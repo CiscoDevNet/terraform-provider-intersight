@@ -1,2 +1,2 @@
-# intersight-terraform
+# intersight-terraform-provider
 Cisco Intersight Terraform
