@@ -1,0 +1,11 @@
+.DS_Store
+.idea
+.build
+hack
+
+# terraform states and log files
+crash.log
+.terraform
+terraform.tfstate
+terraform.tfstate.backup
+terraform.tfvars

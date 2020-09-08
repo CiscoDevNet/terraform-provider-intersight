@@ -1,0 +1,20 @@
+api_key = "changeMe"
+
+// firware server config utility
+scu_password_1 = "changeMe"
+scu_password_2 = "changeMe"
+
+// software repo os file esx6u3.iso
+os_file_password_1 = "changeMe"
+
+//organization moid
+organization = "changeMe"
+
+// server moid
+server_moid = "changeMe"
+
+//catalog moid
+catalog = "changeMe"
+
+// answer file
+answer_file = "changeMe"
