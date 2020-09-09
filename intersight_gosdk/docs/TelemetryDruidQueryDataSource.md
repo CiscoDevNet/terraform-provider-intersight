@@ -1,0 +1,72 @@
+# TelemetryDruidQueryDataSource
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Type** | **string** | The type of data source. | 
+**Query** | [**TelemetryDruidGroupByRequest**](telemetry.DruidGroupByRequest.md) |  | 
+
+## Methods
+
+### NewTelemetryDruidQueryDataSource
+
+`func NewTelemetryDruidQueryDataSource(type_ string, query TelemetryDruidGroupByRequest, ) *TelemetryDruidQueryDataSource`
+
+NewTelemetryDruidQueryDataSource instantiates a new TelemetryDruidQueryDataSource object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewTelemetryDruidQueryDataSourceWithDefaults
+
+`func NewTelemetryDruidQueryDataSourceWithDefaults() *TelemetryDruidQueryDataSource`
+
+NewTelemetryDruidQueryDataSourceWithDefaults instantiates a new TelemetryDruidQueryDataSource object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetType
+
+`func (o *TelemetryDruidQueryDataSource) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *TelemetryDruidQueryDataSource) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *TelemetryDruidQueryDataSource) SetType(v string)`
+
+SetType sets Type field to given value.
+
+
+### GetQuery
+
+`func (o *TelemetryDruidQueryDataSource) GetQuery() TelemetryDruidGroupByRequest`
+
+GetQuery returns the Query field if non-nil, zero value otherwise.
+
+### GetQueryOk
+
+`func (o *TelemetryDruidQueryDataSource) GetQueryOk() (*TelemetryDruidGroupByRequest, bool)`
+
+GetQueryOk returns a tuple with the Query field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQuery
+
+`func (o *TelemetryDruidQueryDataSource) SetQuery(v TelemetryDruidGroupByRequest)`
+
+SetQuery sets Query field to given value.
+
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

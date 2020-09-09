@@ -1,0 +1,160 @@
+# StoragePurePort
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Failover** | Pointer to **string** | Name of the port to which this port has failed over. | [optional] [readonly] 
+**Portal** | Pointer to **string** | Ip address of iSCSI portal configured on the port. | [optional] [readonly] 
+**Array** | Pointer to [**StoragePureArrayRelationship**](storage.PureArray.Relationship.md) |  | [optional] 
+**Controller** | Pointer to [**StoragePureControllerRelationship**](storage.PureController.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+
+## Methods
+
+### NewStoragePurePort
+
+`func NewStoragePurePort() *StoragePurePort`
+
+NewStoragePurePort instantiates a new StoragePurePort object
+This constructor will assign default values to properties that have it defined,
+and makes sure properties required by API are set, but the set of arguments
+will change when the set of required properties is changed
+
+### NewStoragePurePortWithDefaults
+
+`func NewStoragePurePortWithDefaults() *StoragePurePort`
+
+NewStoragePurePortWithDefaults instantiates a new StoragePurePort object
+This constructor will only assign default values to properties that have it defined,
+but it doesn't guarantee that properties required by API are set
+
+### GetFailover
+
+`func (o *StoragePurePort) GetFailover() string`
+
+GetFailover returns the Failover field if non-nil, zero value otherwise.
+
+### GetFailoverOk
+
+`func (o *StoragePurePort) GetFailoverOk() (*string, bool)`
+
+GetFailoverOk returns a tuple with the Failover field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFailover
+
+`func (o *StoragePurePort) SetFailover(v string)`
+
+SetFailover sets Failover field to given value.
+
+### HasFailover
+
+`func (o *StoragePurePort) HasFailover() bool`
+
+HasFailover returns a boolean if a field has been set.
+
+### GetPortal
+
+`func (o *StoragePurePort) GetPortal() string`
+
+GetPortal returns the Portal field if non-nil, zero value otherwise.
+
+### GetPortalOk
+
+`func (o *StoragePurePort) GetPortalOk() (*string, bool)`
+
+GetPortalOk returns a tuple with the Portal field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPortal
+
+`func (o *StoragePurePort) SetPortal(v string)`
+
+SetPortal sets Portal field to given value.
+
+### HasPortal
+
+`func (o *StoragePurePort) HasPortal() bool`
+
+HasPortal returns a boolean if a field has been set.
+
+### GetArray
+
+`func (o *StoragePurePort) GetArray() StoragePureArrayRelationship`
+
+GetArray returns the Array field if non-nil, zero value otherwise.
+
+### GetArrayOk
+
+`func (o *StoragePurePort) GetArrayOk() (*StoragePureArrayRelationship, bool)`
+
+GetArrayOk returns a tuple with the Array field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetArray
+
+`func (o *StoragePurePort) SetArray(v StoragePureArrayRelationship)`
+
+SetArray sets Array field to given value.
+
+### HasArray
+
+`func (o *StoragePurePort) HasArray() bool`
+
+HasArray returns a boolean if a field has been set.
+
+### GetController
+
+`func (o *StoragePurePort) GetController() StoragePureControllerRelationship`
+
+GetController returns the Controller field if non-nil, zero value otherwise.
+
+### GetControllerOk
+
+`func (o *StoragePurePort) GetControllerOk() (*StoragePureControllerRelationship, bool)`
+
+GetControllerOk returns a tuple with the Controller field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetController
+
+`func (o *StoragePurePort) SetController(v StoragePureControllerRelationship)`
+
+SetController sets Controller field to given value.
+
+### HasController
+
+`func (o *StoragePurePort) HasController() bool`
+
+HasController returns a boolean if a field has been set.
+
+### GetRegisteredDevice
+
+`func (o *StoragePurePort) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
+
+GetRegisteredDevice returns the RegisteredDevice field if non-nil, zero value otherwise.
+
+### GetRegisteredDeviceOk
+
+`func (o *StoragePurePort) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool)`
+
+GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRegisteredDevice
+
+`func (o *StoragePurePort) SetRegisteredDevice(v AssetDeviceRegistrationRelationship)`
+
+SetRegisteredDevice sets RegisteredDevice field to given value.
+
+### HasRegisteredDevice
+
+`func (o *StoragePurePort) HasRegisteredDevice() bool`
+
+HasRegisteredDevice returns a boolean if a field has been set.
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
