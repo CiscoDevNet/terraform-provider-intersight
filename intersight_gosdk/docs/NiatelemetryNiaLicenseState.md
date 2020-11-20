@@ -4,9 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niatelemetry.NiaLicenseState"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.NiaLicenseState"]
 **FeatureActivated** | Pointer to **string** | Features activated on device being inventoried. This determines which features are currently enabled on the device that the license API can check. | [optional] 
 **LicenseActivated** | Pointer to **string** | Licenses activated on device being inventoried. This determines which lienceses are currently enabled on the device. | [optional] 
 **PidType** | Pointer to **string** | PID of device being inventoried. This determines the hardware model type of the device. | [optional] 
+**RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
+**RecordVersion** | Pointer to **string** | Version of record being pushed. This determines what was the API version for data available from the device. | [optional] 
 **Serial** | Pointer to **string** | Serial number of device being inventoried. The serial number is unique per device. | [optional] 
 **Device** | Pointer to [**NiatelemetryNiaInventoryRelationship**](niatelemetry.NiaInventory.Relationship.md) |  | [optional] 
 
@@ -14,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewNiatelemetryNiaLicenseState
 
-`func NewNiatelemetryNiaLicenseState() *NiatelemetryNiaLicenseState`
+`func NewNiatelemetryNiaLicenseState(classId string, objectType string, ) *NiatelemetryNiaLicenseState`
 
 NewNiatelemetryNiaLicenseState instantiates a new NiatelemetryNiaLicenseState object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +32,46 @@ will change when the set of required properties is changed
 NewNiatelemetryNiaLicenseStateWithDefaults instantiates a new NiatelemetryNiaLicenseState object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *NiatelemetryNiaLicenseState) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *NiatelemetryNiaLicenseState) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *NiatelemetryNiaLicenseState) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *NiatelemetryNiaLicenseState) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *NiatelemetryNiaLicenseState) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *NiatelemetryNiaLicenseState) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetFeatureActivated
 
@@ -103,6 +147,56 @@ SetPidType sets PidType field to given value.
 `func (o *NiatelemetryNiaLicenseState) HasPidType() bool`
 
 HasPidType returns a boolean if a field has been set.
+
+### GetRecordType
+
+`func (o *NiatelemetryNiaLicenseState) GetRecordType() string`
+
+GetRecordType returns the RecordType field if non-nil, zero value otherwise.
+
+### GetRecordTypeOk
+
+`func (o *NiatelemetryNiaLicenseState) GetRecordTypeOk() (*string, bool)`
+
+GetRecordTypeOk returns a tuple with the RecordType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecordType
+
+`func (o *NiatelemetryNiaLicenseState) SetRecordType(v string)`
+
+SetRecordType sets RecordType field to given value.
+
+### HasRecordType
+
+`func (o *NiatelemetryNiaLicenseState) HasRecordType() bool`
+
+HasRecordType returns a boolean if a field has been set.
+
+### GetRecordVersion
+
+`func (o *NiatelemetryNiaLicenseState) GetRecordVersion() string`
+
+GetRecordVersion returns the RecordVersion field if non-nil, zero value otherwise.
+
+### GetRecordVersionOk
+
+`func (o *NiatelemetryNiaLicenseState) GetRecordVersionOk() (*string, bool)`
+
+GetRecordVersionOk returns a tuple with the RecordVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecordVersion
+
+`func (o *NiatelemetryNiaLicenseState) SetRecordVersion(v string)`
+
+SetRecordVersion sets RecordVersion field to given value.
+
+### HasRecordVersion
+
+`func (o *NiatelemetryNiaLicenseState) HasRecordVersion() bool`
+
+HasRecordVersion returns a boolean if a field has been set.
 
 ### GetSerial
 

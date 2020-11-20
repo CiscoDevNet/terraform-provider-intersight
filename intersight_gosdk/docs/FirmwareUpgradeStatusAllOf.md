@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.UpgradeStatus"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.UpgradeStatus"]
 **DownloadError** | Pointer to **string** | The error message from the endpoint during the download. | [optional] 
 **DownloadMessage** | Pointer to **string** | The message from the endpoint during the download. | [optional] 
 **DownloadPercentage** | Pointer to **int64** | The percentage of the image downloaded in the endpoint. | [optional] 
@@ -23,7 +25,7 @@ Name | Type | Description | Notes
 
 ### NewFirmwareUpgradeStatusAllOf
 
-`func NewFirmwareUpgradeStatusAllOf() *FirmwareUpgradeStatusAllOf`
+`func NewFirmwareUpgradeStatusAllOf(classId string, objectType string, ) *FirmwareUpgradeStatusAllOf`
 
 NewFirmwareUpgradeStatusAllOf instantiates a new FirmwareUpgradeStatusAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -37,6 +39,46 @@ will change when the set of required properties is changed
 NewFirmwareUpgradeStatusAllOfWithDefaults instantiates a new FirmwareUpgradeStatusAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *FirmwareUpgradeStatusAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *FirmwareUpgradeStatusAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *FirmwareUpgradeStatusAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *FirmwareUpgradeStatusAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *FirmwareUpgradeStatusAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *FirmwareUpgradeStatusAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDownloadError
 

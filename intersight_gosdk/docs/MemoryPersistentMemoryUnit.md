@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "memory.PersistentMemoryUnit"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "memory.PersistentMemoryUnit"]
 **AppDirectCapacity** | Pointer to **string** | AppDirect capacity in GiB of the Persistent Memory Module on a server. | [optional] [readonly] 
 **CountStatus** | Pointer to **string** | Count status of the Persistent Memory Module on a server. | [optional] [readonly] 
 **FirmwareVersion** | Pointer to **string** | Firmware version of the firware running on the Persistent Memory Module on a server. | [optional] [readonly] 
@@ -27,7 +29,7 @@ Name | Type | Description | Notes
 
 ### NewMemoryPersistentMemoryUnit
 
-`func NewMemoryPersistentMemoryUnit() *MemoryPersistentMemoryUnit`
+`func NewMemoryPersistentMemoryUnit(classId string, objectType string, ) *MemoryPersistentMemoryUnit`
 
 NewMemoryPersistentMemoryUnit instantiates a new MemoryPersistentMemoryUnit object
 This constructor will assign default values to properties that have it defined,
@@ -41,6 +43,46 @@ will change when the set of required properties is changed
 NewMemoryPersistentMemoryUnitWithDefaults instantiates a new MemoryPersistentMemoryUnit object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *MemoryPersistentMemoryUnit) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *MemoryPersistentMemoryUnit) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *MemoryPersistentMemoryUnit) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *MemoryPersistentMemoryUnit) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *MemoryPersistentMemoryUnit) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *MemoryPersistentMemoryUnit) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAppDirectCapacity
 

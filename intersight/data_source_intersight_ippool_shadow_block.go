@@ -20,16 +20,20 @@ func dataSourceIppoolShadowBlock() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
 			},
 			"free_block_count": {
 				Description: "Free IDs that can be allocated in this block.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 				Computed:    true,
+			},
+			"ip_type": {
+				Description: "Type of this IP addresses blocks.\n* `IPv4` - IP V4 address type requested.\n* `IPv6` - IP V6 address type requested.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"ip_v4_block": {
 				Description: "A Block of IPv4 addresses.",
@@ -44,10 +48,9 @@ func dataSourceIppoolShadowBlock() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"from": {
 							Description: "First IPv4 address of the block.",
@@ -56,7 +59,7 @@ func dataSourceIppoolShadowBlock() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -69,6 +72,51 @@ func dataSourceIppoolShadowBlock() *schema.Resource {
 						},
 						"to": {
 							Description: "Last IPv4 address of the block.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				Computed: true,
+			},
+			"ip_v6_block": {
+				Description: "A Block of IPv6 addresses.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"from": {
+							Description: "First IPv6 address of the block.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"size": {
+							Description: "Number of identifiers this block can hold.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+						},
+						"to": {
+							Description: "Last IPv6 address of the block.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -90,7 +138,7 @@ func dataSourceIppoolShadowBlock() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified type of this managed object, i.e. the class name.\nThis property is optional. The ObjectType is implied from the URL path.\nIf specified, the value of objectType must match the class name specified in the URL path.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -109,10 +157,9 @@ func dataSourceIppoolShadowBlock() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -121,7 +168,7 @@ func dataSourceIppoolShadowBlock() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -174,6 +221,10 @@ func dataSourceIppoolShadowBlockRead(d *schema.ResourceData, meta interface{}) e
 	if v, ok := d.GetOk("free_block_count"); ok {
 		x := int64(v.(int))
 		o.SetFreeBlockCount(x)
+	}
+	if v, ok := d.GetOk("ip_type"); ok {
+		x := (v.(string))
+		o.SetIpType(x)
 	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -228,9 +279,16 @@ func dataSourceIppoolShadowBlockRead(d *schema.ResourceData, meta interface{}) e
 			if err := d.Set("free_block_count", (s.GetFreeBlockCount())); err != nil {
 				return fmt.Errorf("error occurred while setting property FreeBlockCount: %+v", err)
 			}
+			if err := d.Set("ip_type", (s.GetIpType())); err != nil {
+				return fmt.Errorf("error occurred while setting property IpType: %+v", err)
+			}
 
-			if err := d.Set("ip_v4_block", flattenMapIppoolIpBlock(s.GetIpV4Block(), d)); err != nil {
+			if err := d.Set("ip_v4_block", flattenMapIppoolIpV4Block(s.GetIpV4Block(), d)); err != nil {
 				return fmt.Errorf("error occurred while setting property IpV4Block: %+v", err)
+			}
+
+			if err := d.Set("ip_v6_block", flattenMapIppoolIpV6Block(s.GetIpV6Block(), d)); err != nil {
+				return fmt.Errorf("error occurred while setting property IpV6Block: %+v", err)
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
 				return fmt.Errorf("error occurred while setting property Moid: %+v", err)

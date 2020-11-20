@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.Session"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.Session"]
 **AccountPermissions** | Pointer to [**[]IamAccountPermissions**](iam.AccountPermissions.md) |  | [optional] 
 **ClientIpAddress** | Pointer to **string** | The user agent IP address from which the session is launched. | [optional] [readonly] 
 **Expiration** | Pointer to [**time.Time**](time.Time.md) | Expiration time for the session. | [optional] [readonly] 
@@ -17,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewIamSession
 
-`func NewIamSession() *IamSession`
+`func NewIamSession(classId string, objectType string, ) *IamSession`
 
 NewIamSession instantiates a new IamSession object
 This constructor will assign default values to properties that have it defined,
@@ -31,6 +33,46 @@ will change when the set of required properties is changed
 NewIamSessionWithDefaults instantiates a new IamSession object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *IamSession) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IamSession) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IamSession) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IamSession) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IamSession) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IamSession) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAccountPermissions
 
@@ -57,6 +99,16 @@ SetAccountPermissions sets AccountPermissions field to given value.
 
 HasAccountPermissions returns a boolean if a field has been set.
 
+### SetAccountPermissionsNil
+
+`func (o *IamSession) SetAccountPermissionsNil(b bool)`
+
+ SetAccountPermissionsNil sets the value for AccountPermissions to be an explicit nil
+
+### UnsetAccountPermissions
+`func (o *IamSession) UnsetAccountPermissions()`
+
+UnsetAccountPermissions ensures that no value is present for AccountPermissions, not even an explicit nil
 ### GetClientIpAddress
 
 `func (o *IamSession) GetClientIpAddress() string`

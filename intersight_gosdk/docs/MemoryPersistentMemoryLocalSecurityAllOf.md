@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "memory.PersistentMemoryLocalSecurity"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "memory.PersistentMemoryLocalSecurity"]
 **Enabled** | Pointer to **bool** | Persistent Memory Security state. | [optional] 
 **IsSecurePassphraseSet** | Pointer to **bool** | Indicates whether the value of the &#39;securePassphrase&#39; property has been set. | [optional] [readonly] 
 **SecurePassphrase** | Pointer to **string** | Secure passphrase to be applied on the Persistent Memory Modules on the server. The allowed characters are a-z, A to Z, 0-9, and special characters &#x3D;, \\u0021, &amp;, \\#, $, %, +, ^, @, _, *, -. | [optional] 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewMemoryPersistentMemoryLocalSecurityAllOf
 
-`func NewMemoryPersistentMemoryLocalSecurityAllOf() *MemoryPersistentMemoryLocalSecurityAllOf`
+`func NewMemoryPersistentMemoryLocalSecurityAllOf(classId string, objectType string, ) *MemoryPersistentMemoryLocalSecurityAllOf`
 
 NewMemoryPersistentMemoryLocalSecurityAllOf instantiates a new MemoryPersistentMemoryLocalSecurityAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewMemoryPersistentMemoryLocalSecurityAllOfWithDefaults instantiates a new MemoryPersistentMemoryLocalSecurityAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *MemoryPersistentMemoryLocalSecurityAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *MemoryPersistentMemoryLocalSecurityAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *MemoryPersistentMemoryLocalSecurityAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *MemoryPersistentMemoryLocalSecurityAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *MemoryPersistentMemoryLocalSecurityAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *MemoryPersistentMemoryLocalSecurityAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetEnabled
 

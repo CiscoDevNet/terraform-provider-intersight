@@ -19,11 +19,15 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 				Optional:         true,
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
+			"bgp_peer_count": {
+				Description: "Number of BGP peers on a node.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"class_id": {
-				Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
 			},
 			"cpu": {
 				Description: "CPU usage of device being inventoried. This determines the percentage of CPU resources used.",
@@ -58,10 +62,9 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"free": {
 							Description: "The free disk capacity, currently the type of this field is set to integer. This determines how much memory is free in Bytes.",
@@ -74,7 +77,7 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -93,9 +96,24 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 				},
 				Computed: true,
 			},
+			"dn": {
+				Description: "Dn for the inventories present.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"fex_count": {
-				Description: "Scale of fabric extendors utilized.",
+				Description: "Number of fabric extendors utilized.",
 				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"infra_wi_node_count": {
+				Description: "Number of appliances as physical device that are wired into the cluster.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"ip_address": {
+				Description: "The IP address of the device being inventoried.",
+				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"license_state": {
@@ -111,10 +129,9 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -123,7 +140,7 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -174,8 +191,13 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"node_id": {
+				Description: "The ID of the device being inventoried.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"object_type": {
-				Description: "The fully-qualified type of this managed object, i.e. the class name.\nThis property is optional. The ObjectType is implied from the URL path.\nIf specified, the value of objectType must match the class name specified in the URL path.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -204,10 +226,9 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -216,7 +237,7 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -236,12 +257,12 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 				Optional:    true,
 			},
 			"route_prefix_v4_count": {
-				Description: "Scale of v4 routes per node.",
+				Description: "Number of v4 routes per node.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"route_prefix_v6_count": {
-				Description: "Scale of v6 routes per node.",
+				Description: "Number of v6 routes per node.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -252,6 +273,11 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 			},
 			"software_download": {
 				Description: "Last software downloaded of device being inventoried. This determines if software download API was used.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"system_up_time": {
+				Description: "The amount of time that the device being inventoried been up.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -292,6 +318,10 @@ func dataSourceNiatelemetryNiaInventoryRead(d *schema.ResourceData, meta interfa
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
 	var o = models.NewNiatelemetryNiaInventoryWithDefaults()
+	if v, ok := d.GetOk("bgp_peer_count"); ok {
+		x := int64(v.(int))
+		o.SetBgpPeerCount(x)
+	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -312,9 +342,21 @@ func dataSourceNiatelemetryNiaInventoryRead(d *schema.ResourceData, meta interfa
 		x := (v.(string))
 		o.SetDeviceType(x)
 	}
+	if v, ok := d.GetOk("dn"); ok {
+		x := (v.(string))
+		o.SetDn(x)
+	}
 	if v, ok := d.GetOk("fex_count"); ok {
 		x := int64(v.(int))
 		o.SetFexCount(x)
+	}
+	if v, ok := d.GetOk("infra_wi_node_count"); ok {
+		x := int64(v.(int))
+		o.SetInfraWiNodeCount(x)
+	}
+	if v, ok := d.GetOk("ip_address"); ok {
+		x := (v.(string))
+		o.SetIpAddress(x)
 	}
 	if v, ok := d.GetOk("log_in_time"); ok {
 		x := (v.(string))
@@ -343,6 +385,10 @@ func dataSourceNiatelemetryNiaInventoryRead(d *schema.ResourceData, meta interfa
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
+	}
+	if v, ok := d.GetOk("node_id"); ok {
+		x := (v.(string))
+		o.SetNodeId(x)
 	}
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
@@ -375,6 +421,10 @@ func dataSourceNiatelemetryNiaInventoryRead(d *schema.ResourceData, meta interfa
 	if v, ok := d.GetOk("software_download"); ok {
 		x := (v.(string))
 		o.SetSoftwareDownload(x)
+	}
+	if v, ok := d.GetOk("system_up_time"); ok {
+		x := (v.(string))
+		o.SetSystemUpTime(x)
 	}
 	if v, ok := d.GetOk("nr_version"); ok {
 		x := (v.(string))
@@ -415,6 +465,9 @@ func dataSourceNiatelemetryNiaInventoryRead(d *schema.ResourceData, meta interfa
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
 				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
 			}
+			if err := d.Set("bgp_peer_count", (s.GetBgpPeerCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property BgpPeerCount: %+v", err)
+			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
 				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
 			}
@@ -434,8 +487,17 @@ func dataSourceNiatelemetryNiaInventoryRead(d *schema.ResourceData, meta interfa
 			if err := d.Set("disk", flattenMapNiatelemetryDiskinfo(s.GetDisk(), d)); err != nil {
 				return fmt.Errorf("error occurred while setting property Disk: %+v", err)
 			}
+			if err := d.Set("dn", (s.GetDn())); err != nil {
+				return fmt.Errorf("error occurred while setting property Dn: %+v", err)
+			}
 			if err := d.Set("fex_count", (s.GetFexCount())); err != nil {
 				return fmt.Errorf("error occurred while setting property FexCount: %+v", err)
+			}
+			if err := d.Set("infra_wi_node_count", (s.GetInfraWiNodeCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property InfraWiNodeCount: %+v", err)
+			}
+			if err := d.Set("ip_address", (s.GetIpAddress())); err != nil {
+				return fmt.Errorf("error occurred while setting property IpAddress: %+v", err)
 			}
 
 			if err := d.Set("license_state", flattenMapNiatelemetryNiaLicenseStateRelationship(s.GetLicenseState(), d)); err != nil {
@@ -461,6 +523,9 @@ func dataSourceNiatelemetryNiaInventoryRead(d *schema.ResourceData, meta interfa
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
 				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+			}
+			if err := d.Set("node_id", (s.GetNodeId())); err != nil {
+				return fmt.Errorf("error occurred while setting property NodeId: %+v", err)
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
 				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
@@ -489,6 +554,9 @@ func dataSourceNiatelemetryNiaInventoryRead(d *schema.ResourceData, meta interfa
 			}
 			if err := d.Set("software_download", (s.GetSoftwareDownload())); err != nil {
 				return fmt.Errorf("error occurred while setting property SoftwareDownload: %+v", err)
+			}
+			if err := d.Set("system_up_time", (s.GetSystemUpTime())); err != nil {
+				return fmt.Errorf("error occurred while setting property SystemUpTime: %+v", err)
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {

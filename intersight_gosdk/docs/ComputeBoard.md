@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "compute.Board"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "compute.Board"]
 **BoardId** | Pointer to **int64** | The identity of the motherboard. | [optional] [readonly] 
 **CpuTypeController** | Pointer to **string** | The type of central processing unit on the mother board. | [optional] [readonly] 
 **OperPowerState** | Pointer to **string** | Current power state of the mother board of the server. | [optional] [readonly] 
@@ -28,7 +30,7 @@ Name | Type | Description | Notes
 
 ### NewComputeBoard
 
-`func NewComputeBoard() *ComputeBoard`
+`func NewComputeBoard(classId string, objectType string, ) *ComputeBoard`
 
 NewComputeBoard instantiates a new ComputeBoard object
 This constructor will assign default values to properties that have it defined,
@@ -42,6 +44,46 @@ will change when the set of required properties is changed
 NewComputeBoardWithDefaults instantiates a new ComputeBoard object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *ComputeBoard) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *ComputeBoard) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *ComputeBoard) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *ComputeBoard) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *ComputeBoard) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *ComputeBoard) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetBoardId
 

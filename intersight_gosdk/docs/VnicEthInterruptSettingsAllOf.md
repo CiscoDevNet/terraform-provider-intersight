@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.EthInterruptSettings"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.EthInterruptSettings"]
 **CoalescingTime** | Pointer to **int64** | The time to wait between interrupts or the idle period that must be encountered before an interrupt is sent. To turn off interrupt coalescing, enter 0 (zero) in this field. | [optional] 
 **CoalescingType** | Pointer to **string** | Interrupt Coalescing Type. This can be one of the following:- MIN  - The system waits for the time specified in the Coalescing Time field before sending another interrupt event IDLE - The system does not send an interrupt until there is a period of no activity lasting as least as long as the time specified in the Coalescing Time field. * &#x60;MIN&#x60; - The system waits for the time specified in the Coalescing Time field before sending another interrupt event. * &#x60;IDLE&#x60; - The system does not send an interrupt until there is a period of no activity lasting as least as long as the time specified in the Coalescing Time field. | [optional] [default to "MIN"]
 **Count** | Pointer to **int64** | The number of interrupt resources to allocate. Typical value is be equal to the number of completion queue resources. | [optional] 
@@ -13,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewVnicEthInterruptSettingsAllOf
 
-`func NewVnicEthInterruptSettingsAllOf() *VnicEthInterruptSettingsAllOf`
+`func NewVnicEthInterruptSettingsAllOf(classId string, objectType string, ) *VnicEthInterruptSettingsAllOf`
 
 NewVnicEthInterruptSettingsAllOf instantiates a new VnicEthInterruptSettingsAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewVnicEthInterruptSettingsAllOfWithDefaults instantiates a new VnicEthInterruptSettingsAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *VnicEthInterruptSettingsAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *VnicEthInterruptSettingsAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *VnicEthInterruptSettingsAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *VnicEthInterruptSettingsAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *VnicEthInterruptSettingsAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *VnicEthInterruptSettingsAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCoalescingTime
 

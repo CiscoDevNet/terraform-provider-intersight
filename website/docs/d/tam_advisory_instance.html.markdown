@@ -13,9 +13,9 @@ Instance of an Intersight advisory applicable for an Intersight managed object. 
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `affected_object_moid`:(string) Moid of the Intersight MO affected by the alert. Deprecated now and will be removed in subsequent releases. 
 * `affected_object_type`:(string) Object type of the Intersight MO affected by the alert. Deprecated now and will be removed in subsequent releases. 
-* `class_id`:(string) The concrete type of this complex type. Its value must be the same as the 'objectType' property.The OpenAPI document references this property as a discriminator value. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `last_state_change_time`:(string) Timestamp when a state change was observed on this advisory instnace. 
 * `last_verified_time`:(string) Timestamp when this advisory was last evaluated. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified type of this managed object, i.e. the class name.This property is optional. The ObjectType is implied from the URL path.If specified, the value of objectType must match the class name specified in the URL path. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `state`:(string) Current state of the advisory instance (Active/Cleared/Unknown etc.).* `unknown` - Intersight is unable to determine if the Advisory instance is applicable for the affected managed object.* `active` - Advisory instance is currently active and applicable for the affected managed object.* `cleared` - Advisory instance is no longer applicable for the affected managed object. 

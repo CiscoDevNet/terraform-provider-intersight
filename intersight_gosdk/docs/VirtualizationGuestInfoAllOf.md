@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "virtualization.GuestInfo"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.GuestInfo"]
 **Hostname** | Pointer to **string** | Name provided to the host OS (example, ubuntu6410, test-gateway, etc.). | [optional] 
 **IpAddress** | Pointer to **string** | Primary IP address of the guest os. | [optional] 
 **Name** | Pointer to **string** | The name of the guest running on this VM. This may not be the same as the hostname. | [optional] 
@@ -13,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewVirtualizationGuestInfoAllOf
 
-`func NewVirtualizationGuestInfoAllOf() *VirtualizationGuestInfoAllOf`
+`func NewVirtualizationGuestInfoAllOf(classId string, objectType string, ) *VirtualizationGuestInfoAllOf`
 
 NewVirtualizationGuestInfoAllOf instantiates a new VirtualizationGuestInfoAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewVirtualizationGuestInfoAllOfWithDefaults instantiates a new VirtualizationGuestInfoAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *VirtualizationGuestInfoAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *VirtualizationGuestInfoAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *VirtualizationGuestInfoAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *VirtualizationGuestInfoAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *VirtualizationGuestInfoAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *VirtualizationGuestInfoAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetHostname
 

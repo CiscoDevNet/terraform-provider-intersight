@@ -4,10 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.IoCard"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.IoCard"]
 **ConnectionPath** | Pointer to **string** | Switch Id to which the IOM is connected to. The value can be A or B. | [optional] [readonly] 
 **DcSupported** | Pointer to **bool** | IOM device connector support. | [optional] [readonly] 
 **Side** | Pointer to **string** | Location of IOM within a chassis. The value can be left or right. | [optional] [readonly] 
 **EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](equipment.Chassis.Relationship.md) |  | [optional] 
+**EquipmentFex** | Pointer to [**EquipmentFexRelationship**](equipment.Fex.Relationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
 **PhysicalDeviceRegistration** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
@@ -16,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewEquipmentIoCard
 
-`func NewEquipmentIoCard() *EquipmentIoCard`
+`func NewEquipmentIoCard(classId string, objectType string, ) *EquipmentIoCard`
 
 NewEquipmentIoCard instantiates a new EquipmentIoCard object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +33,46 @@ will change when the set of required properties is changed
 NewEquipmentIoCardWithDefaults instantiates a new EquipmentIoCard object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *EquipmentIoCard) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *EquipmentIoCard) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *EquipmentIoCard) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *EquipmentIoCard) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *EquipmentIoCard) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *EquipmentIoCard) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetConnectionPath
 
@@ -130,6 +173,31 @@ SetEquipmentChassis sets EquipmentChassis field to given value.
 `func (o *EquipmentIoCard) HasEquipmentChassis() bool`
 
 HasEquipmentChassis returns a boolean if a field has been set.
+
+### GetEquipmentFex
+
+`func (o *EquipmentIoCard) GetEquipmentFex() EquipmentFexRelationship`
+
+GetEquipmentFex returns the EquipmentFex field if non-nil, zero value otherwise.
+
+### GetEquipmentFexOk
+
+`func (o *EquipmentIoCard) GetEquipmentFexOk() (*EquipmentFexRelationship, bool)`
+
+GetEquipmentFexOk returns a tuple with the EquipmentFex field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEquipmentFex
+
+`func (o *EquipmentIoCard) SetEquipmentFex(v EquipmentFexRelationship)`
+
+SetEquipmentFex sets EquipmentFex field to given value.
+
+### HasEquipmentFex
+
+`func (o *EquipmentIoCard) HasEquipmentFex() bool`
+
+HasEquipmentFex returns a boolean if a field has been set.
 
 ### GetInventoryDeviceInfo
 

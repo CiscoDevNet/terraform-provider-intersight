@@ -20,10 +20,9 @@ func dataSourceHclExemptedCatalog() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
 			},
 			"comments": {
 				Description: "Reason for the exemption.",
@@ -42,7 +41,7 @@ func dataSourceHclExemptedCatalog() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified type of this managed object, i.e. the class name.\nThis property is optional. The ObjectType is implied from the URL path.\nIf specified, the value of objectType must match the class name specified in the URL path.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -68,7 +67,7 @@ func dataSourceHclExemptedCatalog() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString}},
 			"product_type": {
-				Description: "Type of the product/adapter say PT for Pass Through controllers.",
+				Description: "Type of the product/adapter say GPU for graphic cards.\n* `` - Default type of the Product.\n* `Adapter` - Represents network adapter cards.\n* `StorageController` - Represents storage controllers.\n* `GPU` - Represents graphics cards.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},

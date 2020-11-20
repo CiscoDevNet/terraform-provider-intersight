@@ -4,18 +4,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "appliance.BackupPolicy"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.BackupPolicy"]
 **BackupTime** | Pointer to [**time.Time**](time.Time.md) | The next backup time set by the backup scheduler. Backup scheduler calculates the next backup time with the user-defined schedule set in the Schedule field. | [optional] [readonly] 
 **IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] 
 **ManualBackup** | Pointer to **bool** | Backup mode of the appliance. Automatic backups of the appliance are not initiated if this property is set to &#39;true&#39; and the backup schedule field is ignored. | [optional] 
 **Password** | Pointer to **string** | Password to authenticate the file server. | [optional] 
-**Schedule** | Pointer to [**OnpremSchedule**](onprem.Schedule.md) |  | [optional] 
+**Schedule** | Pointer to [**NullableOnpremSchedule**](onprem.Schedule.md) |  | [optional] 
 **Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
 
 ## Methods
 
 ### NewApplianceBackupPolicy
 
-`func NewApplianceBackupPolicy() *ApplianceBackupPolicy`
+`func NewApplianceBackupPolicy(classId string, objectType string, ) *ApplianceBackupPolicy`
 
 NewApplianceBackupPolicy instantiates a new ApplianceBackupPolicy object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +31,46 @@ will change when the set of required properties is changed
 NewApplianceBackupPolicyWithDefaults instantiates a new ApplianceBackupPolicy object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *ApplianceBackupPolicy) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *ApplianceBackupPolicy) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *ApplianceBackupPolicy) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *ApplianceBackupPolicy) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *ApplianceBackupPolicy) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *ApplianceBackupPolicy) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetBackupTime
 
@@ -155,6 +197,16 @@ SetSchedule sets Schedule field to given value.
 
 HasSchedule returns a boolean if a field has been set.
 
+### SetScheduleNil
+
+`func (o *ApplianceBackupPolicy) SetScheduleNil(b bool)`
+
+ SetScheduleNil sets the value for Schedule to be an explicit nil
+
+### UnsetSchedule
+`func (o *ApplianceBackupPolicy) UnsetSchedule()`
+
+UnsetSchedule ensures that no value is present for Schedule, not even an explicit nil
 ### GetAccount
 
 `func (o *ApplianceBackupPolicy) GetAccount() IamAccountRelationship`

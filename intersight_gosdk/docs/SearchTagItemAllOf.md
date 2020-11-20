@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "search.TagItem"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "search.TagItem"]
 **Count** | Pointer to **int64** | The number of times this tag key has been set across all resources. | [optional] [readonly] 
 **Key** | Pointer to **string** | Key of the Tag from all the resources in Intersight. | [optional] [readonly] 
 **Values** | Pointer to **[]string** |  | [optional] 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewSearchTagItemAllOf
 
-`func NewSearchTagItemAllOf() *SearchTagItemAllOf`
+`func NewSearchTagItemAllOf(classId string, objectType string, ) *SearchTagItemAllOf`
 
 NewSearchTagItemAllOf instantiates a new SearchTagItemAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewSearchTagItemAllOfWithDefaults instantiates a new SearchTagItemAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *SearchTagItemAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *SearchTagItemAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *SearchTagItemAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *SearchTagItemAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *SearchTagItemAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *SearchTagItemAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCount
 
@@ -102,6 +144,16 @@ SetValues sets Values field to given value.
 
 HasValues returns a boolean if a field has been set.
 
+### SetValuesNil
+
+`func (o *SearchTagItemAllOf) SetValuesNil(b bool)`
+
+ SetValuesNil sets the value for Values to be an explicit nil
+
+### UnsetValues
+`func (o *SearchTagItemAllOf) UnsetValues()`
+
+UnsetValues ensures that no value is present for Values, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

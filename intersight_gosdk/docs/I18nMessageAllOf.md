@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "i18n.Message"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "i18n.Message"]
 **Message** | Pointer to **string** | The default (en-US) localized message. Default localized message will be stored and directly retrieved when the user&#39;s locale setting is en-US. | [optional] [readonly] 
 **MessageId** | Pointer to **string** | The unique message identitifer used to lookup text templates in a multi-language message catalog. | [optional] [readonly] 
 **MessageParams** | Pointer to [**[]I18nMessageParam**](i18n.MessageParam.md) |  | [optional] 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewI18nMessageAllOf
 
-`func NewI18nMessageAllOf() *I18nMessageAllOf`
+`func NewI18nMessageAllOf(classId string, objectType string, ) *I18nMessageAllOf`
 
 NewI18nMessageAllOf instantiates a new I18nMessageAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewI18nMessageAllOfWithDefaults instantiates a new I18nMessageAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *I18nMessageAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *I18nMessageAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *I18nMessageAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *I18nMessageAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *I18nMessageAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *I18nMessageAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetMessage
 
@@ -102,6 +144,16 @@ SetMessageParams sets MessageParams field to given value.
 
 HasMessageParams returns a boolean if a field has been set.
 
+### SetMessageParamsNil
+
+`func (o *I18nMessageAllOf) SetMessageParamsNil(b bool)`
+
+ SetMessageParamsNil sets the value for MessageParams to be an explicit nil
+
+### UnsetMessageParams
+`func (o *I18nMessageAllOf) UnsetMessageParams()`
+
+UnsetMessageParams ensures that no value is present for MessageParams, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

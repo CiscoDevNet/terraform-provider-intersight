@@ -4,13 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **int64** | Default VSAN ID of the virtual interface. Setting the ID to 0 will not associate any default VSAN to the traffic on the virtual interface. | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.VsanSettings"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.VsanSettings"]
+**Id** | Pointer to **int64** | Default VLAN of the virtual interface. Setting the value to 0 is equivalent to None and will not associate any Default VLAN to the traffic on the virtual interface. | [optional] 
 
 ## Methods
 
 ### NewVnicVsanSettings
 
-`func NewVnicVsanSettings() *VnicVsanSettings`
+`func NewVnicVsanSettings(classId string, objectType string, ) *VnicVsanSettings`
 
 NewVnicVsanSettings instantiates a new VnicVsanSettings object
 This constructor will assign default values to properties that have it defined,
@@ -24,6 +26,46 @@ will change when the set of required properties is changed
 NewVnicVsanSettingsWithDefaults instantiates a new VnicVsanSettings object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *VnicVsanSettings) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *VnicVsanSettings) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *VnicVsanSettings) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *VnicVsanSettings) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *VnicVsanSettings) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *VnicVsanSettings) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetId
 

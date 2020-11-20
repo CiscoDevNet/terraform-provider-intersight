@@ -4,13 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "network.Element"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "network.Element"]
 **AdminEvacState** | Pointer to **string** | Administratively configured state of Fabric Evacuation feature, for this switch. | [optional] [readonly] 
 **AdminInbandInterfaceState** | Pointer to **string** | The administrative state of the network Element inband management interface. | [optional] [readonly] 
-**AlarmSummary** | Pointer to [**ComputeAlarmSummary**](compute.AlarmSummary.md) |  | [optional] 
+**AlarmSummary** | Pointer to [**NullableComputeAlarmSummary**](compute.AlarmSummary.md) |  | [optional] 
 **AvailableMemory** | Pointer to **string** | Available memory (un-used) on this switch platform. | [optional] [readonly] 
 **EthernetMode** | Pointer to **string** | The user configured Ethernet operational mode for this switch (End-Host or Switching). | [optional] [readonly] 
+**EthernetSwitchingMode** | Pointer to **string** | The user configured Ethernet operational mode for this switch (End-Host or Switching). * &#x60;end-host&#x60; - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * &#x60;switch&#x60; - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode. | [optional] [readonly] [default to "end-host"]
 **FaultSummary** | Pointer to **int64** | The fault summary of the network Element out-of-band management interface. | [optional] 
 **FcMode** | Pointer to **string** | The user configured FC operational mode for this switch (End-Host or Switching). | [optional] [readonly] 
+**FcSwitchingMode** | Pointer to **string** | The user configured FC operational mode for this switch (End-Host or Switching). * &#x60;end-host&#x60; - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer. * &#x60;switch&#x60; - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode. | [optional] [readonly] [default to "end-host"]
 **InbandIpAddress** | Pointer to **string** | The IP address of the network Element inband management interface. | [optional] [readonly] 
 **InbandIpGateway** | Pointer to **string** | The default gateway of the network Element inband management interface. | [optional] [readonly] 
 **InbandIpMask** | Pointer to **string** | The network mask of the network Element inband management interface. | [optional] [readonly] 
@@ -48,7 +52,7 @@ Name | Type | Description | Notes
 
 ### NewNetworkElementAllOf
 
-`func NewNetworkElementAllOf() *NetworkElementAllOf`
+`func NewNetworkElementAllOf(classId string, objectType string, ) *NetworkElementAllOf`
 
 NewNetworkElementAllOf instantiates a new NetworkElementAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -62,6 +66,46 @@ will change when the set of required properties is changed
 NewNetworkElementAllOfWithDefaults instantiates a new NetworkElementAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *NetworkElementAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *NetworkElementAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *NetworkElementAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *NetworkElementAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *NetworkElementAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *NetworkElementAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAdminEvacState
 
@@ -138,6 +182,16 @@ SetAlarmSummary sets AlarmSummary field to given value.
 
 HasAlarmSummary returns a boolean if a field has been set.
 
+### SetAlarmSummaryNil
+
+`func (o *NetworkElementAllOf) SetAlarmSummaryNil(b bool)`
+
+ SetAlarmSummaryNil sets the value for AlarmSummary to be an explicit nil
+
+### UnsetAlarmSummary
+`func (o *NetworkElementAllOf) UnsetAlarmSummary()`
+
+UnsetAlarmSummary ensures that no value is present for AlarmSummary, not even an explicit nil
 ### GetAvailableMemory
 
 `func (o *NetworkElementAllOf) GetAvailableMemory() string`
@@ -188,6 +242,31 @@ SetEthernetMode sets EthernetMode field to given value.
 
 HasEthernetMode returns a boolean if a field has been set.
 
+### GetEthernetSwitchingMode
+
+`func (o *NetworkElementAllOf) GetEthernetSwitchingMode() string`
+
+GetEthernetSwitchingMode returns the EthernetSwitchingMode field if non-nil, zero value otherwise.
+
+### GetEthernetSwitchingModeOk
+
+`func (o *NetworkElementAllOf) GetEthernetSwitchingModeOk() (*string, bool)`
+
+GetEthernetSwitchingModeOk returns a tuple with the EthernetSwitchingMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEthernetSwitchingMode
+
+`func (o *NetworkElementAllOf) SetEthernetSwitchingMode(v string)`
+
+SetEthernetSwitchingMode sets EthernetSwitchingMode field to given value.
+
+### HasEthernetSwitchingMode
+
+`func (o *NetworkElementAllOf) HasEthernetSwitchingMode() bool`
+
+HasEthernetSwitchingMode returns a boolean if a field has been set.
+
 ### GetFaultSummary
 
 `func (o *NetworkElementAllOf) GetFaultSummary() int64`
@@ -237,6 +316,31 @@ SetFcMode sets FcMode field to given value.
 `func (o *NetworkElementAllOf) HasFcMode() bool`
 
 HasFcMode returns a boolean if a field has been set.
+
+### GetFcSwitchingMode
+
+`func (o *NetworkElementAllOf) GetFcSwitchingMode() string`
+
+GetFcSwitchingMode returns the FcSwitchingMode field if non-nil, zero value otherwise.
+
+### GetFcSwitchingModeOk
+
+`func (o *NetworkElementAllOf) GetFcSwitchingModeOk() (*string, bool)`
+
+GetFcSwitchingModeOk returns a tuple with the FcSwitchingMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFcSwitchingMode
+
+`func (o *NetworkElementAllOf) SetFcSwitchingMode(v string)`
+
+SetFcSwitchingMode sets FcSwitchingMode field to given value.
+
+### HasFcSwitchingMode
+
+`func (o *NetworkElementAllOf) HasFcSwitchingMode() bool`
+
+HasFcSwitchingMode returns a boolean if a field has been set.
 
 ### GetInbandIpAddress
 

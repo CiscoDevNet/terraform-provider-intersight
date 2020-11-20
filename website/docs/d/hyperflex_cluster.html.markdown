@@ -14,7 +14,7 @@ of the cluster.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `capacity_runway`:(int) The number of days remaining before the cluster's storage utilization reaches the recommended capacity limit of 76%.Default value is math.MaxInt32 to indicate that the capacity runway is \ Unknown\  for a cluster that is not connected or with not sufficient data. 
-* `class_id`:(string) The concrete type of this complex type. Its value must be the same as the 'objectType' property.The OpenAPI document references this property as a discriminator value. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `cluster_name`:(string) The name of this HyperFlex cluster. 
 * `cluster_type`:(int) The storage type of this cluster (All Flash or Hybrid). 
 * `cluster_uuid`:(string) The unique identifier for this HyperFlex cluster. 
@@ -25,10 +25,10 @@ The following arguments can be used to get data of already created objects in In
 * `flt_aggr`:(int) The number of yellow (warning) and red (critical) alarms stored as an aggregate.The first 16 bits indicate the number of red alarms, and the last 16 bits contain the number of yellow alarms. 
 * `hx_version`:(string) The HyperFlex Data Platform version of this cluster. 
 * `hxdp_build_version`:(string) The version and build number of the HyperFlex Data Platform for this cluster.After a cluster upgrade, this version string will be updated on the next inventory cycle to reflectthe newly installed version. 
-* `hypervisor_type`:(string) The type of hypervisor running on this cluster.* `ESXi` - ESXi hypervisor as specified by the user.* `HYPERV` - Hyperv hypervisor as specified by the user.* `KVM` - KVM hypervisor as specified by the user. 
+* `hypervisor_type`:(string) The type of hypervisor running on this cluster.* `ESXi` - A Vmware ESXi hypervisor of any version.* `HXAP` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.* `Unknown` - The hypervisor running on the HyperFlex cluster is not known. 
 * `hypervisor_version`:(string) The version of hypervisor running on this cluster. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified type of this managed object, i.e. the class name.This property is optional. The ObjectType is implied from the URL path.If specified, the value of objectType must match the class name specified in the URL path. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `utilization_percentage`:(float) The storage utilization percentage is computed based on total capacity and current capacity utilization. 
 * `utilization_trend_percentage`:(float) The storage utilization trend percentage represents the trend in percentage computed using the first and last point from historical data. 
 * `vm_count`:(int) The number of virtual machines present on this cluster. 

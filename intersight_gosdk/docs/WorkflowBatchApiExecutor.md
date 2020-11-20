@@ -4,8 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.BatchApiExecutor"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.BatchApiExecutor"]
 **Batch** | Pointer to [**[]WorkflowApi**](workflow.Api.md) |  | [optional] 
-**Constraints** | Pointer to [**WorkflowTaskConstraints**](workflow.TaskConstraints.md) |  | [optional] 
+**Constraints** | Pointer to [**NullableWorkflowTaskConstraints**](workflow.TaskConstraints.md) |  | [optional] 
 **Description** | Pointer to **string** | A detailed description about the batch APIs. | [optional] 
 **Name** | Pointer to **string** | Name for the batch API task. | [optional] 
 **Outcomes** | Pointer to **interface{}** | All the possible outcomes of this task are captured here. Outcomes property is a collection property of type workflow.Outcome objects. The outcomes can be mapped to the message to be shown. The outcomes are evaluated in the order they are given. At the end of the outcomes list, an catchall success/fail outcome can be added with condition as &#39;true&#39;. This is an optional property and if not specified the task will be marked as success. | [optional] 
@@ -19,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewWorkflowBatchApiExecutor
 
-`func NewWorkflowBatchApiExecutor() *WorkflowBatchApiExecutor`
+`func NewWorkflowBatchApiExecutor(classId string, objectType string, ) *WorkflowBatchApiExecutor`
 
 NewWorkflowBatchApiExecutor instantiates a new WorkflowBatchApiExecutor object
 This constructor will assign default values to properties that have it defined,
@@ -33,6 +35,46 @@ will change when the set of required properties is changed
 NewWorkflowBatchApiExecutorWithDefaults instantiates a new WorkflowBatchApiExecutor object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *WorkflowBatchApiExecutor) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *WorkflowBatchApiExecutor) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *WorkflowBatchApiExecutor) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *WorkflowBatchApiExecutor) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *WorkflowBatchApiExecutor) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *WorkflowBatchApiExecutor) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetBatch
 
@@ -59,6 +101,16 @@ SetBatch sets Batch field to given value.
 
 HasBatch returns a boolean if a field has been set.
 
+### SetBatchNil
+
+`func (o *WorkflowBatchApiExecutor) SetBatchNil(b bool)`
+
+ SetBatchNil sets the value for Batch to be an explicit nil
+
+### UnsetBatch
+`func (o *WorkflowBatchApiExecutor) UnsetBatch()`
+
+UnsetBatch ensures that no value is present for Batch, not even an explicit nil
 ### GetConstraints
 
 `func (o *WorkflowBatchApiExecutor) GetConstraints() WorkflowTaskConstraints`
@@ -84,6 +136,16 @@ SetConstraints sets Constraints field to given value.
 
 HasConstraints returns a boolean if a field has been set.
 
+### SetConstraintsNil
+
+`func (o *WorkflowBatchApiExecutor) SetConstraintsNil(b bool)`
+
+ SetConstraintsNil sets the value for Constraints to be an explicit nil
+
+### UnsetConstraints
+`func (o *WorkflowBatchApiExecutor) UnsetConstraints()`
+
+UnsetConstraints ensures that no value is present for Constraints, not even an explicit nil
 ### GetDescription
 
 `func (o *WorkflowBatchApiExecutor) GetDescription() string`

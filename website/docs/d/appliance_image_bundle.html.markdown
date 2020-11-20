@@ -28,14 +28,14 @@ to the 'current' bundle after the software upgrade is successful.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `auto_upgrade`:(bool) Indicates that the software upgrade was automatically initiated by the Intersight Appliance. 
-* `class_id`:(string) The concrete type of this complex type. Its value must be the same as the 'objectType' property.The OpenAPI document references this property as a discriminator value. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `description`:(string) Short description of the software upgrade bundle. 
 * `fingerprint`:(string) Fingerprint of the software manifest from which this bundle is created. Fingerprint is calculated using the SHA256 algorithm. 
 * `has_error`:(bool) Indicates that the ImageBundle has errors. The upgrade service sets this field when it encounters errors during the manifest processing. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the software upgrade bundle. 
 * `notes`:(string) Detailed description of the software upgrade bundle. 
-* `object_type`:(string) The fully-qualified type of this managed object, i.e. the class name.This property is optional. The ObjectType is implied from the URL path.If specified, the value of objectType must match the class name specified in the URL path. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `priority`:(string) Software upgrade manifest's upgrade priority. The upgrade service supports two priorities, Normal and Critical. Normal priority is used for regular software upgrades, and the upgrade service uses the Upgrade Policy to compute upgrade start time. Critical priority is used for the critical software security patches, and the upgrade service ignores the Upgrade Policy when it computes the upgrade start time.* `Normal` - Normal upgrade priority is used for all the software upgrades except for the critical security updates. The upgrade service of Intersight Appliance uses the Software Upgrade Policy settings to start the upgrade process.* `Critical` - Critical upgrade priority is used for critical updates such as security patches. The upgrade service of the Intersight Appliance starts the upgrade as specified by the upgrade properties in the software manifest file. The upgrade service will not use the settings specified in the Software Upgrade Policy. 
 * `release_time`:(string) Software upgrade manifest's release date and time. 
 * `status_message`:(string) Status message set during the manifest processing. 

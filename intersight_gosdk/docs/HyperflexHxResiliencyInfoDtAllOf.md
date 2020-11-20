@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.HxResiliencyInfoDt"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.HxResiliencyInfoDt"]
 **DataReplicationFactor** | Pointer to **string** |  | [optional] [readonly] [default to "ONE_COPY"]
 **HddFailuresTolerable** | Pointer to **int64** |  | [optional] [readonly] 
 **Messages** | Pointer to **[]string** |  | [optional] 
@@ -16,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewHyperflexHxResiliencyInfoDtAllOf
 
-`func NewHyperflexHxResiliencyInfoDtAllOf() *HyperflexHxResiliencyInfoDtAllOf`
+`func NewHyperflexHxResiliencyInfoDtAllOf(classId string, objectType string, ) *HyperflexHxResiliencyInfoDtAllOf`
 
 NewHyperflexHxResiliencyInfoDtAllOf instantiates a new HyperflexHxResiliencyInfoDtAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +32,46 @@ will change when the set of required properties is changed
 NewHyperflexHxResiliencyInfoDtAllOfWithDefaults instantiates a new HyperflexHxResiliencyInfoDtAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *HyperflexHxResiliencyInfoDtAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *HyperflexHxResiliencyInfoDtAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *HyperflexHxResiliencyInfoDtAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *HyperflexHxResiliencyInfoDtAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *HyperflexHxResiliencyInfoDtAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *HyperflexHxResiliencyInfoDtAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDataReplicationFactor
 
@@ -106,6 +148,16 @@ SetMessages sets Messages field to given value.
 
 HasMessages returns a boolean if a field has been set.
 
+### SetMessagesNil
+
+`func (o *HyperflexHxResiliencyInfoDtAllOf) SetMessagesNil(b bool)`
+
+ SetMessagesNil sets the value for Messages to be an explicit nil
+
+### UnsetMessages
+`func (o *HyperflexHxResiliencyInfoDtAllOf) UnsetMessages()`
+
+UnsetMessages ensures that no value is present for Messages, not even an explicit nil
 ### GetNodeFailuresTolerable
 
 `func (o *HyperflexHxResiliencyInfoDtAllOf) GetNodeFailuresTolerable() int64`

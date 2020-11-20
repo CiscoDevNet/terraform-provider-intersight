@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "pkix.SubjectAlternateName"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "pkix.SubjectAlternateName"]
 **DnsName** | Pointer to **[]string** |  | [optional] 
 **EmailAddress** | Pointer to **[]string** |  | [optional] 
 **IpAddress** | Pointer to **[]string** |  | [optional] 
@@ -13,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewPkixSubjectAlternateNameAllOf
 
-`func NewPkixSubjectAlternateNameAllOf() *PkixSubjectAlternateNameAllOf`
+`func NewPkixSubjectAlternateNameAllOf(classId string, objectType string, ) *PkixSubjectAlternateNameAllOf`
 
 NewPkixSubjectAlternateNameAllOf instantiates a new PkixSubjectAlternateNameAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewPkixSubjectAlternateNameAllOfWithDefaults instantiates a new PkixSubjectAlternateNameAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *PkixSubjectAlternateNameAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *PkixSubjectAlternateNameAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *PkixSubjectAlternateNameAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *PkixSubjectAlternateNameAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *PkixSubjectAlternateNameAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *PkixSubjectAlternateNameAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDnsName
 
@@ -53,6 +95,16 @@ SetDnsName sets DnsName field to given value.
 
 HasDnsName returns a boolean if a field has been set.
 
+### SetDnsNameNil
+
+`func (o *PkixSubjectAlternateNameAllOf) SetDnsNameNil(b bool)`
+
+ SetDnsNameNil sets the value for DnsName to be an explicit nil
+
+### UnsetDnsName
+`func (o *PkixSubjectAlternateNameAllOf) UnsetDnsName()`
+
+UnsetDnsName ensures that no value is present for DnsName, not even an explicit nil
 ### GetEmailAddress
 
 `func (o *PkixSubjectAlternateNameAllOf) GetEmailAddress() []string`
@@ -78,6 +130,16 @@ SetEmailAddress sets EmailAddress field to given value.
 
 HasEmailAddress returns a boolean if a field has been set.
 
+### SetEmailAddressNil
+
+`func (o *PkixSubjectAlternateNameAllOf) SetEmailAddressNil(b bool)`
+
+ SetEmailAddressNil sets the value for EmailAddress to be an explicit nil
+
+### UnsetEmailAddress
+`func (o *PkixSubjectAlternateNameAllOf) UnsetEmailAddress()`
+
+UnsetEmailAddress ensures that no value is present for EmailAddress, not even an explicit nil
 ### GetIpAddress
 
 `func (o *PkixSubjectAlternateNameAllOf) GetIpAddress() []string`
@@ -103,6 +165,16 @@ SetIpAddress sets IpAddress field to given value.
 
 HasIpAddress returns a boolean if a field has been set.
 
+### SetIpAddressNil
+
+`func (o *PkixSubjectAlternateNameAllOf) SetIpAddressNil(b bool)`
+
+ SetIpAddressNil sets the value for IpAddress to be an explicit nil
+
+### UnsetIpAddress
+`func (o *PkixSubjectAlternateNameAllOf) UnsetIpAddress()`
+
+UnsetIpAddress ensures that no value is present for IpAddress, not even an explicit nil
 ### GetUri
 
 `func (o *PkixSubjectAlternateNameAllOf) GetUri() []string`
@@ -128,6 +200,16 @@ SetUri sets Uri field to given value.
 
 HasUri returns a boolean if a field has been set.
 
+### SetUriNil
+
+`func (o *PkixSubjectAlternateNameAllOf) SetUriNil(b bool)`
+
+ SetUriNil sets the value for Uri to be an explicit nil
+
+### UnsetUri
+`func (o *PkixSubjectAlternateNameAllOf) UnsetUri()`
+
+UnsetUri ensures that no value is present for Uri, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

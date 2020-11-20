@@ -4,19 +4,23 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niatelemetry.Epg"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.Epg"]
 **AzurePackCount** | Pointer to **int64** | Azure Pack NAT with ASA feature usage. | [optional] 
 **Dn** | Pointer to **string** | Dn value for the End Point Groups present. | [optional] 
-**EpgDelimiterCount** | Pointer to **int64** | EPG Delimiter scale where the delimiter value is present. | [optional] 
+**EpgDelimiterCount** | Pointer to **int64** | Number of  objects with delimiter value present in EPG Delimiter attribute. | [optional] 
 **FcNpvCount** | Pointer to **int64** | Number of ports with FC path attribute of type FC. | [optional] 
 **FcoeCount** | Pointer to **string** | Number of FCoE per End Point Group. | [optional] 
-**FvRsDomAttCount** | Pointer to **int64** | FvRsDomAtt scale per End Point Group with VMware configured. | [optional] 
+**FvRsDomAttCount** | Pointer to **int64** | Number of FvRsDomAtt objects per End Point Group with VMware configuration. | [optional] 
 **IntraEpgDvsBmCount** | Pointer to **int64** | Intra End Point Group Contract for Distributed Virtual Switch and BM feature usage. | [optional] 
 **IntraEpgHyperv** | Pointer to **string** | Intra EPG Isolation for Hyper-V, enabled if pcEnfPref attribute is set to enforced. | [optional] 
 **IsAttrBased** | Pointer to **string** | Gets the state of End Point Groups with isAttrBasedEPg value as configured. | [optional] 
 **Microsegmentation** | Pointer to **string** | Gets the state of End Point Groups where microsegmentation is present. | [optional] 
-**MicrosoftUsegCount** | Pointer to **int64** | FvRsDomAtt scale per End Point Group with Microsoft configured. | [optional] 
+**MicrosoftUsegCount** | Pointer to **int64** | Number of FvRsDomAtt objects per End Point Group with Microsoft configuration. | [optional] 
 **Name** | Pointer to **string** | Name value for the End Point Groups present. | [optional] 
-**OrchslDevVipCfgCount** | Pointer to **int64** | Simplified Service Graph Integration with Windows Azure Pack count scale. | [optional] 
+**OrchslDevVipCfgCount** | Pointer to **int64** | Number of objects with Simplified Service Graph Integration with Windows Azure Pack. | [optional] 
+**RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
+**RecordVersion** | Pointer to **string** | Version of record being pushed. This determines what was the API version for data available from the device. | [optional] 
 **SiteName** | Pointer to **string** | The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters / sites. | [optional] 
 **UsegHypervCount** | Pointer to **int64** | Logical Operators for attribute based microsegmentation in a hypervisor. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
@@ -25,7 +29,7 @@ Name | Type | Description | Notes
 
 ### NewNiatelemetryEpgAllOf
 
-`func NewNiatelemetryEpgAllOf() *NiatelemetryEpgAllOf`
+`func NewNiatelemetryEpgAllOf(classId string, objectType string, ) *NiatelemetryEpgAllOf`
 
 NewNiatelemetryEpgAllOf instantiates a new NiatelemetryEpgAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -39,6 +43,46 @@ will change when the set of required properties is changed
 NewNiatelemetryEpgAllOfWithDefaults instantiates a new NiatelemetryEpgAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *NiatelemetryEpgAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *NiatelemetryEpgAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *NiatelemetryEpgAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *NiatelemetryEpgAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *NiatelemetryEpgAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *NiatelemetryEpgAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAzurePackCount
 
@@ -364,6 +408,56 @@ SetOrchslDevVipCfgCount sets OrchslDevVipCfgCount field to given value.
 `func (o *NiatelemetryEpgAllOf) HasOrchslDevVipCfgCount() bool`
 
 HasOrchslDevVipCfgCount returns a boolean if a field has been set.
+
+### GetRecordType
+
+`func (o *NiatelemetryEpgAllOf) GetRecordType() string`
+
+GetRecordType returns the RecordType field if non-nil, zero value otherwise.
+
+### GetRecordTypeOk
+
+`func (o *NiatelemetryEpgAllOf) GetRecordTypeOk() (*string, bool)`
+
+GetRecordTypeOk returns a tuple with the RecordType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecordType
+
+`func (o *NiatelemetryEpgAllOf) SetRecordType(v string)`
+
+SetRecordType sets RecordType field to given value.
+
+### HasRecordType
+
+`func (o *NiatelemetryEpgAllOf) HasRecordType() bool`
+
+HasRecordType returns a boolean if a field has been set.
+
+### GetRecordVersion
+
+`func (o *NiatelemetryEpgAllOf) GetRecordVersion() string`
+
+GetRecordVersion returns the RecordVersion field if non-nil, zero value otherwise.
+
+### GetRecordVersionOk
+
+`func (o *NiatelemetryEpgAllOf) GetRecordVersionOk() (*string, bool)`
+
+GetRecordVersionOk returns a tuple with the RecordVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecordVersion
+
+`func (o *NiatelemetryEpgAllOf) SetRecordVersion(v string)`
+
+SetRecordVersion sets RecordVersion field to given value.
+
+### HasRecordVersion
+
+`func (o *NiatelemetryEpgAllOf) HasRecordVersion() bool`
+
+HasRecordVersion returns a boolean if a field has been set.
 
 ### GetSiteName
 

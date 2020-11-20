@@ -15,14 +15,14 @@ The following arguments can be used to get data of already created objects in In
 * `backup_location`:(string) Backup location that contains the backup images for end device which can be used for restore operation. 
 * `backup_server_ip`:(string) Backup server where backup images are maintained. 
 * `backup_size`:(int) Size of the backup image in bytes. 
-* `class_id`:(string) The concrete type of this complex type. Its value must be the same as the 'objectType' property.The OpenAPI document references this property as a discriminator value. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `duration`:(int) Time taken for the backup to be completed. 
 * `encryption_key`:(string) The key used for encrypting the backup file. 
 * `failure_reason`:(string) Reason for backup failure. 
 * `is_purged`:(bool) Backup image got purged or not. The backup images get purged based on the retention count set by the user in the backup config policy. 
 * `last_modified`:(string) Last modified time when this backup record got updated. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified type of this managed object, i.e. the class name.This property is optional. The ObjectType is implied from the URL path.If specified, the value of objectType must match the class name specified in the URL path. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `percentage_completion`:(int) Backup current precentage completion status information. 
 * `product_version`:(string) The end device product version when the backup image was taken. 
 * `protocol`:(string) Protocol used for the remote backup. possible values are FTP, SCP and SFTP. Not applicable for the localhost (127.0.0.1). 

@@ -4,27 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AccountMoid** | Pointer to **string** | The Account ID for this managed object. | [optional] [readonly] 
-**ClassId** | **string** | The concrete type of this complex type. Its value must be the same as the &#39;objectType&#39; property. The OpenAPI document references this property as a discriminator value. | [readonly] 
-**CreateTime** | Pointer to [**time.Time**](time.Time.md) | The time when this managed object was created. | [optional] [readonly] 
-**DomainGroupMoid** | Pointer to **string** | The DomainGroup ID for this managed object. | [optional] [readonly] 
-**ModTime** | Pointer to [**time.Time**](time.Time.md) | The time when this managed object was last modified. | [optional] [readonly] 
-**Moid** | Pointer to **string** | The unique identifier of this Managed Object instance. | [optional] 
-**ObjectType** | **string** | The fully-qualified type of this managed object, i.e. the class name. This property is optional. The ObjectType is implied from the URL path. If specified, the value of objectType must match the class name specified in the URL path. | [readonly] 
-**Owners** | Pointer to **[]string** |  | [optional] 
-**SharedScope** | Pointer to **string** | Intersight provides pre-built workflows, tasks and policies to end users through global catalogs. Objects that are made available through global catalogs are said to have a &#39;shared&#39; ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. | [optional] [readonly] 
-**Tags** | Pointer to [**[]MoTag**](mo.Tag.md) |  | [optional] 
-**VersionContext** | Pointer to [**MoVersionContext**](mo.VersionContext.md) |  | [optional] 
-**Ancestors** | Pointer to [**[]MoBaseMoRelationship**](mo.BaseMo.Relationship.md) | An array of relationships to moBaseMo resources. | [optional] [readonly] 
-**Parent** | Pointer to [**MoBaseMoRelationship**](mo.BaseMo.Relationship.md) |  | [optional] 
-**PermissionResources** | Pointer to [**[]MoBaseMoRelationship**](mo.BaseMo.Relationship.md) | An array of relationships to moBaseMo resources. | [optional] [readonly] 
-**DisplayNames** | Pointer to [**map[string][]string**](array.md) | A set of display names for the MO resource. These names are calculated based on other properties of the MO and potentially properties of Ancestor MOs. Displaynames are intended as a way to provide a normalized user appropriate name for an MO, especially for MOs which do not have a &#39;Name&#39; property, which is the case for much of the inventory discovered from managed targets. There are a limited number of keys, currently &#39;short&#39; and &#39;hierarchical&#39;. The value is an array and clients should use the first element of the array. | [optional] [readonly] 
-**Description** | Pointer to **string** | Description of the profile. | [optional] 
-**Name** | Pointer to **string** | Name of the concrete profile. | [optional] 
-**Type** | Pointer to **string** | Defines the type of the profile. Accepted value is instance. * &#x60;instance&#x60; - The profile defines the configuration for a specific instance of a target. | [optional] [default to "instance"]
-**SrcTemplate** | Pointer to [**PolicyAbstractProfileRelationship**](policy.AbstractProfile.Relationship.md) |  | [optional] 
-**Action** | Pointer to **string** | User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign. | [optional] 
-**ConfigContext** | Pointer to [**PolicyConfigContext**](policy.ConfigContext.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "mo.MoRef"]
+**ObjectType** | **string** | The fully-qualified name of the remote type referred by this relationship. | 
+**Moid** | Pointer to **string** | The Moid of the referenced REST resource. | [optional] [readonly] 
+**Selector** | Pointer to **string** | An OData $filter expression which describes the REST resource to be referenced. This field may be set instead of &#39;moid&#39; by clients. 1. If &#39;moid&#39; is set this field is ignored. 1. If &#39;selector&#39; is set and &#39;moid&#39; is empty/absent from the request, Intersight determines the Moid of the resource matching the filter expression and populates it in the MoRef that is part of the object instance being inserted/updated to fulfill the REST request. An error is returned if the filter matches zero or more than one REST resource. An example filter string is: Serial eq &#39;3AA8B7T11&#39;. | [optional] [readonly] 
+**Link** | Pointer to **string** | A URL to an instance of the &#39;mo.MoRef&#39; class. | [optional] 
 
 ## Methods
 
@@ -44,31 +28,6 @@ will change when the set of required properties is changed
 NewPolicyAbstractConfigProfileRelationshipWithDefaults instantiates a new PolicyAbstractConfigProfileRelationship object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetAccountMoid
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetAccountMoid() string`
-
-GetAccountMoid returns the AccountMoid field if non-nil, zero value otherwise.
-
-### GetAccountMoidOk
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetAccountMoidOk() (*string, bool)`
-
-GetAccountMoidOk returns a tuple with the AccountMoid field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAccountMoid
-
-`func (o *PolicyAbstractConfigProfileRelationship) SetAccountMoid(v string)`
-
-SetAccountMoid sets AccountMoid field to given value.
-
-### HasAccountMoid
-
-`func (o *PolicyAbstractConfigProfileRelationship) HasAccountMoid() bool`
-
-HasAccountMoid returns a boolean if a field has been set.
 
 ### GetClassId
 
@@ -90,80 +49,25 @@ and a boolean to check if the value has been set.
 SetClassId sets ClassId field to given value.
 
 
-### GetCreateTime
+### GetObjectType
 
-`func (o *PolicyAbstractConfigProfileRelationship) GetCreateTime() time.Time`
+`func (o *PolicyAbstractConfigProfileRelationship) GetObjectType() string`
 
-GetCreateTime returns the CreateTime field if non-nil, zero value otherwise.
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
 
-### GetCreateTimeOk
+### GetObjectTypeOk
 
-`func (o *PolicyAbstractConfigProfileRelationship) GetCreateTimeOk() (*time.Time, bool)`
+`func (o *PolicyAbstractConfigProfileRelationship) GetObjectTypeOk() (*string, bool)`
 
-GetCreateTimeOk returns a tuple with the CreateTime field if it's non-nil, zero value otherwise
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCreateTime
+### SetObjectType
 
-`func (o *PolicyAbstractConfigProfileRelationship) SetCreateTime(v time.Time)`
+`func (o *PolicyAbstractConfigProfileRelationship) SetObjectType(v string)`
 
-SetCreateTime sets CreateTime field to given value.
+SetObjectType sets ObjectType field to given value.
 
-### HasCreateTime
-
-`func (o *PolicyAbstractConfigProfileRelationship) HasCreateTime() bool`
-
-HasCreateTime returns a boolean if a field has been set.
-
-### GetDomainGroupMoid
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetDomainGroupMoid() string`
-
-GetDomainGroupMoid returns the DomainGroupMoid field if non-nil, zero value otherwise.
-
-### GetDomainGroupMoidOk
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetDomainGroupMoidOk() (*string, bool)`
-
-GetDomainGroupMoidOk returns a tuple with the DomainGroupMoid field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDomainGroupMoid
-
-`func (o *PolicyAbstractConfigProfileRelationship) SetDomainGroupMoid(v string)`
-
-SetDomainGroupMoid sets DomainGroupMoid field to given value.
-
-### HasDomainGroupMoid
-
-`func (o *PolicyAbstractConfigProfileRelationship) HasDomainGroupMoid() bool`
-
-HasDomainGroupMoid returns a boolean if a field has been set.
-
-### GetModTime
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetModTime() time.Time`
-
-GetModTime returns the ModTime field if non-nil, zero value otherwise.
-
-### GetModTimeOk
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetModTimeOk() (*time.Time, bool)`
-
-GetModTimeOk returns a tuple with the ModTime field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetModTime
-
-`func (o *PolicyAbstractConfigProfileRelationship) SetModTime(v time.Time)`
-
-SetModTime sets ModTime field to given value.
-
-### HasModTime
-
-`func (o *PolicyAbstractConfigProfileRelationship) HasModTime() bool`
-
-HasModTime returns a boolean if a field has been set.
 
 ### GetMoid
 
@@ -190,405 +94,55 @@ SetMoid sets Moid field to given value.
 
 HasMoid returns a boolean if a field has been set.
 
-### GetObjectType
+### GetSelector
 
-`func (o *PolicyAbstractConfigProfileRelationship) GetObjectType() string`
+`func (o *PolicyAbstractConfigProfileRelationship) GetSelector() string`
 
-GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+GetSelector returns the Selector field if non-nil, zero value otherwise.
 
-### GetObjectTypeOk
+### GetSelectorOk
 
-`func (o *PolicyAbstractConfigProfileRelationship) GetObjectTypeOk() (*string, bool)`
+`func (o *PolicyAbstractConfigProfileRelationship) GetSelectorOk() (*string, bool)`
 
-GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+GetSelectorOk returns a tuple with the Selector field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetObjectType
+### SetSelector
 
-`func (o *PolicyAbstractConfigProfileRelationship) SetObjectType(v string)`
+`func (o *PolicyAbstractConfigProfileRelationship) SetSelector(v string)`
 
-SetObjectType sets ObjectType field to given value.
+SetSelector sets Selector field to given value.
 
+### HasSelector
 
-### GetOwners
+`func (o *PolicyAbstractConfigProfileRelationship) HasSelector() bool`
 
-`func (o *PolicyAbstractConfigProfileRelationship) GetOwners() []string`
+HasSelector returns a boolean if a field has been set.
 
-GetOwners returns the Owners field if non-nil, zero value otherwise.
+### GetLink
 
-### GetOwnersOk
+`func (o *PolicyAbstractConfigProfileRelationship) GetLink() string`
 
-`func (o *PolicyAbstractConfigProfileRelationship) GetOwnersOk() (*[]string, bool)`
+GetLink returns the Link field if non-nil, zero value otherwise.
 
-GetOwnersOk returns a tuple with the Owners field if it's non-nil, zero value otherwise
+### GetLinkOk
+
+`func (o *PolicyAbstractConfigProfileRelationship) GetLinkOk() (*string, bool)`
+
+GetLinkOk returns a tuple with the Link field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOwners
+### SetLink
 
-`func (o *PolicyAbstractConfigProfileRelationship) SetOwners(v []string)`
+`func (o *PolicyAbstractConfigProfileRelationship) SetLink(v string)`
 
-SetOwners sets Owners field to given value.
+SetLink sets Link field to given value.
 
-### HasOwners
+### HasLink
 
-`func (o *PolicyAbstractConfigProfileRelationship) HasOwners() bool`
+`func (o *PolicyAbstractConfigProfileRelationship) HasLink() bool`
 
-HasOwners returns a boolean if a field has been set.
-
-### GetSharedScope
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetSharedScope() string`
-
-GetSharedScope returns the SharedScope field if non-nil, zero value otherwise.
-
-### GetSharedScopeOk
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetSharedScopeOk() (*string, bool)`
-
-GetSharedScopeOk returns a tuple with the SharedScope field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSharedScope
-
-`func (o *PolicyAbstractConfigProfileRelationship) SetSharedScope(v string)`
-
-SetSharedScope sets SharedScope field to given value.
-
-### HasSharedScope
-
-`func (o *PolicyAbstractConfigProfileRelationship) HasSharedScope() bool`
-
-HasSharedScope returns a boolean if a field has been set.
-
-### GetTags
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetTags() []MoTag`
-
-GetTags returns the Tags field if non-nil, zero value otherwise.
-
-### GetTagsOk
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetTagsOk() (*[]MoTag, bool)`
-
-GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTags
-
-`func (o *PolicyAbstractConfigProfileRelationship) SetTags(v []MoTag)`
-
-SetTags sets Tags field to given value.
-
-### HasTags
-
-`func (o *PolicyAbstractConfigProfileRelationship) HasTags() bool`
-
-HasTags returns a boolean if a field has been set.
-
-### GetVersionContext
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetVersionContext() MoVersionContext`
-
-GetVersionContext returns the VersionContext field if non-nil, zero value otherwise.
-
-### GetVersionContextOk
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetVersionContextOk() (*MoVersionContext, bool)`
-
-GetVersionContextOk returns a tuple with the VersionContext field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVersionContext
-
-`func (o *PolicyAbstractConfigProfileRelationship) SetVersionContext(v MoVersionContext)`
-
-SetVersionContext sets VersionContext field to given value.
-
-### HasVersionContext
-
-`func (o *PolicyAbstractConfigProfileRelationship) HasVersionContext() bool`
-
-HasVersionContext returns a boolean if a field has been set.
-
-### GetAncestors
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetAncestors() []MoBaseMoRelationship`
-
-GetAncestors returns the Ancestors field if non-nil, zero value otherwise.
-
-### GetAncestorsOk
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetAncestorsOk() (*[]MoBaseMoRelationship, bool)`
-
-GetAncestorsOk returns a tuple with the Ancestors field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAncestors
-
-`func (o *PolicyAbstractConfigProfileRelationship) SetAncestors(v []MoBaseMoRelationship)`
-
-SetAncestors sets Ancestors field to given value.
-
-### HasAncestors
-
-`func (o *PolicyAbstractConfigProfileRelationship) HasAncestors() bool`
-
-HasAncestors returns a boolean if a field has been set.
-
-### SetAncestorsNil
-
-`func (o *PolicyAbstractConfigProfileRelationship) SetAncestorsNil(b bool)`
-
- SetAncestorsNil sets the value for Ancestors to be an explicit nil
-
-### UnsetAncestors
-`func (o *PolicyAbstractConfigProfileRelationship) UnsetAncestors()`
-
-UnsetAncestors ensures that no value is present for Ancestors, not even an explicit nil
-### GetParent
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetParent() MoBaseMoRelationship`
-
-GetParent returns the Parent field if non-nil, zero value otherwise.
-
-### GetParentOk
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetParentOk() (*MoBaseMoRelationship, bool)`
-
-GetParentOk returns a tuple with the Parent field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetParent
-
-`func (o *PolicyAbstractConfigProfileRelationship) SetParent(v MoBaseMoRelationship)`
-
-SetParent sets Parent field to given value.
-
-### HasParent
-
-`func (o *PolicyAbstractConfigProfileRelationship) HasParent() bool`
-
-HasParent returns a boolean if a field has been set.
-
-### GetPermissionResources
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetPermissionResources() []MoBaseMoRelationship`
-
-GetPermissionResources returns the PermissionResources field if non-nil, zero value otherwise.
-
-### GetPermissionResourcesOk
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetPermissionResourcesOk() (*[]MoBaseMoRelationship, bool)`
-
-GetPermissionResourcesOk returns a tuple with the PermissionResources field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPermissionResources
-
-`func (o *PolicyAbstractConfigProfileRelationship) SetPermissionResources(v []MoBaseMoRelationship)`
-
-SetPermissionResources sets PermissionResources field to given value.
-
-### HasPermissionResources
-
-`func (o *PolicyAbstractConfigProfileRelationship) HasPermissionResources() bool`
-
-HasPermissionResources returns a boolean if a field has been set.
-
-### SetPermissionResourcesNil
-
-`func (o *PolicyAbstractConfigProfileRelationship) SetPermissionResourcesNil(b bool)`
-
- SetPermissionResourcesNil sets the value for PermissionResources to be an explicit nil
-
-### UnsetPermissionResources
-`func (o *PolicyAbstractConfigProfileRelationship) UnsetPermissionResources()`
-
-UnsetPermissionResources ensures that no value is present for PermissionResources, not even an explicit nil
-### GetDisplayNames
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetDisplayNames() map[string][]string`
-
-GetDisplayNames returns the DisplayNames field if non-nil, zero value otherwise.
-
-### GetDisplayNamesOk
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetDisplayNamesOk() (*map[string][]string, bool)`
-
-GetDisplayNamesOk returns a tuple with the DisplayNames field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDisplayNames
-
-`func (o *PolicyAbstractConfigProfileRelationship) SetDisplayNames(v map[string][]string)`
-
-SetDisplayNames sets DisplayNames field to given value.
-
-### HasDisplayNames
-
-`func (o *PolicyAbstractConfigProfileRelationship) HasDisplayNames() bool`
-
-HasDisplayNames returns a boolean if a field has been set.
-
-### SetDisplayNamesNil
-
-`func (o *PolicyAbstractConfigProfileRelationship) SetDisplayNamesNil(b bool)`
-
- SetDisplayNamesNil sets the value for DisplayNames to be an explicit nil
-
-### UnsetDisplayNames
-`func (o *PolicyAbstractConfigProfileRelationship) UnsetDisplayNames()`
-
-UnsetDisplayNames ensures that no value is present for DisplayNames, not even an explicit nil
-### GetDescription
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetDescription() string`
-
-GetDescription returns the Description field if non-nil, zero value otherwise.
-
-### GetDescriptionOk
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetDescriptionOk() (*string, bool)`
-
-GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDescription
-
-`func (o *PolicyAbstractConfigProfileRelationship) SetDescription(v string)`
-
-SetDescription sets Description field to given value.
-
-### HasDescription
-
-`func (o *PolicyAbstractConfigProfileRelationship) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
-
-### GetName
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetName() string`
-
-GetName returns the Name field if non-nil, zero value otherwise.
-
-### GetNameOk
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetNameOk() (*string, bool)`
-
-GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetName
-
-`func (o *PolicyAbstractConfigProfileRelationship) SetName(v string)`
-
-SetName sets Name field to given value.
-
-### HasName
-
-`func (o *PolicyAbstractConfigProfileRelationship) HasName() bool`
-
-HasName returns a boolean if a field has been set.
-
-### GetType
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetType() string`
-
-GetType returns the Type field if non-nil, zero value otherwise.
-
-### GetTypeOk
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetTypeOk() (*string, bool)`
-
-GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetType
-
-`func (o *PolicyAbstractConfigProfileRelationship) SetType(v string)`
-
-SetType sets Type field to given value.
-
-### HasType
-
-`func (o *PolicyAbstractConfigProfileRelationship) HasType() bool`
-
-HasType returns a boolean if a field has been set.
-
-### GetSrcTemplate
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetSrcTemplate() PolicyAbstractProfileRelationship`
-
-GetSrcTemplate returns the SrcTemplate field if non-nil, zero value otherwise.
-
-### GetSrcTemplateOk
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetSrcTemplateOk() (*PolicyAbstractProfileRelationship, bool)`
-
-GetSrcTemplateOk returns a tuple with the SrcTemplate field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSrcTemplate
-
-`func (o *PolicyAbstractConfigProfileRelationship) SetSrcTemplate(v PolicyAbstractProfileRelationship)`
-
-SetSrcTemplate sets SrcTemplate field to given value.
-
-### HasSrcTemplate
-
-`func (o *PolicyAbstractConfigProfileRelationship) HasSrcTemplate() bool`
-
-HasSrcTemplate returns a boolean if a field has been set.
-
-### GetAction
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetAction() string`
-
-GetAction returns the Action field if non-nil, zero value otherwise.
-
-### GetActionOk
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetActionOk() (*string, bool)`
-
-GetActionOk returns a tuple with the Action field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAction
-
-`func (o *PolicyAbstractConfigProfileRelationship) SetAction(v string)`
-
-SetAction sets Action field to given value.
-
-### HasAction
-
-`func (o *PolicyAbstractConfigProfileRelationship) HasAction() bool`
-
-HasAction returns a boolean if a field has been set.
-
-### GetConfigContext
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetConfigContext() PolicyConfigContext`
-
-GetConfigContext returns the ConfigContext field if non-nil, zero value otherwise.
-
-### GetConfigContextOk
-
-`func (o *PolicyAbstractConfigProfileRelationship) GetConfigContextOk() (*PolicyConfigContext, bool)`
-
-GetConfigContextOk returns a tuple with the ConfigContext field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetConfigContext
-
-`func (o *PolicyAbstractConfigProfileRelationship) SetConfigContext(v PolicyConfigContext)`
-
-SetConfigContext sets ConfigContext field to given value.
-
-### HasConfigContext
-
-`func (o *PolicyAbstractConfigProfileRelationship) HasConfigContext() bool`
-
-HasConfigContext returns a boolean if a field has been set.
+HasLink returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

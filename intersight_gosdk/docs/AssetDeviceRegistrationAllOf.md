@@ -4,15 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.DeviceRegistration"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.DeviceRegistration"]
 **AccessKeyId** | Pointer to **string** | An identifier for the credential used by the device connector to authenticate with the Intersight web socket gateway. | [optional] 
 **ClaimedByUserName** | Pointer to **string** | The name of the user who claimed the device for the account. | [optional] [readonly] 
 **ClaimedTime** | Pointer to [**time.Time**](time.Time.md) | The date and time at which the device was claimed to this account. | [optional] [readonly] 
 **DeviceHostname** | Pointer to **[]string** |  | [optional] 
 **DeviceIpAddress** | Pointer to **[]string** |  | [optional] 
 **ExecutionMode** | Pointer to **string** | Indicates if the platform is an actual device or an emulated device for testing, demos, etc. Permitted values are [Normal, Emulator, ContainerEmulator]. * &#x60;&#x60; - The device reported an empty or unrecognized executionMode. * &#x60;Normal&#x60; - The device connector is running in normal mode, i.e. it is not a simulation. * &#x60;Emulator&#x60; - The device connector is running in simulation mode inside an emulated device. * &#x60;ContainerEmulator&#x60; - The device connector is running in simulation mode inside a containerized emulated device. | [optional] [default to ""]
-**ParentSignature** | Pointer to [**AssetParentConnectionSignature**](asset.ParentConnectionSignature.md) |  | [optional] 
+**ParentSignature** | Pointer to [**NullableAssetParentConnectionSignature**](asset.ParentConnectionSignature.md) |  | [optional] 
 **Pid** | Pointer to **[]string** |  | [optional] 
-**PlatformType** | Pointer to **string** | The platform type on which device connector is executing. * &#x60;&#x60; - The device reported an empty or unrecognized platform type. * &#x60;APIC&#x60; - An Application Policy Infrastructure Controller cluster. * &#x60;DCNM&#x60; - A Data Center Network Manager instance. Data Center Network Manager (DCNM) is the network management platform for all NX-OS-enabled deployments, spanning new fabric architectures, IP Fabric for Media, and storage networking deployments for the Cisco Nexus-powered data center. * &#x60;UCSFI&#x60; - A UCS Fabric Interconnect in HA or standalone mode, which is being managed by UCS Manager (UCSM). * &#x60;UCSFIISM&#x60; - A UCS Fabric Interconnect in HA or standalone mode, managed directly by Intersight. * &#x60;IMC&#x60; - A standalone UCS Server Integrated Management Controller. * &#x60;IMCM4&#x60; - A standalone UCS M4 Server. * &#x60;IMCM5&#x60; - A standalone UCS M5 server. * &#x60;UCSIOM&#x60; - An UCS Chassis IO module. * &#x60;HX&#x60; - A HyperFlex storage controller. * &#x60;HyperFlexAP&#x60; - A HyperFlex Application Platform. * &#x60;UCSD&#x60; - A UCS Director virtual appliance. Cisco UCS Director automates, orchestrates, and manages Cisco and third-party hardware. * &#x60;IntersightAppliance&#x60; - Intersight on-premise appliance. * &#x60;PureStorageFlashArray&#x60; - A Pure Storage FlashArray device. * &#x60;NetAppOntap&#x60; - A NetApp ONTAP storage system. * &#x60;EmcScaleIo&#x60; - An EMC ScaleIO storage system. * &#x60;EmcVmax&#x60; - An EMC VMAX storage system. * &#x60;EmcVplex&#x60; - An EMC VPLEX storage system. * &#x60;EmcXtremIo&#x60; - An EMC XtremIO storage system. * &#x60;VmwareVcenter&#x60; - A VMware vCenter device that manages Virtual Machines. * &#x60;MicrosoftHyperV&#x60; - A Microsoft HyperV system that manages Virtual Machines. * &#x60;AppDynamics&#x60; - An AppDynamics controller that monitors applications. * &#x60;Dynatrace&#x60; - A Dynatrace controller that monitors applications. * &#x60;MicrosoftSqlServer&#x60; - A Microsoft SQL database server. * &#x60;Kubernetes&#x60; - A Kubernetes cluster that runs containerized applications. * &#x60;MicrosoftAzure&#x60; - A Microsoft Azure target. * &#x60;ServiceEngine&#x60; - Cisco Application Services Engine. Cisco Application Services Engine is a platform to deploy and manage applications. * &#x60;IMCBlade&#x60; - An Intersight managed UCS Blade Server. | [optional] [default to ""]
+**PlatformType** | Pointer to **string** | The platform type on which device connector is executing. * &#x60;&#x60; - The device reported an empty or unrecognized platform type. * &#x60;APIC&#x60; - An Application Policy Infrastructure Controller cluster. * &#x60;DCNM&#x60; - A Data Center Network Manager instance. Data Center Network Manager (DCNM) is the network management platform for all NX-OS-enabled deployments, spanning new fabric architectures, IP Fabric for Media, and storage networking deployments for the Cisco Nexus-powered data center. * &#x60;UCSFI&#x60; - A UCS Fabric Interconnect in HA or standalone mode, which is being managed by UCS Manager (UCSM). * &#x60;UCSFIISM&#x60; - A UCS Fabric Interconnect in HA or standalone mode, managed directly by Intersight. * &#x60;IMC&#x60; - A standalone UCS Server Integrated Management Controller. * &#x60;IMCM4&#x60; - A standalone UCS M4 Server. * &#x60;IMCM5&#x60; - A standalone UCS M5 server. * &#x60;UCSIOM&#x60; - An UCS Chassis IO module. * &#x60;HX&#x60; - A HyperFlex storage controller. * &#x60;HyperFlexAP&#x60; - A HyperFlex Application Platform. * &#x60;UCSD&#x60; - A UCS Director virtual appliance. Cisco UCS Director automates, orchestrates, and manages Cisco and third-party hardware. * &#x60;IntersightAppliance&#x60; - A Cisco Intersight Connected Virtual Appliance. * &#x60;IntersightAssist&#x60; - A Cisco Intersight Assist. * &#x60;PureStorageFlashArray&#x60; - A Pure Storage FlashArray device. * &#x60;NetAppOntap&#x60; - A NetApp ONTAP storage system. * &#x60;EmcScaleIo&#x60; - An EMC ScaleIO storage system. * &#x60;EmcVmax&#x60; - An EMC VMAX storage system. * &#x60;EmcVplex&#x60; - An EMC VPLEX storage system. * &#x60;EmcXtremIo&#x60; - An EMC XtremIO storage system. * &#x60;VmwareVcenter&#x60; - A VMware vCenter device that manages Virtual Machines. * &#x60;MicrosoftHyperV&#x60; - A Microsoft HyperV system that manages Virtual Machines. * &#x60;AppDynamics&#x60; - An AppDynamics controller that monitors applications. * &#x60;Dynatrace&#x60; - A Dynatrace controller that monitors applications. * &#x60;MicrosoftSqlServer&#x60; - A Microsoft SQL database server. * &#x60;Kubernetes&#x60; - A Kubernetes cluster that runs containerized applications. * &#x60;AmazonWebService&#x60; - A Amazon web service target that discovers and monitors different services like EC2. It discovers entities like VMs, Volumes, regions etc. and monitors attributes like Mem, CPU, cost. * &#x60;AmazonWebServiceBilling&#x60; - A Amazon web service billing target to retrieve billing information stored in S3 bucket. * &#x60;MicrosoftAzureServicePrincipal&#x60; - A Microsoft Azure Service Principal target that discovers all the associated Azure subscriptions. * &#x60;MicrosoftAzureEnterpriseAgreement&#x60; - A Microsoft Azure Enterprise Agreement target that discovers cost, billing and RIs. * &#x60;ServiceEngine&#x60; - Cisco Application Services Engine. Cisco Application Services Engine is a platform to deploy and manage applications. * &#x60;HitachiVirtualStoragePlatform&#x60; - A Hitachi Virtual Storage Platform also referred to as Hitachi VSP. It includes various storage systems designed for data centers. * &#x60;IMCBlade&#x60; - An Intersight managed UCS Blade Server. * &#x60;CustomTarget&#x60; - An external endpoint added as Target that can be accessed through its REST API interface in Intersight Orchestrator automation workflow.Standard HTTP authentication scheme supported: Basic. * &#x60;CiscoCatalyst&#x60; - A Cisco Catalyst networking switch device. | [optional] [default to ""]
 **PublicAccessKey** | Pointer to **string** | The device connector&#39;s public key used by Intersight to authenticate a connection from the device connector. The public key is used to verify that the signature a device connector sends on connect has been signed by the connector&#39;s private key stored on the device&#39;s filesystem. Must be a PEM encoded RSA public key string. | [optional] [readonly] 
 **ReadOnly** | Pointer to **bool** | Flag reported by devices to indicate an administrator of the device has disabled management operations of the device connector and only monitoring is permitted. | [optional] [readonly] 
 **Serial** | Pointer to **[]string** |  | [optional] 
@@ -29,7 +31,7 @@ Name | Type | Description | Notes
 
 ### NewAssetDeviceRegistrationAllOf
 
-`func NewAssetDeviceRegistrationAllOf() *AssetDeviceRegistrationAllOf`
+`func NewAssetDeviceRegistrationAllOf(classId string, objectType string, ) *AssetDeviceRegistrationAllOf`
 
 NewAssetDeviceRegistrationAllOf instantiates a new AssetDeviceRegistrationAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -43,6 +45,46 @@ will change when the set of required properties is changed
 NewAssetDeviceRegistrationAllOfWithDefaults instantiates a new AssetDeviceRegistrationAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *AssetDeviceRegistrationAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *AssetDeviceRegistrationAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *AssetDeviceRegistrationAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *AssetDeviceRegistrationAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *AssetDeviceRegistrationAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *AssetDeviceRegistrationAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAccessKeyId
 
@@ -144,6 +186,16 @@ SetDeviceHostname sets DeviceHostname field to given value.
 
 HasDeviceHostname returns a boolean if a field has been set.
 
+### SetDeviceHostnameNil
+
+`func (o *AssetDeviceRegistrationAllOf) SetDeviceHostnameNil(b bool)`
+
+ SetDeviceHostnameNil sets the value for DeviceHostname to be an explicit nil
+
+### UnsetDeviceHostname
+`func (o *AssetDeviceRegistrationAllOf) UnsetDeviceHostname()`
+
+UnsetDeviceHostname ensures that no value is present for DeviceHostname, not even an explicit nil
 ### GetDeviceIpAddress
 
 `func (o *AssetDeviceRegistrationAllOf) GetDeviceIpAddress() []string`
@@ -169,6 +221,16 @@ SetDeviceIpAddress sets DeviceIpAddress field to given value.
 
 HasDeviceIpAddress returns a boolean if a field has been set.
 
+### SetDeviceIpAddressNil
+
+`func (o *AssetDeviceRegistrationAllOf) SetDeviceIpAddressNil(b bool)`
+
+ SetDeviceIpAddressNil sets the value for DeviceIpAddress to be an explicit nil
+
+### UnsetDeviceIpAddress
+`func (o *AssetDeviceRegistrationAllOf) UnsetDeviceIpAddress()`
+
+UnsetDeviceIpAddress ensures that no value is present for DeviceIpAddress, not even an explicit nil
 ### GetExecutionMode
 
 `func (o *AssetDeviceRegistrationAllOf) GetExecutionMode() string`
@@ -219,6 +281,16 @@ SetParentSignature sets ParentSignature field to given value.
 
 HasParentSignature returns a boolean if a field has been set.
 
+### SetParentSignatureNil
+
+`func (o *AssetDeviceRegistrationAllOf) SetParentSignatureNil(b bool)`
+
+ SetParentSignatureNil sets the value for ParentSignature to be an explicit nil
+
+### UnsetParentSignature
+`func (o *AssetDeviceRegistrationAllOf) UnsetParentSignature()`
+
+UnsetParentSignature ensures that no value is present for ParentSignature, not even an explicit nil
 ### GetPid
 
 `func (o *AssetDeviceRegistrationAllOf) GetPid() []string`
@@ -244,6 +316,16 @@ SetPid sets Pid field to given value.
 
 HasPid returns a boolean if a field has been set.
 
+### SetPidNil
+
+`func (o *AssetDeviceRegistrationAllOf) SetPidNil(b bool)`
+
+ SetPidNil sets the value for Pid to be an explicit nil
+
+### UnsetPid
+`func (o *AssetDeviceRegistrationAllOf) UnsetPid()`
+
+UnsetPid ensures that no value is present for Pid, not even an explicit nil
 ### GetPlatformType
 
 `func (o *AssetDeviceRegistrationAllOf) GetPlatformType() string`
@@ -344,6 +426,16 @@ SetSerial sets Serial field to given value.
 
 HasSerial returns a boolean if a field has been set.
 
+### SetSerialNil
+
+`func (o *AssetDeviceRegistrationAllOf) SetSerialNil(b bool)`
+
+ SetSerialNil sets the value for Serial to be an explicit nil
+
+### UnsetSerial
+`func (o *AssetDeviceRegistrationAllOf) UnsetSerial()`
+
+UnsetSerial ensures that no value is present for Serial, not even an explicit nil
 ### GetVendor
 
 `func (o *AssetDeviceRegistrationAllOf) GetVendor() string`

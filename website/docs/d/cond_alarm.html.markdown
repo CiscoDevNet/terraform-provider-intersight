@@ -18,7 +18,7 @@ The following arguments can be used to get data of already created objects in In
 * `affected_mo_type`:(string) Managed system affected object type. For example Adaptor, FI, CIMC. 
 * `ancestor_mo_id`:(string) Parent MoId of the fault from managed system. For example, Blade moid for adaptor fault. 
 * `ancestor_mo_type`:(string) Parent MO type of the fault from managed system. For example, Blade for adaptor fault. 
-* `class_id`:(string) The concrete type of this complex type. Its value must be the same as the 'objectType' property.The OpenAPI document references this property as a discriminator value. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `code`:(string) A unique alarm code. For alarms mapped from UCS faults, this will be the same as the UCS fault code. 
 * `creation_time`:(string) The time the alarm was created. 
 * `description`:(string) A longer description of the alarm than the name. The description contains details of the component reporting the issue. 
@@ -26,6 +26,6 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `ms_affected_object`:(string) A unique key for the alarm from the managed system's point of view. For example, in the case of UCS, this is the fault's dn. 
 * `name`:(string) Uniquely identifies the type of alarm. For alarms originating from Intersight, this will be a descriptive name. For alarms that are mapped from faults, the name will be derived from fault properties. For example, alarms mapped from UCS faults will use a prefix of UCS and appended with the fault code. 
-* `object_type`:(string) The fully-qualified type of this managed object, i.e. the class name.This property is optional. The ObjectType is implied from the URL path.If specified, the value of objectType must match the class name specified in the URL path. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `orig_severity`:(string) The original severity when the alarm was first created.* `None` - The Enum value None represents that there is no severity.* `Info` - The Enum value Info represents the Informational level of severity.* `Critical` - The Enum value Critical represents the Critical level of severity.* `Warning` - The Enum value Warning represents the Warning level of severity.* `Cleared` - The Enum value Cleared represents that the alarm severity has been cleared. 
 * `severity`:(string) The severity of the alarm. Valid values are Critical, Warning, Info, and Cleared.* `None` - The Enum value None represents that there is no severity.* `Info` - The Enum value Info represents the Informational level of severity.* `Critical` - The Enum value Critical represents the Critical level of severity.* `Warning` - The Enum value Warning represents the Warning level of severity.* `Cleared` - The Enum value Cleared represents that the alarm severity has been cleared. 

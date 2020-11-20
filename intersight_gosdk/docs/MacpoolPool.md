@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "macpool.Pool"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "macpool.Pool"]
 **MacBlocks** | Pointer to [**[]MacpoolBlock**](macpool.Block.md) |  | [optional] 
 **BlockHeads** | Pointer to [**[]MacpoolIdBlockRelationship**](macpool.IdBlock.Relationship.md) | An array of relationships to macpoolIdBlock resources. | [optional] [readonly] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewMacpoolPool
 
-`func NewMacpoolPool() *MacpoolPool`
+`func NewMacpoolPool(classId string, objectType string, ) *MacpoolPool`
 
 NewMacpoolPool instantiates a new MacpoolPool object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewMacpoolPoolWithDefaults instantiates a new MacpoolPool object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *MacpoolPool) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *MacpoolPool) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *MacpoolPool) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *MacpoolPool) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *MacpoolPool) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *MacpoolPool) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetMacBlocks
 
@@ -52,6 +94,16 @@ SetMacBlocks sets MacBlocks field to given value.
 
 HasMacBlocks returns a boolean if a field has been set.
 
+### SetMacBlocksNil
+
+`func (o *MacpoolPool) SetMacBlocksNil(b bool)`
+
+ SetMacBlocksNil sets the value for MacBlocks to be an explicit nil
+
+### UnsetMacBlocks
+`func (o *MacpoolPool) UnsetMacBlocks()`
+
+UnsetMacBlocks ensures that no value is present for MacBlocks, not even an explicit nil
 ### GetBlockHeads
 
 `func (o *MacpoolPool) GetBlockHeads() []MacpoolIdBlockRelationship`

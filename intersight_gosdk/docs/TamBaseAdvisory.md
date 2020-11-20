@@ -4,16 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **Description** | Pointer to **string** | Brief description of the advisory details. | [optional] 
 **Name** | Pointer to **string** | A user defined name for the Intersight Advisory. | [optional] 
-**Severity** | Pointer to [**TamSeverity**](tam.Severity.md) |  | [optional] 
+**Severity** | Pointer to [**NullableTamSeverity**](tam.Severity.md) |  | [optional] 
 **State** | Pointer to **string** | Current state of the advisory. * &#x60;ready&#x60; - Advisory has been evaluated. The affected devices would be analyzed and corresponding advisory instances would be created. * &#x60;evaluating&#x60; - Advisory is currently under evaluation. The affected devices would be analyzed but no advisory instances wouldbe created. The results of the analysis would be made available to Intersight engineering for evaluation and validation. | [optional] [default to "ready"]
 
 ## Methods
 
 ### NewTamBaseAdvisory
 
-`func NewTamBaseAdvisory() *TamBaseAdvisory`
+`func NewTamBaseAdvisory(classId string, objectType string, ) *TamBaseAdvisory`
 
 NewTamBaseAdvisory instantiates a new TamBaseAdvisory object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewTamBaseAdvisoryWithDefaults instantiates a new TamBaseAdvisory object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *TamBaseAdvisory) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *TamBaseAdvisory) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *TamBaseAdvisory) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *TamBaseAdvisory) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *TamBaseAdvisory) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *TamBaseAdvisory) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDescription
 
@@ -103,6 +145,16 @@ SetSeverity sets Severity field to given value.
 
 HasSeverity returns a boolean if a field has been set.
 
+### SetSeverityNil
+
+`func (o *TamBaseAdvisory) SetSeverityNil(b bool)`
+
+ SetSeverityNil sets the value for Severity to be an explicit nil
+
+### UnsetSeverity
+`func (o *TamBaseAdvisory) UnsetSeverity()`
+
+UnsetSeverity ensures that no value is present for Severity, not even an explicit nil
 ### GetState
 
 `func (o *TamBaseAdvisory) GetState() string`

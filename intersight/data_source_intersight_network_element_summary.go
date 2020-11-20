@@ -45,10 +45,9 @@ func dataSourceNetworkElementSummary() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"critical": {
 							Description: "The count of alarms that have severity type Critical.",
@@ -56,7 +55,7 @@ func dataSourceNetworkElementSummary() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -76,10 +75,9 @@ func dataSourceNetworkElementSummary() *schema.Resource {
 				Computed:    true,
 			},
 			"class_id": {
-				Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
 			},
 			"device_mo_id": {
 				Description: "The database identifier of the registered device of an object.",
@@ -99,6 +97,12 @@ func dataSourceNetworkElementSummary() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"ethernet_switching_mode": {
+				Description: "The user configured Ethernet operational mode for this switch (End-Host or Switching).\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"fault_summary": {
 				Description: "The fault summary of the network Element out-of-band management interface.",
 				Type:        schema.TypeInt,
@@ -107,6 +111,12 @@ func dataSourceNetworkElementSummary() *schema.Resource {
 			},
 			"fc_mode": {
 				Description: "The user configured FC operational mode for this switch (End-Host or Switching).",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"fc_switching_mode": {
+				Description: "The user configured FC operational mode for this switch (End-Host or Switching).\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -214,7 +224,7 @@ func dataSourceNetworkElementSummary() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified type of this managed object, i.e. the class name.\nThis property is optional. The ObjectType is implied from the URL path.\nIf specified, the value of objectType must match the class name specified in the URL path.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -305,10 +315,9 @@ func dataSourceNetworkElementSummary() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -317,7 +326,7 @@ func dataSourceNetworkElementSummary() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -439,6 +448,10 @@ func dataSourceNetworkElementSummaryRead(d *schema.ResourceData, meta interface{
 		x := (v.(string))
 		o.SetEthernetMode(x)
 	}
+	if v, ok := d.GetOk("ethernet_switching_mode"); ok {
+		x := (v.(string))
+		o.SetEthernetSwitchingMode(x)
+	}
 	if v, ok := d.GetOk("fault_summary"); ok {
 		x := int64(v.(int))
 		o.SetFaultSummary(x)
@@ -446,6 +459,10 @@ func dataSourceNetworkElementSummaryRead(d *schema.ResourceData, meta interface{
 	if v, ok := d.GetOk("fc_mode"); ok {
 		x := (v.(string))
 		o.SetFcMode(x)
+	}
+	if v, ok := d.GetOk("fc_switching_mode"); ok {
+		x := (v.(string))
+		o.SetFcSwitchingMode(x)
 	}
 	if v, ok := d.GetOk("firmware"); ok {
 		x := (v.(string))
@@ -659,11 +676,17 @@ func dataSourceNetworkElementSummaryRead(d *schema.ResourceData, meta interface{
 			if err := d.Set("ethernet_mode", (s.GetEthernetMode())); err != nil {
 				return fmt.Errorf("error occurred while setting property EthernetMode: %+v", err)
 			}
+			if err := d.Set("ethernet_switching_mode", (s.GetEthernetSwitchingMode())); err != nil {
+				return fmt.Errorf("error occurred while setting property EthernetSwitchingMode: %+v", err)
+			}
 			if err := d.Set("fault_summary", (s.GetFaultSummary())); err != nil {
 				return fmt.Errorf("error occurred while setting property FaultSummary: %+v", err)
 			}
 			if err := d.Set("fc_mode", (s.GetFcMode())); err != nil {
 				return fmt.Errorf("error occurred while setting property FcMode: %+v", err)
+			}
+			if err := d.Set("fc_switching_mode", (s.GetFcSwitchingMode())); err != nil {
+				return fmt.Errorf("error occurred while setting property FcSwitchingMode: %+v", err)
 			}
 			if err := d.Set("firmware", (s.GetFirmware())); err != nil {
 				return fmt.Errorf("error occurred while setting property Firmware: %+v", err)

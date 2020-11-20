@@ -4,8 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "config.ExportedItem"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "config.ExportedItem"]
 **FileName** | Pointer to **string** | Name of the file corresponding to item MO. | [optional] [readonly] 
-**Item** | Pointer to [**ConfigMoRef**](config.MoRef.md) |  | [optional] 
+**Item** | Pointer to [**NullableConfigMoRef**](config.MoRef.md) |  | [optional] 
 **Name** | Pointer to **string** | MO item identity (the moref corresponding to item) expressed as a string. | [optional] [readonly] 
 **ServiceVersion** | Pointer to **string** | Version of the service that owns the item MO. | [optional] [readonly] 
 **Status** | Pointer to **string** | Status of the item&#39;s export operation. * &#x60;&#x60; - The operation has not started. * &#x60;InProgress&#x60; - The operation is in progress. * &#x60;Success&#x60; - The operation has succeeded. * &#x60;Failed&#x60; - The operation has failed. * &#x60;RollBackInitiated&#x60; - The rollback has been inititiated for import failure. * &#x60;RollBackFailed&#x60; - The rollback has failed for import failure. * &#x60;RollbackCompleted&#x60; - The rollback has completed for import failure. * &#x60;RollbackAborted&#x60; - The rollback has been aborted for import failure. * &#x60;OperationTimedOut&#x60; - The operation has timed out. | [optional] [readonly] [default to ""]
@@ -18,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewConfigExportedItem
 
-`func NewConfigExportedItem() *ConfigExportedItem`
+`func NewConfigExportedItem(classId string, objectType string, ) *ConfigExportedItem`
 
 NewConfigExportedItem instantiates a new ConfigExportedItem object
 This constructor will assign default values to properties that have it defined,
@@ -32,6 +34,46 @@ will change when the set of required properties is changed
 NewConfigExportedItemWithDefaults instantiates a new ConfigExportedItem object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *ConfigExportedItem) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *ConfigExportedItem) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *ConfigExportedItem) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *ConfigExportedItem) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *ConfigExportedItem) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *ConfigExportedItem) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetFileName
 
@@ -83,6 +125,16 @@ SetItem sets Item field to given value.
 
 HasItem returns a boolean if a field has been set.
 
+### SetItemNil
+
+`func (o *ConfigExportedItem) SetItemNil(b bool)`
+
+ SetItemNil sets the value for Item to be an explicit nil
+
+### UnsetItem
+`func (o *ConfigExportedItem) UnsetItem()`
+
+UnsetItem ensures that no value is present for Item, not even an explicit nil
 ### GetName
 
 `func (o *ConfigExportedItem) GetName() string`

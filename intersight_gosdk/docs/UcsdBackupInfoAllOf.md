@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "ucsd.BackupInfo"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "ucsd.BackupInfo"]
 **BackupFileName** | Pointer to **string** | Auto generated backup File Name with combination of file prefix given an user input and the timestamp. | [optional] [readonly] 
 **BackupLocation** | Pointer to **string** | Backup location that contains the backup images for end device which can be used for restore operation. | [optional] [readonly] 
 **BackupServerIp** | Pointer to **string** | Backup server where backup images are maintained. | [optional] [readonly] 
@@ -25,7 +27,7 @@ Name | Type | Description | Notes
 
 ### NewUcsdBackupInfoAllOf
 
-`func NewUcsdBackupInfoAllOf() *UcsdBackupInfoAllOf`
+`func NewUcsdBackupInfoAllOf(classId string, objectType string, ) *UcsdBackupInfoAllOf`
 
 NewUcsdBackupInfoAllOf instantiates a new UcsdBackupInfoAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -39,6 +41,46 @@ will change when the set of required properties is changed
 NewUcsdBackupInfoAllOfWithDefaults instantiates a new UcsdBackupInfoAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *UcsdBackupInfoAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *UcsdBackupInfoAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *UcsdBackupInfoAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *UcsdBackupInfoAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *UcsdBackupInfoAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *UcsdBackupInfoAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetBackupFileName
 
@@ -165,6 +207,16 @@ SetConnectors sets Connectors field to given value.
 
 HasConnectors returns a boolean if a field has been set.
 
+### SetConnectorsNil
+
+`func (o *UcsdBackupInfoAllOf) SetConnectorsNil(b bool)`
+
+ SetConnectorsNil sets the value for Connectors to be an explicit nil
+
+### UnsetConnectors
+`func (o *UcsdBackupInfoAllOf) UnsetConnectors()`
+
+UnsetConnectors ensures that no value is present for Connectors, not even an explicit nil
 ### GetDuration
 
 `func (o *UcsdBackupInfoAllOf) GetDuration() int64`

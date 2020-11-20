@@ -4,14 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Bootloader** | Pointer to [**BootBootloader**](boot.Bootloader.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "boot.PchStorage"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "boot.PchStorage"]
+**Bootloader** | Pointer to [**NullableBootBootloader**](boot.Bootloader.md) |  | [optional] 
 **Lun** | Pointer to **int64** | The Logical Unit Number (LUN) of the device. It is the Virtual Drive number for Cisco UCS C-Series Servers. Virtual Drive number is found in storage inventory. | [optional] 
 
 ## Methods
 
 ### NewBootPchStorage
 
-`func NewBootPchStorage() *BootPchStorage`
+`func NewBootPchStorage(classId string, objectType string, ) *BootPchStorage`
 
 NewBootPchStorage instantiates a new BootPchStorage object
 This constructor will assign default values to properties that have it defined,
@@ -25,6 +27,46 @@ will change when the set of required properties is changed
 NewBootPchStorageWithDefaults instantiates a new BootPchStorage object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *BootPchStorage) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *BootPchStorage) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *BootPchStorage) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *BootPchStorage) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *BootPchStorage) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *BootPchStorage) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetBootloader
 
@@ -51,6 +93,16 @@ SetBootloader sets Bootloader field to given value.
 
 HasBootloader returns a boolean if a field has been set.
 
+### SetBootloaderNil
+
+`func (o *BootPchStorage) SetBootloaderNil(b bool)`
+
+ SetBootloaderNil sets the value for Bootloader to be an explicit nil
+
+### UnsetBootloader
+`func (o *BootPchStorage) UnsetBootloader()`
+
+UnsetBootloader ensures that no value is present for Bootloader, not even an explicit nil
 ### GetLun
 
 `func (o *BootPchStorage) GetLun() int64`

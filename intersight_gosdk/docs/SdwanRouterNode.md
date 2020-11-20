@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "sdwan.RouterNode"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "sdwan.RouterNode"]
 **DeviceTemplate** | Pointer to **string** | Name of the Cisco vManage device template that the current device should be attached to. A device template consists of many feature templates that contain SD-WAN vEdge router configuration. | [optional] 
 **Name** | Pointer to **string** | Name of the router node object. | [optional] 
 **NetworkConfiguration** | Pointer to [**[]SdwanNetworkConfigurationType**](sdwan.NetworkConfigurationType.md) |  | [optional] 
@@ -17,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewSdwanRouterNode
 
-`func NewSdwanRouterNode() *SdwanRouterNode`
+`func NewSdwanRouterNode(classId string, objectType string, ) *SdwanRouterNode`
 
 NewSdwanRouterNode instantiates a new SdwanRouterNode object
 This constructor will assign default values to properties that have it defined,
@@ -31,6 +33,46 @@ will change when the set of required properties is changed
 NewSdwanRouterNodeWithDefaults instantiates a new SdwanRouterNode object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *SdwanRouterNode) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *SdwanRouterNode) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *SdwanRouterNode) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *SdwanRouterNode) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *SdwanRouterNode) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *SdwanRouterNode) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDeviceTemplate
 
@@ -107,6 +149,16 @@ SetNetworkConfiguration sets NetworkConfiguration field to given value.
 
 HasNetworkConfiguration returns a boolean if a field has been set.
 
+### SetNetworkConfigurationNil
+
+`func (o *SdwanRouterNode) SetNetworkConfigurationNil(b bool)`
+
+ SetNetworkConfigurationNil sets the value for NetworkConfiguration to be an explicit nil
+
+### UnsetNetworkConfiguration
+`func (o *SdwanRouterNode) UnsetNetworkConfiguration()`
+
+UnsetNetworkConfiguration ensures that no value is present for NetworkConfiguration, not even an explicit nil
 ### GetTemplateInputs
 
 `func (o *SdwanRouterNode) GetTemplateInputs() []SdwanTemplateInputsType`
@@ -132,6 +184,16 @@ SetTemplateInputs sets TemplateInputs field to given value.
 
 HasTemplateInputs returns a boolean if a field has been set.
 
+### SetTemplateInputsNil
+
+`func (o *SdwanRouterNode) SetTemplateInputsNil(b bool)`
+
+ SetTemplateInputsNil sets the value for TemplateInputs to be an explicit nil
+
+### UnsetTemplateInputs
+`func (o *SdwanRouterNode) UnsetTemplateInputs()`
+
+UnsetTemplateInputs ensures that no value is present for TemplateInputs, not even an explicit nil
 ### GetUuid
 
 `func (o *SdwanRouterNode) GetUuid() string`

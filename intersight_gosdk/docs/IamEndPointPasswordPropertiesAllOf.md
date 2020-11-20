@@ -4,9 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.EndPointPasswordProperties"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.EndPointPasswordProperties"]
 **EnablePasswordExpiry** | Pointer to **bool** | Enables password expiry on the endpoint. | [optional] 
-**EnforceStrongPassword** | Pointer to **bool** | Enables a strong password policy Strong password requirements: A. The password must have a minimum of 8 and a maximum of 20 characters. B. The password must not contain the User&#39;s Name. C. The password must contain characters from three of the following four categories. 1) English uppercase characters (A through Z). 2) English lowercase characters (a through z). 3) Base 10 digits (0 through 9). 4) Non-alphabetic characters (! , @, #, $, %, ^, &amp;, *, -, _, +, &#x3D;). | [optional] 
-**ForceSendPassword** | Pointer to **bool** | User password will always be sent to endpoint device. If the option is not selected, then users password will be sent to endpoint device if password is changed for existing users and for new users. | [optional] 
+**EnforceStrongPassword** | Pointer to **bool** | Enables a strong password policy. Strong password requirements: A. The password must have a minimum of 8 and a maximum of 20 characters. B. The password must not contain the User&#39;s Name. C. The password must contain characters from three of the following four categories. 1) English uppercase characters (A through Z). 2) English lowercase characters (a through z). 3) Base 10 digits (0 through 9). 4) Non-alphabetic characters (! , @, #, $, %, ^, &amp;, *, -, _, +, &#x3D;). | [optional] 
+**ForceSendPassword** | Pointer to **bool** | User password will always be sent to endpoint device. If the option is not selected, then user password will be sent to endpoint device for new users and if user password is changed for existing users. | [optional] 
 **GracePeriod** | Pointer to **int64** | Time period until when you can use the existing password, after it expires. | [optional] 
 **NotificationPeriod** | Pointer to **int64** | The duration after which the password will expire. | [optional] 
 **PasswordExpiryDuration** | Pointer to **int64** | Set time period for password expiration. Value should be greater than notification period and grace period. | [optional] 
@@ -16,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewIamEndPointPasswordPropertiesAllOf
 
-`func NewIamEndPointPasswordPropertiesAllOf() *IamEndPointPasswordPropertiesAllOf`
+`func NewIamEndPointPasswordPropertiesAllOf(classId string, objectType string, ) *IamEndPointPasswordPropertiesAllOf`
 
 NewIamEndPointPasswordPropertiesAllOf instantiates a new IamEndPointPasswordPropertiesAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +32,46 @@ will change when the set of required properties is changed
 NewIamEndPointPasswordPropertiesAllOfWithDefaults instantiates a new IamEndPointPasswordPropertiesAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *IamEndPointPasswordPropertiesAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IamEndPointPasswordPropertiesAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IamEndPointPasswordPropertiesAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IamEndPointPasswordPropertiesAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IamEndPointPasswordPropertiesAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IamEndPointPasswordPropertiesAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetEnablePasswordExpiry
 

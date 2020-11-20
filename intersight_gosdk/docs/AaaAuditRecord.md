@@ -4,8 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "aaa.AuditRecord"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "aaa.AuditRecord"]
 **Email** | Pointer to **string** | The email of the associated user that made the change.  In case the user is later deleted, we still have some reference to the information. | [optional] 
 **InstId** | Pointer to **string** | The instance id of AuditRecordLocal, which is used to identify if the comming AuditRecordLocal was already processed before. | [optional] 
+**SessionId** | Pointer to **string** | The sessionId in which the user made the change. In case that the session is later deleted, we still have some reference to the information. | [optional] 
 **SourceIp** | Pointer to **string** | The source IP of the client. | [optional] 
 **Timestamp** | Pointer to [**time.Time**](time.Time.md) | The creation time of AuditRecordLocal, which is the time when the affected MO was created/modified/deleted. | [optional] [readonly] 
 **UserIdOrEmail** | Pointer to **string** | The userId or the email of the associated user that made the change. In case that user is later deleted, we still have some reference to the information. | [optional] 
@@ -17,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewAaaAuditRecord
 
-`func NewAaaAuditRecord() *AaaAuditRecord`
+`func NewAaaAuditRecord(classId string, objectType string, ) *AaaAuditRecord`
 
 NewAaaAuditRecord instantiates a new AaaAuditRecord object
 This constructor will assign default values to properties that have it defined,
@@ -31,6 +34,46 @@ will change when the set of required properties is changed
 NewAaaAuditRecordWithDefaults instantiates a new AaaAuditRecord object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *AaaAuditRecord) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *AaaAuditRecord) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *AaaAuditRecord) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *AaaAuditRecord) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *AaaAuditRecord) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *AaaAuditRecord) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetEmail
 
@@ -81,6 +124,31 @@ SetInstId sets InstId field to given value.
 `func (o *AaaAuditRecord) HasInstId() bool`
 
 HasInstId returns a boolean if a field has been set.
+
+### GetSessionId
+
+`func (o *AaaAuditRecord) GetSessionId() string`
+
+GetSessionId returns the SessionId field if non-nil, zero value otherwise.
+
+### GetSessionIdOk
+
+`func (o *AaaAuditRecord) GetSessionIdOk() (*string, bool)`
+
+GetSessionIdOk returns a tuple with the SessionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSessionId
+
+`func (o *AaaAuditRecord) SetSessionId(v string)`
+
+SetSessionId sets SessionId field to given value.
+
+### HasSessionId
+
+`func (o *AaaAuditRecord) HasSessionId() bool`
+
+HasSessionId returns a boolean if a field has been set.
 
 ### GetSourceIp
 

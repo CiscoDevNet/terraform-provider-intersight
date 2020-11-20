@@ -4,7 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AlarmSummary** | Pointer to [**CondAlarmSummary**](cond.AlarmSummary.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "cond.AlarmAggregation"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "cond.AlarmAggregation"]
+**AlarmSummary** | Pointer to [**NullableCondAlarmSummary**](cond.AlarmSummary.md) |  | [optional] 
 **CriticalAlarmsCount** | Pointer to **int64** | Count of all alarms with severity Critical, irrespective of acknowledgement status. | [optional] 
 **Health** | Pointer to **string** | Health of the managed end point. The highest severity computed from alarmSummary property is set as the health. * &#x60;None&#x60; - The Enum value None represents that there is no severity. * &#x60;Info&#x60; - The Enum value Info represents the Informational level of severity. * &#x60;Critical&#x60; - The Enum value Critical represents the Critical level of severity. * &#x60;Warning&#x60; - The Enum value Warning represents the Warning level of severity. * &#x60;Cleared&#x60; - The Enum value Cleared represents that the alarm severity has been cleared. | [optional] [default to "None"]
 **InfoAlarmsCount** | Pointer to **int64** | Count of all alarms with severity Info, irrespective of acknowledgement status. | [optional] 
@@ -16,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewCondAlarmAggregationAllOf
 
-`func NewCondAlarmAggregationAllOf() *CondAlarmAggregationAllOf`
+`func NewCondAlarmAggregationAllOf(classId string, objectType string, ) *CondAlarmAggregationAllOf`
 
 NewCondAlarmAggregationAllOf instantiates a new CondAlarmAggregationAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +32,46 @@ will change when the set of required properties is changed
 NewCondAlarmAggregationAllOfWithDefaults instantiates a new CondAlarmAggregationAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *CondAlarmAggregationAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *CondAlarmAggregationAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *CondAlarmAggregationAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *CondAlarmAggregationAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *CondAlarmAggregationAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *CondAlarmAggregationAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAlarmSummary
 
@@ -56,6 +98,16 @@ SetAlarmSummary sets AlarmSummary field to given value.
 
 HasAlarmSummary returns a boolean if a field has been set.
 
+### SetAlarmSummaryNil
+
+`func (o *CondAlarmAggregationAllOf) SetAlarmSummaryNil(b bool)`
+
+ SetAlarmSummaryNil sets the value for AlarmSummary to be an explicit nil
+
+### UnsetAlarmSummary
+`func (o *CondAlarmAggregationAllOf) UnsetAlarmSummary()`
+
+UnsetAlarmSummary ensures that no value is present for AlarmSummary, not even an explicit nil
 ### GetCriticalAlarmsCount
 
 `func (o *CondAlarmAggregationAllOf) GetCriticalAlarmsCount() int64`

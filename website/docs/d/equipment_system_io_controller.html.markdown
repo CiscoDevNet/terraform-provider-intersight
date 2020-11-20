@@ -12,7 +12,7 @@ I/O Controller on a chassis which provides the data path to S-series server.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `chassis_id`:(string) The assigned identifier for a chassis. 
-* `class_id`:(string) The concrete type of this complex type. Its value must be the same as the 'objectType' property.The OpenAPI document references this property as a discriminator value. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `connection_path`:(string) Connection Path identifies the data path available between IOModule and FI. 
 * `connection_status`:(string) Connection status identifies the status of data path. 
 * `description`:(string) This field gives a brief information on systemIOController. 
@@ -21,7 +21,7 @@ The following arguments can be used to get data of already created objects in In
 * `managing_instance`:(string) This field identifies the CIMC that manages the controller. 
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified type of this managed object, i.e. the class name.This property is optional. The ObjectType is implied from the URL path.If specified, the value of objectType must match the class name specified in the URL path. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `oper_state`:(string) This field identifies the SIOC operational state. 
 * `part_number`:(string) Part Number identifier for the IO module. 
 * `pid`:(string) This field identifies the Product ID for systemIOController. 

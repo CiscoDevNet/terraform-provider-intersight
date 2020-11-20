@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iaas.DeviceStatus"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iaas.DeviceStatus"]
 **AccountName** | Pointer to **string** | The UCSD infra account name. Account Name is created when UCSD admin adds any new infra account (Physical/Virtual/Compute/Network) to be managed by UCSD. | [optional] [readonly] 
 **AccountType** | Pointer to **string** | The UCSD Infra Account type. | [optional] [readonly] 
 **Category** | Pointer to **string** | The UCSD Infra Account category. | [optional] [readonly] 
@@ -21,7 +23,7 @@ Name | Type | Description | Notes
 
 ### NewIaasDeviceStatusAllOf
 
-`func NewIaasDeviceStatusAllOf() *IaasDeviceStatusAllOf`
+`func NewIaasDeviceStatusAllOf(classId string, objectType string, ) *IaasDeviceStatusAllOf`
 
 NewIaasDeviceStatusAllOf instantiates a new IaasDeviceStatusAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -35,6 +37,46 @@ will change when the set of required properties is changed
 NewIaasDeviceStatusAllOfWithDefaults instantiates a new IaasDeviceStatusAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *IaasDeviceStatusAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IaasDeviceStatusAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IaasDeviceStatusAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IaasDeviceStatusAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IaasDeviceStatusAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IaasDeviceStatusAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAccountName
 

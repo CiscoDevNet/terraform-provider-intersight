@@ -4,16 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.Vlan"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.Vlan"]
 **IsNative** | Pointer to **bool** | Used to define whether this VLAN is to be classified as &#39;native&#39; for traffic in this FI. | [optional] 
 **Name** | Pointer to **string** | The &#39;name&#39; used to identify this VLAN. | [optional] 
 **VlanId** | Pointer to **int64** | The identifier for this Virtual LAN. | [optional] 
 **EthNetworkPolicy** | Pointer to [**FabricEthNetworkPolicyRelationship**](fabric.EthNetworkPolicy.Relationship.md) |  | [optional] 
+**MulticastPolicy** | Pointer to [**FabricMulticastPolicyRelationship**](fabric.MulticastPolicy.Relationship.md) |  | [optional] 
 
 ## Methods
 
 ### NewFabricVlanAllOf
 
-`func NewFabricVlanAllOf() *FabricVlanAllOf`
+`func NewFabricVlanAllOf(classId string, objectType string, ) *FabricVlanAllOf`
 
 NewFabricVlanAllOf instantiates a new FabricVlanAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +30,46 @@ will change when the set of required properties is changed
 NewFabricVlanAllOfWithDefaults instantiates a new FabricVlanAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *FabricVlanAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *FabricVlanAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *FabricVlanAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *FabricVlanAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *FabricVlanAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *FabricVlanAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetIsNative
 
@@ -127,6 +170,31 @@ SetEthNetworkPolicy sets EthNetworkPolicy field to given value.
 `func (o *FabricVlanAllOf) HasEthNetworkPolicy() bool`
 
 HasEthNetworkPolicy returns a boolean if a field has been set.
+
+### GetMulticastPolicy
+
+`func (o *FabricVlanAllOf) GetMulticastPolicy() FabricMulticastPolicyRelationship`
+
+GetMulticastPolicy returns the MulticastPolicy field if non-nil, zero value otherwise.
+
+### GetMulticastPolicyOk
+
+`func (o *FabricVlanAllOf) GetMulticastPolicyOk() (*FabricMulticastPolicyRelationship, bool)`
+
+GetMulticastPolicyOk returns a tuple with the MulticastPolicy field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMulticastPolicy
+
+`func (o *FabricVlanAllOf) SetMulticastPolicy(v FabricMulticastPolicyRelationship)`
+
+SetMulticastPolicy sets MulticastPolicy field to given value.
+
+### HasMulticastPolicy
+
+`func (o *FabricVlanAllOf) HasMulticastPolicy() bool`
+
+HasMulticastPolicy returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

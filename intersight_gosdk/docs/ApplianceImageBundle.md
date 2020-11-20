@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "appliance.ImageBundle"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.ImageBundle"]
 **AnsiblePackages** | Pointer to [**[]OnpremImagePackage**](onprem.ImagePackage.md) |  | [optional] 
 **AutoUpgrade** | Pointer to **bool** | Indicates that the software upgrade was automatically initiated by the Intersight Appliance. | [optional] [readonly] 
 **DcPackages** | Pointer to [**[]OnpremImagePackage**](onprem.ImagePackage.md) |  | [optional] 
@@ -33,7 +35,7 @@ Name | Type | Description | Notes
 
 ### NewApplianceImageBundle
 
-`func NewApplianceImageBundle() *ApplianceImageBundle`
+`func NewApplianceImageBundle(classId string, objectType string, ) *ApplianceImageBundle`
 
 NewApplianceImageBundle instantiates a new ApplianceImageBundle object
 This constructor will assign default values to properties that have it defined,
@@ -47,6 +49,46 @@ will change when the set of required properties is changed
 NewApplianceImageBundleWithDefaults instantiates a new ApplianceImageBundle object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *ApplianceImageBundle) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *ApplianceImageBundle) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *ApplianceImageBundle) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *ApplianceImageBundle) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *ApplianceImageBundle) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *ApplianceImageBundle) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAnsiblePackages
 
@@ -73,6 +115,16 @@ SetAnsiblePackages sets AnsiblePackages field to given value.
 
 HasAnsiblePackages returns a boolean if a field has been set.
 
+### SetAnsiblePackagesNil
+
+`func (o *ApplianceImageBundle) SetAnsiblePackagesNil(b bool)`
+
+ SetAnsiblePackagesNil sets the value for AnsiblePackages to be an explicit nil
+
+### UnsetAnsiblePackages
+`func (o *ApplianceImageBundle) UnsetAnsiblePackages()`
+
+UnsetAnsiblePackages ensures that no value is present for AnsiblePackages, not even an explicit nil
 ### GetAutoUpgrade
 
 `func (o *ApplianceImageBundle) GetAutoUpgrade() bool`
@@ -123,6 +175,16 @@ SetDcPackages sets DcPackages field to given value.
 
 HasDcPackages returns a boolean if a field has been set.
 
+### SetDcPackagesNil
+
+`func (o *ApplianceImageBundle) SetDcPackagesNil(b bool)`
+
+ SetDcPackagesNil sets the value for DcPackages to be an explicit nil
+
+### UnsetDcPackages
+`func (o *ApplianceImageBundle) UnsetDcPackages()`
+
+UnsetDcPackages ensures that no value is present for DcPackages, not even an explicit nil
 ### GetDebugPackages
 
 `func (o *ApplianceImageBundle) GetDebugPackages() []OnpremImagePackage`
@@ -148,6 +210,16 @@ SetDebugPackages sets DebugPackages field to given value.
 
 HasDebugPackages returns a boolean if a field has been set.
 
+### SetDebugPackagesNil
+
+`func (o *ApplianceImageBundle) SetDebugPackagesNil(b bool)`
+
+ SetDebugPackagesNil sets the value for DebugPackages to be an explicit nil
+
+### UnsetDebugPackages
+`func (o *ApplianceImageBundle) UnsetDebugPackages()`
+
+UnsetDebugPackages ensures that no value is present for DebugPackages, not even an explicit nil
 ### GetDescription
 
 `func (o *ApplianceImageBundle) GetDescription() string`
@@ -198,6 +270,16 @@ SetEndpointPackages sets EndpointPackages field to given value.
 
 HasEndpointPackages returns a boolean if a field has been set.
 
+### SetEndpointPackagesNil
+
+`func (o *ApplianceImageBundle) SetEndpointPackagesNil(b bool)`
+
+ SetEndpointPackagesNil sets the value for EndpointPackages to be an explicit nil
+
+### UnsetEndpointPackages
+`func (o *ApplianceImageBundle) UnsetEndpointPackages()`
+
+UnsetEndpointPackages ensures that no value is present for EndpointPackages, not even an explicit nil
 ### GetFingerprint
 
 `func (o *ApplianceImageBundle) GetFingerprint() string`
@@ -273,6 +355,16 @@ SetInfraPackages sets InfraPackages field to given value.
 
 HasInfraPackages returns a boolean if a field has been set.
 
+### SetInfraPackagesNil
+
+`func (o *ApplianceImageBundle) SetInfraPackagesNil(b bool)`
+
+ SetInfraPackagesNil sets the value for InfraPackages to be an explicit nil
+
+### UnsetInfraPackages
+`func (o *ApplianceImageBundle) UnsetInfraPackages()`
+
+UnsetInfraPackages ensures that no value is present for InfraPackages, not even an explicit nil
 ### GetInitPackages
 
 `func (o *ApplianceImageBundle) GetInitPackages() []OnpremImagePackage`
@@ -298,6 +390,16 @@ SetInitPackages sets InitPackages field to given value.
 
 HasInitPackages returns a boolean if a field has been set.
 
+### SetInitPackagesNil
+
+`func (o *ApplianceImageBundle) SetInitPackagesNil(b bool)`
+
+ SetInitPackagesNil sets the value for InitPackages to be an explicit nil
+
+### UnsetInitPackages
+`func (o *ApplianceImageBundle) UnsetInitPackages()`
+
+UnsetInitPackages ensures that no value is present for InitPackages, not even an explicit nil
 ### GetName
 
 `func (o *ApplianceImageBundle) GetName() string`
@@ -423,6 +525,16 @@ SetServicePackages sets ServicePackages field to given value.
 
 HasServicePackages returns a boolean if a field has been set.
 
+### SetServicePackagesNil
+
+`func (o *ApplianceImageBundle) SetServicePackagesNil(b bool)`
+
+ SetServicePackagesNil sets the value for ServicePackages to be an explicit nil
+
+### UnsetServicePackages
+`func (o *ApplianceImageBundle) UnsetServicePackages()`
+
+UnsetServicePackages ensures that no value is present for ServicePackages, not even an explicit nil
 ### GetStatusMessage
 
 `func (o *ApplianceImageBundle) GetStatusMessage() string`
@@ -473,6 +585,16 @@ SetSystemPackages sets SystemPackages field to given value.
 
 HasSystemPackages returns a boolean if a field has been set.
 
+### SetSystemPackagesNil
+
+`func (o *ApplianceImageBundle) SetSystemPackagesNil(b bool)`
+
+ SetSystemPackagesNil sets the value for SystemPackages to be an explicit nil
+
+### UnsetSystemPackages
+`func (o *ApplianceImageBundle) UnsetSystemPackages()`
+
+UnsetSystemPackages ensures that no value is present for SystemPackages, not even an explicit nil
 ### GetUiPackages
 
 `func (o *ApplianceImageBundle) GetUiPackages() []OnpremImagePackage`
@@ -498,6 +620,16 @@ SetUiPackages sets UiPackages field to given value.
 
 HasUiPackages returns a boolean if a field has been set.
 
+### SetUiPackagesNil
+
+`func (o *ApplianceImageBundle) SetUiPackagesNil(b bool)`
+
+ SetUiPackagesNil sets the value for UiPackages to be an explicit nil
+
+### UnsetUiPackages
+`func (o *ApplianceImageBundle) UnsetUiPackages()`
+
+UnsetUiPackages ensures that no value is present for UiPackages, not even an explicit nil
 ### GetUpgradeEndTime
 
 `func (o *ApplianceImageBundle) GetUpgradeEndTime() time.Time`

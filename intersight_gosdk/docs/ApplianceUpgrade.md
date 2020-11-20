@@ -4,16 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "appliance.Upgrade"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.Upgrade"]
 **Active** | Pointer to **bool** | Indicates if the software upgrade is active or not. | [optional] [readonly] 
 **AutoCreated** | Pointer to **bool** | Indicates that the request was automatically created by the system. | [optional] [readonly] 
 **CompletedPhases** | Pointer to [**[]OnpremUpgradePhase**](onprem.UpgradePhase.md) |  | [optional] 
-**CurrentPhase** | Pointer to [**OnpremUpgradePhase**](onprem.UpgradePhase.md) |  | [optional] 
+**CurrentPhase** | Pointer to [**NullableOnpremUpgradePhase**](onprem.UpgradePhase.md) |  | [optional] 
 **Description** | Pointer to **string** | Description of the software upgrade. | [optional] [readonly] 
 **ElapsedTime** | Pointer to **int64** | Elapsed time in seconds during the software upgrade. | [optional] [readonly] 
 **EndTime** | Pointer to [**time.Time**](time.Time.md) | End date of the software upgrade. | [optional] [readonly] 
 **ErrorCode** | Pointer to **int64** | Error code for Intersight Appliance&#39;s software upgrade. In case of failure - this code will help decide if software upgrade can be retried. | [optional] [readonly] 
 **Fingerprint** | Pointer to **string** | Software upgrade manifest&#39;s fingerprint. | [optional] [readonly] 
 **IsRollingBack** | Pointer to **bool** | Track if software upgrade is upgrading or rolling back. | [optional] [readonly] 
+**IsUserTriggered** | Pointer to **bool** | Indicates if the upgrade is triggered by user or due to schedule. | [optional] [readonly] 
 **Messages** | Pointer to **[]string** |  | [optional] 
 **RollbackNeeded** | Pointer to **bool** | Track if rollback is needed. | [optional] 
 **RollbackPhases** | Pointer to [**[]OnpremUpgradePhase**](onprem.UpgradePhase.md) |  | [optional] 
@@ -31,7 +34,7 @@ Name | Type | Description | Notes
 
 ### NewApplianceUpgrade
 
-`func NewApplianceUpgrade() *ApplianceUpgrade`
+`func NewApplianceUpgrade(classId string, objectType string, ) *ApplianceUpgrade`
 
 NewApplianceUpgrade instantiates a new ApplianceUpgrade object
 This constructor will assign default values to properties that have it defined,
@@ -45,6 +48,46 @@ will change when the set of required properties is changed
 NewApplianceUpgradeWithDefaults instantiates a new ApplianceUpgrade object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *ApplianceUpgrade) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *ApplianceUpgrade) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *ApplianceUpgrade) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *ApplianceUpgrade) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *ApplianceUpgrade) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *ApplianceUpgrade) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetActive
 
@@ -121,6 +164,16 @@ SetCompletedPhases sets CompletedPhases field to given value.
 
 HasCompletedPhases returns a boolean if a field has been set.
 
+### SetCompletedPhasesNil
+
+`func (o *ApplianceUpgrade) SetCompletedPhasesNil(b bool)`
+
+ SetCompletedPhasesNil sets the value for CompletedPhases to be an explicit nil
+
+### UnsetCompletedPhases
+`func (o *ApplianceUpgrade) UnsetCompletedPhases()`
+
+UnsetCompletedPhases ensures that no value is present for CompletedPhases, not even an explicit nil
 ### GetCurrentPhase
 
 `func (o *ApplianceUpgrade) GetCurrentPhase() OnpremUpgradePhase`
@@ -146,6 +199,16 @@ SetCurrentPhase sets CurrentPhase field to given value.
 
 HasCurrentPhase returns a boolean if a field has been set.
 
+### SetCurrentPhaseNil
+
+`func (o *ApplianceUpgrade) SetCurrentPhaseNil(b bool)`
+
+ SetCurrentPhaseNil sets the value for CurrentPhase to be an explicit nil
+
+### UnsetCurrentPhase
+`func (o *ApplianceUpgrade) UnsetCurrentPhase()`
+
+UnsetCurrentPhase ensures that no value is present for CurrentPhase, not even an explicit nil
 ### GetDescription
 
 `func (o *ApplianceUpgrade) GetDescription() string`
@@ -296,6 +359,31 @@ SetIsRollingBack sets IsRollingBack field to given value.
 
 HasIsRollingBack returns a boolean if a field has been set.
 
+### GetIsUserTriggered
+
+`func (o *ApplianceUpgrade) GetIsUserTriggered() bool`
+
+GetIsUserTriggered returns the IsUserTriggered field if non-nil, zero value otherwise.
+
+### GetIsUserTriggeredOk
+
+`func (o *ApplianceUpgrade) GetIsUserTriggeredOk() (*bool, bool)`
+
+GetIsUserTriggeredOk returns a tuple with the IsUserTriggered field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsUserTriggered
+
+`func (o *ApplianceUpgrade) SetIsUserTriggered(v bool)`
+
+SetIsUserTriggered sets IsUserTriggered field to given value.
+
+### HasIsUserTriggered
+
+`func (o *ApplianceUpgrade) HasIsUserTriggered() bool`
+
+HasIsUserTriggered returns a boolean if a field has been set.
+
 ### GetMessages
 
 `func (o *ApplianceUpgrade) GetMessages() []string`
@@ -321,6 +409,16 @@ SetMessages sets Messages field to given value.
 
 HasMessages returns a boolean if a field has been set.
 
+### SetMessagesNil
+
+`func (o *ApplianceUpgrade) SetMessagesNil(b bool)`
+
+ SetMessagesNil sets the value for Messages to be an explicit nil
+
+### UnsetMessages
+`func (o *ApplianceUpgrade) UnsetMessages()`
+
+UnsetMessages ensures that no value is present for Messages, not even an explicit nil
 ### GetRollbackNeeded
 
 `func (o *ApplianceUpgrade) GetRollbackNeeded() bool`
@@ -371,6 +469,16 @@ SetRollbackPhases sets RollbackPhases field to given value.
 
 HasRollbackPhases returns a boolean if a field has been set.
 
+### SetRollbackPhasesNil
+
+`func (o *ApplianceUpgrade) SetRollbackPhasesNil(b bool)`
+
+ SetRollbackPhasesNil sets the value for RollbackPhases to be an explicit nil
+
+### UnsetRollbackPhases
+`func (o *ApplianceUpgrade) UnsetRollbackPhases()`
+
+UnsetRollbackPhases ensures that no value is present for RollbackPhases, not even an explicit nil
 ### GetRollbackStatus
 
 `func (o *ApplianceUpgrade) GetRollbackStatus() string`
@@ -421,6 +529,16 @@ SetServices sets Services field to given value.
 
 HasServices returns a boolean if a field has been set.
 
+### SetServicesNil
+
+`func (o *ApplianceUpgrade) SetServicesNil(b bool)`
+
+ SetServicesNil sets the value for Services to be an explicit nil
+
+### UnsetServices
+`func (o *ApplianceUpgrade) UnsetServices()`
+
+UnsetServices ensures that no value is present for Services, not even an explicit nil
 ### GetStartTime
 
 `func (o *ApplianceUpgrade) GetStartTime() time.Time`
@@ -521,6 +639,16 @@ SetUiPackages sets UiPackages field to given value.
 
 HasUiPackages returns a boolean if a field has been set.
 
+### SetUiPackagesNil
+
+`func (o *ApplianceUpgrade) SetUiPackagesNil(b bool)`
+
+ SetUiPackagesNil sets the value for UiPackages to be an explicit nil
+
+### UnsetUiPackages
+`func (o *ApplianceUpgrade) UnsetUiPackages()`
+
+UnsetUiPackages ensures that no value is present for UiPackages, not even an explicit nil
 ### GetVersion
 
 `func (o *ApplianceUpgrade) GetVersion() string`

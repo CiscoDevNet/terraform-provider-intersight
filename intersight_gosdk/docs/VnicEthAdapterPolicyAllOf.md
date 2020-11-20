@@ -4,27 +4,29 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.EthAdapterPolicy"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.EthAdapterPolicy"]
 **AdvancedFilter** | Pointer to **bool** | Enables advanced filtering on the interface. | [optional] 
-**ArfsSettings** | Pointer to [**VnicArfsSettings**](vnic.ArfsSettings.md) |  | [optional] 
-**CompletionQueueSettings** | Pointer to [**VnicCompletionQueueSettings**](vnic.CompletionQueueSettings.md) |  | [optional] 
+**ArfsSettings** | Pointer to [**NullableVnicArfsSettings**](vnic.ArfsSettings.md) |  | [optional] 
+**CompletionQueueSettings** | Pointer to [**NullableVnicCompletionQueueSettings**](vnic.CompletionQueueSettings.md) |  | [optional] 
 **InterruptScaling** | Pointer to **bool** | Enables Interrupt Scaling on the interface. | [optional] 
-**InterruptSettings** | Pointer to [**VnicEthInterruptSettings**](vnic.EthInterruptSettings.md) |  | [optional] 
-**NvgreSettings** | Pointer to [**VnicNvgreSettings**](vnic.NvgreSettings.md) |  | [optional] 
-**RoceSettings** | Pointer to [**VnicRoceSettings**](vnic.RoceSettings.md) |  | [optional] 
-**RssHashSettings** | Pointer to [**VnicRssHashSettings**](vnic.RssHashSettings.md) |  | [optional] 
+**InterruptSettings** | Pointer to [**NullableVnicEthInterruptSettings**](vnic.EthInterruptSettings.md) |  | [optional] 
+**NvgreSettings** | Pointer to [**NullableVnicNvgreSettings**](vnic.NvgreSettings.md) |  | [optional] 
+**RoceSettings** | Pointer to [**NullableVnicRoceSettings**](vnic.RoceSettings.md) |  | [optional] 
+**RssHashSettings** | Pointer to [**NullableVnicRssHashSettings**](vnic.RssHashSettings.md) |  | [optional] 
 **RssSettings** | Pointer to **bool** | Receive Side Scaling allows the incoming traffic to be spread across multiple CPU cores. | [optional] 
-**RxQueueSettings** | Pointer to [**VnicEthRxQueueSettings**](vnic.EthRxQueueSettings.md) |  | [optional] 
-**TcpOffloadSettings** | Pointer to [**VnicTcpOffloadSettings**](vnic.TcpOffloadSettings.md) |  | [optional] 
-**TxQueueSettings** | Pointer to [**VnicEthTxQueueSettings**](vnic.EthTxQueueSettings.md) |  | [optional] 
+**RxQueueSettings** | Pointer to [**NullableVnicEthRxQueueSettings**](vnic.EthRxQueueSettings.md) |  | [optional] 
+**TcpOffloadSettings** | Pointer to [**NullableVnicTcpOffloadSettings**](vnic.TcpOffloadSettings.md) |  | [optional] 
+**TxQueueSettings** | Pointer to [**NullableVnicEthTxQueueSettings**](vnic.EthTxQueueSettings.md) |  | [optional] 
 **UplinkFailbackTimeout** | Pointer to **int64** | Uplink Failback Timeout in seconds when uplink failover is enabled for a vNIC. After a vNIC has started using its secondary interface, this setting controls how long the primary interface must be available before the system resumes using the primary interface for the vNIC. | [optional] 
-**VxlanSettings** | Pointer to [**VnicVxlanSettings**](vnic.VxlanSettings.md) |  | [optional] 
+**VxlanSettings** | Pointer to [**NullableVnicVxlanSettings**](vnic.VxlanSettings.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 
 ## Methods
 
 ### NewVnicEthAdapterPolicyAllOf
 
-`func NewVnicEthAdapterPolicyAllOf() *VnicEthAdapterPolicyAllOf`
+`func NewVnicEthAdapterPolicyAllOf(classId string, objectType string, ) *VnicEthAdapterPolicyAllOf`
 
 NewVnicEthAdapterPolicyAllOf instantiates a new VnicEthAdapterPolicyAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -38,6 +40,46 @@ will change when the set of required properties is changed
 NewVnicEthAdapterPolicyAllOfWithDefaults instantiates a new VnicEthAdapterPolicyAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *VnicEthAdapterPolicyAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *VnicEthAdapterPolicyAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *VnicEthAdapterPolicyAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *VnicEthAdapterPolicyAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *VnicEthAdapterPolicyAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *VnicEthAdapterPolicyAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAdvancedFilter
 
@@ -89,6 +131,16 @@ SetArfsSettings sets ArfsSettings field to given value.
 
 HasArfsSettings returns a boolean if a field has been set.
 
+### SetArfsSettingsNil
+
+`func (o *VnicEthAdapterPolicyAllOf) SetArfsSettingsNil(b bool)`
+
+ SetArfsSettingsNil sets the value for ArfsSettings to be an explicit nil
+
+### UnsetArfsSettings
+`func (o *VnicEthAdapterPolicyAllOf) UnsetArfsSettings()`
+
+UnsetArfsSettings ensures that no value is present for ArfsSettings, not even an explicit nil
 ### GetCompletionQueueSettings
 
 `func (o *VnicEthAdapterPolicyAllOf) GetCompletionQueueSettings() VnicCompletionQueueSettings`
@@ -114,6 +166,16 @@ SetCompletionQueueSettings sets CompletionQueueSettings field to given value.
 
 HasCompletionQueueSettings returns a boolean if a field has been set.
 
+### SetCompletionQueueSettingsNil
+
+`func (o *VnicEthAdapterPolicyAllOf) SetCompletionQueueSettingsNil(b bool)`
+
+ SetCompletionQueueSettingsNil sets the value for CompletionQueueSettings to be an explicit nil
+
+### UnsetCompletionQueueSettings
+`func (o *VnicEthAdapterPolicyAllOf) UnsetCompletionQueueSettings()`
+
+UnsetCompletionQueueSettings ensures that no value is present for CompletionQueueSettings, not even an explicit nil
 ### GetInterruptScaling
 
 `func (o *VnicEthAdapterPolicyAllOf) GetInterruptScaling() bool`
@@ -164,6 +226,16 @@ SetInterruptSettings sets InterruptSettings field to given value.
 
 HasInterruptSettings returns a boolean if a field has been set.
 
+### SetInterruptSettingsNil
+
+`func (o *VnicEthAdapterPolicyAllOf) SetInterruptSettingsNil(b bool)`
+
+ SetInterruptSettingsNil sets the value for InterruptSettings to be an explicit nil
+
+### UnsetInterruptSettings
+`func (o *VnicEthAdapterPolicyAllOf) UnsetInterruptSettings()`
+
+UnsetInterruptSettings ensures that no value is present for InterruptSettings, not even an explicit nil
 ### GetNvgreSettings
 
 `func (o *VnicEthAdapterPolicyAllOf) GetNvgreSettings() VnicNvgreSettings`
@@ -189,6 +261,16 @@ SetNvgreSettings sets NvgreSettings field to given value.
 
 HasNvgreSettings returns a boolean if a field has been set.
 
+### SetNvgreSettingsNil
+
+`func (o *VnicEthAdapterPolicyAllOf) SetNvgreSettingsNil(b bool)`
+
+ SetNvgreSettingsNil sets the value for NvgreSettings to be an explicit nil
+
+### UnsetNvgreSettings
+`func (o *VnicEthAdapterPolicyAllOf) UnsetNvgreSettings()`
+
+UnsetNvgreSettings ensures that no value is present for NvgreSettings, not even an explicit nil
 ### GetRoceSettings
 
 `func (o *VnicEthAdapterPolicyAllOf) GetRoceSettings() VnicRoceSettings`
@@ -214,6 +296,16 @@ SetRoceSettings sets RoceSettings field to given value.
 
 HasRoceSettings returns a boolean if a field has been set.
 
+### SetRoceSettingsNil
+
+`func (o *VnicEthAdapterPolicyAllOf) SetRoceSettingsNil(b bool)`
+
+ SetRoceSettingsNil sets the value for RoceSettings to be an explicit nil
+
+### UnsetRoceSettings
+`func (o *VnicEthAdapterPolicyAllOf) UnsetRoceSettings()`
+
+UnsetRoceSettings ensures that no value is present for RoceSettings, not even an explicit nil
 ### GetRssHashSettings
 
 `func (o *VnicEthAdapterPolicyAllOf) GetRssHashSettings() VnicRssHashSettings`
@@ -239,6 +331,16 @@ SetRssHashSettings sets RssHashSettings field to given value.
 
 HasRssHashSettings returns a boolean if a field has been set.
 
+### SetRssHashSettingsNil
+
+`func (o *VnicEthAdapterPolicyAllOf) SetRssHashSettingsNil(b bool)`
+
+ SetRssHashSettingsNil sets the value for RssHashSettings to be an explicit nil
+
+### UnsetRssHashSettings
+`func (o *VnicEthAdapterPolicyAllOf) UnsetRssHashSettings()`
+
+UnsetRssHashSettings ensures that no value is present for RssHashSettings, not even an explicit nil
 ### GetRssSettings
 
 `func (o *VnicEthAdapterPolicyAllOf) GetRssSettings() bool`
@@ -289,6 +391,16 @@ SetRxQueueSettings sets RxQueueSettings field to given value.
 
 HasRxQueueSettings returns a boolean if a field has been set.
 
+### SetRxQueueSettingsNil
+
+`func (o *VnicEthAdapterPolicyAllOf) SetRxQueueSettingsNil(b bool)`
+
+ SetRxQueueSettingsNil sets the value for RxQueueSettings to be an explicit nil
+
+### UnsetRxQueueSettings
+`func (o *VnicEthAdapterPolicyAllOf) UnsetRxQueueSettings()`
+
+UnsetRxQueueSettings ensures that no value is present for RxQueueSettings, not even an explicit nil
 ### GetTcpOffloadSettings
 
 `func (o *VnicEthAdapterPolicyAllOf) GetTcpOffloadSettings() VnicTcpOffloadSettings`
@@ -314,6 +426,16 @@ SetTcpOffloadSettings sets TcpOffloadSettings field to given value.
 
 HasTcpOffloadSettings returns a boolean if a field has been set.
 
+### SetTcpOffloadSettingsNil
+
+`func (o *VnicEthAdapterPolicyAllOf) SetTcpOffloadSettingsNil(b bool)`
+
+ SetTcpOffloadSettingsNil sets the value for TcpOffloadSettings to be an explicit nil
+
+### UnsetTcpOffloadSettings
+`func (o *VnicEthAdapterPolicyAllOf) UnsetTcpOffloadSettings()`
+
+UnsetTcpOffloadSettings ensures that no value is present for TcpOffloadSettings, not even an explicit nil
 ### GetTxQueueSettings
 
 `func (o *VnicEthAdapterPolicyAllOf) GetTxQueueSettings() VnicEthTxQueueSettings`
@@ -339,6 +461,16 @@ SetTxQueueSettings sets TxQueueSettings field to given value.
 
 HasTxQueueSettings returns a boolean if a field has been set.
 
+### SetTxQueueSettingsNil
+
+`func (o *VnicEthAdapterPolicyAllOf) SetTxQueueSettingsNil(b bool)`
+
+ SetTxQueueSettingsNil sets the value for TxQueueSettings to be an explicit nil
+
+### UnsetTxQueueSettings
+`func (o *VnicEthAdapterPolicyAllOf) UnsetTxQueueSettings()`
+
+UnsetTxQueueSettings ensures that no value is present for TxQueueSettings, not even an explicit nil
 ### GetUplinkFailbackTimeout
 
 `func (o *VnicEthAdapterPolicyAllOf) GetUplinkFailbackTimeout() int64`
@@ -389,6 +521,16 @@ SetVxlanSettings sets VxlanSettings field to given value.
 
 HasVxlanSettings returns a boolean if a field has been set.
 
+### SetVxlanSettingsNil
+
+`func (o *VnicEthAdapterPolicyAllOf) SetVxlanSettingsNil(b bool)`
+
+ SetVxlanSettingsNil sets the value for VxlanSettings to be an explicit nil
+
+### UnsetVxlanSettings
+`func (o *VnicEthAdapterPolicyAllOf) UnsetVxlanSettings()`
+
+UnsetVxlanSettings ensures that no value is present for VxlanSettings, not even an explicit nil
 ### GetOrganization
 
 `func (o *VnicEthAdapterPolicyAllOf) GetOrganization() OrganizationOrganizationRelationship`

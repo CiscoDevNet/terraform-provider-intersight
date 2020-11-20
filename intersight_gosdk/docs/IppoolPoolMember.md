@@ -4,9 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "ippool.PoolMember"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "ippool.PoolMember"]
+**IpType** | Pointer to **string** | Type of the IP address requested. * &#x60;IPv4&#x60; - IP V4 address type requested. * &#x60;IPv6&#x60; - IP V6 address type requested. | [optional] [default to "IPv4"]
 **IpV4Address** | Pointer to **string** | IPv4 Address of this pool member. | [optional] 
+**IpV6Address** | Pointer to **string** | IPv6 Address of this pool member. | [optional] 
 **AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](mo.BaseMo.Relationship.md) |  | [optional] 
-**IpV4Block** | Pointer to [**IppoolShadowBlockRelationship**](ippool.ShadowBlock.Relationship.md) |  | [optional] 
+**IpBlock** | Pointer to [**IppoolShadowBlockRelationship**](ippool.ShadowBlock.Relationship.md) |  | [optional] 
 **Peer** | Pointer to [**IppoolIpLeaseRelationship**](ippool.IpLease.Relationship.md) |  | [optional] 
 **Pool** | Pointer to [**IppoolShadowPoolRelationship**](ippool.ShadowPool.Relationship.md) |  | [optional] 
 
@@ -14,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewIppoolPoolMember
 
-`func NewIppoolPoolMember() *IppoolPoolMember`
+`func NewIppoolPoolMember(classId string, objectType string, ) *IppoolPoolMember`
 
 NewIppoolPoolMember instantiates a new IppoolPoolMember object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +32,71 @@ will change when the set of required properties is changed
 NewIppoolPoolMemberWithDefaults instantiates a new IppoolPoolMember object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *IppoolPoolMember) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IppoolPoolMember) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IppoolPoolMember) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IppoolPoolMember) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IppoolPoolMember) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IppoolPoolMember) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
+
+### GetIpType
+
+`func (o *IppoolPoolMember) GetIpType() string`
+
+GetIpType returns the IpType field if non-nil, zero value otherwise.
+
+### GetIpTypeOk
+
+`func (o *IppoolPoolMember) GetIpTypeOk() (*string, bool)`
+
+GetIpTypeOk returns a tuple with the IpType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpType
+
+`func (o *IppoolPoolMember) SetIpType(v string)`
+
+SetIpType sets IpType field to given value.
+
+### HasIpType
+
+`func (o *IppoolPoolMember) HasIpType() bool`
+
+HasIpType returns a boolean if a field has been set.
 
 ### GetIpV4Address
 
@@ -54,6 +123,31 @@ SetIpV4Address sets IpV4Address field to given value.
 
 HasIpV4Address returns a boolean if a field has been set.
 
+### GetIpV6Address
+
+`func (o *IppoolPoolMember) GetIpV6Address() string`
+
+GetIpV6Address returns the IpV6Address field if non-nil, zero value otherwise.
+
+### GetIpV6AddressOk
+
+`func (o *IppoolPoolMember) GetIpV6AddressOk() (*string, bool)`
+
+GetIpV6AddressOk returns a tuple with the IpV6Address field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpV6Address
+
+`func (o *IppoolPoolMember) SetIpV6Address(v string)`
+
+SetIpV6Address sets IpV6Address field to given value.
+
+### HasIpV6Address
+
+`func (o *IppoolPoolMember) HasIpV6Address() bool`
+
+HasIpV6Address returns a boolean if a field has been set.
+
 ### GetAssignedToEntity
 
 `func (o *IppoolPoolMember) GetAssignedToEntity() MoBaseMoRelationship`
@@ -79,30 +173,30 @@ SetAssignedToEntity sets AssignedToEntity field to given value.
 
 HasAssignedToEntity returns a boolean if a field has been set.
 
-### GetIpV4Block
+### GetIpBlock
 
-`func (o *IppoolPoolMember) GetIpV4Block() IppoolShadowBlockRelationship`
+`func (o *IppoolPoolMember) GetIpBlock() IppoolShadowBlockRelationship`
 
-GetIpV4Block returns the IpV4Block field if non-nil, zero value otherwise.
+GetIpBlock returns the IpBlock field if non-nil, zero value otherwise.
 
-### GetIpV4BlockOk
+### GetIpBlockOk
 
-`func (o *IppoolPoolMember) GetIpV4BlockOk() (*IppoolShadowBlockRelationship, bool)`
+`func (o *IppoolPoolMember) GetIpBlockOk() (*IppoolShadowBlockRelationship, bool)`
 
-GetIpV4BlockOk returns a tuple with the IpV4Block field if it's non-nil, zero value otherwise
+GetIpBlockOk returns a tuple with the IpBlock field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetIpV4Block
+### SetIpBlock
 
-`func (o *IppoolPoolMember) SetIpV4Block(v IppoolShadowBlockRelationship)`
+`func (o *IppoolPoolMember) SetIpBlock(v IppoolShadowBlockRelationship)`
 
-SetIpV4Block sets IpV4Block field to given value.
+SetIpBlock sets IpBlock field to given value.
 
-### HasIpV4Block
+### HasIpBlock
 
-`func (o *IppoolPoolMember) HasIpV4Block() bool`
+`func (o *IppoolPoolMember) HasIpBlock() bool`
 
-HasIpV4Block returns a boolean if a field has been set.
+HasIpBlock returns a boolean if a field has been set.
 
 ### GetPeer
 

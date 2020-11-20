@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.Span"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.Span"]
 **Slots** | Pointer to **[]int64** |  | [optional] 
 **SpanId** | Pointer to **int64** | Unique identifier value of this span. | [optional] 
 **DiskGroup** | Pointer to [**StorageDiskGroupRelationship**](storage.DiskGroup.Relationship.md) |  | [optional] 
@@ -14,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewStorageSpan
 
-`func NewStorageSpan() *StorageSpan`
+`func NewStorageSpan(classId string, objectType string, ) *StorageSpan`
 
 NewStorageSpan instantiates a new StorageSpan object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +30,46 @@ will change when the set of required properties is changed
 NewStorageSpanWithDefaults instantiates a new StorageSpan object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *StorageSpan) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *StorageSpan) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *StorageSpan) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *StorageSpan) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *StorageSpan) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *StorageSpan) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetSlots
 
@@ -54,6 +96,16 @@ SetSlots sets Slots field to given value.
 
 HasSlots returns a boolean if a field has been set.
 
+### SetSlotsNil
+
+`func (o *StorageSpan) SetSlotsNil(b bool)`
+
+ SetSlotsNil sets the value for Slots to be an explicit nil
+
+### UnsetSlots
+`func (o *StorageSpan) UnsetSlots()`
+
+UnsetSlots ensures that no value is present for Slots, not even an explicit nil
 ### GetSpanId
 
 `func (o *StorageSpan) GetSpanId() int64`

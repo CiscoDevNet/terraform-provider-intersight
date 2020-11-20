@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "sdcard.Policy"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "sdcard.Policy"]
 **Partitions** | Pointer to [**[]SdcardPartition**](sdcard.Partition.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]PolicyAbstractConfigProfileRelationship**](policy.AbstractConfigProfile.Relationship.md) | An array of relationships to policyAbstractConfigProfile resources. | [optional] 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewSdcardPolicyAllOf
 
-`func NewSdcardPolicyAllOf() *SdcardPolicyAllOf`
+`func NewSdcardPolicyAllOf(classId string, objectType string, ) *SdcardPolicyAllOf`
 
 NewSdcardPolicyAllOf instantiates a new SdcardPolicyAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewSdcardPolicyAllOfWithDefaults instantiates a new SdcardPolicyAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *SdcardPolicyAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *SdcardPolicyAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *SdcardPolicyAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *SdcardPolicyAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *SdcardPolicyAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *SdcardPolicyAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetPartitions
 
@@ -52,6 +94,16 @@ SetPartitions sets Partitions field to given value.
 
 HasPartitions returns a boolean if a field has been set.
 
+### SetPartitionsNil
+
+`func (o *SdcardPolicyAllOf) SetPartitionsNil(b bool)`
+
+ SetPartitionsNil sets the value for Partitions to be an explicit nil
+
+### UnsetPartitions
+`func (o *SdcardPolicyAllOf) UnsetPartitions()`
+
+UnsetPartitions ensures that no value is present for Partitions, not even an explicit nil
 ### GetOrganization
 
 `func (o *SdcardPolicyAllOf) GetOrganization() OrganizationOrganizationRelationship`

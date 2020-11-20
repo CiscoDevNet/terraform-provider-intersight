@@ -1,9 +1,10 @@
 package intersight
 
 import (
+	"strings"
+
 	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/terraform"
-	"strings"
 )
 
 func Provider() terraform.ResourceProvider {

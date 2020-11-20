@@ -4,7 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AlarmSummary** | Pointer to [**HyperflexAlarmSummary**](hyperflex.AlarmSummary.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.Cluster"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.Cluster"]
+**AlarmSummary** | Pointer to [**NullableHyperflexAlarmSummary**](hyperflex.AlarmSummary.md) |  | [optional] 
 **CapacityRunway** | Pointer to **int64** | The number of days remaining before the cluster&#39;s storage utilization reaches the recommended capacity limit of 76%. Default value is math.MaxInt32 to indicate that the capacity runway is \&quot;Unknown\&quot; for a cluster that is not connected or with not sufficient data. | [optional] [readonly] 
 **ClusterName** | Pointer to **string** | The name of this HyperFlex cluster. | [optional] [readonly] 
 **ClusterType** | Pointer to **int64** | The storage type of this cluster (All Flash or Hybrid). | [optional] [readonly] 
@@ -16,9 +18,9 @@ Name | Type | Description | Notes
 **FltAggr** | Pointer to **int64** | The number of yellow (warning) and red (critical) alarms stored as an aggregate. The first 16 bits indicate the number of red alarms, and the last 16 bits contain the number of yellow alarms. | [optional] [readonly] 
 **HxVersion** | Pointer to **string** | The HyperFlex Data Platform version of this cluster. | [optional] [readonly] 
 **HxdpBuildVersion** | Pointer to **string** | The version and build number of the HyperFlex Data Platform for this cluster. After a cluster upgrade, this version string will be updated on the next inventory cycle to reflect the newly installed version. | [optional] [readonly] 
-**HypervisorType** | Pointer to **string** | The type of hypervisor running on this cluster. * &#x60;ESXi&#x60; - ESXi hypervisor as specified by the user. * &#x60;HYPERV&#x60; - Hyperv hypervisor as specified by the user. * &#x60;KVM&#x60; - KVM hypervisor as specified by the user. | [optional] [readonly] [default to "ESXi"]
+**HypervisorType** | Pointer to **string** | The type of hypervisor running on this cluster. * &#x60;ESXi&#x60; - A Vmware ESXi hypervisor of any version. * &#x60;HXAP&#x60; - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform. * &#x60;Hyper-V&#x60; - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * &#x60;Unknown&#x60; - The hypervisor running on the HyperFlex cluster is not known. | [optional] [readonly] [default to "ESXi"]
 **HypervisorVersion** | Pointer to **string** | The version of hypervisor running on this cluster. | [optional] [readonly] 
-**Summary** | Pointer to [**HyperflexSummary**](hyperflex.Summary.md) |  | [optional] 
+**Summary** | Pointer to [**NullableHyperflexSummary**](hyperflex.Summary.md) |  | [optional] 
 **UtilizationPercentage** | Pointer to **float32** | The storage utilization percentage is computed based on total capacity and current capacity utilization. | [optional] [readonly] 
 **UtilizationTrendPercentage** | Pointer to **float32** | The storage utilization trend percentage represents the trend in percentage computed using the first and last point from historical data. | [optional] [readonly] 
 **VmCount** | Pointer to **int64** | The number of virtual machines present on this cluster. | [optional] [readonly] 
@@ -26,12 +28,14 @@ Name | Type | Description | Notes
 **Health** | Pointer to [**HyperflexHealthRelationship**](hyperflex.Health.Relationship.md) |  | [optional] 
 **Nodes** | Pointer to [**[]HyperflexNodeRelationship**](hyperflex.Node.Relationship.md) | An array of relationships to hyperflexNode resources. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**StorageContainers** | Pointer to [**[]StorageHyperFlexStorageContainerRelationship**](storage.HyperFlexStorageContainer.Relationship.md) | An array of relationships to storageHyperFlexStorageContainer resources. | [optional] [readonly] 
+**Volumes** | Pointer to [**[]StorageHyperFlexVolumeRelationship**](storage.HyperFlexVolume.Relationship.md) | An array of relationships to storageHyperFlexVolume resources. | [optional] [readonly] 
 
 ## Methods
 
 ### NewHyperflexClusterAllOf
 
-`func NewHyperflexClusterAllOf() *HyperflexClusterAllOf`
+`func NewHyperflexClusterAllOf(classId string, objectType string, ) *HyperflexClusterAllOf`
 
 NewHyperflexClusterAllOf instantiates a new HyperflexClusterAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -45,6 +49,46 @@ will change when the set of required properties is changed
 NewHyperflexClusterAllOfWithDefaults instantiates a new HyperflexClusterAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *HyperflexClusterAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *HyperflexClusterAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *HyperflexClusterAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *HyperflexClusterAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *HyperflexClusterAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *HyperflexClusterAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAlarmSummary
 
@@ -71,6 +115,16 @@ SetAlarmSummary sets AlarmSummary field to given value.
 
 HasAlarmSummary returns a boolean if a field has been set.
 
+### SetAlarmSummaryNil
+
+`func (o *HyperflexClusterAllOf) SetAlarmSummaryNil(b bool)`
+
+ SetAlarmSummaryNil sets the value for AlarmSummary to be an explicit nil
+
+### UnsetAlarmSummary
+`func (o *HyperflexClusterAllOf) UnsetAlarmSummary()`
+
+UnsetAlarmSummary ensures that no value is present for AlarmSummary, not even an explicit nil
 ### GetCapacityRunway
 
 `func (o *HyperflexClusterAllOf) GetCapacityRunway() int64`
@@ -421,6 +475,16 @@ SetSummary sets Summary field to given value.
 
 HasSummary returns a boolean if a field has been set.
 
+### SetSummaryNil
+
+`func (o *HyperflexClusterAllOf) SetSummaryNil(b bool)`
+
+ SetSummaryNil sets the value for Summary to be an explicit nil
+
+### UnsetSummary
+`func (o *HyperflexClusterAllOf) UnsetSummary()`
+
+UnsetSummary ensures that no value is present for Summary, not even an explicit nil
 ### GetUtilizationPercentage
 
 `func (o *HyperflexClusterAllOf) GetUtilizationPercentage() float32`
@@ -616,6 +680,76 @@ SetRegisteredDevice sets RegisteredDevice field to given value.
 
 HasRegisteredDevice returns a boolean if a field has been set.
 
+### GetStorageContainers
+
+`func (o *HyperflexClusterAllOf) GetStorageContainers() []StorageHyperFlexStorageContainerRelationship`
+
+GetStorageContainers returns the StorageContainers field if non-nil, zero value otherwise.
+
+### GetStorageContainersOk
+
+`func (o *HyperflexClusterAllOf) GetStorageContainersOk() (*[]StorageHyperFlexStorageContainerRelationship, bool)`
+
+GetStorageContainersOk returns a tuple with the StorageContainers field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageContainers
+
+`func (o *HyperflexClusterAllOf) SetStorageContainers(v []StorageHyperFlexStorageContainerRelationship)`
+
+SetStorageContainers sets StorageContainers field to given value.
+
+### HasStorageContainers
+
+`func (o *HyperflexClusterAllOf) HasStorageContainers() bool`
+
+HasStorageContainers returns a boolean if a field has been set.
+
+### SetStorageContainersNil
+
+`func (o *HyperflexClusterAllOf) SetStorageContainersNil(b bool)`
+
+ SetStorageContainersNil sets the value for StorageContainers to be an explicit nil
+
+### UnsetStorageContainers
+`func (o *HyperflexClusterAllOf) UnsetStorageContainers()`
+
+UnsetStorageContainers ensures that no value is present for StorageContainers, not even an explicit nil
+### GetVolumes
+
+`func (o *HyperflexClusterAllOf) GetVolumes() []StorageHyperFlexVolumeRelationship`
+
+GetVolumes returns the Volumes field if non-nil, zero value otherwise.
+
+### GetVolumesOk
+
+`func (o *HyperflexClusterAllOf) GetVolumesOk() (*[]StorageHyperFlexVolumeRelationship, bool)`
+
+GetVolumesOk returns a tuple with the Volumes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVolumes
+
+`func (o *HyperflexClusterAllOf) SetVolumes(v []StorageHyperFlexVolumeRelationship)`
+
+SetVolumes sets Volumes field to given value.
+
+### HasVolumes
+
+`func (o *HyperflexClusterAllOf) HasVolumes() bool`
+
+HasVolumes returns a boolean if a field has been set.
+
+### SetVolumesNil
+
+`func (o *HyperflexClusterAllOf) SetVolumesNil(b bool)`
+
+ SetVolumesNil sets the value for Volumes to be an explicit nil
+
+### UnsetVolumes
+`func (o *HyperflexClusterAllOf) UnsetVolumes()`
+
+UnsetVolumes ensures that no value is present for Volumes, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

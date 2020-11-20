@@ -4,11 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**AssetTargetMoid** | Pointer to **string** | Asset target defines the remote target endpoints which are either managed by Intersight or their service APIs are invoked from Intersight. Generic API executor service Jasmine can invoke these remote APIs via its executors. Asset targets can be accessed directly for cloud targets or via an associated Intersight Assist. Prerequisite to use asset targets is to persist the target details. Asset target MoRef can be given as task input of type TargetDataType. Fusion determines and populates the target context with the Assist if associated with. It is set internally at the API level. In case of an associated assist, it is used by Assist to fetch the target details and form the API request to send to endpoints. In case of cloud asset targets, Jasmine fetched the target details from DB, forms the API request and sends it to the target. | [optional] [readonly] 
 **Body** | Pointer to **string** | The optional request body that is sent as part of this API request. The request body can contain a golang template that can be populated with task input parameters and previous API output parameters. | [optional] 
-**ContentType** | Pointer to **string** | Intersight Orchestrator, with the support of response parser specification, can extract the values from API responses and map them to task output parameters. The value extraction is supported for response content types XML and JSON. The type of the content that gets passed as payload and response in this API. * &#x60;json&#x60; - The type of content to be parsed, API response or device response, is inJSON format. * &#x60;xml&#x60; - The type of content to be parsed, API response or device response,is in XML format. * &#x60;text&#x60; - The type of content to be parsed, API response or device response, is inTEXT format. | [optional] [default to "json"]
+**ContentType** | Pointer to **string** | Intersight Orchestrator, with the support of response parser specification, can extract the values from API responses and map them to task output parameters. The value extraction is supported for response content types XML and JSON. The type of the content that gets passed as payload and response in this API. | [optional] 
+**Description** | Pointer to **string** | A description that task designer can add to individual API requests that explain  what the API call is about. | [optional] 
+**Label** | Pointer to **string** | A user friendly label that task designers have given to the batch API request. | [optional] 
 **Name** | Pointer to **string** | A reference name for this API request within the batch API request. This name shall be used to map the API output parameters to subsequent API input parameters within a batch API task. | [optional] 
 **Outcomes** | Pointer to **interface{}** | All the possible outcomes of this API are captured here. Outcomes property is a collection property of type workflow.Outcome objects. The outcomes can be mapped to the message to be shown. The outcomes are evaluated in the order they are given. At the end of the outcomes list, an catchall success/fail outcome can be added with condition as &#39;true&#39;. This is an optional property and if not specified the task will be marked as success. | [optional] 
-**ResponseSpec** | Pointer to [**ContentGrammar**](content.Grammar.md) |  | [optional] 
+**ResponseSpec** | Pointer to **interface{}** | The optional grammar specification for parsing the response to extract the required values. The specification should have extraction specification specified for all the API output parameters. | [optional] 
 **SkipOnCondition** | Pointer to **string** | The skip expression, if provided, allows the batch API executor to skip the api execution when the given expression evaluates to true. The expression is given as such a golang template that has to be evaluated to a final content true/false. The expression is an optional and in case not provided, the API will always be executed. | [optional] 
 **StartDelay** | Pointer to **int64** | The delay in seconds after which the API needs to be executed. By default, the given API is executed immediately. Specifying a start delay adds to the delay to execution. Start Delay is not supported for the first API in the Batch and cumulative delay of all the APIs in the Batch should not exceed the task time out. | [optional] 
 **Timeout** | Pointer to **int64** | The duration in seconds by which the API response is expected from the API target. If the end point does not respond for the API request within this timeout duration, the task will be marked as failed. | [optional] 
@@ -17,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewWorkflowApiAllOf
 
-`func NewWorkflowApiAllOf() *WorkflowApiAllOf`
+`func NewWorkflowApiAllOf(classId string, objectType string, ) *WorkflowApiAllOf`
 
 NewWorkflowApiAllOf instantiates a new WorkflowApiAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -31,6 +36,71 @@ will change when the set of required properties is changed
 NewWorkflowApiAllOfWithDefaults instantiates a new WorkflowApiAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *WorkflowApiAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *WorkflowApiAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *WorkflowApiAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *WorkflowApiAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *WorkflowApiAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *WorkflowApiAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
+
+### GetAssetTargetMoid
+
+`func (o *WorkflowApiAllOf) GetAssetTargetMoid() string`
+
+GetAssetTargetMoid returns the AssetTargetMoid field if non-nil, zero value otherwise.
+
+### GetAssetTargetMoidOk
+
+`func (o *WorkflowApiAllOf) GetAssetTargetMoidOk() (*string, bool)`
+
+GetAssetTargetMoidOk returns a tuple with the AssetTargetMoid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssetTargetMoid
+
+`func (o *WorkflowApiAllOf) SetAssetTargetMoid(v string)`
+
+SetAssetTargetMoid sets AssetTargetMoid field to given value.
+
+### HasAssetTargetMoid
+
+`func (o *WorkflowApiAllOf) HasAssetTargetMoid() bool`
+
+HasAssetTargetMoid returns a boolean if a field has been set.
 
 ### GetBody
 
@@ -81,6 +151,56 @@ SetContentType sets ContentType field to given value.
 `func (o *WorkflowApiAllOf) HasContentType() bool`
 
 HasContentType returns a boolean if a field has been set.
+
+### GetDescription
+
+`func (o *WorkflowApiAllOf) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *WorkflowApiAllOf) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *WorkflowApiAllOf) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
+
+### HasDescription
+
+`func (o *WorkflowApiAllOf) HasDescription() bool`
+
+HasDescription returns a boolean if a field has been set.
+
+### GetLabel
+
+`func (o *WorkflowApiAllOf) GetLabel() string`
+
+GetLabel returns the Label field if non-nil, zero value otherwise.
+
+### GetLabelOk
+
+`func (o *WorkflowApiAllOf) GetLabelOk() (*string, bool)`
+
+GetLabelOk returns a tuple with the Label field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLabel
+
+`func (o *WorkflowApiAllOf) SetLabel(v string)`
+
+SetLabel sets Label field to given value.
+
+### HasLabel
+
+`func (o *WorkflowApiAllOf) HasLabel() bool`
+
+HasLabel returns a boolean if a field has been set.
 
 ### GetName
 
@@ -144,20 +264,20 @@ HasOutcomes returns a boolean if a field has been set.
 UnsetOutcomes ensures that no value is present for Outcomes, not even an explicit nil
 ### GetResponseSpec
 
-`func (o *WorkflowApiAllOf) GetResponseSpec() ContentGrammar`
+`func (o *WorkflowApiAllOf) GetResponseSpec() interface{}`
 
 GetResponseSpec returns the ResponseSpec field if non-nil, zero value otherwise.
 
 ### GetResponseSpecOk
 
-`func (o *WorkflowApiAllOf) GetResponseSpecOk() (*ContentGrammar, bool)`
+`func (o *WorkflowApiAllOf) GetResponseSpecOk() (*interface{}, bool)`
 
 GetResponseSpecOk returns a tuple with the ResponseSpec field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetResponseSpec
 
-`func (o *WorkflowApiAllOf) SetResponseSpec(v ContentGrammar)`
+`func (o *WorkflowApiAllOf) SetResponseSpec(v interface{})`
 
 SetResponseSpec sets ResponseSpec field to given value.
 
@@ -167,6 +287,16 @@ SetResponseSpec sets ResponseSpec field to given value.
 
 HasResponseSpec returns a boolean if a field has been set.
 
+### SetResponseSpecNil
+
+`func (o *WorkflowApiAllOf) SetResponseSpecNil(b bool)`
+
+ SetResponseSpecNil sets the value for ResponseSpec to be an explicit nil
+
+### UnsetResponseSpec
+`func (o *WorkflowApiAllOf) UnsetResponseSpec()`
+
+UnsetResponseSpec ensures that no value is present for ResponseSpec, not even an explicit nil
 ### GetSkipOnCondition
 
 `func (o *WorkflowApiAllOf) GetSkipOnCondition() string`

@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.StoragePolicy"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.StoragePolicy"]
 **GlobalHotSpares** | Pointer to [**[]StorageLocalDisk**](storage.LocalDisk.md) |  | [optional] 
 **RetainPolicyVirtualDrives** | Pointer to **bool** | Retains the virtual drives defined in policy if they exist already. If this flag is false, the existing virtual drives are removed and created again based on virtual drives in the policy. | [optional] 
 **UnusedDisksState** | Pointer to **string** | Unused Disks State is used to specify the state, unconfigured good or jbod, in which the disks that are not used in this policy should be moved. * &#x60;UnconfiguredGood&#x60; - Unconfigured good state -ready to be added in a RAID group. * &#x60;Jbod&#x60; - JBOD state where the disks start showing up to host os. | [optional] [default to "UnconfiguredGood"]
@@ -16,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewStorageStoragePolicyAllOf
 
-`func NewStorageStoragePolicyAllOf() *StorageStoragePolicyAllOf`
+`func NewStorageStoragePolicyAllOf(classId string, objectType string, ) *StorageStoragePolicyAllOf`
 
 NewStorageStoragePolicyAllOf instantiates a new StorageStoragePolicyAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +32,46 @@ will change when the set of required properties is changed
 NewStorageStoragePolicyAllOfWithDefaults instantiates a new StorageStoragePolicyAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *StorageStoragePolicyAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *StorageStoragePolicyAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *StorageStoragePolicyAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *StorageStoragePolicyAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *StorageStoragePolicyAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *StorageStoragePolicyAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetGlobalHotSpares
 
@@ -56,6 +98,16 @@ SetGlobalHotSpares sets GlobalHotSpares field to given value.
 
 HasGlobalHotSpares returns a boolean if a field has been set.
 
+### SetGlobalHotSparesNil
+
+`func (o *StorageStoragePolicyAllOf) SetGlobalHotSparesNil(b bool)`
+
+ SetGlobalHotSparesNil sets the value for GlobalHotSpares to be an explicit nil
+
+### UnsetGlobalHotSpares
+`func (o *StorageStoragePolicyAllOf) UnsetGlobalHotSpares()`
+
+UnsetGlobalHotSpares ensures that no value is present for GlobalHotSpares, not even an explicit nil
 ### GetRetainPolicyVirtualDrives
 
 `func (o *StorageStoragePolicyAllOf) GetRetainPolicyVirtualDrives() bool`
@@ -131,6 +183,16 @@ SetVirtualDrives sets VirtualDrives field to given value.
 
 HasVirtualDrives returns a boolean if a field has been set.
 
+### SetVirtualDrivesNil
+
+`func (o *StorageStoragePolicyAllOf) SetVirtualDrivesNil(b bool)`
+
+ SetVirtualDrivesNil sets the value for VirtualDrives to be an explicit nil
+
+### UnsetVirtualDrives
+`func (o *StorageStoragePolicyAllOf) UnsetVirtualDrives()`
+
+UnsetVirtualDrives ensures that no value is present for VirtualDrives, not even an explicit nil
 ### GetDiskGroupPolicies
 
 `func (o *StorageStoragePolicyAllOf) GetDiskGroupPolicies() []StorageDiskGroupPolicyRelationship`

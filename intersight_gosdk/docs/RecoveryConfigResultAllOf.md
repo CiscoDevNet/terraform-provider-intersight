@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "recovery.ConfigResult"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "recovery.ConfigResult"]
 **Var0OnDemandBackup** | Pointer to [**RecoveryOnDemandBackupRelationship**](recovery.OnDemandBackup.Relationship.md) |  | [optional] 
 **BackupProfile** | Pointer to [**RecoveryBackupProfileRelationship**](recovery.BackupProfile.Relationship.md) |  | [optional] 
 **ResultEntries** | Pointer to [**[]RecoveryConfigResultEntryRelationship**](recovery.ConfigResultEntry.Relationship.md) | An array of relationships to recoveryConfigResultEntry resources. | [optional] 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewRecoveryConfigResultAllOf
 
-`func NewRecoveryConfigResultAllOf() *RecoveryConfigResultAllOf`
+`func NewRecoveryConfigResultAllOf(classId string, objectType string, ) *RecoveryConfigResultAllOf`
 
 NewRecoveryConfigResultAllOf instantiates a new RecoveryConfigResultAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewRecoveryConfigResultAllOfWithDefaults instantiates a new RecoveryConfigResultAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *RecoveryConfigResultAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *RecoveryConfigResultAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *RecoveryConfigResultAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *RecoveryConfigResultAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *RecoveryConfigResultAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *RecoveryConfigResultAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetVar0OnDemandBackup
 

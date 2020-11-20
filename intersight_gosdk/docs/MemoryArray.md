@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "memory.Array"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "memory.Array"]
 **ArrayId** | Pointer to **int64** | The instance number of the memory array. | [optional] [readonly] 
 **CpuId** | Pointer to **int64** | ID of the CPU that access this memory array. | [optional] [readonly] 
 **CurrentCapacity** | Pointer to **string** | Current capacity of all the memory units on a server. | [optional] [readonly] 
@@ -24,7 +26,7 @@ Name | Type | Description | Notes
 
 ### NewMemoryArray
 
-`func NewMemoryArray() *MemoryArray`
+`func NewMemoryArray(classId string, objectType string, ) *MemoryArray`
 
 NewMemoryArray instantiates a new MemoryArray object
 This constructor will assign default values to properties that have it defined,
@@ -38,6 +40,46 @@ will change when the set of required properties is changed
 NewMemoryArrayWithDefaults instantiates a new MemoryArray object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *MemoryArray) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *MemoryArray) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *MemoryArray) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *MemoryArray) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *MemoryArray) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *MemoryArray) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetArrayId
 

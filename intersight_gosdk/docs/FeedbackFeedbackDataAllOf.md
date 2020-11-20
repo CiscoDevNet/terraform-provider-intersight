@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "feedback.FeedbackData"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "feedback.FeedbackData"]
 **AccountName** | Pointer to **string** | Account name of the feedback sender. Copied in order to be persisted in case of account removal. | [optional] 
 **AlternativeFollowUpEmails** | Pointer to **[]string** |  | [optional] 
 **Comment** | Pointer to **string** | Text of the feedback as provided by the user, if it is a bug or a comment. | [optional] 
@@ -17,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewFeedbackFeedbackDataAllOf
 
-`func NewFeedbackFeedbackDataAllOf() *FeedbackFeedbackDataAllOf`
+`func NewFeedbackFeedbackDataAllOf(classId string, objectType string, ) *FeedbackFeedbackDataAllOf`
 
 NewFeedbackFeedbackDataAllOf instantiates a new FeedbackFeedbackDataAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -31,6 +33,46 @@ will change when the set of required properties is changed
 NewFeedbackFeedbackDataAllOfWithDefaults instantiates a new FeedbackFeedbackDataAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *FeedbackFeedbackDataAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *FeedbackFeedbackDataAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *FeedbackFeedbackDataAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *FeedbackFeedbackDataAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *FeedbackFeedbackDataAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *FeedbackFeedbackDataAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAccountName
 
@@ -82,6 +124,16 @@ SetAlternativeFollowUpEmails sets AlternativeFollowUpEmails field to given value
 
 HasAlternativeFollowUpEmails returns a boolean if a field has been set.
 
+### SetAlternativeFollowUpEmailsNil
+
+`func (o *FeedbackFeedbackDataAllOf) SetAlternativeFollowUpEmailsNil(b bool)`
+
+ SetAlternativeFollowUpEmailsNil sets the value for AlternativeFollowUpEmails to be an explicit nil
+
+### UnsetAlternativeFollowUpEmails
+`func (o *FeedbackFeedbackDataAllOf) UnsetAlternativeFollowUpEmails()`
+
+UnsetAlternativeFollowUpEmails ensures that no value is present for AlternativeFollowUpEmails, not even an explicit nil
 ### GetComment
 
 `func (o *FeedbackFeedbackDataAllOf) GetComment() string`

@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "pci.Link"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "pci.Link"]
 **Adapter** | Pointer to **string** | The name of the PCI device. | [optional] [readonly] 
 **LinkSpeed** | Pointer to **string** | The upstream link speed of the PCI device. | [optional] [readonly] 
 **LinkStatus** | Pointer to **string** | The upstream link status of the PCI device. | [optional] [readonly] 
@@ -18,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewPciLinkAllOf
 
-`func NewPciLinkAllOf() *PciLinkAllOf`
+`func NewPciLinkAllOf(classId string, objectType string, ) *PciLinkAllOf`
 
 NewPciLinkAllOf instantiates a new PciLinkAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -32,6 +34,46 @@ will change when the set of required properties is changed
 NewPciLinkAllOfWithDefaults instantiates a new PciLinkAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *PciLinkAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *PciLinkAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *PciLinkAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *PciLinkAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *PciLinkAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *PciLinkAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAdapter
 

@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.PureReplicationSchedule"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.PureReplicationSchedule"]
 **DailyLimit** | Pointer to **int64** | Total number of snapshots per day to be available on target above and over the specified retention time. PureStorage FlashArray maintains all created snapshot until retention period. Daily limit is applied only on the snapshots once retention time is expired. In case of, daily limit is less than the number of snapshot available on source, system select snapshots evenly spaced out throughout the day. | [optional] [readonly] 
 **ReplicationBlackoutIntervals** | Pointer to [**[]StoragePureReplicationBlackout**](storage.PureReplicationBlackout.md) |  | [optional] 
 **SnapshotExpiryTime** | Pointer to **string** | Duration to keep the daily limit snapshots on target array. StorageArray deletes the snapshots permanently from the targets beyond this period. | [optional] [readonly] 
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewStoragePureReplicationSchedule
 
-`func NewStoragePureReplicationSchedule() *StoragePureReplicationSchedule`
+`func NewStoragePureReplicationSchedule(classId string, objectType string, ) *StoragePureReplicationSchedule`
 
 NewStoragePureReplicationSchedule instantiates a new StoragePureReplicationSchedule object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +31,46 @@ will change when the set of required properties is changed
 NewStoragePureReplicationScheduleWithDefaults instantiates a new StoragePureReplicationSchedule object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *StoragePureReplicationSchedule) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *StoragePureReplicationSchedule) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *StoragePureReplicationSchedule) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *StoragePureReplicationSchedule) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *StoragePureReplicationSchedule) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *StoragePureReplicationSchedule) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDailyLimit
 
@@ -80,6 +122,16 @@ SetReplicationBlackoutIntervals sets ReplicationBlackoutIntervals field to given
 
 HasReplicationBlackoutIntervals returns a boolean if a field has been set.
 
+### SetReplicationBlackoutIntervalsNil
+
+`func (o *StoragePureReplicationSchedule) SetReplicationBlackoutIntervalsNil(b bool)`
+
+ SetReplicationBlackoutIntervalsNil sets the value for ReplicationBlackoutIntervals to be an explicit nil
+
+### UnsetReplicationBlackoutIntervals
+`func (o *StoragePureReplicationSchedule) UnsetReplicationBlackoutIntervals()`
+
+UnsetReplicationBlackoutIntervals ensures that no value is present for ReplicationBlackoutIntervals, not even an explicit nil
 ### GetSnapshotExpiryTime
 
 `func (o *StoragePureReplicationSchedule) GetSnapshotExpiryTime() string`

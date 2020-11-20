@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.Upgrade"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.Upgrade"]
 **ExcludeComponentList** | Pointer to **[]string** |  | [optional] 
 **Device** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 **Server** | Pointer to [**ComputePhysicalRelationship**](compute.Physical.Relationship.md) |  | [optional] 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewFirmwareUpgradeAllOf
 
-`func NewFirmwareUpgradeAllOf() *FirmwareUpgradeAllOf`
+`func NewFirmwareUpgradeAllOf(classId string, objectType string, ) *FirmwareUpgradeAllOf`
 
 NewFirmwareUpgradeAllOf instantiates a new FirmwareUpgradeAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewFirmwareUpgradeAllOfWithDefaults instantiates a new FirmwareUpgradeAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *FirmwareUpgradeAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *FirmwareUpgradeAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *FirmwareUpgradeAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *FirmwareUpgradeAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *FirmwareUpgradeAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *FirmwareUpgradeAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetExcludeComponentList
 
@@ -52,6 +94,16 @@ SetExcludeComponentList sets ExcludeComponentList field to given value.
 
 HasExcludeComponentList returns a boolean if a field has been set.
 
+### SetExcludeComponentListNil
+
+`func (o *FirmwareUpgradeAllOf) SetExcludeComponentListNil(b bool)`
+
+ SetExcludeComponentListNil sets the value for ExcludeComponentList to be an explicit nil
+
+### UnsetExcludeComponentList
+`func (o *FirmwareUpgradeAllOf) UnsetExcludeComponentList()`
+
+UnsetExcludeComponentList ensures that no value is present for ExcludeComponentList, not even an explicit nil
 ### GetDevice
 
 `func (o *FirmwareUpgradeAllOf) GetDevice() AssetDeviceRegistrationRelationship`

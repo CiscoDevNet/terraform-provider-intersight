@@ -14,12 +14,14 @@ The following arguments can be used to get data of already created objects in In
 * `admin_evac_state`:(string) Administratively configured state of Fabric Evacuation feature, for this switch. 
 * `admin_inband_interface_state`:(string) The administrative state of the network Element inband management interface. 
 * `available_memory`:(string) Available memory (un-used) on this switch platform. 
-* `class_id`:(string) The concrete type of this complex type. Its value must be the same as the 'objectType' property.The OpenAPI document references this property as a discriminator value. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `ethernet_mode`:(string) The user configured Ethernet operational mode for this switch (End-Host or Switching). 
+* `ethernet_switching_mode`:(string) The user configured Ethernet operational mode for this switch (End-Host or Switching).* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode. 
 * `fault_summary`:(int) The fault summary of the network Element out-of-band management interface. 
 * `fc_mode`:(string) The user configured FC operational mode for this switch (End-Host or Switching). 
+* `fc_switching_mode`:(string) The user configured FC operational mode for this switch (End-Host or Switching).* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode. 
 * `inband_ip_address`:(string) The IP address of the network Element inband management interface. 
 * `inband_ip_gateway`:(string) The default gateway of the network Element inband management interface. 
 * `inband_ip_mask`:(string) The network mask of the network Element inband management interface. 
@@ -27,7 +29,7 @@ The following arguments can be used to get data of already created objects in In
 * `management_mode`:(string) The management mode of the fabric interconnect.* `IntersightStandalone` - Intersight Standalone mode of operation.* `UCSM` - Unified Computing System Manager mode of operation.* `Intersight` - Intersight managed mode of operation. 
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified type of this managed object, i.e. the class name.This property is optional. The ObjectType is implied from the URL path.If specified, the value of objectType must match the class name specified in the URL path. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `oper_evac_state`:(string) Operational state of the Fabric Evacuation feature, for this switch. 
 * `operability`:(string) The switch's current overall operational/health state. 
 * `out_of_band_ip_address`:(string) The IP address of the network Element out-of-band management interface. 

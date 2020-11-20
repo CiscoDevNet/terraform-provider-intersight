@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.EndPointUserRole"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.EndPointUserRole"]
 **ChangePassword** | Pointer to **bool** | Denotes whether password has changed. | [optional] [readonly] 
 **Enabled** | Pointer to **bool** | Enables the user account on the endpoint. | [optional] 
 **IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] 
@@ -16,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewIamEndPointUserRoleAllOf
 
-`func NewIamEndPointUserRoleAllOf() *IamEndPointUserRoleAllOf`
+`func NewIamEndPointUserRoleAllOf(classId string, objectType string, ) *IamEndPointUserRoleAllOf`
 
 NewIamEndPointUserRoleAllOf instantiates a new IamEndPointUserRoleAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +32,46 @@ will change when the set of required properties is changed
 NewIamEndPointUserRoleAllOfWithDefaults instantiates a new IamEndPointUserRoleAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *IamEndPointUserRoleAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IamEndPointUserRoleAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IamEndPointUserRoleAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IamEndPointUserRoleAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IamEndPointUserRoleAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IamEndPointUserRoleAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetChangePassword
 

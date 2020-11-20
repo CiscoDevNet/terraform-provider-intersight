@@ -4,9 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.ExtIscsiStoragePolicy"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.ExtIscsiStoragePolicy"]
 **AdminState** | Pointer to **bool** | Enable or disable external FCoE storage configuration. | [optional] 
-**ExtaTraffic** | Pointer to [**HyperflexNamedVlan**](hyperflex.NamedVlan.md) |  | [optional] 
-**ExtbTraffic** | Pointer to [**HyperflexNamedVlan**](hyperflex.NamedVlan.md) |  | [optional] 
+**ExtaTraffic** | Pointer to [**NullableHyperflexNamedVlan**](hyperflex.NamedVlan.md) |  | [optional] 
+**ExtbTraffic** | Pointer to [**NullableHyperflexNamedVlan**](hyperflex.NamedVlan.md) |  | [optional] 
 **ClusterProfiles** | Pointer to [**[]HyperflexClusterProfileRelationship**](hyperflex.ClusterProfile.Relationship.md) | An array of relationships to hyperflexClusterProfile resources. | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 
@@ -14,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewHyperflexExtIscsiStoragePolicyAllOf
 
-`func NewHyperflexExtIscsiStoragePolicyAllOf() *HyperflexExtIscsiStoragePolicyAllOf`
+`func NewHyperflexExtIscsiStoragePolicyAllOf(classId string, objectType string, ) *HyperflexExtIscsiStoragePolicyAllOf`
 
 NewHyperflexExtIscsiStoragePolicyAllOf instantiates a new HyperflexExtIscsiStoragePolicyAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +30,46 @@ will change when the set of required properties is changed
 NewHyperflexExtIscsiStoragePolicyAllOfWithDefaults instantiates a new HyperflexExtIscsiStoragePolicyAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *HyperflexExtIscsiStoragePolicyAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *HyperflexExtIscsiStoragePolicyAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *HyperflexExtIscsiStoragePolicyAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *HyperflexExtIscsiStoragePolicyAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *HyperflexExtIscsiStoragePolicyAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *HyperflexExtIscsiStoragePolicyAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAdminState
 
@@ -79,6 +121,16 @@ SetExtaTraffic sets ExtaTraffic field to given value.
 
 HasExtaTraffic returns a boolean if a field has been set.
 
+### SetExtaTrafficNil
+
+`func (o *HyperflexExtIscsiStoragePolicyAllOf) SetExtaTrafficNil(b bool)`
+
+ SetExtaTrafficNil sets the value for ExtaTraffic to be an explicit nil
+
+### UnsetExtaTraffic
+`func (o *HyperflexExtIscsiStoragePolicyAllOf) UnsetExtaTraffic()`
+
+UnsetExtaTraffic ensures that no value is present for ExtaTraffic, not even an explicit nil
 ### GetExtbTraffic
 
 `func (o *HyperflexExtIscsiStoragePolicyAllOf) GetExtbTraffic() HyperflexNamedVlan`
@@ -104,6 +156,16 @@ SetExtbTraffic sets ExtbTraffic field to given value.
 
 HasExtbTraffic returns a boolean if a field has been set.
 
+### SetExtbTrafficNil
+
+`func (o *HyperflexExtIscsiStoragePolicyAllOf) SetExtbTrafficNil(b bool)`
+
+ SetExtbTrafficNil sets the value for ExtbTraffic to be an explicit nil
+
+### UnsetExtbTraffic
+`func (o *HyperflexExtIscsiStoragePolicyAllOf) UnsetExtbTraffic()`
+
+UnsetExtbTraffic ensures that no value is present for ExtbTraffic, not even an explicit nil
 ### GetClusterProfiles
 
 `func (o *HyperflexExtIscsiStoragePolicyAllOf) GetClusterProfiles() []HyperflexClusterProfileRelationship`

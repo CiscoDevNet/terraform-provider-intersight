@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vmedia.Policy"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vmedia.Policy"]
 **Enabled** | Pointer to **bool** | State of the Virtual Media service on the endpoint. | [optional] 
 **Encryption** | Pointer to **bool** | If enabled, allows encryption of all Virtual Media communications. | [optional] 
 **LowPowerUsb** | Pointer to **bool** | If enabled, the virtual drives appear on the boot selection menu after mapping the image and rebooting the host. | [optional] 
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewVmediaPolicy
 
-`func NewVmediaPolicy() *VmediaPolicy`
+`func NewVmediaPolicy(classId string, objectType string, ) *VmediaPolicy`
 
 NewVmediaPolicy instantiates a new VmediaPolicy object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +31,46 @@ will change when the set of required properties is changed
 NewVmediaPolicyWithDefaults instantiates a new VmediaPolicy object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *VmediaPolicy) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *VmediaPolicy) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *VmediaPolicy) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *VmediaPolicy) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *VmediaPolicy) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *VmediaPolicy) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetEnabled
 
@@ -130,6 +172,16 @@ SetMappings sets Mappings field to given value.
 
 HasMappings returns a boolean if a field has been set.
 
+### SetMappingsNil
+
+`func (o *VmediaPolicy) SetMappingsNil(b bool)`
+
+ SetMappingsNil sets the value for Mappings to be an explicit nil
+
+### UnsetMappings
+`func (o *VmediaPolicy) UnsetMappings()`
+
+UnsetMappings ensures that no value is present for Mappings, not even an explicit nil
 ### GetOrganization
 
 `func (o *VmediaPolicy) GetOrganization() OrganizationOrganizationRelationship`

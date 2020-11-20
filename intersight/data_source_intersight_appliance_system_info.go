@@ -20,13 +20,12 @@ func dataSourceApplianceSystemInfo() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
 			},
 			"cloud_conn_status": {
-				Description: "Connection state of the Intersight Appliance to the Intersight.\n* `` - The device registered with Intersight but subsequently did not establish a persistent websocket connection.\n* `Connected` - The device's connection to Intersight has been established and is active.\n* `NotConnected` - The device's connection to Intersight has been disconnected.\n* `ClaimInProgress` - Claim of the device is in progress.\n* `Unclaimed` - The device was un-claimed from the users account by an Administrator of the device.",
+				Description: "Connection state of the Intersight Appliance to the Intersight.\n* `` - The target details have been persisted but Intersight has not yet attempted to connect to the target.\n* `Connected` - Intersight is able to establish a connection to the target and initiate management activities.\n* `NotConnected` - Intersight is unable to establish a connection to the target.\n* `ClaimInProgress` - Claim of the target is in progress. A connection to the target has not been fully established.\n* `Unclaimed` - The device was un-claimed from the users account by an Administrator of the device. Also indicates the failure to claim Custom Target details in Intersight.\n* `Claimed` - Custom Target is successfully claimed in Intersight. Currently no validation is performed to verify the Target connectivity from Intersight at the time of creation. However invoking API from Intersight Orchestrator fails if this Target is not reachable from Intersight or if Target credentials are incorrect.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -56,7 +55,7 @@ func dataSourceApplianceSystemInfo() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified type of this managed object, i.e. the class name.\nThis property is optional. The ObjectType is implied from the URL path.\nIf specified, the value of objectType must match the class name specified in the URL path.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,

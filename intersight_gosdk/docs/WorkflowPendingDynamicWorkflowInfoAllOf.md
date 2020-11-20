@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.PendingDynamicWorkflowInfo"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.PendingDynamicWorkflowInfo"]
 **Input** | Pointer to **interface{}** | The inputs of the workflow. | [optional] 
 **Name** | Pointer to **string** | A name for the pending dynamic workflow. | [optional] 
 **PendingServices** | Pointer to **[]string** |  | [optional] 
@@ -11,7 +13,7 @@ Name | Type | Description | Notes
 **Status** | Pointer to **string** | The current status of the PendingDynamicWorkflowInfo. * &#x60;GatheringTasks&#x60; - Dynamic workflow is gathering tasks before workflow can start execution. * &#x60;Waiting&#x60; - Dynamic workflow is in waiting state and not yet started execution. | [optional] [default to "GatheringTasks"]
 **WaitOnDuplicate** | Pointer to **bool** | When set to true workflow engine will wait for a duplicate to finish before starting a new one. | [optional] 
 **WorkflowActionTaskLists** | Pointer to [**[]WorkflowDynamicWorkflowActionTaskList**](workflow.DynamicWorkflowActionTaskList.md) |  | [optional] 
-**WorkflowCtx** | Pointer to [**WorkflowWorkflowCtx**](workflow.WorkflowCtx.md) |  | [optional] 
+**WorkflowCtx** | Pointer to [**NullableWorkflowWorkflowCtx**](workflow.WorkflowCtx.md) |  | [optional] 
 **WorkflowKey** | Pointer to **string** | This key contains workflow, initiator and target name. Workflow engine uses the key to do workflow dedup. | [optional] 
 **WorkflowMeta** | Pointer to **interface{}** | The metadata of the workflow. | [optional] 
 **WorkflowInfo** | Pointer to [**WorkflowWorkflowInfoRelationship**](workflow.WorkflowInfo.Relationship.md) |  | [optional] 
@@ -20,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewWorkflowPendingDynamicWorkflowInfoAllOf
 
-`func NewWorkflowPendingDynamicWorkflowInfoAllOf() *WorkflowPendingDynamicWorkflowInfoAllOf`
+`func NewWorkflowPendingDynamicWorkflowInfoAllOf(classId string, objectType string, ) *WorkflowPendingDynamicWorkflowInfoAllOf`
 
 NewWorkflowPendingDynamicWorkflowInfoAllOf instantiates a new WorkflowPendingDynamicWorkflowInfoAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -34,6 +36,46 @@ will change when the set of required properties is changed
 NewWorkflowPendingDynamicWorkflowInfoAllOfWithDefaults instantiates a new WorkflowPendingDynamicWorkflowInfoAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *WorkflowPendingDynamicWorkflowInfoAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *WorkflowPendingDynamicWorkflowInfoAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *WorkflowPendingDynamicWorkflowInfoAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *WorkflowPendingDynamicWorkflowInfoAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *WorkflowPendingDynamicWorkflowInfoAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *WorkflowPendingDynamicWorkflowInfoAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetInput
 
@@ -120,6 +162,16 @@ SetPendingServices sets PendingServices field to given value.
 
 HasPendingServices returns a boolean if a field has been set.
 
+### SetPendingServicesNil
+
+`func (o *WorkflowPendingDynamicWorkflowInfoAllOf) SetPendingServicesNil(b bool)`
+
+ SetPendingServicesNil sets the value for PendingServices to be an explicit nil
+
+### UnsetPendingServices
+`func (o *WorkflowPendingDynamicWorkflowInfoAllOf) UnsetPendingServices()`
+
+UnsetPendingServices ensures that no value is present for PendingServices, not even an explicit nil
 ### GetSrc
 
 `func (o *WorkflowPendingDynamicWorkflowInfoAllOf) GetSrc() string`
@@ -220,6 +272,16 @@ SetWorkflowActionTaskLists sets WorkflowActionTaskLists field to given value.
 
 HasWorkflowActionTaskLists returns a boolean if a field has been set.
 
+### SetWorkflowActionTaskListsNil
+
+`func (o *WorkflowPendingDynamicWorkflowInfoAllOf) SetWorkflowActionTaskListsNil(b bool)`
+
+ SetWorkflowActionTaskListsNil sets the value for WorkflowActionTaskLists to be an explicit nil
+
+### UnsetWorkflowActionTaskLists
+`func (o *WorkflowPendingDynamicWorkflowInfoAllOf) UnsetWorkflowActionTaskLists()`
+
+UnsetWorkflowActionTaskLists ensures that no value is present for WorkflowActionTaskLists, not even an explicit nil
 ### GetWorkflowCtx
 
 `func (o *WorkflowPendingDynamicWorkflowInfoAllOf) GetWorkflowCtx() WorkflowWorkflowCtx`
@@ -245,6 +307,16 @@ SetWorkflowCtx sets WorkflowCtx field to given value.
 
 HasWorkflowCtx returns a boolean if a field has been set.
 
+### SetWorkflowCtxNil
+
+`func (o *WorkflowPendingDynamicWorkflowInfoAllOf) SetWorkflowCtxNil(b bool)`
+
+ SetWorkflowCtxNil sets the value for WorkflowCtx to be an explicit nil
+
+### UnsetWorkflowCtx
+`func (o *WorkflowPendingDynamicWorkflowInfoAllOf) UnsetWorkflowCtx()`
+
+UnsetWorkflowCtx ensures that no value is present for WorkflowCtx, not even an explicit nil
 ### GetWorkflowKey
 
 `func (o *WorkflowPendingDynamicWorkflowInfoAllOf) GetWorkflowKey() string`

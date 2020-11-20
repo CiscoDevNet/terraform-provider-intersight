@@ -4,10 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.Permission"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.Permission"]
 **Description** | Pointer to **string** | The informative description about each permission. | [optional] 
 **Name** | Pointer to **string** | The name of the permission which has to be granted to user. | [optional] 
 **Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
 **EndPointRoles** | Pointer to [**[]IamEndPointRoleRelationship**](iam.EndPointRole.Relationship.md) | An array of relationships to iamEndPointRole resources. | [optional] [readonly] 
+**PrivilegeSets** | Pointer to [**[]IamPrivilegeSetRelationship**](iam.PrivilegeSet.Relationship.md) | An array of relationships to iamPrivilegeSet resources. | [optional] [readonly] 
 **ResourceRoles** | Pointer to [**[]IamResourceRolesRelationship**](iam.ResourceRoles.Relationship.md) | An array of relationships to iamResourceRoles resources. | [optional] 
 **Roles** | Pointer to [**[]IamRoleRelationship**](iam.Role.Relationship.md) | An array of relationships to iamRole resources. | [optional] 
 **SessionLimits** | Pointer to [**IamSessionLimitsRelationship**](iam.SessionLimits.Relationship.md) |  | [optional] 
@@ -18,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewIamPermission
 
-`func NewIamPermission() *IamPermission`
+`func NewIamPermission(classId string, objectType string, ) *IamPermission`
 
 NewIamPermission instantiates a new IamPermission object
 This constructor will assign default values to properties that have it defined,
@@ -32,6 +35,46 @@ will change when the set of required properties is changed
 NewIamPermissionWithDefaults instantiates a new IamPermission object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *IamPermission) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IamPermission) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IamPermission) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IamPermission) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IamPermission) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IamPermission) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDescription
 
@@ -143,6 +186,41 @@ HasEndPointRoles returns a boolean if a field has been set.
 `func (o *IamPermission) UnsetEndPointRoles()`
 
 UnsetEndPointRoles ensures that no value is present for EndPointRoles, not even an explicit nil
+### GetPrivilegeSets
+
+`func (o *IamPermission) GetPrivilegeSets() []IamPrivilegeSetRelationship`
+
+GetPrivilegeSets returns the PrivilegeSets field if non-nil, zero value otherwise.
+
+### GetPrivilegeSetsOk
+
+`func (o *IamPermission) GetPrivilegeSetsOk() (*[]IamPrivilegeSetRelationship, bool)`
+
+GetPrivilegeSetsOk returns a tuple with the PrivilegeSets field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrivilegeSets
+
+`func (o *IamPermission) SetPrivilegeSets(v []IamPrivilegeSetRelationship)`
+
+SetPrivilegeSets sets PrivilegeSets field to given value.
+
+### HasPrivilegeSets
+
+`func (o *IamPermission) HasPrivilegeSets() bool`
+
+HasPrivilegeSets returns a boolean if a field has been set.
+
+### SetPrivilegeSetsNil
+
+`func (o *IamPermission) SetPrivilegeSetsNil(b bool)`
+
+ SetPrivilegeSetsNil sets the value for PrivilegeSets to be an explicit nil
+
+### UnsetPrivilegeSets
+`func (o *IamPermission) UnsetPrivilegeSets()`
+
+UnsetPrivilegeSets ensures that no value is present for PrivilegeSets, not even an explicit nil
 ### GetResourceRoles
 
 `func (o *IamPermission) GetResourceRoles() []IamResourceRolesRelationship`

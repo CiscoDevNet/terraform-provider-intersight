@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.Controller"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.Controller"]
 **ControllerFlags** | Pointer to **string** | The flags for the storage controller. | [optional] [readonly] 
 **ControllerId** | Pointer to **string** | The Id of the storage controller. | [optional] [readonly] 
 **ControllerStatus** | Pointer to **string** | The current status of controller. | [optional] [readonly] 
@@ -37,7 +39,7 @@ Name | Type | Description | Notes
 
 ### NewStorageControllerAllOf
 
-`func NewStorageControllerAllOf() *StorageControllerAllOf`
+`func NewStorageControllerAllOf(classId string, objectType string, ) *StorageControllerAllOf`
 
 NewStorageControllerAllOf instantiates a new StorageControllerAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -51,6 +53,46 @@ will change when the set of required properties is changed
 NewStorageControllerAllOfWithDefaults instantiates a new StorageControllerAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *StorageControllerAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *StorageControllerAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *StorageControllerAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *StorageControllerAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *StorageControllerAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *StorageControllerAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetControllerFlags
 

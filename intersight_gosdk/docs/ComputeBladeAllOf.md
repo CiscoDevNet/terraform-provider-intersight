@@ -4,13 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "compute.Blade"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "compute.Blade"]
 **ChassisId** | Pointer to **string** | The id of the chassis that the blade is located in. | [optional] [readonly] 
 **ScaledMode** | Pointer to **string** | The mode of the server that determines it is scaled. | [optional] [readonly] 
 **SlotId** | Pointer to **int64** | The slot number in the chassis that the blade is located in. | [optional] [readonly] 
 **Adapters** | Pointer to [**[]AdapterUnitRelationship**](adapter.Unit.Relationship.md) | An array of relationships to adapterUnit resources. | [optional] [readonly] 
+**BiosBootmode** | Pointer to [**BiosBootModeRelationship**](bios.BootMode.Relationship.md) |  | [optional] 
 **BiosUnits** | Pointer to [**[]BiosUnitRelationship**](bios.Unit.Relationship.md) | An array of relationships to biosUnit resources. | [optional] [readonly] 
 **Bmc** | Pointer to [**ManagementControllerRelationship**](management.Controller.Relationship.md) |  | [optional] 
 **Board** | Pointer to [**ComputeBoardRelationship**](compute.Board.Relationship.md) |  | [optional] 
+**BootDeviceBootmode** | Pointer to [**BootDeviceBootModeRelationship**](boot.DeviceBootMode.Relationship.md) |  | [optional] 
 **EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](equipment.Chassis.Relationship.md) |  | [optional] 
 **EquipmentIoExpanders** | Pointer to [**[]EquipmentIoExpanderRelationship**](equipment.IoExpander.Relationship.md) | An array of relationships to equipmentIoExpander resources. | [optional] [readonly] 
 **GenericInventoryHolders** | Pointer to [**[]InventoryGenericInventoryHolderRelationship**](inventory.GenericInventoryHolder.Relationship.md) | An array of relationships to inventoryGenericInventoryHolder resources. | [optional] [readonly] 
@@ -29,7 +33,7 @@ Name | Type | Description | Notes
 
 ### NewComputeBladeAllOf
 
-`func NewComputeBladeAllOf() *ComputeBladeAllOf`
+`func NewComputeBladeAllOf(classId string, objectType string, ) *ComputeBladeAllOf`
 
 NewComputeBladeAllOf instantiates a new ComputeBladeAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -43,6 +47,46 @@ will change when the set of required properties is changed
 NewComputeBladeAllOfWithDefaults instantiates a new ComputeBladeAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *ComputeBladeAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *ComputeBladeAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *ComputeBladeAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *ComputeBladeAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *ComputeBladeAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *ComputeBladeAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetChassisId
 
@@ -154,6 +198,31 @@ HasAdapters returns a boolean if a field has been set.
 `func (o *ComputeBladeAllOf) UnsetAdapters()`
 
 UnsetAdapters ensures that no value is present for Adapters, not even an explicit nil
+### GetBiosBootmode
+
+`func (o *ComputeBladeAllOf) GetBiosBootmode() BiosBootModeRelationship`
+
+GetBiosBootmode returns the BiosBootmode field if non-nil, zero value otherwise.
+
+### GetBiosBootmodeOk
+
+`func (o *ComputeBladeAllOf) GetBiosBootmodeOk() (*BiosBootModeRelationship, bool)`
+
+GetBiosBootmodeOk returns a tuple with the BiosBootmode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBiosBootmode
+
+`func (o *ComputeBladeAllOf) SetBiosBootmode(v BiosBootModeRelationship)`
+
+SetBiosBootmode sets BiosBootmode field to given value.
+
+### HasBiosBootmode
+
+`func (o *ComputeBladeAllOf) HasBiosBootmode() bool`
+
+HasBiosBootmode returns a boolean if a field has been set.
+
 ### GetBiosUnits
 
 `func (o *ComputeBladeAllOf) GetBiosUnits() []BiosUnitRelationship`
@@ -238,6 +307,31 @@ SetBoard sets Board field to given value.
 `func (o *ComputeBladeAllOf) HasBoard() bool`
 
 HasBoard returns a boolean if a field has been set.
+
+### GetBootDeviceBootmode
+
+`func (o *ComputeBladeAllOf) GetBootDeviceBootmode() BootDeviceBootModeRelationship`
+
+GetBootDeviceBootmode returns the BootDeviceBootmode field if non-nil, zero value otherwise.
+
+### GetBootDeviceBootmodeOk
+
+`func (o *ComputeBladeAllOf) GetBootDeviceBootmodeOk() (*BootDeviceBootModeRelationship, bool)`
+
+GetBootDeviceBootmodeOk returns a tuple with the BootDeviceBootmode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBootDeviceBootmode
+
+`func (o *ComputeBladeAllOf) SetBootDeviceBootmode(v BootDeviceBootModeRelationship)`
+
+SetBootDeviceBootmode sets BootDeviceBootmode field to given value.
+
+### HasBootDeviceBootmode
+
+`func (o *ComputeBladeAllOf) HasBootDeviceBootmode() bool`
+
+HasBootDeviceBootmode returns a boolean if a field has been set.
 
 ### GetEquipmentChassis
 

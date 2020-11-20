@@ -4,16 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Credential** | Pointer to [**AssetCredential**](asset.Credential.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.HttpConnection"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.HttpConnection"]
+**CertificateAuthority** | Pointer to **string** | The certificate authority of the target. If set and connection is secure the connection will be validate using the servers identity with this certificate. If not set no validation will be done of the identity. | [optional] 
 **IsSecure** | Pointer to **bool** | Indicates whether a connection to the target should be established using HTTPS. | [optional] 
 **ManagementAddress** | Pointer to **string** | The DNS hostname or IP Address, either IPv4 or IPv6, to be used to connect to the managed target. | [optional] 
-**Port** | Pointer to **int64** | The port number to be used to to connect to the managed target. Values 1-65535 indicate a port number to be used. A value of 0 is not a valid port number and instead indicates that the default management port, as defined by the documentation of the managed target, should be used to establish a connection. | [optional] 
+**Port** | Pointer to **int64** | The port number to be used to connect to the managed target. Values 1-65535 indicate a port number to be used. A value of 0 is not a valid port number and instead indicates that the default management port, as defined by the documentation of the managed target, should be used to establish a connection. | [optional] 
 
 ## Methods
 
 ### NewAssetHttpConnectionAllOf
 
-`func NewAssetHttpConnectionAllOf() *AssetHttpConnectionAllOf`
+`func NewAssetHttpConnectionAllOf(classId string, objectType string, ) *AssetHttpConnectionAllOf`
 
 NewAssetHttpConnectionAllOf instantiates a new AssetHttpConnectionAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -28,30 +30,70 @@ NewAssetHttpConnectionAllOfWithDefaults instantiates a new AssetHttpConnectionAl
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetCredential
+### GetClassId
 
-`func (o *AssetHttpConnectionAllOf) GetCredential() AssetCredential`
+`func (o *AssetHttpConnectionAllOf) GetClassId() string`
 
-GetCredential returns the Credential field if non-nil, zero value otherwise.
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
 
-### GetCredentialOk
+### GetClassIdOk
 
-`func (o *AssetHttpConnectionAllOf) GetCredentialOk() (*AssetCredential, bool)`
+`func (o *AssetHttpConnectionAllOf) GetClassIdOk() (*string, bool)`
 
-GetCredentialOk returns a tuple with the Credential field if it's non-nil, zero value otherwise
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCredential
+### SetClassId
 
-`func (o *AssetHttpConnectionAllOf) SetCredential(v AssetCredential)`
+`func (o *AssetHttpConnectionAllOf) SetClassId(v string)`
 
-SetCredential sets Credential field to given value.
+SetClassId sets ClassId field to given value.
 
-### HasCredential
 
-`func (o *AssetHttpConnectionAllOf) HasCredential() bool`
+### GetObjectType
 
-HasCredential returns a boolean if a field has been set.
+`func (o *AssetHttpConnectionAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *AssetHttpConnectionAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *AssetHttpConnectionAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
+
+### GetCertificateAuthority
+
+`func (o *AssetHttpConnectionAllOf) GetCertificateAuthority() string`
+
+GetCertificateAuthority returns the CertificateAuthority field if non-nil, zero value otherwise.
+
+### GetCertificateAuthorityOk
+
+`func (o *AssetHttpConnectionAllOf) GetCertificateAuthorityOk() (*string, bool)`
+
+GetCertificateAuthorityOk returns a tuple with the CertificateAuthority field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCertificateAuthority
+
+`func (o *AssetHttpConnectionAllOf) SetCertificateAuthority(v string)`
+
+SetCertificateAuthority sets CertificateAuthority field to given value.
+
+### HasCertificateAuthority
+
+`func (o *AssetHttpConnectionAllOf) HasCertificateAuthority() bool`
+
+HasCertificateAuthority returns a boolean if a field has been set.
 
 ### GetIsSecure
 

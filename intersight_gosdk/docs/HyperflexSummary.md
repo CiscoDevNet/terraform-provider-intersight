@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.Summary"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.Summary"]
 **ActiveNodes** | Pointer to **string** |  | [optional] [readonly] 
 **Address** | Pointer to **string** |  | [optional] [readonly] 
 **Boottime** | Pointer to **int64** |  | [optional] [readonly] 
@@ -14,11 +16,11 @@ Name | Type | Description | Notes
 **DeduplicationSavings** | Pointer to **float64** |  | [optional] [readonly] 
 **Downtime** | Pointer to **string** |  | [optional] [readonly] 
 **FreeCapacity** | Pointer to **int64** |  | [optional] [readonly] 
-**HealingInfo** | Pointer to [**HyperflexStPlatformClusterHealingInfo**](hyperflex.StPlatformClusterHealingInfo.md) |  | [optional] 
+**HealingInfo** | Pointer to [**NullableHyperflexStPlatformClusterHealingInfo**](hyperflex.StPlatformClusterHealingInfo.md) |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] [readonly] 
 **ResiliencyDetails** | Pointer to **map[string]interface{}** |  | [optional] [readonly] 
 **ResiliencyDetailsSize** | Pointer to **int64** |  | [optional] [readonly] 
-**ResiliencyInfo** | Pointer to [**HyperflexStPlatformClusterResiliencyInfo**](hyperflex.StPlatformClusterResiliencyInfo.md) |  | [optional] 
+**ResiliencyInfo** | Pointer to [**NullableHyperflexStPlatformClusterResiliencyInfo**](hyperflex.StPlatformClusterResiliencyInfo.md) |  | [optional] 
 **SpaceStatus** | Pointer to **string** |  | [optional] [readonly] 
 **State** | Pointer to **string** |  | [optional] [readonly] 
 **TotalCapacity** | Pointer to **int64** |  | [optional] [readonly] 
@@ -30,7 +32,7 @@ Name | Type | Description | Notes
 
 ### NewHyperflexSummary
 
-`func NewHyperflexSummary() *HyperflexSummary`
+`func NewHyperflexSummary(classId string, objectType string, ) *HyperflexSummary`
 
 NewHyperflexSummary instantiates a new HyperflexSummary object
 This constructor will assign default values to properties that have it defined,
@@ -44,6 +46,46 @@ will change when the set of required properties is changed
 NewHyperflexSummaryWithDefaults instantiates a new HyperflexSummary object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *HyperflexSummary) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *HyperflexSummary) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *HyperflexSummary) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *HyperflexSummary) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *HyperflexSummary) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *HyperflexSummary) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetActiveNodes
 
@@ -320,6 +362,16 @@ SetHealingInfo sets HealingInfo field to given value.
 
 HasHealingInfo returns a boolean if a field has been set.
 
+### SetHealingInfoNil
+
+`func (o *HyperflexSummary) SetHealingInfoNil(b bool)`
+
+ SetHealingInfoNil sets the value for HealingInfo to be an explicit nil
+
+### UnsetHealingInfo
+`func (o *HyperflexSummary) UnsetHealingInfo()`
+
+UnsetHealingInfo ensures that no value is present for HealingInfo, not even an explicit nil
 ### GetName
 
 `func (o *HyperflexSummary) GetName() string`
@@ -420,6 +472,16 @@ SetResiliencyInfo sets ResiliencyInfo field to given value.
 
 HasResiliencyInfo returns a boolean if a field has been set.
 
+### SetResiliencyInfoNil
+
+`func (o *HyperflexSummary) SetResiliencyInfoNil(b bool)`
+
+ SetResiliencyInfoNil sets the value for ResiliencyInfo to be an explicit nil
+
+### UnsetResiliencyInfo
+`func (o *HyperflexSummary) UnsetResiliencyInfo()`
+
+UnsetResiliencyInfo ensures that no value is present for ResiliencyInfo, not even an explicit nil
 ### GetSpaceStatus
 
 `func (o *HyperflexSummary) GetSpaceStatus() string`

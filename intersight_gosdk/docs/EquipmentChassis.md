@@ -4,7 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AlarmSummary** | Pointer to [**ComputeAlarmSummary**](compute.AlarmSummary.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.Chassis"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.Chassis"]
+**AlarmSummary** | Pointer to [**NullableComputeAlarmSummary**](compute.AlarmSummary.md) |  | [optional] 
 **ChassisId** | Pointer to **int64** | The assigned identifier for a chassis. | [optional] [readonly] 
 **ConnectionPath** | Pointer to **string** | This field identifies the connectivity path for the chassis enclosure. | [optional] [readonly] 
 **ConnectionStatus** | Pointer to **string** | This field identifies the connectivity status for the chassis enclosure. | [optional] [readonly] 
@@ -30,12 +32,13 @@ Name | Type | Description | Notes
 **Sasexpanders** | Pointer to [**[]StorageSasExpanderRelationship**](storage.SasExpander.Relationship.md) | An array of relationships to storageSasExpander resources. | [optional] [readonly] 
 **Siocs** | Pointer to [**[]EquipmentSystemIoControllerRelationship**](equipment.SystemIoController.Relationship.md) | An array of relationships to equipmentSystemIoController resources. | [optional] [readonly] 
 **StorageEnclosures** | Pointer to [**[]StorageEnclosureRelationship**](storage.Enclosure.Relationship.md) | An array of relationships to storageEnclosure resources. | [optional] [readonly] 
+**VirtualDriveContainer** | Pointer to [**[]StorageVirtualDriveContainerRelationship**](storage.VirtualDriveContainer.Relationship.md) | An array of relationships to storageVirtualDriveContainer resources. | [optional] 
 
 ## Methods
 
 ### NewEquipmentChassis
 
-`func NewEquipmentChassis() *EquipmentChassis`
+`func NewEquipmentChassis(classId string, objectType string, ) *EquipmentChassis`
 
 NewEquipmentChassis instantiates a new EquipmentChassis object
 This constructor will assign default values to properties that have it defined,
@@ -49,6 +52,46 @@ will change when the set of required properties is changed
 NewEquipmentChassisWithDefaults instantiates a new EquipmentChassis object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *EquipmentChassis) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *EquipmentChassis) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *EquipmentChassis) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *EquipmentChassis) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *EquipmentChassis) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *EquipmentChassis) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAlarmSummary
 
@@ -75,6 +118,16 @@ SetAlarmSummary sets AlarmSummary field to given value.
 
 HasAlarmSummary returns a boolean if a field has been set.
 
+### SetAlarmSummaryNil
+
+`func (o *EquipmentChassis) SetAlarmSummaryNil(b bool)`
+
+ SetAlarmSummaryNil sets the value for AlarmSummary to be an explicit nil
+
+### UnsetAlarmSummary
+`func (o *EquipmentChassis) UnsetAlarmSummary()`
+
+UnsetAlarmSummary ensures that no value is present for AlarmSummary, not even an explicit nil
 ### GetChassisId
 
 `func (o *EquipmentChassis) GetChassisId() int64`
@@ -770,6 +823,41 @@ HasStorageEnclosures returns a boolean if a field has been set.
 `func (o *EquipmentChassis) UnsetStorageEnclosures()`
 
 UnsetStorageEnclosures ensures that no value is present for StorageEnclosures, not even an explicit nil
+### GetVirtualDriveContainer
+
+`func (o *EquipmentChassis) GetVirtualDriveContainer() []StorageVirtualDriveContainerRelationship`
+
+GetVirtualDriveContainer returns the VirtualDriveContainer field if non-nil, zero value otherwise.
+
+### GetVirtualDriveContainerOk
+
+`func (o *EquipmentChassis) GetVirtualDriveContainerOk() (*[]StorageVirtualDriveContainerRelationship, bool)`
+
+GetVirtualDriveContainerOk returns a tuple with the VirtualDriveContainer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVirtualDriveContainer
+
+`func (o *EquipmentChassis) SetVirtualDriveContainer(v []StorageVirtualDriveContainerRelationship)`
+
+SetVirtualDriveContainer sets VirtualDriveContainer field to given value.
+
+### HasVirtualDriveContainer
+
+`func (o *EquipmentChassis) HasVirtualDriveContainer() bool`
+
+HasVirtualDriveContainer returns a boolean if a field has been set.
+
+### SetVirtualDriveContainerNil
+
+`func (o *EquipmentChassis) SetVirtualDriveContainerNil(b bool)`
+
+ SetVirtualDriveContainerNil sets the value for VirtualDriveContainer to be an explicit nil
+
+### UnsetVirtualDriveContainer
+`func (o *EquipmentChassis) UnsetVirtualDriveContainer()`
+
+UnsetVirtualDriveContainer ensures that no value is present for VirtualDriveContainer, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -4,10 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "network.VlanPortInfo"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "network.VlanPortInfo"]
 **AccessVlanPortCount** | Pointer to **int64** | The number of available VLAN access ports on a Fabric Interconnect. | [optional] [readonly] 
 **BorderVlanPortCount** | Pointer to **int64** | The number of available VLAN border ports on a Fabric Interconnect. | [optional] [readonly] 
+**CompressedOptimizationSetsValue** | Pointer to **int64** | The number of compressed VLAN Group count on a Fabric Interconnect calculated by VLAN port group library. | [optional] 
 **CompressedVlanPortCount** | Pointer to **string** | The number of compressed VLAN ports on a Fabric Interconnect. | [optional] [readonly] 
+**CompressedVlanPortCountValue** | Pointer to **int64** | The number of compressed VLAN port count on a Fabric Interconnect calculated by VLAN port group library. | [optional] 
+**TotalVlanPortCount** | Pointer to **int64** | The total number of VLAN ports on a Fabric Interconnect. | [optional] [readonly] 
 **UncompressedVlanPortCount** | Pointer to **string** | The number of uncompressed VLAN ports on a Fabric Interconnect. | [optional] [readonly] 
+**UncompressedVlanPortCountValue** | Pointer to **int64** | The number of uncompressed VLAN port count on a Fabric Interconnect calculated by VLAN port group library. | [optional] 
 **VlanPortLimit** | Pointer to **int64** | The maximum number of VLAN ports allowed on a Fabric Interconnect. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
 **NetworkElement** | Pointer to [**NetworkElementRelationship**](network.Element.Relationship.md) |  | [optional] 
@@ -17,7 +23,7 @@ Name | Type | Description | Notes
 
 ### NewNetworkVlanPortInfoAllOf
 
-`func NewNetworkVlanPortInfoAllOf() *NetworkVlanPortInfoAllOf`
+`func NewNetworkVlanPortInfoAllOf(classId string, objectType string, ) *NetworkVlanPortInfoAllOf`
 
 NewNetworkVlanPortInfoAllOf instantiates a new NetworkVlanPortInfoAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -31,6 +37,46 @@ will change when the set of required properties is changed
 NewNetworkVlanPortInfoAllOfWithDefaults instantiates a new NetworkVlanPortInfoAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *NetworkVlanPortInfoAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *NetworkVlanPortInfoAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *NetworkVlanPortInfoAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *NetworkVlanPortInfoAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *NetworkVlanPortInfoAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *NetworkVlanPortInfoAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAccessVlanPortCount
 
@@ -82,6 +128,31 @@ SetBorderVlanPortCount sets BorderVlanPortCount field to given value.
 
 HasBorderVlanPortCount returns a boolean if a field has been set.
 
+### GetCompressedOptimizationSetsValue
+
+`func (o *NetworkVlanPortInfoAllOf) GetCompressedOptimizationSetsValue() int64`
+
+GetCompressedOptimizationSetsValue returns the CompressedOptimizationSetsValue field if non-nil, zero value otherwise.
+
+### GetCompressedOptimizationSetsValueOk
+
+`func (o *NetworkVlanPortInfoAllOf) GetCompressedOptimizationSetsValueOk() (*int64, bool)`
+
+GetCompressedOptimizationSetsValueOk returns a tuple with the CompressedOptimizationSetsValue field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCompressedOptimizationSetsValue
+
+`func (o *NetworkVlanPortInfoAllOf) SetCompressedOptimizationSetsValue(v int64)`
+
+SetCompressedOptimizationSetsValue sets CompressedOptimizationSetsValue field to given value.
+
+### HasCompressedOptimizationSetsValue
+
+`func (o *NetworkVlanPortInfoAllOf) HasCompressedOptimizationSetsValue() bool`
+
+HasCompressedOptimizationSetsValue returns a boolean if a field has been set.
+
 ### GetCompressedVlanPortCount
 
 `func (o *NetworkVlanPortInfoAllOf) GetCompressedVlanPortCount() string`
@@ -107,6 +178,56 @@ SetCompressedVlanPortCount sets CompressedVlanPortCount field to given value.
 
 HasCompressedVlanPortCount returns a boolean if a field has been set.
 
+### GetCompressedVlanPortCountValue
+
+`func (o *NetworkVlanPortInfoAllOf) GetCompressedVlanPortCountValue() int64`
+
+GetCompressedVlanPortCountValue returns the CompressedVlanPortCountValue field if non-nil, zero value otherwise.
+
+### GetCompressedVlanPortCountValueOk
+
+`func (o *NetworkVlanPortInfoAllOf) GetCompressedVlanPortCountValueOk() (*int64, bool)`
+
+GetCompressedVlanPortCountValueOk returns a tuple with the CompressedVlanPortCountValue field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCompressedVlanPortCountValue
+
+`func (o *NetworkVlanPortInfoAllOf) SetCompressedVlanPortCountValue(v int64)`
+
+SetCompressedVlanPortCountValue sets CompressedVlanPortCountValue field to given value.
+
+### HasCompressedVlanPortCountValue
+
+`func (o *NetworkVlanPortInfoAllOf) HasCompressedVlanPortCountValue() bool`
+
+HasCompressedVlanPortCountValue returns a boolean if a field has been set.
+
+### GetTotalVlanPortCount
+
+`func (o *NetworkVlanPortInfoAllOf) GetTotalVlanPortCount() int64`
+
+GetTotalVlanPortCount returns the TotalVlanPortCount field if non-nil, zero value otherwise.
+
+### GetTotalVlanPortCountOk
+
+`func (o *NetworkVlanPortInfoAllOf) GetTotalVlanPortCountOk() (*int64, bool)`
+
+GetTotalVlanPortCountOk returns a tuple with the TotalVlanPortCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalVlanPortCount
+
+`func (o *NetworkVlanPortInfoAllOf) SetTotalVlanPortCount(v int64)`
+
+SetTotalVlanPortCount sets TotalVlanPortCount field to given value.
+
+### HasTotalVlanPortCount
+
+`func (o *NetworkVlanPortInfoAllOf) HasTotalVlanPortCount() bool`
+
+HasTotalVlanPortCount returns a boolean if a field has been set.
+
 ### GetUncompressedVlanPortCount
 
 `func (o *NetworkVlanPortInfoAllOf) GetUncompressedVlanPortCount() string`
@@ -131,6 +252,31 @@ SetUncompressedVlanPortCount sets UncompressedVlanPortCount field to given value
 `func (o *NetworkVlanPortInfoAllOf) HasUncompressedVlanPortCount() bool`
 
 HasUncompressedVlanPortCount returns a boolean if a field has been set.
+
+### GetUncompressedVlanPortCountValue
+
+`func (o *NetworkVlanPortInfoAllOf) GetUncompressedVlanPortCountValue() int64`
+
+GetUncompressedVlanPortCountValue returns the UncompressedVlanPortCountValue field if non-nil, zero value otherwise.
+
+### GetUncompressedVlanPortCountValueOk
+
+`func (o *NetworkVlanPortInfoAllOf) GetUncompressedVlanPortCountValueOk() (*int64, bool)`
+
+GetUncompressedVlanPortCountValueOk returns a tuple with the UncompressedVlanPortCountValue field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUncompressedVlanPortCountValue
+
+`func (o *NetworkVlanPortInfoAllOf) SetUncompressedVlanPortCountValue(v int64)`
+
+SetUncompressedVlanPortCountValue sets UncompressedVlanPortCountValue field to given value.
+
+### HasUncompressedVlanPortCountValue
+
+`func (o *NetworkVlanPortInfoAllOf) HasUncompressedVlanPortCountValue() bool`
+
+HasUncompressedVlanPortCountValue returns a boolean if a field has been set.
 
 ### GetVlanPortLimit
 

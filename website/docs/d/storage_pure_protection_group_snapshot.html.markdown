@@ -11,10 +11,10 @@ Protection group snapshot entity in Pure protection group.
 Protection group snapshot entity in Pure protection group.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `class_id`:(string) The concrete type of this complex type. Its value must be the same as the 'objectType' property.The OpenAPI document references this property as a discriminator value. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `created_time`:(string) Protection group snapshot creation time. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Protection group snapshot name which represents point-in-time copy of all members in protection group. 
-* `object_type`:(string) The fully-qualified type of this managed object, i.e. the class name.This property is optional. The ObjectType is implied from the URL path.If specified, the value of objectType must match the class name specified in the URL path. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `size`:(int) Snapshot size represented in bytes. It is a cumulative size of all snapshots in a set. 
 * `source`:(string) Source protection group name on which the snapshot is created. 

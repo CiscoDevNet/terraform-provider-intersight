@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "software.SolutionDistributable"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "software.SolutionDistributable"]
 **FilePath** | Pointer to **string** | The path of the file in S3/minio bucket. | [optional] [readonly] 
 **SolutionName** | Pointer to **string** | The name of the solution in which the image belongs. | [optional] 
 **SubType** | Pointer to **string** | The type of the file like OS image, Script etc. * &#x60;osimage&#x60; - The solution OS image for deployment. * &#x60;script&#x60; - The Python script for the solution VM configuration and deployment. | [optional] [default to "osimage"]
@@ -13,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewSoftwareSolutionDistributableAllOf
 
-`func NewSoftwareSolutionDistributableAllOf() *SoftwareSolutionDistributableAllOf`
+`func NewSoftwareSolutionDistributableAllOf(classId string, objectType string, ) *SoftwareSolutionDistributableAllOf`
 
 NewSoftwareSolutionDistributableAllOf instantiates a new SoftwareSolutionDistributableAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewSoftwareSolutionDistributableAllOfWithDefaults instantiates a new SoftwareSolutionDistributableAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *SoftwareSolutionDistributableAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *SoftwareSolutionDistributableAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *SoftwareSolutionDistributableAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *SoftwareSolutionDistributableAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *SoftwareSolutionDistributableAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *SoftwareSolutionDistributableAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetFilePath
 

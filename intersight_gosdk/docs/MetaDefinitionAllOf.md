@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "meta.Definition"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "meta.Definition"]
 **AccessPrivileges** | Pointer to [**[]MetaAccessPrivilege**](meta.AccessPrivilege.md) |  | [optional] 
 **AncestorClasses** | Pointer to **[]string** |  | [optional] 
 **DisplayNameMetas** | Pointer to [**[]MetaDisplayNameDefinition**](meta.DisplayNameDefinition.md) |  | [optional] 
@@ -23,7 +25,7 @@ Name | Type | Description | Notes
 
 ### NewMetaDefinitionAllOf
 
-`func NewMetaDefinitionAllOf() *MetaDefinitionAllOf`
+`func NewMetaDefinitionAllOf(classId string, objectType string, ) *MetaDefinitionAllOf`
 
 NewMetaDefinitionAllOf instantiates a new MetaDefinitionAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -37,6 +39,46 @@ will change when the set of required properties is changed
 NewMetaDefinitionAllOfWithDefaults instantiates a new MetaDefinitionAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *MetaDefinitionAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *MetaDefinitionAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *MetaDefinitionAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *MetaDefinitionAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *MetaDefinitionAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *MetaDefinitionAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAccessPrivileges
 
@@ -63,6 +105,16 @@ SetAccessPrivileges sets AccessPrivileges field to given value.
 
 HasAccessPrivileges returns a boolean if a field has been set.
 
+### SetAccessPrivilegesNil
+
+`func (o *MetaDefinitionAllOf) SetAccessPrivilegesNil(b bool)`
+
+ SetAccessPrivilegesNil sets the value for AccessPrivileges to be an explicit nil
+
+### UnsetAccessPrivileges
+`func (o *MetaDefinitionAllOf) UnsetAccessPrivileges()`
+
+UnsetAccessPrivileges ensures that no value is present for AccessPrivileges, not even an explicit nil
 ### GetAncestorClasses
 
 `func (o *MetaDefinitionAllOf) GetAncestorClasses() []string`
@@ -88,6 +140,16 @@ SetAncestorClasses sets AncestorClasses field to given value.
 
 HasAncestorClasses returns a boolean if a field has been set.
 
+### SetAncestorClassesNil
+
+`func (o *MetaDefinitionAllOf) SetAncestorClassesNil(b bool)`
+
+ SetAncestorClassesNil sets the value for AncestorClasses to be an explicit nil
+
+### UnsetAncestorClasses
+`func (o *MetaDefinitionAllOf) UnsetAncestorClasses()`
+
+UnsetAncestorClasses ensures that no value is present for AncestorClasses, not even an explicit nil
 ### GetDisplayNameMetas
 
 `func (o *MetaDefinitionAllOf) GetDisplayNameMetas() []MetaDisplayNameDefinition`
@@ -113,6 +175,16 @@ SetDisplayNameMetas sets DisplayNameMetas field to given value.
 
 HasDisplayNameMetas returns a boolean if a field has been set.
 
+### SetDisplayNameMetasNil
+
+`func (o *MetaDefinitionAllOf) SetDisplayNameMetasNil(b bool)`
+
+ SetDisplayNameMetasNil sets the value for DisplayNameMetas to be an explicit nil
+
+### UnsetDisplayNameMetas
+`func (o *MetaDefinitionAllOf) UnsetDisplayNameMetas()`
+
+UnsetDisplayNameMetas ensures that no value is present for DisplayNameMetas, not even an explicit nil
 ### GetIsConcrete
 
 `func (o *MetaDefinitionAllOf) GetIsConcrete() bool`
@@ -288,6 +360,16 @@ SetProperties sets Properties field to given value.
 
 HasProperties returns a boolean if a field has been set.
 
+### SetPropertiesNil
+
+`func (o *MetaDefinitionAllOf) SetPropertiesNil(b bool)`
+
+ SetPropertiesNil sets the value for Properties to be an explicit nil
+
+### UnsetProperties
+`func (o *MetaDefinitionAllOf) UnsetProperties()`
+
+UnsetProperties ensures that no value is present for Properties, not even an explicit nil
 ### GetRbacResource
 
 `func (o *MetaDefinitionAllOf) GetRbacResource() bool`
@@ -338,6 +420,16 @@ SetRelationships sets Relationships field to given value.
 
 HasRelationships returns a boolean if a field has been set.
 
+### SetRelationshipsNil
+
+`func (o *MetaDefinitionAllOf) SetRelationshipsNil(b bool)`
+
+ SetRelationshipsNil sets the value for Relationships to be an explicit nil
+
+### UnsetRelationships
+`func (o *MetaDefinitionAllOf) UnsetRelationships()`
+
+UnsetRelationships ensures that no value is present for Relationships, not even an explicit nil
 ### GetRestPath
 
 `func (o *MetaDefinitionAllOf) GetRestPath() string`

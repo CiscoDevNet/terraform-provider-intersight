@@ -4,34 +4,53 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BfdIfPolCount** | Pointer to **int64** | Bidirectional Forwarding Detection bfdIfPol Model Object count scale. | [optional] 
-**BfdIfpCount** | Pointer to **int64** | Bidirectional Forwarding Detection Interface Policy count scale. | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niatelemetry.Tenant"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niatelemetry.Tenant"]
+**BfdIfPolCount** | Pointer to **int64** | Number of Bidirectional Forwarding Detection bfdIfPol Model Objects. | [optional] 
+**BfdIfpCount** | Pointer to **int64** | Number of objects with Bidirectional Forwarding Detection Interface Policy. | [optional] 
+**DhcpRsProvCount** | Pointer to **int64** | Number of tenants with Dynamic Host Configuration Protocol enabled. | [optional] 
 **Dn** | Pointer to **string** | Dn for the tenants present. | [optional] 
-**FhsBdPolCount** | Pointer to **int64** | First hop security count scale. Checks for presence of IP source gaurd, dynamic arp inspection. | [optional] 
-**FvRsBdToFhsCount** | Pointer to **int64** | First hop security count scale. Checks for presence of IP source gaurd, dynamic arp inspection. | [optional] 
-**FvSiteConnpCount** | Pointer to **int64** | Multi-Site scale for fvSiteConnp Model Object. | [optional] 
+**FhsBdPolCount** | Pointer to **int64** | Number of objects with First hop security. Checks for presence of IP source gaurd, dynamic arp inspection. | [optional] 
+**FvApCount** | Pointer to **int64** | Number of application profiles per tenant. | [optional] 
+**FvBdCount** | Pointer to **int64** | Number of bridge domains with hardware proxy enabled per tenant. | [optional] 
+**FvBdSubnetCount** | Pointer to **int64** | Number of bridge domain subnets per tenant. | [optional] 
+**FvBdnoArpCount** | Pointer to **int64** | Number of bridge domains with ARP flodding disabled per tenant. | [optional] 
+**FvCepCount** | Pointer to **int64** | Count of number of endpoints per tenant. | [optional] 
+**FvRsBdToFhsCount** | Pointer to **int64** | Number of objects with First hop security. Checks for presence of IP source gaurd, dynamic arp inspection. | [optional] 
+**FvRsBdToOutCount** | Pointer to **int64** | Number of bridge domains connected to layer 3 out per tenant. | [optional] 
+**FvSiteConnpCount** | Pointer to **int64** | Number of Multi-Site objects. | [optional] 
+**FvSubnetCount** | Pointer to **int64** | Number of subnets per tenant. | [optional] 
+**IpStaticRouteCount** | Pointer to **int64** | Number of IP static routes per tenant. | [optional] 
 **L3MulticastCount** | Pointer to **int64** | Number of layer 3 multicasts. | [optional] 
 **L3MulticastCtxCount** | Pointer to **int64** | Number of layer 3 multicast CtxP. | [optional] 
 **L3MulticastIfCount** | Pointer to **int64** | Number of layer 3 multicast IfP. | [optional] 
-**L3outCount** | Pointer to **int64** | L3 out scale for the tenants present. | [optional] 
+**L3outCount** | Pointer to **int64** | Number of L3 out objects for the tenants present. | [optional] 
+**QosCustomPolCount** | Pointer to **int64** | Number of Quality Of Service Custom Policy. | [optional] 
+**RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
+**RecordVersion** | Pointer to **string** | Version of record being pushed. This determines what was the API version for data available from the device. | [optional] 
 **SiteName** | Pointer to **string** | The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters / sites. | [optional] 
 **Ssm** | Pointer to **string** | SSM property feature usage. | [optional] 
+**SsmCount** | Pointer to **int64** | Number of context-level ssm translate policies per tenant. | [optional] 
+**TcamOptCount** | Pointer to **int64** | Number of TCAM optimization enabled per tenant. | [optional] 
 **TraceRouteEpCount** | Pointer to **int64** | Number of ITrace route endpoint per tenant. | [optional] 
 **TraceRouteEpExtCount** | Pointer to **int64** | Number of ITrace endpoint external routes per tenant. | [optional] 
 **TraceRouteExtEpCount** | Pointer to **int64** | Number of ITrace external endpoint routes per tenant. | [optional] 
 **TraceRouteExtExtCount** | Pointer to **int64** | Number of ITrace external routes per tenant. | [optional] 
-**VnsAbsGraphCount** | Pointer to **int64** | L4 to L7 Services graph count scale. | [optional] 
-**VnsBackupPolCount** | Pointer to **int64** | Policy Based Routing standby Node count scale. Checks the Policy Based Routing backup policy. | [optional] 
-**VnsRedirectDestCount** | Pointer to **int64** | Policy Based Routing standby Node count scale. Policy based redirect requires a destination to redirect traffic. | [optional] 
-**VnsSvcRedirectPolCount** | Pointer to **int64** | Policy Based Routing and Policy Based Service Insertion count scale. Includes without L4-L7 package. | [optional] 
-**VrfCount** | Pointer to **int64** | Vrf scale count per tenant. | [optional] 
+**VnsAbsGraphCount** | Pointer to **int64** | Number of objects with L4 to L7 Services graph. | [optional] 
+**VnsBackupPolCount** | Pointer to **int64** | Number of objects with Policy Based Routing standby Node. Checks the Policy Based Routing backup policy. | [optional] 
+**VnsRedirectDestCount** | Pointer to **int64** | Number of objects with Policy Based Routing standby Node. Policy based redirect requires a destination to redirect traffic. | [optional] 
+**VnsSvcRedirectPolCount** | Pointer to **int64** | Number of Policy Based Routing and Policy Based Service Insertion objects. Includes without L4-L7 package. | [optional] 
+**VrfCount** | Pointer to **int64** | Number of Vrfs per tenant. | [optional] 
+**VzBrCpCount** | Pointer to **int64** | Number of Zoning Policy per tenant. | [optional] 
+**VzRtConsCount** | Pointer to **int64** | Number of Client Contract between End Point Groups per tenant. | [optional] 
+**VzRtProvCount** | Pointer to **int64** | Number of Client Contract between End Point Groups per tenant. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
 ## Methods
 
 ### NewNiatelemetryTenantAllOf
 
-`func NewNiatelemetryTenantAllOf() *NiatelemetryTenantAllOf`
+`func NewNiatelemetryTenantAllOf(classId string, objectType string, ) *NiatelemetryTenantAllOf`
 
 NewNiatelemetryTenantAllOf instantiates a new NiatelemetryTenantAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -45,6 +64,46 @@ will change when the set of required properties is changed
 NewNiatelemetryTenantAllOfWithDefaults instantiates a new NiatelemetryTenantAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *NiatelemetryTenantAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *NiatelemetryTenantAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *NiatelemetryTenantAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *NiatelemetryTenantAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *NiatelemetryTenantAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *NiatelemetryTenantAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetBfdIfPolCount
 
@@ -96,6 +155,31 @@ SetBfdIfpCount sets BfdIfpCount field to given value.
 
 HasBfdIfpCount returns a boolean if a field has been set.
 
+### GetDhcpRsProvCount
+
+`func (o *NiatelemetryTenantAllOf) GetDhcpRsProvCount() int64`
+
+GetDhcpRsProvCount returns the DhcpRsProvCount field if non-nil, zero value otherwise.
+
+### GetDhcpRsProvCountOk
+
+`func (o *NiatelemetryTenantAllOf) GetDhcpRsProvCountOk() (*int64, bool)`
+
+GetDhcpRsProvCountOk returns a tuple with the DhcpRsProvCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDhcpRsProvCount
+
+`func (o *NiatelemetryTenantAllOf) SetDhcpRsProvCount(v int64)`
+
+SetDhcpRsProvCount sets DhcpRsProvCount field to given value.
+
+### HasDhcpRsProvCount
+
+`func (o *NiatelemetryTenantAllOf) HasDhcpRsProvCount() bool`
+
+HasDhcpRsProvCount returns a boolean if a field has been set.
+
 ### GetDn
 
 `func (o *NiatelemetryTenantAllOf) GetDn() string`
@@ -146,6 +230,131 @@ SetFhsBdPolCount sets FhsBdPolCount field to given value.
 
 HasFhsBdPolCount returns a boolean if a field has been set.
 
+### GetFvApCount
+
+`func (o *NiatelemetryTenantAllOf) GetFvApCount() int64`
+
+GetFvApCount returns the FvApCount field if non-nil, zero value otherwise.
+
+### GetFvApCountOk
+
+`func (o *NiatelemetryTenantAllOf) GetFvApCountOk() (*int64, bool)`
+
+GetFvApCountOk returns a tuple with the FvApCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFvApCount
+
+`func (o *NiatelemetryTenantAllOf) SetFvApCount(v int64)`
+
+SetFvApCount sets FvApCount field to given value.
+
+### HasFvApCount
+
+`func (o *NiatelemetryTenantAllOf) HasFvApCount() bool`
+
+HasFvApCount returns a boolean if a field has been set.
+
+### GetFvBdCount
+
+`func (o *NiatelemetryTenantAllOf) GetFvBdCount() int64`
+
+GetFvBdCount returns the FvBdCount field if non-nil, zero value otherwise.
+
+### GetFvBdCountOk
+
+`func (o *NiatelemetryTenantAllOf) GetFvBdCountOk() (*int64, bool)`
+
+GetFvBdCountOk returns a tuple with the FvBdCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFvBdCount
+
+`func (o *NiatelemetryTenantAllOf) SetFvBdCount(v int64)`
+
+SetFvBdCount sets FvBdCount field to given value.
+
+### HasFvBdCount
+
+`func (o *NiatelemetryTenantAllOf) HasFvBdCount() bool`
+
+HasFvBdCount returns a boolean if a field has been set.
+
+### GetFvBdSubnetCount
+
+`func (o *NiatelemetryTenantAllOf) GetFvBdSubnetCount() int64`
+
+GetFvBdSubnetCount returns the FvBdSubnetCount field if non-nil, zero value otherwise.
+
+### GetFvBdSubnetCountOk
+
+`func (o *NiatelemetryTenantAllOf) GetFvBdSubnetCountOk() (*int64, bool)`
+
+GetFvBdSubnetCountOk returns a tuple with the FvBdSubnetCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFvBdSubnetCount
+
+`func (o *NiatelemetryTenantAllOf) SetFvBdSubnetCount(v int64)`
+
+SetFvBdSubnetCount sets FvBdSubnetCount field to given value.
+
+### HasFvBdSubnetCount
+
+`func (o *NiatelemetryTenantAllOf) HasFvBdSubnetCount() bool`
+
+HasFvBdSubnetCount returns a boolean if a field has been set.
+
+### GetFvBdnoArpCount
+
+`func (o *NiatelemetryTenantAllOf) GetFvBdnoArpCount() int64`
+
+GetFvBdnoArpCount returns the FvBdnoArpCount field if non-nil, zero value otherwise.
+
+### GetFvBdnoArpCountOk
+
+`func (o *NiatelemetryTenantAllOf) GetFvBdnoArpCountOk() (*int64, bool)`
+
+GetFvBdnoArpCountOk returns a tuple with the FvBdnoArpCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFvBdnoArpCount
+
+`func (o *NiatelemetryTenantAllOf) SetFvBdnoArpCount(v int64)`
+
+SetFvBdnoArpCount sets FvBdnoArpCount field to given value.
+
+### HasFvBdnoArpCount
+
+`func (o *NiatelemetryTenantAllOf) HasFvBdnoArpCount() bool`
+
+HasFvBdnoArpCount returns a boolean if a field has been set.
+
+### GetFvCepCount
+
+`func (o *NiatelemetryTenantAllOf) GetFvCepCount() int64`
+
+GetFvCepCount returns the FvCepCount field if non-nil, zero value otherwise.
+
+### GetFvCepCountOk
+
+`func (o *NiatelemetryTenantAllOf) GetFvCepCountOk() (*int64, bool)`
+
+GetFvCepCountOk returns a tuple with the FvCepCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFvCepCount
+
+`func (o *NiatelemetryTenantAllOf) SetFvCepCount(v int64)`
+
+SetFvCepCount sets FvCepCount field to given value.
+
+### HasFvCepCount
+
+`func (o *NiatelemetryTenantAllOf) HasFvCepCount() bool`
+
+HasFvCepCount returns a boolean if a field has been set.
+
 ### GetFvRsBdToFhsCount
 
 `func (o *NiatelemetryTenantAllOf) GetFvRsBdToFhsCount() int64`
@@ -171,6 +380,31 @@ SetFvRsBdToFhsCount sets FvRsBdToFhsCount field to given value.
 
 HasFvRsBdToFhsCount returns a boolean if a field has been set.
 
+### GetFvRsBdToOutCount
+
+`func (o *NiatelemetryTenantAllOf) GetFvRsBdToOutCount() int64`
+
+GetFvRsBdToOutCount returns the FvRsBdToOutCount field if non-nil, zero value otherwise.
+
+### GetFvRsBdToOutCountOk
+
+`func (o *NiatelemetryTenantAllOf) GetFvRsBdToOutCountOk() (*int64, bool)`
+
+GetFvRsBdToOutCountOk returns a tuple with the FvRsBdToOutCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFvRsBdToOutCount
+
+`func (o *NiatelemetryTenantAllOf) SetFvRsBdToOutCount(v int64)`
+
+SetFvRsBdToOutCount sets FvRsBdToOutCount field to given value.
+
+### HasFvRsBdToOutCount
+
+`func (o *NiatelemetryTenantAllOf) HasFvRsBdToOutCount() bool`
+
+HasFvRsBdToOutCount returns a boolean if a field has been set.
+
 ### GetFvSiteConnpCount
 
 `func (o *NiatelemetryTenantAllOf) GetFvSiteConnpCount() int64`
@@ -195,6 +429,56 @@ SetFvSiteConnpCount sets FvSiteConnpCount field to given value.
 `func (o *NiatelemetryTenantAllOf) HasFvSiteConnpCount() bool`
 
 HasFvSiteConnpCount returns a boolean if a field has been set.
+
+### GetFvSubnetCount
+
+`func (o *NiatelemetryTenantAllOf) GetFvSubnetCount() int64`
+
+GetFvSubnetCount returns the FvSubnetCount field if non-nil, zero value otherwise.
+
+### GetFvSubnetCountOk
+
+`func (o *NiatelemetryTenantAllOf) GetFvSubnetCountOk() (*int64, bool)`
+
+GetFvSubnetCountOk returns a tuple with the FvSubnetCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFvSubnetCount
+
+`func (o *NiatelemetryTenantAllOf) SetFvSubnetCount(v int64)`
+
+SetFvSubnetCount sets FvSubnetCount field to given value.
+
+### HasFvSubnetCount
+
+`func (o *NiatelemetryTenantAllOf) HasFvSubnetCount() bool`
+
+HasFvSubnetCount returns a boolean if a field has been set.
+
+### GetIpStaticRouteCount
+
+`func (o *NiatelemetryTenantAllOf) GetIpStaticRouteCount() int64`
+
+GetIpStaticRouteCount returns the IpStaticRouteCount field if non-nil, zero value otherwise.
+
+### GetIpStaticRouteCountOk
+
+`func (o *NiatelemetryTenantAllOf) GetIpStaticRouteCountOk() (*int64, bool)`
+
+GetIpStaticRouteCountOk returns a tuple with the IpStaticRouteCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpStaticRouteCount
+
+`func (o *NiatelemetryTenantAllOf) SetIpStaticRouteCount(v int64)`
+
+SetIpStaticRouteCount sets IpStaticRouteCount field to given value.
+
+### HasIpStaticRouteCount
+
+`func (o *NiatelemetryTenantAllOf) HasIpStaticRouteCount() bool`
+
+HasIpStaticRouteCount returns a boolean if a field has been set.
 
 ### GetL3MulticastCount
 
@@ -296,6 +580,81 @@ SetL3outCount sets L3outCount field to given value.
 
 HasL3outCount returns a boolean if a field has been set.
 
+### GetQosCustomPolCount
+
+`func (o *NiatelemetryTenantAllOf) GetQosCustomPolCount() int64`
+
+GetQosCustomPolCount returns the QosCustomPolCount field if non-nil, zero value otherwise.
+
+### GetQosCustomPolCountOk
+
+`func (o *NiatelemetryTenantAllOf) GetQosCustomPolCountOk() (*int64, bool)`
+
+GetQosCustomPolCountOk returns a tuple with the QosCustomPolCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQosCustomPolCount
+
+`func (o *NiatelemetryTenantAllOf) SetQosCustomPolCount(v int64)`
+
+SetQosCustomPolCount sets QosCustomPolCount field to given value.
+
+### HasQosCustomPolCount
+
+`func (o *NiatelemetryTenantAllOf) HasQosCustomPolCount() bool`
+
+HasQosCustomPolCount returns a boolean if a field has been set.
+
+### GetRecordType
+
+`func (o *NiatelemetryTenantAllOf) GetRecordType() string`
+
+GetRecordType returns the RecordType field if non-nil, zero value otherwise.
+
+### GetRecordTypeOk
+
+`func (o *NiatelemetryTenantAllOf) GetRecordTypeOk() (*string, bool)`
+
+GetRecordTypeOk returns a tuple with the RecordType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecordType
+
+`func (o *NiatelemetryTenantAllOf) SetRecordType(v string)`
+
+SetRecordType sets RecordType field to given value.
+
+### HasRecordType
+
+`func (o *NiatelemetryTenantAllOf) HasRecordType() bool`
+
+HasRecordType returns a boolean if a field has been set.
+
+### GetRecordVersion
+
+`func (o *NiatelemetryTenantAllOf) GetRecordVersion() string`
+
+GetRecordVersion returns the RecordVersion field if non-nil, zero value otherwise.
+
+### GetRecordVersionOk
+
+`func (o *NiatelemetryTenantAllOf) GetRecordVersionOk() (*string, bool)`
+
+GetRecordVersionOk returns a tuple with the RecordVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecordVersion
+
+`func (o *NiatelemetryTenantAllOf) SetRecordVersion(v string)`
+
+SetRecordVersion sets RecordVersion field to given value.
+
+### HasRecordVersion
+
+`func (o *NiatelemetryTenantAllOf) HasRecordVersion() bool`
+
+HasRecordVersion returns a boolean if a field has been set.
+
 ### GetSiteName
 
 `func (o *NiatelemetryTenantAllOf) GetSiteName() string`
@@ -345,6 +704,56 @@ SetSsm sets Ssm field to given value.
 `func (o *NiatelemetryTenantAllOf) HasSsm() bool`
 
 HasSsm returns a boolean if a field has been set.
+
+### GetSsmCount
+
+`func (o *NiatelemetryTenantAllOf) GetSsmCount() int64`
+
+GetSsmCount returns the SsmCount field if non-nil, zero value otherwise.
+
+### GetSsmCountOk
+
+`func (o *NiatelemetryTenantAllOf) GetSsmCountOk() (*int64, bool)`
+
+GetSsmCountOk returns a tuple with the SsmCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSsmCount
+
+`func (o *NiatelemetryTenantAllOf) SetSsmCount(v int64)`
+
+SetSsmCount sets SsmCount field to given value.
+
+### HasSsmCount
+
+`func (o *NiatelemetryTenantAllOf) HasSsmCount() bool`
+
+HasSsmCount returns a boolean if a field has been set.
+
+### GetTcamOptCount
+
+`func (o *NiatelemetryTenantAllOf) GetTcamOptCount() int64`
+
+GetTcamOptCount returns the TcamOptCount field if non-nil, zero value otherwise.
+
+### GetTcamOptCountOk
+
+`func (o *NiatelemetryTenantAllOf) GetTcamOptCountOk() (*int64, bool)`
+
+GetTcamOptCountOk returns a tuple with the TcamOptCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTcamOptCount
+
+`func (o *NiatelemetryTenantAllOf) SetTcamOptCount(v int64)`
+
+SetTcamOptCount sets TcamOptCount field to given value.
+
+### HasTcamOptCount
+
+`func (o *NiatelemetryTenantAllOf) HasTcamOptCount() bool`
+
+HasTcamOptCount returns a boolean if a field has been set.
 
 ### GetTraceRouteEpCount
 
@@ -570,6 +979,81 @@ SetVrfCount sets VrfCount field to given value.
 `func (o *NiatelemetryTenantAllOf) HasVrfCount() bool`
 
 HasVrfCount returns a boolean if a field has been set.
+
+### GetVzBrCpCount
+
+`func (o *NiatelemetryTenantAllOf) GetVzBrCpCount() int64`
+
+GetVzBrCpCount returns the VzBrCpCount field if non-nil, zero value otherwise.
+
+### GetVzBrCpCountOk
+
+`func (o *NiatelemetryTenantAllOf) GetVzBrCpCountOk() (*int64, bool)`
+
+GetVzBrCpCountOk returns a tuple with the VzBrCpCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVzBrCpCount
+
+`func (o *NiatelemetryTenantAllOf) SetVzBrCpCount(v int64)`
+
+SetVzBrCpCount sets VzBrCpCount field to given value.
+
+### HasVzBrCpCount
+
+`func (o *NiatelemetryTenantAllOf) HasVzBrCpCount() bool`
+
+HasVzBrCpCount returns a boolean if a field has been set.
+
+### GetVzRtConsCount
+
+`func (o *NiatelemetryTenantAllOf) GetVzRtConsCount() int64`
+
+GetVzRtConsCount returns the VzRtConsCount field if non-nil, zero value otherwise.
+
+### GetVzRtConsCountOk
+
+`func (o *NiatelemetryTenantAllOf) GetVzRtConsCountOk() (*int64, bool)`
+
+GetVzRtConsCountOk returns a tuple with the VzRtConsCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVzRtConsCount
+
+`func (o *NiatelemetryTenantAllOf) SetVzRtConsCount(v int64)`
+
+SetVzRtConsCount sets VzRtConsCount field to given value.
+
+### HasVzRtConsCount
+
+`func (o *NiatelemetryTenantAllOf) HasVzRtConsCount() bool`
+
+HasVzRtConsCount returns a boolean if a field has been set.
+
+### GetVzRtProvCount
+
+`func (o *NiatelemetryTenantAllOf) GetVzRtProvCount() int64`
+
+GetVzRtProvCount returns the VzRtProvCount field if non-nil, zero value otherwise.
+
+### GetVzRtProvCountOk
+
+`func (o *NiatelemetryTenantAllOf) GetVzRtProvCountOk() (*int64, bool)`
+
+GetVzRtProvCountOk returns a tuple with the VzRtProvCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVzRtProvCount
+
+`func (o *NiatelemetryTenantAllOf) SetVzRtProvCount(v int64)`
+
+SetVzRtProvCount sets VzRtProvCount field to given value.
+
+### HasVzRtProvCount
+
+`func (o *NiatelemetryTenantAllOf) HasVzRtProvCount() bool`
+
+HasVzRtProvCount returns a boolean if a field has been set.
 
 ### GetRegisteredDevice
 

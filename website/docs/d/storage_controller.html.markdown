@@ -11,7 +11,7 @@ Storage Controller present in a server.
 Storage Controller present in a server.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `class_id`:(string) The concrete type of this complex type. Its value must be the same as the 'objectType' property.The OpenAPI document references this property as a discriminator value. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `controller_flags`:(string) The flags for the storage controller. 
 * `controller_id`:(string) The Id of the storage controller. 
 * `controller_status`:(string) The current status of controller. 
@@ -23,7 +23,7 @@ The following arguments can be used to get data of already created objects in In
 * `max_volumes_supported`:(int) Maximum virtual drives that can be created on this Storage Controller. 
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified type of this managed object, i.e. the class name.This property is optional. The ObjectType is implied from the URL path.If specified, the value of objectType must match the class name specified in the URL path. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `oob_interface_supported`:(string) The CIMC support for out-of-band configuration of controller. 
 * `oper_state`:(string) The current operational state of controller. 
 * `operability`:(string) Operability state of the storage controller. 

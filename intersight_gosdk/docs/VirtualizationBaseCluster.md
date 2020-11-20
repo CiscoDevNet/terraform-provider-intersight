@@ -4,11 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**HypervisorType** | Pointer to **string** | Identifies the broad type of the underlying hypervisor. * &#x60;Unknown&#x60; - The type of the hypervisor is unknown. * &#x60;ESXi&#x60; - A Vmware ESXi hypervisor of any version. * &#x60;HXAP&#x60; - A Cisco HyperFlex Application Platform hypervisor. | [optional] [default to "Unknown"]
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**HypervisorType** | Pointer to **string** | Identifies the broad type of the underlying hypervisor. * &#x60;ESXi&#x60; - A Vmware ESXi hypervisor of any version. * &#x60;HXAP&#x60; - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform. * &#x60;Hyper-V&#x60; - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * &#x60;Unknown&#x60; - The hypervisor running on the HyperFlex cluster is not known. | [optional] [default to "ESXi"]
 **Identity** | Pointer to **string** | The internally generated identity of this cluster. This entity is not manipulated by users. It aids in uniquely identifying the cluster object. In case of VMware, this is a MOR (managed object reference). | [optional] [readonly] 
-**MemoryCapacity** | Pointer to [**VirtualizationMemoryCapacity**](virtualization.MemoryCapacity.md) |  | [optional] 
+**MemoryCapacity** | Pointer to [**NullableVirtualizationMemoryCapacity**](virtualization.MemoryCapacity.md) |  | [optional] 
 **Name** | Pointer to **string** | The user-provided name for this cluster to facilitate identification. | [optional] [readonly] 
-**ProcessorCapacity** | Pointer to [**VirtualizationComputeCapacity**](virtualization.ComputeCapacity.md) |  | [optional] 
+**ProcessorCapacity** | Pointer to [**NullableVirtualizationComputeCapacity**](virtualization.ComputeCapacity.md) |  | [optional] 
 **Status** | Pointer to **string** | Cluster health status as reported by the hypervisor platform. * &#x60;Unknown&#x60; - Entity status is unknown. * &#x60;Degraded&#x60; - State is degraded, and might impact normal operation of the entity. * &#x60;Critical&#x60; - Entity is in a critical state, impacting operations. * &#x60;Ok&#x60; - Entity status is in a stable state, operating normally. | [optional] [readonly] [default to "Unknown"]
 **TotalCores** | Pointer to **int64** | Total number of CPU cores in this cluster. It is a cumulative number across all hosts in the cluster. | [optional] 
 
@@ -16,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewVirtualizationBaseCluster
 
-`func NewVirtualizationBaseCluster() *VirtualizationBaseCluster`
+`func NewVirtualizationBaseCluster(classId string, objectType string, ) *VirtualizationBaseCluster`
 
 NewVirtualizationBaseCluster instantiates a new VirtualizationBaseCluster object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +32,46 @@ will change when the set of required properties is changed
 NewVirtualizationBaseClusterWithDefaults instantiates a new VirtualizationBaseCluster object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *VirtualizationBaseCluster) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *VirtualizationBaseCluster) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *VirtualizationBaseCluster) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *VirtualizationBaseCluster) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *VirtualizationBaseCluster) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *VirtualizationBaseCluster) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetHypervisorType
 
@@ -106,6 +148,16 @@ SetMemoryCapacity sets MemoryCapacity field to given value.
 
 HasMemoryCapacity returns a boolean if a field has been set.
 
+### SetMemoryCapacityNil
+
+`func (o *VirtualizationBaseCluster) SetMemoryCapacityNil(b bool)`
+
+ SetMemoryCapacityNil sets the value for MemoryCapacity to be an explicit nil
+
+### UnsetMemoryCapacity
+`func (o *VirtualizationBaseCluster) UnsetMemoryCapacity()`
+
+UnsetMemoryCapacity ensures that no value is present for MemoryCapacity, not even an explicit nil
 ### GetName
 
 `func (o *VirtualizationBaseCluster) GetName() string`
@@ -156,6 +208,16 @@ SetProcessorCapacity sets ProcessorCapacity field to given value.
 
 HasProcessorCapacity returns a boolean if a field has been set.
 
+### SetProcessorCapacityNil
+
+`func (o *VirtualizationBaseCluster) SetProcessorCapacityNil(b bool)`
+
+ SetProcessorCapacityNil sets the value for ProcessorCapacity to be an explicit nil
+
+### UnsetProcessorCapacity
+`func (o *VirtualizationBaseCluster) UnsetProcessorCapacity()`
+
+UnsetProcessorCapacity ensures that no value is present for ProcessorCapacity, not even an explicit nil
 ### GetStatus
 
 `func (o *VirtualizationBaseCluster) GetStatus() string`

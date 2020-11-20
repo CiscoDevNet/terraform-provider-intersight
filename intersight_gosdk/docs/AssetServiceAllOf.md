@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Options** | Pointer to [**AssetServiceOptions**](asset.ServiceOptions.md) |  | [optional] 
-**Status** | Pointer to **string** | Status indicates if the respective Service can establish a connection and authenticate with the managed target. Status does not include information about the functional health of the target. * &#x60;&#x60; - The device registered with Intersight but subsequently did not establish a persistent websocket connection. * &#x60;Connected&#x60; - The device&#39;s connection to Intersight has been established and is active. * &#x60;NotConnected&#x60; - The device&#39;s connection to Intersight has been disconnected. * &#x60;ClaimInProgress&#x60; - Claim of the device is in progress. * &#x60;Unclaimed&#x60; - The device was un-claimed from the users account by an Administrator of the device. | [optional] [default to ""]
-**StatusErrorReason** | Pointer to **string** | When &#39;Status&#39; is not Connected, statusErrorReason provides further details about why the device is not connected with Intersight. | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**Options** | Pointer to [**NullableAssetServiceOptions**](asset.ServiceOptions.md) |  | [optional] 
 
 ## Methods
 
 ### NewAssetServiceAllOf
 
-`func NewAssetServiceAllOf() *AssetServiceAllOf`
+`func NewAssetServiceAllOf(classId string, objectType string, ) *AssetServiceAllOf`
 
 NewAssetServiceAllOf instantiates a new AssetServiceAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +26,46 @@ will change when the set of required properties is changed
 NewAssetServiceAllOfWithDefaults instantiates a new AssetServiceAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *AssetServiceAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *AssetServiceAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *AssetServiceAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *AssetServiceAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *AssetServiceAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *AssetServiceAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetOptions
 
@@ -52,56 +92,16 @@ SetOptions sets Options field to given value.
 
 HasOptions returns a boolean if a field has been set.
 
-### GetStatus
+### SetOptionsNil
 
-`func (o *AssetServiceAllOf) GetStatus() string`
+`func (o *AssetServiceAllOf) SetOptionsNil(b bool)`
 
-GetStatus returns the Status field if non-nil, zero value otherwise.
+ SetOptionsNil sets the value for Options to be an explicit nil
 
-### GetStatusOk
+### UnsetOptions
+`func (o *AssetServiceAllOf) UnsetOptions()`
 
-`func (o *AssetServiceAllOf) GetStatusOk() (*string, bool)`
-
-GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStatus
-
-`func (o *AssetServiceAllOf) SetStatus(v string)`
-
-SetStatus sets Status field to given value.
-
-### HasStatus
-
-`func (o *AssetServiceAllOf) HasStatus() bool`
-
-HasStatus returns a boolean if a field has been set.
-
-### GetStatusErrorReason
-
-`func (o *AssetServiceAllOf) GetStatusErrorReason() string`
-
-GetStatusErrorReason returns the StatusErrorReason field if non-nil, zero value otherwise.
-
-### GetStatusErrorReasonOk
-
-`func (o *AssetServiceAllOf) GetStatusErrorReasonOk() (*string, bool)`
-
-GetStatusErrorReasonOk returns a tuple with the StatusErrorReason field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStatusErrorReason
-
-`func (o *AssetServiceAllOf) SetStatusErrorReason(v string)`
-
-SetStatusErrorReason sets StatusErrorReason field to given value.
-
-### HasStatusErrorReason
-
-`func (o *AssetServiceAllOf) HasStatusErrorReason() bool`
-
-HasStatusErrorReason returns a boolean if a field has been set.
-
+UnsetOptions ensures that no value is present for Options, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "connector.SshMessage"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "connector.SshMessage"]
 **ExpectPrompts** | Pointer to [**[]ConnectorExpectPrompt**](connector.ExpectPrompt.md) |  | [optional] 
 **MsgType** | Pointer to **int64** | The operation to execute on a new or existing session. | [optional] 
 **SessionId** | Pointer to **string** | Unique id of session to route messages to. | [optional] 
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewConnectorSshMessageAllOf
 
-`func NewConnectorSshMessageAllOf() *ConnectorSshMessageAllOf`
+`func NewConnectorSshMessageAllOf(classId string, objectType string, ) *ConnectorSshMessageAllOf`
 
 NewConnectorSshMessageAllOf instantiates a new ConnectorSshMessageAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +31,46 @@ will change when the set of required properties is changed
 NewConnectorSshMessageAllOfWithDefaults instantiates a new ConnectorSshMessageAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *ConnectorSshMessageAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *ConnectorSshMessageAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *ConnectorSshMessageAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *ConnectorSshMessageAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *ConnectorSshMessageAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *ConnectorSshMessageAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetExpectPrompts
 
@@ -55,6 +97,16 @@ SetExpectPrompts sets ExpectPrompts field to given value.
 
 HasExpectPrompts returns a boolean if a field has been set.
 
+### SetExpectPromptsNil
+
+`func (o *ConnectorSshMessageAllOf) SetExpectPromptsNil(b bool)`
+
+ SetExpectPromptsNil sets the value for ExpectPrompts to be an explicit nil
+
+### UnsetExpectPrompts
+`func (o *ConnectorSshMessageAllOf) UnsetExpectPrompts()`
+
+UnsetExpectPrompts ensures that no value is present for ExpectPrompts, not even an explicit nil
 ### GetMsgType
 
 `func (o *ConnectorSshMessageAllOf) GetMsgType() int64`

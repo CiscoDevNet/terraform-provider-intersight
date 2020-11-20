@@ -16,7 +16,7 @@ The following arguments can be used to get data of already created objects in In
 * `available_size`:(string) Available storage capacity of the virtual drive. 
 * `block_size`:(string) Block size of the virtual drive. 
 * `bootable`:(string) The virtual drive bootable state. 
-* `class_id`:(string) The concrete type of this complex type. Its value must be the same as the 'objectType' property.The OpenAPI document references this property as a discriminator value. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `config_state`:(string) The configuration state of the virtual drive. 
 * `configured_write_cache_policy`:(string) The requested write cache policy of the virtual drive. 
 * `connection_protocol`:(string) The connection protocol of the virtual drive. 
@@ -30,7 +30,7 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of the Virtual drive. 
 * `num_blocks`:(string) Number of Blocks on the Physical Disk. 
-* `object_type`:(string) The fully-qualified type of this managed object, i.e. the class name.This property is optional. The ObjectType is implied from the URL path.If specified, the value of objectType must match the class name specified in the URL path. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `oper_state`:(string) The current operational state of Virtual drive. 
 * `operability`:(string) The current operability state of Virtual drive. 
 * `physical_block_size`:(string) The block size of the the virtual drive. 

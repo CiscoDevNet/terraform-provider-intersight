@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.ForkTask"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.ForkTask"]
 **ForkedTasks** | Pointer to **[]string** |  | [optional] 
 **JoinTask** | Pointer to **string** | Task name for the join control task that must follow a fork control task. | [optional] 
 
@@ -11,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewWorkflowForkTask
 
-`func NewWorkflowForkTask() *WorkflowForkTask`
+`func NewWorkflowForkTask(classId string, objectType string, ) *WorkflowForkTask`
 
 NewWorkflowForkTask instantiates a new WorkflowForkTask object
 This constructor will assign default values to properties that have it defined,
@@ -25,6 +27,46 @@ will change when the set of required properties is changed
 NewWorkflowForkTaskWithDefaults instantiates a new WorkflowForkTask object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *WorkflowForkTask) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *WorkflowForkTask) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *WorkflowForkTask) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *WorkflowForkTask) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *WorkflowForkTask) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *WorkflowForkTask) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetForkedTasks
 
@@ -51,6 +93,16 @@ SetForkedTasks sets ForkedTasks field to given value.
 
 HasForkedTasks returns a boolean if a field has been set.
 
+### SetForkedTasksNil
+
+`func (o *WorkflowForkTask) SetForkedTasksNil(b bool)`
+
+ SetForkedTasksNil sets the value for ForkedTasks to be an explicit nil
+
+### UnsetForkedTasks
+`func (o *WorkflowForkTask) UnsetForkedTasks()`
+
+UnsetForkedTasks ensures that no value is present for ForkedTasks, not even an explicit nil
 ### GetJoinTask
 
 `func (o *WorkflowForkTask) GetJoinTask() string`

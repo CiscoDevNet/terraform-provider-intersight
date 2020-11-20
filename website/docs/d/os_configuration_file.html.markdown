@@ -25,9 +25,11 @@ shall be given during OS installation in the form of os.Answers type and 'additi
 os.OsInstall object.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `class_id`:(string) The concrete type of this complex type. Its value must be the same as the 'objectType' property.The OpenAPI document references this property as a discriminator value. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
+* `description`:(string) Description of the OS ConfigurationFile. 
 * `file_content`:(string) The content of the entire configuration file is stored as value. The contentcan either be a static file content or a template content.The template is expected to conform to the golang template syntax. The valuesfrom os.Answers properties will be used to populate this template. 
+* `internal`:(bool) The internal flag is set to true when configuration file is uploaded from OS Install wizard. Internal Configuration files will not be displayed in Answer Management Page. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of the OS ConfigurationFile that uniquely identifies the configuration file. 
-* `object_type`:(string) The fully-qualified type of this managed object, i.e. the class name.This property is optional. The ObjectType is implied from the URL path.If specified, the value of objectType must match the class name specified in the URL path. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `supported`:(bool) An internal property that is used to distinguish between the pre-canned OSconfiguration file entries and user provided entries. 

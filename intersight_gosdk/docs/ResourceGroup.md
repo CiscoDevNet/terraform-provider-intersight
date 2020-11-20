@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "resource.Group"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "resource.Group"]
 **Name** | Pointer to **string** | The name of this resource group. | [optional] 
 **PerTypeCombinedSelector** | Pointer to [**[]ResourcePerTypeCombinedSelector**](resource.PerTypeCombinedSelector.md) |  | [optional] 
 **Qualifier** | Pointer to **string** | Qualifier shall be used to specify if we want to organize resources using multiple resource group or single For an account, resource groups can be of only one of the above types. (Both the types are mutually exclusive for an account.). * &#x60;Allow-Selectors&#x60; - Resources will be added to resource groups based on ODATA filter. Multiple resource group can be created to organize resources. * &#x60;Allow-All&#x60; - All resources will become part of the Resource Group. Only one resource group can be created to organize resources. | [optional] [default to "Allow-Selectors"]
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewResourceGroup
 
-`func NewResourceGroup() *ResourceGroup`
+`func NewResourceGroup(classId string, objectType string, ) *ResourceGroup`
 
 NewResourceGroup instantiates a new ResourceGroup object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +31,46 @@ will change when the set of required properties is changed
 NewResourceGroupWithDefaults instantiates a new ResourceGroup object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *ResourceGroup) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *ResourceGroup) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *ResourceGroup) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *ResourceGroup) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *ResourceGroup) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *ResourceGroup) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetName
 
@@ -80,6 +122,16 @@ SetPerTypeCombinedSelector sets PerTypeCombinedSelector field to given value.
 
 HasPerTypeCombinedSelector returns a boolean if a field has been set.
 
+### SetPerTypeCombinedSelectorNil
+
+`func (o *ResourceGroup) SetPerTypeCombinedSelectorNil(b bool)`
+
+ SetPerTypeCombinedSelectorNil sets the value for PerTypeCombinedSelector to be an explicit nil
+
+### UnsetPerTypeCombinedSelector
+`func (o *ResourceGroup) UnsetPerTypeCombinedSelector()`
+
+UnsetPerTypeCombinedSelector ensures that no value is present for PerTypeCombinedSelector, not even an explicit nil
 ### GetQualifier
 
 `func (o *ResourceGroup) GetQualifier() string`
@@ -130,6 +182,16 @@ SetSelectors sets Selectors field to given value.
 
 HasSelectors returns a boolean if a field has been set.
 
+### SetSelectorsNil
+
+`func (o *ResourceGroup) SetSelectorsNil(b bool)`
+
+ SetSelectorsNil sets the value for Selectors to be an explicit nil
+
+### UnsetSelectors
+`func (o *ResourceGroup) UnsetSelectors()`
+
+UnsetSelectors ensures that no value is present for Selectors, not even an explicit nil
 ### GetAccount
 
 `func (o *ResourceGroup) GetAccount() IamAccountRelationship`

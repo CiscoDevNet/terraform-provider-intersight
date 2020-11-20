@@ -11,14 +11,14 @@ Model object contains the details of host port available on IO card or fabric ex
 Model object contains the details of host port available on IO card or fabric extender.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `class_id`:(string) The concrete type of this complex type. Its value must be the same as the 'objectType' property.The OpenAPI document references this property as a discriminator value. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `mac_address`:(string) Mac Address of a port in the Fabric Interconnect. 
 * `mode`:(string) Operating mode of this port. 
 * `module_id`:(int) Fabric extender identifier for this port. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified type of this managed object, i.e. the class name.This property is optional. The ObjectType is implied from the URL path.If specified, the value of objectType must match the class name specified in the URL path. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `oper_speed`:(string) Current Operational speed for this port. 
 * `oper_state`:(string) Operational state of this port (enabled/disabled). 
 * `oper_state_qual`:(string) Reason for this port's Operational state. 

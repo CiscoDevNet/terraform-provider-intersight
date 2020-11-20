@@ -4,12 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.Node"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.Node"]
 **BuildNumber** | Pointer to **string** |  | [optional] [readonly] 
 **DisplayVersion** | Pointer to **string** |  | [optional] [readonly] 
 **HostName** | Pointer to **string** |  | [optional] [readonly] 
 **Hypervisor** | Pointer to **string** |  | [optional] [readonly] 
-**Identity** | Pointer to [**HyperflexHxUuIdDt**](hyperflex.HxUuIdDt.md) |  | [optional] 
-**Ip** | Pointer to [**HyperflexHxNetworkAddressDt**](hyperflex.HxNetworkAddressDt.md) |  | [optional] 
+**Identity** | Pointer to [**NullableHyperflexHxUuIdDt**](hyperflex.HxUuIdDt.md) |  | [optional] 
+**Ip** | Pointer to [**NullableHyperflexHxNetworkAddressDt**](hyperflex.HxNetworkAddressDt.md) |  | [optional] 
 **Lockdown** | Pointer to **bool** |  | [optional] [readonly] 
 **ModelNumber** | Pointer to **string** |  | [optional] [readonly] 
 **Role** | Pointer to **string** |  | [optional] [readonly] [default to "UNKNOWN"]
@@ -24,7 +26,7 @@ Name | Type | Description | Notes
 
 ### NewHyperflexNode
 
-`func NewHyperflexNode() *HyperflexNode`
+`func NewHyperflexNode(classId string, objectType string, ) *HyperflexNode`
 
 NewHyperflexNode instantiates a new HyperflexNode object
 This constructor will assign default values to properties that have it defined,
@@ -38,6 +40,46 @@ will change when the set of required properties is changed
 NewHyperflexNodeWithDefaults instantiates a new HyperflexNode object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *HyperflexNode) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *HyperflexNode) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *HyperflexNode) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *HyperflexNode) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *HyperflexNode) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *HyperflexNode) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetBuildNumber
 
@@ -164,6 +206,16 @@ SetIdentity sets Identity field to given value.
 
 HasIdentity returns a boolean if a field has been set.
 
+### SetIdentityNil
+
+`func (o *HyperflexNode) SetIdentityNil(b bool)`
+
+ SetIdentityNil sets the value for Identity to be an explicit nil
+
+### UnsetIdentity
+`func (o *HyperflexNode) UnsetIdentity()`
+
+UnsetIdentity ensures that no value is present for Identity, not even an explicit nil
 ### GetIp
 
 `func (o *HyperflexNode) GetIp() HyperflexHxNetworkAddressDt`
@@ -189,6 +241,16 @@ SetIp sets Ip field to given value.
 
 HasIp returns a boolean if a field has been set.
 
+### SetIpNil
+
+`func (o *HyperflexNode) SetIpNil(b bool)`
+
+ SetIpNil sets the value for Ip to be an explicit nil
+
+### UnsetIp
+`func (o *HyperflexNode) UnsetIp()`
+
+UnsetIp ensures that no value is present for Ip, not even an explicit nil
 ### GetLockdown
 
 `func (o *HyperflexNode) GetLockdown() bool`

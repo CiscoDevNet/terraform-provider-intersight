@@ -4,8 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.ClusterStoragePolicy"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.ClusterStoragePolicy"]
 **DiskPartitionCleanup** | Pointer to **bool** | If enabled, formats existing disk partitions (destroys all user data). | [optional] 
-**LogicalAvalabilityZoneConfig** | Pointer to [**HyperflexLogicalAvailabilityZone**](hyperflex.LogicalAvailabilityZone.md) |  | [optional] 
+**LogicalAvalabilityZoneConfig** | Pointer to [**NullableHyperflexLogicalAvailabilityZone**](hyperflex.LogicalAvailabilityZone.md) |  | [optional] 
 **VdiOptimization** | Pointer to **bool** | Enable or disable VDI optimization (hybrid HyperFlex systems only). | [optional] 
 **ClusterProfiles** | Pointer to [**[]HyperflexClusterProfileRelationship**](hyperflex.ClusterProfile.Relationship.md) | An array of relationships to hyperflexClusterProfile resources. | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
@@ -14,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewHyperflexClusterStoragePolicyAllOf
 
-`func NewHyperflexClusterStoragePolicyAllOf() *HyperflexClusterStoragePolicyAllOf`
+`func NewHyperflexClusterStoragePolicyAllOf(classId string, objectType string, ) *HyperflexClusterStoragePolicyAllOf`
 
 NewHyperflexClusterStoragePolicyAllOf instantiates a new HyperflexClusterStoragePolicyAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +30,46 @@ will change when the set of required properties is changed
 NewHyperflexClusterStoragePolicyAllOfWithDefaults instantiates a new HyperflexClusterStoragePolicyAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *HyperflexClusterStoragePolicyAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *HyperflexClusterStoragePolicyAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *HyperflexClusterStoragePolicyAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *HyperflexClusterStoragePolicyAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *HyperflexClusterStoragePolicyAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *HyperflexClusterStoragePolicyAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDiskPartitionCleanup
 
@@ -79,6 +121,16 @@ SetLogicalAvalabilityZoneConfig sets LogicalAvalabilityZoneConfig field to given
 
 HasLogicalAvalabilityZoneConfig returns a boolean if a field has been set.
 
+### SetLogicalAvalabilityZoneConfigNil
+
+`func (o *HyperflexClusterStoragePolicyAllOf) SetLogicalAvalabilityZoneConfigNil(b bool)`
+
+ SetLogicalAvalabilityZoneConfigNil sets the value for LogicalAvalabilityZoneConfig to be an explicit nil
+
+### UnsetLogicalAvalabilityZoneConfig
+`func (o *HyperflexClusterStoragePolicyAllOf) UnsetLogicalAvalabilityZoneConfig()`
+
+UnsetLogicalAvalabilityZoneConfig ensures that no value is present for LogicalAvalabilityZoneConfig, not even an explicit nil
 ### GetVdiOptimization
 
 `func (o *HyperflexClusterStoragePolicyAllOf) GetVdiOptimization() bool`

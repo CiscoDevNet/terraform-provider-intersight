@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.SysConfigPolicy"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.SysConfigPolicy"]
 **DnsDomainName** | Pointer to **string** | The DNS Search Domain Name. This setting applies to HyperFlex Data Platform 3.0 or later only. | [optional] 
 **DnsServers** | Pointer to **[]string** |  | [optional] 
 **NtpServers** | Pointer to **[]string** |  | [optional] 
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewHyperflexSysConfigPolicyAllOf
 
-`func NewHyperflexSysConfigPolicyAllOf() *HyperflexSysConfigPolicyAllOf`
+`func NewHyperflexSysConfigPolicyAllOf(classId string, objectType string, ) *HyperflexSysConfigPolicyAllOf`
 
 NewHyperflexSysConfigPolicyAllOf instantiates a new HyperflexSysConfigPolicyAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +31,46 @@ will change when the set of required properties is changed
 NewHyperflexSysConfigPolicyAllOfWithDefaults instantiates a new HyperflexSysConfigPolicyAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *HyperflexSysConfigPolicyAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *HyperflexSysConfigPolicyAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *HyperflexSysConfigPolicyAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *HyperflexSysConfigPolicyAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *HyperflexSysConfigPolicyAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *HyperflexSysConfigPolicyAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDnsDomainName
 
@@ -80,6 +122,16 @@ SetDnsServers sets DnsServers field to given value.
 
 HasDnsServers returns a boolean if a field has been set.
 
+### SetDnsServersNil
+
+`func (o *HyperflexSysConfigPolicyAllOf) SetDnsServersNil(b bool)`
+
+ SetDnsServersNil sets the value for DnsServers to be an explicit nil
+
+### UnsetDnsServers
+`func (o *HyperflexSysConfigPolicyAllOf) UnsetDnsServers()`
+
+UnsetDnsServers ensures that no value is present for DnsServers, not even an explicit nil
 ### GetNtpServers
 
 `func (o *HyperflexSysConfigPolicyAllOf) GetNtpServers() []string`
@@ -105,6 +157,16 @@ SetNtpServers sets NtpServers field to given value.
 
 HasNtpServers returns a boolean if a field has been set.
 
+### SetNtpServersNil
+
+`func (o *HyperflexSysConfigPolicyAllOf) SetNtpServersNil(b bool)`
+
+ SetNtpServersNil sets the value for NtpServers to be an explicit nil
+
+### UnsetNtpServers
+`func (o *HyperflexSysConfigPolicyAllOf) UnsetNtpServers()`
+
+UnsetNtpServers ensures that no value is present for NtpServers, not even an explicit nil
 ### GetTimezone
 
 `func (o *HyperflexSysConfigPolicyAllOf) GetTimezone() string`

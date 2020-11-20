@@ -4,9 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.Health"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.Health"]
 **ArbitrationServiceState** | Pointer to **string** |  | [optional] [readonly] [default to "NOT_AVAILABLE"]
 **DataReplicationCompliance** | Pointer to **string** |  | [optional] [readonly] [default to "UNKNOWN"]
-**ResiliencyDetails** | Pointer to [**HyperflexHxResiliencyInfoDt**](hyperflex.HxResiliencyInfoDt.md) |  | [optional] 
+**ResiliencyDetails** | Pointer to [**NullableHyperflexHxResiliencyInfoDt**](hyperflex.HxResiliencyInfoDt.md) |  | [optional] 
 **State** | Pointer to **string** |  | [optional] [readonly] [default to "UNKNOWN"]
 **Uuid** | Pointer to **string** |  | [optional] [readonly] 
 **ZkHealth** | Pointer to **string** |  | [optional] [readonly] [default to "NOT_AVAILABLE"]
@@ -17,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewHyperflexHealthAllOf
 
-`func NewHyperflexHealthAllOf() *HyperflexHealthAllOf`
+`func NewHyperflexHealthAllOf(classId string, objectType string, ) *HyperflexHealthAllOf`
 
 NewHyperflexHealthAllOf instantiates a new HyperflexHealthAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -31,6 +33,46 @@ will change when the set of required properties is changed
 NewHyperflexHealthAllOfWithDefaults instantiates a new HyperflexHealthAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *HyperflexHealthAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *HyperflexHealthAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *HyperflexHealthAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *HyperflexHealthAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *HyperflexHealthAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *HyperflexHealthAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetArbitrationServiceState
 
@@ -107,6 +149,16 @@ SetResiliencyDetails sets ResiliencyDetails field to given value.
 
 HasResiliencyDetails returns a boolean if a field has been set.
 
+### SetResiliencyDetailsNil
+
+`func (o *HyperflexHealthAllOf) SetResiliencyDetailsNil(b bool)`
+
+ SetResiliencyDetailsNil sets the value for ResiliencyDetails to be an explicit nil
+
+### UnsetResiliencyDetails
+`func (o *HyperflexHealthAllOf) UnsetResiliencyDetails()`
+
+UnsetResiliencyDetails ensures that no value is present for ResiliencyDetails, not even an explicit nil
 ### GetState
 
 `func (o *HyperflexHealthAllOf) GetState() string`
@@ -207,6 +259,16 @@ SetZoneResiliencyList sets ZoneResiliencyList field to given value.
 
 HasZoneResiliencyList returns a boolean if a field has been set.
 
+### SetZoneResiliencyListNil
+
+`func (o *HyperflexHealthAllOf) SetZoneResiliencyListNil(b bool)`
+
+ SetZoneResiliencyListNil sets the value for ZoneResiliencyList to be an explicit nil
+
+### UnsetZoneResiliencyList
+`func (o *HyperflexHealthAllOf) UnsetZoneResiliencyList()`
+
+UnsetZoneResiliencyList ensures that no value is present for ZoneResiliencyList, not even an explicit nil
 ### GetCluster
 
 `func (o *HyperflexHealthAllOf) GetCluster() HyperflexClusterRelationship`
