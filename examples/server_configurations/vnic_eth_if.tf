@@ -99,7 +99,8 @@ resource "intersight_vnic_eth_if" "eth1" {
     nr_count = 0
   }
   vmq_settings {
-    enabled = false
+    enabled = true
+    multi_queue_support = false
     num_interrupts = 1
     num_vmqs = 1
   }
@@ -135,7 +136,8 @@ resource "intersight_vnic_eth_if" "eth2" {
     nr_count = 0
   }
   vmq_settings {
-    enabled = false
+    enabled = true
+    multi_queue_support = false
     num_interrupts = 1
     num_vmqs = 1
   }
@@ -172,8 +174,9 @@ resource "intersight_vnic_eth_if" "eth3" {
   }
   vmq_settings {
     enabled = false
-    num_interrupts = 1
-    num_vmqs = 1
+    num_interrupts = 16
+    num_sub_vnics = 64
+    num_vmqs = 4
   }
   lan_connectivity_policy {
     moid = intersight_vnic_lan_connectivity_policy.vnic_lan1.id
@@ -207,7 +210,7 @@ resource "intersight_vnic_eth_if" "eth4" {
     nr_count = 0
   }
   vmq_settings {
-    enabled = false
+    enabled = true
     num_interrupts = 1
     num_vmqs = 1
   }
