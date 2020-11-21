@@ -4,16 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Condition** | Pointer to **string** | The condition to evaluate for this decision task. The condition can be a workflow or task variable or an expression based on the input parameters. Example value for condition if its Workflow/task variable is -  \&quot;${task1.output.var1} or ${workflow.input.var2}\&quot; which evaluates to a value matching any of the decision case values. Example value for condition if its an expression is - \&quot;if ( $.element ! &#x3D; null &amp;&amp; $.element &gt; 0 ) &#39;true&#39;; else &#39;false&#39;; \&quot; which evaluates to &#39;true&#39; or &#39;false&#39; and will match one of the decision case values. Here \&quot;element\&quot; is a variable in decisiontask&#39;s inputParameters JSON formatted map. You can also use javascript like functions indexOf, toUpperCase in the expression which will be evaluated by the expression evaluator. | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.DecisionTask"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.DecisionTask"]
+**Condition** | Pointer to **string** | The condition to evaluate for this decision task. The condition can be a workflow or task variable or an JavaScript expression. Example value for condition could be a variable like \&quot;${task1.output.var1} or ${workflow.input.var2}\&quot; which evaluates to a value matching any of the decision case values. Example value for condition if it’s an expression - \&quot;if ( ${task1.output.var1} ! &#x3D; null &amp;&amp; ${task1.output.var1} &gt; 0 ) &#39;true&#39;; else &#39;false&#39;; \&quot; which evaluates to &#39;true&#39; or &#39;false&#39; and will match one of the decision case values. You can also use JavaScript functions like indexOf, toUpperCase in the expression which will be evaluated by the expression evaluator. | [optional] 
 **DecisionCases** | Pointer to [**[]WorkflowDecisionCase**](workflow.DecisionCase.md) |  | [optional] 
 **DefaultTask** | Pointer to **string** | The default next Task to execute if the decision cannot be evaluated to any of the DecisionCases. | [optional] 
-**InputParameters** | Pointer to **interface{}** | JSON formatted map that defines the input given to the decision task. The inputs are used as variables in the condition property of decision task. The input variables can be static values like \&quot;hello\&quot; , \&quot;24\&quot;, \&quot;true\&quot; OR previous task outputs/workflow inputs like \&quot;${task2.output.var1}}\&quot;. The input variables are referrenced as $.inputVariableName in the condition property. | [optional] 
+**InputParameters** | Pointer to **interface{}** | This field is deprecated. Decision case conditions can be added using the workflow input or task output variables in the Condition field. Refer to Condition field for more details. | [optional] 
 
 ## Methods
 
 ### NewWorkflowDecisionTask
 
-`func NewWorkflowDecisionTask() *WorkflowDecisionTask`
+`func NewWorkflowDecisionTask(classId string, objectType string, ) *WorkflowDecisionTask`
 
 NewWorkflowDecisionTask instantiates a new WorkflowDecisionTask object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewWorkflowDecisionTaskWithDefaults instantiates a new WorkflowDecisionTask object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *WorkflowDecisionTask) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *WorkflowDecisionTask) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *WorkflowDecisionTask) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *WorkflowDecisionTask) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *WorkflowDecisionTask) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *WorkflowDecisionTask) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCondition
 
@@ -78,6 +120,16 @@ SetDecisionCases sets DecisionCases field to given value.
 
 HasDecisionCases returns a boolean if a field has been set.
 
+### SetDecisionCasesNil
+
+`func (o *WorkflowDecisionTask) SetDecisionCasesNil(b bool)`
+
+ SetDecisionCasesNil sets the value for DecisionCases to be an explicit nil
+
+### UnsetDecisionCases
+`func (o *WorkflowDecisionTask) UnsetDecisionCases()`
+
+UnsetDecisionCases ensures that no value is present for DecisionCases, not even an explicit nil
 ### GetDefaultTask
 
 `func (o *WorkflowDecisionTask) GetDefaultTask() string`

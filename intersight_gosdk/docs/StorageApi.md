@@ -34,6 +34,28 @@ Method | HTTP request | Description
 [**GetStorageFlexUtilPhysicalDriveList**](StorageApi.md#GetStorageFlexUtilPhysicalDriveList) | **Get** /api/v1/storage/FlexUtilPhysicalDrives | Read a &#39;storage.FlexUtilPhysicalDrive&#39; resource.
 [**GetStorageFlexUtilVirtualDriveByMoid**](StorageApi.md#GetStorageFlexUtilVirtualDriveByMoid) | **Get** /api/v1/storage/FlexUtilVirtualDrives/{Moid} | Read a &#39;storage.FlexUtilVirtualDrive&#39; resource.
 [**GetStorageFlexUtilVirtualDriveList**](StorageApi.md#GetStorageFlexUtilVirtualDriveList) | **Get** /api/v1/storage/FlexUtilVirtualDrives | Read a &#39;storage.FlexUtilVirtualDrive&#39; resource.
+[**GetStorageHitachiArrayByMoid**](StorageApi.md#GetStorageHitachiArrayByMoid) | **Get** /api/v1/storage/HitachiArrays/{Moid} | Read a &#39;storage.HitachiArray&#39; resource.
+[**GetStorageHitachiArrayList**](StorageApi.md#GetStorageHitachiArrayList) | **Get** /api/v1/storage/HitachiArrays | Read a &#39;storage.HitachiArray&#39; resource.
+[**GetStorageHitachiControllerByMoid**](StorageApi.md#GetStorageHitachiControllerByMoid) | **Get** /api/v1/storage/HitachiControllers/{Moid} | Read a &#39;storage.HitachiController&#39; resource.
+[**GetStorageHitachiControllerList**](StorageApi.md#GetStorageHitachiControllerList) | **Get** /api/v1/storage/HitachiControllers | Read a &#39;storage.HitachiController&#39; resource.
+[**GetStorageHitachiDiskByMoid**](StorageApi.md#GetStorageHitachiDiskByMoid) | **Get** /api/v1/storage/HitachiDisks/{Moid} | Read a &#39;storage.HitachiDisk&#39; resource.
+[**GetStorageHitachiDiskList**](StorageApi.md#GetStorageHitachiDiskList) | **Get** /api/v1/storage/HitachiDisks | Read a &#39;storage.HitachiDisk&#39; resource.
+[**GetStorageHitachiHostByMoid**](StorageApi.md#GetStorageHitachiHostByMoid) | **Get** /api/v1/storage/HitachiHosts/{Moid} | Read a &#39;storage.HitachiHost&#39; resource.
+[**GetStorageHitachiHostList**](StorageApi.md#GetStorageHitachiHostList) | **Get** /api/v1/storage/HitachiHosts | Read a &#39;storage.HitachiHost&#39; resource.
+[**GetStorageHitachiHostLunByMoid**](StorageApi.md#GetStorageHitachiHostLunByMoid) | **Get** /api/v1/storage/HitachiHostLuns/{Moid} | Read a &#39;storage.HitachiHostLun&#39; resource.
+[**GetStorageHitachiHostLunList**](StorageApi.md#GetStorageHitachiHostLunList) | **Get** /api/v1/storage/HitachiHostLuns | Read a &#39;storage.HitachiHostLun&#39; resource.
+[**GetStorageHitachiParityGroupByMoid**](StorageApi.md#GetStorageHitachiParityGroupByMoid) | **Get** /api/v1/storage/HitachiParityGroups/{Moid} | Read a &#39;storage.HitachiParityGroup&#39; resource.
+[**GetStorageHitachiParityGroupList**](StorageApi.md#GetStorageHitachiParityGroupList) | **Get** /api/v1/storage/HitachiParityGroups | Read a &#39;storage.HitachiParityGroup&#39; resource.
+[**GetStorageHitachiPoolByMoid**](StorageApi.md#GetStorageHitachiPoolByMoid) | **Get** /api/v1/storage/HitachiPools/{Moid} | Read a &#39;storage.HitachiPool&#39; resource.
+[**GetStorageHitachiPoolList**](StorageApi.md#GetStorageHitachiPoolList) | **Get** /api/v1/storage/HitachiPools | Read a &#39;storage.HitachiPool&#39; resource.
+[**GetStorageHitachiPortByMoid**](StorageApi.md#GetStorageHitachiPortByMoid) | **Get** /api/v1/storage/HitachiPorts/{Moid} | Read a &#39;storage.HitachiPort&#39; resource.
+[**GetStorageHitachiPortList**](StorageApi.md#GetStorageHitachiPortList) | **Get** /api/v1/storage/HitachiPorts | Read a &#39;storage.HitachiPort&#39; resource.
+[**GetStorageHitachiVolumeByMoid**](StorageApi.md#GetStorageHitachiVolumeByMoid) | **Get** /api/v1/storage/HitachiVolumes/{Moid} | Read a &#39;storage.HitachiVolume&#39; resource.
+[**GetStorageHitachiVolumeList**](StorageApi.md#GetStorageHitachiVolumeList) | **Get** /api/v1/storage/HitachiVolumes | Read a &#39;storage.HitachiVolume&#39; resource.
+[**GetStorageHyperFlexStorageContainerByMoid**](StorageApi.md#GetStorageHyperFlexStorageContainerByMoid) | **Get** /api/v1/storage/HyperFlexStorageContainers/{Moid} | Read a &#39;storage.HyperFlexStorageContainer&#39; resource.
+[**GetStorageHyperFlexStorageContainerList**](StorageApi.md#GetStorageHyperFlexStorageContainerList) | **Get** /api/v1/storage/HyperFlexStorageContainers | Read a &#39;storage.HyperFlexStorageContainer&#39; resource.
+[**GetStorageHyperFlexVolumeByMoid**](StorageApi.md#GetStorageHyperFlexVolumeByMoid) | **Get** /api/v1/storage/HyperFlexVolumes/{Moid} | Read a &#39;storage.HyperFlexVolume&#39; resource.
+[**GetStorageHyperFlexVolumeList**](StorageApi.md#GetStorageHyperFlexVolumeList) | **Get** /api/v1/storage/HyperFlexVolumes | Read a &#39;storage.HyperFlexVolume&#39; resource.
 [**GetStorageItemByMoid**](StorageApi.md#GetStorageItemByMoid) | **Get** /api/v1/storage/Items/{Moid} | Read a &#39;storage.Item&#39; resource.
 [**GetStorageItemList**](StorageApi.md#GetStorageItemList) | **Get** /api/v1/storage/Items | Read a &#39;storage.Item&#39; resource.
 [**GetStoragePhysicalDiskByMoid**](StorageApi.md#GetStoragePhysicalDiskByMoid) | **Get** /api/v1/storage/PhysicalDisks/{Moid} | Read a &#39;storage.PhysicalDisk&#39; resource.
@@ -79,6 +101,8 @@ Method | HTTP request | Description
 [**GetStorageVdMemberEpByMoid**](StorageApi.md#GetStorageVdMemberEpByMoid) | **Get** /api/v1/storage/VdMemberEps/{Moid} | Read a &#39;storage.VdMemberEp&#39; resource.
 [**GetStorageVdMemberEpList**](StorageApi.md#GetStorageVdMemberEpList) | **Get** /api/v1/storage/VdMemberEps | Read a &#39;storage.VdMemberEp&#39; resource.
 [**GetStorageVirtualDriveByMoid**](StorageApi.md#GetStorageVirtualDriveByMoid) | **Get** /api/v1/storage/VirtualDrives/{Moid} | Read a &#39;storage.VirtualDrive&#39; resource.
+[**GetStorageVirtualDriveContainerByMoid**](StorageApi.md#GetStorageVirtualDriveContainerByMoid) | **Get** /api/v1/storage/VirtualDriveContainers/{Moid} | Read a &#39;storage.VirtualDriveContainer&#39; resource.
+[**GetStorageVirtualDriveContainerList**](StorageApi.md#GetStorageVirtualDriveContainerList) | **Get** /api/v1/storage/VirtualDriveContainers | Read a &#39;storage.VirtualDriveContainer&#39; resource.
 [**GetStorageVirtualDriveExtensionByMoid**](StorageApi.md#GetStorageVirtualDriveExtensionByMoid) | **Get** /api/v1/storage/VirtualDriveExtensions/{Moid} | Read a &#39;storage.VirtualDriveExtension&#39; resource.
 [**GetStorageVirtualDriveExtensionList**](StorageApi.md#GetStorageVirtualDriveExtensionList) | **Get** /api/v1/storage/VirtualDriveExtensions | Read a &#39;storage.VirtualDriveExtension&#39; resource.
 [**GetStorageVirtualDriveList**](StorageApi.md#GetStorageVirtualDriveList) | **Get** /api/v1/storage/VirtualDrives | Read a &#39;storage.VirtualDrive&#39; resource.
@@ -95,6 +119,7 @@ Method | HTTP request | Description
 [**PatchStorageFlexUtilController**](StorageApi.md#PatchStorageFlexUtilController) | **Patch** /api/v1/storage/FlexUtilControllers/{Moid} | Update a &#39;storage.FlexUtilController&#39; resource.
 [**PatchStorageFlexUtilPhysicalDrive**](StorageApi.md#PatchStorageFlexUtilPhysicalDrive) | **Patch** /api/v1/storage/FlexUtilPhysicalDrives/{Moid} | Update a &#39;storage.FlexUtilPhysicalDrive&#39; resource.
 [**PatchStorageFlexUtilVirtualDrive**](StorageApi.md#PatchStorageFlexUtilVirtualDrive) | **Patch** /api/v1/storage/FlexUtilVirtualDrives/{Moid} | Update a &#39;storage.FlexUtilVirtualDrive&#39; resource.
+[**PatchStorageHitachiArray**](StorageApi.md#PatchStorageHitachiArray) | **Patch** /api/v1/storage/HitachiArrays/{Moid} | Update a &#39;storage.HitachiArray&#39; resource.
 [**PatchStoragePhysicalDisk**](StorageApi.md#PatchStoragePhysicalDisk) | **Patch** /api/v1/storage/PhysicalDisks/{Moid} | Update a &#39;storage.PhysicalDisk&#39; resource.
 [**PatchStoragePhysicalDiskExtension**](StorageApi.md#PatchStoragePhysicalDiskExtension) | **Patch** /api/v1/storage/PhysicalDiskExtensions/{Moid} | Update a &#39;storage.PhysicalDiskExtension&#39; resource.
 [**PatchStoragePhysicalDiskUsage**](StorageApi.md#PatchStoragePhysicalDiskUsage) | **Patch** /api/v1/storage/PhysicalDiskUsages/{Moid} | Update a &#39;storage.PhysicalDiskUsage&#39; resource.
@@ -105,6 +130,7 @@ Method | HTTP request | Description
 [**PatchStorageStoragePolicy**](StorageApi.md#PatchStorageStoragePolicy) | **Patch** /api/v1/storage/StoragePolicies/{Moid} | Update a &#39;storage.StoragePolicy&#39; resource.
 [**PatchStorageVdMemberEp**](StorageApi.md#PatchStorageVdMemberEp) | **Patch** /api/v1/storage/VdMemberEps/{Moid} | Update a &#39;storage.VdMemberEp&#39; resource.
 [**PatchStorageVirtualDrive**](StorageApi.md#PatchStorageVirtualDrive) | **Patch** /api/v1/storage/VirtualDrives/{Moid} | Update a &#39;storage.VirtualDrive&#39; resource.
+[**PatchStorageVirtualDriveContainer**](StorageApi.md#PatchStorageVirtualDriveContainer) | **Patch** /api/v1/storage/VirtualDriveContainers/{Moid} | Update a &#39;storage.VirtualDriveContainer&#39; resource.
 [**PatchStorageVirtualDriveExtension**](StorageApi.md#PatchStorageVirtualDriveExtension) | **Patch** /api/v1/storage/VirtualDriveExtensions/{Moid} | Update a &#39;storage.VirtualDriveExtension&#39; resource.
 [**UpdateStorageController**](StorageApi.md#UpdateStorageController) | **Post** /api/v1/storage/Controllers/{Moid} | Update a &#39;storage.Controller&#39; resource.
 [**UpdateStorageDiskGroup**](StorageApi.md#UpdateStorageDiskGroup) | **Post** /api/v1/storage/DiskGroups/{Moid} | Update a &#39;storage.DiskGroup&#39; resource.
@@ -119,6 +145,7 @@ Method | HTTP request | Description
 [**UpdateStorageFlexUtilController**](StorageApi.md#UpdateStorageFlexUtilController) | **Post** /api/v1/storage/FlexUtilControllers/{Moid} | Update a &#39;storage.FlexUtilController&#39; resource.
 [**UpdateStorageFlexUtilPhysicalDrive**](StorageApi.md#UpdateStorageFlexUtilPhysicalDrive) | **Post** /api/v1/storage/FlexUtilPhysicalDrives/{Moid} | Update a &#39;storage.FlexUtilPhysicalDrive&#39; resource.
 [**UpdateStorageFlexUtilVirtualDrive**](StorageApi.md#UpdateStorageFlexUtilVirtualDrive) | **Post** /api/v1/storage/FlexUtilVirtualDrives/{Moid} | Update a &#39;storage.FlexUtilVirtualDrive&#39; resource.
+[**UpdateStorageHitachiArray**](StorageApi.md#UpdateStorageHitachiArray) | **Post** /api/v1/storage/HitachiArrays/{Moid} | Update a &#39;storage.HitachiArray&#39; resource.
 [**UpdateStoragePhysicalDisk**](StorageApi.md#UpdateStoragePhysicalDisk) | **Post** /api/v1/storage/PhysicalDisks/{Moid} | Update a &#39;storage.PhysicalDisk&#39; resource.
 [**UpdateStoragePhysicalDiskExtension**](StorageApi.md#UpdateStoragePhysicalDiskExtension) | **Post** /api/v1/storage/PhysicalDiskExtensions/{Moid} | Update a &#39;storage.PhysicalDiskExtension&#39; resource.
 [**UpdateStoragePhysicalDiskUsage**](StorageApi.md#UpdateStoragePhysicalDiskUsage) | **Post** /api/v1/storage/PhysicalDiskUsages/{Moid} | Update a &#39;storage.PhysicalDiskUsage&#39; resource.
@@ -129,6 +156,7 @@ Method | HTTP request | Description
 [**UpdateStorageStoragePolicy**](StorageApi.md#UpdateStorageStoragePolicy) | **Post** /api/v1/storage/StoragePolicies/{Moid} | Update a &#39;storage.StoragePolicy&#39; resource.
 [**UpdateStorageVdMemberEp**](StorageApi.md#UpdateStorageVdMemberEp) | **Post** /api/v1/storage/VdMemberEps/{Moid} | Update a &#39;storage.VdMemberEp&#39; resource.
 [**UpdateStorageVirtualDrive**](StorageApi.md#UpdateStorageVirtualDrive) | **Post** /api/v1/storage/VirtualDrives/{Moid} | Update a &#39;storage.VirtualDrive&#39; resource.
+[**UpdateStorageVirtualDriveContainer**](StorageApi.md#UpdateStorageVirtualDriveContainer) | **Post** /api/v1/storage/VirtualDriveContainers/{Moid} | Update a &#39;storage.VirtualDriveContainer&#39; resource.
 [**UpdateStorageVirtualDriveExtension**](StorageApi.md#UpdateStorageVirtualDriveExtension) | **Post** /api/v1/storage/VirtualDriveExtensions/{Moid} | Update a &#39;storage.VirtualDriveExtension&#39; resource.
 
 
@@ -152,13 +180,13 @@ import (
 )
 
 func main() {
-    storageDiskGroupPolicy := openapiclient.storage.DiskGroupPolicy{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{openapiclient.mo.Tag{Key: "Key_example", Value: "Value_example"}), VersionContext: openapiclient.mo.VersionContext{ClassId: "ClassId_example", ObjectType: "ObjectType_example", InterestedMos: []MoMoRef{openapiclient.mo.MoRef{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example"}), RefMo: openapiclient.mo.MoRef{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example"}, Timestamp: "TODO", Version: "Version_example", VersionType: "VersionType_example"}, Ancestors: []MoBaseMoRelationship{openapiclient.mo.BaseMo.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{openapiclient.mo.Tag{Key: "Key_example", Value: "Value_example"}), VersionContext: openapiclient.mo.VersionContext{ClassId: "ClassId_example", ObjectType: "ObjectType_example", InterestedMos: []MoMoRef{), RefMo: , Timestamp: "TODO", Version: "Version_example", VersionType: "VersionType_example"}, Ancestors: []MoBaseMoRelationship{openapiclient.mo.BaseMo.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }}), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }}), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", DedicatedHotSpares: []StorageLocalDisk{openapiclient.storage.LocalDisk{ClassId: "ClassId_example", ObjectType: "ObjectType_example", SlotNumber: int64(123)}), RaidLevel: "RaidLevel_example", SpanGroups: []StorageSpanGroup{openapiclient.storage.SpanGroup{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Disks: []StorageLocalDisk{openapiclient.storage.LocalDisk{ClassId: "ClassId_example", ObjectType: "ObjectType_example", SlotNumber: int64(123)})}), UseJbods: false, Organization: openapiclient.organization.Organization.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Account: openapiclient.iam.Account.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Status: "Status_example", Var2LicenseReservationOp: openapiclient.license.LicenseReservationOp.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, AuthCode: "AuthCode_example", AuthCodeInstalled: false, ConfirmCode: "ConfirmCode_example", GenerateRequestCode: false, GenerateReturnCode: false, RequestCode: "RequestCode_example", ReturnCode: "ReturnCode_example", Account: openapiclient.iam.Account.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Status: "Status_example", Var2LicenseReservationOp: openapiclient.license.LicenseReservationOp.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, AuthCode: "AuthCode_example", AuthCodeInstalled: false, ConfirmCode: "ConfirmCode_example", GenerateRequestCode: false, GenerateReturnCode: false, RequestCode: "RequestCode_example", ReturnCode: "ReturnCode_example", Account: }, AppRegistrations: []IamAppRegistrationRelationship{openapiclient.iam.AppRegistration.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ClientId: "ClientId_example", ClientName: "ClientName_example", ClientSecret: "ClientSecret_example", ClientType: "ClientType_example", Description: "Description_example", GrantTypes: []string{"GrantTypes_example"), RedirectUris: []string{"RedirectUris_example"), RenewClientSecret: false, ResponseTypes: []string{"ResponseTypes_example"), RevocationTimestamp: "TODO", Revoke: false, Account: , OauthTokens: []IamOAuthTokenRelationship{openapiclient.iam.OAuthToken.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, AccessExpirationTime: "TODO", ClientId: "ClientId_example", ClientIpAddress: "ClientIpAddress_example", ClientName: "ClientName_example", ExpirationTime: "TODO", LastLoginClient: "LastLoginClient_example", LastLoginTime: "TODO", TokenId: "TokenId_example", UserMeta: openapiclient.iam.ClientMeta{ClassId: "ClassId_example", ObjectType: "ObjectType_example", DeviceModel: "DeviceModel_example", UserAgent: "UserAgent_example"}, AppRegistration: openapiclient.iam.AppRegistration.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ClientId: "ClientId_example", ClientName: "ClientName_example", ClientSecret: "ClientSecret_example", ClientType: "ClientType_example", Description: "Description_example", GrantTypes: []string{"GrantTypes_example"), RedirectUris: []string{"RedirectUris_example"), RenewClientSecret: false, ResponseTypes: []string{"ResponseTypes_example"), RevocationTimestamp: "TODO", Revoke: false, Account: , OauthTokens: []IamOAuthTokenRelationship{openapiclient.iam.OAuthToken.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, AccessExpirationTime: "TODO", ClientId: "ClientId_example", ClientIpAddress: "ClientIpAddress_example", ClientName: "ClientName_example", ExpirationTime: "TODO", LastLoginClient: "LastLoginClient_example", LastLoginTime: "TODO", TokenId: "TokenId_example", UserMeta: openapiclient.iam.ClientMeta{ClassId: "ClassId_example", ObjectType: "ObjectType_example", DeviceModel: "DeviceModel_example", UserAgent: "UserAgent_example"}, AppRegistration: , Permission: openapiclient.iam.Permission.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Account: , EndPointRoles: []IamEndPointRoleRelationship{openapiclient.iam.EndPointRole.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", RoleType: "RoleType_example", Type: "Type_example", Account: , EndPointPrivileges: []IamEndPointPrivilegeRelationship{openapiclient.iam.EndPointPrivilege.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Type: "Type_example", System: openapiclient.iam.System.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, EndPointPrivileges: []IamEndPointPrivilegeRelationship{openapiclient.iam.EndPointPrivilege.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Type: "Type_example", System: openapiclient.iam.System.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, EndPointPrivileges: []IamEndPointPrivilegeRelationship{), EndPointRoles: []IamEndPointRoleRelationship{openapiclient.iam.EndPointRole.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", RoleType: "RoleType_example", Type: "Type_example", Account: , EndPointPrivileges: []IamEndPointPrivilegeRelationship{), System: }), Idp: openapiclient.iam.Idp.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DomainName: "DomainName_example", IdpEntityId: "IdpEntityId_example", Metadata: "Metadata_example", Name: "Name_example", Type: "Type_example", Account: , LdapPolicy: openapiclient.iam.LdapPolicy.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", BaseProperties: openapiclient.iam.LdapBaseProperties{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Attribute: "Attribute_example", BaseDn: "BaseDn_example", BindDn: "BindDn_example", BindMethod: "BindMethod_example", Domain: "Domain_example", EnableEncryption: false, EnableGroupAuthorization: false, Filter: "Filter_example", GroupAttribute: "GroupAttribute_example", IsPasswordSet: false, NestedGroupSearchDepth: int64(123), Password: "Password_example", Timeout: int64(123)}, DnsParameters: openapiclient.iam.LdapDnsParameters{ClassId: "ClassId_example", ObjectType: "ObjectType_example", SearchDomain: "SearchDomain_example", SearchForest: "SearchForest_example", Source: "Source_example"}, EnableDns: false, Enabled: false, UserSearchPrecedence: "UserSearchPrecedence_example", Var0Idp: openapiclient.iam.Idp.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DomainName: "DomainName_example", IdpEntityId: "IdpEntityId_example", Metadata: "Metadata_example", Name: "Name_example", Type: "Type_example", Account: , LdapPolicy: openapiclient.iam.LdapPolicy.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", BaseProperties: openapiclient.iam.LdapBaseProperties{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Attribute: "Attribute_example", BaseDn: "BaseDn_example", BindDn: "BindDn_example", BindMethod: "BindMethod_example", Domain: "Domain_example", EnableEncryption: false, EnableGroupAuthorization: false, Filter: "Filter_example", GroupAttribute: "GroupAttribute_example", IsPasswordSet: false, NestedGroupSearchDepth: int64(123), Password: "Password_example", Timeout: int64(123)}, DnsParameters: openapiclient.iam.LdapDnsParameters{ClassId: "ClassId_example", ObjectType: "ObjectType_example", SearchDomain: "SearchDomain_example", SearchForest: "SearchForest_example", Source: "Source_example"}, EnableDns: false, Enabled: false, UserSearchPrecedence: "UserSearchPrecedence_example", Var0Idp: , ApplianceAccount: , Groups: []IamLdapGroupRelationship{openapiclient.iam.LdapGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Domain: "Domain_example", Name: "Name_example", EndPointRole: []IamEndPointRoleRelationship{), LdapPolicy: }), Organization: openapiclient.organization.Organization.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Account: , ResourceGroups: []ResourceGroupRelationship{openapiclient.resource.Group.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", PerTypeCombinedSelector: []ResourcePerTypeCombinedSelector{openapiclient.resource.PerTypeCombinedSelector{ClassId: "ClassId_example", ObjectType: "ObjectType_example", CombinedSelector: "CombinedSelector_example", EmptyFilter: false, SelectorObjectType: "SelectorObjectType_example"}), Qualifier: "Qualifier_example", Selectors: []ResourceSelector{openapiclient.resource.Selector{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Selector: "Selector_example"}), Account: , Organizations: []OrganizationOrganizationRelationship{)})}, Profiles: []PolicyAbstractConfigProfileRelationship{openapiclient.policy.AbstractConfigProfile.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Type: "Type_example", SrcTemplate: openapiclient.policy.AbstractProfile.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Type: "Type_example", SrcTemplate: openapiclient.policy.AbstractProfile.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Type: "Type_example", SrcTemplate: }}, Action: "Action_example", ConfigContext: openapiclient.policy.ConfigContext{ClassId: "ClassId_example", ObjectType: "ObjectType_example", ConfigState: "ConfigState_example", ControlAction: "ControlAction_example", ErrorState: "ErrorState_example", OperState: "OperState_example"}}), Providers: []IamLdapProviderRelationship{openapiclient.iam.LdapProvider.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Port: int64(123), Server: "Server_example", LdapPolicy: })}, System: , UserPreferences: []IamUserPreferenceRelationship{openapiclient.iam.UserPreference.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Preference: 123, UserUniqueIdentifier: "UserUniqueIdentifier_example", Idp: , IdpReference: openapiclient.iam.IdpReference.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DomainName: "DomainName_example", IdpEntityId: "IdpEntityId_example", MultiFactorAuthentication: false, Name: "Name_example", Account: , Idp: , UserPreferences: []IamUserPreferenceRelationship{openapiclient.iam.UserPreference.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Preference: 123, UserUniqueIdentifier: "UserUniqueIdentifier_example", Idp: , IdpReference: openapiclient.iam.IdpReference.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DomainName: "DomainName_example", IdpEntityId: "IdpEntityId_example", MultiFactorAuthentication: false, Name: "Name_example", Account: , Idp: , UserPreferences: []IamUserPreferenceRelationship{), Usergroups: []IamUserGroupRelationship{openapiclient.iam.UserGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Idp: , Idpreference: , Permissions: []IamPermissionRelationship{openapiclient.iam.Permission.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Account: , EndPointRoles: []IamEndPointRoleRelationship{), ResourceRoles: []IamResourceRolesRelationship{openapiclient.iam.ResourceRoles.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, EndPointRoles: []IamEndPointRoleRelationship{), Permission: , Resource: , Roles: []IamRoleRelationship{openapiclient.iam.Role.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", PrivilegeNames: []string{"PrivilegeNames_example"), Account: , PrivilegeSets: []IamPrivilegeSetRelationship{openapiclient.iam.PrivilegeSet.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", PrivilegeNames: []string{"PrivilegeNames_example"), Account: , AssociatedPrivilegeSets: []IamPrivilegeSetRelationship{openapiclient.iam.PrivilegeSet.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", PrivilegeNames: []string{"PrivilegeNames_example"), Account: , AssociatedPrivilegeSets: []IamPrivilegeSetRelationship{), Privileges: []IamPrivilegeRelationship{openapiclient.iam.Privilege.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, HostnamePrefix: "HostnamePrefix_example", Method: "Method_example", Name: "Name_example", RestPath: "RestPath_example", UrlPrefix: "UrlPrefix_example", Account: , System: }), System: }), Privileges: []IamPrivilegeRelationship{openapiclient.iam.Privilege.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, HostnamePrefix: "HostnamePrefix_example", Method: "Method_example", Name: "Name_example", RestPath: "RestPath_example", UrlPrefix: "UrlPrefix_example", Account: , System: }), System: }), System: })}), Roles: []IamRoleRelationship{openapiclient.iam.Role.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", PrivilegeNames: []string{"PrivilegeNames_example"), Account: , PrivilegeSets: []IamPrivilegeSetRelationship{), System: }), SessionLimits: openapiclient.iam.SessionLimits.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, IdleTimeOut: int64(123), MaximumLimit: int64(123), PerUserLimit: int64(123), SessionTimeOut: int64(123), Account: , Permission: }, UserGroups: []IamUserGroupRelationship{openapiclient.iam.UserGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Idp: , Idpreference: , Permissions: []IamPermissionRelationship{), Qualifier: openapiclient.iam.Qualifier.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Value: []string{"Value_example"), Usergroup: }, Users: []IamUserRelationship{openapiclient.iam.User.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ClientIpAddress: "ClientIpAddress_example", Email: "Email_example", FirstName: "FirstName_example", LastLoginTime: "TODO", LastName: "LastName_example", Name: "Name_example", UserIdOrEmail: "UserIdOrEmail_example", UserType: "UserType_example", UserUniqueIdentifier: "UserUniqueIdentifier_example", ApiKeys: []IamApiKeyRelationship{openapiclient.iam.ApiKey.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, HashAlgorithm: "HashAlgorithm_example", KeySpec: openapiclient.pkix.KeyGenerationSpec{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Name: "Name_example"}, PrivateKey: "PrivateKey_example", Purpose: "Purpose_example", SigningAlgorithm: "SigningAlgorithm_example", Permission: , User: openapiclient.iam.User.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ClientIpAddress: "ClientIpAddress_example", Email: "Email_example", FirstName: "FirstName_example", LastLoginTime: "TODO", LastName: "LastName_example", Name: "Name_example", UserIdOrEmail: "UserIdOrEmail_example", UserType: "UserType_example", UserUniqueIdentifier: "UserUniqueIdentifier_example", ApiKeys: []IamApiKeyRelationship{openapiclient.iam.ApiKey.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, HashAlgorithm: "HashAlgorithm_example", KeySpec: openapiclient.pkix.KeyGenerationSpec{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Name: "Name_example"}, PrivateKey: "PrivateKey_example", Purpose: "Purpose_example", SigningAlgorithm: "SigningAlgorithm_example", Permission: , User: }), AppRegistrations: []IamAppRegistrationRelationship{), Idp: , Idpreference: , LocalUserPassword: openapiclient.iam.LocalUserPassword.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, CurrentPassword: "CurrentPassword_example", NewPassword: "NewPassword_example", Password: 123, User: }, OauthTokens: []IamOAuthTokenRelationship{), Permissions: []IamPermissionRelationship{), Sessions: []IamSessionRelationship{openapiclient.iam.Session.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, AccountPermissions: []IamAccountPermissions{openapiclient.iam.AccountPermissions{ClassId: "ClassId_example", ObjectType: "ObjectType_example", AccountIdentifier: "AccountIdentifier_example", AccountName: "AccountName_example", AccountStatus: "AccountStatus_example", Permissions: []IamPermissionReference{openapiclient.iam.PermissionReference{ClassId: "ClassId_example", ObjectType: "ObjectType_example", PermissionIdentifier: "PermissionIdentifier_example", PermissionName: "PermissionName_example"})}), ClientIpAddress: "ClientIpAddress_example", Expiration: "TODO", IdleTimeExpiration: "TODO", LastLoginClient: "LastLoginClient_example", LastLoginTime: "TODO", Permission: , User: })}}), AppRegistrations: []IamAppRegistrationRelationship{), Idp: , Idpreference: , LocalUserPassword: openapiclient.iam.LocalUserPassword.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, CurrentPassword: "CurrentPassword_example", NewPassword: "NewPassword_example", Password: 123, User: }, OauthTokens: []IamOAuthTokenRelationship{), Permissions: []IamPermissionRelationship{), Sessions: []IamSessionRelationship{openapiclient.iam.Session.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, AccountPermissions: []IamAccountPermissions{openapiclient.iam.AccountPermissions{ClassId: "ClassId_example", ObjectType: "ObjectType_example", AccountIdentifier: "AccountIdentifier_example", AccountName: "AccountName_example", AccountStatus: "AccountStatus_example", Permissions: []IamPermissionReference{openapiclient.iam.PermissionReference{ClassId: "ClassId_example", ObjectType: "ObjectType_example", PermissionIdentifier: "PermissionIdentifier_example", PermissionName: "PermissionName_example"})}), ClientIpAddress: "ClientIpAddress_example", Expiration: "TODO", IdleTimeExpiration: "TODO", LastLoginClient: "LastLoginClient_example", LastLoginTime: "TODO", Permission: , User: })})}), Users: []IamUserRelationship{)}), Qualifier: openapiclient.iam.Qualifier.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Value: []string{"Value_example"), Usergroup: }, Users: []IamUserRelationship{)}), Users: []IamUserRelationship{)}}), Usergroups: []IamUserGroupRelationship{), Users: []IamUserRelationship{)}}), Usergroups: []IamUserGroupRelationship{), Users: []IamUserRelationship{)}, ApplianceAccount: , Groups: []IamLdapGroupRelationship{openapiclient.iam.LdapGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Domain: "Domain_example", Name: "Name_example", EndPointRole: []IamEndPointRoleRelationship{), LdapPolicy: }), Organization: , Profiles: []PolicyAbstractConfigProfileRelationship{openapiclient.policy.AbstractConfigProfile.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Type: "Type_example", SrcTemplate: , Action: "Action_example", ConfigContext: openapiclient.policy.ConfigContext{ClassId: "ClassId_example", ObjectType: "ObjectType_example", ConfigState: "ConfigState_example", ControlAction: "ControlAction_example", ErrorState: "ErrorState_example", OperState: "OperState_example"}}), Providers: []IamLdapProviderRelationship{openapiclient.iam.LdapProvider.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Port: int64(123), Server: "Server_example", LdapPolicy: })}, System: , UserPreferences: []IamUserPreferenceRelationship{), Usergroups: []IamUserGroupRelationship{), Users: []IamUserRelationship{)}, PrivilegeSets: []IamPrivilegeSetRelationship{), Privileges: []IamPrivilegeRelationship{), Roles: []IamRoleRelationship{), ServiceProvider: openapiclient.iam.ServiceProvider.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, EntityId: "EntityId_example", Metadata: "Metadata_example", Name: "Name_example", System: }}}), EndPointRoles: []IamEndPointRoleRelationship{), Idp: , PrivilegeSets: []IamPrivilegeSetRelationship{), Privileges: []IamPrivilegeRelationship{), Roles: []IamRoleRelationship{), ServiceProvider: openapiclient.iam.ServiceProvider.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, EntityId: "EntityId_example", Metadata: "Metadata_example", Name: "Name_example", System: }}}), System: }), ResourceRoles: []IamResourceRolesRelationship{openapiclient.iam.ResourceRoles.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, EndPointRoles: []IamEndPointRoleRelationship{), Permission: , Resource: , Roles: []IamRoleRelationship{)}), Roles: []IamRoleRelationship{), SessionLimits: openapiclient.iam.SessionLimits.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, IdleTimeOut: int64(123), MaximumLimit: int64(123), PerUserLimit: int64(123), SessionTimeOut: int64(123), Account: , Permission: }, UserGroups: []IamUserGroupRelationship{), Users: []IamUserRelationship{)}, User: }), Permission: , Roles: []IamRoleRelationship{), User: }, Permission: , User: }), Permission: , Roles: []IamRoleRelationship{), User: }), DomainGroups: []IamDomainGroupRelationship{openapiclient.iam.DomainGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Partition1: int64(123), Partition2: int64(123), Partition3: int64(123), PartitionKey: "PartitionKey_example", Usage: int64(123), Account: }), EndPointRoles: []IamEndPointRoleRelationship{), Idpreferences: []IamIdpReferenceRelationship{), Idps: []IamIdpRelationship{), Permissions: []IamPermissionRelationship{), PrivilegeSets: []IamPrivilegeSetRelationship{), Privileges: []IamPrivilegeRelationship{), ResourceLimits: openapiclient.iam.ResourceLimits.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, PerAccountUserLimit: int64(123), Account: }, Roles: []IamRoleRelationship{), SecurityHolder: openapiclient.iam.SecurityHolder.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Account: , IpRulesConfiguration: openapiclient.iam.IpAccessManagement.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Enable: false, LastRecoveryTime: "TODO", Holder: openapiclient.iam.SecurityHolder.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Account: , IpRulesConfiguration: openapiclient.iam.IpAccessManagement.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Enable: false, LastRecoveryTime: "TODO", Holder: , IpAddresses: []IamIpAddressRelationship{openapiclient.iam.IpAddress.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Address: "Address_example", Description: "Description_example", IpAccessManagement: })}, ResourcePermissions: []IamResourcePermissionRelationship{openapiclient.iam.ResourcePermission.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, PermissionRoles: []IamPermissionToRoles{openapiclient.iam.PermissionToRoles{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Permission: openapiclient.cmrf.CmRf{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example"}, Roles: []CmrfCmRf{openapiclient.cmrf.CmRf{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example"})}), TargetApp: "TargetApp_example", Holder: , Resource: })}, IpAddresses: []IamIpAddressRelationship{openapiclient.iam.IpAddress.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Address: "Address_example", Description: "Description_example", IpAccessManagement: })}, ResourcePermissions: []IamResourcePermissionRelationship{openapiclient.iam.ResourcePermission.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, PermissionRoles: []IamPermissionToRoles{openapiclient.iam.PermissionToRoles{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Permission: , Roles: []CmrfCmRf{)}), TargetApp: "TargetApp_example", Holder: , Resource: })}, SessionLimits: }}, AppRegistrations: []IamAppRegistrationRelationship{), DomainGroups: []IamDomainGroupRelationship{openapiclient.iam.DomainGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Partition1: int64(123), Partition2: int64(123), Partition3: int64(123), PartitionKey: "PartitionKey_example", Usage: int64(123), Account: }), EndPointRoles: []IamEndPointRoleRelationship{), Idpreferences: []IamIdpReferenceRelationship{), Idps: []IamIdpRelationship{), Permissions: []IamPermissionRelationship{), PrivilegeSets: []IamPrivilegeSetRelationship{), Privileges: []IamPrivilegeRelationship{), ResourceLimits: openapiclient.iam.ResourceLimits.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, PerAccountUserLimit: int64(123), Account: }, Roles: []IamRoleRelationship{), SecurityHolder: , SessionLimits: }, ResourceGroups: []ResourceGroupRelationship{openapiclient.resource.Group.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", PerTypeCombinedSelector: []ResourcePerTypeCombinedSelector{openapiclient.resource.PerTypeCombinedSelector{ClassId: "ClassId_example", ObjectType: "ObjectType_example", CombinedSelector: "CombinedSelector_example", EmptyFilter: false, SelectorObjectType: "SelectorObjectType_example"}), Qualifier: "Qualifier_example", Selectors: []ResourceSelector{openapiclient.resource.Selector{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Selector: "Selector_example"}), Account: , Organizations: []OrganizationOrganizationRelationship{)})}, StoragePolicies: []StorageStoragePolicyRelationship{openapiclient.storage.StoragePolicy.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", GlobalHotSpares: []StorageLocalDisk{), RetainPolicyVirtualDrives: false, UnusedDisksState: "UnusedDisksState_example", VirtualDrives: []StorageVirtualDriveConfig{openapiclient.storage.VirtualDriveConfig{ClassId: "ClassId_example", ObjectType: "ObjectType_example", AccessPolicy: "AccessPolicy_example", BootDrive: false, DiskGroupName: "DiskGroupName_example", DiskGroupPolicy: "DiskGroupPolicy_example", DriveCache: "DriveCache_example", ExpandToAvailable: false, IoPolicy: "IoPolicy_example", Name: "Name_example", ReadPolicy: "ReadPolicy_example", Size: int64(123), StripSize: "StripSize_example", WritePolicy: "WritePolicy_example"}), DiskGroupPolicies: []StorageDiskGroupPolicyRelationship{openapiclient.storage.DiskGroupPolicy.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", DedicatedHotSpares: []StorageLocalDisk{), RaidLevel: "RaidLevel_example", SpanGroups: []StorageSpanGroup{openapiclient.storage.SpanGroup{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Disks: []StorageLocalDisk{)}), UseJbods: false, Organization: , StoragePolicies: []StorageStoragePolicyRelationship{openapiclient.storage.StoragePolicy.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", GlobalHotSpares: []StorageLocalDisk{), RetainPolicyVirtualDrives: false, UnusedDisksState: "UnusedDisksState_example", VirtualDrives: []StorageVirtualDriveConfig{openapiclient.storage.VirtualDriveConfig{ClassId: "ClassId_example", ObjectType: "ObjectType_example", AccessPolicy: "AccessPolicy_example", BootDrive: false, DiskGroupName: "DiskGroupName_example", DiskGroupPolicy: "DiskGroupPolicy_example", DriveCache: "DriveCache_example", ExpandToAvailable: false, IoPolicy: "IoPolicy_example", Name: "Name_example", ReadPolicy: "ReadPolicy_example", Size: int64(123), StripSize: "StripSize_example", WritePolicy: "WritePolicy_example"}), DiskGroupPolicies: []StorageDiskGroupPolicyRelationship{openapiclient.storage.DiskGroupPolicy.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", DedicatedHotSpares: []StorageLocalDisk{), RaidLevel: "RaidLevel_example", SpanGroups: []StorageSpanGroup{), UseJbods: false, Organization: , StoragePolicies: []StorageStoragePolicyRelationship{)}), Organization: , Profiles: []PolicyAbstractConfigProfileRelationship{)})}), Organization: , Profiles: []PolicyAbstractConfigProfileRelationship{)})} // StorageDiskGroupPolicy | The 'storage.DiskGroupPolicy' resource to create.
+    storageDiskGroupPolicy := *openapiclient.Newstorage.DiskGroupPolicy("ClassId_example", "ObjectType_example") // StorageDiskGroupPolicy | The 'storage.DiskGroupPolicy' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.CreateStorageDiskGroupPolicy(context.Background(), storageDiskGroupPolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := api_client.StorageApi.CreateStorageDiskGroupPolicy(context.Background()).StorageDiskGroupPolicy(storageDiskGroupPolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.CreateStorageDiskGroupPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -189,7 +217,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -220,13 +248,13 @@ import (
 )
 
 func main() {
-    storageStoragePolicy := openapiclient.storage.StoragePolicy{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", GlobalHotSpares: []StorageLocalDisk{), RetainPolicyVirtualDrives: false, UnusedDisksState: "UnusedDisksState_example", VirtualDrives: []StorageVirtualDriveConfig{), DiskGroupPolicies: []StorageDiskGroupPolicyRelationship{), Organization: , Profiles: []PolicyAbstractConfigProfileRelationship{)} // StorageStoragePolicy | The 'storage.StoragePolicy' resource to create.
+    storageStoragePolicy := *openapiclient.Newstorage.StoragePolicy("ClassId_example", "ObjectType_example") // StorageStoragePolicy | The 'storage.StoragePolicy' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.CreateStorageStoragePolicy(context.Background(), storageStoragePolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := api_client.StorageApi.CreateStorageStoragePolicy(context.Background()).StorageStoragePolicy(storageStoragePolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.CreateStorageStoragePolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -257,7 +285,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -323,7 +351,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -389,7 +417,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -457,7 +485,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -502,7 +530,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStorageControllerList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStorageControllerList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageControllerList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -541,7 +569,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -609,7 +637,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -654,7 +682,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStorageDiskGroupList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStorageDiskGroupList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageDiskGroupList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -693,7 +721,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -761,7 +789,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -806,7 +834,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStorageDiskGroupPolicyList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStorageDiskGroupPolicyList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageDiskGroupPolicyList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -845,7 +873,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -913,7 +941,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -981,7 +1009,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1026,7 +1054,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStorageEnclosureDiskList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStorageEnclosureDiskList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageEnclosureDiskList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1065,7 +1093,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1133,7 +1161,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1178,7 +1206,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStorageEnclosureDiskSlotEpList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStorageEnclosureDiskSlotEpList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageEnclosureDiskSlotEpList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1217,7 +1245,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1262,7 +1290,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStorageEnclosureList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStorageEnclosureList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageEnclosureList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1301,7 +1329,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1369,7 +1397,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1414,7 +1442,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStorageFlexFlashControllerList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStorageFlexFlashControllerList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageFlexFlashControllerList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1453,7 +1481,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1521,7 +1549,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1566,7 +1594,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStorageFlexFlashControllerPropsList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStorageFlexFlashControllerPropsList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageFlexFlashControllerPropsList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1605,7 +1633,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1673,7 +1701,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1718,7 +1746,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStorageFlexFlashPhysicalDriveList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStorageFlexFlashPhysicalDriveList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageFlexFlashPhysicalDriveList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1757,7 +1785,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1825,7 +1853,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1870,7 +1898,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStorageFlexFlashVirtualDriveList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStorageFlexFlashVirtualDriveList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageFlexFlashVirtualDriveList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1909,7 +1937,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1977,7 +2005,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2022,7 +2050,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStorageFlexUtilControllerList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStorageFlexUtilControllerList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageFlexUtilControllerList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2061,7 +2089,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2129,7 +2157,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2174,7 +2202,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStorageFlexUtilPhysicalDriveList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStorageFlexUtilPhysicalDriveList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageFlexUtilPhysicalDriveList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2213,7 +2241,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2281,7 +2309,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2326,7 +2354,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStorageFlexUtilVirtualDriveList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStorageFlexUtilVirtualDriveList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageFlexUtilVirtualDriveList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2365,7 +2393,1679 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageHitachiArrayByMoid
+
+> StorageHitachiArray GetStorageHitachiArrayByMoid(ctx, moid).Execute()
+
+Read a 'storage.HitachiArray' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageHitachiArrayByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageHitachiArrayByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageHitachiArrayByMoid`: StorageHitachiArray
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageHitachiArrayByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageHitachiArrayByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**StorageHitachiArray**](storage.HitachiArray.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageHitachiArrayList
+
+> StorageHitachiArrayResponse GetStorageHitachiArrayList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'storage.HitachiArray' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageHitachiArrayList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageHitachiArrayList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageHitachiArrayList`: StorageHitachiArrayResponse
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageHitachiArrayList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageHitachiArrayListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**StorageHitachiArrayResponse**](storage.HitachiArray.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageHitachiControllerByMoid
+
+> StorageHitachiController GetStorageHitachiControllerByMoid(ctx, moid).Execute()
+
+Read a 'storage.HitachiController' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageHitachiControllerByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageHitachiControllerByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageHitachiControllerByMoid`: StorageHitachiController
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageHitachiControllerByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageHitachiControllerByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**StorageHitachiController**](storage.HitachiController.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageHitachiControllerList
+
+> StorageHitachiControllerResponse GetStorageHitachiControllerList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'storage.HitachiController' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageHitachiControllerList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageHitachiControllerList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageHitachiControllerList`: StorageHitachiControllerResponse
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageHitachiControllerList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageHitachiControllerListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**StorageHitachiControllerResponse**](storage.HitachiController.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageHitachiDiskByMoid
+
+> StorageHitachiDisk GetStorageHitachiDiskByMoid(ctx, moid).Execute()
+
+Read a 'storage.HitachiDisk' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageHitachiDiskByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageHitachiDiskByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageHitachiDiskByMoid`: StorageHitachiDisk
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageHitachiDiskByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageHitachiDiskByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**StorageHitachiDisk**](storage.HitachiDisk.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageHitachiDiskList
+
+> StorageHitachiDiskResponse GetStorageHitachiDiskList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'storage.HitachiDisk' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageHitachiDiskList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageHitachiDiskList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageHitachiDiskList`: StorageHitachiDiskResponse
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageHitachiDiskList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageHitachiDiskListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**StorageHitachiDiskResponse**](storage.HitachiDisk.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageHitachiHostByMoid
+
+> StorageHitachiHost GetStorageHitachiHostByMoid(ctx, moid).Execute()
+
+Read a 'storage.HitachiHost' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageHitachiHostByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageHitachiHostByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageHitachiHostByMoid`: StorageHitachiHost
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageHitachiHostByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageHitachiHostByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**StorageHitachiHost**](storage.HitachiHost.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageHitachiHostList
+
+> StorageHitachiHostResponse GetStorageHitachiHostList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'storage.HitachiHost' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageHitachiHostList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageHitachiHostList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageHitachiHostList`: StorageHitachiHostResponse
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageHitachiHostList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageHitachiHostListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**StorageHitachiHostResponse**](storage.HitachiHost.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageHitachiHostLunByMoid
+
+> StorageHitachiHostLun GetStorageHitachiHostLunByMoid(ctx, moid).Execute()
+
+Read a 'storage.HitachiHostLun' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageHitachiHostLunByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageHitachiHostLunByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageHitachiHostLunByMoid`: StorageHitachiHostLun
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageHitachiHostLunByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageHitachiHostLunByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**StorageHitachiHostLun**](storage.HitachiHostLun.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageHitachiHostLunList
+
+> StorageHitachiHostLunResponse GetStorageHitachiHostLunList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'storage.HitachiHostLun' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageHitachiHostLunList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageHitachiHostLunList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageHitachiHostLunList`: StorageHitachiHostLunResponse
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageHitachiHostLunList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageHitachiHostLunListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**StorageHitachiHostLunResponse**](storage.HitachiHostLun.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageHitachiParityGroupByMoid
+
+> StorageHitachiParityGroup GetStorageHitachiParityGroupByMoid(ctx, moid).Execute()
+
+Read a 'storage.HitachiParityGroup' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageHitachiParityGroupByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageHitachiParityGroupByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageHitachiParityGroupByMoid`: StorageHitachiParityGroup
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageHitachiParityGroupByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageHitachiParityGroupByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**StorageHitachiParityGroup**](storage.HitachiParityGroup.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageHitachiParityGroupList
+
+> StorageHitachiParityGroupResponse GetStorageHitachiParityGroupList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'storage.HitachiParityGroup' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageHitachiParityGroupList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageHitachiParityGroupList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageHitachiParityGroupList`: StorageHitachiParityGroupResponse
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageHitachiParityGroupList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageHitachiParityGroupListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**StorageHitachiParityGroupResponse**](storage.HitachiParityGroup.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageHitachiPoolByMoid
+
+> StorageHitachiPool GetStorageHitachiPoolByMoid(ctx, moid).Execute()
+
+Read a 'storage.HitachiPool' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageHitachiPoolByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageHitachiPoolByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageHitachiPoolByMoid`: StorageHitachiPool
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageHitachiPoolByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageHitachiPoolByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**StorageHitachiPool**](storage.HitachiPool.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageHitachiPoolList
+
+> StorageHitachiPoolResponse GetStorageHitachiPoolList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'storage.HitachiPool' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageHitachiPoolList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageHitachiPoolList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageHitachiPoolList`: StorageHitachiPoolResponse
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageHitachiPoolList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageHitachiPoolListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**StorageHitachiPoolResponse**](storage.HitachiPool.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageHitachiPortByMoid
+
+> StorageHitachiPort GetStorageHitachiPortByMoid(ctx, moid).Execute()
+
+Read a 'storage.HitachiPort' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageHitachiPortByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageHitachiPortByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageHitachiPortByMoid`: StorageHitachiPort
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageHitachiPortByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageHitachiPortByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**StorageHitachiPort**](storage.HitachiPort.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageHitachiPortList
+
+> StorageHitachiPortResponse GetStorageHitachiPortList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'storage.HitachiPort' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageHitachiPortList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageHitachiPortList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageHitachiPortList`: StorageHitachiPortResponse
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageHitachiPortList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageHitachiPortListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**StorageHitachiPortResponse**](storage.HitachiPort.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageHitachiVolumeByMoid
+
+> StorageHitachiVolume GetStorageHitachiVolumeByMoid(ctx, moid).Execute()
+
+Read a 'storage.HitachiVolume' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageHitachiVolumeByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageHitachiVolumeByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageHitachiVolumeByMoid`: StorageHitachiVolume
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageHitachiVolumeByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageHitachiVolumeByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**StorageHitachiVolume**](storage.HitachiVolume.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageHitachiVolumeList
+
+> StorageHitachiVolumeResponse GetStorageHitachiVolumeList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'storage.HitachiVolume' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageHitachiVolumeList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageHitachiVolumeList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageHitachiVolumeList`: StorageHitachiVolumeResponse
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageHitachiVolumeList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageHitachiVolumeListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**StorageHitachiVolumeResponse**](storage.HitachiVolume.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageHyperFlexStorageContainerByMoid
+
+> StorageHyperFlexStorageContainer GetStorageHyperFlexStorageContainerByMoid(ctx, moid).Execute()
+
+Read a 'storage.HyperFlexStorageContainer' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageHyperFlexStorageContainerByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageHyperFlexStorageContainerByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageHyperFlexStorageContainerByMoid`: StorageHyperFlexStorageContainer
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageHyperFlexStorageContainerByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageHyperFlexStorageContainerByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**StorageHyperFlexStorageContainer**](storage.HyperFlexStorageContainer.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageHyperFlexStorageContainerList
+
+> StorageHyperFlexStorageContainerResponse GetStorageHyperFlexStorageContainerList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'storage.HyperFlexStorageContainer' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageHyperFlexStorageContainerList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageHyperFlexStorageContainerList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageHyperFlexStorageContainerList`: StorageHyperFlexStorageContainerResponse
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageHyperFlexStorageContainerList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageHyperFlexStorageContainerListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**StorageHyperFlexStorageContainerResponse**](storage.HyperFlexStorageContainer.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageHyperFlexVolumeByMoid
+
+> StorageHyperFlexVolume GetStorageHyperFlexVolumeByMoid(ctx, moid).Execute()
+
+Read a 'storage.HyperFlexVolume' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageHyperFlexVolumeByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageHyperFlexVolumeByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageHyperFlexVolumeByMoid`: StorageHyperFlexVolume
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageHyperFlexVolumeByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageHyperFlexVolumeByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**StorageHyperFlexVolume**](storage.HyperFlexVolume.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageHyperFlexVolumeList
+
+> StorageHyperFlexVolumeResponse GetStorageHyperFlexVolumeList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'storage.HyperFlexVolume' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageHyperFlexVolumeList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageHyperFlexVolumeList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageHyperFlexVolumeList`: StorageHyperFlexVolumeResponse
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageHyperFlexVolumeList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageHyperFlexVolumeListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**StorageHyperFlexVolumeResponse**](storage.HyperFlexVolume.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2433,7 +4133,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2478,7 +4178,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStorageItemList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStorageItemList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageItemList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2517,7 +4217,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2585,7 +4285,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2653,7 +4353,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2698,7 +4398,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStoragePhysicalDiskExtensionList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStoragePhysicalDiskExtensionList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStoragePhysicalDiskExtensionList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2737,7 +4437,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2782,7 +4482,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStoragePhysicalDiskList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStoragePhysicalDiskList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStoragePhysicalDiskList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2821,7 +4521,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2889,7 +4589,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2934,7 +4634,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStoragePhysicalDiskUsageList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStoragePhysicalDiskUsageList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStoragePhysicalDiskUsageList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2973,7 +4673,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3041,7 +4741,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3086,7 +4786,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStoragePureArrayList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStoragePureArrayList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStoragePureArrayList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3125,7 +4825,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3193,7 +4893,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3238,7 +4938,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStoragePureControllerList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStoragePureControllerList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStoragePureControllerList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3277,7 +4977,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3345,7 +5045,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3390,7 +5090,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStoragePureDiskList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStoragePureDiskList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStoragePureDiskList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3429,7 +5129,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3497,7 +5197,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3565,7 +5265,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3610,7 +5310,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStoragePureHostGroupList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStoragePureHostGroupList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStoragePureHostGroupList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3649,7 +5349,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3694,7 +5394,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStoragePureHostList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStoragePureHostList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStoragePureHostList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3733,7 +5433,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3801,7 +5501,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3846,7 +5546,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStoragePureHostLunList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStoragePureHostLunList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStoragePureHostLunList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3885,7 +5585,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3953,7 +5653,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3998,7 +5698,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStoragePurePortList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStoragePurePortList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStoragePurePortList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4037,7 +5737,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4105,7 +5805,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4150,7 +5850,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStoragePureProtectionGroupList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStoragePureProtectionGroupList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStoragePureProtectionGroupList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4189,7 +5889,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4257,7 +5957,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4302,7 +6002,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStoragePureProtectionGroupSnapshotList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStoragePureProtectionGroupSnapshotList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStoragePureProtectionGroupSnapshotList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4341,7 +6041,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4409,7 +6109,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4454,7 +6154,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStoragePureReplicationScheduleList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStoragePureReplicationScheduleList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStoragePureReplicationScheduleList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4493,7 +6193,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4561,7 +6261,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4606,7 +6306,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStoragePureSnapshotScheduleList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStoragePureSnapshotScheduleList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStoragePureSnapshotScheduleList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4645,7 +6345,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4713,7 +6413,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4758,7 +6458,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStoragePureVolumeList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStoragePureVolumeList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStoragePureVolumeList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4797,7 +6497,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4865,7 +6565,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4910,7 +6610,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStoragePureVolumeSnapshotList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStoragePureVolumeSnapshotList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStoragePureVolumeSnapshotList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4949,7 +6649,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5017,7 +6717,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5062,7 +6762,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStorageSasExpanderList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStorageSasExpanderList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageSasExpanderList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5101,7 +6801,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5169,7 +6869,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5214,7 +6914,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStorageSasPortList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStorageSasPortList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageSasPortList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5253,7 +6953,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5321,7 +7021,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5366,7 +7066,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStorageSpanList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStorageSpanList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageSpanList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5405,7 +7105,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5473,7 +7173,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5518,7 +7218,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStorageStoragePolicyList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStorageStoragePolicyList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageStoragePolicyList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5557,7 +7257,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5625,7 +7325,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5670,7 +7370,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStorageVdMemberEpList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStorageVdMemberEpList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageVdMemberEpList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5709,7 +7409,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5777,7 +7477,159 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageVirtualDriveContainerByMoid
+
+> StorageVirtualDriveContainer GetStorageVirtualDriveContainerByMoid(ctx, moid).Execute()
+
+Read a 'storage.VirtualDriveContainer' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageVirtualDriveContainerByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageVirtualDriveContainerByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageVirtualDriveContainerByMoid`: StorageVirtualDriveContainer
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageVirtualDriveContainerByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageVirtualDriveContainerByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**StorageVirtualDriveContainer**](storage.VirtualDriveContainer.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetStorageVirtualDriveContainerList
+
+> StorageVirtualDriveContainerResponse GetStorageVirtualDriveContainerList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'storage.VirtualDriveContainer' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.GetStorageVirtualDriveContainerList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageVirtualDriveContainerList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetStorageVirtualDriveContainerList`: StorageVirtualDriveContainerResponse
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.GetStorageVirtualDriveContainerList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetStorageVirtualDriveContainerListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**StorageVirtualDriveContainerResponse**](storage.VirtualDriveContainer.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5845,7 +7697,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5890,7 +7742,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStorageVirtualDriveExtensionList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStorageVirtualDriveExtensionList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageVirtualDriveExtensionList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5929,7 +7781,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5974,7 +7826,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.GetStorageVirtualDriveList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.StorageApi.GetStorageVirtualDriveList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.GetStorageVirtualDriveList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6013,7 +7865,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6045,12 +7897,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageController := openapiclient.storage.Controller{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ControllerFlags: "ControllerFlags_example", ControllerId: "ControllerId_example", ControllerStatus: "ControllerStatus_example", ForeignConfigPresent: false, HwRevision: "HwRevision_example", InterfaceType: "InterfaceType_example", MaxVolumesSupported: int64(123), OobInterfaceSupported: "OobInterfaceSupported_example", OperState: "OperState_example", Operability: "Operability_example", PciAddr: "PciAddr_example", PciSlot: "PciSlot_example", Presence: "Presence_example", RaidSupport: "RaidSupport_example", RebuildRate: "RebuildRate_example", SelfEncryptEnabled: "SelfEncryptEnabled_example", Type: "Type_example", ComputeBlade: openapiclient.compute.Blade.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminPowerState: "AdminPowerState_example", AlarmSummary: openapiclient.compute.AlarmSummary{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Critical: int64(123), Warning: int64(123)}, AssetTag: "AssetTag_example", AvailableMemory: int64(123), BiosPostComplete: false, FaultSummary: int64(123), KvmIpAddresses: []ComputeIpAddress{openapiclient.compute.IpAddress{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Address: "Address_example", Category: "Category_example", DefaultGateway: "DefaultGateway_example", Dn: "Dn_example", HttpPort: int64(123), HttpsPort: int64(123), KvmPort: int64(123), KvmVlan: int64(123), Name: "Name_example", Subnet: "Subnet_example", Type: "Type_example"}), ManagementMode: "ManagementMode_example", MemorySpeed: "MemorySpeed_example", MgmtIpAddress: "MgmtIpAddress_example", NumAdaptors: int64(123), NumCpuCores: int64(123), NumCpuCoresEnabled: int64(123), NumCpus: int64(123), NumEthHostInterfaces: int64(123), NumFcHostInterfaces: int64(123), NumThreads: int64(123), OperPowerState: "OperPowerState_example", OperState: "OperState_example", Operability: "Operability_example", PlatformType: "PlatformType_example", Presence: "Presence_example", ServiceProfile: "ServiceProfile_example", TotalMemory: int64(123), UserLabel: "UserLabel_example", Uuid: "Uuid_example", MgmtIdentity: openapiclient.equipment.PhysicalIdentity.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, AdminAction: "AdminAction_example", AdminActionState: "AdminActionState_example", Identifier: int64(123), Lifecycle: "Lifecycle_example", Model: "Model_example", Serial: "Serial_example", Vendor: "Vendor_example", DeviceRegistration: openapiclient.asset.DeviceRegistration.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ApiVersion: int64(123), AppPartitionNumber: int64(123), ConnectionId: "ConnectionId_example", ConnectionReason: "ConnectionReason_example", ConnectionStatus: "ConnectionStatus_example", ConnectionStatusLastChangeTime: "TODO", ConnectorVersion: "ConnectorVersion_example", DeviceExternalIpAddress: "DeviceExternalIpAddress_example", ProxyApp: "ProxyApp_example", AccessKeyId: "AccessKeyId_example", ClaimedByUserName: "ClaimedByUserName_example", ClaimedTime: "TODO", DeviceHostname: []string{"DeviceHostname_example"), DeviceIpAddress: []string{"DeviceIpAddress_example"), ExecutionMode: "ExecutionMode_example", ParentSignature: openapiclient.asset.ParentConnectionSignature{ClassId: "ClassId_example", ObjectType: "ObjectType_example", DeviceId: "DeviceId_example", NodeId: "NodeId_example", Signature: 123, TimeStamp: "TODO"}, Pid: []string{"Pid_example"), PlatformType: "PlatformType_example", PublicAccessKey: "PublicAccessKey_example", ReadOnly: false, Serial: []string{"Serial_example"), Vendor: "Vendor_example", Account: , ClaimedByUser: , ClusterMembers: []AssetClusterMemberRelationship{openapiclient.asset.ClusterMember.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ApiVersion: int64(123), AppPartitionNumber: int64(123), ConnectionId: "ConnectionId_example", ConnectionReason: "ConnectionReason_example", ConnectionStatus: "ConnectionStatus_example", ConnectionStatusLastChangeTime: "TODO", ConnectorVersion: "ConnectorVersion_example", DeviceExternalIpAddress: "DeviceExternalIpAddress_example", ProxyApp: "ProxyApp_example", Leadership: "Leadership_example", LockedLeader: false, MemberIdentity: "MemberIdentity_example", ParentClusterMemberIdentity: "ParentClusterMemberIdentity_example", Sudi: openapiclient.asset.SudiInfo{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Pid: "Pid_example", SerialNumber: "SerialNumber_example", Signature: "Signature_example", Status: "Status_example", SudiCertificate: openapiclient.x509.Certificate{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Issuer: openapiclient.pkix.DistinguishedName{ClassId: "ClassId_example", ObjectType: "ObjectType_example", CommonName: "CommonName_example", Country: []string{"Country_example"), Locality: []string{"Locality_example"), Organization: []string{"Organization_example"), OrganizationalUnit: []string{"OrganizationalUnit_example"), State: []string{"State_example")}, NotAfter: "TODO", NotBefore: "TODO", PemCertificate: "PemCertificate_example", Sha256Fingerprint: "Sha256Fingerprint_example", SignatureAlgorithm: "SignatureAlgorithm_example", Subject: openapiclient.pkix.DistinguishedName{ClassId: "ClassId_example", ObjectType: "ObjectType_example", CommonName: "CommonName_example", Country: []string{"Country_example"), Locality: []string{"Locality_example"), Organization: []string{"Organization_example"), OrganizationalUnit: []string{"OrganizationalUnit_example"), State: []string{"State_example")}}}, Device: openapiclient.asset.DeviceRegistration.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ApiVersion: int64(123), AppPartitionNumber: int64(123), ConnectionId: "ConnectionId_example", ConnectionReason: "ConnectionReason_example", ConnectionStatus: "ConnectionStatus_example", ConnectionStatusLastChangeTime: "TODO", ConnectorVersion: "ConnectorVersion_example", DeviceExternalIpAddress: "DeviceExternalIpAddress_example", ProxyApp: "ProxyApp_example", AccessKeyId: "AccessKeyId_example", ClaimedByUserName: "ClaimedByUserName_example", ClaimedTime: "TODO", DeviceHostname: []string{"DeviceHostname_example"), DeviceIpAddress: []string{"DeviceIpAddress_example"), ExecutionMode: "ExecutionMode_example", ParentSignature: openapiclient.asset.ParentConnectionSignature{ClassId: "ClassId_example", ObjectType: "ObjectType_example", DeviceId: "DeviceId_example", NodeId: "NodeId_example", Signature: 123, TimeStamp: "TODO"}, Pid: []string{"Pid_example"), PlatformType: "PlatformType_example", PublicAccessKey: "PublicAccessKey_example", ReadOnly: false, Serial: []string{"Serial_example"), Vendor: "Vendor_example", Account: , ClaimedByUser: , ClusterMembers: []AssetClusterMemberRelationship{openapiclient.asset.ClusterMember.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ApiVersion: int64(123), AppPartitionNumber: int64(123), ConnectionId: "ConnectionId_example", ConnectionReason: "ConnectionReason_example", ConnectionStatus: "ConnectionStatus_example", ConnectionStatusLastChangeTime: "TODO", ConnectorVersion: "ConnectorVersion_example", DeviceExternalIpAddress: "DeviceExternalIpAddress_example", ProxyApp: "ProxyApp_example", Leadership: "Leadership_example", LockedLeader: false, MemberIdentity: "MemberIdentity_example", ParentClusterMemberIdentity: "ParentClusterMemberIdentity_example", Sudi: openapiclient.asset.SudiInfo{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Pid: "Pid_example", SerialNumber: "SerialNumber_example", Signature: "Signature_example", Status: "Status_example", SudiCertificate: openapiclient.x509.Certificate{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Issuer: , NotAfter: "TODO", NotBefore: "TODO", PemCertificate: "PemCertificate_example", Sha256Fingerprint: "Sha256Fingerprint_example", SignatureAlgorithm: "SignatureAlgorithm_example", Subject: }}, Device: }), DeviceClaim: openapiclient.asset.DeviceClaim.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceUpdates: []AssetConnectionControlMessage{openapiclient.asset.ConnectionControlMessage{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Account: "Account_example", ConnectorVersion: "ConnectorVersion_example", DeviceId: "DeviceId_example", DomainGroup: "DomainGroup_example", Evict: false, Leadership: "Leadership_example", NewIdentity: "NewIdentity_example", Partition: int64(123)}), SecurityToken: "SecurityToken_example", SerialNumber: "SerialNumber_example", Account: , Device: }, DeviceConfiguration: openapiclient.asset.DeviceConfiguration.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, LocalConfigurationLocked: false, LogLevel: "LogLevel_example", Device: }, DomainGroup: , ParentConnection: }}), DeviceClaim: openapiclient.asset.DeviceClaim.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceUpdates: []AssetConnectionControlMessage{openapiclient.asset.ConnectionControlMessage{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Account: "Account_example", ConnectorVersion: "ConnectorVersion_example", DeviceId: "DeviceId_example", DomainGroup: "DomainGroup_example", Evict: false, Leadership: "Leadership_example", NewIdentity: "NewIdentity_example", Partition: int64(123)}), SecurityToken: "SecurityToken_example", SerialNumber: "SerialNumber_example", Account: , Device: }, DeviceConfiguration: openapiclient.asset.DeviceConfiguration.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, LocalConfigurationLocked: false, LogLevel: "LogLevel_example", Device: }, DomainGroup: , ParentConnection: }, PhysicalDeviceRegistration: }, ChassisId: "ChassisId_example", ScaledMode: "ScaledMode_example", SlotId: int64(123), Adapters: []AdapterUnitRelationship{openapiclient.adapter.Unit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdapterId: "AdapterId_example", BaseMacAddress: "BaseMacAddress_example", ConnectionStatus: "ConnectionStatus_example", Integrated: "Integrated_example", OperState: "OperState_example", Operability: "Operability_example", PartNumber: "PartNumber_example", PciSlot: "PciSlot_example", Power: "Power_example", Presence: "Presence_example", Thermal: "Thermal_example", Vid: "Vid_example", ComputeBlade: openapiclient.compute.Blade.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminPowerState: "AdminPowerState_example", AlarmSummary: openapiclient.compute.AlarmSummary{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Critical: int64(123), Warning: int64(123)}, AssetTag: "AssetTag_example", AvailableMemory: int64(123), BiosPostComplete: false, FaultSummary: int64(123), KvmIpAddresses: []ComputeIpAddress{openapiclient.compute.IpAddress{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Address: "Address_example", Category: "Category_example", DefaultGateway: "DefaultGateway_example", Dn: "Dn_example", HttpPort: int64(123), HttpsPort: int64(123), KvmPort: int64(123), KvmVlan: int64(123), Name: "Name_example", Subnet: "Subnet_example", Type: "Type_example"}), ManagementMode: "ManagementMode_example", MemorySpeed: "MemorySpeed_example", MgmtIpAddress: "MgmtIpAddress_example", NumAdaptors: int64(123), NumCpuCores: int64(123), NumCpuCoresEnabled: int64(123), NumCpus: int64(123), NumEthHostInterfaces: int64(123), NumFcHostInterfaces: int64(123), NumThreads: int64(123), OperPowerState: "OperPowerState_example", OperState: "OperState_example", Operability: "Operability_example", PlatformType: "PlatformType_example", Presence: "Presence_example", ServiceProfile: "ServiceProfile_example", TotalMemory: int64(123), UserLabel: "UserLabel_example", Uuid: "Uuid_example", MgmtIdentity: openapiclient.equipment.PhysicalIdentity.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, AdminAction: "AdminAction_example", AdminActionState: "AdminActionState_example", Identifier: int64(123), Lifecycle: "Lifecycle_example", Model: "Model_example", Serial: "Serial_example", Vendor: "Vendor_example", DeviceRegistration: , PhysicalDeviceRegistration: }, ChassisId: "ChassisId_example", ScaledMode: "ScaledMode_example", SlotId: int64(123), Adapters: []AdapterUnitRelationship{openapiclient.adapter.Unit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdapterId: "AdapterId_example", BaseMacAddress: "BaseMacAddress_example", ConnectionStatus: "ConnectionStatus_example", Integrated: "Integrated_example", OperState: "OperState_example", Operability: "Operability_example", PartNumber: "PartNumber_example", PciSlot: "PciSlot_example", Power: "Power_example", Presence: "Presence_example", Thermal: "Thermal_example", Vid: "Vid_example", ComputeBlade: , ComputeRackUnit: openapiclient.compute.RackUnit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminPowerState: "AdminPowerState_example", AlarmSummary: , AssetTag: "AssetTag_example", AvailableMemory: int64(123), BiosPostComplete: false, FaultSummary: int64(123), KvmIpAddresses: []ComputeIpAddress{), ManagementMode: "ManagementMode_example", MemorySpeed: "MemorySpeed_example", MgmtIpAddress: "MgmtIpAddress_example", NumAdaptors: int64(123), NumCpuCores: int64(123), NumCpuCoresEnabled: int64(123), NumCpus: int64(123), NumEthHostInterfaces: int64(123), NumFcHostInterfaces: int64(123), NumThreads: int64(123), OperPowerState: "OperPowerState_example", OperState: "OperState_example", Operability: "Operability_example", PlatformType: "PlatformType_example", Presence: "Presence_example", ServiceProfile: "ServiceProfile_example", TotalMemory: int64(123), UserLabel: "UserLabel_example", Uuid: "Uuid_example", MgmtIdentity: , ConnectionStatus: "ConnectionStatus_example", ServerId: int64(123), TopologyScanStatus: "TopologyScanStatus_example", Adapters: []AdapterUnitRelationship{), BiosBootmode: openapiclient.bios.BootMode.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ActualBootMode: "ActualBootMode_example", ComputeRackUnit: openapiclient.compute.RackUnit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminPowerState: "AdminPowerState_example", AlarmSummary: , AssetTag: "AssetTag_example", AvailableMemory: int64(123), BiosPostComplete: false, FaultSummary: int64(123), KvmIpAddresses: []ComputeIpAddress{), ManagementMode: "ManagementMode_example", MemorySpeed: "MemorySpeed_example", MgmtIpAddress: "MgmtIpAddress_example", NumAdaptors: int64(123), NumCpuCores: int64(123), NumCpuCoresEnabled: int64(123), NumCpus: int64(123), NumEthHostInterfaces: int64(123), NumFcHostInterfaces: int64(123), NumThreads: int64(123), OperPowerState: "OperPowerState_example", OperState: "OperState_example", Operability: "Operability_example", PlatformType: "PlatformType_example", Presence: "Presence_example", ServiceProfile: "ServiceProfile_example", TotalMemory: int64(123), UserLabel: "UserLabel_example", Uuid: "Uuid_example", MgmtIdentity: , ConnectionStatus: "ConnectionStatus_example", ServerId: int64(123), TopologyScanStatus: "TopologyScanStatus_example", Adapters: []AdapterUnitRelationship{), BiosBootmode: openapiclient.bios.BootMode.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ActualBootMode: "ActualBootMode_example", ComputeRackUnit: , InventoryDeviceInfo: openapiclient.inventory.DeviceInfo.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ConfigState: "ConfigState_example", ControlAction: "ControlAction_example", ErrorState: "ErrorState_example", JobInfo: []PolicyinventoryJobInfo{openapiclient.policyinventory.JobInfo{ClassId: "ClassId_example", ObjectType: "ObjectType_example", ExecutionStatus: "ExecutionStatus_example", LastScheduledTime: "TODO", PolicyId: "PolicyId_example", PolicyName: "PolicyName_example"}), OperState: "OperState_example", ProfileMoId: "ProfileMoId_example", RegisteredDevice: }, RegisteredDevice: }, Biosunits: []BiosUnitRelationship{openapiclient.bios.Unit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", InitSeq: "InitSeq_example", InitTs: "InitTs_example", ComputeBlade: , ComputeRackUnit: , InventoryDeviceInfo: openapiclient.inventory.DeviceInfo.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ConfigState: "ConfigState_example", ControlAction: "ControlAction_example", ErrorState: "ErrorState_example", JobInfo: []PolicyinventoryJobInfo{openapiclient.policyinventory.JobInfo{ClassId: "ClassId_example", ObjectType: "ObjectType_example", ExecutionStatus: "ExecutionStatus_example", LastScheduledTime: "TODO", PolicyId: "PolicyId_example", PolicyName: "PolicyName_example"}), OperState: "OperState_example", ProfileMoId: "ProfileMoId_example", RegisteredDevice: }, RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{openapiclient.firmware.RunningFirmware.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Component: "Component_example", PackageVersion: "PackageVersion_example", Type: "Type_example", Version: "Version_example", BiosUnit: openapiclient.bios.Unit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", InitSeq: "InitSeq_example", InitTs: "InitTs_example", ComputeBlade: , ComputeRackUnit: , InventoryDeviceInfo: , RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{openapiclient.firmware.RunningFirmware.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Component: "Component_example", PackageVersion: "PackageVersion_example", Type: "Type_example", Version: "Version_example", BiosUnit: , GraphicsCard: openapiclient.graphics.Card.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", CardId: int64(123), DeviceId: int64(123), ExpanderSlot: "ExpanderSlot_example", FirmwareVersion: "FirmwareVersion_example", Mode: "Mode_example", NumGpus: "NumGpus_example", OperState: "OperState_example", PciAddress: "PciAddress_example", PciAddressList: "PciAddressList_example", PciSlot: "PciSlot_example", ComputeBlade: , ComputeBoard: openapiclient.compute.Board.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", BoardId: int64(123), CpuTypeController: "CpuTypeController_example", OperPowerState: "OperPowerState_example", Presence: "Presence_example", ComputeBlade: , ComputeRackUnit: , EquipmentTpms: []EquipmentTpmRelationship{openapiclient.equipment.Tpm.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ActivationStatus: "ActivationStatus_example", AdminState: "AdminState_example", Ownership: "Ownership_example", Presence: "Presence_example", TpmId: int64(123), Version: "Version_example", ComputeBoard: openapiclient.compute.Board.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", BoardId: int64(123), CpuTypeController: "CpuTypeController_example", OperPowerState: "OperPowerState_example", Presence: "Presence_example", ComputeBlade: , ComputeRackUnit: , EquipmentTpms: []EquipmentTpmRelationship{openapiclient.equipment.Tpm.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ActivationStatus: "ActivationStatus_example", AdminState: "AdminState_example", Ownership: "Ownership_example", Presence: "Presence_example", TpmId: int64(123), Version: "Version_example", ComputeBoard: , InventoryDeviceInfo: , RegisteredDevice: }), GraphicsCards: []GraphicsCardRelationship{openapiclient.graphics.Card.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", CardId: int64(123), DeviceId: int64(123), ExpanderSlot: "ExpanderSlot_example", FirmwareVersion: "FirmwareVersion_example", Mode: "Mode_example", NumGpus: "NumGpus_example", OperState: "OperState_example", PciAddress: "PciAddress_example", PciAddressList: "PciAddressList_example", PciSlot: "PciSlot_example", ComputeBlade: , ComputeBoard: , ComputeRackUnit: , GraphicsControllers: []GraphicsControllerRelationship{openapiclient.graphics.Controller.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ControllerId: int64(123), PciAddr: "PciAddr_example", PciSlot: "PciSlot_example", GraphicsCard: , InventoryDeviceInfo: , RegisteredDevice: }), InventoryDeviceInfo: , RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{)}), InventoryDeviceInfo: , MemoryArrays: []MemoryArrayRelationship{openapiclient.memory.Array.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ArrayId: int64(123), CpuId: int64(123), CurrentCapacity: "CurrentCapacity_example", ErrorCorrection: "ErrorCorrection_example", MaxCapacity: "MaxCapacity_example", MaxDevices: "MaxDevices_example", OperPowerState: "OperPowerState_example", Presence: "Presence_example", ComputeBlade: , ComputeBoard: , ComputeRackUnit: , InventoryDeviceInfo: , PersistentMemoryUnits: []MemoryPersistentMemoryUnitRelationship{openapiclient.memory.PersistentMemoryUnit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminState: "AdminState_example", ArrayId: int64(123), Bank: int64(123), Capacity: "Capacity_example", Clock: "Clock_example", FormFactor: "FormFactor_example", Latency: "Latency_example", Location: "Location_example", OperPowerState: "OperPowerState_example", OperState: "OperState_example", Operability: "Operability_example", Presence: "Presence_example", Set: int64(123), Speed: "Speed_example", Thermal: "Thermal_example", Type: "Type_example", Visibility: "Visibility_example", Width: "Width_example", AppDirectCapacity: "AppDirectCapacity_example", CountStatus: "CountStatus_example", FirmwareVersion: "FirmwareVersion_example", FrozenStatus: "FrozenStatus_example", HealthState: "HealthState_example", LockStatus: "LockStatus_example", MemoryCapacity: "MemoryCapacity_example", MemoryId: int64(123), PersistentMemoryCapacity: "PersistentMemoryCapacity_example", ReservedCapacity: "ReservedCapacity_example", SecurityStatus: "SecurityStatus_example", SocketId: "SocketId_example", SocketMemoryId: "SocketMemoryId_example", TotalCapacity: "TotalCapacity_example", Uid: "Uid_example", InventoryDeviceInfo: , MemoryArray: openapiclient.memory.Array.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ArrayId: int64(123), CpuId: int64(123), CurrentCapacity: "CurrentCapacity_example", ErrorCorrection: "ErrorCorrection_example", MaxCapacity: "MaxCapacity_example", MaxDevices: "MaxDevices_example", OperPowerState: "OperPowerState_example", Presence: "Presence_example", ComputeBlade: , ComputeBoard: , ComputeRackUnit: , InventoryDeviceInfo: , PersistentMemoryUnits: []MemoryPersistentMemoryUnitRelationship{openapiclient.memory.PersistentMemoryUnit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminState: "AdminState_example", ArrayId: int64(123), Bank: int64(123), Capacity: "Capacity_example", Clock: "Clock_example", FormFactor: "FormFactor_example", Latency: "Latency_example", Location: "Location_example", OperPowerState: "OperPowerState_example", OperState: "OperState_example", Operability: "Operability_example", Presence: "Presence_example", Set: int64(123), Speed: "Speed_example", Thermal: "Thermal_example", Type: "Type_example", Visibility: "Visibility_example", Width: "Width_example", AppDirectCapacity: "AppDirectCapacity_example", CountStatus: "CountStatus_example", FirmwareVersion: "FirmwareVersion_example", FrozenStatus: "FrozenStatus_example", HealthState: "HealthState_example", LockStatus: "LockStatus_example", MemoryCapacity: "MemoryCapacity_example", MemoryId: int64(123), PersistentMemoryCapacity: "PersistentMemoryCapacity_example", ReservedCapacity: "ReservedCapacity_example", SecurityStatus: "SecurityStatus_example", SocketId: "SocketId_example", SocketMemoryId: "SocketMemoryId_example", TotalCapacity: "TotalCapacity_example", Uid: "Uid_example", InventoryDeviceInfo: , MemoryArray: , RegisteredDevice: }), RegisteredDevice: , Units: []MemoryUnitRelationship{openapiclient.memory.Unit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminState: "AdminState_example", ArrayId: int64(123), Bank: int64(123), Capacity: "Capacity_example", Clock: "Clock_example", FormFactor: "FormFactor_example", Latency: "Latency_example", Location: "Location_example", OperPowerState: "OperPowerState_example", OperState: "OperState_example", Operability: "Operability_example", Presence: "Presence_example", Set: int64(123), Speed: "Speed_example", Thermal: "Thermal_example", Type: "Type_example", Visibility: "Visibility_example", Width: "Width_example", MemoryId: int64(123), InventoryDeviceInfo: , MemoryArray: , RegisteredDevice: })}, RegisteredDevice: }), RegisteredDevice: , Units: []MemoryUnitRelationship{openapiclient.memory.Unit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminState: "AdminState_example", ArrayId: int64(123), Bank: int64(123), Capacity: "Capacity_example", Clock: "Clock_example", FormFactor: "FormFactor_example", Latency: "Latency_example", Location: "Location_example", OperPowerState: "OperPowerState_example", OperState: "OperState_example", Operability: "Operability_example", Presence: "Presence_example", Set: int64(123), Speed: "Speed_example", Thermal: "Thermal_example", Type: "Type_example", Visibility: "Visibility_example", Width: "Width_example", MemoryId: int64(123), InventoryDeviceInfo: , MemoryArray: , RegisteredDevice: })}), PciCoprocessorCards: []PciCoprocessorCardRelationship{openapiclient.pci.CoprocessorCard.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", CardId: int64(123), PciSlot: "PciSlot_example", ComputeBoard: , InventoryDeviceInfo: , RegisteredDevice: }), PciSwitch: []PciSwitchRelationship{openapiclient.pci.Switch.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", DeviceId: "DeviceId_example", Health: "Health_example", NumOfAdaptors: "NumOfAdaptors_example", PciAddress: "PciAddress_example", PciSlot: "PciSlot_example", ProductName: "ProductName_example", ProductRevision: "ProductRevision_example", SubDeviceId: "SubDeviceId_example", SubVendorId: "SubVendorId_example", Temperature: "Temperature_example", Type: "Type_example", VendorId: "VendorId_example", ComputeBoard: , InventoryDeviceInfo: , Links: []PciLinkRelationship{openapiclient.pci.Link.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Adapter: "Adapter_example", LinkSpeed: "LinkSpeed_example", LinkStatus: "LinkStatus_example", LinkWidth: "LinkWidth_example", PciSlot: "PciSlot_example", SlotStatus: "SlotStatus_example", InventoryDeviceInfo: , PciSwitch: openapiclient.pci.Switch.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", DeviceId: "DeviceId_example", Health: "Health_example", NumOfAdaptors: "NumOfAdaptors_example", PciAddress: "PciAddress_example", PciSlot: "PciSlot_example", ProductName: "ProductName_example", ProductRevision: "ProductRevision_example", SubDeviceId: "SubDeviceId_example", SubVendorId: "SubVendorId_example", Temperature: "Temperature_example", Type: "Type_example", VendorId: "VendorId_example", ComputeBoard: , InventoryDeviceInfo: , Links: []PciLinkRelationship{openapiclient.pci.Link.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Adapter: "Adapter_example", LinkSpeed: "LinkSpeed_example", LinkStatus: "LinkStatus_example", LinkWidth: "LinkWidth_example", PciSlot: "PciSlot_example", SlotStatus: "SlotStatus_example", InventoryDeviceInfo: , PciSwitch: , RegisteredDevice: }), RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{)}, RegisteredDevice: }), RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{)}), PersistentMemoryConfiguration: openapiclient.memory.PersistentMemoryConfiguration.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", MemoryCapacity: "MemoryCapacity_example", NumOfModules: "NumOfModules_example", NumOfRegions: "NumOfRegions_example", PersistentMemoryCapacity: "PersistentMemoryCapacity_example", ReservedCapacity: "ReservedCapacity_example", SecurityState: "SecurityState_example", TotalCapacity: "TotalCapacity_example", ComputeBoard: , InventoryDeviceInfo: , PersistentMemoryConfigResult: openapiclient.memory.PersistentMemoryConfigResult.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ConfigErrorDesc: "ConfigErrorDesc_example", ConfigResult: "ConfigResult_example", ConfigSequenceNo: int64(123), ConfigState: "ConfigState_example", InventoryDeviceInfo: , MemoryPersistentMemoryConfiguration: openapiclient.memory.PersistentMemoryConfiguration.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", MemoryCapacity: "MemoryCapacity_example", NumOfModules: "NumOfModules_example", NumOfRegions: "NumOfRegions_example", PersistentMemoryCapacity: "PersistentMemoryCapacity_example", ReservedCapacity: "ReservedCapacity_example", SecurityState: "SecurityState_example", TotalCapacity: "TotalCapacity_example", ComputeBoard: , InventoryDeviceInfo: , PersistentMemoryConfigResult: openapiclient.memory.PersistentMemoryConfigResult.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ConfigErrorDesc: "ConfigErrorDesc_example", ConfigResult: "ConfigResult_example", ConfigSequenceNo: int64(123), ConfigState: "ConfigState_example", InventoryDeviceInfo: , MemoryPersistentMemoryConfiguration: , PersistentMemoryNamespaceConfigResults: []MemoryPersistentMemoryNamespaceConfigResultRelationship{openapiclient.memory.PersistentMemoryNamespaceConfigResult.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ConfigStatus: "ConfigStatus_example", Name: "Name_example", SocketId: "SocketId_example", SocketMemoryId: "SocketMemoryId_example", InventoryDeviceInfo: , MemoryPersistentMemoryConfigResult: , RegisteredDevice: }), RegisteredDevice: }, PersistentMemoryRegions: []MemoryPersistentMemoryRegionRelationship{openapiclient.memory.PersistentMemoryRegion.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", FreeCapacity: "FreeCapacity_example", HealthState: "HealthState_example", InterleavedSetId: "InterleavedSetId_example", LocaterIds: "LocaterIds_example", PersistentMemoryType: "PersistentMemoryType_example", RegionId: "RegionId_example", SocketId: "SocketId_example", SocketMemoryId: "SocketMemoryId_example", TotalCapacity: "TotalCapacity_example", InventoryDeviceInfo: , MemoryPersistentMemoryConfiguration: , PersistentMemoryNamespaces: []MemoryPersistentMemoryNamespaceRelationship{openapiclient.memory.PersistentMemoryNamespace.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Capacity: "Capacity_example", HealthState: "HealthState_example", LabelVersion: "LabelVersion_example", Mode: "Mode_example", Name: "Name_example", Uuid: "Uuid_example", InventoryDeviceInfo: , MemoryPersistentMemoryRegion: openapiclient.memory.PersistentMemoryRegion.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", FreeCapacity: "FreeCapacity_example", HealthState: "HealthState_example", InterleavedSetId: "InterleavedSetId_example", LocaterIds: "LocaterIds_example", PersistentMemoryType: "PersistentMemoryType_example", RegionId: "RegionId_example", SocketId: "SocketId_example", SocketMemoryId: "SocketMemoryId_example", TotalCapacity: "TotalCapacity_example", InventoryDeviceInfo: , MemoryPersistentMemoryConfiguration: , PersistentMemoryNamespaces: []MemoryPersistentMemoryNamespaceRelationship{openapiclient.memory.PersistentMemoryNamespace.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Capacity: "Capacity_example", HealthState: "HealthState_example", LabelVersion: "LabelVersion_example", Mode: "Mode_example", Name: "Name_example", Uuid: "Uuid_example", InventoryDeviceInfo: , MemoryPersistentMemoryRegion: , RegisteredDevice: }), RegisteredDevice: }, RegisteredDevice: }), RegisteredDevice: }), RegisteredDevice: }, PersistentMemoryNamespaceConfigResults: []MemoryPersistentMemoryNamespaceConfigResultRelationship{openapiclient.memory.PersistentMemoryNamespaceConfigResult.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ConfigStatus: "ConfigStatus_example", Name: "Name_example", SocketId: "SocketId_example", SocketMemoryId: "SocketMemoryId_example", InventoryDeviceInfo: , MemoryPersistentMemoryConfigResult: , RegisteredDevice: }), RegisteredDevice: }, PersistentMemoryRegions: []MemoryPersistentMemoryRegionRelationship{), RegisteredDevice: }, Processors: []ProcessorUnitRelationship{openapiclient.processor.Unit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Architecture: "Architecture_example", NumCores: int64(123), NumCoresEnabled: "NumCoresEnabled_example", NumThreads: "NumThreads_example", OperPowerState: "OperPowerState_example", OperState: "OperState_example", Operability: "Operability_example", Presence: "Presence_example", ProcessorId: int64(123), SocketDesignation: "SocketDesignation_example", Speed: 123, Stepping: "Stepping_example", Thermal: "Thermal_example", ComputeBlade: , ComputeBoard: , ComputeRackUnit: , InventoryDeviceInfo: , RegisteredDevice: }), RegisteredDevice: , SecurityUnits: []SecurityUnitRelationship{openapiclient.security.Unit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", OperState: "OperState_example", Operability: "Operability_example", PartNumber: "PartNumber_example", PciSlot: "PciSlot_example", Power: "Power_example", Presence: "Presence_example", Thermal: "Thermal_example", UnitId: int64(123), Vid: "Vid_example", Voltage: "Voltage_example", ComputeBoard: , InventoryDeviceInfo: , RegisteredDevice: }), StorageControllers: []StorageControllerRelationship{openapiclient.storage.Controller.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ControllerFlags: "ControllerFlags_example", ControllerId: "ControllerId_example", ControllerStatus: "ControllerStatus_example", ForeignConfigPresent: false, HwRevision: "HwRevision_example", InterfaceType: "InterfaceType_example", MaxVolumesSupported: int64(123), OobInterfaceSupported: "OobInterfaceSupported_example", OperState: "OperState_example", Operability: "Operability_example", PciAddr: "PciAddr_example", PciSlot: "PciSlot_example", Presence: "Presence_example", RaidSupport: "RaidSupport_example", RebuildRate: "RebuildRate_example", SelfEncryptEnabled: "SelfEncryptEnabled_example", Type: "Type_example", ComputeBlade: , ComputeBoard: , ComputeRackUnit: , DiskGroup: []StorageDiskGroupRelationship{openapiclient.storage.DiskGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Name: "Name_example", RaidType: "RaidType_example", DedicatedHotSpares: []StoragePhysicalDiskRelationship{openapiclient.storage.PhysicalDisk.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", BlockSize: "BlockSize_example", Bootable: "Bootable_example", ConfigurationCheckpoint: "ConfigurationCheckpoint_example", ConfigurationState: "ConfigurationState_example", DiscoveredPath: "DiscoveredPath_example", DiskId: "DiskId_example", DiskState: "DiskState_example", DriveFirmware: "DriveFirmware_example", DriveState: "DriveState_example", FdeCapable: "FdeCapable_example", HotSpareType: "HotSpareType_example", LinkSpeed: "LinkSpeed_example", LinkState: "LinkState_example", NumBlocks: "NumBlocks_example", OperPowerState: "OperPowerState_example", OperQualifierReason: "OperQualifierReason_example", Operability: "Operability_example", PhysicalBlockSize: "PhysicalBlockSize_example", Pid: "Pid_example", Presence: "Presence_example", Protocol: "Protocol_example", RawSize: "RawSize_example", Secured: "Secured_example", Size: "Size_example", Thermal: "Thermal_example", Type: "Type_example", VariantType: "VariantType_example", InventoryDeviceInfo: , LocatorLed: openapiclient.equipment.LocatorLed.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Color: "Color_example", OperState: "OperState_example", ComputeBlade: , ComputeRackUnit: , EquipmentChassis: openapiclient.equipment.Chassis.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AlarmSummary: , ChassisId: int64(123), ConnectionPath: "ConnectionPath_example", ConnectionStatus: "ConnectionStatus_example", Description: "Description_example", FaultSummary: int64(123), ManagementMode: "ManagementMode_example", Name: "Name_example", OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", PlatformType: "PlatformType_example", ProductName: "ProductName_example", Sku: "Sku_example", Vid: "Vid_example", Blades: []ComputeBladeRelationship{), Fanmodules: []EquipmentFanModuleRelationship{openapiclient.equipment.FanModule.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Description: "Description_example", ModuleId: int64(123), OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", Sku: "Sku_example", TrayId: int64(123), Vid: "Vid_example", ComputeRackUnit: , EquipmentChassis: openapiclient.equipment.Chassis.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AlarmSummary: , ChassisId: int64(123), ConnectionPath: "ConnectionPath_example", ConnectionStatus: "ConnectionStatus_example", Description: "Description_example", FaultSummary: int64(123), ManagementMode: "ManagementMode_example", Name: "Name_example", OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", PlatformType: "PlatformType_example", ProductName: "ProductName_example", Sku: "Sku_example", Vid: "Vid_example", Blades: []ComputeBladeRelationship{), Fanmodules: []EquipmentFanModuleRelationship{openapiclient.equipment.FanModule.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Description: "Description_example", ModuleId: int64(123), OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", Sku: "Sku_example", TrayId: int64(123), Vid: "Vid_example", ComputeRackUnit: , EquipmentChassis: , EquipmentRackEnclosure: openapiclient.equipment.RackEnclosure.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", EnclosureId: int64(123), Fanmodules: []EquipmentFanModuleRelationship{), InventoryDeviceInfo: , Psus: []EquipmentPsuRelationship{openapiclient.equipment.Psu.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Description: "Description_example", OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", PsuFwVersion: "PsuFwVersion_example", PsuId: int64(123), PsuInputSrc: "PsuInputSrc_example", PsuType: "PsuType_example", PsuWattage: "PsuWattage_example", Sku: "Sku_example", Vid: "Vid_example", Voltage: "Voltage_example", ComputeRackUnit: , EquipmentChassis: , EquipmentFex: openapiclient.equipment.Fex.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ConnectionStatus: "ConnectionStatus_example", Description: "Description_example", ModuleId: int64(123), OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", ProductName: "ProductName_example", Sku: "Sku_example", Version: "Version_example", Vid: "Vid_example", HostPorts: []EtherHostPortRelationship{openapiclient.ether.HostPort.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortId: int64(123), Role: "Role_example", SlotId: int64(123), SwitchId: "SwitchId_example", MacAddress: "MacAddress_example", Mode: "Mode_example", OperSpeed: "OperSpeed_example", PeerDn: "PeerDn_example", PortChannelId: int64(123), PortType: "PortType_example", TransceiverType: "TransceiverType_example", AcknowledgedPeerInterface: openapiclient.port.InterfaceBase.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", AcknowledgedPeerInterface: openapiclient.ether.PhysicalPortBase.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortId: int64(123), Role: "Role_example", SlotId: int64(123), SwitchId: "SwitchId_example", MacAddress: "MacAddress_example", Mode: "Mode_example", OperSpeed: "OperSpeed_example", PeerDn: "PeerDn_example", PortChannelId: int64(123), PortType: "PortType_example", TransceiverType: "TransceiverType_example", AcknowledgedPeerInterface: openapiclient.port.InterfaceBase.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", AcknowledgedPeerInterface: openapiclient.ether.PhysicalPortBase.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortId: int64(123), Role: "Role_example", SlotId: int64(123), SwitchId: "SwitchId_example", MacAddress: "MacAddress_example", Mode: "Mode_example", OperSpeed: "OperSpeed_example", PeerDn: "PeerDn_example", PortChannelId: int64(123), PortType: "PortType_example", TransceiverType: "TransceiverType_example", AcknowledgedPeerInterface: , PeerInterface: }, PeerInterface: }, PeerInterface: }, PeerInterface: }, PeerInterface: , ModuleId: int64(123), Speed: "Speed_example", EquipmentIoCardBase: openapiclient.equipment.IoCardBase.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ConnectionStatus: "ConnectionStatus_example", Description: "Description_example", ModuleId: int64(123), OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", ProductName: "ProductName_example", Sku: "Sku_example", Version: "Version_example", Vid: "Vid_example", HostPorts: []EtherHostPortRelationship{openapiclient.ether.HostPort.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortId: int64(123), Role: "Role_example", SlotId: int64(123), SwitchId: "SwitchId_example", MacAddress: "MacAddress_example", Mode: "Mode_example", OperSpeed: "OperSpeed_example", PeerDn: "PeerDn_example", PortChannelId: int64(123), PortType: "PortType_example", TransceiverType: "TransceiverType_example", AcknowledgedPeerInterface: , PeerInterface: , ModuleId: int64(123), Speed: "Speed_example", EquipmentIoCardBase: openapiclient.equipment.IoCardBase.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ConnectionStatus: "ConnectionStatus_example", Description: "Description_example", ModuleId: int64(123), OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", ProductName: "ProductName_example", Sku: "Sku_example", Version: "Version_example", Vid: "Vid_example", HostPorts: []EtherHostPortRelationship{), MgmtController: openapiclient.management.Controller.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", AdapterUnit: , ComputeBlade: , ComputeRackUnit: , EquipmentIoCardBase: , EquipmentSharedIoModule: openapiclient.equipment.SharedIoModule.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ConfigState: "ConfigState_example", Discovery: "Discovery_example", MacOfSharedIomAside: "MacOfSharedIomAside_example", MacOfSharedIomBside: "MacOfSharedIomBside_example", OperState: "OperState_example", PartNumber: "PartNumber_example", Reachability: "Reachability_example", UsrLbl: "UsrLbl_example", Vid: "Vid_example", Controller: openapiclient.management.Controller.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", AdapterUnit: , ComputeBlade: , ComputeRackUnit: , EquipmentIoCardBase: , EquipmentSharedIoModule: openapiclient.equipment.SharedIoModule.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ConfigState: "ConfigState_example", Discovery: "Discovery_example", MacOfSharedIomAside: "MacOfSharedIomAside_example", MacOfSharedIomBside: "MacOfSharedIomBside_example", OperState: "OperState_example", PartNumber: "PartNumber_example", Reachability: "Reachability_example", UsrLbl: "UsrLbl_example", Vid: "Vid_example", Controller: , EquipmentSystemIoController: openapiclient.equipment.SystemIoController.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ChassisId: "ChassisId_example", ConnectionPath: "ConnectionPath_example", ConnectionStatus: "ConnectionStatus_example", Description: "Description_example", ManagingInstance: "ManagingInstance_example", OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", SystemIoControllerId: int64(123), Cmc: , EquipmentChassis: , InventoryDeviceInfo: , RegisteredDevice: , SharedIoModule: }, InventoryDeviceInfo: , PortGroups: []PortGroupRelationship{openapiclient.port.Group.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Transport: "Transport_example", EquipmentSharedIoModule: , EquipmentSwitchCard: openapiclient.equipment.SwitchCard.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Description: "Description_example", NumPorts: int64(123), OutOfBandIpAddress: "OutOfBandIpAddress_example", OutOfBandIpGateway: "OutOfBandIpGateway_example", Presence: "Presence_example", SlotId: int64(123), State: "State_example", SwitchId: "SwitchId_example", FcPortChannels: []FcPortChannelRelationship{openapiclient.fc.PortChannel.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", AdminSpeed: "AdminSpeed_example", AdminState: "AdminState_example", Mode: "Mode_example", OperSpeed: "OperSpeed_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortChannelId: int64(123), Role: "Role_example", SwitchId: "SwitchId_example", Vsan: int64(123), EquipmentSwitchCard: openapiclient.equipment.SwitchCard.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Description: "Description_example", NumPorts: int64(123), OutOfBandIpAddress: "OutOfBandIpAddress_example", OutOfBandIpGateway: "OutOfBandIpGateway_example", Presence: "Presence_example", SlotId: int64(123), State: "State_example", SwitchId: "SwitchId_example", FcPortChannels: []FcPortChannelRelationship{openapiclient.fc.PortChannel.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", AdminSpeed: "AdminSpeed_example", AdminState: "AdminState_example", Mode: "Mode_example", OperSpeed: "OperSpeed_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortChannelId: int64(123), Role: "Role_example", SwitchId: "SwitchId_example", Vsan: int64(123), EquipmentSwitchCard: , RegisteredDevice: }), InventoryDeviceInfo: , NetworkElement: openapiclient.network.Element.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminEvacState: "AdminEvacState_example", AdminInbandInterfaceState: "AdminInbandInterfaceState_example", AlarmSummary: , AvailableMemory: "AvailableMemory_example", EthernetMode: "EthernetMode_example", FaultSummary: int64(123), FcMode: "FcMode_example", InbandIpAddress: "InbandIpAddress_example", InbandIpGateway: "InbandIpGateway_example", InbandIpMask: "InbandIpMask_example", InbandVlan: int64(123), ManagementMode: "ManagementMode_example", OperEvacState: "OperEvacState_example", Operability: "Operability_example", OutOfBandIpAddress: "OutOfBandIpAddress_example", OutOfBandIpGateway: "OutOfBandIpGateway_example", OutOfBandIpMask: "OutOfBandIpMask_example", OutOfBandIpv4Address: "OutOfBandIpv4Address_example", OutOfBandIpv4Gateway: "OutOfBandIpv4Gateway_example", OutOfBandIpv4Mask: "OutOfBandIpv4Mask_example", OutOfBandIpv6Address: "OutOfBandIpv6Address_example", OutOfBandIpv6Gateway: "OutOfBandIpv6Gateway_example", OutOfBandIpv6Prefix: "OutOfBandIpv6Prefix_example", OutOfBandMac: "OutOfBandMac_example", SwitchId: "SwitchId_example", TotalMemory: int64(123), Cards: []EquipmentSwitchCardRelationship{), Fanmodules: []EquipmentFanModuleRelationship{), InventoryDeviceInfo: , ManagementContoller: , ManagementEntity: openapiclient.management.Entity.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ClusterLinkState: "ClusterLinkState_example", ClusterReadiness: "ClusterReadiness_example", ClusterState: "ClusterState_example", EntityId: "EntityId_example", Leadership: "Leadership_example", InventoryDeviceInfo: , NetworkElement: openapiclient.network.Element.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminEvacState: "AdminEvacState_example", AdminInbandInterfaceState: "AdminInbandInterfaceState_example", AlarmSummary: , AvailableMemory: "AvailableMemory_example", EthernetMode: "EthernetMode_example", FaultSummary: int64(123), FcMode: "FcMode_example", InbandIpAddress: "InbandIpAddress_example", InbandIpGateway: "InbandIpGateway_example", InbandIpMask: "InbandIpMask_example", InbandVlan: int64(123), ManagementMode: "ManagementMode_example", OperEvacState: "OperEvacState_example", Operability: "Operability_example", OutOfBandIpAddress: "OutOfBandIpAddress_example", OutOfBandIpGateway: "OutOfBandIpGateway_example", OutOfBandIpMask: "OutOfBandIpMask_example", OutOfBandIpv4Address: "OutOfBandIpv4Address_example", OutOfBandIpv4Gateway: "OutOfBandIpv4Gateway_example", OutOfBandIpv4Mask: "OutOfBandIpv4Mask_example", OutOfBandIpv6Address: "OutOfBandIpv6Address_example", OutOfBandIpv6Gateway: "OutOfBandIpv6Gateway_example", OutOfBandIpv6Prefix: "OutOfBandIpv6Prefix_example", OutOfBandMac: "OutOfBandMac_example", SwitchId: "SwitchId_example", TotalMemory: int64(123), Cards: []EquipmentSwitchCardRelationship{), Fanmodules: []EquipmentFanModuleRelationship{), InventoryDeviceInfo: , ManagementContoller: , ManagementEntity: openapiclient.management.Entity.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ClusterLinkState: "ClusterLinkState_example", ClusterReadiness: "ClusterReadiness_example", ClusterState: "ClusterState_example", EntityId: "EntityId_example", Leadership: "Leadership_example", InventoryDeviceInfo: , NetworkElement: , RegisteredDevice: }, NetworkFcZoneInfo: openapiclient.network.FcZoneInfo.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", UserZoneCount: int64(123), UserZoneLimit: int64(123), ZoneCount: int64(123), ZoneLimit: int64(123), InventoryDeviceInfo: , NetworkElement: , RegisteredDevice: }, NetworkVlanPortInfo: openapiclient.network.VlanPortInfo.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", AccessVlanPortCount: int64(123), BorderVlanPortCount: int64(123), CompressedVlanPortCount: "CompressedVlanPortCount_example", UncompressedVlanPortCount: "UncompressedVlanPortCount_example", VlanPortLimit: int64(123), InventoryDeviceInfo: , NetworkElement: , RegisteredDevice: }, PortMacBindings: []PortMacBindingRelationship{openapiclient.port.MacBinding.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", AggregatePortId: int64(123), ChassisId: int64(123), DeviceMac: "DeviceMac_example", PortId: int64(123), PortMac: "PortMac_example", SlotId: int64(123), SwitchId: int64(123), NetworkElement: , RegisteredDevice: }), Psus: []EquipmentPsuRelationship{openapiclient.equipment.Psu.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Description: "Description_example", OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", PsuFwVersion: "PsuFwVersion_example", PsuId: int64(123), PsuInputSrc: "PsuInputSrc_example", PsuType: "PsuType_example", PsuWattage: "PsuWattage_example", Sku: "Sku_example", Vid: "Vid_example", Voltage: "Voltage_example", ComputeRackUnit: , EquipmentChassis: , EquipmentFex: openapiclient.equipment.Fex.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ConnectionStatus: "ConnectionStatus_example", Description: "Description_example", ModuleId: int64(123), OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", ProductName: "ProductName_example", Sku: "Sku_example", Version: "Version_example", Vid: "Vid_example", HostPorts: []EtherHostPortRelationship{), MgmtController: , NetworkPorts: []EtherNetworkPortRelationship{openapiclient.ether.NetworkPort.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", AcknowledgedPeerInterface: , PeerInterface: , ModuleId: int64(123), PeerDn: "PeerDn_example", PortId: int64(123), SlotId: int64(123), Speed: "Speed_example", SwitchId: "SwitchId_example", EquipmentIoCardBase: , RegisteredDevice: }), DiscoveryState: "DiscoveryState_example", Fans: []EquipmentFanRelationship{openapiclient.equipment.Fan.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Description: "Description_example", FanId: int64(123), FanModuleId: int64(123), ModuleId: int64(123), OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", Sku: "Sku_example", TrayId: int64(123), Vid: "Vid_example", EquipmentFanModule: , EquipmentFex: , InventoryDeviceInfo: , RegisteredDevice: }), InventoryDeviceInfo: , LocatorLed: openapiclient.equipment.LocatorLed.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Color: "Color_example", OperState: "OperState_example", ComputeBlade: , ComputeRackUnit: , EquipmentChassis: , EquipmentFex: , InventoryDeviceInfo: , RegisteredDevice: , StoragePhysicalDisk: openapiclient.storage.PhysicalDisk.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", BlockSize: "BlockSize_example", Bootable: "Bootable_example", ConfigurationCheckpoint: "ConfigurationCheckpoint_example", ConfigurationState: "ConfigurationState_example", DiscoveredPath: "DiscoveredPath_example", DiskId: "DiskId_example", DiskState: "DiskState_example", DriveFirmware: "DriveFirmware_example", DriveState: "DriveState_example", FdeCapable: "FdeCapable_example", HotSpareType: "HotSpareType_example", LinkSpeed: "LinkSpeed_example", LinkState: "LinkState_example", NumBlocks: "NumBlocks_example", OperPowerState: "OperPowerState_example", OperQualifierReason: "OperQualifierReason_example", Operability: "Operability_example", PhysicalBlockSize: "PhysicalBlockSize_example", Pid: "Pid_example", Presence: "Presence_example", Protocol: "Protocol_example", RawSize: "RawSize_example", Secured: "Secured_example", Size: "Size_example", Thermal: "Thermal_example", Type: "Type_example", VariantType: "VariantType_example", InventoryDeviceInfo: , LocatorLed: , PhysicalDiskExtensions: []StoragePhysicalDiskExtensionRelationship{openapiclient.storage.PhysicalDiskExtension.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Bootable: "Bootable_example", DiskDn: "DiskDn_example", DiskId: int64(123), DiskState: "DiskState_example", Health: "Health_example", InventoryDeviceInfo: , PhysicalDisk: , RegisteredDevice: , StorageController: openapiclient.storage.Controller.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ControllerFlags: "ControllerFlags_example", ControllerId: "ControllerId_example", ControllerStatus: "ControllerStatus_example", ForeignConfigPresent: false, HwRevision: "HwRevision_example", InterfaceType: "InterfaceType_example", MaxVolumesSupported: int64(123), OobInterfaceSupported: "OobInterfaceSupported_example", OperState: "OperState_example", Operability: "Operability_example", PciAddr: "PciAddr_example", PciSlot: "PciSlot_example", Presence: "Presence_example", RaidSupport: "RaidSupport_example", RebuildRate: "RebuildRate_example", SelfEncryptEnabled: "SelfEncryptEnabled_example", Type: "Type_example", ComputeBlade: , ComputeBoard: , ComputeRackUnit: , DiskGroup: []StorageDiskGroupRelationship{openapiclient.storage.DiskGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Name: "Name_example", RaidType: "RaidType_example", DedicatedHotSpares: []StoragePhysicalDiskRelationship{), RegisteredDevice: , Spans: []StorageSpanRelationship{openapiclient.storage.Span.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Slots: []int64{int64(123)), SpanId: int64(123), DiskGroup: , PhysicalDisks: []StoragePhysicalDiskRelationship{), RegisteredDevice: }), StorageController: , VirtualDrives: []StorageVirtualDriveRelationship{openapiclient.storage.VirtualDrive.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AccessPolicy: "AccessPolicy_example", ActualWriteCachePolicy: "ActualWriteCachePolicy_example", AvailableSize: "AvailableSize_example", BlockSize: "BlockSize_example", Bootable: "Bootable_example", ConfigState: "ConfigState_example", ConfiguredWriteCachePolicy: "ConfiguredWriteCachePolicy_example", ConnectionProtocol: "ConnectionProtocol_example", DriveCache: "DriveCache_example", DriveSecurity: "DriveSecurity_example", DriveState: "DriveState_example", IoPolicy: "IoPolicy_example", Name: "Name_example", NumBlocks: "NumBlocks_example", OperState: "OperState_example", Operability: "Operability_example", PhysicalBlockSize: "PhysicalBlockSize_example", Presence: "Presence_example", ReadPolicy: "ReadPolicy_example", SecurityFlags: "SecurityFlags_example", Size: "Size_example", StripSize: "StripSize_example", Type: "Type_example", Uuid: "Uuid_example", VendorUuid: "VendorUuid_example", VirtualDriveId: "VirtualDriveId_example", DiskGroup: , InventoryDeviceInfo: , PhysicalDiskUsages: []StoragePhysicalDiskUsageRelationship{openapiclient.storage.PhysicalDiskUsage.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", NumberOfBlocks: "NumberOfBlocks_example", PhysicalDrive: "PhysicalDrive_example", Span: "Span_example", StartingBlock: "StartingBlock_example", State: "State_example", VirtualDrive: "VirtualDrive_example", InventoryDeviceInfo: , RegisteredDevice: }), RegisteredDevice: , StorageController: , VdMemberEps: []StorageVdMemberEpRelationship{openapiclient.storage.VdMemberEp.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperQualifierReason: "OperQualifierReason_example", Presence: "Presence_example", Role: "Role_example", SpanId: "SpanId_example", VdMemberEpId: int64(123), InventoryDeviceInfo: , RegisteredDevice: , StorageVirtualDrive: openapiclient.storage.VirtualDrive.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AccessPolicy: "AccessPolicy_example", ActualWriteCachePolicy: "ActualWriteCachePolicy_example", AvailableSize: "AvailableSize_example", BlockSize: "BlockSize_example", Bootable: "Bootable_example", ConfigState: "ConfigState_example", ConfiguredWriteCachePolicy: "ConfiguredWriteCachePolicy_example", ConnectionProtocol: "ConnectionProtocol_example", DriveCache: "DriveCache_example", DriveSecurity: "DriveSecurity_example", DriveState: "DriveState_example", IoPolicy: "IoPolicy_example", Name: "Name_example", NumBlocks: "NumBlocks_example", OperState: "OperState_example", Operability: "Operability_example", PhysicalBlockSize: "PhysicalBlockSize_example", Presence: "Presence_example", ReadPolicy: "ReadPolicy_example", SecurityFlags: "SecurityFlags_example", Size: "Size_example", StripSize: "StripSize_example", Type: "Type_example", Uuid: "Uuid_example", VendorUuid: "VendorUuid_example", VirtualDriveId: "VirtualDriveId_example", DiskGroup: , InventoryDeviceInfo: , PhysicalDiskUsages: []StoragePhysicalDiskUsageRelationship{openapiclient.storage.PhysicalDiskUsage.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", NumberOfBlocks: "NumberOfBlocks_example", PhysicalDrive: "PhysicalDrive_example", Span: "Span_example", StartingBlock: "StartingBlock_example", State: "State_example", VirtualDrive: "VirtualDrive_example", InventoryDeviceInfo: , RegisteredDevice: }), RegisteredDevice: , StorageController: , VdMemberEps: []StorageVdMemberEpRelationship{openapiclient.storage.VdMemberEp.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperQualifierReason: "OperQualifierReason_example", Presence: "Presence_example", Role: "Role_example", SpanId: "SpanId_example", VdMemberEpId: int64(123), InventoryDeviceInfo: , RegisteredDevice: , StorageVirtualDrive: }), VirtualDriveExtension: openapiclient.storage.VirtualDriveExtension.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Bootable: "Bootable_example", ContainerId: int64(123), DriveState: "DriveState_example", Name: "Name_example", OperDeviceId: "OperDeviceId_example", Uuid: "Uuid_example", VendorUuid: "VendorUuid_example", VirtualDriveDn: "VirtualDriveDn_example", VirtualDriveId: "VirtualDriveId_example", InventoryDeviceInfo: , RegisteredDevice: , StorageController: , VirtualDrive: }}}), VirtualDriveExtension: openapiclient.storage.VirtualDriveExtension.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Bootable: "Bootable_example", ContainerId: int64(123), DriveState: "DriveState_example", Name: "Name_example", OperDeviceId: "OperDeviceId_example", Uuid: "Uuid_example", VendorUuid: "VendorUuid_example", VirtualDriveDn: "VirtualDriveDn_example", VirtualDriveId: "VirtualDriveId_example", InventoryDeviceInfo: , RegisteredDevice: , StorageController: , VirtualDrive: }})}), InventoryDeviceInfo: , PhysicalDiskExtensions: []StoragePhysicalDiskExtensionRelationship{openapiclient.storage.PhysicalDiskExtension.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Bootable: "Bootable_example", DiskDn: "DiskDn_example", DiskId: int64(123), DiskState: "DiskState_example", Health: "Health_example", InventoryDeviceInfo: , PhysicalDisk: , RegisteredDevice: , StorageController: }), PhysicalDisks: []StoragePhysicalDiskRelationship{), RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{), VirtualDriveExtensions: []StorageVirtualDriveExtensionRelationship{), VirtualDrives: []StorageVirtualDriveRelationship{)}}), RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{), SasPorts: []StorageSasPortRelationship{openapiclient.storage.SasPort.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Address: "Address_example", DiskId: int64(123), EndPointId: int64(123), LinkDescription: "LinkDescription_example", LinkSpeed: "LinkSpeed_example", InventoryDeviceInfo: , RegisteredDevice: , StoragePhysicalDisk: }), StorageController: , StorageEnclosure: openapiclient.storage.Enclosure.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ChassisId: int64(123), Description: "Description_example", EnclosureId: int64(123), NumSlots: int64(123), Presence: "Presence_example", ServerId: int64(123), Type: "Type_example", ComputeBlade: , ComputeRackUnit: , EnclosureDiskSlots: []StorageEnclosureDiskSlotEpRelationship{openapiclient.storage.EnclosureDiskSlotEp.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", DrivePath: "DrivePath_example", Health: "Health_example", Presence: "Presence_example", Slot: "Slot_example", InventoryDeviceInfo: , RegisteredDevice: , StorageEnclosure: openapiclient.storage.Enclosure.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ChassisId: int64(123), Description: "Description_example", EnclosureId: int64(123), NumSlots: int64(123), Presence: "Presence_example", ServerId: int64(123), Type: "Type_example", ComputeBlade: , ComputeRackUnit: , EnclosureDiskSlots: []StorageEnclosureDiskSlotEpRelationship{openapiclient.storage.EnclosureDiskSlotEp.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", DrivePath: "DrivePath_example", Health: "Health_example", Presence: "Presence_example", Slot: "Slot_example", InventoryDeviceInfo: , RegisteredDevice: , StorageEnclosure: }), EnclosureDisks: []StorageEnclosureDiskRelationship{openapiclient.storage.EnclosureDisk.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", BlockSize: "BlockSize_example", DiskId: "DiskId_example", DiskState: "DiskState_example", Health: "Health_example", NumBlocks: "NumBlocks_example", Pid: "Pid_example", SasAddress1: "SasAddress1_example", SasAddress2: "SasAddress2_example", Size: "Size_example", InventoryDeviceInfo: , PhysicalDisk: , RegisteredDevice: , StorageEnclosure: }), EquipmentChassis: , InventoryDeviceInfo: , PhysicalDisks: []StoragePhysicalDiskRelationship{), RegisteredDevice: }}), EnclosureDisks: []StorageEnclosureDiskRelationship{openapiclient.storage.EnclosureDisk.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", BlockSize: "BlockSize_example", DiskId: "DiskId_example", DiskState: "DiskState_example", Health: "Health_example", NumBlocks: "NumBlocks_example", Pid: "Pid_example", SasAddress1: "SasAddress1_example", SasAddress2: "SasAddress2_example", Size: "Size_example", InventoryDeviceInfo: , PhysicalDisk: , RegisteredDevice: , StorageEnclosure: }), EquipmentChassis: , InventoryDeviceInfo: , PhysicalDisks: []StoragePhysicalDiskRelationship{), RegisteredDevice: }}}, NetworkElement: , Psus: []EquipmentPsuRelationship{), RegisteredDevice: }, EquipmentRackEnclosure: openapiclient.equipment.RackEnclosure.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", EnclosureId: int64(123), Fanmodules: []EquipmentFanModuleRelationship{), InventoryDeviceInfo: , Psus: []EquipmentPsuRelationship{), RegisteredDevice: , Slots: []EquipmentRackEnclosureSlotRelationship{openapiclient.equipment.RackEnclosureSlot.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", RackId: int64(123), RackUnitDn: "RackUnitDn_example", EquipmentRackEnclosure: , InventoryDeviceInfo: , RackUnit: , RegisteredDevice: })}, InventoryDeviceInfo: , NetworkElement: , RegisteredDevice: }), RegisteredDevice: , StorageItems: []StorageItemRelationship{openapiclient.storage.Item.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", AlarmType: "AlarmType_example", Name: "Name_example", OperState: "OperState_example", Size: "Size_example", Used: "Used_example", InventoryDeviceInfo: , NetworkElement: , RegisteredDevice: }), TopSystem: openapiclient.top.System.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Ipv4Address: "Ipv4Address_example", Ipv6Address: "Ipv6Address_example", Mode: "Mode_example", Name: "Name_example", TimeZone: "TimeZone_example", ComputeBlades: []ComputeBladeRelationship{), ComputeRackUnits: []ComputeRackUnitRelationship{), InventoryDeviceInfo: , ManagementController: , NetworkElements: []NetworkElementRelationship{), RegisteredDevice: }, UcsmRunningFirmware: }, RegisteredDevice: }, NetworkFcZoneInfo: openapiclient.network.FcZoneInfo.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", UserZoneCount: int64(123), UserZoneLimit: int64(123), ZoneCount: int64(123), ZoneLimit: int64(123), InventoryDeviceInfo: , NetworkElement: , RegisteredDevice: }, NetworkVlanPortInfo: openapiclient.network.VlanPortInfo.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", AccessVlanPortCount: int64(123), BorderVlanPortCount: int64(123), CompressedVlanPortCount: "CompressedVlanPortCount_example", UncompressedVlanPortCount: "UncompressedVlanPortCount_example", VlanPortLimit: int64(123), InventoryDeviceInfo: , NetworkElement: , RegisteredDevice: }, PortMacBindings: []PortMacBindingRelationship{openapiclient.port.MacBinding.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", AggregatePortId: int64(123), ChassisId: int64(123), DeviceMac: "DeviceMac_example", PortId: int64(123), PortMac: "PortMac_example", SlotId: int64(123), SwitchId: int64(123), NetworkElement: , RegisteredDevice: }), Psus: []EquipmentPsuRelationship{), RegisteredDevice: , StorageItems: []StorageItemRelationship{openapiclient.storage.Item.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", AlarmType: "AlarmType_example", Name: "Name_example", OperState: "OperState_example", Size: "Size_example", Used: "Used_example", InventoryDeviceInfo: , NetworkElement: , RegisteredDevice: }), TopSystem: openapiclient.top.System.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Ipv4Address: "Ipv4Address_example", Ipv6Address: "Ipv6Address_example", Mode: "Mode_example", Name: "Name_example", TimeZone: "TimeZone_example", ComputeBlades: []ComputeBladeRelationship{), ComputeRackUnits: []ComputeRackUnitRelationship{), InventoryDeviceInfo: , ManagementController: , NetworkElements: []NetworkElementRelationship{), RegisteredDevice: }, UcsmRunningFirmware: }, PortChannels: []EtherPortChannelRelationship{openapiclient.ether.PortChannel.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", AccessVlan: "AccessVlan_example", AdminState: "AdminState_example", AllowedVlans: "AllowedVlans_example", Mode: "Mode_example", NativeVlan: "NativeVlan_example", OperSpeed: "OperSpeed_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortChannelId: int64(123), Role: "Role_example", SwitchId: "SwitchId_example", EquipmentSwitchCard: , RegisteredDevice: }), PortGroups: []PortGroupRelationship{openapiclient.port.Group.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Transport: "Transport_example", EquipmentSharedIoModule: , EquipmentSwitchCard: , EthernetPorts: []EtherPhysicalPortRelationship{openapiclient.ether.PhysicalPort.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortId: int64(123), Role: "Role_example", SlotId: int64(123), SwitchId: "SwitchId_example", MacAddress: "MacAddress_example", Mode: "Mode_example", OperSpeed: "OperSpeed_example", PeerDn: "PeerDn_example", PortChannelId: int64(123), PortType: "PortType_example", TransceiverType: "TransceiverType_example", AcknowledgedPeerInterface: , PeerInterface: , AdminSpeed: "AdminSpeed_example", AdminState: "AdminState_example", AggregatePortId: int64(123), LicenseGrace: "LicenseGrace_example", LicenseState: "LicenseState_example", InventoryDeviceInfo: , PortGroup: , PortSubGroup: openapiclient.port.SubGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Transport: "Transport_example", EthernetPorts: []EtherPhysicalPortRelationship{openapiclient.ether.PhysicalPort.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortId: int64(123), Role: "Role_example", SlotId: int64(123), SwitchId: "SwitchId_example", MacAddress: "MacAddress_example", Mode: "Mode_example", OperSpeed: "OperSpeed_example", PeerDn: "PeerDn_example", PortChannelId: int64(123), PortType: "PortType_example", TransceiverType: "TransceiverType_example", AcknowledgedPeerInterface: , PeerInterface: , AdminSpeed: "AdminSpeed_example", AdminState: "AdminState_example", AggregatePortId: int64(123), LicenseGrace: "LicenseGrace_example", LicenseState: "LicenseState_example", InventoryDeviceInfo: , PortGroup: , PortSubGroup: openapiclient.port.SubGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Transport: "Transport_example", EthernetPorts: []EtherPhysicalPortRelationship{), FcPorts: []FcPhysicalPortRelationship{openapiclient.fc.PhysicalPort.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortId: int64(123), Role: "Role_example", SlotId: int64(123), SwitchId: "SwitchId_example", AdminSpeed: "AdminSpeed_example", AdminState: "AdminState_example", B2bCredit: int64(123), MaxSpeed: "MaxSpeed_example", Mode: "Mode_example", OperSpeed: "OperSpeed_example", PeerDn: "PeerDn_example", PortChannelId: int64(123), TransceiverType: "TransceiverType_example", Vsan: int64(123), Wwn: "Wwn_example", InventoryDeviceInfo: , PortGroup: , PortSubGroup: , RegisteredDevice: }), InventoryDeviceInfo: , PortGroup: , RegisteredDevice: }, RegisteredDevice: }), FcPorts: []FcPhysicalPortRelationship{openapiclient.fc.PhysicalPort.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortId: int64(123), Role: "Role_example", SlotId: int64(123), SwitchId: "SwitchId_example", AdminSpeed: "AdminSpeed_example", AdminState: "AdminState_example", B2bCredit: int64(123), MaxSpeed: "MaxSpeed_example", Mode: "Mode_example", OperSpeed: "OperSpeed_example", PeerDn: "PeerDn_example", PortChannelId: int64(123), TransceiverType: "TransceiverType_example", Vsan: int64(123), Wwn: "Wwn_example", InventoryDeviceInfo: , PortGroup: , PortSubGroup: , RegisteredDevice: }), InventoryDeviceInfo: , PortGroup: , RegisteredDevice: }, RegisteredDevice: }), FcPorts: []FcPhysicalPortRelationship{), InventoryDeviceInfo: , RegisteredDevice: , SubGroups: []PortSubGroupRelationship{)}), RegisteredDevice: }, RegisteredDevice: }), InventoryDeviceInfo: , NetworkElement: , PortChannels: []EtherPortChannelRelationship{openapiclient.ether.PortChannel.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", AccessVlan: "AccessVlan_example", AdminState: "AdminState_example", AllowedVlans: "AllowedVlans_example", Mode: "Mode_example", NativeVlan: "NativeVlan_example", OperSpeed: "OperSpeed_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortChannelId: int64(123), Role: "Role_example", SwitchId: "SwitchId_example", EquipmentSwitchCard: , RegisteredDevice: }), PortGroups: []PortGroupRelationship{), RegisteredDevice: }, EthernetPorts: []EtherPhysicalPortRelationship{), FcPorts: []FcPhysicalPortRelationship{), InventoryDeviceInfo: , RegisteredDevice: , SubGroups: []PortSubGroupRelationship{)}), RegisteredDevice: }, EquipmentSystemIoController: openapiclient.equipment.SystemIoController.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ChassisId: "ChassisId_example", ConnectionPath: "ConnectionPath_example", ConnectionStatus: "ConnectionStatus_example", Description: "Description_example", ManagingInstance: "ManagingInstance_example", OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", SystemIoControllerId: int64(123), Cmc: , EquipmentChassis: , InventoryDeviceInfo: , RegisteredDevice: , SharedIoModule: }, InventoryDeviceInfo: , ManagementInterfaces: []ManagementInterfaceRelationship{openapiclient.management.Interface.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Gateway: "Gateway_example", HostName: "HostName_example", IpAddress: "IpAddress_example", Ipv4Address: "Ipv4Address_example", Ipv4Gateway: "Ipv4Gateway_example", Ipv4Mask: "Ipv4Mask_example", Ipv6Address: "Ipv6Address_example", Ipv6Gateway: "Ipv6Gateway_example", Ipv6Prefix: int64(123), MacAddress: "MacAddress_example", Mask: "Mask_example", SwitchId: "SwitchId_example", UemConnStatus: "UemConnStatus_example", VirtualHostName: "VirtualHostName_example", InventoryDeviceInfo: , ManagementController: , RegisteredDevice: }), NetworkElement: , RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{), StorageSasExpander: openapiclient.storage.SasExpander.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ExpanderId: int64(123), Name: "Name_example", OperState: "OperState_example", Operability: "Operability_example", Presence: "Presence_example", SasAddress: "SasAddress_example", ComputeRackUnit: , Controller: , EquipmentChassis: , InventoryDeviceInfo: , RegisteredDevice: }, TopSystem: }, EquipmentSystemIoController: , InventoryDeviceInfo: , PortGroups: []PortGroupRelationship{), RegisteredDevice: }, EquipmentSystemIoController: , InventoryDeviceInfo: , ManagementInterfaces: []ManagementInterfaceRelationship{openapiclient.management.Interface.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Gateway: "Gateway_example", HostName: "HostName_example", IpAddress: "IpAddress_example", Ipv4Address: "Ipv4Address_example", Ipv4Gateway: "Ipv4Gateway_example", Ipv4Mask: "Ipv4Mask_example", Ipv6Address: "Ipv6Address_example", Ipv6Gateway: "Ipv6Gateway_example", Ipv6Prefix: int64(123), MacAddress: "MacAddress_example", Mask: "Mask_example", SwitchId: "SwitchId_example", UemConnStatus: "UemConnStatus_example", VirtualHostName: "VirtualHostName_example", InventoryDeviceInfo: , ManagementController: , RegisteredDevice: }), NetworkElement: , RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{), StorageSasExpander: openapiclient.storage.SasExpander.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ExpanderId: int64(123), Name: "Name_example", OperState: "OperState_example", Operability: "Operability_example", Presence: "Presence_example", SasAddress: "SasAddress_example", ComputeRackUnit: , Controller: , EquipmentChassis: , InventoryDeviceInfo: , RegisteredDevice: }, TopSystem: }, NetworkPorts: []EtherNetworkPortRelationship{openapiclient.ether.NetworkPort.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", AcknowledgedPeerInterface: , PeerInterface: , ModuleId: int64(123), PeerDn: "PeerDn_example", PortId: int64(123), SlotId: int64(123), Speed: "Speed_example", SwitchId: "SwitchId_example", EquipmentIoCardBase: , RegisteredDevice: })}, RegisteredDevice: }), MgmtController: , NetworkPorts: []EtherNetworkPortRelationship{)}, RegisteredDevice: }), MgmtController: , NetworkPorts: []EtherNetworkPortRelationship{), DiscoveryState: "DiscoveryState_example", Fans: []EquipmentFanRelationship{openapiclient.equipment.Fan.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Description: "Description_example", FanId: int64(123), FanModuleId: int64(123), ModuleId: int64(123), OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", Sku: "Sku_example", TrayId: int64(123), Vid: "Vid_example", EquipmentFanModule: , EquipmentFex: , InventoryDeviceInfo: , RegisteredDevice: }), InventoryDeviceInfo: , LocatorLed: , NetworkElement: , Psus: []EquipmentPsuRelationship{), RegisteredDevice: }, EquipmentRackEnclosure: , InventoryDeviceInfo: , NetworkElement: , RegisteredDevice: }), RegisteredDevice: , Slots: []EquipmentRackEnclosureSlotRelationship{openapiclient.equipment.RackEnclosureSlot.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", RackId: int64(123), RackUnitDn: "RackUnitDn_example", EquipmentRackEnclosure: , InventoryDeviceInfo: , RackUnit: , RegisteredDevice: })}, Fans: []EquipmentFanRelationship{), InventoryDeviceInfo: , NetworkElement: , RegisteredDevice: }), InventoryDeviceInfo: , Ioms: []EquipmentIoCardRelationship{openapiclient.equipment.IoCard.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ConnectionStatus: "ConnectionStatus_example", Description: "Description_example", ModuleId: int64(123), OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", ProductName: "ProductName_example", Sku: "Sku_example", Version: "Version_example", Vid: "Vid_example", HostPorts: []EtherHostPortRelationship{), MgmtController: , NetworkPorts: []EtherNetworkPortRelationship{), ConnectionPath: "ConnectionPath_example", DcSupported: false, Side: "Side_example", EquipmentChassis: , InventoryDeviceInfo: , PhysicalDeviceRegistration: , RegisteredDevice: }), LocatorLed: , PsuControl: openapiclient.equipment.PsuControl.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ClusterState: "ClusterState_example", InputPowerState: "InputPowerState_example", Name: "Name_example", OperQualifier: "OperQualifier_example", OperState: "OperState_example", OutputPowerState: "OutputPowerState_example", Redundancy: "Redundancy_example", EquipmentChassis: , InventoryDeviceInfo: , RegisteredDevice: }, Psus: []EquipmentPsuRelationship{), RegisteredDevice: , Sasexpanders: []StorageSasExpanderRelationship{), Siocs: []EquipmentSystemIoControllerRelationship{), StorageEnclosures: []StorageEnclosureRelationship{)}, EquipmentRackEnclosure: , Fans: []EquipmentFanRelationship{), InventoryDeviceInfo: , NetworkElement: , RegisteredDevice: }), InventoryDeviceInfo: , Ioms: []EquipmentIoCardRelationship{openapiclient.equipment.IoCard.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ConnectionStatus: "ConnectionStatus_example", Description: "Description_example", ModuleId: int64(123), OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", ProductName: "ProductName_example", Sku: "Sku_example", Version: "Version_example", Vid: "Vid_example", HostPorts: []EtherHostPortRelationship{), MgmtController: , NetworkPorts: []EtherNetworkPortRelationship{), ConnectionPath: "ConnectionPath_example", DcSupported: false, Side: "Side_example", EquipmentChassis: , InventoryDeviceInfo: , PhysicalDeviceRegistration: , RegisteredDevice: }), LocatorLed: , PsuControl: openapiclient.equipment.PsuControl.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ClusterState: "ClusterState_example", InputPowerState: "InputPowerState_example", Name: "Name_example", OperQualifier: "OperQualifier_example", OperState: "OperState_example", OutputPowerState: "OutputPowerState_example", Redundancy: "Redundancy_example", EquipmentChassis: , InventoryDeviceInfo: , RegisteredDevice: }, Psus: []EquipmentPsuRelationship{), RegisteredDevice: , Sasexpanders: []StorageSasExpanderRelationship{), Siocs: []EquipmentSystemIoControllerRelationship{), StorageEnclosures: []StorageEnclosureRelationship{)}, EquipmentFex: , InventoryDeviceInfo: , RegisteredDevice: , StoragePhysicalDisk: }, PhysicalDiskExtensions: []StoragePhysicalDiskExtensionRelationship{), RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{), SasPorts: []StorageSasPortRelationship{openapiclient.storage.SasPort.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Address: "Address_example", DiskId: int64(123), EndPointId: int64(123), LinkDescription: "LinkDescription_example", LinkSpeed: "LinkSpeed_example", InventoryDeviceInfo: , RegisteredDevice: , StoragePhysicalDisk: }), StorageController: , StorageEnclosure: }), RegisteredDevice: , Spans: []StorageSpanRelationship{openapiclient.storage.Span.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Slots: []int64{int64(123)), SpanId: int64(123), DiskGroup: , PhysicalDisks: []StoragePhysicalDiskRelationship{), RegisteredDevice: }), StorageController: , VirtualDrives: []StorageVirtualDriveRelationship{)}), InventoryDeviceInfo: , PhysicalDiskExtensions: []StoragePhysicalDiskExtensionRelationship{), PhysicalDisks: []StoragePhysicalDiskRelationship{), RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{), VirtualDriveExtensions: []StorageVirtualDriveExtensionRelationship{), VirtualDrives: []StorageVirtualDriveRelationship{)}), StorageFlexFlashControllers: []StorageFlexFlashControllerRelationship{openapiclient.storage.FlexFlashController.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ControllerState: "ControllerState_example", FfControllerId: "FfControllerId_example", ComputeBoard: , FlexFlashControllerProps: []StorageFlexFlashControllerPropsRelationship{openapiclient.storage.FlexFlashControllerProps.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", CardsManageable: "CardsManageable_example", ConfiguredMode: "ConfiguredMode_example", ControllerName: "ControllerName_example", ControllerStatus: "ControllerStatus_example", FwVersion: "FwVersion_example", InternalState: "InternalState_example", OperatingMode: "OperatingMode_example", PhysicalDriveCount: "PhysicalDriveCount_example", ProductName: "ProductName_example", StartupFwVersion: "StartupFwVersion_example", VirtualDriveCount: "VirtualDriveCount_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexFlashController: openapiclient.storage.FlexFlashController.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ControllerState: "ControllerState_example", FfControllerId: "FfControllerId_example", ComputeBoard: , FlexFlashControllerProps: []StorageFlexFlashControllerPropsRelationship{openapiclient.storage.FlexFlashControllerProps.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", CardsManageable: "CardsManageable_example", ConfiguredMode: "ConfiguredMode_example", ControllerName: "ControllerName_example", ControllerStatus: "ControllerStatus_example", FwVersion: "FwVersion_example", InternalState: "InternalState_example", OperatingMode: "OperatingMode_example", PhysicalDriveCount: "PhysicalDriveCount_example", ProductName: "ProductName_example", StartupFwVersion: "StartupFwVersion_example", VirtualDriveCount: "VirtualDriveCount_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexFlashController: }), FlexFlashPhysicalDrives: []StorageFlexFlashPhysicalDriveRelationship{openapiclient.storage.FlexFlashPhysicalDrive.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", CardStatus: "CardStatus_example", CardType: "CardType_example", OemId: "OemId_example", PdStatus: "PdStatus_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexFlashController: }), FlexFlashVirtualDrives: []StorageFlexFlashVirtualDriveRelationship{openapiclient.storage.FlexFlashVirtualDrive.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", DriveScope: "DriveScope_example", DriveStatus: "DriveStatus_example", PartitionId: "PartitionId_example", ResidentImage: "ResidentImage_example", Size: "Size_example", VirtualDrive: "VirtualDrive_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexFlashController: }), InventoryDeviceInfo: , RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{)}}), FlexFlashPhysicalDrives: []StorageFlexFlashPhysicalDriveRelationship{openapiclient.storage.FlexFlashPhysicalDrive.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", CardStatus: "CardStatus_example", CardType: "CardType_example", OemId: "OemId_example", PdStatus: "PdStatus_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexFlashController: }), FlexFlashVirtualDrives: []StorageFlexFlashVirtualDriveRelationship{openapiclient.storage.FlexFlashVirtualDrive.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", DriveScope: "DriveScope_example", DriveStatus: "DriveStatus_example", PartitionId: "PartitionId_example", ResidentImage: "ResidentImage_example", Size: "Size_example", VirtualDrive: "VirtualDrive_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexFlashController: }), InventoryDeviceInfo: , RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{)}), StorageFlexUtilControllers: []StorageFlexUtilControllerRelationship{openapiclient.storage.FlexUtilController.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ControllerName: "ControllerName_example", ControllerStatus: "ControllerStatus_example", FfControllerId: "FfControllerId_example", InternalState: "InternalState_example", ComputeBoard: , FlexUtilPhysicalDrives: []StorageFlexUtilPhysicalDriveRelationship{openapiclient.storage.FlexUtilPhysicalDrive.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", BlockSize: "BlockSize_example", Capacity: "Capacity_example", Controller: "Controller_example", DrivesEnabled: "DrivesEnabled_example", Health: "Health_example", ManufacturerDate: "ManufacturerDate_example", ManufacturerId: "ManufacturerId_example", OemId: "OemId_example", PartitionCount: "PartitionCount_example", PdStatus: "PdStatus_example", PhysicalDrive: "PhysicalDrive_example", ProductName: "ProductName_example", ProductRevision: "ProductRevision_example", ReadErrorCount: "ReadErrorCount_example", ReadErrorThreshold: "ReadErrorThreshold_example", WriteEnabled: "WriteEnabled_example", WriteErrorCount: "WriteErrorCount_example", WriteErrorThreshold: "WriteErrorThreshold_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexUtilController: openapiclient.storage.FlexUtilController.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ControllerName: "ControllerName_example", ControllerStatus: "ControllerStatus_example", FfControllerId: "FfControllerId_example", InternalState: "InternalState_example", ComputeBoard: , FlexUtilPhysicalDrives: []StorageFlexUtilPhysicalDriveRelationship{openapiclient.storage.FlexUtilPhysicalDrive.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", BlockSize: "BlockSize_example", Capacity: "Capacity_example", Controller: "Controller_example", DrivesEnabled: "DrivesEnabled_example", Health: "Health_example", ManufacturerDate: "ManufacturerDate_example", ManufacturerId: "ManufacturerId_example", OemId: "OemId_example", PartitionCount: "PartitionCount_example", PdStatus: "PdStatus_example", PhysicalDrive: "PhysicalDrive_example", ProductName: "ProductName_example", ProductRevision: "ProductRevision_example", ReadErrorCount: "ReadErrorCount_example", ReadErrorThreshold: "ReadErrorThreshold_example", WriteEnabled: "WriteEnabled_example", WriteErrorCount: "WriteErrorCount_example", WriteErrorThreshold: "WriteErrorThreshold_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexUtilController: }), FlexUtilVirtualDrives: []StorageFlexUtilVirtualDriveRelationship{openapiclient.storage.FlexUtilVirtualDrive.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", DriveStatus: "DriveStatus_example", DriveType: "DriveType_example", PartitionId: "PartitionId_example", PartitionName: "PartitionName_example", ResidentImage: "ResidentImage_example", Size: "Size_example", VirtualDrive: "VirtualDrive_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexUtilController: }), InventoryDeviceInfo: , RegisteredDevice: }}), FlexUtilVirtualDrives: []StorageFlexUtilVirtualDriveRelationship{openapiclient.storage.FlexUtilVirtualDrive.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", DriveStatus: "DriveStatus_example", DriveType: "DriveType_example", PartitionId: "PartitionId_example", PartitionName: "PartitionName_example", ResidentImage: "ResidentImage_example", Size: "Size_example", VirtualDrive: "VirtualDrive_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexUtilController: }), InventoryDeviceInfo: , RegisteredDevice: })}, InventoryDeviceInfo: , RegisteredDevice: }), GraphicsCards: []GraphicsCardRelationship{), InventoryDeviceInfo: , MemoryArrays: []MemoryArrayRelationship{), PciCoprocessorCards: []PciCoprocessorCardRelationship{openapiclient.pci.CoprocessorCard.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", CardId: int64(123), PciSlot: "PciSlot_example", ComputeBoard: , InventoryDeviceInfo: , RegisteredDevice: }), PciSwitch: []PciSwitchRelationship{), PersistentMemoryConfiguration: , Processors: []ProcessorUnitRelationship{openapiclient.processor.Unit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Architecture: "Architecture_example", NumCores: int64(123), NumCoresEnabled: "NumCoresEnabled_example", NumThreads: "NumThreads_example", OperPowerState: "OperPowerState_example", OperState: "OperState_example", Operability: "Operability_example", Presence: "Presence_example", ProcessorId: int64(123), SocketDesignation: "SocketDesignation_example", Speed: 123, Stepping: "Stepping_example", Thermal: "Thermal_example", ComputeBlade: , ComputeBoard: , ComputeRackUnit: , InventoryDeviceInfo: , RegisteredDevice: }), RegisteredDevice: , SecurityUnits: []SecurityUnitRelationship{openapiclient.security.Unit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", OperState: "OperState_example", Operability: "Operability_example", PartNumber: "PartNumber_example", PciSlot: "PciSlot_example", Power: "Power_example", Presence: "Presence_example", Thermal: "Thermal_example", UnitId: int64(123), Vid: "Vid_example", Voltage: "Voltage_example", ComputeBoard: , InventoryDeviceInfo: , RegisteredDevice: }), StorageControllers: []StorageControllerRelationship{), StorageFlexFlashControllers: []StorageFlexFlashControllerRelationship{), StorageFlexUtilControllers: []StorageFlexUtilControllerRelationship{)}, ComputeRackUnit: , GraphicsControllers: []GraphicsControllerRelationship{openapiclient.graphics.Controller.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ControllerId: int64(123), PciAddr: "PciAddr_example", PciSlot: "PciSlot_example", GraphicsCard: , InventoryDeviceInfo: , RegisteredDevice: }), InventoryDeviceInfo: , RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{)}, InventoryDeviceInfo: , ManagementController: , NetworkElements: []NetworkElementRelationship{), PciSwitch: , RegisteredDevice: , StorageController: , StorageFlexFlashController: , StoragePhysicalDisk: }), SystemBootOrder: openapiclient.bios.SystemBootOrder.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, BootMode: "BootMode_example", Dn: "Dn_example", SecureBoot: "SecureBoot_example", BiosUnit: , BootDevices: []BiosBootDeviceRelationship{openapiclient.bios.BootDevice.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceName: "DeviceName_example", DeviceType: "DeviceType_example", BiosSystemBootOrder: openapiclient.bios.SystemBootOrder.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, BootMode: "BootMode_example", Dn: "Dn_example", SecureBoot: "SecureBoot_example", BiosUnit: , BootDevices: []BiosBootDeviceRelationship{openapiclient.bios.BootDevice.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceName: "DeviceName_example", DeviceType: "DeviceType_example", BiosSystemBootOrder: , RegisteredDevice: }), RegisteredDevice: }, RegisteredDevice: }), RegisteredDevice: }}, GraphicsCard: , InventoryDeviceInfo: , ManagementController: , NetworkElements: []NetworkElementRelationship{), PciSwitch: , RegisteredDevice: , StorageController: , StorageFlexFlashController: , StoragePhysicalDisk: }), SystemBootOrder: }), Bmc: , Board: , BootDeviceBootmode: openapiclient.boot.DeviceBootMode.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ConfiguredBootMode: "ConfiguredBootMode_example", ComputeRackUnit: , InventoryDeviceInfo: , RegisteredDevice: }, Fanmodules: []EquipmentFanModuleRelationship{), GenericInventoryHolders: []InventoryGenericInventoryHolderRelationship{openapiclient.inventory.GenericInventoryHolder.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Endpoint: "Endpoint_example", ComputeBlade: , ComputeRackUnit: , GenericInventory: []InventoryGenericInventoryRelationship{openapiclient.inventory.GenericInventory.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Key: "Key_example", Type: "Type_example", Value: "Value_example", InventoryDeviceInfo: , InventoryGenericInventoryHolder: openapiclient.inventory.GenericInventoryHolder.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Endpoint: "Endpoint_example", ComputeBlade: , ComputeRackUnit: , GenericInventory: []InventoryGenericInventoryRelationship{openapiclient.inventory.GenericInventory.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Key: "Key_example", Type: "Type_example", Value: "Value_example", InventoryDeviceInfo: , InventoryGenericInventoryHolder: , RegisteredDevice: }), InventoryDeviceInfo: , RegisteredDevice: }, RegisteredDevice: }), InventoryDeviceInfo: , RegisteredDevice: }), GraphicsCards: []GraphicsCardRelationship{), InventoryDeviceInfo: , LocatorLed: , MemoryArrays: []MemoryArrayRelationship{), PciDevices: []PciDeviceRelationship{openapiclient.pci.Device.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", FirmwareVersion: "FirmwareVersion_example", Pid: "Pid_example", SlotId: "SlotId_example", ComputeBlade: , ComputeRackUnit: , InventoryDeviceInfo: , RegisteredDevice: }), Processors: []ProcessorUnitRelationship{), Psus: []EquipmentPsuRelationship{), RackEnclosureSlot: , RegisteredDevice: , SasExpanders: []StorageSasExpanderRelationship{), StorageControllers: []StorageControllerRelationship{), StorageEnclosures: []StorageEnclosureRelationship{), TopSystem: }, InventoryDeviceInfo: , RegisteredDevice: }, Biosunits: []BiosUnitRelationship{), Bmc: , Board: , BootDeviceBootmode: openapiclient.boot.DeviceBootMode.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ConfiguredBootMode: "ConfiguredBootMode_example", ComputeRackUnit: , InventoryDeviceInfo: , RegisteredDevice: }, Fanmodules: []EquipmentFanModuleRelationship{), GenericInventoryHolders: []InventoryGenericInventoryHolderRelationship{), GraphicsCards: []GraphicsCardRelationship{), InventoryDeviceInfo: , LocatorLed: , MemoryArrays: []MemoryArrayRelationship{), PciDevices: []PciDeviceRelationship{openapiclient.pci.Device.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", FirmwareVersion: "FirmwareVersion_example", Pid: "Pid_example", SlotId: "SlotId_example", ComputeBlade: , ComputeRackUnit: , InventoryDeviceInfo: , RegisteredDevice: }), Processors: []ProcessorUnitRelationship{), Psus: []EquipmentPsuRelationship{), RackEnclosureSlot: , RegisteredDevice: , SasExpanders: []StorageSasExpanderRelationship{), StorageControllers: []StorageControllerRelationship{), StorageEnclosures: []StorageEnclosureRelationship{), TopSystem: }, Controller: , ExtEthIfs: []AdapterExtEthInterfaceRelationship{openapiclient.adapter.ExtEthInterface.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", AcknowledgedPeerInterface: , PeerInterface: , AdminState: "AdminState_example", EpDn: "EpDn_example", ExtEthInterfaceId: "ExtEthInterfaceId_example", InterfaceType: "InterfaceType_example", MacAddress: "MacAddress_example", PeerAggrPortId: int64(123), PeerDn: "PeerDn_example", PeerPortId: int64(123), PeerSlotId: int64(123), SwitchId: "SwitchId_example", AdapterUnit: , InventoryDeviceInfo: , RegisteredDevice: }), HostEthIfs: []AdapterHostEthInterfaceRelationship{openapiclient.adapter.HostEthInterface.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", AcknowledgedPeerInterface: , PeerInterface: , AdminState: "AdminState_example", EpDn: "EpDn_example", HostEthInterfaceId: int64(123), InterfaceType: "InterfaceType_example", MacAddress: "MacAddress_example", Name: "Name_example", Operability: "Operability_example", OriginalMacAddress: "OriginalMacAddress_example", PciAddr: "PciAddr_example", PeerDn: "PeerDn_example", VirtualizationPreference: "VirtualizationPreference_example", VnicDn: "VnicDn_example", AdapterUnit: , InventoryDeviceInfo: , RegisteredDevice: }), HostFcIfs: []AdapterHostFcInterfaceRelationship{openapiclient.adapter.HostFcInterface.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminState: "AdminState_example", EpDn: "EpDn_example", HostFcInterfaceId: int64(123), Name: "Name_example", OperState: "OperState_example", Operability: "Operability_example", OriginalWwnn: "OriginalWwnn_example", OriginalWwpn: "OriginalWwpn_example", PeerDn: "PeerDn_example", Wwnn: "Wwnn_example", Wwpn: "Wwpn_example", AdapterUnit: , InventoryDeviceInfo: , RegisteredDevice: }), HostIscsiIfs: []AdapterHostIscsiInterfaceRelationship{openapiclient.adapter.HostIscsiInterface.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminState: "AdminState_example", EpDn: "EpDn_example", HostIscsiInterfaceId: int64(123), HostVisible: "HostVisible_example", MacAddress: "MacAddress_example", Name: "Name_example", OperState: "OperState_example", Operability: "Operability_example", PeerDn: "PeerDn_example", AdapterUnit: , InventoryDeviceInfo: , RegisteredDevice: }), InventoryDeviceInfo: , RegisteredDevice: }), BiosUnits: []BiosUnitRelationship{), Bmc: , Board: , EquipmentChassis: , EquipmentIoExpanders: []EquipmentIoExpanderRelationship{openapiclient.equipment.IoExpander.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", OperState: "OperState_example", Presence: "Presence_example", ComputeBlade: , InventoryDeviceInfo: , RegisteredDevice: }), GenericInventoryHolders: []InventoryGenericInventoryHolderRelationship{), GraphicsCards: []GraphicsCardRelationship{), InventoryDeviceInfo: , LocatorLed: , MemoryArrays: []MemoryArrayRelationship{), PciDevices: []PciDeviceRelationship{), Processors: []ProcessorUnitRelationship{), RegisteredDevice: , StorageControllers: []StorageControllerRelationship{), StorageEnclosures: []StorageEnclosureRelationship{), TopSystem: }, ComputeRackUnit: , Controller: , ExtEthIfs: []AdapterExtEthInterfaceRelationship{openapiclient.adapter.ExtEthInterface.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", AcknowledgedPeerInterface: , PeerInterface: , AdminState: "AdminState_example", EpDn: "EpDn_example", ExtEthInterfaceId: "ExtEthInterfaceId_example", InterfaceType: "InterfaceType_example", MacAddress: "MacAddress_example", PeerAggrPortId: int64(123), PeerDn: "PeerDn_example", PeerPortId: int64(123), PeerSlotId: int64(123), SwitchId: "SwitchId_example", AdapterUnit: , InventoryDeviceInfo: , RegisteredDevice: }), HostEthIfs: []AdapterHostEthInterfaceRelationship{openapiclient.adapter.HostEthInterface.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", AcknowledgedPeerInterface: , PeerInterface: , AdminState: "AdminState_example", EpDn: "EpDn_example", HostEthInterfaceId: int64(123), InterfaceType: "InterfaceType_example", MacAddress: "MacAddress_example", Name: "Name_example", Operability: "Operability_example", OriginalMacAddress: "OriginalMacAddress_example", PciAddr: "PciAddr_example", PeerDn: "PeerDn_example", VirtualizationPreference: "VirtualizationPreference_example", VnicDn: "VnicDn_example", AdapterUnit: , InventoryDeviceInfo: , RegisteredDevice: }), HostFcIfs: []AdapterHostFcInterfaceRelationship{openapiclient.adapter.HostFcInterface.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminState: "AdminState_example", EpDn: "EpDn_example", HostFcInterfaceId: int64(123), Name: "Name_example", OperState: "OperState_example", Operability: "Operability_example", OriginalWwnn: "OriginalWwnn_example", OriginalWwpn: "OriginalWwpn_example", PeerDn: "PeerDn_example", Wwnn: "Wwnn_example", Wwpn: "Wwpn_example", AdapterUnit: , InventoryDeviceInfo: , RegisteredDevice: }), HostIscsiIfs: []AdapterHostIscsiInterfaceRelationship{openapiclient.adapter.HostIscsiInterface.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminState: "AdminState_example", EpDn: "EpDn_example", HostIscsiInterfaceId: int64(123), HostVisible: "HostVisible_example", MacAddress: "MacAddress_example", Name: "Name_example", OperState: "OperState_example", Operability: "Operability_example", PeerDn: "PeerDn_example", AdapterUnit: , InventoryDeviceInfo: , RegisteredDevice: }), InventoryDeviceInfo: , RegisteredDevice: }), BiosUnits: []BiosUnitRelationship{), Bmc: , Board: , EquipmentChassis: , EquipmentIoExpanders: []EquipmentIoExpanderRelationship{openapiclient.equipment.IoExpander.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", OperState: "OperState_example", Presence: "Presence_example", ComputeBlade: , InventoryDeviceInfo: , RegisteredDevice: }), GenericInventoryHolders: []InventoryGenericInventoryHolderRelationship{), GraphicsCards: []GraphicsCardRelationship{), InventoryDeviceInfo: , LocatorLed: , MemoryArrays: []MemoryArrayRelationship{), PciDevices: []PciDeviceRelationship{), Processors: []ProcessorUnitRelationship{), RegisteredDevice: , StorageControllers: []StorageControllerRelationship{), StorageEnclosures: []StorageEnclosureRelationship{), TopSystem: }, ComputeBoard: , ComputeRackUnit: , DiskGroup: []StorageDiskGroupRelationship{), InventoryDeviceInfo: , PhysicalDiskExtensions: []StoragePhysicalDiskExtensionRelationship{), PhysicalDisks: []StoragePhysicalDiskRelationship{), RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{), VirtualDriveExtensions: []StorageVirtualDriveExtensionRelationship{), VirtualDrives: []StorageVirtualDriveRelationship{)} // StorageController | The 'storage.Controller' resource to update.
+    storageController := *openapiclient.Newstorage.Controller("ClassId_example", "ObjectType_example") // StorageController | The 'storage.Controller' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStorageController(context.Background(), moid, storageController).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStorageController(context.Background(), moid).StorageController(storageController).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStorageController``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6085,7 +7937,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6117,12 +7969,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageDiskGroup := openapiclient.storage.DiskGroup{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Name: "Name_example", RaidType: "RaidType_example", DedicatedHotSpares: []StoragePhysicalDiskRelationship{), RegisteredDevice: , Spans: []StorageSpanRelationship{), StorageController: , VirtualDrives: []StorageVirtualDriveRelationship{)} // StorageDiskGroup | The 'storage.DiskGroup' resource to update.
+    storageDiskGroup := *openapiclient.Newstorage.DiskGroup("ClassId_example", "ObjectType_example") // StorageDiskGroup | The 'storage.DiskGroup' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStorageDiskGroup(context.Background(), moid, storageDiskGroup).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStorageDiskGroup(context.Background(), moid).StorageDiskGroup(storageDiskGroup).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStorageDiskGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6157,7 +8009,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6189,12 +8041,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageDiskGroupPolicy := openapiclient.storage.DiskGroupPolicy{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", DedicatedHotSpares: []StorageLocalDisk{), RaidLevel: "RaidLevel_example", SpanGroups: []StorageSpanGroup{), UseJbods: false, Organization: , StoragePolicies: []StorageStoragePolicyRelationship{)} // StorageDiskGroupPolicy | The 'storage.DiskGroupPolicy' resource to update.
+    storageDiskGroupPolicy := *openapiclient.Newstorage.DiskGroupPolicy("ClassId_example", "ObjectType_example") // StorageDiskGroupPolicy | The 'storage.DiskGroupPolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStorageDiskGroupPolicy(context.Background(), moid, storageDiskGroupPolicy).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStorageDiskGroupPolicy(context.Background(), moid).StorageDiskGroupPolicy(storageDiskGroupPolicy).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStorageDiskGroupPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6229,7 +8081,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6261,12 +8113,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageEnclosure := openapiclient.storage.Enclosure{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ChassisId: int64(123), Description: "Description_example", EnclosureId: int64(123), NumSlots: int64(123), Presence: "Presence_example", ServerId: int64(123), Type: "Type_example", ComputeBlade: , ComputeRackUnit: , EnclosureDiskSlots: []StorageEnclosureDiskSlotEpRelationship{), EnclosureDisks: []StorageEnclosureDiskRelationship{), EquipmentChassis: , InventoryDeviceInfo: , PhysicalDisks: []StoragePhysicalDiskRelationship{), RegisteredDevice: } // StorageEnclosure | The 'storage.Enclosure' resource to update.
+    storageEnclosure := *openapiclient.Newstorage.Enclosure("ClassId_example", "ObjectType_example") // StorageEnclosure | The 'storage.Enclosure' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStorageEnclosure(context.Background(), moid, storageEnclosure).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStorageEnclosure(context.Background(), moid).StorageEnclosure(storageEnclosure).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStorageEnclosure``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6301,7 +8153,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6333,12 +8185,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageEnclosureDisk := openapiclient.storage.EnclosureDisk{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", BlockSize: "BlockSize_example", DiskId: "DiskId_example", DiskState: "DiskState_example", Health: "Health_example", NumBlocks: "NumBlocks_example", Pid: "Pid_example", SasAddress1: "SasAddress1_example", SasAddress2: "SasAddress2_example", Size: "Size_example", InventoryDeviceInfo: , PhysicalDisk: , RegisteredDevice: , StorageEnclosure: } // StorageEnclosureDisk | The 'storage.EnclosureDisk' resource to update.
+    storageEnclosureDisk := *openapiclient.Newstorage.EnclosureDisk("ClassId_example", "ObjectType_example") // StorageEnclosureDisk | The 'storage.EnclosureDisk' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStorageEnclosureDisk(context.Background(), moid, storageEnclosureDisk).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStorageEnclosureDisk(context.Background(), moid).StorageEnclosureDisk(storageEnclosureDisk).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStorageEnclosureDisk``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6373,7 +8225,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6405,12 +8257,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageEnclosureDiskSlotEp := openapiclient.storage.EnclosureDiskSlotEp{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", DrivePath: "DrivePath_example", Health: "Health_example", Presence: "Presence_example", Slot: "Slot_example", InventoryDeviceInfo: , RegisteredDevice: , StorageEnclosure: } // StorageEnclosureDiskSlotEp | The 'storage.EnclosureDiskSlotEp' resource to update.
+    storageEnclosureDiskSlotEp := *openapiclient.Newstorage.EnclosureDiskSlotEp("ClassId_example", "ObjectType_example") // StorageEnclosureDiskSlotEp | The 'storage.EnclosureDiskSlotEp' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStorageEnclosureDiskSlotEp(context.Background(), moid, storageEnclosureDiskSlotEp).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStorageEnclosureDiskSlotEp(context.Background(), moid).StorageEnclosureDiskSlotEp(storageEnclosureDiskSlotEp).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStorageEnclosureDiskSlotEp``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6445,7 +8297,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6477,12 +8329,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageFlexFlashController := openapiclient.storage.FlexFlashController{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ControllerState: "ControllerState_example", FfControllerId: "FfControllerId_example", ComputeBoard: , FlexFlashControllerProps: []StorageFlexFlashControllerPropsRelationship{), FlexFlashPhysicalDrives: []StorageFlexFlashPhysicalDriveRelationship{), FlexFlashVirtualDrives: []StorageFlexFlashVirtualDriveRelationship{), InventoryDeviceInfo: , RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{)} // StorageFlexFlashController | The 'storage.FlexFlashController' resource to update.
+    storageFlexFlashController := *openapiclient.Newstorage.FlexFlashController("ClassId_example", "ObjectType_example") // StorageFlexFlashController | The 'storage.FlexFlashController' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStorageFlexFlashController(context.Background(), moid, storageFlexFlashController).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStorageFlexFlashController(context.Background(), moid).StorageFlexFlashController(storageFlexFlashController).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStorageFlexFlashController``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6517,7 +8369,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6549,12 +8401,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageFlexFlashControllerProps := openapiclient.storage.FlexFlashControllerProps{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", CardsManageable: "CardsManageable_example", ConfiguredMode: "ConfiguredMode_example", ControllerName: "ControllerName_example", ControllerStatus: "ControllerStatus_example", FwVersion: "FwVersion_example", InternalState: "InternalState_example", OperatingMode: "OperatingMode_example", PhysicalDriveCount: "PhysicalDriveCount_example", ProductName: "ProductName_example", StartupFwVersion: "StartupFwVersion_example", VirtualDriveCount: "VirtualDriveCount_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexFlashController: } // StorageFlexFlashControllerProps | The 'storage.FlexFlashControllerProps' resource to update.
+    storageFlexFlashControllerProps := *openapiclient.Newstorage.FlexFlashControllerProps("ClassId_example", "ObjectType_example") // StorageFlexFlashControllerProps | The 'storage.FlexFlashControllerProps' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStorageFlexFlashControllerProps(context.Background(), moid, storageFlexFlashControllerProps).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStorageFlexFlashControllerProps(context.Background(), moid).StorageFlexFlashControllerProps(storageFlexFlashControllerProps).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStorageFlexFlashControllerProps``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6589,7 +8441,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6621,12 +8473,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageFlexFlashPhysicalDrive := openapiclient.storage.FlexFlashPhysicalDrive{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", CardStatus: "CardStatus_example", CardType: "CardType_example", OemId: "OemId_example", PdStatus: "PdStatus_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexFlashController: } // StorageFlexFlashPhysicalDrive | The 'storage.FlexFlashPhysicalDrive' resource to update.
+    storageFlexFlashPhysicalDrive := *openapiclient.Newstorage.FlexFlashPhysicalDrive("ClassId_example", "ObjectType_example") // StorageFlexFlashPhysicalDrive | The 'storage.FlexFlashPhysicalDrive' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStorageFlexFlashPhysicalDrive(context.Background(), moid, storageFlexFlashPhysicalDrive).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStorageFlexFlashPhysicalDrive(context.Background(), moid).StorageFlexFlashPhysicalDrive(storageFlexFlashPhysicalDrive).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStorageFlexFlashPhysicalDrive``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6661,7 +8513,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6693,12 +8545,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageFlexFlashVirtualDrive := openapiclient.storage.FlexFlashVirtualDrive{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", DriveScope: "DriveScope_example", DriveStatus: "DriveStatus_example", PartitionId: "PartitionId_example", ResidentImage: "ResidentImage_example", Size: "Size_example", VirtualDrive: "VirtualDrive_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexFlashController: } // StorageFlexFlashVirtualDrive | The 'storage.FlexFlashVirtualDrive' resource to update.
+    storageFlexFlashVirtualDrive := *openapiclient.Newstorage.FlexFlashVirtualDrive("ClassId_example", "ObjectType_example") // StorageFlexFlashVirtualDrive | The 'storage.FlexFlashVirtualDrive' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStorageFlexFlashVirtualDrive(context.Background(), moid, storageFlexFlashVirtualDrive).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStorageFlexFlashVirtualDrive(context.Background(), moid).StorageFlexFlashVirtualDrive(storageFlexFlashVirtualDrive).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStorageFlexFlashVirtualDrive``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6733,7 +8585,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6765,12 +8617,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageFlexUtilController := openapiclient.storage.FlexUtilController{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ControllerName: "ControllerName_example", ControllerStatus: "ControllerStatus_example", FfControllerId: "FfControllerId_example", InternalState: "InternalState_example", ComputeBoard: , FlexUtilPhysicalDrives: []StorageFlexUtilPhysicalDriveRelationship{), FlexUtilVirtualDrives: []StorageFlexUtilVirtualDriveRelationship{), InventoryDeviceInfo: , RegisteredDevice: } // StorageFlexUtilController | The 'storage.FlexUtilController' resource to update.
+    storageFlexUtilController := *openapiclient.Newstorage.FlexUtilController("ClassId_example", "ObjectType_example") // StorageFlexUtilController | The 'storage.FlexUtilController' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStorageFlexUtilController(context.Background(), moid, storageFlexUtilController).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStorageFlexUtilController(context.Background(), moid).StorageFlexUtilController(storageFlexUtilController).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStorageFlexUtilController``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6805,7 +8657,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6837,12 +8689,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageFlexUtilPhysicalDrive := openapiclient.storage.FlexUtilPhysicalDrive{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", BlockSize: "BlockSize_example", Capacity: "Capacity_example", Controller: "Controller_example", DrivesEnabled: "DrivesEnabled_example", Health: "Health_example", ManufacturerDate: "ManufacturerDate_example", ManufacturerId: "ManufacturerId_example", OemId: "OemId_example", PartitionCount: "PartitionCount_example", PdStatus: "PdStatus_example", PhysicalDrive: "PhysicalDrive_example", ProductName: "ProductName_example", ProductRevision: "ProductRevision_example", ReadErrorCount: "ReadErrorCount_example", ReadErrorThreshold: "ReadErrorThreshold_example", WriteEnabled: "WriteEnabled_example", WriteErrorCount: "WriteErrorCount_example", WriteErrorThreshold: "WriteErrorThreshold_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexUtilController: } // StorageFlexUtilPhysicalDrive | The 'storage.FlexUtilPhysicalDrive' resource to update.
+    storageFlexUtilPhysicalDrive := *openapiclient.Newstorage.FlexUtilPhysicalDrive("ClassId_example", "ObjectType_example") // StorageFlexUtilPhysicalDrive | The 'storage.FlexUtilPhysicalDrive' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStorageFlexUtilPhysicalDrive(context.Background(), moid, storageFlexUtilPhysicalDrive).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStorageFlexUtilPhysicalDrive(context.Background(), moid).StorageFlexUtilPhysicalDrive(storageFlexUtilPhysicalDrive).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStorageFlexUtilPhysicalDrive``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6877,7 +8729,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6909,12 +8761,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageFlexUtilVirtualDrive := openapiclient.storage.FlexUtilVirtualDrive{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", DriveStatus: "DriveStatus_example", DriveType: "DriveType_example", PartitionId: "PartitionId_example", PartitionName: "PartitionName_example", ResidentImage: "ResidentImage_example", Size: "Size_example", VirtualDrive: "VirtualDrive_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexUtilController: } // StorageFlexUtilVirtualDrive | The 'storage.FlexUtilVirtualDrive' resource to update.
+    storageFlexUtilVirtualDrive := *openapiclient.Newstorage.FlexUtilVirtualDrive("ClassId_example", "ObjectType_example") // StorageFlexUtilVirtualDrive | The 'storage.FlexUtilVirtualDrive' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStorageFlexUtilVirtualDrive(context.Background(), moid, storageFlexUtilVirtualDrive).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStorageFlexUtilVirtualDrive(context.Background(), moid).StorageFlexUtilVirtualDrive(storageFlexUtilVirtualDrive).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStorageFlexUtilVirtualDrive``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6949,7 +8801,79 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchStorageHitachiArray
+
+> StorageHitachiArray PatchStorageHitachiArray(ctx, moid).StorageHitachiArray(storageHitachiArray).IfMatch(ifMatch).Execute()
+
+Update a 'storage.HitachiArray' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    storageHitachiArray := *openapiclient.Newstorage.HitachiArray("ClassId_example", "ObjectType_example") // StorageHitachiArray | The 'storage.HitachiArray' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.PatchStorageHitachiArray(context.Background(), moid).StorageHitachiArray(storageHitachiArray).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStorageHitachiArray``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchStorageHitachiArray`: StorageHitachiArray
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.PatchStorageHitachiArray`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchStorageHitachiArrayRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **storageHitachiArray** | [**StorageHitachiArray**](StorageHitachiArray.md) | The &#39;storage.HitachiArray&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**StorageHitachiArray**](storage.HitachiArray.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6981,12 +8905,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storagePhysicalDisk := openapiclient.storage.PhysicalDisk{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", BlockSize: "BlockSize_example", Bootable: "Bootable_example", ConfigurationCheckpoint: "ConfigurationCheckpoint_example", ConfigurationState: "ConfigurationState_example", DiscoveredPath: "DiscoveredPath_example", DiskId: "DiskId_example", DiskState: "DiskState_example", DriveFirmware: "DriveFirmware_example", DriveState: "DriveState_example", FdeCapable: "FdeCapable_example", HotSpareType: "HotSpareType_example", LinkSpeed: "LinkSpeed_example", LinkState: "LinkState_example", NumBlocks: "NumBlocks_example", OperPowerState: "OperPowerState_example", OperQualifierReason: "OperQualifierReason_example", Operability: "Operability_example", PhysicalBlockSize: "PhysicalBlockSize_example", Pid: "Pid_example", Presence: "Presence_example", Protocol: "Protocol_example", RawSize: "RawSize_example", Secured: "Secured_example", Size: "Size_example", Thermal: "Thermal_example", Type: "Type_example", VariantType: "VariantType_example", InventoryDeviceInfo: , LocatorLed: , PhysicalDiskExtensions: []StoragePhysicalDiskExtensionRelationship{), RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{), SasPorts: []StorageSasPortRelationship{), StorageController: , StorageEnclosure: } // StoragePhysicalDisk | The 'storage.PhysicalDisk' resource to update.
+    storagePhysicalDisk := *openapiclient.Newstorage.PhysicalDisk("ClassId_example", "ObjectType_example") // StoragePhysicalDisk | The 'storage.PhysicalDisk' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStoragePhysicalDisk(context.Background(), moid, storagePhysicalDisk).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStoragePhysicalDisk(context.Background(), moid).StoragePhysicalDisk(storagePhysicalDisk).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStoragePhysicalDisk``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7021,7 +8945,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7053,12 +8977,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storagePhysicalDiskExtension := openapiclient.storage.PhysicalDiskExtension{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Bootable: "Bootable_example", DiskDn: "DiskDn_example", DiskId: int64(123), DiskState: "DiskState_example", Health: "Health_example", InventoryDeviceInfo: , PhysicalDisk: , RegisteredDevice: , StorageController: } // StoragePhysicalDiskExtension | The 'storage.PhysicalDiskExtension' resource to update.
+    storagePhysicalDiskExtension := *openapiclient.Newstorage.PhysicalDiskExtension("ClassId_example", "ObjectType_example") // StoragePhysicalDiskExtension | The 'storage.PhysicalDiskExtension' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStoragePhysicalDiskExtension(context.Background(), moid, storagePhysicalDiskExtension).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStoragePhysicalDiskExtension(context.Background(), moid).StoragePhysicalDiskExtension(storagePhysicalDiskExtension).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStoragePhysicalDiskExtension``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7093,7 +9017,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7125,12 +9049,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storagePhysicalDiskUsage := openapiclient.storage.PhysicalDiskUsage{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", NumberOfBlocks: "NumberOfBlocks_example", PhysicalDrive: "PhysicalDrive_example", Span: "Span_example", StartingBlock: "StartingBlock_example", State: "State_example", VirtualDrive: "VirtualDrive_example", InventoryDeviceInfo: , RegisteredDevice: } // StoragePhysicalDiskUsage | The 'storage.PhysicalDiskUsage' resource to update.
+    storagePhysicalDiskUsage := *openapiclient.Newstorage.PhysicalDiskUsage("ClassId_example", "ObjectType_example") // StoragePhysicalDiskUsage | The 'storage.PhysicalDiskUsage' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStoragePhysicalDiskUsage(context.Background(), moid, storagePhysicalDiskUsage).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStoragePhysicalDiskUsage(context.Background(), moid).StoragePhysicalDiskUsage(storagePhysicalDiskUsage).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStoragePhysicalDiskUsage``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7165,7 +9089,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7197,12 +9121,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storagePureArray := openapiclient.storage.PureArray{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Name: "Name_example", Uuid: "Uuid_example", Version: "Version_example", StorageUtilization: openapiclient.storage.BaseCapacity{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Available: int64(123), CapacityUtilization: 123, Free: int64(123), Total: int64(123), Used: int64(123)}, RegisteredDevice: } // StoragePureArray | The 'storage.PureArray' resource to update.
+    storagePureArray := *openapiclient.Newstorage.PureArray("ClassId_example", "ObjectType_example") // StoragePureArray | The 'storage.PureArray' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStoragePureArray(context.Background(), moid, storagePureArray).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStoragePureArray(context.Background(), moid).StoragePureArray(storagePureArray).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStoragePureArray``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7237,7 +9161,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7269,12 +9193,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageSasExpander := openapiclient.storage.SasExpander{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ExpanderId: int64(123), Name: "Name_example", OperState: "OperState_example", Operability: "Operability_example", Presence: "Presence_example", SasAddress: "SasAddress_example", ComputeRackUnit: , Controller: , EquipmentChassis: , InventoryDeviceInfo: , RegisteredDevice: } // StorageSasExpander | The 'storage.SasExpander' resource to update.
+    storageSasExpander := *openapiclient.Newstorage.SasExpander("ClassId_example", "ObjectType_example") // StorageSasExpander | The 'storage.SasExpander' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStorageSasExpander(context.Background(), moid, storageSasExpander).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStorageSasExpander(context.Background(), moid).StorageSasExpander(storageSasExpander).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStorageSasExpander``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7309,7 +9233,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7341,12 +9265,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageSasPort := openapiclient.storage.SasPort{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Address: "Address_example", DiskId: int64(123), EndPointId: int64(123), LinkDescription: "LinkDescription_example", LinkSpeed: "LinkSpeed_example", InventoryDeviceInfo: , RegisteredDevice: , StoragePhysicalDisk: } // StorageSasPort | The 'storage.SasPort' resource to update.
+    storageSasPort := *openapiclient.Newstorage.SasPort("ClassId_example", "ObjectType_example") // StorageSasPort | The 'storage.SasPort' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStorageSasPort(context.Background(), moid, storageSasPort).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStorageSasPort(context.Background(), moid).StorageSasPort(storageSasPort).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStorageSasPort``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7381,7 +9305,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7413,12 +9337,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageSpan := openapiclient.storage.Span{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Slots: []int64{int64(123)), SpanId: int64(123), DiskGroup: , PhysicalDisks: []StoragePhysicalDiskRelationship{), RegisteredDevice: } // StorageSpan | The 'storage.Span' resource to update.
+    storageSpan := *openapiclient.Newstorage.Span("ClassId_example", "ObjectType_example") // StorageSpan | The 'storage.Span' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStorageSpan(context.Background(), moid, storageSpan).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStorageSpan(context.Background(), moid).StorageSpan(storageSpan).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStorageSpan``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7453,7 +9377,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7485,12 +9409,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageStoragePolicy := openapiclient.storage.StoragePolicy{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", GlobalHotSpares: []StorageLocalDisk{), RetainPolicyVirtualDrives: false, UnusedDisksState: "UnusedDisksState_example", VirtualDrives: []StorageVirtualDriveConfig{), DiskGroupPolicies: []StorageDiskGroupPolicyRelationship{), Organization: , Profiles: []PolicyAbstractConfigProfileRelationship{)} // StorageStoragePolicy | The 'storage.StoragePolicy' resource to update.
+    storageStoragePolicy := *openapiclient.Newstorage.StoragePolicy("ClassId_example", "ObjectType_example") // StorageStoragePolicy | The 'storage.StoragePolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStorageStoragePolicy(context.Background(), moid, storageStoragePolicy).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStorageStoragePolicy(context.Background(), moid).StorageStoragePolicy(storageStoragePolicy).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStorageStoragePolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7525,7 +9449,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7557,12 +9481,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageVdMemberEp := openapiclient.storage.VdMemberEp{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperQualifierReason: "OperQualifierReason_example", Presence: "Presence_example", Role: "Role_example", SpanId: "SpanId_example", VdMemberEpId: int64(123), InventoryDeviceInfo: , RegisteredDevice: , StorageVirtualDrive: } // StorageVdMemberEp | The 'storage.VdMemberEp' resource to update.
+    storageVdMemberEp := *openapiclient.Newstorage.VdMemberEp("ClassId_example", "ObjectType_example") // StorageVdMemberEp | The 'storage.VdMemberEp' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStorageVdMemberEp(context.Background(), moid, storageVdMemberEp).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStorageVdMemberEp(context.Background(), moid).StorageVdMemberEp(storageVdMemberEp).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStorageVdMemberEp``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7597,7 +9521,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7629,12 +9553,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageVirtualDrive := openapiclient.storage.VirtualDrive{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AccessPolicy: "AccessPolicy_example", ActualWriteCachePolicy: "ActualWriteCachePolicy_example", AvailableSize: "AvailableSize_example", BlockSize: "BlockSize_example", Bootable: "Bootable_example", ConfigState: "ConfigState_example", ConfiguredWriteCachePolicy: "ConfiguredWriteCachePolicy_example", ConnectionProtocol: "ConnectionProtocol_example", DriveCache: "DriveCache_example", DriveSecurity: "DriveSecurity_example", DriveState: "DriveState_example", IoPolicy: "IoPolicy_example", Name: "Name_example", NumBlocks: "NumBlocks_example", OperState: "OperState_example", Operability: "Operability_example", PhysicalBlockSize: "PhysicalBlockSize_example", Presence: "Presence_example", ReadPolicy: "ReadPolicy_example", SecurityFlags: "SecurityFlags_example", Size: "Size_example", StripSize: "StripSize_example", Type: "Type_example", Uuid: "Uuid_example", VendorUuid: "VendorUuid_example", VirtualDriveId: "VirtualDriveId_example", DiskGroup: , InventoryDeviceInfo: , PhysicalDiskUsages: []StoragePhysicalDiskUsageRelationship{), RegisteredDevice: , StorageController: , VdMemberEps: []StorageVdMemberEpRelationship{), VirtualDriveExtension: } // StorageVirtualDrive | The 'storage.VirtualDrive' resource to update.
+    storageVirtualDrive := *openapiclient.Newstorage.VirtualDrive("ClassId_example", "ObjectType_example") // StorageVirtualDrive | The 'storage.VirtualDrive' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStorageVirtualDrive(context.Background(), moid, storageVirtualDrive).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStorageVirtualDrive(context.Background(), moid).StorageVirtualDrive(storageVirtualDrive).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStorageVirtualDrive``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7669,7 +9593,79 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchStorageVirtualDriveContainer
+
+> StorageVirtualDriveContainer PatchStorageVirtualDriveContainer(ctx, moid).StorageVirtualDriveContainer(storageVirtualDriveContainer).IfMatch(ifMatch).Execute()
+
+Update a 'storage.VirtualDriveContainer' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    storageVirtualDriveContainer := *openapiclient.Newstorage.VirtualDriveContainer("ClassId_example", "ObjectType_example") // StorageVirtualDriveContainer | The 'storage.VirtualDriveContainer' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.PatchStorageVirtualDriveContainer(context.Background(), moid).StorageVirtualDriveContainer(storageVirtualDriveContainer).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStorageVirtualDriveContainer``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchStorageVirtualDriveContainer`: StorageVirtualDriveContainer
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.PatchStorageVirtualDriveContainer`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchStorageVirtualDriveContainerRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **storageVirtualDriveContainer** | [**StorageVirtualDriveContainer**](StorageVirtualDriveContainer.md) | The &#39;storage.VirtualDriveContainer&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**StorageVirtualDriveContainer**](storage.VirtualDriveContainer.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7701,12 +9697,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageVirtualDriveExtension := openapiclient.storage.VirtualDriveExtension{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Bootable: "Bootable_example", ContainerId: int64(123), DriveState: "DriveState_example", Name: "Name_example", OperDeviceId: "OperDeviceId_example", Uuid: "Uuid_example", VendorUuid: "VendorUuid_example", VirtualDriveDn: "VirtualDriveDn_example", VirtualDriveId: "VirtualDriveId_example", InventoryDeviceInfo: , RegisteredDevice: , StorageController: , VirtualDrive: } // StorageVirtualDriveExtension | The 'storage.VirtualDriveExtension' resource to update.
+    storageVirtualDriveExtension := *openapiclient.Newstorage.VirtualDriveExtension("ClassId_example", "ObjectType_example") // StorageVirtualDriveExtension | The 'storage.VirtualDriveExtension' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.PatchStorageVirtualDriveExtension(context.Background(), moid, storageVirtualDriveExtension).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.PatchStorageVirtualDriveExtension(context.Background(), moid).StorageVirtualDriveExtension(storageVirtualDriveExtension).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.PatchStorageVirtualDriveExtension``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7741,7 +9737,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7773,12 +9769,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageController := openapiclient.storage.Controller{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ControllerFlags: "ControllerFlags_example", ControllerId: "ControllerId_example", ControllerStatus: "ControllerStatus_example", ForeignConfigPresent: false, HwRevision: "HwRevision_example", InterfaceType: "InterfaceType_example", MaxVolumesSupported: int64(123), OobInterfaceSupported: "OobInterfaceSupported_example", OperState: "OperState_example", Operability: "Operability_example", PciAddr: "PciAddr_example", PciSlot: "PciSlot_example", Presence: "Presence_example", RaidSupport: "RaidSupport_example", RebuildRate: "RebuildRate_example", SelfEncryptEnabled: "SelfEncryptEnabled_example", Type: "Type_example", ComputeBlade: , ComputeBoard: , ComputeRackUnit: , DiskGroup: []StorageDiskGroupRelationship{), InventoryDeviceInfo: , PhysicalDiskExtensions: []StoragePhysicalDiskExtensionRelationship{), PhysicalDisks: []StoragePhysicalDiskRelationship{), RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{), VirtualDriveExtensions: []StorageVirtualDriveExtensionRelationship{), VirtualDrives: []StorageVirtualDriveRelationship{)} // StorageController | The 'storage.Controller' resource to update.
+    storageController := *openapiclient.Newstorage.Controller("ClassId_example", "ObjectType_example") // StorageController | The 'storage.Controller' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStorageController(context.Background(), moid, storageController).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStorageController(context.Background(), moid).StorageController(storageController).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStorageController``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7813,7 +9809,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7845,12 +9841,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageDiskGroup := openapiclient.storage.DiskGroup{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Name: "Name_example", RaidType: "RaidType_example", DedicatedHotSpares: []StoragePhysicalDiskRelationship{), RegisteredDevice: , Spans: []StorageSpanRelationship{), StorageController: , VirtualDrives: []StorageVirtualDriveRelationship{)} // StorageDiskGroup | The 'storage.DiskGroup' resource to update.
+    storageDiskGroup := *openapiclient.Newstorage.DiskGroup("ClassId_example", "ObjectType_example") // StorageDiskGroup | The 'storage.DiskGroup' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStorageDiskGroup(context.Background(), moid, storageDiskGroup).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStorageDiskGroup(context.Background(), moid).StorageDiskGroup(storageDiskGroup).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStorageDiskGroup``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7885,7 +9881,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7922,7 +9918,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStorageDiskGroupPolicy(context.Background(), moid, storageDiskGroupPolicy).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStorageDiskGroupPolicy(context.Background(), moid).StorageDiskGroupPolicy(storageDiskGroupPolicy).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStorageDiskGroupPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7957,7 +9953,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7989,12 +9985,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageEnclosure := openapiclient.storage.Enclosure{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ChassisId: int64(123), Description: "Description_example", EnclosureId: int64(123), NumSlots: int64(123), Presence: "Presence_example", ServerId: int64(123), Type: "Type_example", ComputeBlade: , ComputeRackUnit: , EnclosureDiskSlots: []StorageEnclosureDiskSlotEpRelationship{), EnclosureDisks: []StorageEnclosureDiskRelationship{), EquipmentChassis: , InventoryDeviceInfo: , PhysicalDisks: []StoragePhysicalDiskRelationship{), RegisteredDevice: } // StorageEnclosure | The 'storage.Enclosure' resource to update.
+    storageEnclosure := *openapiclient.Newstorage.Enclosure("ClassId_example", "ObjectType_example") // StorageEnclosure | The 'storage.Enclosure' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStorageEnclosure(context.Background(), moid, storageEnclosure).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStorageEnclosure(context.Background(), moid).StorageEnclosure(storageEnclosure).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStorageEnclosure``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8029,7 +10025,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8061,12 +10057,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageEnclosureDisk := openapiclient.storage.EnclosureDisk{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", BlockSize: "BlockSize_example", DiskId: "DiskId_example", DiskState: "DiskState_example", Health: "Health_example", NumBlocks: "NumBlocks_example", Pid: "Pid_example", SasAddress1: "SasAddress1_example", SasAddress2: "SasAddress2_example", Size: "Size_example", InventoryDeviceInfo: , PhysicalDisk: , RegisteredDevice: , StorageEnclosure: } // StorageEnclosureDisk | The 'storage.EnclosureDisk' resource to update.
+    storageEnclosureDisk := *openapiclient.Newstorage.EnclosureDisk("ClassId_example", "ObjectType_example") // StorageEnclosureDisk | The 'storage.EnclosureDisk' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStorageEnclosureDisk(context.Background(), moid, storageEnclosureDisk).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStorageEnclosureDisk(context.Background(), moid).StorageEnclosureDisk(storageEnclosureDisk).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStorageEnclosureDisk``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8101,7 +10097,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8133,12 +10129,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageEnclosureDiskSlotEp := openapiclient.storage.EnclosureDiskSlotEp{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", DrivePath: "DrivePath_example", Health: "Health_example", Presence: "Presence_example", Slot: "Slot_example", InventoryDeviceInfo: , RegisteredDevice: , StorageEnclosure: } // StorageEnclosureDiskSlotEp | The 'storage.EnclosureDiskSlotEp' resource to update.
+    storageEnclosureDiskSlotEp := *openapiclient.Newstorage.EnclosureDiskSlotEp("ClassId_example", "ObjectType_example") // StorageEnclosureDiskSlotEp | The 'storage.EnclosureDiskSlotEp' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStorageEnclosureDiskSlotEp(context.Background(), moid, storageEnclosureDiskSlotEp).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStorageEnclosureDiskSlotEp(context.Background(), moid).StorageEnclosureDiskSlotEp(storageEnclosureDiskSlotEp).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStorageEnclosureDiskSlotEp``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8173,7 +10169,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8205,12 +10201,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageFlexFlashController := openapiclient.storage.FlexFlashController{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ControllerState: "ControllerState_example", FfControllerId: "FfControllerId_example", ComputeBoard: , FlexFlashControllerProps: []StorageFlexFlashControllerPropsRelationship{), FlexFlashPhysicalDrives: []StorageFlexFlashPhysicalDriveRelationship{), FlexFlashVirtualDrives: []StorageFlexFlashVirtualDriveRelationship{), InventoryDeviceInfo: , RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{)} // StorageFlexFlashController | The 'storage.FlexFlashController' resource to update.
+    storageFlexFlashController := *openapiclient.Newstorage.FlexFlashController("ClassId_example", "ObjectType_example") // StorageFlexFlashController | The 'storage.FlexFlashController' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStorageFlexFlashController(context.Background(), moid, storageFlexFlashController).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStorageFlexFlashController(context.Background(), moid).StorageFlexFlashController(storageFlexFlashController).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStorageFlexFlashController``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8245,7 +10241,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8277,12 +10273,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageFlexFlashControllerProps := openapiclient.storage.FlexFlashControllerProps{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", CardsManageable: "CardsManageable_example", ConfiguredMode: "ConfiguredMode_example", ControllerName: "ControllerName_example", ControllerStatus: "ControllerStatus_example", FwVersion: "FwVersion_example", InternalState: "InternalState_example", OperatingMode: "OperatingMode_example", PhysicalDriveCount: "PhysicalDriveCount_example", ProductName: "ProductName_example", StartupFwVersion: "StartupFwVersion_example", VirtualDriveCount: "VirtualDriveCount_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexFlashController: } // StorageFlexFlashControllerProps | The 'storage.FlexFlashControllerProps' resource to update.
+    storageFlexFlashControllerProps := *openapiclient.Newstorage.FlexFlashControllerProps("ClassId_example", "ObjectType_example") // StorageFlexFlashControllerProps | The 'storage.FlexFlashControllerProps' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStorageFlexFlashControllerProps(context.Background(), moid, storageFlexFlashControllerProps).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStorageFlexFlashControllerProps(context.Background(), moid).StorageFlexFlashControllerProps(storageFlexFlashControllerProps).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStorageFlexFlashControllerProps``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8317,7 +10313,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8349,12 +10345,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageFlexFlashPhysicalDrive := openapiclient.storage.FlexFlashPhysicalDrive{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", CardStatus: "CardStatus_example", CardType: "CardType_example", OemId: "OemId_example", PdStatus: "PdStatus_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexFlashController: } // StorageFlexFlashPhysicalDrive | The 'storage.FlexFlashPhysicalDrive' resource to update.
+    storageFlexFlashPhysicalDrive := *openapiclient.Newstorage.FlexFlashPhysicalDrive("ClassId_example", "ObjectType_example") // StorageFlexFlashPhysicalDrive | The 'storage.FlexFlashPhysicalDrive' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStorageFlexFlashPhysicalDrive(context.Background(), moid, storageFlexFlashPhysicalDrive).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStorageFlexFlashPhysicalDrive(context.Background(), moid).StorageFlexFlashPhysicalDrive(storageFlexFlashPhysicalDrive).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStorageFlexFlashPhysicalDrive``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8389,7 +10385,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8421,12 +10417,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageFlexFlashVirtualDrive := openapiclient.storage.FlexFlashVirtualDrive{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", DriveScope: "DriveScope_example", DriveStatus: "DriveStatus_example", PartitionId: "PartitionId_example", ResidentImage: "ResidentImage_example", Size: "Size_example", VirtualDrive: "VirtualDrive_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexFlashController: } // StorageFlexFlashVirtualDrive | The 'storage.FlexFlashVirtualDrive' resource to update.
+    storageFlexFlashVirtualDrive := *openapiclient.Newstorage.FlexFlashVirtualDrive("ClassId_example", "ObjectType_example") // StorageFlexFlashVirtualDrive | The 'storage.FlexFlashVirtualDrive' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStorageFlexFlashVirtualDrive(context.Background(), moid, storageFlexFlashVirtualDrive).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStorageFlexFlashVirtualDrive(context.Background(), moid).StorageFlexFlashVirtualDrive(storageFlexFlashVirtualDrive).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStorageFlexFlashVirtualDrive``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8461,7 +10457,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8493,12 +10489,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageFlexUtilController := openapiclient.storage.FlexUtilController{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ControllerName: "ControllerName_example", ControllerStatus: "ControllerStatus_example", FfControllerId: "FfControllerId_example", InternalState: "InternalState_example", ComputeBoard: , FlexUtilPhysicalDrives: []StorageFlexUtilPhysicalDriveRelationship{), FlexUtilVirtualDrives: []StorageFlexUtilVirtualDriveRelationship{), InventoryDeviceInfo: , RegisteredDevice: } // StorageFlexUtilController | The 'storage.FlexUtilController' resource to update.
+    storageFlexUtilController := *openapiclient.Newstorage.FlexUtilController("ClassId_example", "ObjectType_example") // StorageFlexUtilController | The 'storage.FlexUtilController' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStorageFlexUtilController(context.Background(), moid, storageFlexUtilController).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStorageFlexUtilController(context.Background(), moid).StorageFlexUtilController(storageFlexUtilController).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStorageFlexUtilController``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8533,7 +10529,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8565,12 +10561,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageFlexUtilPhysicalDrive := openapiclient.storage.FlexUtilPhysicalDrive{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", BlockSize: "BlockSize_example", Capacity: "Capacity_example", Controller: "Controller_example", DrivesEnabled: "DrivesEnabled_example", Health: "Health_example", ManufacturerDate: "ManufacturerDate_example", ManufacturerId: "ManufacturerId_example", OemId: "OemId_example", PartitionCount: "PartitionCount_example", PdStatus: "PdStatus_example", PhysicalDrive: "PhysicalDrive_example", ProductName: "ProductName_example", ProductRevision: "ProductRevision_example", ReadErrorCount: "ReadErrorCount_example", ReadErrorThreshold: "ReadErrorThreshold_example", WriteEnabled: "WriteEnabled_example", WriteErrorCount: "WriteErrorCount_example", WriteErrorThreshold: "WriteErrorThreshold_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexUtilController: } // StorageFlexUtilPhysicalDrive | The 'storage.FlexUtilPhysicalDrive' resource to update.
+    storageFlexUtilPhysicalDrive := *openapiclient.Newstorage.FlexUtilPhysicalDrive("ClassId_example", "ObjectType_example") // StorageFlexUtilPhysicalDrive | The 'storage.FlexUtilPhysicalDrive' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStorageFlexUtilPhysicalDrive(context.Background(), moid, storageFlexUtilPhysicalDrive).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStorageFlexUtilPhysicalDrive(context.Background(), moid).StorageFlexUtilPhysicalDrive(storageFlexUtilPhysicalDrive).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStorageFlexUtilPhysicalDrive``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8605,7 +10601,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8637,12 +10633,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageFlexUtilVirtualDrive := openapiclient.storage.FlexUtilVirtualDrive{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", DriveStatus: "DriveStatus_example", DriveType: "DriveType_example", PartitionId: "PartitionId_example", PartitionName: "PartitionName_example", ResidentImage: "ResidentImage_example", Size: "Size_example", VirtualDrive: "VirtualDrive_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexUtilController: } // StorageFlexUtilVirtualDrive | The 'storage.FlexUtilVirtualDrive' resource to update.
+    storageFlexUtilVirtualDrive := *openapiclient.Newstorage.FlexUtilVirtualDrive("ClassId_example", "ObjectType_example") // StorageFlexUtilVirtualDrive | The 'storage.FlexUtilVirtualDrive' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStorageFlexUtilVirtualDrive(context.Background(), moid, storageFlexUtilVirtualDrive).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStorageFlexUtilVirtualDrive(context.Background(), moid).StorageFlexUtilVirtualDrive(storageFlexUtilVirtualDrive).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStorageFlexUtilVirtualDrive``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8677,7 +10673,79 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateStorageHitachiArray
+
+> StorageHitachiArray UpdateStorageHitachiArray(ctx, moid).StorageHitachiArray(storageHitachiArray).IfMatch(ifMatch).Execute()
+
+Update a 'storage.HitachiArray' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    storageHitachiArray := *openapiclient.Newstorage.HitachiArray("ClassId_example", "ObjectType_example") // StorageHitachiArray | The 'storage.HitachiArray' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.UpdateStorageHitachiArray(context.Background(), moid).StorageHitachiArray(storageHitachiArray).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStorageHitachiArray``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateStorageHitachiArray`: StorageHitachiArray
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.UpdateStorageHitachiArray`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateStorageHitachiArrayRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **storageHitachiArray** | [**StorageHitachiArray**](StorageHitachiArray.md) | The &#39;storage.HitachiArray&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**StorageHitachiArray**](storage.HitachiArray.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8709,12 +10777,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storagePhysicalDisk := openapiclient.storage.PhysicalDisk{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", BlockSize: "BlockSize_example", Bootable: "Bootable_example", ConfigurationCheckpoint: "ConfigurationCheckpoint_example", ConfigurationState: "ConfigurationState_example", DiscoveredPath: "DiscoveredPath_example", DiskId: "DiskId_example", DiskState: "DiskState_example", DriveFirmware: "DriveFirmware_example", DriveState: "DriveState_example", FdeCapable: "FdeCapable_example", HotSpareType: "HotSpareType_example", LinkSpeed: "LinkSpeed_example", LinkState: "LinkState_example", NumBlocks: "NumBlocks_example", OperPowerState: "OperPowerState_example", OperQualifierReason: "OperQualifierReason_example", Operability: "Operability_example", PhysicalBlockSize: "PhysicalBlockSize_example", Pid: "Pid_example", Presence: "Presence_example", Protocol: "Protocol_example", RawSize: "RawSize_example", Secured: "Secured_example", Size: "Size_example", Thermal: "Thermal_example", Type: "Type_example", VariantType: "VariantType_example", InventoryDeviceInfo: , LocatorLed: , PhysicalDiskExtensions: []StoragePhysicalDiskExtensionRelationship{), RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{), SasPorts: []StorageSasPortRelationship{), StorageController: , StorageEnclosure: } // StoragePhysicalDisk | The 'storage.PhysicalDisk' resource to update.
+    storagePhysicalDisk := *openapiclient.Newstorage.PhysicalDisk("ClassId_example", "ObjectType_example") // StoragePhysicalDisk | The 'storage.PhysicalDisk' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStoragePhysicalDisk(context.Background(), moid, storagePhysicalDisk).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStoragePhysicalDisk(context.Background(), moid).StoragePhysicalDisk(storagePhysicalDisk).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStoragePhysicalDisk``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8749,7 +10817,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8781,12 +10849,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storagePhysicalDiskExtension := openapiclient.storage.PhysicalDiskExtension{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Bootable: "Bootable_example", DiskDn: "DiskDn_example", DiskId: int64(123), DiskState: "DiskState_example", Health: "Health_example", InventoryDeviceInfo: , PhysicalDisk: , RegisteredDevice: , StorageController: } // StoragePhysicalDiskExtension | The 'storage.PhysicalDiskExtension' resource to update.
+    storagePhysicalDiskExtension := *openapiclient.Newstorage.PhysicalDiskExtension("ClassId_example", "ObjectType_example") // StoragePhysicalDiskExtension | The 'storage.PhysicalDiskExtension' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStoragePhysicalDiskExtension(context.Background(), moid, storagePhysicalDiskExtension).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStoragePhysicalDiskExtension(context.Background(), moid).StoragePhysicalDiskExtension(storagePhysicalDiskExtension).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStoragePhysicalDiskExtension``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8821,7 +10889,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8853,12 +10921,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storagePhysicalDiskUsage := openapiclient.storage.PhysicalDiskUsage{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", NumberOfBlocks: "NumberOfBlocks_example", PhysicalDrive: "PhysicalDrive_example", Span: "Span_example", StartingBlock: "StartingBlock_example", State: "State_example", VirtualDrive: "VirtualDrive_example", InventoryDeviceInfo: , RegisteredDevice: } // StoragePhysicalDiskUsage | The 'storage.PhysicalDiskUsage' resource to update.
+    storagePhysicalDiskUsage := *openapiclient.Newstorage.PhysicalDiskUsage("ClassId_example", "ObjectType_example") // StoragePhysicalDiskUsage | The 'storage.PhysicalDiskUsage' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStoragePhysicalDiskUsage(context.Background(), moid, storagePhysicalDiskUsage).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStoragePhysicalDiskUsage(context.Background(), moid).StoragePhysicalDiskUsage(storagePhysicalDiskUsage).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStoragePhysicalDiskUsage``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8893,7 +10961,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8925,12 +10993,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storagePureArray := openapiclient.storage.PureArray{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Name: "Name_example", Uuid: "Uuid_example", Version: "Version_example", StorageUtilization: openapiclient.storage.BaseCapacity{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Available: int64(123), CapacityUtilization: 123, Free: int64(123), Total: int64(123), Used: int64(123)}, RegisteredDevice: } // StoragePureArray | The 'storage.PureArray' resource to update.
+    storagePureArray := *openapiclient.Newstorage.PureArray("ClassId_example", "ObjectType_example") // StoragePureArray | The 'storage.PureArray' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStoragePureArray(context.Background(), moid, storagePureArray).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStoragePureArray(context.Background(), moid).StoragePureArray(storagePureArray).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStoragePureArray``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8965,7 +11033,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8997,12 +11065,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageSasExpander := openapiclient.storage.SasExpander{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ExpanderId: int64(123), Name: "Name_example", OperState: "OperState_example", Operability: "Operability_example", Presence: "Presence_example", SasAddress: "SasAddress_example", ComputeRackUnit: , Controller: , EquipmentChassis: , InventoryDeviceInfo: , RegisteredDevice: } // StorageSasExpander | The 'storage.SasExpander' resource to update.
+    storageSasExpander := *openapiclient.Newstorage.SasExpander("ClassId_example", "ObjectType_example") // StorageSasExpander | The 'storage.SasExpander' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStorageSasExpander(context.Background(), moid, storageSasExpander).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStorageSasExpander(context.Background(), moid).StorageSasExpander(storageSasExpander).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStorageSasExpander``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -9037,7 +11105,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -9069,12 +11137,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageSasPort := openapiclient.storage.SasPort{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Address: "Address_example", DiskId: int64(123), EndPointId: int64(123), LinkDescription: "LinkDescription_example", LinkSpeed: "LinkSpeed_example", InventoryDeviceInfo: , RegisteredDevice: , StoragePhysicalDisk: } // StorageSasPort | The 'storage.SasPort' resource to update.
+    storageSasPort := *openapiclient.Newstorage.SasPort("ClassId_example", "ObjectType_example") // StorageSasPort | The 'storage.SasPort' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStorageSasPort(context.Background(), moid, storageSasPort).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStorageSasPort(context.Background(), moid).StorageSasPort(storageSasPort).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStorageSasPort``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -9109,7 +11177,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -9141,12 +11209,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageSpan := openapiclient.storage.Span{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Slots: []int64{int64(123)), SpanId: int64(123), DiskGroup: , PhysicalDisks: []StoragePhysicalDiskRelationship{), RegisteredDevice: } // StorageSpan | The 'storage.Span' resource to update.
+    storageSpan := *openapiclient.Newstorage.Span("ClassId_example", "ObjectType_example") // StorageSpan | The 'storage.Span' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStorageSpan(context.Background(), moid, storageSpan).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStorageSpan(context.Background(), moid).StorageSpan(storageSpan).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStorageSpan``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -9181,7 +11249,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -9218,7 +11286,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStorageStoragePolicy(context.Background(), moid, storageStoragePolicy).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStorageStoragePolicy(context.Background(), moid).StorageStoragePolicy(storageStoragePolicy).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStorageStoragePolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -9253,7 +11321,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -9285,12 +11353,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageVdMemberEp := openapiclient.storage.VdMemberEp{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperQualifierReason: "OperQualifierReason_example", Presence: "Presence_example", Role: "Role_example", SpanId: "SpanId_example", VdMemberEpId: int64(123), InventoryDeviceInfo: , RegisteredDevice: , StorageVirtualDrive: } // StorageVdMemberEp | The 'storage.VdMemberEp' resource to update.
+    storageVdMemberEp := *openapiclient.Newstorage.VdMemberEp("ClassId_example", "ObjectType_example") // StorageVdMemberEp | The 'storage.VdMemberEp' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStorageVdMemberEp(context.Background(), moid, storageVdMemberEp).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStorageVdMemberEp(context.Background(), moid).StorageVdMemberEp(storageVdMemberEp).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStorageVdMemberEp``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -9325,7 +11393,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -9357,12 +11425,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageVirtualDrive := openapiclient.storage.VirtualDrive{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AccessPolicy: "AccessPolicy_example", ActualWriteCachePolicy: "ActualWriteCachePolicy_example", AvailableSize: "AvailableSize_example", BlockSize: "BlockSize_example", Bootable: "Bootable_example", ConfigState: "ConfigState_example", ConfiguredWriteCachePolicy: "ConfiguredWriteCachePolicy_example", ConnectionProtocol: "ConnectionProtocol_example", DriveCache: "DriveCache_example", DriveSecurity: "DriveSecurity_example", DriveState: "DriveState_example", IoPolicy: "IoPolicy_example", Name: "Name_example", NumBlocks: "NumBlocks_example", OperState: "OperState_example", Operability: "Operability_example", PhysicalBlockSize: "PhysicalBlockSize_example", Presence: "Presence_example", ReadPolicy: "ReadPolicy_example", SecurityFlags: "SecurityFlags_example", Size: "Size_example", StripSize: "StripSize_example", Type: "Type_example", Uuid: "Uuid_example", VendorUuid: "VendorUuid_example", VirtualDriveId: "VirtualDriveId_example", DiskGroup: , InventoryDeviceInfo: , PhysicalDiskUsages: []StoragePhysicalDiskUsageRelationship{), RegisteredDevice: , StorageController: , VdMemberEps: []StorageVdMemberEpRelationship{), VirtualDriveExtension: } // StorageVirtualDrive | The 'storage.VirtualDrive' resource to update.
+    storageVirtualDrive := *openapiclient.Newstorage.VirtualDrive("ClassId_example", "ObjectType_example") // StorageVirtualDrive | The 'storage.VirtualDrive' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStorageVirtualDrive(context.Background(), moid, storageVirtualDrive).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStorageVirtualDrive(context.Background(), moid).StorageVirtualDrive(storageVirtualDrive).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStorageVirtualDrive``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -9397,7 +11465,79 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateStorageVirtualDriveContainer
+
+> StorageVirtualDriveContainer UpdateStorageVirtualDriveContainer(ctx, moid).StorageVirtualDriveContainer(storageVirtualDriveContainer).IfMatch(ifMatch).Execute()
+
+Update a 'storage.VirtualDriveContainer' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    storageVirtualDriveContainer := *openapiclient.Newstorage.VirtualDriveContainer("ClassId_example", "ObjectType_example") // StorageVirtualDriveContainer | The 'storage.VirtualDriveContainer' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.StorageApi.UpdateStorageVirtualDriveContainer(context.Background(), moid).StorageVirtualDriveContainer(storageVirtualDriveContainer).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStorageVirtualDriveContainer``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateStorageVirtualDriveContainer`: StorageVirtualDriveContainer
+    fmt.Fprintf(os.Stdout, "Response from `StorageApi.UpdateStorageVirtualDriveContainer`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateStorageVirtualDriveContainerRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **storageVirtualDriveContainer** | [**StorageVirtualDriveContainer**](StorageVirtualDriveContainer.md) | The &#39;storage.VirtualDriveContainer&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**StorageVirtualDriveContainer**](storage.VirtualDriveContainer.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -9429,12 +11569,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    storageVirtualDriveExtension := openapiclient.storage.VirtualDriveExtension{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Bootable: "Bootable_example", ContainerId: int64(123), DriveState: "DriveState_example", Name: "Name_example", OperDeviceId: "OperDeviceId_example", Uuid: "Uuid_example", VendorUuid: "VendorUuid_example", VirtualDriveDn: "VirtualDriveDn_example", VirtualDriveId: "VirtualDriveId_example", InventoryDeviceInfo: , RegisteredDevice: , StorageController: , VirtualDrive: } // StorageVirtualDriveExtension | The 'storage.VirtualDriveExtension' resource to update.
+    storageVirtualDriveExtension := *openapiclient.Newstorage.VirtualDriveExtension("ClassId_example", "ObjectType_example") // StorageVirtualDriveExtension | The 'storage.VirtualDriveExtension' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.StorageApi.UpdateStorageVirtualDriveExtension(context.Background(), moid, storageVirtualDriveExtension).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.StorageApi.UpdateStorageVirtualDriveExtension(context.Background(), moid).StorageVirtualDriveExtension(storageVirtualDriveExtension).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `StorageApi.UpdateStorageVirtualDriveExtension``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -9469,7 +11609,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 

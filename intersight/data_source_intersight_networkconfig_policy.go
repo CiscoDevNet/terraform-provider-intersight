@@ -42,10 +42,9 @@ func dataSourceNetworkconfigPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -54,7 +53,7 @@ func dataSourceNetworkconfigPolicy() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -70,10 +69,9 @@ func dataSourceNetworkconfigPolicy() *schema.Resource {
 				Computed: true,
 			},
 			"class_id": {
-				Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
 			},
 			"description": {
 				Description: "Description of the policy.",
@@ -117,7 +115,7 @@ func dataSourceNetworkconfigPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified type of this managed object, i.e. the class name.\nThis property is optional. The ObjectType is implied from the URL path.\nIf specified, the value of objectType must match the class name specified in the URL path.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -135,10 +133,9 @@ func dataSourceNetworkconfigPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -147,7 +144,7 @@ func dataSourceNetworkconfigPolicy() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -184,10 +181,9 @@ func dataSourceNetworkconfigPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -196,7 +192,7 @@ func dataSourceNetworkconfigPolicy() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -242,7 +238,7 @@ func dataSourceNetworkconfigPolicyRead(d *schema.ResourceData, meta interface{})
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-	var o = models.NewNetworkconfigPolicyWithDefaults()
+	var o = &models.NetworkconfigPolicy{}
 	if v, ok := d.GetOk("alternate_ipv4dns_server"); ok {
 		x := (v.(string))
 		o.SetAlternateIpv4dnsServer(x)
@@ -326,7 +322,7 @@ func dataSourceNetworkconfigPolicyRead(d *schema.ResourceData, meta interface{})
 	case reflect.Slice:
 		r := reflect.ValueOf(result)
 		for i := 0; i < r.Len(); i++ {
-			var s = models.NewNetworkconfigPolicyWithDefaults()
+			var s = &models.NetworkconfigPolicy{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
 				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)

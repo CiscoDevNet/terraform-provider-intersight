@@ -50,10 +50,9 @@ func dataSourceStorageVirtualDrive() *schema.Resource {
 				Computed:    true,
 			},
 			"class_id": {
-				Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
 			},
 			"config_state": {
 				Description: "The configuration state of the virtual drive.",
@@ -92,10 +91,9 @@ func dataSourceStorageVirtualDrive() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -104,7 +102,7 @@ func dataSourceStorageVirtualDrive() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -157,10 +155,9 @@ func dataSourceStorageVirtualDrive() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -169,7 +166,7 @@ func dataSourceStorageVirtualDrive() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -214,7 +211,7 @@ func dataSourceStorageVirtualDrive() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified type of this managed object, i.e. the class name.\nThis property is optional. The ObjectType is implied from the URL path.\nIf specified, the value of objectType must match the class name specified in the URL path.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -249,10 +246,9 @@ func dataSourceStorageVirtualDrive() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -261,7 +257,7 @@ func dataSourceStorageVirtualDrive() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -302,10 +298,9 @@ func dataSourceStorageVirtualDrive() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -314,7 +309,7 @@ func dataSourceStorageVirtualDrive() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -372,10 +367,9 @@ func dataSourceStorageVirtualDrive() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -384,7 +378,7 @@ func dataSourceStorageVirtualDrive() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -397,6 +391,45 @@ func dataSourceStorageVirtualDrive() *schema.Resource {
 						},
 					},
 				},
+			},
+			"storage_virtual_drive_container": {
+				Description: "A reference to a storageVirtualDriveContainer resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				Computed: true,
 			},
 			"strip_size": {
 				Description: "The strip size is the portion of a stripe that resides on a single drive in the drive group, this is measured in KB.",
@@ -452,10 +485,9 @@ func dataSourceStorageVirtualDrive() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -464,7 +496,7 @@ func dataSourceStorageVirtualDrive() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -504,10 +536,9 @@ func dataSourceStorageVirtualDrive() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -516,7 +547,7 @@ func dataSourceStorageVirtualDrive() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -544,7 +575,7 @@ func dataSourceStorageVirtualDriveRead(d *schema.ResourceData, meta interface{})
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-	var o = models.NewStorageVirtualDriveWithDefaults()
+	var o = &models.StorageVirtualDrive{}
 	if v, ok := d.GetOk("access_policy"); ok {
 		x := (v.(string))
 		o.SetAccessPolicy(x)
@@ -716,7 +747,7 @@ func dataSourceStorageVirtualDriveRead(d *schema.ResourceData, meta interface{})
 	case reflect.Slice:
 		r := reflect.ValueOf(result)
 		for i := 0; i < r.Len(); i++ {
-			var s = models.NewStorageVirtualDriveWithDefaults()
+			var s = &models.StorageVirtualDrive{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
 				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
@@ -833,6 +864,10 @@ func dataSourceStorageVirtualDriveRead(d *schema.ResourceData, meta interface{})
 
 			if err := d.Set("storage_controller", flattenMapStorageControllerRelationship(s.GetStorageController(), d)); err != nil {
 				return fmt.Errorf("error occurred while setting property StorageController: %+v", err)
+			}
+
+			if err := d.Set("storage_virtual_drive_container", flattenMapStorageVirtualDriveContainerRelationship(s.GetStorageVirtualDriveContainer(), d)); err != nil {
+				return fmt.Errorf("error occurred while setting property StorageVirtualDriveContainer: %+v", err)
 			}
 			if err := d.Set("strip_size", (s.GetStripSize())); err != nil {
 				return fmt.Errorf("error occurred while setting property StripSize: %+v", err)

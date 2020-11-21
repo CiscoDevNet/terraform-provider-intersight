@@ -14,13 +14,13 @@ func resourceOsConfigurationFile() *schema.Resource {
 	return &schema.Resource{
 		Create: resourceOsConfigurationFileCreate,
 		Read:   resourceOsConfigurationFileRead,
+		Update: resourceOsConfigurationFileUpdate,
 		Delete: resourceOsConfigurationFileDelete,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
 				Optional:         true,
 				DiffSuppressFunc: SuppressDiffAdditionProps,
-				ForceNew:         true,
 			},
 			"catalog": {
 				Description: "A reference to a osCatalog resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -33,48 +33,46 @@ func resourceOsConfigurationFile() *schema.Resource {
 							Type:             schema.TypeString,
 							Optional:         true,
 							DiffSuppressFunc: SuppressDiffAdditionProps,
-							ForceNew:         true,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
 						},
 						"selector": {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
 						},
 					},
 				},
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
-				ForceNew:   true,
 			},
 			"class_id": {
-				Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-				ForceNew:    true,
+			},
+			"description": {
+				Description: "Description of the OS ConfigurationFile.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"distributions": {
 				Description: "An array of relationships to hclOperatingSystem resources.",
@@ -86,47 +84,45 @@ func resourceOsConfigurationFile() *schema.Resource {
 							Type:             schema.TypeString,
 							Optional:         true,
 							DiffSuppressFunc: SuppressDiffAdditionProps,
-							ForceNew:         true,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
 						},
 						"selector": {
 							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
 						},
 					},
 				},
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
-				ForceNew:   true,
 			},
 			"file_content": {
 				Description: "The content of the entire configuration file is stored as value. The content\ncan either be a static file content or a template content.\nThe template is expected to conform to the golang template syntax. The values\nfrom os.Answers properties will be used to populate this template.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				ForceNew:    true,
+			},
+			"internal": {
+				Description: "The internal flag is set to true when configuration file is uploaded from OS Install wizard. Internal Configuration files will not be displayed in Answer Management Page.",
+				Type:        schema.TypeBool,
+				Optional:    true,
 			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
@@ -139,14 +135,12 @@ func resourceOsConfigurationFile() *schema.Resource {
 				Description: "The name of the OS ConfigurationFile that uniquely identifies the configuration file.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				ForceNew:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified type of this managed object, i.e. the class name.\nThis property is optional. The ObjectType is implied from the URL path.\nIf specified, the value of objectType must match the class name specified in the URL path.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-				ForceNew:    true,
 			},
 			"placeholders": {
 				Type:     schema.TypeList,
@@ -157,27 +151,23 @@ func resourceOsConfigurationFile() *schema.Resource {
 							Type:             schema.TypeString,
 							Optional:         true,
 							DiffSuppressFunc: SuppressDiffAdditionProps,
-							ForceNew:         true,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
 						},
 						"is_value_set": {
 							Description: "Flag to indicate if value is set. Value will be used to check if any edit.",
 							Type:        schema.TypeBool,
 							Optional:    true,
-							ForceNew:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
-							ForceNew:    true,
 						},
 						"type": {
 							Description: "Definition of place holder.",
@@ -190,14 +180,12 @@ func resourceOsConfigurationFile() *schema.Resource {
 										Type:             schema.TypeString,
 										Optional:         true,
 										DiffSuppressFunc: SuppressDiffAdditionProps,
-										ForceNew:         true,
 									},
 									"class_id": {
-										Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
-										ForceNew:    true,
 									},
 									"default": {
 										Description: "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
@@ -210,27 +198,23 @@ func resourceOsConfigurationFile() *schema.Resource {
 													Type:             schema.TypeString,
 													Optional:         true,
 													DiffSuppressFunc: SuppressDiffAdditionProps,
-													ForceNew:         true,
 												},
 												"class_id": {
-													Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 													Type:        schema.TypeString,
 													Optional:    true,
 													Computed:    true,
-													ForceNew:    true,
 												},
 												"object_type": {
-													Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 													Type:        schema.TypeString,
 													Optional:    true,
 													Computed:    true,
-													ForceNew:    true,
 												},
 												"override": {
 													Description: "Override the default value provided for the data type. When true, allow the user to enter value for the data type.",
 													Type:        schema.TypeBool,
 													Optional:    true,
-													ForceNew:    true,
 												},
 												"value": {
 													Description: "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
@@ -238,38 +222,79 @@ func resourceOsConfigurationFile() *schema.Resource {
 													Elem: &schema.Schema{
 														Type: schema.TypeString,
 													}, Optional: true,
-													ForceNew: true,
 												},
 											},
 										},
 										ConfigMode: schema.SchemaConfigModeAttr,
 										Computed:   true,
-										ForceNew:   true,
 									},
 									"description": {
 										Description: "Provide a detailed description of the data type.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										ForceNew:    true,
+									},
+									"display_meta": {
+										Description: "Captures the meta data needed for displaying workflow data types in Intersight User Interface.",
+										Type:        schema.TypeList,
+										MaxItems:    1,
+										Optional:    true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"additional_properties": {
+													Type:             schema.TypeString,
+													Optional:         true,
+													DiffSuppressFunc: SuppressDiffAdditionProps,
+												},
+												"class_id": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Computed:    true,
+												},
+												"inventory_selector": {
+													Description: "Inventory selector specified for primitive data property should be used in Intersight User Interface.",
+													Type:        schema.TypeBool,
+													Optional:    true,
+												},
+												"object_type": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Computed:    true,
+												},
+												"widget_type": {
+													Description: "Specify the widget type for data display.\n* `None` - Display none of the widget types.\n* `Radio` - Display the widget as a radio button.\n* `Dropdown` - Display the widget as a dropdown.\n* `GridSelector` - Display the widget as a selector.\n* `DrawerSelector` - Display the widget as a selector.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Default:     "None",
+												},
+											},
+										},
+										ConfigMode: schema.SchemaConfigModeAttr,
+										Computed:   true,
+									},
+									"input_parameters": {
+										Description: "JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'.",
+										Type:        schema.TypeMap,
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										}, Optional: true,
 									},
 									"label": {
 										Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										ForceNew:    true,
 									},
 									"name": {
 										Description: "Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										ForceNew:    true,
 									},
 									"object_type": {
-										Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
-										ForceNew:    true,
 									},
 									"properties": {
 										Description: "Primitive data type properties.",
@@ -282,14 +307,12 @@ func resourceOsConfigurationFile() *schema.Resource {
 													Type:             schema.TypeString,
 													Optional:         true,
 													DiffSuppressFunc: SuppressDiffAdditionProps,
-													ForceNew:         true,
 												},
 												"class_id": {
-													Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 													Type:        schema.TypeString,
 													Optional:    true,
 													Computed:    true,
-													ForceNew:    true,
 												},
 												"constraints": {
 													Description: "Constraints that must be applied to the parameter value supplied for this data type.",
@@ -302,14 +325,12 @@ func resourceOsConfigurationFile() *schema.Resource {
 																Type:             schema.TypeString,
 																Optional:         true,
 																DiffSuppressFunc: SuppressDiffAdditionProps,
-																ForceNew:         true,
 															},
 															"class_id": {
-																Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+																Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 																Type:        schema.TypeString,
 																Optional:    true,
 																Computed:    true,
-																ForceNew:    true,
 															},
 															"enum_list": {
 																Type:     schema.TypeList,
@@ -320,70 +341,59 @@ func resourceOsConfigurationFile() *schema.Resource {
 																			Type:             schema.TypeString,
 																			Optional:         true,
 																			DiffSuppressFunc: SuppressDiffAdditionProps,
-																			ForceNew:         true,
 																		},
 																		"class_id": {
-																			Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+																			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 																			Type:        schema.TypeString,
 																			Optional:    true,
 																			Computed:    true,
-																			ForceNew:    true,
 																		},
 																		"label": {
 																			Description: "Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_).",
 																			Type:        schema.TypeString,
 																			Optional:    true,
-																			ForceNew:    true,
 																		},
 																		"object_type": {
-																			Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+																			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 																			Type:        schema.TypeString,
 																			Optional:    true,
 																			Computed:    true,
-																			ForceNew:    true,
 																		},
 																		"value": {
 																			Description: "Enum value for this enum entry. Value will be passed to the workflow as string type for execution. Value can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), forward slash (/), or an underscore (_).",
 																			Type:        schema.TypeString,
 																			Optional:    true,
-																			ForceNew:    true,
 																		},
 																	},
 																},
 																ConfigMode: schema.SchemaConfigModeAttr,
 																Computed:   true,
-																ForceNew:   true,
 															},
 															"max": {
 																Description: "Allowed maximum value of the parameter if parameter is integer/float or maximum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked.",
 																Type:        schema.TypeFloat,
 																Optional:    true,
-																ForceNew:    true,
 															},
 															"min": {
 																Description: "Allowed minimum value of the parameter if parameter is integer/float or minimum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked.",
 																Type:        schema.TypeFloat,
 																Optional:    true,
-																ForceNew:    true,
 															},
 															"object_type": {
-																Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+																Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 																Type:        schema.TypeString,
 																Optional:    true,
 																Computed:    true,
-																ForceNew:    true,
 															},
 															"regex": {
 																Description: "When the parameter is a string this regular expression is used to ensure the value is valid.",
 																Type:        schema.TypeString,
 																Optional:    true,
-																ForceNew:    true,
 															},
 														},
 													},
 													ConfigMode: schema.SchemaConfigModeAttr,
 													Computed:   true,
-													ForceNew:   true,
 												},
 												"inventory_selector": {
 													Type:     schema.TypeList,
@@ -394,52 +404,44 @@ func resourceOsConfigurationFile() *schema.Resource {
 																Type:             schema.TypeString,
 																Optional:         true,
 																DiffSuppressFunc: SuppressDiffAdditionProps,
-																ForceNew:         true,
 															},
 															"class_id": {
-																Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+																Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 																Type:        schema.TypeString,
 																Optional:    true,
 																Computed:    true,
-																ForceNew:    true,
 															},
 															"display_attributes": {
 																Type:     schema.TypeList,
 																Optional: true,
 																Elem: &schema.Schema{
-																	Type: schema.TypeString}, ForceNew: true,
-															},
+																	Type: schema.TypeString}},
 															"object_type": {
-																Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+																Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 																Type:        schema.TypeString,
 																Optional:    true,
 																Computed:    true,
-																ForceNew:    true,
 															},
 															"selector": {
 																Description: "Field to hold an Intersight API along with an optional filter to narrow down the search options.",
 																Type:        schema.TypeString,
 																Optional:    true,
-																ForceNew:    true,
 															},
 															"value_attribute": {
 																Description: "A property from the Intersight object, value of which can be used as value for referenced input definition.",
 																Type:        schema.TypeString,
 																Optional:    true,
-																ForceNew:    true,
 															},
 														},
 													},
 													ConfigMode: schema.SchemaConfigModeAttr,
 													Computed:   true,
-													ForceNew:   true,
 												},
 												"object_type": {
-													Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 													Type:        schema.TypeString,
 													Optional:    true,
 													Computed:    true,
-													ForceNew:    true,
 												},
 												"secure": {
 													Description: "Intersight supports secure properties as task input/output. The values of\nthese properties are encrypted and stored in Intersight.\nThis flag marks the property to be secure when it is set to true.",
@@ -452,25 +454,21 @@ func resourceOsConfigurationFile() *schema.Resource {
 													Type:        schema.TypeString,
 													Optional:    true,
 													Default:     "string",
-													ForceNew:    true,
 												},
 											},
 										},
 										ConfigMode: schema.SchemaConfigModeAttr,
 										Computed:   true,
-										ForceNew:   true,
 									},
 									"required": {
 										Description: "Specifies whether this parameter is required. The field is applicable for task and workflow.",
 										Type:        schema.TypeBool,
 										Optional:    true,
-										ForceNew:    true,
 									},
 								},
 							},
 							ConfigMode: schema.SchemaConfigModeAttr,
 							Computed:   true,
-							ForceNew:   true,
 						},
 						"value": {
 							Description: "Value for placeholder provided by user.",
@@ -478,20 +476,17 @@ func resourceOsConfigurationFile() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString,
 							}, Optional: true,
-							ForceNew: true,
 						},
 					},
 				},
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
-				ForceNew:   true,
 			},
 			"supported": {
 				Description: "An internal property that is used to distinguish between the pre-canned OS\nconfiguration file entries and user provided entries.",
 				Type:        schema.TypeBool,
 				Optional:    true,
 				Computed:    true,
-				ForceNew:    true,
 			},
 			"tags": {
 				Type:     schema.TypeList,
@@ -502,23 +497,19 @@ func resourceOsConfigurationFile() *schema.Resource {
 							Type:             schema.TypeString,
 							Optional:         true,
 							DiffSuppressFunc: SuppressDiffAdditionProps,
-							ForceNew:         true,
 						},
 						"key": {
 							Description: "The string representation of a tag key.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 						},
 						"value": {
 							Description: "The string representation of a tag value.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							ForceNew:    true,
 						},
 					},
 				},
-				ForceNew: true,
 			},
 		},
 	}
@@ -583,6 +574,11 @@ func resourceOsConfigurationFileCreate(d *schema.ResourceData, meta interface{})
 
 	o.SetClassId("os.ConfigurationFile")
 
+	if v, ok := d.GetOk("description"); ok {
+		x := (v.(string))
+		o.SetDescription(x)
+	}
+
 	if v, ok := d.GetOk("distributions"); ok {
 		x := make([]models.HclOperatingSystemRelationship, 0)
 		s := v.([]interface{})
@@ -628,6 +624,11 @@ func resourceOsConfigurationFileCreate(d *schema.ResourceData, meta interface{})
 	if v, ok := d.GetOk("file_content"); ok {
 		x := (v.(string))
 		o.SetFileContent(x)
+	}
+
+	if v, ok := d.GetOkExists("internal"); ok {
+		x := v.(bool)
+		o.SetInternal(x)
 	}
 
 	if v, ok := d.GetOk("moid"); ok {
@@ -737,6 +738,56 @@ func resourceOsConfigurationFileCreate(d *schema.ResourceData, meta interface{})
 							{
 								x := (v.(string))
 								o.SetDescription(x)
+							}
+						}
+						if v, ok := l["display_meta"]; ok {
+							{
+								p := make([]models.WorkflowDisplayMeta, 0, 1)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									l := s[i].(map[string]interface{})
+									o := models.NewWorkflowDisplayMetaWithDefaults()
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("workflow.DisplayMeta")
+									if v, ok := l["inventory_selector"]; ok {
+										{
+											x := (v.(bool))
+											o.SetInventorySelector(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["widget_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetWidgetType(x)
+										}
+									}
+									p = append(p, *o)
+								}
+								if len(p) > 0 {
+									x := p[0]
+									o.SetDisplayMeta(x)
+								}
+							}
+						}
+						if v, ok := l["input_parameters"]; ok {
+							{
+								x := v.(map[string]interface{})
+								o.SetInputParameters(x)
 							}
 						}
 						if v, ok := l["label"]; ok {
@@ -1050,12 +1101,20 @@ func resourceOsConfigurationFileRead(d *schema.ResourceData, meta interface{}) e
 		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
 	}
 
+	if err := d.Set("description", (s.GetDescription())); err != nil {
+		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+	}
+
 	if err := d.Set("distributions", flattenListHclOperatingSystemRelationship(s.GetDistributions(), d)); err != nil {
 		return fmt.Errorf("error occurred while setting property Distributions: %+v", err)
 	}
 
 	if err := d.Set("file_content", (s.GetFileContent())); err != nil {
 		return fmt.Errorf("error occurred while setting property FileContent: %+v", err)
+	}
+
+	if err := d.Set("internal", (s.GetInternal())); err != nil {
+		return fmt.Errorf("error occurred while setting property Internal: %+v", err)
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
@@ -1085,6 +1144,579 @@ func resourceOsConfigurationFileRead(d *schema.ResourceData, meta interface{}) e
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
 	return nil
+}
+
+func resourceOsConfigurationFileUpdate(d *schema.ResourceData, meta interface{}) error {
+	log.SetFlags(log.LstdFlags | log.Lshortfile)
+	log.Printf("%v", meta)
+	conn := meta.(*Config)
+	var o = &models.OsConfigurationFile{}
+	if d.HasChange("additional_properties") {
+		v := d.Get("additional_properties")
+		x := []byte(v.(string))
+		var x1 interface{}
+		err := json.Unmarshal(x, &x1)
+		if err == nil && x1 != nil {
+			o.AdditionalProperties = x1.(map[string]interface{})
+		}
+	}
+
+	if d.HasChange("catalog") {
+		v := d.Get("catalog")
+		p := make([]models.OsCatalogRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsOsCatalogRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetCatalog(x)
+		}
+	}
+
+	o.SetClassId("os.ConfigurationFile")
+
+	if d.HasChange("description") {
+		v := d.Get("description")
+		x := (v.(string))
+		o.SetDescription(x)
+	}
+
+	if d.HasChange("distributions") {
+		v := d.Get("distributions")
+		x := make([]models.HclOperatingSystemRelationship, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoMoRef{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			x = append(x, models.MoMoRefAsHclOperatingSystemRelationship(o))
+		}
+		if len(x) > 0 {
+			o.SetDistributions(x)
+		}
+	}
+
+	if d.HasChange("file_content") {
+		v := d.Get("file_content")
+		x := (v.(string))
+		o.SetFileContent(x)
+	}
+
+	if d.HasChange("internal") {
+		v := d.Get("internal")
+		x := (v.(bool))
+		o.SetInternal(x)
+	}
+
+	if d.HasChange("moid") {
+		v := d.Get("moid")
+		x := (v.(string))
+		o.SetMoid(x)
+	}
+
+	if d.HasChange("name") {
+		v := d.Get("name")
+		x := (v.(string))
+		o.SetName(x)
+	}
+
+	o.SetObjectType("os.ConfigurationFile")
+
+	if d.HasChange("placeholders") {
+		v := d.Get("placeholders")
+		x := make([]models.OsPlaceHolder, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.OsPlaceHolder{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("os.PlaceHolder")
+			if v, ok := l["is_value_set"]; ok {
+				{
+					x := (v.(bool))
+					o.SetIsValueSet(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["type"]; ok {
+				{
+					p := make([]models.WorkflowPrimitiveDataType, 0, 1)
+					s := v.([]interface{})
+					for i := 0; i < len(s); i++ {
+						l := s[i].(map[string]interface{})
+						o := models.NewWorkflowPrimitiveDataTypeWithDefaults()
+						if v, ok := l["additional_properties"]; ok {
+							{
+								x := []byte(v.(string))
+								var x1 interface{}
+								err := json.Unmarshal(x, &x1)
+								if err == nil && x1 != nil {
+									o.AdditionalProperties = x1.(map[string]interface{})
+								}
+							}
+						}
+						o.SetClassId("workflow.PrimitiveDataType")
+						if v, ok := l["default"]; ok {
+							{
+								p := make([]models.WorkflowDefaultValue, 0, 1)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									l := s[i].(map[string]interface{})
+									o := models.NewWorkflowDefaultValueWithDefaults()
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("workflow.DefaultValue")
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["override"]; ok {
+										{
+											x := (v.(bool))
+											o.SetOverride(x)
+										}
+									}
+									if v, ok := l["value"]; ok {
+										{
+											x := v.(map[string]interface{})
+											o.SetValue(x)
+										}
+									}
+									p = append(p, *o)
+								}
+								if len(p) > 0 {
+									x := p[0]
+									o.SetDefault(x)
+								}
+							}
+						}
+						if v, ok := l["description"]; ok {
+							{
+								x := (v.(string))
+								o.SetDescription(x)
+							}
+						}
+						if v, ok := l["display_meta"]; ok {
+							{
+								p := make([]models.WorkflowDisplayMeta, 0, 1)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									l := s[i].(map[string]interface{})
+									o := models.NewWorkflowDisplayMetaWithDefaults()
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("workflow.DisplayMeta")
+									if v, ok := l["inventory_selector"]; ok {
+										{
+											x := (v.(bool))
+											o.SetInventorySelector(x)
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["widget_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetWidgetType(x)
+										}
+									}
+									p = append(p, *o)
+								}
+								if len(p) > 0 {
+									x := p[0]
+									o.SetDisplayMeta(x)
+								}
+							}
+						}
+						if v, ok := l["input_parameters"]; ok {
+							{
+								x := v.(map[string]interface{})
+								o.SetInputParameters(x)
+							}
+						}
+						if v, ok := l["label"]; ok {
+							{
+								x := (v.(string))
+								o.SetLabel(x)
+							}
+						}
+						if v, ok := l["name"]; ok {
+							{
+								x := (v.(string))
+								o.SetName(x)
+							}
+						}
+						if v, ok := l["object_type"]; ok {
+							{
+								x := (v.(string))
+								o.SetObjectType(x)
+							}
+						}
+						if v, ok := l["properties"]; ok {
+							{
+								p := make([]models.WorkflowPrimitiveDataProperty, 0, 1)
+								s := v.([]interface{})
+								for i := 0; i < len(s); i++ {
+									l := s[i].(map[string]interface{})
+									o := models.NewWorkflowPrimitiveDataPropertyWithDefaults()
+									if v, ok := l["additional_properties"]; ok {
+										{
+											x := []byte(v.(string))
+											var x1 interface{}
+											err := json.Unmarshal(x, &x1)
+											if err == nil && x1 != nil {
+												o.AdditionalProperties = x1.(map[string]interface{})
+											}
+										}
+									}
+									o.SetClassId("workflow.PrimitiveDataProperty")
+									if v, ok := l["constraints"]; ok {
+										{
+											p := make([]models.WorkflowConstraints, 0, 1)
+											s := v.([]interface{})
+											for i := 0; i < len(s); i++ {
+												l := s[i].(map[string]interface{})
+												o := models.NewWorkflowConstraintsWithDefaults()
+												if v, ok := l["additional_properties"]; ok {
+													{
+														x := []byte(v.(string))
+														var x1 interface{}
+														err := json.Unmarshal(x, &x1)
+														if err == nil && x1 != nil {
+															o.AdditionalProperties = x1.(map[string]interface{})
+														}
+													}
+												}
+												o.SetClassId("workflow.Constraints")
+												if v, ok := l["enum_list"]; ok {
+													{
+														x := make([]models.WorkflowEnumEntry, 0)
+														s := v.([]interface{})
+														for i := 0; i < len(s); i++ {
+															o := models.NewWorkflowEnumEntryWithDefaults()
+															l := s[i].(map[string]interface{})
+															if v, ok := l["additional_properties"]; ok {
+																{
+																	x := []byte(v.(string))
+																	var x1 interface{}
+																	err := json.Unmarshal(x, &x1)
+																	if err == nil && x1 != nil {
+																		o.AdditionalProperties = x1.(map[string]interface{})
+																	}
+																}
+															}
+															o.SetClassId("workflow.EnumEntry")
+															if v, ok := l["label"]; ok {
+																{
+																	x := (v.(string))
+																	o.SetLabel(x)
+																}
+															}
+															if v, ok := l["object_type"]; ok {
+																{
+																	x := (v.(string))
+																	o.SetObjectType(x)
+																}
+															}
+															if v, ok := l["value"]; ok {
+																{
+																	x := (v.(string))
+																	o.SetValue(x)
+																}
+															}
+															x = append(x, *o)
+														}
+														if len(x) > 0 {
+															o.SetEnumList(x)
+														}
+													}
+												}
+												if v, ok := l["max"]; ok {
+													{
+														x := v.(float64)
+														o.SetMax(x)
+													}
+												}
+												if v, ok := l["min"]; ok {
+													{
+														x := v.(float64)
+														o.SetMin(x)
+													}
+												}
+												if v, ok := l["object_type"]; ok {
+													{
+														x := (v.(string))
+														o.SetObjectType(x)
+													}
+												}
+												if v, ok := l["regex"]; ok {
+													{
+														x := (v.(string))
+														o.SetRegex(x)
+													}
+												}
+												p = append(p, *o)
+											}
+											if len(p) > 0 {
+												x := p[0]
+												o.SetConstraints(x)
+											}
+										}
+									}
+									if v, ok := l["inventory_selector"]; ok {
+										{
+											x := make([]models.WorkflowMoReferenceProperty, 0)
+											s := v.([]interface{})
+											for i := 0; i < len(s); i++ {
+												o := models.NewWorkflowMoReferencePropertyWithDefaults()
+												l := s[i].(map[string]interface{})
+												if v, ok := l["additional_properties"]; ok {
+													{
+														x := []byte(v.(string))
+														var x1 interface{}
+														err := json.Unmarshal(x, &x1)
+														if err == nil && x1 != nil {
+															o.AdditionalProperties = x1.(map[string]interface{})
+														}
+													}
+												}
+												o.SetClassId("workflow.MoReferenceProperty")
+												if v, ok := l["display_attributes"]; ok {
+													{
+														x := make([]string, 0)
+														y := reflect.ValueOf(v)
+														for i := 0; i < y.Len(); i++ {
+															x = append(x, y.Index(i).Interface().(string))
+														}
+														if len(x) > 0 {
+															o.SetDisplayAttributes(x)
+														}
+													}
+												}
+												if v, ok := l["object_type"]; ok {
+													{
+														x := (v.(string))
+														o.SetObjectType(x)
+													}
+												}
+												if v, ok := l["selector"]; ok {
+													{
+														x := (v.(string))
+														o.SetSelector(x)
+													}
+												}
+												if v, ok := l["value_attribute"]; ok {
+													{
+														x := (v.(string))
+														o.SetValueAttribute(x)
+													}
+												}
+												x = append(x, *o)
+											}
+											if len(x) > 0 {
+												o.SetInventorySelector(x)
+											}
+										}
+									}
+									if v, ok := l["object_type"]; ok {
+										{
+											x := (v.(string))
+											o.SetObjectType(x)
+										}
+									}
+									if v, ok := l["secure"]; ok {
+										{
+											x := (v.(bool))
+											o.SetSecure(x)
+										}
+									}
+									if v, ok := l["type"]; ok {
+										{
+											x := (v.(string))
+											o.SetType(x)
+										}
+									}
+									p = append(p, *o)
+								}
+								if len(p) > 0 {
+									x := p[0]
+									o.SetProperties(x)
+								}
+							}
+						}
+						if v, ok := l["required"]; ok {
+							{
+								x := (v.(bool))
+								o.SetRequired(x)
+							}
+						}
+						p = append(p, *o)
+					}
+					if len(p) > 0 {
+						x := p[0]
+						o.SetType(x)
+					}
+				}
+			}
+			if v, ok := l["value"]; ok {
+				{
+					x := v.(map[string]interface{})
+					o.SetValue(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetPlaceholders(x)
+		}
+	}
+
+	if d.HasChange("supported") {
+		v := d.Get("supported")
+		x := (v.(bool))
+		o.SetSupported(x)
+	}
+
+	if d.HasChange("tags") {
+		v := d.Get("tags")
+		x := make([]models.MoTag, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.MoTag{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			if v, ok := l["key"]; ok {
+				{
+					x := (v.(string))
+					o.SetKey(x)
+				}
+			}
+			if v, ok := l["value"]; ok {
+				{
+					x := (v.(string))
+					o.SetValue(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetTags(x)
+		}
+	}
+
+	r := conn.ApiClient.OsApi.UpdateOsConfigurationFile(conn.ctx, d.Id()).OsConfigurationFile(*o)
+	result, _, err := r.Execute()
+	if err != nil {
+		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	}
+	log.Printf("Moid: %s", result.GetMoid())
+	d.SetId(result.GetMoid())
+	return resourceOsConfigurationFileRead(d, meta)
 }
 
 func resourceOsConfigurationFileDelete(d *schema.ResourceData, meta interface{}) error {

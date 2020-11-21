@@ -4,20 +4,25 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.AddressInformation"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.AddressInformation"]
 **Address1** | Pointer to **string** | Address Line one of the address information. example \&quot;PO BOX 641570\&quot;. | [optional] [readonly] 
 **Address2** | Pointer to **string** | Address Line two of the address information. example \&quot;Cisco Systems\&quot;. | [optional] [readonly] 
+**Address3** | Pointer to **string** | Address Line three of the address information. example \&quot;Cisco Systems\&quot;. | [optional] [readonly] 
 **City** | Pointer to **string** | City in which the address resides. example \&quot;San Jose\&quot;. | [optional] [readonly] 
 **Country** | Pointer to **string** | Country in which the address resides. example \&quot;US\&quot;. | [optional] [readonly] 
+**County** | Pointer to **string** | County in which the address resides. example \&quot;Washington County\&quot;. | [optional] [readonly] 
 **Location** | Pointer to **string** | Location in which the address resides. example \&quot;14852\&quot;. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name of the user whose address is being populated. | [optional] [readonly] 
 **PostalCode** | Pointer to **string** | Postal Code in which the address resides. example \&quot;95164-1570\&quot;. | [optional] [readonly] 
+**Province** | Pointer to **string** | Province in which the address resides. example \&quot;AB\&quot;. | [optional] [readonly] 
 **State** | Pointer to **string** | State in which the address resides. example \&quot;CA\&quot;. | [optional] [readonly] 
 
 ## Methods
 
 ### NewAssetAddressInformation
 
-`func NewAssetAddressInformation() *AssetAddressInformation`
+`func NewAssetAddressInformation(classId string, objectType string, ) *AssetAddressInformation`
 
 NewAssetAddressInformation instantiates a new AssetAddressInformation object
 This constructor will assign default values to properties that have it defined,
@@ -31,6 +36,46 @@ will change when the set of required properties is changed
 NewAssetAddressInformationWithDefaults instantiates a new AssetAddressInformation object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *AssetAddressInformation) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *AssetAddressInformation) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *AssetAddressInformation) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *AssetAddressInformation) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *AssetAddressInformation) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *AssetAddressInformation) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAddress1
 
@@ -82,6 +127,31 @@ SetAddress2 sets Address2 field to given value.
 
 HasAddress2 returns a boolean if a field has been set.
 
+### GetAddress3
+
+`func (o *AssetAddressInformation) GetAddress3() string`
+
+GetAddress3 returns the Address3 field if non-nil, zero value otherwise.
+
+### GetAddress3Ok
+
+`func (o *AssetAddressInformation) GetAddress3Ok() (*string, bool)`
+
+GetAddress3Ok returns a tuple with the Address3 field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAddress3
+
+`func (o *AssetAddressInformation) SetAddress3(v string)`
+
+SetAddress3 sets Address3 field to given value.
+
+### HasAddress3
+
+`func (o *AssetAddressInformation) HasAddress3() bool`
+
+HasAddress3 returns a boolean if a field has been set.
+
 ### GetCity
 
 `func (o *AssetAddressInformation) GetCity() string`
@@ -131,6 +201,31 @@ SetCountry sets Country field to given value.
 `func (o *AssetAddressInformation) HasCountry() bool`
 
 HasCountry returns a boolean if a field has been set.
+
+### GetCounty
+
+`func (o *AssetAddressInformation) GetCounty() string`
+
+GetCounty returns the County field if non-nil, zero value otherwise.
+
+### GetCountyOk
+
+`func (o *AssetAddressInformation) GetCountyOk() (*string, bool)`
+
+GetCountyOk returns a tuple with the County field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCounty
+
+`func (o *AssetAddressInformation) SetCounty(v string)`
+
+SetCounty sets County field to given value.
+
+### HasCounty
+
+`func (o *AssetAddressInformation) HasCounty() bool`
+
+HasCounty returns a boolean if a field has been set.
 
 ### GetLocation
 
@@ -206,6 +301,31 @@ SetPostalCode sets PostalCode field to given value.
 `func (o *AssetAddressInformation) HasPostalCode() bool`
 
 HasPostalCode returns a boolean if a field has been set.
+
+### GetProvince
+
+`func (o *AssetAddressInformation) GetProvince() string`
+
+GetProvince returns the Province field if non-nil, zero value otherwise.
+
+### GetProvinceOk
+
+`func (o *AssetAddressInformation) GetProvinceOk() (*string, bool)`
+
+GetProvinceOk returns a tuple with the Province field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProvince
+
+`func (o *AssetAddressInformation) SetProvince(v string)`
+
+SetProvince sets Province field to given value.
+
+### HasProvince
+
+`func (o *AssetAddressInformation) HasProvince() bool`
+
+HasProvince returns a boolean if a field has been set.
 
 ### GetState
 

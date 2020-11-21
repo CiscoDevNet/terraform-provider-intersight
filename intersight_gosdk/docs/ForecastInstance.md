@@ -4,12 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "forecast.Instance"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "forecast.Instance"]
 **AltModel** | Pointer to **[]float32** |  | [optional] 
 **DeviceId** | Pointer to **string** | The Moid of the Intersight managed device instance for which regression model is derived. | [optional] [readonly] 
 **FullCapDays** | Pointer to **int64** | The number of days remaining before the device reaches its full functional capacity. | [optional] [readonly] 
 **MetricName** | Pointer to **string** | The name of the metric for which regression model is generated. | [optional] [readonly] 
 **MinDaysForForecast** | Pointer to **int64** | The minimum number of days the HyperFlex cluster should be up for computing forecast. | [optional] [readonly] 
-**Model** | Pointer to [**ForecastModel**](forecast.Model.md) |  | [optional] 
+**Model** | Pointer to [**NullableForecastModel**](forecast.Model.md) |  | [optional] 
 **ThresholdDays** | Pointer to **int64** | The number of days remaining before the device reaches the specified threshold for the metric as defined in definition. | [optional] [readonly] 
 **ForecastDef** | Pointer to [**ForecastDefinitionRelationship**](forecast.Definition.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
@@ -18,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewForecastInstance
 
-`func NewForecastInstance() *ForecastInstance`
+`func NewForecastInstance(classId string, objectType string, ) *ForecastInstance`
 
 NewForecastInstance instantiates a new ForecastInstance object
 This constructor will assign default values to properties that have it defined,
@@ -32,6 +34,46 @@ will change when the set of required properties is changed
 NewForecastInstanceWithDefaults instantiates a new ForecastInstance object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *ForecastInstance) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *ForecastInstance) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *ForecastInstance) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *ForecastInstance) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *ForecastInstance) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *ForecastInstance) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAltModel
 
@@ -58,6 +100,16 @@ SetAltModel sets AltModel field to given value.
 
 HasAltModel returns a boolean if a field has been set.
 
+### SetAltModelNil
+
+`func (o *ForecastInstance) SetAltModelNil(b bool)`
+
+ SetAltModelNil sets the value for AltModel to be an explicit nil
+
+### UnsetAltModel
+`func (o *ForecastInstance) UnsetAltModel()`
+
+UnsetAltModel ensures that no value is present for AltModel, not even an explicit nil
 ### GetDeviceId
 
 `func (o *ForecastInstance) GetDeviceId() string`
@@ -183,6 +235,16 @@ SetModel sets Model field to given value.
 
 HasModel returns a boolean if a field has been set.
 
+### SetModelNil
+
+`func (o *ForecastInstance) SetModelNil(b bool)`
+
+ SetModelNil sets the value for Model to be an explicit nil
+
+### UnsetModel
+`func (o *ForecastInstance) UnsetModel()`
+
+UnsetModel ensures that no value is present for Model, not even an explicit nil
 ### GetThresholdDays
 
 `func (o *ForecastInstance) GetThresholdDays() int64`

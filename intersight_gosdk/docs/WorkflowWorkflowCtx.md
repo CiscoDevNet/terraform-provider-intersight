@@ -4,8 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**InitiatorCtx** | Pointer to [**WorkflowInitiatorContext**](workflow.InitiatorContext.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.WorkflowCtx"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.WorkflowCtx"]
+**InitiatorCtx** | Pointer to [**NullableWorkflowInitiatorContext**](workflow.InitiatorContext.md) |  | [optional] 
 **TargetCtxList** | Pointer to [**[]WorkflowTargetContext**](workflow.TargetContext.md) |  | [optional] 
+**WorkflowMetaName** | Pointer to **string** | The name of workflowMeta of the workflow running. | [optional] 
 **WorkflowSubtype** | Pointer to **string** | The subtype of the workflow. | [optional] 
 **WorkflowType** | Pointer to **string** | Type of the workflow being started. This can be any string for client services to distinguish workflow by type. | [optional] 
 
@@ -13,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewWorkflowWorkflowCtx
 
-`func NewWorkflowWorkflowCtx() *WorkflowWorkflowCtx`
+`func NewWorkflowWorkflowCtx(classId string, objectType string, ) *WorkflowWorkflowCtx`
 
 NewWorkflowWorkflowCtx instantiates a new WorkflowWorkflowCtx object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +30,46 @@ will change when the set of required properties is changed
 NewWorkflowWorkflowCtxWithDefaults instantiates a new WorkflowWorkflowCtx object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *WorkflowWorkflowCtx) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *WorkflowWorkflowCtx) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *WorkflowWorkflowCtx) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *WorkflowWorkflowCtx) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *WorkflowWorkflowCtx) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *WorkflowWorkflowCtx) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetInitiatorCtx
 
@@ -53,6 +96,16 @@ SetInitiatorCtx sets InitiatorCtx field to given value.
 
 HasInitiatorCtx returns a boolean if a field has been set.
 
+### SetInitiatorCtxNil
+
+`func (o *WorkflowWorkflowCtx) SetInitiatorCtxNil(b bool)`
+
+ SetInitiatorCtxNil sets the value for InitiatorCtx to be an explicit nil
+
+### UnsetInitiatorCtx
+`func (o *WorkflowWorkflowCtx) UnsetInitiatorCtx()`
+
+UnsetInitiatorCtx ensures that no value is present for InitiatorCtx, not even an explicit nil
 ### GetTargetCtxList
 
 `func (o *WorkflowWorkflowCtx) GetTargetCtxList() []WorkflowTargetContext`
@@ -77,6 +130,41 @@ SetTargetCtxList sets TargetCtxList field to given value.
 `func (o *WorkflowWorkflowCtx) HasTargetCtxList() bool`
 
 HasTargetCtxList returns a boolean if a field has been set.
+
+### SetTargetCtxListNil
+
+`func (o *WorkflowWorkflowCtx) SetTargetCtxListNil(b bool)`
+
+ SetTargetCtxListNil sets the value for TargetCtxList to be an explicit nil
+
+### UnsetTargetCtxList
+`func (o *WorkflowWorkflowCtx) UnsetTargetCtxList()`
+
+UnsetTargetCtxList ensures that no value is present for TargetCtxList, not even an explicit nil
+### GetWorkflowMetaName
+
+`func (o *WorkflowWorkflowCtx) GetWorkflowMetaName() string`
+
+GetWorkflowMetaName returns the WorkflowMetaName field if non-nil, zero value otherwise.
+
+### GetWorkflowMetaNameOk
+
+`func (o *WorkflowWorkflowCtx) GetWorkflowMetaNameOk() (*string, bool)`
+
+GetWorkflowMetaNameOk returns a tuple with the WorkflowMetaName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWorkflowMetaName
+
+`func (o *WorkflowWorkflowCtx) SetWorkflowMetaName(v string)`
+
+SetWorkflowMetaName sets WorkflowMetaName field to given value.
+
+### HasWorkflowMetaName
+
+`func (o *WorkflowWorkflowCtx) HasWorkflowMetaName() bool`
+
+HasWorkflowMetaName returns a boolean if a field has been set.
 
 ### GetWorkflowSubtype
 

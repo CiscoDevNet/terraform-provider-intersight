@@ -4,22 +4,24 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Capacity** | Pointer to [**InfraHardwareInfo**](infra.HardwareInfo.md) |  | [optional] 
-**GuestInfo** | Pointer to [**VirtualizationGuestInfo**](virtualization.GuestInfo.md) |  | [optional] 
-**HypervisorType** | Pointer to **string** | Type of hypervisor where the virtual machine is hosted for example ESXi. * &#x60;Unknown&#x60; - The type of the hypervisor is unknown. * &#x60;ESXi&#x60; - A Vmware ESXi hypervisor of any version. * &#x60;HXAP&#x60; - A Cisco HyperFlex Application Platform hypervisor. | [optional] [default to "Unknown"]
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**Capacity** | Pointer to [**NullableInfraHardwareInfo**](infra.HardwareInfo.md) |  | [optional] 
+**GuestInfo** | Pointer to [**NullableVirtualizationGuestInfo**](virtualization.GuestInfo.md) |  | [optional] 
+**HypervisorType** | Pointer to **string** | Type of hypervisor where the virtual machine is hosted for example ESXi. * &#x60;ESXi&#x60; - A Vmware ESXi hypervisor of any version. * &#x60;HXAP&#x60; - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform. * &#x60;Hyper-V&#x60; - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * &#x60;Unknown&#x60; - The hypervisor running on the HyperFlex cluster is not known. | [optional] [default to "ESXi"]
 **Identity** | Pointer to **string** | The internally generated identity of this VM. This entity is not manipulated by users. It aids in uniquely identifying the virtual machine object. For VMware, this is MOR (managed object reference). | [optional] 
 **IpAddress** | Pointer to **[]string** |  | [optional] 
-**MemoryCapacity** | Pointer to [**VirtualizationMemoryCapacity**](virtualization.MemoryCapacity.md) |  | [optional] 
+**MemoryCapacity** | Pointer to [**NullableVirtualizationMemoryCapacity**](virtualization.MemoryCapacity.md) |  | [optional] 
 **Name** | Pointer to **string** | User-provided name to identify the virtual machine. | [optional] 
 **PowerState** | Pointer to **string** | Power state of the virtual machine. * &#x60;Unknown&#x60; - The entity&#39;s power state is unknown. * &#x60;PoweredOn&#x60; - The entity is powered on. * &#x60;PoweredOff&#x60; - The entity is powered down. * &#x60;StandBy&#x60; - The entity is in standby mode. * &#x60;Paused&#x60; - The entity is in pause state. | [optional] [default to "Unknown"]
-**ProcessorCapacity** | Pointer to [**VirtualizationComputeCapacity**](virtualization.ComputeCapacity.md) |  | [optional] 
+**ProcessorCapacity** | Pointer to [**NullableVirtualizationComputeCapacity**](virtualization.ComputeCapacity.md) |  | [optional] 
 **Uuid** | Pointer to **string** | The uuid of this virtual machine. The uuid is internally generated and not user specified. | [optional] 
 
 ## Methods
 
 ### NewVirtualizationBaseVirtualMachineAllOf
 
-`func NewVirtualizationBaseVirtualMachineAllOf() *VirtualizationBaseVirtualMachineAllOf`
+`func NewVirtualizationBaseVirtualMachineAllOf(classId string, objectType string, ) *VirtualizationBaseVirtualMachineAllOf`
 
 NewVirtualizationBaseVirtualMachineAllOf instantiates a new VirtualizationBaseVirtualMachineAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -33,6 +35,46 @@ will change when the set of required properties is changed
 NewVirtualizationBaseVirtualMachineAllOfWithDefaults instantiates a new VirtualizationBaseVirtualMachineAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *VirtualizationBaseVirtualMachineAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *VirtualizationBaseVirtualMachineAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *VirtualizationBaseVirtualMachineAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *VirtualizationBaseVirtualMachineAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *VirtualizationBaseVirtualMachineAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *VirtualizationBaseVirtualMachineAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCapacity
 
@@ -59,6 +101,16 @@ SetCapacity sets Capacity field to given value.
 
 HasCapacity returns a boolean if a field has been set.
 
+### SetCapacityNil
+
+`func (o *VirtualizationBaseVirtualMachineAllOf) SetCapacityNil(b bool)`
+
+ SetCapacityNil sets the value for Capacity to be an explicit nil
+
+### UnsetCapacity
+`func (o *VirtualizationBaseVirtualMachineAllOf) UnsetCapacity()`
+
+UnsetCapacity ensures that no value is present for Capacity, not even an explicit nil
 ### GetGuestInfo
 
 `func (o *VirtualizationBaseVirtualMachineAllOf) GetGuestInfo() VirtualizationGuestInfo`
@@ -84,6 +136,16 @@ SetGuestInfo sets GuestInfo field to given value.
 
 HasGuestInfo returns a boolean if a field has been set.
 
+### SetGuestInfoNil
+
+`func (o *VirtualizationBaseVirtualMachineAllOf) SetGuestInfoNil(b bool)`
+
+ SetGuestInfoNil sets the value for GuestInfo to be an explicit nil
+
+### UnsetGuestInfo
+`func (o *VirtualizationBaseVirtualMachineAllOf) UnsetGuestInfo()`
+
+UnsetGuestInfo ensures that no value is present for GuestInfo, not even an explicit nil
 ### GetHypervisorType
 
 `func (o *VirtualizationBaseVirtualMachineAllOf) GetHypervisorType() string`
@@ -159,6 +221,16 @@ SetIpAddress sets IpAddress field to given value.
 
 HasIpAddress returns a boolean if a field has been set.
 
+### SetIpAddressNil
+
+`func (o *VirtualizationBaseVirtualMachineAllOf) SetIpAddressNil(b bool)`
+
+ SetIpAddressNil sets the value for IpAddress to be an explicit nil
+
+### UnsetIpAddress
+`func (o *VirtualizationBaseVirtualMachineAllOf) UnsetIpAddress()`
+
+UnsetIpAddress ensures that no value is present for IpAddress, not even an explicit nil
 ### GetMemoryCapacity
 
 `func (o *VirtualizationBaseVirtualMachineAllOf) GetMemoryCapacity() VirtualizationMemoryCapacity`
@@ -184,6 +256,16 @@ SetMemoryCapacity sets MemoryCapacity field to given value.
 
 HasMemoryCapacity returns a boolean if a field has been set.
 
+### SetMemoryCapacityNil
+
+`func (o *VirtualizationBaseVirtualMachineAllOf) SetMemoryCapacityNil(b bool)`
+
+ SetMemoryCapacityNil sets the value for MemoryCapacity to be an explicit nil
+
+### UnsetMemoryCapacity
+`func (o *VirtualizationBaseVirtualMachineAllOf) UnsetMemoryCapacity()`
+
+UnsetMemoryCapacity ensures that no value is present for MemoryCapacity, not even an explicit nil
 ### GetName
 
 `func (o *VirtualizationBaseVirtualMachineAllOf) GetName() string`
@@ -259,6 +341,16 @@ SetProcessorCapacity sets ProcessorCapacity field to given value.
 
 HasProcessorCapacity returns a boolean if a field has been set.
 
+### SetProcessorCapacityNil
+
+`func (o *VirtualizationBaseVirtualMachineAllOf) SetProcessorCapacityNil(b bool)`
+
+ SetProcessorCapacityNil sets the value for ProcessorCapacity to be an explicit nil
+
+### UnsetProcessorCapacity
+`func (o *VirtualizationBaseVirtualMachineAllOf) UnsetProcessorCapacity()`
+
+UnsetProcessorCapacity ensures that no value is present for ProcessorCapacity, not even an explicit nil
 ### GetUuid
 
 `func (o *VirtualizationBaseVirtualMachineAllOf) GetUuid() string`

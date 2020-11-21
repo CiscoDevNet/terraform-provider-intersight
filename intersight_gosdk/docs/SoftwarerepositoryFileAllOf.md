@@ -4,26 +4,29 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **Description** | Pointer to **string** | User provided description about the file. Cisco provided description for image inventoried from a Cisco repository. | [optional] 
 **DownloadCount** | Pointer to **int64** | The number of times this file has been downloaded from the local repository. It is used by the repository monitoring process to determine the files that are to be evicted from the cache. | [optional] [readonly] 
 **ImportAction** | Pointer to **string** | The action to be performed on the imported file. If &#39;PreCache&#39; is set, the image will be cached in Appliance. Applicable in Intersight appliance deployment. If &#39;Evict&#39; is set, the cached file will be removed. Applicable in Intersight appliance deployment. If &#39;GeneratePreSignedUploadUrl&#39; is set, generates pre signed URL (s) for the file to be imported into the repository. Applicable for local machine source. The URL (s) will be populated under LocalMachine file server. If &#39;CompleteImportProcess&#39; is set, the ImportState is marked as &#39;Imported&#39;. Applicable for local machine source. If &#39;Cancel&#39; is set, the ImportState is marked as &#39;Failed&#39;. Applicable for local machine source. * &#x60;None&#x60; - No action should be taken on the imported file. * &#x60;GeneratePreSignedUploadUrl&#x60; - Generate pre signed URL of file for importing into the repository. * &#x60;GeneratePreSignedDownloadUrl&#x60; - Generate pre signed URL of file in the repository to download. * &#x60;CompleteImportProcess&#x60; - Mark that the import process of the file into the repository is complete. * &#x60;MarkImportFailed&#x60; - Mark to indicate that the import process of the file into the repository failed. * &#x60;PreCache&#x60; - Cache the file into the Intersight Appliance. * &#x60;Cancel&#x60; - The cancel import process for the file into the repository. * &#x60;Extract&#x60; - The action to extract the file in the external repository. * &#x60;Evict&#x60; - Evict the cached file from the Intersight Appliance. | [optional] [default to "None"]
 **ImportState** | Pointer to **string** | The state  of this file in the repository or Appliance. The importState is updated during the import operation and as part of the repository monitoring process. * &#x60;ReadyForImport&#x60; - The image is ready to be imported into the repository. * &#x60;Importing&#x60; - The image is being imported into the repository. * &#x60;Imported&#x60; - The image has been extracted and imported into the repository. * &#x60;PendingExtraction&#x60; - Indicates that the image has been imported but not extracted in the repository. * &#x60;Extracting&#x60; - Indicates that the image is being extracted into the repository. * &#x60;Extracted&#x60; - Indicates that the image has been extracted into the repository. * &#x60;Failed&#x60; - The image import from an external source to the repository has failed. * &#x60;MetaOnly&#x60; - The image is present in an external repository. * &#x60;ReadyForCache&#x60; - The image is ready to be cached into the Intersight Appliance. * &#x60;Caching&#x60; - Indicates that the image is being cached into the Intersight Appliance or endpoint cache. * &#x60;Cached&#x60; - Indicates that the image has been cached into the Intersight Appliance or endpoint cache. * &#x60;CachingFailed&#x60; - Indicates that the image caching into the Intersight Appliance failed or endpoint cache. * &#x60;Corrupted&#x60; - Indicates that the image in the local repository (or endpoint cache) has been corrupted after it was cached. * &#x60;Evicted&#x60; - Indicates that the image has been evicted from the Intersight Appliance (or endpoint cache) to reclaim storage space. | [optional] [readonly] [default to "ReadyForImport"]
 **ImportedTime** | Pointer to [**time.Time**](time.Time.md) | The time at which this image or file was imported/cached into the repositry. if the &#39;ImportState&#39; is &#39;Imported&#39;, the time at which this image or file was imported. if the &#39;ImportState&#39; is &#39;Cached&#39;, the time at which this image or file was cached. | [optional] [readonly] 
 **LastAccessTime** | Pointer to [**time.Time**](time.Time.md) | The time at which this file was last downloaded from the local repository. It is used by the repository monitoring process to determine the files that are to be evicted from the cache. | [optional] [readonly] 
+**Md5eTag** | Pointer to **string** | The MD5 ETag for a file that is stored in Intersight repository or in the appliance cache. Warning - MD5 is currently broken and this will be migrated to SHA shortly. | [optional] 
 **Md5sum** | Pointer to **string** | The md5sum checksum of the file. This information is available for all Cisco distributed images and files imported to the local repository. | [optional] 
 **Name** | Pointer to **string** | The name of the file. It is populated as part of the image import operation. | [optional] 
 **ReleaseDate** | Pointer to [**time.Time**](time.Time.md) | The date on which the file was released or distributed by its vendor. | [optional] 
 **Sha512sum** | Pointer to **string** | The sha512sum of the file. This information is available for all Cisco distributed images and files imported to the local repository. | [optional] 
 **Size** | Pointer to **int64** | The size (in bytes) of the file. This information is available for all Cisco distributed images and files imported to the local repository. | [optional] 
 **SoftwareAdvisoryUrl** | Pointer to **string** | The software advisory, if any, provided by the vendor for this file. | [optional] 
-**Source** | Pointer to [**SoftwarerepositoryFileServer**](softwarerepository.FileServer.md) |  | [optional] 
+**Source** | Pointer to [**NullableSoftwarerepositoryFileServer**](softwarerepository.FileServer.md) |  | [optional] 
 **Version** | Pointer to **string** | Vendor provided version for the file. | [optional] 
 
 ## Methods
 
 ### NewSoftwarerepositoryFileAllOf
 
-`func NewSoftwarerepositoryFileAllOf() *SoftwarerepositoryFileAllOf`
+`func NewSoftwarerepositoryFileAllOf(classId string, objectType string, ) *SoftwarerepositoryFileAllOf`
 
 NewSoftwarerepositoryFileAllOf instantiates a new SoftwarerepositoryFileAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -37,6 +40,46 @@ will change when the set of required properties is changed
 NewSoftwarerepositoryFileAllOfWithDefaults instantiates a new SoftwarerepositoryFileAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *SoftwarerepositoryFileAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *SoftwarerepositoryFileAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *SoftwarerepositoryFileAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *SoftwarerepositoryFileAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *SoftwarerepositoryFileAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *SoftwarerepositoryFileAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDescription
 
@@ -187,6 +230,31 @@ SetLastAccessTime sets LastAccessTime field to given value.
 `func (o *SoftwarerepositoryFileAllOf) HasLastAccessTime() bool`
 
 HasLastAccessTime returns a boolean if a field has been set.
+
+### GetMd5eTag
+
+`func (o *SoftwarerepositoryFileAllOf) GetMd5eTag() string`
+
+GetMd5eTag returns the Md5eTag field if non-nil, zero value otherwise.
+
+### GetMd5eTagOk
+
+`func (o *SoftwarerepositoryFileAllOf) GetMd5eTagOk() (*string, bool)`
+
+GetMd5eTagOk returns a tuple with the Md5eTag field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMd5eTag
+
+`func (o *SoftwarerepositoryFileAllOf) SetMd5eTag(v string)`
+
+SetMd5eTag sets Md5eTag field to given value.
+
+### HasMd5eTag
+
+`func (o *SoftwarerepositoryFileAllOf) HasMd5eTag() bool`
+
+HasMd5eTag returns a boolean if a field has been set.
 
 ### GetMd5sum
 
@@ -363,6 +431,16 @@ SetSource sets Source field to given value.
 
 HasSource returns a boolean if a field has been set.
 
+### SetSourceNil
+
+`func (o *SoftwarerepositoryFileAllOf) SetSourceNil(b bool)`
+
+ SetSourceNil sets the value for Source to be an explicit nil
+
+### UnsetSource
+`func (o *SoftwarerepositoryFileAllOf) UnsetSource()`
+
+UnsetSource ensures that no value is present for Source, not even an explicit nil
 ### GetVersion
 
 `func (o *SoftwarerepositoryFileAllOf) GetVersion() string`

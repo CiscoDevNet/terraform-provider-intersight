@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "sdwan.NetworkConfigurationType"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "sdwan.NetworkConfigurationType"]
 **NetworkType** | Pointer to **string** | Type of the Port group being added. * &#x60;WAN&#x60; - Port-group being added is used for WAN traffic. * &#x60;LAN&#x60; - Port-group being added is used for LAN traffic. * &#x60;Management&#x60; - Port-group being added is used for Management traffic. | [optional] [default to "WAN"]
 **PortGroup** | Pointer to **string** | Name of the Port Group to create. | [optional] 
 **Vlan** | Pointer to **int64** | VLAN to be added to the Port Group. | [optional] 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewSdwanNetworkConfigurationTypeAllOf
 
-`func NewSdwanNetworkConfigurationTypeAllOf() *SdwanNetworkConfigurationTypeAllOf`
+`func NewSdwanNetworkConfigurationTypeAllOf(classId string, objectType string, ) *SdwanNetworkConfigurationTypeAllOf`
 
 NewSdwanNetworkConfigurationTypeAllOf instantiates a new SdwanNetworkConfigurationTypeAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewSdwanNetworkConfigurationTypeAllOfWithDefaults instantiates a new SdwanNetworkConfigurationTypeAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *SdwanNetworkConfigurationTypeAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *SdwanNetworkConfigurationTypeAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *SdwanNetworkConfigurationTypeAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *SdwanNetworkConfigurationTypeAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *SdwanNetworkConfigurationTypeAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *SdwanNetworkConfigurationTypeAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetNetworkType
 

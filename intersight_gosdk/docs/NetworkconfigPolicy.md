@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "networkconfig.Policy"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "networkconfig.Policy"]
 **AlternateIpv4dnsServer** | Pointer to **string** | IP address of the secondary DNS server. | [optional] 
 **AlternateIpv6dnsServer** | Pointer to **string** | IP address of the secondary DNS server. | [optional] 
 **DynamicDnsDomain** | Pointer to **string** | The domain name appended to a hostname for a Dynamic DNS (DDNS) update. If left blank, only a hostname is sent to the DDNS update request. | [optional] 
@@ -21,7 +23,7 @@ Name | Type | Description | Notes
 
 ### NewNetworkconfigPolicy
 
-`func NewNetworkconfigPolicy() *NetworkconfigPolicy`
+`func NewNetworkconfigPolicy(classId string, objectType string, ) *NetworkconfigPolicy`
 
 NewNetworkconfigPolicy instantiates a new NetworkconfigPolicy object
 This constructor will assign default values to properties that have it defined,
@@ -35,6 +37,46 @@ will change when the set of required properties is changed
 NewNetworkconfigPolicyWithDefaults instantiates a new NetworkconfigPolicy object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *NetworkconfigPolicy) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *NetworkconfigPolicy) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *NetworkconfigPolicy) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *NetworkconfigPolicy) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *NetworkconfigPolicy) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *NetworkconfigPolicy) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAlternateIpv4dnsServer
 

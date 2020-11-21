@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "tam.SecurityAdvisory"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "tam.SecurityAdvisory"]
 **Actions** | Pointer to [**[]TamAction**](tam.Action.md) |  | [optional] 
 **AdvisoryId** | Pointer to **string** | Cisco generated identifier for the published security advisory. | [optional] 
 **ApiDataSources** | Pointer to [**[]TamApiDataSource**](tam.ApiDataSource.md) |  | [optional] 
@@ -24,7 +26,7 @@ Name | Type | Description | Notes
 
 ### NewTamSecurityAdvisoryAllOf
 
-`func NewTamSecurityAdvisoryAllOf() *TamSecurityAdvisoryAllOf`
+`func NewTamSecurityAdvisoryAllOf(classId string, objectType string, ) *TamSecurityAdvisoryAllOf`
 
 NewTamSecurityAdvisoryAllOf instantiates a new TamSecurityAdvisoryAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -38,6 +40,46 @@ will change when the set of required properties is changed
 NewTamSecurityAdvisoryAllOfWithDefaults instantiates a new TamSecurityAdvisoryAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *TamSecurityAdvisoryAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *TamSecurityAdvisoryAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *TamSecurityAdvisoryAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *TamSecurityAdvisoryAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *TamSecurityAdvisoryAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *TamSecurityAdvisoryAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetActions
 
@@ -64,6 +106,16 @@ SetActions sets Actions field to given value.
 
 HasActions returns a boolean if a field has been set.
 
+### SetActionsNil
+
+`func (o *TamSecurityAdvisoryAllOf) SetActionsNil(b bool)`
+
+ SetActionsNil sets the value for Actions to be an explicit nil
+
+### UnsetActions
+`func (o *TamSecurityAdvisoryAllOf) UnsetActions()`
+
+UnsetActions ensures that no value is present for Actions, not even an explicit nil
 ### GetAdvisoryId
 
 `func (o *TamSecurityAdvisoryAllOf) GetAdvisoryId() string`
@@ -114,6 +166,16 @@ SetApiDataSources sets ApiDataSources field to given value.
 
 HasApiDataSources returns a boolean if a field has been set.
 
+### SetApiDataSourcesNil
+
+`func (o *TamSecurityAdvisoryAllOf) SetApiDataSourcesNil(b bool)`
+
+ SetApiDataSourcesNil sets the value for ApiDataSources to be an explicit nil
+
+### UnsetApiDataSources
+`func (o *TamSecurityAdvisoryAllOf) UnsetApiDataSources()`
+
+UnsetApiDataSources ensures that no value is present for ApiDataSources, not even an explicit nil
 ### GetBaseScore
 
 `func (o *TamSecurityAdvisoryAllOf) GetBaseScore() float32`
@@ -164,6 +226,16 @@ SetCveIds sets CveIds field to given value.
 
 HasCveIds returns a boolean if a field has been set.
 
+### SetCveIdsNil
+
+`func (o *TamSecurityAdvisoryAllOf) SetCveIdsNil(b bool)`
+
+ SetCveIdsNil sets the value for CveIds to be an explicit nil
+
+### UnsetCveIds
+`func (o *TamSecurityAdvisoryAllOf) UnsetCveIds()`
+
+UnsetCveIds ensures that no value is present for CveIds, not even an explicit nil
 ### GetDatePublished
 
 `func (o *TamSecurityAdvisoryAllOf) GetDatePublished() time.Time`

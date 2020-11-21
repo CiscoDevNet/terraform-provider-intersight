@@ -4,7 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Checksum** | Pointer to [**ConnectorFileChecksum**](connector.FileChecksum.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "softwarerepository.CachedImage"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "softwarerepository.CachedImage"]
+**Checksum** | Pointer to [**NullableConnectorFileChecksum**](connector.FileChecksum.md) |  | [optional] 
 **DownloadError** | Pointer to **string** | Any error encountered. Set to empty when download is in progress or completed. | [optional] 
 **DownloadProgress** | Pointer to **int64** | The download progress of the file represented as a percentage between 0% and 100%. If progress reporting is not possible a value of -1 is sent. | [optional] 
 **DownloadRetries** | Pointer to **int64** | The number of retries the plugin attempted before succeeding or failing the download. | [optional] 
@@ -14,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewConnectorDownloadStatusAllOf
 
-`func NewConnectorDownloadStatusAllOf() *ConnectorDownloadStatusAllOf`
+`func NewConnectorDownloadStatusAllOf(classId string, objectType string, ) *ConnectorDownloadStatusAllOf`
 
 NewConnectorDownloadStatusAllOf instantiates a new ConnectorDownloadStatusAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +30,46 @@ will change when the set of required properties is changed
 NewConnectorDownloadStatusAllOfWithDefaults instantiates a new ConnectorDownloadStatusAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *ConnectorDownloadStatusAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *ConnectorDownloadStatusAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *ConnectorDownloadStatusAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *ConnectorDownloadStatusAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *ConnectorDownloadStatusAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *ConnectorDownloadStatusAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetChecksum
 
@@ -54,6 +96,16 @@ SetChecksum sets Checksum field to given value.
 
 HasChecksum returns a boolean if a field has been set.
 
+### SetChecksumNil
+
+`func (o *ConnectorDownloadStatusAllOf) SetChecksumNil(b bool)`
+
+ SetChecksumNil sets the value for Checksum to be an explicit nil
+
+### UnsetChecksum
+`func (o *ConnectorDownloadStatusAllOf) UnsetChecksum()`
+
+UnsetChecksum ensures that no value is present for Checksum, not even an explicit nil
 ### GetDownloadError
 
 `func (o *ConnectorDownloadStatusAllOf) GetDownloadError() string`

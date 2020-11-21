@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.FileTransfer"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.FileTransfer"]
 **DestinationFilePath** | Pointer to **string** | Destination file path on the target server. | [optional] 
 **FileMode** | Pointer to **int64** | File permission to set on the transferred file. | [optional] 
 **SourceFilePath** | Pointer to **string** | Source file path on the Intersight connected device. | [optional] 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewWorkflowFileTransferAllOf
 
-`func NewWorkflowFileTransferAllOf() *WorkflowFileTransferAllOf`
+`func NewWorkflowFileTransferAllOf(classId string, objectType string, ) *WorkflowFileTransferAllOf`
 
 NewWorkflowFileTransferAllOf instantiates a new WorkflowFileTransferAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewWorkflowFileTransferAllOfWithDefaults instantiates a new WorkflowFileTransferAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *WorkflowFileTransferAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *WorkflowFileTransferAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *WorkflowFileTransferAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *WorkflowFileTransferAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *WorkflowFileTransferAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *WorkflowFileTransferAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDestinationFilePath
 

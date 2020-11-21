@@ -39,7 +39,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -50,7 +50,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -61,7 +61,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 				Computed:   true,
 			},
 			"class_id": {
-				Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -79,7 +79,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -90,7 +90,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -129,7 +129,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -157,7 +157,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Default:     "MSIx",
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -192,7 +192,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -203,7 +203,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -214,7 +214,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 				Computed:   true,
 			},
 			"object_type": {
-				Description: "The fully-qualified type of this managed object, i.e. the class name.\nThis property is optional. The ObjectType is implied from the URL path.\nIf specified, the value of objectType must match the class name specified in the URL path.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -232,7 +232,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -244,7 +244,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -274,7 +274,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -296,7 +296,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -312,7 +312,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"nr_version": {
-							Description: "Configures RDMA over Converged Ethernet (RoCE) version on the virtual interface. Only RoceV1 is supported onn Cisco VIC models 13xx and only RoceV2 is supported on models 14xx.\n* `1` - RDMA over Converged Ethernet Protocol Version 1.\n* `2` - RDMA over Converged Ethernet Protocol Version 2.",
+							Description: "Configure RDMA over Converged Ethernet (RoCE) version on the virtual interface. Only RoCEv1 is supported on Cisco VIC 13xx series adapters and only RoCEv2 is supported on Cisco VIC 14xx series adapters.\n* `1` - RDMA over Converged Ethernet Protocol Version 1.\n* `2` - RDMA over Converged Ethernet Protocol Version 2.",
 							Type:        schema.TypeInt,
 							Optional:    true,
 							Default:     1,
@@ -335,7 +335,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -356,7 +356,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -409,7 +409,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -420,7 +420,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -471,7 +471,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -487,7 +487,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -520,7 +520,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -531,7 +531,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -564,7 +564,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -575,7 +575,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -1335,7 +1335,7 @@ func resourceVnicEthAdapterPolicyUpdate(d *schema.ResourceData, meta interface{}
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-	var o = models.NewVnicEthAdapterPolicyWithDefaults()
+	var o = &models.VnicEthAdapterPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
 		x := []byte(v.(string))
@@ -1358,7 +1358,7 @@ func resourceVnicEthAdapterPolicyUpdate(d *schema.ResourceData, meta interface{}
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewVnicArfsSettingsWithDefaults()
+			o := &models.VnicArfsSettings{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1398,7 +1398,7 @@ func resourceVnicEthAdapterPolicyUpdate(d *schema.ResourceData, meta interface{}
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewVnicCompletionQueueSettingsWithDefaults()
+			o := &models.VnicCompletionQueueSettings{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1454,7 +1454,7 @@ func resourceVnicEthAdapterPolicyUpdate(d *schema.ResourceData, meta interface{}
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewVnicEthInterruptSettingsWithDefaults()
+			o := &models.VnicEthInterruptSettings{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1522,7 +1522,7 @@ func resourceVnicEthAdapterPolicyUpdate(d *schema.ResourceData, meta interface{}
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewVnicNvgreSettingsWithDefaults()
+			o := &models.VnicNvgreSettings{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1562,7 +1562,7 @@ func resourceVnicEthAdapterPolicyUpdate(d *schema.ResourceData, meta interface{}
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
+			o := &models.MoMoRef{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1606,7 +1606,7 @@ func resourceVnicEthAdapterPolicyUpdate(d *schema.ResourceData, meta interface{}
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewVnicRoceSettingsWithDefaults()
+			o := &models.VnicRoceSettings{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1674,7 +1674,7 @@ func resourceVnicEthAdapterPolicyUpdate(d *schema.ResourceData, meta interface{}
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewVnicRssHashSettingsWithDefaults()
+			o := &models.VnicRssHashSettings{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1760,7 +1760,7 @@ func resourceVnicEthAdapterPolicyUpdate(d *schema.ResourceData, meta interface{}
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewVnicEthRxQueueSettingsWithDefaults()
+			o := &models.VnicEthRxQueueSettings{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1803,7 +1803,7 @@ func resourceVnicEthAdapterPolicyUpdate(d *schema.ResourceData, meta interface{}
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := models.NewMoTagWithDefaults()
+			o := &models.MoTag{}
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -1840,7 +1840,7 @@ func resourceVnicEthAdapterPolicyUpdate(d *schema.ResourceData, meta interface{}
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewVnicTcpOffloadSettingsWithDefaults()
+			o := &models.VnicTcpOffloadSettings{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1896,7 +1896,7 @@ func resourceVnicEthAdapterPolicyUpdate(d *schema.ResourceData, meta interface{}
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewVnicEthTxQueueSettingsWithDefaults()
+			o := &models.VnicEthTxQueueSettings{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1946,7 +1946,7 @@ func resourceVnicEthAdapterPolicyUpdate(d *schema.ResourceData, meta interface{}
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewVnicVxlanSettingsWithDefaults()
+			o := &models.VnicVxlanSettings{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))

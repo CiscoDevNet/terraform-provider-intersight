@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "virtualization.VmwareVmCpuSocketInfo"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.VmwareVmCpuSocketInfo"]
 **CoresPerSocket** | Pointer to **int64** | The number of core per CPU socket (value may be empty). | [optional] 
 **NumCpus** | Pointer to **int64** | Number of CPUs allocated to this VM. | [optional] 
 **NumSockets** | Pointer to **int64** | The number of CPU sockets allocated. | [optional] 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewVirtualizationVmwareVmCpuSocketInfo
 
-`func NewVirtualizationVmwareVmCpuSocketInfo() *VirtualizationVmwareVmCpuSocketInfo`
+`func NewVirtualizationVmwareVmCpuSocketInfo(classId string, objectType string, ) *VirtualizationVmwareVmCpuSocketInfo`
 
 NewVirtualizationVmwareVmCpuSocketInfo instantiates a new VirtualizationVmwareVmCpuSocketInfo object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewVirtualizationVmwareVmCpuSocketInfoWithDefaults instantiates a new VirtualizationVmwareVmCpuSocketInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *VirtualizationVmwareVmCpuSocketInfo) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *VirtualizationVmwareVmCpuSocketInfo) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *VirtualizationVmwareVmCpuSocketInfo) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *VirtualizationVmwareVmCpuSocketInfo) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *VirtualizationVmwareVmCpuSocketInfo) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *VirtualizationVmwareVmCpuSocketInfo) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCoresPerSocket
 

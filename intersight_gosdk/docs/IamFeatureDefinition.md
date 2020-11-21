@@ -4,13 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Feature** | Pointer to **string** | The beta feature that will be enabled for specific account. * &#x60;IWO&#x60; - Intersight Workflow Optimizer. | [optional] [default to "IWO"]
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.FeatureDefinition"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.FeatureDefinition"]
+**Feature** | Pointer to **string** | The beta feature that will be enabled for specific account. * &#x60;IWO&#x60; - Intersight Workflow Optimizer. * &#x60;WebAPITarget&#x60; - An external endpoint added as Target within Intersight that can be accessed through its REST APIin Intersight Orchestrator automation workflow.Supported HTTP Authentication scheme - Basic Authentication. * &#x60;Hitachi&#x60; - Support to claim Hitachi Storage arrays using the Intersight Orchestrator framework. * &#x60;Kubernetes&#x60; - Enables ability to create and manage Kubernetes clusters. | [optional] [default to "IWO"]
 
 ## Methods
 
 ### NewIamFeatureDefinition
 
-`func NewIamFeatureDefinition() *IamFeatureDefinition`
+`func NewIamFeatureDefinition(classId string, objectType string, ) *IamFeatureDefinition`
 
 NewIamFeatureDefinition instantiates a new IamFeatureDefinition object
 This constructor will assign default values to properties that have it defined,
@@ -24,6 +26,46 @@ will change when the set of required properties is changed
 NewIamFeatureDefinitionWithDefaults instantiates a new IamFeatureDefinition object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *IamFeatureDefinition) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IamFeatureDefinition) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IamFeatureDefinition) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IamFeatureDefinition) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IamFeatureDefinition) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IamFeatureDefinition) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetFeature
 

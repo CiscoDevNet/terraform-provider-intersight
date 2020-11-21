@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.VirtualDrive"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.VirtualDrive"]
 **AccessPolicy** | Pointer to **string** | The access policy of the virtual drive. | [optional] [readonly] 
 **ActualWriteCachePolicy** | Pointer to **string** | The current write cache policy of the virtual drive. | [optional] [readonly] 
 **AvailableSize** | Pointer to **string** | Available storage capacity of the virtual drive. | [optional] [readonly] 
@@ -35,6 +37,7 @@ Name | Type | Description | Notes
 **PhysicalDiskUsages** | Pointer to [**[]StoragePhysicalDiskUsageRelationship**](storage.PhysicalDiskUsage.Relationship.md) | An array of relationships to storagePhysicalDiskUsage resources. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 **StorageController** | Pointer to [**StorageControllerRelationship**](storage.Controller.Relationship.md) |  | [optional] 
+**StorageVirtualDriveContainer** | Pointer to [**StorageVirtualDriveContainerRelationship**](storage.VirtualDriveContainer.Relationship.md) |  | [optional] 
 **VdMemberEps** | Pointer to [**[]StorageVdMemberEpRelationship**](storage.VdMemberEp.Relationship.md) | An array of relationships to storageVdMemberEp resources. | [optional] [readonly] 
 **VirtualDriveExtension** | Pointer to [**StorageVirtualDriveExtensionRelationship**](storage.VirtualDriveExtension.Relationship.md) |  | [optional] 
 
@@ -42,7 +45,7 @@ Name | Type | Description | Notes
 
 ### NewStorageVirtualDriveAllOf
 
-`func NewStorageVirtualDriveAllOf() *StorageVirtualDriveAllOf`
+`func NewStorageVirtualDriveAllOf(classId string, objectType string, ) *StorageVirtualDriveAllOf`
 
 NewStorageVirtualDriveAllOf instantiates a new StorageVirtualDriveAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -56,6 +59,46 @@ will change when the set of required properties is changed
 NewStorageVirtualDriveAllOfWithDefaults instantiates a new StorageVirtualDriveAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *StorageVirtualDriveAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *StorageVirtualDriveAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *StorageVirtualDriveAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *StorageVirtualDriveAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *StorageVirtualDriveAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *StorageVirtualDriveAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAccessPolicy
 
@@ -841,6 +884,31 @@ SetStorageController sets StorageController field to given value.
 `func (o *StorageVirtualDriveAllOf) HasStorageController() bool`
 
 HasStorageController returns a boolean if a field has been set.
+
+### GetStorageVirtualDriveContainer
+
+`func (o *StorageVirtualDriveAllOf) GetStorageVirtualDriveContainer() StorageVirtualDriveContainerRelationship`
+
+GetStorageVirtualDriveContainer returns the StorageVirtualDriveContainer field if non-nil, zero value otherwise.
+
+### GetStorageVirtualDriveContainerOk
+
+`func (o *StorageVirtualDriveAllOf) GetStorageVirtualDriveContainerOk() (*StorageVirtualDriveContainerRelationship, bool)`
+
+GetStorageVirtualDriveContainerOk returns a tuple with the StorageVirtualDriveContainer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageVirtualDriveContainer
+
+`func (o *StorageVirtualDriveAllOf) SetStorageVirtualDriveContainer(v StorageVirtualDriveContainerRelationship)`
+
+SetStorageVirtualDriveContainer sets StorageVirtualDriveContainer field to given value.
+
+### HasStorageVirtualDriveContainer
+
+`func (o *StorageVirtualDriveAllOf) HasStorageVirtualDriveContainer() bool`
+
+HasStorageVirtualDriveContainer returns a boolean if a field has been set.
 
 ### GetVdMemberEps
 

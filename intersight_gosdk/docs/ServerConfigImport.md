@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "server.ConfigImport"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "server.ConfigImport"]
 **Description** | Pointer to **string** | Description of the imported profile. | [optional] 
 **PolicyPrefix** | Pointer to **string** | Policy prefix for the policies of the imported server profile. | [optional] 
 **PolicyTypes** | Pointer to **[]string** |  | [optional] 
@@ -16,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewServerConfigImport
 
-`func NewServerConfigImport() *ServerConfigImport`
+`func NewServerConfigImport(classId string, objectType string, ) *ServerConfigImport`
 
 NewServerConfigImport instantiates a new ServerConfigImport object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +32,46 @@ will change when the set of required properties is changed
 NewServerConfigImportWithDefaults instantiates a new ServerConfigImport object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *ServerConfigImport) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *ServerConfigImport) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *ServerConfigImport) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *ServerConfigImport) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *ServerConfigImport) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *ServerConfigImport) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDescription
 
@@ -106,6 +148,16 @@ SetPolicyTypes sets PolicyTypes field to given value.
 
 HasPolicyTypes returns a boolean if a field has been set.
 
+### SetPolicyTypesNil
+
+`func (o *ServerConfigImport) SetPolicyTypesNil(b bool)`
+
+ SetPolicyTypesNil sets the value for PolicyTypes to be an explicit nil
+
+### UnsetPolicyTypes
+`func (o *ServerConfigImport) UnsetPolicyTypes()`
+
+UnsetPolicyTypes ensures that no value is present for PolicyTypes, not even an explicit nil
 ### GetProfileName
 
 `func (o *ServerConfigImport) GetProfileName() string`

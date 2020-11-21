@@ -4,9 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "snmp.Trap"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "snmp.Trap"]
 **Destination** | Pointer to **string** | Address to which the SNMP trap information is sent. | [optional] 
 **Enabled** | Pointer to **bool** | Enables/disables the trap on the server If enabled, trap is active on the server. | [optional] 
-**Port** | Pointer to **int64** | Port used by the server to communicate with trap destination. Enter a value between 1-65535. | [optional] 
+**Port** | Pointer to **int64** | Port used by the server to communicate with trap destination. Enter a value between 1-65535. Reserved ports not allowed (22, 23, 80, 123, 389, 443, 623, 636, 2068, 3268, 3269). | [optional] 
 **Type** | Pointer to **string** | Type of trap which decides whether to receive a notification when a trap is received at the destination. * &#x60;Trap&#x60; - Do not receive notifications when trap is sent to the destination. * &#x60;Inform&#x60; - Receive notifications when trap is sent to the destination. This option is valid only for V2 users. | [optional] [default to "Trap"]
 **User** | Pointer to **string** | SNMP user for the trap. Applicable only to SNMPv3. | [optional] 
 **Version** | Pointer to **string** | SNMP version used for the trap. * &#x60;V3&#x60; - SNMP v3 trap version notifications. * &#x60;V2&#x60; - SNMP v2 trap version notifications. | [optional] [default to "V3"]
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewSnmpTrap
 
-`func NewSnmpTrap() *SnmpTrap`
+`func NewSnmpTrap(classId string, objectType string, ) *SnmpTrap`
 
 NewSnmpTrap instantiates a new SnmpTrap object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +31,46 @@ will change when the set of required properties is changed
 NewSnmpTrapWithDefaults instantiates a new SnmpTrap object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *SnmpTrap) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *SnmpTrap) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *SnmpTrap) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *SnmpTrap) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *SnmpTrap) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *SnmpTrap) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDestination
 

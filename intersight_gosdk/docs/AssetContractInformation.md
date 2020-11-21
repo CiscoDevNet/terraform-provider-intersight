@@ -4,8 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BillTo** | Pointer to [**AssetAddressInformation**](asset.AddressInformation.md) |  | [optional] 
-**BillToGlobalUltimate** | Pointer to [**AssetGlobalUltimate**](asset.GlobalUltimate.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.ContractInformation"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.ContractInformation"]
+**BillTo** | Pointer to [**NullableAssetAddressInformation**](asset.AddressInformation.md) |  | [optional] 
+**BillToGlobalUltimate** | Pointer to [**NullableAssetGlobalUltimate**](asset.GlobalUltimate.md) |  | [optional] 
 **ContractNumber** | Pointer to **string** | Contract number for the Cisco support contract purchased for the Cisco device. | [optional] [readonly] 
 **LineStatus** | Pointer to **string** | Contract status as per the Cisco Contract APIx. | [optional] [readonly] 
 
@@ -13,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewAssetContractInformation
 
-`func NewAssetContractInformation() *AssetContractInformation`
+`func NewAssetContractInformation(classId string, objectType string, ) *AssetContractInformation`
 
 NewAssetContractInformation instantiates a new AssetContractInformation object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewAssetContractInformationWithDefaults instantiates a new AssetContractInformation object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *AssetContractInformation) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *AssetContractInformation) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *AssetContractInformation) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *AssetContractInformation) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *AssetContractInformation) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *AssetContractInformation) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetBillTo
 
@@ -53,6 +95,16 @@ SetBillTo sets BillTo field to given value.
 
 HasBillTo returns a boolean if a field has been set.
 
+### SetBillToNil
+
+`func (o *AssetContractInformation) SetBillToNil(b bool)`
+
+ SetBillToNil sets the value for BillTo to be an explicit nil
+
+### UnsetBillTo
+`func (o *AssetContractInformation) UnsetBillTo()`
+
+UnsetBillTo ensures that no value is present for BillTo, not even an explicit nil
 ### GetBillToGlobalUltimate
 
 `func (o *AssetContractInformation) GetBillToGlobalUltimate() AssetGlobalUltimate`
@@ -78,6 +130,16 @@ SetBillToGlobalUltimate sets BillToGlobalUltimate field to given value.
 
 HasBillToGlobalUltimate returns a boolean if a field has been set.
 
+### SetBillToGlobalUltimateNil
+
+`func (o *AssetContractInformation) SetBillToGlobalUltimateNil(b bool)`
+
+ SetBillToGlobalUltimateNil sets the value for BillToGlobalUltimate to be an explicit nil
+
+### UnsetBillToGlobalUltimate
+`func (o *AssetContractInformation) UnsetBillToGlobalUltimate()`
+
+UnsetBillToGlobalUltimate ensures that no value is present for BillToGlobalUltimate, not even an explicit nil
 ### GetContractNumber
 
 `func (o *AssetContractInformation) GetContractNumber() string`

@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.FanModule"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.FanModule"]
 **Description** | Pointer to **string** | This field is to provide description for the fan module. | [optional] [readonly] 
 **ModuleId** | Pointer to **int64** | This field acts as the identifier for this particular Module, within the Fabric Interconnect. | [optional] [readonly] 
 **OperState** | Pointer to **string** | This field is used to indicate this fan module&#39;s operational state. | [optional] [readonly] 
@@ -25,7 +27,7 @@ Name | Type | Description | Notes
 
 ### NewEquipmentFanModule
 
-`func NewEquipmentFanModule() *EquipmentFanModule`
+`func NewEquipmentFanModule(classId string, objectType string, ) *EquipmentFanModule`
 
 NewEquipmentFanModule instantiates a new EquipmentFanModule object
 This constructor will assign default values to properties that have it defined,
@@ -39,6 +41,46 @@ will change when the set of required properties is changed
 NewEquipmentFanModuleWithDefaults instantiates a new EquipmentFanModule object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *EquipmentFanModule) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *EquipmentFanModule) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *EquipmentFanModule) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *EquipmentFanModule) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *EquipmentFanModule) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *EquipmentFanModule) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDescription
 

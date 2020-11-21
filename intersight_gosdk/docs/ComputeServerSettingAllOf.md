@@ -4,12 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "compute.ServerSetting"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "compute.ServerSetting"]
 **AdminLocatorLedState** | Pointer to **string** | User configured state of the locator LED for the server. * &#x60;None&#x60; - No operation property for locator led. * &#x60;On&#x60; - The Locator Led is turned on. * &#x60;Off&#x60; - The Locator Led is turned off. | [optional] [default to "None"]
 **AdminPowerState** | Pointer to **string** | User configured power state of the server. * &#x60;Policy&#x60; - Power state is set to the default value in the policy. * &#x60;PowerOn&#x60; - Power state of the server is set to On. * &#x60;PowerOff&#x60; - Power state is the server set to Off. * &#x60;PowerCycle&#x60; - Power state the server is reset. * &#x60;HardReset&#x60; - Power state the server is hard reset. * &#x60;Shutdown&#x60; - Operating system on the server is shut down. * &#x60;Reboot&#x60; - Power state of IMC is rebooted. | [optional] [default to "Policy"]
 **ConfigState** | Pointer to **string** | The configured state of these settings in the target server. The value is any one of Applied, Applying, Failed. Applied - This state denotes that the settings are applied successfully in the target server. Applying - This state denotes that the settings are being applied in the target server. Failed - This state denotes that the settings could not be applied in the target server. * &#x60;Applied&#x60; - User configured settings are in applied state. * &#x60;Applying&#x60; - User settings are being applied on the target server. * &#x60;Failed&#x60; - User configured settings could not be applied. | [optional] [readonly] [default to "Applied"]
 **OneTimeBootDevice** | Pointer to **string** | The name of the device chosen by user for configuring One-Time Boot device. | [optional] 
-**PersistentMemoryOperation** | Pointer to [**ComputePersistentMemoryOperation**](compute.PersistentMemoryOperation.md) |  | [optional] 
-**ServerConfig** | Pointer to [**ComputeServerConfig**](compute.ServerConfig.md) |  | [optional] 
+**PersistentMemoryOperation** | Pointer to [**NullableComputePersistentMemoryOperation**](compute.PersistentMemoryOperation.md) |  | [optional] 
+**ServerConfig** | Pointer to [**NullableComputeServerConfig**](compute.ServerConfig.md) |  | [optional] 
 **LocatorLed** | Pointer to [**EquipmentLocatorLedRelationship**](equipment.LocatorLed.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 **RunningWorkflow** | Pointer to [**WorkflowWorkflowInfoRelationship**](workflow.WorkflowInfo.Relationship.md) |  | [optional] 
@@ -19,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewComputeServerSettingAllOf
 
-`func NewComputeServerSettingAllOf() *ComputeServerSettingAllOf`
+`func NewComputeServerSettingAllOf(classId string, objectType string, ) *ComputeServerSettingAllOf`
 
 NewComputeServerSettingAllOf instantiates a new ComputeServerSettingAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -33,6 +35,46 @@ will change when the set of required properties is changed
 NewComputeServerSettingAllOfWithDefaults instantiates a new ComputeServerSettingAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *ComputeServerSettingAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *ComputeServerSettingAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *ComputeServerSettingAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *ComputeServerSettingAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *ComputeServerSettingAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *ComputeServerSettingAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAdminLocatorLedState
 
@@ -159,6 +201,16 @@ SetPersistentMemoryOperation sets PersistentMemoryOperation field to given value
 
 HasPersistentMemoryOperation returns a boolean if a field has been set.
 
+### SetPersistentMemoryOperationNil
+
+`func (o *ComputeServerSettingAllOf) SetPersistentMemoryOperationNil(b bool)`
+
+ SetPersistentMemoryOperationNil sets the value for PersistentMemoryOperation to be an explicit nil
+
+### UnsetPersistentMemoryOperation
+`func (o *ComputeServerSettingAllOf) UnsetPersistentMemoryOperation()`
+
+UnsetPersistentMemoryOperation ensures that no value is present for PersistentMemoryOperation, not even an explicit nil
 ### GetServerConfig
 
 `func (o *ComputeServerSettingAllOf) GetServerConfig() ComputeServerConfig`
@@ -184,6 +236,16 @@ SetServerConfig sets ServerConfig field to given value.
 
 HasServerConfig returns a boolean if a field has been set.
 
+### SetServerConfigNil
+
+`func (o *ComputeServerSettingAllOf) SetServerConfigNil(b bool)`
+
+ SetServerConfigNil sets the value for ServerConfig to be an explicit nil
+
+### UnsetServerConfig
+`func (o *ComputeServerSettingAllOf) UnsetServerConfig()`
+
+UnsetServerConfig ensures that no value is present for ServerConfig, not even an explicit nil
 ### GetLocatorLed
 
 `func (o *ComputeServerSettingAllOf) GetLocatorLed() EquipmentLocatorLedRelationship`

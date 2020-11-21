@@ -149,13 +149,13 @@ import (
 )
 
 func main() {
-    capabilityAdapterUnitDescriptor := openapiclient.capability.AdapterUnitDescriptor{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{openapiclient.mo.Tag{Key: "Key_example", Value: "Value_example"}), VersionContext: openapiclient.mo.VersionContext{ClassId: "ClassId_example", ObjectType: "ObjectType_example", InterestedMos: []MoMoRef{openapiclient.mo.MoRef{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example"}), RefMo: openapiclient.mo.MoRef{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example"}, Timestamp: "TODO", Version: "Version_example", VersionType: "VersionType_example"}, Ancestors: []MoBaseMoRelationship{openapiclient.mo.BaseMo.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{openapiclient.mo.Tag{Key: "Key_example", Value: "Value_example"}), VersionContext: openapiclient.mo.VersionContext{ClassId: "ClassId_example", ObjectType: "ObjectType_example", InterestedMos: []MoMoRef{), RefMo: , Timestamp: "TODO", Version: "Version_example", VersionType: "VersionType_example"}, Ancestors: []MoBaseMoRelationship{openapiclient.mo.BaseMo.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }}), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }}), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Model: "Model_example", Vendor: "Vendor_example", Version: "Version_example", Capabilities: []CapabilityCapabilityRelationship{openapiclient.capability.Capability.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: openapiclient.capability.Section.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Action: "Action_example", CatalogName: "CatalogName_example", Name: "Name_example", Source: "Source_example", Version: "Version_example", Catalog: openapiclient.capability.Catalog.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Organization: openapiclient.organization.Organization.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Account: openapiclient.iam.Account.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Status: "Status_example", Var2LicenseReservationOp: openapiclient.license.LicenseReservationOp.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, AuthCode: "AuthCode_example", AuthCodeInstalled: false, ConfirmCode: "ConfirmCode_example", GenerateRequestCode: false, GenerateReturnCode: false, RequestCode: "RequestCode_example", ReturnCode: "ReturnCode_example", Account: openapiclient.iam.Account.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Status: "Status_example", Var2LicenseReservationOp: openapiclient.license.LicenseReservationOp.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, AuthCode: "AuthCode_example", AuthCodeInstalled: false, ConfirmCode: "ConfirmCode_example", GenerateRequestCode: false, GenerateReturnCode: false, RequestCode: "RequestCode_example", ReturnCode: "ReturnCode_example", Account: }, AppRegistrations: []IamAppRegistrationRelationship{openapiclient.iam.AppRegistration.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ClientId: "ClientId_example", ClientName: "ClientName_example", ClientSecret: "ClientSecret_example", ClientType: "ClientType_example", Description: "Description_example", GrantTypes: []string{"GrantTypes_example"), RedirectUris: []string{"RedirectUris_example"), RenewClientSecret: false, ResponseTypes: []string{"ResponseTypes_example"), RevocationTimestamp: "TODO", Revoke: false, Account: , OauthTokens: []IamOAuthTokenRelationship{openapiclient.iam.OAuthToken.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, AccessExpirationTime: "TODO", ClientId: "ClientId_example", ClientIpAddress: "ClientIpAddress_example", ClientName: "ClientName_example", ExpirationTime: "TODO", LastLoginClient: "LastLoginClient_example", LastLoginTime: "TODO", TokenId: "TokenId_example", UserMeta: openapiclient.iam.ClientMeta{ClassId: "ClassId_example", ObjectType: "ObjectType_example", DeviceModel: "DeviceModel_example", UserAgent: "UserAgent_example"}, AppRegistration: openapiclient.iam.AppRegistration.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ClientId: "ClientId_example", ClientName: "ClientName_example", ClientSecret: "ClientSecret_example", ClientType: "ClientType_example", Description: "Description_example", GrantTypes: []string{"GrantTypes_example"), RedirectUris: []string{"RedirectUris_example"), RenewClientSecret: false, ResponseTypes: []string{"ResponseTypes_example"), RevocationTimestamp: "TODO", Revoke: false, Account: , OauthTokens: []IamOAuthTokenRelationship{openapiclient.iam.OAuthToken.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, AccessExpirationTime: "TODO", ClientId: "ClientId_example", ClientIpAddress: "ClientIpAddress_example", ClientName: "ClientName_example", ExpirationTime: "TODO", LastLoginClient: "LastLoginClient_example", LastLoginTime: "TODO", TokenId: "TokenId_example", UserMeta: openapiclient.iam.ClientMeta{ClassId: "ClassId_example", ObjectType: "ObjectType_example", DeviceModel: "DeviceModel_example", UserAgent: "UserAgent_example"}, AppRegistration: , Permission: openapiclient.iam.Permission.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Account: , EndPointRoles: []IamEndPointRoleRelationship{openapiclient.iam.EndPointRole.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", RoleType: "RoleType_example", Type: "Type_example", Account: , EndPointPrivileges: []IamEndPointPrivilegeRelationship{openapiclient.iam.EndPointPrivilege.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Type: "Type_example", System: openapiclient.iam.System.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, EndPointPrivileges: []IamEndPointPrivilegeRelationship{openapiclient.iam.EndPointPrivilege.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Type: "Type_example", System: openapiclient.iam.System.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, EndPointPrivileges: []IamEndPointPrivilegeRelationship{), EndPointRoles: []IamEndPointRoleRelationship{openapiclient.iam.EndPointRole.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", RoleType: "RoleType_example", Type: "Type_example", Account: , EndPointPrivileges: []IamEndPointPrivilegeRelationship{), System: }), Idp: openapiclient.iam.Idp.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DomainName: "DomainName_example", IdpEntityId: "IdpEntityId_example", Metadata: "Metadata_example", Name: "Name_example", Type: "Type_example", Account: , LdapPolicy: openapiclient.iam.LdapPolicy.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", BaseProperties: openapiclient.iam.LdapBaseProperties{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Attribute: "Attribute_example", BaseDn: "BaseDn_example", BindDn: "BindDn_example", BindMethod: "BindMethod_example", Domain: "Domain_example", EnableEncryption: false, EnableGroupAuthorization: false, Filter: "Filter_example", GroupAttribute: "GroupAttribute_example", IsPasswordSet: false, NestedGroupSearchDepth: int64(123), Password: "Password_example", Timeout: int64(123)}, DnsParameters: openapiclient.iam.LdapDnsParameters{ClassId: "ClassId_example", ObjectType: "ObjectType_example", SearchDomain: "SearchDomain_example", SearchForest: "SearchForest_example", Source: "Source_example"}, EnableDns: false, Enabled: false, UserSearchPrecedence: "UserSearchPrecedence_example", Var0Idp: openapiclient.iam.Idp.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DomainName: "DomainName_example", IdpEntityId: "IdpEntityId_example", Metadata: "Metadata_example", Name: "Name_example", Type: "Type_example", Account: , LdapPolicy: openapiclient.iam.LdapPolicy.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", BaseProperties: openapiclient.iam.LdapBaseProperties{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Attribute: "Attribute_example", BaseDn: "BaseDn_example", BindDn: "BindDn_example", BindMethod: "BindMethod_example", Domain: "Domain_example", EnableEncryption: false, EnableGroupAuthorization: false, Filter: "Filter_example", GroupAttribute: "GroupAttribute_example", IsPasswordSet: false, NestedGroupSearchDepth: int64(123), Password: "Password_example", Timeout: int64(123)}, DnsParameters: openapiclient.iam.LdapDnsParameters{ClassId: "ClassId_example", ObjectType: "ObjectType_example", SearchDomain: "SearchDomain_example", SearchForest: "SearchForest_example", Source: "Source_example"}, EnableDns: false, Enabled: false, UserSearchPrecedence: "UserSearchPrecedence_example", Var0Idp: , ApplianceAccount: , Groups: []IamLdapGroupRelationship{openapiclient.iam.LdapGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Domain: "Domain_example", Name: "Name_example", EndPointRole: []IamEndPointRoleRelationship{), LdapPolicy: }), Organization: openapiclient.organization.Organization.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Account: , ResourceGroups: []ResourceGroupRelationship{openapiclient.resource.Group.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", PerTypeCombinedSelector: []ResourcePerTypeCombinedSelector{openapiclient.resource.PerTypeCombinedSelector{ClassId: "ClassId_example", ObjectType: "ObjectType_example", CombinedSelector: "CombinedSelector_example", EmptyFilter: false, SelectorObjectType: "SelectorObjectType_example"}), Qualifier: "Qualifier_example", Selectors: []ResourceSelector{openapiclient.resource.Selector{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Selector: "Selector_example"}), Account: , Organizations: []OrganizationOrganizationRelationship{)})}, Profiles: []PolicyAbstractConfigProfileRelationship{openapiclient.policy.AbstractConfigProfile.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Type: "Type_example", SrcTemplate: openapiclient.policy.AbstractProfile.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Type: "Type_example", SrcTemplate: openapiclient.policy.AbstractProfile.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Type: "Type_example", SrcTemplate: }}, Action: "Action_example", ConfigContext: openapiclient.policy.ConfigContext{ClassId: "ClassId_example", ObjectType: "ObjectType_example", ConfigState: "ConfigState_example", ControlAction: "ControlAction_example", ErrorState: "ErrorState_example", OperState: "OperState_example"}}), Providers: []IamLdapProviderRelationship{openapiclient.iam.LdapProvider.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Port: int64(123), Server: "Server_example", LdapPolicy: })}, System: , UserPreferences: []IamUserPreferenceRelationship{openapiclient.iam.UserPreference.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Preference: 123, UserUniqueIdentifier: "UserUniqueIdentifier_example", Idp: , IdpReference: openapiclient.iam.IdpReference.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DomainName: "DomainName_example", IdpEntityId: "IdpEntityId_example", MultiFactorAuthentication: false, Name: "Name_example", Account: , Idp: , UserPreferences: []IamUserPreferenceRelationship{openapiclient.iam.UserPreference.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Preference: 123, UserUniqueIdentifier: "UserUniqueIdentifier_example", Idp: , IdpReference: openapiclient.iam.IdpReference.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DomainName: "DomainName_example", IdpEntityId: "IdpEntityId_example", MultiFactorAuthentication: false, Name: "Name_example", Account: , Idp: , UserPreferences: []IamUserPreferenceRelationship{), Usergroups: []IamUserGroupRelationship{openapiclient.iam.UserGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Idp: , Idpreference: , Permissions: []IamPermissionRelationship{openapiclient.iam.Permission.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Account: , EndPointRoles: []IamEndPointRoleRelationship{), ResourceRoles: []IamResourceRolesRelationship{openapiclient.iam.ResourceRoles.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, EndPointRoles: []IamEndPointRoleRelationship{), Permission: , Resource: , Roles: []IamRoleRelationship{openapiclient.iam.Role.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", PrivilegeNames: []string{"PrivilegeNames_example"), Account: , PrivilegeSets: []IamPrivilegeSetRelationship{openapiclient.iam.PrivilegeSet.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", PrivilegeNames: []string{"PrivilegeNames_example"), Account: , AssociatedPrivilegeSets: []IamPrivilegeSetRelationship{openapiclient.iam.PrivilegeSet.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", PrivilegeNames: []string{"PrivilegeNames_example"), Account: , AssociatedPrivilegeSets: []IamPrivilegeSetRelationship{), Privileges: []IamPrivilegeRelationship{openapiclient.iam.Privilege.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, HostnamePrefix: "HostnamePrefix_example", Method: "Method_example", Name: "Name_example", RestPath: "RestPath_example", UrlPrefix: "UrlPrefix_example", Account: , System: }), System: }), Privileges: []IamPrivilegeRelationship{openapiclient.iam.Privilege.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, HostnamePrefix: "HostnamePrefix_example", Method: "Method_example", Name: "Name_example", RestPath: "RestPath_example", UrlPrefix: "UrlPrefix_example", Account: , System: }), System: }), System: })}), Roles: []IamRoleRelationship{openapiclient.iam.Role.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", PrivilegeNames: []string{"PrivilegeNames_example"), Account: , PrivilegeSets: []IamPrivilegeSetRelationship{), System: }), SessionLimits: openapiclient.iam.SessionLimits.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, IdleTimeOut: int64(123), MaximumLimit: int64(123), PerUserLimit: int64(123), SessionTimeOut: int64(123), Account: , Permission: }, UserGroups: []IamUserGroupRelationship{openapiclient.iam.UserGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Idp: , Idpreference: , Permissions: []IamPermissionRelationship{), Qualifier: openapiclient.iam.Qualifier.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Value: []string{"Value_example"), Usergroup: }, Users: []IamUserRelationship{openapiclient.iam.User.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ClientIpAddress: "ClientIpAddress_example", Email: "Email_example", FirstName: "FirstName_example", LastLoginTime: "TODO", LastName: "LastName_example", Name: "Name_example", UserIdOrEmail: "UserIdOrEmail_example", UserType: "UserType_example", UserUniqueIdentifier: "UserUniqueIdentifier_example", ApiKeys: []IamApiKeyRelationship{openapiclient.iam.ApiKey.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, HashAlgorithm: "HashAlgorithm_example", KeySpec: openapiclient.pkix.KeyGenerationSpec{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Name: "Name_example"}, PrivateKey: "PrivateKey_example", Purpose: "Purpose_example", SigningAlgorithm: "SigningAlgorithm_example", Permission: , User: openapiclient.iam.User.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ClientIpAddress: "ClientIpAddress_example", Email: "Email_example", FirstName: "FirstName_example", LastLoginTime: "TODO", LastName: "LastName_example", Name: "Name_example", UserIdOrEmail: "UserIdOrEmail_example", UserType: "UserType_example", UserUniqueIdentifier: "UserUniqueIdentifier_example", ApiKeys: []IamApiKeyRelationship{openapiclient.iam.ApiKey.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, HashAlgorithm: "HashAlgorithm_example", KeySpec: openapiclient.pkix.KeyGenerationSpec{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Name: "Name_example"}, PrivateKey: "PrivateKey_example", Purpose: "Purpose_example", SigningAlgorithm: "SigningAlgorithm_example", Permission: , User: }), AppRegistrations: []IamAppRegistrationRelationship{), Idp: , Idpreference: , LocalUserPassword: openapiclient.iam.LocalUserPassword.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, CurrentPassword: "CurrentPassword_example", NewPassword: "NewPassword_example", Password: 123, User: }, OauthTokens: []IamOAuthTokenRelationship{), Permissions: []IamPermissionRelationship{), Sessions: []IamSessionRelationship{openapiclient.iam.Session.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, AccountPermissions: []IamAccountPermissions{openapiclient.iam.AccountPermissions{ClassId: "ClassId_example", ObjectType: "ObjectType_example", AccountIdentifier: "AccountIdentifier_example", AccountName: "AccountName_example", AccountStatus: "AccountStatus_example", Permissions: []IamPermissionReference{openapiclient.iam.PermissionReference{ClassId: "ClassId_example", ObjectType: "ObjectType_example", PermissionIdentifier: "PermissionIdentifier_example", PermissionName: "PermissionName_example"})}), ClientIpAddress: "ClientIpAddress_example", Expiration: "TODO", IdleTimeExpiration: "TODO", LastLoginClient: "LastLoginClient_example", LastLoginTime: "TODO", Permission: , User: })}}), AppRegistrations: []IamAppRegistrationRelationship{), Idp: , Idpreference: , LocalUserPassword: openapiclient.iam.LocalUserPassword.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, CurrentPassword: "CurrentPassword_example", NewPassword: "NewPassword_example", Password: 123, User: }, OauthTokens: []IamOAuthTokenRelationship{), Permissions: []IamPermissionRelationship{), Sessions: []IamSessionRelationship{openapiclient.iam.Session.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, AccountPermissions: []IamAccountPermissions{openapiclient.iam.AccountPermissions{ClassId: "ClassId_example", ObjectType: "ObjectType_example", AccountIdentifier: "AccountIdentifier_example", AccountName: "AccountName_example", AccountStatus: "AccountStatus_example", Permissions: []IamPermissionReference{openapiclient.iam.PermissionReference{ClassId: "ClassId_example", ObjectType: "ObjectType_example", PermissionIdentifier: "PermissionIdentifier_example", PermissionName: "PermissionName_example"})}), ClientIpAddress: "ClientIpAddress_example", Expiration: "TODO", IdleTimeExpiration: "TODO", LastLoginClient: "LastLoginClient_example", LastLoginTime: "TODO", Permission: , User: })})}), Users: []IamUserRelationship{)}), Qualifier: openapiclient.iam.Qualifier.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Value: []string{"Value_example"), Usergroup: }, Users: []IamUserRelationship{)}), Users: []IamUserRelationship{)}}), Usergroups: []IamUserGroupRelationship{), Users: []IamUserRelationship{)}}), Usergroups: []IamUserGroupRelationship{), Users: []IamUserRelationship{)}, ApplianceAccount: , Groups: []IamLdapGroupRelationship{openapiclient.iam.LdapGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Domain: "Domain_example", Name: "Name_example", EndPointRole: []IamEndPointRoleRelationship{), LdapPolicy: }), Organization: , Profiles: []PolicyAbstractConfigProfileRelationship{openapiclient.policy.AbstractConfigProfile.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Type: "Type_example", SrcTemplate: , Action: "Action_example", ConfigContext: openapiclient.policy.ConfigContext{ClassId: "ClassId_example", ObjectType: "ObjectType_example", ConfigState: "ConfigState_example", ControlAction: "ControlAction_example", ErrorState: "ErrorState_example", OperState: "OperState_example"}}), Providers: []IamLdapProviderRelationship{openapiclient.iam.LdapProvider.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Port: int64(123), Server: "Server_example", LdapPolicy: })}, System: , UserPreferences: []IamUserPreferenceRelationship{), Usergroups: []IamUserGroupRelationship{), Users: []IamUserRelationship{)}, PrivilegeSets: []IamPrivilegeSetRelationship{), Privileges: []IamPrivilegeRelationship{), Roles: []IamRoleRelationship{), ServiceProvider: openapiclient.iam.ServiceProvider.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, EntityId: "EntityId_example", Metadata: "Metadata_example", Name: "Name_example", System: }}}), EndPointRoles: []IamEndPointRoleRelationship{), Idp: , PrivilegeSets: []IamPrivilegeSetRelationship{), Privileges: []IamPrivilegeRelationship{), Roles: []IamRoleRelationship{), ServiceProvider: openapiclient.iam.ServiceProvider.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, EntityId: "EntityId_example", Metadata: "Metadata_example", Name: "Name_example", System: }}}), System: }), ResourceRoles: []IamResourceRolesRelationship{openapiclient.iam.ResourceRoles.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, EndPointRoles: []IamEndPointRoleRelationship{), Permission: , Resource: , Roles: []IamRoleRelationship{)}), Roles: []IamRoleRelationship{), SessionLimits: openapiclient.iam.SessionLimits.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, IdleTimeOut: int64(123), MaximumLimit: int64(123), PerUserLimit: int64(123), SessionTimeOut: int64(123), Account: , Permission: }, UserGroups: []IamUserGroupRelationship{), Users: []IamUserRelationship{)}, User: }), Permission: , Roles: []IamRoleRelationship{), User: }, Permission: , User: }), Permission: , Roles: []IamRoleRelationship{), User: }), DomainGroups: []IamDomainGroupRelationship{openapiclient.iam.DomainGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Partition1: int64(123), Partition2: int64(123), Partition3: int64(123), PartitionKey: "PartitionKey_example", Usage: int64(123), Account: }), EndPointRoles: []IamEndPointRoleRelationship{), Idpreferences: []IamIdpReferenceRelationship{), Idps: []IamIdpRelationship{), Permissions: []IamPermissionRelationship{), PrivilegeSets: []IamPrivilegeSetRelationship{), Privileges: []IamPrivilegeRelationship{), ResourceLimits: openapiclient.iam.ResourceLimits.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, PerAccountUserLimit: int64(123), Account: }, Roles: []IamRoleRelationship{), SecurityHolder: openapiclient.iam.SecurityHolder.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Account: , IpRulesConfiguration: openapiclient.iam.IpAccessManagement.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Enable: false, LastRecoveryTime: "TODO", Holder: openapiclient.iam.SecurityHolder.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Account: , IpRulesConfiguration: openapiclient.iam.IpAccessManagement.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Enable: false, LastRecoveryTime: "TODO", Holder: , IpAddresses: []IamIpAddressRelationship{openapiclient.iam.IpAddress.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Address: "Address_example", Description: "Description_example", IpAccessManagement: })}, ResourcePermissions: []IamResourcePermissionRelationship{openapiclient.iam.ResourcePermission.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, PermissionRoles: []IamPermissionToRoles{openapiclient.iam.PermissionToRoles{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Permission: openapiclient.cmrf.CmRf{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example"}, Roles: []CmrfCmRf{openapiclient.cmrf.CmRf{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example"})}), TargetApp: "TargetApp_example", Holder: , Resource: })}, IpAddresses: []IamIpAddressRelationship{openapiclient.iam.IpAddress.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Address: "Address_example", Description: "Description_example", IpAccessManagement: })}, ResourcePermissions: []IamResourcePermissionRelationship{openapiclient.iam.ResourcePermission.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, PermissionRoles: []IamPermissionToRoles{openapiclient.iam.PermissionToRoles{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Permission: , Roles: []CmrfCmRf{)}), TargetApp: "TargetApp_example", Holder: , Resource: })}, SessionLimits: }}, AppRegistrations: []IamAppRegistrationRelationship{), DomainGroups: []IamDomainGroupRelationship{openapiclient.iam.DomainGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Partition1: int64(123), Partition2: int64(123), Partition3: int64(123), PartitionKey: "PartitionKey_example", Usage: int64(123), Account: }), EndPointRoles: []IamEndPointRoleRelationship{), Idpreferences: []IamIdpReferenceRelationship{), Idps: []IamIdpRelationship{), Permissions: []IamPermissionRelationship{), PrivilegeSets: []IamPrivilegeSetRelationship{), Privileges: []IamPrivilegeRelationship{), ResourceLimits: openapiclient.iam.ResourceLimits.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, PerAccountUserLimit: int64(123), Account: }, Roles: []IamRoleRelationship{), SecurityHolder: , SessionLimits: }, ResourceGroups: []ResourceGroupRelationship{openapiclient.resource.Group.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", PerTypeCombinedSelector: []ResourcePerTypeCombinedSelector{openapiclient.resource.PerTypeCombinedSelector{ClassId: "ClassId_example", ObjectType: "ObjectType_example", CombinedSelector: "CombinedSelector_example", EmptyFilter: false, SelectorObjectType: "SelectorObjectType_example"}), Qualifier: "Qualifier_example", Selectors: []ResourceSelector{openapiclient.resource.Selector{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Selector: "Selector_example"}), Account: , Organizations: []OrganizationOrganizationRelationship{)})}, Sections: []CapabilitySectionRelationship{openapiclient.capability.Section.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Action: "Action_example", CatalogName: "CatalogName_example", Name: "Name_example", Source: "Source_example", Version: "Version_example", Catalog: openapiclient.capability.Catalog.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Organization: , Sections: []CapabilitySectionRelationship{)}})}}}), Section: , ConnectivityOrder: "ConnectivityOrder_example", EthernetPortSpeed: int64(123), FibreChannelPortSpeed: int64(123), NumDcePorts: int64(123), PromCardType: "PromCardType_example"} // CapabilityAdapterUnitDescriptor | The 'capability.AdapterUnitDescriptor' resource to create.
+    capabilityAdapterUnitDescriptor := *openapiclient.Newcapability.AdapterUnitDescriptor("ClassId_example", "ObjectType_example") // CapabilityAdapterUnitDescriptor | The 'capability.AdapterUnitDescriptor' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.CreateCapabilityAdapterUnitDescriptor(context.Background(), capabilityAdapterUnitDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.CreateCapabilityAdapterUnitDescriptor(context.Background()).CapabilityAdapterUnitDescriptor(capabilityAdapterUnitDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilityAdapterUnitDescriptor``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -186,7 +186,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -217,13 +217,13 @@ import (
 )
 
 func main() {
-    capabilityChassisDescriptor := openapiclient.capability.ChassisDescriptor{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Model: "Model_example", Vendor: "Vendor_example", Version: "Version_example", Capabilities: []CapabilityCapabilityRelationship{openapiclient.capability.Capability.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: }), Section: , Revision: "Revision_example"} // CapabilityChassisDescriptor | The 'capability.ChassisDescriptor' resource to create.
+    capabilityChassisDescriptor := *openapiclient.Newcapability.ChassisDescriptor("ClassId_example", "ObjectType_example") // CapabilityChassisDescriptor | The 'capability.ChassisDescriptor' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.CreateCapabilityChassisDescriptor(context.Background(), capabilityChassisDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.CreateCapabilityChassisDescriptor(context.Background()).CapabilityChassisDescriptor(capabilityChassisDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilityChassisDescriptor``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -254,7 +254,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -285,13 +285,13 @@ import (
 )
 
 func main() {
-    capabilityChassisManufacturingDef := openapiclient.capability.ChassisManufacturingDef{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , Caption: "Caption_example", ChassisCodeName: "ChassisCodeName_example", Description: "Description_example", Pid: "Pid_example", ProductName: "ProductName_example", Sku: "Sku_example", Vid: "Vid_example"} // CapabilityChassisManufacturingDef | The 'capability.ChassisManufacturingDef' resource to create.
+    capabilityChassisManufacturingDef := *openapiclient.Newcapability.ChassisManufacturingDef("ClassId_example", "ObjectType_example") // CapabilityChassisManufacturingDef | The 'capability.ChassisManufacturingDef' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.CreateCapabilityChassisManufacturingDef(context.Background(), capabilityChassisManufacturingDef).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.CreateCapabilityChassisManufacturingDef(context.Background()).CapabilityChassisManufacturingDef(capabilityChassisManufacturingDef).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilityChassisManufacturingDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -322,7 +322,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -353,13 +353,13 @@ import (
 )
 
 func main() {
-    capabilityEquipmentPhysicalDef := openapiclient.capability.EquipmentPhysicalDef{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , Pid: "Pid_example", Sku: "Sku_example", Vid: "Vid_example", Depth: 123, Height: 123, MaxPower: int64(123), MinPower: int64(123), NominalPower: int64(123), Weight: 123, Width: 123} // CapabilityEquipmentPhysicalDef | The 'capability.EquipmentPhysicalDef' resource to create.
+    capabilityEquipmentPhysicalDef := *openapiclient.Newcapability.EquipmentPhysicalDef("ClassId_example", "ObjectType_example") // CapabilityEquipmentPhysicalDef | The 'capability.EquipmentPhysicalDef' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.CreateCapabilityEquipmentPhysicalDef(context.Background(), capabilityEquipmentPhysicalDef).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.CreateCapabilityEquipmentPhysicalDef(context.Background()).CapabilityEquipmentPhysicalDef(capabilityEquipmentPhysicalDef).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilityEquipmentPhysicalDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -390,7 +390,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -421,13 +421,13 @@ import (
 )
 
 func main() {
-    capabilityEquipmentSlotArray := openapiclient.capability.EquipmentSlotArray{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , Pid: "Pid_example", Sku: "Sku_example", Vid: "Vid_example", FirstIndex: 123, Height: 123, HorizontalStartOffset: 123, InlineGroupSeparation: 123, InlineGroupSize: 123, InlineOffset: 123, Location: "Location_example", NumberOfSlots: int64(123), Orientation: "Orientation_example", Selector: "Selector_example", SlotsPerLine: int64(123), TransverseGroupSeparation: 123, TransverseGroupSize: 123, TransverseOffset: 123, VerticalStartOffset: 123, Width: 123} // CapabilityEquipmentSlotArray | The 'capability.EquipmentSlotArray' resource to create.
+    capabilityEquipmentSlotArray := *openapiclient.Newcapability.EquipmentSlotArray("ClassId_example", "ObjectType_example") // CapabilityEquipmentSlotArray | The 'capability.EquipmentSlotArray' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.CreateCapabilityEquipmentSlotArray(context.Background(), capabilityEquipmentSlotArray).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.CreateCapabilityEquipmentSlotArray(context.Background()).CapabilityEquipmentSlotArray(capabilityEquipmentSlotArray).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilityEquipmentSlotArray``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -458,7 +458,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -489,13 +489,13 @@ import (
 )
 
 func main() {
-    capabilityFanModuleDescriptor := openapiclient.capability.FanModuleDescriptor{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Model: "Model_example", Vendor: "Vendor_example", Version: "Version_example", Capabilities: []CapabilityCapabilityRelationship{), Section: , Revision: "Revision_example"} // CapabilityFanModuleDescriptor | The 'capability.FanModuleDescriptor' resource to create.
+    capabilityFanModuleDescriptor := *openapiclient.Newcapability.FanModuleDescriptor("ClassId_example", "ObjectType_example") // CapabilityFanModuleDescriptor | The 'capability.FanModuleDescriptor' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.CreateCapabilityFanModuleDescriptor(context.Background(), capabilityFanModuleDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.CreateCapabilityFanModuleDescriptor(context.Background()).CapabilityFanModuleDescriptor(capabilityFanModuleDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilityFanModuleDescriptor``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -526,7 +526,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -557,13 +557,13 @@ import (
 )
 
 func main() {
-    capabilityFanModuleManufacturingDef := openapiclient.capability.FanModuleManufacturingDef{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , Caption: "Caption_example", Description: "Description_example", Pid: "Pid_example", ProductName: "ProductName_example", Sku: "Sku_example", Vid: "Vid_example"} // CapabilityFanModuleManufacturingDef | The 'capability.FanModuleManufacturingDef' resource to create.
+    capabilityFanModuleManufacturingDef := *openapiclient.Newcapability.FanModuleManufacturingDef("ClassId_example", "ObjectType_example") // CapabilityFanModuleManufacturingDef | The 'capability.FanModuleManufacturingDef' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.CreateCapabilityFanModuleManufacturingDef(context.Background(), capabilityFanModuleManufacturingDef).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.CreateCapabilityFanModuleManufacturingDef(context.Background()).CapabilityFanModuleManufacturingDef(capabilityFanModuleManufacturingDef).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilityFanModuleManufacturingDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -594,7 +594,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -625,13 +625,13 @@ import (
 )
 
 func main() {
-    capabilityIoCardCapabilityDef := openapiclient.capability.IoCardCapabilityDef{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , DcSupported: false} // CapabilityIoCardCapabilityDef | The 'capability.IoCardCapabilityDef' resource to create.
+    capabilityIoCardCapabilityDef := *openapiclient.Newcapability.IoCardCapabilityDef("ClassId_example", "ObjectType_example") // CapabilityIoCardCapabilityDef | The 'capability.IoCardCapabilityDef' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.CreateCapabilityIoCardCapabilityDef(context.Background(), capabilityIoCardCapabilityDef).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.CreateCapabilityIoCardCapabilityDef(context.Background()).CapabilityIoCardCapabilityDef(capabilityIoCardCapabilityDef).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilityIoCardCapabilityDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -662,7 +662,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -693,13 +693,13 @@ import (
 )
 
 func main() {
-    capabilityIoCardDescriptor := openapiclient.capability.IoCardDescriptor{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Model: "Model_example", Vendor: "Vendor_example", Version: "Version_example", Capabilities: []CapabilityCapabilityRelationship{), Section: , NumHifPorts: int64(123), Revision: "Revision_example"} // CapabilityIoCardDescriptor | The 'capability.IoCardDescriptor' resource to create.
+    capabilityIoCardDescriptor := *openapiclient.Newcapability.IoCardDescriptor("ClassId_example", "ObjectType_example") // CapabilityIoCardDescriptor | The 'capability.IoCardDescriptor' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.CreateCapabilityIoCardDescriptor(context.Background(), capabilityIoCardDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.CreateCapabilityIoCardDescriptor(context.Background()).CapabilityIoCardDescriptor(capabilityIoCardDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilityIoCardDescriptor``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -730,7 +730,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -761,13 +761,13 @@ import (
 )
 
 func main() {
-    capabilityIoCardManufacturingDef := openapiclient.capability.IoCardManufacturingDef{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , Caption: "Caption_example", Description: "Description_example", Pid: "Pid_example", ProductName: "ProductName_example", Sku: "Sku_example", Vid: "Vid_example"} // CapabilityIoCardManufacturingDef | The 'capability.IoCardManufacturingDef' resource to create.
+    capabilityIoCardManufacturingDef := *openapiclient.Newcapability.IoCardManufacturingDef("ClassId_example", "ObjectType_example") // CapabilityIoCardManufacturingDef | The 'capability.IoCardManufacturingDef' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.CreateCapabilityIoCardManufacturingDef(context.Background(), capabilityIoCardManufacturingDef).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.CreateCapabilityIoCardManufacturingDef(context.Background()).CapabilityIoCardManufacturingDef(capabilityIoCardManufacturingDef).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilityIoCardManufacturingDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -798,7 +798,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -829,13 +829,13 @@ import (
 )
 
 func main() {
-    capabilityPortGroupAggregationDef := openapiclient.capability.PortGroupAggregationDef{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , AggregationCap: "AggregationCap_example", Hw40GPortGroupCap: false, Pgtype: "Pgtype_example"} // CapabilityPortGroupAggregationDef | The 'capability.PortGroupAggregationDef' resource to create.
+    capabilityPortGroupAggregationDef := *openapiclient.Newcapability.PortGroupAggregationDef("ClassId_example", "ObjectType_example") // CapabilityPortGroupAggregationDef | The 'capability.PortGroupAggregationDef' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.CreateCapabilityPortGroupAggregationDef(context.Background(), capabilityPortGroupAggregationDef).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.CreateCapabilityPortGroupAggregationDef(context.Background()).CapabilityPortGroupAggregationDef(capabilityPortGroupAggregationDef).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilityPortGroupAggregationDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -866,7 +866,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -897,13 +897,13 @@ import (
 )
 
 func main() {
-    capabilityPsuDescriptor := openapiclient.capability.PsuDescriptor{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Model: "Model_example", Vendor: "Vendor_example", Version: "Version_example", Capabilities: []CapabilityCapabilityRelationship{), Section: , Revision: "Revision_example"} // CapabilityPsuDescriptor | The 'capability.PsuDescriptor' resource to create.
+    capabilityPsuDescriptor := *openapiclient.Newcapability.PsuDescriptor("ClassId_example", "ObjectType_example") // CapabilityPsuDescriptor | The 'capability.PsuDescriptor' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.CreateCapabilityPsuDescriptor(context.Background(), capabilityPsuDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.CreateCapabilityPsuDescriptor(context.Background()).CapabilityPsuDescriptor(capabilityPsuDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilityPsuDescriptor``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -934,7 +934,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -965,13 +965,13 @@ import (
 )
 
 func main() {
-    capabilityPsuManufacturingDef := openapiclient.capability.PsuManufacturingDef{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , Caption: "Caption_example", Description: "Description_example", Pid: "Pid_example", ProductName: "ProductName_example", Sku: "Sku_example", Vid: "Vid_example"} // CapabilityPsuManufacturingDef | The 'capability.PsuManufacturingDef' resource to create.
+    capabilityPsuManufacturingDef := *openapiclient.Newcapability.PsuManufacturingDef("ClassId_example", "ObjectType_example") // CapabilityPsuManufacturingDef | The 'capability.PsuManufacturingDef' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.CreateCapabilityPsuManufacturingDef(context.Background(), capabilityPsuManufacturingDef).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.CreateCapabilityPsuManufacturingDef(context.Background()).CapabilityPsuManufacturingDef(capabilityPsuManufacturingDef).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilityPsuManufacturingDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1002,7 +1002,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1033,13 +1033,13 @@ import (
 )
 
 func main() {
-    capabilitySection := openapiclient.capability.Section{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Action: "Action_example", CatalogName: "CatalogName_example", Name: "Name_example", Source: "Source_example", Version: "Version_example", Catalog: } // CapabilitySection | The 'capability.Section' resource to create.
+    capabilitySection := *openapiclient.Newcapability.Section("ClassId_example", "ObjectType_example") // CapabilitySection | The 'capability.Section' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.CreateCapabilitySection(context.Background(), capabilitySection).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.CreateCapabilitySection(context.Background()).CapabilitySection(capabilitySection).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilitySection``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1070,7 +1070,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1101,13 +1101,13 @@ import (
 )
 
 func main() {
-    capabilitySiocModuleCapabilityDef := openapiclient.capability.SiocModuleCapabilityDef{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , DcSupported: false} // CapabilitySiocModuleCapabilityDef | The 'capability.SiocModuleCapabilityDef' resource to create.
+    capabilitySiocModuleCapabilityDef := *openapiclient.Newcapability.SiocModuleCapabilityDef("ClassId_example", "ObjectType_example") // CapabilitySiocModuleCapabilityDef | The 'capability.SiocModuleCapabilityDef' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.CreateCapabilitySiocModuleCapabilityDef(context.Background(), capabilitySiocModuleCapabilityDef).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.CreateCapabilitySiocModuleCapabilityDef(context.Background()).CapabilitySiocModuleCapabilityDef(capabilitySiocModuleCapabilityDef).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilitySiocModuleCapabilityDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1138,7 +1138,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1169,13 +1169,13 @@ import (
 )
 
 func main() {
-    capabilitySiocModuleDescriptor := openapiclient.capability.SiocModuleDescriptor{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Model: "Model_example", Vendor: "Vendor_example", Version: "Version_example", Capabilities: []CapabilityCapabilityRelationship{), Section: , Revision: "Revision_example"} // CapabilitySiocModuleDescriptor | The 'capability.SiocModuleDescriptor' resource to create.
+    capabilitySiocModuleDescriptor := *openapiclient.Newcapability.SiocModuleDescriptor("ClassId_example", "ObjectType_example") // CapabilitySiocModuleDescriptor | The 'capability.SiocModuleDescriptor' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.CreateCapabilitySiocModuleDescriptor(context.Background(), capabilitySiocModuleDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.CreateCapabilitySiocModuleDescriptor(context.Background()).CapabilitySiocModuleDescriptor(capabilitySiocModuleDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilitySiocModuleDescriptor``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1206,7 +1206,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1237,13 +1237,13 @@ import (
 )
 
 func main() {
-    capabilitySiocModuleManufacturingDef := openapiclient.capability.SiocModuleManufacturingDef{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , Caption: "Caption_example", Description: "Description_example", Pid: "Pid_example", ProductName: "ProductName_example", Sku: "Sku_example", Vid: "Vid_example"} // CapabilitySiocModuleManufacturingDef | The 'capability.SiocModuleManufacturingDef' resource to create.
+    capabilitySiocModuleManufacturingDef := *openapiclient.Newcapability.SiocModuleManufacturingDef("ClassId_example", "ObjectType_example") // CapabilitySiocModuleManufacturingDef | The 'capability.SiocModuleManufacturingDef' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.CreateCapabilitySiocModuleManufacturingDef(context.Background(), capabilitySiocModuleManufacturingDef).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.CreateCapabilitySiocModuleManufacturingDef(context.Background()).CapabilitySiocModuleManufacturingDef(capabilitySiocModuleManufacturingDef).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilitySiocModuleManufacturingDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1274,7 +1274,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1305,13 +1305,13 @@ import (
 )
 
 func main() {
-    capabilitySwitchCapability := openapiclient.capability.SwitchCapability{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , Pid: "Pid_example", Sku: "Sku_example", Vid: "Vid_example", DefaultFcoeVlan: int64(123), DynamicVifsSupported: false, FanModulesSupported: false, FcEndHostModeReservedVsans: []CapabilityPortRange{openapiclient.capability.PortRange{ClassId: "ClassId_example", ObjectType: "ObjectType_example", EndPortId: int64(123), EndSlotId: int64(123), StartPortId: int64(123), StartSlotId: int64(123)}), FcUplinkPortsAutoNegotiationSupported: false, LocatorBeaconSupported: false, MaxActiveSpanSessions: int64(123), MaxEthernetPortChannelMembers: int64(123), MaxEthernetPortChannels: int64(123), MaxEthernetUplinkPorts: int64(123), MaxFcFcoePortChannels: int64(123), MaxFcPortChannelMembers: int64(123), MaxFcoePortChannelMembers: int64(123), MaxPorts: int64(123), MaxSlots: int64(123), MaxVsansSupported: int64(123), MinActiveFans: int64(123), PortsSupporting100gSpeed: []CapabilityPortRange{openapiclient.capability.PortRange{ClassId: "ClassId_example", ObjectType: "ObjectType_example", EndPortId: int64(123), EndSlotId: int64(123), StartPortId: int64(123), StartSlotId: int64(123)}), PortsSupporting10gSpeed: []CapabilityPortRange{), PortsSupporting1gSpeed: []CapabilityPortRange{), PortsSupporting25gSpeed: []CapabilityPortRange{), PortsSupporting40gSpeed: []CapabilityPortRange{), PortsSupportingBreakout: []CapabilityPortRange{), PortsSupportingFcoe: []CapabilityPortRange{), PortsSupportingServerRole: []CapabilityPortRange{), ReservedVsans: []CapabilityPortRange{), SerenoNetflowSupported: false, UnifiedPorts: []CapabilityPortRange{), UnifiedRule: "UnifiedRule_example", VpCompressionSupported: false} // CapabilitySwitchCapability | The 'capability.SwitchCapability' resource to create.
+    capabilitySwitchCapability := *openapiclient.Newcapability.SwitchCapability("ClassId_example", "ObjectType_example") // CapabilitySwitchCapability | The 'capability.SwitchCapability' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.CreateCapabilitySwitchCapability(context.Background(), capabilitySwitchCapability).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.CreateCapabilitySwitchCapability(context.Background()).CapabilitySwitchCapability(capabilitySwitchCapability).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilitySwitchCapability``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1342,7 +1342,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1373,13 +1373,13 @@ import (
 )
 
 func main() {
-    capabilitySwitchDescriptor := openapiclient.capability.SwitchDescriptor{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Model: "Model_example", Vendor: "Vendor_example", Version: "Version_example", Capabilities: []CapabilityCapabilityRelationship{), Section: , ExpectedMemory: int64(123), Revision: "Revision_example"} // CapabilitySwitchDescriptor | The 'capability.SwitchDescriptor' resource to create.
+    capabilitySwitchDescriptor := *openapiclient.Newcapability.SwitchDescriptor("ClassId_example", "ObjectType_example") // CapabilitySwitchDescriptor | The 'capability.SwitchDescriptor' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.CreateCapabilitySwitchDescriptor(context.Background(), capabilitySwitchDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.CreateCapabilitySwitchDescriptor(context.Background()).CapabilitySwitchDescriptor(capabilitySwitchDescriptor).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilitySwitchDescriptor``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1410,7 +1410,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1441,13 +1441,13 @@ import (
 )
 
 func main() {
-    capabilitySwitchManufacturingDef := openapiclient.capability.SwitchManufacturingDef{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , Pid: "Pid_example", Sku: "Sku_example", Vid: "Vid_example", Caption: "Caption_example", Description: "Description_example", PartNumber: "PartNumber_example", ProductName: "ProductName_example"} // CapabilitySwitchManufacturingDef | The 'capability.SwitchManufacturingDef' resource to create.
+    capabilitySwitchManufacturingDef := *openapiclient.Newcapability.SwitchManufacturingDef("ClassId_example", "ObjectType_example") // CapabilitySwitchManufacturingDef | The 'capability.SwitchManufacturingDef' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.CreateCapabilitySwitchManufacturingDef(context.Background(), capabilitySwitchManufacturingDef).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.CreateCapabilitySwitchManufacturingDef(context.Background()).CapabilitySwitchManufacturingDef(capabilitySwitchManufacturingDef).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.CreateCapabilitySwitchManufacturingDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1478,7 +1478,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1544,7 +1544,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1610,7 +1610,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1676,7 +1676,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1742,7 +1742,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1808,7 +1808,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1874,7 +1874,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -1940,7 +1940,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2006,7 +2006,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2072,7 +2072,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2138,7 +2138,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2204,7 +2204,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2270,7 +2270,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2336,7 +2336,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2402,7 +2402,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2468,7 +2468,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2534,7 +2534,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2600,7 +2600,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2666,7 +2666,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2732,7 +2732,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2800,7 +2800,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2845,7 +2845,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.GetCapabilityAdapterUnitDescriptorList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.CapabilityApi.GetCapabilityAdapterUnitDescriptorList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityAdapterUnitDescriptorList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2884,7 +2884,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2952,7 +2952,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -2997,7 +2997,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.GetCapabilityCatalogList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.CapabilityApi.GetCapabilityCatalogList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityCatalogList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3036,7 +3036,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3104,7 +3104,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3149,7 +3149,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.GetCapabilityChassisDescriptorList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.CapabilityApi.GetCapabilityChassisDescriptorList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityChassisDescriptorList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3188,7 +3188,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3256,7 +3256,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3301,7 +3301,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.GetCapabilityChassisManufacturingDefList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.CapabilityApi.GetCapabilityChassisManufacturingDefList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityChassisManufacturingDefList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3340,7 +3340,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3408,7 +3408,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3453,7 +3453,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.GetCapabilityEquipmentPhysicalDefList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.CapabilityApi.GetCapabilityEquipmentPhysicalDefList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityEquipmentPhysicalDefList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3492,7 +3492,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3560,7 +3560,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3605,7 +3605,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.GetCapabilityEquipmentSlotArrayList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.CapabilityApi.GetCapabilityEquipmentSlotArrayList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityEquipmentSlotArrayList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3644,7 +3644,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3712,7 +3712,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3757,7 +3757,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.GetCapabilityFanModuleDescriptorList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.CapabilityApi.GetCapabilityFanModuleDescriptorList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityFanModuleDescriptorList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3796,7 +3796,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3864,7 +3864,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -3909,7 +3909,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.GetCapabilityFanModuleManufacturingDefList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.CapabilityApi.GetCapabilityFanModuleManufacturingDefList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityFanModuleManufacturingDefList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -3948,7 +3948,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4016,7 +4016,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4061,7 +4061,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.GetCapabilityIoCardCapabilityDefList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.CapabilityApi.GetCapabilityIoCardCapabilityDefList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityIoCardCapabilityDefList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4100,7 +4100,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4168,7 +4168,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4213,7 +4213,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.GetCapabilityIoCardDescriptorList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.CapabilityApi.GetCapabilityIoCardDescriptorList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityIoCardDescriptorList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4252,7 +4252,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4320,7 +4320,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4365,7 +4365,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.GetCapabilityIoCardManufacturingDefList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.CapabilityApi.GetCapabilityIoCardManufacturingDefList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityIoCardManufacturingDefList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4404,7 +4404,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4472,7 +4472,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4517,7 +4517,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.GetCapabilityPortGroupAggregationDefList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.CapabilityApi.GetCapabilityPortGroupAggregationDefList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityPortGroupAggregationDefList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4556,7 +4556,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4624,7 +4624,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4669,7 +4669,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.GetCapabilityPsuDescriptorList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.CapabilityApi.GetCapabilityPsuDescriptorList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityPsuDescriptorList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4708,7 +4708,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4776,7 +4776,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4821,7 +4821,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.GetCapabilityPsuManufacturingDefList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.CapabilityApi.GetCapabilityPsuManufacturingDefList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilityPsuManufacturingDefList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -4860,7 +4860,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4928,7 +4928,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -4973,7 +4973,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.GetCapabilitySectionList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.CapabilityApi.GetCapabilitySectionList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilitySectionList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5012,7 +5012,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5080,7 +5080,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5125,7 +5125,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.GetCapabilitySiocModuleCapabilityDefList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.CapabilityApi.GetCapabilitySiocModuleCapabilityDefList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilitySiocModuleCapabilityDefList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5164,7 +5164,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5232,7 +5232,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5277,7 +5277,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.GetCapabilitySiocModuleDescriptorList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.CapabilityApi.GetCapabilitySiocModuleDescriptorList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilitySiocModuleDescriptorList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5316,7 +5316,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5384,7 +5384,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5429,7 +5429,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.GetCapabilitySiocModuleManufacturingDefList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.CapabilityApi.GetCapabilitySiocModuleManufacturingDefList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilitySiocModuleManufacturingDefList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5468,7 +5468,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5536,7 +5536,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5581,7 +5581,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.GetCapabilitySwitchCapabilityList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.CapabilityApi.GetCapabilitySwitchCapabilityList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilitySwitchCapabilityList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5620,7 +5620,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5688,7 +5688,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5733,7 +5733,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.GetCapabilitySwitchDescriptorList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.CapabilityApi.GetCapabilitySwitchDescriptorList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilitySwitchDescriptorList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5772,7 +5772,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5840,7 +5840,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5885,7 +5885,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.GetCapabilitySwitchManufacturingDefList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.CapabilityApi.GetCapabilitySwitchManufacturingDefList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.GetCapabilitySwitchManufacturingDefList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5924,7 +5924,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -5956,12 +5956,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    capabilityAdapterUnitDescriptor := openapiclient.capability.AdapterUnitDescriptor{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Model: "Model_example", Vendor: "Vendor_example", Version: "Version_example", Capabilities: []CapabilityCapabilityRelationship{), Section: , ConnectivityOrder: "ConnectivityOrder_example", EthernetPortSpeed: int64(123), FibreChannelPortSpeed: int64(123), NumDcePorts: int64(123), PromCardType: "PromCardType_example"} // CapabilityAdapterUnitDescriptor | The 'capability.AdapterUnitDescriptor' resource to update.
+    capabilityAdapterUnitDescriptor := *openapiclient.Newcapability.AdapterUnitDescriptor("ClassId_example", "ObjectType_example") // CapabilityAdapterUnitDescriptor | The 'capability.AdapterUnitDescriptor' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.PatchCapabilityAdapterUnitDescriptor(context.Background(), moid, capabilityAdapterUnitDescriptor).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.PatchCapabilityAdapterUnitDescriptor(context.Background(), moid).CapabilityAdapterUnitDescriptor(capabilityAdapterUnitDescriptor).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilityAdapterUnitDescriptor``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5996,7 +5996,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6028,12 +6028,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    capabilityCatalog := openapiclient.capability.Catalog{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Organization: , Sections: []CapabilitySectionRelationship{)} // CapabilityCatalog | The 'capability.Catalog' resource to update.
+    capabilityCatalog := *openapiclient.Newcapability.Catalog("ClassId_example", "ObjectType_example") // CapabilityCatalog | The 'capability.Catalog' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.PatchCapabilityCatalog(context.Background(), moid, capabilityCatalog).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.PatchCapabilityCatalog(context.Background(), moid).CapabilityCatalog(capabilityCatalog).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilityCatalog``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6068,7 +6068,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6100,12 +6100,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    capabilityChassisDescriptor := openapiclient.capability.ChassisDescriptor{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Model: "Model_example", Vendor: "Vendor_example", Version: "Version_example", Capabilities: []CapabilityCapabilityRelationship{), Section: , Revision: "Revision_example"} // CapabilityChassisDescriptor | The 'capability.ChassisDescriptor' resource to update.
+    capabilityChassisDescriptor := *openapiclient.Newcapability.ChassisDescriptor("ClassId_example", "ObjectType_example") // CapabilityChassisDescriptor | The 'capability.ChassisDescriptor' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.PatchCapabilityChassisDescriptor(context.Background(), moid, capabilityChassisDescriptor).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.PatchCapabilityChassisDescriptor(context.Background(), moid).CapabilityChassisDescriptor(capabilityChassisDescriptor).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilityChassisDescriptor``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6140,7 +6140,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6172,12 +6172,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    capabilityChassisManufacturingDef := openapiclient.capability.ChassisManufacturingDef{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , Caption: "Caption_example", ChassisCodeName: "ChassisCodeName_example", Description: "Description_example", Pid: "Pid_example", ProductName: "ProductName_example", Sku: "Sku_example", Vid: "Vid_example"} // CapabilityChassisManufacturingDef | The 'capability.ChassisManufacturingDef' resource to update.
+    capabilityChassisManufacturingDef := *openapiclient.Newcapability.ChassisManufacturingDef("ClassId_example", "ObjectType_example") // CapabilityChassisManufacturingDef | The 'capability.ChassisManufacturingDef' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.PatchCapabilityChassisManufacturingDef(context.Background(), moid, capabilityChassisManufacturingDef).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.PatchCapabilityChassisManufacturingDef(context.Background(), moid).CapabilityChassisManufacturingDef(capabilityChassisManufacturingDef).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilityChassisManufacturingDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6212,7 +6212,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6244,12 +6244,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    capabilityEquipmentPhysicalDef := openapiclient.capability.EquipmentPhysicalDef{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , Pid: "Pid_example", Sku: "Sku_example", Vid: "Vid_example", Depth: 123, Height: 123, MaxPower: int64(123), MinPower: int64(123), NominalPower: int64(123), Weight: 123, Width: 123} // CapabilityEquipmentPhysicalDef | The 'capability.EquipmentPhysicalDef' resource to update.
+    capabilityEquipmentPhysicalDef := *openapiclient.Newcapability.EquipmentPhysicalDef("ClassId_example", "ObjectType_example") // CapabilityEquipmentPhysicalDef | The 'capability.EquipmentPhysicalDef' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.PatchCapabilityEquipmentPhysicalDef(context.Background(), moid, capabilityEquipmentPhysicalDef).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.PatchCapabilityEquipmentPhysicalDef(context.Background(), moid).CapabilityEquipmentPhysicalDef(capabilityEquipmentPhysicalDef).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilityEquipmentPhysicalDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6284,7 +6284,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6316,12 +6316,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    capabilityEquipmentSlotArray := openapiclient.capability.EquipmentSlotArray{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , Pid: "Pid_example", Sku: "Sku_example", Vid: "Vid_example", FirstIndex: 123, Height: 123, HorizontalStartOffset: 123, InlineGroupSeparation: 123, InlineGroupSize: 123, InlineOffset: 123, Location: "Location_example", NumberOfSlots: int64(123), Orientation: "Orientation_example", Selector: "Selector_example", SlotsPerLine: int64(123), TransverseGroupSeparation: 123, TransverseGroupSize: 123, TransverseOffset: 123, VerticalStartOffset: 123, Width: 123} // CapabilityEquipmentSlotArray | The 'capability.EquipmentSlotArray' resource to update.
+    capabilityEquipmentSlotArray := *openapiclient.Newcapability.EquipmentSlotArray("ClassId_example", "ObjectType_example") // CapabilityEquipmentSlotArray | The 'capability.EquipmentSlotArray' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.PatchCapabilityEquipmentSlotArray(context.Background(), moid, capabilityEquipmentSlotArray).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.PatchCapabilityEquipmentSlotArray(context.Background(), moid).CapabilityEquipmentSlotArray(capabilityEquipmentSlotArray).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilityEquipmentSlotArray``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6356,7 +6356,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6388,12 +6388,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    capabilityFanModuleDescriptor := openapiclient.capability.FanModuleDescriptor{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Model: "Model_example", Vendor: "Vendor_example", Version: "Version_example", Capabilities: []CapabilityCapabilityRelationship{), Section: , Revision: "Revision_example"} // CapabilityFanModuleDescriptor | The 'capability.FanModuleDescriptor' resource to update.
+    capabilityFanModuleDescriptor := *openapiclient.Newcapability.FanModuleDescriptor("ClassId_example", "ObjectType_example") // CapabilityFanModuleDescriptor | The 'capability.FanModuleDescriptor' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.PatchCapabilityFanModuleDescriptor(context.Background(), moid, capabilityFanModuleDescriptor).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.PatchCapabilityFanModuleDescriptor(context.Background(), moid).CapabilityFanModuleDescriptor(capabilityFanModuleDescriptor).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilityFanModuleDescriptor``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6428,7 +6428,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6460,12 +6460,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    capabilityFanModuleManufacturingDef := openapiclient.capability.FanModuleManufacturingDef{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , Caption: "Caption_example", Description: "Description_example", Pid: "Pid_example", ProductName: "ProductName_example", Sku: "Sku_example", Vid: "Vid_example"} // CapabilityFanModuleManufacturingDef | The 'capability.FanModuleManufacturingDef' resource to update.
+    capabilityFanModuleManufacturingDef := *openapiclient.Newcapability.FanModuleManufacturingDef("ClassId_example", "ObjectType_example") // CapabilityFanModuleManufacturingDef | The 'capability.FanModuleManufacturingDef' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.PatchCapabilityFanModuleManufacturingDef(context.Background(), moid, capabilityFanModuleManufacturingDef).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.PatchCapabilityFanModuleManufacturingDef(context.Background(), moid).CapabilityFanModuleManufacturingDef(capabilityFanModuleManufacturingDef).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilityFanModuleManufacturingDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6500,7 +6500,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6532,12 +6532,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    capabilityIoCardCapabilityDef := openapiclient.capability.IoCardCapabilityDef{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , DcSupported: false} // CapabilityIoCardCapabilityDef | The 'capability.IoCardCapabilityDef' resource to update.
+    capabilityIoCardCapabilityDef := *openapiclient.Newcapability.IoCardCapabilityDef("ClassId_example", "ObjectType_example") // CapabilityIoCardCapabilityDef | The 'capability.IoCardCapabilityDef' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.PatchCapabilityIoCardCapabilityDef(context.Background(), moid, capabilityIoCardCapabilityDef).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.PatchCapabilityIoCardCapabilityDef(context.Background(), moid).CapabilityIoCardCapabilityDef(capabilityIoCardCapabilityDef).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilityIoCardCapabilityDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6572,7 +6572,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6604,12 +6604,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    capabilityIoCardDescriptor := openapiclient.capability.IoCardDescriptor{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Model: "Model_example", Vendor: "Vendor_example", Version: "Version_example", Capabilities: []CapabilityCapabilityRelationship{), Section: , NumHifPorts: int64(123), Revision: "Revision_example"} // CapabilityIoCardDescriptor | The 'capability.IoCardDescriptor' resource to update.
+    capabilityIoCardDescriptor := *openapiclient.Newcapability.IoCardDescriptor("ClassId_example", "ObjectType_example") // CapabilityIoCardDescriptor | The 'capability.IoCardDescriptor' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.PatchCapabilityIoCardDescriptor(context.Background(), moid, capabilityIoCardDescriptor).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.PatchCapabilityIoCardDescriptor(context.Background(), moid).CapabilityIoCardDescriptor(capabilityIoCardDescriptor).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilityIoCardDescriptor``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6644,7 +6644,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6676,12 +6676,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    capabilityIoCardManufacturingDef := openapiclient.capability.IoCardManufacturingDef{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , Caption: "Caption_example", Description: "Description_example", Pid: "Pid_example", ProductName: "ProductName_example", Sku: "Sku_example", Vid: "Vid_example"} // CapabilityIoCardManufacturingDef | The 'capability.IoCardManufacturingDef' resource to update.
+    capabilityIoCardManufacturingDef := *openapiclient.Newcapability.IoCardManufacturingDef("ClassId_example", "ObjectType_example") // CapabilityIoCardManufacturingDef | The 'capability.IoCardManufacturingDef' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.PatchCapabilityIoCardManufacturingDef(context.Background(), moid, capabilityIoCardManufacturingDef).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.PatchCapabilityIoCardManufacturingDef(context.Background(), moid).CapabilityIoCardManufacturingDef(capabilityIoCardManufacturingDef).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilityIoCardManufacturingDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6716,7 +6716,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6748,12 +6748,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    capabilityPortGroupAggregationDef := openapiclient.capability.PortGroupAggregationDef{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , AggregationCap: "AggregationCap_example", Hw40GPortGroupCap: false, Pgtype: "Pgtype_example"} // CapabilityPortGroupAggregationDef | The 'capability.PortGroupAggregationDef' resource to update.
+    capabilityPortGroupAggregationDef := *openapiclient.Newcapability.PortGroupAggregationDef("ClassId_example", "ObjectType_example") // CapabilityPortGroupAggregationDef | The 'capability.PortGroupAggregationDef' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.PatchCapabilityPortGroupAggregationDef(context.Background(), moid, capabilityPortGroupAggregationDef).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.PatchCapabilityPortGroupAggregationDef(context.Background(), moid).CapabilityPortGroupAggregationDef(capabilityPortGroupAggregationDef).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilityPortGroupAggregationDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6788,7 +6788,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6820,12 +6820,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    capabilityPsuDescriptor := openapiclient.capability.PsuDescriptor{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Model: "Model_example", Vendor: "Vendor_example", Version: "Version_example", Capabilities: []CapabilityCapabilityRelationship{), Section: , Revision: "Revision_example"} // CapabilityPsuDescriptor | The 'capability.PsuDescriptor' resource to update.
+    capabilityPsuDescriptor := *openapiclient.Newcapability.PsuDescriptor("ClassId_example", "ObjectType_example") // CapabilityPsuDescriptor | The 'capability.PsuDescriptor' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.PatchCapabilityPsuDescriptor(context.Background(), moid, capabilityPsuDescriptor).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.PatchCapabilityPsuDescriptor(context.Background(), moid).CapabilityPsuDescriptor(capabilityPsuDescriptor).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilityPsuDescriptor``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6860,7 +6860,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6892,12 +6892,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    capabilityPsuManufacturingDef := openapiclient.capability.PsuManufacturingDef{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , Caption: "Caption_example", Description: "Description_example", Pid: "Pid_example", ProductName: "ProductName_example", Sku: "Sku_example", Vid: "Vid_example"} // CapabilityPsuManufacturingDef | The 'capability.PsuManufacturingDef' resource to update.
+    capabilityPsuManufacturingDef := *openapiclient.Newcapability.PsuManufacturingDef("ClassId_example", "ObjectType_example") // CapabilityPsuManufacturingDef | The 'capability.PsuManufacturingDef' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.PatchCapabilityPsuManufacturingDef(context.Background(), moid, capabilityPsuManufacturingDef).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.PatchCapabilityPsuManufacturingDef(context.Background(), moid).CapabilityPsuManufacturingDef(capabilityPsuManufacturingDef).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilityPsuManufacturingDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -6932,7 +6932,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -6964,12 +6964,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    capabilitySection := openapiclient.capability.Section{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Action: "Action_example", CatalogName: "CatalogName_example", Name: "Name_example", Source: "Source_example", Version: "Version_example", Catalog: } // CapabilitySection | The 'capability.Section' resource to update.
+    capabilitySection := *openapiclient.Newcapability.Section("ClassId_example", "ObjectType_example") // CapabilitySection | The 'capability.Section' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.PatchCapabilitySection(context.Background(), moid, capabilitySection).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.PatchCapabilitySection(context.Background(), moid).CapabilitySection(capabilitySection).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilitySection``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7004,7 +7004,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7036,12 +7036,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    capabilitySiocModuleCapabilityDef := openapiclient.capability.SiocModuleCapabilityDef{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , DcSupported: false} // CapabilitySiocModuleCapabilityDef | The 'capability.SiocModuleCapabilityDef' resource to update.
+    capabilitySiocModuleCapabilityDef := *openapiclient.Newcapability.SiocModuleCapabilityDef("ClassId_example", "ObjectType_example") // CapabilitySiocModuleCapabilityDef | The 'capability.SiocModuleCapabilityDef' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.PatchCapabilitySiocModuleCapabilityDef(context.Background(), moid, capabilitySiocModuleCapabilityDef).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.PatchCapabilitySiocModuleCapabilityDef(context.Background(), moid).CapabilitySiocModuleCapabilityDef(capabilitySiocModuleCapabilityDef).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilitySiocModuleCapabilityDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7076,7 +7076,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7108,12 +7108,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    capabilitySiocModuleDescriptor := openapiclient.capability.SiocModuleDescriptor{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Model: "Model_example", Vendor: "Vendor_example", Version: "Version_example", Capabilities: []CapabilityCapabilityRelationship{), Section: , Revision: "Revision_example"} // CapabilitySiocModuleDescriptor | The 'capability.SiocModuleDescriptor' resource to update.
+    capabilitySiocModuleDescriptor := *openapiclient.Newcapability.SiocModuleDescriptor("ClassId_example", "ObjectType_example") // CapabilitySiocModuleDescriptor | The 'capability.SiocModuleDescriptor' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.PatchCapabilitySiocModuleDescriptor(context.Background(), moid, capabilitySiocModuleDescriptor).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.PatchCapabilitySiocModuleDescriptor(context.Background(), moid).CapabilitySiocModuleDescriptor(capabilitySiocModuleDescriptor).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilitySiocModuleDescriptor``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7148,7 +7148,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7180,12 +7180,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    capabilitySiocModuleManufacturingDef := openapiclient.capability.SiocModuleManufacturingDef{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , Caption: "Caption_example", Description: "Description_example", Pid: "Pid_example", ProductName: "ProductName_example", Sku: "Sku_example", Vid: "Vid_example"} // CapabilitySiocModuleManufacturingDef | The 'capability.SiocModuleManufacturingDef' resource to update.
+    capabilitySiocModuleManufacturingDef := *openapiclient.Newcapability.SiocModuleManufacturingDef("ClassId_example", "ObjectType_example") // CapabilitySiocModuleManufacturingDef | The 'capability.SiocModuleManufacturingDef' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.PatchCapabilitySiocModuleManufacturingDef(context.Background(), moid, capabilitySiocModuleManufacturingDef).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.PatchCapabilitySiocModuleManufacturingDef(context.Background(), moid).CapabilitySiocModuleManufacturingDef(capabilitySiocModuleManufacturingDef).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilitySiocModuleManufacturingDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7220,7 +7220,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7252,12 +7252,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    capabilitySwitchCapability := openapiclient.capability.SwitchCapability{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , Pid: "Pid_example", Sku: "Sku_example", Vid: "Vid_example", DefaultFcoeVlan: int64(123), DynamicVifsSupported: false, FanModulesSupported: false, FcEndHostModeReservedVsans: []CapabilityPortRange{), FcUplinkPortsAutoNegotiationSupported: false, LocatorBeaconSupported: false, MaxActiveSpanSessions: int64(123), MaxEthernetPortChannelMembers: int64(123), MaxEthernetPortChannels: int64(123), MaxEthernetUplinkPorts: int64(123), MaxFcFcoePortChannels: int64(123), MaxFcPortChannelMembers: int64(123), MaxFcoePortChannelMembers: int64(123), MaxPorts: int64(123), MaxSlots: int64(123), MaxVsansSupported: int64(123), MinActiveFans: int64(123), PortsSupporting100gSpeed: []CapabilityPortRange{), PortsSupporting10gSpeed: []CapabilityPortRange{), PortsSupporting1gSpeed: []CapabilityPortRange{), PortsSupporting25gSpeed: []CapabilityPortRange{), PortsSupporting40gSpeed: []CapabilityPortRange{), PortsSupportingBreakout: []CapabilityPortRange{), PortsSupportingFcoe: []CapabilityPortRange{), PortsSupportingServerRole: []CapabilityPortRange{), ReservedVsans: []CapabilityPortRange{), SerenoNetflowSupported: false, UnifiedPorts: []CapabilityPortRange{), UnifiedRule: "UnifiedRule_example", VpCompressionSupported: false} // CapabilitySwitchCapability | The 'capability.SwitchCapability' resource to update.
+    capabilitySwitchCapability := *openapiclient.Newcapability.SwitchCapability("ClassId_example", "ObjectType_example") // CapabilitySwitchCapability | The 'capability.SwitchCapability' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.PatchCapabilitySwitchCapability(context.Background(), moid, capabilitySwitchCapability).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.PatchCapabilitySwitchCapability(context.Background(), moid).CapabilitySwitchCapability(capabilitySwitchCapability).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilitySwitchCapability``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7292,7 +7292,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7324,12 +7324,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    capabilitySwitchDescriptor := openapiclient.capability.SwitchDescriptor{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Model: "Model_example", Vendor: "Vendor_example", Version: "Version_example", Capabilities: []CapabilityCapabilityRelationship{), Section: , ExpectedMemory: int64(123), Revision: "Revision_example"} // CapabilitySwitchDescriptor | The 'capability.SwitchDescriptor' resource to update.
+    capabilitySwitchDescriptor := *openapiclient.Newcapability.SwitchDescriptor("ClassId_example", "ObjectType_example") // CapabilitySwitchDescriptor | The 'capability.SwitchDescriptor' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.PatchCapabilitySwitchDescriptor(context.Background(), moid, capabilitySwitchDescriptor).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.PatchCapabilitySwitchDescriptor(context.Background(), moid).CapabilitySwitchDescriptor(capabilitySwitchDescriptor).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilitySwitchDescriptor``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7364,7 +7364,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7396,12 +7396,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    capabilitySwitchManufacturingDef := openapiclient.capability.SwitchManufacturingDef{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Section: , Pid: "Pid_example", Sku: "Sku_example", Vid: "Vid_example", Caption: "Caption_example", Description: "Description_example", PartNumber: "PartNumber_example", ProductName: "ProductName_example"} // CapabilitySwitchManufacturingDef | The 'capability.SwitchManufacturingDef' resource to update.
+    capabilitySwitchManufacturingDef := *openapiclient.Newcapability.SwitchManufacturingDef("ClassId_example", "ObjectType_example") // CapabilitySwitchManufacturingDef | The 'capability.SwitchManufacturingDef' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.PatchCapabilitySwitchManufacturingDef(context.Background(), moid, capabilitySwitchManufacturingDef).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.PatchCapabilitySwitchManufacturingDef(context.Background(), moid).CapabilitySwitchManufacturingDef(capabilitySwitchManufacturingDef).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.PatchCapabilitySwitchManufacturingDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7436,7 +7436,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7473,7 +7473,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.UpdateCapabilityAdapterUnitDescriptor(context.Background(), moid, capabilityAdapterUnitDescriptor).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.UpdateCapabilityAdapterUnitDescriptor(context.Background(), moid).CapabilityAdapterUnitDescriptor(capabilityAdapterUnitDescriptor).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilityAdapterUnitDescriptor``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7508,7 +7508,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7540,12 +7540,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    capabilityCatalog := openapiclient.capability.Catalog{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Organization: , Sections: []CapabilitySectionRelationship{)} // CapabilityCatalog | The 'capability.Catalog' resource to update.
+    capabilityCatalog := *openapiclient.Newcapability.Catalog("ClassId_example", "ObjectType_example") // CapabilityCatalog | The 'capability.Catalog' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.UpdateCapabilityCatalog(context.Background(), moid, capabilityCatalog).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.UpdateCapabilityCatalog(context.Background(), moid).CapabilityCatalog(capabilityCatalog).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilityCatalog``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7580,7 +7580,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7617,7 +7617,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.UpdateCapabilityChassisDescriptor(context.Background(), moid, capabilityChassisDescriptor).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.UpdateCapabilityChassisDescriptor(context.Background(), moid).CapabilityChassisDescriptor(capabilityChassisDescriptor).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilityChassisDescriptor``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7652,7 +7652,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7689,7 +7689,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.UpdateCapabilityChassisManufacturingDef(context.Background(), moid, capabilityChassisManufacturingDef).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.UpdateCapabilityChassisManufacturingDef(context.Background(), moid).CapabilityChassisManufacturingDef(capabilityChassisManufacturingDef).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilityChassisManufacturingDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7724,7 +7724,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7761,7 +7761,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.UpdateCapabilityEquipmentPhysicalDef(context.Background(), moid, capabilityEquipmentPhysicalDef).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.UpdateCapabilityEquipmentPhysicalDef(context.Background(), moid).CapabilityEquipmentPhysicalDef(capabilityEquipmentPhysicalDef).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilityEquipmentPhysicalDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7796,7 +7796,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7833,7 +7833,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.UpdateCapabilityEquipmentSlotArray(context.Background(), moid, capabilityEquipmentSlotArray).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.UpdateCapabilityEquipmentSlotArray(context.Background(), moid).CapabilityEquipmentSlotArray(capabilityEquipmentSlotArray).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilityEquipmentSlotArray``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7868,7 +7868,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7905,7 +7905,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.UpdateCapabilityFanModuleDescriptor(context.Background(), moid, capabilityFanModuleDescriptor).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.UpdateCapabilityFanModuleDescriptor(context.Background(), moid).CapabilityFanModuleDescriptor(capabilityFanModuleDescriptor).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilityFanModuleDescriptor``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -7940,7 +7940,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -7977,7 +7977,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.UpdateCapabilityFanModuleManufacturingDef(context.Background(), moid, capabilityFanModuleManufacturingDef).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.UpdateCapabilityFanModuleManufacturingDef(context.Background(), moid).CapabilityFanModuleManufacturingDef(capabilityFanModuleManufacturingDef).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilityFanModuleManufacturingDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8012,7 +8012,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8049,7 +8049,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.UpdateCapabilityIoCardCapabilityDef(context.Background(), moid, capabilityIoCardCapabilityDef).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.UpdateCapabilityIoCardCapabilityDef(context.Background(), moid).CapabilityIoCardCapabilityDef(capabilityIoCardCapabilityDef).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilityIoCardCapabilityDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8084,7 +8084,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8121,7 +8121,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.UpdateCapabilityIoCardDescriptor(context.Background(), moid, capabilityIoCardDescriptor).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.UpdateCapabilityIoCardDescriptor(context.Background(), moid).CapabilityIoCardDescriptor(capabilityIoCardDescriptor).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilityIoCardDescriptor``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8156,7 +8156,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8193,7 +8193,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.UpdateCapabilityIoCardManufacturingDef(context.Background(), moid, capabilityIoCardManufacturingDef).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.UpdateCapabilityIoCardManufacturingDef(context.Background(), moid).CapabilityIoCardManufacturingDef(capabilityIoCardManufacturingDef).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilityIoCardManufacturingDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8228,7 +8228,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8265,7 +8265,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.UpdateCapabilityPortGroupAggregationDef(context.Background(), moid, capabilityPortGroupAggregationDef).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.UpdateCapabilityPortGroupAggregationDef(context.Background(), moid).CapabilityPortGroupAggregationDef(capabilityPortGroupAggregationDef).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilityPortGroupAggregationDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8300,7 +8300,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8337,7 +8337,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.UpdateCapabilityPsuDescriptor(context.Background(), moid, capabilityPsuDescriptor).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.UpdateCapabilityPsuDescriptor(context.Background(), moid).CapabilityPsuDescriptor(capabilityPsuDescriptor).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilityPsuDescriptor``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8372,7 +8372,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8409,7 +8409,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.UpdateCapabilityPsuManufacturingDef(context.Background(), moid, capabilityPsuManufacturingDef).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.UpdateCapabilityPsuManufacturingDef(context.Background(), moid).CapabilityPsuManufacturingDef(capabilityPsuManufacturingDef).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilityPsuManufacturingDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8444,7 +8444,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8481,7 +8481,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.UpdateCapabilitySection(context.Background(), moid, capabilitySection).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.UpdateCapabilitySection(context.Background(), moid).CapabilitySection(capabilitySection).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilitySection``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8516,7 +8516,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8553,7 +8553,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.UpdateCapabilitySiocModuleCapabilityDef(context.Background(), moid, capabilitySiocModuleCapabilityDef).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.UpdateCapabilitySiocModuleCapabilityDef(context.Background(), moid).CapabilitySiocModuleCapabilityDef(capabilitySiocModuleCapabilityDef).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilitySiocModuleCapabilityDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8588,7 +8588,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8625,7 +8625,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.UpdateCapabilitySiocModuleDescriptor(context.Background(), moid, capabilitySiocModuleDescriptor).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.UpdateCapabilitySiocModuleDescriptor(context.Background(), moid).CapabilitySiocModuleDescriptor(capabilitySiocModuleDescriptor).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilitySiocModuleDescriptor``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8660,7 +8660,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8697,7 +8697,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.UpdateCapabilitySiocModuleManufacturingDef(context.Background(), moid, capabilitySiocModuleManufacturingDef).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.UpdateCapabilitySiocModuleManufacturingDef(context.Background(), moid).CapabilitySiocModuleManufacturingDef(capabilitySiocModuleManufacturingDef).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilitySiocModuleManufacturingDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8732,7 +8732,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8769,7 +8769,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.UpdateCapabilitySwitchCapability(context.Background(), moid, capabilitySwitchCapability).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.UpdateCapabilitySwitchCapability(context.Background(), moid).CapabilitySwitchCapability(capabilitySwitchCapability).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilitySwitchCapability``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8804,7 +8804,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8841,7 +8841,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.UpdateCapabilitySwitchDescriptor(context.Background(), moid, capabilitySwitchDescriptor).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.UpdateCapabilitySwitchDescriptor(context.Background(), moid).CapabilitySwitchDescriptor(capabilitySwitchDescriptor).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilitySwitchDescriptor``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8876,7 +8876,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -8913,7 +8913,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CapabilityApi.UpdateCapabilitySwitchManufacturingDef(context.Background(), moid, capabilitySwitchManufacturingDef).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.CapabilityApi.UpdateCapabilitySwitchManufacturingDef(context.Background(), moid).CapabilitySwitchManufacturingDef(capabilitySwitchManufacturingDef).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `CapabilityApi.UpdateCapabilitySwitchManufacturingDef``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -8948,7 +8948,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 

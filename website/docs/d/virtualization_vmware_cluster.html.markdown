@@ -11,12 +11,12 @@ A real cluster of resources within a data center in VMware. A cluster is a conve
 A real cluster of resources within a data center in VMware. A cluster is a convenient grouping of resources such as Host, Datastore, etc.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `class_id`:(string) The concrete type of this complex type. Its value must be the same as the 'objectType' property.The OpenAPI document references this property as a discriminator value. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `datastore_count`:(int) Count of all datastores associated with this cluster. 
-* `hypervisor_type`:(string) Identifies the broad type of the underlying hypervisor.* `Unknown` - The type of the hypervisor is unknown.* `ESXi` - A Vmware ESXi hypervisor of any version.* `HXAP` - A Cisco HyperFlex Application Platform hypervisor. 
+* `hypervisor_type`:(string) Identifies the broad type of the underlying hypervisor.* `ESXi` - A Vmware ESXi hypervisor of any version.* `HXAP` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.* `Unknown` - The hypervisor running on the HyperFlex cluster is not known. 
 * `identity`:(string) The internally generated identity of this cluster. This entity is not manipulated by users. It aids in uniquely identifying the cluster object. In case of VMware, this is a MOR (managed object reference). 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The user-provided name for this cluster to facilitate identification. 
-* `object_type`:(string) The fully-qualified type of this managed object, i.e. the class name.This property is optional. The ObjectType is implied from the URL path.If specified, the value of objectType must match the class name specified in the URL path. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `status`:(string) Cluster health status as reported by the hypervisor platform.* `Unknown` - Entity status is unknown.* `Degraded` - State is degraded, and might impact normal operation of the entity.* `Critical` - Entity is in a critical state, impacting operations.* `Ok` - Entity status is in a stable state, operating normally. 
 * `total_cores`:(int) Total number of CPU cores in this cluster. It is a cumulative number across all hosts in the cluster. 

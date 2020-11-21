@@ -12,10 +12,10 @@ Maps a Cisco hardware model Series to its applicable hardware models.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `category`:(string) The category of the model series. 
-* `class_id`:(string) The concrete type of this complex type. Its value must be the same as the 'objectType' property.The OpenAPI document references this property as a discriminator value. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `dist_tag`:(string) The distributable tag value of the model series. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) An unique identifer for a capability descriptor. 
-* `object_type`:(string) The fully-qualified type of this managed object, i.e. the class name.This property is optional. The ObjectType is implied from the URL path.If specified, the value of objectType must match the class name specified in the URL path. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `regex_pattern`:(string) The regex that all images of this model follow. 
 * `series_id`:(string) Cisco hardware model series. 

@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "connector.CommandTerminalStream"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "connector.CommandTerminalStream"]
 **MsgType** | Pointer to **string** | The type of data this message contains. | [optional] 
 **Sequence** | Pointer to **int64** | Sequence of the message within a session to handle out-of-order delivery. | [optional] 
 **Stream** | Pointer to **string** | The input/output payload to/from the pseudo terminal session. When sent from the cloud service if the msgType is CommandInput stream is piped to stdin of the command or a resize message if msgType is CommandResize. From the device connector value is always the combined output of stdout &amp; stderr. | [optional] 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewConnectorCommandTerminalStreamAllOf
 
-`func NewConnectorCommandTerminalStreamAllOf() *ConnectorCommandTerminalStreamAllOf`
+`func NewConnectorCommandTerminalStreamAllOf(classId string, objectType string, ) *ConnectorCommandTerminalStreamAllOf`
 
 NewConnectorCommandTerminalStreamAllOf instantiates a new ConnectorCommandTerminalStreamAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewConnectorCommandTerminalStreamAllOfWithDefaults instantiates a new ConnectorCommandTerminalStreamAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *ConnectorCommandTerminalStreamAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *ConnectorCommandTerminalStreamAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *ConnectorCommandTerminalStreamAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *ConnectorCommandTerminalStreamAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *ConnectorCommandTerminalStreamAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *ConnectorCommandTerminalStreamAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetMsgType
 

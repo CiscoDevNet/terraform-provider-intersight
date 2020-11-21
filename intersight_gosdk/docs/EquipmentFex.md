@@ -4,9 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.Fex"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.Fex"]
 **DiscoveryState** | Pointer to **string** | Discovery state of IO card or fabric extender. | [optional] 
 **Fans** | Pointer to [**[]EquipmentFanRelationship**](equipment.Fan.Relationship.md) | An array of relationships to equipmentFan resources. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
+**Ioms** | Pointer to [**[]EquipmentIoCardRelationship**](equipment.IoCard.Relationship.md) | An array of relationships to equipmentIoCard resources. | [optional] [readonly] 
 **LocatorLed** | Pointer to [**EquipmentLocatorLedRelationship**](equipment.LocatorLed.Relationship.md) |  | [optional] 
 **NetworkElement** | Pointer to [**NetworkElementRelationship**](network.Element.Relationship.md) |  | [optional] 
 **Psus** | Pointer to [**[]EquipmentPsuRelationship**](equipment.Psu.Relationship.md) | An array of relationships to equipmentPsu resources. | [optional] [readonly] 
@@ -16,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewEquipmentFex
 
-`func NewEquipmentFex() *EquipmentFex`
+`func NewEquipmentFex(classId string, objectType string, ) *EquipmentFex`
 
 NewEquipmentFex instantiates a new EquipmentFex object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +33,46 @@ will change when the set of required properties is changed
 NewEquipmentFexWithDefaults instantiates a new EquipmentFex object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *EquipmentFex) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *EquipmentFex) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *EquipmentFex) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *EquipmentFex) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *EquipmentFex) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *EquipmentFex) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDiscoveryState
 
@@ -116,6 +159,41 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
+### GetIoms
+
+`func (o *EquipmentFex) GetIoms() []EquipmentIoCardRelationship`
+
+GetIoms returns the Ioms field if non-nil, zero value otherwise.
+
+### GetIomsOk
+
+`func (o *EquipmentFex) GetIomsOk() (*[]EquipmentIoCardRelationship, bool)`
+
+GetIomsOk returns a tuple with the Ioms field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIoms
+
+`func (o *EquipmentFex) SetIoms(v []EquipmentIoCardRelationship)`
+
+SetIoms sets Ioms field to given value.
+
+### HasIoms
+
+`func (o *EquipmentFex) HasIoms() bool`
+
+HasIoms returns a boolean if a field has been set.
+
+### SetIomsNil
+
+`func (o *EquipmentFex) SetIomsNil(b bool)`
+
+ SetIomsNil sets the value for Ioms to be an explicit nil
+
+### UnsetIoms
+`func (o *EquipmentFex) UnsetIoms()`
+
+UnsetIoms ensures that no value is present for Ioms, not even an explicit nil
 ### GetLocatorLed
 
 `func (o *EquipmentFex) GetLocatorLed() EquipmentLocatorLedRelationship`

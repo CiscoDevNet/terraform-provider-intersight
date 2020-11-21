@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "virtualization.CpuInfo"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.CpuInfo"]
 **Cores** | Pointer to **int64** | Number of cores per CPU, as reported by the manufacturer. | [optional] 
 **Description** | Pointer to **string** | The vendor provided description of the CPU. For example, Intel Xeon E5-2640 v3 @ 2.60GHz. | [optional] 
 **Sockets** | Pointer to **int64** | Number of CPU sockets available. | [optional] 
@@ -14,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewVirtualizationCpuInfo
 
-`func NewVirtualizationCpuInfo() *VirtualizationCpuInfo`
+`func NewVirtualizationCpuInfo(classId string, objectType string, ) *VirtualizationCpuInfo`
 
 NewVirtualizationCpuInfo instantiates a new VirtualizationCpuInfo object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +30,46 @@ will change when the set of required properties is changed
 NewVirtualizationCpuInfoWithDefaults instantiates a new VirtualizationCpuInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *VirtualizationCpuInfo) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *VirtualizationCpuInfo) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *VirtualizationCpuInfo) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *VirtualizationCpuInfo) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *VirtualizationCpuInfo) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *VirtualizationCpuInfo) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCores
 

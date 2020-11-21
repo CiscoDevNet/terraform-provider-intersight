@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ConfigStage** | Pointer to **string** | The current running stage of the configuration or workflow. | [optional] 
 **ConfigState** | Pointer to **string** | Indicates overall configuration state for applying the configuration to the end point. Values  -- Ok, Ok-with-warning, Errored. | [optional] 
 **ValidationState** | Pointer to **string** | Indicates overall state for logical model validation. Values  -- Ok, Ok-with-warning, Errored. | [optional] 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewPolicyAbstractConfigResult
 
-`func NewPolicyAbstractConfigResult() *PolicyAbstractConfigResult`
+`func NewPolicyAbstractConfigResult(classId string, objectType string, ) *PolicyAbstractConfigResult`
 
 NewPolicyAbstractConfigResult instantiates a new PolicyAbstractConfigResult object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewPolicyAbstractConfigResultWithDefaults instantiates a new PolicyAbstractConfigResult object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *PolicyAbstractConfigResult) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *PolicyAbstractConfigResult) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *PolicyAbstractConfigResult) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *PolicyAbstractConfigResult) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *PolicyAbstractConfigResult) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *PolicyAbstractConfigResult) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetConfigStage
 

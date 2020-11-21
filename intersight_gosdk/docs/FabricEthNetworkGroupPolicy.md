@@ -4,14 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**VlanSettings** | Pointer to [**FabricVlanSettings**](fabric.VlanSettings.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.EthNetworkGroupPolicy"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.EthNetworkGroupPolicy"]
+**VlanSettings** | Pointer to [**NullableFabricVlanSettings**](fabric.VlanSettings.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 
 ## Methods
 
 ### NewFabricEthNetworkGroupPolicy
 
-`func NewFabricEthNetworkGroupPolicy() *FabricEthNetworkGroupPolicy`
+`func NewFabricEthNetworkGroupPolicy(classId string, objectType string, ) *FabricEthNetworkGroupPolicy`
 
 NewFabricEthNetworkGroupPolicy instantiates a new FabricEthNetworkGroupPolicy object
 This constructor will assign default values to properties that have it defined,
@@ -25,6 +27,46 @@ will change when the set of required properties is changed
 NewFabricEthNetworkGroupPolicyWithDefaults instantiates a new FabricEthNetworkGroupPolicy object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *FabricEthNetworkGroupPolicy) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *FabricEthNetworkGroupPolicy) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *FabricEthNetworkGroupPolicy) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *FabricEthNetworkGroupPolicy) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *FabricEthNetworkGroupPolicy) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *FabricEthNetworkGroupPolicy) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetVlanSettings
 
@@ -51,6 +93,16 @@ SetVlanSettings sets VlanSettings field to given value.
 
 HasVlanSettings returns a boolean if a field has been set.
 
+### SetVlanSettingsNil
+
+`func (o *FabricEthNetworkGroupPolicy) SetVlanSettingsNil(b bool)`
+
+ SetVlanSettingsNil sets the value for VlanSettings to be an explicit nil
+
+### UnsetVlanSettings
+`func (o *FabricEthNetworkGroupPolicy) UnsetVlanSettings()`
+
+UnsetVlanSettings ensures that no value is present for VlanSettings, not even an explicit nil
 ### GetOrganization
 
 `func (o *FabricEthNetworkGroupPolicy) GetOrganization() OrganizationOrganizationRelationship`

@@ -11,14 +11,14 @@ This represents Fan module housing multiple fans for chassis/server.
 This represents Fan module housing multiple fans for chassis/server.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `class_id`:(string) The concrete type of this complex type. Its value must be the same as the 'objectType' property.The OpenAPI document references this property as a discriminator value. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `description`:(string) This field is to provide description for the fan module. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `model`:(string) This field identifies the model of the given component. 
 * `module_id`:(int) This field acts as the identifier for this particular Module, within the Fabric Interconnect. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified type of this managed object, i.e. the class name.This property is optional. The ObjectType is implied from the URL path.If specified, the value of objectType must match the class name specified in the URL path. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `oper_state`:(string) This field is used to indicate this fan module's operational state. 
 * `part_number`:(string) This field identifies the Part Number for this Fan Module. 
 * `pid`:(string) This field identifies the Product ID for the fan module. 

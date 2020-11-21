@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "adapter.Unit"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "adapter.Unit"]
 **AdapterId** | Pointer to **string** | Unique Identifier of an adapter Unit within a Rack Interface. | [optional] [readonly] 
 **BaseMacAddress** | Pointer to **string** | Original Base Mac address of an adapter unit. | [optional] [readonly] 
 **ConnectionStatus** | Pointer to **string** | Connectivity Status of adapter - A or B or AB. | [optional] [readonly] 
@@ -30,7 +32,7 @@ Name | Type | Description | Notes
 
 ### NewAdapterUnit
 
-`func NewAdapterUnit() *AdapterUnit`
+`func NewAdapterUnit(classId string, objectType string, ) *AdapterUnit`
 
 NewAdapterUnit instantiates a new AdapterUnit object
 This constructor will assign default values to properties that have it defined,
@@ -44,6 +46,46 @@ will change when the set of required properties is changed
 NewAdapterUnitWithDefaults instantiates a new AdapterUnit object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *AdapterUnit) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *AdapterUnit) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *AdapterUnit) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *AdapterUnit) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *AdapterUnit) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *AdapterUnit) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAdapterId
 

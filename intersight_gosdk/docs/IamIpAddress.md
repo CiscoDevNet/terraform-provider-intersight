@@ -4,7 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Address** | Pointer to **string** | The Trusted IP range&#39;s address. IP address, CIDR range, and IP address range formats are supported. For example ’12.13.14.15’, ’12.13.14.0/24’, and ’12.13.14.15-12.13.14.200’. Reserved IP ranges ‘127.0.0.1, ‘10.0.0.0/8’, ‘172.16.0.0/12’, and ‘192.168.0.0/16’ are not allowed. | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.IpAddress"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.IpAddress"]
+**Address** | Pointer to **string** | The Trusted IP range&#39;s address. IP address, CIDR range, and IP address range formats are supported. For example &#39;12.13.14.15&#39;, &#39;12.13.14.0/24&#39;, and &#39;12.13.14.15-12.13.14.200&#39;. Reserved IP ranges &#39;127.0.0.1&#39;, &#39;10.0.0.0/8&#39;, &#39;172.16.0.0/12&#39;, and &#39;192.168.0.0/16&#39; are not allowed. | [optional] 
 **Description** | Pointer to **string** | Description of Trusted IP address range. | [optional] 
 **IpAccessManagement** | Pointer to [**IamIpAccessManagementRelationship**](iam.IpAccessManagement.Relationship.md) |  | [optional] 
 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewIamIpAddress
 
-`func NewIamIpAddress() *IamIpAddress`
+`func NewIamIpAddress(classId string, objectType string, ) *IamIpAddress`
 
 NewIamIpAddress instantiates a new IamIpAddress object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewIamIpAddressWithDefaults instantiates a new IamIpAddress object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *IamIpAddress) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IamIpAddress) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IamIpAddress) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IamIpAddress) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IamIpAddress) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IamIpAddress) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAddress
 

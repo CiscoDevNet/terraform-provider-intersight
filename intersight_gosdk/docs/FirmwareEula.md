@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.Eula"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.Eula"]
 **Accepted** | Pointer to **bool** | EULA acceptance status for the account. | [optional] [readonly] 
 **Content** | Pointer to **string** | EULA acceptance form content provided by cisco.com. | [optional] [readonly] 
 **Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewFirmwareEula
 
-`func NewFirmwareEula() *FirmwareEula`
+`func NewFirmwareEula(classId string, objectType string, ) *FirmwareEula`
 
 NewFirmwareEula instantiates a new FirmwareEula object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewFirmwareEulaWithDefaults instantiates a new FirmwareEula object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *FirmwareEula) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *FirmwareEula) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *FirmwareEula) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *FirmwareEula) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *FirmwareEula) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *FirmwareEula) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAccepted
 

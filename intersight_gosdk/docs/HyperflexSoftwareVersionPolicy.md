@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.SoftwareVersionPolicy"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.SoftwareVersionPolicy"]
 **HxdpVersion** | Pointer to **string** | Desired HyperFlex Data Platform software version to apply on the HyperFlex cluster. | [optional] 
 **HypervisorVersion** | Pointer to **string** | Desired  hypervisor version to apply for all the nodes on the HyperFlex cluster. | [optional] 
 **ServerFirmwareVersion** | Pointer to **string** | Desired server firmware version to apply on the HyperFlex Cluster. | [optional] 
@@ -18,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewHyperflexSoftwareVersionPolicy
 
-`func NewHyperflexSoftwareVersionPolicy() *HyperflexSoftwareVersionPolicy`
+`func NewHyperflexSoftwareVersionPolicy(classId string, objectType string, ) *HyperflexSoftwareVersionPolicy`
 
 NewHyperflexSoftwareVersionPolicy instantiates a new HyperflexSoftwareVersionPolicy object
 This constructor will assign default values to properties that have it defined,
@@ -32,6 +34,46 @@ will change when the set of required properties is changed
 NewHyperflexSoftwareVersionPolicyWithDefaults instantiates a new HyperflexSoftwareVersionPolicy object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *HyperflexSoftwareVersionPolicy) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *HyperflexSoftwareVersionPolicy) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *HyperflexSoftwareVersionPolicy) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *HyperflexSoftwareVersionPolicy) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *HyperflexSoftwareVersionPolicy) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *HyperflexSoftwareVersionPolicy) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetHxdpVersion
 
@@ -133,6 +175,16 @@ SetUpgradeTypes sets UpgradeTypes field to given value.
 
 HasUpgradeTypes returns a boolean if a field has been set.
 
+### SetUpgradeTypesNil
+
+`func (o *HyperflexSoftwareVersionPolicy) SetUpgradeTypesNil(b bool)`
+
+ SetUpgradeTypesNil sets the value for UpgradeTypes to be an explicit nil
+
+### UnsetUpgradeTypes
+`func (o *HyperflexSoftwareVersionPolicy) UnsetUpgradeTypes()`
+
+UnsetUpgradeTypes ensures that no value is present for UpgradeTypes, not even an explicit nil
 ### GetClusterProfiles
 
 `func (o *HyperflexSoftwareVersionPolicy) GetClusterProfiles() []HyperflexClusterProfileRelationship`

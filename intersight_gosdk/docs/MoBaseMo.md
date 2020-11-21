@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **AccountMoid** | Pointer to **string** | The Account ID for this managed object. | [optional] [readonly] 
-**ClassId** | **string** | The concrete type of this complex type. Its value must be the same as the &#39;objectType&#39; property. The OpenAPI document references this property as a discriminator value. | [readonly] 
 **CreateTime** | Pointer to [**time.Time**](time.Time.md) | The time when this managed object was created. | [optional] [readonly] 
 **DomainGroupMoid** | Pointer to **string** | The DomainGroup ID for this managed object. | [optional] [readonly] 
 **ModTime** | Pointer to [**time.Time**](time.Time.md) | The time when this managed object was last modified. | [optional] [readonly] 
 **Moid** | Pointer to **string** | The unique identifier of this Managed Object instance. | [optional] 
-**ObjectType** | **string** | The fully-qualified type of this managed object, i.e. the class name. This property is optional. The ObjectType is implied from the URL path. If specified, the value of objectType must match the class name specified in the URL path. | [readonly] 
 **Owners** | Pointer to **[]string** |  | [optional] 
 **SharedScope** | Pointer to **string** | Intersight provides pre-built workflows, tasks and policies to end users through global catalogs. Objects that are made available through global catalogs are said to have a &#39;shared&#39; ownership. Shared objects are either made globally available to all end users or restricted to end users based on their license entitlement. Users can use this property to differentiate the scope (global or a specific license tier) to which a shared MO belongs. | [optional] [readonly] 
 **Tags** | Pointer to [**[]MoTag**](mo.Tag.md) |  | [optional] 
-**VersionContext** | Pointer to [**MoVersionContext**](mo.VersionContext.md) |  | [optional] 
+**VersionContext** | Pointer to [**NullableMoVersionContext**](mo.VersionContext.md) |  | [optional] 
 **Ancestors** | Pointer to [**[]MoBaseMoRelationship**](mo.BaseMo.Relationship.md) | An array of relationships to moBaseMo resources. | [optional] [readonly] 
 **Parent** | Pointer to [**MoBaseMoRelationship**](mo.BaseMo.Relationship.md) |  | [optional] 
 **PermissionResources** | Pointer to [**[]MoBaseMoRelationship**](mo.BaseMo.Relationship.md) | An array of relationships to moBaseMo resources. | [optional] [readonly] 
@@ -38,6 +38,46 @@ will change when the set of required properties is changed
 NewMoBaseMoWithDefaults instantiates a new MoBaseMo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *MoBaseMo) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *MoBaseMo) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *MoBaseMo) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *MoBaseMo) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *MoBaseMo) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *MoBaseMo) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAccountMoid
 
@@ -63,26 +103,6 @@ SetAccountMoid sets AccountMoid field to given value.
 `func (o *MoBaseMo) HasAccountMoid() bool`
 
 HasAccountMoid returns a boolean if a field has been set.
-
-### GetClassId
-
-`func (o *MoBaseMo) GetClassId() string`
-
-GetClassId returns the ClassId field if non-nil, zero value otherwise.
-
-### GetClassIdOk
-
-`func (o *MoBaseMo) GetClassIdOk() (*string, bool)`
-
-GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetClassId
-
-`func (o *MoBaseMo) SetClassId(v string)`
-
-SetClassId sets ClassId field to given value.
-
 
 ### GetCreateTime
 
@@ -184,26 +204,6 @@ SetMoid sets Moid field to given value.
 
 HasMoid returns a boolean if a field has been set.
 
-### GetObjectType
-
-`func (o *MoBaseMo) GetObjectType() string`
-
-GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
-
-### GetObjectTypeOk
-
-`func (o *MoBaseMo) GetObjectTypeOk() (*string, bool)`
-
-GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetObjectType
-
-`func (o *MoBaseMo) SetObjectType(v string)`
-
-SetObjectType sets ObjectType field to given value.
-
-
 ### GetOwners
 
 `func (o *MoBaseMo) GetOwners() []string`
@@ -229,6 +229,16 @@ SetOwners sets Owners field to given value.
 
 HasOwners returns a boolean if a field has been set.
 
+### SetOwnersNil
+
+`func (o *MoBaseMo) SetOwnersNil(b bool)`
+
+ SetOwnersNil sets the value for Owners to be an explicit nil
+
+### UnsetOwners
+`func (o *MoBaseMo) UnsetOwners()`
+
+UnsetOwners ensures that no value is present for Owners, not even an explicit nil
 ### GetSharedScope
 
 `func (o *MoBaseMo) GetSharedScope() string`
@@ -279,6 +289,16 @@ SetTags sets Tags field to given value.
 
 HasTags returns a boolean if a field has been set.
 
+### SetTagsNil
+
+`func (o *MoBaseMo) SetTagsNil(b bool)`
+
+ SetTagsNil sets the value for Tags to be an explicit nil
+
+### UnsetTags
+`func (o *MoBaseMo) UnsetTags()`
+
+UnsetTags ensures that no value is present for Tags, not even an explicit nil
 ### GetVersionContext
 
 `func (o *MoBaseMo) GetVersionContext() MoVersionContext`
@@ -304,6 +324,16 @@ SetVersionContext sets VersionContext field to given value.
 
 HasVersionContext returns a boolean if a field has been set.
 
+### SetVersionContextNil
+
+`func (o *MoBaseMo) SetVersionContextNil(b bool)`
+
+ SetVersionContextNil sets the value for VersionContext to be an explicit nil
+
+### UnsetVersionContext
+`func (o *MoBaseMo) UnsetVersionContext()`
+
+UnsetVersionContext ensures that no value is present for VersionContext, not even an explicit nil
 ### GetAncestors
 
 `func (o *MoBaseMo) GetAncestors() []MoBaseMoRelationship`

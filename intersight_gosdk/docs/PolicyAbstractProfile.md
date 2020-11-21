@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **Description** | Pointer to **string** | Description of the profile. | [optional] 
 **Name** | Pointer to **string** | Name of the concrete profile. | [optional] 
 **Type** | Pointer to **string** | Defines the type of the profile. Accepted value is instance. * &#x60;instance&#x60; - The profile defines the configuration for a specific instance of a target. | [optional] [default to "instance"]
@@ -13,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewPolicyAbstractProfile
 
-`func NewPolicyAbstractProfile() *PolicyAbstractProfile`
+`func NewPolicyAbstractProfile(classId string, objectType string, ) *PolicyAbstractProfile`
 
 NewPolicyAbstractProfile instantiates a new PolicyAbstractProfile object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewPolicyAbstractProfileWithDefaults instantiates a new PolicyAbstractProfile object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *PolicyAbstractProfile) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *PolicyAbstractProfile) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *PolicyAbstractProfile) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *PolicyAbstractProfile) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *PolicyAbstractProfile) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *PolicyAbstractProfile) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDescription
 

@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.PortMode"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.PortMode"]
 **CustomMode** | Pointer to **string** | Custom Port Mode specified for the port range. * &#x60;FibreChannel&#x60; - Fibre Channel Port Types. * &#x60;BreakoutEthernet10G&#x60; - Breakout Ethernet 10G Port Type. * &#x60;BreakoutEthernet25G&#x60; - Breakout Ethernet 25G Port Type. | [optional] [default to "FibreChannel"]
 **PortIdEnd** | Pointer to **int64** | Ending range of the Port Identifier. | [optional] 
 **PortIdStart** | Pointer to **int64** | Starting range of the Port Identifier. | [optional] 
@@ -14,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewFabricPortModeAllOf
 
-`func NewFabricPortModeAllOf() *FabricPortModeAllOf`
+`func NewFabricPortModeAllOf(classId string, objectType string, ) *FabricPortModeAllOf`
 
 NewFabricPortModeAllOf instantiates a new FabricPortModeAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +30,46 @@ will change when the set of required properties is changed
 NewFabricPortModeAllOfWithDefaults instantiates a new FabricPortModeAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *FabricPortModeAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *FabricPortModeAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *FabricPortModeAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *FabricPortModeAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *FabricPortModeAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *FabricPortModeAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCustomMode
 

@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.Tpm"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.Tpm"]
 **ActivationStatus** | Pointer to **string** | Identifies the activation status of the TPM. | [optional] [readonly] 
 **AdminState** | Pointer to **string** | Identifies the admin configured state of the TPM. | [optional] [readonly] 
 **Ownership** | Pointer to **string** | Identifies the ownership information of the TPM. | [optional] [readonly] 
@@ -18,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewEquipmentTpmAllOf
 
-`func NewEquipmentTpmAllOf() *EquipmentTpmAllOf`
+`func NewEquipmentTpmAllOf(classId string, objectType string, ) *EquipmentTpmAllOf`
 
 NewEquipmentTpmAllOf instantiates a new EquipmentTpmAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -32,6 +34,46 @@ will change when the set of required properties is changed
 NewEquipmentTpmAllOfWithDefaults instantiates a new EquipmentTpmAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *EquipmentTpmAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *EquipmentTpmAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *EquipmentTpmAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *EquipmentTpmAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *EquipmentTpmAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *EquipmentTpmAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetActivationStatus
 

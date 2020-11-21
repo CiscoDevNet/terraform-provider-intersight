@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.PermissionReference"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.PermissionReference"]
 **PermissionIdentifier** | Pointer to **string** | MOID of the permission which user has access to. | [optional] [readonly] 
 **PermissionName** | Pointer to **string** | Name of the permission which user has access to. | [optional] [readonly] 
 
@@ -11,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewIamPermissionReferenceAllOf
 
-`func NewIamPermissionReferenceAllOf() *IamPermissionReferenceAllOf`
+`func NewIamPermissionReferenceAllOf(classId string, objectType string, ) *IamPermissionReferenceAllOf`
 
 NewIamPermissionReferenceAllOf instantiates a new IamPermissionReferenceAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -25,6 +27,46 @@ will change when the set of required properties is changed
 NewIamPermissionReferenceAllOfWithDefaults instantiates a new IamPermissionReferenceAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *IamPermissionReferenceAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IamPermissionReferenceAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IamPermissionReferenceAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IamPermissionReferenceAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IamPermissionReferenceAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IamPermissionReferenceAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetPermissionIdentifier
 

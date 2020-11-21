@@ -4,11 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "virtualization.VmwareHost"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.VmwareHost"]
 **BootTime** | Pointer to [**time.Time**](time.Time.md) | The time when this host booted up. | [optional] 
 **ConnectionState** | Pointer to **string** | Indicates if the host is connected to the vCenter. Values are connected, not connected. | [optional] 
 **HwPowerState** | Pointer to **string** | Is the host Powered-up or Powered-down. * &#x60;Unknown&#x60; - The entity&#39;s power state is unknown. * &#x60;PoweredOn&#x60; - The entity is powered on. * &#x60;PoweredOff&#x60; - The entity is powered down. * &#x60;StandBy&#x60; - The entity is in standby mode. * &#x60;Paused&#x60; - The entity is in pause state. | [optional] [default to "Unknown"]
 **NetworkAdapterCount** | Pointer to **int64** | The count of all network adapters attached to this host. | [optional] 
-**ResourceConsumed** | Pointer to [**VirtualizationVmwareResourceConsumption**](virtualization.VmwareResourceConsumption.md) |  | [optional] 
+**ResourceConsumed** | Pointer to [**NullableVirtualizationVmwareResourceConsumption**](virtualization.VmwareResourceConsumption.md) |  | [optional] 
 **StorageAdapterCount** | Pointer to **int64** | The count of all storage adapters attached to this host. | [optional] 
 **VcenterHostId** | Pointer to **string** | The identity of this host within vCenter (optional). | [optional] 
 **Cluster** | Pointer to [**VirtualizationVmwareClusterRelationship**](virtualization.VmwareCluster.Relationship.md) |  | [optional] 
@@ -19,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewVirtualizationVmwareHost
 
-`func NewVirtualizationVmwareHost() *VirtualizationVmwareHost`
+`func NewVirtualizationVmwareHost(classId string, objectType string, ) *VirtualizationVmwareHost`
 
 NewVirtualizationVmwareHost instantiates a new VirtualizationVmwareHost object
 This constructor will assign default values to properties that have it defined,
@@ -33,6 +35,46 @@ will change when the set of required properties is changed
 NewVirtualizationVmwareHostWithDefaults instantiates a new VirtualizationVmwareHost object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *VirtualizationVmwareHost) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *VirtualizationVmwareHost) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *VirtualizationVmwareHost) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *VirtualizationVmwareHost) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *VirtualizationVmwareHost) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *VirtualizationVmwareHost) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetBootTime
 
@@ -159,6 +201,16 @@ SetResourceConsumed sets ResourceConsumed field to given value.
 
 HasResourceConsumed returns a boolean if a field has been set.
 
+### SetResourceConsumedNil
+
+`func (o *VirtualizationVmwareHost) SetResourceConsumedNil(b bool)`
+
+ SetResourceConsumedNil sets the value for ResourceConsumed to be an explicit nil
+
+### UnsetResourceConsumed
+`func (o *VirtualizationVmwareHost) UnsetResourceConsumed()`
+
+UnsetResourceConsumed ensures that no value is present for ResourceConsumed, not even an explicit nil
 ### GetStorageAdapterCount
 
 `func (o *VirtualizationVmwareHost) GetStorageAdapterCount() int64`

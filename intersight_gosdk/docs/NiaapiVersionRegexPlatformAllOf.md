@@ -4,17 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niaapi.VersionRegexPlatform"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niaapi.VersionRegexPlatform"]
 **Anyllregex** | Pointer to **string** | All long live version Regex pattern. | [optional] 
-**Currentlltrain** | Pointer to [**NiaapiSoftwareRegex**](niaapi.SoftwareRegex.md) |  | [optional] 
-**Latestsltrain** | Pointer to [**NiaapiSoftwareRegex**](niaapi.SoftwareRegex.md) |  | [optional] 
+**Currentlltrain** | Pointer to [**NullableNiaapiSoftwareRegex**](niaapi.SoftwareRegex.md) |  | [optional] 
+**Latestsltrain** | Pointer to [**NullableNiaapiSoftwareRegex**](niaapi.SoftwareRegex.md) |  | [optional] 
 **Sltrain** | Pointer to [**[]NiaapiSoftwareRegex**](niaapi.SoftwareRegex.md) |  | [optional] 
-**Upcominglltrain** | Pointer to [**NiaapiSoftwareRegex**](niaapi.SoftwareRegex.md) |  | [optional] 
+**Upcominglltrain** | Pointer to [**NullableNiaapiSoftwareRegex**](niaapi.SoftwareRegex.md) |  | [optional] 
 
 ## Methods
 
 ### NewNiaapiVersionRegexPlatformAllOf
 
-`func NewNiaapiVersionRegexPlatformAllOf() *NiaapiVersionRegexPlatformAllOf`
+`func NewNiaapiVersionRegexPlatformAllOf(classId string, objectType string, ) *NiaapiVersionRegexPlatformAllOf`
 
 NewNiaapiVersionRegexPlatformAllOf instantiates a new NiaapiVersionRegexPlatformAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +30,46 @@ will change when the set of required properties is changed
 NewNiaapiVersionRegexPlatformAllOfWithDefaults instantiates a new NiaapiVersionRegexPlatformAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *NiaapiVersionRegexPlatformAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *NiaapiVersionRegexPlatformAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *NiaapiVersionRegexPlatformAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *NiaapiVersionRegexPlatformAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *NiaapiVersionRegexPlatformAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *NiaapiVersionRegexPlatformAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAnyllregex
 
@@ -79,6 +121,16 @@ SetCurrentlltrain sets Currentlltrain field to given value.
 
 HasCurrentlltrain returns a boolean if a field has been set.
 
+### SetCurrentlltrainNil
+
+`func (o *NiaapiVersionRegexPlatformAllOf) SetCurrentlltrainNil(b bool)`
+
+ SetCurrentlltrainNil sets the value for Currentlltrain to be an explicit nil
+
+### UnsetCurrentlltrain
+`func (o *NiaapiVersionRegexPlatformAllOf) UnsetCurrentlltrain()`
+
+UnsetCurrentlltrain ensures that no value is present for Currentlltrain, not even an explicit nil
 ### GetLatestsltrain
 
 `func (o *NiaapiVersionRegexPlatformAllOf) GetLatestsltrain() NiaapiSoftwareRegex`
@@ -104,6 +156,16 @@ SetLatestsltrain sets Latestsltrain field to given value.
 
 HasLatestsltrain returns a boolean if a field has been set.
 
+### SetLatestsltrainNil
+
+`func (o *NiaapiVersionRegexPlatformAllOf) SetLatestsltrainNil(b bool)`
+
+ SetLatestsltrainNil sets the value for Latestsltrain to be an explicit nil
+
+### UnsetLatestsltrain
+`func (o *NiaapiVersionRegexPlatformAllOf) UnsetLatestsltrain()`
+
+UnsetLatestsltrain ensures that no value is present for Latestsltrain, not even an explicit nil
 ### GetSltrain
 
 `func (o *NiaapiVersionRegexPlatformAllOf) GetSltrain() []NiaapiSoftwareRegex`
@@ -129,6 +191,16 @@ SetSltrain sets Sltrain field to given value.
 
 HasSltrain returns a boolean if a field has been set.
 
+### SetSltrainNil
+
+`func (o *NiaapiVersionRegexPlatformAllOf) SetSltrainNil(b bool)`
+
+ SetSltrainNil sets the value for Sltrain to be an explicit nil
+
+### UnsetSltrain
+`func (o *NiaapiVersionRegexPlatformAllOf) UnsetSltrain()`
+
+UnsetSltrain ensures that no value is present for Sltrain, not even an explicit nil
 ### GetUpcominglltrain
 
 `func (o *NiaapiVersionRegexPlatformAllOf) GetUpcominglltrain() NiaapiSoftwareRegex`
@@ -154,6 +226,16 @@ SetUpcominglltrain sets Upcominglltrain field to given value.
 
 HasUpcominglltrain returns a boolean if a field has been set.
 
+### SetUpcominglltrainNil
+
+`func (o *NiaapiVersionRegexPlatformAllOf) SetUpcominglltrainNil(b bool)`
+
+ SetUpcominglltrainNil sets the value for Upcominglltrain to be an explicit nil
+
+### UnsetUpcominglltrain
+`func (o *NiaapiVersionRegexPlatformAllOf) UnsetUpcominglltrain()`
+
+UnsetUpcominglltrain ensures that no value is present for Upcominglltrain, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

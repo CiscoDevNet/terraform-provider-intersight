@@ -30,7 +30,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -42,7 +42,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -83,7 +83,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -95,7 +95,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -113,13 +113,19 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 				ForceNew:   true,
 			},
 			"class_id": {
-				Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
 			},
 			"cleanup_time": {
 				Description: "The time when the workflow info will be removed from database.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"email": {
+				Description: "The email address of the user who started this workflow.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -172,7 +178,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -183,7 +189,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -219,7 +225,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 				ForceNew:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified type of this managed object, i.e. the class name.\nThis property is optional. The ObjectType is implied from the URL path.\nIf specified, the value of objectType must match the class name specified in the URL path.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -237,7 +243,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -249,7 +255,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -288,7 +294,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -300,7 +306,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -336,7 +342,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -348,7 +354,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -376,7 +382,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -388,7 +394,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -424,13 +430,13 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -440,6 +446,12 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							Type:        schema.TypeBool,
 							Optional:    true,
 							ForceNew:    true,
+						},
+						"rollback_action": {
+							Description: "Status of rollback for this workflow instance. The rollback action of the workflow can be enabled, disabled, completed.\n* `Disabled` - Status of the rollback action when workflow is disabled for rollback.\n* `Enabled` - Status of the rollback action when workflow is enabled for rollback.\n* `Completed` - Status of the rollback action once workflow completes the rollback for all eligiable tasks.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
 						},
 					},
 				},
@@ -510,7 +522,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -522,7 +534,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -546,6 +558,12 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 			"type": {
 				Description: "A type of the workflow (serverconfig, ansible_monitoring).",
 				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"user_action_required": {
+				Description: "Property will be set when an user action is required on the workflow. This can be because the workflow is waiting for a wait task to be updated, workflow is paused or workflow launched by a configuration object has failed and needs to be retried in order to complete successfully.",
+				Type:        schema.TypeBool,
 				Optional:    true,
 				Computed:    true,
 			},
@@ -575,7 +593,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -593,7 +611,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 										DiffSuppressFunc: SuppressDiffAdditionProps,
 									},
 									"class_id": {
-										Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
@@ -614,7 +632,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 										Optional:    true,
 									},
 									"object_type": {
-										Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
@@ -625,7 +643,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							Computed:   true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -641,13 +659,13 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 										DiffSuppressFunc: SuppressDiffAdditionProps,
 									},
 									"class_id": {
-										Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
 									},
 									"object_type": {
-										Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
@@ -671,6 +689,12 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							},
 							ConfigMode: schema.SchemaConfigModeAttr,
 							Computed:   true,
+						},
+						"workflow_meta_name": {
+							Description: "The name of workflowMeta of the workflow running.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							ForceNew:    true,
 						},
 						"workflow_subtype": {
 							Description: "The subtype of the workflow.",
@@ -702,7 +726,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -714,7 +738,7 @@ func resourceWorkflowWorkflowInfo() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -857,6 +881,11 @@ func resourceWorkflowWorkflowInfoCreate(d *schema.ResourceData, meta interface{}
 	if v, ok := d.GetOk("cleanup_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetCleanupTime(x)
+	}
+
+	if v, ok := d.GetOk("email"); ok {
+		x := (v.(string))
+		o.SetEmail(x)
 	}
 
 	if v, ok := d.GetOk("end_time"); ok {
@@ -1164,6 +1193,12 @@ func resourceWorkflowWorkflowInfoCreate(d *schema.ResourceData, meta interface{}
 					o.SetRetryable(x)
 				}
 			}
+			if v, ok := l["rollback_action"]; ok {
+				{
+					x := (v.(string))
+					o.SetRollbackAction(x)
+				}
+			}
 			p = append(p, *o)
 		}
 		if len(p) > 0 {
@@ -1282,6 +1317,11 @@ func resourceWorkflowWorkflowInfoCreate(d *schema.ResourceData, meta interface{}
 	if v, ok := d.GetOk("type"); ok {
 		x := (v.(string))
 		o.SetType(x)
+	}
+
+	if v, ok := d.GetOkExists("user_action_required"); ok {
+		x := v.(bool)
+		o.SetUserActionRequired(x)
 	}
 
 	if v, ok := d.GetOk("user_id"); ok {
@@ -1416,6 +1456,12 @@ func resourceWorkflowWorkflowInfoCreate(d *schema.ResourceData, meta interface{}
 					}
 				}
 			}
+			if v, ok := l["workflow_meta_name"]; ok {
+				{
+					x := (v.(string))
+					o.SetWorkflowMetaName(x)
+				}
+			}
 			if v, ok := l["workflow_subtype"]; ok {
 				{
 					x := (v.(string))
@@ -1535,6 +1581,10 @@ func resourceWorkflowWorkflowInfoRead(d *schema.ResourceData, meta interface{}) 
 		return fmt.Errorf("error occurred while setting property CleanupTime: %+v", err)
 	}
 
+	if err := d.Set("email", (s.GetEmail())); err != nil {
+		return fmt.Errorf("error occurred while setting property Email: %+v", err)
+	}
+
 	if err := d.Set("end_time", (s.GetEndTime()).String()); err != nil {
 		return fmt.Errorf("error occurred while setting property EndTime: %+v", err)
 	}
@@ -1647,6 +1697,10 @@ func resourceWorkflowWorkflowInfoRead(d *schema.ResourceData, meta interface{}) 
 		return fmt.Errorf("error occurred while setting property Type: %+v", err)
 	}
 
+	if err := d.Set("user_action_required", (s.GetUserActionRequired())); err != nil {
+		return fmt.Errorf("error occurred while setting property UserActionRequired: %+v", err)
+	}
+
 	if err := d.Set("user_id", (s.GetUserId())); err != nil {
 		return fmt.Errorf("error occurred while setting property UserId: %+v", err)
 	}
@@ -1680,14 +1734,14 @@ func resourceWorkflowWorkflowInfoUpdate(d *schema.ResourceData, meta interface{}
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-	var o = models.NewWorkflowWorkflowInfoWithDefaults()
+	var o = &models.WorkflowWorkflowInfo{}
 	if d.HasChange("account") {
 		v := d.Get("account")
 		p := make([]models.IamAccountRelationship, 0, 1)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
+			o := &models.MoMoRef{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1747,7 +1801,7 @@ func resourceWorkflowWorkflowInfoUpdate(d *schema.ResourceData, meta interface{}
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
+			o := &models.MoMoRef{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1793,6 +1847,12 @@ func resourceWorkflowWorkflowInfoUpdate(d *schema.ResourceData, meta interface{}
 		o.SetCleanupTime(x)
 	}
 
+	if d.HasChange("email") {
+		v := d.Get("email")
+		x := (v.(string))
+		o.SetEmail(x)
+	}
+
 	if d.HasChange("end_time") {
 		v := d.Get("end_time")
 		x, _ := time.Parse(v.(string), time.RFC1123)
@@ -1834,7 +1894,7 @@ func resourceWorkflowWorkflowInfoUpdate(d *schema.ResourceData, meta interface{}
 		x := make([]models.WorkflowMessage, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := models.NewWorkflowMessageWithDefaults()
+			o := &models.WorkflowMessage{}
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -1898,7 +1958,7 @@ func resourceWorkflowWorkflowInfoUpdate(d *schema.ResourceData, meta interface{}
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
+			o := &models.MoMoRef{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1948,7 +2008,7 @@ func resourceWorkflowWorkflowInfoUpdate(d *schema.ResourceData, meta interface{}
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
+			o := &models.MoMoRef{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -1998,7 +2058,7 @@ func resourceWorkflowWorkflowInfoUpdate(d *schema.ResourceData, meta interface{}
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
+			o := &models.MoMoRef{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -2042,7 +2102,7 @@ func resourceWorkflowWorkflowInfoUpdate(d *schema.ResourceData, meta interface{}
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
+			o := &models.MoMoRef{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -2092,7 +2152,7 @@ func resourceWorkflowWorkflowInfoUpdate(d *schema.ResourceData, meta interface{}
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewWorkflowWorkflowInfoPropertiesWithDefaults()
+			o := &models.WorkflowWorkflowInfoProperties{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -2114,6 +2174,12 @@ func resourceWorkflowWorkflowInfoUpdate(d *schema.ResourceData, meta interface{}
 				{
 					x := (v.(bool))
 					o.SetRetryable(x)
+				}
+			}
+			if v, ok := l["rollback_action"]; ok {
+				{
+					x := (v.(string))
+					o.SetRollbackAction(x)
 				}
 			}
 			p = append(p, *o)
@@ -2159,7 +2225,7 @@ func resourceWorkflowWorkflowInfoUpdate(d *schema.ResourceData, meta interface{}
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := models.NewMoTagWithDefaults()
+			o := &models.MoTag{}
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -2195,7 +2261,7 @@ func resourceWorkflowWorkflowInfoUpdate(d *schema.ResourceData, meta interface{}
 		x := make([]models.WorkflowTaskInfoRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
+			o := &models.MoMoRef{}
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -2245,6 +2311,12 @@ func resourceWorkflowWorkflowInfoUpdate(d *schema.ResourceData, meta interface{}
 		o.SetType(x)
 	}
 
+	if d.HasChange("user_action_required") {
+		v := d.Get("user_action_required")
+		x := (v.(bool))
+		o.SetUserActionRequired(x)
+	}
+
 	if d.HasChange("user_id") {
 		v := d.Get("user_id")
 		x := (v.(string))
@@ -2263,7 +2335,7 @@ func resourceWorkflowWorkflowInfoUpdate(d *schema.ResourceData, meta interface{}
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewWorkflowWorkflowCtxWithDefaults()
+			o := &models.WorkflowWorkflowCtx{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -2380,6 +2452,12 @@ func resourceWorkflowWorkflowInfoUpdate(d *schema.ResourceData, meta interface{}
 					}
 				}
 			}
+			if v, ok := l["workflow_meta_name"]; ok {
+				{
+					x := (v.(string))
+					o.SetWorkflowMetaName(x)
+				}
+			}
 			if v, ok := l["workflow_subtype"]; ok {
 				{
 					x := (v.(string))
@@ -2406,7 +2484,7 @@ func resourceWorkflowWorkflowInfoUpdate(d *schema.ResourceData, meta interface{}
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
+			o := &models.MoMoRef{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))

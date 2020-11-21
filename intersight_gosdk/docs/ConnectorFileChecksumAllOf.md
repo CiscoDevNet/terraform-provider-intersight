@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "connector.FileChecksum"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "connector.FileChecksum"]
 **Hash** | Pointer to **string** | The calculated hash of the contents using the algorithm. | [optional] 
 **HashAlgorithm** | Pointer to **string** | The hash algorithm used to calculate the checksum. * &#x60;crc&#x60; - A CRC hash as definded by RFC 3385. Generated with the IEEE polynomial. * &#x60;sha256&#x60; - A SHA256 hash as defined by RFC 4634. | [optional] [default to "crc"]
 
@@ -11,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewConnectorFileChecksumAllOf
 
-`func NewConnectorFileChecksumAllOf() *ConnectorFileChecksumAllOf`
+`func NewConnectorFileChecksumAllOf(classId string, objectType string, ) *ConnectorFileChecksumAllOf`
 
 NewConnectorFileChecksumAllOf instantiates a new ConnectorFileChecksumAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -25,6 +27,46 @@ will change when the set of required properties is changed
 NewConnectorFileChecksumAllOfWithDefaults instantiates a new ConnectorFileChecksumAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *ConnectorFileChecksumAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *ConnectorFileChecksumAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *ConnectorFileChecksumAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *ConnectorFileChecksumAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *ConnectorFileChecksumAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *ConnectorFileChecksumAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetHash
 

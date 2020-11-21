@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.FirmwareSummary"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.FirmwareSummary"]
 **BundleVersion** | Pointer to **string** | Version details at the bundle level for the each of server. | [optional] 
 **ComponentsFwInventory** | Pointer to [**[]FirmwareFirmwareInventory**](firmware.FirmwareInventory.md) |  | [optional] 
 **Server** | Pointer to [**ComputePhysicalRelationship**](compute.Physical.Relationship.md) |  | [optional] 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewFirmwareFirmwareSummary
 
-`func NewFirmwareFirmwareSummary() *FirmwareFirmwareSummary`
+`func NewFirmwareFirmwareSummary(classId string, objectType string, ) *FirmwareFirmwareSummary`
 
 NewFirmwareFirmwareSummary instantiates a new FirmwareFirmwareSummary object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewFirmwareFirmwareSummaryWithDefaults instantiates a new FirmwareFirmwareSummary object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *FirmwareFirmwareSummary) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *FirmwareFirmwareSummary) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *FirmwareFirmwareSummary) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *FirmwareFirmwareSummary) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *FirmwareFirmwareSummary) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *FirmwareFirmwareSummary) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetBundleVersion
 
@@ -77,6 +119,16 @@ SetComponentsFwInventory sets ComponentsFwInventory field to given value.
 
 HasComponentsFwInventory returns a boolean if a field has been set.
 
+### SetComponentsFwInventoryNil
+
+`func (o *FirmwareFirmwareSummary) SetComponentsFwInventoryNil(b bool)`
+
+ SetComponentsFwInventoryNil sets the value for ComponentsFwInventory to be an explicit nil
+
+### UnsetComponentsFwInventory
+`func (o *FirmwareFirmwareSummary) UnsetComponentsFwInventory()`
+
+UnsetComponentsFwInventory ensures that no value is present for ComponentsFwInventory, not even an explicit nil
 ### GetServer
 
 `func (o *FirmwareFirmwareSummary) GetServer() ComputePhysicalRelationship`

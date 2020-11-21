@@ -4,7 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MemoryModePercentage** | Pointer to **int32** | Volatile memory percentage. | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "memory.PersistentMemoryGoal"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "memory.PersistentMemoryGoal"]
+**MemoryModePercentage** | Pointer to **int64** | Volatile memory percentage. | [optional] 
 **PersistentMemoryType** | Pointer to **string** | Type of the Persistent Memory configuration where the Persistent Memory Modules are combined in an interleaved set or not. * &#x60;app-direct&#x60; - The App Direct interleaved Persistent Memory type. * &#x60;app-direct-non-interleaved&#x60; - The App Direct non-interleaved Persistent Memory type. | [optional] [default to "app-direct"]
 **SocketId** | Pointer to **string** | CPU Socket ID to which this goal will be applied. * &#x60;All Sockets&#x60; - All the CPU socket IDs in a server. | [optional] [default to "All Sockets"]
 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewMemoryPersistentMemoryGoal
 
-`func NewMemoryPersistentMemoryGoal() *MemoryPersistentMemoryGoal`
+`func NewMemoryPersistentMemoryGoal(classId string, objectType string, ) *MemoryPersistentMemoryGoal`
 
 NewMemoryPersistentMemoryGoal instantiates a new MemoryPersistentMemoryGoal object
 This constructor will assign default values to properties that have it defined,
@@ -27,22 +29,62 @@ NewMemoryPersistentMemoryGoalWithDefaults instantiates a new MemoryPersistentMem
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetClassId
+
+`func (o *MemoryPersistentMemoryGoal) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *MemoryPersistentMemoryGoal) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *MemoryPersistentMemoryGoal) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *MemoryPersistentMemoryGoal) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *MemoryPersistentMemoryGoal) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *MemoryPersistentMemoryGoal) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
+
 ### GetMemoryModePercentage
 
-`func (o *MemoryPersistentMemoryGoal) GetMemoryModePercentage() int32`
+`func (o *MemoryPersistentMemoryGoal) GetMemoryModePercentage() int64`
 
 GetMemoryModePercentage returns the MemoryModePercentage field if non-nil, zero value otherwise.
 
 ### GetMemoryModePercentageOk
 
-`func (o *MemoryPersistentMemoryGoal) GetMemoryModePercentageOk() (*int32, bool)`
+`func (o *MemoryPersistentMemoryGoal) GetMemoryModePercentageOk() (*int64, bool)`
 
 GetMemoryModePercentageOk returns a tuple with the MemoryModePercentage field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMemoryModePercentage
 
-`func (o *MemoryPersistentMemoryGoal) SetMemoryModePercentage(v int32)`
+`func (o *MemoryPersistentMemoryGoal) SetMemoryModePercentage(v int64)`
 
 SetMemoryModePercentage sets MemoryModePercentage field to given value.
 

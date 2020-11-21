@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **RemoteUserLocale** | Pointer to **string** | The platform locale to assign user. A locale defines one or more organizations (domains) the user is allowed access, and access is limited to the organizations specified in the locale. | [optional] 
 **RemoteUserName** | Pointer to **string** | The user name passed to the platform for use in platform audit logs. | [optional] 
 **RemoteUserRoles** | Pointer to **string** | The list of roles to pass to the platform to validate the action against. | [optional] 
@@ -13,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewConnectorAuthMessage
 
-`func NewConnectorAuthMessage() *ConnectorAuthMessage`
+`func NewConnectorAuthMessage(classId string, objectType string, ) *ConnectorAuthMessage`
 
 NewConnectorAuthMessage instantiates a new ConnectorAuthMessage object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewConnectorAuthMessageWithDefaults instantiates a new ConnectorAuthMessage object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *ConnectorAuthMessage) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *ConnectorAuthMessage) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *ConnectorAuthMessage) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *ConnectorAuthMessage) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *ConnectorAuthMessage) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *ConnectorAuthMessage) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetRemoteUserLocale
 

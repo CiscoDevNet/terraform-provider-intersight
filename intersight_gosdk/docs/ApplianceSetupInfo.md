@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "appliance.SetupInfo"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.SetupInfo"]
 **BuildType** | Pointer to **string** | Build type of the Intersight Appliance setup (e.g. release or debug). | [optional] [readonly] 
 **Capabilities** | Pointer to [**[]ApplianceKeyValuePair**](appliance.KeyValuePair.md) |  | [optional] 
 **CloudUrl** | Pointer to **string** | URL of the Intersight to which this Intersight Appliance is connected to. | [optional] [readonly] 
@@ -17,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewApplianceSetupInfo
 
-`func NewApplianceSetupInfo() *ApplianceSetupInfo`
+`func NewApplianceSetupInfo(classId string, objectType string, ) *ApplianceSetupInfo`
 
 NewApplianceSetupInfo instantiates a new ApplianceSetupInfo object
 This constructor will assign default values to properties that have it defined,
@@ -31,6 +33,46 @@ will change when the set of required properties is changed
 NewApplianceSetupInfoWithDefaults instantiates a new ApplianceSetupInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *ApplianceSetupInfo) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *ApplianceSetupInfo) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *ApplianceSetupInfo) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *ApplianceSetupInfo) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *ApplianceSetupInfo) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *ApplianceSetupInfo) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetBuildType
 
@@ -82,6 +124,16 @@ SetCapabilities sets Capabilities field to given value.
 
 HasCapabilities returns a boolean if a field has been set.
 
+### SetCapabilitiesNil
+
+`func (o *ApplianceSetupInfo) SetCapabilitiesNil(b bool)`
+
+ SetCapabilitiesNil sets the value for Capabilities to be an explicit nil
+
+### UnsetCapabilities
+`func (o *ApplianceSetupInfo) UnsetCapabilities()`
+
+UnsetCapabilities ensures that no value is present for Capabilities, not even an explicit nil
 ### GetCloudUrl
 
 `func (o *ApplianceSetupInfo) GetCloudUrl() string`
@@ -182,6 +234,16 @@ SetSetupStates sets SetupStates field to given value.
 
 HasSetupStates returns a boolean if a field has been set.
 
+### SetSetupStatesNil
+
+`func (o *ApplianceSetupInfo) SetSetupStatesNil(b bool)`
+
+ SetSetupStatesNil sets the value for SetupStates to be an explicit nil
+
+### UnsetSetupStates
+`func (o *ApplianceSetupInfo) UnsetSetupStates()`
+
+UnsetSetupStates ensures that no value is present for SetupStates, not even an explicit nil
 ### GetStartTime
 
 `func (o *ApplianceSetupInfo) GetStartTime() time.Time`

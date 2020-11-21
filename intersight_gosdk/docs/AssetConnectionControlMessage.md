@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.ConnectionControlMessage"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.ConnectionControlMessage"]
 **Account** | Pointer to **string** | The account id to which the device belongs. | [optional] 
 **ConnectorVersion** | Pointer to **string** | The version of the device connector currently running on the platform. Deprecated by newer connectors that will report this directly to the device connector gateway in a websocket header, but included to continue to support older versions which report any version change after connect. | [optional] 
 **DeviceId** | Pointer to **string** | The Moid of the device under change. Used to route the message to a devices connection. | [optional] 
@@ -17,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewAssetConnectionControlMessage
 
-`func NewAssetConnectionControlMessage() *AssetConnectionControlMessage`
+`func NewAssetConnectionControlMessage(classId string, objectType string, ) *AssetConnectionControlMessage`
 
 NewAssetConnectionControlMessage instantiates a new AssetConnectionControlMessage object
 This constructor will assign default values to properties that have it defined,
@@ -31,6 +33,46 @@ will change when the set of required properties is changed
 NewAssetConnectionControlMessageWithDefaults instantiates a new AssetConnectionControlMessage object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *AssetConnectionControlMessage) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *AssetConnectionControlMessage) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *AssetConnectionControlMessage) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *AssetConnectionControlMessage) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *AssetConnectionControlMessage) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *AssetConnectionControlMessage) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAccount
 

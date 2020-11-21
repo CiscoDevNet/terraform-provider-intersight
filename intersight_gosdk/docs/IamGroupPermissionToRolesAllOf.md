@@ -4,14 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Group** | Pointer to [**CmrfCmRf**](cmrf.CmRf.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.GroupPermissionToRoles"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.GroupPermissionToRoles"]
+**Group** | Pointer to [**NullableCmrfCmRf**](cmrf.CmRf.md) |  | [optional] 
 **Orgs** | Pointer to [**[]CmrfCmRf**](cmrf.CmRf.md) |  | [optional] 
 
 ## Methods
 
 ### NewIamGroupPermissionToRolesAllOf
 
-`func NewIamGroupPermissionToRolesAllOf() *IamGroupPermissionToRolesAllOf`
+`func NewIamGroupPermissionToRolesAllOf(classId string, objectType string, ) *IamGroupPermissionToRolesAllOf`
 
 NewIamGroupPermissionToRolesAllOf instantiates a new IamGroupPermissionToRolesAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -25,6 +27,46 @@ will change when the set of required properties is changed
 NewIamGroupPermissionToRolesAllOfWithDefaults instantiates a new IamGroupPermissionToRolesAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *IamGroupPermissionToRolesAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IamGroupPermissionToRolesAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IamGroupPermissionToRolesAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IamGroupPermissionToRolesAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IamGroupPermissionToRolesAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IamGroupPermissionToRolesAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetGroup
 
@@ -51,6 +93,16 @@ SetGroup sets Group field to given value.
 
 HasGroup returns a boolean if a field has been set.
 
+### SetGroupNil
+
+`func (o *IamGroupPermissionToRolesAllOf) SetGroupNil(b bool)`
+
+ SetGroupNil sets the value for Group to be an explicit nil
+
+### UnsetGroup
+`func (o *IamGroupPermissionToRolesAllOf) UnsetGroup()`
+
+UnsetGroup ensures that no value is present for Group, not even an explicit nil
 ### GetOrgs
 
 `func (o *IamGroupPermissionToRolesAllOf) GetOrgs() []CmrfCmRf`
@@ -76,6 +128,16 @@ SetOrgs sets Orgs field to given value.
 
 HasOrgs returns a boolean if a field has been set.
 
+### SetOrgsNil
+
+`func (o *IamGroupPermissionToRolesAllOf) SetOrgsNil(b bool)`
+
+ SetOrgsNil sets the value for Orgs to be an explicit nil
+
+### UnsetOrgs
+`func (o *IamGroupPermissionToRolesAllOf) UnsetOrgs()`
+
+UnsetOrgs ensures that no value is present for Orgs, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

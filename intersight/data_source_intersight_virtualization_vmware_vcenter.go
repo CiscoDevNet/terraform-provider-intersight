@@ -20,10 +20,9 @@ func dataSourceVirtualizationVmwareVcenter() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
 			},
 			"identity": {
 				Description: "Identity of the hypervisor (not manipulated by user). It could be a UUID too. For example, c917093f-5443-4748-bc09-eec72ded7608.",
@@ -43,7 +42,7 @@ func dataSourceVirtualizationVmwareVcenter() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified type of this managed object, i.e. the class name.\nThis property is optional. The ObjectType is implied from the URL path.\nIf specified, the value of objectType must match the class name specified in the URL path.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -61,10 +60,9 @@ func dataSourceVirtualizationVmwareVcenter() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -73,7 +71,7 @@ func dataSourceVirtualizationVmwareVcenter() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -125,7 +123,7 @@ func dataSourceVirtualizationVmwareVcenterRead(d *schema.ResourceData, meta inte
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-	var o = models.NewVirtualizationVmwareVcenterWithDefaults()
+	var o = &models.VirtualizationVmwareVcenter{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -177,7 +175,7 @@ func dataSourceVirtualizationVmwareVcenterRead(d *schema.ResourceData, meta inte
 	case reflect.Slice:
 		r := reflect.ValueOf(result)
 		for i := 0; i < r.Len(); i++ {
-			var s = models.NewVirtualizationVmwareVcenterWithDefaults()
+			var s = &models.VirtualizationVmwareVcenter{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
 				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)

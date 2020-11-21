@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.HxUuIdDt"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.HxUuIdDt"]
 **Links** | Pointer to [**[]HyperflexHxLinkDt**](hyperflex.HxLinkDt.md) |  | [optional] 
 **Uuid** | Pointer to **string** |  | [optional] [readonly] 
 
@@ -11,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewHyperflexHxUuIdDt
 
-`func NewHyperflexHxUuIdDt() *HyperflexHxUuIdDt`
+`func NewHyperflexHxUuIdDt(classId string, objectType string, ) *HyperflexHxUuIdDt`
 
 NewHyperflexHxUuIdDt instantiates a new HyperflexHxUuIdDt object
 This constructor will assign default values to properties that have it defined,
@@ -25,6 +27,46 @@ will change when the set of required properties is changed
 NewHyperflexHxUuIdDtWithDefaults instantiates a new HyperflexHxUuIdDt object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *HyperflexHxUuIdDt) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *HyperflexHxUuIdDt) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *HyperflexHxUuIdDt) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *HyperflexHxUuIdDt) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *HyperflexHxUuIdDt) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *HyperflexHxUuIdDt) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetLinks
 
@@ -51,6 +93,16 @@ SetLinks sets Links field to given value.
 
 HasLinks returns a boolean if a field has been set.
 
+### SetLinksNil
+
+`func (o *HyperflexHxUuIdDt) SetLinksNil(b bool)`
+
+ SetLinksNil sets the value for Links to be an explicit nil
+
+### UnsetLinks
+`func (o *HyperflexHxUuIdDt) UnsetLinks()`
+
+UnsetLinks ensures that no value is present for Links, not even an explicit nil
 ### GetUuid
 
 `func (o *HyperflexHxUuIdDt) GetUuid() string`

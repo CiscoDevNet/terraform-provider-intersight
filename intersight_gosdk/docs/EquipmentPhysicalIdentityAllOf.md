@@ -4,13 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**PendingDiscovery** | Pointer to **string** | Value to indicate if discovery needs to be triggered after some event (ex. device connector reconnect). | [optional] 
 **PhysicalDeviceRegistration** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
 ## Methods
 
 ### NewEquipmentPhysicalIdentityAllOf
 
-`func NewEquipmentPhysicalIdentityAllOf() *EquipmentPhysicalIdentityAllOf`
+`func NewEquipmentPhysicalIdentityAllOf(classId string, objectType string, ) *EquipmentPhysicalIdentityAllOf`
 
 NewEquipmentPhysicalIdentityAllOf instantiates a new EquipmentPhysicalIdentityAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -24,6 +27,71 @@ will change when the set of required properties is changed
 NewEquipmentPhysicalIdentityAllOfWithDefaults instantiates a new EquipmentPhysicalIdentityAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *EquipmentPhysicalIdentityAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *EquipmentPhysicalIdentityAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *EquipmentPhysicalIdentityAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *EquipmentPhysicalIdentityAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *EquipmentPhysicalIdentityAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *EquipmentPhysicalIdentityAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
+
+### GetPendingDiscovery
+
+`func (o *EquipmentPhysicalIdentityAllOf) GetPendingDiscovery() string`
+
+GetPendingDiscovery returns the PendingDiscovery field if non-nil, zero value otherwise.
+
+### GetPendingDiscoveryOk
+
+`func (o *EquipmentPhysicalIdentityAllOf) GetPendingDiscoveryOk() (*string, bool)`
+
+GetPendingDiscoveryOk returns a tuple with the PendingDiscovery field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPendingDiscovery
+
+`func (o *EquipmentPhysicalIdentityAllOf) SetPendingDiscovery(v string)`
+
+SetPendingDiscovery sets PendingDiscovery field to given value.
+
+### HasPendingDiscovery
+
+`func (o *EquipmentPhysicalIdentityAllOf) HasPendingDiscovery() bool`
+
+HasPendingDiscovery returns a boolean if a field has been set.
 
 ### GetPhysicalDeviceRegistration
 

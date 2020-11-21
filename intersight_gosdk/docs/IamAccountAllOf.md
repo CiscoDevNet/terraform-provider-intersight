@@ -4,9 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.Account"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.Account"]
 **Name** | Pointer to **string** | Name of the Intersight account. By default, name is same as the MoID of the account. | [optional] 
 **Status** | Pointer to **string** | Status of the account. To activate the Intersight account, claim a device to the account. | [optional] [readonly] 
-**Var2LicenseReservationOp** | Pointer to [**LicenseLicenseReservationOpRelationship**](license.LicenseReservationOp.Relationship.md) |  | [optional] 
 **AppRegistrations** | Pointer to [**[]IamAppRegistrationRelationship**](iam.AppRegistration.Relationship.md) | An array of relationships to iamAppRegistration resources. | [optional] [readonly] 
 **DomainGroups** | Pointer to [**[]IamDomainGroupRelationship**](iam.DomainGroup.Relationship.md) | An array of relationships to iamDomainGroup resources. | [optional] [readonly] 
 **EndPointRoles** | Pointer to [**[]IamEndPointRoleRelationship**](iam.EndPointRole.Relationship.md) | An array of relationships to iamEndPointRole resources. | [optional] [readonly] 
@@ -24,7 +25,7 @@ Name | Type | Description | Notes
 
 ### NewIamAccountAllOf
 
-`func NewIamAccountAllOf() *IamAccountAllOf`
+`func NewIamAccountAllOf(classId string, objectType string, ) *IamAccountAllOf`
 
 NewIamAccountAllOf instantiates a new IamAccountAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -38,6 +39,46 @@ will change when the set of required properties is changed
 NewIamAccountAllOfWithDefaults instantiates a new IamAccountAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *IamAccountAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IamAccountAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IamAccountAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IamAccountAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IamAccountAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IamAccountAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetName
 
@@ -88,31 +129,6 @@ SetStatus sets Status field to given value.
 `func (o *IamAccountAllOf) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
-
-### GetVar2LicenseReservationOp
-
-`func (o *IamAccountAllOf) GetVar2LicenseReservationOp() LicenseLicenseReservationOpRelationship`
-
-GetVar2LicenseReservationOp returns the Var2LicenseReservationOp field if non-nil, zero value otherwise.
-
-### GetVar2LicenseReservationOpOk
-
-`func (o *IamAccountAllOf) GetVar2LicenseReservationOpOk() (*LicenseLicenseReservationOpRelationship, bool)`
-
-GetVar2LicenseReservationOpOk returns a tuple with the Var2LicenseReservationOp field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVar2LicenseReservationOp
-
-`func (o *IamAccountAllOf) SetVar2LicenseReservationOp(v LicenseLicenseReservationOpRelationship)`
-
-SetVar2LicenseReservationOp sets Var2LicenseReservationOp field to given value.
-
-### HasVar2LicenseReservationOp
-
-`func (o *IamAccountAllOf) HasVar2LicenseReservationOp() bool`
-
-HasVar2LicenseReservationOp returns a boolean if a field has been set.
 
 ### GetAppRegistrations
 

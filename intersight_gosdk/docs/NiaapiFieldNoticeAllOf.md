@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **Bugid** | Pointer to **string** | Bug Id associated with this notice. | [optional] 
 **FieldNoticeDesc** | Pointer to **string** | Field notice Description. | [optional] 
 **FieldNoticeId** | Pointer to **string** | Fieldnotice Id of this notice. | [optional] 
@@ -18,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewNiaapiFieldNoticeAllOf
 
-`func NewNiaapiFieldNoticeAllOf() *NiaapiFieldNoticeAllOf`
+`func NewNiaapiFieldNoticeAllOf(classId string, objectType string, ) *NiaapiFieldNoticeAllOf`
 
 NewNiaapiFieldNoticeAllOf instantiates a new NiaapiFieldNoticeAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -32,6 +34,46 @@ will change when the set of required properties is changed
 NewNiaapiFieldNoticeAllOfWithDefaults instantiates a new NiaapiFieldNoticeAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *NiaapiFieldNoticeAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *NiaapiFieldNoticeAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *NiaapiFieldNoticeAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *NiaapiFieldNoticeAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *NiaapiFieldNoticeAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *NiaapiFieldNoticeAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetBugid
 
@@ -208,6 +250,16 @@ SetRevisionInfo sets RevisionInfo field to given value.
 
 HasRevisionInfo returns a boolean if a field has been set.
 
+### SetRevisionInfoNil
+
+`func (o *NiaapiFieldNoticeAllOf) SetRevisionInfoNil(b bool)`
+
+ SetRevisionInfoNil sets the value for RevisionInfo to be an explicit nil
+
+### UnsetRevisionInfo
+`func (o *NiaapiFieldNoticeAllOf) UnsetRevisionInfo()`
+
+UnsetRevisionInfo ensures that no value is present for RevisionInfo, not even an explicit nil
 ### GetSwRelease
 
 `func (o *NiaapiFieldNoticeAllOf) GetSwRelease() string`

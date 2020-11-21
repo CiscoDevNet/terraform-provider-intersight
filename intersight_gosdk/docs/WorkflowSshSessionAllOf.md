@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.SshSession"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.SshSession"]
 **FileTransferToRemote** | Pointer to [**WorkflowFileTransfer**](workflow.FileTransfer.md) |  | [optional] 
 **MessageType** | Pointer to **string** | The type of SSH message to send to the remote server. * &#x60;ExecuteCommand&#x60; - Execute a SSH command on the remote server. * &#x60;NewSession&#x60; - Open a new SSH connection to the remote server. * &#x60;FileTransfer&#x60; - Transfer a file from Intersight connected device to the remote server. * &#x60;CloseSession&#x60; - Close the SSH connection to the remote server. | [optional] [default to "ExecuteCommand"]
 **SshCommand** | Pointer to [**WorkflowSshCmd**](workflow.SshCmd.md) |  | [optional] 
@@ -13,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewWorkflowSshSessionAllOf
 
-`func NewWorkflowSshSessionAllOf() *WorkflowSshSessionAllOf`
+`func NewWorkflowSshSessionAllOf(classId string, objectType string, ) *WorkflowSshSessionAllOf`
 
 NewWorkflowSshSessionAllOf instantiates a new WorkflowSshSessionAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewWorkflowSshSessionAllOfWithDefaults instantiates a new WorkflowSshSessionAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *WorkflowSshSessionAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *WorkflowSshSessionAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *WorkflowSshSessionAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *WorkflowSshSessionAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *WorkflowSshSessionAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *WorkflowSshSessionAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetFileTransferToRemote
 

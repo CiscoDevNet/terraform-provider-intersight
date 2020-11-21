@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hcl.HardwareCompatibilityProfile"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hcl.HardwareCompatibilityProfile"]
 **DriverIsoUrl** | Pointer to **string** | Url for the ISO with the drivers supported for the server. | [optional] 
 **ErrorCode** | Pointer to **string** | Error code indicating the compatibility status. * &#x60;Success&#x60; - The input combination is valid. * &#x60;Unknown&#x60; - Unknown API request to the service. * &#x60;UnknownServer&#x60; - An invalid server model is given API requests or the server model is not present in the HCL database. * &#x60;InvalidUcsVersion&#x60; - UCS Version is not in expected format. * &#x60;ProcessorNotSupported&#x60; - Processor is not supported with the given Server or the Processor does not exist in the HCL database. * &#x60;OSNotSupported&#x60; - OS version is not supported with the given server, processor combination or OS information is not present in the HCL database. * &#x60;OSUnknown&#x60; - OS vendor or version is not known as per the HCL database. * &#x60;UCSVersionNotSupported&#x60; - UCS Version is not supported with the given server, processor and OS combination or the UCS version is not present in the HCL database. * &#x60;UcsVersionServerOSCombinationNotSupported&#x60; - Combination of UCS version, server (model and processor) and os version is not supported. * &#x60;ProductUnknown&#x60; - Product is not known as per the HCL database. * &#x60;ProductNotSupported&#x60; - Product is not supported in the given UCS version, server (model and processor) and operating system version. * &#x60;DriverNameNotSupported&#x60; - Driver protocol or name is not supported for the given product. * &#x60;FirmwareVersionNotSupported&#x60; - Firmware version not supported for the component and the server, operating system combination. * &#x60;DriverVersionNotSupported&#x60; - Driver version not supported for the component and the server, operating system combination. * &#x60;FirmwareVersionDriverVersionCombinationNotSupported&#x60; - Both Firmware and Driver versions are not supported for the component and the server, operating system combination. * &#x60;FirmwareVersionAndDriverVersionNotSupported&#x60; - Firmware and Driver version combination not supported for the component and the server, operating system combination. * &#x60;FirmwareVersionAndDriverNameNotSupported&#x60; - Firmware Version and Driver name or not supported with the component and the server, operating system combination. * &#x60;InternalError&#x60; - API requests to the service have either failed or timed out. * &#x60;MarshallingError&#x60; - Error in JSON marshalling. * &#x60;Exempted&#x60; - An exempted error code means that the product is part of the exempted Catalog and should be ignored for HCL validation purposes. | [optional] [readonly] [default to "Success"]
 **Id** | Pointer to **string** | Identifier of the hardware compatibility profile. | [optional] 
@@ -20,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewHclHardwareCompatibilityProfile
 
-`func NewHclHardwareCompatibilityProfile() *HclHardwareCompatibilityProfile`
+`func NewHclHardwareCompatibilityProfile(classId string, objectType string, ) *HclHardwareCompatibilityProfile`
 
 NewHclHardwareCompatibilityProfile instantiates a new HclHardwareCompatibilityProfile object
 This constructor will assign default values to properties that have it defined,
@@ -34,6 +36,46 @@ will change when the set of required properties is changed
 NewHclHardwareCompatibilityProfileWithDefaults instantiates a new HclHardwareCompatibilityProfile object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *HclHardwareCompatibilityProfile) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *HclHardwareCompatibilityProfile) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *HclHardwareCompatibilityProfile) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *HclHardwareCompatibilityProfile) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *HclHardwareCompatibilityProfile) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *HclHardwareCompatibilityProfile) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDriverIsoUrl
 
@@ -210,6 +252,16 @@ SetProducts sets Products field to given value.
 
 HasProducts returns a boolean if a field has been set.
 
+### SetProductsNil
+
+`func (o *HclHardwareCompatibilityProfile) SetProductsNil(b bool)`
+
+ SetProductsNil sets the value for Products to be an explicit nil
+
+### UnsetProducts
+`func (o *HclHardwareCompatibilityProfile) UnsetProducts()`
+
+UnsetProducts ensures that no value is present for Products, not even an explicit nil
 ### GetServerModel
 
 `func (o *HclHardwareCompatibilityProfile) GetServerModel() string`

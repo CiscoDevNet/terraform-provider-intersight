@@ -4,7 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Certificate** | Pointer to [**X509Certificate**](x509.Certificate.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.Certificate"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.Certificate"]
+**Certificate** | Pointer to [**NullableX509Certificate**](x509.Certificate.md) |  | [optional] 
 **Status** | Pointer to **string** | Status of the certificate. * &#x60;PendingValidation&#x60; - The certificate has not been validated. * &#x60;Valid&#x60; - The certificate is valid. * &#x60;Invalid&#x60; - Ther certificate is invalid. | [optional] [readonly] [default to "PendingValidation"]
 **CertificateRequest** | Pointer to [**IamCertificateRequestRelationship**](iam.CertificateRequest.Relationship.md) |  | [optional] 
 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewIamCertificateAllOf
 
-`func NewIamCertificateAllOf() *IamCertificateAllOf`
+`func NewIamCertificateAllOf(classId string, objectType string, ) *IamCertificateAllOf`
 
 NewIamCertificateAllOf instantiates a new IamCertificateAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewIamCertificateAllOfWithDefaults instantiates a new IamCertificateAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *IamCertificateAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IamCertificateAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IamCertificateAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IamCertificateAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IamCertificateAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IamCertificateAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCertificate
 
@@ -52,6 +94,16 @@ SetCertificate sets Certificate field to given value.
 
 HasCertificate returns a boolean if a field has been set.
 
+### SetCertificateNil
+
+`func (o *IamCertificateAllOf) SetCertificateNil(b bool)`
+
+ SetCertificateNil sets the value for Certificate to be an explicit nil
+
+### UnsetCertificate
+`func (o *IamCertificateAllOf) UnsetCertificate()`
+
+UnsetCertificate ensures that no value is present for Certificate, not even an explicit nil
 ### GetStatus
 
 `func (o *IamCertificateAllOf) GetStatus() string`

@@ -20,10 +20,9 @@ func dataSourceNiatelemetryNiaLicenseState() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
 			},
 			"device": {
 				Description: "A reference to a niatelemetryNiaInventory resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -38,10 +37,9 @@ func dataSourceNiatelemetryNiaLicenseState() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -50,7 +48,7 @@ func dataSourceNiatelemetryNiaLicenseState() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -82,13 +80,23 @@ func dataSourceNiatelemetryNiaLicenseState() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified type of this managed object, i.e. the class name.\nThis property is optional. The ObjectType is implied from the URL path.\nIf specified, the value of objectType must match the class name specified in the URL path.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
 			},
 			"pid_type": {
 				Description: "PID of device being inventoried. This determines the hardware model type of the device.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"record_type": {
+				Description: "Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"record_version": {
+				Description: "Version of record being pushed. This determines what was the API version for data available from the device.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -128,7 +136,7 @@ func dataSourceNiatelemetryNiaLicenseStateRead(d *schema.ResourceData, meta inte
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-	var o = models.NewNiatelemetryNiaLicenseStateWithDefaults()
+	var o = &models.NiatelemetryNiaLicenseState{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -152,6 +160,14 @@ func dataSourceNiatelemetryNiaLicenseStateRead(d *schema.ResourceData, meta inte
 	if v, ok := d.GetOk("pid_type"); ok {
 		x := (v.(string))
 		o.SetPidType(x)
+	}
+	if v, ok := d.GetOk("record_type"); ok {
+		x := (v.(string))
+		o.SetRecordType(x)
+	}
+	if v, ok := d.GetOk("record_version"); ok {
+		x := (v.(string))
+		o.SetRecordVersion(x)
 	}
 	if v, ok := d.GetOk("serial"); ok {
 		x := (v.(string))
@@ -184,7 +200,7 @@ func dataSourceNiatelemetryNiaLicenseStateRead(d *schema.ResourceData, meta inte
 	case reflect.Slice:
 		r := reflect.ValueOf(result)
 		for i := 0; i < r.Len(); i++ {
-			var s = models.NewNiatelemetryNiaLicenseStateWithDefaults()
+			var s = &models.NiatelemetryNiaLicenseState{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
 				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
@@ -213,6 +229,12 @@ func dataSourceNiatelemetryNiaLicenseStateRead(d *schema.ResourceData, meta inte
 			}
 			if err := d.Set("pid_type", (s.GetPidType())); err != nil {
 				return fmt.Errorf("error occurred while setting property PidType: %+v", err)
+			}
+			if err := d.Set("record_type", (s.GetRecordType())); err != nil {
+				return fmt.Errorf("error occurred while setting property RecordType: %+v", err)
+			}
+			if err := d.Set("record_version", (s.GetRecordVersion())); err != nil {
+				return fmt.Errorf("error occurred while setting property RecordVersion: %+v", err)
 			}
 			if err := d.Set("serial", (s.GetSerial())); err != nil {
 				return fmt.Errorf("error occurred while setting property Serial: %+v", err)

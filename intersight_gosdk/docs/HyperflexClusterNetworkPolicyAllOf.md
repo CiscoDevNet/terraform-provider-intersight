@@ -4,12 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.ClusterNetworkPolicy"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.ClusterNetworkPolicy"]
 **JumboFrame** | Pointer to **bool** | Enable or disable jumbo frames. | [optional] 
-**KvmIpRange** | Pointer to [**HyperflexIpAddrRange**](hyperflex.IpAddrRange.md) |  | [optional] 
-**MacPrefixRange** | Pointer to [**HyperflexMacAddrPrefixRange**](hyperflex.MacAddrPrefixRange.md) |  | [optional] 
-**MgmtVlan** | Pointer to [**HyperflexNamedVlan**](hyperflex.NamedVlan.md) |  | [optional] 
+**KvmIpRange** | Pointer to [**NullableHyperflexIpAddrRange**](hyperflex.IpAddrRange.md) |  | [optional] 
+**MacPrefixRange** | Pointer to [**NullableHyperflexMacAddrPrefixRange**](hyperflex.MacAddrPrefixRange.md) |  | [optional] 
+**MgmtVlan** | Pointer to [**NullableHyperflexNamedVlan**](hyperflex.NamedVlan.md) |  | [optional] 
 **UplinkSpeed** | Pointer to **string** | Link speed of the server adapter port to the upstream switch. When the policy is attached to a cluster profile with EDGE management platform, the uplink speed can be &#39;1G&#39; or &#39;10G+&#39;. Use &#39;10G+&#39; for link speeds of 10G or above. When the policy is attached to a cluster profile with Fabric Interconnect management platform, the uplink speed can be &#39;default&#39; only. * &#x60;default&#x60; - Current default value set on the hardware platform. * &#x60;1G&#x60; - A link speed of 1 gigabit per second. * &#x60;10G&#x60; - A link speed of 10 gigabits per second or above. | [optional] [default to "default"]
-**VmMigrationVlan** | Pointer to [**HyperflexNamedVlan**](hyperflex.NamedVlan.md) |  | [optional] 
+**VmMigrationVlan** | Pointer to [**NullableHyperflexNamedVlan**](hyperflex.NamedVlan.md) |  | [optional] 
 **VmNetworkVlans** | Pointer to [**[]HyperflexNamedVlan**](hyperflex.NamedVlan.md) |  | [optional] 
 **ClusterProfiles** | Pointer to [**[]HyperflexClusterProfileRelationship**](hyperflex.ClusterProfile.Relationship.md) | An array of relationships to hyperflexClusterProfile resources. | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
@@ -18,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewHyperflexClusterNetworkPolicyAllOf
 
-`func NewHyperflexClusterNetworkPolicyAllOf() *HyperflexClusterNetworkPolicyAllOf`
+`func NewHyperflexClusterNetworkPolicyAllOf(classId string, objectType string, ) *HyperflexClusterNetworkPolicyAllOf`
 
 NewHyperflexClusterNetworkPolicyAllOf instantiates a new HyperflexClusterNetworkPolicyAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -32,6 +34,46 @@ will change when the set of required properties is changed
 NewHyperflexClusterNetworkPolicyAllOfWithDefaults instantiates a new HyperflexClusterNetworkPolicyAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *HyperflexClusterNetworkPolicyAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *HyperflexClusterNetworkPolicyAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *HyperflexClusterNetworkPolicyAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *HyperflexClusterNetworkPolicyAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *HyperflexClusterNetworkPolicyAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *HyperflexClusterNetworkPolicyAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetJumboFrame
 
@@ -83,6 +125,16 @@ SetKvmIpRange sets KvmIpRange field to given value.
 
 HasKvmIpRange returns a boolean if a field has been set.
 
+### SetKvmIpRangeNil
+
+`func (o *HyperflexClusterNetworkPolicyAllOf) SetKvmIpRangeNil(b bool)`
+
+ SetKvmIpRangeNil sets the value for KvmIpRange to be an explicit nil
+
+### UnsetKvmIpRange
+`func (o *HyperflexClusterNetworkPolicyAllOf) UnsetKvmIpRange()`
+
+UnsetKvmIpRange ensures that no value is present for KvmIpRange, not even an explicit nil
 ### GetMacPrefixRange
 
 `func (o *HyperflexClusterNetworkPolicyAllOf) GetMacPrefixRange() HyperflexMacAddrPrefixRange`
@@ -108,6 +160,16 @@ SetMacPrefixRange sets MacPrefixRange field to given value.
 
 HasMacPrefixRange returns a boolean if a field has been set.
 
+### SetMacPrefixRangeNil
+
+`func (o *HyperflexClusterNetworkPolicyAllOf) SetMacPrefixRangeNil(b bool)`
+
+ SetMacPrefixRangeNil sets the value for MacPrefixRange to be an explicit nil
+
+### UnsetMacPrefixRange
+`func (o *HyperflexClusterNetworkPolicyAllOf) UnsetMacPrefixRange()`
+
+UnsetMacPrefixRange ensures that no value is present for MacPrefixRange, not even an explicit nil
 ### GetMgmtVlan
 
 `func (o *HyperflexClusterNetworkPolicyAllOf) GetMgmtVlan() HyperflexNamedVlan`
@@ -133,6 +195,16 @@ SetMgmtVlan sets MgmtVlan field to given value.
 
 HasMgmtVlan returns a boolean if a field has been set.
 
+### SetMgmtVlanNil
+
+`func (o *HyperflexClusterNetworkPolicyAllOf) SetMgmtVlanNil(b bool)`
+
+ SetMgmtVlanNil sets the value for MgmtVlan to be an explicit nil
+
+### UnsetMgmtVlan
+`func (o *HyperflexClusterNetworkPolicyAllOf) UnsetMgmtVlan()`
+
+UnsetMgmtVlan ensures that no value is present for MgmtVlan, not even an explicit nil
 ### GetUplinkSpeed
 
 `func (o *HyperflexClusterNetworkPolicyAllOf) GetUplinkSpeed() string`
@@ -183,6 +255,16 @@ SetVmMigrationVlan sets VmMigrationVlan field to given value.
 
 HasVmMigrationVlan returns a boolean if a field has been set.
 
+### SetVmMigrationVlanNil
+
+`func (o *HyperflexClusterNetworkPolicyAllOf) SetVmMigrationVlanNil(b bool)`
+
+ SetVmMigrationVlanNil sets the value for VmMigrationVlan to be an explicit nil
+
+### UnsetVmMigrationVlan
+`func (o *HyperflexClusterNetworkPolicyAllOf) UnsetVmMigrationVlan()`
+
+UnsetVmMigrationVlan ensures that no value is present for VmMigrationVlan, not even an explicit nil
 ### GetVmNetworkVlans
 
 `func (o *HyperflexClusterNetworkPolicyAllOf) GetVmNetworkVlans() []HyperflexNamedVlan`
@@ -208,6 +290,16 @@ SetVmNetworkVlans sets VmNetworkVlans field to given value.
 
 HasVmNetworkVlans returns a boolean if a field has been set.
 
+### SetVmNetworkVlansNil
+
+`func (o *HyperflexClusterNetworkPolicyAllOf) SetVmNetworkVlansNil(b bool)`
+
+ SetVmNetworkVlansNil sets the value for VmNetworkVlans to be an explicit nil
+
+### UnsetVmNetworkVlans
+`func (o *HyperflexClusterNetworkPolicyAllOf) UnsetVmNetworkVlans()`
+
+UnsetVmNetworkVlans ensures that no value is present for VmNetworkVlans, not even an explicit nil
 ### GetClusterProfiles
 
 `func (o *HyperflexClusterNetworkPolicyAllOf) GetClusterProfiles() []HyperflexClusterProfileRelationship`

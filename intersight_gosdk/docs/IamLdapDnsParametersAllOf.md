@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.LdapDnsParameters"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.LdapDnsParameters"]
 **SearchDomain** | Pointer to **string** | Domain name that acts as a source for a DNS query. | [optional] 
 **SearchForest** | Pointer to **string** | Forest name that acts as a source for a DNS query. | [optional] 
 **Source** | Pointer to **string** | Source of the domain name used for the DNS SRV request. * &#x60;Extracted&#x60; - The domain name extracted-domain from the login ID. * &#x60;Configured&#x60; - The configured-search domain. * &#x60;ConfiguredExtracted&#x60; - The domain name extracted from the login ID than the configured-search domain. | [optional] [default to "Extracted"]
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewIamLdapDnsParametersAllOf
 
-`func NewIamLdapDnsParametersAllOf() *IamLdapDnsParametersAllOf`
+`func NewIamLdapDnsParametersAllOf(classId string, objectType string, ) *IamLdapDnsParametersAllOf`
 
 NewIamLdapDnsParametersAllOf instantiates a new IamLdapDnsParametersAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewIamLdapDnsParametersAllOfWithDefaults instantiates a new IamLdapDnsParametersAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *IamLdapDnsParametersAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IamLdapDnsParametersAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IamLdapDnsParametersAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IamLdapDnsParametersAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IamLdapDnsParametersAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IamLdapDnsParametersAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetSearchDomain
 

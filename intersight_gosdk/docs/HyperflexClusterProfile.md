@@ -4,13 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.ClusterProfile"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.ClusterProfile"]
 **DataIpAddress** | Pointer to **string** | The storage data IP address for the HyperFlex cluster. | [optional] 
-**HypervisorType** | Pointer to **string** | The hypervisor type for the HyperFlex cluster. * &#x60;ESXi&#x60; - ESXi hypervisor as specified by the user. * &#x60;HYPERV&#x60; - Hyperv hypervisor as specified by the user. * &#x60;KVM&#x60; - KVM hypervisor as specified by the user. | [optional] [default to "ESXi"]
+**HypervisorType** | Pointer to **string** | The hypervisor type for the HyperFlex cluster. * &#x60;ESXi&#x60; - A Vmware ESXi hypervisor of any version. * &#x60;HXAP&#x60; - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform. * &#x60;Hyper-V&#x60; - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * &#x60;Unknown&#x60; - The hypervisor running on the HyperFlex cluster is not known. | [optional] [default to "ESXi"]
 **MacAddressPrefix** | Pointer to **string** | The MAC address prefix in the form of 00:25:B5:XX. | [optional] 
 **MgmtIpAddress** | Pointer to **string** | The management IP address for the HyperFlex cluster. | [optional] 
 **MgmtPlatform** | Pointer to **string** | The management platform for the HyperFlex cluster. * &#x60;FI&#x60; - The host servers used in the cluster deployment are managed by a UCS Fabric Interconnect. * &#x60;EDGE&#x60; - The host servers used in the cluster deployment are standalone severs. | [optional] [default to "FI"]
 **Replication** | Pointer to **int64** | The number of copies of each data block written. | [optional] 
-**StorageDataVlan** | Pointer to [**HyperflexNamedVlan**](hyperflex.NamedVlan.md) |  | [optional] 
+**StorageDataVlan** | Pointer to [**NullableHyperflexNamedVlan**](hyperflex.NamedVlan.md) |  | [optional] 
 **WwxnPrefix** | Pointer to **string** | The WWxN prefix in the form of 20:00:00:25:B5:XX. | [optional] 
 **AssociatedCluster** | Pointer to [**HyperflexClusterRelationship**](hyperflex.Cluster.Relationship.md) |  | [optional] 
 **AutoSupport** | Pointer to [**HyperflexAutoSupportPolicyRelationship**](hyperflex.AutoSupportPolicy.Relationship.md) |  | [optional] 
@@ -34,7 +36,7 @@ Name | Type | Description | Notes
 
 ### NewHyperflexClusterProfile
 
-`func NewHyperflexClusterProfile() *HyperflexClusterProfile`
+`func NewHyperflexClusterProfile(classId string, objectType string, ) *HyperflexClusterProfile`
 
 NewHyperflexClusterProfile instantiates a new HyperflexClusterProfile object
 This constructor will assign default values to properties that have it defined,
@@ -48,6 +50,46 @@ will change when the set of required properties is changed
 NewHyperflexClusterProfileWithDefaults instantiates a new HyperflexClusterProfile object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *HyperflexClusterProfile) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *HyperflexClusterProfile) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *HyperflexClusterProfile) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *HyperflexClusterProfile) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *HyperflexClusterProfile) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *HyperflexClusterProfile) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDataIpAddress
 
@@ -224,6 +266,16 @@ SetStorageDataVlan sets StorageDataVlan field to given value.
 
 HasStorageDataVlan returns a boolean if a field has been set.
 
+### SetStorageDataVlanNil
+
+`func (o *HyperflexClusterProfile) SetStorageDataVlanNil(b bool)`
+
+ SetStorageDataVlanNil sets the value for StorageDataVlan to be an explicit nil
+
+### UnsetStorageDataVlan
+`func (o *HyperflexClusterProfile) UnsetStorageDataVlan()`
+
+UnsetStorageDataVlan ensures that no value is present for StorageDataVlan, not even an explicit nil
 ### GetWwxnPrefix
 
 `func (o *HyperflexClusterProfile) GetWwxnPrefix() string`

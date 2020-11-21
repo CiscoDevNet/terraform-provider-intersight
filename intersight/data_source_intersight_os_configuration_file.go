@@ -32,10 +32,9 @@ func dataSourceOsConfigurationFile() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -44,7 +43,7 @@ func dataSourceOsConfigurationFile() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -60,10 +59,14 @@ func dataSourceOsConfigurationFile() *schema.Resource {
 				Computed: true,
 			},
 			"class_id": {
-				Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
+			},
+			"description": {
+				Description: "Description of the OS ConfigurationFile.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"distributions": {
 				Description: "An array of relationships to hclOperatingSystem resources.",
@@ -77,10 +80,9 @@ func dataSourceOsConfigurationFile() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -89,7 +91,7 @@ func dataSourceOsConfigurationFile() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -109,6 +111,11 @@ func dataSourceOsConfigurationFile() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"internal": {
+				Description: "The internal flag is set to true when configuration file is uploaded from OS Install wizard. Internal Configuration files will not be displayed in Answer Management Page.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
 				Type:        schema.TypeString,
@@ -121,7 +128,7 @@ func dataSourceOsConfigurationFile() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified type of this managed object, i.e. the class name.\nThis property is optional. The ObjectType is implied from the URL path.\nIf specified, the value of objectType must match the class name specified in the URL path.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -137,10 +144,9 @@ func dataSourceOsConfigurationFile() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"is_value_set": {
 							Description: "Flag to indicate if value is set. Value will be used to check if any edit.",
@@ -148,7 +154,7 @@ func dataSourceOsConfigurationFile() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -166,10 +172,9 @@ func dataSourceOsConfigurationFile() *schema.Resource {
 										DiffSuppressFunc: SuppressDiffAdditionProps,
 									},
 									"class_id": {
-										Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
 									},
 									"default": {
 										Description: "Default value for the data type. If default value was provided and the input was required the default value will be used as the input.",
@@ -184,13 +189,12 @@ func dataSourceOsConfigurationFile() *schema.Resource {
 													DiffSuppressFunc: SuppressDiffAdditionProps,
 												},
 												"class_id": {
-													Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 													Type:        schema.TypeString,
 													Optional:    true,
-													Computed:    true,
 												},
 												"object_type": {
-													Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 													Type:        schema.TypeString,
 													Optional:    true,
 													Computed:    true,
@@ -216,6 +220,50 @@ func dataSourceOsConfigurationFile() *schema.Resource {
 										Type:        schema.TypeString,
 										Optional:    true,
 									},
+									"display_meta": {
+										Description: "Captures the meta data needed for displaying workflow data types in Intersight User Interface.",
+										Type:        schema.TypeList,
+										MaxItems:    1,
+										Optional:    true,
+										Elem: &schema.Resource{
+											Schema: map[string]*schema.Schema{
+												"additional_properties": {
+													Type:             schema.TypeString,
+													Optional:         true,
+													DiffSuppressFunc: SuppressDiffAdditionProps,
+												},
+												"class_id": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+												"inventory_selector": {
+													Description: "Inventory selector specified for primitive data property should be used in Intersight User Interface.",
+													Type:        schema.TypeBool,
+													Optional:    true,
+												},
+												"object_type": {
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+													Type:        schema.TypeString,
+													Optional:    true,
+													Computed:    true,
+												},
+												"widget_type": {
+													Description: "Specify the widget type for data display.\n* `None` - Display none of the widget types.\n* `Radio` - Display the widget as a radio button.\n* `Dropdown` - Display the widget as a dropdown.\n* `GridSelector` - Display the widget as a selector.\n* `DrawerSelector` - Display the widget as a selector.",
+													Type:        schema.TypeString,
+													Optional:    true,
+												},
+											},
+										},
+										Computed: true,
+									},
+									"input_parameters": {
+										Description: "JSON formatted mapping from other property of the definition to the current property. Input parameter mapping is supported only for custom data type property in workflow definition and custom data type definition. The format to specify mapping ina workflow definition when source property is of scalar types is '${workflow.input.property}'. The format to specify mapping when the source property is of object reference and mapping needs to be made to the property of the object is '${workflow.input.property.subproperty}'. The format to specify mapping in a custom data type definition is '${datatype.type.property}'. When the current property is of non-scalar type like composite custom data type, then mapping can be provided to the individual property of the custom data type like 'cdt_property:${workflow.input.property}'.",
+										Type:        schema.TypeMap,
+										Elem: &schema.Schema{
+											Type: schema.TypeString,
+										}, Optional: true,
+									},
 									"label": {
 										Description: "Descriptive label for the data type. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), space ( ) or an underscore (_). The first and last character in label must be an alphanumeric character.",
 										Type:        schema.TypeString,
@@ -227,7 +275,7 @@ func dataSourceOsConfigurationFile() *schema.Resource {
 										Optional:    true,
 									},
 									"object_type": {
-										Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
@@ -245,10 +293,9 @@ func dataSourceOsConfigurationFile() *schema.Resource {
 													DiffSuppressFunc: SuppressDiffAdditionProps,
 												},
 												"class_id": {
-													Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 													Type:        schema.TypeString,
 													Optional:    true,
-													Computed:    true,
 												},
 												"constraints": {
 													Description: "Constraints that must be applied to the parameter value supplied for this data type.",
@@ -263,10 +310,9 @@ func dataSourceOsConfigurationFile() *schema.Resource {
 																DiffSuppressFunc: SuppressDiffAdditionProps,
 															},
 															"class_id": {
-																Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+																Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 																Type:        schema.TypeString,
 																Optional:    true,
-																Computed:    true,
 															},
 															"enum_list": {
 																Type:     schema.TypeList,
@@ -279,10 +325,9 @@ func dataSourceOsConfigurationFile() *schema.Resource {
 																			DiffSuppressFunc: SuppressDiffAdditionProps,
 																		},
 																		"class_id": {
-																			Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+																			Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 																			Type:        schema.TypeString,
 																			Optional:    true,
-																			Computed:    true,
 																		},
 																		"label": {
 																			Description: "Label for the enum value. A user friendly short string to identify the enum value. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), forward slash (/), or an underscore (_).",
@@ -290,7 +335,7 @@ func dataSourceOsConfigurationFile() *schema.Resource {
 																			Optional:    true,
 																		},
 																		"object_type": {
-																			Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+																			Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 																			Type:        schema.TypeString,
 																			Optional:    true,
 																			Computed:    true,
@@ -315,7 +360,7 @@ func dataSourceOsConfigurationFile() *schema.Resource {
 																Optional:    true,
 															},
 															"object_type": {
-																Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+																Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 																Type:        schema.TypeString,
 																Optional:    true,
 																Computed:    true,
@@ -340,10 +385,9 @@ func dataSourceOsConfigurationFile() *schema.Resource {
 																DiffSuppressFunc: SuppressDiffAdditionProps,
 															},
 															"class_id": {
-																Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+																Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 																Type:        schema.TypeString,
 																Optional:    true,
-																Computed:    true,
 															},
 															"display_attributes": {
 																Type:     schema.TypeList,
@@ -351,7 +395,7 @@ func dataSourceOsConfigurationFile() *schema.Resource {
 																Elem: &schema.Schema{
 																	Type: schema.TypeString}},
 															"object_type": {
-																Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+																Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 																Type:        schema.TypeString,
 																Optional:    true,
 																Computed:    true,
@@ -371,7 +415,7 @@ func dataSourceOsConfigurationFile() *schema.Resource {
 													Computed: true,
 												},
 												"object_type": {
-													Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 													Type:        schema.TypeString,
 													Optional:    true,
 													Computed:    true,
@@ -447,14 +491,22 @@ func dataSourceOsConfigurationFileRead(d *schema.ResourceData, meta interface{})
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-	var o = models.NewOsConfigurationFileWithDefaults()
+	var o = &models.OsConfigurationFile{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
 	}
+	if v, ok := d.GetOk("description"); ok {
+		x := (v.(string))
+		o.SetDescription(x)
+	}
 	if v, ok := d.GetOk("file_content"); ok {
 		x := (v.(string))
 		o.SetFileContent(x)
+	}
+	if v, ok := d.GetOk("internal"); ok {
+		x := (v.(bool))
+		o.SetInternal(x)
 	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -499,7 +551,7 @@ func dataSourceOsConfigurationFileRead(d *schema.ResourceData, meta interface{})
 	case reflect.Slice:
 		r := reflect.ValueOf(result)
 		for i := 0; i < r.Len(); i++ {
-			var s = models.NewOsConfigurationFileWithDefaults()
+			var s = &models.OsConfigurationFile{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
 				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
@@ -514,12 +566,18 @@ func dataSourceOsConfigurationFileRead(d *schema.ResourceData, meta interface{})
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
 				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
 			}
+			if err := d.Set("description", (s.GetDescription())); err != nil {
+				return fmt.Errorf("error occurred while setting property Description: %+v", err)
+			}
 
 			if err := d.Set("distributions", flattenListHclOperatingSystemRelationship(s.GetDistributions(), d)); err != nil {
 				return fmt.Errorf("error occurred while setting property Distributions: %+v", err)
 			}
 			if err := d.Set("file_content", (s.GetFileContent())); err != nil {
 				return fmt.Errorf("error occurred while setting property FileContent: %+v", err)
+			}
+			if err := d.Set("internal", (s.GetInternal())); err != nil {
+				return fmt.Errorf("error occurred while setting property Internal: %+v", err)
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
 				return fmt.Errorf("error occurred while setting property Moid: %+v", err)

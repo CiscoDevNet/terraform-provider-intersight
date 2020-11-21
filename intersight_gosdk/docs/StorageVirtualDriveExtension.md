@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.VirtualDriveExtension"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.VirtualDriveExtension"]
 **Bootable** | Pointer to **string** | The ability to boot from the virtual drive. | [optional] [readonly] 
 **ContainerId** | Pointer to **int64** | The container id of the virtual drive. | [optional] [readonly] 
 **DriveState** | Pointer to **string** | The state of the virtual drive. | [optional] [readonly] 
@@ -22,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewStorageVirtualDriveExtension
 
-`func NewStorageVirtualDriveExtension() *StorageVirtualDriveExtension`
+`func NewStorageVirtualDriveExtension(classId string, objectType string, ) *StorageVirtualDriveExtension`
 
 NewStorageVirtualDriveExtension instantiates a new StorageVirtualDriveExtension object
 This constructor will assign default values to properties that have it defined,
@@ -36,6 +38,46 @@ will change when the set of required properties is changed
 NewStorageVirtualDriveExtensionWithDefaults instantiates a new StorageVirtualDriveExtension object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *StorageVirtualDriveExtension) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *StorageVirtualDriveExtension) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *StorageVirtualDriveExtension) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *StorageVirtualDriveExtension) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *StorageVirtualDriveExtension) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *StorageVirtualDriveExtension) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetBootable
 

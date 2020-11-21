@@ -20,20 +20,24 @@ func dataSourceNiatelemetryTenant() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"bfd_if_pol_count": {
-				Description: "Bidirectional Forwarding Detection bfdIfPol Model Object count scale.",
+				Description: "Number of Bidirectional Forwarding Detection bfdIfPol Model Objects.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"bfd_ifp_count": {
-				Description: "Bidirectional Forwarding Detection Interface Policy count scale.",
+				Description: "Number of objects with Bidirectional Forwarding Detection Interface Policy.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"class_id": {
-				Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
+			},
+			"dhcp_rs_prov_count": {
+				Description: "Number of tenants with Dynamic Host Configuration Protocol enabled.",
+				Type:        schema.TypeInt,
+				Optional:    true,
 			},
 			"dn": {
 				Description: "Dn for the tenants present.",
@@ -41,17 +45,57 @@ func dataSourceNiatelemetryTenant() *schema.Resource {
 				Optional:    true,
 			},
 			"fhs_bd_pol_count": {
-				Description: "First hop security count scale. Checks for presence of IP source gaurd, dynamic arp inspection.",
+				Description: "Number of objects with First hop security. Checks for presence of IP source gaurd, dynamic arp inspection.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"fv_ap_count": {
+				Description: "Number of application profiles per tenant.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"fv_bd_count": {
+				Description: "Number of bridge domains with hardware proxy enabled per tenant.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"fv_bd_subnet_count": {
+				Description: "Number of bridge domain subnets per tenant.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"fv_bdno_arp_count": {
+				Description: "Number of bridge domains with ARP flodding disabled per tenant.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"fv_cep_count": {
+				Description: "Count of number of endpoints per tenant.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"fv_rs_bd_to_fhs_count": {
-				Description: "First hop security count scale. Checks for presence of IP source gaurd, dynamic arp inspection.",
+				Description: "Number of objects with First hop security. Checks for presence of IP source gaurd, dynamic arp inspection.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"fv_rs_bd_to_out_count": {
+				Description: "Number of bridge domains connected to layer 3 out per tenant.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"fv_site_connp_count": {
-				Description: "Multi-Site scale for fvSiteConnp Model Object.",
+				Description: "Number of Multi-Site objects.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"fv_subnet_count": {
+				Description: "Number of subnets per tenant.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"ip_static_route_count": {
+				Description: "Number of IP static routes per tenant.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -71,7 +115,7 @@ func dataSourceNiatelemetryTenant() *schema.Resource {
 				Optional:    true,
 			},
 			"l3out_count": {
-				Description: "L3 out scale for the tenants present.",
+				Description: "Number of L3 out objects for the tenants present.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -82,10 +126,25 @@ func dataSourceNiatelemetryTenant() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified type of this managed object, i.e. the class name.\nThis property is optional. The ObjectType is implied from the URL path.\nIf specified, the value of objectType must match the class name specified in the URL path.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
+			},
+			"qos_custom_pol_count": {
+				Description: "Number of Quality Of Service Custom Policy.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"record_type": {
+				Description: "Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"record_version": {
+				Description: "Version of record being pushed. This determines what was the API version for data available from the device.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"registered_device": {
 				Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -101,10 +160,9 @@ func dataSourceNiatelemetryTenant() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -113,7 +171,7 @@ func dataSourceNiatelemetryTenant() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -135,6 +193,11 @@ func dataSourceNiatelemetryTenant() *schema.Resource {
 			"ssm": {
 				Description: "SSM property feature usage.",
 				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"ssm_count": {
+				Description: "Number of context-level ssm translate policies per tenant.",
+				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"tags": {
@@ -160,6 +223,11 @@ func dataSourceNiatelemetryTenant() *schema.Resource {
 					},
 				},
 			},
+			"tcam_opt_count": {
+				Description: "Number of TCAM optimization enabled per tenant.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"trace_route_ep_count": {
 				Description: "Number of ITrace route endpoint per tenant.",
 				Type:        schema.TypeInt,
@@ -181,27 +249,42 @@ func dataSourceNiatelemetryTenant() *schema.Resource {
 				Optional:    true,
 			},
 			"vns_abs_graph_count": {
-				Description: "L4 to L7 Services graph count scale.",
+				Description: "Number of objects with L4 to L7 Services graph.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"vns_backup_pol_count": {
-				Description: "Policy Based Routing standby Node count scale. Checks the Policy Based Routing backup policy.",
+				Description: "Number of objects with Policy Based Routing standby Node. Checks the Policy Based Routing backup policy.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"vns_redirect_dest_count": {
-				Description: "Policy Based Routing standby Node count scale. Policy based redirect requires a destination to redirect traffic.",
+				Description: "Number of objects with Policy Based Routing standby Node. Policy based redirect requires a destination to redirect traffic.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"vns_svc_redirect_pol_count": {
-				Description: "Policy Based Routing and Policy Based Service Insertion count scale. Includes without L4-L7 package.",
+				Description: "Number of Policy Based Routing and Policy Based Service Insertion objects. Includes without L4-L7 package.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"vrf_count": {
-				Description: "Vrf scale count per tenant.",
+				Description: "Number of Vrfs per tenant.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"vz_br_cp_count": {
+				Description: "Number of Zoning Policy per tenant.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"vz_rt_cons_count": {
+				Description: "Number of Client Contract between End Point Groups per tenant.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"vz_rt_prov_count": {
+				Description: "Number of Client Contract between End Point Groups per tenant.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -213,7 +296,7 @@ func dataSourceNiatelemetryTenantRead(d *schema.ResourceData, meta interface{}) 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-	var o = models.NewNiatelemetryTenantWithDefaults()
+	var o = &models.NiatelemetryTenant{}
 	if v, ok := d.GetOk("bfd_if_pol_count"); ok {
 		x := int64(v.(int))
 		o.SetBfdIfPolCount(x)
@@ -226,6 +309,10 @@ func dataSourceNiatelemetryTenantRead(d *schema.ResourceData, meta interface{}) 
 		x := (v.(string))
 		o.SetClassId(x)
 	}
+	if v, ok := d.GetOk("dhcp_rs_prov_count"); ok {
+		x := int64(v.(int))
+		o.SetDhcpRsProvCount(x)
+	}
 	if v, ok := d.GetOk("dn"); ok {
 		x := (v.(string))
 		o.SetDn(x)
@@ -234,13 +321,45 @@ func dataSourceNiatelemetryTenantRead(d *schema.ResourceData, meta interface{}) 
 		x := int64(v.(int))
 		o.SetFhsBdPolCount(x)
 	}
+	if v, ok := d.GetOk("fv_ap_count"); ok {
+		x := int64(v.(int))
+		o.SetFvApCount(x)
+	}
+	if v, ok := d.GetOk("fv_bd_count"); ok {
+		x := int64(v.(int))
+		o.SetFvBdCount(x)
+	}
+	if v, ok := d.GetOk("fv_bd_subnet_count"); ok {
+		x := int64(v.(int))
+		o.SetFvBdSubnetCount(x)
+	}
+	if v, ok := d.GetOk("fv_bdno_arp_count"); ok {
+		x := int64(v.(int))
+		o.SetFvBdnoArpCount(x)
+	}
+	if v, ok := d.GetOk("fv_cep_count"); ok {
+		x := int64(v.(int))
+		o.SetFvCepCount(x)
+	}
 	if v, ok := d.GetOk("fv_rs_bd_to_fhs_count"); ok {
 		x := int64(v.(int))
 		o.SetFvRsBdToFhsCount(x)
 	}
+	if v, ok := d.GetOk("fv_rs_bd_to_out_count"); ok {
+		x := int64(v.(int))
+		o.SetFvRsBdToOutCount(x)
+	}
 	if v, ok := d.GetOk("fv_site_connp_count"); ok {
 		x := int64(v.(int))
 		o.SetFvSiteConnpCount(x)
+	}
+	if v, ok := d.GetOk("fv_subnet_count"); ok {
+		x := int64(v.(int))
+		o.SetFvSubnetCount(x)
+	}
+	if v, ok := d.GetOk("ip_static_route_count"); ok {
+		x := int64(v.(int))
+		o.SetIpStaticRouteCount(x)
 	}
 	if v, ok := d.GetOk("l3_multicast_count"); ok {
 		x := int64(v.(int))
@@ -266,6 +385,18 @@ func dataSourceNiatelemetryTenantRead(d *schema.ResourceData, meta interface{}) 
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
+	if v, ok := d.GetOk("qos_custom_pol_count"); ok {
+		x := int64(v.(int))
+		o.SetQosCustomPolCount(x)
+	}
+	if v, ok := d.GetOk("record_type"); ok {
+		x := (v.(string))
+		o.SetRecordType(x)
+	}
+	if v, ok := d.GetOk("record_version"); ok {
+		x := (v.(string))
+		o.SetRecordVersion(x)
+	}
 	if v, ok := d.GetOk("site_name"); ok {
 		x := (v.(string))
 		o.SetSiteName(x)
@@ -273,6 +404,14 @@ func dataSourceNiatelemetryTenantRead(d *schema.ResourceData, meta interface{}) 
 	if v, ok := d.GetOk("ssm"); ok {
 		x := (v.(string))
 		o.SetSsm(x)
+	}
+	if v, ok := d.GetOk("ssm_count"); ok {
+		x := int64(v.(int))
+		o.SetSsmCount(x)
+	}
+	if v, ok := d.GetOk("tcam_opt_count"); ok {
+		x := int64(v.(int))
+		o.SetTcamOptCount(x)
 	}
 	if v, ok := d.GetOk("trace_route_ep_count"); ok {
 		x := int64(v.(int))
@@ -310,6 +449,18 @@ func dataSourceNiatelemetryTenantRead(d *schema.ResourceData, meta interface{}) 
 		x := int64(v.(int))
 		o.SetVrfCount(x)
 	}
+	if v, ok := d.GetOk("vz_br_cp_count"); ok {
+		x := int64(v.(int))
+		o.SetVzBrCpCount(x)
+	}
+	if v, ok := d.GetOk("vz_rt_cons_count"); ok {
+		x := int64(v.(int))
+		o.SetVzRtConsCount(x)
+	}
+	if v, ok := d.GetOk("vz_rt_prov_count"); ok {
+		x := int64(v.(int))
+		o.SetVzRtProvCount(x)
+	}
 
 	data, err := o.MarshalJSON()
 	if err != nil {
@@ -337,7 +488,7 @@ func dataSourceNiatelemetryTenantRead(d *schema.ResourceData, meta interface{}) 
 	case reflect.Slice:
 		r := reflect.ValueOf(result)
 		for i := 0; i < r.Len(); i++ {
-			var s = models.NewNiatelemetryTenantWithDefaults()
+			var s = &models.NiatelemetryTenant{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
 				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
@@ -354,17 +505,44 @@ func dataSourceNiatelemetryTenantRead(d *schema.ResourceData, meta interface{}) 
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
 				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
 			}
+			if err := d.Set("dhcp_rs_prov_count", (s.GetDhcpRsProvCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property DhcpRsProvCount: %+v", err)
+			}
 			if err := d.Set("dn", (s.GetDn())); err != nil {
 				return fmt.Errorf("error occurred while setting property Dn: %+v", err)
 			}
 			if err := d.Set("fhs_bd_pol_count", (s.GetFhsBdPolCount())); err != nil {
 				return fmt.Errorf("error occurred while setting property FhsBdPolCount: %+v", err)
 			}
+			if err := d.Set("fv_ap_count", (s.GetFvApCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property FvApCount: %+v", err)
+			}
+			if err := d.Set("fv_bd_count", (s.GetFvBdCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property FvBdCount: %+v", err)
+			}
+			if err := d.Set("fv_bd_subnet_count", (s.GetFvBdSubnetCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property FvBdSubnetCount: %+v", err)
+			}
+			if err := d.Set("fv_bdno_arp_count", (s.GetFvBdnoArpCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property FvBdnoArpCount: %+v", err)
+			}
+			if err := d.Set("fv_cep_count", (s.GetFvCepCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property FvCepCount: %+v", err)
+			}
 			if err := d.Set("fv_rs_bd_to_fhs_count", (s.GetFvRsBdToFhsCount())); err != nil {
 				return fmt.Errorf("error occurred while setting property FvRsBdToFhsCount: %+v", err)
 			}
+			if err := d.Set("fv_rs_bd_to_out_count", (s.GetFvRsBdToOutCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property FvRsBdToOutCount: %+v", err)
+			}
 			if err := d.Set("fv_site_connp_count", (s.GetFvSiteConnpCount())); err != nil {
 				return fmt.Errorf("error occurred while setting property FvSiteConnpCount: %+v", err)
+			}
+			if err := d.Set("fv_subnet_count", (s.GetFvSubnetCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property FvSubnetCount: %+v", err)
+			}
+			if err := d.Set("ip_static_route_count", (s.GetIpStaticRouteCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property IpStaticRouteCount: %+v", err)
 			}
 			if err := d.Set("l3_multicast_count", (s.GetL3MulticastCount())); err != nil {
 				return fmt.Errorf("error occurred while setting property L3MulticastCount: %+v", err)
@@ -384,6 +562,15 @@ func dataSourceNiatelemetryTenantRead(d *schema.ResourceData, meta interface{}) 
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
 				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
 			}
+			if err := d.Set("qos_custom_pol_count", (s.GetQosCustomPolCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property QosCustomPolCount: %+v", err)
+			}
+			if err := d.Set("record_type", (s.GetRecordType())); err != nil {
+				return fmt.Errorf("error occurred while setting property RecordType: %+v", err)
+			}
+			if err := d.Set("record_version", (s.GetRecordVersion())); err != nil {
+				return fmt.Errorf("error occurred while setting property RecordVersion: %+v", err)
+			}
 
 			if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
 				return fmt.Errorf("error occurred while setting property RegisteredDevice: %+v", err)
@@ -394,9 +581,15 @@ func dataSourceNiatelemetryTenantRead(d *schema.ResourceData, meta interface{}) 
 			if err := d.Set("ssm", (s.GetSsm())); err != nil {
 				return fmt.Errorf("error occurred while setting property Ssm: %+v", err)
 			}
+			if err := d.Set("ssm_count", (s.GetSsmCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property SsmCount: %+v", err)
+			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+			}
+			if err := d.Set("tcam_opt_count", (s.GetTcamOptCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property TcamOptCount: %+v", err)
 			}
 			if err := d.Set("trace_route_ep_count", (s.GetTraceRouteEpCount())); err != nil {
 				return fmt.Errorf("error occurred while setting property TraceRouteEpCount: %+v", err)
@@ -424,6 +617,15 @@ func dataSourceNiatelemetryTenantRead(d *schema.ResourceData, meta interface{}) 
 			}
 			if err := d.Set("vrf_count", (s.GetVrfCount())); err != nil {
 				return fmt.Errorf("error occurred while setting property VrfCount: %+v", err)
+			}
+			if err := d.Set("vz_br_cp_count", (s.GetVzBrCpCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property VzBrCpCount: %+v", err)
+			}
+			if err := d.Set("vz_rt_cons_count", (s.GetVzRtConsCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property VzRtConsCount: %+v", err)
+			}
+			if err := d.Set("vz_rt_prov_count", (s.GetVzRtProvCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property VzRtProvCount: %+v", err)
 			}
 			d.SetId(s.GetMoid())
 		}

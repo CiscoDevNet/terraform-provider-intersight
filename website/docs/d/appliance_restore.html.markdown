@@ -15,13 +15,13 @@ one Restore managed object with a 'Started' state at any time. All other Restore
 managed objects will be in terminal states.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `class_id`:(string) The concrete type of this complex type. Its value must be the same as the 'objectType' property.The OpenAPI document references this property as a discriminator value. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `elapsed_time`:(int) Elapsed time in seconds since the restore process has started. 
 * `end_time`:(string) End date and time of the restore process. 
 * `filename`:(string) Backup filename to backup or restore. 
 * `is_password_set`:(bool) Indicates whether the value of the 'password' property has been set. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified type of this managed object, i.e. the class name.This property is optional. The ObjectType is implied from the URL path.If specified, the value of objectType must match the class name specified in the URL path. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `password`:(string) Password for authenticating with the file server. 
 * `protocol`:(string) Communication protocol used by the file server (e.g. scp or sftp).* `scp` - Secure Copy Protocol (SCP) to access the file server.* `sftp` - SSH File Transfer Protocol (SFTP) to access file server. 
 * `remote_host`:(string) Hostname of the remote file server. 

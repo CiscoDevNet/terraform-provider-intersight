@@ -4,8 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **AdminPowerState** | Pointer to **string** | The desired power state of the server. | [optional] [readonly] 
-**AlarmSummary** | Pointer to [**ComputeAlarmSummary**](compute.AlarmSummary.md) |  | [optional] 
+**AlarmSummary** | Pointer to [**NullableComputeAlarmSummary**](compute.AlarmSummary.md) |  | [optional] 
 **AssetTag** | Pointer to **string** | The user defined asset tag assigned to the server. | [optional] [readonly] 
 **AvailableMemory** | Pointer to **int64** | The amount of memory available on the server. | [optional] [readonly] 
 **BiosPostComplete** | Pointer to **bool** | The BIOS POST completion status of the server. | [optional] 
@@ -30,13 +32,24 @@ Name | Type | Description | Notes
 **TotalMemory** | Pointer to **int64** | The total memory available on the server. | [optional] [readonly] 
 **UserLabel** | Pointer to **string** | The user defined label assigned to the server. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | The universally unique identity of the server. | [optional] [readonly] 
+**BootCddDevices** | Pointer to [**[]BootCddDeviceRelationship**](boot.CddDevice.Relationship.md) | An array of relationships to bootCddDevice resources. | [optional] 
+**BootHddDevices** | Pointer to [**[]BootHddDeviceRelationship**](boot.HddDevice.Relationship.md) | An array of relationships to bootHddDevice resources. | [optional] 
+**BootIscsiDevices** | Pointer to [**[]BootIscsiDeviceRelationship**](boot.IscsiDevice.Relationship.md) | An array of relationships to bootIscsiDevice resources. | [optional] 
+**BootNvmeDevices** | Pointer to [**[]BootNvmeDeviceRelationship**](boot.NvmeDevice.Relationship.md) | An array of relationships to bootNvmeDevice resources. | [optional] 
+**BootPchStorageDevices** | Pointer to [**[]BootPchStorageDeviceRelationship**](boot.PchStorageDevice.Relationship.md) | An array of relationships to bootPchStorageDevice resources. | [optional] 
+**BootPxeDevices** | Pointer to [**[]BootPxeDeviceRelationship**](boot.PxeDevice.Relationship.md) | An array of relationships to bootPxeDevice resources. | [optional] 
+**BootSanDevices** | Pointer to [**[]BootSanDeviceRelationship**](boot.SanDevice.Relationship.md) | An array of relationships to bootSanDevice resources. | [optional] 
+**BootSdDevices** | Pointer to [**[]BootSdDeviceRelationship**](boot.SdDevice.Relationship.md) | An array of relationships to bootSdDevice resources. | [optional] 
+**BootUefiShellDevices** | Pointer to [**[]BootUefiShellDeviceRelationship**](boot.UefiShellDevice.Relationship.md) | An array of relationships to bootUefiShellDevice resources. | [optional] 
+**BootUsbDevices** | Pointer to [**[]BootUsbDeviceRelationship**](boot.UsbDevice.Relationship.md) | An array of relationships to bootUsbDevice resources. | [optional] 
+**BootVmediaDevices** | Pointer to [**[]BootVmediaDeviceRelationship**](boot.VmediaDevice.Relationship.md) | An array of relationships to bootVmediaDevice resources. | [optional] 
 **MgmtIdentity** | Pointer to [**EquipmentPhysicalIdentityRelationship**](equipment.PhysicalIdentity.Relationship.md) |  | [optional] 
 
 ## Methods
 
 ### NewComputePhysicalAllOf
 
-`func NewComputePhysicalAllOf() *ComputePhysicalAllOf`
+`func NewComputePhysicalAllOf(classId string, objectType string, ) *ComputePhysicalAllOf`
 
 NewComputePhysicalAllOf instantiates a new ComputePhysicalAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -50,6 +63,46 @@ will change when the set of required properties is changed
 NewComputePhysicalAllOfWithDefaults instantiates a new ComputePhysicalAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *ComputePhysicalAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *ComputePhysicalAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *ComputePhysicalAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *ComputePhysicalAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *ComputePhysicalAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *ComputePhysicalAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAdminPowerState
 
@@ -101,6 +154,16 @@ SetAlarmSummary sets AlarmSummary field to given value.
 
 HasAlarmSummary returns a boolean if a field has been set.
 
+### SetAlarmSummaryNil
+
+`func (o *ComputePhysicalAllOf) SetAlarmSummaryNil(b bool)`
+
+ SetAlarmSummaryNil sets the value for AlarmSummary to be an explicit nil
+
+### UnsetAlarmSummary
+`func (o *ComputePhysicalAllOf) UnsetAlarmSummary()`
+
+UnsetAlarmSummary ensures that no value is present for AlarmSummary, not even an explicit nil
 ### GetAssetTag
 
 `func (o *ComputePhysicalAllOf) GetAssetTag() string`
@@ -226,6 +289,16 @@ SetKvmIpAddresses sets KvmIpAddresses field to given value.
 
 HasKvmIpAddresses returns a boolean if a field has been set.
 
+### SetKvmIpAddressesNil
+
+`func (o *ComputePhysicalAllOf) SetKvmIpAddressesNil(b bool)`
+
+ SetKvmIpAddressesNil sets the value for KvmIpAddresses to be an explicit nil
+
+### UnsetKvmIpAddresses
+`func (o *ComputePhysicalAllOf) UnsetKvmIpAddresses()`
+
+UnsetKvmIpAddresses ensures that no value is present for KvmIpAddresses, not even an explicit nil
 ### GetManagementMode
 
 `func (o *ComputePhysicalAllOf) GetManagementMode() string`
@@ -701,6 +774,391 @@ SetUuid sets Uuid field to given value.
 
 HasUuid returns a boolean if a field has been set.
 
+### GetBootCddDevices
+
+`func (o *ComputePhysicalAllOf) GetBootCddDevices() []BootCddDeviceRelationship`
+
+GetBootCddDevices returns the BootCddDevices field if non-nil, zero value otherwise.
+
+### GetBootCddDevicesOk
+
+`func (o *ComputePhysicalAllOf) GetBootCddDevicesOk() (*[]BootCddDeviceRelationship, bool)`
+
+GetBootCddDevicesOk returns a tuple with the BootCddDevices field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBootCddDevices
+
+`func (o *ComputePhysicalAllOf) SetBootCddDevices(v []BootCddDeviceRelationship)`
+
+SetBootCddDevices sets BootCddDevices field to given value.
+
+### HasBootCddDevices
+
+`func (o *ComputePhysicalAllOf) HasBootCddDevices() bool`
+
+HasBootCddDevices returns a boolean if a field has been set.
+
+### SetBootCddDevicesNil
+
+`func (o *ComputePhysicalAllOf) SetBootCddDevicesNil(b bool)`
+
+ SetBootCddDevicesNil sets the value for BootCddDevices to be an explicit nil
+
+### UnsetBootCddDevices
+`func (o *ComputePhysicalAllOf) UnsetBootCddDevices()`
+
+UnsetBootCddDevices ensures that no value is present for BootCddDevices, not even an explicit nil
+### GetBootHddDevices
+
+`func (o *ComputePhysicalAllOf) GetBootHddDevices() []BootHddDeviceRelationship`
+
+GetBootHddDevices returns the BootHddDevices field if non-nil, zero value otherwise.
+
+### GetBootHddDevicesOk
+
+`func (o *ComputePhysicalAllOf) GetBootHddDevicesOk() (*[]BootHddDeviceRelationship, bool)`
+
+GetBootHddDevicesOk returns a tuple with the BootHddDevices field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBootHddDevices
+
+`func (o *ComputePhysicalAllOf) SetBootHddDevices(v []BootHddDeviceRelationship)`
+
+SetBootHddDevices sets BootHddDevices field to given value.
+
+### HasBootHddDevices
+
+`func (o *ComputePhysicalAllOf) HasBootHddDevices() bool`
+
+HasBootHddDevices returns a boolean if a field has been set.
+
+### SetBootHddDevicesNil
+
+`func (o *ComputePhysicalAllOf) SetBootHddDevicesNil(b bool)`
+
+ SetBootHddDevicesNil sets the value for BootHddDevices to be an explicit nil
+
+### UnsetBootHddDevices
+`func (o *ComputePhysicalAllOf) UnsetBootHddDevices()`
+
+UnsetBootHddDevices ensures that no value is present for BootHddDevices, not even an explicit nil
+### GetBootIscsiDevices
+
+`func (o *ComputePhysicalAllOf) GetBootIscsiDevices() []BootIscsiDeviceRelationship`
+
+GetBootIscsiDevices returns the BootIscsiDevices field if non-nil, zero value otherwise.
+
+### GetBootIscsiDevicesOk
+
+`func (o *ComputePhysicalAllOf) GetBootIscsiDevicesOk() (*[]BootIscsiDeviceRelationship, bool)`
+
+GetBootIscsiDevicesOk returns a tuple with the BootIscsiDevices field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBootIscsiDevices
+
+`func (o *ComputePhysicalAllOf) SetBootIscsiDevices(v []BootIscsiDeviceRelationship)`
+
+SetBootIscsiDevices sets BootIscsiDevices field to given value.
+
+### HasBootIscsiDevices
+
+`func (o *ComputePhysicalAllOf) HasBootIscsiDevices() bool`
+
+HasBootIscsiDevices returns a boolean if a field has been set.
+
+### SetBootIscsiDevicesNil
+
+`func (o *ComputePhysicalAllOf) SetBootIscsiDevicesNil(b bool)`
+
+ SetBootIscsiDevicesNil sets the value for BootIscsiDevices to be an explicit nil
+
+### UnsetBootIscsiDevices
+`func (o *ComputePhysicalAllOf) UnsetBootIscsiDevices()`
+
+UnsetBootIscsiDevices ensures that no value is present for BootIscsiDevices, not even an explicit nil
+### GetBootNvmeDevices
+
+`func (o *ComputePhysicalAllOf) GetBootNvmeDevices() []BootNvmeDeviceRelationship`
+
+GetBootNvmeDevices returns the BootNvmeDevices field if non-nil, zero value otherwise.
+
+### GetBootNvmeDevicesOk
+
+`func (o *ComputePhysicalAllOf) GetBootNvmeDevicesOk() (*[]BootNvmeDeviceRelationship, bool)`
+
+GetBootNvmeDevicesOk returns a tuple with the BootNvmeDevices field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBootNvmeDevices
+
+`func (o *ComputePhysicalAllOf) SetBootNvmeDevices(v []BootNvmeDeviceRelationship)`
+
+SetBootNvmeDevices sets BootNvmeDevices field to given value.
+
+### HasBootNvmeDevices
+
+`func (o *ComputePhysicalAllOf) HasBootNvmeDevices() bool`
+
+HasBootNvmeDevices returns a boolean if a field has been set.
+
+### SetBootNvmeDevicesNil
+
+`func (o *ComputePhysicalAllOf) SetBootNvmeDevicesNil(b bool)`
+
+ SetBootNvmeDevicesNil sets the value for BootNvmeDevices to be an explicit nil
+
+### UnsetBootNvmeDevices
+`func (o *ComputePhysicalAllOf) UnsetBootNvmeDevices()`
+
+UnsetBootNvmeDevices ensures that no value is present for BootNvmeDevices, not even an explicit nil
+### GetBootPchStorageDevices
+
+`func (o *ComputePhysicalAllOf) GetBootPchStorageDevices() []BootPchStorageDeviceRelationship`
+
+GetBootPchStorageDevices returns the BootPchStorageDevices field if non-nil, zero value otherwise.
+
+### GetBootPchStorageDevicesOk
+
+`func (o *ComputePhysicalAllOf) GetBootPchStorageDevicesOk() (*[]BootPchStorageDeviceRelationship, bool)`
+
+GetBootPchStorageDevicesOk returns a tuple with the BootPchStorageDevices field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBootPchStorageDevices
+
+`func (o *ComputePhysicalAllOf) SetBootPchStorageDevices(v []BootPchStorageDeviceRelationship)`
+
+SetBootPchStorageDevices sets BootPchStorageDevices field to given value.
+
+### HasBootPchStorageDevices
+
+`func (o *ComputePhysicalAllOf) HasBootPchStorageDevices() bool`
+
+HasBootPchStorageDevices returns a boolean if a field has been set.
+
+### SetBootPchStorageDevicesNil
+
+`func (o *ComputePhysicalAllOf) SetBootPchStorageDevicesNil(b bool)`
+
+ SetBootPchStorageDevicesNil sets the value for BootPchStorageDevices to be an explicit nil
+
+### UnsetBootPchStorageDevices
+`func (o *ComputePhysicalAllOf) UnsetBootPchStorageDevices()`
+
+UnsetBootPchStorageDevices ensures that no value is present for BootPchStorageDevices, not even an explicit nil
+### GetBootPxeDevices
+
+`func (o *ComputePhysicalAllOf) GetBootPxeDevices() []BootPxeDeviceRelationship`
+
+GetBootPxeDevices returns the BootPxeDevices field if non-nil, zero value otherwise.
+
+### GetBootPxeDevicesOk
+
+`func (o *ComputePhysicalAllOf) GetBootPxeDevicesOk() (*[]BootPxeDeviceRelationship, bool)`
+
+GetBootPxeDevicesOk returns a tuple with the BootPxeDevices field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBootPxeDevices
+
+`func (o *ComputePhysicalAllOf) SetBootPxeDevices(v []BootPxeDeviceRelationship)`
+
+SetBootPxeDevices sets BootPxeDevices field to given value.
+
+### HasBootPxeDevices
+
+`func (o *ComputePhysicalAllOf) HasBootPxeDevices() bool`
+
+HasBootPxeDevices returns a boolean if a field has been set.
+
+### SetBootPxeDevicesNil
+
+`func (o *ComputePhysicalAllOf) SetBootPxeDevicesNil(b bool)`
+
+ SetBootPxeDevicesNil sets the value for BootPxeDevices to be an explicit nil
+
+### UnsetBootPxeDevices
+`func (o *ComputePhysicalAllOf) UnsetBootPxeDevices()`
+
+UnsetBootPxeDevices ensures that no value is present for BootPxeDevices, not even an explicit nil
+### GetBootSanDevices
+
+`func (o *ComputePhysicalAllOf) GetBootSanDevices() []BootSanDeviceRelationship`
+
+GetBootSanDevices returns the BootSanDevices field if non-nil, zero value otherwise.
+
+### GetBootSanDevicesOk
+
+`func (o *ComputePhysicalAllOf) GetBootSanDevicesOk() (*[]BootSanDeviceRelationship, bool)`
+
+GetBootSanDevicesOk returns a tuple with the BootSanDevices field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBootSanDevices
+
+`func (o *ComputePhysicalAllOf) SetBootSanDevices(v []BootSanDeviceRelationship)`
+
+SetBootSanDevices sets BootSanDevices field to given value.
+
+### HasBootSanDevices
+
+`func (o *ComputePhysicalAllOf) HasBootSanDevices() bool`
+
+HasBootSanDevices returns a boolean if a field has been set.
+
+### SetBootSanDevicesNil
+
+`func (o *ComputePhysicalAllOf) SetBootSanDevicesNil(b bool)`
+
+ SetBootSanDevicesNil sets the value for BootSanDevices to be an explicit nil
+
+### UnsetBootSanDevices
+`func (o *ComputePhysicalAllOf) UnsetBootSanDevices()`
+
+UnsetBootSanDevices ensures that no value is present for BootSanDevices, not even an explicit nil
+### GetBootSdDevices
+
+`func (o *ComputePhysicalAllOf) GetBootSdDevices() []BootSdDeviceRelationship`
+
+GetBootSdDevices returns the BootSdDevices field if non-nil, zero value otherwise.
+
+### GetBootSdDevicesOk
+
+`func (o *ComputePhysicalAllOf) GetBootSdDevicesOk() (*[]BootSdDeviceRelationship, bool)`
+
+GetBootSdDevicesOk returns a tuple with the BootSdDevices field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBootSdDevices
+
+`func (o *ComputePhysicalAllOf) SetBootSdDevices(v []BootSdDeviceRelationship)`
+
+SetBootSdDevices sets BootSdDevices field to given value.
+
+### HasBootSdDevices
+
+`func (o *ComputePhysicalAllOf) HasBootSdDevices() bool`
+
+HasBootSdDevices returns a boolean if a field has been set.
+
+### SetBootSdDevicesNil
+
+`func (o *ComputePhysicalAllOf) SetBootSdDevicesNil(b bool)`
+
+ SetBootSdDevicesNil sets the value for BootSdDevices to be an explicit nil
+
+### UnsetBootSdDevices
+`func (o *ComputePhysicalAllOf) UnsetBootSdDevices()`
+
+UnsetBootSdDevices ensures that no value is present for BootSdDevices, not even an explicit nil
+### GetBootUefiShellDevices
+
+`func (o *ComputePhysicalAllOf) GetBootUefiShellDevices() []BootUefiShellDeviceRelationship`
+
+GetBootUefiShellDevices returns the BootUefiShellDevices field if non-nil, zero value otherwise.
+
+### GetBootUefiShellDevicesOk
+
+`func (o *ComputePhysicalAllOf) GetBootUefiShellDevicesOk() (*[]BootUefiShellDeviceRelationship, bool)`
+
+GetBootUefiShellDevicesOk returns a tuple with the BootUefiShellDevices field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBootUefiShellDevices
+
+`func (o *ComputePhysicalAllOf) SetBootUefiShellDevices(v []BootUefiShellDeviceRelationship)`
+
+SetBootUefiShellDevices sets BootUefiShellDevices field to given value.
+
+### HasBootUefiShellDevices
+
+`func (o *ComputePhysicalAllOf) HasBootUefiShellDevices() bool`
+
+HasBootUefiShellDevices returns a boolean if a field has been set.
+
+### SetBootUefiShellDevicesNil
+
+`func (o *ComputePhysicalAllOf) SetBootUefiShellDevicesNil(b bool)`
+
+ SetBootUefiShellDevicesNil sets the value for BootUefiShellDevices to be an explicit nil
+
+### UnsetBootUefiShellDevices
+`func (o *ComputePhysicalAllOf) UnsetBootUefiShellDevices()`
+
+UnsetBootUefiShellDevices ensures that no value is present for BootUefiShellDevices, not even an explicit nil
+### GetBootUsbDevices
+
+`func (o *ComputePhysicalAllOf) GetBootUsbDevices() []BootUsbDeviceRelationship`
+
+GetBootUsbDevices returns the BootUsbDevices field if non-nil, zero value otherwise.
+
+### GetBootUsbDevicesOk
+
+`func (o *ComputePhysicalAllOf) GetBootUsbDevicesOk() (*[]BootUsbDeviceRelationship, bool)`
+
+GetBootUsbDevicesOk returns a tuple with the BootUsbDevices field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBootUsbDevices
+
+`func (o *ComputePhysicalAllOf) SetBootUsbDevices(v []BootUsbDeviceRelationship)`
+
+SetBootUsbDevices sets BootUsbDevices field to given value.
+
+### HasBootUsbDevices
+
+`func (o *ComputePhysicalAllOf) HasBootUsbDevices() bool`
+
+HasBootUsbDevices returns a boolean if a field has been set.
+
+### SetBootUsbDevicesNil
+
+`func (o *ComputePhysicalAllOf) SetBootUsbDevicesNil(b bool)`
+
+ SetBootUsbDevicesNil sets the value for BootUsbDevices to be an explicit nil
+
+### UnsetBootUsbDevices
+`func (o *ComputePhysicalAllOf) UnsetBootUsbDevices()`
+
+UnsetBootUsbDevices ensures that no value is present for BootUsbDevices, not even an explicit nil
+### GetBootVmediaDevices
+
+`func (o *ComputePhysicalAllOf) GetBootVmediaDevices() []BootVmediaDeviceRelationship`
+
+GetBootVmediaDevices returns the BootVmediaDevices field if non-nil, zero value otherwise.
+
+### GetBootVmediaDevicesOk
+
+`func (o *ComputePhysicalAllOf) GetBootVmediaDevicesOk() (*[]BootVmediaDeviceRelationship, bool)`
+
+GetBootVmediaDevicesOk returns a tuple with the BootVmediaDevices field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBootVmediaDevices
+
+`func (o *ComputePhysicalAllOf) SetBootVmediaDevices(v []BootVmediaDeviceRelationship)`
+
+SetBootVmediaDevices sets BootVmediaDevices field to given value.
+
+### HasBootVmediaDevices
+
+`func (o *ComputePhysicalAllOf) HasBootVmediaDevices() bool`
+
+HasBootVmediaDevices returns a boolean if a field has been set.
+
+### SetBootVmediaDevicesNil
+
+`func (o *ComputePhysicalAllOf) SetBootVmediaDevicesNil(b bool)`
+
+ SetBootVmediaDevicesNil sets the value for BootVmediaDevices to be an explicit nil
+
+### UnsetBootVmediaDevices
+`func (o *ComputePhysicalAllOf) UnsetBootVmediaDevices()`
+
+UnsetBootVmediaDevices ensures that no value is present for BootVmediaDevices, not even an explicit nil
 ### GetMgmtIdentity
 
 `func (o *ComputePhysicalAllOf) GetMgmtIdentity() EquipmentPhysicalIdentityRelationship`

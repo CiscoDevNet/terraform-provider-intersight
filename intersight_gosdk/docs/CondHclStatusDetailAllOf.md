@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "cond.HclStatusDetail"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "cond.HclStatusDetail"]
 **HardwareStatus** | Pointer to **string** | The model is considered as part of the hardware profile for the component. This will provide the HCL validation status for the hardware profile. The reasons can be one of the following \&quot;Incompatible-Server-With-Component\&quot; - the server model and component combination is not listed in HCL \&quot;Incompatible-Firmware\&quot; - The server&#39;s firmware is not listed for this component&#39;s hardware profile \&quot;Incompatible-Component\&quot; - the component&#39;s model is not listed in the HCL \&quot;Service-Unavailable\&quot; - HCL data service is unavailable at the moment (try again later). This could be due to HCL data updating \&quot;Not-Evaluated\&quot; - the hardware profile was not evaulated for the component because the server&#39;s hw/sw status is not listed or server is exempted. \&quot;Compatible\&quot; - this component&#39;s hardware profile is listed in the HCL. * &#x60;Missing-Os-Driver-Info&#x60; - The validation failed becaue the given server has no OS driver information available in the inventory. Either install ucstools vib or use power shell scripts to tag proper OS information. * &#x60;Incompatible-Server-With-Component&#x60; - The validation failed for this component because he server model and component model combination was not found in the HCL. * &#x60;Incompatible-Processor&#x60; - The validation failed because the given processor was not found for the given server PID. * &#x60;Incompatible-Os-Info&#x60; - The validation failed because the given OS vendor and version was not found in HCL for the server PID and processor combination. * &#x60;Incompatible-Component-Model&#x60; - The validation failed because the given Component model was not found in the HCL for the given server PID, processor, server Firmware and OS vendor and version. * &#x60;Incompatible-Firmware&#x60; - The validation failed because the given server firmware or adapter firmware was not found in the HCL for the given server PID, processor, OS vendor and version and component model. * &#x60;Incompatible-Driver&#x60; - The validation failed because the given driver version was not found in the HCL for the given Server PID, processor, OS vendor and version, server firmware and component firmware. * &#x60;Incompatible-Firmware-Driver&#x60; - The validation failed because the given component firmware and driver version was not found in the HCL for the given Server PID, processor, OS vendor and version and server firmware. * &#x60;Service-Unavailable&#x60; - The validation has failed because HCL data service is temporarily not available. The server will be re-evaluated once HCL data service is back online or finished importing new HCL data. * &#x60;Service-Error&#x60; - The validation has failed because the HCL data service has return a service error or unrecognized result. * &#x60;Unrecognized-Protocol&#x60; - The validation has failed for the HCL component because the HCL data service has return a validation reason that is unknown to this service. This reason is used as a default failure reason reason in case we cannot map the error reason received from the HCL data service unto one of the other enum values. * &#x60;Not-Evaluated&#x60; - The validation for the hardware or software HCL status was not yet evaluated because some previous validation had failed. For example if a server&#39;s hardware profile fails to validate with HCL, then the server&#39;s software status will not be evaluated. * &#x60;Compatible&#x60; - The validation has passed for this server PID, processor, OS vendor and version, component model, component firmware and driver version. | [optional] [default to "Missing-Os-Driver-Info"]
 **HclCimcVersion** | Pointer to **string** | The current CIMC version for the server normalized for querying HCL data. | [optional] 
 **HclDriverName** | Pointer to **string** | The current driver name of the component we are validating normalized for querying HCL data. | [optional] 
@@ -25,7 +27,7 @@ Name | Type | Description | Notes
 
 ### NewCondHclStatusDetailAllOf
 
-`func NewCondHclStatusDetailAllOf() *CondHclStatusDetailAllOf`
+`func NewCondHclStatusDetailAllOf(classId string, objectType string, ) *CondHclStatusDetailAllOf`
 
 NewCondHclStatusDetailAllOf instantiates a new CondHclStatusDetailAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -39,6 +41,46 @@ will change when the set of required properties is changed
 NewCondHclStatusDetailAllOfWithDefaults instantiates a new CondHclStatusDetailAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *CondHclStatusDetailAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *CondHclStatusDetailAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *CondHclStatusDetailAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *CondHclStatusDetailAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *CondHclStatusDetailAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *CondHclStatusDetailAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetHardwareStatus
 

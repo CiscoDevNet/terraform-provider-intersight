@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.ConfigResult"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.ConfigResult"]
 **ConfigProgress** | Pointer to **string** | The progress percentage of the running configuration or workflow. | [optional] 
 **Duration** | Pointer to **string** | The duration of the running configuration or workflow. | [optional] 
 **StartTime** | Pointer to **string** | The start time of the configuration or workflow. | [optional] 
@@ -14,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewHyperflexConfigResult
 
-`func NewHyperflexConfigResult() *HyperflexConfigResult`
+`func NewHyperflexConfigResult(classId string, objectType string, ) *HyperflexConfigResult`
 
 NewHyperflexConfigResult instantiates a new HyperflexConfigResult object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +30,46 @@ will change when the set of required properties is changed
 NewHyperflexConfigResultWithDefaults instantiates a new HyperflexConfigResult object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *HyperflexConfigResult) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *HyperflexConfigResult) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *HyperflexConfigResult) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *HyperflexConfigResult) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *HyperflexConfigResult) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *HyperflexConfigResult) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetConfigProgress
 

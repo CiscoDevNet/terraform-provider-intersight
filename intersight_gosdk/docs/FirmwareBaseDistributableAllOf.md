@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **BundleType** | Pointer to **string** | The bundle type of the image, as published on cisco.com. | [optional] [readonly] 
 **ComponentMeta** | Pointer to [**[]FirmwareComponentMeta**](firmware.ComponentMeta.md) |  | [optional] 
 **Guid** | Pointer to **string** | The unique identifier for an image in a Cisco repository. | [optional] [readonly] 
@@ -22,7 +24,7 @@ Name | Type | Description | Notes
 
 ### NewFirmwareBaseDistributableAllOf
 
-`func NewFirmwareBaseDistributableAllOf() *FirmwareBaseDistributableAllOf`
+`func NewFirmwareBaseDistributableAllOf(classId string, objectType string, ) *FirmwareBaseDistributableAllOf`
 
 NewFirmwareBaseDistributableAllOf instantiates a new FirmwareBaseDistributableAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -36,6 +38,46 @@ will change when the set of required properties is changed
 NewFirmwareBaseDistributableAllOfWithDefaults instantiates a new FirmwareBaseDistributableAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *FirmwareBaseDistributableAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *FirmwareBaseDistributableAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *FirmwareBaseDistributableAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *FirmwareBaseDistributableAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *FirmwareBaseDistributableAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *FirmwareBaseDistributableAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetBundleType
 
@@ -87,6 +129,16 @@ SetComponentMeta sets ComponentMeta field to given value.
 
 HasComponentMeta returns a boolean if a field has been set.
 
+### SetComponentMetaNil
+
+`func (o *FirmwareBaseDistributableAllOf) SetComponentMetaNil(b bool)`
+
+ SetComponentMetaNil sets the value for ComponentMeta to be an explicit nil
+
+### UnsetComponentMeta
+`func (o *FirmwareBaseDistributableAllOf) UnsetComponentMeta()`
+
+UnsetComponentMeta ensures that no value is present for ComponentMeta, not even an explicit nil
 ### GetGuid
 
 `func (o *FirmwareBaseDistributableAllOf) GetGuid() string`
@@ -287,6 +339,16 @@ SetSupportedModels sets SupportedModels field to given value.
 
 HasSupportedModels returns a boolean if a field has been set.
 
+### SetSupportedModelsNil
+
+`func (o *FirmwareBaseDistributableAllOf) SetSupportedModelsNil(b bool)`
+
+ SetSupportedModelsNil sets the value for SupportedModels to be an explicit nil
+
+### UnsetSupportedModels
+`func (o *FirmwareBaseDistributableAllOf) UnsetSupportedModels()`
+
+UnsetSupportedModels ensures that no value is present for SupportedModels, not even an explicit nil
 ### GetVendor
 
 `func (o *FirmwareBaseDistributableAllOf) GetVendor() string`

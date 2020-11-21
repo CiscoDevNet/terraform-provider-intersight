@@ -4,13 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.DeviceSummary"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.DeviceSummary"]
 **Dn** | Pointer to **string** | The distinguished name for the Network Element. | [optional] [readonly] 
 **Model** | Pointer to **string** | The model information of the Network Element. | [optional] [readonly] 
 **Serial** | Pointer to **string** | The serial number for the Network Element. | [optional] [readonly] 
 **SourceObjectType** | Pointer to **string** | The source object type of this view MO. | [optional] [readonly] 
-**ComputeBlade** | Pointer to [**ComputeBladeRelationship**](compute.Blade.Relationship.md) |  | [optional] 
 **ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](compute.RackUnit.Relationship.md) |  | [optional] 
-**EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](equipment.Chassis.Relationship.md) |  | [optional] 
+**EquipmentFex** | Pointer to [**EquipmentFexRelationship**](equipment.Fex.Relationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
@@ -18,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewEquipmentDeviceSummaryAllOf
 
-`func NewEquipmentDeviceSummaryAllOf() *EquipmentDeviceSummaryAllOf`
+`func NewEquipmentDeviceSummaryAllOf(classId string, objectType string, ) *EquipmentDeviceSummaryAllOf`
 
 NewEquipmentDeviceSummaryAllOf instantiates a new EquipmentDeviceSummaryAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -32,6 +33,46 @@ will change when the set of required properties is changed
 NewEquipmentDeviceSummaryAllOfWithDefaults instantiates a new EquipmentDeviceSummaryAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *EquipmentDeviceSummaryAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *EquipmentDeviceSummaryAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *EquipmentDeviceSummaryAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *EquipmentDeviceSummaryAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *EquipmentDeviceSummaryAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *EquipmentDeviceSummaryAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDn
 
@@ -133,31 +174,6 @@ SetSourceObjectType sets SourceObjectType field to given value.
 
 HasSourceObjectType returns a boolean if a field has been set.
 
-### GetComputeBlade
-
-`func (o *EquipmentDeviceSummaryAllOf) GetComputeBlade() ComputeBladeRelationship`
-
-GetComputeBlade returns the ComputeBlade field if non-nil, zero value otherwise.
-
-### GetComputeBladeOk
-
-`func (o *EquipmentDeviceSummaryAllOf) GetComputeBladeOk() (*ComputeBladeRelationship, bool)`
-
-GetComputeBladeOk returns a tuple with the ComputeBlade field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetComputeBlade
-
-`func (o *EquipmentDeviceSummaryAllOf) SetComputeBlade(v ComputeBladeRelationship)`
-
-SetComputeBlade sets ComputeBlade field to given value.
-
-### HasComputeBlade
-
-`func (o *EquipmentDeviceSummaryAllOf) HasComputeBlade() bool`
-
-HasComputeBlade returns a boolean if a field has been set.
-
 ### GetComputeRackUnit
 
 `func (o *EquipmentDeviceSummaryAllOf) GetComputeRackUnit() ComputeRackUnitRelationship`
@@ -183,30 +199,30 @@ SetComputeRackUnit sets ComputeRackUnit field to given value.
 
 HasComputeRackUnit returns a boolean if a field has been set.
 
-### GetEquipmentChassis
+### GetEquipmentFex
 
-`func (o *EquipmentDeviceSummaryAllOf) GetEquipmentChassis() EquipmentChassisRelationship`
+`func (o *EquipmentDeviceSummaryAllOf) GetEquipmentFex() EquipmentFexRelationship`
 
-GetEquipmentChassis returns the EquipmentChassis field if non-nil, zero value otherwise.
+GetEquipmentFex returns the EquipmentFex field if non-nil, zero value otherwise.
 
-### GetEquipmentChassisOk
+### GetEquipmentFexOk
 
-`func (o *EquipmentDeviceSummaryAllOf) GetEquipmentChassisOk() (*EquipmentChassisRelationship, bool)`
+`func (o *EquipmentDeviceSummaryAllOf) GetEquipmentFexOk() (*EquipmentFexRelationship, bool)`
 
-GetEquipmentChassisOk returns a tuple with the EquipmentChassis field if it's non-nil, zero value otherwise
+GetEquipmentFexOk returns a tuple with the EquipmentFex field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetEquipmentChassis
+### SetEquipmentFex
 
-`func (o *EquipmentDeviceSummaryAllOf) SetEquipmentChassis(v EquipmentChassisRelationship)`
+`func (o *EquipmentDeviceSummaryAllOf) SetEquipmentFex(v EquipmentFexRelationship)`
 
-SetEquipmentChassis sets EquipmentChassis field to given value.
+SetEquipmentFex sets EquipmentFex field to given value.
 
-### HasEquipmentChassis
+### HasEquipmentFex
 
-`func (o *EquipmentDeviceSummaryAllOf) HasEquipmentChassis() bool`
+`func (o *EquipmentDeviceSummaryAllOf) HasEquipmentFex() bool`
 
-HasEquipmentChassis returns a boolean if a field has been set.
+HasEquipmentFex returns a boolean if a field has been set.
 
 ### GetInventoryDeviceInfo
 

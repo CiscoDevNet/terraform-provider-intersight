@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.PureVolume"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.PureVolume"]
 **Created** | Pointer to [**time.Time**](time.Time.md) | Creation time of the volume. | [optional] [readonly] 
 **Serial** | Pointer to **string** | Serial number of the volume. | [optional] [readonly] 
 **Source** | Pointer to **string** | Source from which the volume is created. Applicable only if the volume is cloned from other volume or snapshot. | [optional] [readonly] 
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewStoragePureVolume
 
-`func NewStoragePureVolume() *StoragePureVolume`
+`func NewStoragePureVolume(classId string, objectType string, ) *StoragePureVolume`
 
 NewStoragePureVolume instantiates a new StoragePureVolume object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +31,46 @@ will change when the set of required properties is changed
 NewStoragePureVolumeWithDefaults instantiates a new StoragePureVolume object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *StoragePureVolume) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *StoragePureVolume) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *StoragePureVolume) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *StoragePureVolume) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *StoragePureVolume) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *StoragePureVolume) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCreated
 

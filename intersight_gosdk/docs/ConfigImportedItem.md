@@ -4,9 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "config.ImportedItem"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "config.ImportedItem"]
 **IsShared** | Pointer to **bool** | Specifies whether this item MO was in shared scope or user scope when exported. | [optional] [readonly] 
 **IsUpdated** | Pointer to **bool** | Specifies whether this item MO was updated or created while importing in desired service. | [optional] [readonly] 
-**Item** | Pointer to [**ConfigMoRef**](config.MoRef.md) |  | [optional] 
+**Item** | Pointer to [**NullableConfigMoRef**](config.MoRef.md) |  | [optional] 
 **Name** | Pointer to **string** | MO item identity (the moref corresponding to item) expressed as a string. | [optional] [readonly] 
 **NewMoid** | Pointer to **string** | Moid of the MO created/updated during import for the item. | [optional] [readonly] 
 **ServiceVersion** | Pointer to **string** | Version of the service that owned the item MO when the item was exported. | [optional] [readonly] 
@@ -18,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewConfigImportedItem
 
-`func NewConfigImportedItem() *ConfigImportedItem`
+`func NewConfigImportedItem(classId string, objectType string, ) *ConfigImportedItem`
 
 NewConfigImportedItem instantiates a new ConfigImportedItem object
 This constructor will assign default values to properties that have it defined,
@@ -32,6 +34,46 @@ will change when the set of required properties is changed
 NewConfigImportedItemWithDefaults instantiates a new ConfigImportedItem object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *ConfigImportedItem) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *ConfigImportedItem) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *ConfigImportedItem) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *ConfigImportedItem) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *ConfigImportedItem) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *ConfigImportedItem) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetIsShared
 
@@ -108,6 +150,16 @@ SetItem sets Item field to given value.
 
 HasItem returns a boolean if a field has been set.
 
+### SetItemNil
+
+`func (o *ConfigImportedItem) SetItemNil(b bool)`
+
+ SetItemNil sets the value for Item to be an explicit nil
+
+### UnsetItem
+`func (o *ConfigImportedItem) UnsetItem()`
+
+UnsetItem ensures that no value is present for Item, not even an explicit nil
 ### GetName
 
 `func (o *ConfigImportedItem) GetName() string`

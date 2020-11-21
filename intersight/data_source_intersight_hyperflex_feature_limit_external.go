@@ -32,10 +32,9 @@ func dataSourceHyperflexFeatureLimitExternal() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -44,7 +43,7 @@ func dataSourceHyperflexFeatureLimitExternal() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -60,10 +59,9 @@ func dataSourceHyperflexFeatureLimitExternal() *schema.Resource {
 				Computed: true,
 			},
 			"class_id": {
-				Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
 			},
 			"feature_limit_entries": {
 				Type:     schema.TypeList,
@@ -76,10 +74,9 @@ func dataSourceHyperflexFeatureLimitExternal() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"constraint": {
 							Description: "The conditions that must be satisfied before applying the AppSetting.",
@@ -94,10 +91,9 @@ func dataSourceHyperflexFeatureLimitExternal() *schema.Resource {
 										DiffSuppressFunc: SuppressDiffAdditionProps,
 									},
 									"class_id": {
-										Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 										Type:        schema.TypeString,
 										Optional:    true,
-										Computed:    true,
 									},
 									"hxdp_version": {
 										Description: "The supported HyperFlex Data Platform version in regex format.",
@@ -105,7 +101,7 @@ func dataSourceHyperflexFeatureLimitExternal() *schema.Resource {
 										Optional:    true,
 									},
 									"hypervisor_type": {
-										Description: "The hypervisor type for the HyperFlex cluster.\n* `ESXi` - ESXi hypervisor as specified by the user.\n* `HYPERV` - Hyperv hypervisor as specified by the user.\n* `KVM` - KVM hypervisor as specified by the user.",
+										Description: "The hypervisor type for the HyperFlex cluster.\n* `ESXi` - A Vmware ESXi hypervisor of any version.\n* `HXAP` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
 										Type:        schema.TypeString,
 										Optional:    true,
 									},
@@ -115,7 +111,7 @@ func dataSourceHyperflexFeatureLimitExternal() *schema.Resource {
 										Optional:    true,
 									},
 									"object_type": {
-										Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
@@ -135,7 +131,7 @@ func dataSourceHyperflexFeatureLimitExternal() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -156,7 +152,7 @@ func dataSourceHyperflexFeatureLimitExternal() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified type of this managed object, i.e. the class name.\nThis property is optional. The ObjectType is implied from the URL path.\nIf specified, the value of objectType must match the class name specified in the URL path.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -192,7 +188,7 @@ func dataSourceHyperflexFeatureLimitExternalRead(d *schema.ResourceData, meta in
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-	var o = models.NewHyperflexFeatureLimitExternalWithDefaults()
+	var o = &models.HyperflexFeatureLimitExternal{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -232,7 +228,7 @@ func dataSourceHyperflexFeatureLimitExternalRead(d *schema.ResourceData, meta in
 	case reflect.Slice:
 		r := reflect.ValueOf(result)
 		for i := 0; i < r.Len(); i++ {
-			var s = models.NewHyperflexFeatureLimitExternalWithDefaults()
+			var s = &models.HyperflexFeatureLimitExternal{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
 				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)

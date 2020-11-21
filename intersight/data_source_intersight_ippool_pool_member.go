@@ -37,10 +37,9 @@ func dataSourceIppoolPoolMember() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -49,7 +48,7 @@ func dataSourceIppoolPoolMember() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -65,17 +64,11 @@ func dataSourceIppoolPoolMember() *schema.Resource {
 				Computed: true,
 			},
 			"class_id": {
-				Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
-				Type:        schema.TypeString,
-				Optional:    true,
-				Computed:    true,
-			},
-			"ip_v4_address": {
-				Description: "IPv4 Address of this pool member.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-			"ip_v4_block": {
+			"ip_block": {
 				Description: "A reference to a ippoolShadowBlock resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -89,10 +82,9 @@ func dataSourceIppoolPoolMember() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -101,7 +93,7 @@ func dataSourceIppoolPoolMember() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -115,6 +107,21 @@ func dataSourceIppoolPoolMember() *schema.Resource {
 					},
 				},
 			},
+			"ip_type": {
+				Description: "Type of the IP address requested.\n* `IPv4` - IP V4 address type requested.\n* `IPv6` - IP V6 address type requested.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"ip_v4_address": {
+				Description: "IPv4 Address of this pool member.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"ip_v6_address": {
+				Description: "IPv6 Address of this pool member.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
 				Type:        schema.TypeString,
@@ -122,7 +129,7 @@ func dataSourceIppoolPoolMember() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified type of this managed object, i.e. the class name.\nThis property is optional. The ObjectType is implied from the URL path.\nIf specified, the value of objectType must match the class name specified in the URL path.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -141,10 +148,9 @@ func dataSourceIppoolPoolMember() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -153,7 +159,7 @@ func dataSourceIppoolPoolMember() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -181,10 +187,9 @@ func dataSourceIppoolPoolMember() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -193,7 +198,7 @@ func dataSourceIppoolPoolMember() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -238,7 +243,7 @@ func dataSourceIppoolPoolMemberRead(d *schema.ResourceData, meta interface{}) er
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-	var o = models.NewIppoolPoolMemberWithDefaults()
+	var o = &models.IppoolPoolMember{}
 	if v, ok := d.GetOk("assigned"); ok {
 		x := (v.(bool))
 		o.SetAssigned(x)
@@ -247,9 +252,17 @@ func dataSourceIppoolPoolMemberRead(d *schema.ResourceData, meta interface{}) er
 		x := (v.(string))
 		o.SetClassId(x)
 	}
+	if v, ok := d.GetOk("ip_type"); ok {
+		x := (v.(string))
+		o.SetIpType(x)
+	}
 	if v, ok := d.GetOk("ip_v4_address"); ok {
 		x := (v.(string))
 		o.SetIpV4Address(x)
+	}
+	if v, ok := d.GetOk("ip_v6_address"); ok {
+		x := (v.(string))
+		o.SetIpV6Address(x)
 	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
@@ -286,7 +299,7 @@ func dataSourceIppoolPoolMemberRead(d *schema.ResourceData, meta interface{}) er
 	case reflect.Slice:
 		r := reflect.ValueOf(result)
 		for i := 0; i < r.Len(); i++ {
-			var s = models.NewIppoolPoolMemberWithDefaults()
+			var s = &models.IppoolPoolMember{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
 				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
@@ -304,12 +317,18 @@ func dataSourceIppoolPoolMemberRead(d *schema.ResourceData, meta interface{}) er
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
 				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
 			}
+
+			if err := d.Set("ip_block", flattenMapIppoolShadowBlockRelationship(s.GetIpBlock(), d)); err != nil {
+				return fmt.Errorf("error occurred while setting property IpBlock: %+v", err)
+			}
+			if err := d.Set("ip_type", (s.GetIpType())); err != nil {
+				return fmt.Errorf("error occurred while setting property IpType: %+v", err)
+			}
 			if err := d.Set("ip_v4_address", (s.GetIpV4Address())); err != nil {
 				return fmt.Errorf("error occurred while setting property IpV4Address: %+v", err)
 			}
-
-			if err := d.Set("ip_v4_block", flattenMapIppoolShadowBlockRelationship(s.GetIpV4Block(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property IpV4Block: %+v", err)
+			if err := d.Set("ip_v6_address", (s.GetIpV6Address())); err != nil {
+				return fmt.Errorf("error occurred while setting property IpV6Address: %+v", err)
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
 				return fmt.Errorf("error occurred while setting property Moid: %+v", err)

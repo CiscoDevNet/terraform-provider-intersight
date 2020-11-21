@@ -4,7 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "boot.DeviceBootMode"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "boot.DeviceBootMode"]
 **ConfiguredBootMode** | Pointer to **string** | The user desired BIOS boot mode as configured in the boot policy. | [optional] 
+**ComputeBlade** | Pointer to [**ComputeBladeRelationship**](compute.Blade.Relationship.md) |  | [optional] 
 **ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](compute.RackUnit.Relationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
@@ -13,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewBootDeviceBootModeAllOf
 
-`func NewBootDeviceBootModeAllOf() *BootDeviceBootModeAllOf`
+`func NewBootDeviceBootModeAllOf(classId string, objectType string, ) *BootDeviceBootModeAllOf`
 
 NewBootDeviceBootModeAllOf instantiates a new BootDeviceBootModeAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +30,46 @@ will change when the set of required properties is changed
 NewBootDeviceBootModeAllOfWithDefaults instantiates a new BootDeviceBootModeAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *BootDeviceBootModeAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *BootDeviceBootModeAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *BootDeviceBootModeAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *BootDeviceBootModeAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *BootDeviceBootModeAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *BootDeviceBootModeAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetConfiguredBootMode
 
@@ -52,6 +95,31 @@ SetConfiguredBootMode sets ConfiguredBootMode field to given value.
 `func (o *BootDeviceBootModeAllOf) HasConfiguredBootMode() bool`
 
 HasConfiguredBootMode returns a boolean if a field has been set.
+
+### GetComputeBlade
+
+`func (o *BootDeviceBootModeAllOf) GetComputeBlade() ComputeBladeRelationship`
+
+GetComputeBlade returns the ComputeBlade field if non-nil, zero value otherwise.
+
+### GetComputeBladeOk
+
+`func (o *BootDeviceBootModeAllOf) GetComputeBladeOk() (*ComputeBladeRelationship, bool)`
+
+GetComputeBladeOk returns a tuple with the ComputeBlade field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetComputeBlade
+
+`func (o *BootDeviceBootModeAllOf) SetComputeBlade(v ComputeBladeRelationship)`
+
+SetComputeBlade sets ComputeBlade field to given value.
+
+### HasComputeBlade
+
+`func (o *BootDeviceBootModeAllOf) HasComputeBlade() bool`
+
+HasComputeBlade returns a boolean if a field has been set.
 
 ### GetComputeRackUnit
 

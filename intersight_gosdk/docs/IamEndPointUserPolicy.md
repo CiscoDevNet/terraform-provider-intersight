@@ -4,7 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PasswordProperties** | Pointer to [**IamEndPointPasswordProperties**](iam.EndPointPasswordProperties.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.EndPointUserPolicy"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.EndPointUserPolicy"]
+**PasswordProperties** | Pointer to [**NullableIamEndPointPasswordProperties**](iam.EndPointPasswordProperties.md) |  | [optional] 
 **EndPointUserRoles** | Pointer to [**[]IamEndPointUserRoleRelationship**](iam.EndPointUserRole.Relationship.md) | An array of relationships to iamEndPointUserRole resources. | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]PolicyAbstractConfigProfileRelationship**](policy.AbstractConfigProfile.Relationship.md) | An array of relationships to policyAbstractConfigProfile resources. | [optional] 
@@ -13,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewIamEndPointUserPolicy
 
-`func NewIamEndPointUserPolicy() *IamEndPointUserPolicy`
+`func NewIamEndPointUserPolicy(classId string, objectType string, ) *IamEndPointUserPolicy`
 
 NewIamEndPointUserPolicy instantiates a new IamEndPointUserPolicy object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewIamEndPointUserPolicyWithDefaults instantiates a new IamEndPointUserPolicy object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *IamEndPointUserPolicy) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IamEndPointUserPolicy) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IamEndPointUserPolicy) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IamEndPointUserPolicy) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IamEndPointUserPolicy) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IamEndPointUserPolicy) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetPasswordProperties
 
@@ -53,6 +95,16 @@ SetPasswordProperties sets PasswordProperties field to given value.
 
 HasPasswordProperties returns a boolean if a field has been set.
 
+### SetPasswordPropertiesNil
+
+`func (o *IamEndPointUserPolicy) SetPasswordPropertiesNil(b bool)`
+
+ SetPasswordPropertiesNil sets the value for PasswordProperties to be an explicit nil
+
+### UnsetPasswordProperties
+`func (o *IamEndPointUserPolicy) UnsetPasswordProperties()`
+
+UnsetPasswordProperties ensures that no value is present for PasswordProperties, not even an explicit nil
 ### GetEndPointUserRoles
 
 `func (o *IamEndPointUserPolicy) GetEndPointUserRoles() []IamEndPointUserRoleRelationship`

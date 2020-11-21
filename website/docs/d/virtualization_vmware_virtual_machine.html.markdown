@@ -13,7 +13,7 @@ The VMware Virtual machine. It has details such as power state, IP address, reso
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `annotation`:(string) List of annotations provided to this VM by user. Can be long. 
 * `boot_time`:(string) Time when this VM booted up. 
-* `class_id`:(string) The concrete type of this complex type. Its value must be the same as the 'objectType' property.The OpenAPI document references this property as a discriminator value. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `config_name`:(string) The configuration name for this VM. This maybe the same as the guest hostname. 
 * `connection_state`:(string) Shows if virtual machine is connected to vCenter. Values are Connected, Disconnected, Orphaned, Inaccessible, and Invalid. 
 * `cpu_hot_add_enabled`:(bool) Indicates if the capability to add CPUs to a running VM is enabled. 
@@ -21,7 +21,7 @@ The following arguments can be used to get data of already created objects in In
 * `dhcp_enabled`:(bool) Shows if DHCP is used for IP/DNS on this VM. 
 * `folder`:(string) The folder name associated with this VM. 
 * `guest_state`:(string) The state of the guest OS running on this VM. Could be running, not running etc.* `Unknown` - Indicates that the guest OS state cannot be determined.* `NotRunning` - Indicates that the guest OS is not running.* `Resetting` - Indicates that the guest OS is resetting.* `Running` - Indicates that the guest OS is running normally.* `ShuttingDown` - Indicates that the guest OS is shutting down.* `Standby` - Indicates that the guest OS is in standby mode. 
-* `hypervisor_type`:(string) Type of hypervisor where the virtual machine is hosted for example ESXi.* `Unknown` - The type of the hypervisor is unknown.* `ESXi` - A Vmware ESXi hypervisor of any version.* `HXAP` - A Cisco HyperFlex Application Platform hypervisor. 
+* `hypervisor_type`:(string) Type of hypervisor where the virtual machine is hosted for example ESXi.* `ESXi` - A Vmware ESXi hypervisor of any version.* `HXAP` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.* `Unknown` - The hypervisor running on the HyperFlex cluster is not known. 
 * `identity`:(string) The internally generated identity of this VM. This entity is not manipulated by users. It aids in uniquely identifying the virtual machine object. For VMware, this is MOR (managed object reference). 
 * `instance_uuid`:(string) UUID assigned by vCenter to every VM. 
 * `is_template`:(bool) If true, indicates that the entity refers to a template of a virtual machine and not a real virtual machine. 
@@ -29,7 +29,7 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) User-provided name to identify the virtual machine. 
 * `network_count`:(int) Indicates how many networks are used by this VM. 
-* `object_type`:(string) The fully-qualified type of this managed object, i.e. the class name.This property is optional. The ObjectType is implied from the URL path.If specified, the value of objectType must match the class name specified in the URL path. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `power_state`:(string) Power state of the virtual machine.* `Unknown` - The entity's power state is unknown.* `PoweredOn` - The entity is powered on.* `PoweredOff` - The entity is powered down.* `StandBy` - The entity is in standby mode.* `Paused` - The entity is in pause state. 
 * `protected_vm`:(bool) Shows if this is a protected VM. VMs can be in protection groups. 
 * `remote_display_vnc_enabled`:(bool) Shows if support for a remote VNC access is enabled. 

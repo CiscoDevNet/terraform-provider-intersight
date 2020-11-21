@@ -4,13 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hcl.ExemptedCatalog"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hcl.ExemptedCatalog"]
 **Comments** | Pointer to **string** | Reason for the exemption. | [optional] 
 **Name** | Pointer to **string** | A unique descriptive name of the exemption. | [optional] 
 **OsVendor** | Pointer to **string** | Vendor of the Operating System. | [optional] 
 **OsVersion** | Pointer to **string** | Version of the Operating system. | [optional] 
 **ProcessorName** | Pointer to **string** | Name of the processor supported for the server. | [optional] 
 **ProductModels** | Pointer to **[]string** |  | [optional] 
-**ProductType** | Pointer to **string** | Type of the product/adapter say PT for Pass Through controllers. | [optional] 
+**ProductType** | Pointer to **string** | Type of the product/adapter say GPU for graphic cards. * &#x60;&#x60; - Default type of the Product. * &#x60;Adapter&#x60; - Represents network adapter cards. * &#x60;StorageController&#x60; - Represents storage controllers. * &#x60;GPU&#x60; - Represents graphics cards. | [optional] [default to ""]
 **ServerPid** | Pointer to **string** | Three part ID representing the server model as returned by UCSM/CIMC XML APIs. | [optional] 
 **UcsVersion** | Pointer to **string** | Version of the UCS software. | [optional] 
 **VersionType** | Pointer to **string** | Type of the UCS version indicating whether it is a UCSM release vesion or a IMC release. | [optional] 
@@ -19,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewHclExemptedCatalogAllOf
 
-`func NewHclExemptedCatalogAllOf() *HclExemptedCatalogAllOf`
+`func NewHclExemptedCatalogAllOf(classId string, objectType string, ) *HclExemptedCatalogAllOf`
 
 NewHclExemptedCatalogAllOf instantiates a new HclExemptedCatalogAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -33,6 +35,46 @@ will change when the set of required properties is changed
 NewHclExemptedCatalogAllOfWithDefaults instantiates a new HclExemptedCatalogAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *HclExemptedCatalogAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *HclExemptedCatalogAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *HclExemptedCatalogAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *HclExemptedCatalogAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *HclExemptedCatalogAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *HclExemptedCatalogAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetComments
 
@@ -184,6 +226,16 @@ SetProductModels sets ProductModels field to given value.
 
 HasProductModels returns a boolean if a field has been set.
 
+### SetProductModelsNil
+
+`func (o *HclExemptedCatalogAllOf) SetProductModelsNil(b bool)`
+
+ SetProductModelsNil sets the value for ProductModels to be an explicit nil
+
+### UnsetProductModels
+`func (o *HclExemptedCatalogAllOf) UnsetProductModels()`
+
+UnsetProductModels ensures that no value is present for ProductModels, not even an explicit nil
 ### GetProductType
 
 `func (o *HclExemptedCatalogAllOf) GetProductType() string`

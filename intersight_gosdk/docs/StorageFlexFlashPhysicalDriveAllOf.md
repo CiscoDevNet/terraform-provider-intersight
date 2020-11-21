@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.FlexFlashPhysicalDrive"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.FlexFlashPhysicalDrive"]
 **CardStatus** | Pointer to **string** | The status of the flex flash physical drive. | [optional] 
 **CardType** | Pointer to **string** | The card type of the flex flash physical drive. | [optional] 
 **OemId** | Pointer to **string** | The OEM Identifier of the flex flash physical drive. | [optional] 
@@ -16,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewStorageFlexFlashPhysicalDriveAllOf
 
-`func NewStorageFlexFlashPhysicalDriveAllOf() *StorageFlexFlashPhysicalDriveAllOf`
+`func NewStorageFlexFlashPhysicalDriveAllOf(classId string, objectType string, ) *StorageFlexFlashPhysicalDriveAllOf`
 
 NewStorageFlexFlashPhysicalDriveAllOf instantiates a new StorageFlexFlashPhysicalDriveAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +32,46 @@ will change when the set of required properties is changed
 NewStorageFlexFlashPhysicalDriveAllOfWithDefaults instantiates a new StorageFlexFlashPhysicalDriveAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *StorageFlexFlashPhysicalDriveAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *StorageFlexFlashPhysicalDriveAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *StorageFlexFlashPhysicalDriveAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *StorageFlexFlashPhysicalDriveAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *StorageFlexFlashPhysicalDriveAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *StorageFlexFlashPhysicalDriveAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCardStatus
 

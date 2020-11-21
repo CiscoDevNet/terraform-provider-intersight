@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.CustomDataProperty"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.CustomDataProperty"]
 **CatalogMoid** | Pointer to **string** | Specify the catalog moid that this custom data type belongs. | [optional] 
 **CustomDataTypeId** | Pointer to **string** | The resolved custom data type definition managed object. | [optional] [readonly] 
 **CustomDataTypeName** | Pointer to **string** | Name of the custom data type for this input. | [optional] 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewWorkflowCustomDataProperty
 
-`func NewWorkflowCustomDataProperty() *WorkflowCustomDataProperty`
+`func NewWorkflowCustomDataProperty(classId string, objectType string, ) *WorkflowCustomDataProperty`
 
 NewWorkflowCustomDataProperty instantiates a new WorkflowCustomDataProperty object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewWorkflowCustomDataPropertyWithDefaults instantiates a new WorkflowCustomDataProperty object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *WorkflowCustomDataProperty) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *WorkflowCustomDataProperty) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *WorkflowCustomDataProperty) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *WorkflowCustomDataProperty) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *WorkflowCustomDataProperty) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *WorkflowCustomDataProperty) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCatalogMoid
 

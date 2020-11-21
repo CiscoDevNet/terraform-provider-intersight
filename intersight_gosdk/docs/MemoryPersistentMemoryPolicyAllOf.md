@@ -4,8 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "memory.PersistentMemoryPolicy"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "memory.PersistentMemoryPolicy"]
 **Goals** | Pointer to [**[]MemoryPersistentMemoryGoal**](memory.PersistentMemoryGoal.md) |  | [optional] 
-**LocalSecurity** | Pointer to [**MemoryPersistentMemoryLocalSecurity**](memory.PersistentMemoryLocalSecurity.md) |  | [optional] 
+**LocalSecurity** | Pointer to [**NullableMemoryPersistentMemoryLocalSecurity**](memory.PersistentMemoryLocalSecurity.md) |  | [optional] 
 **LogicalNamespaces** | Pointer to [**[]MemoryPersistentMemoryLogicalNamespace**](memory.PersistentMemoryLogicalNamespace.md) |  | [optional] 
 **ManagementMode** | Pointer to **string** | Management Mode of the policy. This can be either Configured from Intersight or Configured from Operating System. * &#x60;configured-from-intersight&#x60; - The Persistent Memory Modules are configured from Intersight thorugh Persistent Memory policy. * &#x60;configured-from-operating-system&#x60; - The Persistent Memory Modules are configured from operating system thorugh OS tools. | [optional] [default to "configured-from-intersight"]
 **RetainNamespaces** | Pointer to **bool** | Persistent Memory Namespaces to be retained or not. | [optional] 
@@ -16,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewMemoryPersistentMemoryPolicyAllOf
 
-`func NewMemoryPersistentMemoryPolicyAllOf() *MemoryPersistentMemoryPolicyAllOf`
+`func NewMemoryPersistentMemoryPolicyAllOf(classId string, objectType string, ) *MemoryPersistentMemoryPolicyAllOf`
 
 NewMemoryPersistentMemoryPolicyAllOf instantiates a new MemoryPersistentMemoryPolicyAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +32,46 @@ will change when the set of required properties is changed
 NewMemoryPersistentMemoryPolicyAllOfWithDefaults instantiates a new MemoryPersistentMemoryPolicyAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *MemoryPersistentMemoryPolicyAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *MemoryPersistentMemoryPolicyAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *MemoryPersistentMemoryPolicyAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *MemoryPersistentMemoryPolicyAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *MemoryPersistentMemoryPolicyAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *MemoryPersistentMemoryPolicyAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetGoals
 
@@ -56,6 +98,16 @@ SetGoals sets Goals field to given value.
 
 HasGoals returns a boolean if a field has been set.
 
+### SetGoalsNil
+
+`func (o *MemoryPersistentMemoryPolicyAllOf) SetGoalsNil(b bool)`
+
+ SetGoalsNil sets the value for Goals to be an explicit nil
+
+### UnsetGoals
+`func (o *MemoryPersistentMemoryPolicyAllOf) UnsetGoals()`
+
+UnsetGoals ensures that no value is present for Goals, not even an explicit nil
 ### GetLocalSecurity
 
 `func (o *MemoryPersistentMemoryPolicyAllOf) GetLocalSecurity() MemoryPersistentMemoryLocalSecurity`
@@ -81,6 +133,16 @@ SetLocalSecurity sets LocalSecurity field to given value.
 
 HasLocalSecurity returns a boolean if a field has been set.
 
+### SetLocalSecurityNil
+
+`func (o *MemoryPersistentMemoryPolicyAllOf) SetLocalSecurityNil(b bool)`
+
+ SetLocalSecurityNil sets the value for LocalSecurity to be an explicit nil
+
+### UnsetLocalSecurity
+`func (o *MemoryPersistentMemoryPolicyAllOf) UnsetLocalSecurity()`
+
+UnsetLocalSecurity ensures that no value is present for LocalSecurity, not even an explicit nil
 ### GetLogicalNamespaces
 
 `func (o *MemoryPersistentMemoryPolicyAllOf) GetLogicalNamespaces() []MemoryPersistentMemoryLogicalNamespace`
@@ -106,6 +168,16 @@ SetLogicalNamespaces sets LogicalNamespaces field to given value.
 
 HasLogicalNamespaces returns a boolean if a field has been set.
 
+### SetLogicalNamespacesNil
+
+`func (o *MemoryPersistentMemoryPolicyAllOf) SetLogicalNamespacesNil(b bool)`
+
+ SetLogicalNamespacesNil sets the value for LogicalNamespaces to be an explicit nil
+
+### UnsetLogicalNamespaces
+`func (o *MemoryPersistentMemoryPolicyAllOf) UnsetLogicalNamespaces()`
+
+UnsetLogicalNamespaces ensures that no value is present for LogicalNamespaces, not even an explicit nil
 ### GetManagementMode
 
 `func (o *MemoryPersistentMemoryPolicyAllOf) GetManagementMode() string`

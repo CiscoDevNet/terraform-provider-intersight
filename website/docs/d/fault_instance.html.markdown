@@ -17,7 +17,7 @@ The following arguments can be used to get data of already created objects in In
 * `affected_mo_type`:(string) Managed object type which was affected. 
 * `ancestor_mo_id`:(string) Object Id of the parent of the Managed object which was affected. 
 * `ancestor_mo_type`:(string) Object type of the parent of the Managed object which was affected. 
-* `class_id`:(string) The concrete type of this complex type. Its value must be the same as the 'objectType' property.The OpenAPI document references this property as a discriminator value. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `code`:(string) Numerical fault code of the fault found. 
 * `creation_time`:(string) The time of creation of the fault instance. 
 * `description`:(string) Detailed message of the fault. 
@@ -26,7 +26,7 @@ The following arguments can be used to get data of already created objects in In
 * `last_transition_time`:(string) Last transition time of the fault. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `num_occurrences`:(int) The number of times this fault has occured. 
-* `object_type`:(string) The fully-qualified type of this managed object, i.e. the class name.This property is optional. The ObjectType is implied from the URL path.If specified, the value of objectType must match the class name specified in the URL path. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `original_severity`:(string) Current Severity of the fault found. 
 * `previous_severity`:(string) The Severity of the fault prior to user update. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 

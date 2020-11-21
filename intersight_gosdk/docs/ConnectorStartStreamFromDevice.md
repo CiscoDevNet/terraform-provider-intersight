@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "connector.StartStreamFromDevice"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "connector.StartStreamFromDevice"]
 **MemberId** | Pointer to **string** | The asset.ClusterMember member identity that is opening this stream. | [optional] 
 **MemberStream** | Pointer to **bool** | The stream is to be started against the cluster member. | [optional] 
 **StreamConfig** | Pointer to **interface{}** | Any extra configuration needed to open/identify a stream. | [optional] 
@@ -14,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewConnectorStartStreamFromDevice
 
-`func NewConnectorStartStreamFromDevice() *ConnectorStartStreamFromDevice`
+`func NewConnectorStartStreamFromDevice(classId string, objectType string, ) *ConnectorStartStreamFromDevice`
 
 NewConnectorStartStreamFromDevice instantiates a new ConnectorStartStreamFromDevice object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +30,46 @@ will change when the set of required properties is changed
 NewConnectorStartStreamFromDeviceWithDefaults instantiates a new ConnectorStartStreamFromDevice object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *ConnectorStartStreamFromDevice) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *ConnectorStartStreamFromDevice) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *ConnectorStartStreamFromDevice) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *ConnectorStartStreamFromDevice) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *ConnectorStartStreamFromDevice) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *ConnectorStartStreamFromDevice) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetMemberId
 

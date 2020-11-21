@@ -4,16 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CpuInfo** | Pointer to [**VirtualizationCpuInfo**](virtualization.CpuInfo.md) |  | [optional] 
-**HardwareInfo** | Pointer to [**InfraHardwareInfo**](infra.HardwareInfo.md) |  | [optional] 
-**HypervisorType** | Pointer to **string** | Identifies the broad type of the underlying hypervisor. * &#x60;Unknown&#x60; - The type of the hypervisor is unknown. * &#x60;ESXi&#x60; - A Vmware ESXi hypervisor of any version. * &#x60;HXAP&#x60; - A Cisco HyperFlex Application Platform hypervisor. | [optional] [default to "Unknown"]
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**CpuInfo** | Pointer to [**NullableVirtualizationCpuInfo**](virtualization.CpuInfo.md) |  | [optional] 
+**HardwareInfo** | Pointer to [**NullableInfraHardwareInfo**](infra.HardwareInfo.md) |  | [optional] 
+**HypervisorType** | Pointer to **string** | Identifies the broad type of the underlying hypervisor. * &#x60;ESXi&#x60; - A Vmware ESXi hypervisor of any version. * &#x60;HXAP&#x60; - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform. * &#x60;Hyper-V&#x60; - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * &#x60;Unknown&#x60; - The hypervisor running on the HyperFlex cluster is not known. | [optional] [default to "ESXi"]
 **Identity** | Pointer to **string** | The internally generated identity of this host. This entity is not manipulated by users. It aids in uniquely identifying the datacenter object. For VMware, this is an MOR (managed object reference). | [optional] 
 **MaintenanceMode** | Pointer to **bool** | Is this host in maintenance mode. Set to true or false. | [optional] 
-**MemoryCapacity** | Pointer to [**VirtualizationMemoryCapacity**](virtualization.MemoryCapacity.md) |  | [optional] 
+**MemoryCapacity** | Pointer to [**NullableVirtualizationMemoryCapacity**](virtualization.MemoryCapacity.md) |  | [optional] 
 **Model** | Pointer to **string** | Commercial model information about this hardware. | [optional] 
 **Name** | Pointer to **string** | Name of this host supplied by user. It is not the identity of the host. The name is subject to user manipulations. | [optional] 
-**ProcessorCapacity** | Pointer to [**VirtualizationComputeCapacity**](virtualization.ComputeCapacity.md) |  | [optional] 
-**ProductInfo** | Pointer to [**VirtualizationProductInfo**](virtualization.ProductInfo.md) |  | [optional] 
+**ProcessorCapacity** | Pointer to [**NullableVirtualizationComputeCapacity**](virtualization.ComputeCapacity.md) |  | [optional] 
+**ProductInfo** | Pointer to [**NullableVirtualizationProductInfo**](virtualization.ProductInfo.md) |  | [optional] 
 **Serial** | Pointer to **string** | Serial number of this host (internally generated). | [optional] 
 **Status** | Pointer to **string** | Host health status, as reported by the hypervisor platform. * &#x60;Unknown&#x60; - Entity status is unknown. * &#x60;Degraded&#x60; - State is degraded, and might impact normal operation of the entity. * &#x60;Critical&#x60; - Entity is in a critical state, impacting operations. * &#x60;Ok&#x60; - Entity status is in a stable state, operating normally. | [optional] [default to "Unknown"]
 **UpTime** | Pointer to **string** | The uptime of the host, stored as Duration (from w3c). | [optional] 
@@ -24,7 +26,7 @@ Name | Type | Description | Notes
 
 ### NewVirtualizationBaseHostAllOf
 
-`func NewVirtualizationBaseHostAllOf() *VirtualizationBaseHostAllOf`
+`func NewVirtualizationBaseHostAllOf(classId string, objectType string, ) *VirtualizationBaseHostAllOf`
 
 NewVirtualizationBaseHostAllOf instantiates a new VirtualizationBaseHostAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -38,6 +40,46 @@ will change when the set of required properties is changed
 NewVirtualizationBaseHostAllOfWithDefaults instantiates a new VirtualizationBaseHostAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *VirtualizationBaseHostAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *VirtualizationBaseHostAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *VirtualizationBaseHostAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *VirtualizationBaseHostAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *VirtualizationBaseHostAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *VirtualizationBaseHostAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCpuInfo
 
@@ -64,6 +106,16 @@ SetCpuInfo sets CpuInfo field to given value.
 
 HasCpuInfo returns a boolean if a field has been set.
 
+### SetCpuInfoNil
+
+`func (o *VirtualizationBaseHostAllOf) SetCpuInfoNil(b bool)`
+
+ SetCpuInfoNil sets the value for CpuInfo to be an explicit nil
+
+### UnsetCpuInfo
+`func (o *VirtualizationBaseHostAllOf) UnsetCpuInfo()`
+
+UnsetCpuInfo ensures that no value is present for CpuInfo, not even an explicit nil
 ### GetHardwareInfo
 
 `func (o *VirtualizationBaseHostAllOf) GetHardwareInfo() InfraHardwareInfo`
@@ -89,6 +141,16 @@ SetHardwareInfo sets HardwareInfo field to given value.
 
 HasHardwareInfo returns a boolean if a field has been set.
 
+### SetHardwareInfoNil
+
+`func (o *VirtualizationBaseHostAllOf) SetHardwareInfoNil(b bool)`
+
+ SetHardwareInfoNil sets the value for HardwareInfo to be an explicit nil
+
+### UnsetHardwareInfo
+`func (o *VirtualizationBaseHostAllOf) UnsetHardwareInfo()`
+
+UnsetHardwareInfo ensures that no value is present for HardwareInfo, not even an explicit nil
 ### GetHypervisorType
 
 `func (o *VirtualizationBaseHostAllOf) GetHypervisorType() string`
@@ -189,6 +251,16 @@ SetMemoryCapacity sets MemoryCapacity field to given value.
 
 HasMemoryCapacity returns a boolean if a field has been set.
 
+### SetMemoryCapacityNil
+
+`func (o *VirtualizationBaseHostAllOf) SetMemoryCapacityNil(b bool)`
+
+ SetMemoryCapacityNil sets the value for MemoryCapacity to be an explicit nil
+
+### UnsetMemoryCapacity
+`func (o *VirtualizationBaseHostAllOf) UnsetMemoryCapacity()`
+
+UnsetMemoryCapacity ensures that no value is present for MemoryCapacity, not even an explicit nil
 ### GetModel
 
 `func (o *VirtualizationBaseHostAllOf) GetModel() string`
@@ -264,6 +336,16 @@ SetProcessorCapacity sets ProcessorCapacity field to given value.
 
 HasProcessorCapacity returns a boolean if a field has been set.
 
+### SetProcessorCapacityNil
+
+`func (o *VirtualizationBaseHostAllOf) SetProcessorCapacityNil(b bool)`
+
+ SetProcessorCapacityNil sets the value for ProcessorCapacity to be an explicit nil
+
+### UnsetProcessorCapacity
+`func (o *VirtualizationBaseHostAllOf) UnsetProcessorCapacity()`
+
+UnsetProcessorCapacity ensures that no value is present for ProcessorCapacity, not even an explicit nil
 ### GetProductInfo
 
 `func (o *VirtualizationBaseHostAllOf) GetProductInfo() VirtualizationProductInfo`
@@ -289,6 +371,16 @@ SetProductInfo sets ProductInfo field to given value.
 
 HasProductInfo returns a boolean if a field has been set.
 
+### SetProductInfoNil
+
+`func (o *VirtualizationBaseHostAllOf) SetProductInfoNil(b bool)`
+
+ SetProductInfoNil sets the value for ProductInfo to be an explicit nil
+
+### UnsetProductInfo
+`func (o *VirtualizationBaseHostAllOf) UnsetProductInfo()`
+
+UnsetProductInfo ensures that no value is present for ProductInfo, not even an explicit nil
 ### GetSerial
 
 `func (o *VirtualizationBaseHostAllOf) GetSerial() string`

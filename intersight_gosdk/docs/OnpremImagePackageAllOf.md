@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "onprem.ImagePackage"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "onprem.ImagePackage"]
 **FilePath** | Pointer to **string** | Optional file path of the image package. | [optional] [readonly] 
 **FileSha** | Pointer to **string** | Image file&#39;s fingerprint. Fingerprint is calculated using SHA256 algorithm. | [optional] [readonly] 
 **FileSize** | Pointer to **int64** | Image file size in bytes. | [optional] [readonly] 
@@ -17,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewOnpremImagePackageAllOf
 
-`func NewOnpremImagePackageAllOf() *OnpremImagePackageAllOf`
+`func NewOnpremImagePackageAllOf(classId string, objectType string, ) *OnpremImagePackageAllOf`
 
 NewOnpremImagePackageAllOf instantiates a new OnpremImagePackageAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -31,6 +33,46 @@ will change when the set of required properties is changed
 NewOnpremImagePackageAllOfWithDefaults instantiates a new OnpremImagePackageAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *OnpremImagePackageAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *OnpremImagePackageAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *OnpremImagePackageAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *OnpremImagePackageAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *OnpremImagePackageAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *OnpremImagePackageAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetFilePath
 

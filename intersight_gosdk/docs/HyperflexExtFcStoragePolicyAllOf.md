@@ -4,10 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.ExtFcStoragePolicy"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.ExtFcStoragePolicy"]
 **AdminState** | Pointer to **bool** | Enables or disables external FC storage configuration. | [optional] 
-**ExtaTraffic** | Pointer to [**HyperflexNamedVsan**](hyperflex.NamedVsan.md) |  | [optional] 
-**ExtbTraffic** | Pointer to [**HyperflexNamedVsan**](hyperflex.NamedVsan.md) |  | [optional] 
-**WwxnPrefixRange** | Pointer to [**HyperflexWwxnPrefixRange**](hyperflex.WwxnPrefixRange.md) |  | [optional] 
+**ExtaTraffic** | Pointer to [**NullableHyperflexNamedVsan**](hyperflex.NamedVsan.md) |  | [optional] 
+**ExtbTraffic** | Pointer to [**NullableHyperflexNamedVsan**](hyperflex.NamedVsan.md) |  | [optional] 
+**WwxnPrefixRange** | Pointer to [**NullableHyperflexWwxnPrefixRange**](hyperflex.WwxnPrefixRange.md) |  | [optional] 
 **ClusterProfiles** | Pointer to [**[]HyperflexClusterProfileRelationship**](hyperflex.ClusterProfile.Relationship.md) | An array of relationships to hyperflexClusterProfile resources. | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewHyperflexExtFcStoragePolicyAllOf
 
-`func NewHyperflexExtFcStoragePolicyAllOf() *HyperflexExtFcStoragePolicyAllOf`
+`func NewHyperflexExtFcStoragePolicyAllOf(classId string, objectType string, ) *HyperflexExtFcStoragePolicyAllOf`
 
 NewHyperflexExtFcStoragePolicyAllOf instantiates a new HyperflexExtFcStoragePolicyAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +31,46 @@ will change when the set of required properties is changed
 NewHyperflexExtFcStoragePolicyAllOfWithDefaults instantiates a new HyperflexExtFcStoragePolicyAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *HyperflexExtFcStoragePolicyAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *HyperflexExtFcStoragePolicyAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *HyperflexExtFcStoragePolicyAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *HyperflexExtFcStoragePolicyAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *HyperflexExtFcStoragePolicyAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *HyperflexExtFcStoragePolicyAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAdminState
 
@@ -80,6 +122,16 @@ SetExtaTraffic sets ExtaTraffic field to given value.
 
 HasExtaTraffic returns a boolean if a field has been set.
 
+### SetExtaTrafficNil
+
+`func (o *HyperflexExtFcStoragePolicyAllOf) SetExtaTrafficNil(b bool)`
+
+ SetExtaTrafficNil sets the value for ExtaTraffic to be an explicit nil
+
+### UnsetExtaTraffic
+`func (o *HyperflexExtFcStoragePolicyAllOf) UnsetExtaTraffic()`
+
+UnsetExtaTraffic ensures that no value is present for ExtaTraffic, not even an explicit nil
 ### GetExtbTraffic
 
 `func (o *HyperflexExtFcStoragePolicyAllOf) GetExtbTraffic() HyperflexNamedVsan`
@@ -105,6 +157,16 @@ SetExtbTraffic sets ExtbTraffic field to given value.
 
 HasExtbTraffic returns a boolean if a field has been set.
 
+### SetExtbTrafficNil
+
+`func (o *HyperflexExtFcStoragePolicyAllOf) SetExtbTrafficNil(b bool)`
+
+ SetExtbTrafficNil sets the value for ExtbTraffic to be an explicit nil
+
+### UnsetExtbTraffic
+`func (o *HyperflexExtFcStoragePolicyAllOf) UnsetExtbTraffic()`
+
+UnsetExtbTraffic ensures that no value is present for ExtbTraffic, not even an explicit nil
 ### GetWwxnPrefixRange
 
 `func (o *HyperflexExtFcStoragePolicyAllOf) GetWwxnPrefixRange() HyperflexWwxnPrefixRange`
@@ -130,6 +192,16 @@ SetWwxnPrefixRange sets WwxnPrefixRange field to given value.
 
 HasWwxnPrefixRange returns a boolean if a field has been set.
 
+### SetWwxnPrefixRangeNil
+
+`func (o *HyperflexExtFcStoragePolicyAllOf) SetWwxnPrefixRangeNil(b bool)`
+
+ SetWwxnPrefixRangeNil sets the value for WwxnPrefixRange to be an explicit nil
+
+### UnsetWwxnPrefixRange
+`func (o *HyperflexExtFcStoragePolicyAllOf) UnsetWwxnPrefixRange()`
+
+UnsetWwxnPrefixRange ensures that no value is present for WwxnPrefixRange, not even an explicit nil
 ### GetClusterProfiles
 
 `func (o *HyperflexExtFcStoragePolicyAllOf) GetClusterProfiles() []HyperflexClusterProfileRelationship`

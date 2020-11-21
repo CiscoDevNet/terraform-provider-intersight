@@ -4,8 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **CompletedTime** | Pointer to **string** | The completed time of the task in installer. | [optional] 
-**Context** | Pointer to [**PolicyConfigResultContext**](policy.ConfigResultContext.md) |  | [optional] 
+**Context** | Pointer to [**NullablePolicyConfigResultContext**](policy.ConfigResultContext.md) |  | [optional] 
 **Message** | Pointer to **string** | Localized message based on the locale setting of the user&#39;s context. | [optional] 
 **OwnerId** | Pointer to **string** | The identifier of the object that owns the result message. The owner ID is used to correlate a given result entry to a task or entity. For example, a config result entry that describes the result of a workflow task may have the task&#39;s instance ID as the owner. | [optional] 
 **State** | Pointer to **string** | Values  -- Ok, Ok-with-warning, Errored. | [optional] 
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewPolicyAbstractConfigResultEntryAllOf
 
-`func NewPolicyAbstractConfigResultEntryAllOf() *PolicyAbstractConfigResultEntryAllOf`
+`func NewPolicyAbstractConfigResultEntryAllOf(classId string, objectType string, ) *PolicyAbstractConfigResultEntryAllOf`
 
 NewPolicyAbstractConfigResultEntryAllOf instantiates a new PolicyAbstractConfigResultEntryAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +31,46 @@ will change when the set of required properties is changed
 NewPolicyAbstractConfigResultEntryAllOfWithDefaults instantiates a new PolicyAbstractConfigResultEntryAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *PolicyAbstractConfigResultEntryAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *PolicyAbstractConfigResultEntryAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *PolicyAbstractConfigResultEntryAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *PolicyAbstractConfigResultEntryAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *PolicyAbstractConfigResultEntryAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *PolicyAbstractConfigResultEntryAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCompletedTime
 
@@ -80,6 +122,16 @@ SetContext sets Context field to given value.
 
 HasContext returns a boolean if a field has been set.
 
+### SetContextNil
+
+`func (o *PolicyAbstractConfigResultEntryAllOf) SetContextNil(b bool)`
+
+ SetContextNil sets the value for Context to be an explicit nil
+
+### UnsetContext
+`func (o *PolicyAbstractConfigResultEntryAllOf) UnsetContext()`
+
+UnsetContext ensures that no value is present for Context, not even an explicit nil
 ### GetMessage
 
 `func (o *PolicyAbstractConfigResultEntryAllOf) GetMessage() string`

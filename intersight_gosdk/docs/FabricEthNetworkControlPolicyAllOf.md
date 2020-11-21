@@ -4,9 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.EthNetworkControlPolicy"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.EthNetworkControlPolicy"]
 **CdpEnabled** | Pointer to **bool** | Enables the CDP on an interface. | [optional] 
 **ForgeMac** | Pointer to **string** | Determines if the MAC forging is allowed or denied on an interface. * &#x60;allow&#x60; - Allows mac forging on an interface. * &#x60;deny&#x60; - Denies mac forging on an interface. | [optional] [default to "allow"]
-**LldpSettings** | Pointer to [**FabricLldpSettings**](fabric.LldpSettings.md) |  | [optional] 
+**LldpSettings** | Pointer to [**NullableFabricLldpSettings**](fabric.LldpSettings.md) |  | [optional] 
 **MacRegistrationMode** | Pointer to **string** | Determines the MAC addresses that have to be registered with the switch. * &#x60;nativeVlanOnly&#x60; - Register only the MAC addresses learnt on the native VLAN. * &#x60;allVlans&#x60; - Register all the MAC addresses learnt on all the allowed VLANs. | [optional] [default to "nativeVlanOnly"]
 **UplinkFailAction** | Pointer to **string** | Determines the state of the virtual interface (vethernet / vfc) on the switch when a suitable uplink is not pinned. * &#x60;linkDown&#x60; - The vethernet will go down in case a suitable uplink is not pinned. * &#x60;warning&#x60; - The vethernet will remain up even if a suitable uplink is not pinned. | [optional] [default to "linkDown"]
 **NetworkPolicy** | Pointer to [**[]VnicEthNetworkPolicyRelationship**](vnic.EthNetworkPolicy.Relationship.md) | An array of relationships to vnicEthNetworkPolicy resources. | [optional] 
@@ -16,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewFabricEthNetworkControlPolicyAllOf
 
-`func NewFabricEthNetworkControlPolicyAllOf() *FabricEthNetworkControlPolicyAllOf`
+`func NewFabricEthNetworkControlPolicyAllOf(classId string, objectType string, ) *FabricEthNetworkControlPolicyAllOf`
 
 NewFabricEthNetworkControlPolicyAllOf instantiates a new FabricEthNetworkControlPolicyAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +32,46 @@ will change when the set of required properties is changed
 NewFabricEthNetworkControlPolicyAllOfWithDefaults instantiates a new FabricEthNetworkControlPolicyAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *FabricEthNetworkControlPolicyAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *FabricEthNetworkControlPolicyAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *FabricEthNetworkControlPolicyAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *FabricEthNetworkControlPolicyAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *FabricEthNetworkControlPolicyAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *FabricEthNetworkControlPolicyAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCdpEnabled
 
@@ -106,6 +148,16 @@ SetLldpSettings sets LldpSettings field to given value.
 
 HasLldpSettings returns a boolean if a field has been set.
 
+### SetLldpSettingsNil
+
+`func (o *FabricEthNetworkControlPolicyAllOf) SetLldpSettingsNil(b bool)`
+
+ SetLldpSettingsNil sets the value for LldpSettings to be an explicit nil
+
+### UnsetLldpSettings
+`func (o *FabricEthNetworkControlPolicyAllOf) UnsetLldpSettings()`
+
+UnsetLldpSettings ensures that no value is present for LldpSettings, not even an explicit nil
 ### GetMacRegistrationMode
 
 `func (o *FabricEthNetworkControlPolicyAllOf) GetMacRegistrationMode() string`

@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "uuidpool.UuidLease"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "uuidpool.UuidLease"]
 **Uuid** | Pointer to **string** | UUID Prefix+Suffix numbers. | [optional] 
 **AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](mo.BaseMo.Relationship.md) |  | [optional] 
 **Pool** | Pointer to [**UuidpoolPoolRelationship**](uuidpool.Pool.Relationship.md) |  | [optional] 
@@ -14,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewUuidpoolUuidLeaseAllOf
 
-`func NewUuidpoolUuidLeaseAllOf() *UuidpoolUuidLeaseAllOf`
+`func NewUuidpoolUuidLeaseAllOf(classId string, objectType string, ) *UuidpoolUuidLeaseAllOf`
 
 NewUuidpoolUuidLeaseAllOf instantiates a new UuidpoolUuidLeaseAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +30,46 @@ will change when the set of required properties is changed
 NewUuidpoolUuidLeaseAllOfWithDefaults instantiates a new UuidpoolUuidLeaseAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *UuidpoolUuidLeaseAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *UuidpoolUuidLeaseAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *UuidpoolUuidLeaseAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *UuidpoolUuidLeaseAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *UuidpoolUuidLeaseAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *UuidpoolUuidLeaseAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetUuid
 

@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "virtualization.VmwareDatacenter"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.VmwareDatacenter"]
 **ClusterCount** | Pointer to **int64** | Count of all clusters associated with this DC. | [optional] 
 **DatastoreCount** | Pointer to **int64** | Count of all datastores associated with this DC. | [optional] 
 **HostCount** | Pointer to **int64** | Count of all hosts associated with this DC. | [optional] 
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewVirtualizationVmwareDatacenter
 
-`func NewVirtualizationVmwareDatacenter() *VirtualizationVmwareDatacenter`
+`func NewVirtualizationVmwareDatacenter(classId string, objectType string, ) *VirtualizationVmwareDatacenter`
 
 NewVirtualizationVmwareDatacenter instantiates a new VirtualizationVmwareDatacenter object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +31,46 @@ will change when the set of required properties is changed
 NewVirtualizationVmwareDatacenterWithDefaults instantiates a new VirtualizationVmwareDatacenter object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *VirtualizationVmwareDatacenter) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *VirtualizationVmwareDatacenter) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *VirtualizationVmwareDatacenter) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *VirtualizationVmwareDatacenter) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *VirtualizationVmwareDatacenter) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *VirtualizationVmwareDatacenter) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetClusterCount
 

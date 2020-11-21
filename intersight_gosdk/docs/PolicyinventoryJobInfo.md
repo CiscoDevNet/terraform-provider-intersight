@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "policyinventory.JobInfo"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "policyinventory.JobInfo"]
 **ExecutionStatus** | Pointer to **string** | Execution status of the inventory job. * &#x60;Scheduled&#x60; - Inventory job is marked as scheduled. * &#x60;Completed&#x60; - Inventory job is marked as completed. * &#x60;Error&#x60; - Inventory job has errored out. | [optional] [readonly] [default to "Scheduled"]
 **LastScheduledTime** | Pointer to [**time.Time**](time.Time.md) | Last scheduled time of the inventory job. | [optional] [readonly] 
 **PolicyId** | Pointer to **string** | Policy ID for the inventory job. | [optional] [readonly] 
@@ -13,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewPolicyinventoryJobInfo
 
-`func NewPolicyinventoryJobInfo() *PolicyinventoryJobInfo`
+`func NewPolicyinventoryJobInfo(classId string, objectType string, ) *PolicyinventoryJobInfo`
 
 NewPolicyinventoryJobInfo instantiates a new PolicyinventoryJobInfo object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewPolicyinventoryJobInfoWithDefaults instantiates a new PolicyinventoryJobInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *PolicyinventoryJobInfo) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *PolicyinventoryJobInfo) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *PolicyinventoryJobInfo) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *PolicyinventoryJobInfo) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *PolicyinventoryJobInfo) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *PolicyinventoryJobInfo) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetExecutionStatus
 

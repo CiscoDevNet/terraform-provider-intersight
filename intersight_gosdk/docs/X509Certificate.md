@@ -4,19 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Issuer** | Pointer to [**PkixDistinguishedName**](pkix.DistinguishedName.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "x509.Certificate"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "x509.Certificate"]
+**Issuer** | Pointer to [**NullablePkixDistinguishedName**](pkix.DistinguishedName.md) |  | [optional] 
 **NotAfter** | Pointer to [**time.Time**](time.Time.md) | The date on which the certificate&#39;s validity period ends. | [optional] [readonly] 
 **NotBefore** | Pointer to [**time.Time**](time.Time.md) | The date on which the certificate&#39;s validity period begins. | [optional] [readonly] 
 **PemCertificate** | Pointer to **string** | The base64 encoded certificate in PEM format. | [optional] 
 **Sha256Fingerprint** | Pointer to **string** | The computed SHA-256 fingerprint of the certificate. Equivalent to &#39;openssl x509 -fingerprint -sha256&#39;. | [optional] [readonly] 
 **SignatureAlgorithm** | Pointer to **string** | Signature algorithm, as specified in [RFC 5280](https://tools.ietf.org/html/rfc5280). | [optional] [readonly] 
-**Subject** | Pointer to [**PkixDistinguishedName**](pkix.DistinguishedName.md) |  | [optional] 
+**Subject** | Pointer to [**NullablePkixDistinguishedName**](pkix.DistinguishedName.md) |  | [optional] 
 
 ## Methods
 
 ### NewX509Certificate
 
-`func NewX509Certificate() *X509Certificate`
+`func NewX509Certificate(classId string, objectType string, ) *X509Certificate`
 
 NewX509Certificate instantiates a new X509Certificate object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +32,46 @@ will change when the set of required properties is changed
 NewX509CertificateWithDefaults instantiates a new X509Certificate object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *X509Certificate) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *X509Certificate) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *X509Certificate) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *X509Certificate) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *X509Certificate) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *X509Certificate) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetIssuer
 
@@ -56,6 +98,16 @@ SetIssuer sets Issuer field to given value.
 
 HasIssuer returns a boolean if a field has been set.
 
+### SetIssuerNil
+
+`func (o *X509Certificate) SetIssuerNil(b bool)`
+
+ SetIssuerNil sets the value for Issuer to be an explicit nil
+
+### UnsetIssuer
+`func (o *X509Certificate) UnsetIssuer()`
+
+UnsetIssuer ensures that no value is present for Issuer, not even an explicit nil
 ### GetNotAfter
 
 `func (o *X509Certificate) GetNotAfter() time.Time`
@@ -206,6 +258,16 @@ SetSubject sets Subject field to given value.
 
 HasSubject returns a boolean if a field has been set.
 
+### SetSubjectNil
+
+`func (o *X509Certificate) SetSubjectNil(b bool)`
+
+ SetSubjectNil sets the value for Subject to be an explicit nil
+
+### UnsetSubject
+`func (o *X509Certificate) UnsetSubject()`
+
+UnsetSubject ensures that no value is present for Subject, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

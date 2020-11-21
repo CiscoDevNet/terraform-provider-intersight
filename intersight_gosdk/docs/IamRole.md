@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.Role"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.Role"]
 **Description** | Pointer to **string** | Informative description about each role. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the role which has to be granted to user. | [optional] 
 **PrivilegeNames** | Pointer to **[]string** |  | [optional] 
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewIamRole
 
-`func NewIamRole() *IamRole`
+`func NewIamRole(classId string, objectType string, ) *IamRole`
 
 NewIamRole instantiates a new IamRole object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +31,46 @@ will change when the set of required properties is changed
 NewIamRoleWithDefaults instantiates a new IamRole object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *IamRole) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IamRole) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IamRole) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IamRole) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IamRole) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IamRole) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDescription
 
@@ -105,6 +147,16 @@ SetPrivilegeNames sets PrivilegeNames field to given value.
 
 HasPrivilegeNames returns a boolean if a field has been set.
 
+### SetPrivilegeNamesNil
+
+`func (o *IamRole) SetPrivilegeNamesNil(b bool)`
+
+ SetPrivilegeNamesNil sets the value for PrivilegeNames to be an explicit nil
+
+### UnsetPrivilegeNames
+`func (o *IamRole) UnsetPrivilegeNames()`
+
+UnsetPrivilegeNames ensures that no value is present for PrivilegeNames, not even an explicit nil
 ### GetAccount
 
 `func (o *IamRole) GetAccount() IamAccountRelationship`

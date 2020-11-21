@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "boot.PrecisionPolicy"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "boot.PrecisionPolicy"]
 **BootDevices** | Pointer to [**[]BootDeviceBase**](boot.DeviceBase.md) |  | [optional] 
 **ConfiguredBootMode** | Pointer to **string** | Sets the BIOS boot mode. UEFI uses the GUID Partition Table (GPT) whereas Legacy mode uses the Master Boot Record (MBR) partitioning scheme. * &#x60;Legacy&#x60; - Legacy mode refers to the traditional process of booting from BIOS. Legacy mode uses the Master Boot Record (MBR) to locate the bootloader. * &#x60;Uefi&#x60; - UEFI mode uses the GUID Partition Table (GPT) to locate EFI Service Partitions to boot from. | [optional] [default to "Legacy"]
 **EnforceUefiSecureBoot** | Pointer to **bool** | If UEFI secure boot is enabled, the boot mode is set to UEFI by default. Secure boot enforces that device boots using only software that is trusted by the Original Equipment Manufacturer (OEM). | [optional] 
@@ -14,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewBootPrecisionPolicyAllOf
 
-`func NewBootPrecisionPolicyAllOf() *BootPrecisionPolicyAllOf`
+`func NewBootPrecisionPolicyAllOf(classId string, objectType string, ) *BootPrecisionPolicyAllOf`
 
 NewBootPrecisionPolicyAllOf instantiates a new BootPrecisionPolicyAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +30,46 @@ will change when the set of required properties is changed
 NewBootPrecisionPolicyAllOfWithDefaults instantiates a new BootPrecisionPolicyAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *BootPrecisionPolicyAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *BootPrecisionPolicyAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *BootPrecisionPolicyAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *BootPrecisionPolicyAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *BootPrecisionPolicyAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *BootPrecisionPolicyAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetBootDevices
 
@@ -54,6 +96,16 @@ SetBootDevices sets BootDevices field to given value.
 
 HasBootDevices returns a boolean if a field has been set.
 
+### SetBootDevicesNil
+
+`func (o *BootPrecisionPolicyAllOf) SetBootDevicesNil(b bool)`
+
+ SetBootDevicesNil sets the value for BootDevices to be an explicit nil
+
+### UnsetBootDevices
+`func (o *BootPrecisionPolicyAllOf) UnsetBootDevices()`
+
+UnsetBootDevices ensures that no value is present for BootDevices, not even an explicit nil
 ### GetConfiguredBootMode
 
 `func (o *BootPrecisionPolicyAllOf) GetConfiguredBootMode() string`

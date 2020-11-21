@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ObjectType** | Pointer to **string** | A discriminator value to disambiguate the schema of a HTTP GET response body. | [optional] 
+**ObjectType** | **string** | A discriminator value to disambiguate the schema of a HTTP GET response body. | 
 **Results** | Pointer to [**[]MoTagKeySummary**](mo.TagKeySummary.md) |  | [optional] 
 
 ## Methods
 
 ### NewMoTagSummary
 
-`func NewMoTagSummary() *MoTagSummary`
+`func NewMoTagSummary(objectType string, ) *MoTagSummary`
 
 NewMoTagSummary instantiates a new MoTagSummary object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
-### HasObjectType
-
-`func (o *MoTagSummary) HasObjectType() bool`
-
-HasObjectType returns a boolean if a field has been set.
 
 ### GetResults
 

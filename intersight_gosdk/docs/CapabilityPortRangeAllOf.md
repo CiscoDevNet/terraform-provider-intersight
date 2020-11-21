@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "capability.PortRange"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "capability.PortRange"]
 **EndPortId** | Pointer to **int64** | Ending Port ID in this range of ports. | [optional] 
 **EndSlotId** | Pointer to **int64** | Ending Slot ID in this range of ports. | [optional] 
 **StartPortId** | Pointer to **int64** | Starting Port ID in this range of ports. | [optional] 
@@ -13,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewCapabilityPortRangeAllOf
 
-`func NewCapabilityPortRangeAllOf() *CapabilityPortRangeAllOf`
+`func NewCapabilityPortRangeAllOf(classId string, objectType string, ) *CapabilityPortRangeAllOf`
 
 NewCapabilityPortRangeAllOf instantiates a new CapabilityPortRangeAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewCapabilityPortRangeAllOfWithDefaults instantiates a new CapabilityPortRangeAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *CapabilityPortRangeAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *CapabilityPortRangeAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *CapabilityPortRangeAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *CapabilityPortRangeAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *CapabilityPortRangeAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *CapabilityPortRangeAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetEndPortId
 

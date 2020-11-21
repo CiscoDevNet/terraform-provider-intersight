@@ -16,7 +16,7 @@ the feature set defined for the license entitlement is granted to the customer.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `active_admin`:(bool) The license administrative state.Set this property to 'true' to activate the license entitlements. 
-* `class_id`:(string) The concrete type of this complex type. Its value must be the same as the 'objectType' property.The OpenAPI document references this property as a discriminator value. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `days_left`:(int) The number of days left for licenseState to stay in TrialPeriod or OutOfCompliance state. 
 * `end_time`:(string) The date and time when the trial period expires.The value of the 'endTime' property is set when the account enters the TrialPeriod or OutOfCompliance state. 
 * `enforce_mode`:(string) The entitlement mode reported by Cisco Smart Software Manager. 
@@ -25,8 +25,8 @@ The following arguments can be used to get data of already created objects in In
 * `extra_evaluation`:(int) The number of days the trial Trial or Grace period is extended.The trial or grace period can be extended once. 
 * `license_count`:(int) The total number of devices claimed in the Intersight account. 
 * `license_state`:(string) The license state defined by Intersight.The value may be one of NotLicensed, TrialPeriod, OutOfCompliance, Compliance, GraceExpired, or TrialExpired.* `NotLicensed` - The license token is neither activated nor registered.* `GraceExpired` - The license grace period has expired.* `TrialPeriod` - The 90 days of trial period.* `OutOfCompliance` - The license is out of compliance.* `Compliance` - The license is in compliance.* `TrialExpired` - The trial period of 90 days has expired. 
-* `license_type`:(string) The name of the Intersight license entitlement.For example, this property may be set to 'Essential'.* `Base` - Base as a License type. It is default license type.* `Essential` - Essential as a License type.* `Standard` - Standard as a License type.* `Advantage` - Advantage as a License type.* `Premier` - Premier as a License type. 
+* `license_type`:(string) The name of the Intersight license entitlement.For example, this property may be set to 'Essential'.* `Base` - Base as a License type. It is default license type.* `Essential` - Essential as a License type.* `Standard` - Standard as a License type.* `Advantage` - Advantage as a License type.* `Premier` - Premier as a License type.* `IWO-Essential` - IWO-Essential as a License type.* `IWO-Advantage` - IWO-Advantage as a License type.* `IWO-Premier` - IWO-Premier as a License type. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified type of this managed object, i.e. the class name.This property is optional. The ObjectType is implied from the URL path.If specified, the value of objectType must match the class name specified in the URL path. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `start_time`:(string) The date and time when the licenseState entered the TrialPeriod or OutOfCompliance state. 
 * `trial_admin`:(bool) The administrative state of the trial license.When the LicenseState is set to 'NotLicensed', 'trialAdmin' can be set to true to start the trial period,i.e. licenseState is set to be TrialPeriod. 
