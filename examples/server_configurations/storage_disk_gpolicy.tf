@@ -21,10 +21,10 @@ resource "intersight_storage_disk_group_policy" "storage_disk_group3" {
   use_jbods   = true
   span_groups {
     disks {
-      slot_number = 4
+      slot_number = 2
     }
     disks {
-      slot_number = 2
+      slot_number = 4
     }
   }
   dedicated_hot_spares {
