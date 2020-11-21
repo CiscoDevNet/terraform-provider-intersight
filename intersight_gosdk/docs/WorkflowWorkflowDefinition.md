@@ -4,27 +4,32 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.WorkflowDefinition"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.WorkflowDefinition"]
 **DefaultVersion** | Pointer to **bool** | When true this will be the workflow version that is used when a specific workflow definition version is not specified. The default version is used when user executes a workflow without specifying a version or when workflow is included in another workflow without a specific version. The very first workflow definition created with a name will be set as the default version, after that user can explicitly set any version of the workflow definition as the default version. | [optional] 
 **Description** | Pointer to **string** | The description for this workflow. | [optional] 
 **InputDefinition** | Pointer to [**[]WorkflowBaseDataType**](workflow.BaseDataType.md) |  | [optional] 
+**InputParameterSet** | Pointer to [**[]WorkflowParameterSet**](workflow.ParameterSet.md) |  | [optional] 
 **Label** | Pointer to **string** | A user friendly short name to identify the workflow. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ) or an underscore (_). | [optional] 
-**LicenseEntitlement** | Pointer to **string** | License entitlement required to run this workflow. It is calculated based on the highest license requirement of all its tasks. * &#x60;Base&#x60; - Base as a License type. It is default license type. * &#x60;Essential&#x60; - Essential as a License type. * &#x60;Standard&#x60; - Standard as a License type. * &#x60;Advantage&#x60; - Advantage as a License type. * &#x60;Premier&#x60; - Premier as a License type. | [optional] [readonly] [default to "Base"]
+**LicenseEntitlement** | Pointer to **string** | License entitlement required to run this workflow. It is calculated based on the highest license requirement of all its tasks. * &#x60;Base&#x60; - Base as a License type. It is default license type. * &#x60;Essential&#x60; - Essential as a License type. * &#x60;Standard&#x60; - Standard as a License type. * &#x60;Advantage&#x60; - Advantage as a License type. * &#x60;Premier&#x60; - Premier as a License type. * &#x60;IWO-Essential&#x60; - IWO-Essential as a License type. * &#x60;IWO-Advantage&#x60; - IWO-Advantage as a License type. * &#x60;IWO-Premier&#x60; - IWO-Premier as a License type. | [optional] [readonly] [default to "Base"]
 **MaxTaskCount** | Pointer to **int64** | The maximum number of tasks that can be executed on this workflow. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name for this workflow. You can have multiple versions of the workflow with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_). | [optional] 
 **OutputDefinition** | Pointer to [**[]WorkflowBaseDataType**](workflow.BaseDataType.md) |  | [optional] 
 **OutputParameters** | Pointer to **interface{}** | The output mappings for the workflow. The outputs for worflows will generally be task output variables that we want to export out at the end of the workflow. The format to specify the mapping is &#39;${Source.output.JsonPath}&#39;. &#39;Source&#39; is the name of the task within the workflow. You can map any task output to a workflow output as long as the types are compatible. Following this is JSON path expression to extract JSON fragment from source&#39;s output. | [optional] 
-**Properties** | Pointer to [**WorkflowWorkflowProperties**](workflow.WorkflowProperties.md) |  | [optional] 
+**Properties** | Pointer to [**NullableWorkflowWorkflowProperties**](workflow.WorkflowProperties.md) |  | [optional] 
 **Tasks** | Pointer to [**[]WorkflowWorkflowTask**](workflow.WorkflowTask.md) |  | [optional] 
+**UiInputFilters** | Pointer to [**[]WorkflowUiInputFilter**](workflow.UiInputFilter.md) |  | [optional] 
 **UiRenderingData** | Pointer to **interface{}** | This will hold the data needed for workflow to be rendered in the user interface. | [optional] 
-**ValidationInformation** | Pointer to [**WorkflowValidationInformation**](workflow.ValidationInformation.md) |  | [optional] 
+**ValidationInformation** | Pointer to [**NullableWorkflowValidationInformation**](workflow.ValidationInformation.md) |  | [optional] 
 **Version** | Pointer to **int64** | The version of the workflow to support multiple versions. | [optional] 
 **Catalog** | Pointer to [**WorkflowCatalogRelationship**](workflow.Catalog.Relationship.md) |  | [optional] 
+**WorkflowMetadata** | Pointer to [**WorkflowWorkflowMetadataRelationship**](workflow.WorkflowMetadata.Relationship.md) |  | [optional] 
 
 ## Methods
 
 ### NewWorkflowWorkflowDefinition
 
-`func NewWorkflowWorkflowDefinition() *WorkflowWorkflowDefinition`
+`func NewWorkflowWorkflowDefinition(classId string, objectType string, ) *WorkflowWorkflowDefinition`
 
 NewWorkflowWorkflowDefinition instantiates a new WorkflowWorkflowDefinition object
 This constructor will assign default values to properties that have it defined,
@@ -38,6 +43,46 @@ will change when the set of required properties is changed
 NewWorkflowWorkflowDefinitionWithDefaults instantiates a new WorkflowWorkflowDefinition object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *WorkflowWorkflowDefinition) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *WorkflowWorkflowDefinition) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *WorkflowWorkflowDefinition) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *WorkflowWorkflowDefinition) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *WorkflowWorkflowDefinition) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *WorkflowWorkflowDefinition) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDefaultVersion
 
@@ -114,6 +159,51 @@ SetInputDefinition sets InputDefinition field to given value.
 
 HasInputDefinition returns a boolean if a field has been set.
 
+### SetInputDefinitionNil
+
+`func (o *WorkflowWorkflowDefinition) SetInputDefinitionNil(b bool)`
+
+ SetInputDefinitionNil sets the value for InputDefinition to be an explicit nil
+
+### UnsetInputDefinition
+`func (o *WorkflowWorkflowDefinition) UnsetInputDefinition()`
+
+UnsetInputDefinition ensures that no value is present for InputDefinition, not even an explicit nil
+### GetInputParameterSet
+
+`func (o *WorkflowWorkflowDefinition) GetInputParameterSet() []WorkflowParameterSet`
+
+GetInputParameterSet returns the InputParameterSet field if non-nil, zero value otherwise.
+
+### GetInputParameterSetOk
+
+`func (o *WorkflowWorkflowDefinition) GetInputParameterSetOk() (*[]WorkflowParameterSet, bool)`
+
+GetInputParameterSetOk returns a tuple with the InputParameterSet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInputParameterSet
+
+`func (o *WorkflowWorkflowDefinition) SetInputParameterSet(v []WorkflowParameterSet)`
+
+SetInputParameterSet sets InputParameterSet field to given value.
+
+### HasInputParameterSet
+
+`func (o *WorkflowWorkflowDefinition) HasInputParameterSet() bool`
+
+HasInputParameterSet returns a boolean if a field has been set.
+
+### SetInputParameterSetNil
+
+`func (o *WorkflowWorkflowDefinition) SetInputParameterSetNil(b bool)`
+
+ SetInputParameterSetNil sets the value for InputParameterSet to be an explicit nil
+
+### UnsetInputParameterSet
+`func (o *WorkflowWorkflowDefinition) UnsetInputParameterSet()`
+
+UnsetInputParameterSet ensures that no value is present for InputParameterSet, not even an explicit nil
 ### GetLabel
 
 `func (o *WorkflowWorkflowDefinition) GetLabel() string`
@@ -239,6 +329,16 @@ SetOutputDefinition sets OutputDefinition field to given value.
 
 HasOutputDefinition returns a boolean if a field has been set.
 
+### SetOutputDefinitionNil
+
+`func (o *WorkflowWorkflowDefinition) SetOutputDefinitionNil(b bool)`
+
+ SetOutputDefinitionNil sets the value for OutputDefinition to be an explicit nil
+
+### UnsetOutputDefinition
+`func (o *WorkflowWorkflowDefinition) UnsetOutputDefinition()`
+
+UnsetOutputDefinition ensures that no value is present for OutputDefinition, not even an explicit nil
 ### GetOutputParameters
 
 `func (o *WorkflowWorkflowDefinition) GetOutputParameters() interface{}`
@@ -299,6 +399,16 @@ SetProperties sets Properties field to given value.
 
 HasProperties returns a boolean if a field has been set.
 
+### SetPropertiesNil
+
+`func (o *WorkflowWorkflowDefinition) SetPropertiesNil(b bool)`
+
+ SetPropertiesNil sets the value for Properties to be an explicit nil
+
+### UnsetProperties
+`func (o *WorkflowWorkflowDefinition) UnsetProperties()`
+
+UnsetProperties ensures that no value is present for Properties, not even an explicit nil
 ### GetTasks
 
 `func (o *WorkflowWorkflowDefinition) GetTasks() []WorkflowWorkflowTask`
@@ -324,6 +434,51 @@ SetTasks sets Tasks field to given value.
 
 HasTasks returns a boolean if a field has been set.
 
+### SetTasksNil
+
+`func (o *WorkflowWorkflowDefinition) SetTasksNil(b bool)`
+
+ SetTasksNil sets the value for Tasks to be an explicit nil
+
+### UnsetTasks
+`func (o *WorkflowWorkflowDefinition) UnsetTasks()`
+
+UnsetTasks ensures that no value is present for Tasks, not even an explicit nil
+### GetUiInputFilters
+
+`func (o *WorkflowWorkflowDefinition) GetUiInputFilters() []WorkflowUiInputFilter`
+
+GetUiInputFilters returns the UiInputFilters field if non-nil, zero value otherwise.
+
+### GetUiInputFiltersOk
+
+`func (o *WorkflowWorkflowDefinition) GetUiInputFiltersOk() (*[]WorkflowUiInputFilter, bool)`
+
+GetUiInputFiltersOk returns a tuple with the UiInputFilters field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUiInputFilters
+
+`func (o *WorkflowWorkflowDefinition) SetUiInputFilters(v []WorkflowUiInputFilter)`
+
+SetUiInputFilters sets UiInputFilters field to given value.
+
+### HasUiInputFilters
+
+`func (o *WorkflowWorkflowDefinition) HasUiInputFilters() bool`
+
+HasUiInputFilters returns a boolean if a field has been set.
+
+### SetUiInputFiltersNil
+
+`func (o *WorkflowWorkflowDefinition) SetUiInputFiltersNil(b bool)`
+
+ SetUiInputFiltersNil sets the value for UiInputFilters to be an explicit nil
+
+### UnsetUiInputFilters
+`func (o *WorkflowWorkflowDefinition) UnsetUiInputFilters()`
+
+UnsetUiInputFilters ensures that no value is present for UiInputFilters, not even an explicit nil
 ### GetUiRenderingData
 
 `func (o *WorkflowWorkflowDefinition) GetUiRenderingData() interface{}`
@@ -384,6 +539,16 @@ SetValidationInformation sets ValidationInformation field to given value.
 
 HasValidationInformation returns a boolean if a field has been set.
 
+### SetValidationInformationNil
+
+`func (o *WorkflowWorkflowDefinition) SetValidationInformationNil(b bool)`
+
+ SetValidationInformationNil sets the value for ValidationInformation to be an explicit nil
+
+### UnsetValidationInformation
+`func (o *WorkflowWorkflowDefinition) UnsetValidationInformation()`
+
+UnsetValidationInformation ensures that no value is present for ValidationInformation, not even an explicit nil
 ### GetVersion
 
 `func (o *WorkflowWorkflowDefinition) GetVersion() int64`
@@ -433,6 +598,31 @@ SetCatalog sets Catalog field to given value.
 `func (o *WorkflowWorkflowDefinition) HasCatalog() bool`
 
 HasCatalog returns a boolean if a field has been set.
+
+### GetWorkflowMetadata
+
+`func (o *WorkflowWorkflowDefinition) GetWorkflowMetadata() WorkflowWorkflowMetadataRelationship`
+
+GetWorkflowMetadata returns the WorkflowMetadata field if non-nil, zero value otherwise.
+
+### GetWorkflowMetadataOk
+
+`func (o *WorkflowWorkflowDefinition) GetWorkflowMetadataOk() (*WorkflowWorkflowMetadataRelationship, bool)`
+
+GetWorkflowMetadataOk returns a tuple with the WorkflowMetadata field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWorkflowMetadata
+
+`func (o *WorkflowWorkflowDefinition) SetWorkflowMetadata(v WorkflowWorkflowMetadataRelationship)`
+
+SetWorkflowMetadata sets WorkflowMetadata field to given value.
+
+### HasWorkflowMetadata
+
+`func (o *WorkflowWorkflowDefinition) HasWorkflowMetadata() bool`
+
+HasWorkflowMetadata returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

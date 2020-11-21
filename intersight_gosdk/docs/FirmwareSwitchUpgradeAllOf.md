@@ -4,6 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.SwitchUpgrade"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.SwitchUpgrade"]
+**EnableFabricEvacuation** | Pointer to **bool** | The flag to enable or disable fabric evacuation during the switch firmware upgrade. | [optional] 
 **Device** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 **NetworkElements** | Pointer to [**[]NetworkElementRelationship**](network.Element.Relationship.md) | An array of relationships to networkElement resources. | [optional] 
 
@@ -11,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewFirmwareSwitchUpgradeAllOf
 
-`func NewFirmwareSwitchUpgradeAllOf() *FirmwareSwitchUpgradeAllOf`
+`func NewFirmwareSwitchUpgradeAllOf(classId string, objectType string, ) *FirmwareSwitchUpgradeAllOf`
 
 NewFirmwareSwitchUpgradeAllOf instantiates a new FirmwareSwitchUpgradeAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -25,6 +28,71 @@ will change when the set of required properties is changed
 NewFirmwareSwitchUpgradeAllOfWithDefaults instantiates a new FirmwareSwitchUpgradeAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *FirmwareSwitchUpgradeAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *FirmwareSwitchUpgradeAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *FirmwareSwitchUpgradeAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *FirmwareSwitchUpgradeAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *FirmwareSwitchUpgradeAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *FirmwareSwitchUpgradeAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
+
+### GetEnableFabricEvacuation
+
+`func (o *FirmwareSwitchUpgradeAllOf) GetEnableFabricEvacuation() bool`
+
+GetEnableFabricEvacuation returns the EnableFabricEvacuation field if non-nil, zero value otherwise.
+
+### GetEnableFabricEvacuationOk
+
+`func (o *FirmwareSwitchUpgradeAllOf) GetEnableFabricEvacuationOk() (*bool, bool)`
+
+GetEnableFabricEvacuationOk returns a tuple with the EnableFabricEvacuation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableFabricEvacuation
+
+`func (o *FirmwareSwitchUpgradeAllOf) SetEnableFabricEvacuation(v bool)`
+
+SetEnableFabricEvacuation sets EnableFabricEvacuation field to given value.
+
+### HasEnableFabricEvacuation
+
+`func (o *FirmwareSwitchUpgradeAllOf) HasEnableFabricEvacuation() bool`
+
+HasEnableFabricEvacuation returns a boolean if a field has been set.
 
 ### GetDevice
 

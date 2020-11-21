@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "compute.PersistentMemoryOperation"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "compute.PersistentMemoryOperation"]
 **AdminAction** | Pointer to **string** | Administrative actions that can be performed on the Persistent Memory Modules. * &#x60;None&#x60; - No action on the selected Persistent Memory Modules. * &#x60;SecureErase&#x60; - Secure Erase action on the selected Persistent Memory Modules. * &#x60;Unlock&#x60; - Unlock action on the selected Persistent Memory Modules. | [optional] [default to "None"]
 **IsSecurePassphraseSet** | Pointer to **bool** | Indicates whether the value of the &#39;securePassphrase&#39; property has been set. | [optional] [readonly] 
 **Modules** | Pointer to [**[]ComputePersistentMemoryModule**](compute.PersistentMemoryModule.md) |  | [optional] 
@@ -13,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewComputePersistentMemoryOperationAllOf
 
-`func NewComputePersistentMemoryOperationAllOf() *ComputePersistentMemoryOperationAllOf`
+`func NewComputePersistentMemoryOperationAllOf(classId string, objectType string, ) *ComputePersistentMemoryOperationAllOf`
 
 NewComputePersistentMemoryOperationAllOf instantiates a new ComputePersistentMemoryOperationAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewComputePersistentMemoryOperationAllOfWithDefaults instantiates a new ComputePersistentMemoryOperationAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *ComputePersistentMemoryOperationAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *ComputePersistentMemoryOperationAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *ComputePersistentMemoryOperationAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *ComputePersistentMemoryOperationAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *ComputePersistentMemoryOperationAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *ComputePersistentMemoryOperationAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAdminAction
 
@@ -103,6 +145,16 @@ SetModules sets Modules field to given value.
 
 HasModules returns a boolean if a field has been set.
 
+### SetModulesNil
+
+`func (o *ComputePersistentMemoryOperationAllOf) SetModulesNil(b bool)`
+
+ SetModulesNil sets the value for Modules to be an explicit nil
+
+### UnsetModules
+`func (o *ComputePersistentMemoryOperationAllOf) UnsetModules()`
+
+UnsetModules ensures that no value is present for Modules, not even an explicit nil
 ### GetSecurePassphrase
 
 `func (o *ComputePersistentMemoryOperationAllOf) GetSecurePassphrase() string`

@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.TargetProperty"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.TargetProperty"]
 **ConnectorAttribute** | Pointer to **string** | A singleton value which will contain the path to connector object from the selected object. | [optional] 
 **ConstraintAttributes** | Pointer to **[]string** |  | [optional] 
 **DisplayAttributes** | Pointer to **[]string** |  | [optional] 
@@ -14,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewWorkflowTargetPropertyAllOf
 
-`func NewWorkflowTargetPropertyAllOf() *WorkflowTargetPropertyAllOf`
+`func NewWorkflowTargetPropertyAllOf(classId string, objectType string, ) *WorkflowTargetPropertyAllOf`
 
 NewWorkflowTargetPropertyAllOf instantiates a new WorkflowTargetPropertyAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +30,46 @@ will change when the set of required properties is changed
 NewWorkflowTargetPropertyAllOfWithDefaults instantiates a new WorkflowTargetPropertyAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *WorkflowTargetPropertyAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *WorkflowTargetPropertyAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *WorkflowTargetPropertyAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *WorkflowTargetPropertyAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *WorkflowTargetPropertyAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *WorkflowTargetPropertyAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetConnectorAttribute
 
@@ -79,6 +121,16 @@ SetConstraintAttributes sets ConstraintAttributes field to given value.
 
 HasConstraintAttributes returns a boolean if a field has been set.
 
+### SetConstraintAttributesNil
+
+`func (o *WorkflowTargetPropertyAllOf) SetConstraintAttributesNil(b bool)`
+
+ SetConstraintAttributesNil sets the value for ConstraintAttributes to be an explicit nil
+
+### UnsetConstraintAttributes
+`func (o *WorkflowTargetPropertyAllOf) UnsetConstraintAttributes()`
+
+UnsetConstraintAttributes ensures that no value is present for ConstraintAttributes, not even an explicit nil
 ### GetDisplayAttributes
 
 `func (o *WorkflowTargetPropertyAllOf) GetDisplayAttributes() []string`
@@ -104,6 +156,16 @@ SetDisplayAttributes sets DisplayAttributes field to given value.
 
 HasDisplayAttributes returns a boolean if a field has been set.
 
+### SetDisplayAttributesNil
+
+`func (o *WorkflowTargetPropertyAllOf) SetDisplayAttributesNil(b bool)`
+
+ SetDisplayAttributesNil sets the value for DisplayAttributes to be an explicit nil
+
+### UnsetDisplayAttributes
+`func (o *WorkflowTargetPropertyAllOf) UnsetDisplayAttributes()`
+
+UnsetDisplayAttributes ensures that no value is present for DisplayAttributes, not even an explicit nil
 ### GetSelector
 
 `func (o *WorkflowTargetPropertyAllOf) GetSelector() string`
@@ -154,6 +216,16 @@ SetSupportedObjects sets SupportedObjects field to given value.
 
 HasSupportedObjects returns a boolean if a field has been set.
 
+### SetSupportedObjectsNil
+
+`func (o *WorkflowTargetPropertyAllOf) SetSupportedObjectsNil(b bool)`
+
+ SetSupportedObjectsNil sets the value for SupportedObjects to be an explicit nil
+
+### UnsetSupportedObjects
+`func (o *WorkflowTargetPropertyAllOf) UnsetSupportedObjects()`
+
+UnsetSupportedObjects ensures that no value is present for SupportedObjects, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -4,7 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Capacity** | Pointer to **int32** | Capacity of this Namespace that is created or modified. | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "memory.PersistentMemoryLogicalNamespace"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "memory.PersistentMemoryLogicalNamespace"]
+**Capacity** | Pointer to **int64** | Capacity of this Namespace that is created or modified. | [optional] 
 **Mode** | Pointer to **string** | Mode of this Namespace that is created or modified. * &#x60;raw&#x60; - The raw mode of Persistent Memory Namespace. * &#x60;block&#x60; - The block mode of Persistent Memory Namespace. | [optional] [default to "raw"]
 **Name** | Pointer to **string** | Name of this Namespace to be created on the server. | [optional] 
 **SocketId** | Pointer to **int32** | Socket ID of the region on which this Namespace has to be created or modified. * &#x60;1&#x60; - The first CPU socket in a server. * &#x60;2&#x60; - The second CPU socket in a server. * &#x60;3&#x60; - The third CPU socket in a server. * &#x60;4&#x60; - The fourth CPU socket in a server. | [optional] [default to 1]
@@ -14,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewMemoryPersistentMemoryLogicalNamespace
 
-`func NewMemoryPersistentMemoryLogicalNamespace() *MemoryPersistentMemoryLogicalNamespace`
+`func NewMemoryPersistentMemoryLogicalNamespace(classId string, objectType string, ) *MemoryPersistentMemoryLogicalNamespace`
 
 NewMemoryPersistentMemoryLogicalNamespace instantiates a new MemoryPersistentMemoryLogicalNamespace object
 This constructor will assign default values to properties that have it defined,
@@ -29,22 +31,62 @@ NewMemoryPersistentMemoryLogicalNamespaceWithDefaults instantiates a new MemoryP
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetClassId
+
+`func (o *MemoryPersistentMemoryLogicalNamespace) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *MemoryPersistentMemoryLogicalNamespace) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *MemoryPersistentMemoryLogicalNamespace) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *MemoryPersistentMemoryLogicalNamespace) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *MemoryPersistentMemoryLogicalNamespace) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *MemoryPersistentMemoryLogicalNamespace) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
+
 ### GetCapacity
 
-`func (o *MemoryPersistentMemoryLogicalNamespace) GetCapacity() int32`
+`func (o *MemoryPersistentMemoryLogicalNamespace) GetCapacity() int64`
 
 GetCapacity returns the Capacity field if non-nil, zero value otherwise.
 
 ### GetCapacityOk
 
-`func (o *MemoryPersistentMemoryLogicalNamespace) GetCapacityOk() (*int32, bool)`
+`func (o *MemoryPersistentMemoryLogicalNamespace) GetCapacityOk() (*int64, bool)`
 
 GetCapacityOk returns a tuple with the Capacity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCapacity
 
-`func (o *MemoryPersistentMemoryLogicalNamespace) SetCapacity(v int32)`
+`func (o *MemoryPersistentMemoryLogicalNamespace) SetCapacity(v int64)`
 
 SetCapacity sets Capacity field to given value.
 

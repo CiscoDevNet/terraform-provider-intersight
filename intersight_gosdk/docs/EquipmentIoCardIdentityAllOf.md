@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.IoCardIdentity"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.IoCardIdentity"]
 **IoCardMoid** | Pointer to **string** | MO Reference to equipmentIoCard MO in inventory service. | [optional] 
 **ModuleId** | Pointer to **int64** | IOM/MUX Module ID connected to the FI. | [optional] 
 **NetworkElementMoid** | Pointer to **string** | MO Reference to networkElement MO in inventory service. | [optional] 
@@ -13,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewEquipmentIoCardIdentityAllOf
 
-`func NewEquipmentIoCardIdentityAllOf() *EquipmentIoCardIdentityAllOf`
+`func NewEquipmentIoCardIdentityAllOf(classId string, objectType string, ) *EquipmentIoCardIdentityAllOf`
 
 NewEquipmentIoCardIdentityAllOf instantiates a new EquipmentIoCardIdentityAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewEquipmentIoCardIdentityAllOfWithDefaults instantiates a new EquipmentIoCardIdentityAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *EquipmentIoCardIdentityAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *EquipmentIoCardIdentityAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *EquipmentIoCardIdentityAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *EquipmentIoCardIdentityAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *EquipmentIoCardIdentityAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *EquipmentIoCardIdentityAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetIoCardMoid
 

@@ -4,23 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "capability.SwitchCapability"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "capability.SwitchCapability"]
 **DefaultFcoeVlan** | Pointer to **int64** | Default Fcoe VLAN associated with this switch. | [optional] 
 **DynamicVifsSupported** | Pointer to **bool** | Dynamic VIFs support on this switch. | [optional] 
 **FanModulesSupported** | Pointer to **bool** | Fan Modules support on this switch. | [optional] 
 **FcEndHostModeReservedVsans** | Pointer to [**[]CapabilityPortRange**](capability.PortRange.md) |  | [optional] 
 **FcUplinkPortsAutoNegotiationSupported** | Pointer to **bool** | Fc Uplink ports auto negotiation speed support on this switch. | [optional] 
 **LocatorBeaconSupported** | Pointer to **bool** | Locator Beacon LED support on this switch. | [optional] 
-**MaxActiveSpanSessions** | Pointer to **int64** | Maximum allowed Traffic Monitoring (SPAN) sessions on this switch. | [optional] 
-**MaxEthernetPortChannelMembers** | Pointer to **int64** | Maximum allowed Ethernet Uplink Port-channel members for each Uplink Port-channel on this switch. | [optional] 
-**MaxEthernetPortChannels** | Pointer to **int64** | Maximum allowed Ethernet Uplink Port-channels on this switch. | [optional] 
-**MaxEthernetUplinkPorts** | Pointer to **int64** | Maximum allowed Ethernet Uplink Ports on this switch. | [optional] 
-**MaxFcFcoePortChannels** | Pointer to **int64** | Total maximum Fc and Fcoe Port-channels allowed on this switch. | [optional] 
-**MaxFcPortChannelMembers** | Pointer to **int64** | Maximum allowed FC Uplink Port-channel members for each FCoE Port-channel on this switch. | [optional] 
-**MaxFcoePortChannelMembers** | Pointer to **int64** | Maximum allowed FCoE Uplink Port-channel members for each FCoE Port-channel on this switch. | [optional] 
 **MaxPorts** | Pointer to **int64** | Maximum allowed physical ports on this switch. | [optional] 
 **MaxSlots** | Pointer to **int64** | Maximum allowed physical slots on this switch. | [optional] 
-**MaxVsansSupported** | Pointer to **int64** | Maximum number of Vsans supported on this switch. | [optional] 
-**MinActiveFans** | Pointer to **int64** | Minimum number of fans needed to be active/running on this switch. | [optional] 
+**NetworkLimits** | Pointer to [**NullableCapabilitySwitchNetworkLimits**](capability.SwitchNetworkLimits.md) |  | [optional] 
 **PortsSupporting100gSpeed** | Pointer to [**[]CapabilityPortRange**](capability.PortRange.md) |  | [optional] 
 **PortsSupporting10gSpeed** | Pointer to [**[]CapabilityPortRange**](capability.PortRange.md) |  | [optional] 
 **PortsSupporting1gSpeed** | Pointer to [**[]CapabilityPortRange**](capability.PortRange.md) |  | [optional] 
@@ -31,15 +25,17 @@ Name | Type | Description | Notes
 **PortsSupportingServerRole** | Pointer to [**[]CapabilityPortRange**](capability.PortRange.md) |  | [optional] 
 **ReservedVsans** | Pointer to [**[]CapabilityPortRange**](capability.PortRange.md) |  | [optional] 
 **SerenoNetflowSupported** | Pointer to **bool** | Sereno Adaptor with Netflow support on this switch. | [optional] 
+**StorageLimits** | Pointer to [**NullableCapabilitySwitchStorageLimits**](capability.SwitchStorageLimits.md) |  | [optional] 
+**SwitchingModeCapabilities** | Pointer to [**[]CapabilitySwitchingModeCapability**](capability.SwitchingModeCapability.md) |  | [optional] 
+**SystemLimits** | Pointer to [**NullableCapabilitySwitchSystemLimits**](capability.SwitchSystemLimits.md) |  | [optional] 
 **UnifiedPorts** | Pointer to [**[]CapabilityPortRange**](capability.PortRange.md) |  | [optional] 
 **UnifiedRule** | Pointer to **string** | The Slider rule for Unified ports on this switch. | [optional] 
-**VpCompressionSupported** | Pointer to **bool** | VP Compression support on this switch. | [optional] 
 
 ## Methods
 
 ### NewCapabilitySwitchCapabilityAllOf
 
-`func NewCapabilitySwitchCapabilityAllOf() *CapabilitySwitchCapabilityAllOf`
+`func NewCapabilitySwitchCapabilityAllOf(classId string, objectType string, ) *CapabilitySwitchCapabilityAllOf`
 
 NewCapabilitySwitchCapabilityAllOf instantiates a new CapabilitySwitchCapabilityAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -53,6 +49,46 @@ will change when the set of required properties is changed
 NewCapabilitySwitchCapabilityAllOfWithDefaults instantiates a new CapabilitySwitchCapabilityAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *CapabilitySwitchCapabilityAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *CapabilitySwitchCapabilityAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *CapabilitySwitchCapabilityAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *CapabilitySwitchCapabilityAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *CapabilitySwitchCapabilityAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *CapabilitySwitchCapabilityAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDefaultFcoeVlan
 
@@ -154,6 +190,16 @@ SetFcEndHostModeReservedVsans sets FcEndHostModeReservedVsans field to given val
 
 HasFcEndHostModeReservedVsans returns a boolean if a field has been set.
 
+### SetFcEndHostModeReservedVsansNil
+
+`func (o *CapabilitySwitchCapabilityAllOf) SetFcEndHostModeReservedVsansNil(b bool)`
+
+ SetFcEndHostModeReservedVsansNil sets the value for FcEndHostModeReservedVsans to be an explicit nil
+
+### UnsetFcEndHostModeReservedVsans
+`func (o *CapabilitySwitchCapabilityAllOf) UnsetFcEndHostModeReservedVsans()`
+
+UnsetFcEndHostModeReservedVsans ensures that no value is present for FcEndHostModeReservedVsans, not even an explicit nil
 ### GetFcUplinkPortsAutoNegotiationSupported
 
 `func (o *CapabilitySwitchCapabilityAllOf) GetFcUplinkPortsAutoNegotiationSupported() bool`
@@ -203,181 +249,6 @@ SetLocatorBeaconSupported sets LocatorBeaconSupported field to given value.
 `func (o *CapabilitySwitchCapabilityAllOf) HasLocatorBeaconSupported() bool`
 
 HasLocatorBeaconSupported returns a boolean if a field has been set.
-
-### GetMaxActiveSpanSessions
-
-`func (o *CapabilitySwitchCapabilityAllOf) GetMaxActiveSpanSessions() int64`
-
-GetMaxActiveSpanSessions returns the MaxActiveSpanSessions field if non-nil, zero value otherwise.
-
-### GetMaxActiveSpanSessionsOk
-
-`func (o *CapabilitySwitchCapabilityAllOf) GetMaxActiveSpanSessionsOk() (*int64, bool)`
-
-GetMaxActiveSpanSessionsOk returns a tuple with the MaxActiveSpanSessions field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMaxActiveSpanSessions
-
-`func (o *CapabilitySwitchCapabilityAllOf) SetMaxActiveSpanSessions(v int64)`
-
-SetMaxActiveSpanSessions sets MaxActiveSpanSessions field to given value.
-
-### HasMaxActiveSpanSessions
-
-`func (o *CapabilitySwitchCapabilityAllOf) HasMaxActiveSpanSessions() bool`
-
-HasMaxActiveSpanSessions returns a boolean if a field has been set.
-
-### GetMaxEthernetPortChannelMembers
-
-`func (o *CapabilitySwitchCapabilityAllOf) GetMaxEthernetPortChannelMembers() int64`
-
-GetMaxEthernetPortChannelMembers returns the MaxEthernetPortChannelMembers field if non-nil, zero value otherwise.
-
-### GetMaxEthernetPortChannelMembersOk
-
-`func (o *CapabilitySwitchCapabilityAllOf) GetMaxEthernetPortChannelMembersOk() (*int64, bool)`
-
-GetMaxEthernetPortChannelMembersOk returns a tuple with the MaxEthernetPortChannelMembers field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMaxEthernetPortChannelMembers
-
-`func (o *CapabilitySwitchCapabilityAllOf) SetMaxEthernetPortChannelMembers(v int64)`
-
-SetMaxEthernetPortChannelMembers sets MaxEthernetPortChannelMembers field to given value.
-
-### HasMaxEthernetPortChannelMembers
-
-`func (o *CapabilitySwitchCapabilityAllOf) HasMaxEthernetPortChannelMembers() bool`
-
-HasMaxEthernetPortChannelMembers returns a boolean if a field has been set.
-
-### GetMaxEthernetPortChannels
-
-`func (o *CapabilitySwitchCapabilityAllOf) GetMaxEthernetPortChannels() int64`
-
-GetMaxEthernetPortChannels returns the MaxEthernetPortChannels field if non-nil, zero value otherwise.
-
-### GetMaxEthernetPortChannelsOk
-
-`func (o *CapabilitySwitchCapabilityAllOf) GetMaxEthernetPortChannelsOk() (*int64, bool)`
-
-GetMaxEthernetPortChannelsOk returns a tuple with the MaxEthernetPortChannels field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMaxEthernetPortChannels
-
-`func (o *CapabilitySwitchCapabilityAllOf) SetMaxEthernetPortChannels(v int64)`
-
-SetMaxEthernetPortChannels sets MaxEthernetPortChannels field to given value.
-
-### HasMaxEthernetPortChannels
-
-`func (o *CapabilitySwitchCapabilityAllOf) HasMaxEthernetPortChannels() bool`
-
-HasMaxEthernetPortChannels returns a boolean if a field has been set.
-
-### GetMaxEthernetUplinkPorts
-
-`func (o *CapabilitySwitchCapabilityAllOf) GetMaxEthernetUplinkPorts() int64`
-
-GetMaxEthernetUplinkPorts returns the MaxEthernetUplinkPorts field if non-nil, zero value otherwise.
-
-### GetMaxEthernetUplinkPortsOk
-
-`func (o *CapabilitySwitchCapabilityAllOf) GetMaxEthernetUplinkPortsOk() (*int64, bool)`
-
-GetMaxEthernetUplinkPortsOk returns a tuple with the MaxEthernetUplinkPorts field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMaxEthernetUplinkPorts
-
-`func (o *CapabilitySwitchCapabilityAllOf) SetMaxEthernetUplinkPorts(v int64)`
-
-SetMaxEthernetUplinkPorts sets MaxEthernetUplinkPorts field to given value.
-
-### HasMaxEthernetUplinkPorts
-
-`func (o *CapabilitySwitchCapabilityAllOf) HasMaxEthernetUplinkPorts() bool`
-
-HasMaxEthernetUplinkPorts returns a boolean if a field has been set.
-
-### GetMaxFcFcoePortChannels
-
-`func (o *CapabilitySwitchCapabilityAllOf) GetMaxFcFcoePortChannels() int64`
-
-GetMaxFcFcoePortChannels returns the MaxFcFcoePortChannels field if non-nil, zero value otherwise.
-
-### GetMaxFcFcoePortChannelsOk
-
-`func (o *CapabilitySwitchCapabilityAllOf) GetMaxFcFcoePortChannelsOk() (*int64, bool)`
-
-GetMaxFcFcoePortChannelsOk returns a tuple with the MaxFcFcoePortChannels field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMaxFcFcoePortChannels
-
-`func (o *CapabilitySwitchCapabilityAllOf) SetMaxFcFcoePortChannels(v int64)`
-
-SetMaxFcFcoePortChannels sets MaxFcFcoePortChannels field to given value.
-
-### HasMaxFcFcoePortChannels
-
-`func (o *CapabilitySwitchCapabilityAllOf) HasMaxFcFcoePortChannels() bool`
-
-HasMaxFcFcoePortChannels returns a boolean if a field has been set.
-
-### GetMaxFcPortChannelMembers
-
-`func (o *CapabilitySwitchCapabilityAllOf) GetMaxFcPortChannelMembers() int64`
-
-GetMaxFcPortChannelMembers returns the MaxFcPortChannelMembers field if non-nil, zero value otherwise.
-
-### GetMaxFcPortChannelMembersOk
-
-`func (o *CapabilitySwitchCapabilityAllOf) GetMaxFcPortChannelMembersOk() (*int64, bool)`
-
-GetMaxFcPortChannelMembersOk returns a tuple with the MaxFcPortChannelMembers field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMaxFcPortChannelMembers
-
-`func (o *CapabilitySwitchCapabilityAllOf) SetMaxFcPortChannelMembers(v int64)`
-
-SetMaxFcPortChannelMembers sets MaxFcPortChannelMembers field to given value.
-
-### HasMaxFcPortChannelMembers
-
-`func (o *CapabilitySwitchCapabilityAllOf) HasMaxFcPortChannelMembers() bool`
-
-HasMaxFcPortChannelMembers returns a boolean if a field has been set.
-
-### GetMaxFcoePortChannelMembers
-
-`func (o *CapabilitySwitchCapabilityAllOf) GetMaxFcoePortChannelMembers() int64`
-
-GetMaxFcoePortChannelMembers returns the MaxFcoePortChannelMembers field if non-nil, zero value otherwise.
-
-### GetMaxFcoePortChannelMembersOk
-
-`func (o *CapabilitySwitchCapabilityAllOf) GetMaxFcoePortChannelMembersOk() (*int64, bool)`
-
-GetMaxFcoePortChannelMembersOk returns a tuple with the MaxFcoePortChannelMembers field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMaxFcoePortChannelMembers
-
-`func (o *CapabilitySwitchCapabilityAllOf) SetMaxFcoePortChannelMembers(v int64)`
-
-SetMaxFcoePortChannelMembers sets MaxFcoePortChannelMembers field to given value.
-
-### HasMaxFcoePortChannelMembers
-
-`func (o *CapabilitySwitchCapabilityAllOf) HasMaxFcoePortChannelMembers() bool`
-
-HasMaxFcoePortChannelMembers returns a boolean if a field has been set.
 
 ### GetMaxPorts
 
@@ -429,56 +300,41 @@ SetMaxSlots sets MaxSlots field to given value.
 
 HasMaxSlots returns a boolean if a field has been set.
 
-### GetMaxVsansSupported
+### GetNetworkLimits
 
-`func (o *CapabilitySwitchCapabilityAllOf) GetMaxVsansSupported() int64`
+`func (o *CapabilitySwitchCapabilityAllOf) GetNetworkLimits() CapabilitySwitchNetworkLimits`
 
-GetMaxVsansSupported returns the MaxVsansSupported field if non-nil, zero value otherwise.
+GetNetworkLimits returns the NetworkLimits field if non-nil, zero value otherwise.
 
-### GetMaxVsansSupportedOk
+### GetNetworkLimitsOk
 
-`func (o *CapabilitySwitchCapabilityAllOf) GetMaxVsansSupportedOk() (*int64, bool)`
+`func (o *CapabilitySwitchCapabilityAllOf) GetNetworkLimitsOk() (*CapabilitySwitchNetworkLimits, bool)`
 
-GetMaxVsansSupportedOk returns a tuple with the MaxVsansSupported field if it's non-nil, zero value otherwise
+GetNetworkLimitsOk returns a tuple with the NetworkLimits field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMaxVsansSupported
+### SetNetworkLimits
 
-`func (o *CapabilitySwitchCapabilityAllOf) SetMaxVsansSupported(v int64)`
+`func (o *CapabilitySwitchCapabilityAllOf) SetNetworkLimits(v CapabilitySwitchNetworkLimits)`
 
-SetMaxVsansSupported sets MaxVsansSupported field to given value.
+SetNetworkLimits sets NetworkLimits field to given value.
 
-### HasMaxVsansSupported
+### HasNetworkLimits
 
-`func (o *CapabilitySwitchCapabilityAllOf) HasMaxVsansSupported() bool`
+`func (o *CapabilitySwitchCapabilityAllOf) HasNetworkLimits() bool`
 
-HasMaxVsansSupported returns a boolean if a field has been set.
+HasNetworkLimits returns a boolean if a field has been set.
 
-### GetMinActiveFans
+### SetNetworkLimitsNil
 
-`func (o *CapabilitySwitchCapabilityAllOf) GetMinActiveFans() int64`
+`func (o *CapabilitySwitchCapabilityAllOf) SetNetworkLimitsNil(b bool)`
 
-GetMinActiveFans returns the MinActiveFans field if non-nil, zero value otherwise.
+ SetNetworkLimitsNil sets the value for NetworkLimits to be an explicit nil
 
-### GetMinActiveFansOk
+### UnsetNetworkLimits
+`func (o *CapabilitySwitchCapabilityAllOf) UnsetNetworkLimits()`
 
-`func (o *CapabilitySwitchCapabilityAllOf) GetMinActiveFansOk() (*int64, bool)`
-
-GetMinActiveFansOk returns a tuple with the MinActiveFans field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMinActiveFans
-
-`func (o *CapabilitySwitchCapabilityAllOf) SetMinActiveFans(v int64)`
-
-SetMinActiveFans sets MinActiveFans field to given value.
-
-### HasMinActiveFans
-
-`func (o *CapabilitySwitchCapabilityAllOf) HasMinActiveFans() bool`
-
-HasMinActiveFans returns a boolean if a field has been set.
-
+UnsetNetworkLimits ensures that no value is present for NetworkLimits, not even an explicit nil
 ### GetPortsSupporting100gSpeed
 
 `func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupporting100gSpeed() []CapabilityPortRange`
@@ -504,6 +360,16 @@ SetPortsSupporting100gSpeed sets PortsSupporting100gSpeed field to given value.
 
 HasPortsSupporting100gSpeed returns a boolean if a field has been set.
 
+### SetPortsSupporting100gSpeedNil
+
+`func (o *CapabilitySwitchCapabilityAllOf) SetPortsSupporting100gSpeedNil(b bool)`
+
+ SetPortsSupporting100gSpeedNil sets the value for PortsSupporting100gSpeed to be an explicit nil
+
+### UnsetPortsSupporting100gSpeed
+`func (o *CapabilitySwitchCapabilityAllOf) UnsetPortsSupporting100gSpeed()`
+
+UnsetPortsSupporting100gSpeed ensures that no value is present for PortsSupporting100gSpeed, not even an explicit nil
 ### GetPortsSupporting10gSpeed
 
 `func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupporting10gSpeed() []CapabilityPortRange`
@@ -529,6 +395,16 @@ SetPortsSupporting10gSpeed sets PortsSupporting10gSpeed field to given value.
 
 HasPortsSupporting10gSpeed returns a boolean if a field has been set.
 
+### SetPortsSupporting10gSpeedNil
+
+`func (o *CapabilitySwitchCapabilityAllOf) SetPortsSupporting10gSpeedNil(b bool)`
+
+ SetPortsSupporting10gSpeedNil sets the value for PortsSupporting10gSpeed to be an explicit nil
+
+### UnsetPortsSupporting10gSpeed
+`func (o *CapabilitySwitchCapabilityAllOf) UnsetPortsSupporting10gSpeed()`
+
+UnsetPortsSupporting10gSpeed ensures that no value is present for PortsSupporting10gSpeed, not even an explicit nil
 ### GetPortsSupporting1gSpeed
 
 `func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupporting1gSpeed() []CapabilityPortRange`
@@ -554,6 +430,16 @@ SetPortsSupporting1gSpeed sets PortsSupporting1gSpeed field to given value.
 
 HasPortsSupporting1gSpeed returns a boolean if a field has been set.
 
+### SetPortsSupporting1gSpeedNil
+
+`func (o *CapabilitySwitchCapabilityAllOf) SetPortsSupporting1gSpeedNil(b bool)`
+
+ SetPortsSupporting1gSpeedNil sets the value for PortsSupporting1gSpeed to be an explicit nil
+
+### UnsetPortsSupporting1gSpeed
+`func (o *CapabilitySwitchCapabilityAllOf) UnsetPortsSupporting1gSpeed()`
+
+UnsetPortsSupporting1gSpeed ensures that no value is present for PortsSupporting1gSpeed, not even an explicit nil
 ### GetPortsSupporting25gSpeed
 
 `func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupporting25gSpeed() []CapabilityPortRange`
@@ -579,6 +465,16 @@ SetPortsSupporting25gSpeed sets PortsSupporting25gSpeed field to given value.
 
 HasPortsSupporting25gSpeed returns a boolean if a field has been set.
 
+### SetPortsSupporting25gSpeedNil
+
+`func (o *CapabilitySwitchCapabilityAllOf) SetPortsSupporting25gSpeedNil(b bool)`
+
+ SetPortsSupporting25gSpeedNil sets the value for PortsSupporting25gSpeed to be an explicit nil
+
+### UnsetPortsSupporting25gSpeed
+`func (o *CapabilitySwitchCapabilityAllOf) UnsetPortsSupporting25gSpeed()`
+
+UnsetPortsSupporting25gSpeed ensures that no value is present for PortsSupporting25gSpeed, not even an explicit nil
 ### GetPortsSupporting40gSpeed
 
 `func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupporting40gSpeed() []CapabilityPortRange`
@@ -604,6 +500,16 @@ SetPortsSupporting40gSpeed sets PortsSupporting40gSpeed field to given value.
 
 HasPortsSupporting40gSpeed returns a boolean if a field has been set.
 
+### SetPortsSupporting40gSpeedNil
+
+`func (o *CapabilitySwitchCapabilityAllOf) SetPortsSupporting40gSpeedNil(b bool)`
+
+ SetPortsSupporting40gSpeedNil sets the value for PortsSupporting40gSpeed to be an explicit nil
+
+### UnsetPortsSupporting40gSpeed
+`func (o *CapabilitySwitchCapabilityAllOf) UnsetPortsSupporting40gSpeed()`
+
+UnsetPortsSupporting40gSpeed ensures that no value is present for PortsSupporting40gSpeed, not even an explicit nil
 ### GetPortsSupportingBreakout
 
 `func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupportingBreakout() []CapabilityPortRange`
@@ -629,6 +535,16 @@ SetPortsSupportingBreakout sets PortsSupportingBreakout field to given value.
 
 HasPortsSupportingBreakout returns a boolean if a field has been set.
 
+### SetPortsSupportingBreakoutNil
+
+`func (o *CapabilitySwitchCapabilityAllOf) SetPortsSupportingBreakoutNil(b bool)`
+
+ SetPortsSupportingBreakoutNil sets the value for PortsSupportingBreakout to be an explicit nil
+
+### UnsetPortsSupportingBreakout
+`func (o *CapabilitySwitchCapabilityAllOf) UnsetPortsSupportingBreakout()`
+
+UnsetPortsSupportingBreakout ensures that no value is present for PortsSupportingBreakout, not even an explicit nil
 ### GetPortsSupportingFcoe
 
 `func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupportingFcoe() []CapabilityPortRange`
@@ -654,6 +570,16 @@ SetPortsSupportingFcoe sets PortsSupportingFcoe field to given value.
 
 HasPortsSupportingFcoe returns a boolean if a field has been set.
 
+### SetPortsSupportingFcoeNil
+
+`func (o *CapabilitySwitchCapabilityAllOf) SetPortsSupportingFcoeNil(b bool)`
+
+ SetPortsSupportingFcoeNil sets the value for PortsSupportingFcoe to be an explicit nil
+
+### UnsetPortsSupportingFcoe
+`func (o *CapabilitySwitchCapabilityAllOf) UnsetPortsSupportingFcoe()`
+
+UnsetPortsSupportingFcoe ensures that no value is present for PortsSupportingFcoe, not even an explicit nil
 ### GetPortsSupportingServerRole
 
 `func (o *CapabilitySwitchCapabilityAllOf) GetPortsSupportingServerRole() []CapabilityPortRange`
@@ -679,6 +605,16 @@ SetPortsSupportingServerRole sets PortsSupportingServerRole field to given value
 
 HasPortsSupportingServerRole returns a boolean if a field has been set.
 
+### SetPortsSupportingServerRoleNil
+
+`func (o *CapabilitySwitchCapabilityAllOf) SetPortsSupportingServerRoleNil(b bool)`
+
+ SetPortsSupportingServerRoleNil sets the value for PortsSupportingServerRole to be an explicit nil
+
+### UnsetPortsSupportingServerRole
+`func (o *CapabilitySwitchCapabilityAllOf) UnsetPortsSupportingServerRole()`
+
+UnsetPortsSupportingServerRole ensures that no value is present for PortsSupportingServerRole, not even an explicit nil
 ### GetReservedVsans
 
 `func (o *CapabilitySwitchCapabilityAllOf) GetReservedVsans() []CapabilityPortRange`
@@ -704,6 +640,16 @@ SetReservedVsans sets ReservedVsans field to given value.
 
 HasReservedVsans returns a boolean if a field has been set.
 
+### SetReservedVsansNil
+
+`func (o *CapabilitySwitchCapabilityAllOf) SetReservedVsansNil(b bool)`
+
+ SetReservedVsansNil sets the value for ReservedVsans to be an explicit nil
+
+### UnsetReservedVsans
+`func (o *CapabilitySwitchCapabilityAllOf) UnsetReservedVsans()`
+
+UnsetReservedVsans ensures that no value is present for ReservedVsans, not even an explicit nil
 ### GetSerenoNetflowSupported
 
 `func (o *CapabilitySwitchCapabilityAllOf) GetSerenoNetflowSupported() bool`
@@ -729,6 +675,111 @@ SetSerenoNetflowSupported sets SerenoNetflowSupported field to given value.
 
 HasSerenoNetflowSupported returns a boolean if a field has been set.
 
+### GetStorageLimits
+
+`func (o *CapabilitySwitchCapabilityAllOf) GetStorageLimits() CapabilitySwitchStorageLimits`
+
+GetStorageLimits returns the StorageLimits field if non-nil, zero value otherwise.
+
+### GetStorageLimitsOk
+
+`func (o *CapabilitySwitchCapabilityAllOf) GetStorageLimitsOk() (*CapabilitySwitchStorageLimits, bool)`
+
+GetStorageLimitsOk returns a tuple with the StorageLimits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStorageLimits
+
+`func (o *CapabilitySwitchCapabilityAllOf) SetStorageLimits(v CapabilitySwitchStorageLimits)`
+
+SetStorageLimits sets StorageLimits field to given value.
+
+### HasStorageLimits
+
+`func (o *CapabilitySwitchCapabilityAllOf) HasStorageLimits() bool`
+
+HasStorageLimits returns a boolean if a field has been set.
+
+### SetStorageLimitsNil
+
+`func (o *CapabilitySwitchCapabilityAllOf) SetStorageLimitsNil(b bool)`
+
+ SetStorageLimitsNil sets the value for StorageLimits to be an explicit nil
+
+### UnsetStorageLimits
+`func (o *CapabilitySwitchCapabilityAllOf) UnsetStorageLimits()`
+
+UnsetStorageLimits ensures that no value is present for StorageLimits, not even an explicit nil
+### GetSwitchingModeCapabilities
+
+`func (o *CapabilitySwitchCapabilityAllOf) GetSwitchingModeCapabilities() []CapabilitySwitchingModeCapability`
+
+GetSwitchingModeCapabilities returns the SwitchingModeCapabilities field if non-nil, zero value otherwise.
+
+### GetSwitchingModeCapabilitiesOk
+
+`func (o *CapabilitySwitchCapabilityAllOf) GetSwitchingModeCapabilitiesOk() (*[]CapabilitySwitchingModeCapability, bool)`
+
+GetSwitchingModeCapabilitiesOk returns a tuple with the SwitchingModeCapabilities field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSwitchingModeCapabilities
+
+`func (o *CapabilitySwitchCapabilityAllOf) SetSwitchingModeCapabilities(v []CapabilitySwitchingModeCapability)`
+
+SetSwitchingModeCapabilities sets SwitchingModeCapabilities field to given value.
+
+### HasSwitchingModeCapabilities
+
+`func (o *CapabilitySwitchCapabilityAllOf) HasSwitchingModeCapabilities() bool`
+
+HasSwitchingModeCapabilities returns a boolean if a field has been set.
+
+### SetSwitchingModeCapabilitiesNil
+
+`func (o *CapabilitySwitchCapabilityAllOf) SetSwitchingModeCapabilitiesNil(b bool)`
+
+ SetSwitchingModeCapabilitiesNil sets the value for SwitchingModeCapabilities to be an explicit nil
+
+### UnsetSwitchingModeCapabilities
+`func (o *CapabilitySwitchCapabilityAllOf) UnsetSwitchingModeCapabilities()`
+
+UnsetSwitchingModeCapabilities ensures that no value is present for SwitchingModeCapabilities, not even an explicit nil
+### GetSystemLimits
+
+`func (o *CapabilitySwitchCapabilityAllOf) GetSystemLimits() CapabilitySwitchSystemLimits`
+
+GetSystemLimits returns the SystemLimits field if non-nil, zero value otherwise.
+
+### GetSystemLimitsOk
+
+`func (o *CapabilitySwitchCapabilityAllOf) GetSystemLimitsOk() (*CapabilitySwitchSystemLimits, bool)`
+
+GetSystemLimitsOk returns a tuple with the SystemLimits field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSystemLimits
+
+`func (o *CapabilitySwitchCapabilityAllOf) SetSystemLimits(v CapabilitySwitchSystemLimits)`
+
+SetSystemLimits sets SystemLimits field to given value.
+
+### HasSystemLimits
+
+`func (o *CapabilitySwitchCapabilityAllOf) HasSystemLimits() bool`
+
+HasSystemLimits returns a boolean if a field has been set.
+
+### SetSystemLimitsNil
+
+`func (o *CapabilitySwitchCapabilityAllOf) SetSystemLimitsNil(b bool)`
+
+ SetSystemLimitsNil sets the value for SystemLimits to be an explicit nil
+
+### UnsetSystemLimits
+`func (o *CapabilitySwitchCapabilityAllOf) UnsetSystemLimits()`
+
+UnsetSystemLimits ensures that no value is present for SystemLimits, not even an explicit nil
 ### GetUnifiedPorts
 
 `func (o *CapabilitySwitchCapabilityAllOf) GetUnifiedPorts() []CapabilityPortRange`
@@ -754,6 +805,16 @@ SetUnifiedPorts sets UnifiedPorts field to given value.
 
 HasUnifiedPorts returns a boolean if a field has been set.
 
+### SetUnifiedPortsNil
+
+`func (o *CapabilitySwitchCapabilityAllOf) SetUnifiedPortsNil(b bool)`
+
+ SetUnifiedPortsNil sets the value for UnifiedPorts to be an explicit nil
+
+### UnsetUnifiedPorts
+`func (o *CapabilitySwitchCapabilityAllOf) UnsetUnifiedPorts()`
+
+UnsetUnifiedPorts ensures that no value is present for UnifiedPorts, not even an explicit nil
 ### GetUnifiedRule
 
 `func (o *CapabilitySwitchCapabilityAllOf) GetUnifiedRule() string`
@@ -778,31 +839,6 @@ SetUnifiedRule sets UnifiedRule field to given value.
 `func (o *CapabilitySwitchCapabilityAllOf) HasUnifiedRule() bool`
 
 HasUnifiedRule returns a boolean if a field has been set.
-
-### GetVpCompressionSupported
-
-`func (o *CapabilitySwitchCapabilityAllOf) GetVpCompressionSupported() bool`
-
-GetVpCompressionSupported returns the VpCompressionSupported field if non-nil, zero value otherwise.
-
-### GetVpCompressionSupportedOk
-
-`func (o *CapabilitySwitchCapabilityAllOf) GetVpCompressionSupportedOk() (*bool, bool)`
-
-GetVpCompressionSupportedOk returns a tuple with the VpCompressionSupported field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVpCompressionSupported
-
-`func (o *CapabilitySwitchCapabilityAllOf) SetVpCompressionSupported(v bool)`
-
-SetVpCompressionSupported sets VpCompressionSupported field to given value.
-
-### HasVpCompressionSupported
-
-`func (o *CapabilitySwitchCapabilityAllOf) HasVpCompressionSupported() bool`
-
-HasVpCompressionSupported returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

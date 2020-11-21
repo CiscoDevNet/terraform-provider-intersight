@@ -13,9 +13,9 @@ Refers to a section in the capability catalog. A capability catalog is divided i
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `action`:(string) Administrative action to initialize/load the catalog section from a particular source.* `None` - Nil value to indicate that no action is required.* `LoadLocal` - Load the catalog file packaged with the service.* `LoadIntersightRepository` - Load a catalog file hosted in the Intersight Repository. 
 * `catalog_name`:(string) The catalog name reference. 
-* `class_id`:(string) The concrete type of this complex type. Its value must be the same as the 'objectType' property.The OpenAPI document references this property as a discriminator value. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) A unique name for the section inside a catalog. 
-* `object_type`:(string) The fully-qualified type of this managed object, i.e. the class name.This property is optional. The ObjectType is implied from the URL path.If specified, the value of objectType must match the class name specified in the URL path. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `source`:(string) The configured source for this section of the catalog.* `Local` - The catalog file is packaged with the service.* `IntersightRepository` - The catalog file is hosted in the Intersight Repository. 
 * `version`:(string) Version of the section inside a catalog. 

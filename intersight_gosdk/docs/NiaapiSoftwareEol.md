@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **AffectedVersions** | Pointer to **string** | String contains the Release versions affected by this notice, seperated by comma. | [optional] 
 **AnnouncementDate** | Pointer to [**time.Time**](time.Time.md) | Date time of this notice Announced. | [optional] 
 **AnnouncementDateEpoch** | Pointer to **int64** | Epoch time of this notice Announced. | [optional] 
@@ -27,7 +29,7 @@ Name | Type | Description | Notes
 
 ### NewNiaapiSoftwareEol
 
-`func NewNiaapiSoftwareEol() *NiaapiSoftwareEol`
+`func NewNiaapiSoftwareEol(classId string, objectType string, ) *NiaapiSoftwareEol`
 
 NewNiaapiSoftwareEol instantiates a new NiaapiSoftwareEol object
 This constructor will assign default values to properties that have it defined,
@@ -41,6 +43,46 @@ will change when the set of required properties is changed
 NewNiaapiSoftwareEolWithDefaults instantiates a new NiaapiSoftwareEol object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *NiaapiSoftwareEol) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *NiaapiSoftwareEol) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *NiaapiSoftwareEol) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *NiaapiSoftwareEol) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *NiaapiSoftwareEol) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *NiaapiSoftwareEol) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAffectedVersions
 

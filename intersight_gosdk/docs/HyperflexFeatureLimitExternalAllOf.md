@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.FeatureLimitExternal"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.FeatureLimitExternal"]
 **FeatureLimitEntries** | Pointer to [**[]HyperflexFeatureLimitEntry**](hyperflex.FeatureLimitEntry.md) |  | [optional] 
 **AppCatalog** | Pointer to [**HyperflexAppCatalogRelationship**](hyperflex.AppCatalog.Relationship.md) |  | [optional] 
 
@@ -11,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewHyperflexFeatureLimitExternalAllOf
 
-`func NewHyperflexFeatureLimitExternalAllOf() *HyperflexFeatureLimitExternalAllOf`
+`func NewHyperflexFeatureLimitExternalAllOf(classId string, objectType string, ) *HyperflexFeatureLimitExternalAllOf`
 
 NewHyperflexFeatureLimitExternalAllOf instantiates a new HyperflexFeatureLimitExternalAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -25,6 +27,46 @@ will change when the set of required properties is changed
 NewHyperflexFeatureLimitExternalAllOfWithDefaults instantiates a new HyperflexFeatureLimitExternalAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *HyperflexFeatureLimitExternalAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *HyperflexFeatureLimitExternalAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *HyperflexFeatureLimitExternalAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *HyperflexFeatureLimitExternalAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *HyperflexFeatureLimitExternalAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *HyperflexFeatureLimitExternalAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetFeatureLimitEntries
 
@@ -51,6 +93,16 @@ SetFeatureLimitEntries sets FeatureLimitEntries field to given value.
 
 HasFeatureLimitEntries returns a boolean if a field has been set.
 
+### SetFeatureLimitEntriesNil
+
+`func (o *HyperflexFeatureLimitExternalAllOf) SetFeatureLimitEntriesNil(b bool)`
+
+ SetFeatureLimitEntriesNil sets the value for FeatureLimitEntries to be an explicit nil
+
+### UnsetFeatureLimitEntries
+`func (o *HyperflexFeatureLimitExternalAllOf) UnsetFeatureLimitEntries()`
+
+UnsetFeatureLimitEntries ensures that no value is present for FeatureLimitEntries, not even an explicit nil
 ### GetAppCatalog
 
 `func (o *HyperflexFeatureLimitExternalAllOf) GetAppCatalog() HyperflexAppCatalogRelationship`

@@ -21,8 +21,47 @@ func resourceAccessPolicy() *schema.Resource {
 				Optional:         true,
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
+			"address_type": {
+				Description: "The type of address to be retrieved from Inband IP Pool object.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"enable_ip_v4": {
+							Description: "This flag enables the use of IPv4 address for end-point access.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
+						"enable_ip_v6": {
+							Description: "This flag enables the use of IPv6 address for end-point access.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+			},
 			"class_id": {
-				Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -45,7 +84,7 @@ func resourceAccessPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -57,7 +96,7 @@ func resourceAccessPolicy() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -91,7 +130,7 @@ func resourceAccessPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -103,7 +142,7 @@ func resourceAccessPolicy() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -132,7 +171,7 @@ func resourceAccessPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified type of this managed object, i.e. the class name.\nThis property is optional. The ObjectType is implied from the URL path.\nIf specified, the value of objectType must match the class name specified in the URL path.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -150,7 +189,7 @@ func resourceAccessPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -162,7 +201,7 @@ func resourceAccessPolicy() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -191,7 +230,7 @@ func resourceAccessPolicy() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -203,7 +242,7 @@ func resourceAccessPolicy() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -257,6 +296,49 @@ func resourceAccessPolicyCreate(d *schema.ResourceData, meta interface{}) error 
 		err := json.Unmarshal(x, &x1)
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
+		}
+	}
+
+	if v, ok := d.GetOk("address_type"); ok {
+		p := make([]models.AccessAddressType, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewAccessAddressTypeWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("access.AddressType")
+			if v, ok := l["enable_ip_v4"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnableIpV4(x)
+				}
+			}
+			if v, ok := l["enable_ip_v6"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnableIpV6(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAddressType(x)
 		}
 	}
 
@@ -503,7 +585,7 @@ func detachAccessPolicyProfiles(d *schema.ResourceData, meta interface{}) error 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-	var o = models.NewAccessPolicyWithDefaults()
+	var o = &models.AccessPolicy{}
 	o.SetClassId("access.Policy")
 	o.SetObjectType("access.Policy")
 	o.SetProfiles([]models.PolicyAbstractConfigProfileRelationship{})
@@ -530,6 +612,10 @@ func resourceAccessPolicyRead(d *schema.ResourceData, meta interface{}) error {
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
 		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+	}
+
+	if err := d.Set("address_type", flattenMapAccessAddressType(s.GetAddressType(), d)); err != nil {
+		return fmt.Errorf("error occurred while setting property AddressType: %+v", err)
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
@@ -585,7 +671,7 @@ func resourceAccessPolicyUpdate(d *schema.ResourceData, meta interface{}) error 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-	var o = models.NewAccessPolicyWithDefaults()
+	var o = &models.AccessPolicy{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
 		x := []byte(v.(string))
@@ -593,6 +679,50 @@ func resourceAccessPolicyUpdate(d *schema.ResourceData, meta interface{}) error 
 		err := json.Unmarshal(x, &x1)
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
+		}
+	}
+
+	if d.HasChange("address_type") {
+		v := d.Get("address_type")
+		p := make([]models.AccessAddressType, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.AccessAddressType{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("access.AddressType")
+			if v, ok := l["enable_ip_v4"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnableIpV4(x)
+				}
+			}
+			if v, ok := l["enable_ip_v6"]; ok {
+				{
+					x := (v.(bool))
+					o.SetEnableIpV6(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAddressType(x)
 		}
 	}
 
@@ -610,7 +740,7 @@ func resourceAccessPolicyUpdate(d *schema.ResourceData, meta interface{}) error 
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
+			o := &models.MoMoRef{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -660,7 +790,7 @@ func resourceAccessPolicyUpdate(d *schema.ResourceData, meta interface{}) error 
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
+			o := &models.MoMoRef{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -718,7 +848,7 @@ func resourceAccessPolicyUpdate(d *schema.ResourceData, meta interface{}) error 
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
+			o := &models.MoMoRef{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -761,7 +891,7 @@ func resourceAccessPolicyUpdate(d *schema.ResourceData, meta interface{}) error 
 		x := make([]models.PolicyAbstractConfigProfileRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := models.NewMoMoRefWithDefaults()
+			o := &models.MoMoRef{}
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -804,7 +934,7 @@ func resourceAccessPolicyUpdate(d *schema.ResourceData, meta interface{}) error 
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := models.NewMoTagWithDefaults()
+			o := &models.MoTag{}
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{

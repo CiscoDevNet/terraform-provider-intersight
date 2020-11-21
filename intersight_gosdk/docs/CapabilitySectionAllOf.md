@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "capability.Section"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "capability.Section"]
 **Action** | Pointer to **string** | Administrative action to initialize/load the catalog section from a particular source. * &#x60;None&#x60; - Nil value to indicate that no action is required. * &#x60;LoadLocal&#x60; - Load the catalog file packaged with the service. * &#x60;LoadIntersightRepository&#x60; - Load a catalog file hosted in the Intersight Repository. | [optional] [readonly] [default to "None"]
 **CatalogName** | Pointer to **string** | The catalog name reference. | [optional] 
 **Name** | Pointer to **string** | A unique name for the section inside a catalog. | [optional] 
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewCapabilitySectionAllOf
 
-`func NewCapabilitySectionAllOf() *CapabilitySectionAllOf`
+`func NewCapabilitySectionAllOf(classId string, objectType string, ) *CapabilitySectionAllOf`
 
 NewCapabilitySectionAllOf instantiates a new CapabilitySectionAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +31,46 @@ will change when the set of required properties is changed
 NewCapabilitySectionAllOfWithDefaults instantiates a new CapabilitySectionAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *CapabilitySectionAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *CapabilitySectionAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *CapabilitySectionAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *CapabilitySectionAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *CapabilitySectionAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *CapabilitySectionAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAction
 

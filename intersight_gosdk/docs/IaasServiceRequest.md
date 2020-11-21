@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iaas.ServiceRequest"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iaas.ServiceRequest"]
 **Duration** | Pointer to **string** | Service request duration. | [optional] [readonly] 
 **InitiatingUser** | Pointer to **string** | Service Request initiating user. | [optional] [readonly] 
 **RequestEndTime** | Pointer to **string** | Service request end time. | [optional] [readonly] 
@@ -19,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewIaasServiceRequest
 
-`func NewIaasServiceRequest() *IaasServiceRequest`
+`func NewIaasServiceRequest(classId string, objectType string, ) *IaasServiceRequest`
 
 NewIaasServiceRequest instantiates a new IaasServiceRequest object
 This constructor will assign default values to properties that have it defined,
@@ -33,6 +35,46 @@ will change when the set of required properties is changed
 NewIaasServiceRequestWithDefaults instantiates a new IaasServiceRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *IaasServiceRequest) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IaasServiceRequest) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IaasServiceRequest) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IaasServiceRequest) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IaasServiceRequest) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IaasServiceRequest) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDuration
 
@@ -259,6 +301,16 @@ SetWorkflowSteps sets WorkflowSteps field to given value.
 
 HasWorkflowSteps returns a boolean if a field has been set.
 
+### SetWorkflowStepsNil
+
+`func (o *IaasServiceRequest) SetWorkflowStepsNil(b bool)`
+
+ SetWorkflowStepsNil sets the value for WorkflowSteps to be an explicit nil
+
+### UnsetWorkflowSteps
+`func (o *IaasServiceRequest) UnsetWorkflowSteps()`
+
+UnsetWorkflowSteps ensures that no value is present for WorkflowSteps, not even an explicit nil
 ### GetRegisteredDevice
 
 `func (o *IaasServiceRequest) GetRegisteredDevice() AssetDeviceRegistrationRelationship`

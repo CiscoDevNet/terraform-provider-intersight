@@ -4,19 +4,30 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.Target"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.Target"]
+**ClaimedByUserName** | Pointer to **string** | The name or email id of the user who claimed the target. | [optional] [readonly] 
 **Connections** | Pointer to [**[]AssetConnection**](asset.Connection.md) |  | [optional] 
+**ConnectorVersion** | Pointer to **string** | The Device Connector version for target types which are managed by via embedded Device Connector. | [optional] [readonly] 
+**ExternalIpAddress** | Pointer to **string** | ExternalIpAddress is applicable for targets which are managed via an Intersight Device Connector. The value is the IP Address of the target as seen from Intersight. It is either the IP Address of the managed target&#39;s interface which has a route to the internet or a NAT IP Addresss when the target is deployed in a private network. | [optional] [readonly] 
+**IpAddress** | Pointer to **[]string** |  | [optional] 
+**Name** | Pointer to **string** | A user provided name for the managed target. | [optional] 
+**ProductId** | Pointer to **[]string** |  | [optional] 
+**ReadOnly** | Pointer to **bool** | For targets which are managed by an embedded Intersight Device Connector, this field indicates that an administrator of the target has disabled management operations of the Device Connector and only monitoring is permitted. | [optional] [readonly] 
 **Services** | Pointer to [**[]AssetService**](asset.Service.md) |  | [optional] 
-**Status** | Pointer to **string** | Status indicates if Intersight can establish a connection and authenticate with the managed target. Status does not include information about the functional health of the target. * &#x60;&#x60; - The device registered with Intersight but subsequently did not establish a persistent websocket connection. * &#x60;Connected&#x60; - The device&#39;s connection to Intersight has been established and is active. * &#x60;NotConnected&#x60; - The device&#39;s connection to Intersight has been disconnected. * &#x60;ClaimInProgress&#x60; - Claim of the device is in progress. * &#x60;Unclaimed&#x60; - The device was un-claimed from the users account by an Administrator of the device. | [optional] [readonly] [default to ""]
+**Status** | Pointer to **string** | Status indicates if Intersight can establish a connection and authenticate with the managed target. Status does not include information about the functional health of the target. * &#x60;&#x60; - The target details have been persisted but Intersight has not yet attempted to connect to the target. * &#x60;Connected&#x60; - Intersight is able to establish a connection to the target and initiate management activities. * &#x60;NotConnected&#x60; - Intersight is unable to establish a connection to the target. * &#x60;ClaimInProgress&#x60; - Claim of the target is in progress. A connection to the target has not been fully established. * &#x60;Unclaimed&#x60; - The device was un-claimed from the users account by an Administrator of the device. Also indicates the failure to claim Custom Target details in Intersight. * &#x60;Claimed&#x60; - Custom Target is successfully claimed in Intersight. Currently no validation is performed to verify the Target connectivity from Intersight at the time of creation. However invoking API from Intersight Orchestrator fails if this Target is not reachable from Intersight or if Target credentials are incorrect. | [optional] [readonly] [default to ""]
 **StatusErrorReason** | Pointer to **string** | StatusErrorReason provides additional context for the Status. | [optional] [readonly] 
-**TargetType** | Pointer to **string** | The type of the managed target. For example a UCS Server or Vmware Vcenter target. * &#x60;&#x60; - The device reported an empty or unrecognized platform type. * &#x60;APIC&#x60; - An Application Policy Infrastructure Controller cluster. * &#x60;DCNM&#x60; - A Data Center Network Manager instance. Data Center Network Manager (DCNM) is the network management platform for all NX-OS-enabled deployments, spanning new fabric architectures, IP Fabric for Media, and storage networking deployments for the Cisco Nexus-powered data center. * &#x60;UCSFI&#x60; - A UCS Fabric Interconnect in HA or standalone mode, which is being managed by UCS Manager (UCSM). * &#x60;UCSFIISM&#x60; - A UCS Fabric Interconnect in HA or standalone mode, managed directly by Intersight. * &#x60;IMC&#x60; - A standalone UCS Server Integrated Management Controller. * &#x60;IMCM4&#x60; - A standalone UCS M4 Server. * &#x60;IMCM5&#x60; - A standalone UCS M5 server. * &#x60;UCSIOM&#x60; - An UCS Chassis IO module. * &#x60;HX&#x60; - A HyperFlex storage controller. * &#x60;HyperFlexAP&#x60; - A HyperFlex Application Platform. * &#x60;UCSD&#x60; - A UCS Director virtual appliance. Cisco UCS Director automates, orchestrates, and manages Cisco and third-party hardware. * &#x60;IntersightAppliance&#x60; - Intersight on-premise appliance. * &#x60;PureStorageFlashArray&#x60; - A Pure Storage FlashArray device. * &#x60;NetAppOntap&#x60; - A NetApp ONTAP storage system. * &#x60;EmcScaleIo&#x60; - An EMC ScaleIO storage system. * &#x60;EmcVmax&#x60; - An EMC VMAX storage system. * &#x60;EmcVplex&#x60; - An EMC VPLEX storage system. * &#x60;EmcXtremIo&#x60; - An EMC XtremIO storage system. * &#x60;VmwareVcenter&#x60; - A VMware vCenter device that manages Virtual Machines. * &#x60;MicrosoftHyperV&#x60; - A Microsoft HyperV system that manages Virtual Machines. * &#x60;AppDynamics&#x60; - An AppDynamics controller that monitors applications. * &#x60;Dynatrace&#x60; - A Dynatrace controller that monitors applications. * &#x60;MicrosoftSqlServer&#x60; - A Microsoft SQL database server. * &#x60;Kubernetes&#x60; - A Kubernetes cluster that runs containerized applications. * &#x60;MicrosoftAzure&#x60; - A Microsoft Azure target. * &#x60;ServiceEngine&#x60; - Cisco Application Services Engine. Cisco Application Services Engine is a platform to deploy and manage applications. * &#x60;IMCBlade&#x60; - An Intersight managed UCS Blade Server. | [optional] [default to ""]
+**TargetId** | Pointer to **[]string** |  | [optional] 
+**TargetType** | Pointer to **string** | The type of the managed target. For example a UCS Server or VMware Vcenter target. * &#x60;&#x60; - The device reported an empty or unrecognized platform type. * &#x60;APIC&#x60; - An Application Policy Infrastructure Controller cluster. * &#x60;DCNM&#x60; - A Data Center Network Manager instance. Data Center Network Manager (DCNM) is the network management platform for all NX-OS-enabled deployments, spanning new fabric architectures, IP Fabric for Media, and storage networking deployments for the Cisco Nexus-powered data center. * &#x60;UCSFI&#x60; - A UCS Fabric Interconnect in HA or standalone mode, which is being managed by UCS Manager (UCSM). * &#x60;UCSFIISM&#x60; - A UCS Fabric Interconnect in HA or standalone mode, managed directly by Intersight. * &#x60;IMC&#x60; - A standalone UCS Server Integrated Management Controller. * &#x60;IMCM4&#x60; - A standalone UCS M4 Server. * &#x60;IMCM5&#x60; - A standalone UCS M5 server. * &#x60;UCSIOM&#x60; - An UCS Chassis IO module. * &#x60;HX&#x60; - A HyperFlex storage controller. * &#x60;HyperFlexAP&#x60; - A HyperFlex Application Platform. * &#x60;UCSD&#x60; - A UCS Director virtual appliance. Cisco UCS Director automates, orchestrates, and manages Cisco and third-party hardware. * &#x60;IntersightAppliance&#x60; - A Cisco Intersight Connected Virtual Appliance. * &#x60;IntersightAssist&#x60; - A Cisco Intersight Assist. * &#x60;PureStorageFlashArray&#x60; - A Pure Storage FlashArray device. * &#x60;NetAppOntap&#x60; - A NetApp ONTAP storage system. * &#x60;EmcScaleIo&#x60; - An EMC ScaleIO storage system. * &#x60;EmcVmax&#x60; - An EMC VMAX storage system. * &#x60;EmcVplex&#x60; - An EMC VPLEX storage system. * &#x60;EmcXtremIo&#x60; - An EMC XtremIO storage system. * &#x60;VmwareVcenter&#x60; - A VMware vCenter device that manages Virtual Machines. * &#x60;MicrosoftHyperV&#x60; - A Microsoft HyperV system that manages Virtual Machines. * &#x60;AppDynamics&#x60; - An AppDynamics controller that monitors applications. * &#x60;Dynatrace&#x60; - A Dynatrace controller that monitors applications. * &#x60;MicrosoftSqlServer&#x60; - A Microsoft SQL database server. * &#x60;Kubernetes&#x60; - A Kubernetes cluster that runs containerized applications. * &#x60;AmazonWebService&#x60; - A Amazon web service target that discovers and monitors different services like EC2. It discovers entities like VMs, Volumes, regions etc. and monitors attributes like Mem, CPU, cost. * &#x60;AmazonWebServiceBilling&#x60; - A Amazon web service billing target to retrieve billing information stored in S3 bucket. * &#x60;MicrosoftAzureServicePrincipal&#x60; - A Microsoft Azure Service Principal target that discovers all the associated Azure subscriptions. * &#x60;MicrosoftAzureEnterpriseAgreement&#x60; - A Microsoft Azure Enterprise Agreement target that discovers cost, billing and RIs. * &#x60;ServiceEngine&#x60; - Cisco Application Services Engine. Cisco Application Services Engine is a platform to deploy and manage applications. * &#x60;HitachiVirtualStoragePlatform&#x60; - A Hitachi Virtual Storage Platform also referred to as Hitachi VSP. It includes various storage systems designed for data centers. * &#x60;IMCBlade&#x60; - An Intersight managed UCS Blade Server. * &#x60;CustomTarget&#x60; - An external endpoint added as Target that can be accessed through its REST API interface in Intersight Orchestrator automation workflow.Standard HTTP authentication scheme supported: Basic. * &#x60;CiscoCatalyst&#x60; - A Cisco Catalyst networking switch device. | [optional] [default to ""]
 **Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
-**Assist** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
+**Assist** | Pointer to [**AssetTargetRelationship**](asset.Target.Relationship.md) |  | [optional] 
+**RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
 ## Methods
 
 ### NewAssetTargetAllOf
 
-`func NewAssetTargetAllOf() *AssetTargetAllOf`
+`func NewAssetTargetAllOf(classId string, objectType string, ) *AssetTargetAllOf`
 
 NewAssetTargetAllOf instantiates a new AssetTargetAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +41,71 @@ will change when the set of required properties is changed
 NewAssetTargetAllOfWithDefaults instantiates a new AssetTargetAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *AssetTargetAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *AssetTargetAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *AssetTargetAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *AssetTargetAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *AssetTargetAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *AssetTargetAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
+
+### GetClaimedByUserName
+
+`func (o *AssetTargetAllOf) GetClaimedByUserName() string`
+
+GetClaimedByUserName returns the ClaimedByUserName field if non-nil, zero value otherwise.
+
+### GetClaimedByUserNameOk
+
+`func (o *AssetTargetAllOf) GetClaimedByUserNameOk() (*string, bool)`
+
+GetClaimedByUserNameOk returns a tuple with the ClaimedByUserName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClaimedByUserName
+
+`func (o *AssetTargetAllOf) SetClaimedByUserName(v string)`
+
+SetClaimedByUserName sets ClaimedByUserName field to given value.
+
+### HasClaimedByUserName
+
+`func (o *AssetTargetAllOf) HasClaimedByUserName() bool`
+
+HasClaimedByUserName returns a boolean if a field has been set.
 
 ### GetConnections
 
@@ -56,6 +132,186 @@ SetConnections sets Connections field to given value.
 
 HasConnections returns a boolean if a field has been set.
 
+### SetConnectionsNil
+
+`func (o *AssetTargetAllOf) SetConnectionsNil(b bool)`
+
+ SetConnectionsNil sets the value for Connections to be an explicit nil
+
+### UnsetConnections
+`func (o *AssetTargetAllOf) UnsetConnections()`
+
+UnsetConnections ensures that no value is present for Connections, not even an explicit nil
+### GetConnectorVersion
+
+`func (o *AssetTargetAllOf) GetConnectorVersion() string`
+
+GetConnectorVersion returns the ConnectorVersion field if non-nil, zero value otherwise.
+
+### GetConnectorVersionOk
+
+`func (o *AssetTargetAllOf) GetConnectorVersionOk() (*string, bool)`
+
+GetConnectorVersionOk returns a tuple with the ConnectorVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConnectorVersion
+
+`func (o *AssetTargetAllOf) SetConnectorVersion(v string)`
+
+SetConnectorVersion sets ConnectorVersion field to given value.
+
+### HasConnectorVersion
+
+`func (o *AssetTargetAllOf) HasConnectorVersion() bool`
+
+HasConnectorVersion returns a boolean if a field has been set.
+
+### GetExternalIpAddress
+
+`func (o *AssetTargetAllOf) GetExternalIpAddress() string`
+
+GetExternalIpAddress returns the ExternalIpAddress field if non-nil, zero value otherwise.
+
+### GetExternalIpAddressOk
+
+`func (o *AssetTargetAllOf) GetExternalIpAddressOk() (*string, bool)`
+
+GetExternalIpAddressOk returns a tuple with the ExternalIpAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExternalIpAddress
+
+`func (o *AssetTargetAllOf) SetExternalIpAddress(v string)`
+
+SetExternalIpAddress sets ExternalIpAddress field to given value.
+
+### HasExternalIpAddress
+
+`func (o *AssetTargetAllOf) HasExternalIpAddress() bool`
+
+HasExternalIpAddress returns a boolean if a field has been set.
+
+### GetIpAddress
+
+`func (o *AssetTargetAllOf) GetIpAddress() []string`
+
+GetIpAddress returns the IpAddress field if non-nil, zero value otherwise.
+
+### GetIpAddressOk
+
+`func (o *AssetTargetAllOf) GetIpAddressOk() (*[]string, bool)`
+
+GetIpAddressOk returns a tuple with the IpAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpAddress
+
+`func (o *AssetTargetAllOf) SetIpAddress(v []string)`
+
+SetIpAddress sets IpAddress field to given value.
+
+### HasIpAddress
+
+`func (o *AssetTargetAllOf) HasIpAddress() bool`
+
+HasIpAddress returns a boolean if a field has been set.
+
+### SetIpAddressNil
+
+`func (o *AssetTargetAllOf) SetIpAddressNil(b bool)`
+
+ SetIpAddressNil sets the value for IpAddress to be an explicit nil
+
+### UnsetIpAddress
+`func (o *AssetTargetAllOf) UnsetIpAddress()`
+
+UnsetIpAddress ensures that no value is present for IpAddress, not even an explicit nil
+### GetName
+
+`func (o *AssetTargetAllOf) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *AssetTargetAllOf) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *AssetTargetAllOf) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *AssetTargetAllOf) HasName() bool`
+
+HasName returns a boolean if a field has been set.
+
+### GetProductId
+
+`func (o *AssetTargetAllOf) GetProductId() []string`
+
+GetProductId returns the ProductId field if non-nil, zero value otherwise.
+
+### GetProductIdOk
+
+`func (o *AssetTargetAllOf) GetProductIdOk() (*[]string, bool)`
+
+GetProductIdOk returns a tuple with the ProductId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProductId
+
+`func (o *AssetTargetAllOf) SetProductId(v []string)`
+
+SetProductId sets ProductId field to given value.
+
+### HasProductId
+
+`func (o *AssetTargetAllOf) HasProductId() bool`
+
+HasProductId returns a boolean if a field has been set.
+
+### SetProductIdNil
+
+`func (o *AssetTargetAllOf) SetProductIdNil(b bool)`
+
+ SetProductIdNil sets the value for ProductId to be an explicit nil
+
+### UnsetProductId
+`func (o *AssetTargetAllOf) UnsetProductId()`
+
+UnsetProductId ensures that no value is present for ProductId, not even an explicit nil
+### GetReadOnly
+
+`func (o *AssetTargetAllOf) GetReadOnly() bool`
+
+GetReadOnly returns the ReadOnly field if non-nil, zero value otherwise.
+
+### GetReadOnlyOk
+
+`func (o *AssetTargetAllOf) GetReadOnlyOk() (*bool, bool)`
+
+GetReadOnlyOk returns a tuple with the ReadOnly field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReadOnly
+
+`func (o *AssetTargetAllOf) SetReadOnly(v bool)`
+
+SetReadOnly sets ReadOnly field to given value.
+
+### HasReadOnly
+
+`func (o *AssetTargetAllOf) HasReadOnly() bool`
+
+HasReadOnly returns a boolean if a field has been set.
+
 ### GetServices
 
 `func (o *AssetTargetAllOf) GetServices() []AssetService`
@@ -81,6 +337,16 @@ SetServices sets Services field to given value.
 
 HasServices returns a boolean if a field has been set.
 
+### SetServicesNil
+
+`func (o *AssetTargetAllOf) SetServicesNil(b bool)`
+
+ SetServicesNil sets the value for Services to be an explicit nil
+
+### UnsetServices
+`func (o *AssetTargetAllOf) UnsetServices()`
+
+UnsetServices ensures that no value is present for Services, not even an explicit nil
 ### GetStatus
 
 `func (o *AssetTargetAllOf) GetStatus() string`
@@ -131,6 +397,41 @@ SetStatusErrorReason sets StatusErrorReason field to given value.
 
 HasStatusErrorReason returns a boolean if a field has been set.
 
+### GetTargetId
+
+`func (o *AssetTargetAllOf) GetTargetId() []string`
+
+GetTargetId returns the TargetId field if non-nil, zero value otherwise.
+
+### GetTargetIdOk
+
+`func (o *AssetTargetAllOf) GetTargetIdOk() (*[]string, bool)`
+
+GetTargetIdOk returns a tuple with the TargetId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetId
+
+`func (o *AssetTargetAllOf) SetTargetId(v []string)`
+
+SetTargetId sets TargetId field to given value.
+
+### HasTargetId
+
+`func (o *AssetTargetAllOf) HasTargetId() bool`
+
+HasTargetId returns a boolean if a field has been set.
+
+### SetTargetIdNil
+
+`func (o *AssetTargetAllOf) SetTargetIdNil(b bool)`
+
+ SetTargetIdNil sets the value for TargetId to be an explicit nil
+
+### UnsetTargetId
+`func (o *AssetTargetAllOf) UnsetTargetId()`
+
+UnsetTargetId ensures that no value is present for TargetId, not even an explicit nil
 ### GetTargetType
 
 `func (o *AssetTargetAllOf) GetTargetType() string`
@@ -183,20 +484,20 @@ HasAccount returns a boolean if a field has been set.
 
 ### GetAssist
 
-`func (o *AssetTargetAllOf) GetAssist() AssetDeviceRegistrationRelationship`
+`func (o *AssetTargetAllOf) GetAssist() AssetTargetRelationship`
 
 GetAssist returns the Assist field if non-nil, zero value otherwise.
 
 ### GetAssistOk
 
-`func (o *AssetTargetAllOf) GetAssistOk() (*AssetDeviceRegistrationRelationship, bool)`
+`func (o *AssetTargetAllOf) GetAssistOk() (*AssetTargetRelationship, bool)`
 
 GetAssistOk returns a tuple with the Assist field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAssist
 
-`func (o *AssetTargetAllOf) SetAssist(v AssetDeviceRegistrationRelationship)`
+`func (o *AssetTargetAllOf) SetAssist(v AssetTargetRelationship)`
 
 SetAssist sets Assist field to given value.
 
@@ -205,6 +506,31 @@ SetAssist sets Assist field to given value.
 `func (o *AssetTargetAllOf) HasAssist() bool`
 
 HasAssist returns a boolean if a field has been set.
+
+### GetRegisteredDevice
+
+`func (o *AssetTargetAllOf) GetRegisteredDevice() AssetDeviceRegistrationRelationship`
+
+GetRegisteredDevice returns the RegisteredDevice field if non-nil, zero value otherwise.
+
+### GetRegisteredDeviceOk
+
+`func (o *AssetTargetAllOf) GetRegisteredDeviceOk() (*AssetDeviceRegistrationRelationship, bool)`
+
+GetRegisteredDeviceOk returns a tuple with the RegisteredDevice field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRegisteredDevice
+
+`func (o *AssetTargetAllOf) SetRegisteredDevice(v AssetDeviceRegistrationRelationship)`
+
+SetRegisteredDevice sets RegisteredDevice field to given value.
+
+### HasRegisteredDevice
+
+`func (o *AssetTargetAllOf) HasRegisteredDevice() bool`
+
+HasRegisteredDevice returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

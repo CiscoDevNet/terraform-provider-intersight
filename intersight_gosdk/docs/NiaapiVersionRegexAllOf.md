@@ -4,15 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Apic** | Pointer to [**NiaapiVersionRegexPlatform**](niaapi.VersionRegexPlatform.md) |  | [optional] 
-**Dcnm** | Pointer to [**NiaapiVersionRegexPlatform**](niaapi.VersionRegexPlatform.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niaapi.VersionRegex"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niaapi.VersionRegex"]
+**Apic** | Pointer to [**NullableNiaapiVersionRegexPlatform**](niaapi.VersionRegexPlatform.md) |  | [optional] 
+**Dcnm** | Pointer to [**NullableNiaapiVersionRegexPlatform**](niaapi.VersionRegexPlatform.md) |  | [optional] 
 **Version** | Pointer to **string** | Version number for the Version Regex data, also used as identity. | [optional] 
 
 ## Methods
 
 ### NewNiaapiVersionRegexAllOf
 
-`func NewNiaapiVersionRegexAllOf() *NiaapiVersionRegexAllOf`
+`func NewNiaapiVersionRegexAllOf(classId string, objectType string, ) *NiaapiVersionRegexAllOf`
 
 NewNiaapiVersionRegexAllOf instantiates a new NiaapiVersionRegexAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewNiaapiVersionRegexAllOfWithDefaults instantiates a new NiaapiVersionRegexAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *NiaapiVersionRegexAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *NiaapiVersionRegexAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *NiaapiVersionRegexAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *NiaapiVersionRegexAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *NiaapiVersionRegexAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *NiaapiVersionRegexAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetApic
 
@@ -52,6 +94,16 @@ SetApic sets Apic field to given value.
 
 HasApic returns a boolean if a field has been set.
 
+### SetApicNil
+
+`func (o *NiaapiVersionRegexAllOf) SetApicNil(b bool)`
+
+ SetApicNil sets the value for Apic to be an explicit nil
+
+### UnsetApic
+`func (o *NiaapiVersionRegexAllOf) UnsetApic()`
+
+UnsetApic ensures that no value is present for Apic, not even an explicit nil
 ### GetDcnm
 
 `func (o *NiaapiVersionRegexAllOf) GetDcnm() NiaapiVersionRegexPlatform`
@@ -77,6 +129,16 @@ SetDcnm sets Dcnm field to given value.
 
 HasDcnm returns a boolean if a field has been set.
 
+### SetDcnmNil
+
+`func (o *NiaapiVersionRegexAllOf) SetDcnmNil(b bool)`
+
+ SetDcnmNil sets the value for Dcnm to be an explicit nil
+
+### UnsetDcnm
+`func (o *NiaapiVersionRegexAllOf) UnsetDcnm()`
+
+UnsetDcnm ensures that no value is present for Dcnm, not even an explicit nil
 ### GetVersion
 
 `func (o *NiaapiVersionRegexAllOf) GetVersion() string`

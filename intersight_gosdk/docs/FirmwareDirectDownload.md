@@ -4,7 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**HttpServer** | Pointer to [**FirmwareHttpServer**](firmware.HttpServer.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.DirectDownload"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.DirectDownload"]
+**HttpServer** | Pointer to [**NullableFirmwareHttpServer**](firmware.HttpServer.md) |  | [optional] 
 **ImageSource** | Pointer to **string** | Source type referring the image to be downloaded from CCO or from a local HTTPS server. * &#x60;cisco&#x60; - Image to be downloaded from Cisco software repository. * &#x60;localHttp&#x60; - Image to be downloaded from a https server. | [optional] [default to "cisco"]
 **IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] 
 **Password** | Pointer to **string** | Password as configured on the local https server. | [optional] 
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewFirmwareDirectDownload
 
-`func NewFirmwareDirectDownload() *FirmwareDirectDownload`
+`func NewFirmwareDirectDownload(classId string, objectType string, ) *FirmwareDirectDownload`
 
 NewFirmwareDirectDownload instantiates a new FirmwareDirectDownload object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +31,46 @@ will change when the set of required properties is changed
 NewFirmwareDirectDownloadWithDefaults instantiates a new FirmwareDirectDownload object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *FirmwareDirectDownload) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *FirmwareDirectDownload) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *FirmwareDirectDownload) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *FirmwareDirectDownload) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *FirmwareDirectDownload) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *FirmwareDirectDownload) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetHttpServer
 
@@ -55,6 +97,16 @@ SetHttpServer sets HttpServer field to given value.
 
 HasHttpServer returns a boolean if a field has been set.
 
+### SetHttpServerNil
+
+`func (o *FirmwareDirectDownload) SetHttpServerNil(b bool)`
+
+ SetHttpServerNil sets the value for HttpServer to be an explicit nil
+
+### UnsetHttpServer
+`func (o *FirmwareDirectDownload) UnsetHttpServer()`
+
+UnsetHttpServer ensures that no value is present for HttpServer, not even an explicit nil
 ### GetImageSource
 
 `func (o *FirmwareDirectDownload) GetImageSource() string`

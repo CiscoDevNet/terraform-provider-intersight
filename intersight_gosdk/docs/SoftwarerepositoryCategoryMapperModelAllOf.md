@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "softwarerepository.CategoryMapperModel"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "softwarerepository.CategoryMapperModel"]
 **Category** | Pointer to **string** | The category of the model series. | [optional] 
 **DistTag** | Pointer to **string** | The distributable tag value of the model series. | [optional] 
 **RegexPattern** | Pointer to **string** | The regex that all images of this model follow. | [optional] 
@@ -14,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewSoftwarerepositoryCategoryMapperModelAllOf
 
-`func NewSoftwarerepositoryCategoryMapperModelAllOf() *SoftwarerepositoryCategoryMapperModelAllOf`
+`func NewSoftwarerepositoryCategoryMapperModelAllOf(classId string, objectType string, ) *SoftwarerepositoryCategoryMapperModelAllOf`
 
 NewSoftwarerepositoryCategoryMapperModelAllOf instantiates a new SoftwarerepositoryCategoryMapperModelAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +30,46 @@ will change when the set of required properties is changed
 NewSoftwarerepositoryCategoryMapperModelAllOfWithDefaults instantiates a new SoftwarerepositoryCategoryMapperModelAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *SoftwarerepositoryCategoryMapperModelAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *SoftwarerepositoryCategoryMapperModelAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *SoftwarerepositoryCategoryMapperModelAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *SoftwarerepositoryCategoryMapperModelAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *SoftwarerepositoryCategoryMapperModelAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *SoftwarerepositoryCategoryMapperModelAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCategory
 
@@ -154,6 +196,16 @@ SetSupportedModels sets SupportedModels field to given value.
 
 HasSupportedModels returns a boolean if a field has been set.
 
+### SetSupportedModelsNil
+
+`func (o *SoftwarerepositoryCategoryMapperModelAllOf) SetSupportedModelsNil(b bool)`
+
+ SetSupportedModelsNil sets the value for SupportedModels to be an explicit nil
+
+### UnsetSupportedModels
+`func (o *SoftwarerepositoryCategoryMapperModelAllOf) UnsetSupportedModels()`
+
+UnsetSupportedModels ensures that no value is present for SupportedModels, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

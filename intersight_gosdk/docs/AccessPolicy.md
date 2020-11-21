@@ -4,6 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "access.Policy"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "access.Policy"]
+**AddressType** | Pointer to [**NullableAccessAddressType**](access.AddressType.md) |  | [optional] 
 **InbandVlan** | Pointer to **int64** | VLAN to be used for server access over Inband network. | [optional] 
 **InbandIpPool** | Pointer to [**IppoolPoolRelationship**](ippool.Pool.Relationship.md) |  | [optional] 
 **InbandVrf** | Pointer to [**VrfVrfRelationship**](vrf.Vrf.Relationship.md) |  | [optional] 
@@ -14,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewAccessPolicy
 
-`func NewAccessPolicy() *AccessPolicy`
+`func NewAccessPolicy(classId string, objectType string, ) *AccessPolicy`
 
 NewAccessPolicy instantiates a new AccessPolicy object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +32,81 @@ NewAccessPolicyWithDefaults instantiates a new AccessPolicy object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetClassId
+
+`func (o *AccessPolicy) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *AccessPolicy) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *AccessPolicy) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *AccessPolicy) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *AccessPolicy) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *AccessPolicy) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
+
+### GetAddressType
+
+`func (o *AccessPolicy) GetAddressType() AccessAddressType`
+
+GetAddressType returns the AddressType field if non-nil, zero value otherwise.
+
+### GetAddressTypeOk
+
+`func (o *AccessPolicy) GetAddressTypeOk() (*AccessAddressType, bool)`
+
+GetAddressTypeOk returns a tuple with the AddressType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAddressType
+
+`func (o *AccessPolicy) SetAddressType(v AccessAddressType)`
+
+SetAddressType sets AddressType field to given value.
+
+### HasAddressType
+
+`func (o *AccessPolicy) HasAddressType() bool`
+
+HasAddressType returns a boolean if a field has been set.
+
+### SetAddressTypeNil
+
+`func (o *AccessPolicy) SetAddressTypeNil(b bool)`
+
+ SetAddressTypeNil sets the value for AddressType to be an explicit nil
+
+### UnsetAddressType
+`func (o *AccessPolicy) UnsetAddressType()`
+
+UnsetAddressType ensures that no value is present for AddressType, not even an explicit nil
 ### GetInbandVlan
 
 `func (o *AccessPolicy) GetInbandVlan() int64`

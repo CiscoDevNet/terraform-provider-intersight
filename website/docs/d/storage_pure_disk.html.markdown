@@ -11,13 +11,13 @@ Disk entity associated with Pure FlashArray.
 Disk entity associated with Pure FlashArray.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `class_id`:(string) The concrete type of this complex type. Its value must be the same as the 'objectType' property.The OpenAPI document references this property as a discriminator value. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Disk name available in storage array. 
-* `object_type`:(string) The fully-qualified type of this managed object, i.e. the class name.This property is optional. The ObjectType is implied from the URL path.If specified, the value of objectType must match the class name specified in the URL path. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `part_number`:(string) Storage disk part number. 
 * `protocol`:(string) Storage protocol used in disk for communication. Possible values are SAS, SATA and NVMe.* `Unknown` - Disk protocol is unknown.* `SAS` - Serial Attached SCSI protocol (SAS) used in disk.* `NVMe` - Non-volatile memory express (NVMe) protocol used in disk.* `SATA` - Serial Advanced Technology Attachment (SATA) used in disk. 
 * `revision`:(string) This field identifies the revision of the given component. 

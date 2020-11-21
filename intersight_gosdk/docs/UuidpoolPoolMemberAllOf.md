@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "uuidpool.PoolMember"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "uuidpool.PoolMember"]
 **Uuid** | Pointer to **string** | UUID Prefix+Suffix of this PoolMember. | [optional] 
 **AssignedToEntity** | Pointer to [**MoBaseMoRelationship**](mo.BaseMo.Relationship.md) |  | [optional] 
 **BlockHead** | Pointer to [**UuidpoolBlockRelationship**](uuidpool.Block.Relationship.md) |  | [optional] 
@@ -14,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewUuidpoolPoolMemberAllOf
 
-`func NewUuidpoolPoolMemberAllOf() *UuidpoolPoolMemberAllOf`
+`func NewUuidpoolPoolMemberAllOf(classId string, objectType string, ) *UuidpoolPoolMemberAllOf`
 
 NewUuidpoolPoolMemberAllOf instantiates a new UuidpoolPoolMemberAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +30,46 @@ will change when the set of required properties is changed
 NewUuidpoolPoolMemberAllOfWithDefaults instantiates a new UuidpoolPoolMemberAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *UuidpoolPoolMemberAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *UuidpoolPoolMemberAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *UuidpoolPoolMemberAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *UuidpoolPoolMemberAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *UuidpoolPoolMemberAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *UuidpoolPoolMemberAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetUuid
 

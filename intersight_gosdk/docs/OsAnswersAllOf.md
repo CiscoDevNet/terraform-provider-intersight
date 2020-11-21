@@ -4,10 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "os.Answers"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "os.Answers"]
 **AnswerFile** | Pointer to **string** | If the source of the answers is a static file, the content of the file is stored as value in this property. The value is mandatory only when the &#39;Source&#39; property has been set to &#39;File&#39;. | [optional] 
 **Hostname** | Pointer to **string** | Hostname to be configured for the server in the OS. | [optional] 
 **IpConfigType** | Pointer to **string** | IP configuration type. Values are Static or Dynamic configuration of IP. In case of static IP configuration, IP address, gateway and other details need to be populated. In case of dynamic the IP configuration is obtained dynamically from DHCP. * &#x60;static&#x60; - In case of static IP configuraton, provide the details such as IP address, netmask, and gateway. * &#x60;DHCP&#x60; - In case of dynamic IP configuration, the IP address, netmask and gateway detailsare obtained from DHCP. | [optional] [default to "static"]
-**IpConfiguration** | Pointer to [**OsIpConfiguration**](os.IpConfiguration.md) |  | [optional] 
+**IpConfiguration** | Pointer to [**NullableOsIpConfiguration**](os.IpConfiguration.md) |  | [optional] 
 **IsAnswerFileSet** | Pointer to **bool** | Indicates whether the value of the &#39;answerFile&#39; property has been set. | [optional] [readonly] 
 **IsRootPasswordCrypted** | Pointer to **bool** | Enable to indicate Root Password provided is encrypted. | [optional] 
 **IsRootPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;rootPassword&#39; property has been set. | [optional] [readonly] 
@@ -20,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewOsAnswersAllOf
 
-`func NewOsAnswersAllOf() *OsAnswersAllOf`
+`func NewOsAnswersAllOf(classId string, objectType string, ) *OsAnswersAllOf`
 
 NewOsAnswersAllOf instantiates a new OsAnswersAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -34,6 +36,46 @@ will change when the set of required properties is changed
 NewOsAnswersAllOfWithDefaults instantiates a new OsAnswersAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *OsAnswersAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *OsAnswersAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *OsAnswersAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *OsAnswersAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *OsAnswersAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *OsAnswersAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAnswerFile
 
@@ -135,6 +177,16 @@ SetIpConfiguration sets IpConfiguration field to given value.
 
 HasIpConfiguration returns a boolean if a field has been set.
 
+### SetIpConfigurationNil
+
+`func (o *OsAnswersAllOf) SetIpConfigurationNil(b bool)`
+
+ SetIpConfigurationNil sets the value for IpConfiguration to be an explicit nil
+
+### UnsetIpConfiguration
+`func (o *OsAnswersAllOf) UnsetIpConfiguration()`
+
+UnsetIpConfiguration ensures that no value is present for IpConfiguration, not even an explicit nil
 ### GetIsAnswerFileSet
 
 `func (o *OsAnswersAllOf) GetIsAnswerFileSet() bool`

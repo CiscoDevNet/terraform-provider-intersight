@@ -4,9 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hcl.HyperflexSoftwareCompatibilityInfo"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hcl.HyperflexSoftwareCompatibilityInfo"]
 **Constraints** | Pointer to [**[]HclConstraint**](hcl.Constraint.md) |  | [optional] 
 **HxdpVersion** | Pointer to **string** | HXDP component software version. | [optional] 
-**HypervisorType** | Pointer to **string** | Type fo Hypervisor the HyperFlex components versions are compatible with. For example ESX, Hyperv or KVM. * &#x60;ESXi&#x60; - ESXi hypervisor as specified by the user. * &#x60;HYPERV&#x60; - Hyperv hypervisor as specified by the user. * &#x60;KVM&#x60; - KVM hypervisor as specified by the user. | [optional] [default to "ESXi"]
+**HypervisorType** | Pointer to **string** | Type fo Hypervisor the HyperFlex components versions are compatible with. For example ESX, Hyperv or KVM. * &#x60;ESXi&#x60; - A Vmware ESXi hypervisor of any version. * &#x60;HXAP&#x60; - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform. * &#x60;Hyper-V&#x60; - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V. * &#x60;Unknown&#x60; - The hypervisor running on the HyperFlex cluster is not known. | [optional] [default to "ESXi"]
 **HypervisorVersion** | Pointer to **string** | Hypervisor component software version. | [optional] 
 **ServerFwVersion** | Pointer to **string** | UCS Server Firmware component software version. | [optional] 
 **AppCatalog** | Pointer to [**HyperflexAppCatalogRelationship**](hyperflex.AppCatalog.Relationship.md) |  | [optional] 
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewHclHyperflexSoftwareCompatibilityInfoAllOf
 
-`func NewHclHyperflexSoftwareCompatibilityInfoAllOf() *HclHyperflexSoftwareCompatibilityInfoAllOf`
+`func NewHclHyperflexSoftwareCompatibilityInfoAllOf(classId string, objectType string, ) *HclHyperflexSoftwareCompatibilityInfoAllOf`
 
 NewHclHyperflexSoftwareCompatibilityInfoAllOf instantiates a new HclHyperflexSoftwareCompatibilityInfoAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +31,46 @@ will change when the set of required properties is changed
 NewHclHyperflexSoftwareCompatibilityInfoAllOfWithDefaults instantiates a new HclHyperflexSoftwareCompatibilityInfoAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *HclHyperflexSoftwareCompatibilityInfoAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *HclHyperflexSoftwareCompatibilityInfoAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *HclHyperflexSoftwareCompatibilityInfoAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *HclHyperflexSoftwareCompatibilityInfoAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *HclHyperflexSoftwareCompatibilityInfoAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *HclHyperflexSoftwareCompatibilityInfoAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetConstraints
 
@@ -55,6 +97,16 @@ SetConstraints sets Constraints field to given value.
 
 HasConstraints returns a boolean if a field has been set.
 
+### SetConstraintsNil
+
+`func (o *HclHyperflexSoftwareCompatibilityInfoAllOf) SetConstraintsNil(b bool)`
+
+ SetConstraintsNil sets the value for Constraints to be an explicit nil
+
+### UnsetConstraints
+`func (o *HclHyperflexSoftwareCompatibilityInfoAllOf) UnsetConstraints()`
+
+UnsetConstraints ensures that no value is present for Constraints, not even an explicit nil
 ### GetHxdpVersion
 
 `func (o *HclHyperflexSoftwareCompatibilityInfoAllOf) GetHxdpVersion() string`

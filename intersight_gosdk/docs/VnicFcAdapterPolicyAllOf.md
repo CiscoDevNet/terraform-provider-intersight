@@ -4,25 +4,27 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.FcAdapterPolicy"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.FcAdapterPolicy"]
 **ErrorDetectionTimeout** | Pointer to **int64** | Error Detection Timeout, also referred to as EDTOV, is the number of milliseconds to wait before the system assumes that an error has occurred. | [optional] 
-**ErrorRecoverySettings** | Pointer to [**VnicFcErrorRecoverySettings**](vnic.FcErrorRecoverySettings.md) |  | [optional] 
-**FlogiSettings** | Pointer to [**VnicFlogiSettings**](vnic.FlogiSettings.md) |  | [optional] 
-**InterruptSettings** | Pointer to [**VnicFcInterruptSettings**](vnic.FcInterruptSettings.md) |  | [optional] 
+**ErrorRecoverySettings** | Pointer to [**NullableVnicFcErrorRecoverySettings**](vnic.FcErrorRecoverySettings.md) |  | [optional] 
+**FlogiSettings** | Pointer to [**NullableVnicFlogiSettings**](vnic.FlogiSettings.md) |  | [optional] 
+**InterruptSettings** | Pointer to [**NullableVnicFcInterruptSettings**](vnic.FcInterruptSettings.md) |  | [optional] 
 **IoThrottleCount** | Pointer to **int64** | The maximum number of data or control I/O operations that can be pending for the virtual interface at one time. If this value is exceeded, the additional I/O operations wait in the queue until the number of pending I/O operations decreases and the additional operations can be processed. | [optional] 
 **LunCount** | Pointer to **int64** | The maximum number of LUNs that the Fibre Channel driver will export or show. The maximum number of LUNs is usually controlled by the operating system running on the server. | [optional] 
 **LunQueueDepth** | Pointer to **int64** | The number of commands that the HBA can send and receive in a single transmission per LUN. | [optional] 
-**PlogiSettings** | Pointer to [**VnicPlogiSettings**](vnic.PlogiSettings.md) |  | [optional] 
+**PlogiSettings** | Pointer to [**NullableVnicPlogiSettings**](vnic.PlogiSettings.md) |  | [optional] 
 **ResourceAllocationTimeout** | Pointer to **int64** | Resource Allocation Timeout, also referred to as RATOV, is the number of milliseconds to wait before the system assumes that a resource cannot be properly allocated. | [optional] 
-**RxQueueSettings** | Pointer to [**VnicFcQueueSettings**](vnic.FcQueueSettings.md) |  | [optional] 
-**ScsiQueueSettings** | Pointer to [**VnicScsiQueueSettings**](vnic.ScsiQueueSettings.md) |  | [optional] 
-**TxQueueSettings** | Pointer to [**VnicFcQueueSettings**](vnic.FcQueueSettings.md) |  | [optional] 
+**RxQueueSettings** | Pointer to [**NullableVnicFcQueueSettings**](vnic.FcQueueSettings.md) |  | [optional] 
+**ScsiQueueSettings** | Pointer to [**NullableVnicScsiQueueSettings**](vnic.ScsiQueueSettings.md) |  | [optional] 
+**TxQueueSettings** | Pointer to [**NullableVnicFcQueueSettings**](vnic.FcQueueSettings.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 
 ## Methods
 
 ### NewVnicFcAdapterPolicyAllOf
 
-`func NewVnicFcAdapterPolicyAllOf() *VnicFcAdapterPolicyAllOf`
+`func NewVnicFcAdapterPolicyAllOf(classId string, objectType string, ) *VnicFcAdapterPolicyAllOf`
 
 NewVnicFcAdapterPolicyAllOf instantiates a new VnicFcAdapterPolicyAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -36,6 +38,46 @@ will change when the set of required properties is changed
 NewVnicFcAdapterPolicyAllOfWithDefaults instantiates a new VnicFcAdapterPolicyAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *VnicFcAdapterPolicyAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *VnicFcAdapterPolicyAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *VnicFcAdapterPolicyAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *VnicFcAdapterPolicyAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *VnicFcAdapterPolicyAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *VnicFcAdapterPolicyAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetErrorDetectionTimeout
 
@@ -87,6 +129,16 @@ SetErrorRecoverySettings sets ErrorRecoverySettings field to given value.
 
 HasErrorRecoverySettings returns a boolean if a field has been set.
 
+### SetErrorRecoverySettingsNil
+
+`func (o *VnicFcAdapterPolicyAllOf) SetErrorRecoverySettingsNil(b bool)`
+
+ SetErrorRecoverySettingsNil sets the value for ErrorRecoverySettings to be an explicit nil
+
+### UnsetErrorRecoverySettings
+`func (o *VnicFcAdapterPolicyAllOf) UnsetErrorRecoverySettings()`
+
+UnsetErrorRecoverySettings ensures that no value is present for ErrorRecoverySettings, not even an explicit nil
 ### GetFlogiSettings
 
 `func (o *VnicFcAdapterPolicyAllOf) GetFlogiSettings() VnicFlogiSettings`
@@ -112,6 +164,16 @@ SetFlogiSettings sets FlogiSettings field to given value.
 
 HasFlogiSettings returns a boolean if a field has been set.
 
+### SetFlogiSettingsNil
+
+`func (o *VnicFcAdapterPolicyAllOf) SetFlogiSettingsNil(b bool)`
+
+ SetFlogiSettingsNil sets the value for FlogiSettings to be an explicit nil
+
+### UnsetFlogiSettings
+`func (o *VnicFcAdapterPolicyAllOf) UnsetFlogiSettings()`
+
+UnsetFlogiSettings ensures that no value is present for FlogiSettings, not even an explicit nil
 ### GetInterruptSettings
 
 `func (o *VnicFcAdapterPolicyAllOf) GetInterruptSettings() VnicFcInterruptSettings`
@@ -137,6 +199,16 @@ SetInterruptSettings sets InterruptSettings field to given value.
 
 HasInterruptSettings returns a boolean if a field has been set.
 
+### SetInterruptSettingsNil
+
+`func (o *VnicFcAdapterPolicyAllOf) SetInterruptSettingsNil(b bool)`
+
+ SetInterruptSettingsNil sets the value for InterruptSettings to be an explicit nil
+
+### UnsetInterruptSettings
+`func (o *VnicFcAdapterPolicyAllOf) UnsetInterruptSettings()`
+
+UnsetInterruptSettings ensures that no value is present for InterruptSettings, not even an explicit nil
 ### GetIoThrottleCount
 
 `func (o *VnicFcAdapterPolicyAllOf) GetIoThrottleCount() int64`
@@ -237,6 +309,16 @@ SetPlogiSettings sets PlogiSettings field to given value.
 
 HasPlogiSettings returns a boolean if a field has been set.
 
+### SetPlogiSettingsNil
+
+`func (o *VnicFcAdapterPolicyAllOf) SetPlogiSettingsNil(b bool)`
+
+ SetPlogiSettingsNil sets the value for PlogiSettings to be an explicit nil
+
+### UnsetPlogiSettings
+`func (o *VnicFcAdapterPolicyAllOf) UnsetPlogiSettings()`
+
+UnsetPlogiSettings ensures that no value is present for PlogiSettings, not even an explicit nil
 ### GetResourceAllocationTimeout
 
 `func (o *VnicFcAdapterPolicyAllOf) GetResourceAllocationTimeout() int64`
@@ -287,6 +369,16 @@ SetRxQueueSettings sets RxQueueSettings field to given value.
 
 HasRxQueueSettings returns a boolean if a field has been set.
 
+### SetRxQueueSettingsNil
+
+`func (o *VnicFcAdapterPolicyAllOf) SetRxQueueSettingsNil(b bool)`
+
+ SetRxQueueSettingsNil sets the value for RxQueueSettings to be an explicit nil
+
+### UnsetRxQueueSettings
+`func (o *VnicFcAdapterPolicyAllOf) UnsetRxQueueSettings()`
+
+UnsetRxQueueSettings ensures that no value is present for RxQueueSettings, not even an explicit nil
 ### GetScsiQueueSettings
 
 `func (o *VnicFcAdapterPolicyAllOf) GetScsiQueueSettings() VnicScsiQueueSettings`
@@ -312,6 +404,16 @@ SetScsiQueueSettings sets ScsiQueueSettings field to given value.
 
 HasScsiQueueSettings returns a boolean if a field has been set.
 
+### SetScsiQueueSettingsNil
+
+`func (o *VnicFcAdapterPolicyAllOf) SetScsiQueueSettingsNil(b bool)`
+
+ SetScsiQueueSettingsNil sets the value for ScsiQueueSettings to be an explicit nil
+
+### UnsetScsiQueueSettings
+`func (o *VnicFcAdapterPolicyAllOf) UnsetScsiQueueSettings()`
+
+UnsetScsiQueueSettings ensures that no value is present for ScsiQueueSettings, not even an explicit nil
 ### GetTxQueueSettings
 
 `func (o *VnicFcAdapterPolicyAllOf) GetTxQueueSettings() VnicFcQueueSettings`
@@ -337,6 +439,16 @@ SetTxQueueSettings sets TxQueueSettings field to given value.
 
 HasTxQueueSettings returns a boolean if a field has been set.
 
+### SetTxQueueSettingsNil
+
+`func (o *VnicFcAdapterPolicyAllOf) SetTxQueueSettingsNil(b bool)`
+
+ SetTxQueueSettingsNil sets the value for TxQueueSettings to be an explicit nil
+
+### UnsetTxQueueSettings
+`func (o *VnicFcAdapterPolicyAllOf) UnsetTxQueueSettings()`
+
+UnsetTxQueueSettings ensures that no value is present for TxQueueSettings, not even an explicit nil
 ### GetOrganization
 
 `func (o *VnicFcAdapterPolicyAllOf) GetOrganization() OrganizationOrganizationRelationship`

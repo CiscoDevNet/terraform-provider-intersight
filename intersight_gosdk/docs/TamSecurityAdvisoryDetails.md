@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "tam.SecurityAdvisoryDetails"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "tam.SecurityAdvisoryDetails"]
 **BaseScore** | Pointer to **float32** | CVSS version 3 base score for the security Advisory. | [optional] 
 **CveIds** | Pointer to **[]string** |  | [optional] 
 **EnvironmentalScore** | Pointer to **float32** | CVSS version 3 environmental score for the security Advisory. | [optional] 
@@ -14,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewTamSecurityAdvisoryDetails
 
-`func NewTamSecurityAdvisoryDetails() *TamSecurityAdvisoryDetails`
+`func NewTamSecurityAdvisoryDetails(classId string, objectType string, ) *TamSecurityAdvisoryDetails`
 
 NewTamSecurityAdvisoryDetails instantiates a new TamSecurityAdvisoryDetails object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +30,46 @@ will change when the set of required properties is changed
 NewTamSecurityAdvisoryDetailsWithDefaults instantiates a new TamSecurityAdvisoryDetails object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *TamSecurityAdvisoryDetails) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *TamSecurityAdvisoryDetails) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *TamSecurityAdvisoryDetails) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *TamSecurityAdvisoryDetails) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *TamSecurityAdvisoryDetails) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *TamSecurityAdvisoryDetails) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetBaseScore
 
@@ -79,6 +121,16 @@ SetCveIds sets CveIds field to given value.
 
 HasCveIds returns a boolean if a field has been set.
 
+### SetCveIdsNil
+
+`func (o *TamSecurityAdvisoryDetails) SetCveIdsNil(b bool)`
+
+ SetCveIdsNil sets the value for CveIds to be an explicit nil
+
+### UnsetCveIds
+`func (o *TamSecurityAdvisoryDetails) UnsetCveIds()`
+
+UnsetCveIds ensures that no value is present for CveIds, not even an explicit nil
 ### GetEnvironmentalScore
 
 `func (o *TamSecurityAdvisoryDetails) GetEnvironmentalScore() float32`

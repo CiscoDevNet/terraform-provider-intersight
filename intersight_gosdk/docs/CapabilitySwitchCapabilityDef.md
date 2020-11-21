@@ -4,7 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Pid** | Pointer to **string** | Product Identifier for a Switch/Fabric-Interconnect. | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**Pid** | Pointer to **string** | Product Identifier for a Switch/Fabric-Interconnect. * &#x60;UCS-FI-6454&#x60; - The standard 4th generation UCS Fabric Interconnect with 54 ports. * &#x60;UCS-FI-64108&#x60; - The expanded 4th generation UCS Fabric Interconnect with 108 ports. * &#x60;unknown&#x60; - Unknown device type, usage is TBD. | [optional] [default to "UCS-FI-6454"]
 **Sku** | Pointer to **string** | SKU information for Switch/Fabric-Interconnect. | [optional] 
 **Vid** | Pointer to **string** | VID information for Switch/Fabric-Interconnect. | [optional] 
 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewCapabilitySwitchCapabilityDef
 
-`func NewCapabilitySwitchCapabilityDef() *CapabilitySwitchCapabilityDef`
+`func NewCapabilitySwitchCapabilityDef(classId string, objectType string, ) *CapabilitySwitchCapabilityDef`
 
 NewCapabilitySwitchCapabilityDef instantiates a new CapabilitySwitchCapabilityDef object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewCapabilitySwitchCapabilityDefWithDefaults instantiates a new CapabilitySwitchCapabilityDef object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *CapabilitySwitchCapabilityDef) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *CapabilitySwitchCapabilityDef) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *CapabilitySwitchCapabilityDef) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *CapabilitySwitchCapabilityDef) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *CapabilitySwitchCapabilityDef) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *CapabilitySwitchCapabilityDef) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetPid
 

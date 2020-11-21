@@ -4,12 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.CertificateRequest"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.CertificateRequest"]
 **EmailAddress** | Pointer to **string** | User input email address, an optional part of the subject of the certificate request. | [optional] 
 **Name** | Pointer to **string** | Name of the certificate request. | [optional] 
 **Request** | Pointer to **string** | Generated certificate signing request (CSR) in PEM format. | [optional] [readonly] 
 **SelfSigned** | Pointer to **bool** | Whether the user wants the generated CSR to be self-signed by the appliance. | [optional] 
-**Subject** | Pointer to [**PkixDistinguishedName**](pkix.DistinguishedName.md) |  | [optional] 
-**SubjectAlternateName** | Pointer to [**PkixSubjectAlternateName**](pkix.SubjectAlternateName.md) |  | [optional] 
+**Subject** | Pointer to [**NullablePkixDistinguishedName**](pkix.DistinguishedName.md) |  | [optional] 
+**SubjectAlternateName** | Pointer to [**NullablePkixSubjectAlternateName**](pkix.SubjectAlternateName.md) |  | [optional] 
 **Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
 **Certificate** | Pointer to [**IamCertificateRelationship**](iam.Certificate.Relationship.md) |  | [optional] 
 **PrivateKeySpec** | Pointer to [**IamPrivateKeySpecRelationship**](iam.PrivateKeySpec.Relationship.md) |  | [optional] 
@@ -18,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewIamCertificateRequest
 
-`func NewIamCertificateRequest() *IamCertificateRequest`
+`func NewIamCertificateRequest(classId string, objectType string, ) *IamCertificateRequest`
 
 NewIamCertificateRequest instantiates a new IamCertificateRequest object
 This constructor will assign default values to properties that have it defined,
@@ -32,6 +34,46 @@ will change when the set of required properties is changed
 NewIamCertificateRequestWithDefaults instantiates a new IamCertificateRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *IamCertificateRequest) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IamCertificateRequest) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IamCertificateRequest) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IamCertificateRequest) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IamCertificateRequest) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IamCertificateRequest) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetEmailAddress
 
@@ -158,6 +200,16 @@ SetSubject sets Subject field to given value.
 
 HasSubject returns a boolean if a field has been set.
 
+### SetSubjectNil
+
+`func (o *IamCertificateRequest) SetSubjectNil(b bool)`
+
+ SetSubjectNil sets the value for Subject to be an explicit nil
+
+### UnsetSubject
+`func (o *IamCertificateRequest) UnsetSubject()`
+
+UnsetSubject ensures that no value is present for Subject, not even an explicit nil
 ### GetSubjectAlternateName
 
 `func (o *IamCertificateRequest) GetSubjectAlternateName() PkixSubjectAlternateName`
@@ -183,6 +235,16 @@ SetSubjectAlternateName sets SubjectAlternateName field to given value.
 
 HasSubjectAlternateName returns a boolean if a field has been set.
 
+### SetSubjectAlternateNameNil
+
+`func (o *IamCertificateRequest) SetSubjectAlternateNameNil(b bool)`
+
+ SetSubjectAlternateNameNil sets the value for SubjectAlternateName to be an explicit nil
+
+### UnsetSubjectAlternateName
+`func (o *IamCertificateRequest) UnsetSubjectAlternateName()`
+
+UnsetSubjectAlternateName ensures that no value is present for SubjectAlternateName, not even an explicit nil
 ### GetAccount
 
 `func (o *IamCertificateRequest) GetAccount() IamAccountRelationship`

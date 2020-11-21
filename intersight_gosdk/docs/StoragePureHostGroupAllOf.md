@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.PureHostGroup"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.PureHostGroup"]
 **HostNames** | Pointer to **[]string** |  | [optional] 
 **Array** | Pointer to [**StoragePureArrayRelationship**](storage.PureArray.Relationship.md) |  | [optional] 
 **Hosts** | Pointer to [**[]StoragePureHostRelationship**](storage.PureHost.Relationship.md) | An array of relationships to storagePureHost resources. | [optional] [readonly] 
@@ -14,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewStoragePureHostGroupAllOf
 
-`func NewStoragePureHostGroupAllOf() *StoragePureHostGroupAllOf`
+`func NewStoragePureHostGroupAllOf(classId string, objectType string, ) *StoragePureHostGroupAllOf`
 
 NewStoragePureHostGroupAllOf instantiates a new StoragePureHostGroupAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +30,46 @@ will change when the set of required properties is changed
 NewStoragePureHostGroupAllOfWithDefaults instantiates a new StoragePureHostGroupAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *StoragePureHostGroupAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *StoragePureHostGroupAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *StoragePureHostGroupAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *StoragePureHostGroupAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *StoragePureHostGroupAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *StoragePureHostGroupAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetHostNames
 
@@ -54,6 +96,16 @@ SetHostNames sets HostNames field to given value.
 
 HasHostNames returns a boolean if a field has been set.
 
+### SetHostNamesNil
+
+`func (o *StoragePureHostGroupAllOf) SetHostNamesNil(b bool)`
+
+ SetHostNamesNil sets the value for HostNames to be an explicit nil
+
+### UnsetHostNames
+`func (o *StoragePureHostGroupAllOf) UnsetHostNames()`
+
+UnsetHostNames ensures that no value is present for HostNames, not even an explicit nil
 ### GetArray
 
 `func (o *StoragePureHostGroupAllOf) GetArray() StoragePureArrayRelationship`

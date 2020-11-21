@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.VirtualDriveConfig"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.VirtualDriveConfig"]
 **AccessPolicy** | Pointer to **string** | Access policy that host has on this virtual drive. * &#x60;Default&#x60; - Use platform default access mode. * &#x60;ReadWrite&#x60; - Enables host to perform read-write on the VD. * &#x60;ReadOnly&#x60; - Host can only read from the VD. * &#x60;Blocked&#x60; - Host can neither read nor write to the VD. | [optional] [default to "Default"]
 **BootDrive** | Pointer to **bool** | The flag enables the use of this virtual drive as a boot drive. | [optional] 
 **DiskGroupName** | Pointer to **string** | Disk group policy that has the disk group in which this virtual drive needs to be created. | [optional] [readonly] 
@@ -15,13 +17,14 @@ Name | Type | Description | Notes
 **ReadPolicy** | Pointer to **string** | Read ahead mode to be used to read data from this virtual drive. * &#x60;Default&#x60; - Use platform default read ahead mode. * &#x60;ReadAhead&#x60; - Use read ahead mode for the policy. * &#x60;NoReadAhead&#x60; - Do not use read ahead mode for the policy. | [optional] [default to "Default"]
 **Size** | Pointer to **int64** | Virtual drive size in MB. Size is mandatory field unless the &#39;Expand to Available&#39; option is enabled. | [optional] 
 **StripSize** | Pointer to **string** | The strip size is the portion of a stripe that resides on a single drive in the drive group. The stripe consists of the data segments that the RAID controller writes across multiple drives, not including parity drives. * &#x60;Default&#x60; - Use platform default strip size for a virtual drive. * &#x60;32k&#x60; - Enables a strip size of 32k for a virtual drive. * &#x60;64k&#x60; - Enables a strip size of 64k for a virtual drive. * &#x60;128k&#x60; - Enables a strip size of 128k for a virtual drive. * &#x60;256k&#x60; - Enables a strip size of 256k for a virtual drive. * &#x60;512k&#x60; - Enables a strip size of 512k for a virtual drive. * &#x60;1024k&#x60; - Enables a strip size of 1024k for a virtual drive. | [optional] [default to "Default"]
+**Vdid** | Pointer to **string** | Unique Id of the Virtual Drive to be used to identify Virtual Drive when name is empty. | [optional] [readonly] 
 **WritePolicy** | Pointer to **string** | Write mode to be used to write data to this virtual drive. * &#x60;Default&#x60; - Use platform default write mode. * &#x60;WriteThrough&#x60; - Data is written through the cache and to the physical drives. Performance is improved, because subsequent reads of that data can be satisfied from the cache. * &#x60;WriteBackGoodBbu&#x60; - Data is stored in the cache, and is only written to the physical drives when space in the cache is needed. Virtual drives requesting this policy fall back to Write Through caching when the battery backup unit (BBU) cannot guarantee the safety of the cache in the event of a power failure. * &#x60;AlwaysWriteBack&#x60; - With this policy, write caching remains Write Back even if the battery backup unit is defective or discharged. | [optional] [default to "Default"]
 
 ## Methods
 
 ### NewStorageVirtualDriveConfig
 
-`func NewStorageVirtualDriveConfig() *StorageVirtualDriveConfig`
+`func NewStorageVirtualDriveConfig(classId string, objectType string, ) *StorageVirtualDriveConfig`
 
 NewStorageVirtualDriveConfig instantiates a new StorageVirtualDriveConfig object
 This constructor will assign default values to properties that have it defined,
@@ -35,6 +38,46 @@ will change when the set of required properties is changed
 NewStorageVirtualDriveConfigWithDefaults instantiates a new StorageVirtualDriveConfig object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *StorageVirtualDriveConfig) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *StorageVirtualDriveConfig) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *StorageVirtualDriveConfig) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *StorageVirtualDriveConfig) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *StorageVirtualDriveConfig) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *StorageVirtualDriveConfig) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAccessPolicy
 
@@ -310,6 +353,31 @@ SetStripSize sets StripSize field to given value.
 `func (o *StorageVirtualDriveConfig) HasStripSize() bool`
 
 HasStripSize returns a boolean if a field has been set.
+
+### GetVdid
+
+`func (o *StorageVirtualDriveConfig) GetVdid() string`
+
+GetVdid returns the Vdid field if non-nil, zero value otherwise.
+
+### GetVdidOk
+
+`func (o *StorageVirtualDriveConfig) GetVdidOk() (*string, bool)`
+
+GetVdidOk returns a tuple with the Vdid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVdid
+
+`func (o *StorageVirtualDriveConfig) SetVdid(v string)`
+
+SetVdid sets Vdid field to given value.
+
+### HasVdid
+
+`func (o *StorageVirtualDriveConfig) HasVdid() bool`
+
+HasVdid returns a boolean if a field has been set.
 
 ### GetWritePolicy
 

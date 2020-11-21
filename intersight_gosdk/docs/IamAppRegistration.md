@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.AppRegistration"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.AppRegistration"]
 **ClientId** | Pointer to **string** | A unique identifier for the OAuth2 client application. The client ID is auto-generated when the AppRegistration object is created. | [optional] [readonly] 
 **ClientName** | Pointer to **string** | App Registration name specified by user. | [optional] 
 **ClientSecret** | Pointer to **string** | The OAuth2 client secret. The value of this property is generated when grantType includes &#39;client-credentials&#39;. Otherwise, no client-secret is generated. | [optional] 
@@ -25,7 +27,7 @@ Name | Type | Description | Notes
 
 ### NewIamAppRegistration
 
-`func NewIamAppRegistration() *IamAppRegistration`
+`func NewIamAppRegistration(classId string, objectType string, ) *IamAppRegistration`
 
 NewIamAppRegistration instantiates a new IamAppRegistration object
 This constructor will assign default values to properties that have it defined,
@@ -39,6 +41,46 @@ will change when the set of required properties is changed
 NewIamAppRegistrationWithDefaults instantiates a new IamAppRegistration object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *IamAppRegistration) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IamAppRegistration) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IamAppRegistration) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IamAppRegistration) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IamAppRegistration) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IamAppRegistration) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetClientId
 
@@ -190,6 +232,16 @@ SetGrantTypes sets GrantTypes field to given value.
 
 HasGrantTypes returns a boolean if a field has been set.
 
+### SetGrantTypesNil
+
+`func (o *IamAppRegistration) SetGrantTypesNil(b bool)`
+
+ SetGrantTypesNil sets the value for GrantTypes to be an explicit nil
+
+### UnsetGrantTypes
+`func (o *IamAppRegistration) UnsetGrantTypes()`
+
+UnsetGrantTypes ensures that no value is present for GrantTypes, not even an explicit nil
 ### GetRedirectUris
 
 `func (o *IamAppRegistration) GetRedirectUris() []string`
@@ -215,6 +267,16 @@ SetRedirectUris sets RedirectUris field to given value.
 
 HasRedirectUris returns a boolean if a field has been set.
 
+### SetRedirectUrisNil
+
+`func (o *IamAppRegistration) SetRedirectUrisNil(b bool)`
+
+ SetRedirectUrisNil sets the value for RedirectUris to be an explicit nil
+
+### UnsetRedirectUris
+`func (o *IamAppRegistration) UnsetRedirectUris()`
+
+UnsetRedirectUris ensures that no value is present for RedirectUris, not even an explicit nil
 ### GetRenewClientSecret
 
 `func (o *IamAppRegistration) GetRenewClientSecret() bool`
@@ -265,6 +327,16 @@ SetResponseTypes sets ResponseTypes field to given value.
 
 HasResponseTypes returns a boolean if a field has been set.
 
+### SetResponseTypesNil
+
+`func (o *IamAppRegistration) SetResponseTypesNil(b bool)`
+
+ SetResponseTypesNil sets the value for ResponseTypes to be an explicit nil
+
+### UnsetResponseTypes
+`func (o *IamAppRegistration) UnsetResponseTypes()`
+
+UnsetResponseTypes ensures that no value is present for ResponseTypes, not even an explicit nil
 ### GetRevocationTimestamp
 
 `func (o *IamAppRegistration) GetRevocationTimestamp() time.Time`

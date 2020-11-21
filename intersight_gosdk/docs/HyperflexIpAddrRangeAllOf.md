@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.IpAddrRange"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.IpAddrRange"]
 **EndAddr** | Pointer to **string** | The end IPv4 address of the range. | [optional] 
 **Gateway** | Pointer to **string** | The default gateway for the start and end IPv4 addresses. | [optional] 
 **Netmask** | Pointer to **string** | The netmask specified in dot decimal notation. The start address, end address, and gateway must all be within the network specified by this netmask. | [optional] 
@@ -13,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewHyperflexIpAddrRangeAllOf
 
-`func NewHyperflexIpAddrRangeAllOf() *HyperflexIpAddrRangeAllOf`
+`func NewHyperflexIpAddrRangeAllOf(classId string, objectType string, ) *HyperflexIpAddrRangeAllOf`
 
 NewHyperflexIpAddrRangeAllOf instantiates a new HyperflexIpAddrRangeAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewHyperflexIpAddrRangeAllOfWithDefaults instantiates a new HyperflexIpAddrRangeAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *HyperflexIpAddrRangeAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *HyperflexIpAddrRangeAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *HyperflexIpAddrRangeAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *HyperflexIpAddrRangeAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *HyperflexIpAddrRangeAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *HyperflexIpAddrRangeAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetEndAddr
 

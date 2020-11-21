@@ -11,10 +11,10 @@ The recommend version information for each release on APIC.
 The recommend version information for each release on APIC.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `class_id`:(string) The concrete type of this complex type. Its value must be the same as the 'objectType' property.The OpenAPI document references this property as a discriminator value. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `cll`:(string) Current long-lived release. 
 * `crr`:(string) Customer recommended releases. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified type of this managed object, i.e. the class name.This property is optional. The ObjectType is implied from the URL path.If specified, the value of objectType must match the class name specified in the URL path. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `pid`:(string) Hardware model identificator. 
 * `ull`:(string) Upcoming long-lived release. 

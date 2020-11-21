@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "capability.EquipmentPhysicalDef"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "capability.EquipmentPhysicalDef"]
 **Depth** | Pointer to **float32** | Depth information for a Switch/Fabric-Interconnect. | [optional] 
 **Height** | Pointer to **float32** | Height information for a Switch/Fabric-Interconnect. | [optional] 
 **MaxPower** | Pointer to **int64** | Max Power information for a Switch/Fabric-Interconnect. | [optional] 
@@ -16,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewCapabilityEquipmentPhysicalDef
 
-`func NewCapabilityEquipmentPhysicalDef() *CapabilityEquipmentPhysicalDef`
+`func NewCapabilityEquipmentPhysicalDef(classId string, objectType string, ) *CapabilityEquipmentPhysicalDef`
 
 NewCapabilityEquipmentPhysicalDef instantiates a new CapabilityEquipmentPhysicalDef object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +32,46 @@ will change when the set of required properties is changed
 NewCapabilityEquipmentPhysicalDefWithDefaults instantiates a new CapabilityEquipmentPhysicalDef object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *CapabilityEquipmentPhysicalDef) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *CapabilityEquipmentPhysicalDef) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *CapabilityEquipmentPhysicalDef) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *CapabilityEquipmentPhysicalDef) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *CapabilityEquipmentPhysicalDef) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *CapabilityEquipmentPhysicalDef) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDepth
 

@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "ucsd.UcsdRestoreParameters"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "ucsd.UcsdRestoreParameters"]
 **IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] 
 **Location** | Pointer to **string** | The complete location of the path on the server. The location should be specified in the following format- hostname-or-ipv4address&lt;:port&gt;/absolute-file-path. | [optional] 
 **Password** | Pointer to **string** | The password of the target backup server. Only required if the target server is accessed using SFTP or SCP protocol. | [optional] 
@@ -16,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewUcsdUcsdRestoreParameters
 
-`func NewUcsdUcsdRestoreParameters() *UcsdUcsdRestoreParameters`
+`func NewUcsdUcsdRestoreParameters(classId string, objectType string, ) *UcsdUcsdRestoreParameters`
 
 NewUcsdUcsdRestoreParameters instantiates a new UcsdUcsdRestoreParameters object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +32,46 @@ will change when the set of required properties is changed
 NewUcsdUcsdRestoreParametersWithDefaults instantiates a new UcsdUcsdRestoreParameters object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *UcsdUcsdRestoreParameters) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *UcsdUcsdRestoreParameters) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *UcsdUcsdRestoreParameters) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *UcsdUcsdRestoreParameters) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *UcsdUcsdRestoreParameters) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *UcsdUcsdRestoreParameters) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetIsPasswordSet
 

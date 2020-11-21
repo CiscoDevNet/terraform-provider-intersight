@@ -22,7 +22,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -53,7 +53,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -69,7 +69,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -99,41 +99,6 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 				Type:        schema.TypeBool,
 				Optional:    true,
 			},
-			"max_active_span_sessions": {
-				Description: "Maximum allowed Traffic Monitoring (SPAN) sessions on this switch.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-			},
-			"max_ethernet_port_channel_members": {
-				Description: "Maximum allowed Ethernet Uplink Port-channel members for each Uplink Port-channel on this switch.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-			},
-			"max_ethernet_port_channels": {
-				Description: "Maximum allowed Ethernet Uplink Port-channels on this switch.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-			},
-			"max_ethernet_uplink_ports": {
-				Description: "Maximum allowed Ethernet Uplink Ports on this switch.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-			},
-			"max_fc_fcoe_port_channels": {
-				Description: "Total maximum Fc and Fcoe Port-channels allowed on this switch.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-			},
-			"max_fc_port_channel_members": {
-				Description: "Maximum allowed FC Uplink Port-channel members for each FCoE Port-channel on this switch.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-			},
-			"max_fcoe_port_channel_members": {
-				Description: "Maximum allowed FCoE Uplink Port-channel members for each FCoE Port-channel on this switch.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-			},
 			"max_ports": {
 				Description: "Maximum allowed physical ports on this switch.",
 				Type:        schema.TypeInt,
@@ -141,16 +106,6 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 			},
 			"max_slots": {
 				Description: "Maximum allowed physical slots on this switch.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-			},
-			"max_vsans_supported": {
-				Description: "Maximum number of Vsans supported on this switch.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-			},
-			"min_active_fans": {
-				Description: "Minimum number of fans needed to be active/running on this switch.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -166,16 +121,121 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"network_limits": {
+				Description: "List of network limitations for this switch.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"max_compressed_port_vlan_count": {
+							Description: "Maximum Compressed configurable VLANs on Switch/Fabric-Interconnect.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"max_uncompressed_port_vlan_count": {
+							Description: "Maximum configurable VLANs on Switch/Fabric-Interconnect.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"maximum_active_traffic_monitoring_sessions": {
+							Description: "Maximum configured and enabled Traffic Monitoring sessions on this Switch/Fabric-Interconnect.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"maximum_ethernet_port_channels": {
+							Description: "Maximum configurable Ethernet port-channels on Switch/Fabric-Interconnect.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"maximum_ethernet_uplink_ports": {
+							Description: "Maximum configurable Ethernet Uplink ports on Switch/Fabric-Interconnect.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"maximum_fc_port_channel_members": {
+							Description: "Maximum configurable Fibre Channel port-channel member ports on Switch/Fabric-Interconnect.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"maximum_fc_port_channels": {
+							Description: "Maximum configurable Fibre Channel port-channels on Switch/Fabric-Interconnect.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"maximum_igmp_groups": {
+							Description: "Maximum configurable IGMP Groups on Switch/Fabric-Interconnect.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"maximum_port_channel_members": {
+							Description: "Maximum configurable ports per each port-channel on Switch/Fabric-Interconnect.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"maximum_primary_vlan": {
+							Description: "Maximum configurable Primary Private VLANs on Switch/Fabric-Interconnect.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"maximum_secondary_vlan": {
+							Description: "Maximum configurable Secondary Private VLANs on Switch/Fabric-Interconnect.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"maximum_secondary_vlan_per_primary": {
+							Description: "Maximum configurable Secondary VLANs per each Primary VLAN on Switch/Fabric-Interconnect.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"maximum_vifs": {
+							Description: "Maximum allowes VIFs on Switch/Fabric-Interconnect.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"maximum_vlans": {
+							Description: "Maximum configurable VLANs on Switch/Fabric-Interconnect.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"minimum_active_fans": {
+							Description: "Minimum required fans in 'active' state for this Switch/Fabric-Interconnect.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+			},
 			"object_type": {
-				Description: "The fully-qualified type of this managed object, i.e. the class name.\nThis property is optional. The ObjectType is implied from the URL path.\nIf specified, the value of objectType must match the class name specified in the URL path.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
 			},
 			"pid": {
-				Description: "Product Identifier for a Switch/Fabric-Interconnect.",
+				Description: "Product Identifier for a Switch/Fabric-Interconnect.\n* `UCS-FI-6454` - The standard 4th generation UCS Fabric Interconnect with 54 ports.\n* `UCS-FI-64108` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.\n* `unknown` - Unknown device type, usage is TBD.",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Default:     "UCS-FI-6454",
 			},
 			"ports_supporting100g_speed": {
 				Type:     schema.TypeList,
@@ -188,7 +248,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -204,7 +264,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -235,7 +295,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -251,7 +311,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -282,7 +342,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -298,7 +358,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -329,7 +389,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -345,7 +405,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -376,7 +436,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -392,7 +452,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -423,7 +483,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -439,7 +499,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -470,7 +530,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -486,7 +546,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -517,7 +577,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -533,7 +593,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -564,7 +624,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -580,7 +640,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -613,7 +673,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -625,7 +685,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -650,6 +710,142 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 				Description: "SKU information for Switch/Fabric-Interconnect.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"storage_limits": {
+				Description: "List of storage limitations for this switch.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"maximum_user_zone_count": {
+							Description: "Maximum user zones per Switch/Fabric-Interconnect.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"maximum_virtual_fc_interfaces": {
+							Description: "Maximum configurable Virtual Fibre Channel interfaces on Switch/Fabric-Interconnect.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"maximum_virtual_fc_interfaces_per_blade_server": {
+							Description: "Maximum configurable Virtual Fibre Channel interfaces per blade.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"maximum_vsans": {
+							Description: "Maximum configurable VSANs on Switch/Fabric-Interconnect.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"maximum_zone_count": {
+							Description: "Zone limit per Switch/Fabric-Interconnect.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+			},
+			"switching_mode_capabilities": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"switching_mode": {
+							Description: "Switching mode type (endhost, switch) of the switch.\n* `end-host` - In end-host mode, the fabric interconnects appear to the upstream devices as end hosts with multiple links.In this mode, the switch does not run Spanning Tree Protocol and avoids loops by following a set of rules for traffic forwarding.In case of ethernet switching mode - Ethernet end-host mode is also known as Ethernet host virtualizer.\n* `switch` - In switch mode, the switch runs Spanning Tree Protocol to avoid loops, and broadcast and multicast packets are handled in the traditional way.This is the traditional switch mode.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "end-host",
+						},
+						"vp_compression_supported": {
+							Description: "VP Compression support on this switch.",
+							Type:        schema.TypeBool,
+							Optional:    true,
+						},
+					},
+				},
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+			},
+			"system_limits": {
+				Description: "List of system limitations for this switch.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"maximum_chassis_count": {
+							Description: "Maximum UCS chassis that can be connected to this Switch/Fabric-Interconnect.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"maximum_fex_per_domain": {
+							Description: "Maximum UCS Fabric-extenders (FEX) per Switch/Fabric-Interconnect.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"maximum_servers_per_domain": {
+							Description: "Maximum UCS servers per Switch/Fabric-Interconnect.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
 			},
 			"tags": {
 				Type:     schema.TypeList,
@@ -685,7 +881,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -701,7 +897,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -729,11 +925,6 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 			"vid": {
 				Description: "VID information for Switch/Fabric-Interconnect.",
 				Type:        schema.TypeString,
-				Optional:    true,
-			},
-			"vp_compression_supported": {
-				Description: "VP Compression support on this switch.",
-				Type:        schema.TypeBool,
 				Optional:    true,
 			},
 		},
@@ -835,41 +1026,6 @@ func resourceCapabilitySwitchCapabilityCreate(d *schema.ResourceData, meta inter
 		o.SetLocatorBeaconSupported(x)
 	}
 
-	if v, ok := d.GetOk("max_active_span_sessions"); ok {
-		x := int64(v.(int))
-		o.SetMaxActiveSpanSessions(x)
-	}
-
-	if v, ok := d.GetOk("max_ethernet_port_channel_members"); ok {
-		x := int64(v.(int))
-		o.SetMaxEthernetPortChannelMembers(x)
-	}
-
-	if v, ok := d.GetOk("max_ethernet_port_channels"); ok {
-		x := int64(v.(int))
-		o.SetMaxEthernetPortChannels(x)
-	}
-
-	if v, ok := d.GetOk("max_ethernet_uplink_ports"); ok {
-		x := int64(v.(int))
-		o.SetMaxEthernetUplinkPorts(x)
-	}
-
-	if v, ok := d.GetOk("max_fc_fcoe_port_channels"); ok {
-		x := int64(v.(int))
-		o.SetMaxFcFcoePortChannels(x)
-	}
-
-	if v, ok := d.GetOk("max_fc_port_channel_members"); ok {
-		x := int64(v.(int))
-		o.SetMaxFcPortChannelMembers(x)
-	}
-
-	if v, ok := d.GetOk("max_fcoe_port_channel_members"); ok {
-		x := int64(v.(int))
-		o.SetMaxFcoePortChannelMembers(x)
-	}
-
 	if v, ok := d.GetOk("max_ports"); ok {
 		x := int64(v.(int))
 		o.SetMaxPorts(x)
@@ -880,16 +1036,6 @@ func resourceCapabilitySwitchCapabilityCreate(d *schema.ResourceData, meta inter
 		o.SetMaxSlots(x)
 	}
 
-	if v, ok := d.GetOk("max_vsans_supported"); ok {
-		x := int64(v.(int))
-		o.SetMaxVsansSupported(x)
-	}
-
-	if v, ok := d.GetOk("min_active_fans"); ok {
-		x := int64(v.(int))
-		o.SetMinActiveFans(x)
-	}
-
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -898,6 +1044,127 @@ func resourceCapabilitySwitchCapabilityCreate(d *schema.ResourceData, meta inter
 	if v, ok := d.GetOk("name"); ok {
 		x := (v.(string))
 		o.SetName(x)
+	}
+
+	if v, ok := d.GetOk("network_limits"); ok {
+		p := make([]models.CapabilitySwitchNetworkLimits, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewCapabilitySwitchNetworkLimitsWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("capability.SwitchNetworkLimits")
+			if v, ok := l["max_compressed_port_vlan_count"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaxCompressedPortVlanCount(x)
+				}
+			}
+			if v, ok := l["max_uncompressed_port_vlan_count"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaxUncompressedPortVlanCount(x)
+				}
+			}
+			if v, ok := l["maximum_active_traffic_monitoring_sessions"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumActiveTrafficMonitoringSessions(x)
+				}
+			}
+			if v, ok := l["maximum_ethernet_port_channels"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumEthernetPortChannels(x)
+				}
+			}
+			if v, ok := l["maximum_ethernet_uplink_ports"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumEthernetUplinkPorts(x)
+				}
+			}
+			if v, ok := l["maximum_fc_port_channel_members"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumFcPortChannelMembers(x)
+				}
+			}
+			if v, ok := l["maximum_fc_port_channels"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumFcPortChannels(x)
+				}
+			}
+			if v, ok := l["maximum_igmp_groups"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumIgmpGroups(x)
+				}
+			}
+			if v, ok := l["maximum_port_channel_members"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumPortChannelMembers(x)
+				}
+			}
+			if v, ok := l["maximum_primary_vlan"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumPrimaryVlan(x)
+				}
+			}
+			if v, ok := l["maximum_secondary_vlan"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumSecondaryVlan(x)
+				}
+			}
+			if v, ok := l["maximum_secondary_vlan_per_primary"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumSecondaryVlanPerPrimary(x)
+				}
+			}
+			if v, ok := l["maximum_vifs"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumVifs(x)
+				}
+			}
+			if v, ok := l["maximum_vlans"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumVlans(x)
+				}
+			}
+			if v, ok := l["minimum_active_fans"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMinimumActiveFans(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetNetworkLimits(x)
+		}
 	}
 
 	o.SetObjectType("capability.SwitchCapability")
@@ -1446,6 +1713,158 @@ func resourceCapabilitySwitchCapabilityCreate(d *schema.ResourceData, meta inter
 		o.SetSku(x)
 	}
 
+	if v, ok := d.GetOk("storage_limits"); ok {
+		p := make([]models.CapabilitySwitchStorageLimits, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewCapabilitySwitchStorageLimitsWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("capability.SwitchStorageLimits")
+			if v, ok := l["maximum_user_zone_count"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumUserZoneCount(x)
+				}
+			}
+			if v, ok := l["maximum_virtual_fc_interfaces"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumVirtualFcInterfaces(x)
+				}
+			}
+			if v, ok := l["maximum_virtual_fc_interfaces_per_blade_server"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumVirtualFcInterfacesPerBladeServer(x)
+				}
+			}
+			if v, ok := l["maximum_vsans"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumVsans(x)
+				}
+			}
+			if v, ok := l["maximum_zone_count"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumZoneCount(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetStorageLimits(x)
+		}
+	}
+
+	if v, ok := d.GetOk("switching_mode_capabilities"); ok {
+		x := make([]models.CapabilitySwitchingModeCapability, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewCapabilitySwitchingModeCapabilityWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("capability.SwitchingModeCapability")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["switching_mode"]; ok {
+				{
+					x := (v.(string))
+					o.SetSwitchingMode(x)
+				}
+			}
+			if v, ok := l["vp_compression_supported"]; ok {
+				{
+					x := (v.(bool))
+					o.SetVpCompressionSupported(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetSwitchingModeCapabilities(x)
+		}
+	}
+
+	if v, ok := d.GetOk("system_limits"); ok {
+		p := make([]models.CapabilitySwitchSystemLimits, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewCapabilitySwitchSystemLimitsWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("capability.SwitchSystemLimits")
+			if v, ok := l["maximum_chassis_count"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumChassisCount(x)
+				}
+			}
+			if v, ok := l["maximum_fex_per_domain"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumFexPerDomain(x)
+				}
+			}
+			if v, ok := l["maximum_servers_per_domain"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumServersPerDomain(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetSystemLimits(x)
+		}
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -1545,11 +1964,6 @@ func resourceCapabilitySwitchCapabilityCreate(d *schema.ResourceData, meta inter
 		o.SetVid(x)
 	}
 
-	if v, ok := d.GetOkExists("vp_compression_supported"); ok {
-		x := v.(bool)
-		o.SetVpCompressionSupported(x)
-	}
-
 	r := conn.ApiClient.CapabilityApi.CreateCapabilitySwitchCapability(conn.ctx).CapabilitySwitchCapability(*o)
 	result, _, err := r.Execute()
 	if err != nil {
@@ -1604,34 +2018,6 @@ func resourceCapabilitySwitchCapabilityRead(d *schema.ResourceData, meta interfa
 		return fmt.Errorf("error occurred while setting property LocatorBeaconSupported: %+v", err)
 	}
 
-	if err := d.Set("max_active_span_sessions", (s.GetMaxActiveSpanSessions())); err != nil {
-		return fmt.Errorf("error occurred while setting property MaxActiveSpanSessions: %+v", err)
-	}
-
-	if err := d.Set("max_ethernet_port_channel_members", (s.GetMaxEthernetPortChannelMembers())); err != nil {
-		return fmt.Errorf("error occurred while setting property MaxEthernetPortChannelMembers: %+v", err)
-	}
-
-	if err := d.Set("max_ethernet_port_channels", (s.GetMaxEthernetPortChannels())); err != nil {
-		return fmt.Errorf("error occurred while setting property MaxEthernetPortChannels: %+v", err)
-	}
-
-	if err := d.Set("max_ethernet_uplink_ports", (s.GetMaxEthernetUplinkPorts())); err != nil {
-		return fmt.Errorf("error occurred while setting property MaxEthernetUplinkPorts: %+v", err)
-	}
-
-	if err := d.Set("max_fc_fcoe_port_channels", (s.GetMaxFcFcoePortChannels())); err != nil {
-		return fmt.Errorf("error occurred while setting property MaxFcFcoePortChannels: %+v", err)
-	}
-
-	if err := d.Set("max_fc_port_channel_members", (s.GetMaxFcPortChannelMembers())); err != nil {
-		return fmt.Errorf("error occurred while setting property MaxFcPortChannelMembers: %+v", err)
-	}
-
-	if err := d.Set("max_fcoe_port_channel_members", (s.GetMaxFcoePortChannelMembers())); err != nil {
-		return fmt.Errorf("error occurred while setting property MaxFcoePortChannelMembers: %+v", err)
-	}
-
 	if err := d.Set("max_ports", (s.GetMaxPorts())); err != nil {
 		return fmt.Errorf("error occurred while setting property MaxPorts: %+v", err)
 	}
@@ -1640,20 +2026,16 @@ func resourceCapabilitySwitchCapabilityRead(d *schema.ResourceData, meta interfa
 		return fmt.Errorf("error occurred while setting property MaxSlots: %+v", err)
 	}
 
-	if err := d.Set("max_vsans_supported", (s.GetMaxVsansSupported())); err != nil {
-		return fmt.Errorf("error occurred while setting property MaxVsansSupported: %+v", err)
-	}
-
-	if err := d.Set("min_active_fans", (s.GetMinActiveFans())); err != nil {
-		return fmt.Errorf("error occurred while setting property MinActiveFans: %+v", err)
-	}
-
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
 		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
 		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+	}
+
+	if err := d.Set("network_limits", flattenMapCapabilitySwitchNetworkLimits(s.GetNetworkLimits(), d)); err != nil {
+		return fmt.Errorf("error occurred while setting property NetworkLimits: %+v", err)
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
@@ -1712,6 +2094,18 @@ func resourceCapabilitySwitchCapabilityRead(d *schema.ResourceData, meta interfa
 		return fmt.Errorf("error occurred while setting property Sku: %+v", err)
 	}
 
+	if err := d.Set("storage_limits", flattenMapCapabilitySwitchStorageLimits(s.GetStorageLimits(), d)); err != nil {
+		return fmt.Errorf("error occurred while setting property StorageLimits: %+v", err)
+	}
+
+	if err := d.Set("switching_mode_capabilities", flattenListCapabilitySwitchingModeCapability(s.GetSwitchingModeCapabilities(), d)); err != nil {
+		return fmt.Errorf("error occurred while setting property SwitchingModeCapabilities: %+v", err)
+	}
+
+	if err := d.Set("system_limits", flattenMapCapabilitySwitchSystemLimits(s.GetSystemLimits(), d)); err != nil {
+		return fmt.Errorf("error occurred while setting property SystemLimits: %+v", err)
+	}
+
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
 	}
@@ -1728,10 +2122,6 @@ func resourceCapabilitySwitchCapabilityRead(d *schema.ResourceData, meta interfa
 		return fmt.Errorf("error occurred while setting property Vid: %+v", err)
 	}
 
-	if err := d.Set("vp_compression_supported", (s.GetVpCompressionSupported())); err != nil {
-		return fmt.Errorf("error occurred while setting property VpCompressionSupported: %+v", err)
-	}
-
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
 	return nil
@@ -1741,7 +2131,7 @@ func resourceCapabilitySwitchCapabilityUpdate(d *schema.ResourceData, meta inter
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-	var o = models.NewCapabilitySwitchCapabilityWithDefaults()
+	var o = &models.CapabilitySwitchCapability{}
 	if d.HasChange("additional_properties") {
 		v := d.Get("additional_properties")
 		x := []byte(v.(string))
@@ -1777,7 +2167,7 @@ func resourceCapabilitySwitchCapabilityUpdate(d *schema.ResourceData, meta inter
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := models.NewCapabilityPortRangeWithDefaults()
+			o := &models.CapabilityPortRange{}
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -1839,48 +2229,6 @@ func resourceCapabilitySwitchCapabilityUpdate(d *schema.ResourceData, meta inter
 		o.SetLocatorBeaconSupported(x)
 	}
 
-	if d.HasChange("max_active_span_sessions") {
-		v := d.Get("max_active_span_sessions")
-		x := int64(v.(int))
-		o.SetMaxActiveSpanSessions(x)
-	}
-
-	if d.HasChange("max_ethernet_port_channel_members") {
-		v := d.Get("max_ethernet_port_channel_members")
-		x := int64(v.(int))
-		o.SetMaxEthernetPortChannelMembers(x)
-	}
-
-	if d.HasChange("max_ethernet_port_channels") {
-		v := d.Get("max_ethernet_port_channels")
-		x := int64(v.(int))
-		o.SetMaxEthernetPortChannels(x)
-	}
-
-	if d.HasChange("max_ethernet_uplink_ports") {
-		v := d.Get("max_ethernet_uplink_ports")
-		x := int64(v.(int))
-		o.SetMaxEthernetUplinkPorts(x)
-	}
-
-	if d.HasChange("max_fc_fcoe_port_channels") {
-		v := d.Get("max_fc_fcoe_port_channels")
-		x := int64(v.(int))
-		o.SetMaxFcFcoePortChannels(x)
-	}
-
-	if d.HasChange("max_fc_port_channel_members") {
-		v := d.Get("max_fc_port_channel_members")
-		x := int64(v.(int))
-		o.SetMaxFcPortChannelMembers(x)
-	}
-
-	if d.HasChange("max_fcoe_port_channel_members") {
-		v := d.Get("max_fcoe_port_channel_members")
-		x := int64(v.(int))
-		o.SetMaxFcoePortChannelMembers(x)
-	}
-
 	if d.HasChange("max_ports") {
 		v := d.Get("max_ports")
 		x := int64(v.(int))
@@ -1893,18 +2241,6 @@ func resourceCapabilitySwitchCapabilityUpdate(d *schema.ResourceData, meta inter
 		o.SetMaxSlots(x)
 	}
 
-	if d.HasChange("max_vsans_supported") {
-		v := d.Get("max_vsans_supported")
-		x := int64(v.(int))
-		o.SetMaxVsansSupported(x)
-	}
-
-	if d.HasChange("min_active_fans") {
-		v := d.Get("min_active_fans")
-		x := int64(v.(int))
-		o.SetMinActiveFans(x)
-	}
-
 	if d.HasChange("moid") {
 		v := d.Get("moid")
 		x := (v.(string))
@@ -1915,6 +2251,128 @@ func resourceCapabilitySwitchCapabilityUpdate(d *schema.ResourceData, meta inter
 		v := d.Get("name")
 		x := (v.(string))
 		o.SetName(x)
+	}
+
+	if d.HasChange("network_limits") {
+		v := d.Get("network_limits")
+		p := make([]models.CapabilitySwitchNetworkLimits, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.CapabilitySwitchNetworkLimits{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("capability.SwitchNetworkLimits")
+			if v, ok := l["max_compressed_port_vlan_count"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaxCompressedPortVlanCount(x)
+				}
+			}
+			if v, ok := l["max_uncompressed_port_vlan_count"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaxUncompressedPortVlanCount(x)
+				}
+			}
+			if v, ok := l["maximum_active_traffic_monitoring_sessions"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumActiveTrafficMonitoringSessions(x)
+				}
+			}
+			if v, ok := l["maximum_ethernet_port_channels"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumEthernetPortChannels(x)
+				}
+			}
+			if v, ok := l["maximum_ethernet_uplink_ports"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumEthernetUplinkPorts(x)
+				}
+			}
+			if v, ok := l["maximum_fc_port_channel_members"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumFcPortChannelMembers(x)
+				}
+			}
+			if v, ok := l["maximum_fc_port_channels"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumFcPortChannels(x)
+				}
+			}
+			if v, ok := l["maximum_igmp_groups"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumIgmpGroups(x)
+				}
+			}
+			if v, ok := l["maximum_port_channel_members"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumPortChannelMembers(x)
+				}
+			}
+			if v, ok := l["maximum_primary_vlan"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumPrimaryVlan(x)
+				}
+			}
+			if v, ok := l["maximum_secondary_vlan"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumSecondaryVlan(x)
+				}
+			}
+			if v, ok := l["maximum_secondary_vlan_per_primary"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumSecondaryVlanPerPrimary(x)
+				}
+			}
+			if v, ok := l["maximum_vifs"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumVifs(x)
+				}
+			}
+			if v, ok := l["maximum_vlans"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumVlans(x)
+				}
+			}
+			if v, ok := l["minimum_active_fans"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMinimumActiveFans(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetNetworkLimits(x)
+		}
 	}
 
 	o.SetObjectType("capability.SwitchCapability")
@@ -1930,7 +2388,7 @@ func resourceCapabilitySwitchCapabilityUpdate(d *schema.ResourceData, meta inter
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := models.NewCapabilityPortRangeWithDefaults()
+			o := &models.CapabilityPortRange{}
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -1985,7 +2443,7 @@ func resourceCapabilitySwitchCapabilityUpdate(d *schema.ResourceData, meta inter
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := models.NewCapabilityPortRangeWithDefaults()
+			o := &models.CapabilityPortRange{}
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -2040,7 +2498,7 @@ func resourceCapabilitySwitchCapabilityUpdate(d *schema.ResourceData, meta inter
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := models.NewCapabilityPortRangeWithDefaults()
+			o := &models.CapabilityPortRange{}
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -2095,7 +2553,7 @@ func resourceCapabilitySwitchCapabilityUpdate(d *schema.ResourceData, meta inter
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := models.NewCapabilityPortRangeWithDefaults()
+			o := &models.CapabilityPortRange{}
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -2150,7 +2608,7 @@ func resourceCapabilitySwitchCapabilityUpdate(d *schema.ResourceData, meta inter
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := models.NewCapabilityPortRangeWithDefaults()
+			o := &models.CapabilityPortRange{}
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -2205,7 +2663,7 @@ func resourceCapabilitySwitchCapabilityUpdate(d *schema.ResourceData, meta inter
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := models.NewCapabilityPortRangeWithDefaults()
+			o := &models.CapabilityPortRange{}
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -2260,7 +2718,7 @@ func resourceCapabilitySwitchCapabilityUpdate(d *schema.ResourceData, meta inter
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := models.NewCapabilityPortRangeWithDefaults()
+			o := &models.CapabilityPortRange{}
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -2315,7 +2773,7 @@ func resourceCapabilitySwitchCapabilityUpdate(d *schema.ResourceData, meta inter
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := models.NewCapabilityPortRangeWithDefaults()
+			o := &models.CapabilityPortRange{}
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -2370,7 +2828,7 @@ func resourceCapabilitySwitchCapabilityUpdate(d *schema.ResourceData, meta inter
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := models.NewCapabilityPortRangeWithDefaults()
+			o := &models.CapabilityPortRange{}
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -2426,7 +2884,7 @@ func resourceCapabilitySwitchCapabilityUpdate(d *schema.ResourceData, meta inter
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
 			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
+			o := &models.MoMoRef{}
 			if v, ok := l["additional_properties"]; ok {
 				{
 					x := []byte(v.(string))
@@ -2476,12 +2934,167 @@ func resourceCapabilitySwitchCapabilityUpdate(d *schema.ResourceData, meta inter
 		o.SetSku(x)
 	}
 
+	if d.HasChange("storage_limits") {
+		v := d.Get("storage_limits")
+		p := make([]models.CapabilitySwitchStorageLimits, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.CapabilitySwitchStorageLimits{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("capability.SwitchStorageLimits")
+			if v, ok := l["maximum_user_zone_count"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumUserZoneCount(x)
+				}
+			}
+			if v, ok := l["maximum_virtual_fc_interfaces"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumVirtualFcInterfaces(x)
+				}
+			}
+			if v, ok := l["maximum_virtual_fc_interfaces_per_blade_server"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumVirtualFcInterfacesPerBladeServer(x)
+				}
+			}
+			if v, ok := l["maximum_vsans"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumVsans(x)
+				}
+			}
+			if v, ok := l["maximum_zone_count"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumZoneCount(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetStorageLimits(x)
+		}
+	}
+
+	if d.HasChange("switching_mode_capabilities") {
+		v := d.Get("switching_mode_capabilities")
+		x := make([]models.CapabilitySwitchingModeCapability, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.CapabilitySwitchingModeCapability{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("capability.SwitchingModeCapability")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["switching_mode"]; ok {
+				{
+					x := (v.(string))
+					o.SetSwitchingMode(x)
+				}
+			}
+			if v, ok := l["vp_compression_supported"]; ok {
+				{
+					x := (v.(bool))
+					o.SetVpCompressionSupported(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetSwitchingModeCapabilities(x)
+		}
+	}
+
+	if d.HasChange("system_limits") {
+		v := d.Get("system_limits")
+		p := make([]models.CapabilitySwitchSystemLimits, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.CapabilitySwitchSystemLimits{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("capability.SwitchSystemLimits")
+			if v, ok := l["maximum_chassis_count"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumChassisCount(x)
+				}
+			}
+			if v, ok := l["maximum_fex_per_domain"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumFexPerDomain(x)
+				}
+			}
+			if v, ok := l["maximum_servers_per_domain"]; ok {
+				{
+					x := int64(v.(int))
+					o.SetMaximumServersPerDomain(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetSystemLimits(x)
+		}
+	}
+
 	if d.HasChange("tags") {
 		v := d.Get("tags")
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := models.NewMoTagWithDefaults()
+			o := &models.MoTag{}
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -2517,7 +3130,7 @@ func resourceCapabilitySwitchCapabilityUpdate(d *schema.ResourceData, meta inter
 		x := make([]models.CapabilityPortRange, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := models.NewCapabilityPortRangeWithDefaults()
+			o := &models.CapabilityPortRange{}
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -2577,12 +3190,6 @@ func resourceCapabilitySwitchCapabilityUpdate(d *schema.ResourceData, meta inter
 		v := d.Get("vid")
 		x := (v.(string))
 		o.SetVid(x)
-	}
-
-	if d.HasChange("vp_compression_supported") {
-		v := d.Get("vp_compression_supported")
-		x := (v.(bool))
-		o.SetVpCompressionSupported(x)
 	}
 
 	r := conn.ApiClient.CapabilityApi.UpdateCapabilitySwitchCapability(conn.ctx, d.Id()).CapabilitySwitchCapability(*o)

@@ -4,7 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ArrayItemType** | Pointer to [**WorkflowArrayItem**](workflow.ArrayItem.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.ArrayDataType"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.ArrayDataType"]
+**ArrayItemType** | Pointer to [**NullableWorkflowArrayItem**](workflow.ArrayItem.md) |  | [optional] 
 **Max** | Pointer to **int64** | Specify the maximum value of the array. | [optional] 
 **Min** | Pointer to **int64** | Specify the minimum value of the array. | [optional] 
 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewWorkflowArrayDataType
 
-`func NewWorkflowArrayDataType() *WorkflowArrayDataType`
+`func NewWorkflowArrayDataType(classId string, objectType string, ) *WorkflowArrayDataType`
 
 NewWorkflowArrayDataType instantiates a new WorkflowArrayDataType object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewWorkflowArrayDataTypeWithDefaults instantiates a new WorkflowArrayDataType object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *WorkflowArrayDataType) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *WorkflowArrayDataType) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *WorkflowArrayDataType) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *WorkflowArrayDataType) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *WorkflowArrayDataType) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *WorkflowArrayDataType) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetArrayItemType
 
@@ -52,6 +94,16 @@ SetArrayItemType sets ArrayItemType field to given value.
 
 HasArrayItemType returns a boolean if a field has been set.
 
+### SetArrayItemTypeNil
+
+`func (o *WorkflowArrayDataType) SetArrayItemTypeNil(b bool)`
+
+ SetArrayItemTypeNil sets the value for ArrayItemType to be an explicit nil
+
+### UnsetArrayItemType
+`func (o *WorkflowArrayDataType) UnsetArrayItemType()`
+
+UnsetArrayItemType ensures that no value is present for ArrayItemType, not even an explicit nil
 ### GetMax
 
 `func (o *WorkflowArrayDataType) GetMax() int64`

@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "license.LicenseReservationOp"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "license.LicenseReservationOp"]
 **AuthCode** | Pointer to **string** | Revervation code used to install the license. | [optional] 
 **AuthCodeInstalled** | Pointer to **bool** | Flag to indicate whether authorization code is installed. | [optional] [readonly] 
 **ConfirmCode** | Pointer to **string** | Confirm code used to complete the license update on smart license account. | [optional] [readonly] 
@@ -17,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewLicenseLicenseReservationOp
 
-`func NewLicenseLicenseReservationOp() *LicenseLicenseReservationOp`
+`func NewLicenseLicenseReservationOp(classId string, objectType string, ) *LicenseLicenseReservationOp`
 
 NewLicenseLicenseReservationOp instantiates a new LicenseLicenseReservationOp object
 This constructor will assign default values to properties that have it defined,
@@ -31,6 +33,46 @@ will change when the set of required properties is changed
 NewLicenseLicenseReservationOpWithDefaults instantiates a new LicenseLicenseReservationOp object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *LicenseLicenseReservationOp) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *LicenseLicenseReservationOp) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *LicenseLicenseReservationOp) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *LicenseLicenseReservationOp) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *LicenseLicenseReservationOp) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *LicenseLicenseReservationOp) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAuthCode
 

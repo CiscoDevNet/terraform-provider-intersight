@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **PcId** | Pointer to **int64** | Unique Identifier of the port-channel, local to this switch. | [optional] 
 **Ports** | Pointer to [**[]FabricPortIdentifier**](fabric.PortIdentifier.md) |  | [optional] 
 **PortPolicy** | Pointer to [**FabricPortPolicyRelationship**](fabric.PortPolicy.Relationship.md) |  | [optional] 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewFabricPortChannelRoleAllOf
 
-`func NewFabricPortChannelRoleAllOf() *FabricPortChannelRoleAllOf`
+`func NewFabricPortChannelRoleAllOf(classId string, objectType string, ) *FabricPortChannelRoleAllOf`
 
 NewFabricPortChannelRoleAllOf instantiates a new FabricPortChannelRoleAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewFabricPortChannelRoleAllOfWithDefaults instantiates a new FabricPortChannelRoleAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *FabricPortChannelRoleAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *FabricPortChannelRoleAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *FabricPortChannelRoleAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *FabricPortChannelRoleAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *FabricPortChannelRoleAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *FabricPortChannelRoleAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetPcId
 
@@ -77,6 +119,16 @@ SetPorts sets Ports field to given value.
 
 HasPorts returns a boolean if a field has been set.
 
+### SetPortsNil
+
+`func (o *FabricPortChannelRoleAllOf) SetPortsNil(b bool)`
+
+ SetPortsNil sets the value for Ports to be an explicit nil
+
+### UnsetPorts
+`func (o *FabricPortChannelRoleAllOf) UnsetPorts()`
+
+UnsetPorts ensures that no value is present for Ports, not even an explicit nil
 ### GetPortPolicy
 
 `func (o *FabricPortChannelRoleAllOf) GetPortPolicy() FabricPortPolicyRelationship`

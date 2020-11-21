@@ -31,15 +31,52 @@ func dataSourceIppoolShadowPool() *schema.Resource {
 				Optional:    true,
 			},
 			"class_id": {
-				Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
 			},
 			"description": {
 				Description: "Description of the policy.",
 				Type:        schema.TypeString,
 				Optional:    true,
+			},
+			"ip_block_heads": {
+				Description: "An array of relationships to ippoolShadowBlock resources.",
+				Type:        schema.TypeList,
+				Optional:    true,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
 			},
 			"ip_v4_blocks": {
 				Type:     schema.TypeList,
@@ -52,10 +89,9 @@ func dataSourceIppoolShadowPool() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"from": {
 							Description: "First IPv4 address of the block.",
@@ -64,7 +100,7 @@ func dataSourceIppoolShadowPool() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -98,10 +134,9 @@ func dataSourceIppoolShadowPool() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"gateway": {
 							Description: "IP address of the default IPv4 gateway.",
@@ -116,8 +151,102 @@ func dataSourceIppoolShadowPool() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"primary_dns": {
+							Description: "IP Address of the primary Domain Name System (DNS) server.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"secondary_dns": {
+							Description: "IP Address of the secondary Domain Name System (DNS) server.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				Computed: true,
+			},
+			"ip_v6_blocks": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"from": {
+							Description: "First IPv6 address of the block.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"size": {
+							Description: "Number of identifiers this block can hold.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+							Computed:    true,
+						},
+						"to": {
+							Description: "Last IPv6 address of the block.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				Computed: true,
+			},
+			"ip_v6_config": {
+				Description: "Netmask, Gateway and DNS settings for IPv6 addresses.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"gateway": {
+							Description: "IP address of the default IPv6 gateway.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"prefix": {
+							Description: "A prefix length which masks the  IP address and divides the IP address into network address and host address.",
+							Type:        schema.TypeInt,
 							Optional:    true,
 							Computed:    true,
 						},
@@ -149,7 +278,7 @@ func dataSourceIppoolShadowPool() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified type of this managed object, i.e. the class name.\nThis property is optional. The ObjectType is implied from the URL path.\nIf specified, the value of objectType must match the class name specified in the URL path.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -168,10 +297,9 @@ func dataSourceIppoolShadowPool() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -180,7 +308,7 @@ func dataSourceIppoolShadowPool() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -229,45 +357,6 @@ func dataSourceIppoolShadowPool() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
-			"v4_block_heads": {
-				Description: "An array of relationships to ippoolShadowBlock resources.",
-				Type:        schema.TypeList,
-				Optional:    true,
-				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-			},
 			"v4_size": {
 				Description: "Number of IPv4 addresses in this pool.",
 				Type:        schema.TypeInt,
@@ -300,10 +389,9 @@ func dataSourceIppoolShadowPool() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -312,7 +400,7 @@ func dataSourceIppoolShadowPool() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -334,7 +422,7 @@ func dataSourceIppoolShadowPoolRead(d *schema.ResourceData, meta interface{}) er
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-	var o = models.NewIppoolShadowPoolWithDefaults()
+	var o = &models.IppoolShadowPool{}
 	if v, ok := d.GetOk("assigned"); ok {
 		x := int64(v.(int))
 		o.SetAssigned(x)
@@ -410,7 +498,7 @@ func dataSourceIppoolShadowPoolRead(d *schema.ResourceData, meta interface{}) er
 	case reflect.Slice:
 		r := reflect.ValueOf(result)
 		for i := 0; i < r.Len(); i++ {
-			var s = models.NewIppoolShadowPoolWithDefaults()
+			var s = &models.IppoolShadowPool{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
 				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
@@ -431,12 +519,24 @@ func dataSourceIppoolShadowPoolRead(d *schema.ResourceData, meta interface{}) er
 				return fmt.Errorf("error occurred while setting property Description: %+v", err)
 			}
 
-			if err := d.Set("ip_v4_blocks", flattenListIppoolIpBlock(s.GetIpV4Blocks(), d)); err != nil {
+			if err := d.Set("ip_block_heads", flattenListIppoolShadowBlockRelationship(s.GetIpBlockHeads(), d)); err != nil {
+				return fmt.Errorf("error occurred while setting property IpBlockHeads: %+v", err)
+			}
+
+			if err := d.Set("ip_v4_blocks", flattenListIppoolIpV4Block(s.GetIpV4Blocks(), d)); err != nil {
 				return fmt.Errorf("error occurred while setting property IpV4Blocks: %+v", err)
 			}
 
 			if err := d.Set("ip_v4_config", flattenMapIppoolIpV4Config(s.GetIpV4Config(), d)); err != nil {
 				return fmt.Errorf("error occurred while setting property IpV4Config: %+v", err)
+			}
+
+			if err := d.Set("ip_v6_blocks", flattenListIppoolIpV6Block(s.GetIpV6Blocks(), d)); err != nil {
+				return fmt.Errorf("error occurred while setting property IpV6Blocks: %+v", err)
+			}
+
+			if err := d.Set("ip_v6_config", flattenMapIppoolIpV6Config(s.GetIpV6Config(), d)); err != nil {
+				return fmt.Errorf("error occurred while setting property IpV6Config: %+v", err)
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
 				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
@@ -460,10 +560,6 @@ func dataSourceIppoolShadowPoolRead(d *schema.ResourceData, meta interface{}) er
 			}
 			if err := d.Set("v4_assigned", (s.GetV4Assigned())); err != nil {
 				return fmt.Errorf("error occurred while setting property V4Assigned: %+v", err)
-			}
-
-			if err := d.Set("v4_block_heads", flattenListIppoolShadowBlockRelationship(s.GetV4BlockHeads(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property V4BlockHeads: %+v", err)
 			}
 			if err := d.Set("v4_size", (s.GetV4Size())); err != nil {
 				return fmt.Errorf("error occurred while setting property V4Size: %+v", err)

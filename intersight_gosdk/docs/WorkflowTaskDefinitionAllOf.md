@@ -4,24 +4,28 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.TaskDefinition"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.TaskDefinition"]
 **DefaultVersion** | Pointer to **bool** | When true this will be the task version that is used when a specific task definition version is not specified. The very first task definition created with a name will be set as the default version, after that user can explicitly set any version of the task definition as the default version. | [optional] 
 **Description** | Pointer to **string** | The task definition description to describe what this task will do when executed. | [optional] 
-**InternalProperties** | Pointer to [**WorkflowInternalProperties**](workflow.InternalProperties.md) |  | [optional] 
+**InternalProperties** | Pointer to [**NullableWorkflowInternalProperties**](workflow.InternalProperties.md) |  | [optional] 
 **Label** | Pointer to **string** | A user friendly short name to identify the task definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote (&#39;), or an underscore (_). | [optional] 
-**LicenseEntitlement** | Pointer to **string** | License entitlement required to run this task. It is determined by license requirement of features. * &#x60;Base&#x60; - Base as a License type. It is default license type. * &#x60;Essential&#x60; - Essential as a License type. * &#x60;Standard&#x60; - Standard as a License type. * &#x60;Advantage&#x60; - Advantage as a License type. * &#x60;Premier&#x60; - Premier as a License type. | [optional] [readonly] [default to "Base"]
+**LicenseEntitlement** | Pointer to **string** | License entitlement required to run this task. It is determined by license requirement of features. * &#x60;Base&#x60; - Base as a License type. It is default license type. * &#x60;Essential&#x60; - Essential as a License type. * &#x60;Standard&#x60; - Standard as a License type. * &#x60;Advantage&#x60; - Advantage as a License type. * &#x60;Premier&#x60; - Premier as a License type. * &#x60;IWO-Essential&#x60; - IWO-Essential as a License type. * &#x60;IWO-Advantage&#x60; - IWO-Advantage as a License type. * &#x60;IWO-Premier&#x60; - IWO-Premier as a License type. | [optional] [readonly] [default to "Base"]
 **Name** | Pointer to **string** | The name of the task definition. The name should follow this convention &lt;Verb or Action&gt;&lt;Category&gt;&lt;Vendor&gt;&lt;Product&gt;&lt;Noun or object&gt; Verb or Action is a required portion of the name and this must be part of the pre-approved verb list. Category is an optional field and this will refer to the broad category of the task referring to the type of resource or endpoint. If there is no specific category then use \&quot;Generic\&quot; if required. Vendor is an optional field and this will refer to the specific vendor this task applies to. If the task is generic and not tied to a vendor, then do not specify anything. Product is an optional field, this will contain the vendor product and model when desired. Noun or object is a required field and  this will contain the noun or object on which the action is being performed. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), or an underscore (_). Examples SendEmail  - This is a task in Generic category for sending email. NewStorageVolume - This is a vendor agnostic task under Storage device category for creating a new volume. | [optional] 
-**Properties** | Pointer to [**WorkflowProperties**](workflow.Properties.md) |  | [optional] 
+**Properties** | Pointer to [**NullableWorkflowProperties**](workflow.Properties.md) |  | [optional] 
+**RollbackTasks** | Pointer to [**[]WorkflowRollbackTask**](workflow.RollbackTask.md) |  | [optional] 
 **SecurePropAccess** | Pointer to **bool** | If set to true, the task requires access to secure properties and uses an encyption token associated with a workflow moid to encrypt or decrypt the secure properties. | [optional] 
 **Version** | Pointer to **int64** | The version of the task definition so we can support multiple versions of a task definition. | [optional] 
 **Catalog** | Pointer to [**WorkflowCatalogRelationship**](workflow.Catalog.Relationship.md) |  | [optional] 
 **ImplementedTasks** | Pointer to [**[]WorkflowTaskDefinitionRelationship**](workflow.TaskDefinition.Relationship.md) | An array of relationships to workflowTaskDefinition resources. | [optional] 
 **InterfaceTask** | Pointer to [**WorkflowTaskDefinitionRelationship**](workflow.TaskDefinition.Relationship.md) |  | [optional] 
+**TaskMetadata** | Pointer to [**WorkflowTaskMetadataRelationship**](workflow.TaskMetadata.Relationship.md) |  | [optional] 
 
 ## Methods
 
 ### NewWorkflowTaskDefinitionAllOf
 
-`func NewWorkflowTaskDefinitionAllOf() *WorkflowTaskDefinitionAllOf`
+`func NewWorkflowTaskDefinitionAllOf(classId string, objectType string, ) *WorkflowTaskDefinitionAllOf`
 
 NewWorkflowTaskDefinitionAllOf instantiates a new WorkflowTaskDefinitionAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -35,6 +39,46 @@ will change when the set of required properties is changed
 NewWorkflowTaskDefinitionAllOfWithDefaults instantiates a new WorkflowTaskDefinitionAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *WorkflowTaskDefinitionAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *WorkflowTaskDefinitionAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *WorkflowTaskDefinitionAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *WorkflowTaskDefinitionAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *WorkflowTaskDefinitionAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *WorkflowTaskDefinitionAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDefaultVersion
 
@@ -111,6 +155,16 @@ SetInternalProperties sets InternalProperties field to given value.
 
 HasInternalProperties returns a boolean if a field has been set.
 
+### SetInternalPropertiesNil
+
+`func (o *WorkflowTaskDefinitionAllOf) SetInternalPropertiesNil(b bool)`
+
+ SetInternalPropertiesNil sets the value for InternalProperties to be an explicit nil
+
+### UnsetInternalProperties
+`func (o *WorkflowTaskDefinitionAllOf) UnsetInternalProperties()`
+
+UnsetInternalProperties ensures that no value is present for InternalProperties, not even an explicit nil
 ### GetLabel
 
 `func (o *WorkflowTaskDefinitionAllOf) GetLabel() string`
@@ -211,6 +265,51 @@ SetProperties sets Properties field to given value.
 
 HasProperties returns a boolean if a field has been set.
 
+### SetPropertiesNil
+
+`func (o *WorkflowTaskDefinitionAllOf) SetPropertiesNil(b bool)`
+
+ SetPropertiesNil sets the value for Properties to be an explicit nil
+
+### UnsetProperties
+`func (o *WorkflowTaskDefinitionAllOf) UnsetProperties()`
+
+UnsetProperties ensures that no value is present for Properties, not even an explicit nil
+### GetRollbackTasks
+
+`func (o *WorkflowTaskDefinitionAllOf) GetRollbackTasks() []WorkflowRollbackTask`
+
+GetRollbackTasks returns the RollbackTasks field if non-nil, zero value otherwise.
+
+### GetRollbackTasksOk
+
+`func (o *WorkflowTaskDefinitionAllOf) GetRollbackTasksOk() (*[]WorkflowRollbackTask, bool)`
+
+GetRollbackTasksOk returns a tuple with the RollbackTasks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRollbackTasks
+
+`func (o *WorkflowTaskDefinitionAllOf) SetRollbackTasks(v []WorkflowRollbackTask)`
+
+SetRollbackTasks sets RollbackTasks field to given value.
+
+### HasRollbackTasks
+
+`func (o *WorkflowTaskDefinitionAllOf) HasRollbackTasks() bool`
+
+HasRollbackTasks returns a boolean if a field has been set.
+
+### SetRollbackTasksNil
+
+`func (o *WorkflowTaskDefinitionAllOf) SetRollbackTasksNil(b bool)`
+
+ SetRollbackTasksNil sets the value for RollbackTasks to be an explicit nil
+
+### UnsetRollbackTasks
+`func (o *WorkflowTaskDefinitionAllOf) UnsetRollbackTasks()`
+
+UnsetRollbackTasks ensures that no value is present for RollbackTasks, not even an explicit nil
 ### GetSecurePropAccess
 
 `func (o *WorkflowTaskDefinitionAllOf) GetSecurePropAccess() bool`
@@ -345,6 +444,31 @@ SetInterfaceTask sets InterfaceTask field to given value.
 `func (o *WorkflowTaskDefinitionAllOf) HasInterfaceTask() bool`
 
 HasInterfaceTask returns a boolean if a field has been set.
+
+### GetTaskMetadata
+
+`func (o *WorkflowTaskDefinitionAllOf) GetTaskMetadata() WorkflowTaskMetadataRelationship`
+
+GetTaskMetadata returns the TaskMetadata field if non-nil, zero value otherwise.
+
+### GetTaskMetadataOk
+
+`func (o *WorkflowTaskDefinitionAllOf) GetTaskMetadataOk() (*WorkflowTaskMetadataRelationship, bool)`
+
+GetTaskMetadataOk returns a tuple with the TaskMetadata field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaskMetadata
+
+`func (o *WorkflowTaskDefinitionAllOf) SetTaskMetadata(v WorkflowTaskMetadataRelationship)`
+
+SetTaskMetadata sets TaskMetadata field to given value.
+
+### HasTaskMetadata
+
+`func (o *WorkflowTaskDefinitionAllOf) HasTaskMetadata() bool`
+
+HasTaskMetadata returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "capability.SiocModuleManufacturingDef"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "capability.SiocModuleManufacturingDef"]
 **Caption** | Pointer to **string** | Caption for a chassis SIOC module. | [optional] 
 **Description** | Pointer to **string** | Description for a chassis SIOC module. | [optional] 
 **Pid** | Pointer to **string** | Product Identifier for a chassis SIOC module. | [optional] 
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewCapabilitySiocModuleManufacturingDef
 
-`func NewCapabilitySiocModuleManufacturingDef() *CapabilitySiocModuleManufacturingDef`
+`func NewCapabilitySiocModuleManufacturingDef(classId string, objectType string, ) *CapabilitySiocModuleManufacturingDef`
 
 NewCapabilitySiocModuleManufacturingDef instantiates a new CapabilitySiocModuleManufacturingDef object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +31,46 @@ will change when the set of required properties is changed
 NewCapabilitySiocModuleManufacturingDefWithDefaults instantiates a new CapabilitySiocModuleManufacturingDef object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *CapabilitySiocModuleManufacturingDef) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *CapabilitySiocModuleManufacturingDef) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *CapabilitySiocModuleManufacturingDef) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *CapabilitySiocModuleManufacturingDef) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *CapabilitySiocModuleManufacturingDef) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *CapabilitySiocModuleManufacturingDef) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCaption
 

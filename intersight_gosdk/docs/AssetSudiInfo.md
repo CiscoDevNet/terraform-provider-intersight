@@ -4,17 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.SudiInfo"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.SudiInfo"]
 **Pid** | Pointer to **string** | The device model (PID) extracted from the X.509 SUDI Leaf Certificate. | [optional] 
 **SerialNumber** | Pointer to **string** | The device SerialNumber extracted from the X.509 SUDI Leaf Certiicate. | [optional] 
 **Signature** | Pointer to **string** | The signature is obtained by taking the base64 encoding of the Serial Number + PID + Status, taking the SHA256 hash and then signing with the SUDI X.509 Leaf Certifiate. | [optional] 
 **Status** | Pointer to **string** | The validation status of the device. * &#x60;DeviceStatusUnknown&#x60; - SUDI validation is done on the establishment of a connection. Before a device connects or after it disconnects, the SUDI validation status is set to this value. * &#x60;Verified&#x60; - The device returned a valid PID, Serial Number, Status and X.509 Leaf Certificate. The certificate signing chain was validated. * &#x60;CertificateValidationFailed&#x60; - Validation of the certificate signing chain failed. * &#x60;UnsupportedFirmware&#x60; - The firmware version of the Cisco IMC that is installed does not contain the SUDI APIs needed to perform validation. * &#x60;UnsupportedHardware&#x60; - The device is a model that does not contain a Trust Anchor Module (TAM) and thus cannot be validated. * &#x60;DeviceNotResponding&#x60; - An request was sent to the device, but no response was received. | [optional] [default to "DeviceStatusUnknown"]
-**SudiCertificate** | Pointer to [**X509Certificate**](x509.Certificate.md) |  | [optional] 
+**SudiCertificate** | Pointer to [**NullableX509Certificate**](x509.Certificate.md) |  | [optional] 
 
 ## Methods
 
 ### NewAssetSudiInfo
 
-`func NewAssetSudiInfo() *AssetSudiInfo`
+`func NewAssetSudiInfo(classId string, objectType string, ) *AssetSudiInfo`
 
 NewAssetSudiInfo instantiates a new AssetSudiInfo object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +30,46 @@ will change when the set of required properties is changed
 NewAssetSudiInfoWithDefaults instantiates a new AssetSudiInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *AssetSudiInfo) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *AssetSudiInfo) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *AssetSudiInfo) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *AssetSudiInfo) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *AssetSudiInfo) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *AssetSudiInfo) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetPid
 
@@ -154,6 +196,16 @@ SetSudiCertificate sets SudiCertificate field to given value.
 
 HasSudiCertificate returns a boolean if a field has been set.
 
+### SetSudiCertificateNil
+
+`func (o *AssetSudiInfo) SetSudiCertificateNil(b bool)`
+
+ SetSudiCertificateNil sets the value for SudiCertificate to be an explicit nil
+
+### UnsetSudiCertificate
+`func (o *AssetSudiInfo) UnsetSudiCertificate()`
+
+UnsetSudiCertificate ensures that no value is present for SudiCertificate, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

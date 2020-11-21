@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.LdapBaseProperties"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.LdapBaseProperties"]
 **Attribute** | Pointer to **string** | Role and locale information of the user. | [optional] 
 **BaseDn** | Pointer to **string** | Base Distinguished Name (DN). Starting point from where server will search for users and groups. | [optional] 
 **BindDn** | Pointer to **string** | Distinguished Name (DN) of the user, that is used to authenticate against LDAP servers. | [optional] 
@@ -15,14 +17,14 @@ Name | Type | Description | Notes
 **GroupAttribute** | Pointer to **string** | Groups to which an LDAP entry belongs. | [optional] 
 **IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] 
 **NestedGroupSearchDepth** | Pointer to **int64** | Search depth to look for a nested LDAP group in an LDAP group map. | [optional] 
-**Password** | Pointer to **string** | Password of the user, that is used to authenticate. | [optional] 
+**Password** | Pointer to **string** | The password of the user for initial bind process. It can be any string that adheres to the following constraints. It can have character except spaces, tabs, line breaks. It cannot be more than 254 characters. | [optional] 
 **Timeout** | Pointer to **int64** | LDAP authentication timeout duration, in seconds. | [optional] 
 
 ## Methods
 
 ### NewIamLdapBaseProperties
 
-`func NewIamLdapBaseProperties() *IamLdapBaseProperties`
+`func NewIamLdapBaseProperties(classId string, objectType string, ) *IamLdapBaseProperties`
 
 NewIamLdapBaseProperties instantiates a new IamLdapBaseProperties object
 This constructor will assign default values to properties that have it defined,
@@ -36,6 +38,46 @@ will change when the set of required properties is changed
 NewIamLdapBasePropertiesWithDefaults instantiates a new IamLdapBaseProperties object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *IamLdapBaseProperties) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IamLdapBaseProperties) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IamLdapBaseProperties) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IamLdapBaseProperties) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IamLdapBaseProperties) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IamLdapBaseProperties) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAttribute
 

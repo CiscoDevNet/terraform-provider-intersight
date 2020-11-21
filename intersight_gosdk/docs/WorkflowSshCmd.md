@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.SshCmd"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.SshCmd"]
 **Command** | Pointer to **string** | SSH command to execute on the remote server. | [optional] 
 **CommandType** | Pointer to **string** | SSH command type to execute on the remote server. * &#x60;NonInteractiveCmd&#x60; - Execute a non-interactive SSH command on the remote server. * &#x60;InteractiveCmd&#x60; - Execute an interactive SSH command on the remote server. | [optional] [default to "NonInteractiveCmd"]
 **ExpectPrompts** | Pointer to [**[]ConnectorExpectPrompt**](connector.ExpectPrompt.md) |  | [optional] 
@@ -14,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewWorkflowSshCmd
 
-`func NewWorkflowSshCmd() *WorkflowSshCmd`
+`func NewWorkflowSshCmd(classId string, objectType string, ) *WorkflowSshCmd`
 
 NewWorkflowSshCmd instantiates a new WorkflowSshCmd object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +30,46 @@ will change when the set of required properties is changed
 NewWorkflowSshCmdWithDefaults instantiates a new WorkflowSshCmd object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *WorkflowSshCmd) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *WorkflowSshCmd) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *WorkflowSshCmd) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *WorkflowSshCmd) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *WorkflowSshCmd) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *WorkflowSshCmd) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCommand
 
@@ -104,6 +146,16 @@ SetExpectPrompts sets ExpectPrompts field to given value.
 
 HasExpectPrompts returns a boolean if a field has been set.
 
+### SetExpectPromptsNil
+
+`func (o *WorkflowSshCmd) SetExpectPromptsNil(b bool)`
+
+ SetExpectPromptsNil sets the value for ExpectPrompts to be an explicit nil
+
+### UnsetExpectPrompts
+`func (o *WorkflowSshCmd) UnsetExpectPrompts()`
+
+UnsetExpectPrompts ensures that no value is present for ExpectPrompts, not even an explicit nil
 ### GetShellPrompt
 
 `func (o *WorkflowSshCmd) GetShellPrompt() string`

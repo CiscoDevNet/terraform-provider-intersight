@@ -4,7 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ConfigChanges** | Pointer to [**PolicyConfigChange**](policy.ConfigChange.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.SwitchProfile"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.SwitchProfile"]
+**ConfigChanges** | Pointer to [**NullablePolicyConfigChange**](policy.ConfigChange.md) |  | [optional] 
 **AssignedSwitch** | Pointer to [**NetworkElementRelationship**](network.Element.Relationship.md) |  | [optional] 
 **AssociatedSwitch** | Pointer to [**NetworkElementRelationship**](network.Element.Relationship.md) |  | [optional] 
 **ConfigChangeDetails** | Pointer to [**[]FabricConfigChangeDetailRelationship**](fabric.ConfigChangeDetail.Relationship.md) | An array of relationships to fabricConfigChangeDetail resources. | [optional] [readonly] 
@@ -16,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewFabricSwitchProfileAllOf
 
-`func NewFabricSwitchProfileAllOf() *FabricSwitchProfileAllOf`
+`func NewFabricSwitchProfileAllOf(classId string, objectType string, ) *FabricSwitchProfileAllOf`
 
 NewFabricSwitchProfileAllOf instantiates a new FabricSwitchProfileAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +32,46 @@ will change when the set of required properties is changed
 NewFabricSwitchProfileAllOfWithDefaults instantiates a new FabricSwitchProfileAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *FabricSwitchProfileAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *FabricSwitchProfileAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *FabricSwitchProfileAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *FabricSwitchProfileAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *FabricSwitchProfileAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *FabricSwitchProfileAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetConfigChanges
 
@@ -56,6 +98,16 @@ SetConfigChanges sets ConfigChanges field to given value.
 
 HasConfigChanges returns a boolean if a field has been set.
 
+### SetConfigChangesNil
+
+`func (o *FabricSwitchProfileAllOf) SetConfigChangesNil(b bool)`
+
+ SetConfigChangesNil sets the value for ConfigChanges to be an explicit nil
+
+### UnsetConfigChanges
+`func (o *FabricSwitchProfileAllOf) UnsetConfigChanges()`
+
+UnsetConfigChanges ensures that no value is present for ConfigChanges, not even an explicit nil
 ### GetAssignedSwitch
 
 `func (o *FabricSwitchProfileAllOf) GetAssignedSwitch() NetworkElementRelationship`

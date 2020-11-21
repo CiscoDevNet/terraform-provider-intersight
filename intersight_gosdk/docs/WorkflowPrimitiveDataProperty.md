@@ -4,7 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Constraints** | Pointer to [**WorkflowConstraints**](workflow.Constraints.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.PrimitiveDataProperty"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.PrimitiveDataProperty"]
+**Constraints** | Pointer to [**NullableWorkflowConstraints**](workflow.Constraints.md) |  | [optional] 
 **InventorySelector** | Pointer to [**[]WorkflowMoReferenceProperty**](workflow.MoReferenceProperty.md) |  | [optional] 
 **Secure** | Pointer to **bool** | Intersight supports secure properties as task input/output. The values of these properties are encrypted and stored in Intersight. This flag marks the property to be secure when it is set to true. | [optional] 
 **Type** | Pointer to **string** | Specify the enum type for primitive data type. * &#x60;string&#x60; - Enum to specify a string data type. * &#x60;integer&#x60; - Enum to specify an integer32 data type. * &#x60;float&#x60; - Enum to specify a float64 data type. * &#x60;boolean&#x60; - Enum to specify a boolean data type. * &#x60;json&#x60; - Enum to specify a json data type. * &#x60;enum&#x60; - Enum to specify a enum data type which is a list of pre-defined strings. | [optional] [default to "string"]
@@ -13,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewWorkflowPrimitiveDataProperty
 
-`func NewWorkflowPrimitiveDataProperty() *WorkflowPrimitiveDataProperty`
+`func NewWorkflowPrimitiveDataProperty(classId string, objectType string, ) *WorkflowPrimitiveDataProperty`
 
 NewWorkflowPrimitiveDataProperty instantiates a new WorkflowPrimitiveDataProperty object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewWorkflowPrimitiveDataPropertyWithDefaults instantiates a new WorkflowPrimitiveDataProperty object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *WorkflowPrimitiveDataProperty) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *WorkflowPrimitiveDataProperty) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *WorkflowPrimitiveDataProperty) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *WorkflowPrimitiveDataProperty) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *WorkflowPrimitiveDataProperty) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *WorkflowPrimitiveDataProperty) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetConstraints
 
@@ -53,6 +95,16 @@ SetConstraints sets Constraints field to given value.
 
 HasConstraints returns a boolean if a field has been set.
 
+### SetConstraintsNil
+
+`func (o *WorkflowPrimitiveDataProperty) SetConstraintsNil(b bool)`
+
+ SetConstraintsNil sets the value for Constraints to be an explicit nil
+
+### UnsetConstraints
+`func (o *WorkflowPrimitiveDataProperty) UnsetConstraints()`
+
+UnsetConstraints ensures that no value is present for Constraints, not even an explicit nil
 ### GetInventorySelector
 
 `func (o *WorkflowPrimitiveDataProperty) GetInventorySelector() []WorkflowMoReferenceProperty`
@@ -78,6 +130,16 @@ SetInventorySelector sets InventorySelector field to given value.
 
 HasInventorySelector returns a boolean if a field has been set.
 
+### SetInventorySelectorNil
+
+`func (o *WorkflowPrimitiveDataProperty) SetInventorySelectorNil(b bool)`
+
+ SetInventorySelectorNil sets the value for InventorySelector to be an explicit nil
+
+### UnsetInventorySelector
+`func (o *WorkflowPrimitiveDataProperty) UnsetInventorySelector()`
+
+UnsetInventorySelector ensures that no value is present for InventorySelector, not even an explicit nil
 ### GetSecure
 
 `func (o *WorkflowPrimitiveDataProperty) GetSecure() bool`

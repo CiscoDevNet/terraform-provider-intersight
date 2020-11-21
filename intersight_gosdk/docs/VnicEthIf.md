@@ -4,16 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Cdn** | Pointer to [**VnicCdn**](vnic.Cdn.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.EthIf"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.EthIf"]
+**Cdn** | Pointer to [**NullableVnicCdn**](vnic.Cdn.md) |  | [optional] 
 **FailoverEnabled** | Pointer to **bool** | Setting this to true esnures that the traffic failsover from one uplink to another auotmatically in case of an uplink failure. It is applicable for Cisco VIC adapters only which are connected to Fabric Interconnect cluster. The uplink if specified determines the primary uplink in case of a failover. | [optional] 
-**MacAddress** | Pointer to **string** | The MAC address that is assigned to the vnic based on the MAC pool that has been assigned to the LAN Connectivity Policy. | [optional] [readonly] 
+**MacAddress** | Pointer to **string** | The MAC address that is assigned to the vNIC based on the MAC pool that has been assigned to the LAN Connectivity Policy. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name of the virtual ethernet interface. | [optional] 
 **Order** | Pointer to **int64** | The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1385 which has two. | [optional] 
-**Placement** | Pointer to [**VnicPlacementSettings**](vnic.PlacementSettings.md) |  | [optional] 
+**Placement** | Pointer to [**NullableVnicPlacementSettings**](vnic.PlacementSettings.md) |  | [optional] 
 **StandbyVifId** | Pointer to **int64** | The Standby VIF Id is applicable for failover enabled vNICS. It should be the same as the channel number of the standby vethernet created on switch in order to set up the standby data path. | [optional] [readonly] 
-**UsnicSettings** | Pointer to [**VnicUsnicSettings**](vnic.UsnicSettings.md) |  | [optional] 
+**UsnicSettings** | Pointer to [**NullableVnicUsnicSettings**](vnic.UsnicSettings.md) |  | [optional] 
 **VifId** | Pointer to **int64** | The Vif Id should be same as the channel number of the vethernet created on switch in order to set up the data path. The property is applicable only for FI attached servers where a vethernet is created on the switch for every vNIC. | [optional] [readonly] 
-**VmqSettings** | Pointer to [**VnicVmqSettings**](vnic.VmqSettings.md) |  | [optional] 
+**VmqSettings** | Pointer to [**NullableVnicVmqSettings**](vnic.VmqSettings.md) |  | [optional] 
 **EthAdapterPolicy** | Pointer to [**VnicEthAdapterPolicyRelationship**](vnic.EthAdapterPolicy.Relationship.md) |  | [optional] 
 **EthNetworkPolicy** | Pointer to [**VnicEthNetworkPolicyRelationship**](vnic.EthNetworkPolicy.Relationship.md) |  | [optional] 
 **EthQosPolicy** | Pointer to [**VnicEthQosPolicyRelationship**](vnic.EthQosPolicy.Relationship.md) |  | [optional] 
@@ -30,7 +32,7 @@ Name | Type | Description | Notes
 
 ### NewVnicEthIf
 
-`func NewVnicEthIf() *VnicEthIf`
+`func NewVnicEthIf(classId string, objectType string, ) *VnicEthIf`
 
 NewVnicEthIf instantiates a new VnicEthIf object
 This constructor will assign default values to properties that have it defined,
@@ -44,6 +46,46 @@ will change when the set of required properties is changed
 NewVnicEthIfWithDefaults instantiates a new VnicEthIf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *VnicEthIf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *VnicEthIf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *VnicEthIf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *VnicEthIf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *VnicEthIf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *VnicEthIf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCdn
 
@@ -70,6 +112,16 @@ SetCdn sets Cdn field to given value.
 
 HasCdn returns a boolean if a field has been set.
 
+### SetCdnNil
+
+`func (o *VnicEthIf) SetCdnNil(b bool)`
+
+ SetCdnNil sets the value for Cdn to be an explicit nil
+
+### UnsetCdn
+`func (o *VnicEthIf) UnsetCdn()`
+
+UnsetCdn ensures that no value is present for Cdn, not even an explicit nil
 ### GetFailoverEnabled
 
 `func (o *VnicEthIf) GetFailoverEnabled() bool`
@@ -195,6 +247,16 @@ SetPlacement sets Placement field to given value.
 
 HasPlacement returns a boolean if a field has been set.
 
+### SetPlacementNil
+
+`func (o *VnicEthIf) SetPlacementNil(b bool)`
+
+ SetPlacementNil sets the value for Placement to be an explicit nil
+
+### UnsetPlacement
+`func (o *VnicEthIf) UnsetPlacement()`
+
+UnsetPlacement ensures that no value is present for Placement, not even an explicit nil
 ### GetStandbyVifId
 
 `func (o *VnicEthIf) GetStandbyVifId() int64`
@@ -245,6 +307,16 @@ SetUsnicSettings sets UsnicSettings field to given value.
 
 HasUsnicSettings returns a boolean if a field has been set.
 
+### SetUsnicSettingsNil
+
+`func (o *VnicEthIf) SetUsnicSettingsNil(b bool)`
+
+ SetUsnicSettingsNil sets the value for UsnicSettings to be an explicit nil
+
+### UnsetUsnicSettings
+`func (o *VnicEthIf) UnsetUsnicSettings()`
+
+UnsetUsnicSettings ensures that no value is present for UsnicSettings, not even an explicit nil
 ### GetVifId
 
 `func (o *VnicEthIf) GetVifId() int64`
@@ -295,6 +367,16 @@ SetVmqSettings sets VmqSettings field to given value.
 
 HasVmqSettings returns a boolean if a field has been set.
 
+### SetVmqSettingsNil
+
+`func (o *VnicEthIf) SetVmqSettingsNil(b bool)`
+
+ SetVmqSettingsNil sets the value for VmqSettings to be an explicit nil
+
+### UnsetVmqSettings
+`func (o *VnicEthIf) UnsetVmqSettings()`
+
+UnsetVmqSettings ensures that no value is present for VmqSettings, not even an explicit nil
 ### GetEthAdapterPolicy
 
 `func (o *VnicEthIf) GetEthAdapterPolicy() VnicEthAdapterPolicyRelationship`

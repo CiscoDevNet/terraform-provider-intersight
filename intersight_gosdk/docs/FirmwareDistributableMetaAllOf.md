@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.DistributableMeta"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.DistributableMeta"]
 **BucketName** | Pointer to **string** | The S3 bucket name where the images are present, if source is external cloud store. | [optional] 
 **FileType** | Pointer to **string** | The type of distributable image, example huu, scu, driver, os. * &#x60;Distributable&#x60; - Stores firmware host utility images and fabric images. * &#x60;DriverDistributable&#x60; - Stores driver distributable images. * &#x60;ServerConfigurationUtilityDistributable&#x60; - Stores server configuration utility images. * &#x60;OperatingSystemFile&#x60; - Stores operating system iso images. * &#x60;HyperflexDistributable&#x60; - It stores HyperFlex images. | [optional] [default to "Distributable"]
 **FromVersion** | Pointer to **string** | The version from which user can download images from amazon store, if source is external cloud store. | [optional] 
@@ -17,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewFirmwareDistributableMetaAllOf
 
-`func NewFirmwareDistributableMetaAllOf() *FirmwareDistributableMetaAllOf`
+`func NewFirmwareDistributableMetaAllOf(classId string, objectType string, ) *FirmwareDistributableMetaAllOf`
 
 NewFirmwareDistributableMetaAllOf instantiates a new FirmwareDistributableMetaAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -31,6 +33,46 @@ will change when the set of required properties is changed
 NewFirmwareDistributableMetaAllOfWithDefaults instantiates a new FirmwareDistributableMetaAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *FirmwareDistributableMetaAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *FirmwareDistributableMetaAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *FirmwareDistributableMetaAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *FirmwareDistributableMetaAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *FirmwareDistributableMetaAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *FirmwareDistributableMetaAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetBucketName
 
@@ -207,6 +249,16 @@ SetSupportedModels sets SupportedModels field to given value.
 
 HasSupportedModels returns a boolean if a field has been set.
 
+### SetSupportedModelsNil
+
+`func (o *FirmwareDistributableMetaAllOf) SetSupportedModelsNil(b bool)`
+
+ SetSupportedModelsNil sets the value for SupportedModels to be an explicit nil
+
+### UnsetSupportedModels
+`func (o *FirmwareDistributableMetaAllOf) UnsetSupportedModels()`
+
+UnsetSupportedModels ensures that no value is present for SupportedModels, not even an explicit nil
 ### GetToVersion
 
 `func (o *FirmwareDistributableMetaAllOf) GetToVersion() string`

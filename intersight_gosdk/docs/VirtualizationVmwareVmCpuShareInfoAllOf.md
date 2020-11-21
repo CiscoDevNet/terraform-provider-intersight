@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "virtualization.VmwareVmCpuShareInfo"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.VmwareVmCpuShareInfo"]
 **CpuLimit** | Pointer to **int64** | Upper limit on CPU allocation (MHz). | [optional] 
 **CpuOverheadLimit** | Pointer to **int64** | Amount of CPU for virtualization overhead. | [optional] 
 **CpuReservation** | Pointer to **int64** | Guaranteed minimum allocation of CPU resource (MHz). | [optional] 
@@ -13,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewVirtualizationVmwareVmCpuShareInfoAllOf
 
-`func NewVirtualizationVmwareVmCpuShareInfoAllOf() *VirtualizationVmwareVmCpuShareInfoAllOf`
+`func NewVirtualizationVmwareVmCpuShareInfoAllOf(classId string, objectType string, ) *VirtualizationVmwareVmCpuShareInfoAllOf`
 
 NewVirtualizationVmwareVmCpuShareInfoAllOf instantiates a new VirtualizationVmwareVmCpuShareInfoAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewVirtualizationVmwareVmCpuShareInfoAllOfWithDefaults instantiates a new VirtualizationVmwareVmCpuShareInfoAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *VirtualizationVmwareVmCpuShareInfoAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *VirtualizationVmwareVmCpuShareInfoAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *VirtualizationVmwareVmCpuShareInfoAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *VirtualizationVmwareVmCpuShareInfoAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *VirtualizationVmwareVmCpuShareInfoAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *VirtualizationVmwareVmCpuShareInfoAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCpuLimit
 

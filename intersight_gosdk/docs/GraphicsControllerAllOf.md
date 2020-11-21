@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "graphics.Controller"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "graphics.Controller"]
 **ControllerId** | Pointer to **int64** | The id of the graphics controller. | [optional] [readonly] 
 **PciAddr** | Pointer to **string** | The PCI address of the graphics controller. | [optional] [readonly] 
 **PciSlot** | Pointer to **string** | The PCI slot information of the graphics controller. | [optional] [readonly] 
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewGraphicsControllerAllOf
 
-`func NewGraphicsControllerAllOf() *GraphicsControllerAllOf`
+`func NewGraphicsControllerAllOf(classId string, objectType string, ) *GraphicsControllerAllOf`
 
 NewGraphicsControllerAllOf instantiates a new GraphicsControllerAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +31,46 @@ will change when the set of required properties is changed
 NewGraphicsControllerAllOfWithDefaults instantiates a new GraphicsControllerAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *GraphicsControllerAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *GraphicsControllerAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *GraphicsControllerAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *GraphicsControllerAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *GraphicsControllerAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *GraphicsControllerAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetControllerId
 

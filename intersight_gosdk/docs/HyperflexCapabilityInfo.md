@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.CapabilityInfo"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.CapabilityInfo"]
 **CapabilityConstraints** | Pointer to [**[]HclConstraint**](hcl.Constraint.md) |  | [optional] 
 **Name** | Pointer to **string** | Name of the capability or feature set consisting of a collection of constraint rules and value. | [optional] 
 **Value** | Pointer to **string** | Capability Value which is valid only iff all specified constraints match. | [optional] [readonly] 
@@ -13,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewHyperflexCapabilityInfo
 
-`func NewHyperflexCapabilityInfo() *HyperflexCapabilityInfo`
+`func NewHyperflexCapabilityInfo(classId string, objectType string, ) *HyperflexCapabilityInfo`
 
 NewHyperflexCapabilityInfo instantiates a new HyperflexCapabilityInfo object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewHyperflexCapabilityInfoWithDefaults instantiates a new HyperflexCapabilityInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *HyperflexCapabilityInfo) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *HyperflexCapabilityInfo) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *HyperflexCapabilityInfo) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *HyperflexCapabilityInfo) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *HyperflexCapabilityInfo) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *HyperflexCapabilityInfo) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCapabilityConstraints
 
@@ -53,6 +95,16 @@ SetCapabilityConstraints sets CapabilityConstraints field to given value.
 
 HasCapabilityConstraints returns a boolean if a field has been set.
 
+### SetCapabilityConstraintsNil
+
+`func (o *HyperflexCapabilityInfo) SetCapabilityConstraintsNil(b bool)`
+
+ SetCapabilityConstraintsNil sets the value for CapabilityConstraints to be an explicit nil
+
+### UnsetCapabilityConstraints
+`func (o *HyperflexCapabilityInfo) UnsetCapabilityConstraints()`
+
+UnsetCapabilityConstraints ensures that no value is present for CapabilityConstraints, not even an explicit nil
 ### GetName
 
 `func (o *HyperflexCapabilityInfo) GetName() string`

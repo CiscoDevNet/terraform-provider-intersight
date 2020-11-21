@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "tam.Action"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "tam.Action"]
 **AffectedObjectType** | Pointer to **string** | Type of the managed object that should be marked with an instance of the Alert (when operation type is create) or that should have an alert instance removed (when operation type is remove). | [optional] 
 **AlertType** | Pointer to **string** | Alert type is used to denote the category of an Intersight alert (FieldNotice, equipment Fault etc.). * &#x60;psirt&#x60; - Respresents the psirt alert type (https://tools.cisco.com/security/center/publicationListing.x). * &#x60;fieldNotice&#x60; - Respresents the field notice alert type (https://www.cisco.com/c/en/us/support/web/tsd-products-field-notice-summary.html). | [optional] [default to "psirt"]
 **Identifiers** | Pointer to [**[]TamIdentifiers**](tam.Identifiers.md) |  | [optional] 
@@ -16,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewTamAction
 
-`func NewTamAction() *TamAction`
+`func NewTamAction(classId string, objectType string, ) *TamAction`
 
 NewTamAction instantiates a new TamAction object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +32,46 @@ will change when the set of required properties is changed
 NewTamActionWithDefaults instantiates a new TamAction object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *TamAction) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *TamAction) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *TamAction) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *TamAction) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *TamAction) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *TamAction) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAffectedObjectType
 
@@ -106,6 +148,16 @@ SetIdentifiers sets Identifiers field to given value.
 
 HasIdentifiers returns a boolean if a field has been set.
 
+### SetIdentifiersNil
+
+`func (o *TamAction) SetIdentifiersNil(b bool)`
+
+ SetIdentifiersNil sets the value for Identifiers to be an explicit nil
+
+### UnsetIdentifiers
+`func (o *TamAction) UnsetIdentifiers()`
+
+UnsetIdentifiers ensures that no value is present for Identifiers, not even an explicit nil
 ### GetName
 
 `func (o *TamAction) GetName() string`
@@ -181,6 +233,16 @@ SetQueries sets Queries field to given value.
 
 HasQueries returns a boolean if a field has been set.
 
+### SetQueriesNil
+
+`func (o *TamAction) SetQueriesNil(b bool)`
+
+ SetQueriesNil sets the value for Queries to be an explicit nil
+
+### UnsetQueries
+`func (o *TamAction) UnsetQueries()`
+
+UnsetQueries ensures that no value is present for Queries, not even an explicit nil
 ### GetType
 
 `func (o *TamAction) GetType() string`

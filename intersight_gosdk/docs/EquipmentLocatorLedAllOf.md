@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "equipment.LocatorLed"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.LocatorLed"]
 **Color** | Pointer to **string** | Color of the locatorled available on an equipment. | [optional] [readonly] 
 **OperState** | Pointer to **string** | Identifies the operational state of locatorled. | [optional] [readonly] 
 **ComputeBlade** | Pointer to [**ComputeBladeRelationship**](compute.Blade.Relationship.md) |  | [optional] 
@@ -18,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewEquipmentLocatorLedAllOf
 
-`func NewEquipmentLocatorLedAllOf() *EquipmentLocatorLedAllOf`
+`func NewEquipmentLocatorLedAllOf(classId string, objectType string, ) *EquipmentLocatorLedAllOf`
 
 NewEquipmentLocatorLedAllOf instantiates a new EquipmentLocatorLedAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -32,6 +34,46 @@ will change when the set of required properties is changed
 NewEquipmentLocatorLedAllOfWithDefaults instantiates a new EquipmentLocatorLedAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *EquipmentLocatorLedAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *EquipmentLocatorLedAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *EquipmentLocatorLedAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *EquipmentLocatorLedAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *EquipmentLocatorLedAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *EquipmentLocatorLedAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetColor
 

@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "inventory.Request"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "inventory.Request"]
 **Mos** | Pointer to [**[]InventoryInventoryMo**](inventory.InventoryMo.md) |  | [optional] 
 **Device** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
@@ -11,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewInventoryRequest
 
-`func NewInventoryRequest() *InventoryRequest`
+`func NewInventoryRequest(classId string, objectType string, ) *InventoryRequest`
 
 NewInventoryRequest instantiates a new InventoryRequest object
 This constructor will assign default values to properties that have it defined,
@@ -25,6 +27,46 @@ will change when the set of required properties is changed
 NewInventoryRequestWithDefaults instantiates a new InventoryRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *InventoryRequest) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *InventoryRequest) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *InventoryRequest) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *InventoryRequest) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *InventoryRequest) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *InventoryRequest) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetMos
 
@@ -51,6 +93,16 @@ SetMos sets Mos field to given value.
 
 HasMos returns a boolean if a field has been set.
 
+### SetMosNil
+
+`func (o *InventoryRequest) SetMosNil(b bool)`
+
+ SetMosNil sets the value for Mos to be an explicit nil
+
+### UnsetMos
+`func (o *InventoryRequest) UnsetMos()`
+
+UnsetMos ensures that no value is present for Mos, not even an explicit nil
 ### GetDevice
 
 `func (o *InventoryRequest) GetDevice() AssetDeviceRegistrationRelationship`

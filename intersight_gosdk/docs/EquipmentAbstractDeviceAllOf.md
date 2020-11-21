@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **Name** | Pointer to **string** | Administrator defined name for the device. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | Unique identity of the device. | [optional] [readonly] 
 **Version** | Pointer to **string** | Current running software version of the device. | [optional] [readonly] 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewEquipmentAbstractDeviceAllOf
 
-`func NewEquipmentAbstractDeviceAllOf() *EquipmentAbstractDeviceAllOf`
+`func NewEquipmentAbstractDeviceAllOf(classId string, objectType string, ) *EquipmentAbstractDeviceAllOf`
 
 NewEquipmentAbstractDeviceAllOf instantiates a new EquipmentAbstractDeviceAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewEquipmentAbstractDeviceAllOfWithDefaults instantiates a new EquipmentAbstractDeviceAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *EquipmentAbstractDeviceAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *EquipmentAbstractDeviceAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *EquipmentAbstractDeviceAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *EquipmentAbstractDeviceAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *EquipmentAbstractDeviceAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *EquipmentAbstractDeviceAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetName
 

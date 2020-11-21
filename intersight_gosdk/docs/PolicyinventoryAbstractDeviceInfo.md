@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "inventory.DeviceInfo"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "inventory.DeviceInfo"]
 **ConfigState** | Pointer to **string** | Configuration state of server profile config context. | [optional] [readonly] 
 **ControlAction** | Pointer to **string** | Control action of server profile config context. | [optional] [readonly] 
 **ErrorState** | Pointer to **string** | Error state of server profile config context. | [optional] [readonly] 
@@ -16,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewPolicyinventoryAbstractDeviceInfo
 
-`func NewPolicyinventoryAbstractDeviceInfo() *PolicyinventoryAbstractDeviceInfo`
+`func NewPolicyinventoryAbstractDeviceInfo(classId string, objectType string, ) *PolicyinventoryAbstractDeviceInfo`
 
 NewPolicyinventoryAbstractDeviceInfo instantiates a new PolicyinventoryAbstractDeviceInfo object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +32,46 @@ will change when the set of required properties is changed
 NewPolicyinventoryAbstractDeviceInfoWithDefaults instantiates a new PolicyinventoryAbstractDeviceInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *PolicyinventoryAbstractDeviceInfo) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *PolicyinventoryAbstractDeviceInfo) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *PolicyinventoryAbstractDeviceInfo) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *PolicyinventoryAbstractDeviceInfo) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *PolicyinventoryAbstractDeviceInfo) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *PolicyinventoryAbstractDeviceInfo) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetConfigState
 
@@ -131,6 +173,16 @@ SetJobInfo sets JobInfo field to given value.
 
 HasJobInfo returns a boolean if a field has been set.
 
+### SetJobInfoNil
+
+`func (o *PolicyinventoryAbstractDeviceInfo) SetJobInfoNil(b bool)`
+
+ SetJobInfoNil sets the value for JobInfo to be an explicit nil
+
+### UnsetJobInfo
+`func (o *PolicyinventoryAbstractDeviceInfo) UnsetJobInfo()`
+
+UnsetJobInfo ensures that no value is present for JobInfo, not even an explicit nil
 ### GetOperState
 
 `func (o *PolicyinventoryAbstractDeviceInfo) GetOperState() string`

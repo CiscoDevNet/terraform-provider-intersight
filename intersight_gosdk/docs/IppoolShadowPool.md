@@ -4,21 +4,25 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**IpV4Blocks** | Pointer to [**[]IppoolIpBlock**](ippool.IpBlock.md) |  | [optional] 
-**IpV4Config** | Pointer to [**IppoolIpV4Config**](ippool.IpV4Config.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "ippool.ShadowPool"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "ippool.ShadowPool"]
+**IpV4Blocks** | Pointer to [**[]IppoolIpV4Block**](ippool.IpV4Block.md) |  | [optional] 
+**IpV4Config** | Pointer to [**NullableIppoolIpV4Config**](ippool.IpV4Config.md) |  | [optional] 
+**IpV6Blocks** | Pointer to [**[]IppoolIpV6Block**](ippool.IpV6Block.md) |  | [optional] 
+**IpV6Config** | Pointer to [**NullableIppoolIpV6Config**](ippool.IpV6Config.md) |  | [optional] 
 **V4Assigned** | Pointer to **int64** | Number of IPv4 addresses currently in use. | [optional] [readonly] 
 **V4Size** | Pointer to **int64** | Number of IPv4 addresses in this pool. | [optional] [readonly] 
 **V6Assigned** | Pointer to **int64** | Number of IPv6 addresses currently in use. | [optional] [readonly] 
 **V6Size** | Pointer to **int64** | Number of IPv6 addresses in this pool. | [optional] [readonly] 
+**IpBlockHeads** | Pointer to [**[]IppoolShadowBlockRelationship**](ippool.ShadowBlock.Relationship.md) | An array of relationships to ippoolShadowBlock resources. | [optional] [readonly] 
 **Pool** | Pointer to [**IppoolPoolRelationship**](ippool.Pool.Relationship.md) |  | [optional] 
-**V4BlockHeads** | Pointer to [**[]IppoolShadowBlockRelationship**](ippool.ShadowBlock.Relationship.md) | An array of relationships to ippoolShadowBlock resources. | [optional] [readonly] 
 **Vrf** | Pointer to [**VrfVrfRelationship**](vrf.Vrf.Relationship.md) |  | [optional] 
 
 ## Methods
 
 ### NewIppoolShadowPool
 
-`func NewIppoolShadowPool() *IppoolShadowPool`
+`func NewIppoolShadowPool(classId string, objectType string, ) *IppoolShadowPool`
 
 NewIppoolShadowPool instantiates a new IppoolShadowPool object
 This constructor will assign default values to properties that have it defined,
@@ -33,22 +37,62 @@ NewIppoolShadowPoolWithDefaults instantiates a new IppoolShadowPool object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetClassId
+
+`func (o *IppoolShadowPool) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IppoolShadowPool) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IppoolShadowPool) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IppoolShadowPool) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IppoolShadowPool) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IppoolShadowPool) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
+
 ### GetIpV4Blocks
 
-`func (o *IppoolShadowPool) GetIpV4Blocks() []IppoolIpBlock`
+`func (o *IppoolShadowPool) GetIpV4Blocks() []IppoolIpV4Block`
 
 GetIpV4Blocks returns the IpV4Blocks field if non-nil, zero value otherwise.
 
 ### GetIpV4BlocksOk
 
-`func (o *IppoolShadowPool) GetIpV4BlocksOk() (*[]IppoolIpBlock, bool)`
+`func (o *IppoolShadowPool) GetIpV4BlocksOk() (*[]IppoolIpV4Block, bool)`
 
 GetIpV4BlocksOk returns a tuple with the IpV4Blocks field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIpV4Blocks
 
-`func (o *IppoolShadowPool) SetIpV4Blocks(v []IppoolIpBlock)`
+`func (o *IppoolShadowPool) SetIpV4Blocks(v []IppoolIpV4Block)`
 
 SetIpV4Blocks sets IpV4Blocks field to given value.
 
@@ -58,6 +102,16 @@ SetIpV4Blocks sets IpV4Blocks field to given value.
 
 HasIpV4Blocks returns a boolean if a field has been set.
 
+### SetIpV4BlocksNil
+
+`func (o *IppoolShadowPool) SetIpV4BlocksNil(b bool)`
+
+ SetIpV4BlocksNil sets the value for IpV4Blocks to be an explicit nil
+
+### UnsetIpV4Blocks
+`func (o *IppoolShadowPool) UnsetIpV4Blocks()`
+
+UnsetIpV4Blocks ensures that no value is present for IpV4Blocks, not even an explicit nil
 ### GetIpV4Config
 
 `func (o *IppoolShadowPool) GetIpV4Config() IppoolIpV4Config`
@@ -83,6 +137,86 @@ SetIpV4Config sets IpV4Config field to given value.
 
 HasIpV4Config returns a boolean if a field has been set.
 
+### SetIpV4ConfigNil
+
+`func (o *IppoolShadowPool) SetIpV4ConfigNil(b bool)`
+
+ SetIpV4ConfigNil sets the value for IpV4Config to be an explicit nil
+
+### UnsetIpV4Config
+`func (o *IppoolShadowPool) UnsetIpV4Config()`
+
+UnsetIpV4Config ensures that no value is present for IpV4Config, not even an explicit nil
+### GetIpV6Blocks
+
+`func (o *IppoolShadowPool) GetIpV6Blocks() []IppoolIpV6Block`
+
+GetIpV6Blocks returns the IpV6Blocks field if non-nil, zero value otherwise.
+
+### GetIpV6BlocksOk
+
+`func (o *IppoolShadowPool) GetIpV6BlocksOk() (*[]IppoolIpV6Block, bool)`
+
+GetIpV6BlocksOk returns a tuple with the IpV6Blocks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpV6Blocks
+
+`func (o *IppoolShadowPool) SetIpV6Blocks(v []IppoolIpV6Block)`
+
+SetIpV6Blocks sets IpV6Blocks field to given value.
+
+### HasIpV6Blocks
+
+`func (o *IppoolShadowPool) HasIpV6Blocks() bool`
+
+HasIpV6Blocks returns a boolean if a field has been set.
+
+### SetIpV6BlocksNil
+
+`func (o *IppoolShadowPool) SetIpV6BlocksNil(b bool)`
+
+ SetIpV6BlocksNil sets the value for IpV6Blocks to be an explicit nil
+
+### UnsetIpV6Blocks
+`func (o *IppoolShadowPool) UnsetIpV6Blocks()`
+
+UnsetIpV6Blocks ensures that no value is present for IpV6Blocks, not even an explicit nil
+### GetIpV6Config
+
+`func (o *IppoolShadowPool) GetIpV6Config() IppoolIpV6Config`
+
+GetIpV6Config returns the IpV6Config field if non-nil, zero value otherwise.
+
+### GetIpV6ConfigOk
+
+`func (o *IppoolShadowPool) GetIpV6ConfigOk() (*IppoolIpV6Config, bool)`
+
+GetIpV6ConfigOk returns a tuple with the IpV6Config field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpV6Config
+
+`func (o *IppoolShadowPool) SetIpV6Config(v IppoolIpV6Config)`
+
+SetIpV6Config sets IpV6Config field to given value.
+
+### HasIpV6Config
+
+`func (o *IppoolShadowPool) HasIpV6Config() bool`
+
+HasIpV6Config returns a boolean if a field has been set.
+
+### SetIpV6ConfigNil
+
+`func (o *IppoolShadowPool) SetIpV6ConfigNil(b bool)`
+
+ SetIpV6ConfigNil sets the value for IpV6Config to be an explicit nil
+
+### UnsetIpV6Config
+`func (o *IppoolShadowPool) UnsetIpV6Config()`
+
+UnsetIpV6Config ensures that no value is present for IpV6Config, not even an explicit nil
 ### GetV4Assigned
 
 `func (o *IppoolShadowPool) GetV4Assigned() int64`
@@ -183,6 +317,41 @@ SetV6Size sets V6Size field to given value.
 
 HasV6Size returns a boolean if a field has been set.
 
+### GetIpBlockHeads
+
+`func (o *IppoolShadowPool) GetIpBlockHeads() []IppoolShadowBlockRelationship`
+
+GetIpBlockHeads returns the IpBlockHeads field if non-nil, zero value otherwise.
+
+### GetIpBlockHeadsOk
+
+`func (o *IppoolShadowPool) GetIpBlockHeadsOk() (*[]IppoolShadowBlockRelationship, bool)`
+
+GetIpBlockHeadsOk returns a tuple with the IpBlockHeads field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpBlockHeads
+
+`func (o *IppoolShadowPool) SetIpBlockHeads(v []IppoolShadowBlockRelationship)`
+
+SetIpBlockHeads sets IpBlockHeads field to given value.
+
+### HasIpBlockHeads
+
+`func (o *IppoolShadowPool) HasIpBlockHeads() bool`
+
+HasIpBlockHeads returns a boolean if a field has been set.
+
+### SetIpBlockHeadsNil
+
+`func (o *IppoolShadowPool) SetIpBlockHeadsNil(b bool)`
+
+ SetIpBlockHeadsNil sets the value for IpBlockHeads to be an explicit nil
+
+### UnsetIpBlockHeads
+`func (o *IppoolShadowPool) UnsetIpBlockHeads()`
+
+UnsetIpBlockHeads ensures that no value is present for IpBlockHeads, not even an explicit nil
 ### GetPool
 
 `func (o *IppoolShadowPool) GetPool() IppoolPoolRelationship`
@@ -208,41 +377,6 @@ SetPool sets Pool field to given value.
 
 HasPool returns a boolean if a field has been set.
 
-### GetV4BlockHeads
-
-`func (o *IppoolShadowPool) GetV4BlockHeads() []IppoolShadowBlockRelationship`
-
-GetV4BlockHeads returns the V4BlockHeads field if non-nil, zero value otherwise.
-
-### GetV4BlockHeadsOk
-
-`func (o *IppoolShadowPool) GetV4BlockHeadsOk() (*[]IppoolShadowBlockRelationship, bool)`
-
-GetV4BlockHeadsOk returns a tuple with the V4BlockHeads field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetV4BlockHeads
-
-`func (o *IppoolShadowPool) SetV4BlockHeads(v []IppoolShadowBlockRelationship)`
-
-SetV4BlockHeads sets V4BlockHeads field to given value.
-
-### HasV4BlockHeads
-
-`func (o *IppoolShadowPool) HasV4BlockHeads() bool`
-
-HasV4BlockHeads returns a boolean if a field has been set.
-
-### SetV4BlockHeadsNil
-
-`func (o *IppoolShadowPool) SetV4BlockHeadsNil(b bool)`
-
- SetV4BlockHeadsNil sets the value for V4BlockHeads to be an explicit nil
-
-### UnsetV4BlockHeads
-`func (o *IppoolShadowPool) UnsetV4BlockHeads()`
-
-UnsetV4BlockHeads ensures that no value is present for V4BlockHeads, not even an explicit nil
 ### GetVrf
 
 `func (o *IppoolShadowPool) GetVrf() VrfVrfRelationship`

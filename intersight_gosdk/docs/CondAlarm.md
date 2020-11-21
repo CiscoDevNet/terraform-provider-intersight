@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "cond.Alarm"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "cond.Alarm"]
 **Acknowledge** | Pointer to **string** | Alarm acknowledgment state. Default value is None. * &#x60;None&#x60; - The Enum value None represents that the alarm is not acknowledged and is included as part of health status and overall alarm count. * &#x60;Acknowledge&#x60; - The Enum value Acknowledge represents that the alarm is acknowledged by user. The alarm will be ignored from the health status and overall alarm count. | [optional] [default to "None"]
 **AcknowledgeBy** | Pointer to **string** | User who acknowledged the alarm. | [optional] [readonly] 
 **AcknowledgeTime** | Pointer to [**time.Time**](time.Time.md) | Time at which the alarm was acknowledged by the user. | [optional] [readonly] 
@@ -20,13 +22,14 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Uniquely identifies the type of alarm. For alarms originating from Intersight, this will be a descriptive name. For alarms that are mapped from faults, the name will be derived from fault properties. For example, alarms mapped from UCS faults will use a prefix of UCS and appended with the fault code. | [optional] [readonly] 
 **OrigSeverity** | Pointer to **string** | The original severity when the alarm was first created. * &#x60;None&#x60; - The Enum value None represents that there is no severity. * &#x60;Info&#x60; - The Enum value Info represents the Informational level of severity. * &#x60;Critical&#x60; - The Enum value Critical represents the Critical level of severity. * &#x60;Warning&#x60; - The Enum value Warning represents the Warning level of severity. * &#x60;Cleared&#x60; - The Enum value Cleared represents that the alarm severity has been cleared. | [optional] [readonly] [default to "None"]
 **Severity** | Pointer to **string** | The severity of the alarm. Valid values are Critical, Warning, Info, and Cleared. * &#x60;None&#x60; - The Enum value None represents that there is no severity. * &#x60;Info&#x60; - The Enum value Info represents the Informational level of severity. * &#x60;Critical&#x60; - The Enum value Critical represents the Critical level of severity. * &#x60;Warning&#x60; - The Enum value Warning represents the Warning level of severity. * &#x60;Cleared&#x60; - The Enum value Cleared represents that the alarm severity has been cleared. | [optional] [readonly] [default to "None"]
+**AffectedMo** | Pointer to [**MoBaseMoRelationship**](mo.BaseMo.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
 ## Methods
 
 ### NewCondAlarm
 
-`func NewCondAlarm() *CondAlarm`
+`func NewCondAlarm(classId string, objectType string, ) *CondAlarm`
 
 NewCondAlarm instantiates a new CondAlarm object
 This constructor will assign default values to properties that have it defined,
@@ -40,6 +43,46 @@ will change when the set of required properties is changed
 NewCondAlarmWithDefaults instantiates a new CondAlarm object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *CondAlarm) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *CondAlarm) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *CondAlarm) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *CondAlarm) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *CondAlarm) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *CondAlarm) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAcknowledge
 
@@ -440,6 +483,31 @@ SetSeverity sets Severity field to given value.
 `func (o *CondAlarm) HasSeverity() bool`
 
 HasSeverity returns a boolean if a field has been set.
+
+### GetAffectedMo
+
+`func (o *CondAlarm) GetAffectedMo() MoBaseMoRelationship`
+
+GetAffectedMo returns the AffectedMo field if non-nil, zero value otherwise.
+
+### GetAffectedMoOk
+
+`func (o *CondAlarm) GetAffectedMoOk() (*MoBaseMoRelationship, bool)`
+
+GetAffectedMoOk returns a tuple with the AffectedMo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAffectedMo
+
+`func (o *CondAlarm) SetAffectedMo(v MoBaseMoRelationship)`
+
+SetAffectedMo sets AffectedMo field to given value.
+
+### HasAffectedMo
+
+`func (o *CondAlarm) HasAffectedMo() bool`
+
+HasAffectedMo returns a boolean if a field has been set.
 
 ### GetRegisteredDevice
 

@@ -39,14 +39,33 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"callhome_smart_group_count": {
+				Description: "Number of call home smart monitoring policies on the fabric.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"class_id": {
-				Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
 			},
 			"cloud_sec_peer_count": {
 				Description: "Number of Cloudsec SA peers.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"comp_hv_count": {
+				Description: "Number of compute hypervisors on the fabric.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"config_exportp_count": {
+				Description: "Number of system backup configure export policies on the fabric.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"config_job_count": {
+				Description: "Number of system backup configure jobs on the fanric.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -75,6 +94,11 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"fabric_setupp_count": {
+				Description: "Number of Multi-Pods per fabric.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"fcoe_nport_count": {
 				Description: "Total number of FCoE N-Port for DOM, VSAn, and VLAN.",
 				Type:        schema.TypeInt,
@@ -92,6 +116,11 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 			},
 			"fcoe_nport_vsan_count": {
 				Description: "Number of FCoE N-Port VSAN.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"fv_sla_def_count": {
+				Description: "Number of Internet Protocol Service Level Agreements Monitoring policy objects for object tracking.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -146,7 +175,7 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 				Optional:    true,
 			},
 			"microsoft_useg_vmm_ep_pd_count": {
-				Description: "Microsoft microsegmentation VmmEpPD scale. Ensures that Microsoft was configured.",
+				Description: "Number of Microsoft microsegmentation VmmEpPD objects. Ensures that Microsoft was configured.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -167,7 +196,7 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified type of this managed object, i.e. the class name.\nThis property is optional. The ObjectType is implied from the URL path.\nIf specified, the value of objectType must match the class name specified in the URL path.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -193,13 +222,33 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 				Optional:    true,
 			},
 			"port_security_count": {
-				Description: "Port Security count scale. Non-Zero value indicates the object as enabled.",
+				Description: "Number of objects with Port Security enabled. Non-Zero value indicates the object as enabled.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"qin_vni_tunnel_count": {
 				Description: "QinVniTunnel feature usage. This determines if the qinVniTunnel feature is being used on the fabric and the scale of it.",
 				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"qos_cong_count": {
+				Description: "Number of Quality Of Service congestion class.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"qos_pfc_pol_count": {
+				Description: "Number of Quality Of Service class.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"record_type": {
+				Description: "Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"record_version": {
+				Description: "Version of record being pushed. This determines what was the API version for data available from the device.",
+				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"registered_device": {
@@ -216,10 +265,9 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -228,7 +276,7 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -272,6 +320,11 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"snmp_group_count": {
+				Description: "Number of SNMP monitoring policies on the fabric.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"span_count": {
 				Description: "Number of Span Sources and Destinations.",
 				Type:        schema.TypeInt,
@@ -297,8 +350,18 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
+			"syslog_group_count": {
+				Description: "Number of syslog monitoring policies on the fabric.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 			"syslog_over_v6_count": {
 				Description: "Syslog over IPv6 feature usage. This determines the total number of IPv6 configurtaions in the fabric.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"tacacs_group_count": {
+				Description: "Number of tacacs monitoring policies on the fabric.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -346,27 +409,27 @@ func dataSourceNiatelemetryNiaFeatureUsage() *schema.Resource {
 				Optional:    true,
 			},
 			"vm_ware_vds_count": {
-				Description: "VmWare vCenter 6.5 support count scale. Checks the controller revision value.",
+				Description: "Number of objects with VmWare vCenter 6.5 support. Checks the controller revision value.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"vmm_ctrlrp_count": {
-				Description: "Gets the scale for Virtual Machine Monitor controller policy for VMware vCenter.",
+				Description: "Number of Virtual Machine Monitor controller policy objects for VMware vCenter.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"vmm_domp_count": {
-				Description: "Obtains the scale for Virtual Machine Monitor domain policy model for VMware vCenter.",
+				Description: "Number of Virtual Machine Monitor domain policy model objects for VMware vCenter.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"vmm_ep_pd_count": {
-				Description: "Microsegmentation Distributed Virtual Switch feature usage. Gets the scale for VMware vCenter.",
+				Description: "Microsegmentation Distributed Virtual Switch feature usage. Gets the number of objects associated to VMware vCenter.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"vnsm_dev_count": {
-				Description: "L4-L7 Device Package Import count scale. Checks for the vendor and the model.",
+				Description: "Number of objects with L4-L7 Device Package Import enabled. Checks for the vendor and the model.",
 				Type:        schema.TypeInt,
 				Optional:    true,
 			},
@@ -383,7 +446,7 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(d *schema.ResourceData, meta inte
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-	var o = models.NewNiatelemetryNiaFeatureUsageWithDefaults()
+	var o = &models.NiatelemetryNiaFeatureUsage{}
 	if v, ok := d.GetOk("apic_count"); ok {
 		x := int64(v.(int))
 		o.SetApicCount(x)
@@ -400,6 +463,10 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(d *schema.ResourceData, meta inte
 		x := int64(v.(int))
 		o.SetBdCount(x)
 	}
+	if v, ok := d.GetOk("callhome_smart_group_count"); ok {
+		x := int64(v.(int))
+		o.SetCallhomeSmartGroupCount(x)
+	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -407,6 +474,18 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(d *schema.ResourceData, meta inte
 	if v, ok := d.GetOk("cloud_sec_peer_count"); ok {
 		x := int64(v.(int))
 		o.SetCloudSecPeerCount(x)
+	}
+	if v, ok := d.GetOk("comp_hv_count"); ok {
+		x := int64(v.(int))
+		o.SetCompHvCount(x)
+	}
+	if v, ok := d.GetOk("config_exportp_count"); ok {
+		x := int64(v.(int))
+		o.SetConfigExportpCount(x)
+	}
+	if v, ok := d.GetOk("config_job_count"); ok {
+		x := int64(v.(int))
+		o.SetConfigJobCount(x)
 	}
 	if v, ok := d.GetOk("consistency_checker_app"); ok {
 		x := (v.(string))
@@ -428,6 +507,10 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(d *schema.ResourceData, meta inte
 		x := int64(v.(int))
 		o.SetEpgCount(x)
 	}
+	if v, ok := d.GetOk("fabric_setupp_count"); ok {
+		x := int64(v.(int))
+		o.SetFabricSetuppCount(x)
+	}
 	if v, ok := d.GetOk("fcoe_nport_count"); ok {
 		x := int64(v.(int))
 		o.SetFcoeNportCount(x)
@@ -443,6 +526,10 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(d *schema.ResourceData, meta inte
 	if v, ok := d.GetOk("fcoe_nport_vsan_count"); ok {
 		x := int64(v.(int))
 		o.SetFcoeNportVsanCount(x)
+	}
+	if v, ok := d.GetOk("fv_sla_def_count"); ok {
+		x := int64(v.(int))
+		o.SetFvSlaDefCount(x)
 	}
 	if v, ok := d.GetOk("hsrp_count"); ok {
 		x := int64(v.(int))
@@ -528,6 +615,22 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(d *schema.ResourceData, meta inte
 		x := int64(v.(int))
 		o.SetQinVniTunnelCount(x)
 	}
+	if v, ok := d.GetOk("qos_cong_count"); ok {
+		x := int64(v.(int))
+		o.SetQosCongCount(x)
+	}
+	if v, ok := d.GetOk("qos_pfc_pol_count"); ok {
+		x := int64(v.(int))
+		o.SetQosPfcPolCount(x)
+	}
+	if v, ok := d.GetOk("record_type"); ok {
+		x := (v.(string))
+		o.SetRecordType(x)
+	}
+	if v, ok := d.GetOk("record_version"); ok {
+		x := (v.(string))
+		o.SetRecordVersion(x)
+	}
 	if v, ok := d.GetOk("remote_leaf_count"); ok {
 		x := int64(v.(int))
 		o.SetRemoteLeafCount(x)
@@ -552,6 +655,10 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(d *schema.ResourceData, meta inte
 		x := (v.(string))
 		o.SetSnmp(x)
 	}
+	if v, ok := d.GetOk("snmp_group_count"); ok {
+		x := int64(v.(int))
+		o.SetSnmpGroupCount(x)
+	}
 	if v, ok := d.GetOk("span_count"); ok {
 		x := int64(v.(int))
 		o.SetSpanCount(x)
@@ -572,9 +679,17 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(d *schema.ResourceData, meta inte
 		x := int64(v.(int))
 		o.SetSshOverV6Count(x)
 	}
+	if v, ok := d.GetOk("syslog_group_count"); ok {
+		x := int64(v.(int))
+		o.SetSyslogGroupCount(x)
+	}
 	if v, ok := d.GetOk("syslog_over_v6_count"); ok {
 		x := int64(v.(int))
 		o.SetSyslogOverV6Count(x)
+	}
+	if v, ok := d.GetOk("tacacs_group_count"); ok {
+		x := int64(v.(int))
+		o.SetTacacsGroupCount(x)
 	}
 	if v, ok := d.GetOk("tenant_count"); ok {
 		x := int64(v.(int))
@@ -643,7 +758,7 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(d *schema.ResourceData, meta inte
 	case reflect.Slice:
 		r := reflect.ValueOf(result)
 		for i := 0; i < r.Len(); i++ {
-			var s = models.NewNiatelemetryNiaFeatureUsageWithDefaults()
+			var s = &models.NiatelemetryNiaFeatureUsage{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
 				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
@@ -663,11 +778,23 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(d *schema.ResourceData, meta inte
 			if err := d.Set("bd_count", (s.GetBdCount())); err != nil {
 				return fmt.Errorf("error occurred while setting property BdCount: %+v", err)
 			}
+			if err := d.Set("callhome_smart_group_count", (s.GetCallhomeSmartGroupCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property CallhomeSmartGroupCount: %+v", err)
+			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
 				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
 			}
 			if err := d.Set("cloud_sec_peer_count", (s.GetCloudSecPeerCount())); err != nil {
 				return fmt.Errorf("error occurred while setting property CloudSecPeerCount: %+v", err)
+			}
+			if err := d.Set("comp_hv_count", (s.GetCompHvCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property CompHvCount: %+v", err)
+			}
+			if err := d.Set("config_exportp_count", (s.GetConfigExportpCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property ConfigExportpCount: %+v", err)
+			}
+			if err := d.Set("config_job_count", (s.GetConfigJobCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property ConfigJobCount: %+v", err)
 			}
 			if err := d.Set("consistency_checker_app", (s.GetConsistencyCheckerApp())); err != nil {
 				return fmt.Errorf("error occurred while setting property ConsistencyCheckerApp: %+v", err)
@@ -684,6 +811,9 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(d *schema.ResourceData, meta inte
 			if err := d.Set("epg_count", (s.GetEpgCount())); err != nil {
 				return fmt.Errorf("error occurred while setting property EpgCount: %+v", err)
 			}
+			if err := d.Set("fabric_setupp_count", (s.GetFabricSetuppCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property FabricSetuppCount: %+v", err)
+			}
 			if err := d.Set("fcoe_nport_count", (s.GetFcoeNportCount())); err != nil {
 				return fmt.Errorf("error occurred while setting property FcoeNportCount: %+v", err)
 			}
@@ -695,6 +825,9 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(d *schema.ResourceData, meta inte
 			}
 			if err := d.Set("fcoe_nport_vsan_count", (s.GetFcoeNportVsanCount())); err != nil {
 				return fmt.Errorf("error occurred while setting property FcoeNportVsanCount: %+v", err)
+			}
+			if err := d.Set("fv_sla_def_count", (s.GetFvSlaDefCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property FvSlaDefCount: %+v", err)
 			}
 			if err := d.Set("hsrp_count", (s.GetHsrpCount())); err != nil {
 				return fmt.Errorf("error occurred while setting property HsrpCount: %+v", err)
@@ -759,6 +892,18 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(d *schema.ResourceData, meta inte
 			if err := d.Set("qin_vni_tunnel_count", (s.GetQinVniTunnelCount())); err != nil {
 				return fmt.Errorf("error occurred while setting property QinVniTunnelCount: %+v", err)
 			}
+			if err := d.Set("qos_cong_count", (s.GetQosCongCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property QosCongCount: %+v", err)
+			}
+			if err := d.Set("qos_pfc_pol_count", (s.GetQosPfcPolCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property QosPfcPolCount: %+v", err)
+			}
+			if err := d.Set("record_type", (s.GetRecordType())); err != nil {
+				return fmt.Errorf("error occurred while setting property RecordType: %+v", err)
+			}
+			if err := d.Set("record_version", (s.GetRecordVersion())); err != nil {
+				return fmt.Errorf("error occurred while setting property RecordVersion: %+v", err)
+			}
 
 			if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
 				return fmt.Errorf("error occurred while setting property RegisteredDevice: %+v", err)
@@ -781,6 +926,9 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(d *schema.ResourceData, meta inte
 			if err := d.Set("snmp", (s.GetSnmp())); err != nil {
 				return fmt.Errorf("error occurred while setting property Snmp: %+v", err)
 			}
+			if err := d.Set("snmp_group_count", (s.GetSnmpGroupCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property SnmpGroupCount: %+v", err)
+			}
 			if err := d.Set("span_count", (s.GetSpanCount())); err != nil {
 				return fmt.Errorf("error occurred while setting property SpanCount: %+v", err)
 			}
@@ -796,8 +944,14 @@ func dataSourceNiatelemetryNiaFeatureUsageRead(d *schema.ResourceData, meta inte
 			if err := d.Set("ssh_over_v6_count", (s.GetSshOverV6Count())); err != nil {
 				return fmt.Errorf("error occurred while setting property SshOverV6Count: %+v", err)
 			}
+			if err := d.Set("syslog_group_count", (s.GetSyslogGroupCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property SyslogGroupCount: %+v", err)
+			}
 			if err := d.Set("syslog_over_v6_count", (s.GetSyslogOverV6Count())); err != nil {
 				return fmt.Errorf("error occurred while setting property SyslogOverV6Count: %+v", err)
+			}
+			if err := d.Set("tacacs_group_count", (s.GetTacacsGroupCount())); err != nil {
+				return fmt.Errorf("error occurred while setting property TacacsGroupCount: %+v", err)
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {

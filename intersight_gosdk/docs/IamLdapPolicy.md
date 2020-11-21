@@ -4,8 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BaseProperties** | Pointer to [**IamLdapBaseProperties**](iam.LdapBaseProperties.md) |  | [optional] 
-**DnsParameters** | Pointer to [**IamLdapDnsParameters**](iam.LdapDnsParameters.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.LdapPolicy"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.LdapPolicy"]
+**BaseProperties** | Pointer to [**NullableIamLdapBaseProperties**](iam.LdapBaseProperties.md) |  | [optional] 
+**DnsParameters** | Pointer to [**NullableIamLdapDnsParameters**](iam.LdapDnsParameters.md) |  | [optional] 
 **EnableDns** | Pointer to **bool** | Enables DNS to access LDAP servers. | [optional] 
 **Enabled** | Pointer to **bool** | LDAP server performs authentication. | [optional] 
 **UserSearchPrecedence** | Pointer to **string** | Search precedence between local user database and LDAP user database. * &#x60;LocalUserDb&#x60; - Precedence is given to local user database while searching. * &#x60;LDAPUserDb&#x60; - Precedence is given to LADP user database while searching. | [optional] [default to "LocalUserDb"]
@@ -20,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewIamLdapPolicy
 
-`func NewIamLdapPolicy() *IamLdapPolicy`
+`func NewIamLdapPolicy(classId string, objectType string, ) *IamLdapPolicy`
 
 NewIamLdapPolicy instantiates a new IamLdapPolicy object
 This constructor will assign default values to properties that have it defined,
@@ -34,6 +36,46 @@ will change when the set of required properties is changed
 NewIamLdapPolicyWithDefaults instantiates a new IamLdapPolicy object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *IamLdapPolicy) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IamLdapPolicy) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IamLdapPolicy) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IamLdapPolicy) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IamLdapPolicy) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IamLdapPolicy) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetBaseProperties
 
@@ -60,6 +102,16 @@ SetBaseProperties sets BaseProperties field to given value.
 
 HasBaseProperties returns a boolean if a field has been set.
 
+### SetBasePropertiesNil
+
+`func (o *IamLdapPolicy) SetBasePropertiesNil(b bool)`
+
+ SetBasePropertiesNil sets the value for BaseProperties to be an explicit nil
+
+### UnsetBaseProperties
+`func (o *IamLdapPolicy) UnsetBaseProperties()`
+
+UnsetBaseProperties ensures that no value is present for BaseProperties, not even an explicit nil
 ### GetDnsParameters
 
 `func (o *IamLdapPolicy) GetDnsParameters() IamLdapDnsParameters`
@@ -85,6 +137,16 @@ SetDnsParameters sets DnsParameters field to given value.
 
 HasDnsParameters returns a boolean if a field has been set.
 
+### SetDnsParametersNil
+
+`func (o *IamLdapPolicy) SetDnsParametersNil(b bool)`
+
+ SetDnsParametersNil sets the value for DnsParameters to be an explicit nil
+
+### UnsetDnsParameters
+`func (o *IamLdapPolicy) UnsetDnsParameters()`
+
+UnsetDnsParameters ensures that no value is present for DnsParameters, not even an explicit nil
 ### GetEnableDns
 
 `func (o *IamLdapPolicy) GetEnableDns() bool`

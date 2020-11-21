@@ -4,8 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.ResourceRoles"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.ResourceRoles"]
 **EndPointRoles** | Pointer to [**[]IamEndPointRoleRelationship**](iam.EndPointRole.Relationship.md) | An array of relationships to iamEndPointRole resources. | [optional] [readonly] 
 **Permission** | Pointer to [**IamPermissionRelationship**](iam.Permission.Relationship.md) |  | [optional] 
+**PrivilegeSets** | Pointer to [**[]IamPrivilegeSetRelationship**](iam.PrivilegeSet.Relationship.md) | An array of relationships to iamPrivilegeSet resources. | [optional] [readonly] 
 **Resource** | Pointer to [**MoBaseMoRelationship**](mo.BaseMo.Relationship.md) |  | [optional] 
 **Roles** | Pointer to [**[]IamRoleRelationship**](iam.Role.Relationship.md) | An array of relationships to iamRole resources. | [optional] 
 
@@ -13,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewIamResourceRoles
 
-`func NewIamResourceRoles() *IamResourceRoles`
+`func NewIamResourceRoles(classId string, objectType string, ) *IamResourceRoles`
 
 NewIamResourceRoles instantiates a new IamResourceRoles object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +30,46 @@ will change when the set of required properties is changed
 NewIamResourceRolesWithDefaults instantiates a new IamResourceRoles object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *IamResourceRoles) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IamResourceRoles) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IamResourceRoles) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IamResourceRoles) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IamResourceRoles) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IamResourceRoles) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetEndPointRoles
 
@@ -88,6 +131,41 @@ SetPermission sets Permission field to given value.
 
 HasPermission returns a boolean if a field has been set.
 
+### GetPrivilegeSets
+
+`func (o *IamResourceRoles) GetPrivilegeSets() []IamPrivilegeSetRelationship`
+
+GetPrivilegeSets returns the PrivilegeSets field if non-nil, zero value otherwise.
+
+### GetPrivilegeSetsOk
+
+`func (o *IamResourceRoles) GetPrivilegeSetsOk() (*[]IamPrivilegeSetRelationship, bool)`
+
+GetPrivilegeSetsOk returns a tuple with the PrivilegeSets field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPrivilegeSets
+
+`func (o *IamResourceRoles) SetPrivilegeSets(v []IamPrivilegeSetRelationship)`
+
+SetPrivilegeSets sets PrivilegeSets field to given value.
+
+### HasPrivilegeSets
+
+`func (o *IamResourceRoles) HasPrivilegeSets() bool`
+
+HasPrivilegeSets returns a boolean if a field has been set.
+
+### SetPrivilegeSetsNil
+
+`func (o *IamResourceRoles) SetPrivilegeSetsNil(b bool)`
+
+ SetPrivilegeSetsNil sets the value for PrivilegeSets to be an explicit nil
+
+### UnsetPrivilegeSets
+`func (o *IamResourceRoles) UnsetPrivilegeSets()`
+
+UnsetPrivilegeSets ensures that no value is present for PrivilegeSets, not even an explicit nil
 ### GetResource
 
 `func (o *IamResourceRoles) GetResource() MoBaseMoRelationship`

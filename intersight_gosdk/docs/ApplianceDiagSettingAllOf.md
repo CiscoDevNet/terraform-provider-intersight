@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "appliance.DiagSetting"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.DiagSetting"]
 **IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] 
 **Message** | Pointer to **string** | Status message of the password change operation. | [optional] 
 **Password** | Pointer to **string** | Password of the Intersight Appliance&#39;s OS diagnostic user account. | [optional] 
@@ -13,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewApplianceDiagSettingAllOf
 
-`func NewApplianceDiagSettingAllOf() *ApplianceDiagSettingAllOf`
+`func NewApplianceDiagSettingAllOf(classId string, objectType string, ) *ApplianceDiagSettingAllOf`
 
 NewApplianceDiagSettingAllOf instantiates a new ApplianceDiagSettingAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewApplianceDiagSettingAllOfWithDefaults instantiates a new ApplianceDiagSettingAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *ApplianceDiagSettingAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *ApplianceDiagSettingAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *ApplianceDiagSettingAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *ApplianceDiagSettingAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *ApplianceDiagSettingAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *ApplianceDiagSettingAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetIsPasswordSet
 

@@ -4,7 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Schedule** | Pointer to [**RecoveryBackupSchedule**](recovery.BackupSchedule.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "recovery.ScheduleConfigPolicy"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "recovery.ScheduleConfigPolicy"]
+**Schedule** | Pointer to [**NullableRecoveryBackupSchedule**](recovery.BackupSchedule.md) |  | [optional] 
 **BackupProfiles** | Pointer to [**[]RecoveryBackupProfileRelationship**](recovery.BackupProfile.Relationship.md) | An array of relationships to recoveryBackupProfile resources. | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewRecoveryScheduleConfigPolicyAllOf
 
-`func NewRecoveryScheduleConfigPolicyAllOf() *RecoveryScheduleConfigPolicyAllOf`
+`func NewRecoveryScheduleConfigPolicyAllOf(classId string, objectType string, ) *RecoveryScheduleConfigPolicyAllOf`
 
 NewRecoveryScheduleConfigPolicyAllOf instantiates a new RecoveryScheduleConfigPolicyAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewRecoveryScheduleConfigPolicyAllOfWithDefaults instantiates a new RecoveryScheduleConfigPolicyAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *RecoveryScheduleConfigPolicyAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *RecoveryScheduleConfigPolicyAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *RecoveryScheduleConfigPolicyAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *RecoveryScheduleConfigPolicyAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *RecoveryScheduleConfigPolicyAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *RecoveryScheduleConfigPolicyAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetSchedule
 
@@ -52,6 +94,16 @@ SetSchedule sets Schedule field to given value.
 
 HasSchedule returns a boolean if a field has been set.
 
+### SetScheduleNil
+
+`func (o *RecoveryScheduleConfigPolicyAllOf) SetScheduleNil(b bool)`
+
+ SetScheduleNil sets the value for Schedule to be an explicit nil
+
+### UnsetSchedule
+`func (o *RecoveryScheduleConfigPolicyAllOf) UnsetSchedule()`
+
+UnsetSchedule ensures that no value is present for Schedule, not even an explicit nil
 ### GetBackupProfiles
 
 `func (o *RecoveryScheduleConfigPolicyAllOf) GetBackupProfiles() []RecoveryBackupProfileRelationship`

@@ -4,7 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CustomDataTypeProperties** | Pointer to [**WorkflowCustomDataProperty**](workflow.CustomDataProperty.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.TargetDataType"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.TargetDataType"]
+**CustomDataTypeProperties** | Pointer to [**NullableWorkflowCustomDataProperty**](workflow.CustomDataProperty.md) |  | [optional] 
 **IsArray** | Pointer to **bool** | When this property is true then an array of targets can be passed as input. | [optional] 
 **Max** | Pointer to **int64** | Specify the maximum value of the array. | [optional] 
 **Min** | Pointer to **int64** | Specify the minimum value of the array. | [optional] 
@@ -14,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewWorkflowTargetDataType
 
-`func NewWorkflowTargetDataType() *WorkflowTargetDataType`
+`func NewWorkflowTargetDataType(classId string, objectType string, ) *WorkflowTargetDataType`
 
 NewWorkflowTargetDataType instantiates a new WorkflowTargetDataType object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +30,46 @@ will change when the set of required properties is changed
 NewWorkflowTargetDataTypeWithDefaults instantiates a new WorkflowTargetDataType object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *WorkflowTargetDataType) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *WorkflowTargetDataType) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *WorkflowTargetDataType) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *WorkflowTargetDataType) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *WorkflowTargetDataType) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *WorkflowTargetDataType) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCustomDataTypeProperties
 
@@ -54,6 +96,16 @@ SetCustomDataTypeProperties sets CustomDataTypeProperties field to given value.
 
 HasCustomDataTypeProperties returns a boolean if a field has been set.
 
+### SetCustomDataTypePropertiesNil
+
+`func (o *WorkflowTargetDataType) SetCustomDataTypePropertiesNil(b bool)`
+
+ SetCustomDataTypePropertiesNil sets the value for CustomDataTypeProperties to be an explicit nil
+
+### UnsetCustomDataTypeProperties
+`func (o *WorkflowTargetDataType) UnsetCustomDataTypeProperties()`
+
+UnsetCustomDataTypeProperties ensures that no value is present for CustomDataTypeProperties, not even an explicit nil
 ### GetIsArray
 
 `func (o *WorkflowTargetDataType) GetIsArray() bool`
@@ -154,6 +206,16 @@ SetProperties sets Properties field to given value.
 
 HasProperties returns a boolean if a field has been set.
 
+### SetPropertiesNil
+
+`func (o *WorkflowTargetDataType) SetPropertiesNil(b bool)`
+
+ SetPropertiesNil sets the value for Properties to be an explicit nil
+
+### UnsetProperties
+`func (o *WorkflowTargetDataType) UnsetProperties()`
+
+UnsetProperties ensures that no value is present for Properties, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

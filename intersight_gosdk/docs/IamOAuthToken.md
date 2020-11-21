@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.OAuthToken"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.OAuthToken"]
 **AccessExpirationTime** | Pointer to [**time.Time**](time.Time.md) | Expiration time for the JWT token to which it can be used for api calls. | [optional] [readonly] 
 **ClientId** | Pointer to **string** | The identifier of the registered application to which the token belongs. | [optional] 
 **ClientIpAddress** | Pointer to **string** | The user agent IP address from which the auth token is launched. | [optional] [readonly] 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 **LastLoginClient** | Pointer to **string** | The client address from which last login is initiated. | [optional] [readonly] 
 **LastLoginTime** | Pointer to [**time.Time**](time.Time.md) | The last login time for user. | [optional] [readonly] 
 **TokenId** | Pointer to **string** | Token identifier. Not the Access Token itself. | [optional] [readonly] 
-**UserMeta** | Pointer to [**IamClientMeta**](iam.ClientMeta.md) |  | [optional] 
+**UserMeta** | Pointer to [**NullableIamClientMeta**](iam.ClientMeta.md) |  | [optional] 
 **AppRegistration** | Pointer to [**IamAppRegistrationRelationship**](iam.AppRegistration.Relationship.md) |  | [optional] 
 **Permission** | Pointer to [**IamPermissionRelationship**](iam.Permission.Relationship.md) |  | [optional] 
 **User** | Pointer to [**IamUserRelationship**](iam.User.Relationship.md) |  | [optional] 
@@ -21,7 +23,7 @@ Name | Type | Description | Notes
 
 ### NewIamOAuthToken
 
-`func NewIamOAuthToken() *IamOAuthToken`
+`func NewIamOAuthToken(classId string, objectType string, ) *IamOAuthToken`
 
 NewIamOAuthToken instantiates a new IamOAuthToken object
 This constructor will assign default values to properties that have it defined,
@@ -35,6 +37,46 @@ will change when the set of required properties is changed
 NewIamOAuthTokenWithDefaults instantiates a new IamOAuthToken object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *IamOAuthToken) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IamOAuthToken) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IamOAuthToken) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IamOAuthToken) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IamOAuthToken) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IamOAuthToken) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAccessExpirationTime
 
@@ -261,6 +303,16 @@ SetUserMeta sets UserMeta field to given value.
 
 HasUserMeta returns a boolean if a field has been set.
 
+### SetUserMetaNil
+
+`func (o *IamOAuthToken) SetUserMetaNil(b bool)`
+
+ SetUserMetaNil sets the value for UserMeta to be an explicit nil
+
+### UnsetUserMeta
+`func (o *IamOAuthToken) UnsetUserMeta()`
+
+UnsetUserMeta ensures that no value is present for UserMeta, not even an explicit nil
 ### GetAppRegistration
 
 `func (o *IamOAuthToken) GetAppRegistration() IamAppRegistrationRelationship`

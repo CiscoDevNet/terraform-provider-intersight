@@ -4,7 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ConfigContext** | Pointer to [**PolicyConfigContext**](policy.ConfigContext.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.SwitchClusterProfile"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.SwitchClusterProfile"]
+**ConfigContext** | Pointer to [**NullablePolicyConfigContext**](policy.ConfigContext.md) |  | [optional] 
 **SwitchProfilesCount** | Pointer to **int64** | Number of switch profiles that are part of this cluster profile. | [optional] [readonly] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 **SwitchProfiles** | Pointer to [**[]FabricSwitchProfileRelationship**](fabric.SwitchProfile.Relationship.md) | An array of relationships to fabricSwitchProfile resources. | [optional] 
@@ -13,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewFabricSwitchClusterProfileAllOf
 
-`func NewFabricSwitchClusterProfileAllOf() *FabricSwitchClusterProfileAllOf`
+`func NewFabricSwitchClusterProfileAllOf(classId string, objectType string, ) *FabricSwitchClusterProfileAllOf`
 
 NewFabricSwitchClusterProfileAllOf instantiates a new FabricSwitchClusterProfileAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewFabricSwitchClusterProfileAllOfWithDefaults instantiates a new FabricSwitchClusterProfileAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *FabricSwitchClusterProfileAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *FabricSwitchClusterProfileAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *FabricSwitchClusterProfileAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *FabricSwitchClusterProfileAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *FabricSwitchClusterProfileAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *FabricSwitchClusterProfileAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetConfigContext
 
@@ -53,6 +95,16 @@ SetConfigContext sets ConfigContext field to given value.
 
 HasConfigContext returns a boolean if a field has been set.
 
+### SetConfigContextNil
+
+`func (o *FabricSwitchClusterProfileAllOf) SetConfigContextNil(b bool)`
+
+ SetConfigContextNil sets the value for ConfigContext to be an explicit nil
+
+### UnsetConfigContext
+`func (o *FabricSwitchClusterProfileAllOf) UnsetConfigContext()`
+
+UnsetConfigContext ensures that no value is present for ConfigContext, not even an explicit nil
 ### GetSwitchProfilesCount
 
 `func (o *FabricSwitchClusterProfileAllOf) GetSwitchProfilesCount() int64`

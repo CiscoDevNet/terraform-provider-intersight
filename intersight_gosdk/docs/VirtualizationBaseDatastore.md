@@ -4,7 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Capacity** | Pointer to [**VirtualizationStorageCapacity**](virtualization.StorageCapacity.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "virtualization.VmwareDatastore"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "virtualization.VmwareDatastore"]
+**Capacity** | Pointer to [**NullableVirtualizationStorageCapacity**](virtualization.StorageCapacity.md) |  | [optional] 
 **HostCount** | Pointer to **int64** | Number of hosts attached to or supported-by this datastore. | [optional] 
 **Identity** | Pointer to **string** | The internally generated identity of this datastore. This entity is not manipulated by users. It aids in uniquely identifying the datastore object. For VMware, this is a MOR (managed object reference). | [optional] 
 **Name** | Pointer to **string** | Name of this datastore supplied by user. It is not the identity of the datastore. The name is subject to user manipulations. | [optional] 
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewVirtualizationBaseDatastore
 
-`func NewVirtualizationBaseDatastore() *VirtualizationBaseDatastore`
+`func NewVirtualizationBaseDatastore(classId string, objectType string, ) *VirtualizationBaseDatastore`
 
 NewVirtualizationBaseDatastore instantiates a new VirtualizationBaseDatastore object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +31,46 @@ will change when the set of required properties is changed
 NewVirtualizationBaseDatastoreWithDefaults instantiates a new VirtualizationBaseDatastore object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *VirtualizationBaseDatastore) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *VirtualizationBaseDatastore) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *VirtualizationBaseDatastore) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *VirtualizationBaseDatastore) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *VirtualizationBaseDatastore) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *VirtualizationBaseDatastore) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCapacity
 
@@ -55,6 +97,16 @@ SetCapacity sets Capacity field to given value.
 
 HasCapacity returns a boolean if a field has been set.
 
+### SetCapacityNil
+
+`func (o *VirtualizationBaseDatastore) SetCapacityNil(b bool)`
+
+ SetCapacityNil sets the value for Capacity to be an explicit nil
+
+### UnsetCapacity
+`func (o *VirtualizationBaseDatastore) UnsetCapacity()`
+
+UnsetCapacity ensures that no value is present for Capacity, not even an explicit nil
 ### GetHostCount
 
 `func (o *VirtualizationBaseDatastore) GetHostCount() int64`

@@ -4,19 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BillTo** | Pointer to [**AssetAddressInformation**](asset.AddressInformation.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.ProductInformation"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.ProductInformation"]
+**BillTo** | Pointer to [**NullableAssetAddressInformation**](asset.AddressInformation.md) |  | [optional] 
 **Description** | Pointer to **string** | Short description of the Cisco product that helps identify the product easily. example \&quot;DISTI:UCS 6248UP 1RU Fabric Int/No PSU/32 UP/ 12p LIC\&quot;. | [optional] [readonly] 
 **Family** | Pointer to **string** | Family that the product belongs to. Example \&quot;UCSB\&quot;. | [optional] [readonly] 
 **Group** | Pointer to **string** | Group that the product belongs to. It is one higher level categorization above family. example \&quot;Switch\&quot;. | [optional] [readonly] 
 **Number** | Pointer to **string** | Product number that identifies the product. example PID. example \&quot;UCS-FI-6248UP-CH2\&quot;. | [optional] [readonly] 
-**ShipTo** | Pointer to [**AssetAddressInformation**](asset.AddressInformation.md) |  | [optional] 
+**ShipTo** | Pointer to [**NullableAssetAddressInformation**](asset.AddressInformation.md) |  | [optional] 
 **SubType** | Pointer to **string** | Sub type of the product being specified. example \&quot;UCS 6200 SER\&quot;. | [optional] [readonly] 
 
 ## Methods
 
 ### NewAssetProductInformationAllOf
 
-`func NewAssetProductInformationAllOf() *AssetProductInformationAllOf`
+`func NewAssetProductInformationAllOf(classId string, objectType string, ) *AssetProductInformationAllOf`
 
 NewAssetProductInformationAllOf instantiates a new AssetProductInformationAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +32,46 @@ will change when the set of required properties is changed
 NewAssetProductInformationAllOfWithDefaults instantiates a new AssetProductInformationAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *AssetProductInformationAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *AssetProductInformationAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *AssetProductInformationAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *AssetProductInformationAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *AssetProductInformationAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *AssetProductInformationAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetBillTo
 
@@ -56,6 +98,16 @@ SetBillTo sets BillTo field to given value.
 
 HasBillTo returns a boolean if a field has been set.
 
+### SetBillToNil
+
+`func (o *AssetProductInformationAllOf) SetBillToNil(b bool)`
+
+ SetBillToNil sets the value for BillTo to be an explicit nil
+
+### UnsetBillTo
+`func (o *AssetProductInformationAllOf) UnsetBillTo()`
+
+UnsetBillTo ensures that no value is present for BillTo, not even an explicit nil
 ### GetDescription
 
 `func (o *AssetProductInformationAllOf) GetDescription() string`
@@ -181,6 +233,16 @@ SetShipTo sets ShipTo field to given value.
 
 HasShipTo returns a boolean if a field has been set.
 
+### SetShipToNil
+
+`func (o *AssetProductInformationAllOf) SetShipToNil(b bool)`
+
+ SetShipToNil sets the value for ShipTo to be an explicit nil
+
+### UnsetShipTo
+`func (o *AssetProductInformationAllOf) UnsetShipTo()`
+
+UnsetShipTo ensures that no value is present for ShipTo, not even an explicit nil
 ### GetSubType
 
 `func (o *AssetProductInformationAllOf) GetSubType() string`

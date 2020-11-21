@@ -4,10 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.ComponentMeta"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.ComponentMeta"]
 **ComponentLabel** | Pointer to **string** | The name of the component in the compressed HSU bundle. | [optional] 
 **ComponentType** | Pointer to **string** | The type of component image within the distributable. * &#x60;ALL&#x60; - This represents all the components. * &#x60;ALL,HDD&#x60; - This represents all the components plus the HDDs. * &#x60;None&#x60; - This represents none of the components. * &#x60;NXOS&#x60; - This represents NXOS components. * &#x60;IOM&#x60; - This represents IOM components. * &#x60;PSU&#x60; - This represents PSU components. * &#x60;CIMC&#x60; - This represents CIMC components. * &#x60;BIOS&#x60; - This represents BIOS components. * &#x60;PCIE&#x60; - This represents PCIE components. * &#x60;Drive&#x60; - This represents Storage components. * &#x60;DIMM&#x60; - This represents DIMM components. * &#x60;BoardController&#x60; - This represents Board Controller components. * &#x60;StorageController&#x60; - This represents Storage Controller components. * &#x60;HBA&#x60; - This represents HBA components. * &#x60;GPU&#x60; - This represents GPU components. * &#x60;SasExpander&#x60; - This represents SasExpander components. * &#x60;MSwitch&#x60; - This represents mSwitch components. * &#x60;CMC&#x60; - This represents CMC components. | [optional] [default to "ALL"]
 **Description** | Pointer to **string** | This shows the description of component image within the distributable. | [optional] 
 **Disruption** | Pointer to **string** | The type of disruption on each component. For example, host reboot, automatic power cycle, and manual power cycle. * &#x60;None&#x60; - Indicates that the component did not receive a disruption request. * &#x60;HostReboot&#x60; - Indicates that the component received a host reboot request. * &#x60;EndpointReboot&#x60; - Indicates that the component received an end point reboot request. * &#x60;ManualPowerCycle&#x60; - Indicates that the component received a manual power cycle request. * &#x60;AutomaticPowerCycle&#x60; - Indicates that the component received an automatic power cycle request. | [optional] [default to "None"]
+**ImagePath** | Pointer to **string** | This shows the path of component image within the distributable. | [optional] 
 **IsOobSupported** | Pointer to **bool** | If set, the component can be updated through out-of-band management, else, is updated through host service utility boot. | [optional] 
 **Model** | Pointer to **string** | The model of the component image in the distributable. | [optional] 
 **OobManageability** | Pointer to **[]string** |  | [optional] 
@@ -19,7 +22,7 @@ Name | Type | Description | Notes
 
 ### NewFirmwareComponentMetaAllOf
 
-`func NewFirmwareComponentMetaAllOf() *FirmwareComponentMetaAllOf`
+`func NewFirmwareComponentMetaAllOf(classId string, objectType string, ) *FirmwareComponentMetaAllOf`
 
 NewFirmwareComponentMetaAllOf instantiates a new FirmwareComponentMetaAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -33,6 +36,46 @@ will change when the set of required properties is changed
 NewFirmwareComponentMetaAllOfWithDefaults instantiates a new FirmwareComponentMetaAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *FirmwareComponentMetaAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *FirmwareComponentMetaAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *FirmwareComponentMetaAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *FirmwareComponentMetaAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *FirmwareComponentMetaAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *FirmwareComponentMetaAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetComponentLabel
 
@@ -134,6 +177,31 @@ SetDisruption sets Disruption field to given value.
 
 HasDisruption returns a boolean if a field has been set.
 
+### GetImagePath
+
+`func (o *FirmwareComponentMetaAllOf) GetImagePath() string`
+
+GetImagePath returns the ImagePath field if non-nil, zero value otherwise.
+
+### GetImagePathOk
+
+`func (o *FirmwareComponentMetaAllOf) GetImagePathOk() (*string, bool)`
+
+GetImagePathOk returns a tuple with the ImagePath field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetImagePath
+
+`func (o *FirmwareComponentMetaAllOf) SetImagePath(v string)`
+
+SetImagePath sets ImagePath field to given value.
+
+### HasImagePath
+
+`func (o *FirmwareComponentMetaAllOf) HasImagePath() bool`
+
+HasImagePath returns a boolean if a field has been set.
+
 ### GetIsOobSupported
 
 `func (o *FirmwareComponentMetaAllOf) GetIsOobSupported() bool`
@@ -209,6 +277,16 @@ SetOobManageability sets OobManageability field to given value.
 
 HasOobManageability returns a boolean if a field has been set.
 
+### SetOobManageabilityNil
+
+`func (o *FirmwareComponentMetaAllOf) SetOobManageabilityNil(b bool)`
+
+ SetOobManageabilityNil sets the value for OobManageability to be an explicit nil
+
+### UnsetOobManageability
+`func (o *FirmwareComponentMetaAllOf) UnsetOobManageability()`
+
+UnsetOobManageability ensures that no value is present for OobManageability, not even an explicit nil
 ### GetPackedVersion
 
 `func (o *FirmwareComponentMetaAllOf) GetPackedVersion() string`

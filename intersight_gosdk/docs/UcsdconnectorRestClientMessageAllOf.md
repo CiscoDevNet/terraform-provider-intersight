@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "ucsdconnector.RestClientMessage"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "ucsdconnector.RestClientMessage"]
 **Body** | Pointer to **string** | Payload which is sent along with the request. Most applicable to POST methods. | [optional] 
 **Header** | Pointer to **interface{}** | Headers to be passed with the HTTP rest request. | [optional] 
 **Method** | Pointer to **string** | REST Method, should be set to one of [HTTP.MethodGet, HTTP.MethodPost]. | [optional] 
@@ -13,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewUcsdconnectorRestClientMessageAllOf
 
-`func NewUcsdconnectorRestClientMessageAllOf() *UcsdconnectorRestClientMessageAllOf`
+`func NewUcsdconnectorRestClientMessageAllOf(classId string, objectType string, ) *UcsdconnectorRestClientMessageAllOf`
 
 NewUcsdconnectorRestClientMessageAllOf instantiates a new UcsdconnectorRestClientMessageAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewUcsdconnectorRestClientMessageAllOfWithDefaults instantiates a new UcsdconnectorRestClientMessageAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *UcsdconnectorRestClientMessageAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *UcsdconnectorRestClientMessageAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *UcsdconnectorRestClientMessageAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *UcsdconnectorRestClientMessageAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *UcsdconnectorRestClientMessageAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *UcsdconnectorRestClientMessageAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetBody
 

@@ -4,9 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DirectDownload** | Pointer to [**FirmwareDirectDownload**](firmware.DirectDownload.md) |  | [optional] 
-**FileServer** | Pointer to [**SoftwarerepositoryFileServer**](softwarerepository.FileServer.md) |  | [optional] 
-**NetworkShare** | Pointer to [**FirmwareNetworkShare**](firmware.NetworkShare.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
+**DirectDownload** | Pointer to [**NullableFirmwareDirectDownload**](firmware.DirectDownload.md) |  | [optional] 
+**FileServer** | Pointer to [**NullableSoftwarerepositoryFileServer**](softwarerepository.FileServer.md) |  | [optional] 
+**NetworkShare** | Pointer to [**NullableFirmwareNetworkShare**](firmware.NetworkShare.md) |  | [optional] 
 **SkipEstimateImpact** | Pointer to **bool** | User has the option to skip the estimate impact calculation. | [optional] 
 **Status** | Pointer to **string** | Status of the upgrade operation. * &#x60;NONE&#x60; - Upgrade status is not populated. * &#x60;IN_PROGRESS&#x60; - The upgrade is in progress. * &#x60;SUCCESSFUL&#x60; - The upgrade successfully completed. * &#x60;FAILED&#x60; - The upgrade shows failed status. * &#x60;TERMINATED&#x60; - The upgrade has been terminated. | [optional] [default to "NONE"]
 **UpgradeType** | Pointer to **string** | Desired upgrade mode to choose either direct download based upgrade or network share upgrade. * &#x60;direct_upgrade&#x60; - Upgrade mode is direct download. * &#x60;network_upgrade&#x60; - Upgrade mode is network upgrade. | [optional] [default to "direct_upgrade"]
@@ -19,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewFirmwareUpgradeBaseAllOf
 
-`func NewFirmwareUpgradeBaseAllOf() *FirmwareUpgradeBaseAllOf`
+`func NewFirmwareUpgradeBaseAllOf(classId string, objectType string, ) *FirmwareUpgradeBaseAllOf`
 
 NewFirmwareUpgradeBaseAllOf instantiates a new FirmwareUpgradeBaseAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -33,6 +35,46 @@ will change when the set of required properties is changed
 NewFirmwareUpgradeBaseAllOfWithDefaults instantiates a new FirmwareUpgradeBaseAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *FirmwareUpgradeBaseAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *FirmwareUpgradeBaseAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *FirmwareUpgradeBaseAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *FirmwareUpgradeBaseAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *FirmwareUpgradeBaseAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *FirmwareUpgradeBaseAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDirectDownload
 
@@ -59,6 +101,16 @@ SetDirectDownload sets DirectDownload field to given value.
 
 HasDirectDownload returns a boolean if a field has been set.
 
+### SetDirectDownloadNil
+
+`func (o *FirmwareUpgradeBaseAllOf) SetDirectDownloadNil(b bool)`
+
+ SetDirectDownloadNil sets the value for DirectDownload to be an explicit nil
+
+### UnsetDirectDownload
+`func (o *FirmwareUpgradeBaseAllOf) UnsetDirectDownload()`
+
+UnsetDirectDownload ensures that no value is present for DirectDownload, not even an explicit nil
 ### GetFileServer
 
 `func (o *FirmwareUpgradeBaseAllOf) GetFileServer() SoftwarerepositoryFileServer`
@@ -84,6 +136,16 @@ SetFileServer sets FileServer field to given value.
 
 HasFileServer returns a boolean if a field has been set.
 
+### SetFileServerNil
+
+`func (o *FirmwareUpgradeBaseAllOf) SetFileServerNil(b bool)`
+
+ SetFileServerNil sets the value for FileServer to be an explicit nil
+
+### UnsetFileServer
+`func (o *FirmwareUpgradeBaseAllOf) UnsetFileServer()`
+
+UnsetFileServer ensures that no value is present for FileServer, not even an explicit nil
 ### GetNetworkShare
 
 `func (o *FirmwareUpgradeBaseAllOf) GetNetworkShare() FirmwareNetworkShare`
@@ -109,6 +171,16 @@ SetNetworkShare sets NetworkShare field to given value.
 
 HasNetworkShare returns a boolean if a field has been set.
 
+### SetNetworkShareNil
+
+`func (o *FirmwareUpgradeBaseAllOf) SetNetworkShareNil(b bool)`
+
+ SetNetworkShareNil sets the value for NetworkShare to be an explicit nil
+
+### UnsetNetworkShare
+`func (o *FirmwareUpgradeBaseAllOf) UnsetNetworkShare()`
+
+UnsetNetworkShare ensures that no value is present for NetworkShare, not even an explicit nil
 ### GetSkipEstimateImpact
 
 `func (o *FirmwareUpgradeBaseAllOf) GetSkipEstimateImpact() bool`

@@ -12,13 +12,13 @@ Gets diagnostics messages from UCSD.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `category`:(string) Message category of the alerts. 
-* `class_id`:(string) The concrete type of this complex type. Its value must be the same as the 'objectType' property.The OpenAPI document references this property as a discriminator value. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `guid`:(string) Unique ID of UCS Director getting registerd with Intersight. 
 * `item`:(string) Message target type of the alerts. 
 * `last_checked`:(string) Last checked time of the alerts. 
 * `message`:(string) Detailed info about the alert. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified type of this managed object, i.e. the class name.This property is optional. The ObjectType is implied from the URL path.If specified, the value of objectType must match the class name specified in the URL path. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `recommendation`:(string) Recommended fix for the alert. 
 * `status`:(string) Status of the given alert. 
 * `status_id`:(string) Status Id of the given alert. 

@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "appliance.Restore"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.Restore"]
 **ElapsedTime** | Pointer to **int64** | Elapsed time in seconds since the restore process has started. | [optional] [readonly] 
 **EndTime** | Pointer to [**time.Time**](time.Time.md) | End date and time of the restore process. | [optional] [readonly] 
 **IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] 
@@ -17,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewApplianceRestore
 
-`func NewApplianceRestore() *ApplianceRestore`
+`func NewApplianceRestore(classId string, objectType string, ) *ApplianceRestore`
 
 NewApplianceRestore instantiates a new ApplianceRestore object
 This constructor will assign default values to properties that have it defined,
@@ -31,6 +33,46 @@ will change when the set of required properties is changed
 NewApplianceRestoreWithDefaults instantiates a new ApplianceRestore object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *ApplianceRestore) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *ApplianceRestore) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *ApplianceRestore) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *ApplianceRestore) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *ApplianceRestore) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *ApplianceRestore) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetElapsedTime
 
@@ -132,6 +174,16 @@ SetMessages sets Messages field to given value.
 
 HasMessages returns a boolean if a field has been set.
 
+### SetMessagesNil
+
+`func (o *ApplianceRestore) SetMessagesNil(b bool)`
+
+ SetMessagesNil sets the value for Messages to be an explicit nil
+
+### UnsetMessages
+`func (o *ApplianceRestore) UnsetMessages()`
+
+UnsetMessages ensures that no value is present for Messages, not even an explicit nil
 ### GetPassword
 
 `func (o *ApplianceRestore) GetPassword() string`

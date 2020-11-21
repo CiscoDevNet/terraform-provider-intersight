@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "ucsd.ConnectorPack"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "ucsd.ConnectorPack"]
 **ConnectorFeature** | Pointer to **string** | State of the connector pack whether it is enabled or disabled. | [optional] [readonly] 
 **DependencyNames** | Pointer to **[]string** |  | [optional] 
 **DownloadedVersion** | Pointer to **string** | Version of the connector pack that is last downloaded successfully to UCS Director. | [optional] [readonly] 
@@ -16,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewUcsdConnectorPack
 
-`func NewUcsdConnectorPack() *UcsdConnectorPack`
+`func NewUcsdConnectorPack(classId string, objectType string, ) *UcsdConnectorPack`
 
 NewUcsdConnectorPack instantiates a new UcsdConnectorPack object
 This constructor will assign default values to properties that have it defined,
@@ -30,6 +32,46 @@ will change when the set of required properties is changed
 NewUcsdConnectorPackWithDefaults instantiates a new UcsdConnectorPack object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *UcsdConnectorPack) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *UcsdConnectorPack) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *UcsdConnectorPack) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *UcsdConnectorPack) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *UcsdConnectorPack) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *UcsdConnectorPack) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetConnectorFeature
 
@@ -81,6 +123,16 @@ SetDependencyNames sets DependencyNames field to given value.
 
 HasDependencyNames returns a boolean if a field has been set.
 
+### SetDependencyNamesNil
+
+`func (o *UcsdConnectorPack) SetDependencyNamesNil(b bool)`
+
+ SetDependencyNamesNil sets the value for DependencyNames to be an explicit nil
+
+### UnsetDependencyNames
+`func (o *UcsdConnectorPack) UnsetDependencyNames()`
+
+UnsetDependencyNames ensures that no value is present for DependencyNames, not even an explicit nil
 ### GetDownloadedVersion
 
 `func (o *UcsdConnectorPack) GetDownloadedVersion() string`
@@ -156,6 +208,16 @@ SetServices sets Services field to given value.
 
 HasServices returns a boolean if a field has been set.
 
+### SetServicesNil
+
+`func (o *UcsdConnectorPack) SetServicesNil(b bool)`
+
+ SetServicesNil sets the value for Services to be an explicit nil
+
+### UnsetServices
+`func (o *UcsdConnectorPack) UnsetServices()`
+
+UnsetServices ensures that no value is present for Services, not even an explicit nil
 ### GetState
 
 `func (o *UcsdConnectorPack) GetState() string`

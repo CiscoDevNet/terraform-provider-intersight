@@ -4,8 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**IpV4Blocks** | Pointer to [**[]IppoolIpBlock**](ippool.IpBlock.md) |  | [optional] 
-**IpV4Config** | Pointer to [**IppoolIpV4Config**](ippool.IpV4Config.md) |  | [optional] 
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "ippool.Pool"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "ippool.Pool"]
+**IpV4Blocks** | Pointer to [**[]IppoolIpV4Block**](ippool.IpV4Block.md) |  | [optional] 
+**IpV4Config** | Pointer to [**NullableIppoolIpV4Config**](ippool.IpV4Config.md) |  | [optional] 
+**IpV6Blocks** | Pointer to [**[]IppoolIpV6Block**](ippool.IpV6Block.md) |  | [optional] 
+**IpV6Config** | Pointer to [**NullableIppoolIpV6Config**](ippool.IpV6Config.md) |  | [optional] 
 **V4Assigned** | Pointer to **int64** | Number of IPv4 addresses currently in use. | [optional] [readonly] 
 **V4Size** | Pointer to **int64** | Number of IPv4 addresses in this pool. | [optional] [readonly] 
 **V6Assigned** | Pointer to **int64** | Number of IPv6 addresses currently in use. | [optional] [readonly] 
@@ -17,7 +21,7 @@ Name | Type | Description | Notes
 
 ### NewIppoolPool
 
-`func NewIppoolPool() *IppoolPool`
+`func NewIppoolPool(classId string, objectType string, ) *IppoolPool`
 
 NewIppoolPool instantiates a new IppoolPool object
 This constructor will assign default values to properties that have it defined,
@@ -32,22 +36,62 @@ NewIppoolPoolWithDefaults instantiates a new IppoolPool object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetClassId
+
+`func (o *IppoolPool) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IppoolPool) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IppoolPool) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IppoolPool) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IppoolPool) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IppoolPool) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
+
 ### GetIpV4Blocks
 
-`func (o *IppoolPool) GetIpV4Blocks() []IppoolIpBlock`
+`func (o *IppoolPool) GetIpV4Blocks() []IppoolIpV4Block`
 
 GetIpV4Blocks returns the IpV4Blocks field if non-nil, zero value otherwise.
 
 ### GetIpV4BlocksOk
 
-`func (o *IppoolPool) GetIpV4BlocksOk() (*[]IppoolIpBlock, bool)`
+`func (o *IppoolPool) GetIpV4BlocksOk() (*[]IppoolIpV4Block, bool)`
 
 GetIpV4BlocksOk returns a tuple with the IpV4Blocks field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetIpV4Blocks
 
-`func (o *IppoolPool) SetIpV4Blocks(v []IppoolIpBlock)`
+`func (o *IppoolPool) SetIpV4Blocks(v []IppoolIpV4Block)`
 
 SetIpV4Blocks sets IpV4Blocks field to given value.
 
@@ -57,6 +101,16 @@ SetIpV4Blocks sets IpV4Blocks field to given value.
 
 HasIpV4Blocks returns a boolean if a field has been set.
 
+### SetIpV4BlocksNil
+
+`func (o *IppoolPool) SetIpV4BlocksNil(b bool)`
+
+ SetIpV4BlocksNil sets the value for IpV4Blocks to be an explicit nil
+
+### UnsetIpV4Blocks
+`func (o *IppoolPool) UnsetIpV4Blocks()`
+
+UnsetIpV4Blocks ensures that no value is present for IpV4Blocks, not even an explicit nil
 ### GetIpV4Config
 
 `func (o *IppoolPool) GetIpV4Config() IppoolIpV4Config`
@@ -82,6 +136,86 @@ SetIpV4Config sets IpV4Config field to given value.
 
 HasIpV4Config returns a boolean if a field has been set.
 
+### SetIpV4ConfigNil
+
+`func (o *IppoolPool) SetIpV4ConfigNil(b bool)`
+
+ SetIpV4ConfigNil sets the value for IpV4Config to be an explicit nil
+
+### UnsetIpV4Config
+`func (o *IppoolPool) UnsetIpV4Config()`
+
+UnsetIpV4Config ensures that no value is present for IpV4Config, not even an explicit nil
+### GetIpV6Blocks
+
+`func (o *IppoolPool) GetIpV6Blocks() []IppoolIpV6Block`
+
+GetIpV6Blocks returns the IpV6Blocks field if non-nil, zero value otherwise.
+
+### GetIpV6BlocksOk
+
+`func (o *IppoolPool) GetIpV6BlocksOk() (*[]IppoolIpV6Block, bool)`
+
+GetIpV6BlocksOk returns a tuple with the IpV6Blocks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpV6Blocks
+
+`func (o *IppoolPool) SetIpV6Blocks(v []IppoolIpV6Block)`
+
+SetIpV6Blocks sets IpV6Blocks field to given value.
+
+### HasIpV6Blocks
+
+`func (o *IppoolPool) HasIpV6Blocks() bool`
+
+HasIpV6Blocks returns a boolean if a field has been set.
+
+### SetIpV6BlocksNil
+
+`func (o *IppoolPool) SetIpV6BlocksNil(b bool)`
+
+ SetIpV6BlocksNil sets the value for IpV6Blocks to be an explicit nil
+
+### UnsetIpV6Blocks
+`func (o *IppoolPool) UnsetIpV6Blocks()`
+
+UnsetIpV6Blocks ensures that no value is present for IpV6Blocks, not even an explicit nil
+### GetIpV6Config
+
+`func (o *IppoolPool) GetIpV6Config() IppoolIpV6Config`
+
+GetIpV6Config returns the IpV6Config field if non-nil, zero value otherwise.
+
+### GetIpV6ConfigOk
+
+`func (o *IppoolPool) GetIpV6ConfigOk() (*IppoolIpV6Config, bool)`
+
+GetIpV6ConfigOk returns a tuple with the IpV6Config field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpV6Config
+
+`func (o *IppoolPool) SetIpV6Config(v IppoolIpV6Config)`
+
+SetIpV6Config sets IpV6Config field to given value.
+
+### HasIpV6Config
+
+`func (o *IppoolPool) HasIpV6Config() bool`
+
+HasIpV6Config returns a boolean if a field has been set.
+
+### SetIpV6ConfigNil
+
+`func (o *IppoolPool) SetIpV6ConfigNil(b bool)`
+
+ SetIpV6ConfigNil sets the value for IpV6Config to be an explicit nil
+
+### UnsetIpV6Config
+`func (o *IppoolPool) UnsetIpV6Config()`
+
+UnsetIpV6Config ensures that no value is present for IpV6Config, not even an explicit nil
 ### GetV4Assigned
 
 `func (o *IppoolPool) GetV4Assigned() int64`

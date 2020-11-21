@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fcpool.Pool"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fcpool.Pool"]
 **IdBlocks** | Pointer to [**[]FcpoolBlock**](fcpool.Block.md) |  | [optional] 
 **PoolPurpose** | Pointer to **string** | Purpose of this WWN pool. | [optional] 
 **BlockHeads** | Pointer to [**[]FcpoolFcBlockRelationship**](fcpool.FcBlock.Relationship.md) | An array of relationships to fcpoolFcBlock resources. | [optional] [readonly] 
@@ -13,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewFcpoolPool
 
-`func NewFcpoolPool() *FcpoolPool`
+`func NewFcpoolPool(classId string, objectType string, ) *FcpoolPool`
 
 NewFcpoolPool instantiates a new FcpoolPool object
 This constructor will assign default values to properties that have it defined,
@@ -27,6 +29,46 @@ will change when the set of required properties is changed
 NewFcpoolPoolWithDefaults instantiates a new FcpoolPool object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *FcpoolPool) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *FcpoolPool) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *FcpoolPool) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *FcpoolPool) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *FcpoolPool) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *FcpoolPool) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetIdBlocks
 
@@ -53,6 +95,16 @@ SetIdBlocks sets IdBlocks field to given value.
 
 HasIdBlocks returns a boolean if a field has been set.
 
+### SetIdBlocksNil
+
+`func (o *FcpoolPool) SetIdBlocksNil(b bool)`
+
+ SetIdBlocksNil sets the value for IdBlocks to be an explicit nil
+
+### UnsetIdBlocks
+`func (o *FcpoolPool) UnsetIdBlocks()`
+
+UnsetIdBlocks ensures that no value is present for IdBlocks, not even an explicit nil
 ### GetPoolPurpose
 
 `func (o *FcpoolPool) GetPoolPurpose() string`

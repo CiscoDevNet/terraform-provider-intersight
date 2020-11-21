@@ -29,10 +29,9 @@ func dataSourceAaaAuditRecord() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -41,7 +40,7 @@ func dataSourceAaaAuditRecord() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -61,10 +60,9 @@ func dataSourceAaaAuditRecord() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
 			},
 			"email": {
 				Description: "The email of the associated user that made the change.  In case the user is later deleted, we still have some reference to the information.",
@@ -105,7 +103,7 @@ func dataSourceAaaAuditRecord() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified type of this managed object, i.e. the class name.\nThis property is optional. The ObjectType is implied from the URL path.\nIf specified, the value of objectType must match the class name specified in the URL path.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -116,6 +114,11 @@ func dataSourceAaaAuditRecord() *schema.Resource {
 				Elem: &schema.Schema{
 					Type: schema.TypeString,
 				}, Optional: true,
+			},
+			"session_id": {
+				Description: "The sessionId in which the user made the change. In case that the session is later deleted, we still have some reference to the information.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"sessions": {
 				Description: "A reference to a iamSession resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -131,10 +134,9 @@ func dataSourceAaaAuditRecord() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -143,7 +145,7 @@ func dataSourceAaaAuditRecord() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -210,10 +212,9 @@ func dataSourceAaaAuditRecord() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The concrete type of this complex type. Its value must be the same as the 'objectType' property.\nThe OpenAPI document references this property as a discriminator value.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
-							Computed:    true,
 						},
 						"moid": {
 							Description: "The Moid of the referenced REST resource.",
@@ -222,7 +223,7 @@ func dataSourceAaaAuditRecord() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The concrete type of this complex type.\nThe ObjectType property must be set explicitly by API clients when the type is ambiguous. In all other cases, the \nObjectType is optional. \nThe type is ambiguous when a managed object contains an array of nested documents, and the documents in the array\nare heterogeneous, i.e. the array can contain nested documents of different types.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -249,7 +250,7 @@ func dataSourceAaaAuditRecordRead(d *schema.ResourceData, meta interface{}) erro
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-	var o = models.NewAaaAuditRecordWithDefaults()
+	var o = &models.AaaAuditRecord{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -281,6 +282,10 @@ func dataSourceAaaAuditRecordRead(d *schema.ResourceData, meta interface{}) erro
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
+	}
+	if v, ok := d.GetOk("session_id"); ok {
+		x := (v.(string))
+		o.SetSessionId(x)
 	}
 	if v, ok := d.GetOk("source_ip"); ok {
 		x := (v.(string))
@@ -325,7 +330,7 @@ func dataSourceAaaAuditRecordRead(d *schema.ResourceData, meta interface{}) erro
 	case reflect.Slice:
 		r := reflect.ValueOf(result)
 		for i := 0; i < r.Len(); i++ {
-			var s = models.NewAaaAuditRecordWithDefaults()
+			var s = &models.AaaAuditRecord{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
 				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
@@ -360,6 +365,9 @@ func dataSourceAaaAuditRecordRead(d *schema.ResourceData, meta interface{}) erro
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
 				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+			}
+			if err := d.Set("session_id", (s.GetSessionId())); err != nil {
+				return fmt.Errorf("error occurred while setting property SessionId: %+v", err)
 			}
 
 			if err := d.Set("sessions", flattenMapIamSessionRelationship(s.GetSessions(), d)); err != nil {

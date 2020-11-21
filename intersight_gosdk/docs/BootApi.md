@@ -6,14 +6,58 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateBootPrecisionPolicy**](BootApi.md#CreateBootPrecisionPolicy) | **Post** /api/v1/boot/PrecisionPolicies | Create a &#39;boot.PrecisionPolicy&#39; resource.
 [**DeleteBootPrecisionPolicy**](BootApi.md#DeleteBootPrecisionPolicy) | **Delete** /api/v1/boot/PrecisionPolicies/{Moid} | Delete a &#39;boot.PrecisionPolicy&#39; resource.
+[**GetBootCddDeviceByMoid**](BootApi.md#GetBootCddDeviceByMoid) | **Get** /api/v1/boot/CddDevices/{Moid} | Read a &#39;boot.CddDevice&#39; resource.
+[**GetBootCddDeviceList**](BootApi.md#GetBootCddDeviceList) | **Get** /api/v1/boot/CddDevices | Read a &#39;boot.CddDevice&#39; resource.
 [**GetBootDeviceBootModeByMoid**](BootApi.md#GetBootDeviceBootModeByMoid) | **Get** /api/v1/boot/DeviceBootModes/{Moid} | Read a &#39;boot.DeviceBootMode&#39; resource.
 [**GetBootDeviceBootModeList**](BootApi.md#GetBootDeviceBootModeList) | **Get** /api/v1/boot/DeviceBootModes | Read a &#39;boot.DeviceBootMode&#39; resource.
+[**GetBootHddDeviceByMoid**](BootApi.md#GetBootHddDeviceByMoid) | **Get** /api/v1/boot/HddDevices/{Moid} | Read a &#39;boot.HddDevice&#39; resource.
+[**GetBootHddDeviceList**](BootApi.md#GetBootHddDeviceList) | **Get** /api/v1/boot/HddDevices | Read a &#39;boot.HddDevice&#39; resource.
+[**GetBootIscsiDeviceByMoid**](BootApi.md#GetBootIscsiDeviceByMoid) | **Get** /api/v1/boot/IscsiDevices/{Moid} | Read a &#39;boot.IscsiDevice&#39; resource.
+[**GetBootIscsiDeviceList**](BootApi.md#GetBootIscsiDeviceList) | **Get** /api/v1/boot/IscsiDevices | Read a &#39;boot.IscsiDevice&#39; resource.
+[**GetBootNvmeDeviceByMoid**](BootApi.md#GetBootNvmeDeviceByMoid) | **Get** /api/v1/boot/NvmeDevices/{Moid} | Read a &#39;boot.NvmeDevice&#39; resource.
+[**GetBootNvmeDeviceList**](BootApi.md#GetBootNvmeDeviceList) | **Get** /api/v1/boot/NvmeDevices | Read a &#39;boot.NvmeDevice&#39; resource.
+[**GetBootPchStorageDeviceByMoid**](BootApi.md#GetBootPchStorageDeviceByMoid) | **Get** /api/v1/boot/PchStorageDevices/{Moid} | Read a &#39;boot.PchStorageDevice&#39; resource.
+[**GetBootPchStorageDeviceList**](BootApi.md#GetBootPchStorageDeviceList) | **Get** /api/v1/boot/PchStorageDevices | Read a &#39;boot.PchStorageDevice&#39; resource.
 [**GetBootPrecisionPolicyByMoid**](BootApi.md#GetBootPrecisionPolicyByMoid) | **Get** /api/v1/boot/PrecisionPolicies/{Moid} | Read a &#39;boot.PrecisionPolicy&#39; resource.
 [**GetBootPrecisionPolicyList**](BootApi.md#GetBootPrecisionPolicyList) | **Get** /api/v1/boot/PrecisionPolicies | Read a &#39;boot.PrecisionPolicy&#39; resource.
+[**GetBootPxeDeviceByMoid**](BootApi.md#GetBootPxeDeviceByMoid) | **Get** /api/v1/boot/PxeDevices/{Moid} | Read a &#39;boot.PxeDevice&#39; resource.
+[**GetBootPxeDeviceList**](BootApi.md#GetBootPxeDeviceList) | **Get** /api/v1/boot/PxeDevices | Read a &#39;boot.PxeDevice&#39; resource.
+[**GetBootSanDeviceByMoid**](BootApi.md#GetBootSanDeviceByMoid) | **Get** /api/v1/boot/SanDevices/{Moid} | Read a &#39;boot.SanDevice&#39; resource.
+[**GetBootSanDeviceList**](BootApi.md#GetBootSanDeviceList) | **Get** /api/v1/boot/SanDevices | Read a &#39;boot.SanDevice&#39; resource.
+[**GetBootSdDeviceByMoid**](BootApi.md#GetBootSdDeviceByMoid) | **Get** /api/v1/boot/SdDevices/{Moid} | Read a &#39;boot.SdDevice&#39; resource.
+[**GetBootSdDeviceList**](BootApi.md#GetBootSdDeviceList) | **Get** /api/v1/boot/SdDevices | Read a &#39;boot.SdDevice&#39; resource.
+[**GetBootUefiShellDeviceByMoid**](BootApi.md#GetBootUefiShellDeviceByMoid) | **Get** /api/v1/boot/UefiShellDevices/{Moid} | Read a &#39;boot.UefiShellDevice&#39; resource.
+[**GetBootUefiShellDeviceList**](BootApi.md#GetBootUefiShellDeviceList) | **Get** /api/v1/boot/UefiShellDevices | Read a &#39;boot.UefiShellDevice&#39; resource.
+[**GetBootUsbDeviceByMoid**](BootApi.md#GetBootUsbDeviceByMoid) | **Get** /api/v1/boot/UsbDevices/{Moid} | Read a &#39;boot.UsbDevice&#39; resource.
+[**GetBootUsbDeviceList**](BootApi.md#GetBootUsbDeviceList) | **Get** /api/v1/boot/UsbDevices | Read a &#39;boot.UsbDevice&#39; resource.
+[**GetBootVmediaDeviceByMoid**](BootApi.md#GetBootVmediaDeviceByMoid) | **Get** /api/v1/boot/VmediaDevices/{Moid} | Read a &#39;boot.VmediaDevice&#39; resource.
+[**GetBootVmediaDeviceList**](BootApi.md#GetBootVmediaDeviceList) | **Get** /api/v1/boot/VmediaDevices | Read a &#39;boot.VmediaDevice&#39; resource.
+[**PatchBootCddDevice**](BootApi.md#PatchBootCddDevice) | **Patch** /api/v1/boot/CddDevices/{Moid} | Update a &#39;boot.CddDevice&#39; resource.
 [**PatchBootDeviceBootMode**](BootApi.md#PatchBootDeviceBootMode) | **Patch** /api/v1/boot/DeviceBootModes/{Moid} | Update a &#39;boot.DeviceBootMode&#39; resource.
+[**PatchBootHddDevice**](BootApi.md#PatchBootHddDevice) | **Patch** /api/v1/boot/HddDevices/{Moid} | Update a &#39;boot.HddDevice&#39; resource.
+[**PatchBootIscsiDevice**](BootApi.md#PatchBootIscsiDevice) | **Patch** /api/v1/boot/IscsiDevices/{Moid} | Update a &#39;boot.IscsiDevice&#39; resource.
+[**PatchBootNvmeDevice**](BootApi.md#PatchBootNvmeDevice) | **Patch** /api/v1/boot/NvmeDevices/{Moid} | Update a &#39;boot.NvmeDevice&#39; resource.
+[**PatchBootPchStorageDevice**](BootApi.md#PatchBootPchStorageDevice) | **Patch** /api/v1/boot/PchStorageDevices/{Moid} | Update a &#39;boot.PchStorageDevice&#39; resource.
 [**PatchBootPrecisionPolicy**](BootApi.md#PatchBootPrecisionPolicy) | **Patch** /api/v1/boot/PrecisionPolicies/{Moid} | Update a &#39;boot.PrecisionPolicy&#39; resource.
+[**PatchBootPxeDevice**](BootApi.md#PatchBootPxeDevice) | **Patch** /api/v1/boot/PxeDevices/{Moid} | Update a &#39;boot.PxeDevice&#39; resource.
+[**PatchBootSanDevice**](BootApi.md#PatchBootSanDevice) | **Patch** /api/v1/boot/SanDevices/{Moid} | Update a &#39;boot.SanDevice&#39; resource.
+[**PatchBootSdDevice**](BootApi.md#PatchBootSdDevice) | **Patch** /api/v1/boot/SdDevices/{Moid} | Update a &#39;boot.SdDevice&#39; resource.
+[**PatchBootUefiShellDevice**](BootApi.md#PatchBootUefiShellDevice) | **Patch** /api/v1/boot/UefiShellDevices/{Moid} | Update a &#39;boot.UefiShellDevice&#39; resource.
+[**PatchBootUsbDevice**](BootApi.md#PatchBootUsbDevice) | **Patch** /api/v1/boot/UsbDevices/{Moid} | Update a &#39;boot.UsbDevice&#39; resource.
+[**PatchBootVmediaDevice**](BootApi.md#PatchBootVmediaDevice) | **Patch** /api/v1/boot/VmediaDevices/{Moid} | Update a &#39;boot.VmediaDevice&#39; resource.
+[**UpdateBootCddDevice**](BootApi.md#UpdateBootCddDevice) | **Post** /api/v1/boot/CddDevices/{Moid} | Update a &#39;boot.CddDevice&#39; resource.
 [**UpdateBootDeviceBootMode**](BootApi.md#UpdateBootDeviceBootMode) | **Post** /api/v1/boot/DeviceBootModes/{Moid} | Update a &#39;boot.DeviceBootMode&#39; resource.
+[**UpdateBootHddDevice**](BootApi.md#UpdateBootHddDevice) | **Post** /api/v1/boot/HddDevices/{Moid} | Update a &#39;boot.HddDevice&#39; resource.
+[**UpdateBootIscsiDevice**](BootApi.md#UpdateBootIscsiDevice) | **Post** /api/v1/boot/IscsiDevices/{Moid} | Update a &#39;boot.IscsiDevice&#39; resource.
+[**UpdateBootNvmeDevice**](BootApi.md#UpdateBootNvmeDevice) | **Post** /api/v1/boot/NvmeDevices/{Moid} | Update a &#39;boot.NvmeDevice&#39; resource.
+[**UpdateBootPchStorageDevice**](BootApi.md#UpdateBootPchStorageDevice) | **Post** /api/v1/boot/PchStorageDevices/{Moid} | Update a &#39;boot.PchStorageDevice&#39; resource.
 [**UpdateBootPrecisionPolicy**](BootApi.md#UpdateBootPrecisionPolicy) | **Post** /api/v1/boot/PrecisionPolicies/{Moid} | Update a &#39;boot.PrecisionPolicy&#39; resource.
+[**UpdateBootPxeDevice**](BootApi.md#UpdateBootPxeDevice) | **Post** /api/v1/boot/PxeDevices/{Moid} | Update a &#39;boot.PxeDevice&#39; resource.
+[**UpdateBootSanDevice**](BootApi.md#UpdateBootSanDevice) | **Post** /api/v1/boot/SanDevices/{Moid} | Update a &#39;boot.SanDevice&#39; resource.
+[**UpdateBootSdDevice**](BootApi.md#UpdateBootSdDevice) | **Post** /api/v1/boot/SdDevices/{Moid} | Update a &#39;boot.SdDevice&#39; resource.
+[**UpdateBootUefiShellDevice**](BootApi.md#UpdateBootUefiShellDevice) | **Post** /api/v1/boot/UefiShellDevices/{Moid} | Update a &#39;boot.UefiShellDevice&#39; resource.
+[**UpdateBootUsbDevice**](BootApi.md#UpdateBootUsbDevice) | **Post** /api/v1/boot/UsbDevices/{Moid} | Update a &#39;boot.UsbDevice&#39; resource.
+[**UpdateBootVmediaDevice**](BootApi.md#UpdateBootVmediaDevice) | **Post** /api/v1/boot/VmediaDevices/{Moid} | Update a &#39;boot.VmediaDevice&#39; resource.
 
 
 
@@ -36,13 +80,13 @@ import (
 )
 
 func main() {
-    bootPrecisionPolicy := openapiclient.boot.PrecisionPolicy{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{openapiclient.mo.Tag{Key: "Key_example", Value: "Value_example"}), VersionContext: openapiclient.mo.VersionContext{ClassId: "ClassId_example", ObjectType: "ObjectType_example", InterestedMos: []MoMoRef{openapiclient.mo.MoRef{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example"}), RefMo: openapiclient.mo.MoRef{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example"}, Timestamp: "TODO", Version: "Version_example", VersionType: "VersionType_example"}, Ancestors: []MoBaseMoRelationship{openapiclient.mo.BaseMo.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{openapiclient.mo.Tag{Key: "Key_example", Value: "Value_example"}), VersionContext: openapiclient.mo.VersionContext{ClassId: "ClassId_example", ObjectType: "ObjectType_example", InterestedMos: []MoMoRef{), RefMo: , Timestamp: "TODO", Version: "Version_example", VersionType: "VersionType_example"}, Ancestors: []MoBaseMoRelationship{openapiclient.mo.BaseMo.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }}), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }}), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", BootDevices: []BootDeviceBase{openapiclient.boot.DeviceBase{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Enabled: false, Name: "Name_example"}), ConfiguredBootMode: "ConfiguredBootMode_example", EnforceUefiSecureBoot: false, Organization: openapiclient.organization.Organization.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Account: openapiclient.iam.Account.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Status: "Status_example", Var2LicenseReservationOp: openapiclient.license.LicenseReservationOp.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, AuthCode: "AuthCode_example", AuthCodeInstalled: false, ConfirmCode: "ConfirmCode_example", GenerateRequestCode: false, GenerateReturnCode: false, RequestCode: "RequestCode_example", ReturnCode: "ReturnCode_example", Account: openapiclient.iam.Account.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Status: "Status_example", Var2LicenseReservationOp: openapiclient.license.LicenseReservationOp.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, AuthCode: "AuthCode_example", AuthCodeInstalled: false, ConfirmCode: "ConfirmCode_example", GenerateRequestCode: false, GenerateReturnCode: false, RequestCode: "RequestCode_example", ReturnCode: "ReturnCode_example", Account: }, AppRegistrations: []IamAppRegistrationRelationship{openapiclient.iam.AppRegistration.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ClientId: "ClientId_example", ClientName: "ClientName_example", ClientSecret: "ClientSecret_example", ClientType: "ClientType_example", Description: "Description_example", GrantTypes: []string{"GrantTypes_example"), RedirectUris: []string{"RedirectUris_example"), RenewClientSecret: false, ResponseTypes: []string{"ResponseTypes_example"), RevocationTimestamp: "TODO", Revoke: false, Account: , OauthTokens: []IamOAuthTokenRelationship{openapiclient.iam.OAuthToken.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, AccessExpirationTime: "TODO", ClientId: "ClientId_example", ClientIpAddress: "ClientIpAddress_example", ClientName: "ClientName_example", ExpirationTime: "TODO", LastLoginClient: "LastLoginClient_example", LastLoginTime: "TODO", TokenId: "TokenId_example", UserMeta: openapiclient.iam.ClientMeta{ClassId: "ClassId_example", ObjectType: "ObjectType_example", DeviceModel: "DeviceModel_example", UserAgent: "UserAgent_example"}, AppRegistration: openapiclient.iam.AppRegistration.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ClientId: "ClientId_example", ClientName: "ClientName_example", ClientSecret: "ClientSecret_example", ClientType: "ClientType_example", Description: "Description_example", GrantTypes: []string{"GrantTypes_example"), RedirectUris: []string{"RedirectUris_example"), RenewClientSecret: false, ResponseTypes: []string{"ResponseTypes_example"), RevocationTimestamp: "TODO", Revoke: false, Account: , OauthTokens: []IamOAuthTokenRelationship{openapiclient.iam.OAuthToken.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, AccessExpirationTime: "TODO", ClientId: "ClientId_example", ClientIpAddress: "ClientIpAddress_example", ClientName: "ClientName_example", ExpirationTime: "TODO", LastLoginClient: "LastLoginClient_example", LastLoginTime: "TODO", TokenId: "TokenId_example", UserMeta: openapiclient.iam.ClientMeta{ClassId: "ClassId_example", ObjectType: "ObjectType_example", DeviceModel: "DeviceModel_example", UserAgent: "UserAgent_example"}, AppRegistration: , Permission: openapiclient.iam.Permission.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Account: , EndPointRoles: []IamEndPointRoleRelationship{openapiclient.iam.EndPointRole.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", RoleType: "RoleType_example", Type: "Type_example", Account: , EndPointPrivileges: []IamEndPointPrivilegeRelationship{openapiclient.iam.EndPointPrivilege.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Type: "Type_example", System: openapiclient.iam.System.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, EndPointPrivileges: []IamEndPointPrivilegeRelationship{openapiclient.iam.EndPointPrivilege.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Type: "Type_example", System: openapiclient.iam.System.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, EndPointPrivileges: []IamEndPointPrivilegeRelationship{), EndPointRoles: []IamEndPointRoleRelationship{openapiclient.iam.EndPointRole.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", RoleType: "RoleType_example", Type: "Type_example", Account: , EndPointPrivileges: []IamEndPointPrivilegeRelationship{), System: }), Idp: openapiclient.iam.Idp.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DomainName: "DomainName_example", IdpEntityId: "IdpEntityId_example", Metadata: "Metadata_example", Name: "Name_example", Type: "Type_example", Account: , LdapPolicy: openapiclient.iam.LdapPolicy.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", BaseProperties: openapiclient.iam.LdapBaseProperties{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Attribute: "Attribute_example", BaseDn: "BaseDn_example", BindDn: "BindDn_example", BindMethod: "BindMethod_example", Domain: "Domain_example", EnableEncryption: false, EnableGroupAuthorization: false, Filter: "Filter_example", GroupAttribute: "GroupAttribute_example", IsPasswordSet: false, NestedGroupSearchDepth: int64(123), Password: "Password_example", Timeout: int64(123)}, DnsParameters: openapiclient.iam.LdapDnsParameters{ClassId: "ClassId_example", ObjectType: "ObjectType_example", SearchDomain: "SearchDomain_example", SearchForest: "SearchForest_example", Source: "Source_example"}, EnableDns: false, Enabled: false, UserSearchPrecedence: "UserSearchPrecedence_example", Var0Idp: openapiclient.iam.Idp.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DomainName: "DomainName_example", IdpEntityId: "IdpEntityId_example", Metadata: "Metadata_example", Name: "Name_example", Type: "Type_example", Account: , LdapPolicy: openapiclient.iam.LdapPolicy.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", BaseProperties: openapiclient.iam.LdapBaseProperties{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Attribute: "Attribute_example", BaseDn: "BaseDn_example", BindDn: "BindDn_example", BindMethod: "BindMethod_example", Domain: "Domain_example", EnableEncryption: false, EnableGroupAuthorization: false, Filter: "Filter_example", GroupAttribute: "GroupAttribute_example", IsPasswordSet: false, NestedGroupSearchDepth: int64(123), Password: "Password_example", Timeout: int64(123)}, DnsParameters: openapiclient.iam.LdapDnsParameters{ClassId: "ClassId_example", ObjectType: "ObjectType_example", SearchDomain: "SearchDomain_example", SearchForest: "SearchForest_example", Source: "Source_example"}, EnableDns: false, Enabled: false, UserSearchPrecedence: "UserSearchPrecedence_example", Var0Idp: , ApplianceAccount: , Groups: []IamLdapGroupRelationship{openapiclient.iam.LdapGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Domain: "Domain_example", Name: "Name_example", EndPointRole: []IamEndPointRoleRelationship{), LdapPolicy: }), Organization: openapiclient.organization.Organization.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Account: , ResourceGroups: []ResourceGroupRelationship{openapiclient.resource.Group.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", PerTypeCombinedSelector: []ResourcePerTypeCombinedSelector{openapiclient.resource.PerTypeCombinedSelector{ClassId: "ClassId_example", ObjectType: "ObjectType_example", CombinedSelector: "CombinedSelector_example", EmptyFilter: false, SelectorObjectType: "SelectorObjectType_example"}), Qualifier: "Qualifier_example", Selectors: []ResourceSelector{openapiclient.resource.Selector{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Selector: "Selector_example"}), Account: , Organizations: []OrganizationOrganizationRelationship{)})}, Profiles: []PolicyAbstractConfigProfileRelationship{openapiclient.policy.AbstractConfigProfile.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Type: "Type_example", SrcTemplate: openapiclient.policy.AbstractProfile.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Type: "Type_example", SrcTemplate: openapiclient.policy.AbstractProfile.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Type: "Type_example", SrcTemplate: }}, Action: "Action_example", ConfigContext: openapiclient.policy.ConfigContext{ClassId: "ClassId_example", ObjectType: "ObjectType_example", ConfigState: "ConfigState_example", ControlAction: "ControlAction_example", ErrorState: "ErrorState_example", OperState: "OperState_example"}}), Providers: []IamLdapProviderRelationship{openapiclient.iam.LdapProvider.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Port: int64(123), Server: "Server_example", LdapPolicy: })}, System: , UserPreferences: []IamUserPreferenceRelationship{openapiclient.iam.UserPreference.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Preference: 123, UserUniqueIdentifier: "UserUniqueIdentifier_example", Idp: , IdpReference: openapiclient.iam.IdpReference.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DomainName: "DomainName_example", IdpEntityId: "IdpEntityId_example", MultiFactorAuthentication: false, Name: "Name_example", Account: , Idp: , UserPreferences: []IamUserPreferenceRelationship{openapiclient.iam.UserPreference.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Preference: 123, UserUniqueIdentifier: "UserUniqueIdentifier_example", Idp: , IdpReference: openapiclient.iam.IdpReference.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DomainName: "DomainName_example", IdpEntityId: "IdpEntityId_example", MultiFactorAuthentication: false, Name: "Name_example", Account: , Idp: , UserPreferences: []IamUserPreferenceRelationship{), Usergroups: []IamUserGroupRelationship{openapiclient.iam.UserGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Idp: , Idpreference: , Permissions: []IamPermissionRelationship{openapiclient.iam.Permission.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Account: , EndPointRoles: []IamEndPointRoleRelationship{), ResourceRoles: []IamResourceRolesRelationship{openapiclient.iam.ResourceRoles.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, EndPointRoles: []IamEndPointRoleRelationship{), Permission: , Resource: , Roles: []IamRoleRelationship{openapiclient.iam.Role.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", PrivilegeNames: []string{"PrivilegeNames_example"), Account: , PrivilegeSets: []IamPrivilegeSetRelationship{openapiclient.iam.PrivilegeSet.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", PrivilegeNames: []string{"PrivilegeNames_example"), Account: , AssociatedPrivilegeSets: []IamPrivilegeSetRelationship{openapiclient.iam.PrivilegeSet.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", PrivilegeNames: []string{"PrivilegeNames_example"), Account: , AssociatedPrivilegeSets: []IamPrivilegeSetRelationship{), Privileges: []IamPrivilegeRelationship{openapiclient.iam.Privilege.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, HostnamePrefix: "HostnamePrefix_example", Method: "Method_example", Name: "Name_example", RestPath: "RestPath_example", UrlPrefix: "UrlPrefix_example", Account: , System: }), System: }), Privileges: []IamPrivilegeRelationship{openapiclient.iam.Privilege.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, HostnamePrefix: "HostnamePrefix_example", Method: "Method_example", Name: "Name_example", RestPath: "RestPath_example", UrlPrefix: "UrlPrefix_example", Account: , System: }), System: }), System: })}), Roles: []IamRoleRelationship{openapiclient.iam.Role.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", PrivilegeNames: []string{"PrivilegeNames_example"), Account: , PrivilegeSets: []IamPrivilegeSetRelationship{), System: }), SessionLimits: openapiclient.iam.SessionLimits.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, IdleTimeOut: int64(123), MaximumLimit: int64(123), PerUserLimit: int64(123), SessionTimeOut: int64(123), Account: , Permission: }, UserGroups: []IamUserGroupRelationship{openapiclient.iam.UserGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Idp: , Idpreference: , Permissions: []IamPermissionRelationship{), Qualifier: openapiclient.iam.Qualifier.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Value: []string{"Value_example"), Usergroup: }, Users: []IamUserRelationship{openapiclient.iam.User.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ClientIpAddress: "ClientIpAddress_example", Email: "Email_example", FirstName: "FirstName_example", LastLoginTime: "TODO", LastName: "LastName_example", Name: "Name_example", UserIdOrEmail: "UserIdOrEmail_example", UserType: "UserType_example", UserUniqueIdentifier: "UserUniqueIdentifier_example", ApiKeys: []IamApiKeyRelationship{openapiclient.iam.ApiKey.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, HashAlgorithm: "HashAlgorithm_example", KeySpec: openapiclient.pkix.KeyGenerationSpec{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Name: "Name_example"}, PrivateKey: "PrivateKey_example", Purpose: "Purpose_example", SigningAlgorithm: "SigningAlgorithm_example", Permission: , User: openapiclient.iam.User.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ClientIpAddress: "ClientIpAddress_example", Email: "Email_example", FirstName: "FirstName_example", LastLoginTime: "TODO", LastName: "LastName_example", Name: "Name_example", UserIdOrEmail: "UserIdOrEmail_example", UserType: "UserType_example", UserUniqueIdentifier: "UserUniqueIdentifier_example", ApiKeys: []IamApiKeyRelationship{openapiclient.iam.ApiKey.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, HashAlgorithm: "HashAlgorithm_example", KeySpec: openapiclient.pkix.KeyGenerationSpec{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Name: "Name_example"}, PrivateKey: "PrivateKey_example", Purpose: "Purpose_example", SigningAlgorithm: "SigningAlgorithm_example", Permission: , User: }), AppRegistrations: []IamAppRegistrationRelationship{), Idp: , Idpreference: , LocalUserPassword: openapiclient.iam.LocalUserPassword.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, CurrentPassword: "CurrentPassword_example", NewPassword: "NewPassword_example", Password: 123, User: }, OauthTokens: []IamOAuthTokenRelationship{), Permissions: []IamPermissionRelationship{), Sessions: []IamSessionRelationship{openapiclient.iam.Session.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, AccountPermissions: []IamAccountPermissions{openapiclient.iam.AccountPermissions{ClassId: "ClassId_example", ObjectType: "ObjectType_example", AccountIdentifier: "AccountIdentifier_example", AccountName: "AccountName_example", AccountStatus: "AccountStatus_example", Permissions: []IamPermissionReference{openapiclient.iam.PermissionReference{ClassId: "ClassId_example", ObjectType: "ObjectType_example", PermissionIdentifier: "PermissionIdentifier_example", PermissionName: "PermissionName_example"})}), ClientIpAddress: "ClientIpAddress_example", Expiration: "TODO", IdleTimeExpiration: "TODO", LastLoginClient: "LastLoginClient_example", LastLoginTime: "TODO", Permission: , User: })}}), AppRegistrations: []IamAppRegistrationRelationship{), Idp: , Idpreference: , LocalUserPassword: openapiclient.iam.LocalUserPassword.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, CurrentPassword: "CurrentPassword_example", NewPassword: "NewPassword_example", Password: 123, User: }, OauthTokens: []IamOAuthTokenRelationship{), Permissions: []IamPermissionRelationship{), Sessions: []IamSessionRelationship{openapiclient.iam.Session.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, AccountPermissions: []IamAccountPermissions{openapiclient.iam.AccountPermissions{ClassId: "ClassId_example", ObjectType: "ObjectType_example", AccountIdentifier: "AccountIdentifier_example", AccountName: "AccountName_example", AccountStatus: "AccountStatus_example", Permissions: []IamPermissionReference{openapiclient.iam.PermissionReference{ClassId: "ClassId_example", ObjectType: "ObjectType_example", PermissionIdentifier: "PermissionIdentifier_example", PermissionName: "PermissionName_example"})}), ClientIpAddress: "ClientIpAddress_example", Expiration: "TODO", IdleTimeExpiration: "TODO", LastLoginClient: "LastLoginClient_example", LastLoginTime: "TODO", Permission: , User: })})}), Users: []IamUserRelationship{)}), Qualifier: openapiclient.iam.Qualifier.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Value: []string{"Value_example"), Usergroup: }, Users: []IamUserRelationship{)}), Users: []IamUserRelationship{)}}), Usergroups: []IamUserGroupRelationship{), Users: []IamUserRelationship{)}}), Usergroups: []IamUserGroupRelationship{), Users: []IamUserRelationship{)}, ApplianceAccount: , Groups: []IamLdapGroupRelationship{openapiclient.iam.LdapGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Domain: "Domain_example", Name: "Name_example", EndPointRole: []IamEndPointRoleRelationship{), LdapPolicy: }), Organization: , Profiles: []PolicyAbstractConfigProfileRelationship{openapiclient.policy.AbstractConfigProfile.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", Type: "Type_example", SrcTemplate: , Action: "Action_example", ConfigContext: openapiclient.policy.ConfigContext{ClassId: "ClassId_example", ObjectType: "ObjectType_example", ConfigState: "ConfigState_example", ControlAction: "ControlAction_example", ErrorState: "ErrorState_example", OperState: "OperState_example"}}), Providers: []IamLdapProviderRelationship{openapiclient.iam.LdapProvider.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Port: int64(123), Server: "Server_example", LdapPolicy: })}, System: , UserPreferences: []IamUserPreferenceRelationship{), Usergroups: []IamUserGroupRelationship{), Users: []IamUserRelationship{)}, PrivilegeSets: []IamPrivilegeSetRelationship{), Privileges: []IamPrivilegeRelationship{), Roles: []IamRoleRelationship{), ServiceProvider: openapiclient.iam.ServiceProvider.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, EntityId: "EntityId_example", Metadata: "Metadata_example", Name: "Name_example", System: }}}), EndPointRoles: []IamEndPointRoleRelationship{), Idp: , PrivilegeSets: []IamPrivilegeSetRelationship{), Privileges: []IamPrivilegeRelationship{), Roles: []IamRoleRelationship{), ServiceProvider: openapiclient.iam.ServiceProvider.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, EntityId: "EntityId_example", Metadata: "Metadata_example", Name: "Name_example", System: }}}), System: }), ResourceRoles: []IamResourceRolesRelationship{openapiclient.iam.ResourceRoles.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, EndPointRoles: []IamEndPointRoleRelationship{), Permission: , Resource: , Roles: []IamRoleRelationship{)}), Roles: []IamRoleRelationship{), SessionLimits: openapiclient.iam.SessionLimits.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, IdleTimeOut: int64(123), MaximumLimit: int64(123), PerUserLimit: int64(123), SessionTimeOut: int64(123), Account: , Permission: }, UserGroups: []IamUserGroupRelationship{), Users: []IamUserRelationship{)}, User: }), Permission: , Roles: []IamRoleRelationship{), User: }, Permission: , User: }), Permission: , Roles: []IamRoleRelationship{), User: }), DomainGroups: []IamDomainGroupRelationship{openapiclient.iam.DomainGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Partition1: int64(123), Partition2: int64(123), Partition3: int64(123), PartitionKey: "PartitionKey_example", Usage: int64(123), Account: }), EndPointRoles: []IamEndPointRoleRelationship{), Idpreferences: []IamIdpReferenceRelationship{), Idps: []IamIdpRelationship{), Permissions: []IamPermissionRelationship{), PrivilegeSets: []IamPrivilegeSetRelationship{), Privileges: []IamPrivilegeRelationship{), ResourceLimits: openapiclient.iam.ResourceLimits.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, PerAccountUserLimit: int64(123), Account: }, Roles: []IamRoleRelationship{), SecurityHolder: openapiclient.iam.SecurityHolder.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Account: , IpRulesConfiguration: openapiclient.iam.IpAccessManagement.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Enable: false, LastRecoveryTime: "TODO", Holder: openapiclient.iam.SecurityHolder.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Account: , IpRulesConfiguration: openapiclient.iam.IpAccessManagement.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Enable: false, LastRecoveryTime: "TODO", Holder: , IpAddresses: []IamIpAddressRelationship{openapiclient.iam.IpAddress.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Address: "Address_example", Description: "Description_example", IpAccessManagement: })}, ResourcePermissions: []IamResourcePermissionRelationship{openapiclient.iam.ResourcePermission.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, PermissionRoles: []IamPermissionToRoles{openapiclient.iam.PermissionToRoles{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Permission: openapiclient.cmrf.CmRf{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example"}, Roles: []CmrfCmRf{openapiclient.cmrf.CmRf{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example"})}), TargetApp: "TargetApp_example", Holder: , Resource: })}, IpAddresses: []IamIpAddressRelationship{openapiclient.iam.IpAddress.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Address: "Address_example", Description: "Description_example", IpAccessManagement: })}, ResourcePermissions: []IamResourcePermissionRelationship{openapiclient.iam.ResourcePermission.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, PermissionRoles: []IamPermissionToRoles{openapiclient.iam.PermissionToRoles{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Permission: , Roles: []CmrfCmRf{)}), TargetApp: "TargetApp_example", Holder: , Resource: })}, SessionLimits: }}, AppRegistrations: []IamAppRegistrationRelationship{), DomainGroups: []IamDomainGroupRelationship{openapiclient.iam.DomainGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", Partition1: int64(123), Partition2: int64(123), Partition3: int64(123), PartitionKey: "PartitionKey_example", Usage: int64(123), Account: }), EndPointRoles: []IamEndPointRoleRelationship{), Idpreferences: []IamIdpReferenceRelationship{), Idps: []IamIdpRelationship{), Permissions: []IamPermissionRelationship{), PrivilegeSets: []IamPrivilegeSetRelationship{), Privileges: []IamPrivilegeRelationship{), ResourceLimits: openapiclient.iam.ResourceLimits.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, PerAccountUserLimit: int64(123), Account: }, Roles: []IamRoleRelationship{), SecurityHolder: , SessionLimits: }, ResourceGroups: []ResourceGroupRelationship{openapiclient.resource.Group.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Name: "Name_example", PerTypeCombinedSelector: []ResourcePerTypeCombinedSelector{openapiclient.resource.PerTypeCombinedSelector{ClassId: "ClassId_example", ObjectType: "ObjectType_example", CombinedSelector: "CombinedSelector_example", EmptyFilter: false, SelectorObjectType: "SelectorObjectType_example"}), Qualifier: "Qualifier_example", Selectors: []ResourceSelector{openapiclient.resource.Selector{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Selector: "Selector_example"}), Account: , Organizations: []OrganizationOrganizationRelationship{)})}, Profiles: []PolicyAbstractConfigProfileRelationship{)} // BootPrecisionPolicy | The 'boot.PrecisionPolicy' resource to create.
+    bootPrecisionPolicy := *openapiclient.Newboot.PrecisionPolicy("ClassId_example", "ObjectType_example") // BootPrecisionPolicy | The 'boot.PrecisionPolicy' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.BootApi.CreateBootPrecisionPolicy(context.Background(), bootPrecisionPolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    resp, r, err := api_client.BootApi.CreateBootPrecisionPolicy(context.Background()).BootPrecisionPolicy(bootPrecisionPolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `BootApi.CreateBootPrecisionPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -73,7 +117,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -139,12 +183,164 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
 - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBootCddDeviceByMoid
+
+> BootCddDevice GetBootCddDeviceByMoid(ctx, moid).Execute()
+
+Read a 'boot.CddDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.GetBootCddDeviceByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootCddDeviceByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetBootCddDeviceByMoid`: BootCddDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.GetBootCddDeviceByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBootCddDeviceByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**BootCddDevice**](boot.CddDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBootCddDeviceList
+
+> BootCddDeviceResponse GetBootCddDeviceList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'boot.CddDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.GetBootCddDeviceList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootCddDeviceList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetBootCddDeviceList`: BootCddDeviceResponse
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.GetBootCddDeviceList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBootCddDeviceListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**BootCddDeviceResponse**](boot.CddDevice.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -207,7 +403,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -252,7 +448,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.BootApi.GetBootDeviceBootModeList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.BootApi.GetBootDeviceBootModeList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootDeviceBootModeList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -291,7 +487,615 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBootHddDeviceByMoid
+
+> BootHddDevice GetBootHddDeviceByMoid(ctx, moid).Execute()
+
+Read a 'boot.HddDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.GetBootHddDeviceByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootHddDeviceByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetBootHddDeviceByMoid`: BootHddDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.GetBootHddDeviceByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBootHddDeviceByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**BootHddDevice**](boot.HddDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBootHddDeviceList
+
+> BootHddDeviceResponse GetBootHddDeviceList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'boot.HddDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.GetBootHddDeviceList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootHddDeviceList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetBootHddDeviceList`: BootHddDeviceResponse
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.GetBootHddDeviceList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBootHddDeviceListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**BootHddDeviceResponse**](boot.HddDevice.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBootIscsiDeviceByMoid
+
+> BootIscsiDevice GetBootIscsiDeviceByMoid(ctx, moid).Execute()
+
+Read a 'boot.IscsiDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.GetBootIscsiDeviceByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootIscsiDeviceByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetBootIscsiDeviceByMoid`: BootIscsiDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.GetBootIscsiDeviceByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBootIscsiDeviceByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**BootIscsiDevice**](boot.IscsiDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBootIscsiDeviceList
+
+> BootIscsiDeviceResponse GetBootIscsiDeviceList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'boot.IscsiDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.GetBootIscsiDeviceList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootIscsiDeviceList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetBootIscsiDeviceList`: BootIscsiDeviceResponse
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.GetBootIscsiDeviceList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBootIscsiDeviceListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**BootIscsiDeviceResponse**](boot.IscsiDevice.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBootNvmeDeviceByMoid
+
+> BootNvmeDevice GetBootNvmeDeviceByMoid(ctx, moid).Execute()
+
+Read a 'boot.NvmeDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.GetBootNvmeDeviceByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootNvmeDeviceByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetBootNvmeDeviceByMoid`: BootNvmeDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.GetBootNvmeDeviceByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBootNvmeDeviceByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**BootNvmeDevice**](boot.NvmeDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBootNvmeDeviceList
+
+> BootNvmeDeviceResponse GetBootNvmeDeviceList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'boot.NvmeDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.GetBootNvmeDeviceList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootNvmeDeviceList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetBootNvmeDeviceList`: BootNvmeDeviceResponse
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.GetBootNvmeDeviceList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBootNvmeDeviceListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**BootNvmeDeviceResponse**](boot.NvmeDevice.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBootPchStorageDeviceByMoid
+
+> BootPchStorageDevice GetBootPchStorageDeviceByMoid(ctx, moid).Execute()
+
+Read a 'boot.PchStorageDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.GetBootPchStorageDeviceByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootPchStorageDeviceByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetBootPchStorageDeviceByMoid`: BootPchStorageDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.GetBootPchStorageDeviceByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBootPchStorageDeviceByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**BootPchStorageDevice**](boot.PchStorageDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBootPchStorageDeviceList
+
+> BootPchStorageDeviceResponse GetBootPchStorageDeviceList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'boot.PchStorageDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.GetBootPchStorageDeviceList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootPchStorageDeviceList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetBootPchStorageDeviceList`: BootPchStorageDeviceResponse
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.GetBootPchStorageDeviceList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBootPchStorageDeviceListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**BootPchStorageDeviceResponse**](boot.PchStorageDevice.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -359,7 +1163,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -404,7 +1208,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.BootApi.GetBootPrecisionPolicyList(context.Background(), ).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    resp, r, err := api_client.BootApi.GetBootPrecisionPolicyList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootPrecisionPolicyList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -443,12 +1247,996 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
 - **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBootPxeDeviceByMoid
+
+> BootPxeDevice GetBootPxeDeviceByMoid(ctx, moid).Execute()
+
+Read a 'boot.PxeDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.GetBootPxeDeviceByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootPxeDeviceByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetBootPxeDeviceByMoid`: BootPxeDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.GetBootPxeDeviceByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBootPxeDeviceByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**BootPxeDevice**](boot.PxeDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBootPxeDeviceList
+
+> BootPxeDeviceResponse GetBootPxeDeviceList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'boot.PxeDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.GetBootPxeDeviceList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootPxeDeviceList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetBootPxeDeviceList`: BootPxeDeviceResponse
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.GetBootPxeDeviceList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBootPxeDeviceListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**BootPxeDeviceResponse**](boot.PxeDevice.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBootSanDeviceByMoid
+
+> BootSanDevice GetBootSanDeviceByMoid(ctx, moid).Execute()
+
+Read a 'boot.SanDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.GetBootSanDeviceByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootSanDeviceByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetBootSanDeviceByMoid`: BootSanDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.GetBootSanDeviceByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBootSanDeviceByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**BootSanDevice**](boot.SanDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBootSanDeviceList
+
+> BootSanDeviceResponse GetBootSanDeviceList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'boot.SanDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.GetBootSanDeviceList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootSanDeviceList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetBootSanDeviceList`: BootSanDeviceResponse
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.GetBootSanDeviceList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBootSanDeviceListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**BootSanDeviceResponse**](boot.SanDevice.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBootSdDeviceByMoid
+
+> BootSdDevice GetBootSdDeviceByMoid(ctx, moid).Execute()
+
+Read a 'boot.SdDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.GetBootSdDeviceByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootSdDeviceByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetBootSdDeviceByMoid`: BootSdDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.GetBootSdDeviceByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBootSdDeviceByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**BootSdDevice**](boot.SdDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBootSdDeviceList
+
+> BootSdDeviceResponse GetBootSdDeviceList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'boot.SdDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.GetBootSdDeviceList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootSdDeviceList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetBootSdDeviceList`: BootSdDeviceResponse
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.GetBootSdDeviceList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBootSdDeviceListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**BootSdDeviceResponse**](boot.SdDevice.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBootUefiShellDeviceByMoid
+
+> BootUefiShellDevice GetBootUefiShellDeviceByMoid(ctx, moid).Execute()
+
+Read a 'boot.UefiShellDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.GetBootUefiShellDeviceByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootUefiShellDeviceByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetBootUefiShellDeviceByMoid`: BootUefiShellDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.GetBootUefiShellDeviceByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBootUefiShellDeviceByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**BootUefiShellDevice**](boot.UefiShellDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBootUefiShellDeviceList
+
+> BootUefiShellDeviceResponse GetBootUefiShellDeviceList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'boot.UefiShellDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.GetBootUefiShellDeviceList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootUefiShellDeviceList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetBootUefiShellDeviceList`: BootUefiShellDeviceResponse
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.GetBootUefiShellDeviceList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBootUefiShellDeviceListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**BootUefiShellDeviceResponse**](boot.UefiShellDevice.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBootUsbDeviceByMoid
+
+> BootUsbDevice GetBootUsbDeviceByMoid(ctx, moid).Execute()
+
+Read a 'boot.UsbDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.GetBootUsbDeviceByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootUsbDeviceByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetBootUsbDeviceByMoid`: BootUsbDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.GetBootUsbDeviceByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBootUsbDeviceByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**BootUsbDevice**](boot.UsbDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBootUsbDeviceList
+
+> BootUsbDeviceResponse GetBootUsbDeviceList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'boot.UsbDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.GetBootUsbDeviceList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootUsbDeviceList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetBootUsbDeviceList`: BootUsbDeviceResponse
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.GetBootUsbDeviceList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBootUsbDeviceListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**BootUsbDeviceResponse**](boot.UsbDevice.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBootVmediaDeviceByMoid
+
+> BootVmediaDevice GetBootVmediaDeviceByMoid(ctx, moid).Execute()
+
+Read a 'boot.VmediaDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.GetBootVmediaDeviceByMoid(context.Background(), moid).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootVmediaDeviceByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetBootVmediaDeviceByMoid`: BootVmediaDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.GetBootVmediaDeviceByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBootVmediaDeviceByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**BootVmediaDevice**](boot.VmediaDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBootVmediaDeviceList
+
+> BootVmediaDeviceResponse GetBootVmediaDeviceList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'boot.VmediaDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.GetBootVmediaDeviceList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.GetBootVmediaDeviceList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetBootVmediaDeviceList`: BootVmediaDeviceResponse
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.GetBootVmediaDeviceList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBootVmediaDeviceListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**BootVmediaDeviceResponse**](boot.VmediaDevice.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchBootCddDevice
+
+> BootCddDevice PatchBootCddDevice(ctx, moid).BootCddDevice(bootCddDevice).IfMatch(ifMatch).Execute()
+
+Update a 'boot.CddDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    bootCddDevice := *openapiclient.Newboot.CddDevice("ClassId_example", "ObjectType_example") // BootCddDevice | The 'boot.CddDevice' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.PatchBootCddDevice(context.Background(), moid).BootCddDevice(bootCddDevice).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.PatchBootCddDevice``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchBootCddDevice`: BootCddDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.PatchBootCddDevice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchBootCddDeviceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **bootCddDevice** | [**BootCddDevice**](BootCddDevice.md) | The &#39;boot.CddDevice&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**BootCddDevice**](boot.CddDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -475,12 +2263,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    bootDeviceBootMode := openapiclient.boot.DeviceBootMode{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ConfiguredBootMode: "ConfiguredBootMode_example", ComputeRackUnit: openapiclient.compute.RackUnit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminPowerState: "AdminPowerState_example", AlarmSummary: openapiclient.compute.AlarmSummary{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Critical: int64(123), Warning: int64(123)}, AssetTag: "AssetTag_example", AvailableMemory: int64(123), BiosPostComplete: false, FaultSummary: int64(123), KvmIpAddresses: []ComputeIpAddress{openapiclient.compute.IpAddress{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Address: "Address_example", Category: "Category_example", DefaultGateway: "DefaultGateway_example", Dn: "Dn_example", HttpPort: int64(123), HttpsPort: int64(123), KvmPort: int64(123), KvmVlan: int64(123), Name: "Name_example", Subnet: "Subnet_example", Type: "Type_example"}), ManagementMode: "ManagementMode_example", MemorySpeed: "MemorySpeed_example", MgmtIpAddress: "MgmtIpAddress_example", NumAdaptors: int64(123), NumCpuCores: int64(123), NumCpuCoresEnabled: int64(123), NumCpus: int64(123), NumEthHostInterfaces: int64(123), NumFcHostInterfaces: int64(123), NumThreads: int64(123), OperPowerState: "OperPowerState_example", OperState: "OperState_example", Operability: "Operability_example", PlatformType: "PlatformType_example", Presence: "Presence_example", ServiceProfile: "ServiceProfile_example", TotalMemory: int64(123), UserLabel: "UserLabel_example", Uuid: "Uuid_example", MgmtIdentity: openapiclient.equipment.PhysicalIdentity.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, AdminAction: "AdminAction_example", AdminActionState: "AdminActionState_example", Identifier: int64(123), Lifecycle: "Lifecycle_example", Model: "Model_example", Serial: "Serial_example", Vendor: "Vendor_example", DeviceRegistration: openapiclient.asset.DeviceRegistration.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ApiVersion: int64(123), AppPartitionNumber: int64(123), ConnectionId: "ConnectionId_example", ConnectionReason: "ConnectionReason_example", ConnectionStatus: "ConnectionStatus_example", ConnectionStatusLastChangeTime: "TODO", ConnectorVersion: "ConnectorVersion_example", DeviceExternalIpAddress: "DeviceExternalIpAddress_example", ProxyApp: "ProxyApp_example", AccessKeyId: "AccessKeyId_example", ClaimedByUserName: "ClaimedByUserName_example", ClaimedTime: "TODO", DeviceHostname: []string{"DeviceHostname_example"), DeviceIpAddress: []string{"DeviceIpAddress_example"), ExecutionMode: "ExecutionMode_example", ParentSignature: openapiclient.asset.ParentConnectionSignature{ClassId: "ClassId_example", ObjectType: "ObjectType_example", DeviceId: "DeviceId_example", NodeId: "NodeId_example", Signature: 123, TimeStamp: "TODO"}, Pid: []string{"Pid_example"), PlatformType: "PlatformType_example", PublicAccessKey: "PublicAccessKey_example", ReadOnly: false, Serial: []string{"Serial_example"), Vendor: "Vendor_example", Account: , ClaimedByUser: , ClusterMembers: []AssetClusterMemberRelationship{openapiclient.asset.ClusterMember.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ApiVersion: int64(123), AppPartitionNumber: int64(123), ConnectionId: "ConnectionId_example", ConnectionReason: "ConnectionReason_example", ConnectionStatus: "ConnectionStatus_example", ConnectionStatusLastChangeTime: "TODO", ConnectorVersion: "ConnectorVersion_example", DeviceExternalIpAddress: "DeviceExternalIpAddress_example", ProxyApp: "ProxyApp_example", Leadership: "Leadership_example", LockedLeader: false, MemberIdentity: "MemberIdentity_example", ParentClusterMemberIdentity: "ParentClusterMemberIdentity_example", Sudi: openapiclient.asset.SudiInfo{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Pid: "Pid_example", SerialNumber: "SerialNumber_example", Signature: "Signature_example", Status: "Status_example", SudiCertificate: openapiclient.x509.Certificate{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Issuer: openapiclient.pkix.DistinguishedName{ClassId: "ClassId_example", ObjectType: "ObjectType_example", CommonName: "CommonName_example", Country: []string{"Country_example"), Locality: []string{"Locality_example"), Organization: []string{"Organization_example"), OrganizationalUnit: []string{"OrganizationalUnit_example"), State: []string{"State_example")}, NotAfter: "TODO", NotBefore: "TODO", PemCertificate: "PemCertificate_example", Sha256Fingerprint: "Sha256Fingerprint_example", SignatureAlgorithm: "SignatureAlgorithm_example", Subject: openapiclient.pkix.DistinguishedName{ClassId: "ClassId_example", ObjectType: "ObjectType_example", CommonName: "CommonName_example", Country: []string{"Country_example"), Locality: []string{"Locality_example"), Organization: []string{"Organization_example"), OrganizationalUnit: []string{"OrganizationalUnit_example"), State: []string{"State_example")}}}, Device: openapiclient.asset.DeviceRegistration.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ApiVersion: int64(123), AppPartitionNumber: int64(123), ConnectionId: "ConnectionId_example", ConnectionReason: "ConnectionReason_example", ConnectionStatus: "ConnectionStatus_example", ConnectionStatusLastChangeTime: "TODO", ConnectorVersion: "ConnectorVersion_example", DeviceExternalIpAddress: "DeviceExternalIpAddress_example", ProxyApp: "ProxyApp_example", AccessKeyId: "AccessKeyId_example", ClaimedByUserName: "ClaimedByUserName_example", ClaimedTime: "TODO", DeviceHostname: []string{"DeviceHostname_example"), DeviceIpAddress: []string{"DeviceIpAddress_example"), ExecutionMode: "ExecutionMode_example", ParentSignature: openapiclient.asset.ParentConnectionSignature{ClassId: "ClassId_example", ObjectType: "ObjectType_example", DeviceId: "DeviceId_example", NodeId: "NodeId_example", Signature: 123, TimeStamp: "TODO"}, Pid: []string{"Pid_example"), PlatformType: "PlatformType_example", PublicAccessKey: "PublicAccessKey_example", ReadOnly: false, Serial: []string{"Serial_example"), Vendor: "Vendor_example", Account: , ClaimedByUser: , ClusterMembers: []AssetClusterMemberRelationship{openapiclient.asset.ClusterMember.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ApiVersion: int64(123), AppPartitionNumber: int64(123), ConnectionId: "ConnectionId_example", ConnectionReason: "ConnectionReason_example", ConnectionStatus: "ConnectionStatus_example", ConnectionStatusLastChangeTime: "TODO", ConnectorVersion: "ConnectorVersion_example", DeviceExternalIpAddress: "DeviceExternalIpAddress_example", ProxyApp: "ProxyApp_example", Leadership: "Leadership_example", LockedLeader: false, MemberIdentity: "MemberIdentity_example", ParentClusterMemberIdentity: "ParentClusterMemberIdentity_example", Sudi: openapiclient.asset.SudiInfo{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Pid: "Pid_example", SerialNumber: "SerialNumber_example", Signature: "Signature_example", Status: "Status_example", SudiCertificate: openapiclient.x509.Certificate{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Issuer: , NotAfter: "TODO", NotBefore: "TODO", PemCertificate: "PemCertificate_example", Sha256Fingerprint: "Sha256Fingerprint_example", SignatureAlgorithm: "SignatureAlgorithm_example", Subject: }}, Device: }), DeviceClaim: openapiclient.asset.DeviceClaim.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceUpdates: []AssetConnectionControlMessage{openapiclient.asset.ConnectionControlMessage{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Account: "Account_example", ConnectorVersion: "ConnectorVersion_example", DeviceId: "DeviceId_example", DomainGroup: "DomainGroup_example", Evict: false, Leadership: "Leadership_example", NewIdentity: "NewIdentity_example", Partition: int64(123)}), SecurityToken: "SecurityToken_example", SerialNumber: "SerialNumber_example", Account: , Device: }, DeviceConfiguration: openapiclient.asset.DeviceConfiguration.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, LocalConfigurationLocked: false, LogLevel: "LogLevel_example", Device: }, DomainGroup: , ParentConnection: }}), DeviceClaim: openapiclient.asset.DeviceClaim.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceUpdates: []AssetConnectionControlMessage{openapiclient.asset.ConnectionControlMessage{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Account: "Account_example", ConnectorVersion: "ConnectorVersion_example", DeviceId: "DeviceId_example", DomainGroup: "DomainGroup_example", Evict: false, Leadership: "Leadership_example", NewIdentity: "NewIdentity_example", Partition: int64(123)}), SecurityToken: "SecurityToken_example", SerialNumber: "SerialNumber_example", Account: , Device: }, DeviceConfiguration: openapiclient.asset.DeviceConfiguration.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, LocalConfigurationLocked: false, LogLevel: "LogLevel_example", Device: }, DomainGroup: , ParentConnection: }, PhysicalDeviceRegistration: }, ConnectionStatus: "ConnectionStatus_example", ServerId: int64(123), TopologyScanStatus: "TopologyScanStatus_example", Adapters: []AdapterUnitRelationship{openapiclient.adapter.Unit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdapterId: "AdapterId_example", BaseMacAddress: "BaseMacAddress_example", ConnectionStatus: "ConnectionStatus_example", Integrated: "Integrated_example", OperState: "OperState_example", Operability: "Operability_example", PartNumber: "PartNumber_example", PciSlot: "PciSlot_example", Power: "Power_example", Presence: "Presence_example", Thermal: "Thermal_example", Vid: "Vid_example", ComputeBlade: openapiclient.compute.Blade.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminPowerState: "AdminPowerState_example", AlarmSummary: openapiclient.compute.AlarmSummary{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Critical: int64(123), Warning: int64(123)}, AssetTag: "AssetTag_example", AvailableMemory: int64(123), BiosPostComplete: false, FaultSummary: int64(123), KvmIpAddresses: []ComputeIpAddress{openapiclient.compute.IpAddress{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Address: "Address_example", Category: "Category_example", DefaultGateway: "DefaultGateway_example", Dn: "Dn_example", HttpPort: int64(123), HttpsPort: int64(123), KvmPort: int64(123), KvmVlan: int64(123), Name: "Name_example", Subnet: "Subnet_example", Type: "Type_example"}), ManagementMode: "ManagementMode_example", MemorySpeed: "MemorySpeed_example", MgmtIpAddress: "MgmtIpAddress_example", NumAdaptors: int64(123), NumCpuCores: int64(123), NumCpuCoresEnabled: int64(123), NumCpus: int64(123), NumEthHostInterfaces: int64(123), NumFcHostInterfaces: int64(123), NumThreads: int64(123), OperPowerState: "OperPowerState_example", OperState: "OperState_example", Operability: "Operability_example", PlatformType: "PlatformType_example", Presence: "Presence_example", ServiceProfile: "ServiceProfile_example", TotalMemory: int64(123), UserLabel: "UserLabel_example", Uuid: "Uuid_example", MgmtIdentity: openapiclient.equipment.PhysicalIdentity.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, AdminAction: "AdminAction_example", AdminActionState: "AdminActionState_example", Identifier: int64(123), Lifecycle: "Lifecycle_example", Model: "Model_example", Serial: "Serial_example", Vendor: "Vendor_example", DeviceRegistration: , PhysicalDeviceRegistration: }, ChassisId: "ChassisId_example", ScaledMode: "ScaledMode_example", SlotId: int64(123), Adapters: []AdapterUnitRelationship{openapiclient.adapter.Unit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdapterId: "AdapterId_example", BaseMacAddress: "BaseMacAddress_example", ConnectionStatus: "ConnectionStatus_example", Integrated: "Integrated_example", OperState: "OperState_example", Operability: "Operability_example", PartNumber: "PartNumber_example", PciSlot: "PciSlot_example", Power: "Power_example", Presence: "Presence_example", Thermal: "Thermal_example", Vid: "Vid_example", ComputeBlade: openapiclient.compute.Blade.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminPowerState: "AdminPowerState_example", AlarmSummary: , AssetTag: "AssetTag_example", AvailableMemory: int64(123), BiosPostComplete: false, FaultSummary: int64(123), KvmIpAddresses: []ComputeIpAddress{), ManagementMode: "ManagementMode_example", MemorySpeed: "MemorySpeed_example", MgmtIpAddress: "MgmtIpAddress_example", NumAdaptors: int64(123), NumCpuCores: int64(123), NumCpuCoresEnabled: int64(123), NumCpus: int64(123), NumEthHostInterfaces: int64(123), NumFcHostInterfaces: int64(123), NumThreads: int64(123), OperPowerState: "OperPowerState_example", OperState: "OperState_example", Operability: "Operability_example", PlatformType: "PlatformType_example", Presence: "Presence_example", ServiceProfile: "ServiceProfile_example", TotalMemory: int64(123), UserLabel: "UserLabel_example", Uuid: "Uuid_example", MgmtIdentity: , ChassisId: "ChassisId_example", ScaledMode: "ScaledMode_example", SlotId: int64(123), Adapters: []AdapterUnitRelationship{), BiosUnits: []BiosUnitRelationship{openapiclient.bios.Unit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", InitSeq: "InitSeq_example", InitTs: "InitTs_example", ComputeBlade: , ComputeRackUnit: openapiclient.compute.RackUnit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminPowerState: "AdminPowerState_example", AlarmSummary: , AssetTag: "AssetTag_example", AvailableMemory: int64(123), BiosPostComplete: false, FaultSummary: int64(123), KvmIpAddresses: []ComputeIpAddress{), ManagementMode: "ManagementMode_example", MemorySpeed: "MemorySpeed_example", MgmtIpAddress: "MgmtIpAddress_example", NumAdaptors: int64(123), NumCpuCores: int64(123), NumCpuCoresEnabled: int64(123), NumCpus: int64(123), NumEthHostInterfaces: int64(123), NumFcHostInterfaces: int64(123), NumThreads: int64(123), OperPowerState: "OperPowerState_example", OperState: "OperState_example", Operability: "Operability_example", PlatformType: "PlatformType_example", Presence: "Presence_example", ServiceProfile: "ServiceProfile_example", TotalMemory: int64(123), UserLabel: "UserLabel_example", Uuid: "Uuid_example", MgmtIdentity: , ConnectionStatus: "ConnectionStatus_example", ServerId: int64(123), TopologyScanStatus: "TopologyScanStatus_example", Adapters: []AdapterUnitRelationship{), BiosBootmode: openapiclient.bios.BootMode.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ActualBootMode: "ActualBootMode_example", ComputeRackUnit: , InventoryDeviceInfo: openapiclient.inventory.DeviceInfo.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ConfigState: "ConfigState_example", ControlAction: "ControlAction_example", ErrorState: "ErrorState_example", JobInfo: []PolicyinventoryJobInfo{openapiclient.policyinventory.JobInfo{ClassId: "ClassId_example", ObjectType: "ObjectType_example", ExecutionStatus: "ExecutionStatus_example", LastScheduledTime: "TODO", PolicyId: "PolicyId_example", PolicyName: "PolicyName_example"}), OperState: "OperState_example", ProfileMoId: "ProfileMoId_example", RegisteredDevice: }, RegisteredDevice: }, Biosunits: []BiosUnitRelationship{openapiclient.bios.Unit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", InitSeq: "InitSeq_example", InitTs: "InitTs_example", ComputeBlade: , ComputeRackUnit: , InventoryDeviceInfo: openapiclient.inventory.DeviceInfo.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, ConfigState: "ConfigState_example", ControlAction: "ControlAction_example", ErrorState: "ErrorState_example", JobInfo: []PolicyinventoryJobInfo{openapiclient.policyinventory.JobInfo{ClassId: "ClassId_example", ObjectType: "ObjectType_example", ExecutionStatus: "ExecutionStatus_example", LastScheduledTime: "TODO", PolicyId: "PolicyId_example", PolicyName: "PolicyName_example"}), OperState: "OperState_example", ProfileMoId: "ProfileMoId_example", RegisteredDevice: }, RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{openapiclient.firmware.RunningFirmware.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Component: "Component_example", PackageVersion: "PackageVersion_example", Type: "Type_example", Version: "Version_example", BiosUnit: , GraphicsCard: openapiclient.graphics.Card.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", CardId: int64(123), DeviceId: int64(123), ExpanderSlot: "ExpanderSlot_example", FirmwareVersion: "FirmwareVersion_example", Mode: "Mode_example", NumGpus: "NumGpus_example", OperState: "OperState_example", PciAddress: "PciAddress_example", PciAddressList: "PciAddressList_example", PciSlot: "PciSlot_example", ComputeBlade: , ComputeBoard: openapiclient.compute.Board.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", BoardId: int64(123), CpuTypeController: "CpuTypeController_example", OperPowerState: "OperPowerState_example", Presence: "Presence_example", ComputeBlade: , ComputeRackUnit: , EquipmentTpms: []EquipmentTpmRelationship{openapiclient.equipment.Tpm.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ActivationStatus: "ActivationStatus_example", AdminState: "AdminState_example", Ownership: "Ownership_example", Presence: "Presence_example", TpmId: int64(123), Version: "Version_example", ComputeBoard: openapiclient.compute.Board.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", BoardId: int64(123), CpuTypeController: "CpuTypeController_example", OperPowerState: "OperPowerState_example", Presence: "Presence_example", ComputeBlade: , ComputeRackUnit: , EquipmentTpms: []EquipmentTpmRelationship{openapiclient.equipment.Tpm.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ActivationStatus: "ActivationStatus_example", AdminState: "AdminState_example", Ownership: "Ownership_example", Presence: "Presence_example", TpmId: int64(123), Version: "Version_example", ComputeBoard: , InventoryDeviceInfo: , RegisteredDevice: }), GraphicsCards: []GraphicsCardRelationship{openapiclient.graphics.Card.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", CardId: int64(123), DeviceId: int64(123), ExpanderSlot: "ExpanderSlot_example", FirmwareVersion: "FirmwareVersion_example", Mode: "Mode_example", NumGpus: "NumGpus_example", OperState: "OperState_example", PciAddress: "PciAddress_example", PciAddressList: "PciAddressList_example", PciSlot: "PciSlot_example", ComputeBlade: , ComputeBoard: , ComputeRackUnit: , GraphicsControllers: []GraphicsControllerRelationship{openapiclient.graphics.Controller.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ControllerId: int64(123), PciAddr: "PciAddr_example", PciSlot: "PciSlot_example", GraphicsCard: , InventoryDeviceInfo: , RegisteredDevice: }), InventoryDeviceInfo: , RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{openapiclient.firmware.RunningFirmware.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Component: "Component_example", PackageVersion: "PackageVersion_example", Type: "Type_example", Version: "Version_example", BiosUnit: , GraphicsCard: , InventoryDeviceInfo: , ManagementController: openapiclient.management.Controller.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", AdapterUnit: , ComputeBlade: , ComputeRackUnit: , EquipmentIoCardBase: openapiclient.equipment.IoCardBase.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ConnectionStatus: "ConnectionStatus_example", Description: "Description_example", ModuleId: int64(123), OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", ProductName: "ProductName_example", Sku: "Sku_example", Version: "Version_example", Vid: "Vid_example", HostPorts: []EtherHostPortRelationship{openapiclient.ether.HostPort.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortId: int64(123), Role: "Role_example", SlotId: int64(123), SwitchId: "SwitchId_example", MacAddress: "MacAddress_example", Mode: "Mode_example", OperSpeed: "OperSpeed_example", PeerDn: "PeerDn_example", PortChannelId: int64(123), PortType: "PortType_example", TransceiverType: "TransceiverType_example", AcknowledgedPeerInterface: openapiclient.port.InterfaceBase.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", AcknowledgedPeerInterface: openapiclient.ether.PhysicalPortBase.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortId: int64(123), Role: "Role_example", SlotId: int64(123), SwitchId: "SwitchId_example", MacAddress: "MacAddress_example", Mode: "Mode_example", OperSpeed: "OperSpeed_example", PeerDn: "PeerDn_example", PortChannelId: int64(123), PortType: "PortType_example", TransceiverType: "TransceiverType_example", AcknowledgedPeerInterface: openapiclient.port.InterfaceBase.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", AcknowledgedPeerInterface: openapiclient.ether.PhysicalPortBase.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortId: int64(123), Role: "Role_example", SlotId: int64(123), SwitchId: "SwitchId_example", MacAddress: "MacAddress_example", Mode: "Mode_example", OperSpeed: "OperSpeed_example", PeerDn: "PeerDn_example", PortChannelId: int64(123), PortType: "PortType_example", TransceiverType: "TransceiverType_example", AcknowledgedPeerInterface: , PeerInterface: }, PeerInterface: }, PeerInterface: }, PeerInterface: }, PeerInterface: , ModuleId: int64(123), Speed: "Speed_example", EquipmentIoCardBase: openapiclient.equipment.IoCardBase.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ConnectionStatus: "ConnectionStatus_example", Description: "Description_example", ModuleId: int64(123), OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", ProductName: "ProductName_example", Sku: "Sku_example", Version: "Version_example", Vid: "Vid_example", HostPorts: []EtherHostPortRelationship{openapiclient.ether.HostPort.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortId: int64(123), Role: "Role_example", SlotId: int64(123), SwitchId: "SwitchId_example", MacAddress: "MacAddress_example", Mode: "Mode_example", OperSpeed: "OperSpeed_example", PeerDn: "PeerDn_example", PortChannelId: int64(123), PortType: "PortType_example", TransceiverType: "TransceiverType_example", AcknowledgedPeerInterface: , PeerInterface: , ModuleId: int64(123), Speed: "Speed_example", EquipmentIoCardBase: , RegisteredDevice: }), MgmtController: openapiclient.management.Controller.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", AdapterUnit: , ComputeBlade: , ComputeRackUnit: , EquipmentIoCardBase: , EquipmentSharedIoModule: openapiclient.equipment.SharedIoModule.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ConfigState: "ConfigState_example", Discovery: "Discovery_example", MacOfSharedIomAside: "MacOfSharedIomAside_example", MacOfSharedIomBside: "MacOfSharedIomBside_example", OperState: "OperState_example", PartNumber: "PartNumber_example", Reachability: "Reachability_example", UsrLbl: "UsrLbl_example", Vid: "Vid_example", Controller: , EquipmentSystemIoController: openapiclient.equipment.SystemIoController.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ChassisId: "ChassisId_example", ConnectionPath: "ConnectionPath_example", ConnectionStatus: "ConnectionStatus_example", Description: "Description_example", ManagingInstance: "ManagingInstance_example", OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", SystemIoControllerId: int64(123), Cmc: , EquipmentChassis: openapiclient.equipment.Chassis.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AlarmSummary: , ChassisId: int64(123), ConnectionPath: "ConnectionPath_example", ConnectionStatus: "ConnectionStatus_example", Description: "Description_example", FaultSummary: int64(123), ManagementMode: "ManagementMode_example", Name: "Name_example", OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", PlatformType: "PlatformType_example", ProductName: "ProductName_example", Sku: "Sku_example", Vid: "Vid_example", Blades: []ComputeBladeRelationship{), Fanmodules: []EquipmentFanModuleRelationship{openapiclient.equipment.FanModule.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Description: "Description_example", ModuleId: int64(123), OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", Sku: "Sku_example", TrayId: int64(123), Vid: "Vid_example", ComputeRackUnit: , EquipmentChassis: openapiclient.equipment.Chassis.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AlarmSummary: , ChassisId: int64(123), ConnectionPath: "ConnectionPath_example", ConnectionStatus: "ConnectionStatus_example", Description: "Description_example", FaultSummary: int64(123), ManagementMode: "ManagementMode_example", Name: "Name_example", OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", PlatformType: "PlatformType_example", ProductName: "ProductName_example", Sku: "Sku_example", Vid: "Vid_example", Blades: []ComputeBladeRelationship{), Fanmodules: []EquipmentFanModuleRelationship{openapiclient.equipment.FanModule.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Description: "Description_example", ModuleId: int64(123), OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", Sku: "Sku_example", TrayId: int64(123), Vid: "Vid_example", ComputeRackUnit: , EquipmentChassis: , EquipmentRackEnclosure: openapiclient.equipment.RackEnclosure.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", EnclosureId: int64(123), Fanmodules: []EquipmentFanModuleRelationship{), InventoryDeviceInfo: , Psus: []EquipmentPsuRelationship{openapiclient.equipment.Psu.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Description: "Description_example", OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", PsuFwVersion: "PsuFwVersion_example", PsuId: int64(123), PsuInputSrc: "PsuInputSrc_example", PsuType: "PsuType_example", PsuWattage: "PsuWattage_example", Sku: "Sku_example", Vid: "Vid_example", Voltage: "Voltage_example", ComputeRackUnit: , EquipmentChassis: , EquipmentFex: openapiclient.equipment.Fex.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ConnectionStatus: "ConnectionStatus_example", Description: "Description_example", ModuleId: int64(123), OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", ProductName: "ProductName_example", Sku: "Sku_example", Version: "Version_example", Vid: "Vid_example", HostPorts: []EtherHostPortRelationship{), MgmtController: , NetworkPorts: []EtherNetworkPortRelationship{openapiclient.ether.NetworkPort.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", AcknowledgedPeerInterface: , PeerInterface: , ModuleId: int64(123), PeerDn: "PeerDn_example", PortId: int64(123), SlotId: int64(123), Speed: "Speed_example", SwitchId: "SwitchId_example", EquipmentIoCardBase: , RegisteredDevice: }), DiscoveryState: "DiscoveryState_example", Fans: []EquipmentFanRelationship{openapiclient.equipment.Fan.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Description: "Description_example", FanId: int64(123), FanModuleId: int64(123), ModuleId: int64(123), OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", Sku: "Sku_example", TrayId: int64(123), Vid: "Vid_example", EquipmentFanModule: , EquipmentFex: openapiclient.equipment.Fex.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ConnectionStatus: "ConnectionStatus_example", Description: "Description_example", ModuleId: int64(123), OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", ProductName: "ProductName_example", Sku: "Sku_example", Version: "Version_example", Vid: "Vid_example", HostPorts: []EtherHostPortRelationship{), MgmtController: , NetworkPorts: []EtherNetworkPortRelationship{openapiclient.ether.NetworkPort.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", AcknowledgedPeerInterface: , PeerInterface: , ModuleId: int64(123), PeerDn: "PeerDn_example", PortId: int64(123), SlotId: int64(123), Speed: "Speed_example", SwitchId: "SwitchId_example", EquipmentIoCardBase: , RegisteredDevice: }), DiscoveryState: "DiscoveryState_example", Fans: []EquipmentFanRelationship{openapiclient.equipment.Fan.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Description: "Description_example", FanId: int64(123), FanModuleId: int64(123), ModuleId: int64(123), OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", Sku: "Sku_example", TrayId: int64(123), Vid: "Vid_example", EquipmentFanModule: , EquipmentFex: , InventoryDeviceInfo: , RegisteredDevice: }), InventoryDeviceInfo: , LocatorLed: openapiclient.equipment.LocatorLed.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Color: "Color_example", OperState: "OperState_example", ComputeBlade: , ComputeRackUnit: , EquipmentChassis: , EquipmentFex: , InventoryDeviceInfo: , RegisteredDevice: , StoragePhysicalDisk: openapiclient.storage.PhysicalDisk.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", BlockSize: "BlockSize_example", Bootable: "Bootable_example", ConfigurationCheckpoint: "ConfigurationCheckpoint_example", ConfigurationState: "ConfigurationState_example", DiscoveredPath: "DiscoveredPath_example", DiskId: "DiskId_example", DiskState: "DiskState_example", DriveFirmware: "DriveFirmware_example", DriveState: "DriveState_example", FdeCapable: "FdeCapable_example", HotSpareType: "HotSpareType_example", LinkSpeed: "LinkSpeed_example", LinkState: "LinkState_example", NumBlocks: "NumBlocks_example", OperPowerState: "OperPowerState_example", OperQualifierReason: "OperQualifierReason_example", Operability: "Operability_example", PhysicalBlockSize: "PhysicalBlockSize_example", Pid: "Pid_example", Presence: "Presence_example", Protocol: "Protocol_example", RawSize: "RawSize_example", Secured: "Secured_example", Size: "Size_example", Thermal: "Thermal_example", Type: "Type_example", VariantType: "VariantType_example", InventoryDeviceInfo: , LocatorLed: openapiclient.equipment.LocatorLed.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Color: "Color_example", OperState: "OperState_example", ComputeBlade: , ComputeRackUnit: , EquipmentChassis: , EquipmentFex: , InventoryDeviceInfo: , RegisteredDevice: , StoragePhysicalDisk: openapiclient.storage.PhysicalDisk.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", BlockSize: "BlockSize_example", Bootable: "Bootable_example", ConfigurationCheckpoint: "ConfigurationCheckpoint_example", ConfigurationState: "ConfigurationState_example", DiscoveredPath: "DiscoveredPath_example", DiskId: "DiskId_example", DiskState: "DiskState_example", DriveFirmware: "DriveFirmware_example", DriveState: "DriveState_example", FdeCapable: "FdeCapable_example", HotSpareType: "HotSpareType_example", LinkSpeed: "LinkSpeed_example", LinkState: "LinkState_example", NumBlocks: "NumBlocks_example", OperPowerState: "OperPowerState_example", OperQualifierReason: "OperQualifierReason_example", Operability: "Operability_example", PhysicalBlockSize: "PhysicalBlockSize_example", Pid: "Pid_example", Presence: "Presence_example", Protocol: "Protocol_example", RawSize: "RawSize_example", Secured: "Secured_example", Size: "Size_example", Thermal: "Thermal_example", Type: "Type_example", VariantType: "VariantType_example", InventoryDeviceInfo: , LocatorLed: , PhysicalDiskExtensions: []StoragePhysicalDiskExtensionRelationship{openapiclient.storage.PhysicalDiskExtension.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Bootable: "Bootable_example", DiskDn: "DiskDn_example", DiskId: int64(123), DiskState: "DiskState_example", Health: "Health_example", InventoryDeviceInfo: , PhysicalDisk: , RegisteredDevice: , StorageController: openapiclient.storage.Controller.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ControllerFlags: "ControllerFlags_example", ControllerId: "ControllerId_example", ControllerStatus: "ControllerStatus_example", ForeignConfigPresent: false, HwRevision: "HwRevision_example", InterfaceType: "InterfaceType_example", MaxVolumesSupported: int64(123), OobInterfaceSupported: "OobInterfaceSupported_example", OperState: "OperState_example", Operability: "Operability_example", PciAddr: "PciAddr_example", PciSlot: "PciSlot_example", Presence: "Presence_example", RaidSupport: "RaidSupport_example", RebuildRate: "RebuildRate_example", SelfEncryptEnabled: "SelfEncryptEnabled_example", Type: "Type_example", ComputeBlade: , ComputeBoard: , ComputeRackUnit: , DiskGroup: []StorageDiskGroupRelationship{openapiclient.storage.DiskGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Name: "Name_example", RaidType: "RaidType_example", DedicatedHotSpares: []StoragePhysicalDiskRelationship{), RegisteredDevice: , Spans: []StorageSpanRelationship{openapiclient.storage.Span.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Slots: []int64{int64(123)), SpanId: int64(123), DiskGroup: openapiclient.storage.DiskGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Name: "Name_example", RaidType: "RaidType_example", DedicatedHotSpares: []StoragePhysicalDiskRelationship{), RegisteredDevice: , Spans: []StorageSpanRelationship{openapiclient.storage.Span.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Slots: []int64{int64(123)), SpanId: int64(123), DiskGroup: , PhysicalDisks: []StoragePhysicalDiskRelationship{), RegisteredDevice: }), StorageController: openapiclient.storage.Controller.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ControllerFlags: "ControllerFlags_example", ControllerId: "ControllerId_example", ControllerStatus: "ControllerStatus_example", ForeignConfigPresent: false, HwRevision: "HwRevision_example", InterfaceType: "InterfaceType_example", MaxVolumesSupported: int64(123), OobInterfaceSupported: "OobInterfaceSupported_example", OperState: "OperState_example", Operability: "Operability_example", PciAddr: "PciAddr_example", PciSlot: "PciSlot_example", Presence: "Presence_example", RaidSupport: "RaidSupport_example", RebuildRate: "RebuildRate_example", SelfEncryptEnabled: "SelfEncryptEnabled_example", Type: "Type_example", ComputeBlade: , ComputeBoard: , ComputeRackUnit: , DiskGroup: []StorageDiskGroupRelationship{), InventoryDeviceInfo: , PhysicalDiskExtensions: []StoragePhysicalDiskExtensionRelationship{openapiclient.storage.PhysicalDiskExtension.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Bootable: "Bootable_example", DiskDn: "DiskDn_example", DiskId: int64(123), DiskState: "DiskState_example", Health: "Health_example", InventoryDeviceInfo: , PhysicalDisk: , RegisteredDevice: , StorageController: }), PhysicalDisks: []StoragePhysicalDiskRelationship{), RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{), VirtualDriveExtensions: []StorageVirtualDriveExtensionRelationship{openapiclient.storage.VirtualDriveExtension.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Bootable: "Bootable_example", ContainerId: int64(123), DriveState: "DriveState_example", Name: "Name_example", OperDeviceId: "OperDeviceId_example", Uuid: "Uuid_example", VendorUuid: "VendorUuid_example", VirtualDriveDn: "VirtualDriveDn_example", VirtualDriveId: "VirtualDriveId_example", InventoryDeviceInfo: , RegisteredDevice: , StorageController: , VirtualDrive: openapiclient.storage.VirtualDrive.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AccessPolicy: "AccessPolicy_example", ActualWriteCachePolicy: "ActualWriteCachePolicy_example", AvailableSize: "AvailableSize_example", BlockSize: "BlockSize_example", Bootable: "Bootable_example", ConfigState: "ConfigState_example", ConfiguredWriteCachePolicy: "ConfiguredWriteCachePolicy_example", ConnectionProtocol: "ConnectionProtocol_example", DriveCache: "DriveCache_example", DriveSecurity: "DriveSecurity_example", DriveState: "DriveState_example", IoPolicy: "IoPolicy_example", Name: "Name_example", NumBlocks: "NumBlocks_example", OperState: "OperState_example", Operability: "Operability_example", PhysicalBlockSize: "PhysicalBlockSize_example", Presence: "Presence_example", ReadPolicy: "ReadPolicy_example", SecurityFlags: "SecurityFlags_example", Size: "Size_example", StripSize: "StripSize_example", Type: "Type_example", Uuid: "Uuid_example", VendorUuid: "VendorUuid_example", VirtualDriveId: "VirtualDriveId_example", DiskGroup: , InventoryDeviceInfo: , PhysicalDiskUsages: []StoragePhysicalDiskUsageRelationship{openapiclient.storage.PhysicalDiskUsage.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", NumberOfBlocks: "NumberOfBlocks_example", PhysicalDrive: "PhysicalDrive_example", Span: "Span_example", StartingBlock: "StartingBlock_example", State: "State_example", VirtualDrive: "VirtualDrive_example", InventoryDeviceInfo: , RegisteredDevice: }), RegisteredDevice: , StorageController: , VdMemberEps: []StorageVdMemberEpRelationship{openapiclient.storage.VdMemberEp.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperQualifierReason: "OperQualifierReason_example", Presence: "Presence_example", Role: "Role_example", SpanId: "SpanId_example", VdMemberEpId: int64(123), InventoryDeviceInfo: , RegisteredDevice: , StorageVirtualDrive: openapiclient.storage.VirtualDrive.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AccessPolicy: "AccessPolicy_example", ActualWriteCachePolicy: "ActualWriteCachePolicy_example", AvailableSize: "AvailableSize_example", BlockSize: "BlockSize_example", Bootable: "Bootable_example", ConfigState: "ConfigState_example", ConfiguredWriteCachePolicy: "ConfiguredWriteCachePolicy_example", ConnectionProtocol: "ConnectionProtocol_example", DriveCache: "DriveCache_example", DriveSecurity: "DriveSecurity_example", DriveState: "DriveState_example", IoPolicy: "IoPolicy_example", Name: "Name_example", NumBlocks: "NumBlocks_example", OperState: "OperState_example", Operability: "Operability_example", PhysicalBlockSize: "PhysicalBlockSize_example", Presence: "Presence_example", ReadPolicy: "ReadPolicy_example", SecurityFlags: "SecurityFlags_example", Size: "Size_example", StripSize: "StripSize_example", Type: "Type_example", Uuid: "Uuid_example", VendorUuid: "VendorUuid_example", VirtualDriveId: "VirtualDriveId_example", DiskGroup: , InventoryDeviceInfo: , PhysicalDiskUsages: []StoragePhysicalDiskUsageRelationship{openapiclient.storage.PhysicalDiskUsage.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", NumberOfBlocks: "NumberOfBlocks_example", PhysicalDrive: "PhysicalDrive_example", Span: "Span_example", StartingBlock: "StartingBlock_example", State: "State_example", VirtualDrive: "VirtualDrive_example", InventoryDeviceInfo: , RegisteredDevice: }), RegisteredDevice: , StorageController: , VdMemberEps: []StorageVdMemberEpRelationship{openapiclient.storage.VdMemberEp.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperQualifierReason: "OperQualifierReason_example", Presence: "Presence_example", Role: "Role_example", SpanId: "SpanId_example", VdMemberEpId: int64(123), InventoryDeviceInfo: , RegisteredDevice: , StorageVirtualDrive: }), VirtualDriveExtension: openapiclient.storage.VirtualDriveExtension.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Bootable: "Bootable_example", ContainerId: int64(123), DriveState: "DriveState_example", Name: "Name_example", OperDeviceId: "OperDeviceId_example", Uuid: "Uuid_example", VendorUuid: "VendorUuid_example", VirtualDriveDn: "VirtualDriveDn_example", VirtualDriveId: "VirtualDriveId_example", InventoryDeviceInfo: , RegisteredDevice: , StorageController: , VirtualDrive: }}}), VirtualDriveExtension: }}), VirtualDrives: []StorageVirtualDriveRelationship{)}, VirtualDrives: []StorageVirtualDriveRelationship{)}, PhysicalDisks: []StoragePhysicalDiskRelationship{), RegisteredDevice: }), StorageController: , VirtualDrives: []StorageVirtualDriveRelationship{)}), InventoryDeviceInfo: , PhysicalDiskExtensions: []StoragePhysicalDiskExtensionRelationship{), PhysicalDisks: []StoragePhysicalDiskRelationship{), RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{), VirtualDriveExtensions: []StorageVirtualDriveExtensionRelationship{), VirtualDrives: []StorageVirtualDriveRelationship{)}}), RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{), SasPorts: []StorageSasPortRelationship{openapiclient.storage.SasPort.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Address: "Address_example", DiskId: int64(123), EndPointId: int64(123), LinkDescription: "LinkDescription_example", LinkSpeed: "LinkSpeed_example", InventoryDeviceInfo: , RegisteredDevice: , StoragePhysicalDisk: }), StorageController: , StorageEnclosure: openapiclient.storage.Enclosure.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ChassisId: int64(123), Description: "Description_example", EnclosureId: int64(123), NumSlots: int64(123), Presence: "Presence_example", ServerId: int64(123), Type: "Type_example", ComputeBlade: , ComputeRackUnit: , EnclosureDiskSlots: []StorageEnclosureDiskSlotEpRelationship{openapiclient.storage.EnclosureDiskSlotEp.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", DrivePath: "DrivePath_example", Health: "Health_example", Presence: "Presence_example", Slot: "Slot_example", InventoryDeviceInfo: , RegisteredDevice: , StorageEnclosure: openapiclient.storage.Enclosure.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ChassisId: int64(123), Description: "Description_example", EnclosureId: int64(123), NumSlots: int64(123), Presence: "Presence_example", ServerId: int64(123), Type: "Type_example", ComputeBlade: , ComputeRackUnit: , EnclosureDiskSlots: []StorageEnclosureDiskSlotEpRelationship{openapiclient.storage.EnclosureDiskSlotEp.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", DrivePath: "DrivePath_example", Health: "Health_example", Presence: "Presence_example", Slot: "Slot_example", InventoryDeviceInfo: , RegisteredDevice: , StorageEnclosure: }), EnclosureDisks: []StorageEnclosureDiskRelationship{openapiclient.storage.EnclosureDisk.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", BlockSize: "BlockSize_example", DiskId: "DiskId_example", DiskState: "DiskState_example", Health: "Health_example", NumBlocks: "NumBlocks_example", Pid: "Pid_example", SasAddress1: "SasAddress1_example", SasAddress2: "SasAddress2_example", Size: "Size_example", InventoryDeviceInfo: , PhysicalDisk: , RegisteredDevice: , StorageEnclosure: }), EquipmentChassis: , InventoryDeviceInfo: , PhysicalDisks: []StoragePhysicalDiskRelationship{), RegisteredDevice: }}), EnclosureDisks: []StorageEnclosureDiskRelationship{openapiclient.storage.EnclosureDisk.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", BlockSize: "BlockSize_example", DiskId: "DiskId_example", DiskState: "DiskState_example", Health: "Health_example", NumBlocks: "NumBlocks_example", Pid: "Pid_example", SasAddress1: "SasAddress1_example", SasAddress2: "SasAddress2_example", Size: "Size_example", InventoryDeviceInfo: , PhysicalDisk: , RegisteredDevice: , StorageEnclosure: }), EquipmentChassis: , InventoryDeviceInfo: , PhysicalDisks: []StoragePhysicalDiskRelationship{), RegisteredDevice: }}}, PhysicalDiskExtensions: []StoragePhysicalDiskExtensionRelationship{), RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{), SasPorts: []StorageSasPortRelationship{openapiclient.storage.SasPort.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Address: "Address_example", DiskId: int64(123), EndPointId: int64(123), LinkDescription: "LinkDescription_example", LinkSpeed: "LinkSpeed_example", InventoryDeviceInfo: , RegisteredDevice: , StoragePhysicalDisk: }), StorageController: , StorageEnclosure: }}, NetworkElement: openapiclient.network.Element.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminEvacState: "AdminEvacState_example", AdminInbandInterfaceState: "AdminInbandInterfaceState_example", AlarmSummary: , AvailableMemory: "AvailableMemory_example", EthernetMode: "EthernetMode_example", FaultSummary: int64(123), FcMode: "FcMode_example", InbandIpAddress: "InbandIpAddress_example", InbandIpGateway: "InbandIpGateway_example", InbandIpMask: "InbandIpMask_example", InbandVlan: int64(123), ManagementMode: "ManagementMode_example", OperEvacState: "OperEvacState_example", Operability: "Operability_example", OutOfBandIpAddress: "OutOfBandIpAddress_example", OutOfBandIpGateway: "OutOfBandIpGateway_example", OutOfBandIpMask: "OutOfBandIpMask_example", OutOfBandIpv4Address: "OutOfBandIpv4Address_example", OutOfBandIpv4Gateway: "OutOfBandIpv4Gateway_example", OutOfBandIpv4Mask: "OutOfBandIpv4Mask_example", OutOfBandIpv6Address: "OutOfBandIpv6Address_example", OutOfBandIpv6Gateway: "OutOfBandIpv6Gateway_example", OutOfBandIpv6Prefix: "OutOfBandIpv6Prefix_example", OutOfBandMac: "OutOfBandMac_example", SwitchId: "SwitchId_example", TotalMemory: int64(123), Cards: []EquipmentSwitchCardRelationship{openapiclient.equipment.SwitchCard.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Description: "Description_example", NumPorts: int64(123), OutOfBandIpAddress: "OutOfBandIpAddress_example", OutOfBandIpGateway: "OutOfBandIpGateway_example", Presence: "Presence_example", SlotId: int64(123), State: "State_example", SwitchId: "SwitchId_example", FcPortChannels: []FcPortChannelRelationship{openapiclient.fc.PortChannel.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", AdminSpeed: "AdminSpeed_example", AdminState: "AdminState_example", Mode: "Mode_example", OperSpeed: "OperSpeed_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortChannelId: int64(123), Role: "Role_example", SwitchId: "SwitchId_example", Vsan: int64(123), EquipmentSwitchCard: openapiclient.equipment.SwitchCard.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Description: "Description_example", NumPorts: int64(123), OutOfBandIpAddress: "OutOfBandIpAddress_example", OutOfBandIpGateway: "OutOfBandIpGateway_example", Presence: "Presence_example", SlotId: int64(123), State: "State_example", SwitchId: "SwitchId_example", FcPortChannels: []FcPortChannelRelationship{openapiclient.fc.PortChannel.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", AdminSpeed: "AdminSpeed_example", AdminState: "AdminState_example", Mode: "Mode_example", OperSpeed: "OperSpeed_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortChannelId: int64(123), Role: "Role_example", SwitchId: "SwitchId_example", Vsan: int64(123), EquipmentSwitchCard: , RegisteredDevice: }), InventoryDeviceInfo: , NetworkElement: openapiclient.network.Element.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminEvacState: "AdminEvacState_example", AdminInbandInterfaceState: "AdminInbandInterfaceState_example", AlarmSummary: , AvailableMemory: "AvailableMemory_example", EthernetMode: "EthernetMode_example", FaultSummary: int64(123), FcMode: "FcMode_example", InbandIpAddress: "InbandIpAddress_example", InbandIpGateway: "InbandIpGateway_example", InbandIpMask: "InbandIpMask_example", InbandVlan: int64(123), ManagementMode: "ManagementMode_example", OperEvacState: "OperEvacState_example", Operability: "Operability_example", OutOfBandIpAddress: "OutOfBandIpAddress_example", OutOfBandIpGateway: "OutOfBandIpGateway_example", OutOfBandIpMask: "OutOfBandIpMask_example", OutOfBandIpv4Address: "OutOfBandIpv4Address_example", OutOfBandIpv4Gateway: "OutOfBandIpv4Gateway_example", OutOfBandIpv4Mask: "OutOfBandIpv4Mask_example", OutOfBandIpv6Address: "OutOfBandIpv6Address_example", OutOfBandIpv6Gateway: "OutOfBandIpv6Gateway_example", OutOfBandIpv6Prefix: "OutOfBandIpv6Prefix_example", OutOfBandMac: "OutOfBandMac_example", SwitchId: "SwitchId_example", TotalMemory: int64(123), Cards: []EquipmentSwitchCardRelationship{), Fanmodules: []EquipmentFanModuleRelationship{), InventoryDeviceInfo: , ManagementContoller: , ManagementEntity: openapiclient.management.Entity.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ClusterLinkState: "ClusterLinkState_example", ClusterReadiness: "ClusterReadiness_example", ClusterState: "ClusterState_example", EntityId: "EntityId_example", Leadership: "Leadership_example", InventoryDeviceInfo: , NetworkElement: , RegisteredDevice: }, NetworkFcZoneInfo: openapiclient.network.FcZoneInfo.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", UserZoneCount: int64(123), UserZoneLimit: int64(123), ZoneCount: int64(123), ZoneLimit: int64(123), InventoryDeviceInfo: , NetworkElement: , RegisteredDevice: }, NetworkVlanPortInfo: openapiclient.network.VlanPortInfo.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", AccessVlanPortCount: int64(123), BorderVlanPortCount: int64(123), CompressedVlanPortCount: "CompressedVlanPortCount_example", UncompressedVlanPortCount: "UncompressedVlanPortCount_example", VlanPortLimit: int64(123), InventoryDeviceInfo: , NetworkElement: , RegisteredDevice: }, PortMacBindings: []PortMacBindingRelationship{openapiclient.port.MacBinding.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", AggregatePortId: int64(123), ChassisId: int64(123), DeviceMac: "DeviceMac_example", PortId: int64(123), PortMac: "PortMac_example", SlotId: int64(123), SwitchId: int64(123), NetworkElement: , RegisteredDevice: }), Psus: []EquipmentPsuRelationship{openapiclient.equipment.Psu.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Description: "Description_example", OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", PsuFwVersion: "PsuFwVersion_example", PsuId: int64(123), PsuInputSrc: "PsuInputSrc_example", PsuType: "PsuType_example", PsuWattage: "PsuWattage_example", Sku: "Sku_example", Vid: "Vid_example", Voltage: "Voltage_example", ComputeRackUnit: , EquipmentChassis: , EquipmentFex: , EquipmentRackEnclosure: openapiclient.equipment.RackEnclosure.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", EnclosureId: int64(123), Fanmodules: []EquipmentFanModuleRelationship{), InventoryDeviceInfo: , Psus: []EquipmentPsuRelationship{), RegisteredDevice: , Slots: []EquipmentRackEnclosureSlotRelationship{openapiclient.equipment.RackEnclosureSlot.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", RackId: int64(123), RackUnitDn: "RackUnitDn_example", EquipmentRackEnclosure: , InventoryDeviceInfo: , RackUnit: , RegisteredDevice: })}, InventoryDeviceInfo: , NetworkElement: , RegisteredDevice: }), RegisteredDevice: , StorageItems: []StorageItemRelationship{openapiclient.storage.Item.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", AlarmType: "AlarmType_example", Name: "Name_example", OperState: "OperState_example", Size: "Size_example", Used: "Used_example", InventoryDeviceInfo: , NetworkElement: , RegisteredDevice: }), TopSystem: openapiclient.top.System.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Ipv4Address: "Ipv4Address_example", Ipv6Address: "Ipv6Address_example", Mode: "Mode_example", Name: "Name_example", TimeZone: "TimeZone_example", ComputeBlades: []ComputeBladeRelationship{), ComputeRackUnits: []ComputeRackUnitRelationship{), InventoryDeviceInfo: , ManagementController: , NetworkElements: []NetworkElementRelationship{), RegisteredDevice: }, UcsmRunningFirmware: }, PortChannels: []EtherPortChannelRelationship{openapiclient.ether.PortChannel.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", AccessVlan: "AccessVlan_example", AdminState: "AdminState_example", AllowedVlans: "AllowedVlans_example", Mode: "Mode_example", NativeVlan: "NativeVlan_example", OperSpeed: "OperSpeed_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortChannelId: int64(123), Role: "Role_example", SwitchId: "SwitchId_example", EquipmentSwitchCard: , RegisteredDevice: }), PortGroups: []PortGroupRelationship{openapiclient.port.Group.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Transport: "Transport_example", EquipmentSharedIoModule: openapiclient.equipment.SharedIoModule.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ConfigState: "ConfigState_example", Discovery: "Discovery_example", MacOfSharedIomAside: "MacOfSharedIomAside_example", MacOfSharedIomBside: "MacOfSharedIomBside_example", OperState: "OperState_example", PartNumber: "PartNumber_example", Reachability: "Reachability_example", UsrLbl: "UsrLbl_example", Vid: "Vid_example", Controller: , EquipmentSystemIoController: openapiclient.equipment.SystemIoController.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ChassisId: "ChassisId_example", ConnectionPath: "ConnectionPath_example", ConnectionStatus: "ConnectionStatus_example", Description: "Description_example", ManagingInstance: "ManagingInstance_example", OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", SystemIoControllerId: int64(123), Cmc: , EquipmentChassis: , InventoryDeviceInfo: , RegisteredDevice: , SharedIoModule: }, InventoryDeviceInfo: , PortGroups: []PortGroupRelationship{openapiclient.port.Group.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Transport: "Transport_example", EquipmentSharedIoModule: , EquipmentSwitchCard: , EthernetPorts: []EtherPhysicalPortRelationship{openapiclient.ether.PhysicalPort.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortId: int64(123), Role: "Role_example", SlotId: int64(123), SwitchId: "SwitchId_example", MacAddress: "MacAddress_example", Mode: "Mode_example", OperSpeed: "OperSpeed_example", PeerDn: "PeerDn_example", PortChannelId: int64(123), PortType: "PortType_example", TransceiverType: "TransceiverType_example", AcknowledgedPeerInterface: , PeerInterface: , AdminSpeed: "AdminSpeed_example", AdminState: "AdminState_example", AggregatePortId: int64(123), LicenseGrace: "LicenseGrace_example", LicenseState: "LicenseState_example", InventoryDeviceInfo: , PortGroup: , PortSubGroup: openapiclient.port.SubGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Transport: "Transport_example", EthernetPorts: []EtherPhysicalPortRelationship{openapiclient.ether.PhysicalPort.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortId: int64(123), Role: "Role_example", SlotId: int64(123), SwitchId: "SwitchId_example", MacAddress: "MacAddress_example", Mode: "Mode_example", OperSpeed: "OperSpeed_example", PeerDn: "PeerDn_example", PortChannelId: int64(123), PortType: "PortType_example", TransceiverType: "TransceiverType_example", AcknowledgedPeerInterface: , PeerInterface: , AdminSpeed: "AdminSpeed_example", AdminState: "AdminState_example", AggregatePortId: int64(123), LicenseGrace: "LicenseGrace_example", LicenseState: "LicenseState_example", InventoryDeviceInfo: , PortGroup: , PortSubGroup: openapiclient.port.SubGroup.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Transport: "Transport_example", EthernetPorts: []EtherPhysicalPortRelationship{), FcPorts: []FcPhysicalPortRelationship{openapiclient.fc.PhysicalPort.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortId: int64(123), Role: "Role_example", SlotId: int64(123), SwitchId: "SwitchId_example", AdminSpeed: "AdminSpeed_example", AdminState: "AdminState_example", B2bCredit: int64(123), MaxSpeed: "MaxSpeed_example", Mode: "Mode_example", OperSpeed: "OperSpeed_example", PeerDn: "PeerDn_example", PortChannelId: int64(123), TransceiverType: "TransceiverType_example", Vsan: int64(123), Wwn: "Wwn_example", InventoryDeviceInfo: , PortGroup: , PortSubGroup: , RegisteredDevice: }), InventoryDeviceInfo: , PortGroup: , RegisteredDevice: }, RegisteredDevice: }), FcPorts: []FcPhysicalPortRelationship{openapiclient.fc.PhysicalPort.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortId: int64(123), Role: "Role_example", SlotId: int64(123), SwitchId: "SwitchId_example", AdminSpeed: "AdminSpeed_example", AdminState: "AdminState_example", B2bCredit: int64(123), MaxSpeed: "MaxSpeed_example", Mode: "Mode_example", OperSpeed: "OperSpeed_example", PeerDn: "PeerDn_example", PortChannelId: int64(123), TransceiverType: "TransceiverType_example", Vsan: int64(123), Wwn: "Wwn_example", InventoryDeviceInfo: , PortGroup: , PortSubGroup: , RegisteredDevice: }), InventoryDeviceInfo: , PortGroup: , RegisteredDevice: }, RegisteredDevice: }), FcPorts: []FcPhysicalPortRelationship{), InventoryDeviceInfo: , RegisteredDevice: , SubGroups: []PortSubGroupRelationship{)}), RegisteredDevice: }, EquipmentSwitchCard: , EthernetPorts: []EtherPhysicalPortRelationship{), FcPorts: []FcPhysicalPortRelationship{), InventoryDeviceInfo: , RegisteredDevice: , SubGroups: []PortSubGroupRelationship{)}), RegisteredDevice: }, RegisteredDevice: }), InventoryDeviceInfo: , NetworkElement: , PortChannels: []EtherPortChannelRelationship{openapiclient.ether.PortChannel.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", AccessVlan: "AccessVlan_example", AdminState: "AdminState_example", AllowedVlans: "AllowedVlans_example", Mode: "Mode_example", NativeVlan: "NativeVlan_example", OperSpeed: "OperSpeed_example", OperState: "OperState_example", OperStateQual: "OperStateQual_example", PortChannelId: int64(123), Role: "Role_example", SwitchId: "SwitchId_example", EquipmentSwitchCard: , RegisteredDevice: }), PortGroups: []PortGroupRelationship{), RegisteredDevice: }), Fanmodules: []EquipmentFanModuleRelationship{), InventoryDeviceInfo: , ManagementContoller: , ManagementEntity: openapiclient.management.Entity.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ClusterLinkState: "ClusterLinkState_example", ClusterReadiness: "ClusterReadiness_example", ClusterState: "ClusterState_example", EntityId: "EntityId_example", Leadership: "Leadership_example", InventoryDeviceInfo: , NetworkElement: , RegisteredDevice: }, NetworkFcZoneInfo: openapiclient.network.FcZoneInfo.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", UserZoneCount: int64(123), UserZoneLimit: int64(123), ZoneCount: int64(123), ZoneLimit: int64(123), InventoryDeviceInfo: , NetworkElement: , RegisteredDevice: }, NetworkVlanPortInfo: openapiclient.network.VlanPortInfo.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", AccessVlanPortCount: int64(123), BorderVlanPortCount: int64(123), CompressedVlanPortCount: "CompressedVlanPortCount_example", UncompressedVlanPortCount: "UncompressedVlanPortCount_example", VlanPortLimit: int64(123), InventoryDeviceInfo: , NetworkElement: , RegisteredDevice: }, PortMacBindings: []PortMacBindingRelationship{openapiclient.port.MacBinding.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", AggregatePortId: int64(123), ChassisId: int64(123), DeviceMac: "DeviceMac_example", PortId: int64(123), PortMac: "PortMac_example", SlotId: int64(123), SwitchId: int64(123), NetworkElement: , RegisteredDevice: }), Psus: []EquipmentPsuRelationship{), RegisteredDevice: , StorageItems: []StorageItemRelationship{openapiclient.storage.Item.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", AlarmType: "AlarmType_example", Name: "Name_example", OperState: "OperState_example", Size: "Size_example", Used: "Used_example", InventoryDeviceInfo: , NetworkElement: , RegisteredDevice: }), TopSystem: openapiclient.top.System.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Ipv4Address: "Ipv4Address_example", Ipv6Address: "Ipv6Address_example", Mode: "Mode_example", Name: "Name_example", TimeZone: "TimeZone_example", ComputeBlades: []ComputeBladeRelationship{), ComputeRackUnits: []ComputeRackUnitRelationship{), InventoryDeviceInfo: , ManagementController: , NetworkElements: []NetworkElementRelationship{), RegisteredDevice: }, UcsmRunningFirmware: }, Psus: []EquipmentPsuRelationship{), RegisteredDevice: }, InventoryDeviceInfo: , RegisteredDevice: }), InventoryDeviceInfo: , LocatorLed: , NetworkElement: , Psus: []EquipmentPsuRelationship{), RegisteredDevice: }, EquipmentRackEnclosure: , InventoryDeviceInfo: , NetworkElement: , RegisteredDevice: }), RegisteredDevice: , Slots: []EquipmentRackEnclosureSlotRelationship{openapiclient.equipment.RackEnclosureSlot.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", RackId: int64(123), RackUnitDn: "RackUnitDn_example", EquipmentRackEnclosure: , InventoryDeviceInfo: , RackUnit: , RegisteredDevice: })}, Fans: []EquipmentFanRelationship{), InventoryDeviceInfo: , NetworkElement: , RegisteredDevice: }), InventoryDeviceInfo: , Ioms: []EquipmentIoCardRelationship{openapiclient.equipment.IoCard.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ConnectionStatus: "ConnectionStatus_example", Description: "Description_example", ModuleId: int64(123), OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", ProductName: "ProductName_example", Sku: "Sku_example", Version: "Version_example", Vid: "Vid_example", HostPorts: []EtherHostPortRelationship{), MgmtController: , NetworkPorts: []EtherNetworkPortRelationship{), ConnectionPath: "ConnectionPath_example", DcSupported: false, Side: "Side_example", EquipmentChassis: , InventoryDeviceInfo: , PhysicalDeviceRegistration: , RegisteredDevice: }), LocatorLed: , PsuControl: openapiclient.equipment.PsuControl.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ClusterState: "ClusterState_example", InputPowerState: "InputPowerState_example", Name: "Name_example", OperQualifier: "OperQualifier_example", OperState: "OperState_example", OutputPowerState: "OutputPowerState_example", Redundancy: "Redundancy_example", EquipmentChassis: , InventoryDeviceInfo: , RegisteredDevice: }, Psus: []EquipmentPsuRelationship{), RegisteredDevice: , Sasexpanders: []StorageSasExpanderRelationship{openapiclient.storage.SasExpander.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ExpanderId: int64(123), Name: "Name_example", OperState: "OperState_example", Operability: "Operability_example", Presence: "Presence_example", SasAddress: "SasAddress_example", ComputeRackUnit: , Controller: , EquipmentChassis: , InventoryDeviceInfo: , RegisteredDevice: }), Siocs: []EquipmentSystemIoControllerRelationship{), StorageEnclosures: []StorageEnclosureRelationship{)}, EquipmentRackEnclosure: , Fans: []EquipmentFanRelationship{), InventoryDeviceInfo: , NetworkElement: , RegisteredDevice: }), InventoryDeviceInfo: , Ioms: []EquipmentIoCardRelationship{openapiclient.equipment.IoCard.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ConnectionStatus: "ConnectionStatus_example", Description: "Description_example", ModuleId: int64(123), OperState: "OperState_example", PartNumber: "PartNumber_example", Pid: "Pid_example", Presence: "Presence_example", ProductName: "ProductName_example", Sku: "Sku_example", Version: "Version_example", Vid: "Vid_example", HostPorts: []EtherHostPortRelationship{), MgmtController: , NetworkPorts: []EtherNetworkPortRelationship{), ConnectionPath: "ConnectionPath_example", DcSupported: false, Side: "Side_example", EquipmentChassis: , InventoryDeviceInfo: , PhysicalDeviceRegistration: , RegisteredDevice: }), LocatorLed: , PsuControl: openapiclient.equipment.PsuControl.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ClusterState: "ClusterState_example", InputPowerState: "InputPowerState_example", Name: "Name_example", OperQualifier: "OperQualifier_example", OperState: "OperState_example", OutputPowerState: "OutputPowerState_example", Redundancy: "Redundancy_example", EquipmentChassis: , InventoryDeviceInfo: , RegisteredDevice: }, Psus: []EquipmentPsuRelationship{), RegisteredDevice: , Sasexpanders: []StorageSasExpanderRelationship{openapiclient.storage.SasExpander.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ExpanderId: int64(123), Name: "Name_example", OperState: "OperState_example", Operability: "Operability_example", Presence: "Presence_example", SasAddress: "SasAddress_example", ComputeRackUnit: , Controller: , EquipmentChassis: , InventoryDeviceInfo: , RegisteredDevice: }), Siocs: []EquipmentSystemIoControllerRelationship{), StorageEnclosures: []StorageEnclosureRelationship{)}, InventoryDeviceInfo: , RegisteredDevice: , SharedIoModule: }, InventoryDeviceInfo: , PortGroups: []PortGroupRelationship{), RegisteredDevice: }, EquipmentSystemIoController: , InventoryDeviceInfo: , ManagementInterfaces: []ManagementInterfaceRelationship{openapiclient.management.Interface.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Gateway: "Gateway_example", HostName: "HostName_example", IpAddress: "IpAddress_example", Ipv4Address: "Ipv4Address_example", Ipv4Gateway: "Ipv4Gateway_example", Ipv4Mask: "Ipv4Mask_example", Ipv6Address: "Ipv6Address_example", Ipv6Gateway: "Ipv6Gateway_example", Ipv6Prefix: int64(123), MacAddress: "MacAddress_example", Mask: "Mask_example", SwitchId: "SwitchId_example", UemConnStatus: "UemConnStatus_example", VirtualHostName: "VirtualHostName_example", InventoryDeviceInfo: , ManagementController: , RegisteredDevice: }), NetworkElement: , RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{), StorageSasExpander: , TopSystem: }, NetworkPorts: []EtherNetworkPortRelationship{)}, RegisteredDevice: }), MgmtController: , NetworkPorts: []EtherNetworkPortRelationship{)}, EquipmentSharedIoModule: , EquipmentSystemIoController: , InventoryDeviceInfo: , ManagementInterfaces: []ManagementInterfaceRelationship{openapiclient.management.Interface.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Gateway: "Gateway_example", HostName: "HostName_example", IpAddress: "IpAddress_example", Ipv4Address: "Ipv4Address_example", Ipv4Gateway: "Ipv4Gateway_example", Ipv4Mask: "Ipv4Mask_example", Ipv6Address: "Ipv6Address_example", Ipv6Gateway: "Ipv6Gateway_example", Ipv6Prefix: int64(123), MacAddress: "MacAddress_example", Mask: "Mask_example", SwitchId: "SwitchId_example", UemConnStatus: "UemConnStatus_example", VirtualHostName: "VirtualHostName_example", InventoryDeviceInfo: , ManagementController: , RegisteredDevice: }), NetworkElement: , RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{), StorageSasExpander: , TopSystem: }, NetworkElements: []NetworkElementRelationship{), PciSwitch: openapiclient.pci.Switch.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", DeviceId: "DeviceId_example", Health: "Health_example", NumOfAdaptors: "NumOfAdaptors_example", PciAddress: "PciAddress_example", PciSlot: "PciSlot_example", ProductName: "ProductName_example", ProductRevision: "ProductRevision_example", SubDeviceId: "SubDeviceId_example", SubVendorId: "SubVendorId_example", Temperature: "Temperature_example", Type: "Type_example", VendorId: "VendorId_example", ComputeBoard: , InventoryDeviceInfo: , Links: []PciLinkRelationship{openapiclient.pci.Link.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Adapter: "Adapter_example", LinkSpeed: "LinkSpeed_example", LinkStatus: "LinkStatus_example", LinkWidth: "LinkWidth_example", PciSlot: "PciSlot_example", SlotStatus: "SlotStatus_example", InventoryDeviceInfo: , PciSwitch: openapiclient.pci.Switch.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", DeviceId: "DeviceId_example", Health: "Health_example", NumOfAdaptors: "NumOfAdaptors_example", PciAddress: "PciAddress_example", PciSlot: "PciSlot_example", ProductName: "ProductName_example", ProductRevision: "ProductRevision_example", SubDeviceId: "SubDeviceId_example", SubVendorId: "SubVendorId_example", Temperature: "Temperature_example", Type: "Type_example", VendorId: "VendorId_example", ComputeBoard: , InventoryDeviceInfo: , Links: []PciLinkRelationship{openapiclient.pci.Link.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Adapter: "Adapter_example", LinkSpeed: "LinkSpeed_example", LinkStatus: "LinkStatus_example", LinkWidth: "LinkWidth_example", PciSlot: "PciSlot_example", SlotStatus: "SlotStatus_example", InventoryDeviceInfo: , PciSwitch: , RegisteredDevice: }), RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{)}, RegisteredDevice: }), RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{)}, RegisteredDevice: , StorageController: , StorageFlexFlashController: openapiclient.storage.FlexFlashController.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ControllerState: "ControllerState_example", FfControllerId: "FfControllerId_example", ComputeBoard: , FlexFlashControllerProps: []StorageFlexFlashControllerPropsRelationship{openapiclient.storage.FlexFlashControllerProps.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", CardsManageable: "CardsManageable_example", ConfiguredMode: "ConfiguredMode_example", ControllerName: "ControllerName_example", ControllerStatus: "ControllerStatus_example", FwVersion: "FwVersion_example", InternalState: "InternalState_example", OperatingMode: "OperatingMode_example", PhysicalDriveCount: "PhysicalDriveCount_example", ProductName: "ProductName_example", StartupFwVersion: "StartupFwVersion_example", VirtualDriveCount: "VirtualDriveCount_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexFlashController: openapiclient.storage.FlexFlashController.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ControllerState: "ControllerState_example", FfControllerId: "FfControllerId_example", ComputeBoard: , FlexFlashControllerProps: []StorageFlexFlashControllerPropsRelationship{openapiclient.storage.FlexFlashControllerProps.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", CardsManageable: "CardsManageable_example", ConfiguredMode: "ConfiguredMode_example", ControllerName: "ControllerName_example", ControllerStatus: "ControllerStatus_example", FwVersion: "FwVersion_example", InternalState: "InternalState_example", OperatingMode: "OperatingMode_example", PhysicalDriveCount: "PhysicalDriveCount_example", ProductName: "ProductName_example", StartupFwVersion: "StartupFwVersion_example", VirtualDriveCount: "VirtualDriveCount_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexFlashController: }), FlexFlashPhysicalDrives: []StorageFlexFlashPhysicalDriveRelationship{openapiclient.storage.FlexFlashPhysicalDrive.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", CardStatus: "CardStatus_example", CardType: "CardType_example", OemId: "OemId_example", PdStatus: "PdStatus_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexFlashController: }), FlexFlashVirtualDrives: []StorageFlexFlashVirtualDriveRelationship{openapiclient.storage.FlexFlashVirtualDrive.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", DriveScope: "DriveScope_example", DriveStatus: "DriveStatus_example", PartitionId: "PartitionId_example", ResidentImage: "ResidentImage_example", Size: "Size_example", VirtualDrive: "VirtualDrive_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexFlashController: }), InventoryDeviceInfo: , RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{)}}), FlexFlashPhysicalDrives: []StorageFlexFlashPhysicalDriveRelationship{openapiclient.storage.FlexFlashPhysicalDrive.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", CardStatus: "CardStatus_example", CardType: "CardType_example", OemId: "OemId_example", PdStatus: "PdStatus_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexFlashController: }), FlexFlashVirtualDrives: []StorageFlexFlashVirtualDriveRelationship{openapiclient.storage.FlexFlashVirtualDrive.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", DriveScope: "DriveScope_example", DriveStatus: "DriveStatus_example", PartitionId: "PartitionId_example", ResidentImage: "ResidentImage_example", Size: "Size_example", VirtualDrive: "VirtualDrive_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexFlashController: }), InventoryDeviceInfo: , RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{)}, StoragePhysicalDisk: })}), InventoryDeviceInfo: , MemoryArrays: []MemoryArrayRelationship{openapiclient.memory.Array.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ArrayId: int64(123), CpuId: int64(123), CurrentCapacity: "CurrentCapacity_example", ErrorCorrection: "ErrorCorrection_example", MaxCapacity: "MaxCapacity_example", MaxDevices: "MaxDevices_example", OperPowerState: "OperPowerState_example", Presence: "Presence_example", ComputeBlade: , ComputeBoard: , ComputeRackUnit: , InventoryDeviceInfo: , PersistentMemoryUnits: []MemoryPersistentMemoryUnitRelationship{openapiclient.memory.PersistentMemoryUnit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminState: "AdminState_example", ArrayId: int64(123), Bank: int64(123), Capacity: "Capacity_example", Clock: "Clock_example", FormFactor: "FormFactor_example", Latency: "Latency_example", Location: "Location_example", OperPowerState: "OperPowerState_example", OperState: "OperState_example", Operability: "Operability_example", Presence: "Presence_example", Set: int64(123), Speed: "Speed_example", Thermal: "Thermal_example", Type: "Type_example", Visibility: "Visibility_example", Width: "Width_example", AppDirectCapacity: "AppDirectCapacity_example", CountStatus: "CountStatus_example", FirmwareVersion: "FirmwareVersion_example", FrozenStatus: "FrozenStatus_example", HealthState: "HealthState_example", LockStatus: "LockStatus_example", MemoryCapacity: "MemoryCapacity_example", MemoryId: int64(123), PersistentMemoryCapacity: "PersistentMemoryCapacity_example", ReservedCapacity: "ReservedCapacity_example", SecurityStatus: "SecurityStatus_example", SocketId: "SocketId_example", SocketMemoryId: "SocketMemoryId_example", TotalCapacity: "TotalCapacity_example", Uid: "Uid_example", InventoryDeviceInfo: , MemoryArray: openapiclient.memory.Array.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ArrayId: int64(123), CpuId: int64(123), CurrentCapacity: "CurrentCapacity_example", ErrorCorrection: "ErrorCorrection_example", MaxCapacity: "MaxCapacity_example", MaxDevices: "MaxDevices_example", OperPowerState: "OperPowerState_example", Presence: "Presence_example", ComputeBlade: , ComputeBoard: , ComputeRackUnit: , InventoryDeviceInfo: , PersistentMemoryUnits: []MemoryPersistentMemoryUnitRelationship{openapiclient.memory.PersistentMemoryUnit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminState: "AdminState_example", ArrayId: int64(123), Bank: int64(123), Capacity: "Capacity_example", Clock: "Clock_example", FormFactor: "FormFactor_example", Latency: "Latency_example", Location: "Location_example", OperPowerState: "OperPowerState_example", OperState: "OperState_example", Operability: "Operability_example", Presence: "Presence_example", Set: int64(123), Speed: "Speed_example", Thermal: "Thermal_example", Type: "Type_example", Visibility: "Visibility_example", Width: "Width_example", AppDirectCapacity: "AppDirectCapacity_example", CountStatus: "CountStatus_example", FirmwareVersion: "FirmwareVersion_example", FrozenStatus: "FrozenStatus_example", HealthState: "HealthState_example", LockStatus: "LockStatus_example", MemoryCapacity: "MemoryCapacity_example", MemoryId: int64(123), PersistentMemoryCapacity: "PersistentMemoryCapacity_example", ReservedCapacity: "ReservedCapacity_example", SecurityStatus: "SecurityStatus_example", SocketId: "SocketId_example", SocketMemoryId: "SocketMemoryId_example", TotalCapacity: "TotalCapacity_example", Uid: "Uid_example", InventoryDeviceInfo: , MemoryArray: , RegisteredDevice: }), RegisteredDevice: , Units: []MemoryUnitRelationship{openapiclient.memory.Unit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminState: "AdminState_example", ArrayId: int64(123), Bank: int64(123), Capacity: "Capacity_example", Clock: "Clock_example", FormFactor: "FormFactor_example", Latency: "Latency_example", Location: "Location_example", OperPowerState: "OperPowerState_example", OperState: "OperState_example", Operability: "Operability_example", Presence: "Presence_example", Set: int64(123), Speed: "Speed_example", Thermal: "Thermal_example", Type: "Type_example", Visibility: "Visibility_example", Width: "Width_example", MemoryId: int64(123), InventoryDeviceInfo: , MemoryArray: , RegisteredDevice: })}, RegisteredDevice: }), RegisteredDevice: , Units: []MemoryUnitRelationship{openapiclient.memory.Unit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminState: "AdminState_example", ArrayId: int64(123), Bank: int64(123), Capacity: "Capacity_example", Clock: "Clock_example", FormFactor: "FormFactor_example", Latency: "Latency_example", Location: "Location_example", OperPowerState: "OperPowerState_example", OperState: "OperState_example", Operability: "Operability_example", Presence: "Presence_example", Set: int64(123), Speed: "Speed_example", Thermal: "Thermal_example", Type: "Type_example", Visibility: "Visibility_example", Width: "Width_example", MemoryId: int64(123), InventoryDeviceInfo: , MemoryArray: , RegisteredDevice: })}), PciCoprocessorCards: []PciCoprocessorCardRelationship{openapiclient.pci.CoprocessorCard.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", CardId: int64(123), PciSlot: "PciSlot_example", ComputeBoard: , InventoryDeviceInfo: , RegisteredDevice: }), PciSwitch: []PciSwitchRelationship{), PersistentMemoryConfiguration: openapiclient.memory.PersistentMemoryConfiguration.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", MemoryCapacity: "MemoryCapacity_example", NumOfModules: "NumOfModules_example", NumOfRegions: "NumOfRegions_example", PersistentMemoryCapacity: "PersistentMemoryCapacity_example", ReservedCapacity: "ReservedCapacity_example", SecurityState: "SecurityState_example", TotalCapacity: "TotalCapacity_example", ComputeBoard: , InventoryDeviceInfo: , PersistentMemoryConfigResult: openapiclient.memory.PersistentMemoryConfigResult.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ConfigErrorDesc: "ConfigErrorDesc_example", ConfigResult: "ConfigResult_example", ConfigSequenceNo: int64(123), ConfigState: "ConfigState_example", InventoryDeviceInfo: , MemoryPersistentMemoryConfiguration: openapiclient.memory.PersistentMemoryConfiguration.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", MemoryCapacity: "MemoryCapacity_example", NumOfModules: "NumOfModules_example", NumOfRegions: "NumOfRegions_example", PersistentMemoryCapacity: "PersistentMemoryCapacity_example", ReservedCapacity: "ReservedCapacity_example", SecurityState: "SecurityState_example", TotalCapacity: "TotalCapacity_example", ComputeBoard: , InventoryDeviceInfo: , PersistentMemoryConfigResult: openapiclient.memory.PersistentMemoryConfigResult.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ConfigErrorDesc: "ConfigErrorDesc_example", ConfigResult: "ConfigResult_example", ConfigSequenceNo: int64(123), ConfigState: "ConfigState_example", InventoryDeviceInfo: , MemoryPersistentMemoryConfiguration: , PersistentMemoryNamespaceConfigResults: []MemoryPersistentMemoryNamespaceConfigResultRelationship{openapiclient.memory.PersistentMemoryNamespaceConfigResult.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ConfigStatus: "ConfigStatus_example", Name: "Name_example", SocketId: "SocketId_example", SocketMemoryId: "SocketMemoryId_example", InventoryDeviceInfo: , MemoryPersistentMemoryConfigResult: , RegisteredDevice: }), RegisteredDevice: }, PersistentMemoryRegions: []MemoryPersistentMemoryRegionRelationship{openapiclient.memory.PersistentMemoryRegion.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", FreeCapacity: "FreeCapacity_example", HealthState: "HealthState_example", InterleavedSetId: "InterleavedSetId_example", LocaterIds: "LocaterIds_example", PersistentMemoryType: "PersistentMemoryType_example", RegionId: "RegionId_example", SocketId: "SocketId_example", SocketMemoryId: "SocketMemoryId_example", TotalCapacity: "TotalCapacity_example", InventoryDeviceInfo: , MemoryPersistentMemoryConfiguration: , PersistentMemoryNamespaces: []MemoryPersistentMemoryNamespaceRelationship{openapiclient.memory.PersistentMemoryNamespace.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Capacity: "Capacity_example", HealthState: "HealthState_example", LabelVersion: "LabelVersion_example", Mode: "Mode_example", Name: "Name_example", Uuid: "Uuid_example", InventoryDeviceInfo: , MemoryPersistentMemoryRegion: openapiclient.memory.PersistentMemoryRegion.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", FreeCapacity: "FreeCapacity_example", HealthState: "HealthState_example", InterleavedSetId: "InterleavedSetId_example", LocaterIds: "LocaterIds_example", PersistentMemoryType: "PersistentMemoryType_example", RegionId: "RegionId_example", SocketId: "SocketId_example", SocketMemoryId: "SocketMemoryId_example", TotalCapacity: "TotalCapacity_example", InventoryDeviceInfo: , MemoryPersistentMemoryConfiguration: , PersistentMemoryNamespaces: []MemoryPersistentMemoryNamespaceRelationship{openapiclient.memory.PersistentMemoryNamespace.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Capacity: "Capacity_example", HealthState: "HealthState_example", LabelVersion: "LabelVersion_example", Mode: "Mode_example", Name: "Name_example", Uuid: "Uuid_example", InventoryDeviceInfo: , MemoryPersistentMemoryRegion: , RegisteredDevice: }), RegisteredDevice: }, RegisteredDevice: }), RegisteredDevice: }), RegisteredDevice: }, PersistentMemoryNamespaceConfigResults: []MemoryPersistentMemoryNamespaceConfigResultRelationship{openapiclient.memory.PersistentMemoryNamespaceConfigResult.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ConfigStatus: "ConfigStatus_example", Name: "Name_example", SocketId: "SocketId_example", SocketMemoryId: "SocketMemoryId_example", InventoryDeviceInfo: , MemoryPersistentMemoryConfigResult: , RegisteredDevice: }), RegisteredDevice: }, PersistentMemoryRegions: []MemoryPersistentMemoryRegionRelationship{), RegisteredDevice: }, Processors: []ProcessorUnitRelationship{openapiclient.processor.Unit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Architecture: "Architecture_example", NumCores: int64(123), NumCoresEnabled: "NumCoresEnabled_example", NumThreads: "NumThreads_example", OperPowerState: "OperPowerState_example", OperState: "OperState_example", Operability: "Operability_example", Presence: "Presence_example", ProcessorId: int64(123), SocketDesignation: "SocketDesignation_example", Speed: 123, Stepping: "Stepping_example", Thermal: "Thermal_example", ComputeBlade: , ComputeBoard: , ComputeRackUnit: , InventoryDeviceInfo: , RegisteredDevice: }), RegisteredDevice: , SecurityUnits: []SecurityUnitRelationship{openapiclient.security.Unit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", OperState: "OperState_example", Operability: "Operability_example", PartNumber: "PartNumber_example", PciSlot: "PciSlot_example", Power: "Power_example", Presence: "Presence_example", Thermal: "Thermal_example", UnitId: int64(123), Vid: "Vid_example", Voltage: "Voltage_example", ComputeBoard: , InventoryDeviceInfo: , RegisteredDevice: }), StorageControllers: []StorageControllerRelationship{), StorageFlexFlashControllers: []StorageFlexFlashControllerRelationship{), StorageFlexUtilControllers: []StorageFlexUtilControllerRelationship{openapiclient.storage.FlexUtilController.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ControllerName: "ControllerName_example", ControllerStatus: "ControllerStatus_example", FfControllerId: "FfControllerId_example", InternalState: "InternalState_example", ComputeBoard: , FlexUtilPhysicalDrives: []StorageFlexUtilPhysicalDriveRelationship{openapiclient.storage.FlexUtilPhysicalDrive.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", BlockSize: "BlockSize_example", Capacity: "Capacity_example", Controller: "Controller_example", DrivesEnabled: "DrivesEnabled_example", Health: "Health_example", ManufacturerDate: "ManufacturerDate_example", ManufacturerId: "ManufacturerId_example", OemId: "OemId_example", PartitionCount: "PartitionCount_example", PdStatus: "PdStatus_example", PhysicalDrive: "PhysicalDrive_example", ProductName: "ProductName_example", ProductRevision: "ProductRevision_example", ReadErrorCount: "ReadErrorCount_example", ReadErrorThreshold: "ReadErrorThreshold_example", WriteEnabled: "WriteEnabled_example", WriteErrorCount: "WriteErrorCount_example", WriteErrorThreshold: "WriteErrorThreshold_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexUtilController: openapiclient.storage.FlexUtilController.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ControllerName: "ControllerName_example", ControllerStatus: "ControllerStatus_example", FfControllerId: "FfControllerId_example", InternalState: "InternalState_example", ComputeBoard: , FlexUtilPhysicalDrives: []StorageFlexUtilPhysicalDriveRelationship{openapiclient.storage.FlexUtilPhysicalDrive.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", BlockSize: "BlockSize_example", Capacity: "Capacity_example", Controller: "Controller_example", DrivesEnabled: "DrivesEnabled_example", Health: "Health_example", ManufacturerDate: "ManufacturerDate_example", ManufacturerId: "ManufacturerId_example", OemId: "OemId_example", PartitionCount: "PartitionCount_example", PdStatus: "PdStatus_example", PhysicalDrive: "PhysicalDrive_example", ProductName: "ProductName_example", ProductRevision: "ProductRevision_example", ReadErrorCount: "ReadErrorCount_example", ReadErrorThreshold: "ReadErrorThreshold_example", WriteEnabled: "WriteEnabled_example", WriteErrorCount: "WriteErrorCount_example", WriteErrorThreshold: "WriteErrorThreshold_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexUtilController: }), FlexUtilVirtualDrives: []StorageFlexUtilVirtualDriveRelationship{openapiclient.storage.FlexUtilVirtualDrive.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", DriveStatus: "DriveStatus_example", DriveType: "DriveType_example", PartitionId: "PartitionId_example", PartitionName: "PartitionName_example", ResidentImage: "ResidentImage_example", Size: "Size_example", VirtualDrive: "VirtualDrive_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexUtilController: }), InventoryDeviceInfo: , RegisteredDevice: }}), FlexUtilVirtualDrives: []StorageFlexUtilVirtualDriveRelationship{openapiclient.storage.FlexUtilVirtualDrive.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", DriveStatus: "DriveStatus_example", DriveType: "DriveType_example", PartitionId: "PartitionId_example", PartitionName: "PartitionName_example", ResidentImage: "ResidentImage_example", Size: "Size_example", VirtualDrive: "VirtualDrive_example", InventoryDeviceInfo: , RegisteredDevice: , StorageFlexUtilController: }), InventoryDeviceInfo: , RegisteredDevice: })}, InventoryDeviceInfo: , RegisteredDevice: }), GraphicsCards: []GraphicsCardRelationship{), InventoryDeviceInfo: , MemoryArrays: []MemoryArrayRelationship{), PciCoprocessorCards: []PciCoprocessorCardRelationship{openapiclient.pci.CoprocessorCard.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", CardId: int64(123), PciSlot: "PciSlot_example", ComputeBoard: , InventoryDeviceInfo: , RegisteredDevice: }), PciSwitch: []PciSwitchRelationship{), PersistentMemoryConfiguration: , Processors: []ProcessorUnitRelationship{openapiclient.processor.Unit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", Architecture: "Architecture_example", NumCores: int64(123), NumCoresEnabled: "NumCoresEnabled_example", NumThreads: "NumThreads_example", OperPowerState: "OperPowerState_example", OperState: "OperState_example", Operability: "Operability_example", Presence: "Presence_example", ProcessorId: int64(123), SocketDesignation: "SocketDesignation_example", Speed: 123, Stepping: "Stepping_example", Thermal: "Thermal_example", ComputeBlade: , ComputeBoard: , ComputeRackUnit: , InventoryDeviceInfo: , RegisteredDevice: }), RegisteredDevice: , SecurityUnits: []SecurityUnitRelationship{openapiclient.security.Unit.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", OperState: "OperState_example", Operability: "Operability_example", PartNumber: "PartNumber_example", PciSlot: "PciSlot_example", Power: "Power_example", Presence: "Presence_example", Thermal: "Thermal_example", UnitId: int64(123), Vid: "Vid_example", Voltage: "Voltage_example", ComputeBoard: , InventoryDeviceInfo: , RegisteredDevice: }), StorageControllers: []StorageControllerRelationship{), StorageFlexFlashControllers: []StorageFlexFlashControllerRelationship{), StorageFlexUtilControllers: []StorageFlexUtilControllerRelationship{)}, ComputeRackUnit: , GraphicsControllers: []GraphicsControllerRelationship{openapiclient.graphics.Controller.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", ControllerId: int64(123), PciAddr: "PciAddr_example", PciSlot: "PciSlot_example", GraphicsCard: , InventoryDeviceInfo: , RegisteredDevice: }), InventoryDeviceInfo: , RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{)}, InventoryDeviceInfo: , ManagementController: , NetworkElements: []NetworkElementRelationship{), PciSwitch: , RegisteredDevice: , StorageController: , StorageFlexFlashController: , StoragePhysicalDisk: }), SystemBootOrder: openapiclient.bios.SystemBootOrder.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, BootMode: "BootMode_example", Dn: "Dn_example", SecureBoot: "SecureBoot_example", BiosUnit: , BootDevices: []BiosBootDeviceRelationship{openapiclient.bios.BootDevice.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceName: "DeviceName_example", DeviceType: "DeviceType_example", BiosSystemBootOrder: openapiclient.bios.SystemBootOrder.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, BootMode: "BootMode_example", Dn: "Dn_example", SecureBoot: "SecureBoot_example", BiosUnit: , BootDevices: []BiosBootDeviceRelationship{openapiclient.bios.BootDevice.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceName: "DeviceName_example", DeviceType: "DeviceType_example", BiosSystemBootOrder: , RegisteredDevice: }), RegisteredDevice: }, RegisteredDevice: }), RegisteredDevice: }}), Bmc: , Board: , BootDeviceBootmode: openapiclient.boot.DeviceBootMode.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ConfiguredBootMode: "ConfiguredBootMode_example", ComputeRackUnit: , InventoryDeviceInfo: , RegisteredDevice: }, Fanmodules: []EquipmentFanModuleRelationship{), GenericInventoryHolders: []InventoryGenericInventoryHolderRelationship{openapiclient.inventory.GenericInventoryHolder.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Endpoint: "Endpoint_example", ComputeBlade: , ComputeRackUnit: , GenericInventory: []InventoryGenericInventoryRelationship{openapiclient.inventory.GenericInventory.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Key: "Key_example", Type: "Type_example", Value: "Value_example", InventoryDeviceInfo: , InventoryGenericInventoryHolder: openapiclient.inventory.GenericInventoryHolder.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Endpoint: "Endpoint_example", ComputeBlade: , ComputeRackUnit: , GenericInventory: []InventoryGenericInventoryRelationship{openapiclient.inventory.GenericInventory.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Key: "Key_example", Type: "Type_example", Value: "Value_example", InventoryDeviceInfo: , InventoryGenericInventoryHolder: , RegisteredDevice: }), InventoryDeviceInfo: , RegisteredDevice: }, RegisteredDevice: }), InventoryDeviceInfo: , RegisteredDevice: }), GraphicsCards: []GraphicsCardRelationship{), InventoryDeviceInfo: , LocatorLed: , MemoryArrays: []MemoryArrayRelationship{), PciDevices: []PciDeviceRelationship{openapiclient.pci.Device.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", FirmwareVersion: "FirmwareVersion_example", Pid: "Pid_example", SlotId: "SlotId_example", ComputeBlade: , ComputeRackUnit: , InventoryDeviceInfo: , RegisteredDevice: }), Processors: []ProcessorUnitRelationship{), Psus: []EquipmentPsuRelationship{), RackEnclosureSlot: , RegisteredDevice: , SasExpanders: []StorageSasExpanderRelationship{), StorageControllers: []StorageControllerRelationship{), StorageEnclosures: []StorageEnclosureRelationship{), TopSystem: }, InventoryDeviceInfo: , RegisteredDevice: , RunningFirmware: []FirmwareRunningFirmwareRelationship{), SystemBootOrder: }), Bmc: , Board: , EquipmentChassis: , EquipmentIoExpanders: []EquipmentIoExpanderRelationship{openapiclient.equipment.IoExpander.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", OperState: "OperState_example", Presence: "Presence_example", ComputeBlade: , InventoryDeviceInfo: , RegisteredDevice: }), GenericInventoryHolders: []InventoryGenericInventoryHolderRelationship{), GraphicsCards: []GraphicsCardRelationship{), InventoryDeviceInfo: , LocatorLed: , MemoryArrays: []MemoryArrayRelationship{), PciDevices: []PciDeviceRelationship{openapiclient.pci.Device.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", FirmwareVersion: "FirmwareVersion_example", Pid: "Pid_example", SlotId: "SlotId_example", ComputeBlade: , ComputeRackUnit: , InventoryDeviceInfo: , RegisteredDevice: }), Processors: []ProcessorUnitRelationship{), RegisteredDevice: , StorageControllers: []StorageControllerRelationship{), StorageEnclosures: []StorageEnclosureRelationship{), TopSystem: }, ComputeRackUnit: , Controller: , ExtEthIfs: []AdapterExtEthInterfaceRelationship{openapiclient.adapter.ExtEthInterface.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", AcknowledgedPeerInterface: , PeerInterface: , AdminState: "AdminState_example", EpDn: "EpDn_example", ExtEthInterfaceId: "ExtEthInterfaceId_example", InterfaceType: "InterfaceType_example", MacAddress: "MacAddress_example", PeerAggrPortId: int64(123), PeerDn: "PeerDn_example", PeerPortId: int64(123), PeerSlotId: int64(123), SwitchId: "SwitchId_example", AdapterUnit: , InventoryDeviceInfo: , RegisteredDevice: }), HostEthIfs: []AdapterHostEthInterfaceRelationship{openapiclient.adapter.HostEthInterface.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", AcknowledgedPeerInterface: , PeerInterface: , AdminState: "AdminState_example", EpDn: "EpDn_example", HostEthInterfaceId: int64(123), InterfaceType: "InterfaceType_example", MacAddress: "MacAddress_example", Name: "Name_example", Operability: "Operability_example", OriginalMacAddress: "OriginalMacAddress_example", PciAddr: "PciAddr_example", PeerDn: "PeerDn_example", VirtualizationPreference: "VirtualizationPreference_example", VnicDn: "VnicDn_example", AdapterUnit: , InventoryDeviceInfo: , RegisteredDevice: }), HostFcIfs: []AdapterHostFcInterfaceRelationship{openapiclient.adapter.HostFcInterface.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminState: "AdminState_example", EpDn: "EpDn_example", HostFcInterfaceId: int64(123), Name: "Name_example", OperState: "OperState_example", Operability: "Operability_example", OriginalWwnn: "OriginalWwnn_example", OriginalWwpn: "OriginalWwpn_example", PeerDn: "PeerDn_example", Wwnn: "Wwnn_example", Wwpn: "Wwpn_example", AdapterUnit: , InventoryDeviceInfo: , RegisteredDevice: }), HostIscsiIfs: []AdapterHostIscsiInterfaceRelationship{openapiclient.adapter.HostIscsiInterface.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminState: "AdminState_example", EpDn: "EpDn_example", HostIscsiInterfaceId: int64(123), HostVisible: "HostVisible_example", MacAddress: "MacAddress_example", Name: "Name_example", OperState: "OperState_example", Operability: "Operability_example", PeerDn: "PeerDn_example", AdapterUnit: , InventoryDeviceInfo: , RegisteredDevice: }), InventoryDeviceInfo: , RegisteredDevice: }), BiosUnits: []BiosUnitRelationship{), Bmc: , Board: , EquipmentChassis: , EquipmentIoExpanders: []EquipmentIoExpanderRelationship{openapiclient.equipment.IoExpander.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", OperState: "OperState_example", Presence: "Presence_example", ComputeBlade: , InventoryDeviceInfo: , RegisteredDevice: }), GenericInventoryHolders: []InventoryGenericInventoryHolderRelationship{), GraphicsCards: []GraphicsCardRelationship{), InventoryDeviceInfo: , LocatorLed: , MemoryArrays: []MemoryArrayRelationship{), PciDevices: []PciDeviceRelationship{), Processors: []ProcessorUnitRelationship{), RegisteredDevice: , StorageControllers: []StorageControllerRelationship{), StorageEnclosures: []StorageEnclosureRelationship{), TopSystem: }, ComputeRackUnit: , Controller: , ExtEthIfs: []AdapterExtEthInterfaceRelationship{openapiclient.adapter.ExtEthInterface.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", AcknowledgedPeerInterface: , PeerInterface: , AdminState: "AdminState_example", EpDn: "EpDn_example", ExtEthInterfaceId: "ExtEthInterfaceId_example", InterfaceType: "InterfaceType_example", MacAddress: "MacAddress_example", PeerAggrPortId: int64(123), PeerDn: "PeerDn_example", PeerPortId: int64(123), PeerSlotId: int64(123), SwitchId: "SwitchId_example", AdapterUnit: , InventoryDeviceInfo: , RegisteredDevice: }), HostEthIfs: []AdapterHostEthInterfaceRelationship{openapiclient.adapter.HostEthInterface.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", OperState: "OperState_example", AcknowledgedPeerInterface: , PeerInterface: , AdminState: "AdminState_example", EpDn: "EpDn_example", HostEthInterfaceId: int64(123), InterfaceType: "InterfaceType_example", MacAddress: "MacAddress_example", Name: "Name_example", Operability: "Operability_example", OriginalMacAddress: "OriginalMacAddress_example", PciAddr: "PciAddr_example", PeerDn: "PeerDn_example", VirtualizationPreference: "VirtualizationPreference_example", VnicDn: "VnicDn_example", AdapterUnit: , InventoryDeviceInfo: , RegisteredDevice: }), HostFcIfs: []AdapterHostFcInterfaceRelationship{openapiclient.adapter.HostFcInterface.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminState: "AdminState_example", EpDn: "EpDn_example", HostFcInterfaceId: int64(123), Name: "Name_example", OperState: "OperState_example", Operability: "Operability_example", OriginalWwnn: "OriginalWwnn_example", OriginalWwpn: "OriginalWwpn_example", PeerDn: "PeerDn_example", Wwnn: "Wwnn_example", Wwpn: "Wwpn_example", AdapterUnit: , InventoryDeviceInfo: , RegisteredDevice: }), HostIscsiIfs: []AdapterHostIscsiInterfaceRelationship{openapiclient.adapter.HostIscsiInterface.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", Model: "Model_example", Revision: "Revision_example", Serial: "Serial_example", Vendor: "Vendor_example", AdminState: "AdminState_example", EpDn: "EpDn_example", HostIscsiInterfaceId: int64(123), HostVisible: "HostVisible_example", MacAddress: "MacAddress_example", Name: "Name_example", OperState: "OperState_example", Operability: "Operability_example", PeerDn: "PeerDn_example", AdapterUnit: , InventoryDeviceInfo: , RegisteredDevice: }), InventoryDeviceInfo: , RegisteredDevice: }), BiosBootmode: openapiclient.bios.BootMode.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ActualBootMode: "ActualBootMode_example", ComputeRackUnit: , InventoryDeviceInfo: , RegisteredDevice: }, Biosunits: []BiosUnitRelationship{), Bmc: , Board: , BootDeviceBootmode: openapiclient.boot.DeviceBootMode.Relationship{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Moid: "Moid_example", Selector: "Selector_example", Link: "Link_example", AccountMoid: "AccountMoid_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ConfiguredBootMode: "ConfiguredBootMode_example", ComputeRackUnit: , InventoryDeviceInfo: , RegisteredDevice: }, Fanmodules: []EquipmentFanModuleRelationship{), GenericInventoryHolders: []InventoryGenericInventoryHolderRelationship{), GraphicsCards: []GraphicsCardRelationship{), InventoryDeviceInfo: , LocatorLed: , MemoryArrays: []MemoryArrayRelationship{), PciDevices: []PciDeviceRelationship{), Processors: []ProcessorUnitRelationship{), Psus: []EquipmentPsuRelationship{), RackEnclosureSlot: , RegisteredDevice: , SasExpanders: []StorageSasExpanderRelationship{), StorageControllers: []StorageControllerRelationship{), StorageEnclosures: []StorageEnclosureRelationship{), TopSystem: }, InventoryDeviceInfo: , RegisteredDevice: } // BootDeviceBootMode | The 'boot.DeviceBootMode' resource to update.
+    bootDeviceBootMode := *openapiclient.Newboot.DeviceBootMode("ClassId_example", "ObjectType_example") // BootDeviceBootMode | The 'boot.DeviceBootMode' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.BootApi.PatchBootDeviceBootMode(context.Background(), moid, bootDeviceBootMode).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.BootApi.PatchBootDeviceBootMode(context.Background(), moid).BootDeviceBootMode(bootDeviceBootMode).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `BootApi.PatchBootDeviceBootMode``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -515,7 +2303,295 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchBootHddDevice
+
+> BootHddDevice PatchBootHddDevice(ctx, moid).BootHddDevice(bootHddDevice).IfMatch(ifMatch).Execute()
+
+Update a 'boot.HddDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    bootHddDevice := *openapiclient.Newboot.HddDevice("ClassId_example", "ObjectType_example") // BootHddDevice | The 'boot.HddDevice' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.PatchBootHddDevice(context.Background(), moid).BootHddDevice(bootHddDevice).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.PatchBootHddDevice``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchBootHddDevice`: BootHddDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.PatchBootHddDevice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchBootHddDeviceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **bootHddDevice** | [**BootHddDevice**](BootHddDevice.md) | The &#39;boot.HddDevice&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**BootHddDevice**](boot.HddDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchBootIscsiDevice
+
+> BootIscsiDevice PatchBootIscsiDevice(ctx, moid).BootIscsiDevice(bootIscsiDevice).IfMatch(ifMatch).Execute()
+
+Update a 'boot.IscsiDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    bootIscsiDevice := *openapiclient.Newboot.IscsiDevice("ClassId_example", "ObjectType_example") // BootIscsiDevice | The 'boot.IscsiDevice' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.PatchBootIscsiDevice(context.Background(), moid).BootIscsiDevice(bootIscsiDevice).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.PatchBootIscsiDevice``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchBootIscsiDevice`: BootIscsiDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.PatchBootIscsiDevice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchBootIscsiDeviceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **bootIscsiDevice** | [**BootIscsiDevice**](BootIscsiDevice.md) | The &#39;boot.IscsiDevice&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**BootIscsiDevice**](boot.IscsiDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchBootNvmeDevice
+
+> BootNvmeDevice PatchBootNvmeDevice(ctx, moid).BootNvmeDevice(bootNvmeDevice).IfMatch(ifMatch).Execute()
+
+Update a 'boot.NvmeDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    bootNvmeDevice := *openapiclient.Newboot.NvmeDevice("ClassId_example", "ObjectType_example") // BootNvmeDevice | The 'boot.NvmeDevice' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.PatchBootNvmeDevice(context.Background(), moid).BootNvmeDevice(bootNvmeDevice).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.PatchBootNvmeDevice``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchBootNvmeDevice`: BootNvmeDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.PatchBootNvmeDevice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchBootNvmeDeviceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **bootNvmeDevice** | [**BootNvmeDevice**](BootNvmeDevice.md) | The &#39;boot.NvmeDevice&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**BootNvmeDevice**](boot.NvmeDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchBootPchStorageDevice
+
+> BootPchStorageDevice PatchBootPchStorageDevice(ctx, moid).BootPchStorageDevice(bootPchStorageDevice).IfMatch(ifMatch).Execute()
+
+Update a 'boot.PchStorageDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    bootPchStorageDevice := *openapiclient.Newboot.PchStorageDevice("ClassId_example", "ObjectType_example") // BootPchStorageDevice | The 'boot.PchStorageDevice' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.PatchBootPchStorageDevice(context.Background(), moid).BootPchStorageDevice(bootPchStorageDevice).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.PatchBootPchStorageDevice``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchBootPchStorageDevice`: BootPchStorageDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.PatchBootPchStorageDevice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchBootPchStorageDeviceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **bootPchStorageDevice** | [**BootPchStorageDevice**](BootPchStorageDevice.md) | The &#39;boot.PchStorageDevice&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**BootPchStorageDevice**](boot.PchStorageDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -547,12 +2623,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    bootPrecisionPolicy := openapiclient.boot.PrecisionPolicy{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, Description: "Description_example", Name: "Name_example", BootDevices: []BootDeviceBase{openapiclient.boot.DeviceBase{ClassId: "ClassId_example", ObjectType: "ObjectType_example", Enabled: false, Name: "Name_example"}), ConfiguredBootMode: "ConfiguredBootMode_example", EnforceUefiSecureBoot: false, Organization: , Profiles: []PolicyAbstractConfigProfileRelationship{)} // BootPrecisionPolicy | The 'boot.PrecisionPolicy' resource to update.
+    bootPrecisionPolicy := *openapiclient.Newboot.PrecisionPolicy("ClassId_example", "ObjectType_example") // BootPrecisionPolicy | The 'boot.PrecisionPolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.BootApi.PatchBootPrecisionPolicy(context.Background(), moid, bootPrecisionPolicy).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.BootApi.PatchBootPrecisionPolicy(context.Background(), moid).BootPrecisionPolicy(bootPrecisionPolicy).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `BootApi.PatchBootPrecisionPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -587,7 +2663,511 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchBootPxeDevice
+
+> BootPxeDevice PatchBootPxeDevice(ctx, moid).BootPxeDevice(bootPxeDevice).IfMatch(ifMatch).Execute()
+
+Update a 'boot.PxeDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    bootPxeDevice := *openapiclient.Newboot.PxeDevice("ClassId_example", "ObjectType_example") // BootPxeDevice | The 'boot.PxeDevice' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.PatchBootPxeDevice(context.Background(), moid).BootPxeDevice(bootPxeDevice).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.PatchBootPxeDevice``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchBootPxeDevice`: BootPxeDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.PatchBootPxeDevice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchBootPxeDeviceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **bootPxeDevice** | [**BootPxeDevice**](BootPxeDevice.md) | The &#39;boot.PxeDevice&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**BootPxeDevice**](boot.PxeDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchBootSanDevice
+
+> BootSanDevice PatchBootSanDevice(ctx, moid).BootSanDevice(bootSanDevice).IfMatch(ifMatch).Execute()
+
+Update a 'boot.SanDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    bootSanDevice := *openapiclient.Newboot.SanDevice("ClassId_example", "ObjectType_example") // BootSanDevice | The 'boot.SanDevice' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.PatchBootSanDevice(context.Background(), moid).BootSanDevice(bootSanDevice).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.PatchBootSanDevice``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchBootSanDevice`: BootSanDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.PatchBootSanDevice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchBootSanDeviceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **bootSanDevice** | [**BootSanDevice**](BootSanDevice.md) | The &#39;boot.SanDevice&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**BootSanDevice**](boot.SanDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchBootSdDevice
+
+> BootSdDevice PatchBootSdDevice(ctx, moid).BootSdDevice(bootSdDevice).IfMatch(ifMatch).Execute()
+
+Update a 'boot.SdDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    bootSdDevice := *openapiclient.Newboot.SdDevice("ClassId_example", "ObjectType_example") // BootSdDevice | The 'boot.SdDevice' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.PatchBootSdDevice(context.Background(), moid).BootSdDevice(bootSdDevice).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.PatchBootSdDevice``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchBootSdDevice`: BootSdDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.PatchBootSdDevice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchBootSdDeviceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **bootSdDevice** | [**BootSdDevice**](BootSdDevice.md) | The &#39;boot.SdDevice&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**BootSdDevice**](boot.SdDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchBootUefiShellDevice
+
+> BootUefiShellDevice PatchBootUefiShellDevice(ctx, moid).BootUefiShellDevice(bootUefiShellDevice).IfMatch(ifMatch).Execute()
+
+Update a 'boot.UefiShellDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    bootUefiShellDevice := *openapiclient.Newboot.UefiShellDevice("ClassId_example", "ObjectType_example") // BootUefiShellDevice | The 'boot.UefiShellDevice' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.PatchBootUefiShellDevice(context.Background(), moid).BootUefiShellDevice(bootUefiShellDevice).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.PatchBootUefiShellDevice``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchBootUefiShellDevice`: BootUefiShellDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.PatchBootUefiShellDevice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchBootUefiShellDeviceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **bootUefiShellDevice** | [**BootUefiShellDevice**](BootUefiShellDevice.md) | The &#39;boot.UefiShellDevice&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**BootUefiShellDevice**](boot.UefiShellDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchBootUsbDevice
+
+> BootUsbDevice PatchBootUsbDevice(ctx, moid).BootUsbDevice(bootUsbDevice).IfMatch(ifMatch).Execute()
+
+Update a 'boot.UsbDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    bootUsbDevice := *openapiclient.Newboot.UsbDevice("ClassId_example", "ObjectType_example") // BootUsbDevice | The 'boot.UsbDevice' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.PatchBootUsbDevice(context.Background(), moid).BootUsbDevice(bootUsbDevice).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.PatchBootUsbDevice``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchBootUsbDevice`: BootUsbDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.PatchBootUsbDevice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchBootUsbDeviceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **bootUsbDevice** | [**BootUsbDevice**](BootUsbDevice.md) | The &#39;boot.UsbDevice&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**BootUsbDevice**](boot.UsbDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchBootVmediaDevice
+
+> BootVmediaDevice PatchBootVmediaDevice(ctx, moid).BootVmediaDevice(bootVmediaDevice).IfMatch(ifMatch).Execute()
+
+Update a 'boot.VmediaDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    bootVmediaDevice := *openapiclient.Newboot.VmediaDevice("ClassId_example", "ObjectType_example") // BootVmediaDevice | The 'boot.VmediaDevice' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.PatchBootVmediaDevice(context.Background(), moid).BootVmediaDevice(bootVmediaDevice).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.PatchBootVmediaDevice``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchBootVmediaDevice`: BootVmediaDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.PatchBootVmediaDevice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchBootVmediaDeviceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **bootVmediaDevice** | [**BootVmediaDevice**](BootVmediaDevice.md) | The &#39;boot.VmediaDevice&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**BootVmediaDevice**](boot.VmediaDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateBootCddDevice
+
+> BootCddDevice UpdateBootCddDevice(ctx, moid).BootCddDevice(bootCddDevice).IfMatch(ifMatch).Execute()
+
+Update a 'boot.CddDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    bootCddDevice := *openapiclient.Newboot.CddDevice("ClassId_example", "ObjectType_example") // BootCddDevice | The 'boot.CddDevice' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.UpdateBootCddDevice(context.Background(), moid).BootCddDevice(bootCddDevice).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.UpdateBootCddDevice``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateBootCddDevice`: BootCddDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.UpdateBootCddDevice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateBootCddDeviceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **bootCddDevice** | [**BootCddDevice**](BootCddDevice.md) | The &#39;boot.CddDevice&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**BootCddDevice**](boot.CddDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -619,12 +3199,12 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    bootDeviceBootMode := openapiclient.boot.DeviceBootMode{AccountMoid: "AccountMoid_example", ClassId: "ClassId_example", CreateTime: "TODO", DomainGroupMoid: "DomainGroupMoid_example", ModTime: "TODO", Moid: "Moid_example", ObjectType: "ObjectType_example", Owners: []string{"Owners_example"), SharedScope: "SharedScope_example", Tags: []MoTag{), VersionContext: , Ancestors: []MoBaseMoRelationship{), Parent: , PermissionResources: []MoBaseMoRelationship{), DisplayNames: map[string]string{ "Key" = "Value" }, DeviceMoId: "DeviceMoId_example", Dn: "Dn_example", Rn: "Rn_example", ConfiguredBootMode: "ConfiguredBootMode_example", ComputeRackUnit: , InventoryDeviceInfo: , RegisteredDevice: } // BootDeviceBootMode | The 'boot.DeviceBootMode' resource to update.
+    bootDeviceBootMode := *openapiclient.Newboot.DeviceBootMode("ClassId_example", "ObjectType_example") // BootDeviceBootMode | The 'boot.DeviceBootMode' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.BootApi.UpdateBootDeviceBootMode(context.Background(), moid, bootDeviceBootMode).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.BootApi.UpdateBootDeviceBootMode(context.Background(), moid).BootDeviceBootMode(bootDeviceBootMode).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `BootApi.UpdateBootDeviceBootMode``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -659,7 +3239,295 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateBootHddDevice
+
+> BootHddDevice UpdateBootHddDevice(ctx, moid).BootHddDevice(bootHddDevice).IfMatch(ifMatch).Execute()
+
+Update a 'boot.HddDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    bootHddDevice := *openapiclient.Newboot.HddDevice("ClassId_example", "ObjectType_example") // BootHddDevice | The 'boot.HddDevice' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.UpdateBootHddDevice(context.Background(), moid).BootHddDevice(bootHddDevice).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.UpdateBootHddDevice``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateBootHddDevice`: BootHddDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.UpdateBootHddDevice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateBootHddDeviceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **bootHddDevice** | [**BootHddDevice**](BootHddDevice.md) | The &#39;boot.HddDevice&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**BootHddDevice**](boot.HddDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateBootIscsiDevice
+
+> BootIscsiDevice UpdateBootIscsiDevice(ctx, moid).BootIscsiDevice(bootIscsiDevice).IfMatch(ifMatch).Execute()
+
+Update a 'boot.IscsiDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    bootIscsiDevice := *openapiclient.Newboot.IscsiDevice("ClassId_example", "ObjectType_example") // BootIscsiDevice | The 'boot.IscsiDevice' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.UpdateBootIscsiDevice(context.Background(), moid).BootIscsiDevice(bootIscsiDevice).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.UpdateBootIscsiDevice``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateBootIscsiDevice`: BootIscsiDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.UpdateBootIscsiDevice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateBootIscsiDeviceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **bootIscsiDevice** | [**BootIscsiDevice**](BootIscsiDevice.md) | The &#39;boot.IscsiDevice&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**BootIscsiDevice**](boot.IscsiDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateBootNvmeDevice
+
+> BootNvmeDevice UpdateBootNvmeDevice(ctx, moid).BootNvmeDevice(bootNvmeDevice).IfMatch(ifMatch).Execute()
+
+Update a 'boot.NvmeDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    bootNvmeDevice := *openapiclient.Newboot.NvmeDevice("ClassId_example", "ObjectType_example") // BootNvmeDevice | The 'boot.NvmeDevice' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.UpdateBootNvmeDevice(context.Background(), moid).BootNvmeDevice(bootNvmeDevice).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.UpdateBootNvmeDevice``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateBootNvmeDevice`: BootNvmeDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.UpdateBootNvmeDevice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateBootNvmeDeviceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **bootNvmeDevice** | [**BootNvmeDevice**](BootNvmeDevice.md) | The &#39;boot.NvmeDevice&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**BootNvmeDevice**](boot.NvmeDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateBootPchStorageDevice
+
+> BootPchStorageDevice UpdateBootPchStorageDevice(ctx, moid).BootPchStorageDevice(bootPchStorageDevice).IfMatch(ifMatch).Execute()
+
+Update a 'boot.PchStorageDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    bootPchStorageDevice := *openapiclient.Newboot.PchStorageDevice("ClassId_example", "ObjectType_example") // BootPchStorageDevice | The 'boot.PchStorageDevice' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.UpdateBootPchStorageDevice(context.Background(), moid).BootPchStorageDevice(bootPchStorageDevice).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.UpdateBootPchStorageDevice``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateBootPchStorageDevice`: BootPchStorageDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.UpdateBootPchStorageDevice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateBootPchStorageDeviceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **bootPchStorageDevice** | [**BootPchStorageDevice**](BootPchStorageDevice.md) | The &#39;boot.PchStorageDevice&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**BootPchStorageDevice**](boot.PchStorageDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 
@@ -696,7 +3564,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.BootApi.UpdateBootPrecisionPolicy(context.Background(), moid, bootPrecisionPolicy).IfMatch(ifMatch).Execute()
+    resp, r, err := api_client.BootApi.UpdateBootPrecisionPolicy(context.Background(), moid).BootPrecisionPolicy(bootPrecisionPolicy).IfMatch(ifMatch).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `BootApi.UpdateBootPrecisionPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -731,7 +3599,439 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2)
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateBootPxeDevice
+
+> BootPxeDevice UpdateBootPxeDevice(ctx, moid).BootPxeDevice(bootPxeDevice).IfMatch(ifMatch).Execute()
+
+Update a 'boot.PxeDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    bootPxeDevice := *openapiclient.Newboot.PxeDevice("ClassId_example", "ObjectType_example") // BootPxeDevice | The 'boot.PxeDevice' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.UpdateBootPxeDevice(context.Background(), moid).BootPxeDevice(bootPxeDevice).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.UpdateBootPxeDevice``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateBootPxeDevice`: BootPxeDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.UpdateBootPxeDevice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateBootPxeDeviceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **bootPxeDevice** | [**BootPxeDevice**](BootPxeDevice.md) | The &#39;boot.PxeDevice&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**BootPxeDevice**](boot.PxeDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateBootSanDevice
+
+> BootSanDevice UpdateBootSanDevice(ctx, moid).BootSanDevice(bootSanDevice).IfMatch(ifMatch).Execute()
+
+Update a 'boot.SanDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    bootSanDevice := *openapiclient.Newboot.SanDevice("ClassId_example", "ObjectType_example") // BootSanDevice | The 'boot.SanDevice' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.UpdateBootSanDevice(context.Background(), moid).BootSanDevice(bootSanDevice).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.UpdateBootSanDevice``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateBootSanDevice`: BootSanDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.UpdateBootSanDevice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateBootSanDeviceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **bootSanDevice** | [**BootSanDevice**](BootSanDevice.md) | The &#39;boot.SanDevice&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**BootSanDevice**](boot.SanDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateBootSdDevice
+
+> BootSdDevice UpdateBootSdDevice(ctx, moid).BootSdDevice(bootSdDevice).IfMatch(ifMatch).Execute()
+
+Update a 'boot.SdDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    bootSdDevice := *openapiclient.Newboot.SdDevice("ClassId_example", "ObjectType_example") // BootSdDevice | The 'boot.SdDevice' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.UpdateBootSdDevice(context.Background(), moid).BootSdDevice(bootSdDevice).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.UpdateBootSdDevice``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateBootSdDevice`: BootSdDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.UpdateBootSdDevice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateBootSdDeviceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **bootSdDevice** | [**BootSdDevice**](BootSdDevice.md) | The &#39;boot.SdDevice&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**BootSdDevice**](boot.SdDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateBootUefiShellDevice
+
+> BootUefiShellDevice UpdateBootUefiShellDevice(ctx, moid).BootUefiShellDevice(bootUefiShellDevice).IfMatch(ifMatch).Execute()
+
+Update a 'boot.UefiShellDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    bootUefiShellDevice := *openapiclient.Newboot.UefiShellDevice("ClassId_example", "ObjectType_example") // BootUefiShellDevice | The 'boot.UefiShellDevice' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.UpdateBootUefiShellDevice(context.Background(), moid).BootUefiShellDevice(bootUefiShellDevice).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.UpdateBootUefiShellDevice``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateBootUefiShellDevice`: BootUefiShellDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.UpdateBootUefiShellDevice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateBootUefiShellDeviceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **bootUefiShellDevice** | [**BootUefiShellDevice**](BootUefiShellDevice.md) | The &#39;boot.UefiShellDevice&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**BootUefiShellDevice**](boot.UefiShellDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateBootUsbDevice
+
+> BootUsbDevice UpdateBootUsbDevice(ctx, moid).BootUsbDevice(bootUsbDevice).IfMatch(ifMatch).Execute()
+
+Update a 'boot.UsbDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    bootUsbDevice := *openapiclient.Newboot.UsbDevice("ClassId_example", "ObjectType_example") // BootUsbDevice | The 'boot.UsbDevice' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.UpdateBootUsbDevice(context.Background(), moid).BootUsbDevice(bootUsbDevice).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.UpdateBootUsbDevice``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateBootUsbDevice`: BootUsbDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.UpdateBootUsbDevice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateBootUsbDeviceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **bootUsbDevice** | [**BootUsbDevice**](BootUsbDevice.md) | The &#39;boot.UsbDevice&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**BootUsbDevice**](boot.UsbDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateBootVmediaDevice
+
+> BootVmediaDevice UpdateBootVmediaDevice(ctx, moid).BootVmediaDevice(bootVmediaDevice).IfMatch(ifMatch).Execute()
+
+Update a 'boot.VmediaDevice' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    bootVmediaDevice := *openapiclient.Newboot.VmediaDevice("ClassId_example", "ObjectType_example") // BootVmediaDevice | The 'boot.VmediaDevice' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BootApi.UpdateBootVmediaDevice(context.Background(), moid).BootVmediaDevice(bootVmediaDevice).IfMatch(ifMatch).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BootApi.UpdateBootVmediaDevice``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateBootVmediaDevice`: BootVmediaDevice
+    fmt.Fprintf(os.Stdout, "Response from `BootApi.UpdateBootVmediaDevice`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateBootVmediaDeviceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **bootVmediaDevice** | [**BootVmediaDevice**](BootVmediaDevice.md) | The &#39;boot.VmediaDevice&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**BootVmediaDevice**](boot.VmediaDevice.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
 
 ### HTTP request headers
 

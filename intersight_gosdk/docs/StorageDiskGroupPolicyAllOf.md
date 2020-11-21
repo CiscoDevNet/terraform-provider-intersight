@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.DiskGroupPolicy"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.DiskGroupPolicy"]
 **DedicatedHotSpares** | Pointer to [**[]StorageLocalDisk**](storage.LocalDisk.md) |  | [optional] 
 **RaidLevel** | Pointer to **string** | The supported RAID level for the disk group. * &#x60;Raid0&#x60; - RAID 0 Stripe Raid Level. * &#x60;Raid1&#x60; - RAID 1 Mirror Raid Level. * &#x60;Raid5&#x60; - RAID 5 Mirror Raid Level. * &#x60;Raid6&#x60; - RAID 6 Mirror Raid Level. * &#x60;Raid10&#x60; - RAID 10 Mirror Raid Level. * &#x60;Raid50&#x60; - RAID 50 Mirror Raid Level. * &#x60;Raid60&#x60; - RAID 60 Mirror Raid Level. | [optional] [default to "Raid0"]
 **SpanGroups** | Pointer to [**[]StorageSpanGroup**](storage.SpanGroup.md) |  | [optional] 
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewStorageDiskGroupPolicyAllOf
 
-`func NewStorageDiskGroupPolicyAllOf() *StorageDiskGroupPolicyAllOf`
+`func NewStorageDiskGroupPolicyAllOf(classId string, objectType string, ) *StorageDiskGroupPolicyAllOf`
 
 NewStorageDiskGroupPolicyAllOf instantiates a new StorageDiskGroupPolicyAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +31,46 @@ will change when the set of required properties is changed
 NewStorageDiskGroupPolicyAllOfWithDefaults instantiates a new StorageDiskGroupPolicyAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *StorageDiskGroupPolicyAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *StorageDiskGroupPolicyAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *StorageDiskGroupPolicyAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *StorageDiskGroupPolicyAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *StorageDiskGroupPolicyAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *StorageDiskGroupPolicyAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDedicatedHotSpares
 
@@ -55,6 +97,16 @@ SetDedicatedHotSpares sets DedicatedHotSpares field to given value.
 
 HasDedicatedHotSpares returns a boolean if a field has been set.
 
+### SetDedicatedHotSparesNil
+
+`func (o *StorageDiskGroupPolicyAllOf) SetDedicatedHotSparesNil(b bool)`
+
+ SetDedicatedHotSparesNil sets the value for DedicatedHotSpares to be an explicit nil
+
+### UnsetDedicatedHotSpares
+`func (o *StorageDiskGroupPolicyAllOf) UnsetDedicatedHotSpares()`
+
+UnsetDedicatedHotSpares ensures that no value is present for DedicatedHotSpares, not even an explicit nil
 ### GetRaidLevel
 
 `func (o *StorageDiskGroupPolicyAllOf) GetRaidLevel() string`
@@ -105,6 +157,16 @@ SetSpanGroups sets SpanGroups field to given value.
 
 HasSpanGroups returns a boolean if a field has been set.
 
+### SetSpanGroupsNil
+
+`func (o *StorageDiskGroupPolicyAllOf) SetSpanGroupsNil(b bool)`
+
+ SetSpanGroupsNil sets the value for SpanGroups to be an explicit nil
+
+### UnsetSpanGroups
+`func (o *StorageDiskGroupPolicyAllOf) UnsetSpanGroups()`
+
+UnsetSpanGroups ensures that no value is present for SpanGroups, not even an explicit nil
 ### GetUseJbods
 
 `func (o *StorageDiskGroupPolicyAllOf) GetUseJbods() bool`

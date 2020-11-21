@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.DeviceClaim"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.DeviceClaim"]
 **DeviceUpdates** | Pointer to [**[]AssetConnectionControlMessage**](asset.ConnectionControlMessage.md) |  | [optional] 
 **SecurityToken** | Pointer to **string** | Obtained from the device connector management UI or API (REST endpoint &#39;/connector/SecurityTokens&#39;). | [optional] 
 **SerialNumber** | Pointer to **string** | Obtained from the device connector management UI or API (REST endpoint &#39;/connector/DeviceIdentifiers&#39;). | [optional] 
@@ -14,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewAssetDeviceClaimAllOf
 
-`func NewAssetDeviceClaimAllOf() *AssetDeviceClaimAllOf`
+`func NewAssetDeviceClaimAllOf(classId string, objectType string, ) *AssetDeviceClaimAllOf`
 
 NewAssetDeviceClaimAllOf instantiates a new AssetDeviceClaimAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +30,46 @@ will change when the set of required properties is changed
 NewAssetDeviceClaimAllOfWithDefaults instantiates a new AssetDeviceClaimAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *AssetDeviceClaimAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *AssetDeviceClaimAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *AssetDeviceClaimAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *AssetDeviceClaimAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *AssetDeviceClaimAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *AssetDeviceClaimAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDeviceUpdates
 
@@ -54,6 +96,16 @@ SetDeviceUpdates sets DeviceUpdates field to given value.
 
 HasDeviceUpdates returns a boolean if a field has been set.
 
+### SetDeviceUpdatesNil
+
+`func (o *AssetDeviceClaimAllOf) SetDeviceUpdatesNil(b bool)`
+
+ SetDeviceUpdatesNil sets the value for DeviceUpdates to be an explicit nil
+
+### UnsetDeviceUpdates
+`func (o *AssetDeviceClaimAllOf) UnsetDeviceUpdates()`
+
+UnsetDeviceUpdates ensures that no value is present for DeviceUpdates, not even an explicit nil
 ### GetSecurityToken
 
 `func (o *AssetDeviceClaimAllOf) GetSecurityToken() string`

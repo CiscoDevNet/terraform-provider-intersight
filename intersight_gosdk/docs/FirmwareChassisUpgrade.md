@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.ChassisUpgrade"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.ChassisUpgrade"]
 **ExcludeComponentList** | Pointer to **[]string** |  | [optional] 
 **Chassis** | Pointer to [**EquipmentChassisRelationship**](equipment.Chassis.Relationship.md) |  | [optional] 
 **Device** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewFirmwareChassisUpgrade
 
-`func NewFirmwareChassisUpgrade() *FirmwareChassisUpgrade`
+`func NewFirmwareChassisUpgrade(classId string, objectType string, ) *FirmwareChassisUpgrade`
 
 NewFirmwareChassisUpgrade instantiates a new FirmwareChassisUpgrade object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewFirmwareChassisUpgradeWithDefaults instantiates a new FirmwareChassisUpgrade object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *FirmwareChassisUpgrade) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *FirmwareChassisUpgrade) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *FirmwareChassisUpgrade) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *FirmwareChassisUpgrade) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *FirmwareChassisUpgrade) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *FirmwareChassisUpgrade) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetExcludeComponentList
 
@@ -52,6 +94,16 @@ SetExcludeComponentList sets ExcludeComponentList field to given value.
 
 HasExcludeComponentList returns a boolean if a field has been set.
 
+### SetExcludeComponentListNil
+
+`func (o *FirmwareChassisUpgrade) SetExcludeComponentListNil(b bool)`
+
+ SetExcludeComponentListNil sets the value for ExcludeComponentList to be an explicit nil
+
+### UnsetExcludeComponentList
+`func (o *FirmwareChassisUpgrade) UnsetExcludeComponentList()`
+
+UnsetExcludeComponentList ensures that no value is present for ExcludeComponentList, not even an explicit nil
 ### GetChassis
 
 `func (o *FirmwareChassisUpgrade) GetChassis() EquipmentChassisRelationship`

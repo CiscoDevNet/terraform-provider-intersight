@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "appliance.Backup"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.Backup"]
 **ElapsedTime** | Pointer to **int64** | Elapsed time in seconds since the backup process has started. | [optional] [readonly] 
 **EndTime** | Pointer to [**time.Time**](time.Time.md) | End date and time of the backup process. | [optional] [readonly] 
 **IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] 
@@ -17,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewApplianceBackup
 
-`func NewApplianceBackup() *ApplianceBackup`
+`func NewApplianceBackup(classId string, objectType string, ) *ApplianceBackup`
 
 NewApplianceBackup instantiates a new ApplianceBackup object
 This constructor will assign default values to properties that have it defined,
@@ -31,6 +33,46 @@ will change when the set of required properties is changed
 NewApplianceBackupWithDefaults instantiates a new ApplianceBackup object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *ApplianceBackup) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *ApplianceBackup) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *ApplianceBackup) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *ApplianceBackup) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *ApplianceBackup) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *ApplianceBackup) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetElapsedTime
 
@@ -132,6 +174,16 @@ SetMessages sets Messages field to given value.
 
 HasMessages returns a boolean if a field has been set.
 
+### SetMessagesNil
+
+`func (o *ApplianceBackup) SetMessagesNil(b bool)`
+
+ SetMessagesNil sets the value for Messages to be an explicit nil
+
+### UnsetMessages
+`func (o *ApplianceBackup) UnsetMessages()`
+
+UnsetMessages ensures that no value is present for Messages, not even an explicit nil
 ### GetPassword
 
 `func (o *ApplianceBackup) GetPassword() string`

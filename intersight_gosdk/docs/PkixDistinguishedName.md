@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "pkix.DistinguishedName"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "pkix.DistinguishedName"]
 **CommonName** | Pointer to **string** | A required component that identifies a person or an object. | [optional] [readonly] 
 **Country** | Pointer to **[]string** |  | [optional] 
 **Locality** | Pointer to **[]string** |  | [optional] 
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewPkixDistinguishedName
 
-`func NewPkixDistinguishedName() *PkixDistinguishedName`
+`func NewPkixDistinguishedName(classId string, objectType string, ) *PkixDistinguishedName`
 
 NewPkixDistinguishedName instantiates a new PkixDistinguishedName object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +31,46 @@ will change when the set of required properties is changed
 NewPkixDistinguishedNameWithDefaults instantiates a new PkixDistinguishedName object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *PkixDistinguishedName) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *PkixDistinguishedName) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *PkixDistinguishedName) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *PkixDistinguishedName) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *PkixDistinguishedName) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *PkixDistinguishedName) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCommonName
 
@@ -80,6 +122,16 @@ SetCountry sets Country field to given value.
 
 HasCountry returns a boolean if a field has been set.
 
+### SetCountryNil
+
+`func (o *PkixDistinguishedName) SetCountryNil(b bool)`
+
+ SetCountryNil sets the value for Country to be an explicit nil
+
+### UnsetCountry
+`func (o *PkixDistinguishedName) UnsetCountry()`
+
+UnsetCountry ensures that no value is present for Country, not even an explicit nil
 ### GetLocality
 
 `func (o *PkixDistinguishedName) GetLocality() []string`
@@ -105,6 +157,16 @@ SetLocality sets Locality field to given value.
 
 HasLocality returns a boolean if a field has been set.
 
+### SetLocalityNil
+
+`func (o *PkixDistinguishedName) SetLocalityNil(b bool)`
+
+ SetLocalityNil sets the value for Locality to be an explicit nil
+
+### UnsetLocality
+`func (o *PkixDistinguishedName) UnsetLocality()`
+
+UnsetLocality ensures that no value is present for Locality, not even an explicit nil
 ### GetOrganization
 
 `func (o *PkixDistinguishedName) GetOrganization() []string`
@@ -130,6 +192,16 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
+### SetOrganizationNil
+
+`func (o *PkixDistinguishedName) SetOrganizationNil(b bool)`
+
+ SetOrganizationNil sets the value for Organization to be an explicit nil
+
+### UnsetOrganization
+`func (o *PkixDistinguishedName) UnsetOrganization()`
+
+UnsetOrganization ensures that no value is present for Organization, not even an explicit nil
 ### GetOrganizationalUnit
 
 `func (o *PkixDistinguishedName) GetOrganizationalUnit() []string`
@@ -155,6 +227,16 @@ SetOrganizationalUnit sets OrganizationalUnit field to given value.
 
 HasOrganizationalUnit returns a boolean if a field has been set.
 
+### SetOrganizationalUnitNil
+
+`func (o *PkixDistinguishedName) SetOrganizationalUnitNil(b bool)`
+
+ SetOrganizationalUnitNil sets the value for OrganizationalUnit to be an explicit nil
+
+### UnsetOrganizationalUnit
+`func (o *PkixDistinguishedName) UnsetOrganizationalUnit()`
+
+UnsetOrganizationalUnit ensures that no value is present for OrganizationalUnit, not even an explicit nil
 ### GetState
 
 `func (o *PkixDistinguishedName) GetState() []string`
@@ -180,6 +262,16 @@ SetState sets State field to given value.
 
 HasState returns a boolean if a field has been set.
 
+### SetStateNil
+
+`func (o *PkixDistinguishedName) SetStateNil(b bool)`
+
+ SetStateNil sets the value for State to be an explicit nil
+
+### UnsetState
+`func (o *PkixDistinguishedName) UnsetState()`
+
+UnsetState ensures that no value is present for State, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

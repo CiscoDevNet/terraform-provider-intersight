@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "softwarerepository.LocalMachine"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "softwarerepository.LocalMachine"]
 **DownloadUrl** | Pointer to **string** | When the import action in the file MO is updated with &#39;GeneratePreSignedDownloadUrl&#39;, Intersight returns a pre-signed URL in this property as part of the patch response. The user is expected to subsequently download the file using this URL. | [optional] [readonly] 
 **PartSize** | Pointer to **int64** | The chunk size (in bytes) for each part of the file to be uploaded. | [optional] 
 **UploadId** | Pointer to **string** | When the import action in file MO is updated with &#39;GeneratePreSignedUploadUrl&#39;, Intersight shall return a upload Id in this property as part of the PATCH response. | [optional] 
@@ -14,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewSoftwarerepositoryLocalMachine
 
-`func NewSoftwarerepositoryLocalMachine() *SoftwarerepositoryLocalMachine`
+`func NewSoftwarerepositoryLocalMachine(classId string, objectType string, ) *SoftwarerepositoryLocalMachine`
 
 NewSoftwarerepositoryLocalMachine instantiates a new SoftwarerepositoryLocalMachine object
 This constructor will assign default values to properties that have it defined,
@@ -28,6 +30,46 @@ will change when the set of required properties is changed
 NewSoftwarerepositoryLocalMachineWithDefaults instantiates a new SoftwarerepositoryLocalMachine object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *SoftwarerepositoryLocalMachine) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *SoftwarerepositoryLocalMachine) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *SoftwarerepositoryLocalMachine) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *SoftwarerepositoryLocalMachine) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *SoftwarerepositoryLocalMachine) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *SoftwarerepositoryLocalMachine) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetDownloadUrl
 
@@ -154,6 +196,16 @@ SetUploadUrls sets UploadUrls field to given value.
 
 HasUploadUrls returns a boolean if a field has been set.
 
+### SetUploadUrlsNil
+
+`func (o *SoftwarerepositoryLocalMachine) SetUploadUrlsNil(b bool)`
+
+ SetUploadUrlsNil sets the value for UploadUrls to be an explicit nil
+
+### UnsetUploadUrls
+`func (o *SoftwarerepositoryLocalMachine) UnsetUploadUrls()`
+
+UnsetUploadUrls ensures that no value is present for UploadUrls, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

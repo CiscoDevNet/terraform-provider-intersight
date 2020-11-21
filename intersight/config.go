@@ -9,14 +9,15 @@ import (
 	"encoding/hex"
 	"errors"
 	"fmt"
-	gosdk "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"golang.org/x/oauth2"
-	"golang.org/x/oauth2/clientcredentials"
 	"log"
 	"net/http"
 	"net/http/httptrace"
 	"os"
 	"time"
+
+	gosdk "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
+	"golang.org/x/oauth2"
+	"golang.org/x/oauth2/clientcredentials"
 )
 
 type Config struct {

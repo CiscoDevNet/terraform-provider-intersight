@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "softwarerepository.CategorySupportConstraint"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "softwarerepository.CategorySupportConstraint"]
 **ConstraintId** | Pointer to **string** | Identifier for this managed object. | [optional] 
 **FilteredModels** | Pointer to [**[]SoftwarerepositoryConstraintModels**](softwarerepository.ConstraintModels.md) |  | [optional] 
 **MdfId** | Pointer to **string** | Cisco software repository image category identifier. | [optional] 
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewSoftwarerepositoryCategorySupportConstraintAllOf
 
-`func NewSoftwarerepositoryCategorySupportConstraintAllOf() *SoftwarerepositoryCategorySupportConstraintAllOf`
+`func NewSoftwarerepositoryCategorySupportConstraintAllOf(classId string, objectType string, ) *SoftwarerepositoryCategorySupportConstraintAllOf`
 
 NewSoftwarerepositoryCategorySupportConstraintAllOf instantiates a new SoftwarerepositoryCategorySupportConstraintAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +31,46 @@ will change when the set of required properties is changed
 NewSoftwarerepositoryCategorySupportConstraintAllOfWithDefaults instantiates a new SoftwarerepositoryCategorySupportConstraintAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *SoftwarerepositoryCategorySupportConstraintAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *SoftwarerepositoryCategorySupportConstraintAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *SoftwarerepositoryCategorySupportConstraintAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *SoftwarerepositoryCategorySupportConstraintAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *SoftwarerepositoryCategorySupportConstraintAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *SoftwarerepositoryCategorySupportConstraintAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetConstraintId
 
@@ -80,6 +122,16 @@ SetFilteredModels sets FilteredModels field to given value.
 
 HasFilteredModels returns a boolean if a field has been set.
 
+### SetFilteredModelsNil
+
+`func (o *SoftwarerepositoryCategorySupportConstraintAllOf) SetFilteredModelsNil(b bool)`
+
+ SetFilteredModelsNil sets the value for FilteredModels to be an explicit nil
+
+### UnsetFilteredModels
+`func (o *SoftwarerepositoryCategorySupportConstraintAllOf) UnsetFilteredModels()`
+
+UnsetFilteredModels ensures that no value is present for FilteredModels, not even an explicit nil
 ### GetMdfId
 
 `func (o *SoftwarerepositoryCategorySupportConstraintAllOf) GetMdfId() string`
@@ -180,6 +232,16 @@ SetSupportedModels sets SupportedModels field to given value.
 
 HasSupportedModels returns a boolean if a field has been set.
 
+### SetSupportedModelsNil
+
+`func (o *SoftwarerepositoryCategorySupportConstraintAllOf) SetSupportedModelsNil(b bool)`
+
+ SetSupportedModelsNil sets the value for SupportedModels to be an explicit nil
+
+### UnsetSupportedModels
+`func (o *SoftwarerepositoryCategorySupportConstraintAllOf) UnsetSupportedModels()`
+
+UnsetSupportedModels ensures that no value is present for SupportedModels, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

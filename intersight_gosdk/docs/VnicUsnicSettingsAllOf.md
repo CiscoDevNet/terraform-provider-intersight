@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.UsnicSettings"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.UsnicSettings"]
 **Cos** | Pointer to **int64** | Class of Service to be used for traffic on the usNIC. | [optional] 
 **Count** | Pointer to **int64** | Number of usNIC interfaces to be created. | [optional] 
 **UsnicAdapterPolicy** | Pointer to **string** | Ethernet Adapter policy to be associated with the usNICs. | [optional] 
@@ -12,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewVnicUsnicSettingsAllOf
 
-`func NewVnicUsnicSettingsAllOf() *VnicUsnicSettingsAllOf`
+`func NewVnicUsnicSettingsAllOf(classId string, objectType string, ) *VnicUsnicSettingsAllOf`
 
 NewVnicUsnicSettingsAllOf instantiates a new VnicUsnicSettingsAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -26,6 +28,46 @@ will change when the set of required properties is changed
 NewVnicUsnicSettingsAllOfWithDefaults instantiates a new VnicUsnicSettingsAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *VnicUsnicSettingsAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *VnicUsnicSettingsAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *VnicUsnicSettingsAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *VnicUsnicSettingsAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *VnicUsnicSettingsAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *VnicUsnicSettingsAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCos
 

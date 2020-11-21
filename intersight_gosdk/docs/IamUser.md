@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.User"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.User"]
 **ClientIpAddress** | Pointer to **string** | IP address from which the user last logged in to Intersight. | [optional] [readonly] 
 **Email** | Pointer to **string** | Email of the user. Users are added to Intersight using the email configured in the IdP. | [optional] 
 **FirstName** | Pointer to **string** | First name of the user. This field is populated from the IdP attributes received after authentication. | [optional] [readonly] 
@@ -26,7 +28,7 @@ Name | Type | Description | Notes
 
 ### NewIamUser
 
-`func NewIamUser() *IamUser`
+`func NewIamUser(classId string, objectType string, ) *IamUser`
 
 NewIamUser instantiates a new IamUser object
 This constructor will assign default values to properties that have it defined,
@@ -40,6 +42,46 @@ will change when the set of required properties is changed
 NewIamUserWithDefaults instantiates a new IamUser object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *IamUser) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *IamUser) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *IamUser) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *IamUser) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *IamUser) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *IamUser) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetClientIpAddress
 

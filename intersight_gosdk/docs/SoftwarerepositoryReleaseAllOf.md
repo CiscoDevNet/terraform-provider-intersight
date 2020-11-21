@@ -4,10 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "softwarerepository.Release"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "softwarerepository.Release"]
 **ReleaseDate** | Pointer to [**time.Time**](time.Time.md) | The date when the file was released or distributed by its vendor. | [optional] 
 **ReleaseNotesUrl** | Pointer to **string** | The URL for the release notes of this image. | [optional] 
 **SupportedModels** | Pointer to **[]string** |  | [optional] 
-**Type** | Pointer to **string** | The platform type for which the images are released. This can be a fabric interconnect or compute server hardware. * &#x60;FabricSwitch&#x60; - The images in a release that correspond to Fabric Interconnect switches. * &#x60;ComputeSystem&#x60; - The images in a release that correspond to servers. | [optional] [default to "FabricSwitch"]
+**Type** | Pointer to **string** | The platform type for which the images are released. This can be a Fabric Interconnect or compute server hardware. * &#x60;FabricSwitch&#x60; - The images in a release that correspond to Fabric Interconnect switches. * &#x60;ComputeSystem&#x60; - The images in a release that correspond to servers. | [optional] [default to "FabricSwitch"]
 **Version** | Pointer to **string** | Cisco provided release version. | [optional] 
 **Catalog** | Pointer to [**SoftwarerepositoryCatalogRelationship**](softwarerepository.Catalog.Relationship.md) |  | [optional] 
 
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewSoftwarerepositoryReleaseAllOf
 
-`func NewSoftwarerepositoryReleaseAllOf() *SoftwarerepositoryReleaseAllOf`
+`func NewSoftwarerepositoryReleaseAllOf(classId string, objectType string, ) *SoftwarerepositoryReleaseAllOf`
 
 NewSoftwarerepositoryReleaseAllOf instantiates a new SoftwarerepositoryReleaseAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +31,46 @@ will change when the set of required properties is changed
 NewSoftwarerepositoryReleaseAllOfWithDefaults instantiates a new SoftwarerepositoryReleaseAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *SoftwarerepositoryReleaseAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *SoftwarerepositoryReleaseAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *SoftwarerepositoryReleaseAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *SoftwarerepositoryReleaseAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *SoftwarerepositoryReleaseAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *SoftwarerepositoryReleaseAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetReleaseDate
 
@@ -105,6 +147,16 @@ SetSupportedModels sets SupportedModels field to given value.
 
 HasSupportedModels returns a boolean if a field has been set.
 
+### SetSupportedModelsNil
+
+`func (o *SoftwarerepositoryReleaseAllOf) SetSupportedModelsNil(b bool)`
+
+ SetSupportedModelsNil sets the value for SupportedModels to be an explicit nil
+
+### UnsetSupportedModels
+`func (o *SoftwarerepositoryReleaseAllOf) UnsetSupportedModels()`
+
+UnsetSupportedModels ensures that no value is present for SupportedModels, not even an explicit nil
 ### GetType
 
 `func (o *SoftwarerepositoryReleaseAllOf) GetType() string`

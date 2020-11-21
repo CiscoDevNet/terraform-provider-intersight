@@ -4,16 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "license.AccountLicenseData"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "license.AccountLicenseData"]
 **AccountId** | Pointer to **string** | Root user&#39;s ID of the account. | [optional] [readonly] 
 **AgentData** | Pointer to **string** | Agent trusted store data. | [optional] [readonly] 
 **AuthExpireTime** | Pointer to **string** | Authorization expiration time. | [optional] [readonly] 
 **AuthInitialTime** | Pointer to **string** | Intial authorization time. | [optional] [readonly] 
 **AuthNextTime** | Pointer to **string** | Next time for the authorization. | [optional] [readonly] 
 **Category** | Pointer to **string** | Account license data category name. | [optional] [readonly] 
-**DefaultLicenseType** | Pointer to **string** | Default license tier set by user. * &#x60;Base&#x60; - Base as a License type. It is default license type. * &#x60;Essential&#x60; - Essential as a License type. * &#x60;Standard&#x60; - Standard as a License type. * &#x60;Advantage&#x60; - Advantage as a License type. * &#x60;Premier&#x60; - Premier as a License type. | [optional] [default to "Base"]
+**DefaultLicenseType** | Pointer to **string** | Default license tier set by user. * &#x60;Base&#x60; - Base as a License type. It is default license type. * &#x60;Essential&#x60; - Essential as a License type. * &#x60;Standard&#x60; - Standard as a License type. * &#x60;Advantage&#x60; - Advantage as a License type. * &#x60;Premier&#x60; - Premier as a License type. * &#x60;IWO-Essential&#x60; - IWO-Essential as a License type. * &#x60;IWO-Advantage&#x60; - IWO-Advantage as a License type. * &#x60;IWO-Premier&#x60; - IWO-Premier as a License type. | [optional] [default to "Base"]
 **ErrorDesc** | Pointer to **string** | The detailed error message when there is any error related to license sync of this account. | [optional] [readonly] 
 **Group** | Pointer to **string** | Account license data group name. | [optional] [readonly] 
-**HighestCompliantLicenseTier** | Pointer to **string** | The highest license tier which is in compliant of this account. * &#x60;Base&#x60; - Base as a License type. It is default license type. * &#x60;Essential&#x60; - Essential as a License type. * &#x60;Standard&#x60; - Standard as a License type. * &#x60;Advantage&#x60; - Advantage as a License type. * &#x60;Premier&#x60; - Premier as a License type. | [optional] [readonly] [default to "Base"]
+**HighestCompliantLicenseTier** | Pointer to **string** | The highest license tier which is in compliant of this account. * &#x60;Base&#x60; - Base as a License type. It is default license type. * &#x60;Essential&#x60; - Essential as a License type. * &#x60;Standard&#x60; - Standard as a License type. * &#x60;Advantage&#x60; - Advantage as a License type. * &#x60;Premier&#x60; - Premier as a License type. * &#x60;IWO-Essential&#x60; - IWO-Essential as a License type. * &#x60;IWO-Advantage&#x60; - IWO-Advantage as a License type. * &#x60;IWO-Premier&#x60; - IWO-Premier as a License type. | [optional] [readonly] [default to "Base"]
 **LastSync** | Pointer to [**time.Time**](time.Time.md) | Specifies last sync time with SA. | [optional] [readonly] 
 **LastUpdatedTime** | Pointer to [**time.Time**](time.Time.md) | Record&#39;s last update datetime. | [optional] [readonly] 
 **LicenseState** | Pointer to **string** | Aggregrated mode for the agent. | [optional] [readonly] 
@@ -28,6 +30,8 @@ Name | Type | Description | Notes
 **VirtualAccount** | Pointer to **string** | Name of the virtual account. | [optional] [readonly] 
 **Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
 **CustomerOp** | Pointer to [**LicenseCustomerOpRelationship**](license.CustomerOp.Relationship.md) |  | [optional] 
+**IwoCustomerOp** | Pointer to [**LicenseIwoCustomerOpRelationship**](license.IwoCustomerOp.Relationship.md) |  | [optional] 
+**IwoLicenseCount** | Pointer to [**LicenseIwoLicenseCountRelationship**](license.IwoLicenseCount.Relationship.md) |  | [optional] 
 **Licenseinfos** | Pointer to [**[]LicenseLicenseInfoRelationship**](license.LicenseInfo.Relationship.md) | An array of relationships to licenseLicenseInfo resources. | [optional] 
 **SmartlicenseToken** | Pointer to [**LicenseSmartlicenseTokenRelationship**](license.SmartlicenseToken.Relationship.md) |  | [optional] 
 
@@ -35,7 +39,7 @@ Name | Type | Description | Notes
 
 ### NewLicenseAccountLicenseDataAllOf
 
-`func NewLicenseAccountLicenseDataAllOf() *LicenseAccountLicenseDataAllOf`
+`func NewLicenseAccountLicenseDataAllOf(classId string, objectType string, ) *LicenseAccountLicenseDataAllOf`
 
 NewLicenseAccountLicenseDataAllOf instantiates a new LicenseAccountLicenseDataAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -49,6 +53,46 @@ will change when the set of required properties is changed
 NewLicenseAccountLicenseDataAllOfWithDefaults instantiates a new LicenseAccountLicenseDataAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *LicenseAccountLicenseDataAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *LicenseAccountLicenseDataAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *LicenseAccountLicenseDataAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *LicenseAccountLicenseDataAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *LicenseAccountLicenseDataAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *LicenseAccountLicenseDataAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetAccountId
 
@@ -649,6 +693,56 @@ SetCustomerOp sets CustomerOp field to given value.
 `func (o *LicenseAccountLicenseDataAllOf) HasCustomerOp() bool`
 
 HasCustomerOp returns a boolean if a field has been set.
+
+### GetIwoCustomerOp
+
+`func (o *LicenseAccountLicenseDataAllOf) GetIwoCustomerOp() LicenseIwoCustomerOpRelationship`
+
+GetIwoCustomerOp returns the IwoCustomerOp field if non-nil, zero value otherwise.
+
+### GetIwoCustomerOpOk
+
+`func (o *LicenseAccountLicenseDataAllOf) GetIwoCustomerOpOk() (*LicenseIwoCustomerOpRelationship, bool)`
+
+GetIwoCustomerOpOk returns a tuple with the IwoCustomerOp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIwoCustomerOp
+
+`func (o *LicenseAccountLicenseDataAllOf) SetIwoCustomerOp(v LicenseIwoCustomerOpRelationship)`
+
+SetIwoCustomerOp sets IwoCustomerOp field to given value.
+
+### HasIwoCustomerOp
+
+`func (o *LicenseAccountLicenseDataAllOf) HasIwoCustomerOp() bool`
+
+HasIwoCustomerOp returns a boolean if a field has been set.
+
+### GetIwoLicenseCount
+
+`func (o *LicenseAccountLicenseDataAllOf) GetIwoLicenseCount() LicenseIwoLicenseCountRelationship`
+
+GetIwoLicenseCount returns the IwoLicenseCount field if non-nil, zero value otherwise.
+
+### GetIwoLicenseCountOk
+
+`func (o *LicenseAccountLicenseDataAllOf) GetIwoLicenseCountOk() (*LicenseIwoLicenseCountRelationship, bool)`
+
+GetIwoLicenseCountOk returns a tuple with the IwoLicenseCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIwoLicenseCount
+
+`func (o *LicenseAccountLicenseDataAllOf) SetIwoLicenseCount(v LicenseIwoLicenseCountRelationship)`
+
+SetIwoLicenseCount sets IwoLicenseCount field to given value.
+
+### HasIwoLicenseCount
+
+`func (o *LicenseAccountLicenseDataAllOf) HasIwoLicenseCount() bool`
+
+HasIwoLicenseCount returns a boolean if a field has been set.
 
 ### GetLicenseinfos
 

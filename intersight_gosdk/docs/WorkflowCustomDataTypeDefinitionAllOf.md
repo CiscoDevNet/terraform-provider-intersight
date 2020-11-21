@@ -4,10 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.CustomDataTypeDefinition"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.CustomDataTypeDefinition"]
 **CompositeType** | Pointer to **bool** | When true this data type definition is a collection of type definitions to represent composite data like JSON. | [optional] 
 **Description** | Pointer to **string** | A human-friendly description of this custom data type indicating it&#39;s domain and usage. | [optional] 
 **Label** | Pointer to **string** | A user friendly short name to identify the custom data type definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote (&#39;), or an underscore (_). | [optional] 
 **Name** | Pointer to **string** | The name of custom data type definition. The valid name can contain lower case and upper case alphabetic characters, digits and special characters &#39;-&#39; and &#39;_&#39;. | [optional] 
+**ParameterSet** | Pointer to [**[]WorkflowParameterSet**](workflow.ParameterSet.md) |  | [optional] 
 **TypeDefinition** | Pointer to [**[]WorkflowBaseDataType**](workflow.BaseDataType.md) |  | [optional] 
 **Catalog** | Pointer to [**WorkflowCatalogRelationship**](workflow.Catalog.Relationship.md) |  | [optional] 
 
@@ -15,7 +18,7 @@ Name | Type | Description | Notes
 
 ### NewWorkflowCustomDataTypeDefinitionAllOf
 
-`func NewWorkflowCustomDataTypeDefinitionAllOf() *WorkflowCustomDataTypeDefinitionAllOf`
+`func NewWorkflowCustomDataTypeDefinitionAllOf(classId string, objectType string, ) *WorkflowCustomDataTypeDefinitionAllOf`
 
 NewWorkflowCustomDataTypeDefinitionAllOf instantiates a new WorkflowCustomDataTypeDefinitionAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +32,46 @@ will change when the set of required properties is changed
 NewWorkflowCustomDataTypeDefinitionAllOfWithDefaults instantiates a new WorkflowCustomDataTypeDefinitionAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *WorkflowCustomDataTypeDefinitionAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *WorkflowCustomDataTypeDefinitionAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *WorkflowCustomDataTypeDefinitionAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *WorkflowCustomDataTypeDefinitionAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *WorkflowCustomDataTypeDefinitionAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *WorkflowCustomDataTypeDefinitionAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetCompositeType
 
@@ -130,6 +173,41 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetParameterSet
+
+`func (o *WorkflowCustomDataTypeDefinitionAllOf) GetParameterSet() []WorkflowParameterSet`
+
+GetParameterSet returns the ParameterSet field if non-nil, zero value otherwise.
+
+### GetParameterSetOk
+
+`func (o *WorkflowCustomDataTypeDefinitionAllOf) GetParameterSetOk() (*[]WorkflowParameterSet, bool)`
+
+GetParameterSetOk returns a tuple with the ParameterSet field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetParameterSet
+
+`func (o *WorkflowCustomDataTypeDefinitionAllOf) SetParameterSet(v []WorkflowParameterSet)`
+
+SetParameterSet sets ParameterSet field to given value.
+
+### HasParameterSet
+
+`func (o *WorkflowCustomDataTypeDefinitionAllOf) HasParameterSet() bool`
+
+HasParameterSet returns a boolean if a field has been set.
+
+### SetParameterSetNil
+
+`func (o *WorkflowCustomDataTypeDefinitionAllOf) SetParameterSetNil(b bool)`
+
+ SetParameterSetNil sets the value for ParameterSet to be an explicit nil
+
+### UnsetParameterSet
+`func (o *WorkflowCustomDataTypeDefinitionAllOf) UnsetParameterSet()`
+
+UnsetParameterSet ensures that no value is present for ParameterSet, not even an explicit nil
 ### GetTypeDefinition
 
 `func (o *WorkflowCustomDataTypeDefinitionAllOf) GetTypeDefinition() []WorkflowBaseDataType`
@@ -155,6 +233,16 @@ SetTypeDefinition sets TypeDefinition field to given value.
 
 HasTypeDefinition returns a boolean if a field has been set.
 
+### SetTypeDefinitionNil
+
+`func (o *WorkflowCustomDataTypeDefinitionAllOf) SetTypeDefinitionNil(b bool)`
+
+ SetTypeDefinitionNil sets the value for TypeDefinition to be an explicit nil
+
+### UnsetTypeDefinition
+`func (o *WorkflowCustomDataTypeDefinitionAllOf) UnsetTypeDefinition()`
+
+UnsetTypeDefinition ensures that no value is present for TypeDefinition, not even an explicit nil
 ### GetCatalog
 
 `func (o *WorkflowCustomDataTypeDefinitionAllOf) GetCatalog() WorkflowCatalogRelationship`

@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.PureProtectionGroup"]
+**ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.PureProtectionGroup"]
 **Size** | Pointer to **int64** | Overall size of all snapshots in the protection group, represented in bytes. | [optional] 
 **Source** | Pointer to **string** | Name of PureStorage array name on which the protection group is created. | [optional] [readonly] 
 **Targets** | Pointer to **[]string** |  | [optional] 
@@ -17,7 +19,7 @@ Name | Type | Description | Notes
 
 ### NewStoragePureProtectionGroupAllOf
 
-`func NewStoragePureProtectionGroupAllOf() *StoragePureProtectionGroupAllOf`
+`func NewStoragePureProtectionGroupAllOf(classId string, objectType string, ) *StoragePureProtectionGroupAllOf`
 
 NewStoragePureProtectionGroupAllOf instantiates a new StoragePureProtectionGroupAllOf object
 This constructor will assign default values to properties that have it defined,
@@ -31,6 +33,46 @@ will change when the set of required properties is changed
 NewStoragePureProtectionGroupAllOfWithDefaults instantiates a new StoragePureProtectionGroupAllOf object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetClassId
+
+`func (o *StoragePureProtectionGroupAllOf) GetClassId() string`
+
+GetClassId returns the ClassId field if non-nil, zero value otherwise.
+
+### GetClassIdOk
+
+`func (o *StoragePureProtectionGroupAllOf) GetClassIdOk() (*string, bool)`
+
+GetClassIdOk returns a tuple with the ClassId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetClassId
+
+`func (o *StoragePureProtectionGroupAllOf) SetClassId(v string)`
+
+SetClassId sets ClassId field to given value.
+
+
+### GetObjectType
+
+`func (o *StoragePureProtectionGroupAllOf) GetObjectType() string`
+
+GetObjectType returns the ObjectType field if non-nil, zero value otherwise.
+
+### GetObjectTypeOk
+
+`func (o *StoragePureProtectionGroupAllOf) GetObjectTypeOk() (*string, bool)`
+
+GetObjectTypeOk returns a tuple with the ObjectType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObjectType
+
+`func (o *StoragePureProtectionGroupAllOf) SetObjectType(v string)`
+
+SetObjectType sets ObjectType field to given value.
+
 
 ### GetSize
 
@@ -107,6 +149,16 @@ SetTargets sets Targets field to given value.
 
 HasTargets returns a boolean if a field has been set.
 
+### SetTargetsNil
+
+`func (o *StoragePureProtectionGroupAllOf) SetTargetsNil(b bool)`
+
+ SetTargetsNil sets the value for Targets to be an explicit nil
+
+### UnsetTargets
+`func (o *StoragePureProtectionGroupAllOf) UnsetTargets()`
+
+UnsetTargets ensures that no value is present for Targets, not even an explicit nil
 ### GetArray
 
 `func (o *StoragePureProtectionGroupAllOf) GetArray() StoragePureArrayRelationship`
