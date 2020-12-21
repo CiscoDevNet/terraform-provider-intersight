@@ -1,4 +1,6 @@
 api_key = "changeMe"
+secret_key = "changeMe"
+endpoint = "changeMe"
 
 // ipmi over lay policy props
 encryption_key = "changeMe"
