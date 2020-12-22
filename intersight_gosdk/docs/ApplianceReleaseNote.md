@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "appliance.ReleaseNote"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.ReleaseNote"]
-**Notes** | Pointer to [**[]OnpremUpgradeNote**](onprem.UpgradeNote.md) |  | [optional] 
+**Notes** | Pointer to [**[]OnpremUpgradeNote**](OnpremUpgradeNote.md) |  | [optional] 
 **Version** | Pointer to **string** | Version number of the pending upgrade. | [optional] [readonly] 
 
 ## Methods

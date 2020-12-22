@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -12,6 +12,7 @@
 package intersight
 
 import (
+	"bytes"
 	_context "context"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
@@ -48,7 +49,7 @@ func (r ApiCreateDeviceconnectorPolicyRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateDeviceconnectorPolicyRequest) Execute() (DeviceconnectorPolicy, *_nethttp.Response, error) {
+func (r ApiCreateDeviceconnectorPolicyRequest) Execute() (DeviceconnectorPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateDeviceconnectorPolicyExecute(r)
 }
 
@@ -68,19 +69,21 @@ func (a *DeviceconnectorApiService) CreateDeviceconnectorPolicy(ctx _context.Con
  * Execute executes the request
  * @return DeviceconnectorPolicy
  */
-func (a *DeviceconnectorApiService) CreateDeviceconnectorPolicyExecute(r ApiCreateDeviceconnectorPolicyRequest) (DeviceconnectorPolicy, *_nethttp.Response, error) {
+func (a *DeviceconnectorApiService) CreateDeviceconnectorPolicyExecute(r ApiCreateDeviceconnectorPolicyRequest) (DeviceconnectorPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  DeviceconnectorPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DeviceconnectorApiService.CreateDeviceconnectorPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/deviceconnector/Policies"
@@ -89,7 +92,8 @@ func (a *DeviceconnectorApiService) CreateDeviceconnectorPolicyExecute(r ApiCrea
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.deviceconnectorPolicy == nil {
-		return localVarReturnValue, nil, reportError("deviceconnectorPolicy is required and must be specified")
+		executionError.error = "deviceconnectorPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -119,18 +123,22 @@ func (a *DeviceconnectorApiService) CreateDeviceconnectorPolicyExecute(r ApiCrea
 	localVarPostBody = r.deviceconnectorPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -197,7 +205,7 @@ func (a *DeviceconnectorApiService) CreateDeviceconnectorPolicyExecute(r ApiCrea
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiDeleteDeviceconnectorPolicyRequest struct {
@@ -206,7 +214,7 @@ type ApiDeleteDeviceconnectorPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteDeviceconnectorPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteDeviceconnectorPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteDeviceconnectorPolicyExecute(r)
 }
 
@@ -227,18 +235,20 @@ func (a *DeviceconnectorApiService) DeleteDeviceconnectorPolicy(ctx _context.Con
 /*
  * Execute executes the request
  */
-func (a *DeviceconnectorApiService) DeleteDeviceconnectorPolicyExecute(r ApiDeleteDeviceconnectorPolicyRequest) (*_nethttp.Response, error) {
+func (a *DeviceconnectorApiService) DeleteDeviceconnectorPolicyExecute(r ApiDeleteDeviceconnectorPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DeviceconnectorApiService.DeleteDeviceconnectorPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/deviceconnector/Policies/{Moid}"
@@ -267,18 +277,22 @@ func (a *DeviceconnectorApiService) DeleteDeviceconnectorPolicyExecute(r ApiDele
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -336,7 +350,7 @@ func (a *DeviceconnectorApiService) DeleteDeviceconnectorPolicyExecute(r ApiDele
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiGetDeviceconnectorPolicyByMoidRequest struct {
@@ -345,7 +359,7 @@ type ApiGetDeviceconnectorPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetDeviceconnectorPolicyByMoidRequest) Execute() (DeviceconnectorPolicy, *_nethttp.Response, error) {
+func (r ApiGetDeviceconnectorPolicyByMoidRequest) Execute() (DeviceconnectorPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetDeviceconnectorPolicyByMoidExecute(r)
 }
 
@@ -367,19 +381,21 @@ func (a *DeviceconnectorApiService) GetDeviceconnectorPolicyByMoid(ctx _context.
  * Execute executes the request
  * @return DeviceconnectorPolicy
  */
-func (a *DeviceconnectorApiService) GetDeviceconnectorPolicyByMoidExecute(r ApiGetDeviceconnectorPolicyByMoidRequest) (DeviceconnectorPolicy, *_nethttp.Response, error) {
+func (a *DeviceconnectorApiService) GetDeviceconnectorPolicyByMoidExecute(r ApiGetDeviceconnectorPolicyByMoidRequest) (DeviceconnectorPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  DeviceconnectorPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DeviceconnectorApiService.GetDeviceconnectorPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/deviceconnector/Policies/{Moid}"
@@ -408,18 +424,22 @@ func (a *DeviceconnectorApiService) GetDeviceconnectorPolicyByMoidExecute(r ApiG
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -486,7 +506,7 @@ func (a *DeviceconnectorApiService) GetDeviceconnectorPolicyByMoidExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetDeviceconnectorPolicyListRequest struct {
@@ -550,7 +570,7 @@ func (r ApiGetDeviceconnectorPolicyListRequest) Tags(tags string) ApiGetDeviceco
 	return r
 }
 
-func (r ApiGetDeviceconnectorPolicyListRequest) Execute() (DeviceconnectorPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetDeviceconnectorPolicyListRequest) Execute() (DeviceconnectorPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetDeviceconnectorPolicyListExecute(r)
 }
 
@@ -570,19 +590,21 @@ func (a *DeviceconnectorApiService) GetDeviceconnectorPolicyList(ctx _context.Co
  * Execute executes the request
  * @return DeviceconnectorPolicyResponse
  */
-func (a *DeviceconnectorApiService) GetDeviceconnectorPolicyListExecute(r ApiGetDeviceconnectorPolicyListRequest) (DeviceconnectorPolicyResponse, *_nethttp.Response, error) {
+func (a *DeviceconnectorApiService) GetDeviceconnectorPolicyListExecute(r ApiGetDeviceconnectorPolicyListRequest) (DeviceconnectorPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  DeviceconnectorPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DeviceconnectorApiService.GetDeviceconnectorPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/deviceconnector/Policies"
@@ -643,18 +665,22 @@ func (a *DeviceconnectorApiService) GetDeviceconnectorPolicyListExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -721,7 +747,7 @@ func (a *DeviceconnectorApiService) GetDeviceconnectorPolicyListExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchDeviceconnectorPolicyRequest struct {
@@ -741,7 +767,7 @@ func (r ApiPatchDeviceconnectorPolicyRequest) IfMatch(ifMatch string) ApiPatchDe
 	return r
 }
 
-func (r ApiPatchDeviceconnectorPolicyRequest) Execute() (DeviceconnectorPolicy, *_nethttp.Response, error) {
+func (r ApiPatchDeviceconnectorPolicyRequest) Execute() (DeviceconnectorPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchDeviceconnectorPolicyExecute(r)
 }
 
@@ -763,19 +789,21 @@ func (a *DeviceconnectorApiService) PatchDeviceconnectorPolicy(ctx _context.Cont
  * Execute executes the request
  * @return DeviceconnectorPolicy
  */
-func (a *DeviceconnectorApiService) PatchDeviceconnectorPolicyExecute(r ApiPatchDeviceconnectorPolicyRequest) (DeviceconnectorPolicy, *_nethttp.Response, error) {
+func (a *DeviceconnectorApiService) PatchDeviceconnectorPolicyExecute(r ApiPatchDeviceconnectorPolicyRequest) (DeviceconnectorPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  DeviceconnectorPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DeviceconnectorApiService.PatchDeviceconnectorPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/deviceconnector/Policies/{Moid}"
@@ -785,7 +813,8 @@ func (a *DeviceconnectorApiService) PatchDeviceconnectorPolicyExecute(r ApiPatch
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.deviceconnectorPolicy == nil {
-		return localVarReturnValue, nil, reportError("deviceconnectorPolicy is required and must be specified")
+		executionError.error = "deviceconnectorPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -812,18 +841,22 @@ func (a *DeviceconnectorApiService) PatchDeviceconnectorPolicyExecute(r ApiPatch
 	localVarPostBody = r.deviceconnectorPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -890,7 +923,7 @@ func (a *DeviceconnectorApiService) PatchDeviceconnectorPolicyExecute(r ApiPatch
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateDeviceconnectorPolicyRequest struct {
@@ -910,7 +943,7 @@ func (r ApiUpdateDeviceconnectorPolicyRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateDeviceconnectorPolicyRequest) Execute() (DeviceconnectorPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateDeviceconnectorPolicyRequest) Execute() (DeviceconnectorPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateDeviceconnectorPolicyExecute(r)
 }
 
@@ -932,19 +965,21 @@ func (a *DeviceconnectorApiService) UpdateDeviceconnectorPolicy(ctx _context.Con
  * Execute executes the request
  * @return DeviceconnectorPolicy
  */
-func (a *DeviceconnectorApiService) UpdateDeviceconnectorPolicyExecute(r ApiUpdateDeviceconnectorPolicyRequest) (DeviceconnectorPolicy, *_nethttp.Response, error) {
+func (a *DeviceconnectorApiService) UpdateDeviceconnectorPolicyExecute(r ApiUpdateDeviceconnectorPolicyRequest) (DeviceconnectorPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  DeviceconnectorPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DeviceconnectorApiService.UpdateDeviceconnectorPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/deviceconnector/Policies/{Moid}"
@@ -954,7 +989,8 @@ func (a *DeviceconnectorApiService) UpdateDeviceconnectorPolicyExecute(r ApiUpda
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.deviceconnectorPolicy == nil {
-		return localVarReturnValue, nil, reportError("deviceconnectorPolicy is required and must be specified")
+		executionError.error = "deviceconnectorPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -981,18 +1017,22 @@ func (a *DeviceconnectorApiService) UpdateDeviceconnectorPolicyExecute(r ApiUpda
 	localVarPostBody = r.deviceconnectorPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1059,5 +1099,5 @@ func (a *DeviceconnectorApiService) UpdateDeviceconnectorPolicyExecute(r ApiUpda
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }

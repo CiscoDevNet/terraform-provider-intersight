@@ -1,22 +1,25 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
+	"strings"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceIamAppRegistration() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceIamAppRegistrationCreate,
-		Read:   resourceIamAppRegistrationRead,
-		Update: resourceIamAppRegistrationUpdate,
-		Delete: resourceIamAppRegistrationDelete,
+		CreateContext: resourceIamAppRegistrationCreate,
+		ReadContext:   resourceIamAppRegistrationRead,
+		UpdateContext: resourceIamAppRegistrationUpdate,
+		DeleteContext: resourceIamAppRegistrationDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"account": {
 				Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -150,7 +153,7 @@ func resourceIamAppRegistration() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -205,6 +208,7 @@ func resourceIamAppRegistration() *schema.Resource {
 				Description: "Set value to true to renew the client-secret. Applicable to client_credentials grant type.",
 				Type:        schema.TypeBool,
 				Optional:    true,
+				Default:     false,
 			},
 			"response_types": {
 				Type:     schema.TypeList,
@@ -221,6 +225,7 @@ func resourceIamAppRegistration() *schema.Resource {
 				Description: "Used to trigger update the revocationTimestamp value.\nIf UI sent updating request with the Revoke value is true, then update RevocationTimestamp.",
 				Type:        schema.TypeBool,
 				Optional:    true,
+				Default:     false,
 			},
 			"roles": {
 				Description: "An array of relationships to iamRole resources.",
@@ -330,7 +335,7 @@ func resourceIamAppRegistration() *schema.Resource {
 	}
 }
 
-func resourceIamAppRegistrationCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceIamAppRegistrationCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -675,117 +680,121 @@ func resourceIamAppRegistrationCreate(d *schema.ResourceData, meta interface{}) 
 	}
 
 	r := conn.ApiClient.IamApi.CreateIamAppRegistration(conn.ctx).IamAppRegistration(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating IamAppRegistration: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceIamAppRegistrationRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceIamAppRegistrationRead(c, d, meta)
 }
 
-func resourceIamAppRegistrationRead(d *schema.ResourceData, meta interface{}) error {
+func resourceIamAppRegistrationRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.IamApi.GetIamAppRegistrationByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "IamAppRegistration object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching IamAppRegistration: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("account", flattenMapIamAccountRelationship(s.GetAccount(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Account: %+v", err)
+		return diag.Errorf("error occurred while setting property Account in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("client_id", (s.GetClientId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClientId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClientId in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("client_name", (s.GetClientName())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClientName: %+v", err)
+		return diag.Errorf("error occurred while setting property ClientName in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("client_secret", (s.GetClientSecret())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClientSecret: %+v", err)
+		return diag.Errorf("error occurred while setting property ClientSecret in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("client_type", (s.GetClientType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClientType: %+v", err)
+		return diag.Errorf("error occurred while setting property ClientType in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("grant_types", (s.GetGrantTypes())); err != nil {
-		return fmt.Errorf("error occurred while setting property GrantTypes: %+v", err)
+		return diag.Errorf("error occurred while setting property GrantTypes in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("oauth_tokens", flattenListIamOAuthTokenRelationship(s.GetOauthTokens(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property OauthTokens: %+v", err)
+		return diag.Errorf("error occurred while setting property OauthTokens in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("permission", flattenMapIamPermissionRelationship(s.GetPermission(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Permission: %+v", err)
+		return diag.Errorf("error occurred while setting property Permission in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("redirect_uris", (s.GetRedirectUris())); err != nil {
-		return fmt.Errorf("error occurred while setting property RedirectUris: %+v", err)
+		return diag.Errorf("error occurred while setting property RedirectUris in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("renew_client_secret", (s.GetRenewClientSecret())); err != nil {
-		return fmt.Errorf("error occurred while setting property RenewClientSecret: %+v", err)
+		return diag.Errorf("error occurred while setting property RenewClientSecret in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("response_types", (s.GetResponseTypes())); err != nil {
-		return fmt.Errorf("error occurred while setting property ResponseTypes: %+v", err)
+		return diag.Errorf("error occurred while setting property ResponseTypes in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("revocation_timestamp", (s.GetRevocationTimestamp()).String()); err != nil {
-		return fmt.Errorf("error occurred while setting property RevocationTimestamp: %+v", err)
+		return diag.Errorf("error occurred while setting property RevocationTimestamp in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("revoke", (s.GetRevoke())); err != nil {
-		return fmt.Errorf("error occurred while setting property Revoke: %+v", err)
+		return diag.Errorf("error occurred while setting property Revoke in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("roles", flattenListIamRoleRelationship(s.GetRoles(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Roles: %+v", err)
+		return diag.Errorf("error occurred while setting property Roles in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in IamAppRegistration object: %s", err.Error())
 	}
 
 	if err := d.Set("user", flattenMapIamUserRelationship(s.GetUser(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property User: %+v", err)
+		return diag.Errorf("error occurred while setting property User in IamAppRegistration object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceIamAppRegistrationUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceIamAppRegistrationUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1149,23 +1158,24 @@ func resourceIamAppRegistrationUpdate(d *schema.ResourceData, meta interface{}) 
 	}
 
 	r := conn.ApiClient.IamApi.UpdateIamAppRegistration(conn.ctx, d.Id()).IamAppRegistration(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating IamAppRegistration: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamAppRegistrationRead(d, meta)
+	return resourceIamAppRegistrationRead(c, d, meta)
 }
 
-func resourceIamAppRegistrationDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceIamAppRegistrationDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamAppRegistration(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting IamAppRegistration object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

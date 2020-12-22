@@ -1,18 +1,16 @@
-
 ---
+subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_enclosure_disk"
-sidebar_current: "docs-intersight-data-source-storage-enclosure-disk"
 description: |-
-Physical Disk on the enclosure.
+  Physical Disk on the enclosure.
 ---
 
-# Data Source: intersight_storage._enclosure_disk
+# Data Source: intersight_storage_enclosure_disk
 Physical Disk on the enclosure.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `block_size`:(string) The block size of the physical disk in bytes. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `disk_id`:(string) This field represents the disk Id in the storage enclosure. 
 * `disk_state`:(string) This field identifies the current disk configuration applied in the physical disk. 
@@ -21,7 +19,6 @@ The following arguments can be used to get data of already created objects in In
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `num_blocks`:(string) The number of blocks present on the physical disk. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `pid`:(string) This field identifies the Product ID for physicalDisk. 
 * `revision`:(string) This field identifies the revision of the given component. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 

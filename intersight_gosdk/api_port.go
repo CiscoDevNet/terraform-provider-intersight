@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -12,6 +12,7 @@
 package intersight
 
 import (
+	"bytes"
 	_context "context"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
@@ -33,7 +34,7 @@ type ApiGetPortGroupByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetPortGroupByMoidRequest) Execute() (PortGroup, *_nethttp.Response, error) {
+func (r ApiGetPortGroupByMoidRequest) Execute() (PortGroup, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetPortGroupByMoidExecute(r)
 }
 
@@ -55,19 +56,21 @@ func (a *PortApiService) GetPortGroupByMoid(ctx _context.Context, moid string) A
  * Execute executes the request
  * @return PortGroup
  */
-func (a *PortApiService) GetPortGroupByMoidExecute(r ApiGetPortGroupByMoidRequest) (PortGroup, *_nethttp.Response, error) {
+func (a *PortApiService) GetPortGroupByMoidExecute(r ApiGetPortGroupByMoidRequest) (PortGroup, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PortGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.GetPortGroupByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/Groups/{Moid}"
@@ -96,18 +99,22 @@ func (a *PortApiService) GetPortGroupByMoidExecute(r ApiGetPortGroupByMoidReques
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -174,7 +181,7 @@ func (a *PortApiService) GetPortGroupByMoidExecute(r ApiGetPortGroupByMoidReques
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetPortGroupListRequest struct {
@@ -238,7 +245,7 @@ func (r ApiGetPortGroupListRequest) Tags(tags string) ApiGetPortGroupListRequest
 	return r
 }
 
-func (r ApiGetPortGroupListRequest) Execute() (PortGroupResponse, *_nethttp.Response, error) {
+func (r ApiGetPortGroupListRequest) Execute() (PortGroupResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetPortGroupListExecute(r)
 }
 
@@ -258,19 +265,21 @@ func (a *PortApiService) GetPortGroupList(ctx _context.Context) ApiGetPortGroupL
  * Execute executes the request
  * @return PortGroupResponse
  */
-func (a *PortApiService) GetPortGroupListExecute(r ApiGetPortGroupListRequest) (PortGroupResponse, *_nethttp.Response, error) {
+func (a *PortApiService) GetPortGroupListExecute(r ApiGetPortGroupListRequest) (PortGroupResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PortGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.GetPortGroupList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/Groups"
@@ -331,18 +340,22 @@ func (a *PortApiService) GetPortGroupListExecute(r ApiGetPortGroupListRequest) (
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -409,7 +422,7 @@ func (a *PortApiService) GetPortGroupListExecute(r ApiGetPortGroupListRequest) (
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetPortMacBindingByMoidRequest struct {
@@ -418,7 +431,7 @@ type ApiGetPortMacBindingByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetPortMacBindingByMoidRequest) Execute() (PortMacBinding, *_nethttp.Response, error) {
+func (r ApiGetPortMacBindingByMoidRequest) Execute() (PortMacBinding, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetPortMacBindingByMoidExecute(r)
 }
 
@@ -440,19 +453,21 @@ func (a *PortApiService) GetPortMacBindingByMoid(ctx _context.Context, moid stri
  * Execute executes the request
  * @return PortMacBinding
  */
-func (a *PortApiService) GetPortMacBindingByMoidExecute(r ApiGetPortMacBindingByMoidRequest) (PortMacBinding, *_nethttp.Response, error) {
+func (a *PortApiService) GetPortMacBindingByMoidExecute(r ApiGetPortMacBindingByMoidRequest) (PortMacBinding, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PortMacBinding
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.GetPortMacBindingByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/MacBindings/{Moid}"
@@ -481,18 +496,22 @@ func (a *PortApiService) GetPortMacBindingByMoidExecute(r ApiGetPortMacBindingBy
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -559,7 +578,7 @@ func (a *PortApiService) GetPortMacBindingByMoidExecute(r ApiGetPortMacBindingBy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetPortMacBindingListRequest struct {
@@ -623,7 +642,7 @@ func (r ApiGetPortMacBindingListRequest) Tags(tags string) ApiGetPortMacBindingL
 	return r
 }
 
-func (r ApiGetPortMacBindingListRequest) Execute() (PortMacBindingResponse, *_nethttp.Response, error) {
+func (r ApiGetPortMacBindingListRequest) Execute() (PortMacBindingResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetPortMacBindingListExecute(r)
 }
 
@@ -643,19 +662,21 @@ func (a *PortApiService) GetPortMacBindingList(ctx _context.Context) ApiGetPortM
  * Execute executes the request
  * @return PortMacBindingResponse
  */
-func (a *PortApiService) GetPortMacBindingListExecute(r ApiGetPortMacBindingListRequest) (PortMacBindingResponse, *_nethttp.Response, error) {
+func (a *PortApiService) GetPortMacBindingListExecute(r ApiGetPortMacBindingListRequest) (PortMacBindingResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PortMacBindingResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.GetPortMacBindingList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/MacBindings"
@@ -716,18 +737,22 @@ func (a *PortApiService) GetPortMacBindingListExecute(r ApiGetPortMacBindingList
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -794,7 +819,7 @@ func (a *PortApiService) GetPortMacBindingListExecute(r ApiGetPortMacBindingList
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetPortSubGroupByMoidRequest struct {
@@ -803,7 +828,7 @@ type ApiGetPortSubGroupByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetPortSubGroupByMoidRequest) Execute() (PortSubGroup, *_nethttp.Response, error) {
+func (r ApiGetPortSubGroupByMoidRequest) Execute() (PortSubGroup, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetPortSubGroupByMoidExecute(r)
 }
 
@@ -825,19 +850,21 @@ func (a *PortApiService) GetPortSubGroupByMoid(ctx _context.Context, moid string
  * Execute executes the request
  * @return PortSubGroup
  */
-func (a *PortApiService) GetPortSubGroupByMoidExecute(r ApiGetPortSubGroupByMoidRequest) (PortSubGroup, *_nethttp.Response, error) {
+func (a *PortApiService) GetPortSubGroupByMoidExecute(r ApiGetPortSubGroupByMoidRequest) (PortSubGroup, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PortSubGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.GetPortSubGroupByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/SubGroups/{Moid}"
@@ -866,18 +893,22 @@ func (a *PortApiService) GetPortSubGroupByMoidExecute(r ApiGetPortSubGroupByMoid
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -944,7 +975,7 @@ func (a *PortApiService) GetPortSubGroupByMoidExecute(r ApiGetPortSubGroupByMoid
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetPortSubGroupListRequest struct {
@@ -1008,7 +1039,7 @@ func (r ApiGetPortSubGroupListRequest) Tags(tags string) ApiGetPortSubGroupListR
 	return r
 }
 
-func (r ApiGetPortSubGroupListRequest) Execute() (PortSubGroupResponse, *_nethttp.Response, error) {
+func (r ApiGetPortSubGroupListRequest) Execute() (PortSubGroupResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetPortSubGroupListExecute(r)
 }
 
@@ -1028,19 +1059,21 @@ func (a *PortApiService) GetPortSubGroupList(ctx _context.Context) ApiGetPortSub
  * Execute executes the request
  * @return PortSubGroupResponse
  */
-func (a *PortApiService) GetPortSubGroupListExecute(r ApiGetPortSubGroupListRequest) (PortSubGroupResponse, *_nethttp.Response, error) {
+func (a *PortApiService) GetPortSubGroupListExecute(r ApiGetPortSubGroupListRequest) (PortSubGroupResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PortSubGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.GetPortSubGroupList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/SubGroups"
@@ -1101,18 +1134,22 @@ func (a *PortApiService) GetPortSubGroupListExecute(r ApiGetPortSubGroupListRequ
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1179,7 +1216,7 @@ func (a *PortApiService) GetPortSubGroupListExecute(r ApiGetPortSubGroupListRequ
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchPortGroupRequest struct {
@@ -1199,7 +1236,7 @@ func (r ApiPatchPortGroupRequest) IfMatch(ifMatch string) ApiPatchPortGroupReque
 	return r
 }
 
-func (r ApiPatchPortGroupRequest) Execute() (PortGroup, *_nethttp.Response, error) {
+func (r ApiPatchPortGroupRequest) Execute() (PortGroup, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchPortGroupExecute(r)
 }
 
@@ -1221,19 +1258,21 @@ func (a *PortApiService) PatchPortGroup(ctx _context.Context, moid string) ApiPa
  * Execute executes the request
  * @return PortGroup
  */
-func (a *PortApiService) PatchPortGroupExecute(r ApiPatchPortGroupRequest) (PortGroup, *_nethttp.Response, error) {
+func (a *PortApiService) PatchPortGroupExecute(r ApiPatchPortGroupRequest) (PortGroup, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PortGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.PatchPortGroup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/Groups/{Moid}"
@@ -1243,7 +1282,8 @@ func (a *PortApiService) PatchPortGroupExecute(r ApiPatchPortGroupRequest) (Port
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.portGroup == nil {
-		return localVarReturnValue, nil, reportError("portGroup is required and must be specified")
+		executionError.error = "portGroup is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -1270,18 +1310,22 @@ func (a *PortApiService) PatchPortGroupExecute(r ApiPatchPortGroupRequest) (Port
 	localVarPostBody = r.portGroup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1348,7 +1392,7 @@ func (a *PortApiService) PatchPortGroupExecute(r ApiPatchPortGroupRequest) (Port
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchPortMacBindingRequest struct {
@@ -1368,7 +1412,7 @@ func (r ApiPatchPortMacBindingRequest) IfMatch(ifMatch string) ApiPatchPortMacBi
 	return r
 }
 
-func (r ApiPatchPortMacBindingRequest) Execute() (PortMacBinding, *_nethttp.Response, error) {
+func (r ApiPatchPortMacBindingRequest) Execute() (PortMacBinding, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchPortMacBindingExecute(r)
 }
 
@@ -1390,19 +1434,21 @@ func (a *PortApiService) PatchPortMacBinding(ctx _context.Context, moid string) 
  * Execute executes the request
  * @return PortMacBinding
  */
-func (a *PortApiService) PatchPortMacBindingExecute(r ApiPatchPortMacBindingRequest) (PortMacBinding, *_nethttp.Response, error) {
+func (a *PortApiService) PatchPortMacBindingExecute(r ApiPatchPortMacBindingRequest) (PortMacBinding, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PortMacBinding
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.PatchPortMacBinding")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/MacBindings/{Moid}"
@@ -1412,7 +1458,8 @@ func (a *PortApiService) PatchPortMacBindingExecute(r ApiPatchPortMacBindingRequ
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.portMacBinding == nil {
-		return localVarReturnValue, nil, reportError("portMacBinding is required and must be specified")
+		executionError.error = "portMacBinding is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -1439,18 +1486,22 @@ func (a *PortApiService) PatchPortMacBindingExecute(r ApiPatchPortMacBindingRequ
 	localVarPostBody = r.portMacBinding
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1517,7 +1568,7 @@ func (a *PortApiService) PatchPortMacBindingExecute(r ApiPatchPortMacBindingRequ
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchPortSubGroupRequest struct {
@@ -1537,7 +1588,7 @@ func (r ApiPatchPortSubGroupRequest) IfMatch(ifMatch string) ApiPatchPortSubGrou
 	return r
 }
 
-func (r ApiPatchPortSubGroupRequest) Execute() (PortSubGroup, *_nethttp.Response, error) {
+func (r ApiPatchPortSubGroupRequest) Execute() (PortSubGroup, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchPortSubGroupExecute(r)
 }
 
@@ -1559,19 +1610,21 @@ func (a *PortApiService) PatchPortSubGroup(ctx _context.Context, moid string) Ap
  * Execute executes the request
  * @return PortSubGroup
  */
-func (a *PortApiService) PatchPortSubGroupExecute(r ApiPatchPortSubGroupRequest) (PortSubGroup, *_nethttp.Response, error) {
+func (a *PortApiService) PatchPortSubGroupExecute(r ApiPatchPortSubGroupRequest) (PortSubGroup, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PortSubGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.PatchPortSubGroup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/SubGroups/{Moid}"
@@ -1581,7 +1634,8 @@ func (a *PortApiService) PatchPortSubGroupExecute(r ApiPatchPortSubGroupRequest)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.portSubGroup == nil {
-		return localVarReturnValue, nil, reportError("portSubGroup is required and must be specified")
+		executionError.error = "portSubGroup is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -1608,18 +1662,22 @@ func (a *PortApiService) PatchPortSubGroupExecute(r ApiPatchPortSubGroupRequest)
 	localVarPostBody = r.portSubGroup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1686,7 +1744,7 @@ func (a *PortApiService) PatchPortSubGroupExecute(r ApiPatchPortSubGroupRequest)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdatePortGroupRequest struct {
@@ -1706,7 +1764,7 @@ func (r ApiUpdatePortGroupRequest) IfMatch(ifMatch string) ApiUpdatePortGroupReq
 	return r
 }
 
-func (r ApiUpdatePortGroupRequest) Execute() (PortGroup, *_nethttp.Response, error) {
+func (r ApiUpdatePortGroupRequest) Execute() (PortGroup, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdatePortGroupExecute(r)
 }
 
@@ -1728,19 +1786,21 @@ func (a *PortApiService) UpdatePortGroup(ctx _context.Context, moid string) ApiU
  * Execute executes the request
  * @return PortGroup
  */
-func (a *PortApiService) UpdatePortGroupExecute(r ApiUpdatePortGroupRequest) (PortGroup, *_nethttp.Response, error) {
+func (a *PortApiService) UpdatePortGroupExecute(r ApiUpdatePortGroupRequest) (PortGroup, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PortGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.UpdatePortGroup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/Groups/{Moid}"
@@ -1750,7 +1810,8 @@ func (a *PortApiService) UpdatePortGroupExecute(r ApiUpdatePortGroupRequest) (Po
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.portGroup == nil {
-		return localVarReturnValue, nil, reportError("portGroup is required and must be specified")
+		executionError.error = "portGroup is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -1777,18 +1838,22 @@ func (a *PortApiService) UpdatePortGroupExecute(r ApiUpdatePortGroupRequest) (Po
 	localVarPostBody = r.portGroup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1855,7 +1920,7 @@ func (a *PortApiService) UpdatePortGroupExecute(r ApiUpdatePortGroupRequest) (Po
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdatePortMacBindingRequest struct {
@@ -1875,7 +1940,7 @@ func (r ApiUpdatePortMacBindingRequest) IfMatch(ifMatch string) ApiUpdatePortMac
 	return r
 }
 
-func (r ApiUpdatePortMacBindingRequest) Execute() (PortMacBinding, *_nethttp.Response, error) {
+func (r ApiUpdatePortMacBindingRequest) Execute() (PortMacBinding, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdatePortMacBindingExecute(r)
 }
 
@@ -1897,19 +1962,21 @@ func (a *PortApiService) UpdatePortMacBinding(ctx _context.Context, moid string)
  * Execute executes the request
  * @return PortMacBinding
  */
-func (a *PortApiService) UpdatePortMacBindingExecute(r ApiUpdatePortMacBindingRequest) (PortMacBinding, *_nethttp.Response, error) {
+func (a *PortApiService) UpdatePortMacBindingExecute(r ApiUpdatePortMacBindingRequest) (PortMacBinding, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PortMacBinding
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.UpdatePortMacBinding")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/MacBindings/{Moid}"
@@ -1919,7 +1986,8 @@ func (a *PortApiService) UpdatePortMacBindingExecute(r ApiUpdatePortMacBindingRe
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.portMacBinding == nil {
-		return localVarReturnValue, nil, reportError("portMacBinding is required and must be specified")
+		executionError.error = "portMacBinding is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -1946,18 +2014,22 @@ func (a *PortApiService) UpdatePortMacBindingExecute(r ApiUpdatePortMacBindingRe
 	localVarPostBody = r.portMacBinding
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2024,7 +2096,7 @@ func (a *PortApiService) UpdatePortMacBindingExecute(r ApiUpdatePortMacBindingRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdatePortSubGroupRequest struct {
@@ -2044,7 +2116,7 @@ func (r ApiUpdatePortSubGroupRequest) IfMatch(ifMatch string) ApiUpdatePortSubGr
 	return r
 }
 
-func (r ApiUpdatePortSubGroupRequest) Execute() (PortSubGroup, *_nethttp.Response, error) {
+func (r ApiUpdatePortSubGroupRequest) Execute() (PortSubGroup, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdatePortSubGroupExecute(r)
 }
 
@@ -2066,19 +2138,21 @@ func (a *PortApiService) UpdatePortSubGroup(ctx _context.Context, moid string) A
  * Execute executes the request
  * @return PortSubGroup
  */
-func (a *PortApiService) UpdatePortSubGroupExecute(r ApiUpdatePortSubGroupRequest) (PortSubGroup, *_nethttp.Response, error) {
+func (a *PortApiService) UpdatePortSubGroupExecute(r ApiUpdatePortSubGroupRequest) (PortSubGroup, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PortSubGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PortApiService.UpdatePortSubGroup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/port/SubGroups/{Moid}"
@@ -2088,7 +2162,8 @@ func (a *PortApiService) UpdatePortSubGroupExecute(r ApiUpdatePortSubGroupReques
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.portSubGroup == nil {
-		return localVarReturnValue, nil, reportError("portSubGroup is required and must be specified")
+		executionError.error = "portSubGroup is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -2115,18 +2190,22 @@ func (a *PortApiService) UpdatePortSubGroupExecute(r ApiUpdatePortSubGroupReques
 	localVarPostBody = r.portSubGroup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2193,5 +2272,5 @@ func (a *PortApiService) UpdatePortSubGroupExecute(r ApiUpdatePortSubGroupReques
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }

@@ -1,19 +1,22 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceConnectorpackConnectorPackUpgrade() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceConnectorpackConnectorPackUpgradeCreate,
-		Read:   resourceConnectorpackConnectorPackUpgradeRead,
-		Delete: resourceConnectorpackConnectorPackUpgradeDelete,
+		CreateContext: resourceConnectorpackConnectorPackUpgradeCreate,
+		ReadContext:   resourceConnectorpackConnectorPackUpgradeRead,
+		DeleteContext: resourceConnectorpackConnectorPackUpgradeDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -174,7 +177,7 @@ func resourceConnectorpackConnectorPackUpgrade() *schema.Resource {
 	}
 }
 
-func resourceConnectorpackConnectorPackUpgradeCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceConnectorpackConnectorPackUpgradeCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -324,72 +327,77 @@ func resourceConnectorpackConnectorPackUpgradeCreate(d *schema.ResourceData, met
 	}
 
 	r := conn.ApiClient.ConnectorpackApi.CreateConnectorpackConnectorPackUpgrade(conn.ctx).ConnectorpackConnectorPackUpgrade(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating ConnectorpackConnectorPackUpgrade: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceConnectorpackConnectorPackUpgradeRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceConnectorpackConnectorPackUpgradeRead(c, d, meta)
 }
 
-func resourceConnectorpackConnectorPackUpgradeRead(d *schema.ResourceData, meta interface{}) error {
+func resourceConnectorpackConnectorPackUpgradeRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.ConnectorpackApi.GetConnectorpackConnectorPackUpgradeByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "ConnectorpackConnectorPackUpgrade object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching ConnectorpackConnectorPackUpgrade: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in ConnectorpackConnectorPackUpgrade object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in ConnectorpackConnectorPackUpgrade object: %s", err.Error())
 	}
 
 	if err := d.Set("connector_pack_op_type", (s.GetConnectorPackOpType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ConnectorPackOpType: %+v", err)
+		return diag.Errorf("error occurred while setting property ConnectorPackOpType in ConnectorpackConnectorPackUpgrade object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in ConnectorpackConnectorPackUpgrade object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in ConnectorpackConnectorPackUpgrade object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in ConnectorpackConnectorPackUpgrade object: %s", err.Error())
 	}
 
 	if err := d.Set("ucsd_info", flattenMapIaasUcsdInfoRelationship(s.GetUcsdInfo(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property UcsdInfo: %+v", err)
+		return diag.Errorf("error occurred while setting property UcsdInfo in ConnectorpackConnectorPackUpgrade object: %s", err.Error())
 	}
 
 	if err := d.Set("workflow", flattenMapWorkflowWorkflowInfoRelationship(s.GetWorkflow(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Workflow: %+v", err)
+		return diag.Errorf("error occurred while setting property Workflow in ConnectorpackConnectorPackUpgrade object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceConnectorpackConnectorPackUpgradeDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceConnectorpackConnectorPackUpgradeDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.ConnectorpackApi.DeleteConnectorpackConnectorPackUpgrade(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting ConnectorpackConnectorPackUpgrade object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

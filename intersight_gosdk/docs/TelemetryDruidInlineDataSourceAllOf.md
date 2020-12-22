@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ColumnNames** | **[]string** | the column names. | 
-**Rows** | [**[][]string**](array.md) | an array of rows. | 
+**Rows** | **[][]string** | an array of rows. | 
 
 ## Methods
 

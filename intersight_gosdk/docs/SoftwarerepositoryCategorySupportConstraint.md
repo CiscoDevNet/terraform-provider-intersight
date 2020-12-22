@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "softwarerepository.CategorySupportConstraint"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "softwarerepository.CategorySupportConstraint"]
 **ConstraintId** | Pointer to **string** | Identifier for this managed object. | [optional] 
-**FilteredModels** | Pointer to [**[]SoftwarerepositoryConstraintModels**](softwarerepository.ConstraintModels.md) |  | [optional] 
+**FilteredModels** | Pointer to [**[]SoftwarerepositoryConstraintModels**](SoftwarerepositoryConstraintModels.md) |  | [optional] 
 **MdfId** | Pointer to **string** | Cisco software repository image category identifier. | [optional] 
 **MinVersion** | Pointer to **string** | Minimum image version from where the models can be supported. | [optional] 
 **ParseFromImageName** | Pointer to **bool** | Fields which tells if the constraint is based on image name parsing. | [optional] 

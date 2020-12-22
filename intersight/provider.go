@@ -1,13 +1,15 @@
 package intersight
 
 import (
+	"context"
 	"strings"
 
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
-	"github.com/hashicorp/terraform-plugin-sdk/terraform"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
-func Provider() terraform.ResourceProvider {
+func Provider() *schema.Provider {
 	return &schema.Provider{
 		Schema: map[string]*schema.Schema{
 			"apikey": {
@@ -29,13 +31,15 @@ func Provider() terraform.ResourceProvider {
 				Description: "Endpoint URL",
 			},
 		},
-		ResourcesMap:   GetResourceMapping(),
-		DataSourcesMap: GetDataSourceMapping(),
-		ConfigureFunc:  configureProvider,
+		ResourcesMap:         GetResourceMapping(),
+		DataSourcesMap:       GetDataSourceMapping(),
+		ConfigureContextFunc: configureProvider,
 	}
 }
 
-func configureProvider(d *schema.ResourceData) (interface{}, error) {
+func configureProvider(c context.Context, d *schema.ResourceData) (interface{}, diag.Diagnostics) {
+	var de diag.Diagnostics
+	var err error
 	endpoint := d.Get("endpoint").(string)
 	if strings.HasPrefix(endpoint, "https://") || strings.HasPrefix(endpoint, "http://") {
 		endpoint = strings.TrimPrefix(endpoint, "https://")
@@ -48,7 +52,10 @@ func configureProvider(d *schema.ResourceData) (interface{}, error) {
 	}
 
 	client := Client{}
-	config.ctx = client.SetInputs(config.ApiKey, config.SecretKeyFile, config.Endpoint, true)
+	config.ctx, err = client.SetInputs(config.ApiKey, config.SecretKeyFile, config.Endpoint, true)
+	if err != nil {
+		return nil, diag.Errorf(err.Error())
+	}
 	config.ApiClient = client.GetApiClient(config.ctx, true)
-	return &config, nil
+	return &config, de
 }

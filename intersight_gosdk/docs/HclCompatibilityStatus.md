@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hcl.CompatibilityStatus"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hcl.CompatibilityStatus"]
-**ProfileList** | Pointer to [**[]HclHardwareCompatibilityProfile**](hcl.HardwareCompatibilityProfile.md) |  | [optional] 
+**ProfileList** | Pointer to [**[]HclHardwareCompatibilityProfile**](HclHardwareCompatibilityProfile.md) |  | [optional] 
 **RequestType** | Pointer to **string** | Type of the request to be served. * &#x60;FillSupportedVersions&#x60; - Responds with the supported firmware and driver versions. The API doesn&#39;t expect firmware and driver versions to be passed in the request and ignores if passed. * &#x60;CheckCompatibility&#x60; - Checks the compatibility for the given firmware and driver versions. This request type expects the firmware and driver versions to filled and the service validates the values and responds back with the error codes. * &#x60;GetRecommendedDrivers&#x60; - Responds with the supported drivers. The API expects firmware version to be filled. The API populates driver ISO url for the given server model. Today the link is same for all servers managed by UCSM whereas it depends on the model for Standalone servers. | [optional] [default to "FillSupportedVersions"]
 
 ## Methods

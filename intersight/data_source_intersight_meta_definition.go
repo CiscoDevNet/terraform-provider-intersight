@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceMetaDefinition() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceMetaDefinitionRead,
+		ReadContext: dataSourceMetaDefinitionRead,
 		Schema: map[string]*schema.Schema{
 			"access_privileges": {
 				Type:     schema.TypeList,
@@ -185,7 +186,7 @@ func dataSourceMetaDefinition() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -258,13 +259,19 @@ func dataSourceMetaDefinition() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"peer_rel_name": {
+							Description: "Name of relationship in peer managed object.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
 						},
 						"type": {
-							Description: "Fully qualified type of the foreign managed object.",
+							Description: "Fully qualified type of the peer managed object.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -312,10 +319,11 @@ func dataSourceMetaDefinition() *schema.Resource {
 	}
 }
 
-func dataSourceMetaDefinitionRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceMetaDefinitionRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.MetaDefinition{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -368,25 +376,25 @@ func dataSourceMetaDefinitionRead(d *schema.ResourceData, meta interface{}) erro
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of MetaDefinition object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.MetaApi.GetMetaDefinitionList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.MetaApi.GetMetaDefinitionList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching MetaDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for MetaDefinition list: %s", err.Error())
 	}
 	var s = &models.MetaDefinitionList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to MetaDefinition: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to MetaDefinition list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for MetaDefinition did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -395,72 +403,72 @@ func dataSourceMetaDefinitionRead(d *schema.ResourceData, meta interface{}) erro
 			var s = &models.MetaDefinition{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 
 			if err := d.Set("access_privileges", flattenListMetaAccessPrivilege(s.GetAccessPrivileges(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property AccessPrivileges: %+v", err)
+				return diag.Errorf("error occurred while setting property AccessPrivileges: %s", err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("ancestor_classes", (s.GetAncestorClasses())); err != nil {
-				return fmt.Errorf("error occurred while setting property AncestorClasses: %+v", err)
+				return diag.Errorf("error occurred while setting property AncestorClasses: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 
 			if err := d.Set("display_name_metas", flattenListMetaDisplayNameDefinition(s.GetDisplayNameMetas(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property DisplayNameMetas: %+v", err)
+				return diag.Errorf("error occurred while setting property DisplayNameMetas: %s", err.Error())
 			}
 			if err := d.Set("is_concrete", (s.GetIsConcrete())); err != nil {
-				return fmt.Errorf("error occurred while setting property IsConcrete: %+v", err)
+				return diag.Errorf("error occurred while setting property IsConcrete: %s", err.Error())
 			}
 			if err := d.Set("meta_type", (s.GetMetaType())); err != nil {
-				return fmt.Errorf("error occurred while setting property MetaType: %+v", err)
+				return diag.Errorf("error occurred while setting property MetaType: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("name", (s.GetName())); err != nil {
-				return fmt.Errorf("error occurred while setting property Name: %+v", err)
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("namespace", (s.GetNamespace())); err != nil {
-				return fmt.Errorf("error occurred while setting property Namespace: %+v", err)
+				return diag.Errorf("error occurred while setting property Namespace: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("parent_class", (s.GetParentClass())); err != nil {
-				return fmt.Errorf("error occurred while setting property ParentClass: %+v", err)
+				return diag.Errorf("error occurred while setting property ParentClass: %s", err.Error())
 			}
 			if err := d.Set("permission_supported", (s.GetPermissionSupported())); err != nil {
-				return fmt.Errorf("error occurred while setting property PermissionSupported: %+v", err)
+				return diag.Errorf("error occurred while setting property PermissionSupported: %s", err.Error())
 			}
 
 			if err := d.Set("properties", flattenListMetaPropDefinition(s.GetProperties(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Properties: %+v", err)
+				return diag.Errorf("error occurred while setting property Properties: %s", err.Error())
 			}
 			if err := d.Set("rbac_resource", (s.GetRbacResource())); err != nil {
-				return fmt.Errorf("error occurred while setting property RbacResource: %+v", err)
+				return diag.Errorf("error occurred while setting property RbacResource: %s", err.Error())
 			}
 
 			if err := d.Set("relationships", flattenListMetaRelationshipDefinition(s.GetRelationships(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Relationships: %+v", err)
+				return diag.Errorf("error occurred while setting property Relationships: %s", err.Error())
 			}
 			if err := d.Set("rest_path", (s.GetRestPath())); err != nil {
-				return fmt.Errorf("error occurred while setting property RestPath: %+v", err)
+				return diag.Errorf("error occurred while setting property RestPath: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("nr_version", (s.GetVersion())); err != nil {
-				return fmt.Errorf("error occurred while setting property Version: %+v", err)
+				return diag.Errorf("error occurred while setting property Version: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

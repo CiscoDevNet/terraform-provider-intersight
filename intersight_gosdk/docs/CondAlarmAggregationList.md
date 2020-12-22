@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Count** | Pointer to **int32** | The total number of &#39;cond.AlarmAggregation&#39; resources matching the request, accross all pages. The &#39;Count&#39; attribute is included when the HTTP GET request includes the &#39;$inlinecount&#39; parameter. | [optional] 
-**Results** | Pointer to [**[]CondAlarmAggregation**](cond.AlarmAggregation.md) | The array of &#39;cond.AlarmAggregation&#39; resources matching the request. | [optional] 
+**Results** | Pointer to [**[]CondAlarmAggregation**](CondAlarmAggregation.md) | The array of &#39;cond.AlarmAggregation&#39; resources matching the request. | [optional] 
 
 ## Methods
 

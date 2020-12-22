@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceNiaapiDcnmLatestMaintainedRelease() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceNiaapiDcnmLatestMaintainedReleaseRead,
+		ReadContext: dataSourceNiaapiDcnmLatestMaintainedReleaseRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -78,10 +79,11 @@ func dataSourceNiaapiDcnmLatestMaintainedRelease() *schema.Resource {
 	}
 }
 
-func dataSourceNiaapiDcnmLatestMaintainedReleaseRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceNiaapiDcnmLatestMaintainedReleaseRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.NiaapiDcnmLatestMaintainedRelease{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -110,25 +112,25 @@ func dataSourceNiaapiDcnmLatestMaintainedReleaseRead(d *schema.ResourceData, met
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of NiaapiDcnmLatestMaintainedRelease object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.NiaapiApi.GetNiaapiDcnmLatestMaintainedReleaseList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.NiaapiApi.GetNiaapiDcnmLatestMaintainedReleaseList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching NiaapiDcnmLatestMaintainedRelease: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for NiaapiDcnmLatestMaintainedRelease list: %s", err.Error())
 	}
 	var s = &models.NiaapiDcnmLatestMaintainedReleaseList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to NiaapiDcnmLatestMaintainedRelease: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to NiaapiDcnmLatestMaintainedRelease list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for NiaapiDcnmLatestMaintainedRelease did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -137,35 +139,35 @@ func dataSourceNiaapiDcnmLatestMaintainedReleaseRead(d *schema.ResourceData, met
 			var s = &models.NiaapiDcnmLatestMaintainedRelease{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("maintained_release", (s.GetMaintainedRelease())); err != nil {
-				return fmt.Errorf("error occurred while setting property MaintainedRelease: %+v", err)
+				return diag.Errorf("error occurred while setting property MaintainedRelease: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("software_release", (s.GetSoftwareRelease())); err != nil {
-				return fmt.Errorf("error occurred while setting property SoftwareRelease: %+v", err)
+				return diag.Errorf("error occurred while setting property SoftwareRelease: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("version_tag", (s.GetVersionTag())); err != nil {
-				return fmt.Errorf("error occurred while setting property VersionTag: %+v", err)
+				return diag.Errorf("error occurred while setting property VersionTag: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

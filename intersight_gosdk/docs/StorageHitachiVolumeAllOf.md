@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **RaidType** | Pointer to **string** | RAID type drive configuration. | [optional] [readonly] 
 **Status** | Pointer to **string** | Status information of the volume. * &#x60;N/A&#x60; - Not available. * &#x60;NML&#x60; - The volume is in normal status. * &#x60;BLK&#x60; - The volume is blocked. * &#x60;BSY&#x60; - The volume status is being changed. * &#x60;Unknown&#x60; - The volume status is unknown (not supported). | [optional] [readonly] [default to "N/A"]
 **Array** | Pointer to [**StorageHitachiArrayRelationship**](storage.HitachiArray.Relationship.md) |  | [optional] 
-**ParityGroups** | Pointer to [**[]StorageHitachiParityGroupRelationship**](storage.HitachiParityGroup.Relationship.md) | An array of relationships to storageHitachiParityGroup resources. | [optional] [readonly] 
+**ParityGroups** | Pointer to [**[]StorageHitachiParityGroupRelationship**](StorageHitachiParityGroupRelationship.md) | An array of relationships to storageHitachiParityGroup resources. | [optional] [readonly] 
 **Pool** | Pointer to [**StorageHitachiPoolRelationship**](storage.HitachiPool.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 

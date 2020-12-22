@@ -26,14 +26,14 @@ Name | Type | Description | Notes
 **ComputeBlade** | Pointer to [**ComputeBladeRelationship**](compute.Blade.Relationship.md) |  | [optional] 
 **ComputeBoard** | Pointer to [**ComputeBoardRelationship**](compute.Board.Relationship.md) |  | [optional] 
 **ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](compute.RackUnit.Relationship.md) |  | [optional] 
-**DiskGroup** | Pointer to [**[]StorageDiskGroupRelationship**](storage.DiskGroup.Relationship.md) | An array of relationships to storageDiskGroup resources. | [optional] 
+**DiskGroup** | Pointer to [**[]StorageDiskGroupRelationship**](StorageDiskGroupRelationship.md) | An array of relationships to storageDiskGroup resources. | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
-**PhysicalDiskExtensions** | Pointer to [**[]StoragePhysicalDiskExtensionRelationship**](storage.PhysicalDiskExtension.Relationship.md) | An array of relationships to storagePhysicalDiskExtension resources. | [optional] [readonly] 
-**PhysicalDisks** | Pointer to [**[]StoragePhysicalDiskRelationship**](storage.PhysicalDisk.Relationship.md) | An array of relationships to storagePhysicalDisk resources. | [optional] [readonly] 
+**PhysicalDiskExtensions** | Pointer to [**[]StoragePhysicalDiskExtensionRelationship**](StoragePhysicalDiskExtensionRelationship.md) | An array of relationships to storagePhysicalDiskExtension resources. | [optional] [readonly] 
+**PhysicalDisks** | Pointer to [**[]StoragePhysicalDiskRelationship**](StoragePhysicalDiskRelationship.md) | An array of relationships to storagePhysicalDisk resources. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
-**RunningFirmware** | Pointer to [**[]FirmwareRunningFirmwareRelationship**](firmware.RunningFirmware.Relationship.md) | An array of relationships to firmwareRunningFirmware resources. | [optional] [readonly] 
-**VirtualDriveExtensions** | Pointer to [**[]StorageVirtualDriveExtensionRelationship**](storage.VirtualDriveExtension.Relationship.md) | An array of relationships to storageVirtualDriveExtension resources. | [optional] [readonly] 
-**VirtualDrives** | Pointer to [**[]StorageVirtualDriveRelationship**](storage.VirtualDrive.Relationship.md) | An array of relationships to storageVirtualDrive resources. | [optional] [readonly] 
+**RunningFirmware** | Pointer to [**[]FirmwareRunningFirmwareRelationship**](FirmwareRunningFirmwareRelationship.md) | An array of relationships to firmwareRunningFirmware resources. | [optional] [readonly] 
+**VirtualDriveExtensions** | Pointer to [**[]StorageVirtualDriveExtensionRelationship**](StorageVirtualDriveExtensionRelationship.md) | An array of relationships to storageVirtualDriveExtension resources. | [optional] [readonly] 
+**VirtualDrives** | Pointer to [**[]StorageVirtualDriveRelationship**](StorageVirtualDriveRelationship.md) | An array of relationships to storageVirtualDrive resources. | [optional] [readonly] 
 
 ## Methods
 

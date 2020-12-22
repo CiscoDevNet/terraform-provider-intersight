@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceFabricSwitchControlPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceFabricSwitchControlPolicyCreate,
-		Read:   resourceFabricSwitchControlPolicyRead,
-		Update: resourceFabricSwitchControlPolicyUpdate,
-		Delete: resourceFabricSwitchControlPolicyDelete,
+		CreateContext: resourceFabricSwitchControlPolicyCreate,
+		ReadContext:   resourceFabricSwitchControlPolicyRead,
+		UpdateContext: resourceFabricSwitchControlPolicyUpdate,
+		DeleteContext: resourceFabricSwitchControlPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -159,12 +162,13 @@ func resourceFabricSwitchControlPolicy() *schema.Resource {
 				Description: "To enable or disable the VLAN port count optimization.",
 				Type:        schema.TypeBool,
 				Optional:    true,
+				Default:     false,
 			},
 		},
 	}
 }
 
-func resourceFabricSwitchControlPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricSwitchControlPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -323,73 +327,77 @@ func resourceFabricSwitchControlPolicyCreate(d *schema.ResourceData, meta interf
 	}
 
 	r := conn.ApiClient.FabricApi.CreateFabricSwitchControlPolicy(conn.ctx).FabricSwitchControlPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating FabricSwitchControlPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceFabricSwitchControlPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceFabricSwitchControlPolicyRead(c, d, meta)
 }
 
-func resourceFabricSwitchControlPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricSwitchControlPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.FabricApi.GetFabricSwitchControlPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "FabricSwitchControlPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching FabricSwitchControlPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in FabricSwitchControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in FabricSwitchControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in FabricSwitchControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in FabricSwitchControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in FabricSwitchControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in FabricSwitchControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in FabricSwitchControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("profiles", flattenListFabricSwitchProfileRelationship(s.GetProfiles(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Profiles: %+v", err)
+		return diag.Errorf("error occurred while setting property Profiles in FabricSwitchControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in FabricSwitchControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("vlan_port_optimization_enabled", (s.GetVlanPortOptimizationEnabled())); err != nil {
-		return fmt.Errorf("error occurred while setting property VlanPortOptimizationEnabled: %+v", err)
+		return diag.Errorf("error occurred while setting property VlanPortOptimizationEnabled in FabricSwitchControlPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceFabricSwitchControlPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricSwitchControlPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -556,23 +564,24 @@ func resourceFabricSwitchControlPolicyUpdate(d *schema.ResourceData, meta interf
 	}
 
 	r := conn.ApiClient.FabricApi.UpdateFabricSwitchControlPolicy(conn.ctx, d.Id()).FabricSwitchControlPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating FabricSwitchControlPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFabricSwitchControlPolicyRead(d, meta)
+	return resourceFabricSwitchControlPolicyRead(c, d, meta)
 }
 
-func resourceFabricSwitchControlPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricSwitchControlPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.FabricApi.DeleteFabricSwitchControlPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting FabricSwitchControlPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceVnicEthNetworkPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceVnicEthNetworkPolicyCreate,
-		Read:   resourceVnicEthNetworkPolicyRead,
-		Update: resourceVnicEthNetworkPolicyUpdate,
-		Delete: resourceVnicEthNetworkPolicyDelete,
+		CreateContext: resourceVnicEthNetworkPolicyCreate,
+		ReadContext:   resourceVnicEthNetworkPolicyRead,
+		UpdateContext: resourceVnicEthNetworkPolicyUpdate,
+		DeleteContext: resourceVnicEthNetworkPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -148,6 +151,7 @@ func resourceVnicEthNetworkPolicy() *schema.Resource {
 							Description: "Native VLAN ID of the virtual interface or the corresponding vethernet on the peer Fabric Interconnect to which the virtual interface is connected. Setting the ID to 0 will not associate any native VLAN to the traffic on the virtual interface.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     0,
 						},
 						"mode": {
 							Description: "Option to determine if the port can carry single VLAN (Access) or multiple VLANs (Trunk) traffic.\n* `ACCESS` - An access port carries traffic only for a single VLAN on the interface.\n* `TRUNK` - A trunk port can have two or more VLANs configured on the interface. It can carry traffic for several VLANs simultaneously.",
@@ -170,7 +174,7 @@ func resourceVnicEthNetworkPolicy() *schema.Resource {
 	}
 }
 
-func resourceVnicEthNetworkPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicEthNetworkPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -336,73 +340,77 @@ func resourceVnicEthNetworkPolicyCreate(d *schema.ResourceData, meta interface{}
 	}
 
 	r := conn.ApiClient.VnicApi.CreateVnicEthNetworkPolicy(conn.ctx).VnicEthNetworkPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating VnicEthNetworkPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceVnicEthNetworkPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceVnicEthNetworkPolicyRead(c, d, meta)
 }
 
-func resourceVnicEthNetworkPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicEthNetworkPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.VnicApi.GetVnicEthNetworkPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "VnicEthNetworkPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching VnicEthNetworkPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in VnicEthNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in VnicEthNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in VnicEthNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in VnicEthNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in VnicEthNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in VnicEthNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in VnicEthNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in VnicEthNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("target_platform", (s.GetTargetPlatform())); err != nil {
-		return fmt.Errorf("error occurred while setting property TargetPlatform: %+v", err)
+		return diag.Errorf("error occurred while setting property TargetPlatform in VnicEthNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("vlan_settings", flattenMapVnicVlanSettings(s.GetVlanSettings(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property VlanSettings: %+v", err)
+		return diag.Errorf("error occurred while setting property VlanSettings in VnicEthNetworkPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceVnicEthNetworkPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicEthNetworkPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -576,23 +584,24 @@ func resourceVnicEthNetworkPolicyUpdate(d *schema.ResourceData, meta interface{}
 	}
 
 	r := conn.ApiClient.VnicApi.UpdateVnicEthNetworkPolicy(conn.ctx, d.Id()).VnicEthNetworkPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating VnicEthNetworkPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceVnicEthNetworkPolicyRead(d, meta)
+	return resourceVnicEthNetworkPolicyRead(c, d, meta)
 }
 
-func resourceVnicEthNetworkPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicEthNetworkPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.VnicApi.DeleteVnicEthNetworkPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting VnicEthNetworkPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

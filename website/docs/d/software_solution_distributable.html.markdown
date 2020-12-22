@@ -1,18 +1,16 @@
-
 ---
+subcategory: "software"
 layout: "intersight"
 page_title: "Intersight: intersight_software_solution_distributable"
-sidebar_current: "docs-intersight-data-source-software-solution-distributable"
 description: |-
-A solution image distributed by Cisco.
+  A solution image distributed by Cisco.
 ---
 
-# Data Source: intersight_software._solution_distributable
+# Data Source: intersight_software_solution_distributable
 A solution image distributed by Cisco.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `bundle_type`:(string) The bundle type of the image, as published on cisco.com. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `description`:(string) User provided description about the file. Cisco provided description for image inventoried from a Cisco repository. 
 * `download_count`:(int) The number of times this file has been downloaded from the local repository. It is used by the repository monitoring process to determine the files that are to be evicted from the cache. 
 * `file_path`:(string) The path of the file in S3/minio bucket. 
@@ -25,7 +23,6 @@ The following arguments can be used to get data of already created objects in In
 * `model`:(string) The endpoint model for which this firmware image is applicable. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of the file. It is populated as part of the image import operation. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `platform_type`:(string) The platform type of the image. 
 * `recommended_build`:(string) The build which is recommended by Cisco. 
 * `release_notes_url`:(string) The url for the release notes of this image. 
@@ -36,4 +33,4 @@ The following arguments can be used to get data of already created objects in In
 * `solution_name`:(string) The name of the solution in which the image belongs. 
 * `sub_type`:(string) The type of the file like OS image, Script etc.* `osimage` - The solution OS image for deployment.* `script` - The Python script for the solution VM configuration and deployment. 
 * `vendor`:(string) The vendor or publisher of this file. 
-* `version`:(string) Vendor provided version for the file. 
+* `nr_version`:(string) Vendor provided version for the file. 

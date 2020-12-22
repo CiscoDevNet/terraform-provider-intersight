@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "sdcard.Partition"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "sdcard.Partition"]
 **Type** | Pointer to **string** | This specifies the type of the partition. Allowed values are OS, Utility. * &#x60;OS&#x60; - This partition contains virtual drives where user can install operating system. * &#x60;Utility&#x60; - This partition contains virtual drives for utilities such as SCU, HUU, Drivers and Diagnostics. | [optional] [default to "OS"]
-**VirtualDrives** | Pointer to [**[]SdcardVirtualDrive**](sdcard.VirtualDrive.md) |  | [optional] 
+**VirtualDrives** | Pointer to [**[]SdcardVirtualDrive**](SdcardVirtualDrive.md) |  | [optional] 
 
 ## Methods
 

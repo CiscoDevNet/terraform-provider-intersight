@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -12,6 +12,7 @@
 package intersight
 
 import (
+	"bytes"
 	_context "context"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
@@ -33,7 +34,7 @@ type ApiGetManagementControllerByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetManagementControllerByMoidRequest) Execute() (ManagementController, *_nethttp.Response, error) {
+func (r ApiGetManagementControllerByMoidRequest) Execute() (ManagementController, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetManagementControllerByMoidExecute(r)
 }
 
@@ -55,19 +56,21 @@ func (a *ManagementApiService) GetManagementControllerByMoid(ctx _context.Contex
  * Execute executes the request
  * @return ManagementController
  */
-func (a *ManagementApiService) GetManagementControllerByMoidExecute(r ApiGetManagementControllerByMoidRequest) (ManagementController, *_nethttp.Response, error) {
+func (a *ManagementApiService) GetManagementControllerByMoidExecute(r ApiGetManagementControllerByMoidRequest) (ManagementController, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ManagementController
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.GetManagementControllerByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Controllers/{Moid}"
@@ -96,18 +99,22 @@ func (a *ManagementApiService) GetManagementControllerByMoidExecute(r ApiGetMana
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -174,7 +181,7 @@ func (a *ManagementApiService) GetManagementControllerByMoidExecute(r ApiGetMana
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetManagementControllerListRequest struct {
@@ -238,7 +245,7 @@ func (r ApiGetManagementControllerListRequest) Tags(tags string) ApiGetManagemen
 	return r
 }
 
-func (r ApiGetManagementControllerListRequest) Execute() (ManagementControllerResponse, *_nethttp.Response, error) {
+func (r ApiGetManagementControllerListRequest) Execute() (ManagementControllerResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetManagementControllerListExecute(r)
 }
 
@@ -258,19 +265,21 @@ func (a *ManagementApiService) GetManagementControllerList(ctx _context.Context)
  * Execute executes the request
  * @return ManagementControllerResponse
  */
-func (a *ManagementApiService) GetManagementControllerListExecute(r ApiGetManagementControllerListRequest) (ManagementControllerResponse, *_nethttp.Response, error) {
+func (a *ManagementApiService) GetManagementControllerListExecute(r ApiGetManagementControllerListRequest) (ManagementControllerResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ManagementControllerResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.GetManagementControllerList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Controllers"
@@ -331,18 +340,22 @@ func (a *ManagementApiService) GetManagementControllerListExecute(r ApiGetManage
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -409,7 +422,7 @@ func (a *ManagementApiService) GetManagementControllerListExecute(r ApiGetManage
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetManagementEntityByMoidRequest struct {
@@ -418,7 +431,7 @@ type ApiGetManagementEntityByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetManagementEntityByMoidRequest) Execute() (ManagementEntity, *_nethttp.Response, error) {
+func (r ApiGetManagementEntityByMoidRequest) Execute() (ManagementEntity, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetManagementEntityByMoidExecute(r)
 }
 
@@ -440,19 +453,21 @@ func (a *ManagementApiService) GetManagementEntityByMoid(ctx _context.Context, m
  * Execute executes the request
  * @return ManagementEntity
  */
-func (a *ManagementApiService) GetManagementEntityByMoidExecute(r ApiGetManagementEntityByMoidRequest) (ManagementEntity, *_nethttp.Response, error) {
+func (a *ManagementApiService) GetManagementEntityByMoidExecute(r ApiGetManagementEntityByMoidRequest) (ManagementEntity, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ManagementEntity
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.GetManagementEntityByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Entities/{Moid}"
@@ -481,18 +496,22 @@ func (a *ManagementApiService) GetManagementEntityByMoidExecute(r ApiGetManageme
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -559,7 +578,7 @@ func (a *ManagementApiService) GetManagementEntityByMoidExecute(r ApiGetManageme
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetManagementEntityListRequest struct {
@@ -623,7 +642,7 @@ func (r ApiGetManagementEntityListRequest) Tags(tags string) ApiGetManagementEnt
 	return r
 }
 
-func (r ApiGetManagementEntityListRequest) Execute() (ManagementEntityResponse, *_nethttp.Response, error) {
+func (r ApiGetManagementEntityListRequest) Execute() (ManagementEntityResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetManagementEntityListExecute(r)
 }
 
@@ -643,19 +662,21 @@ func (a *ManagementApiService) GetManagementEntityList(ctx _context.Context) Api
  * Execute executes the request
  * @return ManagementEntityResponse
  */
-func (a *ManagementApiService) GetManagementEntityListExecute(r ApiGetManagementEntityListRequest) (ManagementEntityResponse, *_nethttp.Response, error) {
+func (a *ManagementApiService) GetManagementEntityListExecute(r ApiGetManagementEntityListRequest) (ManagementEntityResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ManagementEntityResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.GetManagementEntityList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Entities"
@@ -716,18 +737,22 @@ func (a *ManagementApiService) GetManagementEntityListExecute(r ApiGetManagement
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -794,7 +819,7 @@ func (a *ManagementApiService) GetManagementEntityListExecute(r ApiGetManagement
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetManagementInterfaceByMoidRequest struct {
@@ -803,7 +828,7 @@ type ApiGetManagementInterfaceByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetManagementInterfaceByMoidRequest) Execute() (ManagementInterface, *_nethttp.Response, error) {
+func (r ApiGetManagementInterfaceByMoidRequest) Execute() (ManagementInterface, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetManagementInterfaceByMoidExecute(r)
 }
 
@@ -825,19 +850,21 @@ func (a *ManagementApiService) GetManagementInterfaceByMoid(ctx _context.Context
  * Execute executes the request
  * @return ManagementInterface
  */
-func (a *ManagementApiService) GetManagementInterfaceByMoidExecute(r ApiGetManagementInterfaceByMoidRequest) (ManagementInterface, *_nethttp.Response, error) {
+func (a *ManagementApiService) GetManagementInterfaceByMoidExecute(r ApiGetManagementInterfaceByMoidRequest) (ManagementInterface, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ManagementInterface
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.GetManagementInterfaceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Interfaces/{Moid}"
@@ -866,18 +893,22 @@ func (a *ManagementApiService) GetManagementInterfaceByMoidExecute(r ApiGetManag
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -944,7 +975,7 @@ func (a *ManagementApiService) GetManagementInterfaceByMoidExecute(r ApiGetManag
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetManagementInterfaceListRequest struct {
@@ -1008,7 +1039,7 @@ func (r ApiGetManagementInterfaceListRequest) Tags(tags string) ApiGetManagement
 	return r
 }
 
-func (r ApiGetManagementInterfaceListRequest) Execute() (ManagementInterfaceResponse, *_nethttp.Response, error) {
+func (r ApiGetManagementInterfaceListRequest) Execute() (ManagementInterfaceResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetManagementInterfaceListExecute(r)
 }
 
@@ -1028,19 +1059,21 @@ func (a *ManagementApiService) GetManagementInterfaceList(ctx _context.Context) 
  * Execute executes the request
  * @return ManagementInterfaceResponse
  */
-func (a *ManagementApiService) GetManagementInterfaceListExecute(r ApiGetManagementInterfaceListRequest) (ManagementInterfaceResponse, *_nethttp.Response, error) {
+func (a *ManagementApiService) GetManagementInterfaceListExecute(r ApiGetManagementInterfaceListRequest) (ManagementInterfaceResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ManagementInterfaceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.GetManagementInterfaceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Interfaces"
@@ -1101,18 +1134,22 @@ func (a *ManagementApiService) GetManagementInterfaceListExecute(r ApiGetManagem
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1179,7 +1216,7 @@ func (a *ManagementApiService) GetManagementInterfaceListExecute(r ApiGetManagem
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchManagementControllerRequest struct {
@@ -1199,7 +1236,7 @@ func (r ApiPatchManagementControllerRequest) IfMatch(ifMatch string) ApiPatchMan
 	return r
 }
 
-func (r ApiPatchManagementControllerRequest) Execute() (ManagementController, *_nethttp.Response, error) {
+func (r ApiPatchManagementControllerRequest) Execute() (ManagementController, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchManagementControllerExecute(r)
 }
 
@@ -1221,19 +1258,21 @@ func (a *ManagementApiService) PatchManagementController(ctx _context.Context, m
  * Execute executes the request
  * @return ManagementController
  */
-func (a *ManagementApiService) PatchManagementControllerExecute(r ApiPatchManagementControllerRequest) (ManagementController, *_nethttp.Response, error) {
+func (a *ManagementApiService) PatchManagementControllerExecute(r ApiPatchManagementControllerRequest) (ManagementController, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ManagementController
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.PatchManagementController")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Controllers/{Moid}"
@@ -1243,7 +1282,8 @@ func (a *ManagementApiService) PatchManagementControllerExecute(r ApiPatchManage
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.managementController == nil {
-		return localVarReturnValue, nil, reportError("managementController is required and must be specified")
+		executionError.error = "managementController is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -1270,18 +1310,22 @@ func (a *ManagementApiService) PatchManagementControllerExecute(r ApiPatchManage
 	localVarPostBody = r.managementController
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1348,7 +1392,7 @@ func (a *ManagementApiService) PatchManagementControllerExecute(r ApiPatchManage
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchManagementEntityRequest struct {
@@ -1368,7 +1412,7 @@ func (r ApiPatchManagementEntityRequest) IfMatch(ifMatch string) ApiPatchManagem
 	return r
 }
 
-func (r ApiPatchManagementEntityRequest) Execute() (ManagementEntity, *_nethttp.Response, error) {
+func (r ApiPatchManagementEntityRequest) Execute() (ManagementEntity, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchManagementEntityExecute(r)
 }
 
@@ -1390,19 +1434,21 @@ func (a *ManagementApiService) PatchManagementEntity(ctx _context.Context, moid 
  * Execute executes the request
  * @return ManagementEntity
  */
-func (a *ManagementApiService) PatchManagementEntityExecute(r ApiPatchManagementEntityRequest) (ManagementEntity, *_nethttp.Response, error) {
+func (a *ManagementApiService) PatchManagementEntityExecute(r ApiPatchManagementEntityRequest) (ManagementEntity, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ManagementEntity
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.PatchManagementEntity")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Entities/{Moid}"
@@ -1412,7 +1458,8 @@ func (a *ManagementApiService) PatchManagementEntityExecute(r ApiPatchManagement
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.managementEntity == nil {
-		return localVarReturnValue, nil, reportError("managementEntity is required and must be specified")
+		executionError.error = "managementEntity is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -1439,18 +1486,22 @@ func (a *ManagementApiService) PatchManagementEntityExecute(r ApiPatchManagement
 	localVarPostBody = r.managementEntity
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1517,7 +1568,7 @@ func (a *ManagementApiService) PatchManagementEntityExecute(r ApiPatchManagement
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchManagementInterfaceRequest struct {
@@ -1537,7 +1588,7 @@ func (r ApiPatchManagementInterfaceRequest) IfMatch(ifMatch string) ApiPatchMana
 	return r
 }
 
-func (r ApiPatchManagementInterfaceRequest) Execute() (ManagementInterface, *_nethttp.Response, error) {
+func (r ApiPatchManagementInterfaceRequest) Execute() (ManagementInterface, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchManagementInterfaceExecute(r)
 }
 
@@ -1559,19 +1610,21 @@ func (a *ManagementApiService) PatchManagementInterface(ctx _context.Context, mo
  * Execute executes the request
  * @return ManagementInterface
  */
-func (a *ManagementApiService) PatchManagementInterfaceExecute(r ApiPatchManagementInterfaceRequest) (ManagementInterface, *_nethttp.Response, error) {
+func (a *ManagementApiService) PatchManagementInterfaceExecute(r ApiPatchManagementInterfaceRequest) (ManagementInterface, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ManagementInterface
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.PatchManagementInterface")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Interfaces/{Moid}"
@@ -1581,7 +1634,8 @@ func (a *ManagementApiService) PatchManagementInterfaceExecute(r ApiPatchManagem
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.managementInterface == nil {
-		return localVarReturnValue, nil, reportError("managementInterface is required and must be specified")
+		executionError.error = "managementInterface is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -1608,18 +1662,22 @@ func (a *ManagementApiService) PatchManagementInterfaceExecute(r ApiPatchManagem
 	localVarPostBody = r.managementInterface
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1686,7 +1744,7 @@ func (a *ManagementApiService) PatchManagementInterfaceExecute(r ApiPatchManagem
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateManagementControllerRequest struct {
@@ -1706,7 +1764,7 @@ func (r ApiUpdateManagementControllerRequest) IfMatch(ifMatch string) ApiUpdateM
 	return r
 }
 
-func (r ApiUpdateManagementControllerRequest) Execute() (ManagementController, *_nethttp.Response, error) {
+func (r ApiUpdateManagementControllerRequest) Execute() (ManagementController, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateManagementControllerExecute(r)
 }
 
@@ -1728,19 +1786,21 @@ func (a *ManagementApiService) UpdateManagementController(ctx _context.Context, 
  * Execute executes the request
  * @return ManagementController
  */
-func (a *ManagementApiService) UpdateManagementControllerExecute(r ApiUpdateManagementControllerRequest) (ManagementController, *_nethttp.Response, error) {
+func (a *ManagementApiService) UpdateManagementControllerExecute(r ApiUpdateManagementControllerRequest) (ManagementController, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ManagementController
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.UpdateManagementController")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Controllers/{Moid}"
@@ -1750,7 +1810,8 @@ func (a *ManagementApiService) UpdateManagementControllerExecute(r ApiUpdateMana
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.managementController == nil {
-		return localVarReturnValue, nil, reportError("managementController is required and must be specified")
+		executionError.error = "managementController is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -1777,18 +1838,22 @@ func (a *ManagementApiService) UpdateManagementControllerExecute(r ApiUpdateMana
 	localVarPostBody = r.managementController
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1855,7 +1920,7 @@ func (a *ManagementApiService) UpdateManagementControllerExecute(r ApiUpdateMana
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateManagementEntityRequest struct {
@@ -1875,7 +1940,7 @@ func (r ApiUpdateManagementEntityRequest) IfMatch(ifMatch string) ApiUpdateManag
 	return r
 }
 
-func (r ApiUpdateManagementEntityRequest) Execute() (ManagementEntity, *_nethttp.Response, error) {
+func (r ApiUpdateManagementEntityRequest) Execute() (ManagementEntity, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateManagementEntityExecute(r)
 }
 
@@ -1897,19 +1962,21 @@ func (a *ManagementApiService) UpdateManagementEntity(ctx _context.Context, moid
  * Execute executes the request
  * @return ManagementEntity
  */
-func (a *ManagementApiService) UpdateManagementEntityExecute(r ApiUpdateManagementEntityRequest) (ManagementEntity, *_nethttp.Response, error) {
+func (a *ManagementApiService) UpdateManagementEntityExecute(r ApiUpdateManagementEntityRequest) (ManagementEntity, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ManagementEntity
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.UpdateManagementEntity")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Entities/{Moid}"
@@ -1919,7 +1986,8 @@ func (a *ManagementApiService) UpdateManagementEntityExecute(r ApiUpdateManageme
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.managementEntity == nil {
-		return localVarReturnValue, nil, reportError("managementEntity is required and must be specified")
+		executionError.error = "managementEntity is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -1946,18 +2014,22 @@ func (a *ManagementApiService) UpdateManagementEntityExecute(r ApiUpdateManageme
 	localVarPostBody = r.managementEntity
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2024,7 +2096,7 @@ func (a *ManagementApiService) UpdateManagementEntityExecute(r ApiUpdateManageme
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateManagementInterfaceRequest struct {
@@ -2044,7 +2116,7 @@ func (r ApiUpdateManagementInterfaceRequest) IfMatch(ifMatch string) ApiUpdateMa
 	return r
 }
 
-func (r ApiUpdateManagementInterfaceRequest) Execute() (ManagementInterface, *_nethttp.Response, error) {
+func (r ApiUpdateManagementInterfaceRequest) Execute() (ManagementInterface, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateManagementInterfaceExecute(r)
 }
 
@@ -2066,19 +2138,21 @@ func (a *ManagementApiService) UpdateManagementInterface(ctx _context.Context, m
  * Execute executes the request
  * @return ManagementInterface
  */
-func (a *ManagementApiService) UpdateManagementInterfaceExecute(r ApiUpdateManagementInterfaceRequest) (ManagementInterface, *_nethttp.Response, error) {
+func (a *ManagementApiService) UpdateManagementInterfaceExecute(r ApiUpdateManagementInterfaceRequest) (ManagementInterface, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ManagementInterface
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ManagementApiService.UpdateManagementInterface")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/management/Interfaces/{Moid}"
@@ -2088,7 +2162,8 @@ func (a *ManagementApiService) UpdateManagementInterfaceExecute(r ApiUpdateManag
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.managementInterface == nil {
-		return localVarReturnValue, nil, reportError("managementInterface is required and must be specified")
+		executionError.error = "managementInterface is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -2115,18 +2190,22 @@ func (a *ManagementApiService) UpdateManagementInterfaceExecute(r ApiUpdateManag
 	localVarPostBody = r.managementInterface
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2193,5 +2272,5 @@ func (a *ManagementApiService) UpdateManagementInterfaceExecute(r ApiUpdateManag
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }

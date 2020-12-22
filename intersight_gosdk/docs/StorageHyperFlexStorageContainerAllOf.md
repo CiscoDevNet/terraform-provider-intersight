@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "storage.HyperFlexStorageContainer"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "storage.HyperFlexStorageContainer"]
-**LastAccessTime** | Pointer to [**time.Time**](time.Time.md) | Storage container&#39;s last access time. | [optional] [readonly] 
-**LastModifiedTime** | Pointer to [**time.Time**](time.Time.md) | Storage container&#39;s last modified time. | [optional] [readonly] 
+**LastAccessTime** | Pointer to **time.Time** | Storage container&#39;s last access time. | [optional] [readonly] 
+**LastModifiedTime** | Pointer to **time.Time** | Storage container&#39;s last modified time. | [optional] [readonly] 
 **ProvisionedCapacity** | Pointer to **int64** | Provisioned Capacity of the Storage container in bytes. | [optional] [readonly] 
 **Type** | Pointer to **string** | Storage Container type (SMB/NFS/iSCSI). * &#x60;NFS&#x60; - Storage container created/accesed through NFS protocol. * &#x60;SMB&#x60; - Storage container created/accessed through SMB protocol. * &#x60;iSCSI&#x60; - Storage container created/accessed through iSCSI protocol. | [optional] [readonly] [default to "NFS"]
 **UnCompressedUsedBytes** | Pointer to **int64** | Uncompressed bytes on Storage Container. | [optional] [readonly] 

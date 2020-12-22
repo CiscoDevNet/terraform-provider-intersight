@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -12,6 +12,7 @@
 package intersight
 
 import (
+	"bytes"
 	_context "context"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
@@ -48,7 +49,7 @@ func (r ApiCreateUuidpoolPoolRequest) IfNoneMatch(ifNoneMatch string) ApiCreateU
 	return r
 }
 
-func (r ApiCreateUuidpoolPoolRequest) Execute() (UuidpoolPool, *_nethttp.Response, error) {
+func (r ApiCreateUuidpoolPoolRequest) Execute() (UuidpoolPool, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateUuidpoolPoolExecute(r)
 }
 
@@ -68,19 +69,21 @@ func (a *UuidpoolApiService) CreateUuidpoolPool(ctx _context.Context) ApiCreateU
  * Execute executes the request
  * @return UuidpoolPool
  */
-func (a *UuidpoolApiService) CreateUuidpoolPoolExecute(r ApiCreateUuidpoolPoolRequest) (UuidpoolPool, *_nethttp.Response, error) {
+func (a *UuidpoolApiService) CreateUuidpoolPoolExecute(r ApiCreateUuidpoolPoolRequest) (UuidpoolPool, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  UuidpoolPool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UuidpoolApiService.CreateUuidpoolPool")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/uuidpool/Pools"
@@ -89,7 +92,8 @@ func (a *UuidpoolApiService) CreateUuidpoolPoolExecute(r ApiCreateUuidpoolPoolRe
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.uuidpoolPool == nil {
-		return localVarReturnValue, nil, reportError("uuidpoolPool is required and must be specified")
+		executionError.error = "uuidpoolPool is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -119,18 +123,22 @@ func (a *UuidpoolApiService) CreateUuidpoolPoolExecute(r ApiCreateUuidpoolPoolRe
 	localVarPostBody = r.uuidpoolPool
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -197,7 +205,7 @@ func (a *UuidpoolApiService) CreateUuidpoolPoolExecute(r ApiCreateUuidpoolPoolRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiDeleteUuidpoolPoolRequest struct {
@@ -206,7 +214,7 @@ type ApiDeleteUuidpoolPoolRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteUuidpoolPoolRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteUuidpoolPoolRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteUuidpoolPoolExecute(r)
 }
 
@@ -227,18 +235,20 @@ func (a *UuidpoolApiService) DeleteUuidpoolPool(ctx _context.Context, moid strin
 /*
  * Execute executes the request
  */
-func (a *UuidpoolApiService) DeleteUuidpoolPoolExecute(r ApiDeleteUuidpoolPoolRequest) (*_nethttp.Response, error) {
+func (a *UuidpoolApiService) DeleteUuidpoolPoolExecute(r ApiDeleteUuidpoolPoolRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UuidpoolApiService.DeleteUuidpoolPool")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/uuidpool/Pools/{Moid}"
@@ -267,18 +277,22 @@ func (a *UuidpoolApiService) DeleteUuidpoolPoolExecute(r ApiDeleteUuidpoolPoolRe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -336,7 +350,7 @@ func (a *UuidpoolApiService) DeleteUuidpoolPoolExecute(r ApiDeleteUuidpoolPoolRe
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiGetUuidpoolBlockByMoidRequest struct {
@@ -345,7 +359,7 @@ type ApiGetUuidpoolBlockByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetUuidpoolBlockByMoidRequest) Execute() (UuidpoolBlock, *_nethttp.Response, error) {
+func (r ApiGetUuidpoolBlockByMoidRequest) Execute() (UuidpoolBlock, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetUuidpoolBlockByMoidExecute(r)
 }
 
@@ -367,19 +381,21 @@ func (a *UuidpoolApiService) GetUuidpoolBlockByMoid(ctx _context.Context, moid s
  * Execute executes the request
  * @return UuidpoolBlock
  */
-func (a *UuidpoolApiService) GetUuidpoolBlockByMoidExecute(r ApiGetUuidpoolBlockByMoidRequest) (UuidpoolBlock, *_nethttp.Response, error) {
+func (a *UuidpoolApiService) GetUuidpoolBlockByMoidExecute(r ApiGetUuidpoolBlockByMoidRequest) (UuidpoolBlock, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  UuidpoolBlock
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UuidpoolApiService.GetUuidpoolBlockByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/uuidpool/Blocks/{Moid}"
@@ -408,18 +424,22 @@ func (a *UuidpoolApiService) GetUuidpoolBlockByMoidExecute(r ApiGetUuidpoolBlock
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -486,7 +506,7 @@ func (a *UuidpoolApiService) GetUuidpoolBlockByMoidExecute(r ApiGetUuidpoolBlock
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetUuidpoolBlockListRequest struct {
@@ -550,7 +570,7 @@ func (r ApiGetUuidpoolBlockListRequest) Tags(tags string) ApiGetUuidpoolBlockLis
 	return r
 }
 
-func (r ApiGetUuidpoolBlockListRequest) Execute() (UuidpoolBlockResponse, *_nethttp.Response, error) {
+func (r ApiGetUuidpoolBlockListRequest) Execute() (UuidpoolBlockResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetUuidpoolBlockListExecute(r)
 }
 
@@ -570,19 +590,21 @@ func (a *UuidpoolApiService) GetUuidpoolBlockList(ctx _context.Context) ApiGetUu
  * Execute executes the request
  * @return UuidpoolBlockResponse
  */
-func (a *UuidpoolApiService) GetUuidpoolBlockListExecute(r ApiGetUuidpoolBlockListRequest) (UuidpoolBlockResponse, *_nethttp.Response, error) {
+func (a *UuidpoolApiService) GetUuidpoolBlockListExecute(r ApiGetUuidpoolBlockListRequest) (UuidpoolBlockResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  UuidpoolBlockResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UuidpoolApiService.GetUuidpoolBlockList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/uuidpool/Blocks"
@@ -643,18 +665,22 @@ func (a *UuidpoolApiService) GetUuidpoolBlockListExecute(r ApiGetUuidpoolBlockLi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -721,7 +747,7 @@ func (a *UuidpoolApiService) GetUuidpoolBlockListExecute(r ApiGetUuidpoolBlockLi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetUuidpoolPoolByMoidRequest struct {
@@ -730,7 +756,7 @@ type ApiGetUuidpoolPoolByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetUuidpoolPoolByMoidRequest) Execute() (UuidpoolPool, *_nethttp.Response, error) {
+func (r ApiGetUuidpoolPoolByMoidRequest) Execute() (UuidpoolPool, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetUuidpoolPoolByMoidExecute(r)
 }
 
@@ -752,19 +778,21 @@ func (a *UuidpoolApiService) GetUuidpoolPoolByMoid(ctx _context.Context, moid st
  * Execute executes the request
  * @return UuidpoolPool
  */
-func (a *UuidpoolApiService) GetUuidpoolPoolByMoidExecute(r ApiGetUuidpoolPoolByMoidRequest) (UuidpoolPool, *_nethttp.Response, error) {
+func (a *UuidpoolApiService) GetUuidpoolPoolByMoidExecute(r ApiGetUuidpoolPoolByMoidRequest) (UuidpoolPool, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  UuidpoolPool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UuidpoolApiService.GetUuidpoolPoolByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/uuidpool/Pools/{Moid}"
@@ -793,18 +821,22 @@ func (a *UuidpoolApiService) GetUuidpoolPoolByMoidExecute(r ApiGetUuidpoolPoolBy
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -871,7 +903,7 @@ func (a *UuidpoolApiService) GetUuidpoolPoolByMoidExecute(r ApiGetUuidpoolPoolBy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetUuidpoolPoolListRequest struct {
@@ -935,7 +967,7 @@ func (r ApiGetUuidpoolPoolListRequest) Tags(tags string) ApiGetUuidpoolPoolListR
 	return r
 }
 
-func (r ApiGetUuidpoolPoolListRequest) Execute() (UuidpoolPoolResponse, *_nethttp.Response, error) {
+func (r ApiGetUuidpoolPoolListRequest) Execute() (UuidpoolPoolResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetUuidpoolPoolListExecute(r)
 }
 
@@ -955,19 +987,21 @@ func (a *UuidpoolApiService) GetUuidpoolPoolList(ctx _context.Context) ApiGetUui
  * Execute executes the request
  * @return UuidpoolPoolResponse
  */
-func (a *UuidpoolApiService) GetUuidpoolPoolListExecute(r ApiGetUuidpoolPoolListRequest) (UuidpoolPoolResponse, *_nethttp.Response, error) {
+func (a *UuidpoolApiService) GetUuidpoolPoolListExecute(r ApiGetUuidpoolPoolListRequest) (UuidpoolPoolResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  UuidpoolPoolResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UuidpoolApiService.GetUuidpoolPoolList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/uuidpool/Pools"
@@ -1028,18 +1062,22 @@ func (a *UuidpoolApiService) GetUuidpoolPoolListExecute(r ApiGetUuidpoolPoolList
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1106,7 +1144,7 @@ func (a *UuidpoolApiService) GetUuidpoolPoolListExecute(r ApiGetUuidpoolPoolList
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetUuidpoolPoolMemberByMoidRequest struct {
@@ -1115,7 +1153,7 @@ type ApiGetUuidpoolPoolMemberByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetUuidpoolPoolMemberByMoidRequest) Execute() (UuidpoolPoolMember, *_nethttp.Response, error) {
+func (r ApiGetUuidpoolPoolMemberByMoidRequest) Execute() (UuidpoolPoolMember, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetUuidpoolPoolMemberByMoidExecute(r)
 }
 
@@ -1137,19 +1175,21 @@ func (a *UuidpoolApiService) GetUuidpoolPoolMemberByMoid(ctx _context.Context, m
  * Execute executes the request
  * @return UuidpoolPoolMember
  */
-func (a *UuidpoolApiService) GetUuidpoolPoolMemberByMoidExecute(r ApiGetUuidpoolPoolMemberByMoidRequest) (UuidpoolPoolMember, *_nethttp.Response, error) {
+func (a *UuidpoolApiService) GetUuidpoolPoolMemberByMoidExecute(r ApiGetUuidpoolPoolMemberByMoidRequest) (UuidpoolPoolMember, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  UuidpoolPoolMember
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UuidpoolApiService.GetUuidpoolPoolMemberByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/uuidpool/PoolMembers/{Moid}"
@@ -1178,18 +1218,22 @@ func (a *UuidpoolApiService) GetUuidpoolPoolMemberByMoidExecute(r ApiGetUuidpool
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1256,7 +1300,7 @@ func (a *UuidpoolApiService) GetUuidpoolPoolMemberByMoidExecute(r ApiGetUuidpool
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetUuidpoolPoolMemberListRequest struct {
@@ -1320,7 +1364,7 @@ func (r ApiGetUuidpoolPoolMemberListRequest) Tags(tags string) ApiGetUuidpoolPoo
 	return r
 }
 
-func (r ApiGetUuidpoolPoolMemberListRequest) Execute() (UuidpoolPoolMemberResponse, *_nethttp.Response, error) {
+func (r ApiGetUuidpoolPoolMemberListRequest) Execute() (UuidpoolPoolMemberResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetUuidpoolPoolMemberListExecute(r)
 }
 
@@ -1340,19 +1384,21 @@ func (a *UuidpoolApiService) GetUuidpoolPoolMemberList(ctx _context.Context) Api
  * Execute executes the request
  * @return UuidpoolPoolMemberResponse
  */
-func (a *UuidpoolApiService) GetUuidpoolPoolMemberListExecute(r ApiGetUuidpoolPoolMemberListRequest) (UuidpoolPoolMemberResponse, *_nethttp.Response, error) {
+func (a *UuidpoolApiService) GetUuidpoolPoolMemberListExecute(r ApiGetUuidpoolPoolMemberListRequest) (UuidpoolPoolMemberResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  UuidpoolPoolMemberResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UuidpoolApiService.GetUuidpoolPoolMemberList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/uuidpool/PoolMembers"
@@ -1413,18 +1459,22 @@ func (a *UuidpoolApiService) GetUuidpoolPoolMemberListExecute(r ApiGetUuidpoolPo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1491,7 +1541,7 @@ func (a *UuidpoolApiService) GetUuidpoolPoolMemberListExecute(r ApiGetUuidpoolPo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetUuidpoolUniverseByMoidRequest struct {
@@ -1500,7 +1550,7 @@ type ApiGetUuidpoolUniverseByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetUuidpoolUniverseByMoidRequest) Execute() (UuidpoolUniverse, *_nethttp.Response, error) {
+func (r ApiGetUuidpoolUniverseByMoidRequest) Execute() (UuidpoolUniverse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetUuidpoolUniverseByMoidExecute(r)
 }
 
@@ -1522,19 +1572,21 @@ func (a *UuidpoolApiService) GetUuidpoolUniverseByMoid(ctx _context.Context, moi
  * Execute executes the request
  * @return UuidpoolUniverse
  */
-func (a *UuidpoolApiService) GetUuidpoolUniverseByMoidExecute(r ApiGetUuidpoolUniverseByMoidRequest) (UuidpoolUniverse, *_nethttp.Response, error) {
+func (a *UuidpoolApiService) GetUuidpoolUniverseByMoidExecute(r ApiGetUuidpoolUniverseByMoidRequest) (UuidpoolUniverse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  UuidpoolUniverse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UuidpoolApiService.GetUuidpoolUniverseByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/uuidpool/Universes/{Moid}"
@@ -1563,18 +1615,22 @@ func (a *UuidpoolApiService) GetUuidpoolUniverseByMoidExecute(r ApiGetUuidpoolUn
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1641,7 +1697,7 @@ func (a *UuidpoolApiService) GetUuidpoolUniverseByMoidExecute(r ApiGetUuidpoolUn
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetUuidpoolUniverseListRequest struct {
@@ -1705,7 +1761,7 @@ func (r ApiGetUuidpoolUniverseListRequest) Tags(tags string) ApiGetUuidpoolUnive
 	return r
 }
 
-func (r ApiGetUuidpoolUniverseListRequest) Execute() (UuidpoolUniverseResponse, *_nethttp.Response, error) {
+func (r ApiGetUuidpoolUniverseListRequest) Execute() (UuidpoolUniverseResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetUuidpoolUniverseListExecute(r)
 }
 
@@ -1725,19 +1781,21 @@ func (a *UuidpoolApiService) GetUuidpoolUniverseList(ctx _context.Context) ApiGe
  * Execute executes the request
  * @return UuidpoolUniverseResponse
  */
-func (a *UuidpoolApiService) GetUuidpoolUniverseListExecute(r ApiGetUuidpoolUniverseListRequest) (UuidpoolUniverseResponse, *_nethttp.Response, error) {
+func (a *UuidpoolApiService) GetUuidpoolUniverseListExecute(r ApiGetUuidpoolUniverseListRequest) (UuidpoolUniverseResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  UuidpoolUniverseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UuidpoolApiService.GetUuidpoolUniverseList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/uuidpool/Universes"
@@ -1798,18 +1856,22 @@ func (a *UuidpoolApiService) GetUuidpoolUniverseListExecute(r ApiGetUuidpoolUniv
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1876,7 +1938,7 @@ func (a *UuidpoolApiService) GetUuidpoolUniverseListExecute(r ApiGetUuidpoolUniv
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetUuidpoolUuidLeaseByMoidRequest struct {
@@ -1885,7 +1947,7 @@ type ApiGetUuidpoolUuidLeaseByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetUuidpoolUuidLeaseByMoidRequest) Execute() (UuidpoolUuidLease, *_nethttp.Response, error) {
+func (r ApiGetUuidpoolUuidLeaseByMoidRequest) Execute() (UuidpoolUuidLease, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetUuidpoolUuidLeaseByMoidExecute(r)
 }
 
@@ -1907,19 +1969,21 @@ func (a *UuidpoolApiService) GetUuidpoolUuidLeaseByMoid(ctx _context.Context, mo
  * Execute executes the request
  * @return UuidpoolUuidLease
  */
-func (a *UuidpoolApiService) GetUuidpoolUuidLeaseByMoidExecute(r ApiGetUuidpoolUuidLeaseByMoidRequest) (UuidpoolUuidLease, *_nethttp.Response, error) {
+func (a *UuidpoolApiService) GetUuidpoolUuidLeaseByMoidExecute(r ApiGetUuidpoolUuidLeaseByMoidRequest) (UuidpoolUuidLease, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  UuidpoolUuidLease
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UuidpoolApiService.GetUuidpoolUuidLeaseByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/uuidpool/UuidLeases/{Moid}"
@@ -1948,18 +2012,22 @@ func (a *UuidpoolApiService) GetUuidpoolUuidLeaseByMoidExecute(r ApiGetUuidpoolU
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2026,7 +2094,7 @@ func (a *UuidpoolApiService) GetUuidpoolUuidLeaseByMoidExecute(r ApiGetUuidpoolU
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetUuidpoolUuidLeaseListRequest struct {
@@ -2090,7 +2158,7 @@ func (r ApiGetUuidpoolUuidLeaseListRequest) Tags(tags string) ApiGetUuidpoolUuid
 	return r
 }
 
-func (r ApiGetUuidpoolUuidLeaseListRequest) Execute() (UuidpoolUuidLeaseResponse, *_nethttp.Response, error) {
+func (r ApiGetUuidpoolUuidLeaseListRequest) Execute() (UuidpoolUuidLeaseResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetUuidpoolUuidLeaseListExecute(r)
 }
 
@@ -2110,19 +2178,21 @@ func (a *UuidpoolApiService) GetUuidpoolUuidLeaseList(ctx _context.Context) ApiG
  * Execute executes the request
  * @return UuidpoolUuidLeaseResponse
  */
-func (a *UuidpoolApiService) GetUuidpoolUuidLeaseListExecute(r ApiGetUuidpoolUuidLeaseListRequest) (UuidpoolUuidLeaseResponse, *_nethttp.Response, error) {
+func (a *UuidpoolApiService) GetUuidpoolUuidLeaseListExecute(r ApiGetUuidpoolUuidLeaseListRequest) (UuidpoolUuidLeaseResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  UuidpoolUuidLeaseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UuidpoolApiService.GetUuidpoolUuidLeaseList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/uuidpool/UuidLeases"
@@ -2183,18 +2253,22 @@ func (a *UuidpoolApiService) GetUuidpoolUuidLeaseListExecute(r ApiGetUuidpoolUui
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2261,7 +2335,7 @@ func (a *UuidpoolApiService) GetUuidpoolUuidLeaseListExecute(r ApiGetUuidpoolUui
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchUuidpoolPoolRequest struct {
@@ -2281,7 +2355,7 @@ func (r ApiPatchUuidpoolPoolRequest) IfMatch(ifMatch string) ApiPatchUuidpoolPoo
 	return r
 }
 
-func (r ApiPatchUuidpoolPoolRequest) Execute() (UuidpoolPool, *_nethttp.Response, error) {
+func (r ApiPatchUuidpoolPoolRequest) Execute() (UuidpoolPool, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchUuidpoolPoolExecute(r)
 }
 
@@ -2303,19 +2377,21 @@ func (a *UuidpoolApiService) PatchUuidpoolPool(ctx _context.Context, moid string
  * Execute executes the request
  * @return UuidpoolPool
  */
-func (a *UuidpoolApiService) PatchUuidpoolPoolExecute(r ApiPatchUuidpoolPoolRequest) (UuidpoolPool, *_nethttp.Response, error) {
+func (a *UuidpoolApiService) PatchUuidpoolPoolExecute(r ApiPatchUuidpoolPoolRequest) (UuidpoolPool, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  UuidpoolPool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UuidpoolApiService.PatchUuidpoolPool")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/uuidpool/Pools/{Moid}"
@@ -2325,7 +2401,8 @@ func (a *UuidpoolApiService) PatchUuidpoolPoolExecute(r ApiPatchUuidpoolPoolRequ
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.uuidpoolPool == nil {
-		return localVarReturnValue, nil, reportError("uuidpoolPool is required and must be specified")
+		executionError.error = "uuidpoolPool is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -2352,18 +2429,22 @@ func (a *UuidpoolApiService) PatchUuidpoolPoolExecute(r ApiPatchUuidpoolPoolRequ
 	localVarPostBody = r.uuidpoolPool
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2430,7 +2511,7 @@ func (a *UuidpoolApiService) PatchUuidpoolPoolExecute(r ApiPatchUuidpoolPoolRequ
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateUuidpoolPoolRequest struct {
@@ -2450,7 +2531,7 @@ func (r ApiUpdateUuidpoolPoolRequest) IfMatch(ifMatch string) ApiUpdateUuidpoolP
 	return r
 }
 
-func (r ApiUpdateUuidpoolPoolRequest) Execute() (UuidpoolPool, *_nethttp.Response, error) {
+func (r ApiUpdateUuidpoolPoolRequest) Execute() (UuidpoolPool, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateUuidpoolPoolExecute(r)
 }
 
@@ -2472,19 +2553,21 @@ func (a *UuidpoolApiService) UpdateUuidpoolPool(ctx _context.Context, moid strin
  * Execute executes the request
  * @return UuidpoolPool
  */
-func (a *UuidpoolApiService) UpdateUuidpoolPoolExecute(r ApiUpdateUuidpoolPoolRequest) (UuidpoolPool, *_nethttp.Response, error) {
+func (a *UuidpoolApiService) UpdateUuidpoolPoolExecute(r ApiUpdateUuidpoolPoolRequest) (UuidpoolPool, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  UuidpoolPool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UuidpoolApiService.UpdateUuidpoolPool")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/uuidpool/Pools/{Moid}"
@@ -2494,7 +2577,8 @@ func (a *UuidpoolApiService) UpdateUuidpoolPoolExecute(r ApiUpdateUuidpoolPoolRe
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.uuidpoolPool == nil {
-		return localVarReturnValue, nil, reportError("uuidpoolPool is required and must be specified")
+		executionError.error = "uuidpoolPool is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -2521,18 +2605,22 @@ func (a *UuidpoolApiService) UpdateUuidpoolPoolExecute(r ApiUpdateUuidpoolPoolRe
 	localVarPostBody = r.uuidpoolPool
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2599,5 +2687,5 @@ func (a *UuidpoolApiService) UpdateUuidpoolPoolExecute(r ApiUpdateUuidpoolPoolRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }

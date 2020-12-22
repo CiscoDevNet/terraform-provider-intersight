@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceVnicFcIf() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceVnicFcIfCreate,
-		Read:   resourceVnicFcIfRead,
-		Update: resourceVnicFcIfUpdate,
-		Delete: resourceVnicFcIfDelete,
+		CreateContext: resourceVnicFcIfCreate,
+		ReadContext:   resourceVnicFcIfRead,
+		UpdateContext: resourceVnicFcIfUpdate,
+		DeleteContext: resourceVnicFcIfDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -211,6 +214,7 @@ func resourceVnicFcIf() *schema.Resource {
 							Description: "The PCI Link used as transport for the virtual interface. All VIC adapters have a single PCI link except VIC 1385 which has two.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     0,
 						},
 						"switch_id": {
 							Description: "The fabric port to which the vNICs will be associated.\n* `None` - Fabric Id is not set to either A or B for the standalone case where the server is not connected to Fabric Interconnects. The value 'None' should be used.\n* `A` - Fabric A of the FI cluster.\n* `B` - Fabric B of the FI cluster.",
@@ -518,7 +522,7 @@ func resourceVnicFcIf() *schema.Resource {
 	}
 }
 
-func resourceVnicFcIfCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicFcIfCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1048,133 +1052,138 @@ func resourceVnicFcIfCreate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	r := conn.ApiClient.VnicApi.CreateVnicFcIf(conn.ctx).VnicFcIf(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating VnicFcIf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceVnicFcIfRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceVnicFcIfRead(c, d, meta)
 }
-func detachVnicFcIfProfiles(d *schema.ResourceData, meta interface{}) error {
+func detachVnicFcIfProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.VnicFcIf{}
 	o.SetClassId("vnic.FcIf")
 	o.SetObjectType("vnic.FcIf")
 	o.SetProfile(models.PolicyAbstractConfigProfileRelationship{})
 
 	r := conn.ApiClient.VnicApi.UpdateVnicFcIf(conn.ctx, d.Id()).VnicFcIf(*o)
-	_, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while creating: %s", err.Error())
+	_, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	return err
+	return de
 }
 
-func resourceVnicFcIfRead(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.VnicApi.GetVnicFcIfByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "VnicFcIf object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching VnicFcIf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in VnicFcIf object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in VnicFcIf object: %s", err.Error())
 	}
 
 	if err := d.Set("fc_adapter_policy", flattenMapVnicFcAdapterPolicyRelationship(s.GetFcAdapterPolicy(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property FcAdapterPolicy: %+v", err)
+		return diag.Errorf("error occurred while setting property FcAdapterPolicy in VnicFcIf object: %s", err.Error())
 	}
 
 	if err := d.Set("fc_network_policy", flattenMapVnicFcNetworkPolicyRelationship(s.GetFcNetworkPolicy(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property FcNetworkPolicy: %+v", err)
+		return diag.Errorf("error occurred while setting property FcNetworkPolicy in VnicFcIf object: %s", err.Error())
 	}
 
 	if err := d.Set("fc_qos_policy", flattenMapVnicFcQosPolicyRelationship(s.GetFcQosPolicy(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property FcQosPolicy: %+v", err)
+		return diag.Errorf("error occurred while setting property FcQosPolicy in VnicFcIf object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in VnicFcIf object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in VnicFcIf object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in VnicFcIf object: %s", err.Error())
 	}
 
 	if err := d.Set("order", (s.GetOrder())); err != nil {
-		return fmt.Errorf("error occurred while setting property Order: %+v", err)
+		return diag.Errorf("error occurred while setting property Order in VnicFcIf object: %s", err.Error())
 	}
 
 	if err := d.Set("persistent_bindings", (s.GetPersistentBindings())); err != nil {
-		return fmt.Errorf("error occurred while setting property PersistentBindings: %+v", err)
+		return diag.Errorf("error occurred while setting property PersistentBindings in VnicFcIf object: %s", err.Error())
 	}
 
 	if err := d.Set("placement", flattenMapVnicPlacementSettings(s.GetPlacement(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Placement: %+v", err)
+		return diag.Errorf("error occurred while setting property Placement in VnicFcIf object: %s", err.Error())
 	}
 
 	if err := d.Set("profile", flattenMapPolicyAbstractConfigProfileRelationship(s.GetProfile(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Profile: %+v", err)
+		return diag.Errorf("error occurred while setting property Profile in VnicFcIf object: %s", err.Error())
 	}
 
 	if err := d.Set("san_connectivity_policy", flattenMapVnicSanConnectivityPolicyRelationship(s.GetSanConnectivityPolicy(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property SanConnectivityPolicy: %+v", err)
+		return diag.Errorf("error occurred while setting property SanConnectivityPolicy in VnicFcIf object: %s", err.Error())
 	}
 
 	if err := d.Set("scp_vhba", flattenMapVnicFcIfRelationship(s.GetScpVhba(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ScpVhba: %+v", err)
+		return diag.Errorf("error occurred while setting property ScpVhba in VnicFcIf object: %s", err.Error())
 	}
 
 	if err := d.Set("sp_vhbas", flattenListVnicFcIfRelationship(s.GetSpVhbas(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property SpVhbas: %+v", err)
+		return diag.Errorf("error occurred while setting property SpVhbas in VnicFcIf object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in VnicFcIf object: %s", err.Error())
 	}
 
 	if err := d.Set("type", (s.GetType())); err != nil {
-		return fmt.Errorf("error occurred while setting property Type: %+v", err)
+		return diag.Errorf("error occurred while setting property Type in VnicFcIf object: %s", err.Error())
 	}
 
 	if err := d.Set("vif_id", (s.GetVifId())); err != nil {
-		return fmt.Errorf("error occurred while setting property VifId: %+v", err)
+		return diag.Errorf("error occurred while setting property VifId in VnicFcIf object: %s", err.Error())
 	}
 
 	if err := d.Set("wwpn", (s.GetWwpn())); err != nil {
-		return fmt.Errorf("error occurred while setting property Wwpn: %+v", err)
+		return diag.Errorf("error occurred while setting property Wwpn in VnicFcIf object: %s", err.Error())
 	}
 
 	if err := d.Set("wwpn_lease", flattenMapFcpoolLeaseRelationship(s.GetWwpnLease(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property WwpnLease: %+v", err)
+		return diag.Errorf("error occurred while setting property WwpnLease in VnicFcIf object: %s", err.Error())
 	}
 
 	if err := d.Set("wwpn_pool", flattenMapFcpoolPoolRelationship(s.GetWwpnPool(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property WwpnPool: %+v", err)
+		return diag.Errorf("error occurred while setting property WwpnPool in VnicFcIf object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceVnicFcIfUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicFcIfUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1723,31 +1732,32 @@ func resourceVnicFcIfUpdate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	r := conn.ApiClient.VnicApi.UpdateVnicFcIf(conn.ctx, d.Id()).VnicFcIf(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating VnicFcIf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceVnicFcIfRead(d, meta)
+	return resourceVnicFcIfRead(c, d, meta)
 }
 
-func resourceVnicFcIfDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicFcIfDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profile"); ok {
 		if len(p.([]interface{})) > 0 {
 			e := detachVnicFcIfProfiles(d, meta)
-			if e != nil {
+			if e.HasError() {
 				return e
 			}
 		}
 	}
 	p := conn.ApiClient.VnicApi.DeleteVnicFcIf(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting VnicFcIf object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

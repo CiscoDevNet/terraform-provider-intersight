@@ -7,12 +7,12 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "sdwan.VmanageAccountPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "sdwan.VmanageAccountPolicy"]
 **EndpointAddress** | Pointer to **string** | VManage server hostname (FQDN) that the acccount holds information for. | [optional] 
-**IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] 
+**IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] [default to false]
 **Password** | Pointer to **string** | Local password for authenticating with the vManage server. | [optional] 
-**Port** | Pointer to **int64** | VManage Port number on which the application is running. | [optional] 
+**Port** | Pointer to **int64** | VManage Port number on which the application is running. | [optional] [default to 8443]
 **Username** | Pointer to **string** | Local username for authenticating with the vManage server. | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
-**Profiles** | Pointer to [**[]SdwanProfileRelationship**](sdwan.Profile.Relationship.md) | An array of relationships to sdwanProfile resources. | [optional] 
+**Profiles** | Pointer to [**[]SdwanProfileRelationship**](SdwanProfileRelationship.md) | An array of relationships to sdwanProfile resources. | [optional] 
 
 ## Methods
 

@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceNetworkElement() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceNetworkElementRead,
+		ReadContext: dataSourceNetworkElementRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -113,7 +114,7 @@ func dataSourceNetworkElement() *schema.Resource {
 				},
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -259,7 +260,7 @@ func dataSourceNetworkElement() *schema.Resource {
 					},
 				},
 			},
-			"management_contoller": {
+			"management_controller": {
 				Description: "A reference to a managementController resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
@@ -801,10 +802,11 @@ func dataSourceNetworkElement() *schema.Resource {
 	}
 }
 
-func dataSourceNetworkElementRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.NetworkElement{}
 	if v, ok := d.GetOk("admin_evac_state"); ok {
 		x := (v.(string))
@@ -957,25 +959,25 @@ func dataSourceNetworkElementRead(d *schema.ResourceData, meta interface{}) erro
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of NetworkElement object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.NetworkApi.GetNetworkElementList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.NetworkApi.GetNetworkElementList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching NetworkElement: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for NetworkElement list: %s", err.Error())
 	}
 	var s = &models.NetworkElementList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to NetworkElement: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to NetworkElement list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for NetworkElement did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -984,184 +986,184 @@ func dataSourceNetworkElementRead(d *schema.ResourceData, meta interface{}) erro
 			var s = &models.NetworkElement{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("admin_evac_state", (s.GetAdminEvacState())); err != nil {
-				return fmt.Errorf("error occurred while setting property AdminEvacState: %+v", err)
+				return diag.Errorf("error occurred while setting property AdminEvacState: %s", err.Error())
 			}
 			if err := d.Set("admin_inband_interface_state", (s.GetAdminInbandInterfaceState())); err != nil {
-				return fmt.Errorf("error occurred while setting property AdminInbandInterfaceState: %+v", err)
+				return diag.Errorf("error occurred while setting property AdminInbandInterfaceState: %s", err.Error())
 			}
 
 			if err := d.Set("alarm_summary", flattenMapComputeAlarmSummary(s.GetAlarmSummary(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property AlarmSummary: %+v", err)
+				return diag.Errorf("error occurred while setting property AlarmSummary: %s", err.Error())
 			}
 			if err := d.Set("available_memory", (s.GetAvailableMemory())); err != nil {
-				return fmt.Errorf("error occurred while setting property AvailableMemory: %+v", err)
+				return diag.Errorf("error occurred while setting property AvailableMemory: %s", err.Error())
 			}
 
 			if err := d.Set("cards", flattenListEquipmentSwitchCardRelationship(s.GetCards(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Cards: %+v", err)
+				return diag.Errorf("error occurred while setting property Cards: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("device_mo_id", (s.GetDeviceMoId())); err != nil {
-				return fmt.Errorf("error occurred while setting property DeviceMoId: %+v", err)
+				return diag.Errorf("error occurred while setting property DeviceMoId: %s", err.Error())
 			}
 			if err := d.Set("dn", (s.GetDn())); err != nil {
-				return fmt.Errorf("error occurred while setting property Dn: %+v", err)
+				return diag.Errorf("error occurred while setting property Dn: %s", err.Error())
 			}
 			if err := d.Set("ethernet_mode", (s.GetEthernetMode())); err != nil {
-				return fmt.Errorf("error occurred while setting property EthernetMode: %+v", err)
+				return diag.Errorf("error occurred while setting property EthernetMode: %s", err.Error())
 			}
 			if err := d.Set("ethernet_switching_mode", (s.GetEthernetSwitchingMode())); err != nil {
-				return fmt.Errorf("error occurred while setting property EthernetSwitchingMode: %+v", err)
+				return diag.Errorf("error occurred while setting property EthernetSwitchingMode: %s", err.Error())
 			}
 
 			if err := d.Set("fanmodules", flattenListEquipmentFanModuleRelationship(s.GetFanmodules(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Fanmodules: %+v", err)
+				return diag.Errorf("error occurred while setting property Fanmodules: %s", err.Error())
 			}
 			if err := d.Set("fault_summary", (s.GetFaultSummary())); err != nil {
-				return fmt.Errorf("error occurred while setting property FaultSummary: %+v", err)
+				return diag.Errorf("error occurred while setting property FaultSummary: %s", err.Error())
 			}
 			if err := d.Set("fc_mode", (s.GetFcMode())); err != nil {
-				return fmt.Errorf("error occurred while setting property FcMode: %+v", err)
+				return diag.Errorf("error occurred while setting property FcMode: %s", err.Error())
 			}
 			if err := d.Set("fc_switching_mode", (s.GetFcSwitchingMode())); err != nil {
-				return fmt.Errorf("error occurred while setting property FcSwitchingMode: %+v", err)
+				return diag.Errorf("error occurred while setting property FcSwitchingMode: %s", err.Error())
 			}
 			if err := d.Set("inband_ip_address", (s.GetInbandIpAddress())); err != nil {
-				return fmt.Errorf("error occurred while setting property InbandIpAddress: %+v", err)
+				return diag.Errorf("error occurred while setting property InbandIpAddress: %s", err.Error())
 			}
 			if err := d.Set("inband_ip_gateway", (s.GetInbandIpGateway())); err != nil {
-				return fmt.Errorf("error occurred while setting property InbandIpGateway: %+v", err)
+				return diag.Errorf("error occurred while setting property InbandIpGateway: %s", err.Error())
 			}
 			if err := d.Set("inband_ip_mask", (s.GetInbandIpMask())); err != nil {
-				return fmt.Errorf("error occurred while setting property InbandIpMask: %+v", err)
+				return diag.Errorf("error occurred while setting property InbandIpMask: %s", err.Error())
 			}
 			if err := d.Set("inband_vlan", (s.GetInbandVlan())); err != nil {
-				return fmt.Errorf("error occurred while setting property InbandVlan: %+v", err)
+				return diag.Errorf("error occurred while setting property InbandVlan: %s", err.Error())
 			}
 
 			if err := d.Set("inventory_device_info", flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property InventoryDeviceInfo: %+v", err)
+				return diag.Errorf("error occurred while setting property InventoryDeviceInfo: %s", err.Error())
 			}
 
-			if err := d.Set("management_contoller", flattenMapManagementControllerRelationship(s.GetManagementContoller(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property ManagementContoller: %+v", err)
+			if err := d.Set("management_controller", flattenMapManagementControllerRelationship(s.GetManagementController(), d)); err != nil {
+				return diag.Errorf("error occurred while setting property ManagementController: %s", err.Error())
 			}
 
 			if err := d.Set("management_entity", flattenMapManagementEntityRelationship(s.GetManagementEntity(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property ManagementEntity: %+v", err)
+				return diag.Errorf("error occurred while setting property ManagementEntity: %s", err.Error())
 			}
 			if err := d.Set("management_mode", (s.GetManagementMode())); err != nil {
-				return fmt.Errorf("error occurred while setting property ManagementMode: %+v", err)
+				return diag.Errorf("error occurred while setting property ManagementMode: %s", err.Error())
 			}
 			if err := d.Set("model", (s.GetModel())); err != nil {
-				return fmt.Errorf("error occurred while setting property Model: %+v", err)
+				return diag.Errorf("error occurred while setting property Model: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 
 			if err := d.Set("network_fc_zone_info", flattenMapNetworkFcZoneInfoRelationship(s.GetNetworkFcZoneInfo(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property NetworkFcZoneInfo: %+v", err)
+				return diag.Errorf("error occurred while setting property NetworkFcZoneInfo: %s", err.Error())
 			}
 
 			if err := d.Set("network_vlan_port_info", flattenMapNetworkVlanPortInfoRelationship(s.GetNetworkVlanPortInfo(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property NetworkVlanPortInfo: %+v", err)
+				return diag.Errorf("error occurred while setting property NetworkVlanPortInfo: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("oper_evac_state", (s.GetOperEvacState())); err != nil {
-				return fmt.Errorf("error occurred while setting property OperEvacState: %+v", err)
+				return diag.Errorf("error occurred while setting property OperEvacState: %s", err.Error())
 			}
 			if err := d.Set("operability", (s.GetOperability())); err != nil {
-				return fmt.Errorf("error occurred while setting property Operability: %+v", err)
+				return diag.Errorf("error occurred while setting property Operability: %s", err.Error())
 			}
 			if err := d.Set("out_of_band_ip_address", (s.GetOutOfBandIpAddress())); err != nil {
-				return fmt.Errorf("error occurred while setting property OutOfBandIpAddress: %+v", err)
+				return diag.Errorf("error occurred while setting property OutOfBandIpAddress: %s", err.Error())
 			}
 			if err := d.Set("out_of_band_ip_gateway", (s.GetOutOfBandIpGateway())); err != nil {
-				return fmt.Errorf("error occurred while setting property OutOfBandIpGateway: %+v", err)
+				return diag.Errorf("error occurred while setting property OutOfBandIpGateway: %s", err.Error())
 			}
 			if err := d.Set("out_of_band_ip_mask", (s.GetOutOfBandIpMask())); err != nil {
-				return fmt.Errorf("error occurred while setting property OutOfBandIpMask: %+v", err)
+				return diag.Errorf("error occurred while setting property OutOfBandIpMask: %s", err.Error())
 			}
 			if err := d.Set("out_of_band_ipv4_address", (s.GetOutOfBandIpv4Address())); err != nil {
-				return fmt.Errorf("error occurred while setting property OutOfBandIpv4Address: %+v", err)
+				return diag.Errorf("error occurred while setting property OutOfBandIpv4Address: %s", err.Error())
 			}
 			if err := d.Set("out_of_band_ipv4_gateway", (s.GetOutOfBandIpv4Gateway())); err != nil {
-				return fmt.Errorf("error occurred while setting property OutOfBandIpv4Gateway: %+v", err)
+				return diag.Errorf("error occurred while setting property OutOfBandIpv4Gateway: %s", err.Error())
 			}
 			if err := d.Set("out_of_band_ipv4_mask", (s.GetOutOfBandIpv4Mask())); err != nil {
-				return fmt.Errorf("error occurred while setting property OutOfBandIpv4Mask: %+v", err)
+				return diag.Errorf("error occurred while setting property OutOfBandIpv4Mask: %s", err.Error())
 			}
 			if err := d.Set("out_of_band_ipv6_address", (s.GetOutOfBandIpv6Address())); err != nil {
-				return fmt.Errorf("error occurred while setting property OutOfBandIpv6Address: %+v", err)
+				return diag.Errorf("error occurred while setting property OutOfBandIpv6Address: %s", err.Error())
 			}
 			if err := d.Set("out_of_band_ipv6_gateway", (s.GetOutOfBandIpv6Gateway())); err != nil {
-				return fmt.Errorf("error occurred while setting property OutOfBandIpv6Gateway: %+v", err)
+				return diag.Errorf("error occurred while setting property OutOfBandIpv6Gateway: %s", err.Error())
 			}
 			if err := d.Set("out_of_band_ipv6_prefix", (s.GetOutOfBandIpv6Prefix())); err != nil {
-				return fmt.Errorf("error occurred while setting property OutOfBandIpv6Prefix: %+v", err)
+				return diag.Errorf("error occurred while setting property OutOfBandIpv6Prefix: %s", err.Error())
 			}
 			if err := d.Set("out_of_band_mac", (s.GetOutOfBandMac())); err != nil {
-				return fmt.Errorf("error occurred while setting property OutOfBandMac: %+v", err)
+				return diag.Errorf("error occurred while setting property OutOfBandMac: %s", err.Error())
 			}
 
 			if err := d.Set("port_mac_bindings", flattenListPortMacBindingRelationship(s.GetPortMacBindings(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property PortMacBindings: %+v", err)
+				return diag.Errorf("error occurred while setting property PortMacBindings: %s", err.Error())
 			}
 
 			if err := d.Set("psus", flattenListEquipmentPsuRelationship(s.GetPsus(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Psus: %+v", err)
+				return diag.Errorf("error occurred while setting property Psus: %s", err.Error())
 			}
 
 			if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property RegisteredDevice: %+v", err)
+				return diag.Errorf("error occurred while setting property RegisteredDevice: %s", err.Error())
 			}
 			if err := d.Set("revision", (s.GetRevision())); err != nil {
-				return fmt.Errorf("error occurred while setting property Revision: %+v", err)
+				return diag.Errorf("error occurred while setting property Revision: %s", err.Error())
 			}
 			if err := d.Set("rn", (s.GetRn())); err != nil {
-				return fmt.Errorf("error occurred while setting property Rn: %+v", err)
+				return diag.Errorf("error occurred while setting property Rn: %s", err.Error())
 			}
 			if err := d.Set("serial", (s.GetSerial())); err != nil {
-				return fmt.Errorf("error occurred while setting property Serial: %+v", err)
+				return diag.Errorf("error occurred while setting property Serial: %s", err.Error())
 			}
 
 			if err := d.Set("storage_items", flattenListStorageItemRelationship(s.GetStorageItems(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property StorageItems: %+v", err)
+				return diag.Errorf("error occurred while setting property StorageItems: %s", err.Error())
 			}
 			if err := d.Set("switch_id", (s.GetSwitchId())); err != nil {
-				return fmt.Errorf("error occurred while setting property SwitchId: %+v", err)
+				return diag.Errorf("error occurred while setting property SwitchId: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 
 			if err := d.Set("top_system", flattenMapTopSystemRelationship(s.GetTopSystem(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property TopSystem: %+v", err)
+				return diag.Errorf("error occurred while setting property TopSystem: %s", err.Error())
 			}
 			if err := d.Set("total_memory", (s.GetTotalMemory())); err != nil {
-				return fmt.Errorf("error occurred while setting property TotalMemory: %+v", err)
+				return diag.Errorf("error occurred while setting property TotalMemory: %s", err.Error())
 			}
 
 			if err := d.Set("ucsm_running_firmware", flattenMapFirmwareRunningFirmwareRelationship(s.GetUcsmRunningFirmware(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property UcsmRunningFirmware: %+v", err)
+				return diag.Errorf("error occurred while setting property UcsmRunningFirmware: %s", err.Error())
 			}
 			if err := d.Set("vendor", (s.GetVendor())); err != nil {
-				return fmt.Errorf("error occurred while setting property Vendor: %+v", err)
+				return diag.Errorf("error occurred while setting property Vendor: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

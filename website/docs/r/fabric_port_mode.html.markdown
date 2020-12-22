@@ -1,13 +1,12 @@
-
 ---
+subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_port_mode"
-sidebar_current: "docs-intersight-resource-fabric-port-mode"
 description: |-
   Object sent by user to configure range of unified ports as FC/Ethernet or ports as breakout.
 ---
 
-# Resource: intersight_fabric._port_mode
+# Resource: intersight_fabric_port_mode
 Object sent by user to configure range of unified ports as FC/Ethernet or ports as breakout.
 ## Argument Reference
 The following arguments are supported:
@@ -34,3 +33,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_fabric_port_mode` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_fabric_port_mode.example 1234567890987654321abcde
+```

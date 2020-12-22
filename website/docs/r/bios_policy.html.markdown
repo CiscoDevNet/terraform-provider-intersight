@@ -1,13 +1,12 @@
-
 ---
+subcategory: "bios"
 layout: "intersight"
 page_title: "Intersight: intersight_bios_policy"
-sidebar_current: "docs-intersight-resource-bios-policy"
 description: |-
   Policy for setting BIOS tokens on the endpoint.
 ---
 
-# Resource: intersight_bios._policy
+# Resource: intersight_bios_policy
 Policy for setting BIOS tokens on the endpoint.
 ## Argument Reference
 The following arguments are supported:
@@ -124,7 +123,7 @@ The following arguments are supported:
 * `network_stack`:(string) BIOS Token for setting Network Stack configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `enabled` - Enables the BIOS setting.* `disabled` - Disables the BIOS setting. 
 * `numa_optimized`:(string) BIOS Token for setting NUMA optimized configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `enabled` - Enables the BIOS setting.* `disabled` - Disables the BIOS setting. 
 * `nvmdimm_perform_config`:(string) BIOS Token for setting NVM Performance Setting configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `BW Optimized` - Value - BW Optimized for configuring NvmdimmPerformConfig token.* `Balanced Profile` - Value - Balanced Profile for configuring NvmdimmPerformConfig token.* `Latency Optimized` - Value - Latency Optimized for configuring NvmdimmPerformConfig token. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `onboard10gbit_lom`:(string) BIOS Token for setting Onboard 10Gbit LOM configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `enabled` - Enables the BIOS setting.* `disabled` - Disables the BIOS setting. 
 * `onboard_gbit_lom`:(string) BIOS Token for setting Onboard Gbit LOM configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `enabled` - Enables the BIOS setting.* `disabled` - Disables the BIOS setting. 
 * `onboard_scu_storage_support`:(string) BIOS Token for setting Onboard SCU Storage Support configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `enabled` - Enables the BIOS setting.* `disabled` - Disables the BIOS setting. 
@@ -326,3 +325,10 @@ This complex property has following sub-properties:
 * `vmd_enable`:(string) BIOS Token for setting VMD Enablement configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `enabled` - Enables the BIOS setting.* `disabled` - Disables the BIOS setting. 
 * `work_load_config`:(string) BIOS Token for setting Workload Configuration configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `Balanced` - Value - Balanced for configuring WorkLoadConfig token.* `I/O Sensitive` - Value - I/O Sensitive for configuring WorkLoadConfig token.* `NUMA` - Value - NUMA for configuring WorkLoadConfig token.* `UMA` - Value - UMA for configuring WorkLoadConfig token. 
 * `xpt_prefetch`:(string) BIOS Token for setting XPT Prefetch configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `Auto` - Value - Auto for configuring XptPrefetch token.* `disabled` - Value - disabled for configuring XptPrefetch token.* `enabled` - Value - enabled for configuring XptPrefetch token. 
+
+
+## Import
+`intersight_bios_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_bios_policy.example 1234567890987654321abcde
+```

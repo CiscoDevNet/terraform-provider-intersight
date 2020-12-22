@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -12,6 +12,7 @@
 package intersight
 
 import (
+	"bytes"
 	_context "context"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
@@ -48,7 +49,7 @@ func (r ApiCreateKvmPolicyRequest) IfNoneMatch(ifNoneMatch string) ApiCreateKvmP
 	return r
 }
 
-func (r ApiCreateKvmPolicyRequest) Execute() (KvmPolicy, *_nethttp.Response, error) {
+func (r ApiCreateKvmPolicyRequest) Execute() (KvmPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateKvmPolicyExecute(r)
 }
 
@@ -68,19 +69,21 @@ func (a *KvmApiService) CreateKvmPolicy(ctx _context.Context) ApiCreateKvmPolicy
  * Execute executes the request
  * @return KvmPolicy
  */
-func (a *KvmApiService) CreateKvmPolicyExecute(r ApiCreateKvmPolicyRequest) (KvmPolicy, *_nethttp.Response, error) {
+func (a *KvmApiService) CreateKvmPolicyExecute(r ApiCreateKvmPolicyRequest) (KvmPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  KvmPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KvmApiService.CreateKvmPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/kvm/Policies"
@@ -89,7 +92,8 @@ func (a *KvmApiService) CreateKvmPolicyExecute(r ApiCreateKvmPolicyRequest) (Kvm
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kvmPolicy == nil {
-		return localVarReturnValue, nil, reportError("kvmPolicy is required and must be specified")
+		executionError.error = "kvmPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -119,18 +123,22 @@ func (a *KvmApiService) CreateKvmPolicyExecute(r ApiCreateKvmPolicyRequest) (Kvm
 	localVarPostBody = r.kvmPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -197,7 +205,367 @@ func (a *KvmApiService) CreateKvmPolicyExecute(r ApiCreateKvmPolicyRequest) (Kvm
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
+}
+
+type ApiCreateKvmSessionRequest struct {
+	ctx         _context.Context
+	ApiService  *KvmApiService
+	kvmSession  *KvmSession
+	ifMatch     *string
+	ifNoneMatch *string
+}
+
+func (r ApiCreateKvmSessionRequest) KvmSession(kvmSession KvmSession) ApiCreateKvmSessionRequest {
+	r.kvmSession = &kvmSession
+	return r
+}
+func (r ApiCreateKvmSessionRequest) IfMatch(ifMatch string) ApiCreateKvmSessionRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+func (r ApiCreateKvmSessionRequest) IfNoneMatch(ifNoneMatch string) ApiCreateKvmSessionRequest {
+	r.ifNoneMatch = &ifNoneMatch
+	return r
+}
+
+func (r ApiCreateKvmSessionRequest) Execute() (KvmSession, *_nethttp.Response, GenericOpenAPIError) {
+	return r.ApiService.CreateKvmSessionExecute(r)
+}
+
+/*
+ * CreateKvmSession Create a 'kvm.Session' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiCreateKvmSessionRequest
+ */
+func (a *KvmApiService) CreateKvmSession(ctx _context.Context) ApiCreateKvmSessionRequest {
+	return ApiCreateKvmSessionRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return KvmSession
+ */
+func (a *KvmApiService) CreateKvmSessionExecute(r ApiCreateKvmSessionRequest) (KvmSession, *_nethttp.Response, GenericOpenAPIError) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
+		localVarReturnValue  KvmSession
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KvmApiService.CreateKvmSession")
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarPath := localBasePath + "/api/v1/kvm/Sessions"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.kvmSession == nil {
+		executionError.error = "kvmSession is required and must be specified"
+		return localVarReturnValue, nil, executionError
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	if r.ifNoneMatch != nil {
+		localVarHeaderParams["If-None-Match"] = parameterToString(*r.ifNoneMatch, "")
+	}
+	// body params
+	localVarPostBody = r.kvmSession
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, executionError
+}
+
+type ApiCreateKvmTunnelRequest struct {
+	ctx         _context.Context
+	ApiService  *KvmApiService
+	kvmTunnel   *KvmTunnel
+	ifMatch     *string
+	ifNoneMatch *string
+}
+
+func (r ApiCreateKvmTunnelRequest) KvmTunnel(kvmTunnel KvmTunnel) ApiCreateKvmTunnelRequest {
+	r.kvmTunnel = &kvmTunnel
+	return r
+}
+func (r ApiCreateKvmTunnelRequest) IfMatch(ifMatch string) ApiCreateKvmTunnelRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+func (r ApiCreateKvmTunnelRequest) IfNoneMatch(ifNoneMatch string) ApiCreateKvmTunnelRequest {
+	r.ifNoneMatch = &ifNoneMatch
+	return r
+}
+
+func (r ApiCreateKvmTunnelRequest) Execute() (KvmTunnel, *_nethttp.Response, GenericOpenAPIError) {
+	return r.ApiService.CreateKvmTunnelExecute(r)
+}
+
+/*
+ * CreateKvmTunnel Create a 'kvm.Tunnel' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiCreateKvmTunnelRequest
+ */
+func (a *KvmApiService) CreateKvmTunnel(ctx _context.Context) ApiCreateKvmTunnelRequest {
+	return ApiCreateKvmTunnelRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return KvmTunnel
+ */
+func (a *KvmApiService) CreateKvmTunnelExecute(r ApiCreateKvmTunnelRequest) (KvmTunnel, *_nethttp.Response, GenericOpenAPIError) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
+		localVarReturnValue  KvmTunnel
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KvmApiService.CreateKvmTunnel")
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarPath := localBasePath + "/api/v1/kvm/Tunnels"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.kvmTunnel == nil {
+		executionError.error = "kvmTunnel is required and must be specified"
+		return localVarReturnValue, nil, executionError
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	if r.ifNoneMatch != nil {
+		localVarHeaderParams["If-None-Match"] = parameterToString(*r.ifNoneMatch, "")
+	}
+	// body params
+	localVarPostBody = r.kvmTunnel
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiDeleteKvmPolicyRequest struct {
@@ -206,7 +574,7 @@ type ApiDeleteKvmPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteKvmPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteKvmPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteKvmPolicyExecute(r)
 }
 
@@ -227,18 +595,20 @@ func (a *KvmApiService) DeleteKvmPolicy(ctx _context.Context, moid string) ApiDe
 /*
  * Execute executes the request
  */
-func (a *KvmApiService) DeleteKvmPolicyExecute(r ApiDeleteKvmPolicyRequest) (*_nethttp.Response, error) {
+func (a *KvmApiService) DeleteKvmPolicyExecute(r ApiDeleteKvmPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KvmApiService.DeleteKvmPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/kvm/Policies/{Moid}"
@@ -267,18 +637,22 @@ func (a *KvmApiService) DeleteKvmPolicyExecute(r ApiDeleteKvmPolicyRequest) (*_n
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -336,27 +710,27 @@ func (a *KvmApiService) DeleteKvmPolicyExecute(r ApiDeleteKvmPolicyRequest) (*_n
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
-type ApiGetKvmKvmSessionByMoidRequest struct {
+type ApiDeleteKvmSessionRequest struct {
 	ctx        _context.Context
 	ApiService *KvmApiService
 	moid       string
 }
 
-func (r ApiGetKvmKvmSessionByMoidRequest) Execute() (KvmKvmSession, *_nethttp.Response, error) {
-	return r.ApiService.GetKvmKvmSessionByMoidExecute(r)
+func (r ApiDeleteKvmSessionRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+	return r.ApiService.DeleteKvmSessionExecute(r)
 }
 
 /*
- * GetKvmKvmSessionByMoid Read a 'kvm.KvmSession' resource.
+ * DeleteKvmSession Delete a 'kvm.Session' resource.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param moid The unique Moid identifier of a resource instance.
- * @return ApiGetKvmKvmSessionByMoidRequest
+ * @return ApiDeleteKvmSessionRequest
  */
-func (a *KvmApiService) GetKvmKvmSessionByMoid(ctx _context.Context, moid string) ApiGetKvmKvmSessionByMoidRequest {
-	return ApiGetKvmKvmSessionByMoidRequest{
+func (a *KvmApiService) DeleteKvmSession(ctx _context.Context, moid string) ApiDeleteKvmSessionRequest {
+	return ApiDeleteKvmSessionRequest{
 		ApiService: a,
 		ctx:        ctx,
 		moid:       moid,
@@ -365,24 +739,24 @@ func (a *KvmApiService) GetKvmKvmSessionByMoid(ctx _context.Context, moid string
 
 /*
  * Execute executes the request
- * @return KvmKvmSession
  */
-func (a *KvmApiService) GetKvmKvmSessionByMoidExecute(r ApiGetKvmKvmSessionByMoidRequest) (KvmKvmSession, *_nethttp.Response, error) {
+func (a *KvmApiService) DeleteKvmSessionExecute(r ApiDeleteKvmSessionRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  KvmKvmSession
+		executionError       GenericOpenAPIError
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KvmApiService.GetKvmKvmSessionByMoid")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KvmApiService.DeleteKvmSession")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
-	localVarPath := localBasePath + "/api/v1/kvm/KvmSessions/{Moid}"
+	localVarPath := localBasePath + "/api/v1/kvm/Sessions/{Moid}"
 	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -399,7 +773,7 @@ func (a *KvmApiService) GetKvmKvmSessionByMoidExecute(r ApiGetKvmKvmSessionByMoi
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -408,18 +782,22 @@ func (a *KvmApiService) GetKvmKvmSessionByMoidExecute(r ApiGetKvmKvmSessionByMoi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -432,198 +810,104 @@ func (a *KvmApiService) GetKvmKvmSessionByMoidExecute(r ApiGetKvmKvmSessionByMoi
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		var v Error
 		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 		if err != nil {
 			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
-type ApiGetKvmKvmSessionListRequest struct {
-	ctx         _context.Context
-	ApiService  *KvmApiService
-	filter      *string
-	orderby     *string
-	top         *int32
-	skip        *int32
-	select_     *string
-	expand      *string
-	apply       *string
-	count       *bool
-	inlinecount *string
-	at          *string
-	tags        *string
+type ApiDeleteKvmTunnelRequest struct {
+	ctx        _context.Context
+	ApiService *KvmApiService
+	moid       string
 }
 
-func (r ApiGetKvmKvmSessionListRequest) Filter(filter string) ApiGetKvmKvmSessionListRequest {
-	r.filter = &filter
-	return r
-}
-func (r ApiGetKvmKvmSessionListRequest) Orderby(orderby string) ApiGetKvmKvmSessionListRequest {
-	r.orderby = &orderby
-	return r
-}
-func (r ApiGetKvmKvmSessionListRequest) Top(top int32) ApiGetKvmKvmSessionListRequest {
-	r.top = &top
-	return r
-}
-func (r ApiGetKvmKvmSessionListRequest) Skip(skip int32) ApiGetKvmKvmSessionListRequest {
-	r.skip = &skip
-	return r
-}
-func (r ApiGetKvmKvmSessionListRequest) Select_(select_ string) ApiGetKvmKvmSessionListRequest {
-	r.select_ = &select_
-	return r
-}
-func (r ApiGetKvmKvmSessionListRequest) Expand(expand string) ApiGetKvmKvmSessionListRequest {
-	r.expand = &expand
-	return r
-}
-func (r ApiGetKvmKvmSessionListRequest) Apply(apply string) ApiGetKvmKvmSessionListRequest {
-	r.apply = &apply
-	return r
-}
-func (r ApiGetKvmKvmSessionListRequest) Count(count bool) ApiGetKvmKvmSessionListRequest {
-	r.count = &count
-	return r
-}
-func (r ApiGetKvmKvmSessionListRequest) Inlinecount(inlinecount string) ApiGetKvmKvmSessionListRequest {
-	r.inlinecount = &inlinecount
-	return r
-}
-func (r ApiGetKvmKvmSessionListRequest) At(at string) ApiGetKvmKvmSessionListRequest {
-	r.at = &at
-	return r
-}
-func (r ApiGetKvmKvmSessionListRequest) Tags(tags string) ApiGetKvmKvmSessionListRequest {
-	r.tags = &tags
-	return r
-}
-
-func (r ApiGetKvmKvmSessionListRequest) Execute() (KvmKvmSessionResponse, *_nethttp.Response, error) {
-	return r.ApiService.GetKvmKvmSessionListExecute(r)
+func (r ApiDeleteKvmTunnelRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+	return r.ApiService.DeleteKvmTunnelExecute(r)
 }
 
 /*
- * GetKvmKvmSessionList Read a 'kvm.KvmSession' resource.
+ * DeleteKvmTunnel Delete a 'kvm.Tunnel' resource.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiGetKvmKvmSessionListRequest
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiDeleteKvmTunnelRequest
  */
-func (a *KvmApiService) GetKvmKvmSessionList(ctx _context.Context) ApiGetKvmKvmSessionListRequest {
-	return ApiGetKvmKvmSessionListRequest{
+func (a *KvmApiService) DeleteKvmTunnel(ctx _context.Context, moid string) ApiDeleteKvmTunnelRequest {
+	return ApiDeleteKvmTunnelRequest{
 		ApiService: a,
 		ctx:        ctx,
+		moid:       moid,
 	}
 }
 
 /*
  * Execute executes the request
- * @return KvmKvmSessionResponse
  */
-func (a *KvmApiService) GetKvmKvmSessionListExecute(r ApiGetKvmKvmSessionListRequest) (KvmKvmSessionResponse, *_nethttp.Response, error) {
+func (a *KvmApiService) DeleteKvmTunnelExecute(r ApiDeleteKvmTunnelRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  KvmKvmSessionResponse
+		executionError       GenericOpenAPIError
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KvmApiService.GetKvmKvmSessionList")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KvmApiService.DeleteKvmTunnel")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
-	localVarPath := localBasePath + "/api/v1/kvm/KvmSessions"
+	localVarPath := localBasePath + "/api/v1/kvm/Tunnels/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
-	if r.filter != nil {
-		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
-	}
-	if r.orderby != nil {
-		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
-	}
-	if r.top != nil {
-		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
-	}
-	if r.skip != nil {
-		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
-	}
-	if r.select_ != nil {
-		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
-	}
-	if r.expand != nil {
-		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
-	}
-	if r.apply != nil {
-		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
-	}
-	if r.count != nil {
-		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
-	}
-	if r.inlinecount != nil {
-		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
-	}
-	if r.at != nil {
-		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
-	}
-	if r.tags != nil {
-		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -634,7 +918,7 @@ func (a *KvmApiService) GetKvmKvmSessionListExecute(r ApiGetKvmKvmSessionListReq
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+	localVarHTTPHeaderAccepts := []string{"application/json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -643,18 +927,22 @@ func (a *KvmApiService) GetKvmKvmSessionListExecute(r ApiGetKvmKvmSessionListReq
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -667,61 +955,52 @@ func (a *KvmApiService) GetKvmKvmSessionListExecute(r ApiGetKvmKvmSessionListReq
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v Error
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
+				return localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		var v Error
 		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 		if err != nil {
 			newErr.error = err.Error()
-			return localVarReturnValue, localVarHTTPResponse, newErr
+			return localVarHTTPResponse, newErr
 		}
 		newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
+		return localVarHTTPResponse, newErr
 	}
 
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiGetKvmPolicyByMoidRequest struct {
@@ -730,7 +1009,7 @@ type ApiGetKvmPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKvmPolicyByMoidRequest) Execute() (KvmPolicy, *_nethttp.Response, error) {
+func (r ApiGetKvmPolicyByMoidRequest) Execute() (KvmPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetKvmPolicyByMoidExecute(r)
 }
 
@@ -752,19 +1031,21 @@ func (a *KvmApiService) GetKvmPolicyByMoid(ctx _context.Context, moid string) Ap
  * Execute executes the request
  * @return KvmPolicy
  */
-func (a *KvmApiService) GetKvmPolicyByMoidExecute(r ApiGetKvmPolicyByMoidRequest) (KvmPolicy, *_nethttp.Response, error) {
+func (a *KvmApiService) GetKvmPolicyByMoidExecute(r ApiGetKvmPolicyByMoidRequest) (KvmPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  KvmPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KvmApiService.GetKvmPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/kvm/Policies/{Moid}"
@@ -793,18 +1074,22 @@ func (a *KvmApiService) GetKvmPolicyByMoidExecute(r ApiGetKvmPolicyByMoidRequest
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -871,7 +1156,7 @@ func (a *KvmApiService) GetKvmPolicyByMoidExecute(r ApiGetKvmPolicyByMoidRequest
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetKvmPolicyListRequest struct {
@@ -935,7 +1220,7 @@ func (r ApiGetKvmPolicyListRequest) Tags(tags string) ApiGetKvmPolicyListRequest
 	return r
 }
 
-func (r ApiGetKvmPolicyListRequest) Execute() (KvmPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetKvmPolicyListRequest) Execute() (KvmPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetKvmPolicyListExecute(r)
 }
 
@@ -955,19 +1240,21 @@ func (a *KvmApiService) GetKvmPolicyList(ctx _context.Context) ApiGetKvmPolicyLi
  * Execute executes the request
  * @return KvmPolicyResponse
  */
-func (a *KvmApiService) GetKvmPolicyListExecute(r ApiGetKvmPolicyListRequest) (KvmPolicyResponse, *_nethttp.Response, error) {
+func (a *KvmApiService) GetKvmPolicyListExecute(r ApiGetKvmPolicyListRequest) (KvmPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  KvmPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KvmApiService.GetKvmPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/kvm/Policies"
@@ -1028,18 +1315,22 @@ func (a *KvmApiService) GetKvmPolicyListExecute(r ApiGetKvmPolicyListRequest) (K
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1106,7 +1397,801 @@ func (a *KvmApiService) GetKvmPolicyListExecute(r ApiGetKvmPolicyListRequest) (K
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
+}
+
+type ApiGetKvmSessionByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *KvmApiService
+	moid       string
+}
+
+func (r ApiGetKvmSessionByMoidRequest) Execute() (KvmSession, *_nethttp.Response, GenericOpenAPIError) {
+	return r.ApiService.GetKvmSessionByMoidExecute(r)
+}
+
+/*
+ * GetKvmSessionByMoid Read a 'kvm.Session' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetKvmSessionByMoidRequest
+ */
+func (a *KvmApiService) GetKvmSessionByMoid(ctx _context.Context, moid string) ApiGetKvmSessionByMoidRequest {
+	return ApiGetKvmSessionByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return KvmSession
+ */
+func (a *KvmApiService) GetKvmSessionByMoidExecute(r ApiGetKvmSessionByMoidRequest) (KvmSession, *_nethttp.Response, GenericOpenAPIError) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
+		localVarReturnValue  KvmSession
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KvmApiService.GetKvmSessionByMoid")
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarPath := localBasePath + "/api/v1/kvm/Sessions/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, executionError
+}
+
+type ApiGetKvmSessionListRequest struct {
+	ctx         _context.Context
+	ApiService  *KvmApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetKvmSessionListRequest) Filter(filter string) ApiGetKvmSessionListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetKvmSessionListRequest) Orderby(orderby string) ApiGetKvmSessionListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetKvmSessionListRequest) Top(top int32) ApiGetKvmSessionListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetKvmSessionListRequest) Skip(skip int32) ApiGetKvmSessionListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetKvmSessionListRequest) Select_(select_ string) ApiGetKvmSessionListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetKvmSessionListRequest) Expand(expand string) ApiGetKvmSessionListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetKvmSessionListRequest) Apply(apply string) ApiGetKvmSessionListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetKvmSessionListRequest) Count(count bool) ApiGetKvmSessionListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetKvmSessionListRequest) Inlinecount(inlinecount string) ApiGetKvmSessionListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetKvmSessionListRequest) At(at string) ApiGetKvmSessionListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetKvmSessionListRequest) Tags(tags string) ApiGetKvmSessionListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetKvmSessionListRequest) Execute() (KvmSessionResponse, *_nethttp.Response, GenericOpenAPIError) {
+	return r.ApiService.GetKvmSessionListExecute(r)
+}
+
+/*
+ * GetKvmSessionList Read a 'kvm.Session' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetKvmSessionListRequest
+ */
+func (a *KvmApiService) GetKvmSessionList(ctx _context.Context) ApiGetKvmSessionListRequest {
+	return ApiGetKvmSessionListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return KvmSessionResponse
+ */
+func (a *KvmApiService) GetKvmSessionListExecute(r ApiGetKvmSessionListRequest) (KvmSessionResponse, *_nethttp.Response, GenericOpenAPIError) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
+		localVarReturnValue  KvmSessionResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KvmApiService.GetKvmSessionList")
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarPath := localBasePath + "/api/v1/kvm/Sessions"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, executionError
+}
+
+type ApiGetKvmTunnelByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *KvmApiService
+	moid       string
+}
+
+func (r ApiGetKvmTunnelByMoidRequest) Execute() (KvmTunnel, *_nethttp.Response, GenericOpenAPIError) {
+	return r.ApiService.GetKvmTunnelByMoidExecute(r)
+}
+
+/*
+ * GetKvmTunnelByMoid Read a 'kvm.Tunnel' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetKvmTunnelByMoidRequest
+ */
+func (a *KvmApiService) GetKvmTunnelByMoid(ctx _context.Context, moid string) ApiGetKvmTunnelByMoidRequest {
+	return ApiGetKvmTunnelByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return KvmTunnel
+ */
+func (a *KvmApiService) GetKvmTunnelByMoidExecute(r ApiGetKvmTunnelByMoidRequest) (KvmTunnel, *_nethttp.Response, GenericOpenAPIError) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
+		localVarReturnValue  KvmTunnel
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KvmApiService.GetKvmTunnelByMoid")
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarPath := localBasePath + "/api/v1/kvm/Tunnels/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, executionError
+}
+
+type ApiGetKvmTunnelListRequest struct {
+	ctx         _context.Context
+	ApiService  *KvmApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetKvmTunnelListRequest) Filter(filter string) ApiGetKvmTunnelListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetKvmTunnelListRequest) Orderby(orderby string) ApiGetKvmTunnelListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetKvmTunnelListRequest) Top(top int32) ApiGetKvmTunnelListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetKvmTunnelListRequest) Skip(skip int32) ApiGetKvmTunnelListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetKvmTunnelListRequest) Select_(select_ string) ApiGetKvmTunnelListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetKvmTunnelListRequest) Expand(expand string) ApiGetKvmTunnelListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetKvmTunnelListRequest) Apply(apply string) ApiGetKvmTunnelListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetKvmTunnelListRequest) Count(count bool) ApiGetKvmTunnelListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetKvmTunnelListRequest) Inlinecount(inlinecount string) ApiGetKvmTunnelListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetKvmTunnelListRequest) At(at string) ApiGetKvmTunnelListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetKvmTunnelListRequest) Tags(tags string) ApiGetKvmTunnelListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetKvmTunnelListRequest) Execute() (KvmTunnelResponse, *_nethttp.Response, GenericOpenAPIError) {
+	return r.ApiService.GetKvmTunnelListExecute(r)
+}
+
+/*
+ * GetKvmTunnelList Read a 'kvm.Tunnel' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetKvmTunnelListRequest
+ */
+func (a *KvmApiService) GetKvmTunnelList(ctx _context.Context) ApiGetKvmTunnelListRequest {
+	return ApiGetKvmTunnelListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return KvmTunnelResponse
+ */
+func (a *KvmApiService) GetKvmTunnelListExecute(r ApiGetKvmTunnelListRequest) (KvmTunnelResponse, *_nethttp.Response, GenericOpenAPIError) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
+		localVarReturnValue  KvmTunnelResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KvmApiService.GetKvmTunnelList")
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarPath := localBasePath + "/api/v1/kvm/Tunnels"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetKvmVmConsoleByMoidRequest struct {
@@ -1115,7 +2200,7 @@ type ApiGetKvmVmConsoleByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetKvmVmConsoleByMoidRequest) Execute() (KvmVmConsole, *_nethttp.Response, error) {
+func (r ApiGetKvmVmConsoleByMoidRequest) Execute() (KvmVmConsole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetKvmVmConsoleByMoidExecute(r)
 }
 
@@ -1137,19 +2222,21 @@ func (a *KvmApiService) GetKvmVmConsoleByMoid(ctx _context.Context, moid string)
  * Execute executes the request
  * @return KvmVmConsole
  */
-func (a *KvmApiService) GetKvmVmConsoleByMoidExecute(r ApiGetKvmVmConsoleByMoidRequest) (KvmVmConsole, *_nethttp.Response, error) {
+func (a *KvmApiService) GetKvmVmConsoleByMoidExecute(r ApiGetKvmVmConsoleByMoidRequest) (KvmVmConsole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  KvmVmConsole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KvmApiService.GetKvmVmConsoleByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/kvm/VmConsoles/{Moid}"
@@ -1178,18 +2265,22 @@ func (a *KvmApiService) GetKvmVmConsoleByMoidExecute(r ApiGetKvmVmConsoleByMoidR
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1256,7 +2347,7 @@ func (a *KvmApiService) GetKvmVmConsoleByMoidExecute(r ApiGetKvmVmConsoleByMoidR
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetKvmVmConsoleListRequest struct {
@@ -1320,7 +2411,7 @@ func (r ApiGetKvmVmConsoleListRequest) Tags(tags string) ApiGetKvmVmConsoleListR
 	return r
 }
 
-func (r ApiGetKvmVmConsoleListRequest) Execute() (KvmVmConsoleResponse, *_nethttp.Response, error) {
+func (r ApiGetKvmVmConsoleListRequest) Execute() (KvmVmConsoleResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetKvmVmConsoleListExecute(r)
 }
 
@@ -1340,19 +2431,21 @@ func (a *KvmApiService) GetKvmVmConsoleList(ctx _context.Context) ApiGetKvmVmCon
  * Execute executes the request
  * @return KvmVmConsoleResponse
  */
-func (a *KvmApiService) GetKvmVmConsoleListExecute(r ApiGetKvmVmConsoleListRequest) (KvmVmConsoleResponse, *_nethttp.Response, error) {
+func (a *KvmApiService) GetKvmVmConsoleListExecute(r ApiGetKvmVmConsoleListRequest) (KvmVmConsoleResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  KvmVmConsoleResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KvmApiService.GetKvmVmConsoleList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/kvm/VmConsoles"
@@ -1413,18 +2506,22 @@ func (a *KvmApiService) GetKvmVmConsoleListExecute(r ApiGetKvmVmConsoleListReque
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1491,7 +2588,7 @@ func (a *KvmApiService) GetKvmVmConsoleListExecute(r ApiGetKvmVmConsoleListReque
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchKvmPolicyRequest struct {
@@ -1511,7 +2608,7 @@ func (r ApiPatchKvmPolicyRequest) IfMatch(ifMatch string) ApiPatchKvmPolicyReque
 	return r
 }
 
-func (r ApiPatchKvmPolicyRequest) Execute() (KvmPolicy, *_nethttp.Response, error) {
+func (r ApiPatchKvmPolicyRequest) Execute() (KvmPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchKvmPolicyExecute(r)
 }
 
@@ -1533,19 +2630,21 @@ func (a *KvmApiService) PatchKvmPolicy(ctx _context.Context, moid string) ApiPat
  * Execute executes the request
  * @return KvmPolicy
  */
-func (a *KvmApiService) PatchKvmPolicyExecute(r ApiPatchKvmPolicyRequest) (KvmPolicy, *_nethttp.Response, error) {
+func (a *KvmApiService) PatchKvmPolicyExecute(r ApiPatchKvmPolicyRequest) (KvmPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  KvmPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KvmApiService.PatchKvmPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/kvm/Policies/{Moid}"
@@ -1555,7 +2654,8 @@ func (a *KvmApiService) PatchKvmPolicyExecute(r ApiPatchKvmPolicyRequest) (KvmPo
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kvmPolicy == nil {
-		return localVarReturnValue, nil, reportError("kvmPolicy is required and must be specified")
+		executionError.error = "kvmPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -1582,18 +2682,22 @@ func (a *KvmApiService) PatchKvmPolicyExecute(r ApiPatchKvmPolicyRequest) (KvmPo
 	localVarPostBody = r.kvmPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1660,7 +2764,7 @@ func (a *KvmApiService) PatchKvmPolicyExecute(r ApiPatchKvmPolicyRequest) (KvmPo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateKvmPolicyRequest struct {
@@ -1680,7 +2784,7 @@ func (r ApiUpdateKvmPolicyRequest) IfMatch(ifMatch string) ApiUpdateKvmPolicyReq
 	return r
 }
 
-func (r ApiUpdateKvmPolicyRequest) Execute() (KvmPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateKvmPolicyRequest) Execute() (KvmPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateKvmPolicyExecute(r)
 }
 
@@ -1702,19 +2806,21 @@ func (a *KvmApiService) UpdateKvmPolicy(ctx _context.Context, moid string) ApiUp
  * Execute executes the request
  * @return KvmPolicy
  */
-func (a *KvmApiService) UpdateKvmPolicyExecute(r ApiUpdateKvmPolicyRequest) (KvmPolicy, *_nethttp.Response, error) {
+func (a *KvmApiService) UpdateKvmPolicyExecute(r ApiUpdateKvmPolicyRequest) (KvmPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  KvmPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "KvmApiService.UpdateKvmPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/kvm/Policies/{Moid}"
@@ -1724,7 +2830,8 @@ func (a *KvmApiService) UpdateKvmPolicyExecute(r ApiUpdateKvmPolicyRequest) (Kvm
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.kvmPolicy == nil {
-		return localVarReturnValue, nil, reportError("kvmPolicy is required and must be specified")
+		executionError.error = "kvmPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -1751,18 +2858,22 @@ func (a *KvmApiService) UpdateKvmPolicyExecute(r ApiUpdateKvmPolicyRequest) (Kvm
 	localVarPostBody = r.kvmPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1829,5 +2940,5 @@ func (a *KvmApiService) UpdateKvmPolicyExecute(r ApiUpdateKvmPolicyRequest) (Kvm
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }

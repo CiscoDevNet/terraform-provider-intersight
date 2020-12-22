@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceFabricSystemQosPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceFabricSystemQosPolicyCreate,
-		Read:   resourceFabricSystemQosPolicyRead,
-		Update: resourceFabricSystemQosPolicyUpdate,
-		Delete: resourceFabricSystemQosPolicyDelete,
+		CreateContext: resourceFabricSystemQosPolicyCreate,
+		ReadContext:   resourceFabricSystemQosPolicyRead,
+		UpdateContext: resourceFabricSystemQosPolicyUpdate,
+		DeleteContext: resourceFabricSystemQosPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -63,11 +66,13 @@ func resourceFabricSystemQosPolicy() *schema.Resource {
 							Description: "Maximum transmission unit (MTU) is the largest size packet or frame,\nthat can be sent in a packet- or frame-based network such as the Internet.\nUser can select from the following:\n1. Any value between 1500 and 9216\n2. 'Normal' (default) mapping to a value of 1500.\n3. 'FC' mapping to a value of 2240.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     1500,
 						},
 						"multicast_optimize": {
 							Description: "If enabled, this QoS class will be optimized to send multiple packets.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     false,
 						},
 						"name": {
 							Description: "The 'name' of this QoS Class.\n* `Best Effort` - QoS Priority for Best-effort traffic.\n* `FC` - QoS Priority for FC traffic.\n* `Platinum` - QoS Priority for Platinum traffic.\n* `Gold` - QoS Priority for Gold traffic.\n* `Silver` - QoS Priority for Silver traffic.\n* `Bronze` - QoS Priority for Bronze traffic.",
@@ -85,6 +90,7 @@ func resourceFabricSystemQosPolicy() *schema.Resource {
 							Description: "If enabled, this QoS class will allow packet drops within an acceptable limit.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     true,
 						},
 						"weight": {
 							Description: "The weight of the QoS Class controls the distribution of bandwidth between QoS Classes,\nwith the same priority after the Guarantees for the QoS Classes are reached.",
@@ -228,7 +234,7 @@ func resourceFabricSystemQosPolicy() *schema.Resource {
 	}
 }
 
-func resourceFabricSystemQosPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricSystemQosPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -460,73 +466,77 @@ func resourceFabricSystemQosPolicyCreate(d *schema.ResourceData, meta interface{
 	}
 
 	r := conn.ApiClient.FabricApi.CreateFabricSystemQosPolicy(conn.ctx).FabricSystemQosPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating FabricSystemQosPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceFabricSystemQosPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceFabricSystemQosPolicyRead(c, d, meta)
 }
 
-func resourceFabricSystemQosPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricSystemQosPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.FabricApi.GetFabricSystemQosPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "FabricSystemQosPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching FabricSystemQosPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in FabricSystemQosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in FabricSystemQosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("classes", flattenListFabricQosClass(s.GetClasses(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Classes: %+v", err)
+		return diag.Errorf("error occurred while setting property Classes in FabricSystemQosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in FabricSystemQosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in FabricSystemQosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in FabricSystemQosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in FabricSystemQosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in FabricSystemQosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("profiles", flattenListFabricSwitchProfileRelationship(s.GetProfiles(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Profiles: %+v", err)
+		return diag.Errorf("error occurred while setting property Profiles in FabricSystemQosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in FabricSystemQosPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceFabricSystemQosPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricSystemQosPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -766,23 +776,24 @@ func resourceFabricSystemQosPolicyUpdate(d *schema.ResourceData, meta interface{
 	}
 
 	r := conn.ApiClient.FabricApi.UpdateFabricSystemQosPolicy(conn.ctx, d.Id()).FabricSystemQosPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating FabricSystemQosPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFabricSystemQosPolicyRead(d, meta)
+	return resourceFabricSystemQosPolicyRead(c, d, meta)
 }
 
-func resourceFabricSystemQosPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricSystemQosPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.FabricApi.DeleteFabricSystemQosPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting FabricSystemQosPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

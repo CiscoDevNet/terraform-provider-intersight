@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceWorkflowErrorResponseHandler() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceWorkflowErrorResponseHandlerCreate,
-		Read:   resourceWorkflowErrorResponseHandlerRead,
-		Update: resourceWorkflowErrorResponseHandlerUpdate,
-		Delete: resourceWorkflowErrorResponseHandlerDelete,
+		CreateContext: resourceWorkflowErrorResponseHandlerCreate,
+		ReadContext:   resourceWorkflowErrorResponseHandlerRead,
+		UpdateContext: resourceWorkflowErrorResponseHandlerUpdate,
+		DeleteContext: resourceWorkflowErrorResponseHandlerDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -87,7 +90,7 @@ func resourceWorkflowErrorResponseHandler() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -275,7 +278,7 @@ func resourceWorkflowErrorResponseHandler() *schema.Resource {
 	}
 }
 
-func resourceWorkflowErrorResponseHandlerCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceWorkflowErrorResponseHandlerCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -561,77 +564,81 @@ func resourceWorkflowErrorResponseHandlerCreate(d *schema.ResourceData, meta int
 	}
 
 	r := conn.ApiClient.WorkflowApi.CreateWorkflowErrorResponseHandler(conn.ctx).WorkflowErrorResponseHandler(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating WorkflowErrorResponseHandler: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceWorkflowErrorResponseHandlerRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceWorkflowErrorResponseHandlerRead(c, d, meta)
 }
 
-func resourceWorkflowErrorResponseHandlerRead(d *schema.ResourceData, meta interface{}) error {
+func resourceWorkflowErrorResponseHandlerRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.WorkflowApi.GetWorkflowErrorResponseHandlerByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "WorkflowErrorResponseHandler object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching WorkflowErrorResponseHandler: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in WorkflowErrorResponseHandler object: %s", err.Error())
 	}
 
 	if err := d.Set("catalog", flattenMapWorkflowCatalogRelationship(s.GetCatalog(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Catalog: %+v", err)
+		return diag.Errorf("error occurred while setting property Catalog in WorkflowErrorResponseHandler object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in WorkflowErrorResponseHandler object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in WorkflowErrorResponseHandler object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in WorkflowErrorResponseHandler object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in WorkflowErrorResponseHandler object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in WorkflowErrorResponseHandler object: %s", err.Error())
 	}
 
 	if err := d.Set("parameters", flattenListContentParameter(s.GetParameters(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Parameters: %+v", err)
+		return diag.Errorf("error occurred while setting property Parameters in WorkflowErrorResponseHandler object: %s", err.Error())
 	}
 
 	if err := d.Set("platform_type", (s.GetPlatformType())); err != nil {
-		return fmt.Errorf("error occurred while setting property PlatformType: %+v", err)
+		return diag.Errorf("error occurred while setting property PlatformType in WorkflowErrorResponseHandler object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in WorkflowErrorResponseHandler object: %s", err.Error())
 	}
 
 	if err := d.Set("types", flattenListContentComplexType(s.GetTypes(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Types: %+v", err)
+		return diag.Errorf("error occurred while setting property Types in WorkflowErrorResponseHandler object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceWorkflowErrorResponseHandlerUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceWorkflowErrorResponseHandlerUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -926,23 +933,24 @@ func resourceWorkflowErrorResponseHandlerUpdate(d *schema.ResourceData, meta int
 	}
 
 	r := conn.ApiClient.WorkflowApi.UpdateWorkflowErrorResponseHandler(conn.ctx, d.Id()).WorkflowErrorResponseHandler(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating WorkflowErrorResponseHandler: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceWorkflowErrorResponseHandlerRead(d, meta)
+	return resourceWorkflowErrorResponseHandlerRead(c, d, meta)
 }
 
-func resourceWorkflowErrorResponseHandlerDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceWorkflowErrorResponseHandlerDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.WorkflowApi.DeleteWorkflowErrorResponseHandler(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting WorkflowErrorResponseHandler object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

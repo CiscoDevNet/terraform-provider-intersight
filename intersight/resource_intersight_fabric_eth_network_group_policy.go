@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceFabricEthNetworkGroupPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceFabricEthNetworkGroupPolicyCreate,
-		Read:   resourceFabricEthNetworkGroupPolicyRead,
-		Update: resourceFabricEthNetworkGroupPolicyUpdate,
-		Delete: resourceFabricEthNetworkGroupPolicyDelete,
+		CreateContext: resourceFabricEthNetworkGroupPolicyCreate,
+		ReadContext:   resourceFabricEthNetworkGroupPolicyRead,
+		UpdateContext: resourceFabricEthNetworkGroupPolicyUpdate,
+		DeleteContext: resourceFabricEthNetworkGroupPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -142,6 +145,7 @@ func resourceFabricEthNetworkGroupPolicy() *schema.Resource {
 							Description: "Native VLAN ID of the virtual interface or the corresponding vethernet on the peer Fabric Interconnect to which the virtual interface is connected. Setting the ID to 0 will not associate any native VLAN to the traffic on the virtual interface.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     0,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -158,7 +162,7 @@ func resourceFabricEthNetworkGroupPolicy() *schema.Resource {
 	}
 }
 
-func resourceFabricEthNetworkGroupPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricEthNetworkGroupPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -313,69 +317,73 @@ func resourceFabricEthNetworkGroupPolicyCreate(d *schema.ResourceData, meta inte
 	}
 
 	r := conn.ApiClient.FabricApi.CreateFabricEthNetworkGroupPolicy(conn.ctx).FabricEthNetworkGroupPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating FabricEthNetworkGroupPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceFabricEthNetworkGroupPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceFabricEthNetworkGroupPolicyRead(c, d, meta)
 }
 
-func resourceFabricEthNetworkGroupPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricEthNetworkGroupPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.FabricApi.GetFabricEthNetworkGroupPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "FabricEthNetworkGroupPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching FabricEthNetworkGroupPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in FabricEthNetworkGroupPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in FabricEthNetworkGroupPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in FabricEthNetworkGroupPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in FabricEthNetworkGroupPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in FabricEthNetworkGroupPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in FabricEthNetworkGroupPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in FabricEthNetworkGroupPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in FabricEthNetworkGroupPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("vlan_settings", flattenMapFabricVlanSettings(s.GetVlanSettings(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property VlanSettings: %+v", err)
+		return diag.Errorf("error occurred while setting property VlanSettings in FabricEthNetworkGroupPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceFabricEthNetworkGroupPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricEthNetworkGroupPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -537,23 +545,24 @@ func resourceFabricEthNetworkGroupPolicyUpdate(d *schema.ResourceData, meta inte
 	}
 
 	r := conn.ApiClient.FabricApi.UpdateFabricEthNetworkGroupPolicy(conn.ctx, d.Id()).FabricEthNetworkGroupPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating FabricEthNetworkGroupPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFabricEthNetworkGroupPolicyRead(d, meta)
+	return resourceFabricEthNetworkGroupPolicyRead(c, d, meta)
 }
 
-func resourceFabricEthNetworkGroupPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricEthNetworkGroupPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.FabricApi.DeleteFabricEthNetworkGroupPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting FabricEthNetworkGroupPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -12,6 +12,7 @@
 package intersight
 
 import (
+	"bytes"
 	_context "context"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
@@ -26,6 +27,366 @@ var (
 
 // FabricApiService FabricApi service
 type FabricApiService service
+
+type ApiCreateFabricAppliancePcRoleRequest struct {
+	ctx                   _context.Context
+	ApiService            *FabricApiService
+	fabricAppliancePcRole *FabricAppliancePcRole
+	ifMatch               *string
+	ifNoneMatch           *string
+}
+
+func (r ApiCreateFabricAppliancePcRoleRequest) FabricAppliancePcRole(fabricAppliancePcRole FabricAppliancePcRole) ApiCreateFabricAppliancePcRoleRequest {
+	r.fabricAppliancePcRole = &fabricAppliancePcRole
+	return r
+}
+func (r ApiCreateFabricAppliancePcRoleRequest) IfMatch(ifMatch string) ApiCreateFabricAppliancePcRoleRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+func (r ApiCreateFabricAppliancePcRoleRequest) IfNoneMatch(ifNoneMatch string) ApiCreateFabricAppliancePcRoleRequest {
+	r.ifNoneMatch = &ifNoneMatch
+	return r
+}
+
+func (r ApiCreateFabricAppliancePcRoleRequest) Execute() (FabricAppliancePcRole, *_nethttp.Response, GenericOpenAPIError) {
+	return r.ApiService.CreateFabricAppliancePcRoleExecute(r)
+}
+
+/*
+ * CreateFabricAppliancePcRole Create a 'fabric.AppliancePcRole' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiCreateFabricAppliancePcRoleRequest
+ */
+func (a *FabricApiService) CreateFabricAppliancePcRole(ctx _context.Context) ApiCreateFabricAppliancePcRoleRequest {
+	return ApiCreateFabricAppliancePcRoleRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return FabricAppliancePcRole
+ */
+func (a *FabricApiService) CreateFabricAppliancePcRoleExecute(r ApiCreateFabricAppliancePcRoleRequest) (FabricAppliancePcRole, *_nethttp.Response, GenericOpenAPIError) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
+		localVarReturnValue  FabricAppliancePcRole
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricAppliancePcRole")
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/AppliancePcRoles"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.fabricAppliancePcRole == nil {
+		executionError.error = "fabricAppliancePcRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	if r.ifNoneMatch != nil {
+		localVarHeaderParams["If-None-Match"] = parameterToString(*r.ifNoneMatch, "")
+	}
+	// body params
+	localVarPostBody = r.fabricAppliancePcRole
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, executionError
+}
+
+type ApiCreateFabricApplianceRoleRequest struct {
+	ctx                 _context.Context
+	ApiService          *FabricApiService
+	fabricApplianceRole *FabricApplianceRole
+	ifMatch             *string
+	ifNoneMatch         *string
+}
+
+func (r ApiCreateFabricApplianceRoleRequest) FabricApplianceRole(fabricApplianceRole FabricApplianceRole) ApiCreateFabricApplianceRoleRequest {
+	r.fabricApplianceRole = &fabricApplianceRole
+	return r
+}
+func (r ApiCreateFabricApplianceRoleRequest) IfMatch(ifMatch string) ApiCreateFabricApplianceRoleRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+func (r ApiCreateFabricApplianceRoleRequest) IfNoneMatch(ifNoneMatch string) ApiCreateFabricApplianceRoleRequest {
+	r.ifNoneMatch = &ifNoneMatch
+	return r
+}
+
+func (r ApiCreateFabricApplianceRoleRequest) Execute() (FabricApplianceRole, *_nethttp.Response, GenericOpenAPIError) {
+	return r.ApiService.CreateFabricApplianceRoleExecute(r)
+}
+
+/*
+ * CreateFabricApplianceRole Create a 'fabric.ApplianceRole' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiCreateFabricApplianceRoleRequest
+ */
+func (a *FabricApiService) CreateFabricApplianceRole(ctx _context.Context) ApiCreateFabricApplianceRoleRequest {
+	return ApiCreateFabricApplianceRoleRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return FabricApplianceRole
+ */
+func (a *FabricApiService) CreateFabricApplianceRoleExecute(r ApiCreateFabricApplianceRoleRequest) (FabricApplianceRole, *_nethttp.Response, GenericOpenAPIError) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
+		localVarReturnValue  FabricApplianceRole
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricApplianceRole")
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/ApplianceRoles"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.fabricApplianceRole == nil {
+		executionError.error = "fabricApplianceRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	if r.ifNoneMatch != nil {
+		localVarHeaderParams["If-None-Match"] = parameterToString(*r.ifNoneMatch, "")
+	}
+	// body params
+	localVarPostBody = r.fabricApplianceRole
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, executionError
+}
 
 type ApiCreateFabricEstimateImpactRequest struct {
 	ctx                  _context.Context
@@ -48,7 +409,7 @@ func (r ApiCreateFabricEstimateImpactRequest) IfNoneMatch(ifNoneMatch string) Ap
 	return r
 }
 
-func (r ApiCreateFabricEstimateImpactRequest) Execute() (FabricEstimateImpact, *_nethttp.Response, error) {
+func (r ApiCreateFabricEstimateImpactRequest) Execute() (FabricEstimateImpact, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateFabricEstimateImpactExecute(r)
 }
 
@@ -68,19 +429,21 @@ func (a *FabricApiService) CreateFabricEstimateImpact(ctx _context.Context) ApiC
  * Execute executes the request
  * @return FabricEstimateImpact
  */
-func (a *FabricApiService) CreateFabricEstimateImpactExecute(r ApiCreateFabricEstimateImpactRequest) (FabricEstimateImpact, *_nethttp.Response, error) {
+func (a *FabricApiService) CreateFabricEstimateImpactExecute(r ApiCreateFabricEstimateImpactRequest) (FabricEstimateImpact, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricEstimateImpact
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricEstimateImpact")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/EstimateImpacts"
@@ -89,7 +452,8 @@ func (a *FabricApiService) CreateFabricEstimateImpactExecute(r ApiCreateFabricEs
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricEstimateImpact == nil {
-		return localVarReturnValue, nil, reportError("fabricEstimateImpact is required and must be specified")
+		executionError.error = "fabricEstimateImpact is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -119,18 +483,22 @@ func (a *FabricApiService) CreateFabricEstimateImpactExecute(r ApiCreateFabricEs
 	localVarPostBody = r.fabricEstimateImpact
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -197,7 +565,7 @@ func (a *FabricApiService) CreateFabricEstimateImpactExecute(r ApiCreateFabricEs
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateFabricEthNetworkControlPolicyRequest struct {
@@ -221,7 +589,7 @@ func (r ApiCreateFabricEthNetworkControlPolicyRequest) IfNoneMatch(ifNoneMatch s
 	return r
 }
 
-func (r ApiCreateFabricEthNetworkControlPolicyRequest) Execute() (FabricEthNetworkControlPolicy, *_nethttp.Response, error) {
+func (r ApiCreateFabricEthNetworkControlPolicyRequest) Execute() (FabricEthNetworkControlPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateFabricEthNetworkControlPolicyExecute(r)
 }
 
@@ -241,19 +609,21 @@ func (a *FabricApiService) CreateFabricEthNetworkControlPolicy(ctx _context.Cont
  * Execute executes the request
  * @return FabricEthNetworkControlPolicy
  */
-func (a *FabricApiService) CreateFabricEthNetworkControlPolicyExecute(r ApiCreateFabricEthNetworkControlPolicyRequest) (FabricEthNetworkControlPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) CreateFabricEthNetworkControlPolicyExecute(r ApiCreateFabricEthNetworkControlPolicyRequest) (FabricEthNetworkControlPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricEthNetworkControlPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricEthNetworkControlPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/EthNetworkControlPolicies"
@@ -262,7 +632,8 @@ func (a *FabricApiService) CreateFabricEthNetworkControlPolicyExecute(r ApiCreat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricEthNetworkControlPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricEthNetworkControlPolicy is required and must be specified")
+		executionError.error = "fabricEthNetworkControlPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -292,18 +663,22 @@ func (a *FabricApiService) CreateFabricEthNetworkControlPolicyExecute(r ApiCreat
 	localVarPostBody = r.fabricEthNetworkControlPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -370,7 +745,7 @@ func (a *FabricApiService) CreateFabricEthNetworkControlPolicyExecute(r ApiCreat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateFabricEthNetworkGroupPolicyRequest struct {
@@ -394,7 +769,7 @@ func (r ApiCreateFabricEthNetworkGroupPolicyRequest) IfNoneMatch(ifNoneMatch str
 	return r
 }
 
-func (r ApiCreateFabricEthNetworkGroupPolicyRequest) Execute() (FabricEthNetworkGroupPolicy, *_nethttp.Response, error) {
+func (r ApiCreateFabricEthNetworkGroupPolicyRequest) Execute() (FabricEthNetworkGroupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateFabricEthNetworkGroupPolicyExecute(r)
 }
 
@@ -414,19 +789,21 @@ func (a *FabricApiService) CreateFabricEthNetworkGroupPolicy(ctx _context.Contex
  * Execute executes the request
  * @return FabricEthNetworkGroupPolicy
  */
-func (a *FabricApiService) CreateFabricEthNetworkGroupPolicyExecute(r ApiCreateFabricEthNetworkGroupPolicyRequest) (FabricEthNetworkGroupPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) CreateFabricEthNetworkGroupPolicyExecute(r ApiCreateFabricEthNetworkGroupPolicyRequest) (FabricEthNetworkGroupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricEthNetworkGroupPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricEthNetworkGroupPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/EthNetworkGroupPolicies"
@@ -435,7 +812,8 @@ func (a *FabricApiService) CreateFabricEthNetworkGroupPolicyExecute(r ApiCreateF
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricEthNetworkGroupPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricEthNetworkGroupPolicy is required and must be specified")
+		executionError.error = "fabricEthNetworkGroupPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -465,18 +843,22 @@ func (a *FabricApiService) CreateFabricEthNetworkGroupPolicyExecute(r ApiCreateF
 	localVarPostBody = r.fabricEthNetworkGroupPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -543,7 +925,7 @@ func (a *FabricApiService) CreateFabricEthNetworkGroupPolicyExecute(r ApiCreateF
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateFabricEthNetworkPolicyRequest struct {
@@ -567,7 +949,7 @@ func (r ApiCreateFabricEthNetworkPolicyRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateFabricEthNetworkPolicyRequest) Execute() (FabricEthNetworkPolicy, *_nethttp.Response, error) {
+func (r ApiCreateFabricEthNetworkPolicyRequest) Execute() (FabricEthNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateFabricEthNetworkPolicyExecute(r)
 }
 
@@ -587,19 +969,21 @@ func (a *FabricApiService) CreateFabricEthNetworkPolicy(ctx _context.Context) Ap
  * Execute executes the request
  * @return FabricEthNetworkPolicy
  */
-func (a *FabricApiService) CreateFabricEthNetworkPolicyExecute(r ApiCreateFabricEthNetworkPolicyRequest) (FabricEthNetworkPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) CreateFabricEthNetworkPolicyExecute(r ApiCreateFabricEthNetworkPolicyRequest) (FabricEthNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricEthNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricEthNetworkPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/EthNetworkPolicies"
@@ -608,7 +992,8 @@ func (a *FabricApiService) CreateFabricEthNetworkPolicyExecute(r ApiCreateFabric
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricEthNetworkPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricEthNetworkPolicy is required and must be specified")
+		executionError.error = "fabricEthNetworkPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -638,18 +1023,22 @@ func (a *FabricApiService) CreateFabricEthNetworkPolicyExecute(r ApiCreateFabric
 	localVarPostBody = r.fabricEthNetworkPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -716,7 +1105,7 @@ func (a *FabricApiService) CreateFabricEthNetworkPolicyExecute(r ApiCreateFabric
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateFabricFcNetworkPolicyRequest struct {
@@ -740,7 +1129,7 @@ func (r ApiCreateFabricFcNetworkPolicyRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateFabricFcNetworkPolicyRequest) Execute() (FabricFcNetworkPolicy, *_nethttp.Response, error) {
+func (r ApiCreateFabricFcNetworkPolicyRequest) Execute() (FabricFcNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateFabricFcNetworkPolicyExecute(r)
 }
 
@@ -760,19 +1149,21 @@ func (a *FabricApiService) CreateFabricFcNetworkPolicy(ctx _context.Context) Api
  * Execute executes the request
  * @return FabricFcNetworkPolicy
  */
-func (a *FabricApiService) CreateFabricFcNetworkPolicyExecute(r ApiCreateFabricFcNetworkPolicyRequest) (FabricFcNetworkPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) CreateFabricFcNetworkPolicyExecute(r ApiCreateFabricFcNetworkPolicyRequest) (FabricFcNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricFcNetworkPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcNetworkPolicies"
@@ -781,7 +1172,8 @@ func (a *FabricApiService) CreateFabricFcNetworkPolicyExecute(r ApiCreateFabricF
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricFcNetworkPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricFcNetworkPolicy is required and must be specified")
+		executionError.error = "fabricFcNetworkPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -811,18 +1203,22 @@ func (a *FabricApiService) CreateFabricFcNetworkPolicyExecute(r ApiCreateFabricF
 	localVarPostBody = r.fabricFcNetworkPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -889,7 +1285,7 @@ func (a *FabricApiService) CreateFabricFcNetworkPolicyExecute(r ApiCreateFabricF
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateFabricFcUplinkPcRoleRequest struct {
@@ -913,7 +1309,7 @@ func (r ApiCreateFabricFcUplinkPcRoleRequest) IfNoneMatch(ifNoneMatch string) Ap
 	return r
 }
 
-func (r ApiCreateFabricFcUplinkPcRoleRequest) Execute() (FabricFcUplinkPcRole, *_nethttp.Response, error) {
+func (r ApiCreateFabricFcUplinkPcRoleRequest) Execute() (FabricFcUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateFabricFcUplinkPcRoleExecute(r)
 }
 
@@ -933,19 +1329,21 @@ func (a *FabricApiService) CreateFabricFcUplinkPcRole(ctx _context.Context) ApiC
  * Execute executes the request
  * @return FabricFcUplinkPcRole
  */
-func (a *FabricApiService) CreateFabricFcUplinkPcRoleExecute(r ApiCreateFabricFcUplinkPcRoleRequest) (FabricFcUplinkPcRole, *_nethttp.Response, error) {
+func (a *FabricApiService) CreateFabricFcUplinkPcRoleExecute(r ApiCreateFabricFcUplinkPcRoleRequest) (FabricFcUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcUplinkPcRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricFcUplinkPcRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcUplinkPcRoles"
@@ -954,7 +1352,8 @@ func (a *FabricApiService) CreateFabricFcUplinkPcRoleExecute(r ApiCreateFabricFc
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricFcUplinkPcRole == nil {
-		return localVarReturnValue, nil, reportError("fabricFcUplinkPcRole is required and must be specified")
+		executionError.error = "fabricFcUplinkPcRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -984,18 +1383,22 @@ func (a *FabricApiService) CreateFabricFcUplinkPcRoleExecute(r ApiCreateFabricFc
 	localVarPostBody = r.fabricFcUplinkPcRole
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1062,7 +1465,7 @@ func (a *FabricApiService) CreateFabricFcUplinkPcRoleExecute(r ApiCreateFabricFc
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateFabricFcUplinkRoleRequest struct {
@@ -1086,7 +1489,7 @@ func (r ApiCreateFabricFcUplinkRoleRequest) IfNoneMatch(ifNoneMatch string) ApiC
 	return r
 }
 
-func (r ApiCreateFabricFcUplinkRoleRequest) Execute() (FabricFcUplinkRole, *_nethttp.Response, error) {
+func (r ApiCreateFabricFcUplinkRoleRequest) Execute() (FabricFcUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateFabricFcUplinkRoleExecute(r)
 }
 
@@ -1106,19 +1509,21 @@ func (a *FabricApiService) CreateFabricFcUplinkRole(ctx _context.Context) ApiCre
  * Execute executes the request
  * @return FabricFcUplinkRole
  */
-func (a *FabricApiService) CreateFabricFcUplinkRoleExecute(r ApiCreateFabricFcUplinkRoleRequest) (FabricFcUplinkRole, *_nethttp.Response, error) {
+func (a *FabricApiService) CreateFabricFcUplinkRoleExecute(r ApiCreateFabricFcUplinkRoleRequest) (FabricFcUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcUplinkRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricFcUplinkRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcUplinkRoles"
@@ -1127,7 +1532,8 @@ func (a *FabricApiService) CreateFabricFcUplinkRoleExecute(r ApiCreateFabricFcUp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricFcUplinkRole == nil {
-		return localVarReturnValue, nil, reportError("fabricFcUplinkRole is required and must be specified")
+		executionError.error = "fabricFcUplinkRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -1157,18 +1563,22 @@ func (a *FabricApiService) CreateFabricFcUplinkRoleExecute(r ApiCreateFabricFcUp
 	localVarPostBody = r.fabricFcUplinkRole
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1235,7 +1645,7 @@ func (a *FabricApiService) CreateFabricFcUplinkRoleExecute(r ApiCreateFabricFcUp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateFabricFcoeUplinkPcRoleRequest struct {
@@ -1259,7 +1669,7 @@ func (r ApiCreateFabricFcoeUplinkPcRoleRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateFabricFcoeUplinkPcRoleRequest) Execute() (FabricFcoeUplinkPcRole, *_nethttp.Response, error) {
+func (r ApiCreateFabricFcoeUplinkPcRoleRequest) Execute() (FabricFcoeUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateFabricFcoeUplinkPcRoleExecute(r)
 }
 
@@ -1279,19 +1689,21 @@ func (a *FabricApiService) CreateFabricFcoeUplinkPcRole(ctx _context.Context) Ap
  * Execute executes the request
  * @return FabricFcoeUplinkPcRole
  */
-func (a *FabricApiService) CreateFabricFcoeUplinkPcRoleExecute(r ApiCreateFabricFcoeUplinkPcRoleRequest) (FabricFcoeUplinkPcRole, *_nethttp.Response, error) {
+func (a *FabricApiService) CreateFabricFcoeUplinkPcRoleExecute(r ApiCreateFabricFcoeUplinkPcRoleRequest) (FabricFcoeUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcoeUplinkPcRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricFcoeUplinkPcRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcoeUplinkPcRoles"
@@ -1300,7 +1712,8 @@ func (a *FabricApiService) CreateFabricFcoeUplinkPcRoleExecute(r ApiCreateFabric
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricFcoeUplinkPcRole == nil {
-		return localVarReturnValue, nil, reportError("fabricFcoeUplinkPcRole is required and must be specified")
+		executionError.error = "fabricFcoeUplinkPcRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -1330,18 +1743,22 @@ func (a *FabricApiService) CreateFabricFcoeUplinkPcRoleExecute(r ApiCreateFabric
 	localVarPostBody = r.fabricFcoeUplinkPcRole
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1408,7 +1825,7 @@ func (a *FabricApiService) CreateFabricFcoeUplinkPcRoleExecute(r ApiCreateFabric
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateFabricFcoeUplinkRoleRequest struct {
@@ -1432,7 +1849,7 @@ func (r ApiCreateFabricFcoeUplinkRoleRequest) IfNoneMatch(ifNoneMatch string) Ap
 	return r
 }
 
-func (r ApiCreateFabricFcoeUplinkRoleRequest) Execute() (FabricFcoeUplinkRole, *_nethttp.Response, error) {
+func (r ApiCreateFabricFcoeUplinkRoleRequest) Execute() (FabricFcoeUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateFabricFcoeUplinkRoleExecute(r)
 }
 
@@ -1452,19 +1869,21 @@ func (a *FabricApiService) CreateFabricFcoeUplinkRole(ctx _context.Context) ApiC
  * Execute executes the request
  * @return FabricFcoeUplinkRole
  */
-func (a *FabricApiService) CreateFabricFcoeUplinkRoleExecute(r ApiCreateFabricFcoeUplinkRoleRequest) (FabricFcoeUplinkRole, *_nethttp.Response, error) {
+func (a *FabricApiService) CreateFabricFcoeUplinkRoleExecute(r ApiCreateFabricFcoeUplinkRoleRequest) (FabricFcoeUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcoeUplinkRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricFcoeUplinkRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcoeUplinkRoles"
@@ -1473,7 +1892,8 @@ func (a *FabricApiService) CreateFabricFcoeUplinkRoleExecute(r ApiCreateFabricFc
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricFcoeUplinkRole == nil {
-		return localVarReturnValue, nil, reportError("fabricFcoeUplinkRole is required and must be specified")
+		executionError.error = "fabricFcoeUplinkRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -1503,18 +1923,22 @@ func (a *FabricApiService) CreateFabricFcoeUplinkRoleExecute(r ApiCreateFabricFc
 	localVarPostBody = r.fabricFcoeUplinkRole
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1581,7 +2005,7 @@ func (a *FabricApiService) CreateFabricFcoeUplinkRoleExecute(r ApiCreateFabricFc
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateFabricMulticastPolicyRequest struct {
@@ -1605,7 +2029,7 @@ func (r ApiCreateFabricMulticastPolicyRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateFabricMulticastPolicyRequest) Execute() (FabricMulticastPolicy, *_nethttp.Response, error) {
+func (r ApiCreateFabricMulticastPolicyRequest) Execute() (FabricMulticastPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateFabricMulticastPolicyExecute(r)
 }
 
@@ -1625,19 +2049,21 @@ func (a *FabricApiService) CreateFabricMulticastPolicy(ctx _context.Context) Api
  * Execute executes the request
  * @return FabricMulticastPolicy
  */
-func (a *FabricApiService) CreateFabricMulticastPolicyExecute(r ApiCreateFabricMulticastPolicyRequest) (FabricMulticastPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) CreateFabricMulticastPolicyExecute(r ApiCreateFabricMulticastPolicyRequest) (FabricMulticastPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricMulticastPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricMulticastPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/MulticastPolicies"
@@ -1646,7 +2072,8 @@ func (a *FabricApiService) CreateFabricMulticastPolicyExecute(r ApiCreateFabricM
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricMulticastPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricMulticastPolicy is required and must be specified")
+		executionError.error = "fabricMulticastPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -1676,18 +2103,22 @@ func (a *FabricApiService) CreateFabricMulticastPolicyExecute(r ApiCreateFabricM
 	localVarPostBody = r.fabricMulticastPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1754,7 +2185,7 @@ func (a *FabricApiService) CreateFabricMulticastPolicyExecute(r ApiCreateFabricM
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateFabricPcOperationRequest struct {
@@ -1778,7 +2209,7 @@ func (r ApiCreateFabricPcOperationRequest) IfNoneMatch(ifNoneMatch string) ApiCr
 	return r
 }
 
-func (r ApiCreateFabricPcOperationRequest) Execute() (FabricPcOperation, *_nethttp.Response, error) {
+func (r ApiCreateFabricPcOperationRequest) Execute() (FabricPcOperation, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateFabricPcOperationExecute(r)
 }
 
@@ -1798,19 +2229,21 @@ func (a *FabricApiService) CreateFabricPcOperation(ctx _context.Context) ApiCrea
  * Execute executes the request
  * @return FabricPcOperation
  */
-func (a *FabricApiService) CreateFabricPcOperationExecute(r ApiCreateFabricPcOperationRequest) (FabricPcOperation, *_nethttp.Response, error) {
+func (a *FabricApiService) CreateFabricPcOperationExecute(r ApiCreateFabricPcOperationRequest) (FabricPcOperation, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricPcOperation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricPcOperation")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PcOperations"
@@ -1819,7 +2252,8 @@ func (a *FabricApiService) CreateFabricPcOperationExecute(r ApiCreateFabricPcOpe
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricPcOperation == nil {
-		return localVarReturnValue, nil, reportError("fabricPcOperation is required and must be specified")
+		executionError.error = "fabricPcOperation is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -1849,18 +2283,22 @@ func (a *FabricApiService) CreateFabricPcOperationExecute(r ApiCreateFabricPcOpe
 	localVarPostBody = r.fabricPcOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1927,7 +2365,7 @@ func (a *FabricApiService) CreateFabricPcOperationExecute(r ApiCreateFabricPcOpe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateFabricPortModeRequest struct {
@@ -1951,7 +2389,7 @@ func (r ApiCreateFabricPortModeRequest) IfNoneMatch(ifNoneMatch string) ApiCreat
 	return r
 }
 
-func (r ApiCreateFabricPortModeRequest) Execute() (FabricPortMode, *_nethttp.Response, error) {
+func (r ApiCreateFabricPortModeRequest) Execute() (FabricPortMode, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateFabricPortModeExecute(r)
 }
 
@@ -1971,19 +2409,21 @@ func (a *FabricApiService) CreateFabricPortMode(ctx _context.Context) ApiCreateF
  * Execute executes the request
  * @return FabricPortMode
  */
-func (a *FabricApiService) CreateFabricPortModeExecute(r ApiCreateFabricPortModeRequest) (FabricPortMode, *_nethttp.Response, error) {
+func (a *FabricApiService) CreateFabricPortModeExecute(r ApiCreateFabricPortModeRequest) (FabricPortMode, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricPortMode
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricPortMode")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PortModes"
@@ -1992,7 +2432,8 @@ func (a *FabricApiService) CreateFabricPortModeExecute(r ApiCreateFabricPortMode
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricPortMode == nil {
-		return localVarReturnValue, nil, reportError("fabricPortMode is required and must be specified")
+		executionError.error = "fabricPortMode is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -2022,18 +2463,22 @@ func (a *FabricApiService) CreateFabricPortModeExecute(r ApiCreateFabricPortMode
 	localVarPostBody = r.fabricPortMode
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2100,7 +2545,7 @@ func (a *FabricApiService) CreateFabricPortModeExecute(r ApiCreateFabricPortMode
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateFabricPortOperationRequest struct {
@@ -2124,7 +2569,7 @@ func (r ApiCreateFabricPortOperationRequest) IfNoneMatch(ifNoneMatch string) Api
 	return r
 }
 
-func (r ApiCreateFabricPortOperationRequest) Execute() (FabricPortOperation, *_nethttp.Response, error) {
+func (r ApiCreateFabricPortOperationRequest) Execute() (FabricPortOperation, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateFabricPortOperationExecute(r)
 }
 
@@ -2144,19 +2589,21 @@ func (a *FabricApiService) CreateFabricPortOperation(ctx _context.Context) ApiCr
  * Execute executes the request
  * @return FabricPortOperation
  */
-func (a *FabricApiService) CreateFabricPortOperationExecute(r ApiCreateFabricPortOperationRequest) (FabricPortOperation, *_nethttp.Response, error) {
+func (a *FabricApiService) CreateFabricPortOperationExecute(r ApiCreateFabricPortOperationRequest) (FabricPortOperation, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricPortOperation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricPortOperation")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PortOperations"
@@ -2165,7 +2612,8 @@ func (a *FabricApiService) CreateFabricPortOperationExecute(r ApiCreateFabricPor
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricPortOperation == nil {
-		return localVarReturnValue, nil, reportError("fabricPortOperation is required and must be specified")
+		executionError.error = "fabricPortOperation is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -2195,18 +2643,22 @@ func (a *FabricApiService) CreateFabricPortOperationExecute(r ApiCreateFabricPor
 	localVarPostBody = r.fabricPortOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2273,7 +2725,7 @@ func (a *FabricApiService) CreateFabricPortOperationExecute(r ApiCreateFabricPor
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateFabricPortPolicyRequest struct {
@@ -2297,7 +2749,7 @@ func (r ApiCreateFabricPortPolicyRequest) IfNoneMatch(ifNoneMatch string) ApiCre
 	return r
 }
 
-func (r ApiCreateFabricPortPolicyRequest) Execute() (FabricPortPolicy, *_nethttp.Response, error) {
+func (r ApiCreateFabricPortPolicyRequest) Execute() (FabricPortPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateFabricPortPolicyExecute(r)
 }
 
@@ -2317,19 +2769,21 @@ func (a *FabricApiService) CreateFabricPortPolicy(ctx _context.Context) ApiCreat
  * Execute executes the request
  * @return FabricPortPolicy
  */
-func (a *FabricApiService) CreateFabricPortPolicyExecute(r ApiCreateFabricPortPolicyRequest) (FabricPortPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) CreateFabricPortPolicyExecute(r ApiCreateFabricPortPolicyRequest) (FabricPortPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricPortPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricPortPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PortPolicies"
@@ -2338,7 +2792,8 @@ func (a *FabricApiService) CreateFabricPortPolicyExecute(r ApiCreateFabricPortPo
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricPortPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricPortPolicy is required and must be specified")
+		executionError.error = "fabricPortPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -2368,18 +2823,22 @@ func (a *FabricApiService) CreateFabricPortPolicyExecute(r ApiCreateFabricPortPo
 	localVarPostBody = r.fabricPortPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2446,7 +2905,7 @@ func (a *FabricApiService) CreateFabricPortPolicyExecute(r ApiCreateFabricPortPo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateFabricServerRoleRequest struct {
@@ -2470,7 +2929,7 @@ func (r ApiCreateFabricServerRoleRequest) IfNoneMatch(ifNoneMatch string) ApiCre
 	return r
 }
 
-func (r ApiCreateFabricServerRoleRequest) Execute() (FabricServerRole, *_nethttp.Response, error) {
+func (r ApiCreateFabricServerRoleRequest) Execute() (FabricServerRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateFabricServerRoleExecute(r)
 }
 
@@ -2490,19 +2949,21 @@ func (a *FabricApiService) CreateFabricServerRole(ctx _context.Context) ApiCreat
  * Execute executes the request
  * @return FabricServerRole
  */
-func (a *FabricApiService) CreateFabricServerRoleExecute(r ApiCreateFabricServerRoleRequest) (FabricServerRole, *_nethttp.Response, error) {
+func (a *FabricApiService) CreateFabricServerRoleExecute(r ApiCreateFabricServerRoleRequest) (FabricServerRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricServerRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricServerRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/ServerRoles"
@@ -2511,7 +2972,8 @@ func (a *FabricApiService) CreateFabricServerRoleExecute(r ApiCreateFabricServer
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricServerRole == nil {
-		return localVarReturnValue, nil, reportError("fabricServerRole is required and must be specified")
+		executionError.error = "fabricServerRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -2541,18 +3003,22 @@ func (a *FabricApiService) CreateFabricServerRoleExecute(r ApiCreateFabricServer
 	localVarPostBody = r.fabricServerRole
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2619,7 +3085,7 @@ func (a *FabricApiService) CreateFabricServerRoleExecute(r ApiCreateFabricServer
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateFabricSwitchClusterProfileRequest struct {
@@ -2643,7 +3109,7 @@ func (r ApiCreateFabricSwitchClusterProfileRequest) IfNoneMatch(ifNoneMatch stri
 	return r
 }
 
-func (r ApiCreateFabricSwitchClusterProfileRequest) Execute() (FabricSwitchClusterProfile, *_nethttp.Response, error) {
+func (r ApiCreateFabricSwitchClusterProfileRequest) Execute() (FabricSwitchClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateFabricSwitchClusterProfileExecute(r)
 }
 
@@ -2663,19 +3129,21 @@ func (a *FabricApiService) CreateFabricSwitchClusterProfile(ctx _context.Context
  * Execute executes the request
  * @return FabricSwitchClusterProfile
  */
-func (a *FabricApiService) CreateFabricSwitchClusterProfileExecute(r ApiCreateFabricSwitchClusterProfileRequest) (FabricSwitchClusterProfile, *_nethttp.Response, error) {
+func (a *FabricApiService) CreateFabricSwitchClusterProfileExecute(r ApiCreateFabricSwitchClusterProfileRequest) (FabricSwitchClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricSwitchClusterProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricSwitchClusterProfile")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SwitchClusterProfiles"
@@ -2684,7 +3152,8 @@ func (a *FabricApiService) CreateFabricSwitchClusterProfileExecute(r ApiCreateFa
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricSwitchClusterProfile == nil {
-		return localVarReturnValue, nil, reportError("fabricSwitchClusterProfile is required and must be specified")
+		executionError.error = "fabricSwitchClusterProfile is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -2714,18 +3183,22 @@ func (a *FabricApiService) CreateFabricSwitchClusterProfileExecute(r ApiCreateFa
 	localVarPostBody = r.fabricSwitchClusterProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2792,7 +3265,7 @@ func (a *FabricApiService) CreateFabricSwitchClusterProfileExecute(r ApiCreateFa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateFabricSwitchControlPolicyRequest struct {
@@ -2816,7 +3289,7 @@ func (r ApiCreateFabricSwitchControlPolicyRequest) IfNoneMatch(ifNoneMatch strin
 	return r
 }
 
-func (r ApiCreateFabricSwitchControlPolicyRequest) Execute() (FabricSwitchControlPolicy, *_nethttp.Response, error) {
+func (r ApiCreateFabricSwitchControlPolicyRequest) Execute() (FabricSwitchControlPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateFabricSwitchControlPolicyExecute(r)
 }
 
@@ -2836,19 +3309,21 @@ func (a *FabricApiService) CreateFabricSwitchControlPolicy(ctx _context.Context)
  * Execute executes the request
  * @return FabricSwitchControlPolicy
  */
-func (a *FabricApiService) CreateFabricSwitchControlPolicyExecute(r ApiCreateFabricSwitchControlPolicyRequest) (FabricSwitchControlPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) CreateFabricSwitchControlPolicyExecute(r ApiCreateFabricSwitchControlPolicyRequest) (FabricSwitchControlPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricSwitchControlPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricSwitchControlPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SwitchControlPolicies"
@@ -2857,7 +3332,8 @@ func (a *FabricApiService) CreateFabricSwitchControlPolicyExecute(r ApiCreateFab
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricSwitchControlPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricSwitchControlPolicy is required and must be specified")
+		executionError.error = "fabricSwitchControlPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -2887,18 +3363,22 @@ func (a *FabricApiService) CreateFabricSwitchControlPolicyExecute(r ApiCreateFab
 	localVarPostBody = r.fabricSwitchControlPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2965,7 +3445,7 @@ func (a *FabricApiService) CreateFabricSwitchControlPolicyExecute(r ApiCreateFab
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateFabricSwitchProfileRequest struct {
@@ -2989,7 +3469,7 @@ func (r ApiCreateFabricSwitchProfileRequest) IfNoneMatch(ifNoneMatch string) Api
 	return r
 }
 
-func (r ApiCreateFabricSwitchProfileRequest) Execute() (FabricSwitchProfile, *_nethttp.Response, error) {
+func (r ApiCreateFabricSwitchProfileRequest) Execute() (FabricSwitchProfile, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateFabricSwitchProfileExecute(r)
 }
 
@@ -3009,19 +3489,21 @@ func (a *FabricApiService) CreateFabricSwitchProfile(ctx _context.Context) ApiCr
  * Execute executes the request
  * @return FabricSwitchProfile
  */
-func (a *FabricApiService) CreateFabricSwitchProfileExecute(r ApiCreateFabricSwitchProfileRequest) (FabricSwitchProfile, *_nethttp.Response, error) {
+func (a *FabricApiService) CreateFabricSwitchProfileExecute(r ApiCreateFabricSwitchProfileRequest) (FabricSwitchProfile, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricSwitchProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricSwitchProfile")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SwitchProfiles"
@@ -3030,7 +3512,8 @@ func (a *FabricApiService) CreateFabricSwitchProfileExecute(r ApiCreateFabricSwi
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricSwitchProfile == nil {
-		return localVarReturnValue, nil, reportError("fabricSwitchProfile is required and must be specified")
+		executionError.error = "fabricSwitchProfile is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3060,18 +3543,22 @@ func (a *FabricApiService) CreateFabricSwitchProfileExecute(r ApiCreateFabricSwi
 	localVarPostBody = r.fabricSwitchProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3138,7 +3625,7 @@ func (a *FabricApiService) CreateFabricSwitchProfileExecute(r ApiCreateFabricSwi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateFabricSystemQosPolicyRequest struct {
@@ -3162,7 +3649,7 @@ func (r ApiCreateFabricSystemQosPolicyRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateFabricSystemQosPolicyRequest) Execute() (FabricSystemQosPolicy, *_nethttp.Response, error) {
+func (r ApiCreateFabricSystemQosPolicyRequest) Execute() (FabricSystemQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateFabricSystemQosPolicyExecute(r)
 }
 
@@ -3182,19 +3669,21 @@ func (a *FabricApiService) CreateFabricSystemQosPolicy(ctx _context.Context) Api
  * Execute executes the request
  * @return FabricSystemQosPolicy
  */
-func (a *FabricApiService) CreateFabricSystemQosPolicyExecute(r ApiCreateFabricSystemQosPolicyRequest) (FabricSystemQosPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) CreateFabricSystemQosPolicyExecute(r ApiCreateFabricSystemQosPolicyRequest) (FabricSystemQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricSystemQosPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricSystemQosPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SystemQosPolicies"
@@ -3203,7 +3692,8 @@ func (a *FabricApiService) CreateFabricSystemQosPolicyExecute(r ApiCreateFabricS
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricSystemQosPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricSystemQosPolicy is required and must be specified")
+		executionError.error = "fabricSystemQosPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3233,18 +3723,22 @@ func (a *FabricApiService) CreateFabricSystemQosPolicyExecute(r ApiCreateFabricS
 	localVarPostBody = r.fabricSystemQosPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3311,7 +3805,7 @@ func (a *FabricApiService) CreateFabricSystemQosPolicyExecute(r ApiCreateFabricS
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateFabricUplinkPcRoleRequest struct {
@@ -3335,7 +3829,7 @@ func (r ApiCreateFabricUplinkPcRoleRequest) IfNoneMatch(ifNoneMatch string) ApiC
 	return r
 }
 
-func (r ApiCreateFabricUplinkPcRoleRequest) Execute() (FabricUplinkPcRole, *_nethttp.Response, error) {
+func (r ApiCreateFabricUplinkPcRoleRequest) Execute() (FabricUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateFabricUplinkPcRoleExecute(r)
 }
 
@@ -3355,19 +3849,21 @@ func (a *FabricApiService) CreateFabricUplinkPcRole(ctx _context.Context) ApiCre
  * Execute executes the request
  * @return FabricUplinkPcRole
  */
-func (a *FabricApiService) CreateFabricUplinkPcRoleExecute(r ApiCreateFabricUplinkPcRoleRequest) (FabricUplinkPcRole, *_nethttp.Response, error) {
+func (a *FabricApiService) CreateFabricUplinkPcRoleExecute(r ApiCreateFabricUplinkPcRoleRequest) (FabricUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricUplinkPcRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricUplinkPcRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/UplinkPcRoles"
@@ -3376,7 +3872,8 @@ func (a *FabricApiService) CreateFabricUplinkPcRoleExecute(r ApiCreateFabricUpli
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricUplinkPcRole == nil {
-		return localVarReturnValue, nil, reportError("fabricUplinkPcRole is required and must be specified")
+		executionError.error = "fabricUplinkPcRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3406,18 +3903,22 @@ func (a *FabricApiService) CreateFabricUplinkPcRoleExecute(r ApiCreateFabricUpli
 	localVarPostBody = r.fabricUplinkPcRole
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3484,7 +3985,7 @@ func (a *FabricApiService) CreateFabricUplinkPcRoleExecute(r ApiCreateFabricUpli
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateFabricUplinkRoleRequest struct {
@@ -3508,7 +4009,7 @@ func (r ApiCreateFabricUplinkRoleRequest) IfNoneMatch(ifNoneMatch string) ApiCre
 	return r
 }
 
-func (r ApiCreateFabricUplinkRoleRequest) Execute() (FabricUplinkRole, *_nethttp.Response, error) {
+func (r ApiCreateFabricUplinkRoleRequest) Execute() (FabricUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateFabricUplinkRoleExecute(r)
 }
 
@@ -3528,19 +4029,21 @@ func (a *FabricApiService) CreateFabricUplinkRole(ctx _context.Context) ApiCreat
  * Execute executes the request
  * @return FabricUplinkRole
  */
-func (a *FabricApiService) CreateFabricUplinkRoleExecute(r ApiCreateFabricUplinkRoleRequest) (FabricUplinkRole, *_nethttp.Response, error) {
+func (a *FabricApiService) CreateFabricUplinkRoleExecute(r ApiCreateFabricUplinkRoleRequest) (FabricUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricUplinkRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricUplinkRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/UplinkRoles"
@@ -3549,7 +4052,8 @@ func (a *FabricApiService) CreateFabricUplinkRoleExecute(r ApiCreateFabricUplink
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricUplinkRole == nil {
-		return localVarReturnValue, nil, reportError("fabricUplinkRole is required and must be specified")
+		executionError.error = "fabricUplinkRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3579,18 +4083,22 @@ func (a *FabricApiService) CreateFabricUplinkRoleExecute(r ApiCreateFabricUplink
 	localVarPostBody = r.fabricUplinkRole
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3657,7 +4165,7 @@ func (a *FabricApiService) CreateFabricUplinkRoleExecute(r ApiCreateFabricUplink
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateFabricVlanRequest struct {
@@ -3681,7 +4189,7 @@ func (r ApiCreateFabricVlanRequest) IfNoneMatch(ifNoneMatch string) ApiCreateFab
 	return r
 }
 
-func (r ApiCreateFabricVlanRequest) Execute() (FabricVlan, *_nethttp.Response, error) {
+func (r ApiCreateFabricVlanRequest) Execute() (FabricVlan, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateFabricVlanExecute(r)
 }
 
@@ -3701,19 +4209,21 @@ func (a *FabricApiService) CreateFabricVlan(ctx _context.Context) ApiCreateFabri
  * Execute executes the request
  * @return FabricVlan
  */
-func (a *FabricApiService) CreateFabricVlanExecute(r ApiCreateFabricVlanRequest) (FabricVlan, *_nethttp.Response, error) {
+func (a *FabricApiService) CreateFabricVlanExecute(r ApiCreateFabricVlanRequest) (FabricVlan, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricVlan
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricVlan")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/Vlans"
@@ -3722,7 +4232,8 @@ func (a *FabricApiService) CreateFabricVlanExecute(r ApiCreateFabricVlanRequest)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricVlan == nil {
-		return localVarReturnValue, nil, reportError("fabricVlan is required and must be specified")
+		executionError.error = "fabricVlan is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3752,18 +4263,22 @@ func (a *FabricApiService) CreateFabricVlanExecute(r ApiCreateFabricVlanRequest)
 	localVarPostBody = r.fabricVlan
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3830,7 +4345,7 @@ func (a *FabricApiService) CreateFabricVlanExecute(r ApiCreateFabricVlanRequest)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateFabricVsanRequest struct {
@@ -3854,7 +4369,7 @@ func (r ApiCreateFabricVsanRequest) IfNoneMatch(ifNoneMatch string) ApiCreateFab
 	return r
 }
 
-func (r ApiCreateFabricVsanRequest) Execute() (FabricVsan, *_nethttp.Response, error) {
+func (r ApiCreateFabricVsanRequest) Execute() (FabricVsan, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateFabricVsanExecute(r)
 }
 
@@ -3874,19 +4389,21 @@ func (a *FabricApiService) CreateFabricVsan(ctx _context.Context) ApiCreateFabri
  * Execute executes the request
  * @return FabricVsan
  */
-func (a *FabricApiService) CreateFabricVsanExecute(r ApiCreateFabricVsanRequest) (FabricVsan, *_nethttp.Response, error) {
+func (a *FabricApiService) CreateFabricVsanExecute(r ApiCreateFabricVsanRequest) (FabricVsan, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricVsan
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.CreateFabricVsan")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/Vsans"
@@ -3895,7 +4412,8 @@ func (a *FabricApiService) CreateFabricVsanExecute(r ApiCreateFabricVsanRequest)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricVsan == nil {
-		return localVarReturnValue, nil, reportError("fabricVsan is required and must be specified")
+		executionError.error = "fabricVsan is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3925,18 +4443,22 @@ func (a *FabricApiService) CreateFabricVsanExecute(r ApiCreateFabricVsanRequest)
 	localVarPostBody = r.fabricVsan
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4003,7 +4525,297 @@ func (a *FabricApiService) CreateFabricVsanExecute(r ApiCreateFabricVsanRequest)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
+}
+
+type ApiDeleteFabricAppliancePcRoleRequest struct {
+	ctx        _context.Context
+	ApiService *FabricApiService
+	moid       string
+}
+
+func (r ApiDeleteFabricAppliancePcRoleRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+	return r.ApiService.DeleteFabricAppliancePcRoleExecute(r)
+}
+
+/*
+ * DeleteFabricAppliancePcRole Delete a 'fabric.AppliancePcRole' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiDeleteFabricAppliancePcRoleRequest
+ */
+func (a *FabricApiService) DeleteFabricAppliancePcRole(ctx _context.Context, moid string) ApiDeleteFabricAppliancePcRoleRequest {
+	return ApiDeleteFabricAppliancePcRoleRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ */
+func (a *FabricApiService) DeleteFabricAppliancePcRoleExecute(r ApiDeleteFabricAppliancePcRoleRequest) (*_nethttp.Response, GenericOpenAPIError) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricAppliancePcRole")
+	if err != nil {
+		executionError.error = err.Error()
+		return nil, executionError
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/AppliancePcRoles/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		executionError.error = err.Error()
+		return nil, executionError
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, executionError
+}
+
+type ApiDeleteFabricApplianceRoleRequest struct {
+	ctx        _context.Context
+	ApiService *FabricApiService
+	moid       string
+}
+
+func (r ApiDeleteFabricApplianceRoleRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+	return r.ApiService.DeleteFabricApplianceRoleExecute(r)
+}
+
+/*
+ * DeleteFabricApplianceRole Delete a 'fabric.ApplianceRole' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiDeleteFabricApplianceRoleRequest
+ */
+func (a *FabricApiService) DeleteFabricApplianceRole(ctx _context.Context, moid string) ApiDeleteFabricApplianceRoleRequest {
+	return ApiDeleteFabricApplianceRoleRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ */
+func (a *FabricApiService) DeleteFabricApplianceRoleExecute(r ApiDeleteFabricApplianceRoleRequest) (*_nethttp.Response, GenericOpenAPIError) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricApplianceRole")
+	if err != nil {
+		executionError.error = err.Error()
+		return nil, executionError
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/ApplianceRoles/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		executionError.error = err.Error()
+		return nil, executionError
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteFabricEthNetworkControlPolicyRequest struct {
@@ -4012,7 +4824,7 @@ type ApiDeleteFabricEthNetworkControlPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFabricEthNetworkControlPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteFabricEthNetworkControlPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteFabricEthNetworkControlPolicyExecute(r)
 }
 
@@ -4033,18 +4845,20 @@ func (a *FabricApiService) DeleteFabricEthNetworkControlPolicy(ctx _context.Cont
 /*
  * Execute executes the request
  */
-func (a *FabricApiService) DeleteFabricEthNetworkControlPolicyExecute(r ApiDeleteFabricEthNetworkControlPolicyRequest) (*_nethttp.Response, error) {
+func (a *FabricApiService) DeleteFabricEthNetworkControlPolicyExecute(r ApiDeleteFabricEthNetworkControlPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricEthNetworkControlPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/EthNetworkControlPolicies/{Moid}"
@@ -4073,18 +4887,22 @@ func (a *FabricApiService) DeleteFabricEthNetworkControlPolicyExecute(r ApiDelet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4142,7 +4960,7 @@ func (a *FabricApiService) DeleteFabricEthNetworkControlPolicyExecute(r ApiDelet
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteFabricEthNetworkGroupPolicyRequest struct {
@@ -4151,7 +4969,7 @@ type ApiDeleteFabricEthNetworkGroupPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFabricEthNetworkGroupPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteFabricEthNetworkGroupPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteFabricEthNetworkGroupPolicyExecute(r)
 }
 
@@ -4172,18 +4990,20 @@ func (a *FabricApiService) DeleteFabricEthNetworkGroupPolicy(ctx _context.Contex
 /*
  * Execute executes the request
  */
-func (a *FabricApiService) DeleteFabricEthNetworkGroupPolicyExecute(r ApiDeleteFabricEthNetworkGroupPolicyRequest) (*_nethttp.Response, error) {
+func (a *FabricApiService) DeleteFabricEthNetworkGroupPolicyExecute(r ApiDeleteFabricEthNetworkGroupPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricEthNetworkGroupPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/EthNetworkGroupPolicies/{Moid}"
@@ -4212,18 +5032,22 @@ func (a *FabricApiService) DeleteFabricEthNetworkGroupPolicyExecute(r ApiDeleteF
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4281,7 +5105,7 @@ func (a *FabricApiService) DeleteFabricEthNetworkGroupPolicyExecute(r ApiDeleteF
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteFabricEthNetworkPolicyRequest struct {
@@ -4290,7 +5114,7 @@ type ApiDeleteFabricEthNetworkPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFabricEthNetworkPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteFabricEthNetworkPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteFabricEthNetworkPolicyExecute(r)
 }
 
@@ -4311,18 +5135,20 @@ func (a *FabricApiService) DeleteFabricEthNetworkPolicy(ctx _context.Context, mo
 /*
  * Execute executes the request
  */
-func (a *FabricApiService) DeleteFabricEthNetworkPolicyExecute(r ApiDeleteFabricEthNetworkPolicyRequest) (*_nethttp.Response, error) {
+func (a *FabricApiService) DeleteFabricEthNetworkPolicyExecute(r ApiDeleteFabricEthNetworkPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricEthNetworkPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/EthNetworkPolicies/{Moid}"
@@ -4351,18 +5177,22 @@ func (a *FabricApiService) DeleteFabricEthNetworkPolicyExecute(r ApiDeleteFabric
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4420,7 +5250,7 @@ func (a *FabricApiService) DeleteFabricEthNetworkPolicyExecute(r ApiDeleteFabric
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteFabricFcNetworkPolicyRequest struct {
@@ -4429,7 +5259,7 @@ type ApiDeleteFabricFcNetworkPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFabricFcNetworkPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteFabricFcNetworkPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteFabricFcNetworkPolicyExecute(r)
 }
 
@@ -4450,18 +5280,20 @@ func (a *FabricApiService) DeleteFabricFcNetworkPolicy(ctx _context.Context, moi
 /*
  * Execute executes the request
  */
-func (a *FabricApiService) DeleteFabricFcNetworkPolicyExecute(r ApiDeleteFabricFcNetworkPolicyRequest) (*_nethttp.Response, error) {
+func (a *FabricApiService) DeleteFabricFcNetworkPolicyExecute(r ApiDeleteFabricFcNetworkPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricFcNetworkPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcNetworkPolicies/{Moid}"
@@ -4490,18 +5322,22 @@ func (a *FabricApiService) DeleteFabricFcNetworkPolicyExecute(r ApiDeleteFabricF
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4559,7 +5395,7 @@ func (a *FabricApiService) DeleteFabricFcNetworkPolicyExecute(r ApiDeleteFabricF
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteFabricFcUplinkPcRoleRequest struct {
@@ -4568,7 +5404,7 @@ type ApiDeleteFabricFcUplinkPcRoleRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFabricFcUplinkPcRoleRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteFabricFcUplinkPcRoleRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteFabricFcUplinkPcRoleExecute(r)
 }
 
@@ -4589,18 +5425,20 @@ func (a *FabricApiService) DeleteFabricFcUplinkPcRole(ctx _context.Context, moid
 /*
  * Execute executes the request
  */
-func (a *FabricApiService) DeleteFabricFcUplinkPcRoleExecute(r ApiDeleteFabricFcUplinkPcRoleRequest) (*_nethttp.Response, error) {
+func (a *FabricApiService) DeleteFabricFcUplinkPcRoleExecute(r ApiDeleteFabricFcUplinkPcRoleRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricFcUplinkPcRole")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcUplinkPcRoles/{Moid}"
@@ -4629,18 +5467,22 @@ func (a *FabricApiService) DeleteFabricFcUplinkPcRoleExecute(r ApiDeleteFabricFc
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4698,7 +5540,7 @@ func (a *FabricApiService) DeleteFabricFcUplinkPcRoleExecute(r ApiDeleteFabricFc
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteFabricFcUplinkRoleRequest struct {
@@ -4707,7 +5549,7 @@ type ApiDeleteFabricFcUplinkRoleRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFabricFcUplinkRoleRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteFabricFcUplinkRoleRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteFabricFcUplinkRoleExecute(r)
 }
 
@@ -4728,18 +5570,20 @@ func (a *FabricApiService) DeleteFabricFcUplinkRole(ctx _context.Context, moid s
 /*
  * Execute executes the request
  */
-func (a *FabricApiService) DeleteFabricFcUplinkRoleExecute(r ApiDeleteFabricFcUplinkRoleRequest) (*_nethttp.Response, error) {
+func (a *FabricApiService) DeleteFabricFcUplinkRoleExecute(r ApiDeleteFabricFcUplinkRoleRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricFcUplinkRole")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcUplinkRoles/{Moid}"
@@ -4768,18 +5612,22 @@ func (a *FabricApiService) DeleteFabricFcUplinkRoleExecute(r ApiDeleteFabricFcUp
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4837,7 +5685,7 @@ func (a *FabricApiService) DeleteFabricFcUplinkRoleExecute(r ApiDeleteFabricFcUp
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteFabricFcoeUplinkPcRoleRequest struct {
@@ -4846,7 +5694,7 @@ type ApiDeleteFabricFcoeUplinkPcRoleRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFabricFcoeUplinkPcRoleRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteFabricFcoeUplinkPcRoleRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteFabricFcoeUplinkPcRoleExecute(r)
 }
 
@@ -4867,18 +5715,20 @@ func (a *FabricApiService) DeleteFabricFcoeUplinkPcRole(ctx _context.Context, mo
 /*
  * Execute executes the request
  */
-func (a *FabricApiService) DeleteFabricFcoeUplinkPcRoleExecute(r ApiDeleteFabricFcoeUplinkPcRoleRequest) (*_nethttp.Response, error) {
+func (a *FabricApiService) DeleteFabricFcoeUplinkPcRoleExecute(r ApiDeleteFabricFcoeUplinkPcRoleRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricFcoeUplinkPcRole")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcoeUplinkPcRoles/{Moid}"
@@ -4907,18 +5757,22 @@ func (a *FabricApiService) DeleteFabricFcoeUplinkPcRoleExecute(r ApiDeleteFabric
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4976,7 +5830,7 @@ func (a *FabricApiService) DeleteFabricFcoeUplinkPcRoleExecute(r ApiDeleteFabric
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteFabricFcoeUplinkRoleRequest struct {
@@ -4985,7 +5839,7 @@ type ApiDeleteFabricFcoeUplinkRoleRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFabricFcoeUplinkRoleRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteFabricFcoeUplinkRoleRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteFabricFcoeUplinkRoleExecute(r)
 }
 
@@ -5006,18 +5860,20 @@ func (a *FabricApiService) DeleteFabricFcoeUplinkRole(ctx _context.Context, moid
 /*
  * Execute executes the request
  */
-func (a *FabricApiService) DeleteFabricFcoeUplinkRoleExecute(r ApiDeleteFabricFcoeUplinkRoleRequest) (*_nethttp.Response, error) {
+func (a *FabricApiService) DeleteFabricFcoeUplinkRoleExecute(r ApiDeleteFabricFcoeUplinkRoleRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricFcoeUplinkRole")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcoeUplinkRoles/{Moid}"
@@ -5046,18 +5902,22 @@ func (a *FabricApiService) DeleteFabricFcoeUplinkRoleExecute(r ApiDeleteFabricFc
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5115,7 +5975,7 @@ func (a *FabricApiService) DeleteFabricFcoeUplinkRoleExecute(r ApiDeleteFabricFc
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteFabricMulticastPolicyRequest struct {
@@ -5124,7 +5984,7 @@ type ApiDeleteFabricMulticastPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFabricMulticastPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteFabricMulticastPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteFabricMulticastPolicyExecute(r)
 }
 
@@ -5145,18 +6005,20 @@ func (a *FabricApiService) DeleteFabricMulticastPolicy(ctx _context.Context, moi
 /*
  * Execute executes the request
  */
-func (a *FabricApiService) DeleteFabricMulticastPolicyExecute(r ApiDeleteFabricMulticastPolicyRequest) (*_nethttp.Response, error) {
+func (a *FabricApiService) DeleteFabricMulticastPolicyExecute(r ApiDeleteFabricMulticastPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricMulticastPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/MulticastPolicies/{Moid}"
@@ -5185,18 +6047,22 @@ func (a *FabricApiService) DeleteFabricMulticastPolicyExecute(r ApiDeleteFabricM
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5254,7 +6120,7 @@ func (a *FabricApiService) DeleteFabricMulticastPolicyExecute(r ApiDeleteFabricM
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteFabricPcOperationRequest struct {
@@ -5263,7 +6129,7 @@ type ApiDeleteFabricPcOperationRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFabricPcOperationRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteFabricPcOperationRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteFabricPcOperationExecute(r)
 }
 
@@ -5284,18 +6150,20 @@ func (a *FabricApiService) DeleteFabricPcOperation(ctx _context.Context, moid st
 /*
  * Execute executes the request
  */
-func (a *FabricApiService) DeleteFabricPcOperationExecute(r ApiDeleteFabricPcOperationRequest) (*_nethttp.Response, error) {
+func (a *FabricApiService) DeleteFabricPcOperationExecute(r ApiDeleteFabricPcOperationRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricPcOperation")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PcOperations/{Moid}"
@@ -5324,18 +6192,22 @@ func (a *FabricApiService) DeleteFabricPcOperationExecute(r ApiDeleteFabricPcOpe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5393,7 +6265,7 @@ func (a *FabricApiService) DeleteFabricPcOperationExecute(r ApiDeleteFabricPcOpe
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteFabricPortModeRequest struct {
@@ -5402,7 +6274,7 @@ type ApiDeleteFabricPortModeRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFabricPortModeRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteFabricPortModeRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteFabricPortModeExecute(r)
 }
 
@@ -5423,18 +6295,20 @@ func (a *FabricApiService) DeleteFabricPortMode(ctx _context.Context, moid strin
 /*
  * Execute executes the request
  */
-func (a *FabricApiService) DeleteFabricPortModeExecute(r ApiDeleteFabricPortModeRequest) (*_nethttp.Response, error) {
+func (a *FabricApiService) DeleteFabricPortModeExecute(r ApiDeleteFabricPortModeRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricPortMode")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PortModes/{Moid}"
@@ -5463,18 +6337,22 @@ func (a *FabricApiService) DeleteFabricPortModeExecute(r ApiDeleteFabricPortMode
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5532,7 +6410,7 @@ func (a *FabricApiService) DeleteFabricPortModeExecute(r ApiDeleteFabricPortMode
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteFabricPortOperationRequest struct {
@@ -5541,7 +6419,7 @@ type ApiDeleteFabricPortOperationRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFabricPortOperationRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteFabricPortOperationRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteFabricPortOperationExecute(r)
 }
 
@@ -5562,18 +6440,20 @@ func (a *FabricApiService) DeleteFabricPortOperation(ctx _context.Context, moid 
 /*
  * Execute executes the request
  */
-func (a *FabricApiService) DeleteFabricPortOperationExecute(r ApiDeleteFabricPortOperationRequest) (*_nethttp.Response, error) {
+func (a *FabricApiService) DeleteFabricPortOperationExecute(r ApiDeleteFabricPortOperationRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricPortOperation")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PortOperations/{Moid}"
@@ -5602,18 +6482,22 @@ func (a *FabricApiService) DeleteFabricPortOperationExecute(r ApiDeleteFabricPor
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5671,7 +6555,7 @@ func (a *FabricApiService) DeleteFabricPortOperationExecute(r ApiDeleteFabricPor
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteFabricPortPolicyRequest struct {
@@ -5680,7 +6564,7 @@ type ApiDeleteFabricPortPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFabricPortPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteFabricPortPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteFabricPortPolicyExecute(r)
 }
 
@@ -5701,18 +6585,20 @@ func (a *FabricApiService) DeleteFabricPortPolicy(ctx _context.Context, moid str
 /*
  * Execute executes the request
  */
-func (a *FabricApiService) DeleteFabricPortPolicyExecute(r ApiDeleteFabricPortPolicyRequest) (*_nethttp.Response, error) {
+func (a *FabricApiService) DeleteFabricPortPolicyExecute(r ApiDeleteFabricPortPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricPortPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PortPolicies/{Moid}"
@@ -5741,18 +6627,22 @@ func (a *FabricApiService) DeleteFabricPortPolicyExecute(r ApiDeleteFabricPortPo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5810,7 +6700,7 @@ func (a *FabricApiService) DeleteFabricPortPolicyExecute(r ApiDeleteFabricPortPo
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteFabricServerRoleRequest struct {
@@ -5819,7 +6709,7 @@ type ApiDeleteFabricServerRoleRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFabricServerRoleRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteFabricServerRoleRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteFabricServerRoleExecute(r)
 }
 
@@ -5840,18 +6730,20 @@ func (a *FabricApiService) DeleteFabricServerRole(ctx _context.Context, moid str
 /*
  * Execute executes the request
  */
-func (a *FabricApiService) DeleteFabricServerRoleExecute(r ApiDeleteFabricServerRoleRequest) (*_nethttp.Response, error) {
+func (a *FabricApiService) DeleteFabricServerRoleExecute(r ApiDeleteFabricServerRoleRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricServerRole")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/ServerRoles/{Moid}"
@@ -5880,18 +6772,22 @@ func (a *FabricApiService) DeleteFabricServerRoleExecute(r ApiDeleteFabricServer
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5949,7 +6845,7 @@ func (a *FabricApiService) DeleteFabricServerRoleExecute(r ApiDeleteFabricServer
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteFabricSwitchClusterProfileRequest struct {
@@ -5958,7 +6854,7 @@ type ApiDeleteFabricSwitchClusterProfileRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFabricSwitchClusterProfileRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteFabricSwitchClusterProfileRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteFabricSwitchClusterProfileExecute(r)
 }
 
@@ -5979,18 +6875,20 @@ func (a *FabricApiService) DeleteFabricSwitchClusterProfile(ctx _context.Context
 /*
  * Execute executes the request
  */
-func (a *FabricApiService) DeleteFabricSwitchClusterProfileExecute(r ApiDeleteFabricSwitchClusterProfileRequest) (*_nethttp.Response, error) {
+func (a *FabricApiService) DeleteFabricSwitchClusterProfileExecute(r ApiDeleteFabricSwitchClusterProfileRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricSwitchClusterProfile")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SwitchClusterProfiles/{Moid}"
@@ -6019,18 +6917,22 @@ func (a *FabricApiService) DeleteFabricSwitchClusterProfileExecute(r ApiDeleteFa
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6088,7 +6990,7 @@ func (a *FabricApiService) DeleteFabricSwitchClusterProfileExecute(r ApiDeleteFa
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteFabricSwitchControlPolicyRequest struct {
@@ -6097,7 +6999,7 @@ type ApiDeleteFabricSwitchControlPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFabricSwitchControlPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteFabricSwitchControlPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteFabricSwitchControlPolicyExecute(r)
 }
 
@@ -6118,18 +7020,20 @@ func (a *FabricApiService) DeleteFabricSwitchControlPolicy(ctx _context.Context,
 /*
  * Execute executes the request
  */
-func (a *FabricApiService) DeleteFabricSwitchControlPolicyExecute(r ApiDeleteFabricSwitchControlPolicyRequest) (*_nethttp.Response, error) {
+func (a *FabricApiService) DeleteFabricSwitchControlPolicyExecute(r ApiDeleteFabricSwitchControlPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricSwitchControlPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SwitchControlPolicies/{Moid}"
@@ -6158,18 +7062,22 @@ func (a *FabricApiService) DeleteFabricSwitchControlPolicyExecute(r ApiDeleteFab
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6227,7 +7135,7 @@ func (a *FabricApiService) DeleteFabricSwitchControlPolicyExecute(r ApiDeleteFab
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteFabricSwitchProfileRequest struct {
@@ -6236,7 +7144,7 @@ type ApiDeleteFabricSwitchProfileRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFabricSwitchProfileRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteFabricSwitchProfileRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteFabricSwitchProfileExecute(r)
 }
 
@@ -6257,18 +7165,20 @@ func (a *FabricApiService) DeleteFabricSwitchProfile(ctx _context.Context, moid 
 /*
  * Execute executes the request
  */
-func (a *FabricApiService) DeleteFabricSwitchProfileExecute(r ApiDeleteFabricSwitchProfileRequest) (*_nethttp.Response, error) {
+func (a *FabricApiService) DeleteFabricSwitchProfileExecute(r ApiDeleteFabricSwitchProfileRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricSwitchProfile")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SwitchProfiles/{Moid}"
@@ -6297,18 +7207,22 @@ func (a *FabricApiService) DeleteFabricSwitchProfileExecute(r ApiDeleteFabricSwi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6366,7 +7280,7 @@ func (a *FabricApiService) DeleteFabricSwitchProfileExecute(r ApiDeleteFabricSwi
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteFabricSystemQosPolicyRequest struct {
@@ -6375,7 +7289,7 @@ type ApiDeleteFabricSystemQosPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFabricSystemQosPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteFabricSystemQosPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteFabricSystemQosPolicyExecute(r)
 }
 
@@ -6396,18 +7310,20 @@ func (a *FabricApiService) DeleteFabricSystemQosPolicy(ctx _context.Context, moi
 /*
  * Execute executes the request
  */
-func (a *FabricApiService) DeleteFabricSystemQosPolicyExecute(r ApiDeleteFabricSystemQosPolicyRequest) (*_nethttp.Response, error) {
+func (a *FabricApiService) DeleteFabricSystemQosPolicyExecute(r ApiDeleteFabricSystemQosPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricSystemQosPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SystemQosPolicies/{Moid}"
@@ -6436,18 +7352,22 @@ func (a *FabricApiService) DeleteFabricSystemQosPolicyExecute(r ApiDeleteFabricS
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6505,7 +7425,7 @@ func (a *FabricApiService) DeleteFabricSystemQosPolicyExecute(r ApiDeleteFabricS
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteFabricUplinkPcRoleRequest struct {
@@ -6514,7 +7434,7 @@ type ApiDeleteFabricUplinkPcRoleRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFabricUplinkPcRoleRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteFabricUplinkPcRoleRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteFabricUplinkPcRoleExecute(r)
 }
 
@@ -6535,18 +7455,20 @@ func (a *FabricApiService) DeleteFabricUplinkPcRole(ctx _context.Context, moid s
 /*
  * Execute executes the request
  */
-func (a *FabricApiService) DeleteFabricUplinkPcRoleExecute(r ApiDeleteFabricUplinkPcRoleRequest) (*_nethttp.Response, error) {
+func (a *FabricApiService) DeleteFabricUplinkPcRoleExecute(r ApiDeleteFabricUplinkPcRoleRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricUplinkPcRole")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/UplinkPcRoles/{Moid}"
@@ -6575,18 +7497,22 @@ func (a *FabricApiService) DeleteFabricUplinkPcRoleExecute(r ApiDeleteFabricUpli
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6644,7 +7570,7 @@ func (a *FabricApiService) DeleteFabricUplinkPcRoleExecute(r ApiDeleteFabricUpli
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteFabricUplinkRoleRequest struct {
@@ -6653,7 +7579,7 @@ type ApiDeleteFabricUplinkRoleRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFabricUplinkRoleRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteFabricUplinkRoleRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteFabricUplinkRoleExecute(r)
 }
 
@@ -6674,18 +7600,20 @@ func (a *FabricApiService) DeleteFabricUplinkRole(ctx _context.Context, moid str
 /*
  * Execute executes the request
  */
-func (a *FabricApiService) DeleteFabricUplinkRoleExecute(r ApiDeleteFabricUplinkRoleRequest) (*_nethttp.Response, error) {
+func (a *FabricApiService) DeleteFabricUplinkRoleExecute(r ApiDeleteFabricUplinkRoleRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricUplinkRole")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/UplinkRoles/{Moid}"
@@ -6714,18 +7642,22 @@ func (a *FabricApiService) DeleteFabricUplinkRoleExecute(r ApiDeleteFabricUplink
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6783,7 +7715,7 @@ func (a *FabricApiService) DeleteFabricUplinkRoleExecute(r ApiDeleteFabricUplink
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteFabricVlanRequest struct {
@@ -6792,7 +7724,7 @@ type ApiDeleteFabricVlanRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFabricVlanRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteFabricVlanRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteFabricVlanExecute(r)
 }
 
@@ -6813,18 +7745,20 @@ func (a *FabricApiService) DeleteFabricVlan(ctx _context.Context, moid string) A
 /*
  * Execute executes the request
  */
-func (a *FabricApiService) DeleteFabricVlanExecute(r ApiDeleteFabricVlanRequest) (*_nethttp.Response, error) {
+func (a *FabricApiService) DeleteFabricVlanExecute(r ApiDeleteFabricVlanRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricVlan")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/Vlans/{Moid}"
@@ -6853,18 +7787,22 @@ func (a *FabricApiService) DeleteFabricVlanExecute(r ApiDeleteFabricVlanRequest)
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6922,7 +7860,7 @@ func (a *FabricApiService) DeleteFabricVlanExecute(r ApiDeleteFabricVlanRequest)
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteFabricVsanRequest struct {
@@ -6931,7 +7869,7 @@ type ApiDeleteFabricVsanRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteFabricVsanRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteFabricVsanRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteFabricVsanExecute(r)
 }
 
@@ -6952,18 +7890,20 @@ func (a *FabricApiService) DeleteFabricVsan(ctx _context.Context, moid string) A
 /*
  * Execute executes the request
  */
-func (a *FabricApiService) DeleteFabricVsanExecute(r ApiDeleteFabricVsanRequest) (*_nethttp.Response, error) {
+func (a *FabricApiService) DeleteFabricVsanExecute(r ApiDeleteFabricVsanRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.DeleteFabricVsan")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/Vsans/{Moid}"
@@ -6992,18 +7932,22 @@ func (a *FabricApiService) DeleteFabricVsanExecute(r ApiDeleteFabricVsanRequest)
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7061,27 +8005,27 @@ func (a *FabricApiService) DeleteFabricVsanExecute(r ApiDeleteFabricVsanRequest)
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
-type ApiGetFabricConfigChangeDetailByMoidRequest struct {
+type ApiGetFabricAppliancePcRoleByMoidRequest struct {
 	ctx        _context.Context
 	ApiService *FabricApiService
 	moid       string
 }
 
-func (r ApiGetFabricConfigChangeDetailByMoidRequest) Execute() (FabricConfigChangeDetail, *_nethttp.Response, error) {
-	return r.ApiService.GetFabricConfigChangeDetailByMoidExecute(r)
+func (r ApiGetFabricAppliancePcRoleByMoidRequest) Execute() (FabricAppliancePcRole, *_nethttp.Response, GenericOpenAPIError) {
+	return r.ApiService.GetFabricAppliancePcRoleByMoidExecute(r)
 }
 
 /*
- * GetFabricConfigChangeDetailByMoid Read a 'fabric.ConfigChangeDetail' resource.
+ * GetFabricAppliancePcRoleByMoid Read a 'fabric.AppliancePcRole' resource.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param moid The unique Moid identifier of a resource instance.
- * @return ApiGetFabricConfigChangeDetailByMoidRequest
+ * @return ApiGetFabricAppliancePcRoleByMoidRequest
  */
-func (a *FabricApiService) GetFabricConfigChangeDetailByMoid(ctx _context.Context, moid string) ApiGetFabricConfigChangeDetailByMoidRequest {
-	return ApiGetFabricConfigChangeDetailByMoidRequest{
+func (a *FabricApiService) GetFabricAppliancePcRoleByMoid(ctx _context.Context, moid string) ApiGetFabricAppliancePcRoleByMoidRequest {
+	return ApiGetFabricAppliancePcRoleByMoidRequest{
 		ApiService: a,
 		ctx:        ctx,
 		moid:       moid,
@@ -7090,24 +8034,26 @@ func (a *FabricApiService) GetFabricConfigChangeDetailByMoid(ctx _context.Contex
 
 /*
  * Execute executes the request
- * @return FabricConfigChangeDetail
+ * @return FabricAppliancePcRole
  */
-func (a *FabricApiService) GetFabricConfigChangeDetailByMoidExecute(r ApiGetFabricConfigChangeDetailByMoidRequest) (FabricConfigChangeDetail, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricAppliancePcRoleByMoidExecute(r ApiGetFabricAppliancePcRoleByMoidRequest) (FabricAppliancePcRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  FabricConfigChangeDetail
+		executionError       GenericOpenAPIError
+		localVarReturnValue  FabricAppliancePcRole
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricConfigChangeDetailByMoid")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricAppliancePcRoleByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
-	localVarPath := localBasePath + "/api/v1/fabric/ConfigChangeDetails/{Moid}"
+	localVarPath := localBasePath + "/api/v1/fabric/AppliancePcRoles/{Moid}"
 	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -7133,18 +8079,22 @@ func (a *FabricApiService) GetFabricConfigChangeDetailByMoidExecute(r ApiGetFabr
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7211,7 +8161,801 @@ func (a *FabricApiService) GetFabricConfigChangeDetailByMoidExecute(r ApiGetFabr
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
+}
+
+type ApiGetFabricAppliancePcRoleListRequest struct {
+	ctx         _context.Context
+	ApiService  *FabricApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetFabricAppliancePcRoleListRequest) Filter(filter string) ApiGetFabricAppliancePcRoleListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetFabricAppliancePcRoleListRequest) Orderby(orderby string) ApiGetFabricAppliancePcRoleListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetFabricAppliancePcRoleListRequest) Top(top int32) ApiGetFabricAppliancePcRoleListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetFabricAppliancePcRoleListRequest) Skip(skip int32) ApiGetFabricAppliancePcRoleListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetFabricAppliancePcRoleListRequest) Select_(select_ string) ApiGetFabricAppliancePcRoleListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetFabricAppliancePcRoleListRequest) Expand(expand string) ApiGetFabricAppliancePcRoleListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetFabricAppliancePcRoleListRequest) Apply(apply string) ApiGetFabricAppliancePcRoleListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetFabricAppliancePcRoleListRequest) Count(count bool) ApiGetFabricAppliancePcRoleListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetFabricAppliancePcRoleListRequest) Inlinecount(inlinecount string) ApiGetFabricAppliancePcRoleListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetFabricAppliancePcRoleListRequest) At(at string) ApiGetFabricAppliancePcRoleListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetFabricAppliancePcRoleListRequest) Tags(tags string) ApiGetFabricAppliancePcRoleListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetFabricAppliancePcRoleListRequest) Execute() (FabricAppliancePcRoleResponse, *_nethttp.Response, GenericOpenAPIError) {
+	return r.ApiService.GetFabricAppliancePcRoleListExecute(r)
+}
+
+/*
+ * GetFabricAppliancePcRoleList Read a 'fabric.AppliancePcRole' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetFabricAppliancePcRoleListRequest
+ */
+func (a *FabricApiService) GetFabricAppliancePcRoleList(ctx _context.Context) ApiGetFabricAppliancePcRoleListRequest {
+	return ApiGetFabricAppliancePcRoleListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return FabricAppliancePcRoleResponse
+ */
+func (a *FabricApiService) GetFabricAppliancePcRoleListExecute(r ApiGetFabricAppliancePcRoleListRequest) (FabricAppliancePcRoleResponse, *_nethttp.Response, GenericOpenAPIError) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
+		localVarReturnValue  FabricAppliancePcRoleResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricAppliancePcRoleList")
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/AppliancePcRoles"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, executionError
+}
+
+type ApiGetFabricApplianceRoleByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *FabricApiService
+	moid       string
+}
+
+func (r ApiGetFabricApplianceRoleByMoidRequest) Execute() (FabricApplianceRole, *_nethttp.Response, GenericOpenAPIError) {
+	return r.ApiService.GetFabricApplianceRoleByMoidExecute(r)
+}
+
+/*
+ * GetFabricApplianceRoleByMoid Read a 'fabric.ApplianceRole' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetFabricApplianceRoleByMoidRequest
+ */
+func (a *FabricApiService) GetFabricApplianceRoleByMoid(ctx _context.Context, moid string) ApiGetFabricApplianceRoleByMoidRequest {
+	return ApiGetFabricApplianceRoleByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return FabricApplianceRole
+ */
+func (a *FabricApiService) GetFabricApplianceRoleByMoidExecute(r ApiGetFabricApplianceRoleByMoidRequest) (FabricApplianceRole, *_nethttp.Response, GenericOpenAPIError) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
+		localVarReturnValue  FabricApplianceRole
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricApplianceRoleByMoid")
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/ApplianceRoles/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, executionError
+}
+
+type ApiGetFabricApplianceRoleListRequest struct {
+	ctx         _context.Context
+	ApiService  *FabricApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetFabricApplianceRoleListRequest) Filter(filter string) ApiGetFabricApplianceRoleListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetFabricApplianceRoleListRequest) Orderby(orderby string) ApiGetFabricApplianceRoleListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetFabricApplianceRoleListRequest) Top(top int32) ApiGetFabricApplianceRoleListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetFabricApplianceRoleListRequest) Skip(skip int32) ApiGetFabricApplianceRoleListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetFabricApplianceRoleListRequest) Select_(select_ string) ApiGetFabricApplianceRoleListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetFabricApplianceRoleListRequest) Expand(expand string) ApiGetFabricApplianceRoleListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetFabricApplianceRoleListRequest) Apply(apply string) ApiGetFabricApplianceRoleListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetFabricApplianceRoleListRequest) Count(count bool) ApiGetFabricApplianceRoleListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetFabricApplianceRoleListRequest) Inlinecount(inlinecount string) ApiGetFabricApplianceRoleListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetFabricApplianceRoleListRequest) At(at string) ApiGetFabricApplianceRoleListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetFabricApplianceRoleListRequest) Tags(tags string) ApiGetFabricApplianceRoleListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetFabricApplianceRoleListRequest) Execute() (FabricApplianceRoleResponse, *_nethttp.Response, GenericOpenAPIError) {
+	return r.ApiService.GetFabricApplianceRoleListExecute(r)
+}
+
+/*
+ * GetFabricApplianceRoleList Read a 'fabric.ApplianceRole' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetFabricApplianceRoleListRequest
+ */
+func (a *FabricApiService) GetFabricApplianceRoleList(ctx _context.Context) ApiGetFabricApplianceRoleListRequest {
+	return ApiGetFabricApplianceRoleListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return FabricApplianceRoleResponse
+ */
+func (a *FabricApiService) GetFabricApplianceRoleListExecute(r ApiGetFabricApplianceRoleListRequest) (FabricApplianceRoleResponse, *_nethttp.Response, GenericOpenAPIError) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
+		localVarReturnValue  FabricApplianceRoleResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricApplianceRoleList")
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/ApplianceRoles"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, executionError
+}
+
+type ApiGetFabricConfigChangeDetailByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *FabricApiService
+	moid       string
+}
+
+func (r ApiGetFabricConfigChangeDetailByMoidRequest) Execute() (FabricConfigChangeDetail, *_nethttp.Response, GenericOpenAPIError) {
+	return r.ApiService.GetFabricConfigChangeDetailByMoidExecute(r)
+}
+
+/*
+ * GetFabricConfigChangeDetailByMoid Read a 'fabric.ConfigChangeDetail' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetFabricConfigChangeDetailByMoidRequest
+ */
+func (a *FabricApiService) GetFabricConfigChangeDetailByMoid(ctx _context.Context, moid string) ApiGetFabricConfigChangeDetailByMoidRequest {
+	return ApiGetFabricConfigChangeDetailByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return FabricConfigChangeDetail
+ */
+func (a *FabricApiService) GetFabricConfigChangeDetailByMoidExecute(r ApiGetFabricConfigChangeDetailByMoidRequest) (FabricConfigChangeDetail, *_nethttp.Response, GenericOpenAPIError) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
+		localVarReturnValue  FabricConfigChangeDetail
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricConfigChangeDetailByMoid")
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/ConfigChangeDetails/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricConfigChangeDetailListRequest struct {
@@ -7275,7 +9019,7 @@ func (r ApiGetFabricConfigChangeDetailListRequest) Tags(tags string) ApiGetFabri
 	return r
 }
 
-func (r ApiGetFabricConfigChangeDetailListRequest) Execute() (FabricConfigChangeDetailResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricConfigChangeDetailListRequest) Execute() (FabricConfigChangeDetailResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricConfigChangeDetailListExecute(r)
 }
 
@@ -7295,19 +9039,21 @@ func (a *FabricApiService) GetFabricConfigChangeDetailList(ctx _context.Context)
  * Execute executes the request
  * @return FabricConfigChangeDetailResponse
  */
-func (a *FabricApiService) GetFabricConfigChangeDetailListExecute(r ApiGetFabricConfigChangeDetailListRequest) (FabricConfigChangeDetailResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricConfigChangeDetailListExecute(r ApiGetFabricConfigChangeDetailListRequest) (FabricConfigChangeDetailResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricConfigChangeDetailResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricConfigChangeDetailList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/ConfigChangeDetails"
@@ -7368,18 +9114,22 @@ func (a *FabricApiService) GetFabricConfigChangeDetailListExecute(r ApiGetFabric
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7446,7 +9196,7 @@ func (a *FabricApiService) GetFabricConfigChangeDetailListExecute(r ApiGetFabric
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricConfigResultByMoidRequest struct {
@@ -7455,7 +9205,7 @@ type ApiGetFabricConfigResultByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricConfigResultByMoidRequest) Execute() (FabricConfigResult, *_nethttp.Response, error) {
+func (r ApiGetFabricConfigResultByMoidRequest) Execute() (FabricConfigResult, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricConfigResultByMoidExecute(r)
 }
 
@@ -7477,19 +9227,21 @@ func (a *FabricApiService) GetFabricConfigResultByMoid(ctx _context.Context, moi
  * Execute executes the request
  * @return FabricConfigResult
  */
-func (a *FabricApiService) GetFabricConfigResultByMoidExecute(r ApiGetFabricConfigResultByMoidRequest) (FabricConfigResult, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricConfigResultByMoidExecute(r ApiGetFabricConfigResultByMoidRequest) (FabricConfigResult, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricConfigResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricConfigResultByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/ConfigResults/{Moid}"
@@ -7518,18 +9270,22 @@ func (a *FabricApiService) GetFabricConfigResultByMoidExecute(r ApiGetFabricConf
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7596,7 +9352,7 @@ func (a *FabricApiService) GetFabricConfigResultByMoidExecute(r ApiGetFabricConf
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricConfigResultEntryByMoidRequest struct {
@@ -7605,7 +9361,7 @@ type ApiGetFabricConfigResultEntryByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricConfigResultEntryByMoidRequest) Execute() (FabricConfigResultEntry, *_nethttp.Response, error) {
+func (r ApiGetFabricConfigResultEntryByMoidRequest) Execute() (FabricConfigResultEntry, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricConfigResultEntryByMoidExecute(r)
 }
 
@@ -7627,19 +9383,21 @@ func (a *FabricApiService) GetFabricConfigResultEntryByMoid(ctx _context.Context
  * Execute executes the request
  * @return FabricConfigResultEntry
  */
-func (a *FabricApiService) GetFabricConfigResultEntryByMoidExecute(r ApiGetFabricConfigResultEntryByMoidRequest) (FabricConfigResultEntry, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricConfigResultEntryByMoidExecute(r ApiGetFabricConfigResultEntryByMoidRequest) (FabricConfigResultEntry, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricConfigResultEntry
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricConfigResultEntryByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/ConfigResultEntries/{Moid}"
@@ -7668,18 +9426,22 @@ func (a *FabricApiService) GetFabricConfigResultEntryByMoidExecute(r ApiGetFabri
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7746,7 +9508,7 @@ func (a *FabricApiService) GetFabricConfigResultEntryByMoidExecute(r ApiGetFabri
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricConfigResultEntryListRequest struct {
@@ -7810,7 +9572,7 @@ func (r ApiGetFabricConfigResultEntryListRequest) Tags(tags string) ApiGetFabric
 	return r
 }
 
-func (r ApiGetFabricConfigResultEntryListRequest) Execute() (FabricConfigResultEntryResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricConfigResultEntryListRequest) Execute() (FabricConfigResultEntryResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricConfigResultEntryListExecute(r)
 }
 
@@ -7830,19 +9592,21 @@ func (a *FabricApiService) GetFabricConfigResultEntryList(ctx _context.Context) 
  * Execute executes the request
  * @return FabricConfigResultEntryResponse
  */
-func (a *FabricApiService) GetFabricConfigResultEntryListExecute(r ApiGetFabricConfigResultEntryListRequest) (FabricConfigResultEntryResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricConfigResultEntryListExecute(r ApiGetFabricConfigResultEntryListRequest) (FabricConfigResultEntryResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricConfigResultEntryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricConfigResultEntryList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/ConfigResultEntries"
@@ -7903,18 +9667,22 @@ func (a *FabricApiService) GetFabricConfigResultEntryListExecute(r ApiGetFabricC
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7981,7 +9749,7 @@ func (a *FabricApiService) GetFabricConfigResultEntryListExecute(r ApiGetFabricC
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricConfigResultListRequest struct {
@@ -8045,7 +9813,7 @@ func (r ApiGetFabricConfigResultListRequest) Tags(tags string) ApiGetFabricConfi
 	return r
 }
 
-func (r ApiGetFabricConfigResultListRequest) Execute() (FabricConfigResultResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricConfigResultListRequest) Execute() (FabricConfigResultResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricConfigResultListExecute(r)
 }
 
@@ -8065,19 +9833,21 @@ func (a *FabricApiService) GetFabricConfigResultList(ctx _context.Context) ApiGe
  * Execute executes the request
  * @return FabricConfigResultResponse
  */
-func (a *FabricApiService) GetFabricConfigResultListExecute(r ApiGetFabricConfigResultListRequest) (FabricConfigResultResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricConfigResultListExecute(r ApiGetFabricConfigResultListRequest) (FabricConfigResultResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricConfigResultResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricConfigResultList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/ConfigResults"
@@ -8138,18 +9908,22 @@ func (a *FabricApiService) GetFabricConfigResultListExecute(r ApiGetFabricConfig
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8216,7 +9990,7 @@ func (a *FabricApiService) GetFabricConfigResultListExecute(r ApiGetFabricConfig
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricEthNetworkControlPolicyByMoidRequest struct {
@@ -8225,7 +9999,7 @@ type ApiGetFabricEthNetworkControlPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricEthNetworkControlPolicyByMoidRequest) Execute() (FabricEthNetworkControlPolicy, *_nethttp.Response, error) {
+func (r ApiGetFabricEthNetworkControlPolicyByMoidRequest) Execute() (FabricEthNetworkControlPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricEthNetworkControlPolicyByMoidExecute(r)
 }
 
@@ -8247,19 +10021,21 @@ func (a *FabricApiService) GetFabricEthNetworkControlPolicyByMoid(ctx _context.C
  * Execute executes the request
  * @return FabricEthNetworkControlPolicy
  */
-func (a *FabricApiService) GetFabricEthNetworkControlPolicyByMoidExecute(r ApiGetFabricEthNetworkControlPolicyByMoidRequest) (FabricEthNetworkControlPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricEthNetworkControlPolicyByMoidExecute(r ApiGetFabricEthNetworkControlPolicyByMoidRequest) (FabricEthNetworkControlPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricEthNetworkControlPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricEthNetworkControlPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/EthNetworkControlPolicies/{Moid}"
@@ -8288,18 +10064,22 @@ func (a *FabricApiService) GetFabricEthNetworkControlPolicyByMoidExecute(r ApiGe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8366,7 +10146,7 @@ func (a *FabricApiService) GetFabricEthNetworkControlPolicyByMoidExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricEthNetworkControlPolicyListRequest struct {
@@ -8430,7 +10210,7 @@ func (r ApiGetFabricEthNetworkControlPolicyListRequest) Tags(tags string) ApiGet
 	return r
 }
 
-func (r ApiGetFabricEthNetworkControlPolicyListRequest) Execute() (FabricEthNetworkControlPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricEthNetworkControlPolicyListRequest) Execute() (FabricEthNetworkControlPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricEthNetworkControlPolicyListExecute(r)
 }
 
@@ -8450,19 +10230,21 @@ func (a *FabricApiService) GetFabricEthNetworkControlPolicyList(ctx _context.Con
  * Execute executes the request
  * @return FabricEthNetworkControlPolicyResponse
  */
-func (a *FabricApiService) GetFabricEthNetworkControlPolicyListExecute(r ApiGetFabricEthNetworkControlPolicyListRequest) (FabricEthNetworkControlPolicyResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricEthNetworkControlPolicyListExecute(r ApiGetFabricEthNetworkControlPolicyListRequest) (FabricEthNetworkControlPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricEthNetworkControlPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricEthNetworkControlPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/EthNetworkControlPolicies"
@@ -8523,18 +10305,22 @@ func (a *FabricApiService) GetFabricEthNetworkControlPolicyListExecute(r ApiGetF
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8601,7 +10387,7 @@ func (a *FabricApiService) GetFabricEthNetworkControlPolicyListExecute(r ApiGetF
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricEthNetworkGroupPolicyByMoidRequest struct {
@@ -8610,7 +10396,7 @@ type ApiGetFabricEthNetworkGroupPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricEthNetworkGroupPolicyByMoidRequest) Execute() (FabricEthNetworkGroupPolicy, *_nethttp.Response, error) {
+func (r ApiGetFabricEthNetworkGroupPolicyByMoidRequest) Execute() (FabricEthNetworkGroupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricEthNetworkGroupPolicyByMoidExecute(r)
 }
 
@@ -8632,19 +10418,21 @@ func (a *FabricApiService) GetFabricEthNetworkGroupPolicyByMoid(ctx _context.Con
  * Execute executes the request
  * @return FabricEthNetworkGroupPolicy
  */
-func (a *FabricApiService) GetFabricEthNetworkGroupPolicyByMoidExecute(r ApiGetFabricEthNetworkGroupPolicyByMoidRequest) (FabricEthNetworkGroupPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricEthNetworkGroupPolicyByMoidExecute(r ApiGetFabricEthNetworkGroupPolicyByMoidRequest) (FabricEthNetworkGroupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricEthNetworkGroupPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricEthNetworkGroupPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/EthNetworkGroupPolicies/{Moid}"
@@ -8673,18 +10461,22 @@ func (a *FabricApiService) GetFabricEthNetworkGroupPolicyByMoidExecute(r ApiGetF
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8751,7 +10543,7 @@ func (a *FabricApiService) GetFabricEthNetworkGroupPolicyByMoidExecute(r ApiGetF
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricEthNetworkGroupPolicyListRequest struct {
@@ -8815,7 +10607,7 @@ func (r ApiGetFabricEthNetworkGroupPolicyListRequest) Tags(tags string) ApiGetFa
 	return r
 }
 
-func (r ApiGetFabricEthNetworkGroupPolicyListRequest) Execute() (FabricEthNetworkGroupPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricEthNetworkGroupPolicyListRequest) Execute() (FabricEthNetworkGroupPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricEthNetworkGroupPolicyListExecute(r)
 }
 
@@ -8835,19 +10627,21 @@ func (a *FabricApiService) GetFabricEthNetworkGroupPolicyList(ctx _context.Conte
  * Execute executes the request
  * @return FabricEthNetworkGroupPolicyResponse
  */
-func (a *FabricApiService) GetFabricEthNetworkGroupPolicyListExecute(r ApiGetFabricEthNetworkGroupPolicyListRequest) (FabricEthNetworkGroupPolicyResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricEthNetworkGroupPolicyListExecute(r ApiGetFabricEthNetworkGroupPolicyListRequest) (FabricEthNetworkGroupPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricEthNetworkGroupPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricEthNetworkGroupPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/EthNetworkGroupPolicies"
@@ -8908,18 +10702,22 @@ func (a *FabricApiService) GetFabricEthNetworkGroupPolicyListExecute(r ApiGetFab
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8986,7 +10784,7 @@ func (a *FabricApiService) GetFabricEthNetworkGroupPolicyListExecute(r ApiGetFab
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricEthNetworkPolicyByMoidRequest struct {
@@ -8995,7 +10793,7 @@ type ApiGetFabricEthNetworkPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricEthNetworkPolicyByMoidRequest) Execute() (FabricEthNetworkPolicy, *_nethttp.Response, error) {
+func (r ApiGetFabricEthNetworkPolicyByMoidRequest) Execute() (FabricEthNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricEthNetworkPolicyByMoidExecute(r)
 }
 
@@ -9017,19 +10815,21 @@ func (a *FabricApiService) GetFabricEthNetworkPolicyByMoid(ctx _context.Context,
  * Execute executes the request
  * @return FabricEthNetworkPolicy
  */
-func (a *FabricApiService) GetFabricEthNetworkPolicyByMoidExecute(r ApiGetFabricEthNetworkPolicyByMoidRequest) (FabricEthNetworkPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricEthNetworkPolicyByMoidExecute(r ApiGetFabricEthNetworkPolicyByMoidRequest) (FabricEthNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricEthNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricEthNetworkPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/EthNetworkPolicies/{Moid}"
@@ -9058,18 +10858,22 @@ func (a *FabricApiService) GetFabricEthNetworkPolicyByMoidExecute(r ApiGetFabric
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9136,7 +10940,7 @@ func (a *FabricApiService) GetFabricEthNetworkPolicyByMoidExecute(r ApiGetFabric
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricEthNetworkPolicyListRequest struct {
@@ -9200,7 +11004,7 @@ func (r ApiGetFabricEthNetworkPolicyListRequest) Tags(tags string) ApiGetFabricE
 	return r
 }
 
-func (r ApiGetFabricEthNetworkPolicyListRequest) Execute() (FabricEthNetworkPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricEthNetworkPolicyListRequest) Execute() (FabricEthNetworkPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricEthNetworkPolicyListExecute(r)
 }
 
@@ -9220,19 +11024,21 @@ func (a *FabricApiService) GetFabricEthNetworkPolicyList(ctx _context.Context) A
  * Execute executes the request
  * @return FabricEthNetworkPolicyResponse
  */
-func (a *FabricApiService) GetFabricEthNetworkPolicyListExecute(r ApiGetFabricEthNetworkPolicyListRequest) (FabricEthNetworkPolicyResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricEthNetworkPolicyListExecute(r ApiGetFabricEthNetworkPolicyListRequest) (FabricEthNetworkPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricEthNetworkPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricEthNetworkPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/EthNetworkPolicies"
@@ -9293,18 +11099,22 @@ func (a *FabricApiService) GetFabricEthNetworkPolicyListExecute(r ApiGetFabricEt
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9371,7 +11181,7 @@ func (a *FabricApiService) GetFabricEthNetworkPolicyListExecute(r ApiGetFabricEt
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricFcNetworkPolicyByMoidRequest struct {
@@ -9380,7 +11190,7 @@ type ApiGetFabricFcNetworkPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricFcNetworkPolicyByMoidRequest) Execute() (FabricFcNetworkPolicy, *_nethttp.Response, error) {
+func (r ApiGetFabricFcNetworkPolicyByMoidRequest) Execute() (FabricFcNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricFcNetworkPolicyByMoidExecute(r)
 }
 
@@ -9402,19 +11212,21 @@ func (a *FabricApiService) GetFabricFcNetworkPolicyByMoid(ctx _context.Context, 
  * Execute executes the request
  * @return FabricFcNetworkPolicy
  */
-func (a *FabricApiService) GetFabricFcNetworkPolicyByMoidExecute(r ApiGetFabricFcNetworkPolicyByMoidRequest) (FabricFcNetworkPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricFcNetworkPolicyByMoidExecute(r ApiGetFabricFcNetworkPolicyByMoidRequest) (FabricFcNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricFcNetworkPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcNetworkPolicies/{Moid}"
@@ -9443,18 +11255,22 @@ func (a *FabricApiService) GetFabricFcNetworkPolicyByMoidExecute(r ApiGetFabricF
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9521,7 +11337,7 @@ func (a *FabricApiService) GetFabricFcNetworkPolicyByMoidExecute(r ApiGetFabricF
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricFcNetworkPolicyListRequest struct {
@@ -9585,7 +11401,7 @@ func (r ApiGetFabricFcNetworkPolicyListRequest) Tags(tags string) ApiGetFabricFc
 	return r
 }
 
-func (r ApiGetFabricFcNetworkPolicyListRequest) Execute() (FabricFcNetworkPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricFcNetworkPolicyListRequest) Execute() (FabricFcNetworkPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricFcNetworkPolicyListExecute(r)
 }
 
@@ -9605,19 +11421,21 @@ func (a *FabricApiService) GetFabricFcNetworkPolicyList(ctx _context.Context) Ap
  * Execute executes the request
  * @return FabricFcNetworkPolicyResponse
  */
-func (a *FabricApiService) GetFabricFcNetworkPolicyListExecute(r ApiGetFabricFcNetworkPolicyListRequest) (FabricFcNetworkPolicyResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricFcNetworkPolicyListExecute(r ApiGetFabricFcNetworkPolicyListRequest) (FabricFcNetworkPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcNetworkPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricFcNetworkPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcNetworkPolicies"
@@ -9678,18 +11496,22 @@ func (a *FabricApiService) GetFabricFcNetworkPolicyListExecute(r ApiGetFabricFcN
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9756,7 +11578,7 @@ func (a *FabricApiService) GetFabricFcNetworkPolicyListExecute(r ApiGetFabricFcN
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricFcUplinkPcRoleByMoidRequest struct {
@@ -9765,7 +11587,7 @@ type ApiGetFabricFcUplinkPcRoleByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricFcUplinkPcRoleByMoidRequest) Execute() (FabricFcUplinkPcRole, *_nethttp.Response, error) {
+func (r ApiGetFabricFcUplinkPcRoleByMoidRequest) Execute() (FabricFcUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricFcUplinkPcRoleByMoidExecute(r)
 }
 
@@ -9787,19 +11609,21 @@ func (a *FabricApiService) GetFabricFcUplinkPcRoleByMoid(ctx _context.Context, m
  * Execute executes the request
  * @return FabricFcUplinkPcRole
  */
-func (a *FabricApiService) GetFabricFcUplinkPcRoleByMoidExecute(r ApiGetFabricFcUplinkPcRoleByMoidRequest) (FabricFcUplinkPcRole, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricFcUplinkPcRoleByMoidExecute(r ApiGetFabricFcUplinkPcRoleByMoidRequest) (FabricFcUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcUplinkPcRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricFcUplinkPcRoleByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcUplinkPcRoles/{Moid}"
@@ -9828,18 +11652,22 @@ func (a *FabricApiService) GetFabricFcUplinkPcRoleByMoidExecute(r ApiGetFabricFc
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9906,7 +11734,7 @@ func (a *FabricApiService) GetFabricFcUplinkPcRoleByMoidExecute(r ApiGetFabricFc
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricFcUplinkPcRoleListRequest struct {
@@ -9970,7 +11798,7 @@ func (r ApiGetFabricFcUplinkPcRoleListRequest) Tags(tags string) ApiGetFabricFcU
 	return r
 }
 
-func (r ApiGetFabricFcUplinkPcRoleListRequest) Execute() (FabricFcUplinkPcRoleResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricFcUplinkPcRoleListRequest) Execute() (FabricFcUplinkPcRoleResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricFcUplinkPcRoleListExecute(r)
 }
 
@@ -9990,19 +11818,21 @@ func (a *FabricApiService) GetFabricFcUplinkPcRoleList(ctx _context.Context) Api
  * Execute executes the request
  * @return FabricFcUplinkPcRoleResponse
  */
-func (a *FabricApiService) GetFabricFcUplinkPcRoleListExecute(r ApiGetFabricFcUplinkPcRoleListRequest) (FabricFcUplinkPcRoleResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricFcUplinkPcRoleListExecute(r ApiGetFabricFcUplinkPcRoleListRequest) (FabricFcUplinkPcRoleResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcUplinkPcRoleResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricFcUplinkPcRoleList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcUplinkPcRoles"
@@ -10063,18 +11893,22 @@ func (a *FabricApiService) GetFabricFcUplinkPcRoleListExecute(r ApiGetFabricFcUp
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10141,7 +11975,7 @@ func (a *FabricApiService) GetFabricFcUplinkPcRoleListExecute(r ApiGetFabricFcUp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricFcUplinkRoleByMoidRequest struct {
@@ -10150,7 +11984,7 @@ type ApiGetFabricFcUplinkRoleByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricFcUplinkRoleByMoidRequest) Execute() (FabricFcUplinkRole, *_nethttp.Response, error) {
+func (r ApiGetFabricFcUplinkRoleByMoidRequest) Execute() (FabricFcUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricFcUplinkRoleByMoidExecute(r)
 }
 
@@ -10172,19 +12006,21 @@ func (a *FabricApiService) GetFabricFcUplinkRoleByMoid(ctx _context.Context, moi
  * Execute executes the request
  * @return FabricFcUplinkRole
  */
-func (a *FabricApiService) GetFabricFcUplinkRoleByMoidExecute(r ApiGetFabricFcUplinkRoleByMoidRequest) (FabricFcUplinkRole, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricFcUplinkRoleByMoidExecute(r ApiGetFabricFcUplinkRoleByMoidRequest) (FabricFcUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcUplinkRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricFcUplinkRoleByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcUplinkRoles/{Moid}"
@@ -10213,18 +12049,22 @@ func (a *FabricApiService) GetFabricFcUplinkRoleByMoidExecute(r ApiGetFabricFcUp
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10291,7 +12131,7 @@ func (a *FabricApiService) GetFabricFcUplinkRoleByMoidExecute(r ApiGetFabricFcUp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricFcUplinkRoleListRequest struct {
@@ -10355,7 +12195,7 @@ func (r ApiGetFabricFcUplinkRoleListRequest) Tags(tags string) ApiGetFabricFcUpl
 	return r
 }
 
-func (r ApiGetFabricFcUplinkRoleListRequest) Execute() (FabricFcUplinkRoleResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricFcUplinkRoleListRequest) Execute() (FabricFcUplinkRoleResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricFcUplinkRoleListExecute(r)
 }
 
@@ -10375,19 +12215,21 @@ func (a *FabricApiService) GetFabricFcUplinkRoleList(ctx _context.Context) ApiGe
  * Execute executes the request
  * @return FabricFcUplinkRoleResponse
  */
-func (a *FabricApiService) GetFabricFcUplinkRoleListExecute(r ApiGetFabricFcUplinkRoleListRequest) (FabricFcUplinkRoleResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricFcUplinkRoleListExecute(r ApiGetFabricFcUplinkRoleListRequest) (FabricFcUplinkRoleResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcUplinkRoleResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricFcUplinkRoleList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcUplinkRoles"
@@ -10448,18 +12290,22 @@ func (a *FabricApiService) GetFabricFcUplinkRoleListExecute(r ApiGetFabricFcUpli
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10526,7 +12372,7 @@ func (a *FabricApiService) GetFabricFcUplinkRoleListExecute(r ApiGetFabricFcUpli
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricFcoeUplinkPcRoleByMoidRequest struct {
@@ -10535,7 +12381,7 @@ type ApiGetFabricFcoeUplinkPcRoleByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricFcoeUplinkPcRoleByMoidRequest) Execute() (FabricFcoeUplinkPcRole, *_nethttp.Response, error) {
+func (r ApiGetFabricFcoeUplinkPcRoleByMoidRequest) Execute() (FabricFcoeUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricFcoeUplinkPcRoleByMoidExecute(r)
 }
 
@@ -10557,19 +12403,21 @@ func (a *FabricApiService) GetFabricFcoeUplinkPcRoleByMoid(ctx _context.Context,
  * Execute executes the request
  * @return FabricFcoeUplinkPcRole
  */
-func (a *FabricApiService) GetFabricFcoeUplinkPcRoleByMoidExecute(r ApiGetFabricFcoeUplinkPcRoleByMoidRequest) (FabricFcoeUplinkPcRole, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricFcoeUplinkPcRoleByMoidExecute(r ApiGetFabricFcoeUplinkPcRoleByMoidRequest) (FabricFcoeUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcoeUplinkPcRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricFcoeUplinkPcRoleByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcoeUplinkPcRoles/{Moid}"
@@ -10598,18 +12446,22 @@ func (a *FabricApiService) GetFabricFcoeUplinkPcRoleByMoidExecute(r ApiGetFabric
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10676,7 +12528,7 @@ func (a *FabricApiService) GetFabricFcoeUplinkPcRoleByMoidExecute(r ApiGetFabric
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricFcoeUplinkPcRoleListRequest struct {
@@ -10740,7 +12592,7 @@ func (r ApiGetFabricFcoeUplinkPcRoleListRequest) Tags(tags string) ApiGetFabricF
 	return r
 }
 
-func (r ApiGetFabricFcoeUplinkPcRoleListRequest) Execute() (FabricFcoeUplinkPcRoleResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricFcoeUplinkPcRoleListRequest) Execute() (FabricFcoeUplinkPcRoleResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricFcoeUplinkPcRoleListExecute(r)
 }
 
@@ -10760,19 +12612,21 @@ func (a *FabricApiService) GetFabricFcoeUplinkPcRoleList(ctx _context.Context) A
  * Execute executes the request
  * @return FabricFcoeUplinkPcRoleResponse
  */
-func (a *FabricApiService) GetFabricFcoeUplinkPcRoleListExecute(r ApiGetFabricFcoeUplinkPcRoleListRequest) (FabricFcoeUplinkPcRoleResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricFcoeUplinkPcRoleListExecute(r ApiGetFabricFcoeUplinkPcRoleListRequest) (FabricFcoeUplinkPcRoleResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcoeUplinkPcRoleResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricFcoeUplinkPcRoleList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcoeUplinkPcRoles"
@@ -10833,18 +12687,22 @@ func (a *FabricApiService) GetFabricFcoeUplinkPcRoleListExecute(r ApiGetFabricFc
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10911,7 +12769,7 @@ func (a *FabricApiService) GetFabricFcoeUplinkPcRoleListExecute(r ApiGetFabricFc
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricFcoeUplinkRoleByMoidRequest struct {
@@ -10920,7 +12778,7 @@ type ApiGetFabricFcoeUplinkRoleByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricFcoeUplinkRoleByMoidRequest) Execute() (FabricFcoeUplinkRole, *_nethttp.Response, error) {
+func (r ApiGetFabricFcoeUplinkRoleByMoidRequest) Execute() (FabricFcoeUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricFcoeUplinkRoleByMoidExecute(r)
 }
 
@@ -10942,19 +12800,21 @@ func (a *FabricApiService) GetFabricFcoeUplinkRoleByMoid(ctx _context.Context, m
  * Execute executes the request
  * @return FabricFcoeUplinkRole
  */
-func (a *FabricApiService) GetFabricFcoeUplinkRoleByMoidExecute(r ApiGetFabricFcoeUplinkRoleByMoidRequest) (FabricFcoeUplinkRole, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricFcoeUplinkRoleByMoidExecute(r ApiGetFabricFcoeUplinkRoleByMoidRequest) (FabricFcoeUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcoeUplinkRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricFcoeUplinkRoleByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcoeUplinkRoles/{Moid}"
@@ -10983,18 +12843,22 @@ func (a *FabricApiService) GetFabricFcoeUplinkRoleByMoidExecute(r ApiGetFabricFc
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11061,7 +12925,7 @@ func (a *FabricApiService) GetFabricFcoeUplinkRoleByMoidExecute(r ApiGetFabricFc
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricFcoeUplinkRoleListRequest struct {
@@ -11125,7 +12989,7 @@ func (r ApiGetFabricFcoeUplinkRoleListRequest) Tags(tags string) ApiGetFabricFco
 	return r
 }
 
-func (r ApiGetFabricFcoeUplinkRoleListRequest) Execute() (FabricFcoeUplinkRoleResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricFcoeUplinkRoleListRequest) Execute() (FabricFcoeUplinkRoleResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricFcoeUplinkRoleListExecute(r)
 }
 
@@ -11145,19 +13009,21 @@ func (a *FabricApiService) GetFabricFcoeUplinkRoleList(ctx _context.Context) Api
  * Execute executes the request
  * @return FabricFcoeUplinkRoleResponse
  */
-func (a *FabricApiService) GetFabricFcoeUplinkRoleListExecute(r ApiGetFabricFcoeUplinkRoleListRequest) (FabricFcoeUplinkRoleResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricFcoeUplinkRoleListExecute(r ApiGetFabricFcoeUplinkRoleListRequest) (FabricFcoeUplinkRoleResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcoeUplinkRoleResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricFcoeUplinkRoleList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcoeUplinkRoles"
@@ -11218,18 +13084,22 @@ func (a *FabricApiService) GetFabricFcoeUplinkRoleListExecute(r ApiGetFabricFcoe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11296,7 +13166,7 @@ func (a *FabricApiService) GetFabricFcoeUplinkRoleListExecute(r ApiGetFabricFcoe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricMulticastPolicyByMoidRequest struct {
@@ -11305,7 +13175,7 @@ type ApiGetFabricMulticastPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricMulticastPolicyByMoidRequest) Execute() (FabricMulticastPolicy, *_nethttp.Response, error) {
+func (r ApiGetFabricMulticastPolicyByMoidRequest) Execute() (FabricMulticastPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricMulticastPolicyByMoidExecute(r)
 }
 
@@ -11327,19 +13197,21 @@ func (a *FabricApiService) GetFabricMulticastPolicyByMoid(ctx _context.Context, 
  * Execute executes the request
  * @return FabricMulticastPolicy
  */
-func (a *FabricApiService) GetFabricMulticastPolicyByMoidExecute(r ApiGetFabricMulticastPolicyByMoidRequest) (FabricMulticastPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricMulticastPolicyByMoidExecute(r ApiGetFabricMulticastPolicyByMoidRequest) (FabricMulticastPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricMulticastPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricMulticastPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/MulticastPolicies/{Moid}"
@@ -11368,18 +13240,22 @@ func (a *FabricApiService) GetFabricMulticastPolicyByMoidExecute(r ApiGetFabricM
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11446,7 +13322,7 @@ func (a *FabricApiService) GetFabricMulticastPolicyByMoidExecute(r ApiGetFabricM
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricMulticastPolicyListRequest struct {
@@ -11510,7 +13386,7 @@ func (r ApiGetFabricMulticastPolicyListRequest) Tags(tags string) ApiGetFabricMu
 	return r
 }
 
-func (r ApiGetFabricMulticastPolicyListRequest) Execute() (FabricMulticastPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricMulticastPolicyListRequest) Execute() (FabricMulticastPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricMulticastPolicyListExecute(r)
 }
 
@@ -11530,19 +13406,21 @@ func (a *FabricApiService) GetFabricMulticastPolicyList(ctx _context.Context) Ap
  * Execute executes the request
  * @return FabricMulticastPolicyResponse
  */
-func (a *FabricApiService) GetFabricMulticastPolicyListExecute(r ApiGetFabricMulticastPolicyListRequest) (FabricMulticastPolicyResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricMulticastPolicyListExecute(r ApiGetFabricMulticastPolicyListRequest) (FabricMulticastPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricMulticastPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricMulticastPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/MulticastPolicies"
@@ -11603,18 +13481,22 @@ func (a *FabricApiService) GetFabricMulticastPolicyListExecute(r ApiGetFabricMul
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11681,7 +13563,7 @@ func (a *FabricApiService) GetFabricMulticastPolicyListExecute(r ApiGetFabricMul
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricPcMemberByMoidRequest struct {
@@ -11690,7 +13572,7 @@ type ApiGetFabricPcMemberByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricPcMemberByMoidRequest) Execute() (FabricPcMember, *_nethttp.Response, error) {
+func (r ApiGetFabricPcMemberByMoidRequest) Execute() (FabricPcMember, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricPcMemberByMoidExecute(r)
 }
 
@@ -11712,19 +13594,21 @@ func (a *FabricApiService) GetFabricPcMemberByMoid(ctx _context.Context, moid st
  * Execute executes the request
  * @return FabricPcMember
  */
-func (a *FabricApiService) GetFabricPcMemberByMoidExecute(r ApiGetFabricPcMemberByMoidRequest) (FabricPcMember, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricPcMemberByMoidExecute(r ApiGetFabricPcMemberByMoidRequest) (FabricPcMember, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricPcMember
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricPcMemberByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PcMembers/{Moid}"
@@ -11753,18 +13637,22 @@ func (a *FabricApiService) GetFabricPcMemberByMoidExecute(r ApiGetFabricPcMember
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11831,7 +13719,7 @@ func (a *FabricApiService) GetFabricPcMemberByMoidExecute(r ApiGetFabricPcMember
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricPcMemberListRequest struct {
@@ -11895,7 +13783,7 @@ func (r ApiGetFabricPcMemberListRequest) Tags(tags string) ApiGetFabricPcMemberL
 	return r
 }
 
-func (r ApiGetFabricPcMemberListRequest) Execute() (FabricPcMemberResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricPcMemberListRequest) Execute() (FabricPcMemberResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricPcMemberListExecute(r)
 }
 
@@ -11915,19 +13803,21 @@ func (a *FabricApiService) GetFabricPcMemberList(ctx _context.Context) ApiGetFab
  * Execute executes the request
  * @return FabricPcMemberResponse
  */
-func (a *FabricApiService) GetFabricPcMemberListExecute(r ApiGetFabricPcMemberListRequest) (FabricPcMemberResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricPcMemberListExecute(r ApiGetFabricPcMemberListRequest) (FabricPcMemberResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricPcMemberResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricPcMemberList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PcMembers"
@@ -11988,18 +13878,22 @@ func (a *FabricApiService) GetFabricPcMemberListExecute(r ApiGetFabricPcMemberLi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12066,7 +13960,7 @@ func (a *FabricApiService) GetFabricPcMemberListExecute(r ApiGetFabricPcMemberLi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricPcOperationByMoidRequest struct {
@@ -12075,7 +13969,7 @@ type ApiGetFabricPcOperationByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricPcOperationByMoidRequest) Execute() (FabricPcOperation, *_nethttp.Response, error) {
+func (r ApiGetFabricPcOperationByMoidRequest) Execute() (FabricPcOperation, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricPcOperationByMoidExecute(r)
 }
 
@@ -12097,19 +13991,21 @@ func (a *FabricApiService) GetFabricPcOperationByMoid(ctx _context.Context, moid
  * Execute executes the request
  * @return FabricPcOperation
  */
-func (a *FabricApiService) GetFabricPcOperationByMoidExecute(r ApiGetFabricPcOperationByMoidRequest) (FabricPcOperation, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricPcOperationByMoidExecute(r ApiGetFabricPcOperationByMoidRequest) (FabricPcOperation, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricPcOperation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricPcOperationByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PcOperations/{Moid}"
@@ -12138,18 +14034,22 @@ func (a *FabricApiService) GetFabricPcOperationByMoidExecute(r ApiGetFabricPcOpe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12216,7 +14116,7 @@ func (a *FabricApiService) GetFabricPcOperationByMoidExecute(r ApiGetFabricPcOpe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricPcOperationListRequest struct {
@@ -12280,7 +14180,7 @@ func (r ApiGetFabricPcOperationListRequest) Tags(tags string) ApiGetFabricPcOper
 	return r
 }
 
-func (r ApiGetFabricPcOperationListRequest) Execute() (FabricPcOperationResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricPcOperationListRequest) Execute() (FabricPcOperationResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricPcOperationListExecute(r)
 }
 
@@ -12300,19 +14200,21 @@ func (a *FabricApiService) GetFabricPcOperationList(ctx _context.Context) ApiGet
  * Execute executes the request
  * @return FabricPcOperationResponse
  */
-func (a *FabricApiService) GetFabricPcOperationListExecute(r ApiGetFabricPcOperationListRequest) (FabricPcOperationResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricPcOperationListExecute(r ApiGetFabricPcOperationListRequest) (FabricPcOperationResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricPcOperationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricPcOperationList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PcOperations"
@@ -12373,18 +14275,22 @@ func (a *FabricApiService) GetFabricPcOperationListExecute(r ApiGetFabricPcOpera
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12451,7 +14357,7 @@ func (a *FabricApiService) GetFabricPcOperationListExecute(r ApiGetFabricPcOpera
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricPortModeByMoidRequest struct {
@@ -12460,7 +14366,7 @@ type ApiGetFabricPortModeByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricPortModeByMoidRequest) Execute() (FabricPortMode, *_nethttp.Response, error) {
+func (r ApiGetFabricPortModeByMoidRequest) Execute() (FabricPortMode, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricPortModeByMoidExecute(r)
 }
 
@@ -12482,19 +14388,21 @@ func (a *FabricApiService) GetFabricPortModeByMoid(ctx _context.Context, moid st
  * Execute executes the request
  * @return FabricPortMode
  */
-func (a *FabricApiService) GetFabricPortModeByMoidExecute(r ApiGetFabricPortModeByMoidRequest) (FabricPortMode, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricPortModeByMoidExecute(r ApiGetFabricPortModeByMoidRequest) (FabricPortMode, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricPortMode
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricPortModeByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PortModes/{Moid}"
@@ -12523,18 +14431,22 @@ func (a *FabricApiService) GetFabricPortModeByMoidExecute(r ApiGetFabricPortMode
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12601,7 +14513,7 @@ func (a *FabricApiService) GetFabricPortModeByMoidExecute(r ApiGetFabricPortMode
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricPortModeListRequest struct {
@@ -12665,7 +14577,7 @@ func (r ApiGetFabricPortModeListRequest) Tags(tags string) ApiGetFabricPortModeL
 	return r
 }
 
-func (r ApiGetFabricPortModeListRequest) Execute() (FabricPortModeResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricPortModeListRequest) Execute() (FabricPortModeResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricPortModeListExecute(r)
 }
 
@@ -12685,19 +14597,21 @@ func (a *FabricApiService) GetFabricPortModeList(ctx _context.Context) ApiGetFab
  * Execute executes the request
  * @return FabricPortModeResponse
  */
-func (a *FabricApiService) GetFabricPortModeListExecute(r ApiGetFabricPortModeListRequest) (FabricPortModeResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricPortModeListExecute(r ApiGetFabricPortModeListRequest) (FabricPortModeResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricPortModeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricPortModeList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PortModes"
@@ -12758,18 +14672,22 @@ func (a *FabricApiService) GetFabricPortModeListExecute(r ApiGetFabricPortModeLi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12836,7 +14754,7 @@ func (a *FabricApiService) GetFabricPortModeListExecute(r ApiGetFabricPortModeLi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricPortOperationByMoidRequest struct {
@@ -12845,7 +14763,7 @@ type ApiGetFabricPortOperationByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricPortOperationByMoidRequest) Execute() (FabricPortOperation, *_nethttp.Response, error) {
+func (r ApiGetFabricPortOperationByMoidRequest) Execute() (FabricPortOperation, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricPortOperationByMoidExecute(r)
 }
 
@@ -12867,19 +14785,21 @@ func (a *FabricApiService) GetFabricPortOperationByMoid(ctx _context.Context, mo
  * Execute executes the request
  * @return FabricPortOperation
  */
-func (a *FabricApiService) GetFabricPortOperationByMoidExecute(r ApiGetFabricPortOperationByMoidRequest) (FabricPortOperation, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricPortOperationByMoidExecute(r ApiGetFabricPortOperationByMoidRequest) (FabricPortOperation, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricPortOperation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricPortOperationByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PortOperations/{Moid}"
@@ -12908,18 +14828,22 @@ func (a *FabricApiService) GetFabricPortOperationByMoidExecute(r ApiGetFabricPor
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12986,7 +14910,7 @@ func (a *FabricApiService) GetFabricPortOperationByMoidExecute(r ApiGetFabricPor
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricPortOperationListRequest struct {
@@ -13050,7 +14974,7 @@ func (r ApiGetFabricPortOperationListRequest) Tags(tags string) ApiGetFabricPort
 	return r
 }
 
-func (r ApiGetFabricPortOperationListRequest) Execute() (FabricPortOperationResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricPortOperationListRequest) Execute() (FabricPortOperationResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricPortOperationListExecute(r)
 }
 
@@ -13070,19 +14994,21 @@ func (a *FabricApiService) GetFabricPortOperationList(ctx _context.Context) ApiG
  * Execute executes the request
  * @return FabricPortOperationResponse
  */
-func (a *FabricApiService) GetFabricPortOperationListExecute(r ApiGetFabricPortOperationListRequest) (FabricPortOperationResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricPortOperationListExecute(r ApiGetFabricPortOperationListRequest) (FabricPortOperationResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricPortOperationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricPortOperationList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PortOperations"
@@ -13143,18 +15069,22 @@ func (a *FabricApiService) GetFabricPortOperationListExecute(r ApiGetFabricPortO
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13221,7 +15151,7 @@ func (a *FabricApiService) GetFabricPortOperationListExecute(r ApiGetFabricPortO
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricPortPolicyByMoidRequest struct {
@@ -13230,7 +15160,7 @@ type ApiGetFabricPortPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricPortPolicyByMoidRequest) Execute() (FabricPortPolicy, *_nethttp.Response, error) {
+func (r ApiGetFabricPortPolicyByMoidRequest) Execute() (FabricPortPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricPortPolicyByMoidExecute(r)
 }
 
@@ -13252,19 +15182,21 @@ func (a *FabricApiService) GetFabricPortPolicyByMoid(ctx _context.Context, moid 
  * Execute executes the request
  * @return FabricPortPolicy
  */
-func (a *FabricApiService) GetFabricPortPolicyByMoidExecute(r ApiGetFabricPortPolicyByMoidRequest) (FabricPortPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricPortPolicyByMoidExecute(r ApiGetFabricPortPolicyByMoidRequest) (FabricPortPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricPortPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricPortPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PortPolicies/{Moid}"
@@ -13293,18 +15225,22 @@ func (a *FabricApiService) GetFabricPortPolicyByMoidExecute(r ApiGetFabricPortPo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13371,7 +15307,7 @@ func (a *FabricApiService) GetFabricPortPolicyByMoidExecute(r ApiGetFabricPortPo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricPortPolicyListRequest struct {
@@ -13435,7 +15371,7 @@ func (r ApiGetFabricPortPolicyListRequest) Tags(tags string) ApiGetFabricPortPol
 	return r
 }
 
-func (r ApiGetFabricPortPolicyListRequest) Execute() (FabricPortPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricPortPolicyListRequest) Execute() (FabricPortPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricPortPolicyListExecute(r)
 }
 
@@ -13455,19 +15391,21 @@ func (a *FabricApiService) GetFabricPortPolicyList(ctx _context.Context) ApiGetF
  * Execute executes the request
  * @return FabricPortPolicyResponse
  */
-func (a *FabricApiService) GetFabricPortPolicyListExecute(r ApiGetFabricPortPolicyListRequest) (FabricPortPolicyResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricPortPolicyListExecute(r ApiGetFabricPortPolicyListRequest) (FabricPortPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricPortPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricPortPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PortPolicies"
@@ -13528,18 +15466,22 @@ func (a *FabricApiService) GetFabricPortPolicyListExecute(r ApiGetFabricPortPoli
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13606,7 +15548,7 @@ func (a *FabricApiService) GetFabricPortPolicyListExecute(r ApiGetFabricPortPoli
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricServerRoleByMoidRequest struct {
@@ -13615,7 +15557,7 @@ type ApiGetFabricServerRoleByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricServerRoleByMoidRequest) Execute() (FabricServerRole, *_nethttp.Response, error) {
+func (r ApiGetFabricServerRoleByMoidRequest) Execute() (FabricServerRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricServerRoleByMoidExecute(r)
 }
 
@@ -13637,19 +15579,21 @@ func (a *FabricApiService) GetFabricServerRoleByMoid(ctx _context.Context, moid 
  * Execute executes the request
  * @return FabricServerRole
  */
-func (a *FabricApiService) GetFabricServerRoleByMoidExecute(r ApiGetFabricServerRoleByMoidRequest) (FabricServerRole, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricServerRoleByMoidExecute(r ApiGetFabricServerRoleByMoidRequest) (FabricServerRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricServerRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricServerRoleByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/ServerRoles/{Moid}"
@@ -13678,18 +15622,22 @@ func (a *FabricApiService) GetFabricServerRoleByMoidExecute(r ApiGetFabricServer
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13756,7 +15704,7 @@ func (a *FabricApiService) GetFabricServerRoleByMoidExecute(r ApiGetFabricServer
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricServerRoleListRequest struct {
@@ -13820,7 +15768,7 @@ func (r ApiGetFabricServerRoleListRequest) Tags(tags string) ApiGetFabricServerR
 	return r
 }
 
-func (r ApiGetFabricServerRoleListRequest) Execute() (FabricServerRoleResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricServerRoleListRequest) Execute() (FabricServerRoleResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricServerRoleListExecute(r)
 }
 
@@ -13840,19 +15788,21 @@ func (a *FabricApiService) GetFabricServerRoleList(ctx _context.Context) ApiGetF
  * Execute executes the request
  * @return FabricServerRoleResponse
  */
-func (a *FabricApiService) GetFabricServerRoleListExecute(r ApiGetFabricServerRoleListRequest) (FabricServerRoleResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricServerRoleListExecute(r ApiGetFabricServerRoleListRequest) (FabricServerRoleResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricServerRoleResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricServerRoleList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/ServerRoles"
@@ -13913,18 +15863,22 @@ func (a *FabricApiService) GetFabricServerRoleListExecute(r ApiGetFabricServerRo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13991,7 +15945,7 @@ func (a *FabricApiService) GetFabricServerRoleListExecute(r ApiGetFabricServerRo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricSwitchClusterProfileByMoidRequest struct {
@@ -14000,7 +15954,7 @@ type ApiGetFabricSwitchClusterProfileByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricSwitchClusterProfileByMoidRequest) Execute() (FabricSwitchClusterProfile, *_nethttp.Response, error) {
+func (r ApiGetFabricSwitchClusterProfileByMoidRequest) Execute() (FabricSwitchClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricSwitchClusterProfileByMoidExecute(r)
 }
 
@@ -14022,19 +15976,21 @@ func (a *FabricApiService) GetFabricSwitchClusterProfileByMoid(ctx _context.Cont
  * Execute executes the request
  * @return FabricSwitchClusterProfile
  */
-func (a *FabricApiService) GetFabricSwitchClusterProfileByMoidExecute(r ApiGetFabricSwitchClusterProfileByMoidRequest) (FabricSwitchClusterProfile, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricSwitchClusterProfileByMoidExecute(r ApiGetFabricSwitchClusterProfileByMoidRequest) (FabricSwitchClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricSwitchClusterProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricSwitchClusterProfileByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SwitchClusterProfiles/{Moid}"
@@ -14063,18 +16019,22 @@ func (a *FabricApiService) GetFabricSwitchClusterProfileByMoidExecute(r ApiGetFa
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14141,7 +16101,7 @@ func (a *FabricApiService) GetFabricSwitchClusterProfileByMoidExecute(r ApiGetFa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricSwitchClusterProfileListRequest struct {
@@ -14205,7 +16165,7 @@ func (r ApiGetFabricSwitchClusterProfileListRequest) Tags(tags string) ApiGetFab
 	return r
 }
 
-func (r ApiGetFabricSwitchClusterProfileListRequest) Execute() (FabricSwitchClusterProfileResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricSwitchClusterProfileListRequest) Execute() (FabricSwitchClusterProfileResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricSwitchClusterProfileListExecute(r)
 }
 
@@ -14225,19 +16185,21 @@ func (a *FabricApiService) GetFabricSwitchClusterProfileList(ctx _context.Contex
  * Execute executes the request
  * @return FabricSwitchClusterProfileResponse
  */
-func (a *FabricApiService) GetFabricSwitchClusterProfileListExecute(r ApiGetFabricSwitchClusterProfileListRequest) (FabricSwitchClusterProfileResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricSwitchClusterProfileListExecute(r ApiGetFabricSwitchClusterProfileListRequest) (FabricSwitchClusterProfileResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricSwitchClusterProfileResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricSwitchClusterProfileList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SwitchClusterProfiles"
@@ -14298,18 +16260,22 @@ func (a *FabricApiService) GetFabricSwitchClusterProfileListExecute(r ApiGetFabr
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14376,7 +16342,7 @@ func (a *FabricApiService) GetFabricSwitchClusterProfileListExecute(r ApiGetFabr
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricSwitchControlPolicyByMoidRequest struct {
@@ -14385,7 +16351,7 @@ type ApiGetFabricSwitchControlPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricSwitchControlPolicyByMoidRequest) Execute() (FabricSwitchControlPolicy, *_nethttp.Response, error) {
+func (r ApiGetFabricSwitchControlPolicyByMoidRequest) Execute() (FabricSwitchControlPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricSwitchControlPolicyByMoidExecute(r)
 }
 
@@ -14407,19 +16373,21 @@ func (a *FabricApiService) GetFabricSwitchControlPolicyByMoid(ctx _context.Conte
  * Execute executes the request
  * @return FabricSwitchControlPolicy
  */
-func (a *FabricApiService) GetFabricSwitchControlPolicyByMoidExecute(r ApiGetFabricSwitchControlPolicyByMoidRequest) (FabricSwitchControlPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricSwitchControlPolicyByMoidExecute(r ApiGetFabricSwitchControlPolicyByMoidRequest) (FabricSwitchControlPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricSwitchControlPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricSwitchControlPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SwitchControlPolicies/{Moid}"
@@ -14448,18 +16416,22 @@ func (a *FabricApiService) GetFabricSwitchControlPolicyByMoidExecute(r ApiGetFab
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14526,7 +16498,7 @@ func (a *FabricApiService) GetFabricSwitchControlPolicyByMoidExecute(r ApiGetFab
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricSwitchControlPolicyListRequest struct {
@@ -14590,7 +16562,7 @@ func (r ApiGetFabricSwitchControlPolicyListRequest) Tags(tags string) ApiGetFabr
 	return r
 }
 
-func (r ApiGetFabricSwitchControlPolicyListRequest) Execute() (FabricSwitchControlPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricSwitchControlPolicyListRequest) Execute() (FabricSwitchControlPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricSwitchControlPolicyListExecute(r)
 }
 
@@ -14610,19 +16582,21 @@ func (a *FabricApiService) GetFabricSwitchControlPolicyList(ctx _context.Context
  * Execute executes the request
  * @return FabricSwitchControlPolicyResponse
  */
-func (a *FabricApiService) GetFabricSwitchControlPolicyListExecute(r ApiGetFabricSwitchControlPolicyListRequest) (FabricSwitchControlPolicyResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricSwitchControlPolicyListExecute(r ApiGetFabricSwitchControlPolicyListRequest) (FabricSwitchControlPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricSwitchControlPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricSwitchControlPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SwitchControlPolicies"
@@ -14683,18 +16657,22 @@ func (a *FabricApiService) GetFabricSwitchControlPolicyListExecute(r ApiGetFabri
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14761,7 +16739,7 @@ func (a *FabricApiService) GetFabricSwitchControlPolicyListExecute(r ApiGetFabri
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricSwitchProfileByMoidRequest struct {
@@ -14770,7 +16748,7 @@ type ApiGetFabricSwitchProfileByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricSwitchProfileByMoidRequest) Execute() (FabricSwitchProfile, *_nethttp.Response, error) {
+func (r ApiGetFabricSwitchProfileByMoidRequest) Execute() (FabricSwitchProfile, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricSwitchProfileByMoidExecute(r)
 }
 
@@ -14792,19 +16770,21 @@ func (a *FabricApiService) GetFabricSwitchProfileByMoid(ctx _context.Context, mo
  * Execute executes the request
  * @return FabricSwitchProfile
  */
-func (a *FabricApiService) GetFabricSwitchProfileByMoidExecute(r ApiGetFabricSwitchProfileByMoidRequest) (FabricSwitchProfile, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricSwitchProfileByMoidExecute(r ApiGetFabricSwitchProfileByMoidRequest) (FabricSwitchProfile, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricSwitchProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricSwitchProfileByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SwitchProfiles/{Moid}"
@@ -14833,18 +16813,22 @@ func (a *FabricApiService) GetFabricSwitchProfileByMoidExecute(r ApiGetFabricSwi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14911,7 +16895,7 @@ func (a *FabricApiService) GetFabricSwitchProfileByMoidExecute(r ApiGetFabricSwi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricSwitchProfileListRequest struct {
@@ -14975,7 +16959,7 @@ func (r ApiGetFabricSwitchProfileListRequest) Tags(tags string) ApiGetFabricSwit
 	return r
 }
 
-func (r ApiGetFabricSwitchProfileListRequest) Execute() (FabricSwitchProfileResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricSwitchProfileListRequest) Execute() (FabricSwitchProfileResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricSwitchProfileListExecute(r)
 }
 
@@ -14995,19 +16979,21 @@ func (a *FabricApiService) GetFabricSwitchProfileList(ctx _context.Context) ApiG
  * Execute executes the request
  * @return FabricSwitchProfileResponse
  */
-func (a *FabricApiService) GetFabricSwitchProfileListExecute(r ApiGetFabricSwitchProfileListRequest) (FabricSwitchProfileResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricSwitchProfileListExecute(r ApiGetFabricSwitchProfileListRequest) (FabricSwitchProfileResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricSwitchProfileResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricSwitchProfileList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SwitchProfiles"
@@ -15068,18 +17054,22 @@ func (a *FabricApiService) GetFabricSwitchProfileListExecute(r ApiGetFabricSwitc
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15146,7 +17136,7 @@ func (a *FabricApiService) GetFabricSwitchProfileListExecute(r ApiGetFabricSwitc
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricSystemQosPolicyByMoidRequest struct {
@@ -15155,7 +17145,7 @@ type ApiGetFabricSystemQosPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricSystemQosPolicyByMoidRequest) Execute() (FabricSystemQosPolicy, *_nethttp.Response, error) {
+func (r ApiGetFabricSystemQosPolicyByMoidRequest) Execute() (FabricSystemQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricSystemQosPolicyByMoidExecute(r)
 }
 
@@ -15177,19 +17167,21 @@ func (a *FabricApiService) GetFabricSystemQosPolicyByMoid(ctx _context.Context, 
  * Execute executes the request
  * @return FabricSystemQosPolicy
  */
-func (a *FabricApiService) GetFabricSystemQosPolicyByMoidExecute(r ApiGetFabricSystemQosPolicyByMoidRequest) (FabricSystemQosPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricSystemQosPolicyByMoidExecute(r ApiGetFabricSystemQosPolicyByMoidRequest) (FabricSystemQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricSystemQosPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricSystemQosPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SystemQosPolicies/{Moid}"
@@ -15218,18 +17210,22 @@ func (a *FabricApiService) GetFabricSystemQosPolicyByMoidExecute(r ApiGetFabricS
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15296,7 +17292,7 @@ func (a *FabricApiService) GetFabricSystemQosPolicyByMoidExecute(r ApiGetFabricS
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricSystemQosPolicyListRequest struct {
@@ -15360,7 +17356,7 @@ func (r ApiGetFabricSystemQosPolicyListRequest) Tags(tags string) ApiGetFabricSy
 	return r
 }
 
-func (r ApiGetFabricSystemQosPolicyListRequest) Execute() (FabricSystemQosPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricSystemQosPolicyListRequest) Execute() (FabricSystemQosPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricSystemQosPolicyListExecute(r)
 }
 
@@ -15380,19 +17376,21 @@ func (a *FabricApiService) GetFabricSystemQosPolicyList(ctx _context.Context) Ap
  * Execute executes the request
  * @return FabricSystemQosPolicyResponse
  */
-func (a *FabricApiService) GetFabricSystemQosPolicyListExecute(r ApiGetFabricSystemQosPolicyListRequest) (FabricSystemQosPolicyResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricSystemQosPolicyListExecute(r ApiGetFabricSystemQosPolicyListRequest) (FabricSystemQosPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricSystemQosPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricSystemQosPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SystemQosPolicies"
@@ -15453,18 +17451,22 @@ func (a *FabricApiService) GetFabricSystemQosPolicyListExecute(r ApiGetFabricSys
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15531,7 +17533,7 @@ func (a *FabricApiService) GetFabricSystemQosPolicyListExecute(r ApiGetFabricSys
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricUplinkPcRoleByMoidRequest struct {
@@ -15540,7 +17542,7 @@ type ApiGetFabricUplinkPcRoleByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricUplinkPcRoleByMoidRequest) Execute() (FabricUplinkPcRole, *_nethttp.Response, error) {
+func (r ApiGetFabricUplinkPcRoleByMoidRequest) Execute() (FabricUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricUplinkPcRoleByMoidExecute(r)
 }
 
@@ -15562,19 +17564,21 @@ func (a *FabricApiService) GetFabricUplinkPcRoleByMoid(ctx _context.Context, moi
  * Execute executes the request
  * @return FabricUplinkPcRole
  */
-func (a *FabricApiService) GetFabricUplinkPcRoleByMoidExecute(r ApiGetFabricUplinkPcRoleByMoidRequest) (FabricUplinkPcRole, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricUplinkPcRoleByMoidExecute(r ApiGetFabricUplinkPcRoleByMoidRequest) (FabricUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricUplinkPcRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricUplinkPcRoleByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/UplinkPcRoles/{Moid}"
@@ -15603,18 +17607,22 @@ func (a *FabricApiService) GetFabricUplinkPcRoleByMoidExecute(r ApiGetFabricUpli
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15681,7 +17689,7 @@ func (a *FabricApiService) GetFabricUplinkPcRoleByMoidExecute(r ApiGetFabricUpli
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricUplinkPcRoleListRequest struct {
@@ -15745,7 +17753,7 @@ func (r ApiGetFabricUplinkPcRoleListRequest) Tags(tags string) ApiGetFabricUplin
 	return r
 }
 
-func (r ApiGetFabricUplinkPcRoleListRequest) Execute() (FabricUplinkPcRoleResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricUplinkPcRoleListRequest) Execute() (FabricUplinkPcRoleResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricUplinkPcRoleListExecute(r)
 }
 
@@ -15765,19 +17773,21 @@ func (a *FabricApiService) GetFabricUplinkPcRoleList(ctx _context.Context) ApiGe
  * Execute executes the request
  * @return FabricUplinkPcRoleResponse
  */
-func (a *FabricApiService) GetFabricUplinkPcRoleListExecute(r ApiGetFabricUplinkPcRoleListRequest) (FabricUplinkPcRoleResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricUplinkPcRoleListExecute(r ApiGetFabricUplinkPcRoleListRequest) (FabricUplinkPcRoleResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricUplinkPcRoleResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricUplinkPcRoleList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/UplinkPcRoles"
@@ -15838,18 +17848,22 @@ func (a *FabricApiService) GetFabricUplinkPcRoleListExecute(r ApiGetFabricUplink
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15916,7 +17930,7 @@ func (a *FabricApiService) GetFabricUplinkPcRoleListExecute(r ApiGetFabricUplink
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricUplinkRoleByMoidRequest struct {
@@ -15925,7 +17939,7 @@ type ApiGetFabricUplinkRoleByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricUplinkRoleByMoidRequest) Execute() (FabricUplinkRole, *_nethttp.Response, error) {
+func (r ApiGetFabricUplinkRoleByMoidRequest) Execute() (FabricUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricUplinkRoleByMoidExecute(r)
 }
 
@@ -15947,19 +17961,21 @@ func (a *FabricApiService) GetFabricUplinkRoleByMoid(ctx _context.Context, moid 
  * Execute executes the request
  * @return FabricUplinkRole
  */
-func (a *FabricApiService) GetFabricUplinkRoleByMoidExecute(r ApiGetFabricUplinkRoleByMoidRequest) (FabricUplinkRole, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricUplinkRoleByMoidExecute(r ApiGetFabricUplinkRoleByMoidRequest) (FabricUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricUplinkRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricUplinkRoleByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/UplinkRoles/{Moid}"
@@ -15988,18 +18004,22 @@ func (a *FabricApiService) GetFabricUplinkRoleByMoidExecute(r ApiGetFabricUplink
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16066,7 +18086,7 @@ func (a *FabricApiService) GetFabricUplinkRoleByMoidExecute(r ApiGetFabricUplink
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricUplinkRoleListRequest struct {
@@ -16130,7 +18150,7 @@ func (r ApiGetFabricUplinkRoleListRequest) Tags(tags string) ApiGetFabricUplinkR
 	return r
 }
 
-func (r ApiGetFabricUplinkRoleListRequest) Execute() (FabricUplinkRoleResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricUplinkRoleListRequest) Execute() (FabricUplinkRoleResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricUplinkRoleListExecute(r)
 }
 
@@ -16150,19 +18170,21 @@ func (a *FabricApiService) GetFabricUplinkRoleList(ctx _context.Context) ApiGetF
  * Execute executes the request
  * @return FabricUplinkRoleResponse
  */
-func (a *FabricApiService) GetFabricUplinkRoleListExecute(r ApiGetFabricUplinkRoleListRequest) (FabricUplinkRoleResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricUplinkRoleListExecute(r ApiGetFabricUplinkRoleListRequest) (FabricUplinkRoleResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricUplinkRoleResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricUplinkRoleList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/UplinkRoles"
@@ -16223,18 +18245,22 @@ func (a *FabricApiService) GetFabricUplinkRoleListExecute(r ApiGetFabricUplinkRo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16301,7 +18327,7 @@ func (a *FabricApiService) GetFabricUplinkRoleListExecute(r ApiGetFabricUplinkRo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricVlanByMoidRequest struct {
@@ -16310,7 +18336,7 @@ type ApiGetFabricVlanByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricVlanByMoidRequest) Execute() (FabricVlan, *_nethttp.Response, error) {
+func (r ApiGetFabricVlanByMoidRequest) Execute() (FabricVlan, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricVlanByMoidExecute(r)
 }
 
@@ -16332,19 +18358,21 @@ func (a *FabricApiService) GetFabricVlanByMoid(ctx _context.Context, moid string
  * Execute executes the request
  * @return FabricVlan
  */
-func (a *FabricApiService) GetFabricVlanByMoidExecute(r ApiGetFabricVlanByMoidRequest) (FabricVlan, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricVlanByMoidExecute(r ApiGetFabricVlanByMoidRequest) (FabricVlan, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricVlan
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricVlanByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/Vlans/{Moid}"
@@ -16373,18 +18401,22 @@ func (a *FabricApiService) GetFabricVlanByMoidExecute(r ApiGetFabricVlanByMoidRe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16451,7 +18483,7 @@ func (a *FabricApiService) GetFabricVlanByMoidExecute(r ApiGetFabricVlanByMoidRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricVlanListRequest struct {
@@ -16515,7 +18547,7 @@ func (r ApiGetFabricVlanListRequest) Tags(tags string) ApiGetFabricVlanListReque
 	return r
 }
 
-func (r ApiGetFabricVlanListRequest) Execute() (FabricVlanResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricVlanListRequest) Execute() (FabricVlanResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricVlanListExecute(r)
 }
 
@@ -16535,19 +18567,21 @@ func (a *FabricApiService) GetFabricVlanList(ctx _context.Context) ApiGetFabricV
  * Execute executes the request
  * @return FabricVlanResponse
  */
-func (a *FabricApiService) GetFabricVlanListExecute(r ApiGetFabricVlanListRequest) (FabricVlanResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricVlanListExecute(r ApiGetFabricVlanListRequest) (FabricVlanResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricVlanResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricVlanList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/Vlans"
@@ -16608,18 +18642,22 @@ func (a *FabricApiService) GetFabricVlanListExecute(r ApiGetFabricVlanListReques
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16686,7 +18724,7 @@ func (a *FabricApiService) GetFabricVlanListExecute(r ApiGetFabricVlanListReques
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricVsanByMoidRequest struct {
@@ -16695,7 +18733,7 @@ type ApiGetFabricVsanByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetFabricVsanByMoidRequest) Execute() (FabricVsan, *_nethttp.Response, error) {
+func (r ApiGetFabricVsanByMoidRequest) Execute() (FabricVsan, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricVsanByMoidExecute(r)
 }
 
@@ -16717,19 +18755,21 @@ func (a *FabricApiService) GetFabricVsanByMoid(ctx _context.Context, moid string
  * Execute executes the request
  * @return FabricVsan
  */
-func (a *FabricApiService) GetFabricVsanByMoidExecute(r ApiGetFabricVsanByMoidRequest) (FabricVsan, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricVsanByMoidExecute(r ApiGetFabricVsanByMoidRequest) (FabricVsan, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricVsan
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricVsanByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/Vsans/{Moid}"
@@ -16758,18 +18798,22 @@ func (a *FabricApiService) GetFabricVsanByMoidExecute(r ApiGetFabricVsanByMoidRe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16836,7 +18880,7 @@ func (a *FabricApiService) GetFabricVsanByMoidExecute(r ApiGetFabricVsanByMoidRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetFabricVsanListRequest struct {
@@ -16900,7 +18944,7 @@ func (r ApiGetFabricVsanListRequest) Tags(tags string) ApiGetFabricVsanListReque
 	return r
 }
 
-func (r ApiGetFabricVsanListRequest) Execute() (FabricVsanResponse, *_nethttp.Response, error) {
+func (r ApiGetFabricVsanListRequest) Execute() (FabricVsanResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetFabricVsanListExecute(r)
 }
 
@@ -16920,19 +18964,21 @@ func (a *FabricApiService) GetFabricVsanList(ctx _context.Context) ApiGetFabricV
  * Execute executes the request
  * @return FabricVsanResponse
  */
-func (a *FabricApiService) GetFabricVsanListExecute(r ApiGetFabricVsanListRequest) (FabricVsanResponse, *_nethttp.Response, error) {
+func (a *FabricApiService) GetFabricVsanListExecute(r ApiGetFabricVsanListRequest) (FabricVsanResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricVsanResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.GetFabricVsanList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/Vsans"
@@ -16993,18 +19039,22 @@ func (a *FabricApiService) GetFabricVsanListExecute(r ApiGetFabricVsanListReques
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17071,7 +19121,359 @@ func (a *FabricApiService) GetFabricVsanListExecute(r ApiGetFabricVsanListReques
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
+}
+
+type ApiPatchFabricAppliancePcRoleRequest struct {
+	ctx                   _context.Context
+	ApiService            *FabricApiService
+	moid                  string
+	fabricAppliancePcRole *FabricAppliancePcRole
+	ifMatch               *string
+}
+
+func (r ApiPatchFabricAppliancePcRoleRequest) FabricAppliancePcRole(fabricAppliancePcRole FabricAppliancePcRole) ApiPatchFabricAppliancePcRoleRequest {
+	r.fabricAppliancePcRole = &fabricAppliancePcRole
+	return r
+}
+func (r ApiPatchFabricAppliancePcRoleRequest) IfMatch(ifMatch string) ApiPatchFabricAppliancePcRoleRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchFabricAppliancePcRoleRequest) Execute() (FabricAppliancePcRole, *_nethttp.Response, GenericOpenAPIError) {
+	return r.ApiService.PatchFabricAppliancePcRoleExecute(r)
+}
+
+/*
+ * PatchFabricAppliancePcRole Update a 'fabric.AppliancePcRole' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiPatchFabricAppliancePcRoleRequest
+ */
+func (a *FabricApiService) PatchFabricAppliancePcRole(ctx _context.Context, moid string) ApiPatchFabricAppliancePcRoleRequest {
+	return ApiPatchFabricAppliancePcRoleRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return FabricAppliancePcRole
+ */
+func (a *FabricApiService) PatchFabricAppliancePcRoleExecute(r ApiPatchFabricAppliancePcRoleRequest) (FabricAppliancePcRole, *_nethttp.Response, GenericOpenAPIError) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
+		localVarReturnValue  FabricAppliancePcRole
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricAppliancePcRole")
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/AppliancePcRoles/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.fabricAppliancePcRole == nil {
+		executionError.error = "fabricAppliancePcRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.fabricAppliancePcRole
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, executionError
+}
+
+type ApiPatchFabricApplianceRoleRequest struct {
+	ctx                 _context.Context
+	ApiService          *FabricApiService
+	moid                string
+	fabricApplianceRole *FabricApplianceRole
+	ifMatch             *string
+}
+
+func (r ApiPatchFabricApplianceRoleRequest) FabricApplianceRole(fabricApplianceRole FabricApplianceRole) ApiPatchFabricApplianceRoleRequest {
+	r.fabricApplianceRole = &fabricApplianceRole
+	return r
+}
+func (r ApiPatchFabricApplianceRoleRequest) IfMatch(ifMatch string) ApiPatchFabricApplianceRoleRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchFabricApplianceRoleRequest) Execute() (FabricApplianceRole, *_nethttp.Response, GenericOpenAPIError) {
+	return r.ApiService.PatchFabricApplianceRoleExecute(r)
+}
+
+/*
+ * PatchFabricApplianceRole Update a 'fabric.ApplianceRole' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiPatchFabricApplianceRoleRequest
+ */
+func (a *FabricApiService) PatchFabricApplianceRole(ctx _context.Context, moid string) ApiPatchFabricApplianceRoleRequest {
+	return ApiPatchFabricApplianceRoleRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return FabricApplianceRole
+ */
+func (a *FabricApiService) PatchFabricApplianceRoleExecute(r ApiPatchFabricApplianceRoleRequest) (FabricApplianceRole, *_nethttp.Response, GenericOpenAPIError) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
+		localVarReturnValue  FabricApplianceRole
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricApplianceRole")
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/ApplianceRoles/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.fabricApplianceRole == nil {
+		executionError.error = "fabricApplianceRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.fabricApplianceRole
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchFabricEthNetworkControlPolicyRequest struct {
@@ -17091,7 +19493,7 @@ func (r ApiPatchFabricEthNetworkControlPolicyRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiPatchFabricEthNetworkControlPolicyRequest) Execute() (FabricEthNetworkControlPolicy, *_nethttp.Response, error) {
+func (r ApiPatchFabricEthNetworkControlPolicyRequest) Execute() (FabricEthNetworkControlPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchFabricEthNetworkControlPolicyExecute(r)
 }
 
@@ -17113,19 +19515,21 @@ func (a *FabricApiService) PatchFabricEthNetworkControlPolicy(ctx _context.Conte
  * Execute executes the request
  * @return FabricEthNetworkControlPolicy
  */
-func (a *FabricApiService) PatchFabricEthNetworkControlPolicyExecute(r ApiPatchFabricEthNetworkControlPolicyRequest) (FabricEthNetworkControlPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) PatchFabricEthNetworkControlPolicyExecute(r ApiPatchFabricEthNetworkControlPolicyRequest) (FabricEthNetworkControlPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricEthNetworkControlPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricEthNetworkControlPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/EthNetworkControlPolicies/{Moid}"
@@ -17135,7 +19539,8 @@ func (a *FabricApiService) PatchFabricEthNetworkControlPolicyExecute(r ApiPatchF
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricEthNetworkControlPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricEthNetworkControlPolicy is required and must be specified")
+		executionError.error = "fabricEthNetworkControlPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -17162,18 +19567,22 @@ func (a *FabricApiService) PatchFabricEthNetworkControlPolicyExecute(r ApiPatchF
 	localVarPostBody = r.fabricEthNetworkControlPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17240,7 +19649,7 @@ func (a *FabricApiService) PatchFabricEthNetworkControlPolicyExecute(r ApiPatchF
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchFabricEthNetworkGroupPolicyRequest struct {
@@ -17260,7 +19669,7 @@ func (r ApiPatchFabricEthNetworkGroupPolicyRequest) IfMatch(ifMatch string) ApiP
 	return r
 }
 
-func (r ApiPatchFabricEthNetworkGroupPolicyRequest) Execute() (FabricEthNetworkGroupPolicy, *_nethttp.Response, error) {
+func (r ApiPatchFabricEthNetworkGroupPolicyRequest) Execute() (FabricEthNetworkGroupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchFabricEthNetworkGroupPolicyExecute(r)
 }
 
@@ -17282,19 +19691,21 @@ func (a *FabricApiService) PatchFabricEthNetworkGroupPolicy(ctx _context.Context
  * Execute executes the request
  * @return FabricEthNetworkGroupPolicy
  */
-func (a *FabricApiService) PatchFabricEthNetworkGroupPolicyExecute(r ApiPatchFabricEthNetworkGroupPolicyRequest) (FabricEthNetworkGroupPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) PatchFabricEthNetworkGroupPolicyExecute(r ApiPatchFabricEthNetworkGroupPolicyRequest) (FabricEthNetworkGroupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricEthNetworkGroupPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricEthNetworkGroupPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/EthNetworkGroupPolicies/{Moid}"
@@ -17304,7 +19715,8 @@ func (a *FabricApiService) PatchFabricEthNetworkGroupPolicyExecute(r ApiPatchFab
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricEthNetworkGroupPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricEthNetworkGroupPolicy is required and must be specified")
+		executionError.error = "fabricEthNetworkGroupPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -17331,18 +19743,22 @@ func (a *FabricApiService) PatchFabricEthNetworkGroupPolicyExecute(r ApiPatchFab
 	localVarPostBody = r.fabricEthNetworkGroupPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17409,7 +19825,7 @@ func (a *FabricApiService) PatchFabricEthNetworkGroupPolicyExecute(r ApiPatchFab
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchFabricEthNetworkPolicyRequest struct {
@@ -17429,7 +19845,7 @@ func (r ApiPatchFabricEthNetworkPolicyRequest) IfMatch(ifMatch string) ApiPatchF
 	return r
 }
 
-func (r ApiPatchFabricEthNetworkPolicyRequest) Execute() (FabricEthNetworkPolicy, *_nethttp.Response, error) {
+func (r ApiPatchFabricEthNetworkPolicyRequest) Execute() (FabricEthNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchFabricEthNetworkPolicyExecute(r)
 }
 
@@ -17451,19 +19867,21 @@ func (a *FabricApiService) PatchFabricEthNetworkPolicy(ctx _context.Context, moi
  * Execute executes the request
  * @return FabricEthNetworkPolicy
  */
-func (a *FabricApiService) PatchFabricEthNetworkPolicyExecute(r ApiPatchFabricEthNetworkPolicyRequest) (FabricEthNetworkPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) PatchFabricEthNetworkPolicyExecute(r ApiPatchFabricEthNetworkPolicyRequest) (FabricEthNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricEthNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricEthNetworkPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/EthNetworkPolicies/{Moid}"
@@ -17473,7 +19891,8 @@ func (a *FabricApiService) PatchFabricEthNetworkPolicyExecute(r ApiPatchFabricEt
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricEthNetworkPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricEthNetworkPolicy is required and must be specified")
+		executionError.error = "fabricEthNetworkPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -17500,18 +19919,22 @@ func (a *FabricApiService) PatchFabricEthNetworkPolicyExecute(r ApiPatchFabricEt
 	localVarPostBody = r.fabricEthNetworkPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17578,7 +20001,7 @@ func (a *FabricApiService) PatchFabricEthNetworkPolicyExecute(r ApiPatchFabricEt
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchFabricFcNetworkPolicyRequest struct {
@@ -17598,7 +20021,7 @@ func (r ApiPatchFabricFcNetworkPolicyRequest) IfMatch(ifMatch string) ApiPatchFa
 	return r
 }
 
-func (r ApiPatchFabricFcNetworkPolicyRequest) Execute() (FabricFcNetworkPolicy, *_nethttp.Response, error) {
+func (r ApiPatchFabricFcNetworkPolicyRequest) Execute() (FabricFcNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchFabricFcNetworkPolicyExecute(r)
 }
 
@@ -17620,19 +20043,21 @@ func (a *FabricApiService) PatchFabricFcNetworkPolicy(ctx _context.Context, moid
  * Execute executes the request
  * @return FabricFcNetworkPolicy
  */
-func (a *FabricApiService) PatchFabricFcNetworkPolicyExecute(r ApiPatchFabricFcNetworkPolicyRequest) (FabricFcNetworkPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) PatchFabricFcNetworkPolicyExecute(r ApiPatchFabricFcNetworkPolicyRequest) (FabricFcNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricFcNetworkPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcNetworkPolicies/{Moid}"
@@ -17642,7 +20067,8 @@ func (a *FabricApiService) PatchFabricFcNetworkPolicyExecute(r ApiPatchFabricFcN
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricFcNetworkPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricFcNetworkPolicy is required and must be specified")
+		executionError.error = "fabricFcNetworkPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -17669,18 +20095,22 @@ func (a *FabricApiService) PatchFabricFcNetworkPolicyExecute(r ApiPatchFabricFcN
 	localVarPostBody = r.fabricFcNetworkPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17747,7 +20177,7 @@ func (a *FabricApiService) PatchFabricFcNetworkPolicyExecute(r ApiPatchFabricFcN
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchFabricFcUplinkPcRoleRequest struct {
@@ -17767,7 +20197,7 @@ func (r ApiPatchFabricFcUplinkPcRoleRequest) IfMatch(ifMatch string) ApiPatchFab
 	return r
 }
 
-func (r ApiPatchFabricFcUplinkPcRoleRequest) Execute() (FabricFcUplinkPcRole, *_nethttp.Response, error) {
+func (r ApiPatchFabricFcUplinkPcRoleRequest) Execute() (FabricFcUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchFabricFcUplinkPcRoleExecute(r)
 }
 
@@ -17789,19 +20219,21 @@ func (a *FabricApiService) PatchFabricFcUplinkPcRole(ctx _context.Context, moid 
  * Execute executes the request
  * @return FabricFcUplinkPcRole
  */
-func (a *FabricApiService) PatchFabricFcUplinkPcRoleExecute(r ApiPatchFabricFcUplinkPcRoleRequest) (FabricFcUplinkPcRole, *_nethttp.Response, error) {
+func (a *FabricApiService) PatchFabricFcUplinkPcRoleExecute(r ApiPatchFabricFcUplinkPcRoleRequest) (FabricFcUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcUplinkPcRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricFcUplinkPcRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcUplinkPcRoles/{Moid}"
@@ -17811,7 +20243,8 @@ func (a *FabricApiService) PatchFabricFcUplinkPcRoleExecute(r ApiPatchFabricFcUp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricFcUplinkPcRole == nil {
-		return localVarReturnValue, nil, reportError("fabricFcUplinkPcRole is required and must be specified")
+		executionError.error = "fabricFcUplinkPcRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -17838,18 +20271,22 @@ func (a *FabricApiService) PatchFabricFcUplinkPcRoleExecute(r ApiPatchFabricFcUp
 	localVarPostBody = r.fabricFcUplinkPcRole
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17916,7 +20353,7 @@ func (a *FabricApiService) PatchFabricFcUplinkPcRoleExecute(r ApiPatchFabricFcUp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchFabricFcUplinkRoleRequest struct {
@@ -17936,7 +20373,7 @@ func (r ApiPatchFabricFcUplinkRoleRequest) IfMatch(ifMatch string) ApiPatchFabri
 	return r
 }
 
-func (r ApiPatchFabricFcUplinkRoleRequest) Execute() (FabricFcUplinkRole, *_nethttp.Response, error) {
+func (r ApiPatchFabricFcUplinkRoleRequest) Execute() (FabricFcUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchFabricFcUplinkRoleExecute(r)
 }
 
@@ -17958,19 +20395,21 @@ func (a *FabricApiService) PatchFabricFcUplinkRole(ctx _context.Context, moid st
  * Execute executes the request
  * @return FabricFcUplinkRole
  */
-func (a *FabricApiService) PatchFabricFcUplinkRoleExecute(r ApiPatchFabricFcUplinkRoleRequest) (FabricFcUplinkRole, *_nethttp.Response, error) {
+func (a *FabricApiService) PatchFabricFcUplinkRoleExecute(r ApiPatchFabricFcUplinkRoleRequest) (FabricFcUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcUplinkRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricFcUplinkRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcUplinkRoles/{Moid}"
@@ -17980,7 +20419,8 @@ func (a *FabricApiService) PatchFabricFcUplinkRoleExecute(r ApiPatchFabricFcUpli
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricFcUplinkRole == nil {
-		return localVarReturnValue, nil, reportError("fabricFcUplinkRole is required and must be specified")
+		executionError.error = "fabricFcUplinkRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -18007,18 +20447,22 @@ func (a *FabricApiService) PatchFabricFcUplinkRoleExecute(r ApiPatchFabricFcUpli
 	localVarPostBody = r.fabricFcUplinkRole
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18085,7 +20529,7 @@ func (a *FabricApiService) PatchFabricFcUplinkRoleExecute(r ApiPatchFabricFcUpli
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchFabricFcoeUplinkPcRoleRequest struct {
@@ -18105,7 +20549,7 @@ func (r ApiPatchFabricFcoeUplinkPcRoleRequest) IfMatch(ifMatch string) ApiPatchF
 	return r
 }
 
-func (r ApiPatchFabricFcoeUplinkPcRoleRequest) Execute() (FabricFcoeUplinkPcRole, *_nethttp.Response, error) {
+func (r ApiPatchFabricFcoeUplinkPcRoleRequest) Execute() (FabricFcoeUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchFabricFcoeUplinkPcRoleExecute(r)
 }
 
@@ -18127,19 +20571,21 @@ func (a *FabricApiService) PatchFabricFcoeUplinkPcRole(ctx _context.Context, moi
  * Execute executes the request
  * @return FabricFcoeUplinkPcRole
  */
-func (a *FabricApiService) PatchFabricFcoeUplinkPcRoleExecute(r ApiPatchFabricFcoeUplinkPcRoleRequest) (FabricFcoeUplinkPcRole, *_nethttp.Response, error) {
+func (a *FabricApiService) PatchFabricFcoeUplinkPcRoleExecute(r ApiPatchFabricFcoeUplinkPcRoleRequest) (FabricFcoeUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcoeUplinkPcRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricFcoeUplinkPcRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcoeUplinkPcRoles/{Moid}"
@@ -18149,7 +20595,8 @@ func (a *FabricApiService) PatchFabricFcoeUplinkPcRoleExecute(r ApiPatchFabricFc
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricFcoeUplinkPcRole == nil {
-		return localVarReturnValue, nil, reportError("fabricFcoeUplinkPcRole is required and must be specified")
+		executionError.error = "fabricFcoeUplinkPcRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -18176,18 +20623,22 @@ func (a *FabricApiService) PatchFabricFcoeUplinkPcRoleExecute(r ApiPatchFabricFc
 	localVarPostBody = r.fabricFcoeUplinkPcRole
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18254,7 +20705,7 @@ func (a *FabricApiService) PatchFabricFcoeUplinkPcRoleExecute(r ApiPatchFabricFc
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchFabricFcoeUplinkRoleRequest struct {
@@ -18274,7 +20725,7 @@ func (r ApiPatchFabricFcoeUplinkRoleRequest) IfMatch(ifMatch string) ApiPatchFab
 	return r
 }
 
-func (r ApiPatchFabricFcoeUplinkRoleRequest) Execute() (FabricFcoeUplinkRole, *_nethttp.Response, error) {
+func (r ApiPatchFabricFcoeUplinkRoleRequest) Execute() (FabricFcoeUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchFabricFcoeUplinkRoleExecute(r)
 }
 
@@ -18296,19 +20747,21 @@ func (a *FabricApiService) PatchFabricFcoeUplinkRole(ctx _context.Context, moid 
  * Execute executes the request
  * @return FabricFcoeUplinkRole
  */
-func (a *FabricApiService) PatchFabricFcoeUplinkRoleExecute(r ApiPatchFabricFcoeUplinkRoleRequest) (FabricFcoeUplinkRole, *_nethttp.Response, error) {
+func (a *FabricApiService) PatchFabricFcoeUplinkRoleExecute(r ApiPatchFabricFcoeUplinkRoleRequest) (FabricFcoeUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcoeUplinkRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricFcoeUplinkRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcoeUplinkRoles/{Moid}"
@@ -18318,7 +20771,8 @@ func (a *FabricApiService) PatchFabricFcoeUplinkRoleExecute(r ApiPatchFabricFcoe
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricFcoeUplinkRole == nil {
-		return localVarReturnValue, nil, reportError("fabricFcoeUplinkRole is required and must be specified")
+		executionError.error = "fabricFcoeUplinkRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -18345,18 +20799,22 @@ func (a *FabricApiService) PatchFabricFcoeUplinkRoleExecute(r ApiPatchFabricFcoe
 	localVarPostBody = r.fabricFcoeUplinkRole
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18423,7 +20881,7 @@ func (a *FabricApiService) PatchFabricFcoeUplinkRoleExecute(r ApiPatchFabricFcoe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchFabricMulticastPolicyRequest struct {
@@ -18443,7 +20901,7 @@ func (r ApiPatchFabricMulticastPolicyRequest) IfMatch(ifMatch string) ApiPatchFa
 	return r
 }
 
-func (r ApiPatchFabricMulticastPolicyRequest) Execute() (FabricMulticastPolicy, *_nethttp.Response, error) {
+func (r ApiPatchFabricMulticastPolicyRequest) Execute() (FabricMulticastPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchFabricMulticastPolicyExecute(r)
 }
 
@@ -18465,19 +20923,21 @@ func (a *FabricApiService) PatchFabricMulticastPolicy(ctx _context.Context, moid
  * Execute executes the request
  * @return FabricMulticastPolicy
  */
-func (a *FabricApiService) PatchFabricMulticastPolicyExecute(r ApiPatchFabricMulticastPolicyRequest) (FabricMulticastPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) PatchFabricMulticastPolicyExecute(r ApiPatchFabricMulticastPolicyRequest) (FabricMulticastPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricMulticastPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricMulticastPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/MulticastPolicies/{Moid}"
@@ -18487,7 +20947,8 @@ func (a *FabricApiService) PatchFabricMulticastPolicyExecute(r ApiPatchFabricMul
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricMulticastPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricMulticastPolicy is required and must be specified")
+		executionError.error = "fabricMulticastPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -18514,18 +20975,22 @@ func (a *FabricApiService) PatchFabricMulticastPolicyExecute(r ApiPatchFabricMul
 	localVarPostBody = r.fabricMulticastPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18592,7 +21057,7 @@ func (a *FabricApiService) PatchFabricMulticastPolicyExecute(r ApiPatchFabricMul
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchFabricPcOperationRequest struct {
@@ -18612,7 +21077,7 @@ func (r ApiPatchFabricPcOperationRequest) IfMatch(ifMatch string) ApiPatchFabric
 	return r
 }
 
-func (r ApiPatchFabricPcOperationRequest) Execute() (FabricPcOperation, *_nethttp.Response, error) {
+func (r ApiPatchFabricPcOperationRequest) Execute() (FabricPcOperation, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchFabricPcOperationExecute(r)
 }
 
@@ -18634,19 +21099,21 @@ func (a *FabricApiService) PatchFabricPcOperation(ctx _context.Context, moid str
  * Execute executes the request
  * @return FabricPcOperation
  */
-func (a *FabricApiService) PatchFabricPcOperationExecute(r ApiPatchFabricPcOperationRequest) (FabricPcOperation, *_nethttp.Response, error) {
+func (a *FabricApiService) PatchFabricPcOperationExecute(r ApiPatchFabricPcOperationRequest) (FabricPcOperation, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricPcOperation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricPcOperation")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PcOperations/{Moid}"
@@ -18656,7 +21123,8 @@ func (a *FabricApiService) PatchFabricPcOperationExecute(r ApiPatchFabricPcOpera
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricPcOperation == nil {
-		return localVarReturnValue, nil, reportError("fabricPcOperation is required and must be specified")
+		executionError.error = "fabricPcOperation is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -18683,18 +21151,22 @@ func (a *FabricApiService) PatchFabricPcOperationExecute(r ApiPatchFabricPcOpera
 	localVarPostBody = r.fabricPcOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18761,7 +21233,7 @@ func (a *FabricApiService) PatchFabricPcOperationExecute(r ApiPatchFabricPcOpera
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchFabricPortModeRequest struct {
@@ -18781,7 +21253,7 @@ func (r ApiPatchFabricPortModeRequest) IfMatch(ifMatch string) ApiPatchFabricPor
 	return r
 }
 
-func (r ApiPatchFabricPortModeRequest) Execute() (FabricPortMode, *_nethttp.Response, error) {
+func (r ApiPatchFabricPortModeRequest) Execute() (FabricPortMode, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchFabricPortModeExecute(r)
 }
 
@@ -18803,19 +21275,21 @@ func (a *FabricApiService) PatchFabricPortMode(ctx _context.Context, moid string
  * Execute executes the request
  * @return FabricPortMode
  */
-func (a *FabricApiService) PatchFabricPortModeExecute(r ApiPatchFabricPortModeRequest) (FabricPortMode, *_nethttp.Response, error) {
+func (a *FabricApiService) PatchFabricPortModeExecute(r ApiPatchFabricPortModeRequest) (FabricPortMode, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricPortMode
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricPortMode")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PortModes/{Moid}"
@@ -18825,7 +21299,8 @@ func (a *FabricApiService) PatchFabricPortModeExecute(r ApiPatchFabricPortModeRe
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricPortMode == nil {
-		return localVarReturnValue, nil, reportError("fabricPortMode is required and must be specified")
+		executionError.error = "fabricPortMode is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -18852,18 +21327,22 @@ func (a *FabricApiService) PatchFabricPortModeExecute(r ApiPatchFabricPortModeRe
 	localVarPostBody = r.fabricPortMode
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18930,7 +21409,7 @@ func (a *FabricApiService) PatchFabricPortModeExecute(r ApiPatchFabricPortModeRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchFabricPortOperationRequest struct {
@@ -18950,7 +21429,7 @@ func (r ApiPatchFabricPortOperationRequest) IfMatch(ifMatch string) ApiPatchFabr
 	return r
 }
 
-func (r ApiPatchFabricPortOperationRequest) Execute() (FabricPortOperation, *_nethttp.Response, error) {
+func (r ApiPatchFabricPortOperationRequest) Execute() (FabricPortOperation, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchFabricPortOperationExecute(r)
 }
 
@@ -18972,19 +21451,21 @@ func (a *FabricApiService) PatchFabricPortOperation(ctx _context.Context, moid s
  * Execute executes the request
  * @return FabricPortOperation
  */
-func (a *FabricApiService) PatchFabricPortOperationExecute(r ApiPatchFabricPortOperationRequest) (FabricPortOperation, *_nethttp.Response, error) {
+func (a *FabricApiService) PatchFabricPortOperationExecute(r ApiPatchFabricPortOperationRequest) (FabricPortOperation, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricPortOperation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricPortOperation")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PortOperations/{Moid}"
@@ -18994,7 +21475,8 @@ func (a *FabricApiService) PatchFabricPortOperationExecute(r ApiPatchFabricPortO
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricPortOperation == nil {
-		return localVarReturnValue, nil, reportError("fabricPortOperation is required and must be specified")
+		executionError.error = "fabricPortOperation is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -19021,18 +21503,22 @@ func (a *FabricApiService) PatchFabricPortOperationExecute(r ApiPatchFabricPortO
 	localVarPostBody = r.fabricPortOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19099,7 +21585,7 @@ func (a *FabricApiService) PatchFabricPortOperationExecute(r ApiPatchFabricPortO
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchFabricPortPolicyRequest struct {
@@ -19119,7 +21605,7 @@ func (r ApiPatchFabricPortPolicyRequest) IfMatch(ifMatch string) ApiPatchFabricP
 	return r
 }
 
-func (r ApiPatchFabricPortPolicyRequest) Execute() (FabricPortPolicy, *_nethttp.Response, error) {
+func (r ApiPatchFabricPortPolicyRequest) Execute() (FabricPortPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchFabricPortPolicyExecute(r)
 }
 
@@ -19141,19 +21627,21 @@ func (a *FabricApiService) PatchFabricPortPolicy(ctx _context.Context, moid stri
  * Execute executes the request
  * @return FabricPortPolicy
  */
-func (a *FabricApiService) PatchFabricPortPolicyExecute(r ApiPatchFabricPortPolicyRequest) (FabricPortPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) PatchFabricPortPolicyExecute(r ApiPatchFabricPortPolicyRequest) (FabricPortPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricPortPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricPortPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PortPolicies/{Moid}"
@@ -19163,7 +21651,8 @@ func (a *FabricApiService) PatchFabricPortPolicyExecute(r ApiPatchFabricPortPoli
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricPortPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricPortPolicy is required and must be specified")
+		executionError.error = "fabricPortPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -19190,18 +21679,22 @@ func (a *FabricApiService) PatchFabricPortPolicyExecute(r ApiPatchFabricPortPoli
 	localVarPostBody = r.fabricPortPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19268,7 +21761,7 @@ func (a *FabricApiService) PatchFabricPortPolicyExecute(r ApiPatchFabricPortPoli
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchFabricServerRoleRequest struct {
@@ -19288,7 +21781,7 @@ func (r ApiPatchFabricServerRoleRequest) IfMatch(ifMatch string) ApiPatchFabricS
 	return r
 }
 
-func (r ApiPatchFabricServerRoleRequest) Execute() (FabricServerRole, *_nethttp.Response, error) {
+func (r ApiPatchFabricServerRoleRequest) Execute() (FabricServerRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchFabricServerRoleExecute(r)
 }
 
@@ -19310,19 +21803,21 @@ func (a *FabricApiService) PatchFabricServerRole(ctx _context.Context, moid stri
  * Execute executes the request
  * @return FabricServerRole
  */
-func (a *FabricApiService) PatchFabricServerRoleExecute(r ApiPatchFabricServerRoleRequest) (FabricServerRole, *_nethttp.Response, error) {
+func (a *FabricApiService) PatchFabricServerRoleExecute(r ApiPatchFabricServerRoleRequest) (FabricServerRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricServerRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricServerRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/ServerRoles/{Moid}"
@@ -19332,7 +21827,8 @@ func (a *FabricApiService) PatchFabricServerRoleExecute(r ApiPatchFabricServerRo
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricServerRole == nil {
-		return localVarReturnValue, nil, reportError("fabricServerRole is required and must be specified")
+		executionError.error = "fabricServerRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -19359,18 +21855,22 @@ func (a *FabricApiService) PatchFabricServerRoleExecute(r ApiPatchFabricServerRo
 	localVarPostBody = r.fabricServerRole
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19437,7 +21937,7 @@ func (a *FabricApiService) PatchFabricServerRoleExecute(r ApiPatchFabricServerRo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchFabricSwitchClusterProfileRequest struct {
@@ -19457,7 +21957,7 @@ func (r ApiPatchFabricSwitchClusterProfileRequest) IfMatch(ifMatch string) ApiPa
 	return r
 }
 
-func (r ApiPatchFabricSwitchClusterProfileRequest) Execute() (FabricSwitchClusterProfile, *_nethttp.Response, error) {
+func (r ApiPatchFabricSwitchClusterProfileRequest) Execute() (FabricSwitchClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchFabricSwitchClusterProfileExecute(r)
 }
 
@@ -19479,19 +21979,21 @@ func (a *FabricApiService) PatchFabricSwitchClusterProfile(ctx _context.Context,
  * Execute executes the request
  * @return FabricSwitchClusterProfile
  */
-func (a *FabricApiService) PatchFabricSwitchClusterProfileExecute(r ApiPatchFabricSwitchClusterProfileRequest) (FabricSwitchClusterProfile, *_nethttp.Response, error) {
+func (a *FabricApiService) PatchFabricSwitchClusterProfileExecute(r ApiPatchFabricSwitchClusterProfileRequest) (FabricSwitchClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricSwitchClusterProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricSwitchClusterProfile")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SwitchClusterProfiles/{Moid}"
@@ -19501,7 +22003,8 @@ func (a *FabricApiService) PatchFabricSwitchClusterProfileExecute(r ApiPatchFabr
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricSwitchClusterProfile == nil {
-		return localVarReturnValue, nil, reportError("fabricSwitchClusterProfile is required and must be specified")
+		executionError.error = "fabricSwitchClusterProfile is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -19528,18 +22031,22 @@ func (a *FabricApiService) PatchFabricSwitchClusterProfileExecute(r ApiPatchFabr
 	localVarPostBody = r.fabricSwitchClusterProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19606,7 +22113,7 @@ func (a *FabricApiService) PatchFabricSwitchClusterProfileExecute(r ApiPatchFabr
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchFabricSwitchControlPolicyRequest struct {
@@ -19626,7 +22133,7 @@ func (r ApiPatchFabricSwitchControlPolicyRequest) IfMatch(ifMatch string) ApiPat
 	return r
 }
 
-func (r ApiPatchFabricSwitchControlPolicyRequest) Execute() (FabricSwitchControlPolicy, *_nethttp.Response, error) {
+func (r ApiPatchFabricSwitchControlPolicyRequest) Execute() (FabricSwitchControlPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchFabricSwitchControlPolicyExecute(r)
 }
 
@@ -19648,19 +22155,21 @@ func (a *FabricApiService) PatchFabricSwitchControlPolicy(ctx _context.Context, 
  * Execute executes the request
  * @return FabricSwitchControlPolicy
  */
-func (a *FabricApiService) PatchFabricSwitchControlPolicyExecute(r ApiPatchFabricSwitchControlPolicyRequest) (FabricSwitchControlPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) PatchFabricSwitchControlPolicyExecute(r ApiPatchFabricSwitchControlPolicyRequest) (FabricSwitchControlPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricSwitchControlPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricSwitchControlPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SwitchControlPolicies/{Moid}"
@@ -19670,7 +22179,8 @@ func (a *FabricApiService) PatchFabricSwitchControlPolicyExecute(r ApiPatchFabri
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricSwitchControlPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricSwitchControlPolicy is required and must be specified")
+		executionError.error = "fabricSwitchControlPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -19697,18 +22207,22 @@ func (a *FabricApiService) PatchFabricSwitchControlPolicyExecute(r ApiPatchFabri
 	localVarPostBody = r.fabricSwitchControlPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19775,7 +22289,7 @@ func (a *FabricApiService) PatchFabricSwitchControlPolicyExecute(r ApiPatchFabri
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchFabricSwitchProfileRequest struct {
@@ -19795,7 +22309,7 @@ func (r ApiPatchFabricSwitchProfileRequest) IfMatch(ifMatch string) ApiPatchFabr
 	return r
 }
 
-func (r ApiPatchFabricSwitchProfileRequest) Execute() (FabricSwitchProfile, *_nethttp.Response, error) {
+func (r ApiPatchFabricSwitchProfileRequest) Execute() (FabricSwitchProfile, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchFabricSwitchProfileExecute(r)
 }
 
@@ -19817,19 +22331,21 @@ func (a *FabricApiService) PatchFabricSwitchProfile(ctx _context.Context, moid s
  * Execute executes the request
  * @return FabricSwitchProfile
  */
-func (a *FabricApiService) PatchFabricSwitchProfileExecute(r ApiPatchFabricSwitchProfileRequest) (FabricSwitchProfile, *_nethttp.Response, error) {
+func (a *FabricApiService) PatchFabricSwitchProfileExecute(r ApiPatchFabricSwitchProfileRequest) (FabricSwitchProfile, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricSwitchProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricSwitchProfile")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SwitchProfiles/{Moid}"
@@ -19839,7 +22355,8 @@ func (a *FabricApiService) PatchFabricSwitchProfileExecute(r ApiPatchFabricSwitc
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricSwitchProfile == nil {
-		return localVarReturnValue, nil, reportError("fabricSwitchProfile is required and must be specified")
+		executionError.error = "fabricSwitchProfile is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -19866,18 +22383,22 @@ func (a *FabricApiService) PatchFabricSwitchProfileExecute(r ApiPatchFabricSwitc
 	localVarPostBody = r.fabricSwitchProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19944,7 +22465,7 @@ func (a *FabricApiService) PatchFabricSwitchProfileExecute(r ApiPatchFabricSwitc
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchFabricSystemQosPolicyRequest struct {
@@ -19964,7 +22485,7 @@ func (r ApiPatchFabricSystemQosPolicyRequest) IfMatch(ifMatch string) ApiPatchFa
 	return r
 }
 
-func (r ApiPatchFabricSystemQosPolicyRequest) Execute() (FabricSystemQosPolicy, *_nethttp.Response, error) {
+func (r ApiPatchFabricSystemQosPolicyRequest) Execute() (FabricSystemQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchFabricSystemQosPolicyExecute(r)
 }
 
@@ -19986,19 +22507,21 @@ func (a *FabricApiService) PatchFabricSystemQosPolicy(ctx _context.Context, moid
  * Execute executes the request
  * @return FabricSystemQosPolicy
  */
-func (a *FabricApiService) PatchFabricSystemQosPolicyExecute(r ApiPatchFabricSystemQosPolicyRequest) (FabricSystemQosPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) PatchFabricSystemQosPolicyExecute(r ApiPatchFabricSystemQosPolicyRequest) (FabricSystemQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricSystemQosPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricSystemQosPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SystemQosPolicies/{Moid}"
@@ -20008,7 +22531,8 @@ func (a *FabricApiService) PatchFabricSystemQosPolicyExecute(r ApiPatchFabricSys
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricSystemQosPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricSystemQosPolicy is required and must be specified")
+		executionError.error = "fabricSystemQosPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -20035,18 +22559,22 @@ func (a *FabricApiService) PatchFabricSystemQosPolicyExecute(r ApiPatchFabricSys
 	localVarPostBody = r.fabricSystemQosPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20113,7 +22641,7 @@ func (a *FabricApiService) PatchFabricSystemQosPolicyExecute(r ApiPatchFabricSys
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchFabricUplinkPcRoleRequest struct {
@@ -20133,7 +22661,7 @@ func (r ApiPatchFabricUplinkPcRoleRequest) IfMatch(ifMatch string) ApiPatchFabri
 	return r
 }
 
-func (r ApiPatchFabricUplinkPcRoleRequest) Execute() (FabricUplinkPcRole, *_nethttp.Response, error) {
+func (r ApiPatchFabricUplinkPcRoleRequest) Execute() (FabricUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchFabricUplinkPcRoleExecute(r)
 }
 
@@ -20155,19 +22683,21 @@ func (a *FabricApiService) PatchFabricUplinkPcRole(ctx _context.Context, moid st
  * Execute executes the request
  * @return FabricUplinkPcRole
  */
-func (a *FabricApiService) PatchFabricUplinkPcRoleExecute(r ApiPatchFabricUplinkPcRoleRequest) (FabricUplinkPcRole, *_nethttp.Response, error) {
+func (a *FabricApiService) PatchFabricUplinkPcRoleExecute(r ApiPatchFabricUplinkPcRoleRequest) (FabricUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricUplinkPcRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricUplinkPcRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/UplinkPcRoles/{Moid}"
@@ -20177,7 +22707,8 @@ func (a *FabricApiService) PatchFabricUplinkPcRoleExecute(r ApiPatchFabricUplink
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricUplinkPcRole == nil {
-		return localVarReturnValue, nil, reportError("fabricUplinkPcRole is required and must be specified")
+		executionError.error = "fabricUplinkPcRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -20204,18 +22735,22 @@ func (a *FabricApiService) PatchFabricUplinkPcRoleExecute(r ApiPatchFabricUplink
 	localVarPostBody = r.fabricUplinkPcRole
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20282,7 +22817,7 @@ func (a *FabricApiService) PatchFabricUplinkPcRoleExecute(r ApiPatchFabricUplink
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchFabricUplinkRoleRequest struct {
@@ -20302,7 +22837,7 @@ func (r ApiPatchFabricUplinkRoleRequest) IfMatch(ifMatch string) ApiPatchFabricU
 	return r
 }
 
-func (r ApiPatchFabricUplinkRoleRequest) Execute() (FabricUplinkRole, *_nethttp.Response, error) {
+func (r ApiPatchFabricUplinkRoleRequest) Execute() (FabricUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchFabricUplinkRoleExecute(r)
 }
 
@@ -20324,19 +22859,21 @@ func (a *FabricApiService) PatchFabricUplinkRole(ctx _context.Context, moid stri
  * Execute executes the request
  * @return FabricUplinkRole
  */
-func (a *FabricApiService) PatchFabricUplinkRoleExecute(r ApiPatchFabricUplinkRoleRequest) (FabricUplinkRole, *_nethttp.Response, error) {
+func (a *FabricApiService) PatchFabricUplinkRoleExecute(r ApiPatchFabricUplinkRoleRequest) (FabricUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricUplinkRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricUplinkRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/UplinkRoles/{Moid}"
@@ -20346,7 +22883,8 @@ func (a *FabricApiService) PatchFabricUplinkRoleExecute(r ApiPatchFabricUplinkRo
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricUplinkRole == nil {
-		return localVarReturnValue, nil, reportError("fabricUplinkRole is required and must be specified")
+		executionError.error = "fabricUplinkRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -20373,18 +22911,22 @@ func (a *FabricApiService) PatchFabricUplinkRoleExecute(r ApiPatchFabricUplinkRo
 	localVarPostBody = r.fabricUplinkRole
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20451,7 +22993,7 @@ func (a *FabricApiService) PatchFabricUplinkRoleExecute(r ApiPatchFabricUplinkRo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchFabricVlanRequest struct {
@@ -20471,7 +23013,7 @@ func (r ApiPatchFabricVlanRequest) IfMatch(ifMatch string) ApiPatchFabricVlanReq
 	return r
 }
 
-func (r ApiPatchFabricVlanRequest) Execute() (FabricVlan, *_nethttp.Response, error) {
+func (r ApiPatchFabricVlanRequest) Execute() (FabricVlan, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchFabricVlanExecute(r)
 }
 
@@ -20493,19 +23035,21 @@ func (a *FabricApiService) PatchFabricVlan(ctx _context.Context, moid string) Ap
  * Execute executes the request
  * @return FabricVlan
  */
-func (a *FabricApiService) PatchFabricVlanExecute(r ApiPatchFabricVlanRequest) (FabricVlan, *_nethttp.Response, error) {
+func (a *FabricApiService) PatchFabricVlanExecute(r ApiPatchFabricVlanRequest) (FabricVlan, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricVlan
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricVlan")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/Vlans/{Moid}"
@@ -20515,7 +23059,8 @@ func (a *FabricApiService) PatchFabricVlanExecute(r ApiPatchFabricVlanRequest) (
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricVlan == nil {
-		return localVarReturnValue, nil, reportError("fabricVlan is required and must be specified")
+		executionError.error = "fabricVlan is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -20542,18 +23087,22 @@ func (a *FabricApiService) PatchFabricVlanExecute(r ApiPatchFabricVlanRequest) (
 	localVarPostBody = r.fabricVlan
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20620,7 +23169,7 @@ func (a *FabricApiService) PatchFabricVlanExecute(r ApiPatchFabricVlanRequest) (
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchFabricVsanRequest struct {
@@ -20640,7 +23189,7 @@ func (r ApiPatchFabricVsanRequest) IfMatch(ifMatch string) ApiPatchFabricVsanReq
 	return r
 }
 
-func (r ApiPatchFabricVsanRequest) Execute() (FabricVsan, *_nethttp.Response, error) {
+func (r ApiPatchFabricVsanRequest) Execute() (FabricVsan, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchFabricVsanExecute(r)
 }
 
@@ -20662,19 +23211,21 @@ func (a *FabricApiService) PatchFabricVsan(ctx _context.Context, moid string) Ap
  * Execute executes the request
  * @return FabricVsan
  */
-func (a *FabricApiService) PatchFabricVsanExecute(r ApiPatchFabricVsanRequest) (FabricVsan, *_nethttp.Response, error) {
+func (a *FabricApiService) PatchFabricVsanExecute(r ApiPatchFabricVsanRequest) (FabricVsan, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricVsan
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.PatchFabricVsan")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/Vsans/{Moid}"
@@ -20684,7 +23235,8 @@ func (a *FabricApiService) PatchFabricVsanExecute(r ApiPatchFabricVsanRequest) (
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricVsan == nil {
-		return localVarReturnValue, nil, reportError("fabricVsan is required and must be specified")
+		executionError.error = "fabricVsan is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -20711,18 +23263,22 @@ func (a *FabricApiService) PatchFabricVsanExecute(r ApiPatchFabricVsanRequest) (
 	localVarPostBody = r.fabricVsan
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20789,7 +23345,359 @@ func (a *FabricApiService) PatchFabricVsanExecute(r ApiPatchFabricVsanRequest) (
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
+}
+
+type ApiUpdateFabricAppliancePcRoleRequest struct {
+	ctx                   _context.Context
+	ApiService            *FabricApiService
+	moid                  string
+	fabricAppliancePcRole *FabricAppliancePcRole
+	ifMatch               *string
+}
+
+func (r ApiUpdateFabricAppliancePcRoleRequest) FabricAppliancePcRole(fabricAppliancePcRole FabricAppliancePcRole) ApiUpdateFabricAppliancePcRoleRequest {
+	r.fabricAppliancePcRole = &fabricAppliancePcRole
+	return r
+}
+func (r ApiUpdateFabricAppliancePcRoleRequest) IfMatch(ifMatch string) ApiUpdateFabricAppliancePcRoleRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateFabricAppliancePcRoleRequest) Execute() (FabricAppliancePcRole, *_nethttp.Response, GenericOpenAPIError) {
+	return r.ApiService.UpdateFabricAppliancePcRoleExecute(r)
+}
+
+/*
+ * UpdateFabricAppliancePcRole Update a 'fabric.AppliancePcRole' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiUpdateFabricAppliancePcRoleRequest
+ */
+func (a *FabricApiService) UpdateFabricAppliancePcRole(ctx _context.Context, moid string) ApiUpdateFabricAppliancePcRoleRequest {
+	return ApiUpdateFabricAppliancePcRoleRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return FabricAppliancePcRole
+ */
+func (a *FabricApiService) UpdateFabricAppliancePcRoleExecute(r ApiUpdateFabricAppliancePcRoleRequest) (FabricAppliancePcRole, *_nethttp.Response, GenericOpenAPIError) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
+		localVarReturnValue  FabricAppliancePcRole
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricAppliancePcRole")
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/AppliancePcRoles/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.fabricAppliancePcRole == nil {
+		executionError.error = "fabricAppliancePcRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.fabricAppliancePcRole
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, executionError
+}
+
+type ApiUpdateFabricApplianceRoleRequest struct {
+	ctx                 _context.Context
+	ApiService          *FabricApiService
+	moid                string
+	fabricApplianceRole *FabricApplianceRole
+	ifMatch             *string
+}
+
+func (r ApiUpdateFabricApplianceRoleRequest) FabricApplianceRole(fabricApplianceRole FabricApplianceRole) ApiUpdateFabricApplianceRoleRequest {
+	r.fabricApplianceRole = &fabricApplianceRole
+	return r
+}
+func (r ApiUpdateFabricApplianceRoleRequest) IfMatch(ifMatch string) ApiUpdateFabricApplianceRoleRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateFabricApplianceRoleRequest) Execute() (FabricApplianceRole, *_nethttp.Response, GenericOpenAPIError) {
+	return r.ApiService.UpdateFabricApplianceRoleExecute(r)
+}
+
+/*
+ * UpdateFabricApplianceRole Update a 'fabric.ApplianceRole' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiUpdateFabricApplianceRoleRequest
+ */
+func (a *FabricApiService) UpdateFabricApplianceRole(ctx _context.Context, moid string) ApiUpdateFabricApplianceRoleRequest {
+	return ApiUpdateFabricApplianceRoleRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return FabricApplianceRole
+ */
+func (a *FabricApiService) UpdateFabricApplianceRoleExecute(r ApiUpdateFabricApplianceRoleRequest) (FabricApplianceRole, *_nethttp.Response, GenericOpenAPIError) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
+		localVarReturnValue  FabricApplianceRole
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricApplianceRole")
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarPath := localBasePath + "/api/v1/fabric/ApplianceRoles/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.fabricApplianceRole == nil {
+		executionError.error = "fabricApplianceRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.fabricApplianceRole
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateFabricEthNetworkControlPolicyRequest struct {
@@ -20809,7 +23717,7 @@ func (r ApiUpdateFabricEthNetworkControlPolicyRequest) IfMatch(ifMatch string) A
 	return r
 }
 
-func (r ApiUpdateFabricEthNetworkControlPolicyRequest) Execute() (FabricEthNetworkControlPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateFabricEthNetworkControlPolicyRequest) Execute() (FabricEthNetworkControlPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateFabricEthNetworkControlPolicyExecute(r)
 }
 
@@ -20831,19 +23739,21 @@ func (a *FabricApiService) UpdateFabricEthNetworkControlPolicy(ctx _context.Cont
  * Execute executes the request
  * @return FabricEthNetworkControlPolicy
  */
-func (a *FabricApiService) UpdateFabricEthNetworkControlPolicyExecute(r ApiUpdateFabricEthNetworkControlPolicyRequest) (FabricEthNetworkControlPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) UpdateFabricEthNetworkControlPolicyExecute(r ApiUpdateFabricEthNetworkControlPolicyRequest) (FabricEthNetworkControlPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricEthNetworkControlPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricEthNetworkControlPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/EthNetworkControlPolicies/{Moid}"
@@ -20853,7 +23763,8 @@ func (a *FabricApiService) UpdateFabricEthNetworkControlPolicyExecute(r ApiUpdat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricEthNetworkControlPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricEthNetworkControlPolicy is required and must be specified")
+		executionError.error = "fabricEthNetworkControlPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -20880,18 +23791,22 @@ func (a *FabricApiService) UpdateFabricEthNetworkControlPolicyExecute(r ApiUpdat
 	localVarPostBody = r.fabricEthNetworkControlPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20958,7 +23873,7 @@ func (a *FabricApiService) UpdateFabricEthNetworkControlPolicyExecute(r ApiUpdat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateFabricEthNetworkGroupPolicyRequest struct {
@@ -20978,7 +23893,7 @@ func (r ApiUpdateFabricEthNetworkGroupPolicyRequest) IfMatch(ifMatch string) Api
 	return r
 }
 
-func (r ApiUpdateFabricEthNetworkGroupPolicyRequest) Execute() (FabricEthNetworkGroupPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateFabricEthNetworkGroupPolicyRequest) Execute() (FabricEthNetworkGroupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateFabricEthNetworkGroupPolicyExecute(r)
 }
 
@@ -21000,19 +23915,21 @@ func (a *FabricApiService) UpdateFabricEthNetworkGroupPolicy(ctx _context.Contex
  * Execute executes the request
  * @return FabricEthNetworkGroupPolicy
  */
-func (a *FabricApiService) UpdateFabricEthNetworkGroupPolicyExecute(r ApiUpdateFabricEthNetworkGroupPolicyRequest) (FabricEthNetworkGroupPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) UpdateFabricEthNetworkGroupPolicyExecute(r ApiUpdateFabricEthNetworkGroupPolicyRequest) (FabricEthNetworkGroupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricEthNetworkGroupPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricEthNetworkGroupPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/EthNetworkGroupPolicies/{Moid}"
@@ -21022,7 +23939,8 @@ func (a *FabricApiService) UpdateFabricEthNetworkGroupPolicyExecute(r ApiUpdateF
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricEthNetworkGroupPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricEthNetworkGroupPolicy is required and must be specified")
+		executionError.error = "fabricEthNetworkGroupPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -21049,18 +23967,22 @@ func (a *FabricApiService) UpdateFabricEthNetworkGroupPolicyExecute(r ApiUpdateF
 	localVarPostBody = r.fabricEthNetworkGroupPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21127,7 +24049,7 @@ func (a *FabricApiService) UpdateFabricEthNetworkGroupPolicyExecute(r ApiUpdateF
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateFabricEthNetworkPolicyRequest struct {
@@ -21147,7 +24069,7 @@ func (r ApiUpdateFabricEthNetworkPolicyRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateFabricEthNetworkPolicyRequest) Execute() (FabricEthNetworkPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateFabricEthNetworkPolicyRequest) Execute() (FabricEthNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateFabricEthNetworkPolicyExecute(r)
 }
 
@@ -21169,19 +24091,21 @@ func (a *FabricApiService) UpdateFabricEthNetworkPolicy(ctx _context.Context, mo
  * Execute executes the request
  * @return FabricEthNetworkPolicy
  */
-func (a *FabricApiService) UpdateFabricEthNetworkPolicyExecute(r ApiUpdateFabricEthNetworkPolicyRequest) (FabricEthNetworkPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) UpdateFabricEthNetworkPolicyExecute(r ApiUpdateFabricEthNetworkPolicyRequest) (FabricEthNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricEthNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricEthNetworkPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/EthNetworkPolicies/{Moid}"
@@ -21191,7 +24115,8 @@ func (a *FabricApiService) UpdateFabricEthNetworkPolicyExecute(r ApiUpdateFabric
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricEthNetworkPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricEthNetworkPolicy is required and must be specified")
+		executionError.error = "fabricEthNetworkPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -21218,18 +24143,22 @@ func (a *FabricApiService) UpdateFabricEthNetworkPolicyExecute(r ApiUpdateFabric
 	localVarPostBody = r.fabricEthNetworkPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21296,7 +24225,7 @@ func (a *FabricApiService) UpdateFabricEthNetworkPolicyExecute(r ApiUpdateFabric
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateFabricFcNetworkPolicyRequest struct {
@@ -21316,7 +24245,7 @@ func (r ApiUpdateFabricFcNetworkPolicyRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateFabricFcNetworkPolicyRequest) Execute() (FabricFcNetworkPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateFabricFcNetworkPolicyRequest) Execute() (FabricFcNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateFabricFcNetworkPolicyExecute(r)
 }
 
@@ -21338,19 +24267,21 @@ func (a *FabricApiService) UpdateFabricFcNetworkPolicy(ctx _context.Context, moi
  * Execute executes the request
  * @return FabricFcNetworkPolicy
  */
-func (a *FabricApiService) UpdateFabricFcNetworkPolicyExecute(r ApiUpdateFabricFcNetworkPolicyRequest) (FabricFcNetworkPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) UpdateFabricFcNetworkPolicyExecute(r ApiUpdateFabricFcNetworkPolicyRequest) (FabricFcNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricFcNetworkPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcNetworkPolicies/{Moid}"
@@ -21360,7 +24291,8 @@ func (a *FabricApiService) UpdateFabricFcNetworkPolicyExecute(r ApiUpdateFabricF
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricFcNetworkPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricFcNetworkPolicy is required and must be specified")
+		executionError.error = "fabricFcNetworkPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -21387,18 +24319,22 @@ func (a *FabricApiService) UpdateFabricFcNetworkPolicyExecute(r ApiUpdateFabricF
 	localVarPostBody = r.fabricFcNetworkPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21465,7 +24401,7 @@ func (a *FabricApiService) UpdateFabricFcNetworkPolicyExecute(r ApiUpdateFabricF
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateFabricFcUplinkPcRoleRequest struct {
@@ -21485,7 +24421,7 @@ func (r ApiUpdateFabricFcUplinkPcRoleRequest) IfMatch(ifMatch string) ApiUpdateF
 	return r
 }
 
-func (r ApiUpdateFabricFcUplinkPcRoleRequest) Execute() (FabricFcUplinkPcRole, *_nethttp.Response, error) {
+func (r ApiUpdateFabricFcUplinkPcRoleRequest) Execute() (FabricFcUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateFabricFcUplinkPcRoleExecute(r)
 }
 
@@ -21507,19 +24443,21 @@ func (a *FabricApiService) UpdateFabricFcUplinkPcRole(ctx _context.Context, moid
  * Execute executes the request
  * @return FabricFcUplinkPcRole
  */
-func (a *FabricApiService) UpdateFabricFcUplinkPcRoleExecute(r ApiUpdateFabricFcUplinkPcRoleRequest) (FabricFcUplinkPcRole, *_nethttp.Response, error) {
+func (a *FabricApiService) UpdateFabricFcUplinkPcRoleExecute(r ApiUpdateFabricFcUplinkPcRoleRequest) (FabricFcUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcUplinkPcRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricFcUplinkPcRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcUplinkPcRoles/{Moid}"
@@ -21529,7 +24467,8 @@ func (a *FabricApiService) UpdateFabricFcUplinkPcRoleExecute(r ApiUpdateFabricFc
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricFcUplinkPcRole == nil {
-		return localVarReturnValue, nil, reportError("fabricFcUplinkPcRole is required and must be specified")
+		executionError.error = "fabricFcUplinkPcRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -21556,18 +24495,22 @@ func (a *FabricApiService) UpdateFabricFcUplinkPcRoleExecute(r ApiUpdateFabricFc
 	localVarPostBody = r.fabricFcUplinkPcRole
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21634,7 +24577,7 @@ func (a *FabricApiService) UpdateFabricFcUplinkPcRoleExecute(r ApiUpdateFabricFc
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateFabricFcUplinkRoleRequest struct {
@@ -21654,7 +24597,7 @@ func (r ApiUpdateFabricFcUplinkRoleRequest) IfMatch(ifMatch string) ApiUpdateFab
 	return r
 }
 
-func (r ApiUpdateFabricFcUplinkRoleRequest) Execute() (FabricFcUplinkRole, *_nethttp.Response, error) {
+func (r ApiUpdateFabricFcUplinkRoleRequest) Execute() (FabricFcUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateFabricFcUplinkRoleExecute(r)
 }
 
@@ -21676,19 +24619,21 @@ func (a *FabricApiService) UpdateFabricFcUplinkRole(ctx _context.Context, moid s
  * Execute executes the request
  * @return FabricFcUplinkRole
  */
-func (a *FabricApiService) UpdateFabricFcUplinkRoleExecute(r ApiUpdateFabricFcUplinkRoleRequest) (FabricFcUplinkRole, *_nethttp.Response, error) {
+func (a *FabricApiService) UpdateFabricFcUplinkRoleExecute(r ApiUpdateFabricFcUplinkRoleRequest) (FabricFcUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcUplinkRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricFcUplinkRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcUplinkRoles/{Moid}"
@@ -21698,7 +24643,8 @@ func (a *FabricApiService) UpdateFabricFcUplinkRoleExecute(r ApiUpdateFabricFcUp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricFcUplinkRole == nil {
-		return localVarReturnValue, nil, reportError("fabricFcUplinkRole is required and must be specified")
+		executionError.error = "fabricFcUplinkRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -21725,18 +24671,22 @@ func (a *FabricApiService) UpdateFabricFcUplinkRoleExecute(r ApiUpdateFabricFcUp
 	localVarPostBody = r.fabricFcUplinkRole
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21803,7 +24753,7 @@ func (a *FabricApiService) UpdateFabricFcUplinkRoleExecute(r ApiUpdateFabricFcUp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateFabricFcoeUplinkPcRoleRequest struct {
@@ -21823,7 +24773,7 @@ func (r ApiUpdateFabricFcoeUplinkPcRoleRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateFabricFcoeUplinkPcRoleRequest) Execute() (FabricFcoeUplinkPcRole, *_nethttp.Response, error) {
+func (r ApiUpdateFabricFcoeUplinkPcRoleRequest) Execute() (FabricFcoeUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateFabricFcoeUplinkPcRoleExecute(r)
 }
 
@@ -21845,19 +24795,21 @@ func (a *FabricApiService) UpdateFabricFcoeUplinkPcRole(ctx _context.Context, mo
  * Execute executes the request
  * @return FabricFcoeUplinkPcRole
  */
-func (a *FabricApiService) UpdateFabricFcoeUplinkPcRoleExecute(r ApiUpdateFabricFcoeUplinkPcRoleRequest) (FabricFcoeUplinkPcRole, *_nethttp.Response, error) {
+func (a *FabricApiService) UpdateFabricFcoeUplinkPcRoleExecute(r ApiUpdateFabricFcoeUplinkPcRoleRequest) (FabricFcoeUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcoeUplinkPcRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricFcoeUplinkPcRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcoeUplinkPcRoles/{Moid}"
@@ -21867,7 +24819,8 @@ func (a *FabricApiService) UpdateFabricFcoeUplinkPcRoleExecute(r ApiUpdateFabric
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricFcoeUplinkPcRole == nil {
-		return localVarReturnValue, nil, reportError("fabricFcoeUplinkPcRole is required and must be specified")
+		executionError.error = "fabricFcoeUplinkPcRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -21894,18 +24847,22 @@ func (a *FabricApiService) UpdateFabricFcoeUplinkPcRoleExecute(r ApiUpdateFabric
 	localVarPostBody = r.fabricFcoeUplinkPcRole
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21972,7 +24929,7 @@ func (a *FabricApiService) UpdateFabricFcoeUplinkPcRoleExecute(r ApiUpdateFabric
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateFabricFcoeUplinkRoleRequest struct {
@@ -21992,7 +24949,7 @@ func (r ApiUpdateFabricFcoeUplinkRoleRequest) IfMatch(ifMatch string) ApiUpdateF
 	return r
 }
 
-func (r ApiUpdateFabricFcoeUplinkRoleRequest) Execute() (FabricFcoeUplinkRole, *_nethttp.Response, error) {
+func (r ApiUpdateFabricFcoeUplinkRoleRequest) Execute() (FabricFcoeUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateFabricFcoeUplinkRoleExecute(r)
 }
 
@@ -22014,19 +24971,21 @@ func (a *FabricApiService) UpdateFabricFcoeUplinkRole(ctx _context.Context, moid
  * Execute executes the request
  * @return FabricFcoeUplinkRole
  */
-func (a *FabricApiService) UpdateFabricFcoeUplinkRoleExecute(r ApiUpdateFabricFcoeUplinkRoleRequest) (FabricFcoeUplinkRole, *_nethttp.Response, error) {
+func (a *FabricApiService) UpdateFabricFcoeUplinkRoleExecute(r ApiUpdateFabricFcoeUplinkRoleRequest) (FabricFcoeUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricFcoeUplinkRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricFcoeUplinkRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/FcoeUplinkRoles/{Moid}"
@@ -22036,7 +24995,8 @@ func (a *FabricApiService) UpdateFabricFcoeUplinkRoleExecute(r ApiUpdateFabricFc
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricFcoeUplinkRole == nil {
-		return localVarReturnValue, nil, reportError("fabricFcoeUplinkRole is required and must be specified")
+		executionError.error = "fabricFcoeUplinkRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -22063,18 +25023,22 @@ func (a *FabricApiService) UpdateFabricFcoeUplinkRoleExecute(r ApiUpdateFabricFc
 	localVarPostBody = r.fabricFcoeUplinkRole
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22141,7 +25105,7 @@ func (a *FabricApiService) UpdateFabricFcoeUplinkRoleExecute(r ApiUpdateFabricFc
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateFabricMulticastPolicyRequest struct {
@@ -22161,7 +25125,7 @@ func (r ApiUpdateFabricMulticastPolicyRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateFabricMulticastPolicyRequest) Execute() (FabricMulticastPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateFabricMulticastPolicyRequest) Execute() (FabricMulticastPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateFabricMulticastPolicyExecute(r)
 }
 
@@ -22183,19 +25147,21 @@ func (a *FabricApiService) UpdateFabricMulticastPolicy(ctx _context.Context, moi
  * Execute executes the request
  * @return FabricMulticastPolicy
  */
-func (a *FabricApiService) UpdateFabricMulticastPolicyExecute(r ApiUpdateFabricMulticastPolicyRequest) (FabricMulticastPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) UpdateFabricMulticastPolicyExecute(r ApiUpdateFabricMulticastPolicyRequest) (FabricMulticastPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricMulticastPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricMulticastPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/MulticastPolicies/{Moid}"
@@ -22205,7 +25171,8 @@ func (a *FabricApiService) UpdateFabricMulticastPolicyExecute(r ApiUpdateFabricM
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricMulticastPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricMulticastPolicy is required and must be specified")
+		executionError.error = "fabricMulticastPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -22232,18 +25199,22 @@ func (a *FabricApiService) UpdateFabricMulticastPolicyExecute(r ApiUpdateFabricM
 	localVarPostBody = r.fabricMulticastPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22310,7 +25281,7 @@ func (a *FabricApiService) UpdateFabricMulticastPolicyExecute(r ApiUpdateFabricM
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateFabricPcOperationRequest struct {
@@ -22330,7 +25301,7 @@ func (r ApiUpdateFabricPcOperationRequest) IfMatch(ifMatch string) ApiUpdateFabr
 	return r
 }
 
-func (r ApiUpdateFabricPcOperationRequest) Execute() (FabricPcOperation, *_nethttp.Response, error) {
+func (r ApiUpdateFabricPcOperationRequest) Execute() (FabricPcOperation, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateFabricPcOperationExecute(r)
 }
 
@@ -22352,19 +25323,21 @@ func (a *FabricApiService) UpdateFabricPcOperation(ctx _context.Context, moid st
  * Execute executes the request
  * @return FabricPcOperation
  */
-func (a *FabricApiService) UpdateFabricPcOperationExecute(r ApiUpdateFabricPcOperationRequest) (FabricPcOperation, *_nethttp.Response, error) {
+func (a *FabricApiService) UpdateFabricPcOperationExecute(r ApiUpdateFabricPcOperationRequest) (FabricPcOperation, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricPcOperation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricPcOperation")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PcOperations/{Moid}"
@@ -22374,7 +25347,8 @@ func (a *FabricApiService) UpdateFabricPcOperationExecute(r ApiUpdateFabricPcOpe
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricPcOperation == nil {
-		return localVarReturnValue, nil, reportError("fabricPcOperation is required and must be specified")
+		executionError.error = "fabricPcOperation is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -22401,18 +25375,22 @@ func (a *FabricApiService) UpdateFabricPcOperationExecute(r ApiUpdateFabricPcOpe
 	localVarPostBody = r.fabricPcOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22479,7 +25457,7 @@ func (a *FabricApiService) UpdateFabricPcOperationExecute(r ApiUpdateFabricPcOpe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateFabricPortModeRequest struct {
@@ -22499,7 +25477,7 @@ func (r ApiUpdateFabricPortModeRequest) IfMatch(ifMatch string) ApiUpdateFabricP
 	return r
 }
 
-func (r ApiUpdateFabricPortModeRequest) Execute() (FabricPortMode, *_nethttp.Response, error) {
+func (r ApiUpdateFabricPortModeRequest) Execute() (FabricPortMode, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateFabricPortModeExecute(r)
 }
 
@@ -22521,19 +25499,21 @@ func (a *FabricApiService) UpdateFabricPortMode(ctx _context.Context, moid strin
  * Execute executes the request
  * @return FabricPortMode
  */
-func (a *FabricApiService) UpdateFabricPortModeExecute(r ApiUpdateFabricPortModeRequest) (FabricPortMode, *_nethttp.Response, error) {
+func (a *FabricApiService) UpdateFabricPortModeExecute(r ApiUpdateFabricPortModeRequest) (FabricPortMode, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricPortMode
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricPortMode")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PortModes/{Moid}"
@@ -22543,7 +25523,8 @@ func (a *FabricApiService) UpdateFabricPortModeExecute(r ApiUpdateFabricPortMode
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricPortMode == nil {
-		return localVarReturnValue, nil, reportError("fabricPortMode is required and must be specified")
+		executionError.error = "fabricPortMode is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -22570,18 +25551,22 @@ func (a *FabricApiService) UpdateFabricPortModeExecute(r ApiUpdateFabricPortMode
 	localVarPostBody = r.fabricPortMode
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22648,7 +25633,7 @@ func (a *FabricApiService) UpdateFabricPortModeExecute(r ApiUpdateFabricPortMode
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateFabricPortOperationRequest struct {
@@ -22668,7 +25653,7 @@ func (r ApiUpdateFabricPortOperationRequest) IfMatch(ifMatch string) ApiUpdateFa
 	return r
 }
 
-func (r ApiUpdateFabricPortOperationRequest) Execute() (FabricPortOperation, *_nethttp.Response, error) {
+func (r ApiUpdateFabricPortOperationRequest) Execute() (FabricPortOperation, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateFabricPortOperationExecute(r)
 }
 
@@ -22690,19 +25675,21 @@ func (a *FabricApiService) UpdateFabricPortOperation(ctx _context.Context, moid 
  * Execute executes the request
  * @return FabricPortOperation
  */
-func (a *FabricApiService) UpdateFabricPortOperationExecute(r ApiUpdateFabricPortOperationRequest) (FabricPortOperation, *_nethttp.Response, error) {
+func (a *FabricApiService) UpdateFabricPortOperationExecute(r ApiUpdateFabricPortOperationRequest) (FabricPortOperation, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricPortOperation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricPortOperation")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PortOperations/{Moid}"
@@ -22712,7 +25699,8 @@ func (a *FabricApiService) UpdateFabricPortOperationExecute(r ApiUpdateFabricPor
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricPortOperation == nil {
-		return localVarReturnValue, nil, reportError("fabricPortOperation is required and must be specified")
+		executionError.error = "fabricPortOperation is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -22739,18 +25727,22 @@ func (a *FabricApiService) UpdateFabricPortOperationExecute(r ApiUpdateFabricPor
 	localVarPostBody = r.fabricPortOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22817,7 +25809,7 @@ func (a *FabricApiService) UpdateFabricPortOperationExecute(r ApiUpdateFabricPor
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateFabricPortPolicyRequest struct {
@@ -22837,7 +25829,7 @@ func (r ApiUpdateFabricPortPolicyRequest) IfMatch(ifMatch string) ApiUpdateFabri
 	return r
 }
 
-func (r ApiUpdateFabricPortPolicyRequest) Execute() (FabricPortPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateFabricPortPolicyRequest) Execute() (FabricPortPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateFabricPortPolicyExecute(r)
 }
 
@@ -22859,19 +25851,21 @@ func (a *FabricApiService) UpdateFabricPortPolicy(ctx _context.Context, moid str
  * Execute executes the request
  * @return FabricPortPolicy
  */
-func (a *FabricApiService) UpdateFabricPortPolicyExecute(r ApiUpdateFabricPortPolicyRequest) (FabricPortPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) UpdateFabricPortPolicyExecute(r ApiUpdateFabricPortPolicyRequest) (FabricPortPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricPortPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricPortPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/PortPolicies/{Moid}"
@@ -22881,7 +25875,8 @@ func (a *FabricApiService) UpdateFabricPortPolicyExecute(r ApiUpdateFabricPortPo
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricPortPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricPortPolicy is required and must be specified")
+		executionError.error = "fabricPortPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -22908,18 +25903,22 @@ func (a *FabricApiService) UpdateFabricPortPolicyExecute(r ApiUpdateFabricPortPo
 	localVarPostBody = r.fabricPortPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22986,7 +25985,7 @@ func (a *FabricApiService) UpdateFabricPortPolicyExecute(r ApiUpdateFabricPortPo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateFabricServerRoleRequest struct {
@@ -23006,7 +26005,7 @@ func (r ApiUpdateFabricServerRoleRequest) IfMatch(ifMatch string) ApiUpdateFabri
 	return r
 }
 
-func (r ApiUpdateFabricServerRoleRequest) Execute() (FabricServerRole, *_nethttp.Response, error) {
+func (r ApiUpdateFabricServerRoleRequest) Execute() (FabricServerRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateFabricServerRoleExecute(r)
 }
 
@@ -23028,19 +26027,21 @@ func (a *FabricApiService) UpdateFabricServerRole(ctx _context.Context, moid str
  * Execute executes the request
  * @return FabricServerRole
  */
-func (a *FabricApiService) UpdateFabricServerRoleExecute(r ApiUpdateFabricServerRoleRequest) (FabricServerRole, *_nethttp.Response, error) {
+func (a *FabricApiService) UpdateFabricServerRoleExecute(r ApiUpdateFabricServerRoleRequest) (FabricServerRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricServerRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricServerRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/ServerRoles/{Moid}"
@@ -23050,7 +26051,8 @@ func (a *FabricApiService) UpdateFabricServerRoleExecute(r ApiUpdateFabricServer
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricServerRole == nil {
-		return localVarReturnValue, nil, reportError("fabricServerRole is required and must be specified")
+		executionError.error = "fabricServerRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -23077,18 +26079,22 @@ func (a *FabricApiService) UpdateFabricServerRoleExecute(r ApiUpdateFabricServer
 	localVarPostBody = r.fabricServerRole
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23155,7 +26161,7 @@ func (a *FabricApiService) UpdateFabricServerRoleExecute(r ApiUpdateFabricServer
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateFabricSwitchClusterProfileRequest struct {
@@ -23175,7 +26181,7 @@ func (r ApiUpdateFabricSwitchClusterProfileRequest) IfMatch(ifMatch string) ApiU
 	return r
 }
 
-func (r ApiUpdateFabricSwitchClusterProfileRequest) Execute() (FabricSwitchClusterProfile, *_nethttp.Response, error) {
+func (r ApiUpdateFabricSwitchClusterProfileRequest) Execute() (FabricSwitchClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateFabricSwitchClusterProfileExecute(r)
 }
 
@@ -23197,19 +26203,21 @@ func (a *FabricApiService) UpdateFabricSwitchClusterProfile(ctx _context.Context
  * Execute executes the request
  * @return FabricSwitchClusterProfile
  */
-func (a *FabricApiService) UpdateFabricSwitchClusterProfileExecute(r ApiUpdateFabricSwitchClusterProfileRequest) (FabricSwitchClusterProfile, *_nethttp.Response, error) {
+func (a *FabricApiService) UpdateFabricSwitchClusterProfileExecute(r ApiUpdateFabricSwitchClusterProfileRequest) (FabricSwitchClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricSwitchClusterProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricSwitchClusterProfile")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SwitchClusterProfiles/{Moid}"
@@ -23219,7 +26227,8 @@ func (a *FabricApiService) UpdateFabricSwitchClusterProfileExecute(r ApiUpdateFa
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricSwitchClusterProfile == nil {
-		return localVarReturnValue, nil, reportError("fabricSwitchClusterProfile is required and must be specified")
+		executionError.error = "fabricSwitchClusterProfile is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -23246,18 +26255,22 @@ func (a *FabricApiService) UpdateFabricSwitchClusterProfileExecute(r ApiUpdateFa
 	localVarPostBody = r.fabricSwitchClusterProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23324,7 +26337,7 @@ func (a *FabricApiService) UpdateFabricSwitchClusterProfileExecute(r ApiUpdateFa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateFabricSwitchControlPolicyRequest struct {
@@ -23344,7 +26357,7 @@ func (r ApiUpdateFabricSwitchControlPolicyRequest) IfMatch(ifMatch string) ApiUp
 	return r
 }
 
-func (r ApiUpdateFabricSwitchControlPolicyRequest) Execute() (FabricSwitchControlPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateFabricSwitchControlPolicyRequest) Execute() (FabricSwitchControlPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateFabricSwitchControlPolicyExecute(r)
 }
 
@@ -23366,19 +26379,21 @@ func (a *FabricApiService) UpdateFabricSwitchControlPolicy(ctx _context.Context,
  * Execute executes the request
  * @return FabricSwitchControlPolicy
  */
-func (a *FabricApiService) UpdateFabricSwitchControlPolicyExecute(r ApiUpdateFabricSwitchControlPolicyRequest) (FabricSwitchControlPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) UpdateFabricSwitchControlPolicyExecute(r ApiUpdateFabricSwitchControlPolicyRequest) (FabricSwitchControlPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricSwitchControlPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricSwitchControlPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SwitchControlPolicies/{Moid}"
@@ -23388,7 +26403,8 @@ func (a *FabricApiService) UpdateFabricSwitchControlPolicyExecute(r ApiUpdateFab
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricSwitchControlPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricSwitchControlPolicy is required and must be specified")
+		executionError.error = "fabricSwitchControlPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -23415,18 +26431,22 @@ func (a *FabricApiService) UpdateFabricSwitchControlPolicyExecute(r ApiUpdateFab
 	localVarPostBody = r.fabricSwitchControlPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23493,7 +26513,7 @@ func (a *FabricApiService) UpdateFabricSwitchControlPolicyExecute(r ApiUpdateFab
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateFabricSwitchProfileRequest struct {
@@ -23513,7 +26533,7 @@ func (r ApiUpdateFabricSwitchProfileRequest) IfMatch(ifMatch string) ApiUpdateFa
 	return r
 }
 
-func (r ApiUpdateFabricSwitchProfileRequest) Execute() (FabricSwitchProfile, *_nethttp.Response, error) {
+func (r ApiUpdateFabricSwitchProfileRequest) Execute() (FabricSwitchProfile, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateFabricSwitchProfileExecute(r)
 }
 
@@ -23535,19 +26555,21 @@ func (a *FabricApiService) UpdateFabricSwitchProfile(ctx _context.Context, moid 
  * Execute executes the request
  * @return FabricSwitchProfile
  */
-func (a *FabricApiService) UpdateFabricSwitchProfileExecute(r ApiUpdateFabricSwitchProfileRequest) (FabricSwitchProfile, *_nethttp.Response, error) {
+func (a *FabricApiService) UpdateFabricSwitchProfileExecute(r ApiUpdateFabricSwitchProfileRequest) (FabricSwitchProfile, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricSwitchProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricSwitchProfile")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SwitchProfiles/{Moid}"
@@ -23557,7 +26579,8 @@ func (a *FabricApiService) UpdateFabricSwitchProfileExecute(r ApiUpdateFabricSwi
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricSwitchProfile == nil {
-		return localVarReturnValue, nil, reportError("fabricSwitchProfile is required and must be specified")
+		executionError.error = "fabricSwitchProfile is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -23584,18 +26607,22 @@ func (a *FabricApiService) UpdateFabricSwitchProfileExecute(r ApiUpdateFabricSwi
 	localVarPostBody = r.fabricSwitchProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23662,7 +26689,7 @@ func (a *FabricApiService) UpdateFabricSwitchProfileExecute(r ApiUpdateFabricSwi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateFabricSystemQosPolicyRequest struct {
@@ -23682,7 +26709,7 @@ func (r ApiUpdateFabricSystemQosPolicyRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateFabricSystemQosPolicyRequest) Execute() (FabricSystemQosPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateFabricSystemQosPolicyRequest) Execute() (FabricSystemQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateFabricSystemQosPolicyExecute(r)
 }
 
@@ -23704,19 +26731,21 @@ func (a *FabricApiService) UpdateFabricSystemQosPolicy(ctx _context.Context, moi
  * Execute executes the request
  * @return FabricSystemQosPolicy
  */
-func (a *FabricApiService) UpdateFabricSystemQosPolicyExecute(r ApiUpdateFabricSystemQosPolicyRequest) (FabricSystemQosPolicy, *_nethttp.Response, error) {
+func (a *FabricApiService) UpdateFabricSystemQosPolicyExecute(r ApiUpdateFabricSystemQosPolicyRequest) (FabricSystemQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricSystemQosPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricSystemQosPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/SystemQosPolicies/{Moid}"
@@ -23726,7 +26755,8 @@ func (a *FabricApiService) UpdateFabricSystemQosPolicyExecute(r ApiUpdateFabricS
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricSystemQosPolicy == nil {
-		return localVarReturnValue, nil, reportError("fabricSystemQosPolicy is required and must be specified")
+		executionError.error = "fabricSystemQosPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -23753,18 +26783,22 @@ func (a *FabricApiService) UpdateFabricSystemQosPolicyExecute(r ApiUpdateFabricS
 	localVarPostBody = r.fabricSystemQosPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23831,7 +26865,7 @@ func (a *FabricApiService) UpdateFabricSystemQosPolicyExecute(r ApiUpdateFabricS
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateFabricUplinkPcRoleRequest struct {
@@ -23851,7 +26885,7 @@ func (r ApiUpdateFabricUplinkPcRoleRequest) IfMatch(ifMatch string) ApiUpdateFab
 	return r
 }
 
-func (r ApiUpdateFabricUplinkPcRoleRequest) Execute() (FabricUplinkPcRole, *_nethttp.Response, error) {
+func (r ApiUpdateFabricUplinkPcRoleRequest) Execute() (FabricUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateFabricUplinkPcRoleExecute(r)
 }
 
@@ -23873,19 +26907,21 @@ func (a *FabricApiService) UpdateFabricUplinkPcRole(ctx _context.Context, moid s
  * Execute executes the request
  * @return FabricUplinkPcRole
  */
-func (a *FabricApiService) UpdateFabricUplinkPcRoleExecute(r ApiUpdateFabricUplinkPcRoleRequest) (FabricUplinkPcRole, *_nethttp.Response, error) {
+func (a *FabricApiService) UpdateFabricUplinkPcRoleExecute(r ApiUpdateFabricUplinkPcRoleRequest) (FabricUplinkPcRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricUplinkPcRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricUplinkPcRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/UplinkPcRoles/{Moid}"
@@ -23895,7 +26931,8 @@ func (a *FabricApiService) UpdateFabricUplinkPcRoleExecute(r ApiUpdateFabricUpli
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricUplinkPcRole == nil {
-		return localVarReturnValue, nil, reportError("fabricUplinkPcRole is required and must be specified")
+		executionError.error = "fabricUplinkPcRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -23922,18 +26959,22 @@ func (a *FabricApiService) UpdateFabricUplinkPcRoleExecute(r ApiUpdateFabricUpli
 	localVarPostBody = r.fabricUplinkPcRole
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -24000,7 +27041,7 @@ func (a *FabricApiService) UpdateFabricUplinkPcRoleExecute(r ApiUpdateFabricUpli
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateFabricUplinkRoleRequest struct {
@@ -24020,7 +27061,7 @@ func (r ApiUpdateFabricUplinkRoleRequest) IfMatch(ifMatch string) ApiUpdateFabri
 	return r
 }
 
-func (r ApiUpdateFabricUplinkRoleRequest) Execute() (FabricUplinkRole, *_nethttp.Response, error) {
+func (r ApiUpdateFabricUplinkRoleRequest) Execute() (FabricUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateFabricUplinkRoleExecute(r)
 }
 
@@ -24042,19 +27083,21 @@ func (a *FabricApiService) UpdateFabricUplinkRole(ctx _context.Context, moid str
  * Execute executes the request
  * @return FabricUplinkRole
  */
-func (a *FabricApiService) UpdateFabricUplinkRoleExecute(r ApiUpdateFabricUplinkRoleRequest) (FabricUplinkRole, *_nethttp.Response, error) {
+func (a *FabricApiService) UpdateFabricUplinkRoleExecute(r ApiUpdateFabricUplinkRoleRequest) (FabricUplinkRole, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricUplinkRole
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricUplinkRole")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/UplinkRoles/{Moid}"
@@ -24064,7 +27107,8 @@ func (a *FabricApiService) UpdateFabricUplinkRoleExecute(r ApiUpdateFabricUplink
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricUplinkRole == nil {
-		return localVarReturnValue, nil, reportError("fabricUplinkRole is required and must be specified")
+		executionError.error = "fabricUplinkRole is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -24091,18 +27135,22 @@ func (a *FabricApiService) UpdateFabricUplinkRoleExecute(r ApiUpdateFabricUplink
 	localVarPostBody = r.fabricUplinkRole
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -24169,7 +27217,7 @@ func (a *FabricApiService) UpdateFabricUplinkRoleExecute(r ApiUpdateFabricUplink
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateFabricVlanRequest struct {
@@ -24189,7 +27237,7 @@ func (r ApiUpdateFabricVlanRequest) IfMatch(ifMatch string) ApiUpdateFabricVlanR
 	return r
 }
 
-func (r ApiUpdateFabricVlanRequest) Execute() (FabricVlan, *_nethttp.Response, error) {
+func (r ApiUpdateFabricVlanRequest) Execute() (FabricVlan, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateFabricVlanExecute(r)
 }
 
@@ -24211,19 +27259,21 @@ func (a *FabricApiService) UpdateFabricVlan(ctx _context.Context, moid string) A
  * Execute executes the request
  * @return FabricVlan
  */
-func (a *FabricApiService) UpdateFabricVlanExecute(r ApiUpdateFabricVlanRequest) (FabricVlan, *_nethttp.Response, error) {
+func (a *FabricApiService) UpdateFabricVlanExecute(r ApiUpdateFabricVlanRequest) (FabricVlan, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricVlan
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricVlan")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/Vlans/{Moid}"
@@ -24233,7 +27283,8 @@ func (a *FabricApiService) UpdateFabricVlanExecute(r ApiUpdateFabricVlanRequest)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricVlan == nil {
-		return localVarReturnValue, nil, reportError("fabricVlan is required and must be specified")
+		executionError.error = "fabricVlan is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -24260,18 +27311,22 @@ func (a *FabricApiService) UpdateFabricVlanExecute(r ApiUpdateFabricVlanRequest)
 	localVarPostBody = r.fabricVlan
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -24338,7 +27393,7 @@ func (a *FabricApiService) UpdateFabricVlanExecute(r ApiUpdateFabricVlanRequest)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateFabricVsanRequest struct {
@@ -24358,7 +27413,7 @@ func (r ApiUpdateFabricVsanRequest) IfMatch(ifMatch string) ApiUpdateFabricVsanR
 	return r
 }
 
-func (r ApiUpdateFabricVsanRequest) Execute() (FabricVsan, *_nethttp.Response, error) {
+func (r ApiUpdateFabricVsanRequest) Execute() (FabricVsan, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateFabricVsanExecute(r)
 }
 
@@ -24380,19 +27435,21 @@ func (a *FabricApiService) UpdateFabricVsan(ctx _context.Context, moid string) A
  * Execute executes the request
  * @return FabricVsan
  */
-func (a *FabricApiService) UpdateFabricVsanExecute(r ApiUpdateFabricVsanRequest) (FabricVsan, *_nethttp.Response, error) {
+func (a *FabricApiService) UpdateFabricVsanExecute(r ApiUpdateFabricVsanRequest) (FabricVsan, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  FabricVsan
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FabricApiService.UpdateFabricVsan")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/fabric/Vsans/{Moid}"
@@ -24402,7 +27459,8 @@ func (a *FabricApiService) UpdateFabricVsanExecute(r ApiUpdateFabricVsanRequest)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.fabricVsan == nil {
-		return localVarReturnValue, nil, reportError("fabricVsan is required and must be specified")
+		executionError.error = "fabricVsan is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -24429,18 +27487,22 @@ func (a *FabricApiService) UpdateFabricVsanExecute(r ApiUpdateFabricVsanRequest)
 	localVarPostBody = r.fabricVsan
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -24507,5 +27569,5 @@ func (a *FabricApiService) UpdateFabricVsanExecute(r ApiUpdateFabricVsanRequest)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }

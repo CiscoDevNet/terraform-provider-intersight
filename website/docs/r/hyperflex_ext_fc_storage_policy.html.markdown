@@ -1,13 +1,12 @@
-
 ---
+subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_ext_fc_storage_policy"
-sidebar_current: "docs-intersight-resource-hyperflex-ext-fc-storage-policy"
 description: |-
   A policy specifying external storage connectivity information via Fabric attached FC storage.
 ---
 
-# Resource: intersight_hyperflex._ext_fc_storage_policy
+# Resource: intersight_hyperflex_ext_fc_storage_policy
 A policy specifying external storage connectivity information via Fabric attached FC storage.
 ## Argument Reference
 The following arguments are supported:
@@ -65,3 +64,10 @@ This complex property has following sub-properties:
   + `end_addr`:(string) The end WWxN prefix of a WWPN/WWNN range in the form of 20:00:00:25:B5:XX. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `start_addr`:(string) The start WWxN prefix of a WWPN/WWNN range in the form of 20:00:00:25:B5:XX. 
+
+
+## Import
+`intersight_hyperflex_ext_fc_storage_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_hyperflex_ext_fc_storage_policy.example 1234567890987654321abcde
+```

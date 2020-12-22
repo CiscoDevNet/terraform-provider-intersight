@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceHyperflexConfigResult() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceHyperflexConfigResultRead,
+		ReadContext: dataSourceHyperflexConfigResultRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -170,10 +171,11 @@ func dataSourceHyperflexConfigResult() *schema.Resource {
 	}
 }
 
-func dataSourceHyperflexConfigResultRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceHyperflexConfigResultRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.HyperflexConfigResult{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -214,25 +216,25 @@ func dataSourceHyperflexConfigResultRead(d *schema.ResourceData, meta interface{
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of HyperflexConfigResult object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.HyperflexApi.GetHyperflexConfigResultList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexConfigResultList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching HyperflexConfigResult: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for HyperflexConfigResult list: %s", err.Error())
 	}
 	var s = &models.HyperflexConfigResultList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to HyperflexConfigResult: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to HyperflexConfigResult list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for HyperflexConfigResult did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -241,52 +243,52 @@ func dataSourceHyperflexConfigResultRead(d *schema.ResourceData, meta interface{
 			var s = &models.HyperflexConfigResult{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 
 			if err := d.Set("cluster_profile", flattenMapHyperflexClusterProfileRelationship(s.GetClusterProfile(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property ClusterProfile: %+v", err)
+				return diag.Errorf("error occurred while setting property ClusterProfile: %s", err.Error())
 			}
 			if err := d.Set("config_progress", (s.GetConfigProgress())); err != nil {
-				return fmt.Errorf("error occurred while setting property ConfigProgress: %+v", err)
+				return diag.Errorf("error occurred while setting property ConfigProgress: %s", err.Error())
 			}
 			if err := d.Set("config_stage", (s.GetConfigStage())); err != nil {
-				return fmt.Errorf("error occurred while setting property ConfigStage: %+v", err)
+				return diag.Errorf("error occurred while setting property ConfigStage: %s", err.Error())
 			}
 			if err := d.Set("config_state", (s.GetConfigState())); err != nil {
-				return fmt.Errorf("error occurred while setting property ConfigState: %+v", err)
+				return diag.Errorf("error occurred while setting property ConfigState: %s", err.Error())
 			}
 			if err := d.Set("duration", (s.GetDuration())); err != nil {
-				return fmt.Errorf("error occurred while setting property Duration: %+v", err)
+				return diag.Errorf("error occurred while setting property Duration: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 
 			if err := d.Set("result_entries", flattenListHyperflexConfigResultEntryRelationship(s.GetResultEntries(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property ResultEntries: %+v", err)
+				return diag.Errorf("error occurred while setting property ResultEntries: %s", err.Error())
 			}
 			if err := d.Set("start_time", (s.GetStartTime())); err != nil {
-				return fmt.Errorf("error occurred while setting property StartTime: %+v", err)
+				return diag.Errorf("error occurred while setting property StartTime: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("validation_state", (s.GetValidationState())); err != nil {
-				return fmt.Errorf("error occurred while setting property ValidationState: %+v", err)
+				return diag.Errorf("error occurred while setting property ValidationState: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

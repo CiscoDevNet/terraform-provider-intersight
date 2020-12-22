@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceCapabilityEquipmentPhysicalDef() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceCapabilityEquipmentPhysicalDefRead,
+		ReadContext: dataSourceCapabilityEquipmentPhysicalDefRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -61,7 +62,7 @@ func dataSourceCapabilityEquipmentPhysicalDef() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -70,45 +71,6 @@ func dataSourceCapabilityEquipmentPhysicalDef() *schema.Resource {
 				Description: "Product Identifier for a Switch/Fabric-Interconnect.\n* `UCS-FI-6454` - The standard 4th generation UCS Fabric Interconnect with 54 ports.\n* `UCS-FI-64108` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.\n* `unknown` - Unknown device type, usage is TBD.",
 				Type:        schema.TypeString,
 				Optional:    true,
-			},
-			"section": {
-				Description: "A reference to a capabilitySection resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
 			},
 			"sku": {
 				Description: "SKU information for Switch/Fabric-Interconnect.",
@@ -157,10 +119,11 @@ func dataSourceCapabilityEquipmentPhysicalDef() *schema.Resource {
 	}
 }
 
-func dataSourceCapabilityEquipmentPhysicalDefRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceCapabilityEquipmentPhysicalDefRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.CapabilityEquipmentPhysicalDef{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -221,25 +184,25 @@ func dataSourceCapabilityEquipmentPhysicalDefRead(d *schema.ResourceData, meta i
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of CapabilityEquipmentPhysicalDef object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.CapabilityApi.GetCapabilityEquipmentPhysicalDefList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.CapabilityApi.GetCapabilityEquipmentPhysicalDefList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching CapabilityEquipmentPhysicalDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for CapabilityEquipmentPhysicalDef list: %s", err.Error())
 	}
 	var s = &models.CapabilityEquipmentPhysicalDefList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to CapabilityEquipmentPhysicalDef: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to CapabilityEquipmentPhysicalDef list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for CapabilityEquipmentPhysicalDef did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -248,63 +211,59 @@ func dataSourceCapabilityEquipmentPhysicalDefRead(d *schema.ResourceData, meta i
 			var s = &models.CapabilityEquipmentPhysicalDef{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("depth", (s.GetDepth())); err != nil {
-				return fmt.Errorf("error occurred while setting property Depth: %+v", err)
+				return diag.Errorf("error occurred while setting property Depth: %s", err.Error())
 			}
 			if err := d.Set("height", (s.GetHeight())); err != nil {
-				return fmt.Errorf("error occurred while setting property Height: %+v", err)
+				return diag.Errorf("error occurred while setting property Height: %s", err.Error())
 			}
 			if err := d.Set("max_power", (s.GetMaxPower())); err != nil {
-				return fmt.Errorf("error occurred while setting property MaxPower: %+v", err)
+				return diag.Errorf("error occurred while setting property MaxPower: %s", err.Error())
 			}
 			if err := d.Set("min_power", (s.GetMinPower())); err != nil {
-				return fmt.Errorf("error occurred while setting property MinPower: %+v", err)
+				return diag.Errorf("error occurred while setting property MinPower: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("name", (s.GetName())); err != nil {
-				return fmt.Errorf("error occurred while setting property Name: %+v", err)
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("nominal_power", (s.GetNominalPower())); err != nil {
-				return fmt.Errorf("error occurred while setting property NominalPower: %+v", err)
+				return diag.Errorf("error occurred while setting property NominalPower: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("pid", (s.GetPid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Pid: %+v", err)
-			}
-
-			if err := d.Set("section", flattenMapCapabilitySectionRelationship(s.GetSection(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Section: %+v", err)
+				return diag.Errorf("error occurred while setting property Pid: %s", err.Error())
 			}
 			if err := d.Set("sku", (s.GetSku())); err != nil {
-				return fmt.Errorf("error occurred while setting property Sku: %+v", err)
+				return diag.Errorf("error occurred while setting property Sku: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("vid", (s.GetVid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Vid: %+v", err)
+				return diag.Errorf("error occurred while setting property Vid: %s", err.Error())
 			}
 			if err := d.Set("weight", (s.GetWeight())); err != nil {
-				return fmt.Errorf("error occurred while setting property Weight: %+v", err)
+				return diag.Errorf("error occurred while setting property Weight: %s", err.Error())
 			}
 			if err := d.Set("width", (s.GetWidth())); err != nil {
-				return fmt.Errorf("error occurred while setting property Width: %+v", err)
+				return diag.Errorf("error occurred while setting property Width: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

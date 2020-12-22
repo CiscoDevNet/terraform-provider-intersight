@@ -1,21 +1,24 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceAssetTarget() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceAssetTargetCreate,
-		Read:   resourceAssetTargetRead,
-		Update: resourceAssetTargetUpdate,
-		Delete: resourceAssetTargetDelete,
+		CreateContext: resourceAssetTargetCreate,
+		ReadContext:   resourceAssetTargetRead,
+		UpdateContext: resourceAssetTargetUpdate,
+		DeleteContext: resourceAssetTargetDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"account": {
 				Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -203,7 +206,7 @@ func resourceAssetTarget() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -366,7 +369,7 @@ func resourceAssetTarget() *schema.Resource {
 	}
 }
 
-func resourceAssetTargetCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceAssetTargetCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -751,117 +754,121 @@ func resourceAssetTargetCreate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	r := conn.ApiClient.AssetApi.CreateAssetTarget(conn.ctx).AssetTarget(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating AssetTarget: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceAssetTargetRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceAssetTargetRead(c, d, meta)
 }
 
-func resourceAssetTargetRead(d *schema.ResourceData, meta interface{}) error {
+func resourceAssetTargetRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.AssetApi.GetAssetTargetByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "AssetTarget object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching AssetTarget: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("account", flattenMapIamAccountRelationship(s.GetAccount(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Account: %+v", err)
+		return diag.Errorf("error occurred while setting property Account in AssetTarget object: %s", err.Error())
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in AssetTarget object: %s", err.Error())
 	}
 
 	if err := d.Set("assist", flattenMapAssetTargetRelationship(s.GetAssist(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Assist: %+v", err)
+		return diag.Errorf("error occurred while setting property Assist in AssetTarget object: %s", err.Error())
 	}
 
 	if err := d.Set("claimed_by_user_name", (s.GetClaimedByUserName())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClaimedByUserName: %+v", err)
+		return diag.Errorf("error occurred while setting property ClaimedByUserName in AssetTarget object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in AssetTarget object: %s", err.Error())
 	}
 
 	if err := d.Set("connections", flattenListAssetConnection(s.GetConnections(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Connections: %+v", err)
+		return diag.Errorf("error occurred while setting property Connections in AssetTarget object: %s", err.Error())
 	}
 
 	if err := d.Set("connector_version", (s.GetConnectorVersion())); err != nil {
-		return fmt.Errorf("error occurred while setting property ConnectorVersion: %+v", err)
+		return diag.Errorf("error occurred while setting property ConnectorVersion in AssetTarget object: %s", err.Error())
 	}
 
 	if err := d.Set("external_ip_address", (s.GetExternalIpAddress())); err != nil {
-		return fmt.Errorf("error occurred while setting property ExternalIpAddress: %+v", err)
+		return diag.Errorf("error occurred while setting property ExternalIpAddress in AssetTarget object: %s", err.Error())
 	}
 
 	if err := d.Set("ip_address", (s.GetIpAddress())); err != nil {
-		return fmt.Errorf("error occurred while setting property IpAddress: %+v", err)
+		return diag.Errorf("error occurred while setting property IpAddress in AssetTarget object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in AssetTarget object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in AssetTarget object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in AssetTarget object: %s", err.Error())
 	}
 
 	if err := d.Set("product_id", (s.GetProductId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ProductId: %+v", err)
+		return diag.Errorf("error occurred while setting property ProductId in AssetTarget object: %s", err.Error())
 	}
 
 	if err := d.Set("read_only", (s.GetReadOnly())); err != nil {
-		return fmt.Errorf("error occurred while setting property ReadOnly: %+v", err)
+		return diag.Errorf("error occurred while setting property ReadOnly in AssetTarget object: %s", err.Error())
 	}
 
 	if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property RegisteredDevice: %+v", err)
+		return diag.Errorf("error occurred while setting property RegisteredDevice in AssetTarget object: %s", err.Error())
 	}
 
 	if err := d.Set("services", flattenListAssetService(s.GetServices(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Services: %+v", err)
+		return diag.Errorf("error occurred while setting property Services in AssetTarget object: %s", err.Error())
 	}
 
 	if err := d.Set("status", (s.GetStatus())); err != nil {
-		return fmt.Errorf("error occurred while setting property Status: %+v", err)
+		return diag.Errorf("error occurred while setting property Status in AssetTarget object: %s", err.Error())
 	}
 
 	if err := d.Set("status_error_reason", (s.GetStatusErrorReason())); err != nil {
-		return fmt.Errorf("error occurred while setting property StatusErrorReason: %+v", err)
+		return diag.Errorf("error occurred while setting property StatusErrorReason in AssetTarget object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in AssetTarget object: %s", err.Error())
 	}
 
 	if err := d.Set("target_id", (s.GetTargetId())); err != nil {
-		return fmt.Errorf("error occurred while setting property TargetId: %+v", err)
+		return diag.Errorf("error occurred while setting property TargetId in AssetTarget object: %s", err.Error())
 	}
 
 	if err := d.Set("target_type", (s.GetTargetType())); err != nil {
-		return fmt.Errorf("error occurred while setting property TargetType: %+v", err)
+		return diag.Errorf("error occurred while setting property TargetType in AssetTarget object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceAssetTargetUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceAssetTargetUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1265,23 +1272,24 @@ func resourceAssetTargetUpdate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	r := conn.ApiClient.AssetApi.UpdateAssetTarget(conn.ctx, d.Id()).AssetTarget(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating AssetTarget: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceAssetTargetRead(d, meta)
+	return resourceAssetTargetRead(c, d, meta)
 }
 
-func resourceAssetTargetDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceAssetTargetDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.AssetApi.DeleteAssetTarget(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting AssetTarget object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

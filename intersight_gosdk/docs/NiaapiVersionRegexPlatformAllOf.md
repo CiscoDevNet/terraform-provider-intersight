@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Anyllregex** | Pointer to **string** | All long live version Regex pattern. | [optional] 
 **Currentlltrain** | Pointer to [**NullableNiaapiSoftwareRegex**](niaapi.SoftwareRegex.md) |  | [optional] 
 **Latestsltrain** | Pointer to [**NullableNiaapiSoftwareRegex**](niaapi.SoftwareRegex.md) |  | [optional] 
-**Sltrain** | Pointer to [**[]NiaapiSoftwareRegex**](niaapi.SoftwareRegex.md) |  | [optional] 
+**Sltrain** | Pointer to [**[]NiaapiSoftwareRegex**](NiaapiSoftwareRegex.md) |  | [optional] 
 **Upcominglltrain** | Pointer to [**NullableNiaapiSoftwareRegex**](niaapi.SoftwareRegex.md) |  | [optional] 
 
 ## Methods

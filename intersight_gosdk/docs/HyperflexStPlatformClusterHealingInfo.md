@@ -6,12 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.StPlatformClusterHealingInfo"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.StPlatformClusterHealingInfo"]
-**EstimatedCompletionTimeInSeconds** | Pointer to **int64** |  | [optional] [readonly] 
-**InProgress** | Pointer to **bool** |  | [optional] [readonly] 
+**EstimatedCompletionTimeInSeconds** | Pointer to **int64** | The estimated time in seconds it will take to complete the auto-healing process. | [optional] [readonly] 
+**InProgress** | Pointer to **bool** | The status of the cluster&#39;s auto-healing process. If &#39;true&#39;, auto-healing is in progress for the cluster. | [optional] [readonly] 
 **Messages** | Pointer to **[]string** |  | [optional] 
-**MessagesIterator** | Pointer to **interface{}** |  | [optional] [readonly] 
-**MessagesSize** | Pointer to **int64** |  | [optional] [readonly] 
-**PercentComplete** | Pointer to **int64** |  | [optional] [readonly] 
+**MessagesIterator** | Pointer to **interface{}** | The current message describing the auto-healing process of the cluster. | [optional] [readonly] 
+**MessagesSize** | Pointer to **int64** | The number of elements in the messages collection. | [optional] [readonly] 
+**PercentComplete** | Pointer to **int64** | The progress of the auto-healing process as a percentage. | [optional] [readonly] 
 
 ## Methods
 

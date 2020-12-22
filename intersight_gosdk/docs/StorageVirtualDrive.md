@@ -34,11 +34,11 @@ Name | Type | Description | Notes
 **VirtualDriveId** | Pointer to **string** | The identifier for this Virtual drive. | [optional] [readonly] 
 **DiskGroup** | Pointer to [**StorageDiskGroupRelationship**](storage.DiskGroup.Relationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
-**PhysicalDiskUsages** | Pointer to [**[]StoragePhysicalDiskUsageRelationship**](storage.PhysicalDiskUsage.Relationship.md) | An array of relationships to storagePhysicalDiskUsage resources. | [optional] 
+**PhysicalDiskUsages** | Pointer to [**[]StoragePhysicalDiskUsageRelationship**](StoragePhysicalDiskUsageRelationship.md) | An array of relationships to storagePhysicalDiskUsage resources. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 **StorageController** | Pointer to [**StorageControllerRelationship**](storage.Controller.Relationship.md) |  | [optional] 
 **StorageVirtualDriveContainer** | Pointer to [**StorageVirtualDriveContainerRelationship**](storage.VirtualDriveContainer.Relationship.md) |  | [optional] 
-**VdMemberEps** | Pointer to [**[]StorageVdMemberEpRelationship**](storage.VdMemberEp.Relationship.md) | An array of relationships to storageVdMemberEp resources. | [optional] [readonly] 
+**VdMemberEps** | Pointer to [**[]StorageVdMemberEpRelationship**](StorageVdMemberEpRelationship.md) | An array of relationships to storageVdMemberEp resources. | [optional] [readonly] 
 **VirtualDriveExtension** | Pointer to [**StorageVirtualDriveExtensionRelationship**](storage.VirtualDriveExtension.Relationship.md) |  | [optional] 
 
 ## Methods

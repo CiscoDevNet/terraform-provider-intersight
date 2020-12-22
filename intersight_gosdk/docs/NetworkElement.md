@@ -34,17 +34,17 @@ Name | Type | Description | Notes
 **OutOfBandMac** | Pointer to **string** | The MAC address of the network Element out-of-band management interface. | [optional] [readonly] 
 **SwitchId** | Pointer to **string** | The Switch Id of the network Element. | [optional] [readonly] 
 **TotalMemory** | Pointer to **int64** | Total available memory on this switch platform. | [optional] [readonly] 
-**Cards** | Pointer to [**[]EquipmentSwitchCardRelationship**](equipment.SwitchCard.Relationship.md) | An array of relationships to equipmentSwitchCard resources. | [optional] [readonly] 
-**Fanmodules** | Pointer to [**[]EquipmentFanModuleRelationship**](equipment.FanModule.Relationship.md) | An array of relationships to equipmentFanModule resources. | [optional] [readonly] 
+**Cards** | Pointer to [**[]EquipmentSwitchCardRelationship**](EquipmentSwitchCardRelationship.md) | An array of relationships to equipmentSwitchCard resources. | [optional] [readonly] 
+**Fanmodules** | Pointer to [**[]EquipmentFanModuleRelationship**](EquipmentFanModuleRelationship.md) | An array of relationships to equipmentFanModule resources. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
-**ManagementContoller** | Pointer to [**ManagementControllerRelationship**](management.Controller.Relationship.md) |  | [optional] 
+**ManagementController** | Pointer to [**ManagementControllerRelationship**](management.Controller.Relationship.md) |  | [optional] 
 **ManagementEntity** | Pointer to [**ManagementEntityRelationship**](management.Entity.Relationship.md) |  | [optional] 
 **NetworkFcZoneInfo** | Pointer to [**NetworkFcZoneInfoRelationship**](network.FcZoneInfo.Relationship.md) |  | [optional] 
 **NetworkVlanPortInfo** | Pointer to [**NetworkVlanPortInfoRelationship**](network.VlanPortInfo.Relationship.md) |  | [optional] 
-**PortMacBindings** | Pointer to [**[]PortMacBindingRelationship**](port.MacBinding.Relationship.md) | An array of relationships to portMacBinding resources. | [optional] 
-**Psus** | Pointer to [**[]EquipmentPsuRelationship**](equipment.Psu.Relationship.md) | An array of relationships to equipmentPsu resources. | [optional] [readonly] 
+**PortMacBindings** | Pointer to [**[]PortMacBindingRelationship**](PortMacBindingRelationship.md) | An array of relationships to portMacBinding resources. | [optional] 
+**Psus** | Pointer to [**[]EquipmentPsuRelationship**](EquipmentPsuRelationship.md) | An array of relationships to equipmentPsu resources. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
-**StorageItems** | Pointer to [**[]StorageItemRelationship**](storage.Item.Relationship.md) | An array of relationships to storageItem resources. | [optional] [readonly] 
+**StorageItems** | Pointer to [**[]StorageItemRelationship**](StorageItemRelationship.md) | An array of relationships to storageItem resources. | [optional] [readonly] 
 **TopSystem** | Pointer to [**TopSystemRelationship**](top.System.Relationship.md) |  | [optional] 
 **UcsmRunningFirmware** | Pointer to [**FirmwareRunningFirmwareRelationship**](firmware.RunningFirmware.Relationship.md) |  | [optional] 
 
@@ -912,30 +912,30 @@ SetInventoryDeviceInfo sets InventoryDeviceInfo field to given value.
 
 HasInventoryDeviceInfo returns a boolean if a field has been set.
 
-### GetManagementContoller
+### GetManagementController
 
-`func (o *NetworkElement) GetManagementContoller() ManagementControllerRelationship`
+`func (o *NetworkElement) GetManagementController() ManagementControllerRelationship`
 
-GetManagementContoller returns the ManagementContoller field if non-nil, zero value otherwise.
+GetManagementController returns the ManagementController field if non-nil, zero value otherwise.
 
-### GetManagementContollerOk
+### GetManagementControllerOk
 
-`func (o *NetworkElement) GetManagementContollerOk() (*ManagementControllerRelationship, bool)`
+`func (o *NetworkElement) GetManagementControllerOk() (*ManagementControllerRelationship, bool)`
 
-GetManagementContollerOk returns a tuple with the ManagementContoller field if it's non-nil, zero value otherwise
+GetManagementControllerOk returns a tuple with the ManagementController field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetManagementContoller
+### SetManagementController
 
-`func (o *NetworkElement) SetManagementContoller(v ManagementControllerRelationship)`
+`func (o *NetworkElement) SetManagementController(v ManagementControllerRelationship)`
 
-SetManagementContoller sets ManagementContoller field to given value.
+SetManagementController sets ManagementController field to given value.
 
-### HasManagementContoller
+### HasManagementController
 
-`func (o *NetworkElement) HasManagementContoller() bool`
+`func (o *NetworkElement) HasManagementController() bool`
 
-HasManagementContoller returns a boolean if a field has been set.
+HasManagementController returns a boolean if a field has been set.
 
 ### GetManagementEntity
 

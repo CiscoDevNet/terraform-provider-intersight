@@ -9,11 +9,11 @@ Name | Type | Description | Notes
 **Transport** | Pointer to **string** | Type of port group. Values are Eth or Fc. | [optional] [readonly] 
 **EquipmentSharedIoModule** | Pointer to [**EquipmentSharedIoModuleRelationship**](equipment.SharedIoModule.Relationship.md) |  | [optional] 
 **EquipmentSwitchCard** | Pointer to [**EquipmentSwitchCardRelationship**](equipment.SwitchCard.Relationship.md) |  | [optional] 
-**EthernetPorts** | Pointer to [**[]EtherPhysicalPortRelationship**](ether.PhysicalPort.Relationship.md) | An array of relationships to etherPhysicalPort resources. | [optional] [readonly] 
-**FcPorts** | Pointer to [**[]FcPhysicalPortRelationship**](fc.PhysicalPort.Relationship.md) | An array of relationships to fcPhysicalPort resources. | [optional] [readonly] 
+**EthernetPorts** | Pointer to [**[]EtherPhysicalPortRelationship**](EtherPhysicalPortRelationship.md) | An array of relationships to etherPhysicalPort resources. | [optional] [readonly] 
+**FcPorts** | Pointer to [**[]FcPhysicalPortRelationship**](FcPhysicalPortRelationship.md) | An array of relationships to fcPhysicalPort resources. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
-**SubGroups** | Pointer to [**[]PortSubGroupRelationship**](port.SubGroup.Relationship.md) | An array of relationships to portSubGroup resources. | [optional] [readonly] 
+**SubGroups** | Pointer to [**[]PortSubGroupRelationship**](PortSubGroupRelationship.md) | An array of relationships to portSubGroup resources. | [optional] [readonly] 
 
 ## Methods
 

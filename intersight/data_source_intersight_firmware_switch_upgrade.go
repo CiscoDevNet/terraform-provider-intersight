@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceFirmwareSwitchUpgrade() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceFirmwareSwitchUpgradeRead,
+		ReadContext: dataSourceFirmwareSwitchUpgradeRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -129,7 +130,7 @@ func dataSourceFirmwareSwitchUpgrade() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -308,7 +309,7 @@ func dataSourceFirmwareSwitchUpgrade() *schema.Resource {
 										Optional:    true,
 									},
 									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
@@ -336,7 +337,7 @@ func dataSourceFirmwareSwitchUpgrade() *schema.Resource {
 							Computed: true,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -444,7 +445,7 @@ func dataSourceFirmwareSwitchUpgrade() *schema.Resource {
 							Computed: true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -633,10 +634,11 @@ func dataSourceFirmwareSwitchUpgrade() *schema.Resource {
 	}
 }
 
-func dataSourceFirmwareSwitchUpgradeRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceFirmwareSwitchUpgradeRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.FirmwareSwitchUpgrade{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -669,25 +671,25 @@ func dataSourceFirmwareSwitchUpgradeRead(d *schema.ResourceData, meta interface{
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of FirmwareSwitchUpgrade object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.FirmwareApi.GetFirmwareSwitchUpgradeList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.FirmwareApi.GetFirmwareSwitchUpgradeList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching FirmwareSwitchUpgrade: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for FirmwareSwitchUpgrade list: %s", err.Error())
 	}
 	var s = &models.FirmwareSwitchUpgradeList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to FirmwareSwitchUpgrade: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to FirmwareSwitchUpgrade list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for FirmwareSwitchUpgrade did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -696,74 +698,74 @@ func dataSourceFirmwareSwitchUpgradeRead(d *schema.ResourceData, meta interface{
 			var s = &models.FirmwareSwitchUpgrade{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 
 			if err := d.Set("device", flattenMapAssetDeviceRegistrationRelationship(s.GetDevice(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Device: %+v", err)
+				return diag.Errorf("error occurred while setting property Device: %s", err.Error())
 			}
 
 			if err := d.Set("direct_download", flattenMapFirmwareDirectDownload(s.GetDirectDownload(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property DirectDownload: %+v", err)
+				return diag.Errorf("error occurred while setting property DirectDownload: %s", err.Error())
 			}
 
 			if err := d.Set("distributable", flattenMapFirmwareDistributableRelationship(s.GetDistributable(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Distributable: %+v", err)
+				return diag.Errorf("error occurred while setting property Distributable: %s", err.Error())
 			}
 			if err := d.Set("enable_fabric_evacuation", (s.GetEnableFabricEvacuation())); err != nil {
-				return fmt.Errorf("error occurred while setting property EnableFabricEvacuation: %+v", err)
+				return diag.Errorf("error occurred while setting property EnableFabricEvacuation: %s", err.Error())
 			}
 
 			if err := d.Set("file_server", flattenMapSoftwarerepositoryFileServer(s.GetFileServer(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property FileServer: %+v", err)
+				return diag.Errorf("error occurred while setting property FileServer: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 
 			if err := d.Set("network_elements", flattenListNetworkElementRelationship(s.GetNetworkElements(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property NetworkElements: %+v", err)
+				return diag.Errorf("error occurred while setting property NetworkElements: %s", err.Error())
 			}
 
 			if err := d.Set("network_share", flattenMapFirmwareNetworkShare(s.GetNetworkShare(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property NetworkShare: %+v", err)
+				return diag.Errorf("error occurred while setting property NetworkShare: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 
 			if err := d.Set("release", flattenMapSoftwarerepositoryReleaseRelationship(s.GetRelease(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Release: %+v", err)
+				return diag.Errorf("error occurred while setting property Release: %s", err.Error())
 			}
 			if err := d.Set("skip_estimate_impact", (s.GetSkipEstimateImpact())); err != nil {
-				return fmt.Errorf("error occurred while setting property SkipEstimateImpact: %+v", err)
+				return diag.Errorf("error occurred while setting property SkipEstimateImpact: %s", err.Error())
 			}
 			if err := d.Set("status", (s.GetStatus())); err != nil {
-				return fmt.Errorf("error occurred while setting property Status: %+v", err)
+				return diag.Errorf("error occurred while setting property Status: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 
 			if err := d.Set("upgrade_impact", flattenMapFirmwareUpgradeImpactStatusRelationship(s.GetUpgradeImpact(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property UpgradeImpact: %+v", err)
+				return diag.Errorf("error occurred while setting property UpgradeImpact: %s", err.Error())
 			}
 
 			if err := d.Set("upgrade_status", flattenMapFirmwareUpgradeStatusRelationship(s.GetUpgradeStatus(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property UpgradeStatus: %+v", err)
+				return diag.Errorf("error occurred while setting property UpgradeStatus: %s", err.Error())
 			}
 			if err := d.Set("upgrade_type", (s.GetUpgradeType())); err != nil {
-				return fmt.Errorf("error occurred while setting property UpgradeType: %+v", err)
+				return diag.Errorf("error occurred while setting property UpgradeType: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

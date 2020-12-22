@@ -16,8 +16,8 @@ Name | Type | Description | Notes
 **ErrorDesc** | Pointer to **string** | The detailed error message when there is any error related to license sync of this account. | [optional] [readonly] 
 **Group** | Pointer to **string** | Account license data group name. | [optional] [readonly] 
 **HighestCompliantLicenseTier** | Pointer to **string** | The highest license tier which is in compliant of this account. * &#x60;Base&#x60; - Base as a License type. It is default license type. * &#x60;Essential&#x60; - Essential as a License type. * &#x60;Standard&#x60; - Standard as a License type. * &#x60;Advantage&#x60; - Advantage as a License type. * &#x60;Premier&#x60; - Premier as a License type. * &#x60;IWO-Essential&#x60; - IWO-Essential as a License type. * &#x60;IWO-Advantage&#x60; - IWO-Advantage as a License type. * &#x60;IWO-Premier&#x60; - IWO-Premier as a License type. | [optional] [readonly] [default to "Base"]
-**LastSync** | Pointer to [**time.Time**](time.Time.md) | Specifies last sync time with SA. | [optional] [readonly] 
-**LastUpdatedTime** | Pointer to [**time.Time**](time.Time.md) | Record&#39;s last update datetime. | [optional] [readonly] 
+**LastSync** | Pointer to **time.Time** | Specifies last sync time with SA. | [optional] [readonly] 
+**LastUpdatedTime** | Pointer to **time.Time** | Record&#39;s last update datetime. | [optional] [readonly] 
 **LicenseState** | Pointer to **string** | Aggregrated mode for the agent. | [optional] [readonly] 
 **LicenseTechSupportInfo** | Pointer to **string** | Tech-support info of a smart-agent. | [optional] [readonly] 
 **RegisterExpireTime** | Pointer to **string** | Registration exipiration time. | [optional] [readonly] 
@@ -32,7 +32,7 @@ Name | Type | Description | Notes
 **CustomerOp** | Pointer to [**LicenseCustomerOpRelationship**](license.CustomerOp.Relationship.md) |  | [optional] 
 **IwoCustomerOp** | Pointer to [**LicenseIwoCustomerOpRelationship**](license.IwoCustomerOp.Relationship.md) |  | [optional] 
 **IwoLicenseCount** | Pointer to [**LicenseIwoLicenseCountRelationship**](license.IwoLicenseCount.Relationship.md) |  | [optional] 
-**Licenseinfos** | Pointer to [**[]LicenseLicenseInfoRelationship**](license.LicenseInfo.Relationship.md) | An array of relationships to licenseLicenseInfo resources. | [optional] 
+**Licenseinfos** | Pointer to [**[]LicenseLicenseInfoRelationship**](LicenseLicenseInfoRelationship.md) | An array of relationships to licenseLicenseInfo resources. | [optional] 
 **SmartlicenseToken** | Pointer to [**LicenseSmartlicenseTokenRelationship**](license.SmartlicenseToken.Relationship.md) |  | [optional] 
 
 ## Methods

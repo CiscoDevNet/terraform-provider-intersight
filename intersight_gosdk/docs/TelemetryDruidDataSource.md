@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **Condition** | **string** | Expression that must be an equality where one side is an expression of the left-hand side, and the other side is a simple column reference to the right-hand side. The right-hand reference must be a simple column reference. | 
 **JoinType** | **string** |  | 
 **ColumnNames** | **[]string** | the column names. | 
-**Rows** | [**[][]string**](array.md) | an array of rows. | 
+**Rows** | **[][]string** | an array of rows. | 
 
 ## Methods
 

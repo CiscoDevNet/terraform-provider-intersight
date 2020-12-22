@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -20,29 +20,48 @@ type HyperflexSummaryAllOf struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType                string                                           `json:"ObjectType"`
-	ActiveNodes               *string                                          `json:"ActiveNodes,omitempty"`
-	Address                   *string                                          `json:"Address,omitempty"`
-	Boottime                  *int64                                           `json:"Boottime,omitempty"`
-	ClusterAccessPolicy       *string                                          `json:"ClusterAccessPolicy,omitempty"`
-	CompressionSavings        *float64                                         `json:"CompressionSavings,omitempty"`
-	DataReplicationCompliance *string                                          `json:"DataReplicationCompliance,omitempty"`
-	DataReplicationFactor     *string                                          `json:"DataReplicationFactor,omitempty"`
-	DeduplicationSavings      *float64                                         `json:"DeduplicationSavings,omitempty"`
-	Downtime                  *string                                          `json:"Downtime,omitempty"`
-	FreeCapacity              *int64                                           `json:"FreeCapacity,omitempty"`
-	HealingInfo               NullableHyperflexStPlatformClusterHealingInfo    `json:"HealingInfo,omitempty"`
-	Name                      *string                                          `json:"Name,omitempty"`
-	ResiliencyDetails         *map[string]interface{}                          `json:"ResiliencyDetails,omitempty"`
-	ResiliencyDetailsSize     *int64                                           `json:"ResiliencyDetailsSize,omitempty"`
-	ResiliencyInfo            NullableHyperflexStPlatformClusterResiliencyInfo `json:"ResiliencyInfo,omitempty"`
-	SpaceStatus               *string                                          `json:"SpaceStatus,omitempty"`
-	State                     *string                                          `json:"State,omitempty"`
-	TotalCapacity             *int64                                           `json:"TotalCapacity,omitempty"`
-	TotalSavings              *float64                                         `json:"TotalSavings,omitempty"`
-	Uptime                    *string                                          `json:"Uptime,omitempty"`
-	UsedCapacity              *int64                                           `json:"UsedCapacity,omitempty"`
-	AdditionalProperties      map[string]interface{}
+	ObjectType string `json:"ObjectType"`
+	// The number of nodes currently participating in the storage cluster.
+	ActiveNodes *string `json:"ActiveNodes,omitempty"`
+	// The data IP address of the HyperFlex cluster.
+	Address *string `json:"Address,omitempty"`
+	// The time taken during last cluster startup in seconds.
+	Boottime *int64 `json:"Boottime,omitempty"`
+	// The cluster access policy for the HyperFlex cluster. An access policy of 'STRICT' means that the cluster becomes readonly once any fragment of data is reduced to one copy. 'LENIENT' means that the cluster stays in read-write mode even if any fragment of data is reduced to one copy.
+	ClusterAccessPolicy *string `json:"ClusterAccessPolicy,omitempty"`
+	// The percentage of storage space saved using data compression.
+	CompressionSavings *float64 `json:"CompressionSavings,omitempty"`
+	// The compliance with the data replication factor set for the HyperFlex cluster.
+	DataReplicationCompliance *string `json:"DataReplicationCompliance,omitempty"`
+	// The number of data copies retained by the HyperFlex cluster.
+	DataReplicationFactor *string `json:"DataReplicationFactor,omitempty"`
+	// The percentage of storage space saved using data deduplication.
+	DeduplicationSavings *float64 `json:"DeduplicationSavings,omitempty"`
+	// The amount of time the HyperFlex cluster has been offline.
+	Downtime *string `json:"Downtime,omitempty"`
+	// The amount of storage capacity currently not in use, represented in bytes.
+	FreeCapacity *int64                                        `json:"FreeCapacity,omitempty"`
+	HealingInfo  NullableHyperflexStPlatformClusterHealingInfo `json:"HealingInfo,omitempty"`
+	// The name of the HyperFlex cluster.
+	Name *string `json:"Name,omitempty"`
+	// The details about the resiliency health of the cluster. Includes information about the cluster healing status and the storage cluster health.
+	ResiliencyDetails *map[string]interface{} `json:"ResiliencyDetails,omitempty"`
+	// The number of elements in the resiliency details property.
+	ResiliencyDetailsSize *int64                                           `json:"ResiliencyDetailsSize,omitempty"`
+	ResiliencyInfo        NullableHyperflexStPlatformClusterResiliencyInfo `json:"ResiliencyInfo,omitempty"`
+	// The space utilization status of the HyperFlex cluster.
+	SpaceStatus *string `json:"SpaceStatus,omitempty"`
+	// The operational state of the HyperFlex cluster.
+	State *string `json:"State,omitempty"`
+	// The total amount of storage capacity available for the HyperFlex cluster, represented in bytes.
+	TotalCapacity *int64 `json:"TotalCapacity,omitempty"`
+	// The percentage of storage space saved in total.
+	TotalSavings *float64 `json:"TotalSavings,omitempty"`
+	// The amount of time the HyperFlex cluster has been running since last startup.
+	Uptime *string `json:"Uptime,omitempty"`
+	// The amount of storage capacity in use, represented in bytes.
+	UsedCapacity         *int64 `json:"UsedCapacity,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _HyperflexSummaryAllOf HyperflexSummaryAllOf

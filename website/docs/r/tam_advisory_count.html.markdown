@@ -1,13 +1,12 @@
-
 ---
+subcategory: "tam"
 layout: "intersight"
 page_title: "Intersight: intersight_tam_advisory_count"
-sidebar_current: "docs-intersight-resource-tam-advisory-count"
 description: |-
   Total number of advisories currently affecting a given Account.
 ---
 
-# Resource: intersight_tam._advisory_count
+# Resource: intersight_tam_advisory_count
 Total number of advisories currently affecting a given Account.
 ## Argument Reference
 The following arguments are supported:
@@ -31,3 +30,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_tam_advisory_count` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_tam_advisory_count.example 1234567890987654321abcde
+```

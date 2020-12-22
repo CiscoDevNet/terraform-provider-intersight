@@ -1,21 +1,24 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceHyperflexSysConfigPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceHyperflexSysConfigPolicyCreate,
-		Read:   resourceHyperflexSysConfigPolicyRead,
-		Update: resourceHyperflexSysConfigPolicyUpdate,
-		Delete: resourceHyperflexSysConfigPolicyDelete,
+		CreateContext: resourceHyperflexSysConfigPolicyCreate,
+		ReadContext:   resourceHyperflexSysConfigPolicyRead,
+		UpdateContext: resourceHyperflexSysConfigPolicyUpdate,
+		DeleteContext: resourceHyperflexSysConfigPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -23,7 +26,7 @@ func resourceHyperflexSysConfigPolicy() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -181,7 +184,7 @@ func resourceHyperflexSysConfigPolicy() *schema.Resource {
 	}
 }
 
-func resourceHyperflexSysConfigPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexSysConfigPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -367,85 +370,89 @@ func resourceHyperflexSysConfigPolicyCreate(d *schema.ResourceData, meta interfa
 	}
 
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexSysConfigPolicy(conn.ctx).HyperflexSysConfigPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating HyperflexSysConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceHyperflexSysConfigPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceHyperflexSysConfigPolicyRead(c, d, meta)
 }
 
-func resourceHyperflexSysConfigPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexSysConfigPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.HyperflexApi.GetHyperflexSysConfigPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "HyperflexSysConfigPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching HyperflexSysConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in HyperflexSysConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in HyperflexSysConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cluster_profiles", flattenListHyperflexClusterProfileRelationship(s.GetClusterProfiles(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ClusterProfiles: %+v", err)
+		return diag.Errorf("error occurred while setting property ClusterProfiles in HyperflexSysConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in HyperflexSysConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("dns_domain_name", (s.GetDnsDomainName())); err != nil {
-		return fmt.Errorf("error occurred while setting property DnsDomainName: %+v", err)
+		return diag.Errorf("error occurred while setting property DnsDomainName in HyperflexSysConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("dns_servers", (s.GetDnsServers())); err != nil {
-		return fmt.Errorf("error occurred while setting property DnsServers: %+v", err)
+		return diag.Errorf("error occurred while setting property DnsServers in HyperflexSysConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in HyperflexSysConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in HyperflexSysConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("ntp_servers", (s.GetNtpServers())); err != nil {
-		return fmt.Errorf("error occurred while setting property NtpServers: %+v", err)
+		return diag.Errorf("error occurred while setting property NtpServers in HyperflexSysConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in HyperflexSysConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in HyperflexSysConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in HyperflexSysConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("timezone", (s.GetTimezone())); err != nil {
-		return fmt.Errorf("error occurred while setting property Timezone: %+v", err)
+		return diag.Errorf("error occurred while setting property Timezone in HyperflexSysConfigPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceHyperflexSysConfigPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexSysConfigPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -642,23 +649,24 @@ func resourceHyperflexSysConfigPolicyUpdate(d *schema.ResourceData, meta interfa
 	}
 
 	r := conn.ApiClient.HyperflexApi.UpdateHyperflexSysConfigPolicy(conn.ctx, d.Id()).HyperflexSysConfigPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating HyperflexSysConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexSysConfigPolicyRead(d, meta)
+	return resourceHyperflexSysConfigPolicyRead(c, d, meta)
 }
 
-func resourceHyperflexSysConfigPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexSysConfigPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexSysConfigPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting HyperflexSysConfigPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **TotalCapacity** | Pointer to **string** | Total capacity in GiB of the Persistent Memory Region. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
 **MemoryPersistentMemoryConfiguration** | Pointer to [**MemoryPersistentMemoryConfigurationRelationship**](memory.PersistentMemoryConfiguration.Relationship.md) |  | [optional] 
-**PersistentMemoryNamespaces** | Pointer to [**[]MemoryPersistentMemoryNamespaceRelationship**](memory.PersistentMemoryNamespace.Relationship.md) | An array of relationships to memoryPersistentMemoryNamespace resources. | [optional] [readonly] 
+**PersistentMemoryNamespaces** | Pointer to [**[]MemoryPersistentMemoryNamespaceRelationship**](MemoryPersistentMemoryNamespaceRelationship.md) | An array of relationships to memoryPersistentMemoryNamespace resources. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
 ## Methods

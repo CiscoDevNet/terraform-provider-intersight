@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.StPlatformClusterResiliencyInfo"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.StPlatformClusterResiliencyInfo"]
-**HddFailuresTolerable** | Pointer to **int64** |  | [optional] [readonly] 
+**HddFailuresTolerable** | Pointer to **int64** | The number of persistent storage device failures tolerable before the storage cluster becomes offline. | [optional] [readonly] 
 **Messages** | Pointer to **[]string** |  | [optional] 
-**MessagesIterator** | Pointer to **interface{}** |  | [optional] [readonly] 
-**MessagesSize** | Pointer to **int64** |  | [optional] [readonly] 
-**NodeFailuresTolerable** | Pointer to **int64** |  | [optional] [readonly] 
-**SsdFailuresTolerable** | Pointer to **int64** |  | [optional] [readonly] 
-**State** | Pointer to **string** |  | [optional] [readonly] 
+**MessagesIterator** | Pointer to **interface{}** | The current message describing the auto-healing process of the cluster. | [optional] [readonly] 
+**MessagesSize** | Pointer to **int64** | The number of elements in the messages collection. | [optional] [readonly] 
+**NodeFailuresTolerable** | Pointer to **int64** | The number of node failures tolerable before the storage cluster becomes offline. | [optional] [readonly] 
+**SsdFailuresTolerable** | Pointer to **int64** | The number of caching device failures tolerable before the storage cluster becomes offline. | [optional] [readonly] 
+**State** | Pointer to **string** | The resiliency state of the cluster. The resiliency status is &#39;HEALTHY&#39; if there are no failures and the storage cluster is fully operational. The resiliency status is &#39;WARNING&#39; when the cluster has experienced failures that may adversely affect the cluster. It is &#39;UNKNOWN&#39; if the cluster is offline or if the state cannot be determined. | [optional] [readonly] 
 
 ## Methods
 

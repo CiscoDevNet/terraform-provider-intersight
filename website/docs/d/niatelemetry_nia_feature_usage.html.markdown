@@ -1,13 +1,12 @@
-
 ---
+subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_nia_feature_usage"
-sidebar_current: "docs-intersight-data-source-niatelemetry-nia-feature-usage"
 description: |-
-Object available at Device connector scope for feature and fabric information. This applies to APIC environment currently.
+  Object available at Device connector scope for feature and fabric information. This applies to APIC environment currently.
 ---
 
-# Data Source: intersight_niatelemetry._nia_feature_usage
+# Data Source: intersight_niatelemetry_nia_feature_usage
 Object available at Device connector scope for feature and fabric information. This applies to APIC environment currently.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
@@ -16,7 +15,6 @@ The following arguments can be used to get data of already created objects in In
 * `ave`:(string) AVE feature usage. This determines if ACI virtual edge feature is enabled or disabled. 
 * `bd_count`:(int) Number of BDs. This determines the total number of Broadcast Domains across the fabric. 
 * `callhome_smart_group_count`:(int) Number of call home smart monitoring policies on the fabric. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `cloud_sec_peer_count`:(int) Number of Cloudsec SA peers. 
 * `comp_hv_count`:(int) Number of compute hypervisors on the fabric. 
 * `config_exportp_count`:(int) Number of system backup configure export policies on the fabric. 
@@ -46,7 +44,6 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `net_flow_count`:(int) Number of Netflow monitor policies. 
 * `nir`:(string) NIR application usage. This determines if the fabric has NIR application installed. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `open_stack`:(string) Open stack feature usage. 
 * `opflex_kubernetes_count`:(int) Opflex for Kubernetes feature usage. This determines the total number of VMM sessions of type kubernetes. 
 * `ospf_count`:(int) Ospf feature usage. This determines the total number of OSPF sessions across the fabric. 

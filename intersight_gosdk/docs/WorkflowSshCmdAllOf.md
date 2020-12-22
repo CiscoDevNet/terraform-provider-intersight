@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.SshCmd"]
 **Command** | Pointer to **string** | SSH command to execute on the remote server. | [optional] 
 **CommandType** | Pointer to **string** | SSH command type to execute on the remote server. * &#x60;NonInteractiveCmd&#x60; - Execute a non-interactive SSH command on the remote server. * &#x60;InteractiveCmd&#x60; - Execute an interactive SSH command on the remote server. | [optional] [default to "NonInteractiveCmd"]
-**ExpectPrompts** | Pointer to [**[]ConnectorExpectPrompt**](connector.ExpectPrompt.md) |  | [optional] 
+**ExpectPrompts** | Pointer to [**[]ConnectorExpectPrompt**](ConnectorExpectPrompt.md) |  | [optional] 
 **ShellPrompt** | Pointer to **string** | Regex of the remote server&#39;s shell prompt. | [optional] 
 **ShellPromptTimeout** | Pointer to **int64** | Expect timeout value in seconds for the shell prompt. | [optional] 
 

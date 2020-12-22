@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.LldpSettings"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.LldpSettings"]
-**ReceiveEnabled** | Pointer to **bool** | Determines if the LLDP frames can be received by an interface on the switch. | [optional] 
-**TransmitEnabled** | Pointer to **bool** | Determines if the LLDP frames can be transmitted by an interface on the switch. | [optional] 
+**ReceiveEnabled** | Pointer to **bool** | Determines if the LLDP frames can be received by an interface on the switch. | [optional] [default to false]
+**TransmitEnabled** | Pointer to **bool** | Determines if the LLDP frames can be transmitted by an interface on the switch. | [optional] [default to false]
 
 ## Methods
 

@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -17,28 +17,38 @@ import (
 	"strings"
 )
 
-// HyperflexNode struct for HyperflexNode
+// HyperflexNode A host participating in the cluster. The host consists of a hypervisor installed on a node that manages virtual machines.
 type HyperflexNode struct {
 	MoBaseMo
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType           string                              `json:"ObjectType"`
-	BuildNumber          *string                             `json:"BuildNumber,omitempty"`
-	DisplayVersion       *string                             `json:"DisplayVersion,omitempty"`
-	HostName             *string                             `json:"HostName,omitempty"`
-	Hypervisor           *string                             `json:"Hypervisor,omitempty"`
-	Identity             NullableHyperflexHxUuIdDt           `json:"Identity,omitempty"`
-	Ip                   NullableHyperflexHxNetworkAddressDt `json:"Ip,omitempty"`
-	Lockdown             *bool                               `json:"Lockdown,omitempty"`
-	ModelNumber          *string                             `json:"ModelNumber,omitempty"`
-	Role                 *string                             `json:"Role,omitempty"`
-	SerialNumber         *string                             `json:"SerialNumber,omitempty"`
-	Status               *string                             `json:"Status,omitempty"`
-	Version              *string                             `json:"Version,omitempty"`
-	Cluster              *HyperflexClusterRelationship       `json:"Cluster,omitempty"`
-	ClusterMember        *AssetClusterMemberRelationship     `json:"ClusterMember,omitempty"`
-	PhysicalServer       *ComputePhysicalRelationship        `json:"PhysicalServer,omitempty"`
+	ObjectType string `json:"ObjectType"`
+	// The build number of the hypervisor running on the host.
+	BuildNumber *string `json:"BuildNumber,omitempty"`
+	// The user-friendly string representation of the hypervisor version of the host.
+	DisplayVersion *string `json:"DisplayVersion,omitempty"`
+	// The hostname configured for the hypervisor running on the host.
+	HostName *string `json:"HostName,omitempty"`
+	// The type of hypervisor running on the host.
+	Hypervisor *string                             `json:"Hypervisor,omitempty"`
+	Identity   NullableHyperflexHxUuIdDt           `json:"Identity,omitempty"`
+	Ip         NullableHyperflexHxNetworkAddressDt `json:"Ip,omitempty"`
+	// The admin state of lockdown mode on the host. If 'true', lockdown mode is enabled.
+	Lockdown *bool `json:"Lockdown,omitempty"`
+	// The model of the host server.
+	ModelNumber *string `json:"ModelNumber,omitempty"`
+	// The role of the host in the HyperFlex cluster. Specifies whether this host is used for compute or for both compute and storage. * `UNKNOWN` - The role of the HyperFlex cluster node is not known. * `STORAGE` - The HyperFlex cluster node provides both storage and compute resources for the cluster. * `COMPUTE` - The HyperFlex cluster node provides compute resources for the cluster.
+	Role *string `json:"Role,omitempty"`
+	// The serial of the host server.
+	SerialNumber *string `json:"SerialNumber,omitempty"`
+	// The status of the host. Indicates whether the hypervisor is online. * `UNKNOWN` - The host status cannot be determined. * `ONLINE` - The host is online and operational. * `OFFLINE` - The host is offline and is currently not participating in the HyperFlex cluster. * `INMAINTENANCE` - The host is not participating in the HyperFlex cluster because of a maintenance operation, such as firmware or data platform upgrade. * `DEGRADED` - The host is degraded and may not be performing in its full operational capacity.
+	Status *string `json:"Status,omitempty"`
+	// The version of the hypervisor running on the host.
+	Version              *string                         `json:"Version,omitempty"`
+	Cluster              *HyperflexClusterRelationship   `json:"Cluster,omitempty"`
+	ClusterMember        *AssetClusterMemberRelationship `json:"ClusterMember,omitempty"`
+	PhysicalServer       *ComputePhysicalRelationship    `json:"PhysicalServer,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -699,22 +709,32 @@ func (o *HyperflexNode) UnmarshalJSON(bytes []byte) (err error) {
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType     string                              `json:"ObjectType"`
-		BuildNumber    *string                             `json:"BuildNumber,omitempty"`
-		DisplayVersion *string                             `json:"DisplayVersion,omitempty"`
-		HostName       *string                             `json:"HostName,omitempty"`
-		Hypervisor     *string                             `json:"Hypervisor,omitempty"`
-		Identity       NullableHyperflexHxUuIdDt           `json:"Identity,omitempty"`
-		Ip             NullableHyperflexHxNetworkAddressDt `json:"Ip,omitempty"`
-		Lockdown       *bool                               `json:"Lockdown,omitempty"`
-		ModelNumber    *string                             `json:"ModelNumber,omitempty"`
-		Role           *string                             `json:"Role,omitempty"`
-		SerialNumber   *string                             `json:"SerialNumber,omitempty"`
-		Status         *string                             `json:"Status,omitempty"`
-		Version        *string                             `json:"Version,omitempty"`
-		Cluster        *HyperflexClusterRelationship       `json:"Cluster,omitempty"`
-		ClusterMember  *AssetClusterMemberRelationship     `json:"ClusterMember,omitempty"`
-		PhysicalServer *ComputePhysicalRelationship        `json:"PhysicalServer,omitempty"`
+		ObjectType string `json:"ObjectType"`
+		// The build number of the hypervisor running on the host.
+		BuildNumber *string `json:"BuildNumber,omitempty"`
+		// The user-friendly string representation of the hypervisor version of the host.
+		DisplayVersion *string `json:"DisplayVersion,omitempty"`
+		// The hostname configured for the hypervisor running on the host.
+		HostName *string `json:"HostName,omitempty"`
+		// The type of hypervisor running on the host.
+		Hypervisor *string                             `json:"Hypervisor,omitempty"`
+		Identity   NullableHyperflexHxUuIdDt           `json:"Identity,omitempty"`
+		Ip         NullableHyperflexHxNetworkAddressDt `json:"Ip,omitempty"`
+		// The admin state of lockdown mode on the host. If 'true', lockdown mode is enabled.
+		Lockdown *bool `json:"Lockdown,omitempty"`
+		// The model of the host server.
+		ModelNumber *string `json:"ModelNumber,omitempty"`
+		// The role of the host in the HyperFlex cluster. Specifies whether this host is used for compute or for both compute and storage. * `UNKNOWN` - The role of the HyperFlex cluster node is not known. * `STORAGE` - The HyperFlex cluster node provides both storage and compute resources for the cluster. * `COMPUTE` - The HyperFlex cluster node provides compute resources for the cluster.
+		Role *string `json:"Role,omitempty"`
+		// The serial of the host server.
+		SerialNumber *string `json:"SerialNumber,omitempty"`
+		// The status of the host. Indicates whether the hypervisor is online. * `UNKNOWN` - The host status cannot be determined. * `ONLINE` - The host is online and operational. * `OFFLINE` - The host is offline and is currently not participating in the HyperFlex cluster. * `INMAINTENANCE` - The host is not participating in the HyperFlex cluster because of a maintenance operation, such as firmware or data platform upgrade. * `DEGRADED` - The host is degraded and may not be performing in its full operational capacity.
+		Status *string `json:"Status,omitempty"`
+		// The version of the hypervisor running on the host.
+		Version        *string                         `json:"Version,omitempty"`
+		Cluster        *HyperflexClusterRelationship   `json:"Cluster,omitempty"`
+		ClusterMember  *AssetClusterMemberRelationship `json:"ClusterMember,omitempty"`
+		PhysicalServer *ComputePhysicalRelationship    `json:"PhysicalServer,omitempty"`
 	}
 
 	varHyperflexNodeWithoutEmbeddedStruct := HyperflexNodeWithoutEmbeddedStruct{}

@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **ConfigChanges** | Pointer to [**NullablePolicyConfigChange**](policy.ConfigChange.md) |  | [optional] 
 **AssignedSwitch** | Pointer to [**NetworkElementRelationship**](network.Element.Relationship.md) |  | [optional] 
 **AssociatedSwitch** | Pointer to [**NetworkElementRelationship**](network.Element.Relationship.md) |  | [optional] 
-**ConfigChangeDetails** | Pointer to [**[]FabricConfigChangeDetailRelationship**](fabric.ConfigChangeDetail.Relationship.md) | An array of relationships to fabricConfigChangeDetail resources. | [optional] [readonly] 
+**ConfigChangeDetails** | Pointer to [**[]FabricConfigChangeDetailRelationship**](FabricConfigChangeDetailRelationship.md) | An array of relationships to fabricConfigChangeDetail resources. | [optional] [readonly] 
 **ConfigResult** | Pointer to [**FabricConfigResultRelationship**](fabric.ConfigResult.Relationship.md) |  | [optional] 
-**RunningWorkflows** | Pointer to [**[]WorkflowWorkflowInfoRelationship**](workflow.WorkflowInfo.Relationship.md) | An array of relationships to workflowWorkflowInfo resources. | [optional] [readonly] 
+**RunningWorkflows** | Pointer to [**[]WorkflowWorkflowInfoRelationship**](WorkflowWorkflowInfoRelationship.md) | An array of relationships to workflowWorkflowInfo resources. | [optional] [readonly] 
 **SwitchClusterProfile** | Pointer to [**FabricSwitchClusterProfileRelationship**](fabric.SwitchClusterProfile.Relationship.md) |  | [optional] 
 
 ## Methods

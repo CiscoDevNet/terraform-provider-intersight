@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Capacity** | Pointer to **int64** | Capacity of the file system in bytes. | [optional] 
 **Mountpoint** | Pointer to **string** | Mount point of this file system. | [optional] [readonly] 
 **OperationalStatus** | Pointer to **string** | Operational status of the file system. Operational status is based on the result of the status checks. If result of any check is Critical, then its value is Impaired. Otherwise, if result of any check is Warning, then its value is AttentionNeeded. If all checks are OK, then its value is Operational. * &#x60;Unknown&#x60; - Operational status of the Intersight Appliance entity is Unknown. * &#x60;Operational&#x60; - Operational status of the Intersight Appliance entity is Operational. * &#x60;Impaired&#x60; - Operational status of the Intersight Appliance entity is Impaired. * &#x60;AttentionNeeded&#x60; - Operational status of the Intersight Appliance entity is AttentionNeeded. | [optional] [readonly] [default to "Unknown"]
-**StatusChecks** | Pointer to [**[]ApplianceStatusCheck**](appliance.StatusCheck.md) |  | [optional] 
+**StatusChecks** | Pointer to [**[]ApplianceStatusCheck**](ApplianceStatusCheck.md) |  | [optional] 
 **Usage** | Pointer to **float32** | Percentage of the file system capacity currently in use. | [optional] [readonly] 
 **NodeStatus** | Pointer to [**ApplianceNodeStatusRelationship**](appliance.NodeStatus.Relationship.md) |  | [optional] 
 

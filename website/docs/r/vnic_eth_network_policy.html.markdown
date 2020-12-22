@@ -1,13 +1,12 @@
-
 ---
+subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_eth_network_policy"
-sidebar_current: "docs-intersight-resource-vnic-eth-network-policy"
 description: |-
   An Ethernet Network policy determines if the port can carry single VLAN (Access) or multiple VLANs (Trunk) traffic. You can specify the VLAN to be associated with an Ethernet packet if no tag is found.
 ---
 
-# Resource: intersight_vnic._eth_network_policy
+# Resource: intersight_vnic_eth_network_policy
 An Ethernet Network policy determines if the port can carry single VLAN (Access) or multiple VLANs (Trunk) traffic. You can specify the VLAN to be associated with an Ethernet packet if no tag is found.
 ## Argument Reference
 The following arguments are supported:
@@ -42,3 +41,10 @@ This complex property has following sub-properties:
   + `default_vlan`:(int) Native VLAN ID of the virtual interface or the corresponding vethernet on the peer Fabric Interconnect to which the virtual interface is connected. Setting the ID to 0 will not associate any native VLAN to the traffic on the virtual interface. 
   + `mode`:(string) Option to determine if the port can carry single VLAN (Access) or multiple VLANs (Trunk) traffic.* `ACCESS` - An access port carries traffic only for a single VLAN on the interface.* `TRUNK` - A trunk port can have two or more VLANs configured on the interface. It can carry traffic for several VLANs simultaneously. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+
+
+## Import
+`intersight_vnic_eth_network_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_vnic_eth_network_policy.example 1234567890987654321abcde
+```

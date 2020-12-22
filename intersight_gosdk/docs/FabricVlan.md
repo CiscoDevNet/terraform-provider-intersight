@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.Vlan"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.Vlan"]
+**AutoAllowOnUplinks** | Pointer to **bool** | Used to determine whether this VLAN will be allowed on all uplink ports and PCs in this FI. | [optional] [default to true]
 **IsNative** | Pointer to **bool** | Used to define whether this VLAN is to be classified as &#39;native&#39; for traffic in this FI. | [optional] 
 **Name** | Pointer to **string** | The &#39;name&#39; used to identify this VLAN. | [optional] 
 **VlanId** | Pointer to **int64** | The identifier for this Virtual LAN. | [optional] 
@@ -70,6 +71,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetAutoAllowOnUplinks
+
+`func (o *FabricVlan) GetAutoAllowOnUplinks() bool`
+
+GetAutoAllowOnUplinks returns the AutoAllowOnUplinks field if non-nil, zero value otherwise.
+
+### GetAutoAllowOnUplinksOk
+
+`func (o *FabricVlan) GetAutoAllowOnUplinksOk() (*bool, bool)`
+
+GetAutoAllowOnUplinksOk returns a tuple with the AutoAllowOnUplinks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAutoAllowOnUplinks
+
+`func (o *FabricVlan) SetAutoAllowOnUplinks(v bool)`
+
+SetAutoAllowOnUplinks sets AutoAllowOnUplinks field to given value.
+
+### HasAutoAllowOnUplinks
+
+`func (o *FabricVlan) HasAutoAllowOnUplinks() bool`
+
+HasAutoAllowOnUplinks returns a boolean if a field has been set.
 
 ### GetIsNative
 

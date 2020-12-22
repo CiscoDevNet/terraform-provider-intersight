@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceHclExemptedCatalog() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceHclExemptedCatalogRead,
+		ReadContext: dataSourceHclExemptedCatalogRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -41,7 +42,7 @@ func dataSourceHclExemptedCatalog() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -113,10 +114,11 @@ func dataSourceHclExemptedCatalog() *schema.Resource {
 	}
 }
 
-func dataSourceHclExemptedCatalogRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceHclExemptedCatalogRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.HclExemptedCatalog{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -169,25 +171,25 @@ func dataSourceHclExemptedCatalogRead(d *schema.ResourceData, meta interface{}) 
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of HclExemptedCatalog object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.HclApi.GetHclExemptedCatalogList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.HclApi.GetHclExemptedCatalogList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching HclExemptedCatalog: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for HclExemptedCatalog list: %s", err.Error())
 	}
 	var s = &models.HclExemptedCatalogList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to HclExemptedCatalog: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to HclExemptedCatalog list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for HclExemptedCatalog did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -196,56 +198,56 @@ func dataSourceHclExemptedCatalogRead(d *schema.ResourceData, meta interface{}) 
 			var s = &models.HclExemptedCatalog{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("comments", (s.GetComments())); err != nil {
-				return fmt.Errorf("error occurred while setting property Comments: %+v", err)
+				return diag.Errorf("error occurred while setting property Comments: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("name", (s.GetName())); err != nil {
-				return fmt.Errorf("error occurred while setting property Name: %+v", err)
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("os_vendor", (s.GetOsVendor())); err != nil {
-				return fmt.Errorf("error occurred while setting property OsVendor: %+v", err)
+				return diag.Errorf("error occurred while setting property OsVendor: %s", err.Error())
 			}
 			if err := d.Set("os_version", (s.GetOsVersion())); err != nil {
-				return fmt.Errorf("error occurred while setting property OsVersion: %+v", err)
+				return diag.Errorf("error occurred while setting property OsVersion: %s", err.Error())
 			}
 			if err := d.Set("processor_name", (s.GetProcessorName())); err != nil {
-				return fmt.Errorf("error occurred while setting property ProcessorName: %+v", err)
+				return diag.Errorf("error occurred while setting property ProcessorName: %s", err.Error())
 			}
 			if err := d.Set("product_models", (s.GetProductModels())); err != nil {
-				return fmt.Errorf("error occurred while setting property ProductModels: %+v", err)
+				return diag.Errorf("error occurred while setting property ProductModels: %s", err.Error())
 			}
 			if err := d.Set("product_type", (s.GetProductType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ProductType: %+v", err)
+				return diag.Errorf("error occurred while setting property ProductType: %s", err.Error())
 			}
 			if err := d.Set("server_pid", (s.GetServerPid())); err != nil {
-				return fmt.Errorf("error occurred while setting property ServerPid: %+v", err)
+				return diag.Errorf("error occurred while setting property ServerPid: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("ucs_version", (s.GetUcsVersion())); err != nil {
-				return fmt.Errorf("error occurred while setting property UcsVersion: %+v", err)
+				return diag.Errorf("error occurred while setting property UcsVersion: %s", err.Error())
 			}
 			if err := d.Set("version_type", (s.GetVersionType())); err != nil {
-				return fmt.Errorf("error occurred while setting property VersionType: %+v", err)
+				return diag.Errorf("error occurred while setting property VersionType: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

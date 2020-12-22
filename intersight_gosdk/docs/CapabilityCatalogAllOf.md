@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "capability.Catalog"]
 **Name** | Pointer to **string** | A unique name for the catalog. | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
-**Sections** | Pointer to [**[]CapabilitySectionRelationship**](capability.Section.Relationship.md) | An array of relationships to capabilitySection resources. | [optional] 
 
 ## Methods
 
@@ -119,41 +118,6 @@ SetOrganization sets Organization field to given value.
 
 HasOrganization returns a boolean if a field has been set.
 
-### GetSections
-
-`func (o *CapabilityCatalogAllOf) GetSections() []CapabilitySectionRelationship`
-
-GetSections returns the Sections field if non-nil, zero value otherwise.
-
-### GetSectionsOk
-
-`func (o *CapabilityCatalogAllOf) GetSectionsOk() (*[]CapabilitySectionRelationship, bool)`
-
-GetSectionsOk returns a tuple with the Sections field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSections
-
-`func (o *CapabilityCatalogAllOf) SetSections(v []CapabilitySectionRelationship)`
-
-SetSections sets Sections field to given value.
-
-### HasSections
-
-`func (o *CapabilityCatalogAllOf) HasSections() bool`
-
-HasSections returns a boolean if a field has been set.
-
-### SetSectionsNil
-
-`func (o *CapabilityCatalogAllOf) SetSectionsNil(b bool)`
-
- SetSectionsNil sets the value for Sections to be an explicit nil
-
-### UnsetSections
-`func (o *CapabilityCatalogAllOf) UnsetSections()`
-
-UnsetSections ensures that no value is present for Sections, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

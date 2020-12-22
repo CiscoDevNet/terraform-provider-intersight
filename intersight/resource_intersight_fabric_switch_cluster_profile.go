@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceFabricSwitchClusterProfile() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceFabricSwitchClusterProfileCreate,
-		Read:   resourceFabricSwitchClusterProfileRead,
-		Update: resourceFabricSwitchClusterProfileUpdate,
-		Delete: resourceFabricSwitchClusterProfileDelete,
+		CreateContext: resourceFabricSwitchClusterProfileCreate,
+		ReadContext:   resourceFabricSwitchClusterProfileRead,
+		UpdateContext: resourceFabricSwitchClusterProfileUpdate,
+		DeleteContext: resourceFabricSwitchClusterProfileDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -63,7 +66,7 @@ func resourceFabricSwitchClusterProfile() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -263,7 +266,7 @@ func resourceFabricSwitchClusterProfile() *schema.Resource {
 	}
 }
 
-func resourceFabricSwitchClusterProfileCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricSwitchClusterProfileCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -525,85 +528,89 @@ func resourceFabricSwitchClusterProfileCreate(d *schema.ResourceData, meta inter
 	}
 
 	r := conn.ApiClient.FabricApi.CreateFabricSwitchClusterProfile(conn.ctx).FabricSwitchClusterProfile(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating FabricSwitchClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceFabricSwitchClusterProfileRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceFabricSwitchClusterProfileRead(c, d, meta)
 }
 
-func resourceFabricSwitchClusterProfileRead(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricSwitchClusterProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.FabricApi.GetFabricSwitchClusterProfileByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "FabricSwitchClusterProfile object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching FabricSwitchClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in FabricSwitchClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in FabricSwitchClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("config_context", flattenMapPolicyConfigContext(s.GetConfigContext(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ConfigContext: %+v", err)
+		return diag.Errorf("error occurred while setting property ConfigContext in FabricSwitchClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in FabricSwitchClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in FabricSwitchClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in FabricSwitchClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in FabricSwitchClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in FabricSwitchClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("src_template", flattenMapPolicyAbstractProfileRelationship(s.GetSrcTemplate(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property SrcTemplate: %+v", err)
+		return diag.Errorf("error occurred while setting property SrcTemplate in FabricSwitchClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("switch_profiles", flattenListFabricSwitchProfileRelationship(s.GetSwitchProfiles(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property SwitchProfiles: %+v", err)
+		return diag.Errorf("error occurred while setting property SwitchProfiles in FabricSwitchClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("switch_profiles_count", (s.GetSwitchProfilesCount())); err != nil {
-		return fmt.Errorf("error occurred while setting property SwitchProfilesCount: %+v", err)
+		return diag.Errorf("error occurred while setting property SwitchProfilesCount in FabricSwitchClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in FabricSwitchClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("type", (s.GetType())); err != nil {
-		return fmt.Errorf("error occurred while setting property Type: %+v", err)
+		return diag.Errorf("error occurred while setting property Type in FabricSwitchClusterProfile object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceFabricSwitchClusterProfileUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricSwitchClusterProfileUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -876,23 +883,24 @@ func resourceFabricSwitchClusterProfileUpdate(d *schema.ResourceData, meta inter
 	}
 
 	r := conn.ApiClient.FabricApi.UpdateFabricSwitchClusterProfile(conn.ctx, d.Id()).FabricSwitchClusterProfile(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating FabricSwitchClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFabricSwitchClusterProfileRead(d, meta)
+	return resourceFabricSwitchClusterProfileRead(c, d, meta)
 }
 
-func resourceFabricSwitchClusterProfileDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricSwitchClusterProfileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.FabricApi.DeleteFabricSwitchClusterProfile(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting FabricSwitchClusterProfile object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

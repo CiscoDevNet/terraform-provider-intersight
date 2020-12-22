@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceBiosUnit() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceBiosUnitRead,
+		ReadContext: dataSourceBiosUnitRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -20,7 +21,7 @@ func dataSourceBiosUnit() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -350,10 +351,11 @@ func dataSourceBiosUnit() *schema.Resource {
 	}
 }
 
-func dataSourceBiosUnitRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceBiosUnitRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.BiosUnit{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -406,25 +408,25 @@ func dataSourceBiosUnitRead(d *schema.ResourceData, meta interface{}) error {
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of BiosUnit object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.BiosApi.GetBiosUnitList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.BiosApi.GetBiosUnitList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching BiosUnit: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for BiosUnit list: %s", err.Error())
 	}
 	var s = &models.BiosUnitList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to BiosUnit: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to BiosUnit list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for BiosUnit did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -433,77 +435,77 @@ func dataSourceBiosUnitRead(d *schema.ResourceData, meta interface{}) error {
 			var s = &models.BiosUnit{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 
 			if err := d.Set("compute_blade", flattenMapComputeBladeRelationship(s.GetComputeBlade(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property ComputeBlade: %+v", err)
+				return diag.Errorf("error occurred while setting property ComputeBlade: %s", err.Error())
 			}
 
 			if err := d.Set("compute_rack_unit", flattenMapComputeRackUnitRelationship(s.GetComputeRackUnit(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property ComputeRackUnit: %+v", err)
+				return diag.Errorf("error occurred while setting property ComputeRackUnit: %s", err.Error())
 			}
 			if err := d.Set("device_mo_id", (s.GetDeviceMoId())); err != nil {
-				return fmt.Errorf("error occurred while setting property DeviceMoId: %+v", err)
+				return diag.Errorf("error occurred while setting property DeviceMoId: %s", err.Error())
 			}
 			if err := d.Set("dn", (s.GetDn())); err != nil {
-				return fmt.Errorf("error occurred while setting property Dn: %+v", err)
+				return diag.Errorf("error occurred while setting property Dn: %s", err.Error())
 			}
 			if err := d.Set("init_seq", (s.GetInitSeq())); err != nil {
-				return fmt.Errorf("error occurred while setting property InitSeq: %+v", err)
+				return diag.Errorf("error occurred while setting property InitSeq: %s", err.Error())
 			}
 			if err := d.Set("init_ts", (s.GetInitTs())); err != nil {
-				return fmt.Errorf("error occurred while setting property InitTs: %+v", err)
+				return diag.Errorf("error occurred while setting property InitTs: %s", err.Error())
 			}
 
 			if err := d.Set("inventory_device_info", flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property InventoryDeviceInfo: %+v", err)
+				return diag.Errorf("error occurred while setting property InventoryDeviceInfo: %s", err.Error())
 			}
 			if err := d.Set("model", (s.GetModel())); err != nil {
-				return fmt.Errorf("error occurred while setting property Model: %+v", err)
+				return diag.Errorf("error occurred while setting property Model: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 
 			if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property RegisteredDevice: %+v", err)
+				return diag.Errorf("error occurred while setting property RegisteredDevice: %s", err.Error())
 			}
 			if err := d.Set("revision", (s.GetRevision())); err != nil {
-				return fmt.Errorf("error occurred while setting property Revision: %+v", err)
+				return diag.Errorf("error occurred while setting property Revision: %s", err.Error())
 			}
 			if err := d.Set("rn", (s.GetRn())); err != nil {
-				return fmt.Errorf("error occurred while setting property Rn: %+v", err)
+				return diag.Errorf("error occurred while setting property Rn: %s", err.Error())
 			}
 
 			if err := d.Set("running_firmware", flattenListFirmwareRunningFirmwareRelationship(s.GetRunningFirmware(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property RunningFirmware: %+v", err)
+				return diag.Errorf("error occurred while setting property RunningFirmware: %s", err.Error())
 			}
 			if err := d.Set("serial", (s.GetSerial())); err != nil {
-				return fmt.Errorf("error occurred while setting property Serial: %+v", err)
+				return diag.Errorf("error occurred while setting property Serial: %s", err.Error())
 			}
 
 			if err := d.Set("system_boot_order", flattenMapBiosSystemBootOrderRelationship(s.GetSystemBootOrder(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property SystemBootOrder: %+v", err)
+				return diag.Errorf("error occurred while setting property SystemBootOrder: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("vendor", (s.GetVendor())); err != nil {
-				return fmt.Errorf("error occurred while setting property Vendor: %+v", err)
+				return diag.Errorf("error occurred while setting property Vendor: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

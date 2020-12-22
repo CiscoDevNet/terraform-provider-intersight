@@ -1,19 +1,20 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceApplianceImageBundle() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceApplianceImageBundleRead,
+		ReadContext: dataSourceApplianceImageBundleRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -811,10 +812,11 @@ func dataSourceApplianceImageBundle() *schema.Resource {
 	}
 }
 
-func dataSourceApplianceImageBundleRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceApplianceImageBundleRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.ApplianceImageBundle{}
 	if v, ok := d.GetOk("auto_upgrade"); ok {
 		x := (v.(bool))
@@ -891,25 +893,25 @@ func dataSourceApplianceImageBundleRead(d *schema.ResourceData, meta interface{}
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of ApplianceImageBundle object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.ApplianceApi.GetApplianceImageBundleList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.ApplianceApi.GetApplianceImageBundleList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching ApplianceImageBundle: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for ApplianceImageBundle list: %s", err.Error())
 	}
 	var s = &models.ApplianceImageBundleList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to ApplianceImageBundle: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to ApplianceImageBundle list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for ApplianceImageBundle did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -918,110 +920,110 @@ func dataSourceApplianceImageBundleRead(d *schema.ResourceData, meta interface{}
 			var s = &models.ApplianceImageBundle{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 
 			if err := d.Set("ansible_packages", flattenListOnpremImagePackage(s.GetAnsiblePackages(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property AnsiblePackages: %+v", err)
+				return diag.Errorf("error occurred while setting property AnsiblePackages: %s", err.Error())
 			}
 			if err := d.Set("auto_upgrade", (s.GetAutoUpgrade())); err != nil {
-				return fmt.Errorf("error occurred while setting property AutoUpgrade: %+v", err)
+				return diag.Errorf("error occurred while setting property AutoUpgrade: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 
 			if err := d.Set("dc_packages", flattenListOnpremImagePackage(s.GetDcPackages(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property DcPackages: %+v", err)
+				return diag.Errorf("error occurred while setting property DcPackages: %s", err.Error())
 			}
 
 			if err := d.Set("debug_packages", flattenListOnpremImagePackage(s.GetDebugPackages(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property DebugPackages: %+v", err)
+				return diag.Errorf("error occurred while setting property DebugPackages: %s", err.Error())
 			}
 			if err := d.Set("description", (s.GetDescription())); err != nil {
-				return fmt.Errorf("error occurred while setting property Description: %+v", err)
+				return diag.Errorf("error occurred while setting property Description: %s", err.Error())
 			}
 
 			if err := d.Set("endpoint_packages", flattenListOnpremImagePackage(s.GetEndpointPackages(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property EndpointPackages: %+v", err)
+				return diag.Errorf("error occurred while setting property EndpointPackages: %s", err.Error())
 			}
 			if err := d.Set("fingerprint", (s.GetFingerprint())); err != nil {
-				return fmt.Errorf("error occurred while setting property Fingerprint: %+v", err)
+				return diag.Errorf("error occurred while setting property Fingerprint: %s", err.Error())
 			}
 			if err := d.Set("has_error", (s.GetHasError())); err != nil {
-				return fmt.Errorf("error occurred while setting property HasError: %+v", err)
+				return diag.Errorf("error occurred while setting property HasError: %s", err.Error())
 			}
 
 			if err := d.Set("infra_packages", flattenListOnpremImagePackage(s.GetInfraPackages(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property InfraPackages: %+v", err)
+				return diag.Errorf("error occurred while setting property InfraPackages: %s", err.Error())
 			}
 
 			if err := d.Set("init_packages", flattenListOnpremImagePackage(s.GetInitPackages(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property InitPackages: %+v", err)
+				return diag.Errorf("error occurred while setting property InitPackages: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("name", (s.GetName())); err != nil {
-				return fmt.Errorf("error occurred while setting property Name: %+v", err)
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("notes", (s.GetNotes())); err != nil {
-				return fmt.Errorf("error occurred while setting property Notes: %+v", err)
+				return diag.Errorf("error occurred while setting property Notes: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("priority", (s.GetPriority())); err != nil {
-				return fmt.Errorf("error occurred while setting property Priority: %+v", err)
+				return diag.Errorf("error occurred while setting property Priority: %s", err.Error())
 			}
 
 			if err := d.Set("release_time", (s.GetReleaseTime()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property ReleaseTime: %+v", err)
+				return diag.Errorf("error occurred while setting property ReleaseTime: %s", err.Error())
 			}
 
 			if err := d.Set("service_packages", flattenListOnpremImagePackage(s.GetServicePackages(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property ServicePackages: %+v", err)
+				return diag.Errorf("error occurred while setting property ServicePackages: %s", err.Error())
 			}
 			if err := d.Set("status_message", (s.GetStatusMessage())); err != nil {
-				return fmt.Errorf("error occurred while setting property StatusMessage: %+v", err)
+				return diag.Errorf("error occurred while setting property StatusMessage: %s", err.Error())
 			}
 
 			if err := d.Set("system_packages", flattenListOnpremImagePackage(s.GetSystemPackages(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property SystemPackages: %+v", err)
+				return diag.Errorf("error occurred while setting property SystemPackages: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 
 			if err := d.Set("ui_packages", flattenListOnpremImagePackage(s.GetUiPackages(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property UiPackages: %+v", err)
+				return diag.Errorf("error occurred while setting property UiPackages: %s", err.Error())
 			}
 
 			if err := d.Set("upgrade_end_time", (s.GetUpgradeEndTime()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property UpgradeEndTime: %+v", err)
+				return diag.Errorf("error occurred while setting property UpgradeEndTime: %s", err.Error())
 			}
 			if err := d.Set("upgrade_grace_period", (s.GetUpgradeGracePeriod())); err != nil {
-				return fmt.Errorf("error occurred while setting property UpgradeGracePeriod: %+v", err)
+				return diag.Errorf("error occurred while setting property UpgradeGracePeriod: %s", err.Error())
 			}
 			if err := d.Set("upgrade_impact_duration", (s.GetUpgradeImpactDuration())); err != nil {
-				return fmt.Errorf("error occurred while setting property UpgradeImpactDuration: %+v", err)
+				return diag.Errorf("error occurred while setting property UpgradeImpactDuration: %s", err.Error())
 			}
 			if err := d.Set("upgrade_impact_enum", (s.GetUpgradeImpactEnum())); err != nil {
-				return fmt.Errorf("error occurred while setting property UpgradeImpactEnum: %+v", err)
+				return diag.Errorf("error occurred while setting property UpgradeImpactEnum: %s", err.Error())
 			}
 
 			if err := d.Set("upgrade_start_time", (s.GetUpgradeStartTime()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property UpgradeStartTime: %+v", err)
+				return diag.Errorf("error occurred while setting property UpgradeStartTime: %s", err.Error())
 			}
 			if err := d.Set("nr_version", (s.GetVersion())); err != nil {
-				return fmt.Errorf("error occurred while setting property Version: %+v", err)
+				return diag.Errorf("error occurred while setting property Version: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

@@ -1,14 +1,13 @@
-
 ---
+subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_certificate_request"
-sidebar_current: "docs-intersight-resource-iam-certificate-request"
 description: |-
   The information required to generate a certificate signing request (CSR),
 which is a block of encoded text that is given to a Certificate Authority when applying for an SSL Certificate.
 ---
 
-# Resource: intersight_iam._certificate_request
+# Resource: intersight_iam_certificate_request
 The information required to generate a certificate signing request (CSR),
 which is a block of encoded text that is given to a Certificate Authority when applying for an SSL Certificate.
 ## Argument Reference
@@ -31,11 +30,11 @@ This complex property has following sub-properties:
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `email_address`:(string) User input email address, an optional part of the subject of the certificate request. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the certificate request. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `private_key_spec`:(Array with Maximum of one item) - A reference to a iamPrivateKeySpec resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `additional_properties`:
@@ -74,7 +73,7 @@ This complex property has following sub-properties:
                 (Array of schema.TypeString) -
   + `ip_address`:
                 (Array of schema.TypeString) -
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `uri`:
                 (Array of schema.TypeString) -
 * `tags`:(Array)
@@ -83,3 +82,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_iam_certificate_request` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_iam_certificate_request.example 1234567890987654321abcde
+```

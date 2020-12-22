@@ -1,21 +1,24 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceIamUser() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceIamUserCreate,
-		Read:   resourceIamUserRead,
-		Update: resourceIamUserUpdate,
-		Delete: resourceIamUserDelete,
+		CreateContext: resourceIamUserCreate,
+		ReadContext:   resourceIamUserRead,
+		UpdateContext: resourceIamUserUpdate,
+		DeleteContext: resourceIamUserDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -445,7 +448,7 @@ func resourceIamUser() *schema.Resource {
 	}
 }
 
-func resourceIamUserCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceIamUserCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -888,121 +891,125 @@ func resourceIamUserCreate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	r := conn.ApiClient.IamApi.CreateIamUser(conn.ctx).IamUser(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating IamUser: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceIamUserRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceIamUserRead(c, d, meta)
 }
 
-func resourceIamUserRead(d *schema.ResourceData, meta interface{}) error {
+func resourceIamUserRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.IamApi.GetIamUserByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "IamUser object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching IamUser: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in IamUser object: %s", err.Error())
 	}
 
 	if err := d.Set("api_keys", flattenListIamApiKeyRelationship(s.GetApiKeys(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ApiKeys: %+v", err)
+		return diag.Errorf("error occurred while setting property ApiKeys in IamUser object: %s", err.Error())
 	}
 
 	if err := d.Set("app_registrations", flattenListIamAppRegistrationRelationship(s.GetAppRegistrations(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property AppRegistrations: %+v", err)
+		return diag.Errorf("error occurred while setting property AppRegistrations in IamUser object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in IamUser object: %s", err.Error())
 	}
 
 	if err := d.Set("client_ip_address", (s.GetClientIpAddress())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClientIpAddress: %+v", err)
+		return diag.Errorf("error occurred while setting property ClientIpAddress in IamUser object: %s", err.Error())
 	}
 
 	if err := d.Set("email", (s.GetEmail())); err != nil {
-		return fmt.Errorf("error occurred while setting property Email: %+v", err)
+		return diag.Errorf("error occurred while setting property Email in IamUser object: %s", err.Error())
 	}
 
 	if err := d.Set("first_name", (s.GetFirstName())); err != nil {
-		return fmt.Errorf("error occurred while setting property FirstName: %+v", err)
+		return diag.Errorf("error occurred while setting property FirstName in IamUser object: %s", err.Error())
 	}
 
 	if err := d.Set("idp", flattenMapIamIdpRelationship(s.GetIdp(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Idp: %+v", err)
+		return diag.Errorf("error occurred while setting property Idp in IamUser object: %s", err.Error())
 	}
 
 	if err := d.Set("idpreference", flattenMapIamIdpReferenceRelationship(s.GetIdpreference(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Idpreference: %+v", err)
+		return diag.Errorf("error occurred while setting property Idpreference in IamUser object: %s", err.Error())
 	}
 
 	if err := d.Set("last_login_time", (s.GetLastLoginTime()).String()); err != nil {
-		return fmt.Errorf("error occurred while setting property LastLoginTime: %+v", err)
+		return diag.Errorf("error occurred while setting property LastLoginTime in IamUser object: %s", err.Error())
 	}
 
 	if err := d.Set("last_name", (s.GetLastName())); err != nil {
-		return fmt.Errorf("error occurred while setting property LastName: %+v", err)
+		return diag.Errorf("error occurred while setting property LastName in IamUser object: %s", err.Error())
 	}
 
 	if err := d.Set("local_user_password", flattenMapIamLocalUserPasswordRelationship(s.GetLocalUserPassword(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property LocalUserPassword: %+v", err)
+		return diag.Errorf("error occurred while setting property LocalUserPassword in IamUser object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in IamUser object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in IamUser object: %s", err.Error())
 	}
 
 	if err := d.Set("oauth_tokens", flattenListIamOAuthTokenRelationship(s.GetOauthTokens(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property OauthTokens: %+v", err)
+		return diag.Errorf("error occurred while setting property OauthTokens in IamUser object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in IamUser object: %s", err.Error())
 	}
 
 	if err := d.Set("permissions", flattenListIamPermissionRelationship(s.GetPermissions(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Permissions: %+v", err)
+		return diag.Errorf("error occurred while setting property Permissions in IamUser object: %s", err.Error())
 	}
 
 	if err := d.Set("sessions", flattenListIamSessionRelationship(s.GetSessions(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Sessions: %+v", err)
+		return diag.Errorf("error occurred while setting property Sessions in IamUser object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in IamUser object: %s", err.Error())
 	}
 
 	if err := d.Set("user_id_or_email", (s.GetUserIdOrEmail())); err != nil {
-		return fmt.Errorf("error occurred while setting property UserIdOrEmail: %+v", err)
+		return diag.Errorf("error occurred while setting property UserIdOrEmail in IamUser object: %s", err.Error())
 	}
 
 	if err := d.Set("user_type", (s.GetUserType())); err != nil {
-		return fmt.Errorf("error occurred while setting property UserType: %+v", err)
+		return diag.Errorf("error occurred while setting property UserType in IamUser object: %s", err.Error())
 	}
 
 	if err := d.Set("user_unique_identifier", (s.GetUserUniqueIdentifier())); err != nil {
-		return fmt.Errorf("error occurred while setting property UserUniqueIdentifier: %+v", err)
+		return diag.Errorf("error occurred while setting property UserUniqueIdentifier in IamUser object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceIamUserUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceIamUserUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1465,23 +1472,24 @@ func resourceIamUserUpdate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	r := conn.ApiClient.IamApi.UpdateIamUser(conn.ctx, d.Id()).IamUser(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating IamUser: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamUserRead(d, meta)
+	return resourceIamUserRead(c, d, meta)
 }
 
-func resourceIamUserDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceIamUserDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamUser(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting IamUser object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

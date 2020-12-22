@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Count** | Pointer to **int32** | The total number of &#39;organization.Organization&#39; resources matching the request, accross all pages. The &#39;Count&#39; attribute is included when the HTTP GET request includes the &#39;$inlinecount&#39; parameter. | [optional] 
-**Results** | Pointer to [**[]OrganizationOrganization**](organization.Organization.md) | The array of &#39;organization.Organization&#39; resources matching the request. | [optional] 
+**Results** | Pointer to [**[]OrganizationOrganization**](OrganizationOrganization.md) | The array of &#39;organization.Organization&#39; resources matching the request. | [optional] 
 
 ## Methods
 

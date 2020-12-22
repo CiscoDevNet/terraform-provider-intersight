@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceFirmwareDistributableMeta() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceFirmwareDistributableMetaRead,
+		ReadContext: dataSourceFirmwareDistributableMetaRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -25,7 +26,7 @@ func dataSourceFirmwareDistributableMeta() *schema.Resource {
 				Optional:    true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -103,10 +104,11 @@ func dataSourceFirmwareDistributableMeta() *schema.Resource {
 	}
 }
 
-func dataSourceFirmwareDistributableMetaRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceFirmwareDistributableMetaRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.FirmwareDistributableMeta{}
 	if v, ok := d.GetOk("bucket_name"); ok {
 		x := (v.(string))
@@ -151,25 +153,25 @@ func dataSourceFirmwareDistributableMetaRead(d *schema.ResourceData, meta interf
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of FirmwareDistributableMeta object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.FirmwareApi.GetFirmwareDistributableMetaList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.FirmwareApi.GetFirmwareDistributableMetaList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching FirmwareDistributableMeta: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for FirmwareDistributableMeta list: %s", err.Error())
 	}
 	var s = &models.FirmwareDistributableMetaList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to FirmwareDistributableMeta: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to FirmwareDistributableMeta list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for FirmwareDistributableMeta did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -178,50 +180,50 @@ func dataSourceFirmwareDistributableMetaRead(d *schema.ResourceData, meta interf
 			var s = &models.FirmwareDistributableMeta{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("bucket_name", (s.GetBucketName())); err != nil {
-				return fmt.Errorf("error occurred while setting property BucketName: %+v", err)
+				return diag.Errorf("error occurred while setting property BucketName: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("file_type", (s.GetFileType())); err != nil {
-				return fmt.Errorf("error occurred while setting property FileType: %+v", err)
+				return diag.Errorf("error occurred while setting property FileType: %s", err.Error())
 			}
 			if err := d.Set("from_version", (s.GetFromVersion())); err != nil {
-				return fmt.Errorf("error occurred while setting property FromVersion: %+v", err)
+				return diag.Errorf("error occurred while setting property FromVersion: %s", err.Error())
 			}
 			if err := d.Set("mdfid", (s.GetMdfid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Mdfid: %+v", err)
+				return diag.Errorf("error occurred while setting property Mdfid: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("software_type_id", (s.GetSoftwareTypeId())); err != nil {
-				return fmt.Errorf("error occurred while setting property SoftwareTypeId: %+v", err)
+				return diag.Errorf("error occurred while setting property SoftwareTypeId: %s", err.Error())
 			}
 			if err := d.Set("nr_source", (s.GetSource())); err != nil {
-				return fmt.Errorf("error occurred while setting property Source: %+v", err)
+				return diag.Errorf("error occurred while setting property Source: %s", err.Error())
 			}
 			if err := d.Set("supported_models", (s.GetSupportedModels())); err != nil {
-				return fmt.Errorf("error occurred while setting property SupportedModels: %+v", err)
+				return diag.Errorf("error occurred while setting property SupportedModels: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("to_version", (s.GetToVersion())); err != nil {
-				return fmt.Errorf("error occurred while setting property ToVersion: %+v", err)
+				return diag.Errorf("error occurred while setting property ToVersion: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

@@ -1,13 +1,12 @@
-
 ---
+subcategory: "sol"
 layout: "intersight"
 page_title: "Intersight: intersight_sol_policy"
-sidebar_current: "docs-intersight-resource-sol-policy"
 description: |-
   Policy for configuring Serial Over LAN settings on endpoint.
 ---
 
-# Resource: intersight_sol._policy
+# Resource: intersight_sol_policy
 Policy for configuring Serial Over LAN settings on endpoint.
 ## Argument Reference
 The following arguments are supported:
@@ -20,7 +19,7 @@ The following arguments are supported:
 * `enabled`:(bool) State of Serial Over LAN service on the endpoint. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the concrete policy. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `organization`:(Array with Maximum of one item) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `additional_properties`:
@@ -44,3 +43,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_sol_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_sol_policy.example 1234567890987654321abcde
+```

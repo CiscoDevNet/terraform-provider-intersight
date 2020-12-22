@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -21,10 +21,6 @@ type FabricUplinkRoleAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// Admin configured speed for the port. * `Auto` - Admin configurable speed AUTO ( default ). * `1Gbps` - Admin configurable speed 1Gbps. * `10Gbps` - Admin configurable speed 10Gbps. * `25Gbps` - Admin configurable speed 25Gbps. * `40Gbps` - Admin configurable speed 40Gbps. * `100Gbps` - Admin configurable speed 100Gbps.
-	AdminSpeed *string `json:"AdminSpeed,omitempty"`
-	// Forward error correction configuration for the port. * `Auto` - Forward error correction option 'Auto'. * `Cl91` - Forward error correction option 'cl91'. * `Cl74` - Forward error correction option 'cl74'.
-	Fec *string `json:"Fec,omitempty"`
 	// Admin configured state for UDLD for this port. * `Disabled` - Admin configured Disabled State. * `Enabled` - Admin configured Enabled State.
 	UdldAdminState       *string `json:"UdldAdminState,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -40,10 +36,6 @@ func NewFabricUplinkRoleAllOf(classId string, objectType string) *FabricUplinkRo
 	this := FabricUplinkRoleAllOf{}
 	this.ClassId = classId
 	this.ObjectType = objectType
-	var adminSpeed string = "Auto"
-	this.AdminSpeed = &adminSpeed
-	var fec string = "Auto"
-	this.Fec = &fec
 	var udldAdminState string = "Disabled"
 	this.UdldAdminState = &udldAdminState
 	return &this
@@ -58,10 +50,6 @@ func NewFabricUplinkRoleAllOfWithDefaults() *FabricUplinkRoleAllOf {
 	this.ClassId = classId
 	var objectType string = "fabric.UplinkRole"
 	this.ObjectType = objectType
-	var adminSpeed string = "Auto"
-	this.AdminSpeed = &adminSpeed
-	var fec string = "Auto"
-	this.Fec = &fec
 	var udldAdminState string = "Disabled"
 	this.UdldAdminState = &udldAdminState
 	return &this
@@ -115,70 +103,6 @@ func (o *FabricUplinkRoleAllOf) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
-// GetAdminSpeed returns the AdminSpeed field value if set, zero value otherwise.
-func (o *FabricUplinkRoleAllOf) GetAdminSpeed() string {
-	if o == nil || o.AdminSpeed == nil {
-		var ret string
-		return ret
-	}
-	return *o.AdminSpeed
-}
-
-// GetAdminSpeedOk returns a tuple with the AdminSpeed field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *FabricUplinkRoleAllOf) GetAdminSpeedOk() (*string, bool) {
-	if o == nil || o.AdminSpeed == nil {
-		return nil, false
-	}
-	return o.AdminSpeed, true
-}
-
-// HasAdminSpeed returns a boolean if a field has been set.
-func (o *FabricUplinkRoleAllOf) HasAdminSpeed() bool {
-	if o != nil && o.AdminSpeed != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetAdminSpeed gets a reference to the given string and assigns it to the AdminSpeed field.
-func (o *FabricUplinkRoleAllOf) SetAdminSpeed(v string) {
-	o.AdminSpeed = &v
-}
-
-// GetFec returns the Fec field value if set, zero value otherwise.
-func (o *FabricUplinkRoleAllOf) GetFec() string {
-	if o == nil || o.Fec == nil {
-		var ret string
-		return ret
-	}
-	return *o.Fec
-}
-
-// GetFecOk returns a tuple with the Fec field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *FabricUplinkRoleAllOf) GetFecOk() (*string, bool) {
-	if o == nil || o.Fec == nil {
-		return nil, false
-	}
-	return o.Fec, true
-}
-
-// HasFec returns a boolean if a field has been set.
-func (o *FabricUplinkRoleAllOf) HasFec() bool {
-	if o != nil && o.Fec != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetFec gets a reference to the given string and assigns it to the Fec field.
-func (o *FabricUplinkRoleAllOf) SetFec(v string) {
-	o.Fec = &v
-}
-
 // GetUdldAdminState returns the UdldAdminState field value if set, zero value otherwise.
 func (o *FabricUplinkRoleAllOf) GetUdldAdminState() string {
 	if o == nil || o.UdldAdminState == nil {
@@ -219,12 +143,6 @@ func (o FabricUplinkRoleAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
-	if o.AdminSpeed != nil {
-		toSerialize["AdminSpeed"] = o.AdminSpeed
-	}
-	if o.Fec != nil {
-		toSerialize["Fec"] = o.Fec
-	}
 	if o.UdldAdminState != nil {
 		toSerialize["UdldAdminState"] = o.UdldAdminState
 	}
@@ -248,8 +166,6 @@ func (o *FabricUplinkRoleAllOf) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
-		delete(additionalProperties, "AdminSpeed")
-		delete(additionalProperties, "Fec")
 		delete(additionalProperties, "UdldAdminState")
 		o.AdditionalProperties = additionalProperties
 	}

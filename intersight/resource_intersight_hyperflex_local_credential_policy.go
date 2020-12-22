@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceHyperflexLocalCredentialPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceHyperflexLocalCredentialPolicyCreate,
-		Read:   resourceHyperflexLocalCredentialPolicyRead,
-		Update: resourceHyperflexLocalCredentialPolicyUpdate,
-		Delete: resourceHyperflexLocalCredentialPolicyDelete,
+		CreateContext: resourceHyperflexLocalCredentialPolicyCreate,
+		ReadContext:   resourceHyperflexLocalCredentialPolicyRead,
+		UpdateContext: resourceHyperflexLocalCredentialPolicyUpdate,
+		DeleteContext: resourceHyperflexLocalCredentialPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -76,6 +79,7 @@ func resourceHyperflexLocalCredentialPolicy() *schema.Resource {
 				Description: "Indicates if Hypervisor password is the factory set default password. For HyperFlex Data Platform versions 3.0 or higher, enable this if the default password was not changed on the Hypervisor. It is required to supply a new custom Hypervisor password that will be applied to the Hypervisor during deployment. For HyperFlex Data Platform versions prior to 3.0 release, this setting has no effect and the default password will be used for initial install. The Hypervisor password should be changed after deployment.",
 				Type:        schema.TypeBool,
 				Optional:    true,
+				Default:     false,
 			},
 			"hxdp_root_pwd": {
 				Description: "HyperFlex storage controller VM password must contain a minimum of 10 characters, with at least 1 lowercase, 1 uppercase, 1 numeric, and 1 of these -_@#$%^&*! special characters.",
@@ -83,7 +87,7 @@ func resourceHyperflexLocalCredentialPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"hypervisor_admin": {
-				Description: "Hypervisor administrator username must contain only alphanumeric characters. Use the root account for ESXi deployments.",
+				Description: "Hypervisor administrator username must contain only alphanumeric characters.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -117,7 +121,7 @@ func resourceHyperflexLocalCredentialPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -191,7 +195,7 @@ func resourceHyperflexLocalCredentialPolicy() *schema.Resource {
 	}
 }
 
-func resourceHyperflexLocalCredentialPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexLocalCredentialPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -375,85 +379,89 @@ func resourceHyperflexLocalCredentialPolicyCreate(d *schema.ResourceData, meta i
 	}
 
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexLocalCredentialPolicy(conn.ctx).HyperflexLocalCredentialPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating HyperflexLocalCredentialPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceHyperflexLocalCredentialPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceHyperflexLocalCredentialPolicyRead(c, d, meta)
 }
 
-func resourceHyperflexLocalCredentialPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexLocalCredentialPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.HyperflexApi.GetHyperflexLocalCredentialPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "HyperflexLocalCredentialPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching HyperflexLocalCredentialPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in HyperflexLocalCredentialPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in HyperflexLocalCredentialPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cluster_profiles", flattenListHyperflexClusterProfileRelationship(s.GetClusterProfiles(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ClusterProfiles: %+v", err)
+		return diag.Errorf("error occurred while setting property ClusterProfiles in HyperflexLocalCredentialPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in HyperflexLocalCredentialPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("factory_hypervisor_password", (s.GetFactoryHypervisorPassword())); err != nil {
-		return fmt.Errorf("error occurred while setting property FactoryHypervisorPassword: %+v", err)
+		return diag.Errorf("error occurred while setting property FactoryHypervisorPassword in HyperflexLocalCredentialPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("hypervisor_admin", (s.GetHypervisorAdmin())); err != nil {
-		return fmt.Errorf("error occurred while setting property HypervisorAdmin: %+v", err)
+		return diag.Errorf("error occurred while setting property HypervisorAdmin in HyperflexLocalCredentialPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("is_hxdp_root_pwd_set", (s.GetIsHxdpRootPwdSet())); err != nil {
-		return fmt.Errorf("error occurred while setting property IsHxdpRootPwdSet: %+v", err)
+		return diag.Errorf("error occurred while setting property IsHxdpRootPwdSet in HyperflexLocalCredentialPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("is_hypervisor_admin_pwd_set", (s.GetIsHypervisorAdminPwdSet())); err != nil {
-		return fmt.Errorf("error occurred while setting property IsHypervisorAdminPwdSet: %+v", err)
+		return diag.Errorf("error occurred while setting property IsHypervisorAdminPwdSet in HyperflexLocalCredentialPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in HyperflexLocalCredentialPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in HyperflexLocalCredentialPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in HyperflexLocalCredentialPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in HyperflexLocalCredentialPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in HyperflexLocalCredentialPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceHyperflexLocalCredentialPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexLocalCredentialPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -650,23 +658,24 @@ func resourceHyperflexLocalCredentialPolicyUpdate(d *schema.ResourceData, meta i
 	}
 
 	r := conn.ApiClient.HyperflexApi.UpdateHyperflexLocalCredentialPolicy(conn.ctx, d.Id()).HyperflexLocalCredentialPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating HyperflexLocalCredentialPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexLocalCredentialPolicyRead(d, meta)
+	return resourceHyperflexLocalCredentialPolicyRead(c, d, meta)
 }
 
-func resourceHyperflexLocalCredentialPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexLocalCredentialPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexLocalCredentialPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting HyperflexLocalCredentialPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

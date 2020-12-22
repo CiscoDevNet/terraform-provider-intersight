@@ -1,13 +1,12 @@
-
 ---
+subcategory: "tam"
 layout: "intersight"
 page_title: "Intersight: intersight_tam_advisory_definition"
-sidebar_current: "docs-intersight-resource-tam-advisory-definition"
 description: |-
   An Intersight Advisory. An advisory represents an identification of a potential issue and may also include  a recommendation for resolving the said issue. Advisories may be of different kind and severity. for e.g. It could be a security vulnerability or a performance issue or a hardware issue with different recommendations for resolving them.
 ---
 
-# Resource: intersight_tam._advisory_definition
+# Resource: intersight_tam_advisory_definition
 An Intersight Advisory. An advisory represents an identification of a potential issue and may also include  a recommendation for resolving the said issue. Advisories may be of different kind and severity. for e.g. It could be a security vulnerability or a performance issue or a hardware issue with different recommendations for resolving them.
 ## Argument Reference
 The following arguments are supported:
@@ -67,7 +66,7 @@ This complex property has following sub-properties:
     + `priority`:(int) An integer value depicting the priority of the query among the queries that are part of the same QueryEntry collection. 
     + `query`:(string) A SparkSQL query to be used on a given data source. 
   + `type`:(string) Type of data source (for e.g. TextFsmTempalate based, Intersight API based etc.).* `nxos` - Collector type for this data collection is NXOS.* `intersightApi` - Collector type for this data collection is Intersight APIs. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `date_published`:(string) Date when the security advisory was first published by Cisco. 
 * `date_updated`:(string) Date when the security advisory was last updated by Cisco. 
 * `description`:(string) Brief description of the advisory details. 
@@ -98,5 +97,12 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `type`:(string) The type (field notice, security advisory etc.) of Intersight advisory.* `securityAdvisory` - Respresents the psirt alert type (https://tools.cisco.com/security/center/publicationListing.x).* `fieldNotice` - Respresents the field notice alert type (https://www.cisco.com/c/en/us/support/web/tsd-products-field-notice-summary.html). 
-* `version`:(string) Cisco assigned advisory version after latest revision. 
+* `nr_version`:(string) Cisco assigned advisory version after latest revision. 
 * `workaround`:(string) Workarounds available for the advisory. 
+
+
+## Import
+`intersight_tam_advisory_definition` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_tam_advisory_definition.example 1234567890987654321abcde
+```

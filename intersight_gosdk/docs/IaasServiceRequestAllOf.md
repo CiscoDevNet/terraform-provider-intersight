@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **RequestType** | Pointer to **string** | Service request type of an SR. | [optional] [readonly] 
 **Status** | Pointer to **string** | UCSD service request status. | [optional] [readonly] 
 **WorkflowName** | Pointer to **string** | Executed workflow name for an SR. | [optional] [readonly] 
-**WorkflowSteps** | Pointer to [**[]IaasWorkflowSteps**](iaas.WorkflowSteps.md) |  | [optional] 
+**WorkflowSteps** | Pointer to [**[]IaasWorkflowSteps**](IaasWorkflowSteps.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
 ## Methods

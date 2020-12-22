@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.ClientCertificateCredential"]
 **ClientCertificate** | Pointer to **string** | PEM encoded x509 client certificate used to authenticate with the target. | [optional] 
 **ClientKey** | Pointer to **string** | PEM encoded private key used to authenticate with the target. | [optional] 
-**IsClientKeySet** | Pointer to **bool** | Indicates whether the value of the &#39;clientKey&#39; property has been set. | [optional] [readonly] 
+**IsClientKeySet** | Pointer to **bool** | Indicates whether the value of the &#39;clientKey&#39; property has been set. | [optional] [readonly] [default to false]
 
 ## Methods
 

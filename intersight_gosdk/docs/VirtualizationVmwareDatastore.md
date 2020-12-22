@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **Url** | Pointer to **string** | The URL to access this datastore (example - &#39;ds:///vmfs/volumes/562a4e8a-0eeb5372-dd61-78baf9cb9afa/&#39;). | [optional] 
 **Cluster** | Pointer to [**VirtualizationVmwareClusterRelationship**](virtualization.VmwareCluster.Relationship.md) |  | [optional] 
 **Datacenter** | Pointer to [**VirtualizationVmwareDatacenterRelationship**](virtualization.VmwareDatacenter.Relationship.md) |  | [optional] 
-**Hosts** | Pointer to [**[]VirtualizationVmwareHostRelationship**](virtualization.VmwareHost.Relationship.md) | An array of relationships to virtualizationVmwareHost resources. | [optional] [readonly] 
+**Hosts** | Pointer to [**[]VirtualizationVmwareHostRelationship**](VirtualizationVmwareHostRelationship.md) | An array of relationships to virtualizationVmwareHost resources. | [optional] [readonly] 
 
 ## Methods
 

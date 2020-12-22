@@ -1,22 +1,19 @@
-
 ---
+subcategory: "security"
 layout: "intersight"
 page_title: "Intersight: intersight_security_unit"
-sidebar_current: "docs-intersight-data-source-security-unit"
 description: |-
-The crypto card present on a server.
+  The crypto card present on a server.
 ---
 
-# Data Source: intersight_security._unit
+# Data Source: intersight_security_unit
 The crypto card present on a server.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `oper_state`:(string) Operational state of the security unit. 
 * `operability`:(string) Operability state of the security unit. 
 * `part_number`:(string) The part number of the security unit. 

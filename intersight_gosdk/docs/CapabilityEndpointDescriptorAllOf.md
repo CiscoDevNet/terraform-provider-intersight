@@ -10,8 +10,7 @@ Name | Type | Description | Notes
 **Model** | Pointer to **string** | The model of the endpoint, for which this capability information is applicable. | [optional] 
 **Vendor** | Pointer to **string** | The vendor of the endpoint, for which this capability information is applicable. | [optional] 
 **Version** | Pointer to **string** | The firmware or software version of the endpoint, for which this capability information is applicable. | [optional] 
-**Capabilities** | Pointer to [**[]CapabilityCapabilityRelationship**](capability.Capability.Relationship.md) | An array of relationships to capabilityCapability resources. | [optional] 
-**Section** | Pointer to [**CapabilitySectionRelationship**](capability.Section.Relationship.md) |  | [optional] 
+**Capabilities** | Pointer to [**[]CapabilityCapabilityRelationship**](CapabilityCapabilityRelationship.md) | An array of relationships to capabilityCapability resources. | [optional] 
 
 ## Methods
 
@@ -207,31 +206,6 @@ HasCapabilities returns a boolean if a field has been set.
 `func (o *CapabilityEndpointDescriptorAllOf) UnsetCapabilities()`
 
 UnsetCapabilities ensures that no value is present for Capabilities, not even an explicit nil
-### GetSection
-
-`func (o *CapabilityEndpointDescriptorAllOf) GetSection() CapabilitySectionRelationship`
-
-GetSection returns the Section field if non-nil, zero value otherwise.
-
-### GetSectionOk
-
-`func (o *CapabilityEndpointDescriptorAllOf) GetSectionOk() (*CapabilitySectionRelationship, bool)`
-
-GetSectionOk returns a tuple with the Section field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSection
-
-`func (o *CapabilityEndpointDescriptorAllOf) SetSection(v CapabilitySectionRelationship)`
-
-SetSection sets Section field to given value.
-
-### HasSection
-
-`func (o *CapabilityEndpointDescriptorAllOf) HasSection() bool`
-
-HasSection returns a boolean if a field has been set.
-
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

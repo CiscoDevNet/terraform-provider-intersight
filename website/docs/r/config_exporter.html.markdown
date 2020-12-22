@@ -1,14 +1,13 @@
-
 ---
+subcategory: "config"
 layout: "intersight"
 page_title: "Intersight: intersight_config_exporter"
-sidebar_current: "docs-intersight-resource-config-exporter"
 description: |-
   All export operations are captured as Exporter instances. Users shall use this Exporter
 mo to track the export operation progress.
 ---
 
-# Resource: intersight_config._exporter
+# Resource: intersight_config_exporter
 All export operations are captured as Exporter instances. Users shall use this Exporter
 mo to track the export operation progress.
 ## Argument Reference
@@ -51,3 +50,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_config_exporter` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_config_exporter.example 1234567890987654321abcde
+```

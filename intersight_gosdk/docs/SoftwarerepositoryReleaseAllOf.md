@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "softwarerepository.Release"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "softwarerepository.Release"]
-**ReleaseDate** | Pointer to [**time.Time**](time.Time.md) | The date when the file was released or distributed by its vendor. | [optional] 
+**ReleaseDate** | Pointer to **time.Time** | The date when the file was released or distributed by its vendor. | [optional] 
 **ReleaseNotesUrl** | Pointer to **string** | The URL for the release notes of this image. | [optional] 
 **SupportedModels** | Pointer to **[]string** |  | [optional] 
 **Type** | Pointer to **string** | The platform type for which the images are released. This can be a Fabric Interconnect or compute server hardware. * &#x60;FabricSwitch&#x60; - The images in a release that correspond to Fabric Interconnect switches. * &#x60;ComputeSystem&#x60; - The images in a release that correspond to servers. | [optional] [default to "FabricSwitch"]

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "appliance.AppStatus"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.AppStatus"]
-**ApiStatuses** | Pointer to [**[]ApplianceApiStatus**](appliance.ApiStatus.md) |  | [optional] 
+**ApiStatuses** | Pointer to [**[]ApplianceApiStatus**](ApplianceApiStatus.md) |  | [optional] 
 **AppLabel** | Pointer to **string** | Unique label to identify the application. | [optional] [readonly] 
 **OperationalStatus** | Pointer to **string** | Operational status of the application. Operational status is based on the result of the status checks. If result of any check is Critical, then its value is Impaired. Otherwise, if result of any check is Warning, then its value is AttentionNeeded. If all checks are OK, then its value is Operational. * &#x60;Unknown&#x60; - Operational status of the Intersight Appliance entity is Unknown. * &#x60;Operational&#x60; - Operational status of the Intersight Appliance entity is Operational. * &#x60;Impaired&#x60; - Operational status of the Intersight Appliance entity is Impaired. * &#x60;AttentionNeeded&#x60; - Operational status of the Intersight Appliance entity is AttentionNeeded. | [optional] [readonly] [default to "Unknown"]
 **ReadyCount** | Pointer to **int64** | Number of replicas ready.  The number of instances of the application currently ready to perform its intended functions. | [optional] [readonly] 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **RestartCount5Mins** | Pointer to **int64** | Number of instance restarts in the last 5 minutes. | [optional] [readonly] 
 **RestartCountTotal** | Pointer to **int64** | Total number of restarts since last deployment. | [optional] [readonly] 
 **RunningCount** | Pointer to **int64** | Number of replicas running. The number of instances of the application currently running. | [optional] [readonly] 
-**StatusChecks** | Pointer to [**[]ApplianceStatusCheck**](appliance.StatusCheck.md) |  | [optional] 
+**StatusChecks** | Pointer to [**[]ApplianceStatusCheck**](ApplianceStatusCheck.md) |  | [optional] 
 **GroupStatus** | Pointer to [**ApplianceGroupStatusRelationship**](appliance.GroupStatus.Relationship.md) |  | [optional] 
 **SystemStatus** | Pointer to [**ApplianceSystemStatusRelationship**](appliance.SystemStatus.Relationship.md) |  | [optional] 
 

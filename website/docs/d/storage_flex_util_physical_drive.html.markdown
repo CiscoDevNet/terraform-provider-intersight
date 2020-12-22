@@ -1,19 +1,17 @@
-
 ---
+subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_flex_util_physical_drive"
-sidebar_current: "docs-intersight-data-source-storage-flex-util-physical-drive"
 description: |-
-Storage Flex Util Physical Drive.
+  Storage Flex Util Physical Drive.
 ---
 
-# Data Source: intersight_storage._flex_util_physical_drive
+# Data Source: intersight_storage_flex_util_physical_drive
 Storage Flex Util Physical Drive.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `block_size`:(string) Block size of the FlexUtil Physical drive. 
 * `capacity`:(string) Capacity of the FlexUtil Physical drive. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `controller`:(string) Type of the Physical Drive Controller. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
@@ -23,7 +21,6 @@ The following arguments can be used to get data of already created objects in In
 * `manufacturer_id`:(string) Manufacturer identity of the FlexUtil Physical Drive. 
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `oem_id`:(string) The OEM Identifier of the FlexUtil physical drive. 
 * `partition_count`:(string) The number of partitions present on the FlexUtil Physical Drive. 
 * `pd_status`:(string) Status of the FlexUtil Physical Drive. 

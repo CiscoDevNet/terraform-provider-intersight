@@ -1,18 +1,16 @@
-
 ---
+subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_system_io_controller"
-sidebar_current: "docs-intersight-data-source-equipment-system-io-controller"
 description: |-
-I/O Controller on a chassis which provides the data path to S-series server.
+  I/O Controller on a chassis which provides the data path to S-series server.
 ---
 
-# Data Source: intersight_equipment._system_io_controller
+# Data Source: intersight_equipment_system_io_controller
 I/O Controller on a chassis which provides the data path to S-series server.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `chassis_id`:(string) The assigned identifier for a chassis. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `connection_path`:(string) Connection Path identifies the data path available between IOModule and FI. 
 * `connection_status`:(string) Connection status identifies the status of data path. 
 * `description`:(string) This field gives a brief information on systemIOController. 
@@ -21,7 +19,6 @@ The following arguments can be used to get data of already created objects in In
 * `managing_instance`:(string) This field identifies the CIMC that manages the controller. 
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `oper_state`:(string) This field identifies the SIOC operational state. 
 * `part_number`:(string) Part Number identifier for the IO module. 
 * `pid`:(string) This field identifies the Product ID for systemIOController. 

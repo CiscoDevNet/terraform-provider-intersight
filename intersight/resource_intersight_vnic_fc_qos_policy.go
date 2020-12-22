@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceVnicFcQosPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceVnicFcQosPolicyCreate,
-		Read:   resourceVnicFcQosPolicyRead,
-		Update: resourceVnicFcQosPolicyUpdate,
-		Delete: resourceVnicFcQosPolicyDelete,
+		CreateContext: resourceVnicFcQosPolicyCreate,
+		ReadContext:   resourceVnicFcQosPolicyRead,
+		UpdateContext: resourceVnicFcQosPolicyUpdate,
+		DeleteContext: resourceVnicFcQosPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -31,6 +34,7 @@ func resourceVnicFcQosPolicy() *schema.Resource {
 				Description: "Class of Service to be associated to the traffic on the virtual interface.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+				Default:     3,
 			},
 			"description": {
 				Description: "Description of the policy.",
@@ -41,6 +45,7 @@ func resourceVnicFcQosPolicy() *schema.Resource {
 				Description: "The maximum size of the Fibre Channel frame payload bytes that the virtual interface supports.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+				Default:     2112,
 			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
@@ -112,6 +117,7 @@ func resourceVnicFcQosPolicy() *schema.Resource {
 				Description: "The value in Mbps to use for limiting the data rate on the virtual interface. Setting this to zero will turn rate limiting off.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+				Default:     0,
 			},
 			"tags": {
 				Type:     schema.TypeList,
@@ -140,7 +146,7 @@ func resourceVnicFcQosPolicy() *schema.Resource {
 	}
 }
 
-func resourceVnicFcQosPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicFcQosPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -272,81 +278,85 @@ func resourceVnicFcQosPolicyCreate(d *schema.ResourceData, meta interface{}) err
 	}
 
 	r := conn.ApiClient.VnicApi.CreateVnicFcQosPolicy(conn.ctx).VnicFcQosPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating VnicFcQosPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceVnicFcQosPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceVnicFcQosPolicyRead(c, d, meta)
 }
 
-func resourceVnicFcQosPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicFcQosPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.VnicApi.GetVnicFcQosPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "VnicFcQosPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching VnicFcQosPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in VnicFcQosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in VnicFcQosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cos", (s.GetCos())); err != nil {
-		return fmt.Errorf("error occurred while setting property Cos: %+v", err)
+		return diag.Errorf("error occurred while setting property Cos in VnicFcQosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in VnicFcQosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("max_data_field_size", (s.GetMaxDataFieldSize())); err != nil {
-		return fmt.Errorf("error occurred while setting property MaxDataFieldSize: %+v", err)
+		return diag.Errorf("error occurred while setting property MaxDataFieldSize in VnicFcQosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in VnicFcQosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in VnicFcQosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in VnicFcQosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in VnicFcQosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("priority", (s.GetPriority())); err != nil {
-		return fmt.Errorf("error occurred while setting property Priority: %+v", err)
+		return diag.Errorf("error occurred while setting property Priority in VnicFcQosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("rate_limit", (s.GetRateLimit())); err != nil {
-		return fmt.Errorf("error occurred while setting property RateLimit: %+v", err)
+		return diag.Errorf("error occurred while setting property RateLimit in VnicFcQosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in VnicFcQosPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceVnicFcQosPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicFcQosPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -488,23 +498,24 @@ func resourceVnicFcQosPolicyUpdate(d *schema.ResourceData, meta interface{}) err
 	}
 
 	r := conn.ApiClient.VnicApi.UpdateVnicFcQosPolicy(conn.ctx, d.Id()).VnicFcQosPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating VnicFcQosPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceVnicFcQosPolicyRead(d, meta)
+	return resourceVnicFcQosPolicyRead(c, d, meta)
 }
 
-func resourceVnicFcQosPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicFcQosPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.VnicApi.DeleteVnicFcQosPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting VnicFcQosPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

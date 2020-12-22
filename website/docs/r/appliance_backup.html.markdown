@@ -1,15 +1,14 @@
-
 ---
+subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_backup"
-sidebar_current: "docs-intersight-resource-appliance-backup"
 description: |-
   Backup tracks all backup requests to create a full system backup of the Intersight
 Appliance. There will be only one Backup managed object with a 'Started' state at
 any time. All other Backup managed objects will be in terminal states.
 ---
 
-# Resource: intersight_appliance._backup
+# Resource: intersight_appliance_backup
 Backup tracks all backup requests to create a full system backup of the Intersight
 Appliance. There will be only one Backup managed object with a 'Started' state at
 any time. All other Backup managed objects will be in terminal states.
@@ -25,7 +24,7 @@ This complex property has following sub-properties:
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `elapsed_time`:(int)(Computed) Elapsed time in seconds since the backup process has started. 
 * `end_time`:(string)(Computed) End date and time of the backup process. 
 * `filename`:(string) Backup filename to backup or restore. 
@@ -48,3 +47,10 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `username`:(string) Username to authenticate the fileserver. 
+
+
+## Import
+`intersight_appliance_backup` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_appliance_backup.example 1234567890987654321abcde
+```

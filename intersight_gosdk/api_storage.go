@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -12,6 +12,7 @@
 package intersight
 
 import (
+	"bytes"
 	_context "context"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
@@ -48,7 +49,7 @@ func (r ApiCreateStorageDiskGroupPolicyRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateStorageDiskGroupPolicyRequest) Execute() (StorageDiskGroupPolicy, *_nethttp.Response, error) {
+func (r ApiCreateStorageDiskGroupPolicyRequest) Execute() (StorageDiskGroupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateStorageDiskGroupPolicyExecute(r)
 }
 
@@ -68,19 +69,21 @@ func (a *StorageApiService) CreateStorageDiskGroupPolicy(ctx _context.Context) A
  * Execute executes the request
  * @return StorageDiskGroupPolicy
  */
-func (a *StorageApiService) CreateStorageDiskGroupPolicyExecute(r ApiCreateStorageDiskGroupPolicyRequest) (StorageDiskGroupPolicy, *_nethttp.Response, error) {
+func (a *StorageApiService) CreateStorageDiskGroupPolicyExecute(r ApiCreateStorageDiskGroupPolicyRequest) (StorageDiskGroupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageDiskGroupPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.CreateStorageDiskGroupPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/DiskGroupPolicies"
@@ -89,7 +92,8 @@ func (a *StorageApiService) CreateStorageDiskGroupPolicyExecute(r ApiCreateStora
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageDiskGroupPolicy == nil {
-		return localVarReturnValue, nil, reportError("storageDiskGroupPolicy is required and must be specified")
+		executionError.error = "storageDiskGroupPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -119,18 +123,22 @@ func (a *StorageApiService) CreateStorageDiskGroupPolicyExecute(r ApiCreateStora
 	localVarPostBody = r.storageDiskGroupPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -197,7 +205,7 @@ func (a *StorageApiService) CreateStorageDiskGroupPolicyExecute(r ApiCreateStora
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateStorageStoragePolicyRequest struct {
@@ -221,7 +229,7 @@ func (r ApiCreateStorageStoragePolicyRequest) IfNoneMatch(ifNoneMatch string) Ap
 	return r
 }
 
-func (r ApiCreateStorageStoragePolicyRequest) Execute() (StorageStoragePolicy, *_nethttp.Response, error) {
+func (r ApiCreateStorageStoragePolicyRequest) Execute() (StorageStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateStorageStoragePolicyExecute(r)
 }
 
@@ -241,19 +249,21 @@ func (a *StorageApiService) CreateStorageStoragePolicy(ctx _context.Context) Api
  * Execute executes the request
  * @return StorageStoragePolicy
  */
-func (a *StorageApiService) CreateStorageStoragePolicyExecute(r ApiCreateStorageStoragePolicyRequest) (StorageStoragePolicy, *_nethttp.Response, error) {
+func (a *StorageApiService) CreateStorageStoragePolicyExecute(r ApiCreateStorageStoragePolicyRequest) (StorageStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageStoragePolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.CreateStorageStoragePolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/StoragePolicies"
@@ -262,7 +272,8 @@ func (a *StorageApiService) CreateStorageStoragePolicyExecute(r ApiCreateStorage
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageStoragePolicy == nil {
-		return localVarReturnValue, nil, reportError("storageStoragePolicy is required and must be specified")
+		executionError.error = "storageStoragePolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -292,18 +303,22 @@ func (a *StorageApiService) CreateStorageStoragePolicyExecute(r ApiCreateStorage
 	localVarPostBody = r.storageStoragePolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -370,7 +385,7 @@ func (a *StorageApiService) CreateStorageStoragePolicyExecute(r ApiCreateStorage
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiDeleteStorageDiskGroupPolicyRequest struct {
@@ -379,7 +394,7 @@ type ApiDeleteStorageDiskGroupPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteStorageDiskGroupPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteStorageDiskGroupPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteStorageDiskGroupPolicyExecute(r)
 }
 
@@ -400,18 +415,20 @@ func (a *StorageApiService) DeleteStorageDiskGroupPolicy(ctx _context.Context, m
 /*
  * Execute executes the request
  */
-func (a *StorageApiService) DeleteStorageDiskGroupPolicyExecute(r ApiDeleteStorageDiskGroupPolicyRequest) (*_nethttp.Response, error) {
+func (a *StorageApiService) DeleteStorageDiskGroupPolicyExecute(r ApiDeleteStorageDiskGroupPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.DeleteStorageDiskGroupPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/DiskGroupPolicies/{Moid}"
@@ -440,18 +457,22 @@ func (a *StorageApiService) DeleteStorageDiskGroupPolicyExecute(r ApiDeleteStora
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -509,7 +530,7 @@ func (a *StorageApiService) DeleteStorageDiskGroupPolicyExecute(r ApiDeleteStora
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteStorageStoragePolicyRequest struct {
@@ -518,7 +539,7 @@ type ApiDeleteStorageStoragePolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteStorageStoragePolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteStorageStoragePolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteStorageStoragePolicyExecute(r)
 }
 
@@ -539,18 +560,20 @@ func (a *StorageApiService) DeleteStorageStoragePolicy(ctx _context.Context, moi
 /*
  * Execute executes the request
  */
-func (a *StorageApiService) DeleteStorageStoragePolicyExecute(r ApiDeleteStorageStoragePolicyRequest) (*_nethttp.Response, error) {
+func (a *StorageApiService) DeleteStorageStoragePolicyExecute(r ApiDeleteStorageStoragePolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.DeleteStorageStoragePolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/StoragePolicies/{Moid}"
@@ -579,18 +602,22 @@ func (a *StorageApiService) DeleteStorageStoragePolicyExecute(r ApiDeleteStorage
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -648,7 +675,7 @@ func (a *StorageApiService) DeleteStorageStoragePolicyExecute(r ApiDeleteStorage
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageControllerByMoidRequest struct {
@@ -657,7 +684,7 @@ type ApiGetStorageControllerByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageControllerByMoidRequest) Execute() (StorageController, *_nethttp.Response, error) {
+func (r ApiGetStorageControllerByMoidRequest) Execute() (StorageController, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageControllerByMoidExecute(r)
 }
 
@@ -679,19 +706,21 @@ func (a *StorageApiService) GetStorageControllerByMoid(ctx _context.Context, moi
  * Execute executes the request
  * @return StorageController
  */
-func (a *StorageApiService) GetStorageControllerByMoidExecute(r ApiGetStorageControllerByMoidRequest) (StorageController, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageControllerByMoidExecute(r ApiGetStorageControllerByMoidRequest) (StorageController, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageController
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageControllerByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/Controllers/{Moid}"
@@ -720,18 +749,22 @@ func (a *StorageApiService) GetStorageControllerByMoidExecute(r ApiGetStorageCon
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -798,7 +831,7 @@ func (a *StorageApiService) GetStorageControllerByMoidExecute(r ApiGetStorageCon
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageControllerListRequest struct {
@@ -862,7 +895,7 @@ func (r ApiGetStorageControllerListRequest) Tags(tags string) ApiGetStorageContr
 	return r
 }
 
-func (r ApiGetStorageControllerListRequest) Execute() (StorageControllerResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageControllerListRequest) Execute() (StorageControllerResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageControllerListExecute(r)
 }
 
@@ -882,19 +915,21 @@ func (a *StorageApiService) GetStorageControllerList(ctx _context.Context) ApiGe
  * Execute executes the request
  * @return StorageControllerResponse
  */
-func (a *StorageApiService) GetStorageControllerListExecute(r ApiGetStorageControllerListRequest) (StorageControllerResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageControllerListExecute(r ApiGetStorageControllerListRequest) (StorageControllerResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageControllerResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageControllerList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/Controllers"
@@ -955,18 +990,22 @@ func (a *StorageApiService) GetStorageControllerListExecute(r ApiGetStorageContr
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1033,7 +1072,7 @@ func (a *StorageApiService) GetStorageControllerListExecute(r ApiGetStorageContr
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageDiskGroupByMoidRequest struct {
@@ -1042,7 +1081,7 @@ type ApiGetStorageDiskGroupByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageDiskGroupByMoidRequest) Execute() (StorageDiskGroup, *_nethttp.Response, error) {
+func (r ApiGetStorageDiskGroupByMoidRequest) Execute() (StorageDiskGroup, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageDiskGroupByMoidExecute(r)
 }
 
@@ -1064,19 +1103,21 @@ func (a *StorageApiService) GetStorageDiskGroupByMoid(ctx _context.Context, moid
  * Execute executes the request
  * @return StorageDiskGroup
  */
-func (a *StorageApiService) GetStorageDiskGroupByMoidExecute(r ApiGetStorageDiskGroupByMoidRequest) (StorageDiskGroup, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageDiskGroupByMoidExecute(r ApiGetStorageDiskGroupByMoidRequest) (StorageDiskGroup, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageDiskGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageDiskGroupByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/DiskGroups/{Moid}"
@@ -1105,18 +1146,22 @@ func (a *StorageApiService) GetStorageDiskGroupByMoidExecute(r ApiGetStorageDisk
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1183,7 +1228,7 @@ func (a *StorageApiService) GetStorageDiskGroupByMoidExecute(r ApiGetStorageDisk
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageDiskGroupListRequest struct {
@@ -1247,7 +1292,7 @@ func (r ApiGetStorageDiskGroupListRequest) Tags(tags string) ApiGetStorageDiskGr
 	return r
 }
 
-func (r ApiGetStorageDiskGroupListRequest) Execute() (StorageDiskGroupResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageDiskGroupListRequest) Execute() (StorageDiskGroupResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageDiskGroupListExecute(r)
 }
 
@@ -1267,19 +1312,21 @@ func (a *StorageApiService) GetStorageDiskGroupList(ctx _context.Context) ApiGet
  * Execute executes the request
  * @return StorageDiskGroupResponse
  */
-func (a *StorageApiService) GetStorageDiskGroupListExecute(r ApiGetStorageDiskGroupListRequest) (StorageDiskGroupResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageDiskGroupListExecute(r ApiGetStorageDiskGroupListRequest) (StorageDiskGroupResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageDiskGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageDiskGroupList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/DiskGroups"
@@ -1340,18 +1387,22 @@ func (a *StorageApiService) GetStorageDiskGroupListExecute(r ApiGetStorageDiskGr
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1418,7 +1469,7 @@ func (a *StorageApiService) GetStorageDiskGroupListExecute(r ApiGetStorageDiskGr
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageDiskGroupPolicyByMoidRequest struct {
@@ -1427,7 +1478,7 @@ type ApiGetStorageDiskGroupPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageDiskGroupPolicyByMoidRequest) Execute() (StorageDiskGroupPolicy, *_nethttp.Response, error) {
+func (r ApiGetStorageDiskGroupPolicyByMoidRequest) Execute() (StorageDiskGroupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageDiskGroupPolicyByMoidExecute(r)
 }
 
@@ -1449,19 +1500,21 @@ func (a *StorageApiService) GetStorageDiskGroupPolicyByMoid(ctx _context.Context
  * Execute executes the request
  * @return StorageDiskGroupPolicy
  */
-func (a *StorageApiService) GetStorageDiskGroupPolicyByMoidExecute(r ApiGetStorageDiskGroupPolicyByMoidRequest) (StorageDiskGroupPolicy, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageDiskGroupPolicyByMoidExecute(r ApiGetStorageDiskGroupPolicyByMoidRequest) (StorageDiskGroupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageDiskGroupPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageDiskGroupPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/DiskGroupPolicies/{Moid}"
@@ -1490,18 +1543,22 @@ func (a *StorageApiService) GetStorageDiskGroupPolicyByMoidExecute(r ApiGetStora
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1568,7 +1625,7 @@ func (a *StorageApiService) GetStorageDiskGroupPolicyByMoidExecute(r ApiGetStora
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageDiskGroupPolicyListRequest struct {
@@ -1632,7 +1689,7 @@ func (r ApiGetStorageDiskGroupPolicyListRequest) Tags(tags string) ApiGetStorage
 	return r
 }
 
-func (r ApiGetStorageDiskGroupPolicyListRequest) Execute() (StorageDiskGroupPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageDiskGroupPolicyListRequest) Execute() (StorageDiskGroupPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageDiskGroupPolicyListExecute(r)
 }
 
@@ -1652,19 +1709,21 @@ func (a *StorageApiService) GetStorageDiskGroupPolicyList(ctx _context.Context) 
  * Execute executes the request
  * @return StorageDiskGroupPolicyResponse
  */
-func (a *StorageApiService) GetStorageDiskGroupPolicyListExecute(r ApiGetStorageDiskGroupPolicyListRequest) (StorageDiskGroupPolicyResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageDiskGroupPolicyListExecute(r ApiGetStorageDiskGroupPolicyListRequest) (StorageDiskGroupPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageDiskGroupPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageDiskGroupPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/DiskGroupPolicies"
@@ -1725,18 +1784,22 @@ func (a *StorageApiService) GetStorageDiskGroupPolicyListExecute(r ApiGetStorage
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1803,7 +1866,7 @@ func (a *StorageApiService) GetStorageDiskGroupPolicyListExecute(r ApiGetStorage
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageEnclosureByMoidRequest struct {
@@ -1812,7 +1875,7 @@ type ApiGetStorageEnclosureByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageEnclosureByMoidRequest) Execute() (StorageEnclosure, *_nethttp.Response, error) {
+func (r ApiGetStorageEnclosureByMoidRequest) Execute() (StorageEnclosure, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageEnclosureByMoidExecute(r)
 }
 
@@ -1834,19 +1897,21 @@ func (a *StorageApiService) GetStorageEnclosureByMoid(ctx _context.Context, moid
  * Execute executes the request
  * @return StorageEnclosure
  */
-func (a *StorageApiService) GetStorageEnclosureByMoidExecute(r ApiGetStorageEnclosureByMoidRequest) (StorageEnclosure, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageEnclosureByMoidExecute(r ApiGetStorageEnclosureByMoidRequest) (StorageEnclosure, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageEnclosure
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageEnclosureByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/Enclosures/{Moid}"
@@ -1875,18 +1940,22 @@ func (a *StorageApiService) GetStorageEnclosureByMoidExecute(r ApiGetStorageEncl
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1953,7 +2022,7 @@ func (a *StorageApiService) GetStorageEnclosureByMoidExecute(r ApiGetStorageEncl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageEnclosureDiskByMoidRequest struct {
@@ -1962,7 +2031,7 @@ type ApiGetStorageEnclosureDiskByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageEnclosureDiskByMoidRequest) Execute() (StorageEnclosureDisk, *_nethttp.Response, error) {
+func (r ApiGetStorageEnclosureDiskByMoidRequest) Execute() (StorageEnclosureDisk, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageEnclosureDiskByMoidExecute(r)
 }
 
@@ -1984,19 +2053,21 @@ func (a *StorageApiService) GetStorageEnclosureDiskByMoid(ctx _context.Context, 
  * Execute executes the request
  * @return StorageEnclosureDisk
  */
-func (a *StorageApiService) GetStorageEnclosureDiskByMoidExecute(r ApiGetStorageEnclosureDiskByMoidRequest) (StorageEnclosureDisk, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageEnclosureDiskByMoidExecute(r ApiGetStorageEnclosureDiskByMoidRequest) (StorageEnclosureDisk, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageEnclosureDisk
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageEnclosureDiskByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/EnclosureDisks/{Moid}"
@@ -2025,18 +2096,22 @@ func (a *StorageApiService) GetStorageEnclosureDiskByMoidExecute(r ApiGetStorage
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2103,7 +2178,7 @@ func (a *StorageApiService) GetStorageEnclosureDiskByMoidExecute(r ApiGetStorage
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageEnclosureDiskListRequest struct {
@@ -2167,7 +2242,7 @@ func (r ApiGetStorageEnclosureDiskListRequest) Tags(tags string) ApiGetStorageEn
 	return r
 }
 
-func (r ApiGetStorageEnclosureDiskListRequest) Execute() (StorageEnclosureDiskResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageEnclosureDiskListRequest) Execute() (StorageEnclosureDiskResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageEnclosureDiskListExecute(r)
 }
 
@@ -2187,19 +2262,21 @@ func (a *StorageApiService) GetStorageEnclosureDiskList(ctx _context.Context) Ap
  * Execute executes the request
  * @return StorageEnclosureDiskResponse
  */
-func (a *StorageApiService) GetStorageEnclosureDiskListExecute(r ApiGetStorageEnclosureDiskListRequest) (StorageEnclosureDiskResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageEnclosureDiskListExecute(r ApiGetStorageEnclosureDiskListRequest) (StorageEnclosureDiskResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageEnclosureDiskResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageEnclosureDiskList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/EnclosureDisks"
@@ -2260,18 +2337,22 @@ func (a *StorageApiService) GetStorageEnclosureDiskListExecute(r ApiGetStorageEn
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2338,7 +2419,7 @@ func (a *StorageApiService) GetStorageEnclosureDiskListExecute(r ApiGetStorageEn
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageEnclosureDiskSlotEpByMoidRequest struct {
@@ -2347,7 +2428,7 @@ type ApiGetStorageEnclosureDiskSlotEpByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageEnclosureDiskSlotEpByMoidRequest) Execute() (StorageEnclosureDiskSlotEp, *_nethttp.Response, error) {
+func (r ApiGetStorageEnclosureDiskSlotEpByMoidRequest) Execute() (StorageEnclosureDiskSlotEp, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageEnclosureDiskSlotEpByMoidExecute(r)
 }
 
@@ -2369,19 +2450,21 @@ func (a *StorageApiService) GetStorageEnclosureDiskSlotEpByMoid(ctx _context.Con
  * Execute executes the request
  * @return StorageEnclosureDiskSlotEp
  */
-func (a *StorageApiService) GetStorageEnclosureDiskSlotEpByMoidExecute(r ApiGetStorageEnclosureDiskSlotEpByMoidRequest) (StorageEnclosureDiskSlotEp, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageEnclosureDiskSlotEpByMoidExecute(r ApiGetStorageEnclosureDiskSlotEpByMoidRequest) (StorageEnclosureDiskSlotEp, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageEnclosureDiskSlotEp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageEnclosureDiskSlotEpByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/EnclosureDiskSlotEps/{Moid}"
@@ -2410,18 +2493,22 @@ func (a *StorageApiService) GetStorageEnclosureDiskSlotEpByMoidExecute(r ApiGetS
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2488,7 +2575,7 @@ func (a *StorageApiService) GetStorageEnclosureDiskSlotEpByMoidExecute(r ApiGetS
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageEnclosureDiskSlotEpListRequest struct {
@@ -2552,7 +2639,7 @@ func (r ApiGetStorageEnclosureDiskSlotEpListRequest) Tags(tags string) ApiGetSto
 	return r
 }
 
-func (r ApiGetStorageEnclosureDiskSlotEpListRequest) Execute() (StorageEnclosureDiskSlotEpResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageEnclosureDiskSlotEpListRequest) Execute() (StorageEnclosureDiskSlotEpResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageEnclosureDiskSlotEpListExecute(r)
 }
 
@@ -2572,19 +2659,21 @@ func (a *StorageApiService) GetStorageEnclosureDiskSlotEpList(ctx _context.Conte
  * Execute executes the request
  * @return StorageEnclosureDiskSlotEpResponse
  */
-func (a *StorageApiService) GetStorageEnclosureDiskSlotEpListExecute(r ApiGetStorageEnclosureDiskSlotEpListRequest) (StorageEnclosureDiskSlotEpResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageEnclosureDiskSlotEpListExecute(r ApiGetStorageEnclosureDiskSlotEpListRequest) (StorageEnclosureDiskSlotEpResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageEnclosureDiskSlotEpResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageEnclosureDiskSlotEpList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/EnclosureDiskSlotEps"
@@ -2645,18 +2734,22 @@ func (a *StorageApiService) GetStorageEnclosureDiskSlotEpListExecute(r ApiGetSto
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2723,7 +2816,7 @@ func (a *StorageApiService) GetStorageEnclosureDiskSlotEpListExecute(r ApiGetSto
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageEnclosureListRequest struct {
@@ -2787,7 +2880,7 @@ func (r ApiGetStorageEnclosureListRequest) Tags(tags string) ApiGetStorageEnclos
 	return r
 }
 
-func (r ApiGetStorageEnclosureListRequest) Execute() (StorageEnclosureResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageEnclosureListRequest) Execute() (StorageEnclosureResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageEnclosureListExecute(r)
 }
 
@@ -2807,19 +2900,21 @@ func (a *StorageApiService) GetStorageEnclosureList(ctx _context.Context) ApiGet
  * Execute executes the request
  * @return StorageEnclosureResponse
  */
-func (a *StorageApiService) GetStorageEnclosureListExecute(r ApiGetStorageEnclosureListRequest) (StorageEnclosureResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageEnclosureListExecute(r ApiGetStorageEnclosureListRequest) (StorageEnclosureResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageEnclosureResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageEnclosureList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/Enclosures"
@@ -2880,18 +2975,22 @@ func (a *StorageApiService) GetStorageEnclosureListExecute(r ApiGetStorageEnclos
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2958,7 +3057,7 @@ func (a *StorageApiService) GetStorageEnclosureListExecute(r ApiGetStorageEnclos
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageFlexFlashControllerByMoidRequest struct {
@@ -2967,7 +3066,7 @@ type ApiGetStorageFlexFlashControllerByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageFlexFlashControllerByMoidRequest) Execute() (StorageFlexFlashController, *_nethttp.Response, error) {
+func (r ApiGetStorageFlexFlashControllerByMoidRequest) Execute() (StorageFlexFlashController, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageFlexFlashControllerByMoidExecute(r)
 }
 
@@ -2989,19 +3088,21 @@ func (a *StorageApiService) GetStorageFlexFlashControllerByMoid(ctx _context.Con
  * Execute executes the request
  * @return StorageFlexFlashController
  */
-func (a *StorageApiService) GetStorageFlexFlashControllerByMoidExecute(r ApiGetStorageFlexFlashControllerByMoidRequest) (StorageFlexFlashController, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageFlexFlashControllerByMoidExecute(r ApiGetStorageFlexFlashControllerByMoidRequest) (StorageFlexFlashController, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexFlashController
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageFlexFlashControllerByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexFlashControllers/{Moid}"
@@ -3030,18 +3131,22 @@ func (a *StorageApiService) GetStorageFlexFlashControllerByMoidExecute(r ApiGetS
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3108,7 +3213,7 @@ func (a *StorageApiService) GetStorageFlexFlashControllerByMoidExecute(r ApiGetS
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageFlexFlashControllerListRequest struct {
@@ -3172,7 +3277,7 @@ func (r ApiGetStorageFlexFlashControllerListRequest) Tags(tags string) ApiGetSto
 	return r
 }
 
-func (r ApiGetStorageFlexFlashControllerListRequest) Execute() (StorageFlexFlashControllerResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageFlexFlashControllerListRequest) Execute() (StorageFlexFlashControllerResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageFlexFlashControllerListExecute(r)
 }
 
@@ -3192,19 +3297,21 @@ func (a *StorageApiService) GetStorageFlexFlashControllerList(ctx _context.Conte
  * Execute executes the request
  * @return StorageFlexFlashControllerResponse
  */
-func (a *StorageApiService) GetStorageFlexFlashControllerListExecute(r ApiGetStorageFlexFlashControllerListRequest) (StorageFlexFlashControllerResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageFlexFlashControllerListExecute(r ApiGetStorageFlexFlashControllerListRequest) (StorageFlexFlashControllerResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexFlashControllerResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageFlexFlashControllerList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexFlashControllers"
@@ -3265,18 +3372,22 @@ func (a *StorageApiService) GetStorageFlexFlashControllerListExecute(r ApiGetSto
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3343,7 +3454,7 @@ func (a *StorageApiService) GetStorageFlexFlashControllerListExecute(r ApiGetSto
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageFlexFlashControllerPropsByMoidRequest struct {
@@ -3352,7 +3463,7 @@ type ApiGetStorageFlexFlashControllerPropsByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageFlexFlashControllerPropsByMoidRequest) Execute() (StorageFlexFlashControllerProps, *_nethttp.Response, error) {
+func (r ApiGetStorageFlexFlashControllerPropsByMoidRequest) Execute() (StorageFlexFlashControllerProps, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageFlexFlashControllerPropsByMoidExecute(r)
 }
 
@@ -3374,19 +3485,21 @@ func (a *StorageApiService) GetStorageFlexFlashControllerPropsByMoid(ctx _contex
  * Execute executes the request
  * @return StorageFlexFlashControllerProps
  */
-func (a *StorageApiService) GetStorageFlexFlashControllerPropsByMoidExecute(r ApiGetStorageFlexFlashControllerPropsByMoidRequest) (StorageFlexFlashControllerProps, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageFlexFlashControllerPropsByMoidExecute(r ApiGetStorageFlexFlashControllerPropsByMoidRequest) (StorageFlexFlashControllerProps, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexFlashControllerProps
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageFlexFlashControllerPropsByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexFlashControllerProps/{Moid}"
@@ -3415,18 +3528,22 @@ func (a *StorageApiService) GetStorageFlexFlashControllerPropsByMoidExecute(r Ap
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3493,7 +3610,7 @@ func (a *StorageApiService) GetStorageFlexFlashControllerPropsByMoidExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageFlexFlashControllerPropsListRequest struct {
@@ -3557,7 +3674,7 @@ func (r ApiGetStorageFlexFlashControllerPropsListRequest) Tags(tags string) ApiG
 	return r
 }
 
-func (r ApiGetStorageFlexFlashControllerPropsListRequest) Execute() (StorageFlexFlashControllerPropsResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageFlexFlashControllerPropsListRequest) Execute() (StorageFlexFlashControllerPropsResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageFlexFlashControllerPropsListExecute(r)
 }
 
@@ -3577,19 +3694,21 @@ func (a *StorageApiService) GetStorageFlexFlashControllerPropsList(ctx _context.
  * Execute executes the request
  * @return StorageFlexFlashControllerPropsResponse
  */
-func (a *StorageApiService) GetStorageFlexFlashControllerPropsListExecute(r ApiGetStorageFlexFlashControllerPropsListRequest) (StorageFlexFlashControllerPropsResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageFlexFlashControllerPropsListExecute(r ApiGetStorageFlexFlashControllerPropsListRequest) (StorageFlexFlashControllerPropsResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexFlashControllerPropsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageFlexFlashControllerPropsList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexFlashControllerProps"
@@ -3650,18 +3769,22 @@ func (a *StorageApiService) GetStorageFlexFlashControllerPropsListExecute(r ApiG
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3728,7 +3851,7 @@ func (a *StorageApiService) GetStorageFlexFlashControllerPropsListExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageFlexFlashPhysicalDriveByMoidRequest struct {
@@ -3737,7 +3860,7 @@ type ApiGetStorageFlexFlashPhysicalDriveByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageFlexFlashPhysicalDriveByMoidRequest) Execute() (StorageFlexFlashPhysicalDrive, *_nethttp.Response, error) {
+func (r ApiGetStorageFlexFlashPhysicalDriveByMoidRequest) Execute() (StorageFlexFlashPhysicalDrive, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageFlexFlashPhysicalDriveByMoidExecute(r)
 }
 
@@ -3759,19 +3882,21 @@ func (a *StorageApiService) GetStorageFlexFlashPhysicalDriveByMoid(ctx _context.
  * Execute executes the request
  * @return StorageFlexFlashPhysicalDrive
  */
-func (a *StorageApiService) GetStorageFlexFlashPhysicalDriveByMoidExecute(r ApiGetStorageFlexFlashPhysicalDriveByMoidRequest) (StorageFlexFlashPhysicalDrive, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageFlexFlashPhysicalDriveByMoidExecute(r ApiGetStorageFlexFlashPhysicalDriveByMoidRequest) (StorageFlexFlashPhysicalDrive, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexFlashPhysicalDrive
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageFlexFlashPhysicalDriveByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexFlashPhysicalDrives/{Moid}"
@@ -3800,18 +3925,22 @@ func (a *StorageApiService) GetStorageFlexFlashPhysicalDriveByMoidExecute(r ApiG
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3878,7 +4007,7 @@ func (a *StorageApiService) GetStorageFlexFlashPhysicalDriveByMoidExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageFlexFlashPhysicalDriveListRequest struct {
@@ -3942,7 +4071,7 @@ func (r ApiGetStorageFlexFlashPhysicalDriveListRequest) Tags(tags string) ApiGet
 	return r
 }
 
-func (r ApiGetStorageFlexFlashPhysicalDriveListRequest) Execute() (StorageFlexFlashPhysicalDriveResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageFlexFlashPhysicalDriveListRequest) Execute() (StorageFlexFlashPhysicalDriveResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageFlexFlashPhysicalDriveListExecute(r)
 }
 
@@ -3962,19 +4091,21 @@ func (a *StorageApiService) GetStorageFlexFlashPhysicalDriveList(ctx _context.Co
  * Execute executes the request
  * @return StorageFlexFlashPhysicalDriveResponse
  */
-func (a *StorageApiService) GetStorageFlexFlashPhysicalDriveListExecute(r ApiGetStorageFlexFlashPhysicalDriveListRequest) (StorageFlexFlashPhysicalDriveResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageFlexFlashPhysicalDriveListExecute(r ApiGetStorageFlexFlashPhysicalDriveListRequest) (StorageFlexFlashPhysicalDriveResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexFlashPhysicalDriveResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageFlexFlashPhysicalDriveList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexFlashPhysicalDrives"
@@ -4035,18 +4166,22 @@ func (a *StorageApiService) GetStorageFlexFlashPhysicalDriveListExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4113,7 +4248,7 @@ func (a *StorageApiService) GetStorageFlexFlashPhysicalDriveListExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageFlexFlashVirtualDriveByMoidRequest struct {
@@ -4122,7 +4257,7 @@ type ApiGetStorageFlexFlashVirtualDriveByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageFlexFlashVirtualDriveByMoidRequest) Execute() (StorageFlexFlashVirtualDrive, *_nethttp.Response, error) {
+func (r ApiGetStorageFlexFlashVirtualDriveByMoidRequest) Execute() (StorageFlexFlashVirtualDrive, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageFlexFlashVirtualDriveByMoidExecute(r)
 }
 
@@ -4144,19 +4279,21 @@ func (a *StorageApiService) GetStorageFlexFlashVirtualDriveByMoid(ctx _context.C
  * Execute executes the request
  * @return StorageFlexFlashVirtualDrive
  */
-func (a *StorageApiService) GetStorageFlexFlashVirtualDriveByMoidExecute(r ApiGetStorageFlexFlashVirtualDriveByMoidRequest) (StorageFlexFlashVirtualDrive, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageFlexFlashVirtualDriveByMoidExecute(r ApiGetStorageFlexFlashVirtualDriveByMoidRequest) (StorageFlexFlashVirtualDrive, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexFlashVirtualDrive
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageFlexFlashVirtualDriveByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexFlashVirtualDrives/{Moid}"
@@ -4185,18 +4322,22 @@ func (a *StorageApiService) GetStorageFlexFlashVirtualDriveByMoidExecute(r ApiGe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4263,7 +4404,7 @@ func (a *StorageApiService) GetStorageFlexFlashVirtualDriveByMoidExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageFlexFlashVirtualDriveListRequest struct {
@@ -4327,7 +4468,7 @@ func (r ApiGetStorageFlexFlashVirtualDriveListRequest) Tags(tags string) ApiGetS
 	return r
 }
 
-func (r ApiGetStorageFlexFlashVirtualDriveListRequest) Execute() (StorageFlexFlashVirtualDriveResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageFlexFlashVirtualDriveListRequest) Execute() (StorageFlexFlashVirtualDriveResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageFlexFlashVirtualDriveListExecute(r)
 }
 
@@ -4347,19 +4488,21 @@ func (a *StorageApiService) GetStorageFlexFlashVirtualDriveList(ctx _context.Con
  * Execute executes the request
  * @return StorageFlexFlashVirtualDriveResponse
  */
-func (a *StorageApiService) GetStorageFlexFlashVirtualDriveListExecute(r ApiGetStorageFlexFlashVirtualDriveListRequest) (StorageFlexFlashVirtualDriveResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageFlexFlashVirtualDriveListExecute(r ApiGetStorageFlexFlashVirtualDriveListRequest) (StorageFlexFlashVirtualDriveResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexFlashVirtualDriveResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageFlexFlashVirtualDriveList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexFlashVirtualDrives"
@@ -4420,18 +4563,22 @@ func (a *StorageApiService) GetStorageFlexFlashVirtualDriveListExecute(r ApiGetS
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4498,7 +4645,7 @@ func (a *StorageApiService) GetStorageFlexFlashVirtualDriveListExecute(r ApiGetS
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageFlexUtilControllerByMoidRequest struct {
@@ -4507,7 +4654,7 @@ type ApiGetStorageFlexUtilControllerByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageFlexUtilControllerByMoidRequest) Execute() (StorageFlexUtilController, *_nethttp.Response, error) {
+func (r ApiGetStorageFlexUtilControllerByMoidRequest) Execute() (StorageFlexUtilController, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageFlexUtilControllerByMoidExecute(r)
 }
 
@@ -4529,19 +4676,21 @@ func (a *StorageApiService) GetStorageFlexUtilControllerByMoid(ctx _context.Cont
  * Execute executes the request
  * @return StorageFlexUtilController
  */
-func (a *StorageApiService) GetStorageFlexUtilControllerByMoidExecute(r ApiGetStorageFlexUtilControllerByMoidRequest) (StorageFlexUtilController, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageFlexUtilControllerByMoidExecute(r ApiGetStorageFlexUtilControllerByMoidRequest) (StorageFlexUtilController, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexUtilController
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageFlexUtilControllerByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexUtilControllers/{Moid}"
@@ -4570,18 +4719,22 @@ func (a *StorageApiService) GetStorageFlexUtilControllerByMoidExecute(r ApiGetSt
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4648,7 +4801,7 @@ func (a *StorageApiService) GetStorageFlexUtilControllerByMoidExecute(r ApiGetSt
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageFlexUtilControllerListRequest struct {
@@ -4712,7 +4865,7 @@ func (r ApiGetStorageFlexUtilControllerListRequest) Tags(tags string) ApiGetStor
 	return r
 }
 
-func (r ApiGetStorageFlexUtilControllerListRequest) Execute() (StorageFlexUtilControllerResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageFlexUtilControllerListRequest) Execute() (StorageFlexUtilControllerResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageFlexUtilControllerListExecute(r)
 }
 
@@ -4732,19 +4885,21 @@ func (a *StorageApiService) GetStorageFlexUtilControllerList(ctx _context.Contex
  * Execute executes the request
  * @return StorageFlexUtilControllerResponse
  */
-func (a *StorageApiService) GetStorageFlexUtilControllerListExecute(r ApiGetStorageFlexUtilControllerListRequest) (StorageFlexUtilControllerResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageFlexUtilControllerListExecute(r ApiGetStorageFlexUtilControllerListRequest) (StorageFlexUtilControllerResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexUtilControllerResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageFlexUtilControllerList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexUtilControllers"
@@ -4805,18 +4960,22 @@ func (a *StorageApiService) GetStorageFlexUtilControllerListExecute(r ApiGetStor
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4883,7 +5042,7 @@ func (a *StorageApiService) GetStorageFlexUtilControllerListExecute(r ApiGetStor
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageFlexUtilPhysicalDriveByMoidRequest struct {
@@ -4892,7 +5051,7 @@ type ApiGetStorageFlexUtilPhysicalDriveByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageFlexUtilPhysicalDriveByMoidRequest) Execute() (StorageFlexUtilPhysicalDrive, *_nethttp.Response, error) {
+func (r ApiGetStorageFlexUtilPhysicalDriveByMoidRequest) Execute() (StorageFlexUtilPhysicalDrive, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageFlexUtilPhysicalDriveByMoidExecute(r)
 }
 
@@ -4914,19 +5073,21 @@ func (a *StorageApiService) GetStorageFlexUtilPhysicalDriveByMoid(ctx _context.C
  * Execute executes the request
  * @return StorageFlexUtilPhysicalDrive
  */
-func (a *StorageApiService) GetStorageFlexUtilPhysicalDriveByMoidExecute(r ApiGetStorageFlexUtilPhysicalDriveByMoidRequest) (StorageFlexUtilPhysicalDrive, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageFlexUtilPhysicalDriveByMoidExecute(r ApiGetStorageFlexUtilPhysicalDriveByMoidRequest) (StorageFlexUtilPhysicalDrive, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexUtilPhysicalDrive
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageFlexUtilPhysicalDriveByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexUtilPhysicalDrives/{Moid}"
@@ -4955,18 +5116,22 @@ func (a *StorageApiService) GetStorageFlexUtilPhysicalDriveByMoidExecute(r ApiGe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5033,7 +5198,7 @@ func (a *StorageApiService) GetStorageFlexUtilPhysicalDriveByMoidExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageFlexUtilPhysicalDriveListRequest struct {
@@ -5097,7 +5262,7 @@ func (r ApiGetStorageFlexUtilPhysicalDriveListRequest) Tags(tags string) ApiGetS
 	return r
 }
 
-func (r ApiGetStorageFlexUtilPhysicalDriveListRequest) Execute() (StorageFlexUtilPhysicalDriveResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageFlexUtilPhysicalDriveListRequest) Execute() (StorageFlexUtilPhysicalDriveResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageFlexUtilPhysicalDriveListExecute(r)
 }
 
@@ -5117,19 +5282,21 @@ func (a *StorageApiService) GetStorageFlexUtilPhysicalDriveList(ctx _context.Con
  * Execute executes the request
  * @return StorageFlexUtilPhysicalDriveResponse
  */
-func (a *StorageApiService) GetStorageFlexUtilPhysicalDriveListExecute(r ApiGetStorageFlexUtilPhysicalDriveListRequest) (StorageFlexUtilPhysicalDriveResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageFlexUtilPhysicalDriveListExecute(r ApiGetStorageFlexUtilPhysicalDriveListRequest) (StorageFlexUtilPhysicalDriveResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexUtilPhysicalDriveResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageFlexUtilPhysicalDriveList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexUtilPhysicalDrives"
@@ -5190,18 +5357,22 @@ func (a *StorageApiService) GetStorageFlexUtilPhysicalDriveListExecute(r ApiGetS
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5268,7 +5439,7 @@ func (a *StorageApiService) GetStorageFlexUtilPhysicalDriveListExecute(r ApiGetS
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageFlexUtilVirtualDriveByMoidRequest struct {
@@ -5277,7 +5448,7 @@ type ApiGetStorageFlexUtilVirtualDriveByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageFlexUtilVirtualDriveByMoidRequest) Execute() (StorageFlexUtilVirtualDrive, *_nethttp.Response, error) {
+func (r ApiGetStorageFlexUtilVirtualDriveByMoidRequest) Execute() (StorageFlexUtilVirtualDrive, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageFlexUtilVirtualDriveByMoidExecute(r)
 }
 
@@ -5299,19 +5470,21 @@ func (a *StorageApiService) GetStorageFlexUtilVirtualDriveByMoid(ctx _context.Co
  * Execute executes the request
  * @return StorageFlexUtilVirtualDrive
  */
-func (a *StorageApiService) GetStorageFlexUtilVirtualDriveByMoidExecute(r ApiGetStorageFlexUtilVirtualDriveByMoidRequest) (StorageFlexUtilVirtualDrive, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageFlexUtilVirtualDriveByMoidExecute(r ApiGetStorageFlexUtilVirtualDriveByMoidRequest) (StorageFlexUtilVirtualDrive, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexUtilVirtualDrive
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageFlexUtilVirtualDriveByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexUtilVirtualDrives/{Moid}"
@@ -5340,18 +5513,22 @@ func (a *StorageApiService) GetStorageFlexUtilVirtualDriveByMoidExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5418,7 +5595,7 @@ func (a *StorageApiService) GetStorageFlexUtilVirtualDriveByMoidExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageFlexUtilVirtualDriveListRequest struct {
@@ -5482,7 +5659,7 @@ func (r ApiGetStorageFlexUtilVirtualDriveListRequest) Tags(tags string) ApiGetSt
 	return r
 }
 
-func (r ApiGetStorageFlexUtilVirtualDriveListRequest) Execute() (StorageFlexUtilVirtualDriveResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageFlexUtilVirtualDriveListRequest) Execute() (StorageFlexUtilVirtualDriveResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageFlexUtilVirtualDriveListExecute(r)
 }
 
@@ -5502,19 +5679,21 @@ func (a *StorageApiService) GetStorageFlexUtilVirtualDriveList(ctx _context.Cont
  * Execute executes the request
  * @return StorageFlexUtilVirtualDriveResponse
  */
-func (a *StorageApiService) GetStorageFlexUtilVirtualDriveListExecute(r ApiGetStorageFlexUtilVirtualDriveListRequest) (StorageFlexUtilVirtualDriveResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageFlexUtilVirtualDriveListExecute(r ApiGetStorageFlexUtilVirtualDriveListRequest) (StorageFlexUtilVirtualDriveResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexUtilVirtualDriveResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageFlexUtilVirtualDriveList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexUtilVirtualDrives"
@@ -5575,18 +5754,22 @@ func (a *StorageApiService) GetStorageFlexUtilVirtualDriveListExecute(r ApiGetSt
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5653,7 +5836,7 @@ func (a *StorageApiService) GetStorageFlexUtilVirtualDriveListExecute(r ApiGetSt
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageHitachiArrayByMoidRequest struct {
@@ -5662,7 +5845,7 @@ type ApiGetStorageHitachiArrayByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageHitachiArrayByMoidRequest) Execute() (StorageHitachiArray, *_nethttp.Response, error) {
+func (r ApiGetStorageHitachiArrayByMoidRequest) Execute() (StorageHitachiArray, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageHitachiArrayByMoidExecute(r)
 }
 
@@ -5684,19 +5867,21 @@ func (a *StorageApiService) GetStorageHitachiArrayByMoid(ctx _context.Context, m
  * Execute executes the request
  * @return StorageHitachiArray
  */
-func (a *StorageApiService) GetStorageHitachiArrayByMoidExecute(r ApiGetStorageHitachiArrayByMoidRequest) (StorageHitachiArray, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageHitachiArrayByMoidExecute(r ApiGetStorageHitachiArrayByMoidRequest) (StorageHitachiArray, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHitachiArray
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageHitachiArrayByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HitachiArrays/{Moid}"
@@ -5725,18 +5910,22 @@ func (a *StorageApiService) GetStorageHitachiArrayByMoidExecute(r ApiGetStorageH
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5803,7 +5992,7 @@ func (a *StorageApiService) GetStorageHitachiArrayByMoidExecute(r ApiGetStorageH
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageHitachiArrayListRequest struct {
@@ -5867,7 +6056,7 @@ func (r ApiGetStorageHitachiArrayListRequest) Tags(tags string) ApiGetStorageHit
 	return r
 }
 
-func (r ApiGetStorageHitachiArrayListRequest) Execute() (StorageHitachiArrayResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageHitachiArrayListRequest) Execute() (StorageHitachiArrayResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageHitachiArrayListExecute(r)
 }
 
@@ -5887,19 +6076,21 @@ func (a *StorageApiService) GetStorageHitachiArrayList(ctx _context.Context) Api
  * Execute executes the request
  * @return StorageHitachiArrayResponse
  */
-func (a *StorageApiService) GetStorageHitachiArrayListExecute(r ApiGetStorageHitachiArrayListRequest) (StorageHitachiArrayResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageHitachiArrayListExecute(r ApiGetStorageHitachiArrayListRequest) (StorageHitachiArrayResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHitachiArrayResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageHitachiArrayList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HitachiArrays"
@@ -5960,18 +6151,22 @@ func (a *StorageApiService) GetStorageHitachiArrayListExecute(r ApiGetStorageHit
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6038,7 +6233,7 @@ func (a *StorageApiService) GetStorageHitachiArrayListExecute(r ApiGetStorageHit
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageHitachiControllerByMoidRequest struct {
@@ -6047,7 +6242,7 @@ type ApiGetStorageHitachiControllerByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageHitachiControllerByMoidRequest) Execute() (StorageHitachiController, *_nethttp.Response, error) {
+func (r ApiGetStorageHitachiControllerByMoidRequest) Execute() (StorageHitachiController, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageHitachiControllerByMoidExecute(r)
 }
 
@@ -6069,19 +6264,21 @@ func (a *StorageApiService) GetStorageHitachiControllerByMoid(ctx _context.Conte
  * Execute executes the request
  * @return StorageHitachiController
  */
-func (a *StorageApiService) GetStorageHitachiControllerByMoidExecute(r ApiGetStorageHitachiControllerByMoidRequest) (StorageHitachiController, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageHitachiControllerByMoidExecute(r ApiGetStorageHitachiControllerByMoidRequest) (StorageHitachiController, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHitachiController
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageHitachiControllerByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HitachiControllers/{Moid}"
@@ -6110,18 +6307,22 @@ func (a *StorageApiService) GetStorageHitachiControllerByMoidExecute(r ApiGetSto
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6188,7 +6389,7 @@ func (a *StorageApiService) GetStorageHitachiControllerByMoidExecute(r ApiGetSto
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageHitachiControllerListRequest struct {
@@ -6252,7 +6453,7 @@ func (r ApiGetStorageHitachiControllerListRequest) Tags(tags string) ApiGetStora
 	return r
 }
 
-func (r ApiGetStorageHitachiControllerListRequest) Execute() (StorageHitachiControllerResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageHitachiControllerListRequest) Execute() (StorageHitachiControllerResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageHitachiControllerListExecute(r)
 }
 
@@ -6272,19 +6473,21 @@ func (a *StorageApiService) GetStorageHitachiControllerList(ctx _context.Context
  * Execute executes the request
  * @return StorageHitachiControllerResponse
  */
-func (a *StorageApiService) GetStorageHitachiControllerListExecute(r ApiGetStorageHitachiControllerListRequest) (StorageHitachiControllerResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageHitachiControllerListExecute(r ApiGetStorageHitachiControllerListRequest) (StorageHitachiControllerResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHitachiControllerResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageHitachiControllerList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HitachiControllers"
@@ -6345,18 +6548,22 @@ func (a *StorageApiService) GetStorageHitachiControllerListExecute(r ApiGetStora
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6423,7 +6630,7 @@ func (a *StorageApiService) GetStorageHitachiControllerListExecute(r ApiGetStora
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageHitachiDiskByMoidRequest struct {
@@ -6432,7 +6639,7 @@ type ApiGetStorageHitachiDiskByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageHitachiDiskByMoidRequest) Execute() (StorageHitachiDisk, *_nethttp.Response, error) {
+func (r ApiGetStorageHitachiDiskByMoidRequest) Execute() (StorageHitachiDisk, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageHitachiDiskByMoidExecute(r)
 }
 
@@ -6454,19 +6661,21 @@ func (a *StorageApiService) GetStorageHitachiDiskByMoid(ctx _context.Context, mo
  * Execute executes the request
  * @return StorageHitachiDisk
  */
-func (a *StorageApiService) GetStorageHitachiDiskByMoidExecute(r ApiGetStorageHitachiDiskByMoidRequest) (StorageHitachiDisk, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageHitachiDiskByMoidExecute(r ApiGetStorageHitachiDiskByMoidRequest) (StorageHitachiDisk, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHitachiDisk
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageHitachiDiskByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HitachiDisks/{Moid}"
@@ -6495,18 +6704,22 @@ func (a *StorageApiService) GetStorageHitachiDiskByMoidExecute(r ApiGetStorageHi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6573,7 +6786,7 @@ func (a *StorageApiService) GetStorageHitachiDiskByMoidExecute(r ApiGetStorageHi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageHitachiDiskListRequest struct {
@@ -6637,7 +6850,7 @@ func (r ApiGetStorageHitachiDiskListRequest) Tags(tags string) ApiGetStorageHita
 	return r
 }
 
-func (r ApiGetStorageHitachiDiskListRequest) Execute() (StorageHitachiDiskResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageHitachiDiskListRequest) Execute() (StorageHitachiDiskResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageHitachiDiskListExecute(r)
 }
 
@@ -6657,19 +6870,21 @@ func (a *StorageApiService) GetStorageHitachiDiskList(ctx _context.Context) ApiG
  * Execute executes the request
  * @return StorageHitachiDiskResponse
  */
-func (a *StorageApiService) GetStorageHitachiDiskListExecute(r ApiGetStorageHitachiDiskListRequest) (StorageHitachiDiskResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageHitachiDiskListExecute(r ApiGetStorageHitachiDiskListRequest) (StorageHitachiDiskResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHitachiDiskResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageHitachiDiskList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HitachiDisks"
@@ -6730,18 +6945,22 @@ func (a *StorageApiService) GetStorageHitachiDiskListExecute(r ApiGetStorageHita
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6808,7 +7027,7 @@ func (a *StorageApiService) GetStorageHitachiDiskListExecute(r ApiGetStorageHita
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageHitachiHostByMoidRequest struct {
@@ -6817,7 +7036,7 @@ type ApiGetStorageHitachiHostByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageHitachiHostByMoidRequest) Execute() (StorageHitachiHost, *_nethttp.Response, error) {
+func (r ApiGetStorageHitachiHostByMoidRequest) Execute() (StorageHitachiHost, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageHitachiHostByMoidExecute(r)
 }
 
@@ -6839,19 +7058,21 @@ func (a *StorageApiService) GetStorageHitachiHostByMoid(ctx _context.Context, mo
  * Execute executes the request
  * @return StorageHitachiHost
  */
-func (a *StorageApiService) GetStorageHitachiHostByMoidExecute(r ApiGetStorageHitachiHostByMoidRequest) (StorageHitachiHost, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageHitachiHostByMoidExecute(r ApiGetStorageHitachiHostByMoidRequest) (StorageHitachiHost, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHitachiHost
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageHitachiHostByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HitachiHosts/{Moid}"
@@ -6880,18 +7101,22 @@ func (a *StorageApiService) GetStorageHitachiHostByMoidExecute(r ApiGetStorageHi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6958,7 +7183,7 @@ func (a *StorageApiService) GetStorageHitachiHostByMoidExecute(r ApiGetStorageHi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageHitachiHostListRequest struct {
@@ -7022,7 +7247,7 @@ func (r ApiGetStorageHitachiHostListRequest) Tags(tags string) ApiGetStorageHita
 	return r
 }
 
-func (r ApiGetStorageHitachiHostListRequest) Execute() (StorageHitachiHostResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageHitachiHostListRequest) Execute() (StorageHitachiHostResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageHitachiHostListExecute(r)
 }
 
@@ -7042,19 +7267,21 @@ func (a *StorageApiService) GetStorageHitachiHostList(ctx _context.Context) ApiG
  * Execute executes the request
  * @return StorageHitachiHostResponse
  */
-func (a *StorageApiService) GetStorageHitachiHostListExecute(r ApiGetStorageHitachiHostListRequest) (StorageHitachiHostResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageHitachiHostListExecute(r ApiGetStorageHitachiHostListRequest) (StorageHitachiHostResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHitachiHostResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageHitachiHostList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HitachiHosts"
@@ -7115,18 +7342,22 @@ func (a *StorageApiService) GetStorageHitachiHostListExecute(r ApiGetStorageHita
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7193,7 +7424,7 @@ func (a *StorageApiService) GetStorageHitachiHostListExecute(r ApiGetStorageHita
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageHitachiHostLunByMoidRequest struct {
@@ -7202,7 +7433,7 @@ type ApiGetStorageHitachiHostLunByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageHitachiHostLunByMoidRequest) Execute() (StorageHitachiHostLun, *_nethttp.Response, error) {
+func (r ApiGetStorageHitachiHostLunByMoidRequest) Execute() (StorageHitachiHostLun, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageHitachiHostLunByMoidExecute(r)
 }
 
@@ -7224,19 +7455,21 @@ func (a *StorageApiService) GetStorageHitachiHostLunByMoid(ctx _context.Context,
  * Execute executes the request
  * @return StorageHitachiHostLun
  */
-func (a *StorageApiService) GetStorageHitachiHostLunByMoidExecute(r ApiGetStorageHitachiHostLunByMoidRequest) (StorageHitachiHostLun, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageHitachiHostLunByMoidExecute(r ApiGetStorageHitachiHostLunByMoidRequest) (StorageHitachiHostLun, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHitachiHostLun
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageHitachiHostLunByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HitachiHostLuns/{Moid}"
@@ -7265,18 +7498,22 @@ func (a *StorageApiService) GetStorageHitachiHostLunByMoidExecute(r ApiGetStorag
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7343,7 +7580,7 @@ func (a *StorageApiService) GetStorageHitachiHostLunByMoidExecute(r ApiGetStorag
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageHitachiHostLunListRequest struct {
@@ -7407,7 +7644,7 @@ func (r ApiGetStorageHitachiHostLunListRequest) Tags(tags string) ApiGetStorageH
 	return r
 }
 
-func (r ApiGetStorageHitachiHostLunListRequest) Execute() (StorageHitachiHostLunResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageHitachiHostLunListRequest) Execute() (StorageHitachiHostLunResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageHitachiHostLunListExecute(r)
 }
 
@@ -7427,19 +7664,21 @@ func (a *StorageApiService) GetStorageHitachiHostLunList(ctx _context.Context) A
  * Execute executes the request
  * @return StorageHitachiHostLunResponse
  */
-func (a *StorageApiService) GetStorageHitachiHostLunListExecute(r ApiGetStorageHitachiHostLunListRequest) (StorageHitachiHostLunResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageHitachiHostLunListExecute(r ApiGetStorageHitachiHostLunListRequest) (StorageHitachiHostLunResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHitachiHostLunResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageHitachiHostLunList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HitachiHostLuns"
@@ -7500,18 +7739,22 @@ func (a *StorageApiService) GetStorageHitachiHostLunListExecute(r ApiGetStorageH
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7578,7 +7821,7 @@ func (a *StorageApiService) GetStorageHitachiHostLunListExecute(r ApiGetStorageH
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageHitachiParityGroupByMoidRequest struct {
@@ -7587,7 +7830,7 @@ type ApiGetStorageHitachiParityGroupByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageHitachiParityGroupByMoidRequest) Execute() (StorageHitachiParityGroup, *_nethttp.Response, error) {
+func (r ApiGetStorageHitachiParityGroupByMoidRequest) Execute() (StorageHitachiParityGroup, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageHitachiParityGroupByMoidExecute(r)
 }
 
@@ -7609,19 +7852,21 @@ func (a *StorageApiService) GetStorageHitachiParityGroupByMoid(ctx _context.Cont
  * Execute executes the request
  * @return StorageHitachiParityGroup
  */
-func (a *StorageApiService) GetStorageHitachiParityGroupByMoidExecute(r ApiGetStorageHitachiParityGroupByMoidRequest) (StorageHitachiParityGroup, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageHitachiParityGroupByMoidExecute(r ApiGetStorageHitachiParityGroupByMoidRequest) (StorageHitachiParityGroup, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHitachiParityGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageHitachiParityGroupByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HitachiParityGroups/{Moid}"
@@ -7650,18 +7895,22 @@ func (a *StorageApiService) GetStorageHitachiParityGroupByMoidExecute(r ApiGetSt
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7728,7 +7977,7 @@ func (a *StorageApiService) GetStorageHitachiParityGroupByMoidExecute(r ApiGetSt
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageHitachiParityGroupListRequest struct {
@@ -7792,7 +8041,7 @@ func (r ApiGetStorageHitachiParityGroupListRequest) Tags(tags string) ApiGetStor
 	return r
 }
 
-func (r ApiGetStorageHitachiParityGroupListRequest) Execute() (StorageHitachiParityGroupResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageHitachiParityGroupListRequest) Execute() (StorageHitachiParityGroupResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageHitachiParityGroupListExecute(r)
 }
 
@@ -7812,19 +8061,21 @@ func (a *StorageApiService) GetStorageHitachiParityGroupList(ctx _context.Contex
  * Execute executes the request
  * @return StorageHitachiParityGroupResponse
  */
-func (a *StorageApiService) GetStorageHitachiParityGroupListExecute(r ApiGetStorageHitachiParityGroupListRequest) (StorageHitachiParityGroupResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageHitachiParityGroupListExecute(r ApiGetStorageHitachiParityGroupListRequest) (StorageHitachiParityGroupResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHitachiParityGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageHitachiParityGroupList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HitachiParityGroups"
@@ -7885,18 +8136,22 @@ func (a *StorageApiService) GetStorageHitachiParityGroupListExecute(r ApiGetStor
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7963,7 +8218,7 @@ func (a *StorageApiService) GetStorageHitachiParityGroupListExecute(r ApiGetStor
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageHitachiPoolByMoidRequest struct {
@@ -7972,7 +8227,7 @@ type ApiGetStorageHitachiPoolByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageHitachiPoolByMoidRequest) Execute() (StorageHitachiPool, *_nethttp.Response, error) {
+func (r ApiGetStorageHitachiPoolByMoidRequest) Execute() (StorageHitachiPool, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageHitachiPoolByMoidExecute(r)
 }
 
@@ -7994,19 +8249,21 @@ func (a *StorageApiService) GetStorageHitachiPoolByMoid(ctx _context.Context, mo
  * Execute executes the request
  * @return StorageHitachiPool
  */
-func (a *StorageApiService) GetStorageHitachiPoolByMoidExecute(r ApiGetStorageHitachiPoolByMoidRequest) (StorageHitachiPool, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageHitachiPoolByMoidExecute(r ApiGetStorageHitachiPoolByMoidRequest) (StorageHitachiPool, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHitachiPool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageHitachiPoolByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HitachiPools/{Moid}"
@@ -8035,18 +8292,22 @@ func (a *StorageApiService) GetStorageHitachiPoolByMoidExecute(r ApiGetStorageHi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8113,7 +8374,7 @@ func (a *StorageApiService) GetStorageHitachiPoolByMoidExecute(r ApiGetStorageHi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageHitachiPoolListRequest struct {
@@ -8177,7 +8438,7 @@ func (r ApiGetStorageHitachiPoolListRequest) Tags(tags string) ApiGetStorageHita
 	return r
 }
 
-func (r ApiGetStorageHitachiPoolListRequest) Execute() (StorageHitachiPoolResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageHitachiPoolListRequest) Execute() (StorageHitachiPoolResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageHitachiPoolListExecute(r)
 }
 
@@ -8197,19 +8458,21 @@ func (a *StorageApiService) GetStorageHitachiPoolList(ctx _context.Context) ApiG
  * Execute executes the request
  * @return StorageHitachiPoolResponse
  */
-func (a *StorageApiService) GetStorageHitachiPoolListExecute(r ApiGetStorageHitachiPoolListRequest) (StorageHitachiPoolResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageHitachiPoolListExecute(r ApiGetStorageHitachiPoolListRequest) (StorageHitachiPoolResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHitachiPoolResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageHitachiPoolList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HitachiPools"
@@ -8270,18 +8533,22 @@ func (a *StorageApiService) GetStorageHitachiPoolListExecute(r ApiGetStorageHita
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8348,7 +8615,7 @@ func (a *StorageApiService) GetStorageHitachiPoolListExecute(r ApiGetStorageHita
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageHitachiPortByMoidRequest struct {
@@ -8357,7 +8624,7 @@ type ApiGetStorageHitachiPortByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageHitachiPortByMoidRequest) Execute() (StorageHitachiPort, *_nethttp.Response, error) {
+func (r ApiGetStorageHitachiPortByMoidRequest) Execute() (StorageHitachiPort, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageHitachiPortByMoidExecute(r)
 }
 
@@ -8379,19 +8646,21 @@ func (a *StorageApiService) GetStorageHitachiPortByMoid(ctx _context.Context, mo
  * Execute executes the request
  * @return StorageHitachiPort
  */
-func (a *StorageApiService) GetStorageHitachiPortByMoidExecute(r ApiGetStorageHitachiPortByMoidRequest) (StorageHitachiPort, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageHitachiPortByMoidExecute(r ApiGetStorageHitachiPortByMoidRequest) (StorageHitachiPort, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHitachiPort
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageHitachiPortByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HitachiPorts/{Moid}"
@@ -8420,18 +8689,22 @@ func (a *StorageApiService) GetStorageHitachiPortByMoidExecute(r ApiGetStorageHi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8498,7 +8771,7 @@ func (a *StorageApiService) GetStorageHitachiPortByMoidExecute(r ApiGetStorageHi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageHitachiPortListRequest struct {
@@ -8562,7 +8835,7 @@ func (r ApiGetStorageHitachiPortListRequest) Tags(tags string) ApiGetStorageHita
 	return r
 }
 
-func (r ApiGetStorageHitachiPortListRequest) Execute() (StorageHitachiPortResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageHitachiPortListRequest) Execute() (StorageHitachiPortResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageHitachiPortListExecute(r)
 }
 
@@ -8582,19 +8855,21 @@ func (a *StorageApiService) GetStorageHitachiPortList(ctx _context.Context) ApiG
  * Execute executes the request
  * @return StorageHitachiPortResponse
  */
-func (a *StorageApiService) GetStorageHitachiPortListExecute(r ApiGetStorageHitachiPortListRequest) (StorageHitachiPortResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageHitachiPortListExecute(r ApiGetStorageHitachiPortListRequest) (StorageHitachiPortResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHitachiPortResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageHitachiPortList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HitachiPorts"
@@ -8655,18 +8930,22 @@ func (a *StorageApiService) GetStorageHitachiPortListExecute(r ApiGetStorageHita
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8733,7 +9012,7 @@ func (a *StorageApiService) GetStorageHitachiPortListExecute(r ApiGetStorageHita
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageHitachiVolumeByMoidRequest struct {
@@ -8742,7 +9021,7 @@ type ApiGetStorageHitachiVolumeByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageHitachiVolumeByMoidRequest) Execute() (StorageHitachiVolume, *_nethttp.Response, error) {
+func (r ApiGetStorageHitachiVolumeByMoidRequest) Execute() (StorageHitachiVolume, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageHitachiVolumeByMoidExecute(r)
 }
 
@@ -8764,19 +9043,21 @@ func (a *StorageApiService) GetStorageHitachiVolumeByMoid(ctx _context.Context, 
  * Execute executes the request
  * @return StorageHitachiVolume
  */
-func (a *StorageApiService) GetStorageHitachiVolumeByMoidExecute(r ApiGetStorageHitachiVolumeByMoidRequest) (StorageHitachiVolume, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageHitachiVolumeByMoidExecute(r ApiGetStorageHitachiVolumeByMoidRequest) (StorageHitachiVolume, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHitachiVolume
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageHitachiVolumeByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HitachiVolumes/{Moid}"
@@ -8805,18 +9086,22 @@ func (a *StorageApiService) GetStorageHitachiVolumeByMoidExecute(r ApiGetStorage
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8883,7 +9168,7 @@ func (a *StorageApiService) GetStorageHitachiVolumeByMoidExecute(r ApiGetStorage
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageHitachiVolumeListRequest struct {
@@ -8947,7 +9232,7 @@ func (r ApiGetStorageHitachiVolumeListRequest) Tags(tags string) ApiGetStorageHi
 	return r
 }
 
-func (r ApiGetStorageHitachiVolumeListRequest) Execute() (StorageHitachiVolumeResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageHitachiVolumeListRequest) Execute() (StorageHitachiVolumeResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageHitachiVolumeListExecute(r)
 }
 
@@ -8967,19 +9252,21 @@ func (a *StorageApiService) GetStorageHitachiVolumeList(ctx _context.Context) Ap
  * Execute executes the request
  * @return StorageHitachiVolumeResponse
  */
-func (a *StorageApiService) GetStorageHitachiVolumeListExecute(r ApiGetStorageHitachiVolumeListRequest) (StorageHitachiVolumeResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageHitachiVolumeListExecute(r ApiGetStorageHitachiVolumeListRequest) (StorageHitachiVolumeResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHitachiVolumeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageHitachiVolumeList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HitachiVolumes"
@@ -9040,18 +9327,22 @@ func (a *StorageApiService) GetStorageHitachiVolumeListExecute(r ApiGetStorageHi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9118,7 +9409,7 @@ func (a *StorageApiService) GetStorageHitachiVolumeListExecute(r ApiGetStorageHi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageHyperFlexStorageContainerByMoidRequest struct {
@@ -9127,7 +9418,7 @@ type ApiGetStorageHyperFlexStorageContainerByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageHyperFlexStorageContainerByMoidRequest) Execute() (StorageHyperFlexStorageContainer, *_nethttp.Response, error) {
+func (r ApiGetStorageHyperFlexStorageContainerByMoidRequest) Execute() (StorageHyperFlexStorageContainer, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageHyperFlexStorageContainerByMoidExecute(r)
 }
 
@@ -9149,19 +9440,21 @@ func (a *StorageApiService) GetStorageHyperFlexStorageContainerByMoid(ctx _conte
  * Execute executes the request
  * @return StorageHyperFlexStorageContainer
  */
-func (a *StorageApiService) GetStorageHyperFlexStorageContainerByMoidExecute(r ApiGetStorageHyperFlexStorageContainerByMoidRequest) (StorageHyperFlexStorageContainer, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageHyperFlexStorageContainerByMoidExecute(r ApiGetStorageHyperFlexStorageContainerByMoidRequest) (StorageHyperFlexStorageContainer, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHyperFlexStorageContainer
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageHyperFlexStorageContainerByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HyperFlexStorageContainers/{Moid}"
@@ -9190,18 +9483,22 @@ func (a *StorageApiService) GetStorageHyperFlexStorageContainerByMoidExecute(r A
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9268,7 +9565,7 @@ func (a *StorageApiService) GetStorageHyperFlexStorageContainerByMoidExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageHyperFlexStorageContainerListRequest struct {
@@ -9332,7 +9629,7 @@ func (r ApiGetStorageHyperFlexStorageContainerListRequest) Tags(tags string) Api
 	return r
 }
 
-func (r ApiGetStorageHyperFlexStorageContainerListRequest) Execute() (StorageHyperFlexStorageContainerResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageHyperFlexStorageContainerListRequest) Execute() (StorageHyperFlexStorageContainerResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageHyperFlexStorageContainerListExecute(r)
 }
 
@@ -9352,19 +9649,21 @@ func (a *StorageApiService) GetStorageHyperFlexStorageContainerList(ctx _context
  * Execute executes the request
  * @return StorageHyperFlexStorageContainerResponse
  */
-func (a *StorageApiService) GetStorageHyperFlexStorageContainerListExecute(r ApiGetStorageHyperFlexStorageContainerListRequest) (StorageHyperFlexStorageContainerResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageHyperFlexStorageContainerListExecute(r ApiGetStorageHyperFlexStorageContainerListRequest) (StorageHyperFlexStorageContainerResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHyperFlexStorageContainerResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageHyperFlexStorageContainerList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HyperFlexStorageContainers"
@@ -9425,18 +9724,22 @@ func (a *StorageApiService) GetStorageHyperFlexStorageContainerListExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9503,7 +9806,7 @@ func (a *StorageApiService) GetStorageHyperFlexStorageContainerListExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageHyperFlexVolumeByMoidRequest struct {
@@ -9512,7 +9815,7 @@ type ApiGetStorageHyperFlexVolumeByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageHyperFlexVolumeByMoidRequest) Execute() (StorageHyperFlexVolume, *_nethttp.Response, error) {
+func (r ApiGetStorageHyperFlexVolumeByMoidRequest) Execute() (StorageHyperFlexVolume, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageHyperFlexVolumeByMoidExecute(r)
 }
 
@@ -9534,19 +9837,21 @@ func (a *StorageApiService) GetStorageHyperFlexVolumeByMoid(ctx _context.Context
  * Execute executes the request
  * @return StorageHyperFlexVolume
  */
-func (a *StorageApiService) GetStorageHyperFlexVolumeByMoidExecute(r ApiGetStorageHyperFlexVolumeByMoidRequest) (StorageHyperFlexVolume, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageHyperFlexVolumeByMoidExecute(r ApiGetStorageHyperFlexVolumeByMoidRequest) (StorageHyperFlexVolume, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHyperFlexVolume
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageHyperFlexVolumeByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HyperFlexVolumes/{Moid}"
@@ -9575,18 +9880,22 @@ func (a *StorageApiService) GetStorageHyperFlexVolumeByMoidExecute(r ApiGetStora
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9653,7 +9962,7 @@ func (a *StorageApiService) GetStorageHyperFlexVolumeByMoidExecute(r ApiGetStora
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageHyperFlexVolumeListRequest struct {
@@ -9717,7 +10026,7 @@ func (r ApiGetStorageHyperFlexVolumeListRequest) Tags(tags string) ApiGetStorage
 	return r
 }
 
-func (r ApiGetStorageHyperFlexVolumeListRequest) Execute() (StorageHyperFlexVolumeResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageHyperFlexVolumeListRequest) Execute() (StorageHyperFlexVolumeResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageHyperFlexVolumeListExecute(r)
 }
 
@@ -9737,19 +10046,21 @@ func (a *StorageApiService) GetStorageHyperFlexVolumeList(ctx _context.Context) 
  * Execute executes the request
  * @return StorageHyperFlexVolumeResponse
  */
-func (a *StorageApiService) GetStorageHyperFlexVolumeListExecute(r ApiGetStorageHyperFlexVolumeListRequest) (StorageHyperFlexVolumeResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageHyperFlexVolumeListExecute(r ApiGetStorageHyperFlexVolumeListRequest) (StorageHyperFlexVolumeResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHyperFlexVolumeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageHyperFlexVolumeList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HyperFlexVolumes"
@@ -9810,18 +10121,22 @@ func (a *StorageApiService) GetStorageHyperFlexVolumeListExecute(r ApiGetStorage
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9888,7 +10203,7 @@ func (a *StorageApiService) GetStorageHyperFlexVolumeListExecute(r ApiGetStorage
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageItemByMoidRequest struct {
@@ -9897,7 +10212,7 @@ type ApiGetStorageItemByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageItemByMoidRequest) Execute() (StorageItem, *_nethttp.Response, error) {
+func (r ApiGetStorageItemByMoidRequest) Execute() (StorageItem, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageItemByMoidExecute(r)
 }
 
@@ -9919,19 +10234,21 @@ func (a *StorageApiService) GetStorageItemByMoid(ctx _context.Context, moid stri
  * Execute executes the request
  * @return StorageItem
  */
-func (a *StorageApiService) GetStorageItemByMoidExecute(r ApiGetStorageItemByMoidRequest) (StorageItem, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageItemByMoidExecute(r ApiGetStorageItemByMoidRequest) (StorageItem, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageItem
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageItemByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/Items/{Moid}"
@@ -9960,18 +10277,22 @@ func (a *StorageApiService) GetStorageItemByMoidExecute(r ApiGetStorageItemByMoi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10038,7 +10359,7 @@ func (a *StorageApiService) GetStorageItemByMoidExecute(r ApiGetStorageItemByMoi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageItemListRequest struct {
@@ -10102,7 +10423,7 @@ func (r ApiGetStorageItemListRequest) Tags(tags string) ApiGetStorageItemListReq
 	return r
 }
 
-func (r ApiGetStorageItemListRequest) Execute() (StorageItemResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageItemListRequest) Execute() (StorageItemResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageItemListExecute(r)
 }
 
@@ -10122,19 +10443,21 @@ func (a *StorageApiService) GetStorageItemList(ctx _context.Context) ApiGetStora
  * Execute executes the request
  * @return StorageItemResponse
  */
-func (a *StorageApiService) GetStorageItemListExecute(r ApiGetStorageItemListRequest) (StorageItemResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageItemListExecute(r ApiGetStorageItemListRequest) (StorageItemResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageItemResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageItemList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/Items"
@@ -10195,18 +10518,22 @@ func (a *StorageApiService) GetStorageItemListExecute(r ApiGetStorageItemListReq
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10273,7 +10600,7 @@ func (a *StorageApiService) GetStorageItemListExecute(r ApiGetStorageItemListReq
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePhysicalDiskByMoidRequest struct {
@@ -10282,7 +10609,7 @@ type ApiGetStoragePhysicalDiskByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStoragePhysicalDiskByMoidRequest) Execute() (StoragePhysicalDisk, *_nethttp.Response, error) {
+func (r ApiGetStoragePhysicalDiskByMoidRequest) Execute() (StoragePhysicalDisk, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePhysicalDiskByMoidExecute(r)
 }
 
@@ -10304,19 +10631,21 @@ func (a *StorageApiService) GetStoragePhysicalDiskByMoid(ctx _context.Context, m
  * Execute executes the request
  * @return StoragePhysicalDisk
  */
-func (a *StorageApiService) GetStoragePhysicalDiskByMoidExecute(r ApiGetStoragePhysicalDiskByMoidRequest) (StoragePhysicalDisk, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePhysicalDiskByMoidExecute(r ApiGetStoragePhysicalDiskByMoidRequest) (StoragePhysicalDisk, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePhysicalDisk
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePhysicalDiskByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PhysicalDisks/{Moid}"
@@ -10345,18 +10674,22 @@ func (a *StorageApiService) GetStoragePhysicalDiskByMoidExecute(r ApiGetStorageP
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10423,7 +10756,7 @@ func (a *StorageApiService) GetStoragePhysicalDiskByMoidExecute(r ApiGetStorageP
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePhysicalDiskExtensionByMoidRequest struct {
@@ -10432,7 +10765,7 @@ type ApiGetStoragePhysicalDiskExtensionByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStoragePhysicalDiskExtensionByMoidRequest) Execute() (StoragePhysicalDiskExtension, *_nethttp.Response, error) {
+func (r ApiGetStoragePhysicalDiskExtensionByMoidRequest) Execute() (StoragePhysicalDiskExtension, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePhysicalDiskExtensionByMoidExecute(r)
 }
 
@@ -10454,19 +10787,21 @@ func (a *StorageApiService) GetStoragePhysicalDiskExtensionByMoid(ctx _context.C
  * Execute executes the request
  * @return StoragePhysicalDiskExtension
  */
-func (a *StorageApiService) GetStoragePhysicalDiskExtensionByMoidExecute(r ApiGetStoragePhysicalDiskExtensionByMoidRequest) (StoragePhysicalDiskExtension, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePhysicalDiskExtensionByMoidExecute(r ApiGetStoragePhysicalDiskExtensionByMoidRequest) (StoragePhysicalDiskExtension, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePhysicalDiskExtension
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePhysicalDiskExtensionByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PhysicalDiskExtensions/{Moid}"
@@ -10495,18 +10830,22 @@ func (a *StorageApiService) GetStoragePhysicalDiskExtensionByMoidExecute(r ApiGe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10573,7 +10912,7 @@ func (a *StorageApiService) GetStoragePhysicalDiskExtensionByMoidExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePhysicalDiskExtensionListRequest struct {
@@ -10637,7 +10976,7 @@ func (r ApiGetStoragePhysicalDiskExtensionListRequest) Tags(tags string) ApiGetS
 	return r
 }
 
-func (r ApiGetStoragePhysicalDiskExtensionListRequest) Execute() (StoragePhysicalDiskExtensionResponse, *_nethttp.Response, error) {
+func (r ApiGetStoragePhysicalDiskExtensionListRequest) Execute() (StoragePhysicalDiskExtensionResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePhysicalDiskExtensionListExecute(r)
 }
 
@@ -10657,19 +10996,21 @@ func (a *StorageApiService) GetStoragePhysicalDiskExtensionList(ctx _context.Con
  * Execute executes the request
  * @return StoragePhysicalDiskExtensionResponse
  */
-func (a *StorageApiService) GetStoragePhysicalDiskExtensionListExecute(r ApiGetStoragePhysicalDiskExtensionListRequest) (StoragePhysicalDiskExtensionResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePhysicalDiskExtensionListExecute(r ApiGetStoragePhysicalDiskExtensionListRequest) (StoragePhysicalDiskExtensionResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePhysicalDiskExtensionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePhysicalDiskExtensionList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PhysicalDiskExtensions"
@@ -10730,18 +11071,22 @@ func (a *StorageApiService) GetStoragePhysicalDiskExtensionListExecute(r ApiGetS
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10808,7 +11153,7 @@ func (a *StorageApiService) GetStoragePhysicalDiskExtensionListExecute(r ApiGetS
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePhysicalDiskListRequest struct {
@@ -10872,7 +11217,7 @@ func (r ApiGetStoragePhysicalDiskListRequest) Tags(tags string) ApiGetStoragePhy
 	return r
 }
 
-func (r ApiGetStoragePhysicalDiskListRequest) Execute() (StoragePhysicalDiskResponse, *_nethttp.Response, error) {
+func (r ApiGetStoragePhysicalDiskListRequest) Execute() (StoragePhysicalDiskResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePhysicalDiskListExecute(r)
 }
 
@@ -10892,19 +11237,21 @@ func (a *StorageApiService) GetStoragePhysicalDiskList(ctx _context.Context) Api
  * Execute executes the request
  * @return StoragePhysicalDiskResponse
  */
-func (a *StorageApiService) GetStoragePhysicalDiskListExecute(r ApiGetStoragePhysicalDiskListRequest) (StoragePhysicalDiskResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePhysicalDiskListExecute(r ApiGetStoragePhysicalDiskListRequest) (StoragePhysicalDiskResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePhysicalDiskResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePhysicalDiskList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PhysicalDisks"
@@ -10965,18 +11312,22 @@ func (a *StorageApiService) GetStoragePhysicalDiskListExecute(r ApiGetStoragePhy
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11043,7 +11394,7 @@ func (a *StorageApiService) GetStoragePhysicalDiskListExecute(r ApiGetStoragePhy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePhysicalDiskUsageByMoidRequest struct {
@@ -11052,7 +11403,7 @@ type ApiGetStoragePhysicalDiskUsageByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStoragePhysicalDiskUsageByMoidRequest) Execute() (StoragePhysicalDiskUsage, *_nethttp.Response, error) {
+func (r ApiGetStoragePhysicalDiskUsageByMoidRequest) Execute() (StoragePhysicalDiskUsage, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePhysicalDiskUsageByMoidExecute(r)
 }
 
@@ -11074,19 +11425,21 @@ func (a *StorageApiService) GetStoragePhysicalDiskUsageByMoid(ctx _context.Conte
  * Execute executes the request
  * @return StoragePhysicalDiskUsage
  */
-func (a *StorageApiService) GetStoragePhysicalDiskUsageByMoidExecute(r ApiGetStoragePhysicalDiskUsageByMoidRequest) (StoragePhysicalDiskUsage, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePhysicalDiskUsageByMoidExecute(r ApiGetStoragePhysicalDiskUsageByMoidRequest) (StoragePhysicalDiskUsage, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePhysicalDiskUsage
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePhysicalDiskUsageByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PhysicalDiskUsages/{Moid}"
@@ -11115,18 +11468,22 @@ func (a *StorageApiService) GetStoragePhysicalDiskUsageByMoidExecute(r ApiGetSto
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11193,7 +11550,7 @@ func (a *StorageApiService) GetStoragePhysicalDiskUsageByMoidExecute(r ApiGetSto
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePhysicalDiskUsageListRequest struct {
@@ -11257,7 +11614,7 @@ func (r ApiGetStoragePhysicalDiskUsageListRequest) Tags(tags string) ApiGetStora
 	return r
 }
 
-func (r ApiGetStoragePhysicalDiskUsageListRequest) Execute() (StoragePhysicalDiskUsageResponse, *_nethttp.Response, error) {
+func (r ApiGetStoragePhysicalDiskUsageListRequest) Execute() (StoragePhysicalDiskUsageResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePhysicalDiskUsageListExecute(r)
 }
 
@@ -11277,19 +11634,21 @@ func (a *StorageApiService) GetStoragePhysicalDiskUsageList(ctx _context.Context
  * Execute executes the request
  * @return StoragePhysicalDiskUsageResponse
  */
-func (a *StorageApiService) GetStoragePhysicalDiskUsageListExecute(r ApiGetStoragePhysicalDiskUsageListRequest) (StoragePhysicalDiskUsageResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePhysicalDiskUsageListExecute(r ApiGetStoragePhysicalDiskUsageListRequest) (StoragePhysicalDiskUsageResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePhysicalDiskUsageResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePhysicalDiskUsageList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PhysicalDiskUsages"
@@ -11350,18 +11709,22 @@ func (a *StorageApiService) GetStoragePhysicalDiskUsageListExecute(r ApiGetStora
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11428,7 +11791,7 @@ func (a *StorageApiService) GetStoragePhysicalDiskUsageListExecute(r ApiGetStora
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureArrayByMoidRequest struct {
@@ -11437,7 +11800,7 @@ type ApiGetStoragePureArrayByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStoragePureArrayByMoidRequest) Execute() (StoragePureArray, *_nethttp.Response, error) {
+func (r ApiGetStoragePureArrayByMoidRequest) Execute() (StoragePureArray, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureArrayByMoidExecute(r)
 }
 
@@ -11459,19 +11822,21 @@ func (a *StorageApiService) GetStoragePureArrayByMoid(ctx _context.Context, moid
  * Execute executes the request
  * @return StoragePureArray
  */
-func (a *StorageApiService) GetStoragePureArrayByMoidExecute(r ApiGetStoragePureArrayByMoidRequest) (StoragePureArray, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureArrayByMoidExecute(r ApiGetStoragePureArrayByMoidRequest) (StoragePureArray, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureArray
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureArrayByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureArrays/{Moid}"
@@ -11500,18 +11865,22 @@ func (a *StorageApiService) GetStoragePureArrayByMoidExecute(r ApiGetStoragePure
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11578,7 +11947,7 @@ func (a *StorageApiService) GetStoragePureArrayByMoidExecute(r ApiGetStoragePure
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureArrayListRequest struct {
@@ -11642,7 +12011,7 @@ func (r ApiGetStoragePureArrayListRequest) Tags(tags string) ApiGetStoragePureAr
 	return r
 }
 
-func (r ApiGetStoragePureArrayListRequest) Execute() (StoragePureArrayResponse, *_nethttp.Response, error) {
+func (r ApiGetStoragePureArrayListRequest) Execute() (StoragePureArrayResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureArrayListExecute(r)
 }
 
@@ -11662,19 +12031,21 @@ func (a *StorageApiService) GetStoragePureArrayList(ctx _context.Context) ApiGet
  * Execute executes the request
  * @return StoragePureArrayResponse
  */
-func (a *StorageApiService) GetStoragePureArrayListExecute(r ApiGetStoragePureArrayListRequest) (StoragePureArrayResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureArrayListExecute(r ApiGetStoragePureArrayListRequest) (StoragePureArrayResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureArrayResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureArrayList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureArrays"
@@ -11735,18 +12106,22 @@ func (a *StorageApiService) GetStoragePureArrayListExecute(r ApiGetStoragePureAr
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11813,7 +12188,7 @@ func (a *StorageApiService) GetStoragePureArrayListExecute(r ApiGetStoragePureAr
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureControllerByMoidRequest struct {
@@ -11822,7 +12197,7 @@ type ApiGetStoragePureControllerByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStoragePureControllerByMoidRequest) Execute() (StoragePureController, *_nethttp.Response, error) {
+func (r ApiGetStoragePureControllerByMoidRequest) Execute() (StoragePureController, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureControllerByMoidExecute(r)
 }
 
@@ -11844,19 +12219,21 @@ func (a *StorageApiService) GetStoragePureControllerByMoid(ctx _context.Context,
  * Execute executes the request
  * @return StoragePureController
  */
-func (a *StorageApiService) GetStoragePureControllerByMoidExecute(r ApiGetStoragePureControllerByMoidRequest) (StoragePureController, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureControllerByMoidExecute(r ApiGetStoragePureControllerByMoidRequest) (StoragePureController, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureController
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureControllerByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureControllers/{Moid}"
@@ -11885,18 +12262,22 @@ func (a *StorageApiService) GetStoragePureControllerByMoidExecute(r ApiGetStorag
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11963,7 +12344,7 @@ func (a *StorageApiService) GetStoragePureControllerByMoidExecute(r ApiGetStorag
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureControllerListRequest struct {
@@ -12027,7 +12408,7 @@ func (r ApiGetStoragePureControllerListRequest) Tags(tags string) ApiGetStorageP
 	return r
 }
 
-func (r ApiGetStoragePureControllerListRequest) Execute() (StoragePureControllerResponse, *_nethttp.Response, error) {
+func (r ApiGetStoragePureControllerListRequest) Execute() (StoragePureControllerResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureControllerListExecute(r)
 }
 
@@ -12047,19 +12428,21 @@ func (a *StorageApiService) GetStoragePureControllerList(ctx _context.Context) A
  * Execute executes the request
  * @return StoragePureControllerResponse
  */
-func (a *StorageApiService) GetStoragePureControllerListExecute(r ApiGetStoragePureControllerListRequest) (StoragePureControllerResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureControllerListExecute(r ApiGetStoragePureControllerListRequest) (StoragePureControllerResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureControllerResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureControllerList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureControllers"
@@ -12120,18 +12503,22 @@ func (a *StorageApiService) GetStoragePureControllerListExecute(r ApiGetStorageP
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12198,7 +12585,7 @@ func (a *StorageApiService) GetStoragePureControllerListExecute(r ApiGetStorageP
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureDiskByMoidRequest struct {
@@ -12207,7 +12594,7 @@ type ApiGetStoragePureDiskByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStoragePureDiskByMoidRequest) Execute() (StoragePureDisk, *_nethttp.Response, error) {
+func (r ApiGetStoragePureDiskByMoidRequest) Execute() (StoragePureDisk, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureDiskByMoidExecute(r)
 }
 
@@ -12229,19 +12616,21 @@ func (a *StorageApiService) GetStoragePureDiskByMoid(ctx _context.Context, moid 
  * Execute executes the request
  * @return StoragePureDisk
  */
-func (a *StorageApiService) GetStoragePureDiskByMoidExecute(r ApiGetStoragePureDiskByMoidRequest) (StoragePureDisk, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureDiskByMoidExecute(r ApiGetStoragePureDiskByMoidRequest) (StoragePureDisk, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureDisk
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureDiskByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureDisks/{Moid}"
@@ -12270,18 +12659,22 @@ func (a *StorageApiService) GetStoragePureDiskByMoidExecute(r ApiGetStoragePureD
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12348,7 +12741,7 @@ func (a *StorageApiService) GetStoragePureDiskByMoidExecute(r ApiGetStoragePureD
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureDiskListRequest struct {
@@ -12412,7 +12805,7 @@ func (r ApiGetStoragePureDiskListRequest) Tags(tags string) ApiGetStoragePureDis
 	return r
 }
 
-func (r ApiGetStoragePureDiskListRequest) Execute() (StoragePureDiskResponse, *_nethttp.Response, error) {
+func (r ApiGetStoragePureDiskListRequest) Execute() (StoragePureDiskResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureDiskListExecute(r)
 }
 
@@ -12432,19 +12825,21 @@ func (a *StorageApiService) GetStoragePureDiskList(ctx _context.Context) ApiGetS
  * Execute executes the request
  * @return StoragePureDiskResponse
  */
-func (a *StorageApiService) GetStoragePureDiskListExecute(r ApiGetStoragePureDiskListRequest) (StoragePureDiskResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureDiskListExecute(r ApiGetStoragePureDiskListRequest) (StoragePureDiskResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureDiskResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureDiskList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureDisks"
@@ -12505,18 +12900,22 @@ func (a *StorageApiService) GetStoragePureDiskListExecute(r ApiGetStoragePureDis
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12583,7 +12982,7 @@ func (a *StorageApiService) GetStoragePureDiskListExecute(r ApiGetStoragePureDis
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureHostByMoidRequest struct {
@@ -12592,7 +12991,7 @@ type ApiGetStoragePureHostByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStoragePureHostByMoidRequest) Execute() (StoragePureHost, *_nethttp.Response, error) {
+func (r ApiGetStoragePureHostByMoidRequest) Execute() (StoragePureHost, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureHostByMoidExecute(r)
 }
 
@@ -12614,19 +13013,21 @@ func (a *StorageApiService) GetStoragePureHostByMoid(ctx _context.Context, moid 
  * Execute executes the request
  * @return StoragePureHost
  */
-func (a *StorageApiService) GetStoragePureHostByMoidExecute(r ApiGetStoragePureHostByMoidRequest) (StoragePureHost, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureHostByMoidExecute(r ApiGetStoragePureHostByMoidRequest) (StoragePureHost, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureHost
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureHostByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureHosts/{Moid}"
@@ -12655,18 +13056,22 @@ func (a *StorageApiService) GetStoragePureHostByMoidExecute(r ApiGetStoragePureH
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12733,7 +13138,7 @@ func (a *StorageApiService) GetStoragePureHostByMoidExecute(r ApiGetStoragePureH
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureHostGroupByMoidRequest struct {
@@ -12742,7 +13147,7 @@ type ApiGetStoragePureHostGroupByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStoragePureHostGroupByMoidRequest) Execute() (StoragePureHostGroup, *_nethttp.Response, error) {
+func (r ApiGetStoragePureHostGroupByMoidRequest) Execute() (StoragePureHostGroup, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureHostGroupByMoidExecute(r)
 }
 
@@ -12764,19 +13169,21 @@ func (a *StorageApiService) GetStoragePureHostGroupByMoid(ctx _context.Context, 
  * Execute executes the request
  * @return StoragePureHostGroup
  */
-func (a *StorageApiService) GetStoragePureHostGroupByMoidExecute(r ApiGetStoragePureHostGroupByMoidRequest) (StoragePureHostGroup, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureHostGroupByMoidExecute(r ApiGetStoragePureHostGroupByMoidRequest) (StoragePureHostGroup, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureHostGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureHostGroupByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureHostGroups/{Moid}"
@@ -12805,18 +13212,22 @@ func (a *StorageApiService) GetStoragePureHostGroupByMoidExecute(r ApiGetStorage
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12883,7 +13294,7 @@ func (a *StorageApiService) GetStoragePureHostGroupByMoidExecute(r ApiGetStorage
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureHostGroupListRequest struct {
@@ -12947,7 +13358,7 @@ func (r ApiGetStoragePureHostGroupListRequest) Tags(tags string) ApiGetStoragePu
 	return r
 }
 
-func (r ApiGetStoragePureHostGroupListRequest) Execute() (StoragePureHostGroupResponse, *_nethttp.Response, error) {
+func (r ApiGetStoragePureHostGroupListRequest) Execute() (StoragePureHostGroupResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureHostGroupListExecute(r)
 }
 
@@ -12967,19 +13378,21 @@ func (a *StorageApiService) GetStoragePureHostGroupList(ctx _context.Context) Ap
  * Execute executes the request
  * @return StoragePureHostGroupResponse
  */
-func (a *StorageApiService) GetStoragePureHostGroupListExecute(r ApiGetStoragePureHostGroupListRequest) (StoragePureHostGroupResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureHostGroupListExecute(r ApiGetStoragePureHostGroupListRequest) (StoragePureHostGroupResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureHostGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureHostGroupList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureHostGroups"
@@ -13040,18 +13453,22 @@ func (a *StorageApiService) GetStoragePureHostGroupListExecute(r ApiGetStoragePu
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13118,7 +13535,7 @@ func (a *StorageApiService) GetStoragePureHostGroupListExecute(r ApiGetStoragePu
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureHostListRequest struct {
@@ -13182,7 +13599,7 @@ func (r ApiGetStoragePureHostListRequest) Tags(tags string) ApiGetStoragePureHos
 	return r
 }
 
-func (r ApiGetStoragePureHostListRequest) Execute() (StoragePureHostResponse, *_nethttp.Response, error) {
+func (r ApiGetStoragePureHostListRequest) Execute() (StoragePureHostResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureHostListExecute(r)
 }
 
@@ -13202,19 +13619,21 @@ func (a *StorageApiService) GetStoragePureHostList(ctx _context.Context) ApiGetS
  * Execute executes the request
  * @return StoragePureHostResponse
  */
-func (a *StorageApiService) GetStoragePureHostListExecute(r ApiGetStoragePureHostListRequest) (StoragePureHostResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureHostListExecute(r ApiGetStoragePureHostListRequest) (StoragePureHostResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureHostResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureHostList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureHosts"
@@ -13275,18 +13694,22 @@ func (a *StorageApiService) GetStoragePureHostListExecute(r ApiGetStoragePureHos
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13353,7 +13776,7 @@ func (a *StorageApiService) GetStoragePureHostListExecute(r ApiGetStoragePureHos
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureHostLunByMoidRequest struct {
@@ -13362,7 +13785,7 @@ type ApiGetStoragePureHostLunByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStoragePureHostLunByMoidRequest) Execute() (StoragePureHostLun, *_nethttp.Response, error) {
+func (r ApiGetStoragePureHostLunByMoidRequest) Execute() (StoragePureHostLun, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureHostLunByMoidExecute(r)
 }
 
@@ -13384,19 +13807,21 @@ func (a *StorageApiService) GetStoragePureHostLunByMoid(ctx _context.Context, mo
  * Execute executes the request
  * @return StoragePureHostLun
  */
-func (a *StorageApiService) GetStoragePureHostLunByMoidExecute(r ApiGetStoragePureHostLunByMoidRequest) (StoragePureHostLun, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureHostLunByMoidExecute(r ApiGetStoragePureHostLunByMoidRequest) (StoragePureHostLun, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureHostLun
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureHostLunByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureHostLuns/{Moid}"
@@ -13425,18 +13850,22 @@ func (a *StorageApiService) GetStoragePureHostLunByMoidExecute(r ApiGetStoragePu
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13503,7 +13932,7 @@ func (a *StorageApiService) GetStoragePureHostLunByMoidExecute(r ApiGetStoragePu
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureHostLunListRequest struct {
@@ -13567,7 +13996,7 @@ func (r ApiGetStoragePureHostLunListRequest) Tags(tags string) ApiGetStoragePure
 	return r
 }
 
-func (r ApiGetStoragePureHostLunListRequest) Execute() (StoragePureHostLunResponse, *_nethttp.Response, error) {
+func (r ApiGetStoragePureHostLunListRequest) Execute() (StoragePureHostLunResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureHostLunListExecute(r)
 }
 
@@ -13587,19 +14016,21 @@ func (a *StorageApiService) GetStoragePureHostLunList(ctx _context.Context) ApiG
  * Execute executes the request
  * @return StoragePureHostLunResponse
  */
-func (a *StorageApiService) GetStoragePureHostLunListExecute(r ApiGetStoragePureHostLunListRequest) (StoragePureHostLunResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureHostLunListExecute(r ApiGetStoragePureHostLunListRequest) (StoragePureHostLunResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureHostLunResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureHostLunList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureHostLuns"
@@ -13660,18 +14091,22 @@ func (a *StorageApiService) GetStoragePureHostLunListExecute(r ApiGetStoragePure
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13738,7 +14173,7 @@ func (a *StorageApiService) GetStoragePureHostLunListExecute(r ApiGetStoragePure
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePurePortByMoidRequest struct {
@@ -13747,7 +14182,7 @@ type ApiGetStoragePurePortByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStoragePurePortByMoidRequest) Execute() (StoragePurePort, *_nethttp.Response, error) {
+func (r ApiGetStoragePurePortByMoidRequest) Execute() (StoragePurePort, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePurePortByMoidExecute(r)
 }
 
@@ -13769,19 +14204,21 @@ func (a *StorageApiService) GetStoragePurePortByMoid(ctx _context.Context, moid 
  * Execute executes the request
  * @return StoragePurePort
  */
-func (a *StorageApiService) GetStoragePurePortByMoidExecute(r ApiGetStoragePurePortByMoidRequest) (StoragePurePort, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePurePortByMoidExecute(r ApiGetStoragePurePortByMoidRequest) (StoragePurePort, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePurePort
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePurePortByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PurePorts/{Moid}"
@@ -13810,18 +14247,22 @@ func (a *StorageApiService) GetStoragePurePortByMoidExecute(r ApiGetStoragePureP
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13888,7 +14329,7 @@ func (a *StorageApiService) GetStoragePurePortByMoidExecute(r ApiGetStoragePureP
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePurePortListRequest struct {
@@ -13952,7 +14393,7 @@ func (r ApiGetStoragePurePortListRequest) Tags(tags string) ApiGetStoragePurePor
 	return r
 }
 
-func (r ApiGetStoragePurePortListRequest) Execute() (StoragePurePortResponse, *_nethttp.Response, error) {
+func (r ApiGetStoragePurePortListRequest) Execute() (StoragePurePortResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePurePortListExecute(r)
 }
 
@@ -13972,19 +14413,21 @@ func (a *StorageApiService) GetStoragePurePortList(ctx _context.Context) ApiGetS
  * Execute executes the request
  * @return StoragePurePortResponse
  */
-func (a *StorageApiService) GetStoragePurePortListExecute(r ApiGetStoragePurePortListRequest) (StoragePurePortResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePurePortListExecute(r ApiGetStoragePurePortListRequest) (StoragePurePortResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePurePortResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePurePortList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PurePorts"
@@ -14045,18 +14488,22 @@ func (a *StorageApiService) GetStoragePurePortListExecute(r ApiGetStoragePurePor
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14123,7 +14570,7 @@ func (a *StorageApiService) GetStoragePurePortListExecute(r ApiGetStoragePurePor
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureProtectionGroupByMoidRequest struct {
@@ -14132,7 +14579,7 @@ type ApiGetStoragePureProtectionGroupByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStoragePureProtectionGroupByMoidRequest) Execute() (StoragePureProtectionGroup, *_nethttp.Response, error) {
+func (r ApiGetStoragePureProtectionGroupByMoidRequest) Execute() (StoragePureProtectionGroup, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureProtectionGroupByMoidExecute(r)
 }
 
@@ -14154,19 +14601,21 @@ func (a *StorageApiService) GetStoragePureProtectionGroupByMoid(ctx _context.Con
  * Execute executes the request
  * @return StoragePureProtectionGroup
  */
-func (a *StorageApiService) GetStoragePureProtectionGroupByMoidExecute(r ApiGetStoragePureProtectionGroupByMoidRequest) (StoragePureProtectionGroup, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureProtectionGroupByMoidExecute(r ApiGetStoragePureProtectionGroupByMoidRequest) (StoragePureProtectionGroup, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureProtectionGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureProtectionGroupByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureProtectionGroups/{Moid}"
@@ -14195,18 +14644,22 @@ func (a *StorageApiService) GetStoragePureProtectionGroupByMoidExecute(r ApiGetS
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14273,7 +14726,7 @@ func (a *StorageApiService) GetStoragePureProtectionGroupByMoidExecute(r ApiGetS
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureProtectionGroupListRequest struct {
@@ -14337,7 +14790,7 @@ func (r ApiGetStoragePureProtectionGroupListRequest) Tags(tags string) ApiGetSto
 	return r
 }
 
-func (r ApiGetStoragePureProtectionGroupListRequest) Execute() (StoragePureProtectionGroupResponse, *_nethttp.Response, error) {
+func (r ApiGetStoragePureProtectionGroupListRequest) Execute() (StoragePureProtectionGroupResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureProtectionGroupListExecute(r)
 }
 
@@ -14357,19 +14810,21 @@ func (a *StorageApiService) GetStoragePureProtectionGroupList(ctx _context.Conte
  * Execute executes the request
  * @return StoragePureProtectionGroupResponse
  */
-func (a *StorageApiService) GetStoragePureProtectionGroupListExecute(r ApiGetStoragePureProtectionGroupListRequest) (StoragePureProtectionGroupResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureProtectionGroupListExecute(r ApiGetStoragePureProtectionGroupListRequest) (StoragePureProtectionGroupResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureProtectionGroupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureProtectionGroupList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureProtectionGroups"
@@ -14430,18 +14885,22 @@ func (a *StorageApiService) GetStoragePureProtectionGroupListExecute(r ApiGetSto
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14508,7 +14967,7 @@ func (a *StorageApiService) GetStoragePureProtectionGroupListExecute(r ApiGetSto
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureProtectionGroupSnapshotByMoidRequest struct {
@@ -14517,7 +14976,7 @@ type ApiGetStoragePureProtectionGroupSnapshotByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStoragePureProtectionGroupSnapshotByMoidRequest) Execute() (StoragePureProtectionGroupSnapshot, *_nethttp.Response, error) {
+func (r ApiGetStoragePureProtectionGroupSnapshotByMoidRequest) Execute() (StoragePureProtectionGroupSnapshot, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureProtectionGroupSnapshotByMoidExecute(r)
 }
 
@@ -14539,19 +14998,21 @@ func (a *StorageApiService) GetStoragePureProtectionGroupSnapshotByMoid(ctx _con
  * Execute executes the request
  * @return StoragePureProtectionGroupSnapshot
  */
-func (a *StorageApiService) GetStoragePureProtectionGroupSnapshotByMoidExecute(r ApiGetStoragePureProtectionGroupSnapshotByMoidRequest) (StoragePureProtectionGroupSnapshot, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureProtectionGroupSnapshotByMoidExecute(r ApiGetStoragePureProtectionGroupSnapshotByMoidRequest) (StoragePureProtectionGroupSnapshot, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureProtectionGroupSnapshot
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureProtectionGroupSnapshotByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureProtectionGroupSnapshots/{Moid}"
@@ -14580,18 +15041,22 @@ func (a *StorageApiService) GetStoragePureProtectionGroupSnapshotByMoidExecute(r
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14658,7 +15123,7 @@ func (a *StorageApiService) GetStoragePureProtectionGroupSnapshotByMoidExecute(r
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureProtectionGroupSnapshotListRequest struct {
@@ -14722,7 +15187,7 @@ func (r ApiGetStoragePureProtectionGroupSnapshotListRequest) Tags(tags string) A
 	return r
 }
 
-func (r ApiGetStoragePureProtectionGroupSnapshotListRequest) Execute() (StoragePureProtectionGroupSnapshotResponse, *_nethttp.Response, error) {
+func (r ApiGetStoragePureProtectionGroupSnapshotListRequest) Execute() (StoragePureProtectionGroupSnapshotResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureProtectionGroupSnapshotListExecute(r)
 }
 
@@ -14742,19 +15207,21 @@ func (a *StorageApiService) GetStoragePureProtectionGroupSnapshotList(ctx _conte
  * Execute executes the request
  * @return StoragePureProtectionGroupSnapshotResponse
  */
-func (a *StorageApiService) GetStoragePureProtectionGroupSnapshotListExecute(r ApiGetStoragePureProtectionGroupSnapshotListRequest) (StoragePureProtectionGroupSnapshotResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureProtectionGroupSnapshotListExecute(r ApiGetStoragePureProtectionGroupSnapshotListRequest) (StoragePureProtectionGroupSnapshotResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureProtectionGroupSnapshotResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureProtectionGroupSnapshotList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureProtectionGroupSnapshots"
@@ -14815,18 +15282,22 @@ func (a *StorageApiService) GetStoragePureProtectionGroupSnapshotListExecute(r A
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14893,7 +15364,7 @@ func (a *StorageApiService) GetStoragePureProtectionGroupSnapshotListExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureReplicationScheduleByMoidRequest struct {
@@ -14902,7 +15373,7 @@ type ApiGetStoragePureReplicationScheduleByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStoragePureReplicationScheduleByMoidRequest) Execute() (StoragePureReplicationSchedule, *_nethttp.Response, error) {
+func (r ApiGetStoragePureReplicationScheduleByMoidRequest) Execute() (StoragePureReplicationSchedule, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureReplicationScheduleByMoidExecute(r)
 }
 
@@ -14924,19 +15395,21 @@ func (a *StorageApiService) GetStoragePureReplicationScheduleByMoid(ctx _context
  * Execute executes the request
  * @return StoragePureReplicationSchedule
  */
-func (a *StorageApiService) GetStoragePureReplicationScheduleByMoidExecute(r ApiGetStoragePureReplicationScheduleByMoidRequest) (StoragePureReplicationSchedule, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureReplicationScheduleByMoidExecute(r ApiGetStoragePureReplicationScheduleByMoidRequest) (StoragePureReplicationSchedule, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureReplicationSchedule
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureReplicationScheduleByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureReplicationSchedules/{Moid}"
@@ -14965,18 +15438,22 @@ func (a *StorageApiService) GetStoragePureReplicationScheduleByMoidExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15043,7 +15520,7 @@ func (a *StorageApiService) GetStoragePureReplicationScheduleByMoidExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureReplicationScheduleListRequest struct {
@@ -15107,7 +15584,7 @@ func (r ApiGetStoragePureReplicationScheduleListRequest) Tags(tags string) ApiGe
 	return r
 }
 
-func (r ApiGetStoragePureReplicationScheduleListRequest) Execute() (StoragePureReplicationScheduleResponse, *_nethttp.Response, error) {
+func (r ApiGetStoragePureReplicationScheduleListRequest) Execute() (StoragePureReplicationScheduleResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureReplicationScheduleListExecute(r)
 }
 
@@ -15127,19 +15604,21 @@ func (a *StorageApiService) GetStoragePureReplicationScheduleList(ctx _context.C
  * Execute executes the request
  * @return StoragePureReplicationScheduleResponse
  */
-func (a *StorageApiService) GetStoragePureReplicationScheduleListExecute(r ApiGetStoragePureReplicationScheduleListRequest) (StoragePureReplicationScheduleResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureReplicationScheduleListExecute(r ApiGetStoragePureReplicationScheduleListRequest) (StoragePureReplicationScheduleResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureReplicationScheduleResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureReplicationScheduleList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureReplicationSchedules"
@@ -15200,18 +15679,22 @@ func (a *StorageApiService) GetStoragePureReplicationScheduleListExecute(r ApiGe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15278,7 +15761,7 @@ func (a *StorageApiService) GetStoragePureReplicationScheduleListExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureSnapshotScheduleByMoidRequest struct {
@@ -15287,7 +15770,7 @@ type ApiGetStoragePureSnapshotScheduleByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStoragePureSnapshotScheduleByMoidRequest) Execute() (StoragePureSnapshotSchedule, *_nethttp.Response, error) {
+func (r ApiGetStoragePureSnapshotScheduleByMoidRequest) Execute() (StoragePureSnapshotSchedule, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureSnapshotScheduleByMoidExecute(r)
 }
 
@@ -15309,19 +15792,21 @@ func (a *StorageApiService) GetStoragePureSnapshotScheduleByMoid(ctx _context.Co
  * Execute executes the request
  * @return StoragePureSnapshotSchedule
  */
-func (a *StorageApiService) GetStoragePureSnapshotScheduleByMoidExecute(r ApiGetStoragePureSnapshotScheduleByMoidRequest) (StoragePureSnapshotSchedule, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureSnapshotScheduleByMoidExecute(r ApiGetStoragePureSnapshotScheduleByMoidRequest) (StoragePureSnapshotSchedule, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureSnapshotSchedule
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureSnapshotScheduleByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureSnapshotSchedules/{Moid}"
@@ -15350,18 +15835,22 @@ func (a *StorageApiService) GetStoragePureSnapshotScheduleByMoidExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15428,7 +15917,7 @@ func (a *StorageApiService) GetStoragePureSnapshotScheduleByMoidExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureSnapshotScheduleListRequest struct {
@@ -15492,7 +15981,7 @@ func (r ApiGetStoragePureSnapshotScheduleListRequest) Tags(tags string) ApiGetSt
 	return r
 }
 
-func (r ApiGetStoragePureSnapshotScheduleListRequest) Execute() (StoragePureSnapshotScheduleResponse, *_nethttp.Response, error) {
+func (r ApiGetStoragePureSnapshotScheduleListRequest) Execute() (StoragePureSnapshotScheduleResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureSnapshotScheduleListExecute(r)
 }
 
@@ -15512,19 +16001,21 @@ func (a *StorageApiService) GetStoragePureSnapshotScheduleList(ctx _context.Cont
  * Execute executes the request
  * @return StoragePureSnapshotScheduleResponse
  */
-func (a *StorageApiService) GetStoragePureSnapshotScheduleListExecute(r ApiGetStoragePureSnapshotScheduleListRequest) (StoragePureSnapshotScheduleResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureSnapshotScheduleListExecute(r ApiGetStoragePureSnapshotScheduleListRequest) (StoragePureSnapshotScheduleResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureSnapshotScheduleResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureSnapshotScheduleList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureSnapshotSchedules"
@@ -15585,18 +16076,22 @@ func (a *StorageApiService) GetStoragePureSnapshotScheduleListExecute(r ApiGetSt
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15663,7 +16158,7 @@ func (a *StorageApiService) GetStoragePureSnapshotScheduleListExecute(r ApiGetSt
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureVolumeByMoidRequest struct {
@@ -15672,7 +16167,7 @@ type ApiGetStoragePureVolumeByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStoragePureVolumeByMoidRequest) Execute() (StoragePureVolume, *_nethttp.Response, error) {
+func (r ApiGetStoragePureVolumeByMoidRequest) Execute() (StoragePureVolume, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureVolumeByMoidExecute(r)
 }
 
@@ -15694,19 +16189,21 @@ func (a *StorageApiService) GetStoragePureVolumeByMoid(ctx _context.Context, moi
  * Execute executes the request
  * @return StoragePureVolume
  */
-func (a *StorageApiService) GetStoragePureVolumeByMoidExecute(r ApiGetStoragePureVolumeByMoidRequest) (StoragePureVolume, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureVolumeByMoidExecute(r ApiGetStoragePureVolumeByMoidRequest) (StoragePureVolume, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureVolume
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureVolumeByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureVolumes/{Moid}"
@@ -15735,18 +16232,22 @@ func (a *StorageApiService) GetStoragePureVolumeByMoidExecute(r ApiGetStoragePur
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15813,7 +16314,7 @@ func (a *StorageApiService) GetStoragePureVolumeByMoidExecute(r ApiGetStoragePur
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureVolumeListRequest struct {
@@ -15877,7 +16378,7 @@ func (r ApiGetStoragePureVolumeListRequest) Tags(tags string) ApiGetStoragePureV
 	return r
 }
 
-func (r ApiGetStoragePureVolumeListRequest) Execute() (StoragePureVolumeResponse, *_nethttp.Response, error) {
+func (r ApiGetStoragePureVolumeListRequest) Execute() (StoragePureVolumeResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureVolumeListExecute(r)
 }
 
@@ -15897,19 +16398,21 @@ func (a *StorageApiService) GetStoragePureVolumeList(ctx _context.Context) ApiGe
  * Execute executes the request
  * @return StoragePureVolumeResponse
  */
-func (a *StorageApiService) GetStoragePureVolumeListExecute(r ApiGetStoragePureVolumeListRequest) (StoragePureVolumeResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureVolumeListExecute(r ApiGetStoragePureVolumeListRequest) (StoragePureVolumeResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureVolumeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureVolumeList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureVolumes"
@@ -15970,18 +16473,22 @@ func (a *StorageApiService) GetStoragePureVolumeListExecute(r ApiGetStoragePureV
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16048,7 +16555,7 @@ func (a *StorageApiService) GetStoragePureVolumeListExecute(r ApiGetStoragePureV
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureVolumeSnapshotByMoidRequest struct {
@@ -16057,7 +16564,7 @@ type ApiGetStoragePureVolumeSnapshotByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStoragePureVolumeSnapshotByMoidRequest) Execute() (StoragePureVolumeSnapshot, *_nethttp.Response, error) {
+func (r ApiGetStoragePureVolumeSnapshotByMoidRequest) Execute() (StoragePureVolumeSnapshot, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureVolumeSnapshotByMoidExecute(r)
 }
 
@@ -16079,19 +16586,21 @@ func (a *StorageApiService) GetStoragePureVolumeSnapshotByMoid(ctx _context.Cont
  * Execute executes the request
  * @return StoragePureVolumeSnapshot
  */
-func (a *StorageApiService) GetStoragePureVolumeSnapshotByMoidExecute(r ApiGetStoragePureVolumeSnapshotByMoidRequest) (StoragePureVolumeSnapshot, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureVolumeSnapshotByMoidExecute(r ApiGetStoragePureVolumeSnapshotByMoidRequest) (StoragePureVolumeSnapshot, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureVolumeSnapshot
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureVolumeSnapshotByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureVolumeSnapshots/{Moid}"
@@ -16120,18 +16629,22 @@ func (a *StorageApiService) GetStoragePureVolumeSnapshotByMoidExecute(r ApiGetSt
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16198,7 +16711,7 @@ func (a *StorageApiService) GetStoragePureVolumeSnapshotByMoidExecute(r ApiGetSt
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStoragePureVolumeSnapshotListRequest struct {
@@ -16262,7 +16775,7 @@ func (r ApiGetStoragePureVolumeSnapshotListRequest) Tags(tags string) ApiGetStor
 	return r
 }
 
-func (r ApiGetStoragePureVolumeSnapshotListRequest) Execute() (StoragePureVolumeSnapshotResponse, *_nethttp.Response, error) {
+func (r ApiGetStoragePureVolumeSnapshotListRequest) Execute() (StoragePureVolumeSnapshotResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStoragePureVolumeSnapshotListExecute(r)
 }
 
@@ -16282,19 +16795,21 @@ func (a *StorageApiService) GetStoragePureVolumeSnapshotList(ctx _context.Contex
  * Execute executes the request
  * @return StoragePureVolumeSnapshotResponse
  */
-func (a *StorageApiService) GetStoragePureVolumeSnapshotListExecute(r ApiGetStoragePureVolumeSnapshotListRequest) (StoragePureVolumeSnapshotResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStoragePureVolumeSnapshotListExecute(r ApiGetStoragePureVolumeSnapshotListRequest) (StoragePureVolumeSnapshotResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureVolumeSnapshotResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStoragePureVolumeSnapshotList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureVolumeSnapshots"
@@ -16355,18 +16870,22 @@ func (a *StorageApiService) GetStoragePureVolumeSnapshotListExecute(r ApiGetStor
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16433,7 +16952,7 @@ func (a *StorageApiService) GetStoragePureVolumeSnapshotListExecute(r ApiGetStor
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageSasExpanderByMoidRequest struct {
@@ -16442,7 +16961,7 @@ type ApiGetStorageSasExpanderByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageSasExpanderByMoidRequest) Execute() (StorageSasExpander, *_nethttp.Response, error) {
+func (r ApiGetStorageSasExpanderByMoidRequest) Execute() (StorageSasExpander, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageSasExpanderByMoidExecute(r)
 }
 
@@ -16464,19 +16983,21 @@ func (a *StorageApiService) GetStorageSasExpanderByMoid(ctx _context.Context, mo
  * Execute executes the request
  * @return StorageSasExpander
  */
-func (a *StorageApiService) GetStorageSasExpanderByMoidExecute(r ApiGetStorageSasExpanderByMoidRequest) (StorageSasExpander, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageSasExpanderByMoidExecute(r ApiGetStorageSasExpanderByMoidRequest) (StorageSasExpander, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageSasExpander
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageSasExpanderByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/SasExpanders/{Moid}"
@@ -16505,18 +17026,22 @@ func (a *StorageApiService) GetStorageSasExpanderByMoidExecute(r ApiGetStorageSa
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16583,7 +17108,7 @@ func (a *StorageApiService) GetStorageSasExpanderByMoidExecute(r ApiGetStorageSa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageSasExpanderListRequest struct {
@@ -16647,7 +17172,7 @@ func (r ApiGetStorageSasExpanderListRequest) Tags(tags string) ApiGetStorageSasE
 	return r
 }
 
-func (r ApiGetStorageSasExpanderListRequest) Execute() (StorageSasExpanderResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageSasExpanderListRequest) Execute() (StorageSasExpanderResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageSasExpanderListExecute(r)
 }
 
@@ -16667,19 +17192,21 @@ func (a *StorageApiService) GetStorageSasExpanderList(ctx _context.Context) ApiG
  * Execute executes the request
  * @return StorageSasExpanderResponse
  */
-func (a *StorageApiService) GetStorageSasExpanderListExecute(r ApiGetStorageSasExpanderListRequest) (StorageSasExpanderResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageSasExpanderListExecute(r ApiGetStorageSasExpanderListRequest) (StorageSasExpanderResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageSasExpanderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageSasExpanderList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/SasExpanders"
@@ -16740,18 +17267,22 @@ func (a *StorageApiService) GetStorageSasExpanderListExecute(r ApiGetStorageSasE
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16818,7 +17349,7 @@ func (a *StorageApiService) GetStorageSasExpanderListExecute(r ApiGetStorageSasE
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageSasPortByMoidRequest struct {
@@ -16827,7 +17358,7 @@ type ApiGetStorageSasPortByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageSasPortByMoidRequest) Execute() (StorageSasPort, *_nethttp.Response, error) {
+func (r ApiGetStorageSasPortByMoidRequest) Execute() (StorageSasPort, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageSasPortByMoidExecute(r)
 }
 
@@ -16849,19 +17380,21 @@ func (a *StorageApiService) GetStorageSasPortByMoid(ctx _context.Context, moid s
  * Execute executes the request
  * @return StorageSasPort
  */
-func (a *StorageApiService) GetStorageSasPortByMoidExecute(r ApiGetStorageSasPortByMoidRequest) (StorageSasPort, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageSasPortByMoidExecute(r ApiGetStorageSasPortByMoidRequest) (StorageSasPort, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageSasPort
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageSasPortByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/SasPorts/{Moid}"
@@ -16890,18 +17423,22 @@ func (a *StorageApiService) GetStorageSasPortByMoidExecute(r ApiGetStorageSasPor
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16968,7 +17505,7 @@ func (a *StorageApiService) GetStorageSasPortByMoidExecute(r ApiGetStorageSasPor
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageSasPortListRequest struct {
@@ -17032,7 +17569,7 @@ func (r ApiGetStorageSasPortListRequest) Tags(tags string) ApiGetStorageSasPortL
 	return r
 }
 
-func (r ApiGetStorageSasPortListRequest) Execute() (StorageSasPortResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageSasPortListRequest) Execute() (StorageSasPortResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageSasPortListExecute(r)
 }
 
@@ -17052,19 +17589,21 @@ func (a *StorageApiService) GetStorageSasPortList(ctx _context.Context) ApiGetSt
  * Execute executes the request
  * @return StorageSasPortResponse
  */
-func (a *StorageApiService) GetStorageSasPortListExecute(r ApiGetStorageSasPortListRequest) (StorageSasPortResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageSasPortListExecute(r ApiGetStorageSasPortListRequest) (StorageSasPortResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageSasPortResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageSasPortList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/SasPorts"
@@ -17125,18 +17664,22 @@ func (a *StorageApiService) GetStorageSasPortListExecute(r ApiGetStorageSasPortL
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17203,7 +17746,7 @@ func (a *StorageApiService) GetStorageSasPortListExecute(r ApiGetStorageSasPortL
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageSpanByMoidRequest struct {
@@ -17212,7 +17755,7 @@ type ApiGetStorageSpanByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageSpanByMoidRequest) Execute() (StorageSpan, *_nethttp.Response, error) {
+func (r ApiGetStorageSpanByMoidRequest) Execute() (StorageSpan, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageSpanByMoidExecute(r)
 }
 
@@ -17234,19 +17777,21 @@ func (a *StorageApiService) GetStorageSpanByMoid(ctx _context.Context, moid stri
  * Execute executes the request
  * @return StorageSpan
  */
-func (a *StorageApiService) GetStorageSpanByMoidExecute(r ApiGetStorageSpanByMoidRequest) (StorageSpan, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageSpanByMoidExecute(r ApiGetStorageSpanByMoidRequest) (StorageSpan, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageSpan
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageSpanByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/Spans/{Moid}"
@@ -17275,18 +17820,22 @@ func (a *StorageApiService) GetStorageSpanByMoidExecute(r ApiGetStorageSpanByMoi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17353,7 +17902,7 @@ func (a *StorageApiService) GetStorageSpanByMoidExecute(r ApiGetStorageSpanByMoi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageSpanListRequest struct {
@@ -17417,7 +17966,7 @@ func (r ApiGetStorageSpanListRequest) Tags(tags string) ApiGetStorageSpanListReq
 	return r
 }
 
-func (r ApiGetStorageSpanListRequest) Execute() (StorageSpanResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageSpanListRequest) Execute() (StorageSpanResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageSpanListExecute(r)
 }
 
@@ -17437,19 +17986,21 @@ func (a *StorageApiService) GetStorageSpanList(ctx _context.Context) ApiGetStora
  * Execute executes the request
  * @return StorageSpanResponse
  */
-func (a *StorageApiService) GetStorageSpanListExecute(r ApiGetStorageSpanListRequest) (StorageSpanResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageSpanListExecute(r ApiGetStorageSpanListRequest) (StorageSpanResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageSpanResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageSpanList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/Spans"
@@ -17510,18 +18061,22 @@ func (a *StorageApiService) GetStorageSpanListExecute(r ApiGetStorageSpanListReq
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17588,7 +18143,7 @@ func (a *StorageApiService) GetStorageSpanListExecute(r ApiGetStorageSpanListReq
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageStoragePolicyByMoidRequest struct {
@@ -17597,7 +18152,7 @@ type ApiGetStorageStoragePolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageStoragePolicyByMoidRequest) Execute() (StorageStoragePolicy, *_nethttp.Response, error) {
+func (r ApiGetStorageStoragePolicyByMoidRequest) Execute() (StorageStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageStoragePolicyByMoidExecute(r)
 }
 
@@ -17619,19 +18174,21 @@ func (a *StorageApiService) GetStorageStoragePolicyByMoid(ctx _context.Context, 
  * Execute executes the request
  * @return StorageStoragePolicy
  */
-func (a *StorageApiService) GetStorageStoragePolicyByMoidExecute(r ApiGetStorageStoragePolicyByMoidRequest) (StorageStoragePolicy, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageStoragePolicyByMoidExecute(r ApiGetStorageStoragePolicyByMoidRequest) (StorageStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageStoragePolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageStoragePolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/StoragePolicies/{Moid}"
@@ -17660,18 +18217,22 @@ func (a *StorageApiService) GetStorageStoragePolicyByMoidExecute(r ApiGetStorage
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17738,7 +18299,7 @@ func (a *StorageApiService) GetStorageStoragePolicyByMoidExecute(r ApiGetStorage
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageStoragePolicyListRequest struct {
@@ -17802,7 +18363,7 @@ func (r ApiGetStorageStoragePolicyListRequest) Tags(tags string) ApiGetStorageSt
 	return r
 }
 
-func (r ApiGetStorageStoragePolicyListRequest) Execute() (StorageStoragePolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageStoragePolicyListRequest) Execute() (StorageStoragePolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageStoragePolicyListExecute(r)
 }
 
@@ -17822,19 +18383,21 @@ func (a *StorageApiService) GetStorageStoragePolicyList(ctx _context.Context) Ap
  * Execute executes the request
  * @return StorageStoragePolicyResponse
  */
-func (a *StorageApiService) GetStorageStoragePolicyListExecute(r ApiGetStorageStoragePolicyListRequest) (StorageStoragePolicyResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageStoragePolicyListExecute(r ApiGetStorageStoragePolicyListRequest) (StorageStoragePolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageStoragePolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageStoragePolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/StoragePolicies"
@@ -17895,18 +18458,22 @@ func (a *StorageApiService) GetStorageStoragePolicyListExecute(r ApiGetStorageSt
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17973,7 +18540,7 @@ func (a *StorageApiService) GetStorageStoragePolicyListExecute(r ApiGetStorageSt
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageVdMemberEpByMoidRequest struct {
@@ -17982,7 +18549,7 @@ type ApiGetStorageVdMemberEpByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageVdMemberEpByMoidRequest) Execute() (StorageVdMemberEp, *_nethttp.Response, error) {
+func (r ApiGetStorageVdMemberEpByMoidRequest) Execute() (StorageVdMemberEp, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageVdMemberEpByMoidExecute(r)
 }
 
@@ -18004,19 +18571,21 @@ func (a *StorageApiService) GetStorageVdMemberEpByMoid(ctx _context.Context, moi
  * Execute executes the request
  * @return StorageVdMemberEp
  */
-func (a *StorageApiService) GetStorageVdMemberEpByMoidExecute(r ApiGetStorageVdMemberEpByMoidRequest) (StorageVdMemberEp, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageVdMemberEpByMoidExecute(r ApiGetStorageVdMemberEpByMoidRequest) (StorageVdMemberEp, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageVdMemberEp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageVdMemberEpByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/VdMemberEps/{Moid}"
@@ -18045,18 +18614,22 @@ func (a *StorageApiService) GetStorageVdMemberEpByMoidExecute(r ApiGetStorageVdM
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18123,7 +18696,7 @@ func (a *StorageApiService) GetStorageVdMemberEpByMoidExecute(r ApiGetStorageVdM
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageVdMemberEpListRequest struct {
@@ -18187,7 +18760,7 @@ func (r ApiGetStorageVdMemberEpListRequest) Tags(tags string) ApiGetStorageVdMem
 	return r
 }
 
-func (r ApiGetStorageVdMemberEpListRequest) Execute() (StorageVdMemberEpResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageVdMemberEpListRequest) Execute() (StorageVdMemberEpResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageVdMemberEpListExecute(r)
 }
 
@@ -18207,19 +18780,21 @@ func (a *StorageApiService) GetStorageVdMemberEpList(ctx _context.Context) ApiGe
  * Execute executes the request
  * @return StorageVdMemberEpResponse
  */
-func (a *StorageApiService) GetStorageVdMemberEpListExecute(r ApiGetStorageVdMemberEpListRequest) (StorageVdMemberEpResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageVdMemberEpListExecute(r ApiGetStorageVdMemberEpListRequest) (StorageVdMemberEpResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageVdMemberEpResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageVdMemberEpList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/VdMemberEps"
@@ -18280,18 +18855,22 @@ func (a *StorageApiService) GetStorageVdMemberEpListExecute(r ApiGetStorageVdMem
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18358,7 +18937,7 @@ func (a *StorageApiService) GetStorageVdMemberEpListExecute(r ApiGetStorageVdMem
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageVirtualDriveByMoidRequest struct {
@@ -18367,7 +18946,7 @@ type ApiGetStorageVirtualDriveByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageVirtualDriveByMoidRequest) Execute() (StorageVirtualDrive, *_nethttp.Response, error) {
+func (r ApiGetStorageVirtualDriveByMoidRequest) Execute() (StorageVirtualDrive, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageVirtualDriveByMoidExecute(r)
 }
 
@@ -18389,19 +18968,21 @@ func (a *StorageApiService) GetStorageVirtualDriveByMoid(ctx _context.Context, m
  * Execute executes the request
  * @return StorageVirtualDrive
  */
-func (a *StorageApiService) GetStorageVirtualDriveByMoidExecute(r ApiGetStorageVirtualDriveByMoidRequest) (StorageVirtualDrive, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageVirtualDriveByMoidExecute(r ApiGetStorageVirtualDriveByMoidRequest) (StorageVirtualDrive, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageVirtualDrive
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageVirtualDriveByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/VirtualDrives/{Moid}"
@@ -18430,18 +19011,22 @@ func (a *StorageApiService) GetStorageVirtualDriveByMoidExecute(r ApiGetStorageV
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18508,7 +19093,7 @@ func (a *StorageApiService) GetStorageVirtualDriveByMoidExecute(r ApiGetStorageV
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageVirtualDriveContainerByMoidRequest struct {
@@ -18517,7 +19102,7 @@ type ApiGetStorageVirtualDriveContainerByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageVirtualDriveContainerByMoidRequest) Execute() (StorageVirtualDriveContainer, *_nethttp.Response, error) {
+func (r ApiGetStorageVirtualDriveContainerByMoidRequest) Execute() (StorageVirtualDriveContainer, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageVirtualDriveContainerByMoidExecute(r)
 }
 
@@ -18539,19 +19124,21 @@ func (a *StorageApiService) GetStorageVirtualDriveContainerByMoid(ctx _context.C
  * Execute executes the request
  * @return StorageVirtualDriveContainer
  */
-func (a *StorageApiService) GetStorageVirtualDriveContainerByMoidExecute(r ApiGetStorageVirtualDriveContainerByMoidRequest) (StorageVirtualDriveContainer, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageVirtualDriveContainerByMoidExecute(r ApiGetStorageVirtualDriveContainerByMoidRequest) (StorageVirtualDriveContainer, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageVirtualDriveContainer
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageVirtualDriveContainerByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/VirtualDriveContainers/{Moid}"
@@ -18580,18 +19167,22 @@ func (a *StorageApiService) GetStorageVirtualDriveContainerByMoidExecute(r ApiGe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18658,7 +19249,7 @@ func (a *StorageApiService) GetStorageVirtualDriveContainerByMoidExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageVirtualDriveContainerListRequest struct {
@@ -18722,7 +19313,7 @@ func (r ApiGetStorageVirtualDriveContainerListRequest) Tags(tags string) ApiGetS
 	return r
 }
 
-func (r ApiGetStorageVirtualDriveContainerListRequest) Execute() (StorageVirtualDriveContainerResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageVirtualDriveContainerListRequest) Execute() (StorageVirtualDriveContainerResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageVirtualDriveContainerListExecute(r)
 }
 
@@ -18742,19 +19333,21 @@ func (a *StorageApiService) GetStorageVirtualDriveContainerList(ctx _context.Con
  * Execute executes the request
  * @return StorageVirtualDriveContainerResponse
  */
-func (a *StorageApiService) GetStorageVirtualDriveContainerListExecute(r ApiGetStorageVirtualDriveContainerListRequest) (StorageVirtualDriveContainerResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageVirtualDriveContainerListExecute(r ApiGetStorageVirtualDriveContainerListRequest) (StorageVirtualDriveContainerResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageVirtualDriveContainerResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageVirtualDriveContainerList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/VirtualDriveContainers"
@@ -18815,18 +19408,22 @@ func (a *StorageApiService) GetStorageVirtualDriveContainerListExecute(r ApiGetS
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18893,7 +19490,7 @@ func (a *StorageApiService) GetStorageVirtualDriveContainerListExecute(r ApiGetS
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageVirtualDriveExtensionByMoidRequest struct {
@@ -18902,7 +19499,7 @@ type ApiGetStorageVirtualDriveExtensionByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetStorageVirtualDriveExtensionByMoidRequest) Execute() (StorageVirtualDriveExtension, *_nethttp.Response, error) {
+func (r ApiGetStorageVirtualDriveExtensionByMoidRequest) Execute() (StorageVirtualDriveExtension, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageVirtualDriveExtensionByMoidExecute(r)
 }
 
@@ -18924,19 +19521,21 @@ func (a *StorageApiService) GetStorageVirtualDriveExtensionByMoid(ctx _context.C
  * Execute executes the request
  * @return StorageVirtualDriveExtension
  */
-func (a *StorageApiService) GetStorageVirtualDriveExtensionByMoidExecute(r ApiGetStorageVirtualDriveExtensionByMoidRequest) (StorageVirtualDriveExtension, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageVirtualDriveExtensionByMoidExecute(r ApiGetStorageVirtualDriveExtensionByMoidRequest) (StorageVirtualDriveExtension, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageVirtualDriveExtension
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageVirtualDriveExtensionByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/VirtualDriveExtensions/{Moid}"
@@ -18965,18 +19564,22 @@ func (a *StorageApiService) GetStorageVirtualDriveExtensionByMoidExecute(r ApiGe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19043,7 +19646,7 @@ func (a *StorageApiService) GetStorageVirtualDriveExtensionByMoidExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageVirtualDriveExtensionListRequest struct {
@@ -19107,7 +19710,7 @@ func (r ApiGetStorageVirtualDriveExtensionListRequest) Tags(tags string) ApiGetS
 	return r
 }
 
-func (r ApiGetStorageVirtualDriveExtensionListRequest) Execute() (StorageVirtualDriveExtensionResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageVirtualDriveExtensionListRequest) Execute() (StorageVirtualDriveExtensionResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageVirtualDriveExtensionListExecute(r)
 }
 
@@ -19127,19 +19730,21 @@ func (a *StorageApiService) GetStorageVirtualDriveExtensionList(ctx _context.Con
  * Execute executes the request
  * @return StorageVirtualDriveExtensionResponse
  */
-func (a *StorageApiService) GetStorageVirtualDriveExtensionListExecute(r ApiGetStorageVirtualDriveExtensionListRequest) (StorageVirtualDriveExtensionResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageVirtualDriveExtensionListExecute(r ApiGetStorageVirtualDriveExtensionListRequest) (StorageVirtualDriveExtensionResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageVirtualDriveExtensionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageVirtualDriveExtensionList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/VirtualDriveExtensions"
@@ -19200,18 +19805,22 @@ func (a *StorageApiService) GetStorageVirtualDriveExtensionListExecute(r ApiGetS
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19278,7 +19887,7 @@ func (a *StorageApiService) GetStorageVirtualDriveExtensionListExecute(r ApiGetS
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetStorageVirtualDriveListRequest struct {
@@ -19342,7 +19951,7 @@ func (r ApiGetStorageVirtualDriveListRequest) Tags(tags string) ApiGetStorageVir
 	return r
 }
 
-func (r ApiGetStorageVirtualDriveListRequest) Execute() (StorageVirtualDriveResponse, *_nethttp.Response, error) {
+func (r ApiGetStorageVirtualDriveListRequest) Execute() (StorageVirtualDriveResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetStorageVirtualDriveListExecute(r)
 }
 
@@ -19362,19 +19971,21 @@ func (a *StorageApiService) GetStorageVirtualDriveList(ctx _context.Context) Api
  * Execute executes the request
  * @return StorageVirtualDriveResponse
  */
-func (a *StorageApiService) GetStorageVirtualDriveListExecute(r ApiGetStorageVirtualDriveListRequest) (StorageVirtualDriveResponse, *_nethttp.Response, error) {
+func (a *StorageApiService) GetStorageVirtualDriveListExecute(r ApiGetStorageVirtualDriveListRequest) (StorageVirtualDriveResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageVirtualDriveResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.GetStorageVirtualDriveList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/VirtualDrives"
@@ -19435,18 +20046,22 @@ func (a *StorageApiService) GetStorageVirtualDriveListExecute(r ApiGetStorageVir
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19513,7 +20128,7 @@ func (a *StorageApiService) GetStorageVirtualDriveListExecute(r ApiGetStorageVir
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStorageControllerRequest struct {
@@ -19533,7 +20148,7 @@ func (r ApiPatchStorageControllerRequest) IfMatch(ifMatch string) ApiPatchStorag
 	return r
 }
 
-func (r ApiPatchStorageControllerRequest) Execute() (StorageController, *_nethttp.Response, error) {
+func (r ApiPatchStorageControllerRequest) Execute() (StorageController, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStorageControllerExecute(r)
 }
 
@@ -19555,19 +20170,21 @@ func (a *StorageApiService) PatchStorageController(ctx _context.Context, moid st
  * Execute executes the request
  * @return StorageController
  */
-func (a *StorageApiService) PatchStorageControllerExecute(r ApiPatchStorageControllerRequest) (StorageController, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStorageControllerExecute(r ApiPatchStorageControllerRequest) (StorageController, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageController
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageController")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/Controllers/{Moid}"
@@ -19577,7 +20194,8 @@ func (a *StorageApiService) PatchStorageControllerExecute(r ApiPatchStorageContr
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageController == nil {
-		return localVarReturnValue, nil, reportError("storageController is required and must be specified")
+		executionError.error = "storageController is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -19604,18 +20222,22 @@ func (a *StorageApiService) PatchStorageControllerExecute(r ApiPatchStorageContr
 	localVarPostBody = r.storageController
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19682,7 +20304,7 @@ func (a *StorageApiService) PatchStorageControllerExecute(r ApiPatchStorageContr
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStorageDiskGroupRequest struct {
@@ -19702,7 +20324,7 @@ func (r ApiPatchStorageDiskGroupRequest) IfMatch(ifMatch string) ApiPatchStorage
 	return r
 }
 
-func (r ApiPatchStorageDiskGroupRequest) Execute() (StorageDiskGroup, *_nethttp.Response, error) {
+func (r ApiPatchStorageDiskGroupRequest) Execute() (StorageDiskGroup, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStorageDiskGroupExecute(r)
 }
 
@@ -19724,19 +20346,21 @@ func (a *StorageApiService) PatchStorageDiskGroup(ctx _context.Context, moid str
  * Execute executes the request
  * @return StorageDiskGroup
  */
-func (a *StorageApiService) PatchStorageDiskGroupExecute(r ApiPatchStorageDiskGroupRequest) (StorageDiskGroup, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStorageDiskGroupExecute(r ApiPatchStorageDiskGroupRequest) (StorageDiskGroup, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageDiskGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageDiskGroup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/DiskGroups/{Moid}"
@@ -19746,7 +20370,8 @@ func (a *StorageApiService) PatchStorageDiskGroupExecute(r ApiPatchStorageDiskGr
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageDiskGroup == nil {
-		return localVarReturnValue, nil, reportError("storageDiskGroup is required and must be specified")
+		executionError.error = "storageDiskGroup is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -19773,18 +20398,22 @@ func (a *StorageApiService) PatchStorageDiskGroupExecute(r ApiPatchStorageDiskGr
 	localVarPostBody = r.storageDiskGroup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19851,7 +20480,7 @@ func (a *StorageApiService) PatchStorageDiskGroupExecute(r ApiPatchStorageDiskGr
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStorageDiskGroupPolicyRequest struct {
@@ -19871,7 +20500,7 @@ func (r ApiPatchStorageDiskGroupPolicyRequest) IfMatch(ifMatch string) ApiPatchS
 	return r
 }
 
-func (r ApiPatchStorageDiskGroupPolicyRequest) Execute() (StorageDiskGroupPolicy, *_nethttp.Response, error) {
+func (r ApiPatchStorageDiskGroupPolicyRequest) Execute() (StorageDiskGroupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStorageDiskGroupPolicyExecute(r)
 }
 
@@ -19893,19 +20522,21 @@ func (a *StorageApiService) PatchStorageDiskGroupPolicy(ctx _context.Context, mo
  * Execute executes the request
  * @return StorageDiskGroupPolicy
  */
-func (a *StorageApiService) PatchStorageDiskGroupPolicyExecute(r ApiPatchStorageDiskGroupPolicyRequest) (StorageDiskGroupPolicy, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStorageDiskGroupPolicyExecute(r ApiPatchStorageDiskGroupPolicyRequest) (StorageDiskGroupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageDiskGroupPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageDiskGroupPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/DiskGroupPolicies/{Moid}"
@@ -19915,7 +20546,8 @@ func (a *StorageApiService) PatchStorageDiskGroupPolicyExecute(r ApiPatchStorage
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageDiskGroupPolicy == nil {
-		return localVarReturnValue, nil, reportError("storageDiskGroupPolicy is required and must be specified")
+		executionError.error = "storageDiskGroupPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -19942,18 +20574,22 @@ func (a *StorageApiService) PatchStorageDiskGroupPolicyExecute(r ApiPatchStorage
 	localVarPostBody = r.storageDiskGroupPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20020,7 +20656,7 @@ func (a *StorageApiService) PatchStorageDiskGroupPolicyExecute(r ApiPatchStorage
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStorageEnclosureRequest struct {
@@ -20040,7 +20676,7 @@ func (r ApiPatchStorageEnclosureRequest) IfMatch(ifMatch string) ApiPatchStorage
 	return r
 }
 
-func (r ApiPatchStorageEnclosureRequest) Execute() (StorageEnclosure, *_nethttp.Response, error) {
+func (r ApiPatchStorageEnclosureRequest) Execute() (StorageEnclosure, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStorageEnclosureExecute(r)
 }
 
@@ -20062,19 +20698,21 @@ func (a *StorageApiService) PatchStorageEnclosure(ctx _context.Context, moid str
  * Execute executes the request
  * @return StorageEnclosure
  */
-func (a *StorageApiService) PatchStorageEnclosureExecute(r ApiPatchStorageEnclosureRequest) (StorageEnclosure, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStorageEnclosureExecute(r ApiPatchStorageEnclosureRequest) (StorageEnclosure, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageEnclosure
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageEnclosure")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/Enclosures/{Moid}"
@@ -20084,7 +20722,8 @@ func (a *StorageApiService) PatchStorageEnclosureExecute(r ApiPatchStorageEnclos
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageEnclosure == nil {
-		return localVarReturnValue, nil, reportError("storageEnclosure is required and must be specified")
+		executionError.error = "storageEnclosure is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -20111,18 +20750,22 @@ func (a *StorageApiService) PatchStorageEnclosureExecute(r ApiPatchStorageEnclos
 	localVarPostBody = r.storageEnclosure
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20189,7 +20832,7 @@ func (a *StorageApiService) PatchStorageEnclosureExecute(r ApiPatchStorageEnclos
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStorageEnclosureDiskRequest struct {
@@ -20209,7 +20852,7 @@ func (r ApiPatchStorageEnclosureDiskRequest) IfMatch(ifMatch string) ApiPatchSto
 	return r
 }
 
-func (r ApiPatchStorageEnclosureDiskRequest) Execute() (StorageEnclosureDisk, *_nethttp.Response, error) {
+func (r ApiPatchStorageEnclosureDiskRequest) Execute() (StorageEnclosureDisk, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStorageEnclosureDiskExecute(r)
 }
 
@@ -20231,19 +20874,21 @@ func (a *StorageApiService) PatchStorageEnclosureDisk(ctx _context.Context, moid
  * Execute executes the request
  * @return StorageEnclosureDisk
  */
-func (a *StorageApiService) PatchStorageEnclosureDiskExecute(r ApiPatchStorageEnclosureDiskRequest) (StorageEnclosureDisk, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStorageEnclosureDiskExecute(r ApiPatchStorageEnclosureDiskRequest) (StorageEnclosureDisk, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageEnclosureDisk
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageEnclosureDisk")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/EnclosureDisks/{Moid}"
@@ -20253,7 +20898,8 @@ func (a *StorageApiService) PatchStorageEnclosureDiskExecute(r ApiPatchStorageEn
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageEnclosureDisk == nil {
-		return localVarReturnValue, nil, reportError("storageEnclosureDisk is required and must be specified")
+		executionError.error = "storageEnclosureDisk is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -20280,18 +20926,22 @@ func (a *StorageApiService) PatchStorageEnclosureDiskExecute(r ApiPatchStorageEn
 	localVarPostBody = r.storageEnclosureDisk
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20358,7 +21008,7 @@ func (a *StorageApiService) PatchStorageEnclosureDiskExecute(r ApiPatchStorageEn
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStorageEnclosureDiskSlotEpRequest struct {
@@ -20378,7 +21028,7 @@ func (r ApiPatchStorageEnclosureDiskSlotEpRequest) IfMatch(ifMatch string) ApiPa
 	return r
 }
 
-func (r ApiPatchStorageEnclosureDiskSlotEpRequest) Execute() (StorageEnclosureDiskSlotEp, *_nethttp.Response, error) {
+func (r ApiPatchStorageEnclosureDiskSlotEpRequest) Execute() (StorageEnclosureDiskSlotEp, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStorageEnclosureDiskSlotEpExecute(r)
 }
 
@@ -20400,19 +21050,21 @@ func (a *StorageApiService) PatchStorageEnclosureDiskSlotEp(ctx _context.Context
  * Execute executes the request
  * @return StorageEnclosureDiskSlotEp
  */
-func (a *StorageApiService) PatchStorageEnclosureDiskSlotEpExecute(r ApiPatchStorageEnclosureDiskSlotEpRequest) (StorageEnclosureDiskSlotEp, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStorageEnclosureDiskSlotEpExecute(r ApiPatchStorageEnclosureDiskSlotEpRequest) (StorageEnclosureDiskSlotEp, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageEnclosureDiskSlotEp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageEnclosureDiskSlotEp")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/EnclosureDiskSlotEps/{Moid}"
@@ -20422,7 +21074,8 @@ func (a *StorageApiService) PatchStorageEnclosureDiskSlotEpExecute(r ApiPatchSto
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageEnclosureDiskSlotEp == nil {
-		return localVarReturnValue, nil, reportError("storageEnclosureDiskSlotEp is required and must be specified")
+		executionError.error = "storageEnclosureDiskSlotEp is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -20449,18 +21102,22 @@ func (a *StorageApiService) PatchStorageEnclosureDiskSlotEpExecute(r ApiPatchSto
 	localVarPostBody = r.storageEnclosureDiskSlotEp
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20527,7 +21184,7 @@ func (a *StorageApiService) PatchStorageEnclosureDiskSlotEpExecute(r ApiPatchSto
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStorageFlexFlashControllerRequest struct {
@@ -20547,7 +21204,7 @@ func (r ApiPatchStorageFlexFlashControllerRequest) IfMatch(ifMatch string) ApiPa
 	return r
 }
 
-func (r ApiPatchStorageFlexFlashControllerRequest) Execute() (StorageFlexFlashController, *_nethttp.Response, error) {
+func (r ApiPatchStorageFlexFlashControllerRequest) Execute() (StorageFlexFlashController, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStorageFlexFlashControllerExecute(r)
 }
 
@@ -20569,19 +21226,21 @@ func (a *StorageApiService) PatchStorageFlexFlashController(ctx _context.Context
  * Execute executes the request
  * @return StorageFlexFlashController
  */
-func (a *StorageApiService) PatchStorageFlexFlashControllerExecute(r ApiPatchStorageFlexFlashControllerRequest) (StorageFlexFlashController, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStorageFlexFlashControllerExecute(r ApiPatchStorageFlexFlashControllerRequest) (StorageFlexFlashController, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexFlashController
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageFlexFlashController")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexFlashControllers/{Moid}"
@@ -20591,7 +21250,8 @@ func (a *StorageApiService) PatchStorageFlexFlashControllerExecute(r ApiPatchSto
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageFlexFlashController == nil {
-		return localVarReturnValue, nil, reportError("storageFlexFlashController is required and must be specified")
+		executionError.error = "storageFlexFlashController is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -20618,18 +21278,22 @@ func (a *StorageApiService) PatchStorageFlexFlashControllerExecute(r ApiPatchSto
 	localVarPostBody = r.storageFlexFlashController
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20696,7 +21360,7 @@ func (a *StorageApiService) PatchStorageFlexFlashControllerExecute(r ApiPatchSto
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStorageFlexFlashControllerPropsRequest struct {
@@ -20716,7 +21380,7 @@ func (r ApiPatchStorageFlexFlashControllerPropsRequest) IfMatch(ifMatch string) 
 	return r
 }
 
-func (r ApiPatchStorageFlexFlashControllerPropsRequest) Execute() (StorageFlexFlashControllerProps, *_nethttp.Response, error) {
+func (r ApiPatchStorageFlexFlashControllerPropsRequest) Execute() (StorageFlexFlashControllerProps, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStorageFlexFlashControllerPropsExecute(r)
 }
 
@@ -20738,19 +21402,21 @@ func (a *StorageApiService) PatchStorageFlexFlashControllerProps(ctx _context.Co
  * Execute executes the request
  * @return StorageFlexFlashControllerProps
  */
-func (a *StorageApiService) PatchStorageFlexFlashControllerPropsExecute(r ApiPatchStorageFlexFlashControllerPropsRequest) (StorageFlexFlashControllerProps, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStorageFlexFlashControllerPropsExecute(r ApiPatchStorageFlexFlashControllerPropsRequest) (StorageFlexFlashControllerProps, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexFlashControllerProps
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageFlexFlashControllerProps")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexFlashControllerProps/{Moid}"
@@ -20760,7 +21426,8 @@ func (a *StorageApiService) PatchStorageFlexFlashControllerPropsExecute(r ApiPat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageFlexFlashControllerProps == nil {
-		return localVarReturnValue, nil, reportError("storageFlexFlashControllerProps is required and must be specified")
+		executionError.error = "storageFlexFlashControllerProps is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -20787,18 +21454,22 @@ func (a *StorageApiService) PatchStorageFlexFlashControllerPropsExecute(r ApiPat
 	localVarPostBody = r.storageFlexFlashControllerProps
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20865,7 +21536,7 @@ func (a *StorageApiService) PatchStorageFlexFlashControllerPropsExecute(r ApiPat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStorageFlexFlashPhysicalDriveRequest struct {
@@ -20885,7 +21556,7 @@ func (r ApiPatchStorageFlexFlashPhysicalDriveRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiPatchStorageFlexFlashPhysicalDriveRequest) Execute() (StorageFlexFlashPhysicalDrive, *_nethttp.Response, error) {
+func (r ApiPatchStorageFlexFlashPhysicalDriveRequest) Execute() (StorageFlexFlashPhysicalDrive, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStorageFlexFlashPhysicalDriveExecute(r)
 }
 
@@ -20907,19 +21578,21 @@ func (a *StorageApiService) PatchStorageFlexFlashPhysicalDrive(ctx _context.Cont
  * Execute executes the request
  * @return StorageFlexFlashPhysicalDrive
  */
-func (a *StorageApiService) PatchStorageFlexFlashPhysicalDriveExecute(r ApiPatchStorageFlexFlashPhysicalDriveRequest) (StorageFlexFlashPhysicalDrive, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStorageFlexFlashPhysicalDriveExecute(r ApiPatchStorageFlexFlashPhysicalDriveRequest) (StorageFlexFlashPhysicalDrive, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexFlashPhysicalDrive
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageFlexFlashPhysicalDrive")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexFlashPhysicalDrives/{Moid}"
@@ -20929,7 +21602,8 @@ func (a *StorageApiService) PatchStorageFlexFlashPhysicalDriveExecute(r ApiPatch
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageFlexFlashPhysicalDrive == nil {
-		return localVarReturnValue, nil, reportError("storageFlexFlashPhysicalDrive is required and must be specified")
+		executionError.error = "storageFlexFlashPhysicalDrive is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -20956,18 +21630,22 @@ func (a *StorageApiService) PatchStorageFlexFlashPhysicalDriveExecute(r ApiPatch
 	localVarPostBody = r.storageFlexFlashPhysicalDrive
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21034,7 +21712,7 @@ func (a *StorageApiService) PatchStorageFlexFlashPhysicalDriveExecute(r ApiPatch
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStorageFlexFlashVirtualDriveRequest struct {
@@ -21054,7 +21732,7 @@ func (r ApiPatchStorageFlexFlashVirtualDriveRequest) IfMatch(ifMatch string) Api
 	return r
 }
 
-func (r ApiPatchStorageFlexFlashVirtualDriveRequest) Execute() (StorageFlexFlashVirtualDrive, *_nethttp.Response, error) {
+func (r ApiPatchStorageFlexFlashVirtualDriveRequest) Execute() (StorageFlexFlashVirtualDrive, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStorageFlexFlashVirtualDriveExecute(r)
 }
 
@@ -21076,19 +21754,21 @@ func (a *StorageApiService) PatchStorageFlexFlashVirtualDrive(ctx _context.Conte
  * Execute executes the request
  * @return StorageFlexFlashVirtualDrive
  */
-func (a *StorageApiService) PatchStorageFlexFlashVirtualDriveExecute(r ApiPatchStorageFlexFlashVirtualDriveRequest) (StorageFlexFlashVirtualDrive, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStorageFlexFlashVirtualDriveExecute(r ApiPatchStorageFlexFlashVirtualDriveRequest) (StorageFlexFlashVirtualDrive, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexFlashVirtualDrive
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageFlexFlashVirtualDrive")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexFlashVirtualDrives/{Moid}"
@@ -21098,7 +21778,8 @@ func (a *StorageApiService) PatchStorageFlexFlashVirtualDriveExecute(r ApiPatchS
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageFlexFlashVirtualDrive == nil {
-		return localVarReturnValue, nil, reportError("storageFlexFlashVirtualDrive is required and must be specified")
+		executionError.error = "storageFlexFlashVirtualDrive is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -21125,18 +21806,22 @@ func (a *StorageApiService) PatchStorageFlexFlashVirtualDriveExecute(r ApiPatchS
 	localVarPostBody = r.storageFlexFlashVirtualDrive
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21203,7 +21888,7 @@ func (a *StorageApiService) PatchStorageFlexFlashVirtualDriveExecute(r ApiPatchS
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStorageFlexUtilControllerRequest struct {
@@ -21223,7 +21908,7 @@ func (r ApiPatchStorageFlexUtilControllerRequest) IfMatch(ifMatch string) ApiPat
 	return r
 }
 
-func (r ApiPatchStorageFlexUtilControllerRequest) Execute() (StorageFlexUtilController, *_nethttp.Response, error) {
+func (r ApiPatchStorageFlexUtilControllerRequest) Execute() (StorageFlexUtilController, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStorageFlexUtilControllerExecute(r)
 }
 
@@ -21245,19 +21930,21 @@ func (a *StorageApiService) PatchStorageFlexUtilController(ctx _context.Context,
  * Execute executes the request
  * @return StorageFlexUtilController
  */
-func (a *StorageApiService) PatchStorageFlexUtilControllerExecute(r ApiPatchStorageFlexUtilControllerRequest) (StorageFlexUtilController, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStorageFlexUtilControllerExecute(r ApiPatchStorageFlexUtilControllerRequest) (StorageFlexUtilController, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexUtilController
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageFlexUtilController")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexUtilControllers/{Moid}"
@@ -21267,7 +21954,8 @@ func (a *StorageApiService) PatchStorageFlexUtilControllerExecute(r ApiPatchStor
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageFlexUtilController == nil {
-		return localVarReturnValue, nil, reportError("storageFlexUtilController is required and must be specified")
+		executionError.error = "storageFlexUtilController is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -21294,18 +21982,22 @@ func (a *StorageApiService) PatchStorageFlexUtilControllerExecute(r ApiPatchStor
 	localVarPostBody = r.storageFlexUtilController
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21372,7 +22064,7 @@ func (a *StorageApiService) PatchStorageFlexUtilControllerExecute(r ApiPatchStor
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStorageFlexUtilPhysicalDriveRequest struct {
@@ -21392,7 +22084,7 @@ func (r ApiPatchStorageFlexUtilPhysicalDriveRequest) IfMatch(ifMatch string) Api
 	return r
 }
 
-func (r ApiPatchStorageFlexUtilPhysicalDriveRequest) Execute() (StorageFlexUtilPhysicalDrive, *_nethttp.Response, error) {
+func (r ApiPatchStorageFlexUtilPhysicalDriveRequest) Execute() (StorageFlexUtilPhysicalDrive, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStorageFlexUtilPhysicalDriveExecute(r)
 }
 
@@ -21414,19 +22106,21 @@ func (a *StorageApiService) PatchStorageFlexUtilPhysicalDrive(ctx _context.Conte
  * Execute executes the request
  * @return StorageFlexUtilPhysicalDrive
  */
-func (a *StorageApiService) PatchStorageFlexUtilPhysicalDriveExecute(r ApiPatchStorageFlexUtilPhysicalDriveRequest) (StorageFlexUtilPhysicalDrive, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStorageFlexUtilPhysicalDriveExecute(r ApiPatchStorageFlexUtilPhysicalDriveRequest) (StorageFlexUtilPhysicalDrive, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexUtilPhysicalDrive
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageFlexUtilPhysicalDrive")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexUtilPhysicalDrives/{Moid}"
@@ -21436,7 +22130,8 @@ func (a *StorageApiService) PatchStorageFlexUtilPhysicalDriveExecute(r ApiPatchS
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageFlexUtilPhysicalDrive == nil {
-		return localVarReturnValue, nil, reportError("storageFlexUtilPhysicalDrive is required and must be specified")
+		executionError.error = "storageFlexUtilPhysicalDrive is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -21463,18 +22158,22 @@ func (a *StorageApiService) PatchStorageFlexUtilPhysicalDriveExecute(r ApiPatchS
 	localVarPostBody = r.storageFlexUtilPhysicalDrive
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21541,7 +22240,7 @@ func (a *StorageApiService) PatchStorageFlexUtilPhysicalDriveExecute(r ApiPatchS
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStorageFlexUtilVirtualDriveRequest struct {
@@ -21561,7 +22260,7 @@ func (r ApiPatchStorageFlexUtilVirtualDriveRequest) IfMatch(ifMatch string) ApiP
 	return r
 }
 
-func (r ApiPatchStorageFlexUtilVirtualDriveRequest) Execute() (StorageFlexUtilVirtualDrive, *_nethttp.Response, error) {
+func (r ApiPatchStorageFlexUtilVirtualDriveRequest) Execute() (StorageFlexUtilVirtualDrive, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStorageFlexUtilVirtualDriveExecute(r)
 }
 
@@ -21583,19 +22282,21 @@ func (a *StorageApiService) PatchStorageFlexUtilVirtualDrive(ctx _context.Contex
  * Execute executes the request
  * @return StorageFlexUtilVirtualDrive
  */
-func (a *StorageApiService) PatchStorageFlexUtilVirtualDriveExecute(r ApiPatchStorageFlexUtilVirtualDriveRequest) (StorageFlexUtilVirtualDrive, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStorageFlexUtilVirtualDriveExecute(r ApiPatchStorageFlexUtilVirtualDriveRequest) (StorageFlexUtilVirtualDrive, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexUtilVirtualDrive
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageFlexUtilVirtualDrive")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexUtilVirtualDrives/{Moid}"
@@ -21605,7 +22306,8 @@ func (a *StorageApiService) PatchStorageFlexUtilVirtualDriveExecute(r ApiPatchSt
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageFlexUtilVirtualDrive == nil {
-		return localVarReturnValue, nil, reportError("storageFlexUtilVirtualDrive is required and must be specified")
+		executionError.error = "storageFlexUtilVirtualDrive is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -21632,18 +22334,22 @@ func (a *StorageApiService) PatchStorageFlexUtilVirtualDriveExecute(r ApiPatchSt
 	localVarPostBody = r.storageFlexUtilVirtualDrive
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21710,7 +22416,7 @@ func (a *StorageApiService) PatchStorageFlexUtilVirtualDriveExecute(r ApiPatchSt
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStorageHitachiArrayRequest struct {
@@ -21730,7 +22436,7 @@ func (r ApiPatchStorageHitachiArrayRequest) IfMatch(ifMatch string) ApiPatchStor
 	return r
 }
 
-func (r ApiPatchStorageHitachiArrayRequest) Execute() (StorageHitachiArray, *_nethttp.Response, error) {
+func (r ApiPatchStorageHitachiArrayRequest) Execute() (StorageHitachiArray, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStorageHitachiArrayExecute(r)
 }
 
@@ -21752,19 +22458,21 @@ func (a *StorageApiService) PatchStorageHitachiArray(ctx _context.Context, moid 
  * Execute executes the request
  * @return StorageHitachiArray
  */
-func (a *StorageApiService) PatchStorageHitachiArrayExecute(r ApiPatchStorageHitachiArrayRequest) (StorageHitachiArray, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStorageHitachiArrayExecute(r ApiPatchStorageHitachiArrayRequest) (StorageHitachiArray, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHitachiArray
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageHitachiArray")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HitachiArrays/{Moid}"
@@ -21774,7 +22482,8 @@ func (a *StorageApiService) PatchStorageHitachiArrayExecute(r ApiPatchStorageHit
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageHitachiArray == nil {
-		return localVarReturnValue, nil, reportError("storageHitachiArray is required and must be specified")
+		executionError.error = "storageHitachiArray is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -21801,18 +22510,22 @@ func (a *StorageApiService) PatchStorageHitachiArrayExecute(r ApiPatchStorageHit
 	localVarPostBody = r.storageHitachiArray
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21879,7 +22592,7 @@ func (a *StorageApiService) PatchStorageHitachiArrayExecute(r ApiPatchStorageHit
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStoragePhysicalDiskRequest struct {
@@ -21899,7 +22612,7 @@ func (r ApiPatchStoragePhysicalDiskRequest) IfMatch(ifMatch string) ApiPatchStor
 	return r
 }
 
-func (r ApiPatchStoragePhysicalDiskRequest) Execute() (StoragePhysicalDisk, *_nethttp.Response, error) {
+func (r ApiPatchStoragePhysicalDiskRequest) Execute() (StoragePhysicalDisk, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStoragePhysicalDiskExecute(r)
 }
 
@@ -21921,19 +22634,21 @@ func (a *StorageApiService) PatchStoragePhysicalDisk(ctx _context.Context, moid 
  * Execute executes the request
  * @return StoragePhysicalDisk
  */
-func (a *StorageApiService) PatchStoragePhysicalDiskExecute(r ApiPatchStoragePhysicalDiskRequest) (StoragePhysicalDisk, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStoragePhysicalDiskExecute(r ApiPatchStoragePhysicalDiskRequest) (StoragePhysicalDisk, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePhysicalDisk
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStoragePhysicalDisk")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PhysicalDisks/{Moid}"
@@ -21943,7 +22658,8 @@ func (a *StorageApiService) PatchStoragePhysicalDiskExecute(r ApiPatchStoragePhy
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storagePhysicalDisk == nil {
-		return localVarReturnValue, nil, reportError("storagePhysicalDisk is required and must be specified")
+		executionError.error = "storagePhysicalDisk is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -21970,18 +22686,22 @@ func (a *StorageApiService) PatchStoragePhysicalDiskExecute(r ApiPatchStoragePhy
 	localVarPostBody = r.storagePhysicalDisk
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22048,7 +22768,7 @@ func (a *StorageApiService) PatchStoragePhysicalDiskExecute(r ApiPatchStoragePhy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStoragePhysicalDiskExtensionRequest struct {
@@ -22068,7 +22788,7 @@ func (r ApiPatchStoragePhysicalDiskExtensionRequest) IfMatch(ifMatch string) Api
 	return r
 }
 
-func (r ApiPatchStoragePhysicalDiskExtensionRequest) Execute() (StoragePhysicalDiskExtension, *_nethttp.Response, error) {
+func (r ApiPatchStoragePhysicalDiskExtensionRequest) Execute() (StoragePhysicalDiskExtension, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStoragePhysicalDiskExtensionExecute(r)
 }
 
@@ -22090,19 +22810,21 @@ func (a *StorageApiService) PatchStoragePhysicalDiskExtension(ctx _context.Conte
  * Execute executes the request
  * @return StoragePhysicalDiskExtension
  */
-func (a *StorageApiService) PatchStoragePhysicalDiskExtensionExecute(r ApiPatchStoragePhysicalDiskExtensionRequest) (StoragePhysicalDiskExtension, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStoragePhysicalDiskExtensionExecute(r ApiPatchStoragePhysicalDiskExtensionRequest) (StoragePhysicalDiskExtension, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePhysicalDiskExtension
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStoragePhysicalDiskExtension")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PhysicalDiskExtensions/{Moid}"
@@ -22112,7 +22834,8 @@ func (a *StorageApiService) PatchStoragePhysicalDiskExtensionExecute(r ApiPatchS
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storagePhysicalDiskExtension == nil {
-		return localVarReturnValue, nil, reportError("storagePhysicalDiskExtension is required and must be specified")
+		executionError.error = "storagePhysicalDiskExtension is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -22139,18 +22862,22 @@ func (a *StorageApiService) PatchStoragePhysicalDiskExtensionExecute(r ApiPatchS
 	localVarPostBody = r.storagePhysicalDiskExtension
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22217,7 +22944,7 @@ func (a *StorageApiService) PatchStoragePhysicalDiskExtensionExecute(r ApiPatchS
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStoragePhysicalDiskUsageRequest struct {
@@ -22237,7 +22964,7 @@ func (r ApiPatchStoragePhysicalDiskUsageRequest) IfMatch(ifMatch string) ApiPatc
 	return r
 }
 
-func (r ApiPatchStoragePhysicalDiskUsageRequest) Execute() (StoragePhysicalDiskUsage, *_nethttp.Response, error) {
+func (r ApiPatchStoragePhysicalDiskUsageRequest) Execute() (StoragePhysicalDiskUsage, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStoragePhysicalDiskUsageExecute(r)
 }
 
@@ -22259,19 +22986,21 @@ func (a *StorageApiService) PatchStoragePhysicalDiskUsage(ctx _context.Context, 
  * Execute executes the request
  * @return StoragePhysicalDiskUsage
  */
-func (a *StorageApiService) PatchStoragePhysicalDiskUsageExecute(r ApiPatchStoragePhysicalDiskUsageRequest) (StoragePhysicalDiskUsage, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStoragePhysicalDiskUsageExecute(r ApiPatchStoragePhysicalDiskUsageRequest) (StoragePhysicalDiskUsage, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePhysicalDiskUsage
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStoragePhysicalDiskUsage")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PhysicalDiskUsages/{Moid}"
@@ -22281,7 +23010,8 @@ func (a *StorageApiService) PatchStoragePhysicalDiskUsageExecute(r ApiPatchStora
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storagePhysicalDiskUsage == nil {
-		return localVarReturnValue, nil, reportError("storagePhysicalDiskUsage is required and must be specified")
+		executionError.error = "storagePhysicalDiskUsage is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -22308,18 +23038,22 @@ func (a *StorageApiService) PatchStoragePhysicalDiskUsageExecute(r ApiPatchStora
 	localVarPostBody = r.storagePhysicalDiskUsage
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22386,7 +23120,7 @@ func (a *StorageApiService) PatchStoragePhysicalDiskUsageExecute(r ApiPatchStora
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStoragePureArrayRequest struct {
@@ -22406,7 +23140,7 @@ func (r ApiPatchStoragePureArrayRequest) IfMatch(ifMatch string) ApiPatchStorage
 	return r
 }
 
-func (r ApiPatchStoragePureArrayRequest) Execute() (StoragePureArray, *_nethttp.Response, error) {
+func (r ApiPatchStoragePureArrayRequest) Execute() (StoragePureArray, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStoragePureArrayExecute(r)
 }
 
@@ -22428,19 +23162,21 @@ func (a *StorageApiService) PatchStoragePureArray(ctx _context.Context, moid str
  * Execute executes the request
  * @return StoragePureArray
  */
-func (a *StorageApiService) PatchStoragePureArrayExecute(r ApiPatchStoragePureArrayRequest) (StoragePureArray, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStoragePureArrayExecute(r ApiPatchStoragePureArrayRequest) (StoragePureArray, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureArray
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStoragePureArray")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureArrays/{Moid}"
@@ -22450,7 +23186,8 @@ func (a *StorageApiService) PatchStoragePureArrayExecute(r ApiPatchStoragePureAr
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storagePureArray == nil {
-		return localVarReturnValue, nil, reportError("storagePureArray is required and must be specified")
+		executionError.error = "storagePureArray is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -22477,18 +23214,22 @@ func (a *StorageApiService) PatchStoragePureArrayExecute(r ApiPatchStoragePureAr
 	localVarPostBody = r.storagePureArray
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22555,7 +23296,7 @@ func (a *StorageApiService) PatchStoragePureArrayExecute(r ApiPatchStoragePureAr
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStorageSasExpanderRequest struct {
@@ -22575,7 +23316,7 @@ func (r ApiPatchStorageSasExpanderRequest) IfMatch(ifMatch string) ApiPatchStora
 	return r
 }
 
-func (r ApiPatchStorageSasExpanderRequest) Execute() (StorageSasExpander, *_nethttp.Response, error) {
+func (r ApiPatchStorageSasExpanderRequest) Execute() (StorageSasExpander, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStorageSasExpanderExecute(r)
 }
 
@@ -22597,19 +23338,21 @@ func (a *StorageApiService) PatchStorageSasExpander(ctx _context.Context, moid s
  * Execute executes the request
  * @return StorageSasExpander
  */
-func (a *StorageApiService) PatchStorageSasExpanderExecute(r ApiPatchStorageSasExpanderRequest) (StorageSasExpander, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStorageSasExpanderExecute(r ApiPatchStorageSasExpanderRequest) (StorageSasExpander, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageSasExpander
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageSasExpander")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/SasExpanders/{Moid}"
@@ -22619,7 +23362,8 @@ func (a *StorageApiService) PatchStorageSasExpanderExecute(r ApiPatchStorageSasE
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageSasExpander == nil {
-		return localVarReturnValue, nil, reportError("storageSasExpander is required and must be specified")
+		executionError.error = "storageSasExpander is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -22646,18 +23390,22 @@ func (a *StorageApiService) PatchStorageSasExpanderExecute(r ApiPatchStorageSasE
 	localVarPostBody = r.storageSasExpander
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22724,7 +23472,7 @@ func (a *StorageApiService) PatchStorageSasExpanderExecute(r ApiPatchStorageSasE
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStorageSasPortRequest struct {
@@ -22744,7 +23492,7 @@ func (r ApiPatchStorageSasPortRequest) IfMatch(ifMatch string) ApiPatchStorageSa
 	return r
 }
 
-func (r ApiPatchStorageSasPortRequest) Execute() (StorageSasPort, *_nethttp.Response, error) {
+func (r ApiPatchStorageSasPortRequest) Execute() (StorageSasPort, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStorageSasPortExecute(r)
 }
 
@@ -22766,19 +23514,21 @@ func (a *StorageApiService) PatchStorageSasPort(ctx _context.Context, moid strin
  * Execute executes the request
  * @return StorageSasPort
  */
-func (a *StorageApiService) PatchStorageSasPortExecute(r ApiPatchStorageSasPortRequest) (StorageSasPort, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStorageSasPortExecute(r ApiPatchStorageSasPortRequest) (StorageSasPort, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageSasPort
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageSasPort")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/SasPorts/{Moid}"
@@ -22788,7 +23538,8 @@ func (a *StorageApiService) PatchStorageSasPortExecute(r ApiPatchStorageSasPortR
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageSasPort == nil {
-		return localVarReturnValue, nil, reportError("storageSasPort is required and must be specified")
+		executionError.error = "storageSasPort is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -22815,18 +23566,22 @@ func (a *StorageApiService) PatchStorageSasPortExecute(r ApiPatchStorageSasPortR
 	localVarPostBody = r.storageSasPort
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22893,7 +23648,7 @@ func (a *StorageApiService) PatchStorageSasPortExecute(r ApiPatchStorageSasPortR
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStorageSpanRequest struct {
@@ -22913,7 +23668,7 @@ func (r ApiPatchStorageSpanRequest) IfMatch(ifMatch string) ApiPatchStorageSpanR
 	return r
 }
 
-func (r ApiPatchStorageSpanRequest) Execute() (StorageSpan, *_nethttp.Response, error) {
+func (r ApiPatchStorageSpanRequest) Execute() (StorageSpan, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStorageSpanExecute(r)
 }
 
@@ -22935,19 +23690,21 @@ func (a *StorageApiService) PatchStorageSpan(ctx _context.Context, moid string) 
  * Execute executes the request
  * @return StorageSpan
  */
-func (a *StorageApiService) PatchStorageSpanExecute(r ApiPatchStorageSpanRequest) (StorageSpan, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStorageSpanExecute(r ApiPatchStorageSpanRequest) (StorageSpan, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageSpan
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageSpan")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/Spans/{Moid}"
@@ -22957,7 +23714,8 @@ func (a *StorageApiService) PatchStorageSpanExecute(r ApiPatchStorageSpanRequest
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageSpan == nil {
-		return localVarReturnValue, nil, reportError("storageSpan is required and must be specified")
+		executionError.error = "storageSpan is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -22984,18 +23742,22 @@ func (a *StorageApiService) PatchStorageSpanExecute(r ApiPatchStorageSpanRequest
 	localVarPostBody = r.storageSpan
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23062,7 +23824,7 @@ func (a *StorageApiService) PatchStorageSpanExecute(r ApiPatchStorageSpanRequest
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStorageStoragePolicyRequest struct {
@@ -23082,7 +23844,7 @@ func (r ApiPatchStorageStoragePolicyRequest) IfMatch(ifMatch string) ApiPatchSto
 	return r
 }
 
-func (r ApiPatchStorageStoragePolicyRequest) Execute() (StorageStoragePolicy, *_nethttp.Response, error) {
+func (r ApiPatchStorageStoragePolicyRequest) Execute() (StorageStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStorageStoragePolicyExecute(r)
 }
 
@@ -23104,19 +23866,21 @@ func (a *StorageApiService) PatchStorageStoragePolicy(ctx _context.Context, moid
  * Execute executes the request
  * @return StorageStoragePolicy
  */
-func (a *StorageApiService) PatchStorageStoragePolicyExecute(r ApiPatchStorageStoragePolicyRequest) (StorageStoragePolicy, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStorageStoragePolicyExecute(r ApiPatchStorageStoragePolicyRequest) (StorageStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageStoragePolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageStoragePolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/StoragePolicies/{Moid}"
@@ -23126,7 +23890,8 @@ func (a *StorageApiService) PatchStorageStoragePolicyExecute(r ApiPatchStorageSt
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageStoragePolicy == nil {
-		return localVarReturnValue, nil, reportError("storageStoragePolicy is required and must be specified")
+		executionError.error = "storageStoragePolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -23153,18 +23918,22 @@ func (a *StorageApiService) PatchStorageStoragePolicyExecute(r ApiPatchStorageSt
 	localVarPostBody = r.storageStoragePolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23231,7 +24000,7 @@ func (a *StorageApiService) PatchStorageStoragePolicyExecute(r ApiPatchStorageSt
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStorageVdMemberEpRequest struct {
@@ -23251,7 +24020,7 @@ func (r ApiPatchStorageVdMemberEpRequest) IfMatch(ifMatch string) ApiPatchStorag
 	return r
 }
 
-func (r ApiPatchStorageVdMemberEpRequest) Execute() (StorageVdMemberEp, *_nethttp.Response, error) {
+func (r ApiPatchStorageVdMemberEpRequest) Execute() (StorageVdMemberEp, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStorageVdMemberEpExecute(r)
 }
 
@@ -23273,19 +24042,21 @@ func (a *StorageApiService) PatchStorageVdMemberEp(ctx _context.Context, moid st
  * Execute executes the request
  * @return StorageVdMemberEp
  */
-func (a *StorageApiService) PatchStorageVdMemberEpExecute(r ApiPatchStorageVdMemberEpRequest) (StorageVdMemberEp, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStorageVdMemberEpExecute(r ApiPatchStorageVdMemberEpRequest) (StorageVdMemberEp, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageVdMemberEp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageVdMemberEp")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/VdMemberEps/{Moid}"
@@ -23295,7 +24066,8 @@ func (a *StorageApiService) PatchStorageVdMemberEpExecute(r ApiPatchStorageVdMem
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageVdMemberEp == nil {
-		return localVarReturnValue, nil, reportError("storageVdMemberEp is required and must be specified")
+		executionError.error = "storageVdMemberEp is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -23322,18 +24094,22 @@ func (a *StorageApiService) PatchStorageVdMemberEpExecute(r ApiPatchStorageVdMem
 	localVarPostBody = r.storageVdMemberEp
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23400,7 +24176,7 @@ func (a *StorageApiService) PatchStorageVdMemberEpExecute(r ApiPatchStorageVdMem
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStorageVirtualDriveRequest struct {
@@ -23420,7 +24196,7 @@ func (r ApiPatchStorageVirtualDriveRequest) IfMatch(ifMatch string) ApiPatchStor
 	return r
 }
 
-func (r ApiPatchStorageVirtualDriveRequest) Execute() (StorageVirtualDrive, *_nethttp.Response, error) {
+func (r ApiPatchStorageVirtualDriveRequest) Execute() (StorageVirtualDrive, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStorageVirtualDriveExecute(r)
 }
 
@@ -23442,19 +24218,21 @@ func (a *StorageApiService) PatchStorageVirtualDrive(ctx _context.Context, moid 
  * Execute executes the request
  * @return StorageVirtualDrive
  */
-func (a *StorageApiService) PatchStorageVirtualDriveExecute(r ApiPatchStorageVirtualDriveRequest) (StorageVirtualDrive, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStorageVirtualDriveExecute(r ApiPatchStorageVirtualDriveRequest) (StorageVirtualDrive, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageVirtualDrive
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageVirtualDrive")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/VirtualDrives/{Moid}"
@@ -23464,7 +24242,8 @@ func (a *StorageApiService) PatchStorageVirtualDriveExecute(r ApiPatchStorageVir
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageVirtualDrive == nil {
-		return localVarReturnValue, nil, reportError("storageVirtualDrive is required and must be specified")
+		executionError.error = "storageVirtualDrive is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -23491,18 +24270,22 @@ func (a *StorageApiService) PatchStorageVirtualDriveExecute(r ApiPatchStorageVir
 	localVarPostBody = r.storageVirtualDrive
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23569,7 +24352,7 @@ func (a *StorageApiService) PatchStorageVirtualDriveExecute(r ApiPatchStorageVir
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStorageVirtualDriveContainerRequest struct {
@@ -23589,7 +24372,7 @@ func (r ApiPatchStorageVirtualDriveContainerRequest) IfMatch(ifMatch string) Api
 	return r
 }
 
-func (r ApiPatchStorageVirtualDriveContainerRequest) Execute() (StorageVirtualDriveContainer, *_nethttp.Response, error) {
+func (r ApiPatchStorageVirtualDriveContainerRequest) Execute() (StorageVirtualDriveContainer, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStorageVirtualDriveContainerExecute(r)
 }
 
@@ -23611,19 +24394,21 @@ func (a *StorageApiService) PatchStorageVirtualDriveContainer(ctx _context.Conte
  * Execute executes the request
  * @return StorageVirtualDriveContainer
  */
-func (a *StorageApiService) PatchStorageVirtualDriveContainerExecute(r ApiPatchStorageVirtualDriveContainerRequest) (StorageVirtualDriveContainer, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStorageVirtualDriveContainerExecute(r ApiPatchStorageVirtualDriveContainerRequest) (StorageVirtualDriveContainer, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageVirtualDriveContainer
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageVirtualDriveContainer")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/VirtualDriveContainers/{Moid}"
@@ -23633,7 +24418,8 @@ func (a *StorageApiService) PatchStorageVirtualDriveContainerExecute(r ApiPatchS
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageVirtualDriveContainer == nil {
-		return localVarReturnValue, nil, reportError("storageVirtualDriveContainer is required and must be specified")
+		executionError.error = "storageVirtualDriveContainer is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -23660,18 +24446,22 @@ func (a *StorageApiService) PatchStorageVirtualDriveContainerExecute(r ApiPatchS
 	localVarPostBody = r.storageVirtualDriveContainer
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23738,7 +24528,7 @@ func (a *StorageApiService) PatchStorageVirtualDriveContainerExecute(r ApiPatchS
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchStorageVirtualDriveExtensionRequest struct {
@@ -23758,7 +24548,7 @@ func (r ApiPatchStorageVirtualDriveExtensionRequest) IfMatch(ifMatch string) Api
 	return r
 }
 
-func (r ApiPatchStorageVirtualDriveExtensionRequest) Execute() (StorageVirtualDriveExtension, *_nethttp.Response, error) {
+func (r ApiPatchStorageVirtualDriveExtensionRequest) Execute() (StorageVirtualDriveExtension, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchStorageVirtualDriveExtensionExecute(r)
 }
 
@@ -23780,19 +24570,21 @@ func (a *StorageApiService) PatchStorageVirtualDriveExtension(ctx _context.Conte
  * Execute executes the request
  * @return StorageVirtualDriveExtension
  */
-func (a *StorageApiService) PatchStorageVirtualDriveExtensionExecute(r ApiPatchStorageVirtualDriveExtensionRequest) (StorageVirtualDriveExtension, *_nethttp.Response, error) {
+func (a *StorageApiService) PatchStorageVirtualDriveExtensionExecute(r ApiPatchStorageVirtualDriveExtensionRequest) (StorageVirtualDriveExtension, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageVirtualDriveExtension
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.PatchStorageVirtualDriveExtension")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/VirtualDriveExtensions/{Moid}"
@@ -23802,7 +24594,8 @@ func (a *StorageApiService) PatchStorageVirtualDriveExtensionExecute(r ApiPatchS
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageVirtualDriveExtension == nil {
-		return localVarReturnValue, nil, reportError("storageVirtualDriveExtension is required and must be specified")
+		executionError.error = "storageVirtualDriveExtension is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -23829,18 +24622,22 @@ func (a *StorageApiService) PatchStorageVirtualDriveExtensionExecute(r ApiPatchS
 	localVarPostBody = r.storageVirtualDriveExtension
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23907,7 +24704,7 @@ func (a *StorageApiService) PatchStorageVirtualDriveExtensionExecute(r ApiPatchS
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStorageControllerRequest struct {
@@ -23927,7 +24724,7 @@ func (r ApiUpdateStorageControllerRequest) IfMatch(ifMatch string) ApiUpdateStor
 	return r
 }
 
-func (r ApiUpdateStorageControllerRequest) Execute() (StorageController, *_nethttp.Response, error) {
+func (r ApiUpdateStorageControllerRequest) Execute() (StorageController, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStorageControllerExecute(r)
 }
 
@@ -23949,19 +24746,21 @@ func (a *StorageApiService) UpdateStorageController(ctx _context.Context, moid s
  * Execute executes the request
  * @return StorageController
  */
-func (a *StorageApiService) UpdateStorageControllerExecute(r ApiUpdateStorageControllerRequest) (StorageController, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStorageControllerExecute(r ApiUpdateStorageControllerRequest) (StorageController, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageController
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageController")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/Controllers/{Moid}"
@@ -23971,7 +24770,8 @@ func (a *StorageApiService) UpdateStorageControllerExecute(r ApiUpdateStorageCon
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageController == nil {
-		return localVarReturnValue, nil, reportError("storageController is required and must be specified")
+		executionError.error = "storageController is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -23998,18 +24798,22 @@ func (a *StorageApiService) UpdateStorageControllerExecute(r ApiUpdateStorageCon
 	localVarPostBody = r.storageController
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -24076,7 +24880,7 @@ func (a *StorageApiService) UpdateStorageControllerExecute(r ApiUpdateStorageCon
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStorageDiskGroupRequest struct {
@@ -24096,7 +24900,7 @@ func (r ApiUpdateStorageDiskGroupRequest) IfMatch(ifMatch string) ApiUpdateStora
 	return r
 }
 
-func (r ApiUpdateStorageDiskGroupRequest) Execute() (StorageDiskGroup, *_nethttp.Response, error) {
+func (r ApiUpdateStorageDiskGroupRequest) Execute() (StorageDiskGroup, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStorageDiskGroupExecute(r)
 }
 
@@ -24118,19 +24922,21 @@ func (a *StorageApiService) UpdateStorageDiskGroup(ctx _context.Context, moid st
  * Execute executes the request
  * @return StorageDiskGroup
  */
-func (a *StorageApiService) UpdateStorageDiskGroupExecute(r ApiUpdateStorageDiskGroupRequest) (StorageDiskGroup, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStorageDiskGroupExecute(r ApiUpdateStorageDiskGroupRequest) (StorageDiskGroup, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageDiskGroup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageDiskGroup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/DiskGroups/{Moid}"
@@ -24140,7 +24946,8 @@ func (a *StorageApiService) UpdateStorageDiskGroupExecute(r ApiUpdateStorageDisk
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageDiskGroup == nil {
-		return localVarReturnValue, nil, reportError("storageDiskGroup is required and must be specified")
+		executionError.error = "storageDiskGroup is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -24167,18 +24974,22 @@ func (a *StorageApiService) UpdateStorageDiskGroupExecute(r ApiUpdateStorageDisk
 	localVarPostBody = r.storageDiskGroup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -24245,7 +25056,7 @@ func (a *StorageApiService) UpdateStorageDiskGroupExecute(r ApiUpdateStorageDisk
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStorageDiskGroupPolicyRequest struct {
@@ -24265,7 +25076,7 @@ func (r ApiUpdateStorageDiskGroupPolicyRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateStorageDiskGroupPolicyRequest) Execute() (StorageDiskGroupPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateStorageDiskGroupPolicyRequest) Execute() (StorageDiskGroupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStorageDiskGroupPolicyExecute(r)
 }
 
@@ -24287,19 +25098,21 @@ func (a *StorageApiService) UpdateStorageDiskGroupPolicy(ctx _context.Context, m
  * Execute executes the request
  * @return StorageDiskGroupPolicy
  */
-func (a *StorageApiService) UpdateStorageDiskGroupPolicyExecute(r ApiUpdateStorageDiskGroupPolicyRequest) (StorageDiskGroupPolicy, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStorageDiskGroupPolicyExecute(r ApiUpdateStorageDiskGroupPolicyRequest) (StorageDiskGroupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageDiskGroupPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageDiskGroupPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/DiskGroupPolicies/{Moid}"
@@ -24309,7 +25122,8 @@ func (a *StorageApiService) UpdateStorageDiskGroupPolicyExecute(r ApiUpdateStora
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageDiskGroupPolicy == nil {
-		return localVarReturnValue, nil, reportError("storageDiskGroupPolicy is required and must be specified")
+		executionError.error = "storageDiskGroupPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -24336,18 +25150,22 @@ func (a *StorageApiService) UpdateStorageDiskGroupPolicyExecute(r ApiUpdateStora
 	localVarPostBody = r.storageDiskGroupPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -24414,7 +25232,7 @@ func (a *StorageApiService) UpdateStorageDiskGroupPolicyExecute(r ApiUpdateStora
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStorageEnclosureRequest struct {
@@ -24434,7 +25252,7 @@ func (r ApiUpdateStorageEnclosureRequest) IfMatch(ifMatch string) ApiUpdateStora
 	return r
 }
 
-func (r ApiUpdateStorageEnclosureRequest) Execute() (StorageEnclosure, *_nethttp.Response, error) {
+func (r ApiUpdateStorageEnclosureRequest) Execute() (StorageEnclosure, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStorageEnclosureExecute(r)
 }
 
@@ -24456,19 +25274,21 @@ func (a *StorageApiService) UpdateStorageEnclosure(ctx _context.Context, moid st
  * Execute executes the request
  * @return StorageEnclosure
  */
-func (a *StorageApiService) UpdateStorageEnclosureExecute(r ApiUpdateStorageEnclosureRequest) (StorageEnclosure, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStorageEnclosureExecute(r ApiUpdateStorageEnclosureRequest) (StorageEnclosure, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageEnclosure
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageEnclosure")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/Enclosures/{Moid}"
@@ -24478,7 +25298,8 @@ func (a *StorageApiService) UpdateStorageEnclosureExecute(r ApiUpdateStorageEncl
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageEnclosure == nil {
-		return localVarReturnValue, nil, reportError("storageEnclosure is required and must be specified")
+		executionError.error = "storageEnclosure is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -24505,18 +25326,22 @@ func (a *StorageApiService) UpdateStorageEnclosureExecute(r ApiUpdateStorageEncl
 	localVarPostBody = r.storageEnclosure
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -24583,7 +25408,7 @@ func (a *StorageApiService) UpdateStorageEnclosureExecute(r ApiUpdateStorageEncl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStorageEnclosureDiskRequest struct {
@@ -24603,7 +25428,7 @@ func (r ApiUpdateStorageEnclosureDiskRequest) IfMatch(ifMatch string) ApiUpdateS
 	return r
 }
 
-func (r ApiUpdateStorageEnclosureDiskRequest) Execute() (StorageEnclosureDisk, *_nethttp.Response, error) {
+func (r ApiUpdateStorageEnclosureDiskRequest) Execute() (StorageEnclosureDisk, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStorageEnclosureDiskExecute(r)
 }
 
@@ -24625,19 +25450,21 @@ func (a *StorageApiService) UpdateStorageEnclosureDisk(ctx _context.Context, moi
  * Execute executes the request
  * @return StorageEnclosureDisk
  */
-func (a *StorageApiService) UpdateStorageEnclosureDiskExecute(r ApiUpdateStorageEnclosureDiskRequest) (StorageEnclosureDisk, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStorageEnclosureDiskExecute(r ApiUpdateStorageEnclosureDiskRequest) (StorageEnclosureDisk, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageEnclosureDisk
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageEnclosureDisk")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/EnclosureDisks/{Moid}"
@@ -24647,7 +25474,8 @@ func (a *StorageApiService) UpdateStorageEnclosureDiskExecute(r ApiUpdateStorage
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageEnclosureDisk == nil {
-		return localVarReturnValue, nil, reportError("storageEnclosureDisk is required and must be specified")
+		executionError.error = "storageEnclosureDisk is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -24674,18 +25502,22 @@ func (a *StorageApiService) UpdateStorageEnclosureDiskExecute(r ApiUpdateStorage
 	localVarPostBody = r.storageEnclosureDisk
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -24752,7 +25584,7 @@ func (a *StorageApiService) UpdateStorageEnclosureDiskExecute(r ApiUpdateStorage
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStorageEnclosureDiskSlotEpRequest struct {
@@ -24772,7 +25604,7 @@ func (r ApiUpdateStorageEnclosureDiskSlotEpRequest) IfMatch(ifMatch string) ApiU
 	return r
 }
 
-func (r ApiUpdateStorageEnclosureDiskSlotEpRequest) Execute() (StorageEnclosureDiskSlotEp, *_nethttp.Response, error) {
+func (r ApiUpdateStorageEnclosureDiskSlotEpRequest) Execute() (StorageEnclosureDiskSlotEp, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStorageEnclosureDiskSlotEpExecute(r)
 }
 
@@ -24794,19 +25626,21 @@ func (a *StorageApiService) UpdateStorageEnclosureDiskSlotEp(ctx _context.Contex
  * Execute executes the request
  * @return StorageEnclosureDiskSlotEp
  */
-func (a *StorageApiService) UpdateStorageEnclosureDiskSlotEpExecute(r ApiUpdateStorageEnclosureDiskSlotEpRequest) (StorageEnclosureDiskSlotEp, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStorageEnclosureDiskSlotEpExecute(r ApiUpdateStorageEnclosureDiskSlotEpRequest) (StorageEnclosureDiskSlotEp, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageEnclosureDiskSlotEp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageEnclosureDiskSlotEp")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/EnclosureDiskSlotEps/{Moid}"
@@ -24816,7 +25650,8 @@ func (a *StorageApiService) UpdateStorageEnclosureDiskSlotEpExecute(r ApiUpdateS
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageEnclosureDiskSlotEp == nil {
-		return localVarReturnValue, nil, reportError("storageEnclosureDiskSlotEp is required and must be specified")
+		executionError.error = "storageEnclosureDiskSlotEp is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -24843,18 +25678,22 @@ func (a *StorageApiService) UpdateStorageEnclosureDiskSlotEpExecute(r ApiUpdateS
 	localVarPostBody = r.storageEnclosureDiskSlotEp
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -24921,7 +25760,7 @@ func (a *StorageApiService) UpdateStorageEnclosureDiskSlotEpExecute(r ApiUpdateS
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStorageFlexFlashControllerRequest struct {
@@ -24941,7 +25780,7 @@ func (r ApiUpdateStorageFlexFlashControllerRequest) IfMatch(ifMatch string) ApiU
 	return r
 }
 
-func (r ApiUpdateStorageFlexFlashControllerRequest) Execute() (StorageFlexFlashController, *_nethttp.Response, error) {
+func (r ApiUpdateStorageFlexFlashControllerRequest) Execute() (StorageFlexFlashController, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStorageFlexFlashControllerExecute(r)
 }
 
@@ -24963,19 +25802,21 @@ func (a *StorageApiService) UpdateStorageFlexFlashController(ctx _context.Contex
  * Execute executes the request
  * @return StorageFlexFlashController
  */
-func (a *StorageApiService) UpdateStorageFlexFlashControllerExecute(r ApiUpdateStorageFlexFlashControllerRequest) (StorageFlexFlashController, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStorageFlexFlashControllerExecute(r ApiUpdateStorageFlexFlashControllerRequest) (StorageFlexFlashController, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexFlashController
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageFlexFlashController")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexFlashControllers/{Moid}"
@@ -24985,7 +25826,8 @@ func (a *StorageApiService) UpdateStorageFlexFlashControllerExecute(r ApiUpdateS
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageFlexFlashController == nil {
-		return localVarReturnValue, nil, reportError("storageFlexFlashController is required and must be specified")
+		executionError.error = "storageFlexFlashController is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -25012,18 +25854,22 @@ func (a *StorageApiService) UpdateStorageFlexFlashControllerExecute(r ApiUpdateS
 	localVarPostBody = r.storageFlexFlashController
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -25090,7 +25936,7 @@ func (a *StorageApiService) UpdateStorageFlexFlashControllerExecute(r ApiUpdateS
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStorageFlexFlashControllerPropsRequest struct {
@@ -25110,7 +25956,7 @@ func (r ApiUpdateStorageFlexFlashControllerPropsRequest) IfMatch(ifMatch string)
 	return r
 }
 
-func (r ApiUpdateStorageFlexFlashControllerPropsRequest) Execute() (StorageFlexFlashControllerProps, *_nethttp.Response, error) {
+func (r ApiUpdateStorageFlexFlashControllerPropsRequest) Execute() (StorageFlexFlashControllerProps, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStorageFlexFlashControllerPropsExecute(r)
 }
 
@@ -25132,19 +25978,21 @@ func (a *StorageApiService) UpdateStorageFlexFlashControllerProps(ctx _context.C
  * Execute executes the request
  * @return StorageFlexFlashControllerProps
  */
-func (a *StorageApiService) UpdateStorageFlexFlashControllerPropsExecute(r ApiUpdateStorageFlexFlashControllerPropsRequest) (StorageFlexFlashControllerProps, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStorageFlexFlashControllerPropsExecute(r ApiUpdateStorageFlexFlashControllerPropsRequest) (StorageFlexFlashControllerProps, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexFlashControllerProps
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageFlexFlashControllerProps")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexFlashControllerProps/{Moid}"
@@ -25154,7 +26002,8 @@ func (a *StorageApiService) UpdateStorageFlexFlashControllerPropsExecute(r ApiUp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageFlexFlashControllerProps == nil {
-		return localVarReturnValue, nil, reportError("storageFlexFlashControllerProps is required and must be specified")
+		executionError.error = "storageFlexFlashControllerProps is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -25181,18 +26030,22 @@ func (a *StorageApiService) UpdateStorageFlexFlashControllerPropsExecute(r ApiUp
 	localVarPostBody = r.storageFlexFlashControllerProps
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -25259,7 +26112,7 @@ func (a *StorageApiService) UpdateStorageFlexFlashControllerPropsExecute(r ApiUp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStorageFlexFlashPhysicalDriveRequest struct {
@@ -25279,7 +26132,7 @@ func (r ApiUpdateStorageFlexFlashPhysicalDriveRequest) IfMatch(ifMatch string) A
 	return r
 }
 
-func (r ApiUpdateStorageFlexFlashPhysicalDriveRequest) Execute() (StorageFlexFlashPhysicalDrive, *_nethttp.Response, error) {
+func (r ApiUpdateStorageFlexFlashPhysicalDriveRequest) Execute() (StorageFlexFlashPhysicalDrive, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStorageFlexFlashPhysicalDriveExecute(r)
 }
 
@@ -25301,19 +26154,21 @@ func (a *StorageApiService) UpdateStorageFlexFlashPhysicalDrive(ctx _context.Con
  * Execute executes the request
  * @return StorageFlexFlashPhysicalDrive
  */
-func (a *StorageApiService) UpdateStorageFlexFlashPhysicalDriveExecute(r ApiUpdateStorageFlexFlashPhysicalDriveRequest) (StorageFlexFlashPhysicalDrive, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStorageFlexFlashPhysicalDriveExecute(r ApiUpdateStorageFlexFlashPhysicalDriveRequest) (StorageFlexFlashPhysicalDrive, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexFlashPhysicalDrive
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageFlexFlashPhysicalDrive")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexFlashPhysicalDrives/{Moid}"
@@ -25323,7 +26178,8 @@ func (a *StorageApiService) UpdateStorageFlexFlashPhysicalDriveExecute(r ApiUpda
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageFlexFlashPhysicalDrive == nil {
-		return localVarReturnValue, nil, reportError("storageFlexFlashPhysicalDrive is required and must be specified")
+		executionError.error = "storageFlexFlashPhysicalDrive is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -25350,18 +26206,22 @@ func (a *StorageApiService) UpdateStorageFlexFlashPhysicalDriveExecute(r ApiUpda
 	localVarPostBody = r.storageFlexFlashPhysicalDrive
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -25428,7 +26288,7 @@ func (a *StorageApiService) UpdateStorageFlexFlashPhysicalDriveExecute(r ApiUpda
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStorageFlexFlashVirtualDriveRequest struct {
@@ -25448,7 +26308,7 @@ func (r ApiUpdateStorageFlexFlashVirtualDriveRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiUpdateStorageFlexFlashVirtualDriveRequest) Execute() (StorageFlexFlashVirtualDrive, *_nethttp.Response, error) {
+func (r ApiUpdateStorageFlexFlashVirtualDriveRequest) Execute() (StorageFlexFlashVirtualDrive, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStorageFlexFlashVirtualDriveExecute(r)
 }
 
@@ -25470,19 +26330,21 @@ func (a *StorageApiService) UpdateStorageFlexFlashVirtualDrive(ctx _context.Cont
  * Execute executes the request
  * @return StorageFlexFlashVirtualDrive
  */
-func (a *StorageApiService) UpdateStorageFlexFlashVirtualDriveExecute(r ApiUpdateStorageFlexFlashVirtualDriveRequest) (StorageFlexFlashVirtualDrive, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStorageFlexFlashVirtualDriveExecute(r ApiUpdateStorageFlexFlashVirtualDriveRequest) (StorageFlexFlashVirtualDrive, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexFlashVirtualDrive
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageFlexFlashVirtualDrive")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexFlashVirtualDrives/{Moid}"
@@ -25492,7 +26354,8 @@ func (a *StorageApiService) UpdateStorageFlexFlashVirtualDriveExecute(r ApiUpdat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageFlexFlashVirtualDrive == nil {
-		return localVarReturnValue, nil, reportError("storageFlexFlashVirtualDrive is required and must be specified")
+		executionError.error = "storageFlexFlashVirtualDrive is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -25519,18 +26382,22 @@ func (a *StorageApiService) UpdateStorageFlexFlashVirtualDriveExecute(r ApiUpdat
 	localVarPostBody = r.storageFlexFlashVirtualDrive
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -25597,7 +26464,7 @@ func (a *StorageApiService) UpdateStorageFlexFlashVirtualDriveExecute(r ApiUpdat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStorageFlexUtilControllerRequest struct {
@@ -25617,7 +26484,7 @@ func (r ApiUpdateStorageFlexUtilControllerRequest) IfMatch(ifMatch string) ApiUp
 	return r
 }
 
-func (r ApiUpdateStorageFlexUtilControllerRequest) Execute() (StorageFlexUtilController, *_nethttp.Response, error) {
+func (r ApiUpdateStorageFlexUtilControllerRequest) Execute() (StorageFlexUtilController, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStorageFlexUtilControllerExecute(r)
 }
 
@@ -25639,19 +26506,21 @@ func (a *StorageApiService) UpdateStorageFlexUtilController(ctx _context.Context
  * Execute executes the request
  * @return StorageFlexUtilController
  */
-func (a *StorageApiService) UpdateStorageFlexUtilControllerExecute(r ApiUpdateStorageFlexUtilControllerRequest) (StorageFlexUtilController, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStorageFlexUtilControllerExecute(r ApiUpdateStorageFlexUtilControllerRequest) (StorageFlexUtilController, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexUtilController
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageFlexUtilController")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexUtilControllers/{Moid}"
@@ -25661,7 +26530,8 @@ func (a *StorageApiService) UpdateStorageFlexUtilControllerExecute(r ApiUpdateSt
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageFlexUtilController == nil {
-		return localVarReturnValue, nil, reportError("storageFlexUtilController is required and must be specified")
+		executionError.error = "storageFlexUtilController is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -25688,18 +26558,22 @@ func (a *StorageApiService) UpdateStorageFlexUtilControllerExecute(r ApiUpdateSt
 	localVarPostBody = r.storageFlexUtilController
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -25766,7 +26640,7 @@ func (a *StorageApiService) UpdateStorageFlexUtilControllerExecute(r ApiUpdateSt
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStorageFlexUtilPhysicalDriveRequest struct {
@@ -25786,7 +26660,7 @@ func (r ApiUpdateStorageFlexUtilPhysicalDriveRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiUpdateStorageFlexUtilPhysicalDriveRequest) Execute() (StorageFlexUtilPhysicalDrive, *_nethttp.Response, error) {
+func (r ApiUpdateStorageFlexUtilPhysicalDriveRequest) Execute() (StorageFlexUtilPhysicalDrive, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStorageFlexUtilPhysicalDriveExecute(r)
 }
 
@@ -25808,19 +26682,21 @@ func (a *StorageApiService) UpdateStorageFlexUtilPhysicalDrive(ctx _context.Cont
  * Execute executes the request
  * @return StorageFlexUtilPhysicalDrive
  */
-func (a *StorageApiService) UpdateStorageFlexUtilPhysicalDriveExecute(r ApiUpdateStorageFlexUtilPhysicalDriveRequest) (StorageFlexUtilPhysicalDrive, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStorageFlexUtilPhysicalDriveExecute(r ApiUpdateStorageFlexUtilPhysicalDriveRequest) (StorageFlexUtilPhysicalDrive, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexUtilPhysicalDrive
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageFlexUtilPhysicalDrive")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexUtilPhysicalDrives/{Moid}"
@@ -25830,7 +26706,8 @@ func (a *StorageApiService) UpdateStorageFlexUtilPhysicalDriveExecute(r ApiUpdat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageFlexUtilPhysicalDrive == nil {
-		return localVarReturnValue, nil, reportError("storageFlexUtilPhysicalDrive is required and must be specified")
+		executionError.error = "storageFlexUtilPhysicalDrive is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -25857,18 +26734,22 @@ func (a *StorageApiService) UpdateStorageFlexUtilPhysicalDriveExecute(r ApiUpdat
 	localVarPostBody = r.storageFlexUtilPhysicalDrive
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -25935,7 +26816,7 @@ func (a *StorageApiService) UpdateStorageFlexUtilPhysicalDriveExecute(r ApiUpdat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStorageFlexUtilVirtualDriveRequest struct {
@@ -25955,7 +26836,7 @@ func (r ApiUpdateStorageFlexUtilVirtualDriveRequest) IfMatch(ifMatch string) Api
 	return r
 }
 
-func (r ApiUpdateStorageFlexUtilVirtualDriveRequest) Execute() (StorageFlexUtilVirtualDrive, *_nethttp.Response, error) {
+func (r ApiUpdateStorageFlexUtilVirtualDriveRequest) Execute() (StorageFlexUtilVirtualDrive, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStorageFlexUtilVirtualDriveExecute(r)
 }
 
@@ -25977,19 +26858,21 @@ func (a *StorageApiService) UpdateStorageFlexUtilVirtualDrive(ctx _context.Conte
  * Execute executes the request
  * @return StorageFlexUtilVirtualDrive
  */
-func (a *StorageApiService) UpdateStorageFlexUtilVirtualDriveExecute(r ApiUpdateStorageFlexUtilVirtualDriveRequest) (StorageFlexUtilVirtualDrive, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStorageFlexUtilVirtualDriveExecute(r ApiUpdateStorageFlexUtilVirtualDriveRequest) (StorageFlexUtilVirtualDrive, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageFlexUtilVirtualDrive
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageFlexUtilVirtualDrive")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/FlexUtilVirtualDrives/{Moid}"
@@ -25999,7 +26882,8 @@ func (a *StorageApiService) UpdateStorageFlexUtilVirtualDriveExecute(r ApiUpdate
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageFlexUtilVirtualDrive == nil {
-		return localVarReturnValue, nil, reportError("storageFlexUtilVirtualDrive is required and must be specified")
+		executionError.error = "storageFlexUtilVirtualDrive is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -26026,18 +26910,22 @@ func (a *StorageApiService) UpdateStorageFlexUtilVirtualDriveExecute(r ApiUpdate
 	localVarPostBody = r.storageFlexUtilVirtualDrive
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -26104,7 +26992,7 @@ func (a *StorageApiService) UpdateStorageFlexUtilVirtualDriveExecute(r ApiUpdate
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStorageHitachiArrayRequest struct {
@@ -26124,7 +27012,7 @@ func (r ApiUpdateStorageHitachiArrayRequest) IfMatch(ifMatch string) ApiUpdateSt
 	return r
 }
 
-func (r ApiUpdateStorageHitachiArrayRequest) Execute() (StorageHitachiArray, *_nethttp.Response, error) {
+func (r ApiUpdateStorageHitachiArrayRequest) Execute() (StorageHitachiArray, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStorageHitachiArrayExecute(r)
 }
 
@@ -26146,19 +27034,21 @@ func (a *StorageApiService) UpdateStorageHitachiArray(ctx _context.Context, moid
  * Execute executes the request
  * @return StorageHitachiArray
  */
-func (a *StorageApiService) UpdateStorageHitachiArrayExecute(r ApiUpdateStorageHitachiArrayRequest) (StorageHitachiArray, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStorageHitachiArrayExecute(r ApiUpdateStorageHitachiArrayRequest) (StorageHitachiArray, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageHitachiArray
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageHitachiArray")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/HitachiArrays/{Moid}"
@@ -26168,7 +27058,8 @@ func (a *StorageApiService) UpdateStorageHitachiArrayExecute(r ApiUpdateStorageH
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageHitachiArray == nil {
-		return localVarReturnValue, nil, reportError("storageHitachiArray is required and must be specified")
+		executionError.error = "storageHitachiArray is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -26195,18 +27086,22 @@ func (a *StorageApiService) UpdateStorageHitachiArrayExecute(r ApiUpdateStorageH
 	localVarPostBody = r.storageHitachiArray
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -26273,7 +27168,7 @@ func (a *StorageApiService) UpdateStorageHitachiArrayExecute(r ApiUpdateStorageH
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStoragePhysicalDiskRequest struct {
@@ -26293,7 +27188,7 @@ func (r ApiUpdateStoragePhysicalDiskRequest) IfMatch(ifMatch string) ApiUpdateSt
 	return r
 }
 
-func (r ApiUpdateStoragePhysicalDiskRequest) Execute() (StoragePhysicalDisk, *_nethttp.Response, error) {
+func (r ApiUpdateStoragePhysicalDiskRequest) Execute() (StoragePhysicalDisk, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStoragePhysicalDiskExecute(r)
 }
 
@@ -26315,19 +27210,21 @@ func (a *StorageApiService) UpdateStoragePhysicalDisk(ctx _context.Context, moid
  * Execute executes the request
  * @return StoragePhysicalDisk
  */
-func (a *StorageApiService) UpdateStoragePhysicalDiskExecute(r ApiUpdateStoragePhysicalDiskRequest) (StoragePhysicalDisk, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStoragePhysicalDiskExecute(r ApiUpdateStoragePhysicalDiskRequest) (StoragePhysicalDisk, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePhysicalDisk
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStoragePhysicalDisk")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PhysicalDisks/{Moid}"
@@ -26337,7 +27234,8 @@ func (a *StorageApiService) UpdateStoragePhysicalDiskExecute(r ApiUpdateStorageP
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storagePhysicalDisk == nil {
-		return localVarReturnValue, nil, reportError("storagePhysicalDisk is required and must be specified")
+		executionError.error = "storagePhysicalDisk is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -26364,18 +27262,22 @@ func (a *StorageApiService) UpdateStoragePhysicalDiskExecute(r ApiUpdateStorageP
 	localVarPostBody = r.storagePhysicalDisk
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -26442,7 +27344,7 @@ func (a *StorageApiService) UpdateStoragePhysicalDiskExecute(r ApiUpdateStorageP
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStoragePhysicalDiskExtensionRequest struct {
@@ -26462,7 +27364,7 @@ func (r ApiUpdateStoragePhysicalDiskExtensionRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiUpdateStoragePhysicalDiskExtensionRequest) Execute() (StoragePhysicalDiskExtension, *_nethttp.Response, error) {
+func (r ApiUpdateStoragePhysicalDiskExtensionRequest) Execute() (StoragePhysicalDiskExtension, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStoragePhysicalDiskExtensionExecute(r)
 }
 
@@ -26484,19 +27386,21 @@ func (a *StorageApiService) UpdateStoragePhysicalDiskExtension(ctx _context.Cont
  * Execute executes the request
  * @return StoragePhysicalDiskExtension
  */
-func (a *StorageApiService) UpdateStoragePhysicalDiskExtensionExecute(r ApiUpdateStoragePhysicalDiskExtensionRequest) (StoragePhysicalDiskExtension, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStoragePhysicalDiskExtensionExecute(r ApiUpdateStoragePhysicalDiskExtensionRequest) (StoragePhysicalDiskExtension, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePhysicalDiskExtension
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStoragePhysicalDiskExtension")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PhysicalDiskExtensions/{Moid}"
@@ -26506,7 +27410,8 @@ func (a *StorageApiService) UpdateStoragePhysicalDiskExtensionExecute(r ApiUpdat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storagePhysicalDiskExtension == nil {
-		return localVarReturnValue, nil, reportError("storagePhysicalDiskExtension is required and must be specified")
+		executionError.error = "storagePhysicalDiskExtension is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -26533,18 +27438,22 @@ func (a *StorageApiService) UpdateStoragePhysicalDiskExtensionExecute(r ApiUpdat
 	localVarPostBody = r.storagePhysicalDiskExtension
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -26611,7 +27520,7 @@ func (a *StorageApiService) UpdateStoragePhysicalDiskExtensionExecute(r ApiUpdat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStoragePhysicalDiskUsageRequest struct {
@@ -26631,7 +27540,7 @@ func (r ApiUpdateStoragePhysicalDiskUsageRequest) IfMatch(ifMatch string) ApiUpd
 	return r
 }
 
-func (r ApiUpdateStoragePhysicalDiskUsageRequest) Execute() (StoragePhysicalDiskUsage, *_nethttp.Response, error) {
+func (r ApiUpdateStoragePhysicalDiskUsageRequest) Execute() (StoragePhysicalDiskUsage, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStoragePhysicalDiskUsageExecute(r)
 }
 
@@ -26653,19 +27562,21 @@ func (a *StorageApiService) UpdateStoragePhysicalDiskUsage(ctx _context.Context,
  * Execute executes the request
  * @return StoragePhysicalDiskUsage
  */
-func (a *StorageApiService) UpdateStoragePhysicalDiskUsageExecute(r ApiUpdateStoragePhysicalDiskUsageRequest) (StoragePhysicalDiskUsage, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStoragePhysicalDiskUsageExecute(r ApiUpdateStoragePhysicalDiskUsageRequest) (StoragePhysicalDiskUsage, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePhysicalDiskUsage
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStoragePhysicalDiskUsage")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PhysicalDiskUsages/{Moid}"
@@ -26675,7 +27586,8 @@ func (a *StorageApiService) UpdateStoragePhysicalDiskUsageExecute(r ApiUpdateSto
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storagePhysicalDiskUsage == nil {
-		return localVarReturnValue, nil, reportError("storagePhysicalDiskUsage is required and must be specified")
+		executionError.error = "storagePhysicalDiskUsage is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -26702,18 +27614,22 @@ func (a *StorageApiService) UpdateStoragePhysicalDiskUsageExecute(r ApiUpdateSto
 	localVarPostBody = r.storagePhysicalDiskUsage
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -26780,7 +27696,7 @@ func (a *StorageApiService) UpdateStoragePhysicalDiskUsageExecute(r ApiUpdateSto
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStoragePureArrayRequest struct {
@@ -26800,7 +27716,7 @@ func (r ApiUpdateStoragePureArrayRequest) IfMatch(ifMatch string) ApiUpdateStora
 	return r
 }
 
-func (r ApiUpdateStoragePureArrayRequest) Execute() (StoragePureArray, *_nethttp.Response, error) {
+func (r ApiUpdateStoragePureArrayRequest) Execute() (StoragePureArray, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStoragePureArrayExecute(r)
 }
 
@@ -26822,19 +27738,21 @@ func (a *StorageApiService) UpdateStoragePureArray(ctx _context.Context, moid st
  * Execute executes the request
  * @return StoragePureArray
  */
-func (a *StorageApiService) UpdateStoragePureArrayExecute(r ApiUpdateStoragePureArrayRequest) (StoragePureArray, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStoragePureArrayExecute(r ApiUpdateStoragePureArrayRequest) (StoragePureArray, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StoragePureArray
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStoragePureArray")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/PureArrays/{Moid}"
@@ -26844,7 +27762,8 @@ func (a *StorageApiService) UpdateStoragePureArrayExecute(r ApiUpdateStoragePure
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storagePureArray == nil {
-		return localVarReturnValue, nil, reportError("storagePureArray is required and must be specified")
+		executionError.error = "storagePureArray is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -26871,18 +27790,22 @@ func (a *StorageApiService) UpdateStoragePureArrayExecute(r ApiUpdateStoragePure
 	localVarPostBody = r.storagePureArray
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -26949,7 +27872,7 @@ func (a *StorageApiService) UpdateStoragePureArrayExecute(r ApiUpdateStoragePure
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStorageSasExpanderRequest struct {
@@ -26969,7 +27892,7 @@ func (r ApiUpdateStorageSasExpanderRequest) IfMatch(ifMatch string) ApiUpdateSto
 	return r
 }
 
-func (r ApiUpdateStorageSasExpanderRequest) Execute() (StorageSasExpander, *_nethttp.Response, error) {
+func (r ApiUpdateStorageSasExpanderRequest) Execute() (StorageSasExpander, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStorageSasExpanderExecute(r)
 }
 
@@ -26991,19 +27914,21 @@ func (a *StorageApiService) UpdateStorageSasExpander(ctx _context.Context, moid 
  * Execute executes the request
  * @return StorageSasExpander
  */
-func (a *StorageApiService) UpdateStorageSasExpanderExecute(r ApiUpdateStorageSasExpanderRequest) (StorageSasExpander, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStorageSasExpanderExecute(r ApiUpdateStorageSasExpanderRequest) (StorageSasExpander, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageSasExpander
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageSasExpander")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/SasExpanders/{Moid}"
@@ -27013,7 +27938,8 @@ func (a *StorageApiService) UpdateStorageSasExpanderExecute(r ApiUpdateStorageSa
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageSasExpander == nil {
-		return localVarReturnValue, nil, reportError("storageSasExpander is required and must be specified")
+		executionError.error = "storageSasExpander is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -27040,18 +27966,22 @@ func (a *StorageApiService) UpdateStorageSasExpanderExecute(r ApiUpdateStorageSa
 	localVarPostBody = r.storageSasExpander
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -27118,7 +28048,7 @@ func (a *StorageApiService) UpdateStorageSasExpanderExecute(r ApiUpdateStorageSa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStorageSasPortRequest struct {
@@ -27138,7 +28068,7 @@ func (r ApiUpdateStorageSasPortRequest) IfMatch(ifMatch string) ApiUpdateStorage
 	return r
 }
 
-func (r ApiUpdateStorageSasPortRequest) Execute() (StorageSasPort, *_nethttp.Response, error) {
+func (r ApiUpdateStorageSasPortRequest) Execute() (StorageSasPort, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStorageSasPortExecute(r)
 }
 
@@ -27160,19 +28090,21 @@ func (a *StorageApiService) UpdateStorageSasPort(ctx _context.Context, moid stri
  * Execute executes the request
  * @return StorageSasPort
  */
-func (a *StorageApiService) UpdateStorageSasPortExecute(r ApiUpdateStorageSasPortRequest) (StorageSasPort, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStorageSasPortExecute(r ApiUpdateStorageSasPortRequest) (StorageSasPort, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageSasPort
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageSasPort")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/SasPorts/{Moid}"
@@ -27182,7 +28114,8 @@ func (a *StorageApiService) UpdateStorageSasPortExecute(r ApiUpdateStorageSasPor
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageSasPort == nil {
-		return localVarReturnValue, nil, reportError("storageSasPort is required and must be specified")
+		executionError.error = "storageSasPort is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -27209,18 +28142,22 @@ func (a *StorageApiService) UpdateStorageSasPortExecute(r ApiUpdateStorageSasPor
 	localVarPostBody = r.storageSasPort
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -27287,7 +28224,7 @@ func (a *StorageApiService) UpdateStorageSasPortExecute(r ApiUpdateStorageSasPor
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStorageSpanRequest struct {
@@ -27307,7 +28244,7 @@ func (r ApiUpdateStorageSpanRequest) IfMatch(ifMatch string) ApiUpdateStorageSpa
 	return r
 }
 
-func (r ApiUpdateStorageSpanRequest) Execute() (StorageSpan, *_nethttp.Response, error) {
+func (r ApiUpdateStorageSpanRequest) Execute() (StorageSpan, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStorageSpanExecute(r)
 }
 
@@ -27329,19 +28266,21 @@ func (a *StorageApiService) UpdateStorageSpan(ctx _context.Context, moid string)
  * Execute executes the request
  * @return StorageSpan
  */
-func (a *StorageApiService) UpdateStorageSpanExecute(r ApiUpdateStorageSpanRequest) (StorageSpan, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStorageSpanExecute(r ApiUpdateStorageSpanRequest) (StorageSpan, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageSpan
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageSpan")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/Spans/{Moid}"
@@ -27351,7 +28290,8 @@ func (a *StorageApiService) UpdateStorageSpanExecute(r ApiUpdateStorageSpanReque
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageSpan == nil {
-		return localVarReturnValue, nil, reportError("storageSpan is required and must be specified")
+		executionError.error = "storageSpan is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -27378,18 +28318,22 @@ func (a *StorageApiService) UpdateStorageSpanExecute(r ApiUpdateStorageSpanReque
 	localVarPostBody = r.storageSpan
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -27456,7 +28400,7 @@ func (a *StorageApiService) UpdateStorageSpanExecute(r ApiUpdateStorageSpanReque
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStorageStoragePolicyRequest struct {
@@ -27476,7 +28420,7 @@ func (r ApiUpdateStorageStoragePolicyRequest) IfMatch(ifMatch string) ApiUpdateS
 	return r
 }
 
-func (r ApiUpdateStorageStoragePolicyRequest) Execute() (StorageStoragePolicy, *_nethttp.Response, error) {
+func (r ApiUpdateStorageStoragePolicyRequest) Execute() (StorageStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStorageStoragePolicyExecute(r)
 }
 
@@ -27498,19 +28442,21 @@ func (a *StorageApiService) UpdateStorageStoragePolicy(ctx _context.Context, moi
  * Execute executes the request
  * @return StorageStoragePolicy
  */
-func (a *StorageApiService) UpdateStorageStoragePolicyExecute(r ApiUpdateStorageStoragePolicyRequest) (StorageStoragePolicy, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStorageStoragePolicyExecute(r ApiUpdateStorageStoragePolicyRequest) (StorageStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageStoragePolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageStoragePolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/StoragePolicies/{Moid}"
@@ -27520,7 +28466,8 @@ func (a *StorageApiService) UpdateStorageStoragePolicyExecute(r ApiUpdateStorage
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageStoragePolicy == nil {
-		return localVarReturnValue, nil, reportError("storageStoragePolicy is required and must be specified")
+		executionError.error = "storageStoragePolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -27547,18 +28494,22 @@ func (a *StorageApiService) UpdateStorageStoragePolicyExecute(r ApiUpdateStorage
 	localVarPostBody = r.storageStoragePolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -27625,7 +28576,7 @@ func (a *StorageApiService) UpdateStorageStoragePolicyExecute(r ApiUpdateStorage
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStorageVdMemberEpRequest struct {
@@ -27645,7 +28596,7 @@ func (r ApiUpdateStorageVdMemberEpRequest) IfMatch(ifMatch string) ApiUpdateStor
 	return r
 }
 
-func (r ApiUpdateStorageVdMemberEpRequest) Execute() (StorageVdMemberEp, *_nethttp.Response, error) {
+func (r ApiUpdateStorageVdMemberEpRequest) Execute() (StorageVdMemberEp, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStorageVdMemberEpExecute(r)
 }
 
@@ -27667,19 +28618,21 @@ func (a *StorageApiService) UpdateStorageVdMemberEp(ctx _context.Context, moid s
  * Execute executes the request
  * @return StorageVdMemberEp
  */
-func (a *StorageApiService) UpdateStorageVdMemberEpExecute(r ApiUpdateStorageVdMemberEpRequest) (StorageVdMemberEp, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStorageVdMemberEpExecute(r ApiUpdateStorageVdMemberEpRequest) (StorageVdMemberEp, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageVdMemberEp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageVdMemberEp")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/VdMemberEps/{Moid}"
@@ -27689,7 +28642,8 @@ func (a *StorageApiService) UpdateStorageVdMemberEpExecute(r ApiUpdateStorageVdM
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageVdMemberEp == nil {
-		return localVarReturnValue, nil, reportError("storageVdMemberEp is required and must be specified")
+		executionError.error = "storageVdMemberEp is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -27716,18 +28670,22 @@ func (a *StorageApiService) UpdateStorageVdMemberEpExecute(r ApiUpdateStorageVdM
 	localVarPostBody = r.storageVdMemberEp
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -27794,7 +28752,7 @@ func (a *StorageApiService) UpdateStorageVdMemberEpExecute(r ApiUpdateStorageVdM
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStorageVirtualDriveRequest struct {
@@ -27814,7 +28772,7 @@ func (r ApiUpdateStorageVirtualDriveRequest) IfMatch(ifMatch string) ApiUpdateSt
 	return r
 }
 
-func (r ApiUpdateStorageVirtualDriveRequest) Execute() (StorageVirtualDrive, *_nethttp.Response, error) {
+func (r ApiUpdateStorageVirtualDriveRequest) Execute() (StorageVirtualDrive, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStorageVirtualDriveExecute(r)
 }
 
@@ -27836,19 +28794,21 @@ func (a *StorageApiService) UpdateStorageVirtualDrive(ctx _context.Context, moid
  * Execute executes the request
  * @return StorageVirtualDrive
  */
-func (a *StorageApiService) UpdateStorageVirtualDriveExecute(r ApiUpdateStorageVirtualDriveRequest) (StorageVirtualDrive, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStorageVirtualDriveExecute(r ApiUpdateStorageVirtualDriveRequest) (StorageVirtualDrive, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageVirtualDrive
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageVirtualDrive")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/VirtualDrives/{Moid}"
@@ -27858,7 +28818,8 @@ func (a *StorageApiService) UpdateStorageVirtualDriveExecute(r ApiUpdateStorageV
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageVirtualDrive == nil {
-		return localVarReturnValue, nil, reportError("storageVirtualDrive is required and must be specified")
+		executionError.error = "storageVirtualDrive is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -27885,18 +28846,22 @@ func (a *StorageApiService) UpdateStorageVirtualDriveExecute(r ApiUpdateStorageV
 	localVarPostBody = r.storageVirtualDrive
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -27963,7 +28928,7 @@ func (a *StorageApiService) UpdateStorageVirtualDriveExecute(r ApiUpdateStorageV
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStorageVirtualDriveContainerRequest struct {
@@ -27983,7 +28948,7 @@ func (r ApiUpdateStorageVirtualDriveContainerRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiUpdateStorageVirtualDriveContainerRequest) Execute() (StorageVirtualDriveContainer, *_nethttp.Response, error) {
+func (r ApiUpdateStorageVirtualDriveContainerRequest) Execute() (StorageVirtualDriveContainer, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStorageVirtualDriveContainerExecute(r)
 }
 
@@ -28005,19 +28970,21 @@ func (a *StorageApiService) UpdateStorageVirtualDriveContainer(ctx _context.Cont
  * Execute executes the request
  * @return StorageVirtualDriveContainer
  */
-func (a *StorageApiService) UpdateStorageVirtualDriveContainerExecute(r ApiUpdateStorageVirtualDriveContainerRequest) (StorageVirtualDriveContainer, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStorageVirtualDriveContainerExecute(r ApiUpdateStorageVirtualDriveContainerRequest) (StorageVirtualDriveContainer, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageVirtualDriveContainer
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageVirtualDriveContainer")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/VirtualDriveContainers/{Moid}"
@@ -28027,7 +28994,8 @@ func (a *StorageApiService) UpdateStorageVirtualDriveContainerExecute(r ApiUpdat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageVirtualDriveContainer == nil {
-		return localVarReturnValue, nil, reportError("storageVirtualDriveContainer is required and must be specified")
+		executionError.error = "storageVirtualDriveContainer is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -28054,18 +29022,22 @@ func (a *StorageApiService) UpdateStorageVirtualDriveContainerExecute(r ApiUpdat
 	localVarPostBody = r.storageVirtualDriveContainer
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -28132,7 +29104,7 @@ func (a *StorageApiService) UpdateStorageVirtualDriveContainerExecute(r ApiUpdat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateStorageVirtualDriveExtensionRequest struct {
@@ -28152,7 +29124,7 @@ func (r ApiUpdateStorageVirtualDriveExtensionRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiUpdateStorageVirtualDriveExtensionRequest) Execute() (StorageVirtualDriveExtension, *_nethttp.Response, error) {
+func (r ApiUpdateStorageVirtualDriveExtensionRequest) Execute() (StorageVirtualDriveExtension, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateStorageVirtualDriveExtensionExecute(r)
 }
 
@@ -28174,19 +29146,21 @@ func (a *StorageApiService) UpdateStorageVirtualDriveExtension(ctx _context.Cont
  * Execute executes the request
  * @return StorageVirtualDriveExtension
  */
-func (a *StorageApiService) UpdateStorageVirtualDriveExtensionExecute(r ApiUpdateStorageVirtualDriveExtensionRequest) (StorageVirtualDriveExtension, *_nethttp.Response, error) {
+func (a *StorageApiService) UpdateStorageVirtualDriveExtensionExecute(r ApiUpdateStorageVirtualDriveExtensionRequest) (StorageVirtualDriveExtension, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  StorageVirtualDriveExtension
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StorageApiService.UpdateStorageVirtualDriveExtension")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/storage/VirtualDriveExtensions/{Moid}"
@@ -28196,7 +29170,8 @@ func (a *StorageApiService) UpdateStorageVirtualDriveExtensionExecute(r ApiUpdat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.storageVirtualDriveExtension == nil {
-		return localVarReturnValue, nil, reportError("storageVirtualDriveExtension is required and must be specified")
+		executionError.error = "storageVirtualDriveExtension is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -28223,18 +29198,22 @@ func (a *StorageApiService) UpdateStorageVirtualDriveExtensionExecute(r ApiUpdat
 	localVarPostBody = r.storageVirtualDriveExtension
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -28301,5 +29280,5 @@ func (a *StorageApiService) UpdateStorageVirtualDriveExtensionExecute(r ApiUpdat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }

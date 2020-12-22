@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceIamEndPointUserRole() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceIamEndPointUserRoleCreate,
-		Read:   resourceIamEndPointUserRoleRead,
-		Update: resourceIamEndPointUserRoleUpdate,
-		Delete: resourceIamEndPointUserRoleDelete,
+		CreateContext: resourceIamEndPointUserRoleCreate,
+		ReadContext:   resourceIamEndPointUserRoleRead,
+		UpdateContext: resourceIamEndPointUserRoleUpdate,
+		DeleteContext: resourceIamEndPointUserRoleDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -174,7 +177,7 @@ func resourceIamEndPointUserRole() *schema.Resource {
 				ForceNew:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -211,7 +214,7 @@ func resourceIamEndPointUserRole() *schema.Resource {
 	}
 }
 
-func resourceIamEndPointUserRoleCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceIamEndPointUserRoleCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -418,77 +421,81 @@ func resourceIamEndPointUserRoleCreate(d *schema.ResourceData, meta interface{})
 	}
 
 	r := conn.ApiClient.IamApi.CreateIamEndPointUserRole(conn.ctx).IamEndPointUserRole(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating IamEndPointUserRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceIamEndPointUserRoleRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceIamEndPointUserRoleRead(c, d, meta)
 }
 
-func resourceIamEndPointUserRoleRead(d *schema.ResourceData, meta interface{}) error {
+func resourceIamEndPointUserRoleRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.IamApi.GetIamEndPointUserRoleByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "IamEndPointUserRole object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching IamEndPointUserRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in IamEndPointUserRole object: %s", err.Error())
 	}
 
 	if err := d.Set("change_password", (s.GetChangePassword())); err != nil {
-		return fmt.Errorf("error occurred while setting property ChangePassword: %+v", err)
+		return diag.Errorf("error occurred while setting property ChangePassword in IamEndPointUserRole object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in IamEndPointUserRole object: %s", err.Error())
 	}
 
 	if err := d.Set("enabled", (s.GetEnabled())); err != nil {
-		return fmt.Errorf("error occurred while setting property Enabled: %+v", err)
+		return diag.Errorf("error occurred while setting property Enabled in IamEndPointUserRole object: %s", err.Error())
 	}
 
 	if err := d.Set("end_point_role", flattenListIamEndPointRoleRelationship(s.GetEndPointRole(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property EndPointRole: %+v", err)
+		return diag.Errorf("error occurred while setting property EndPointRole in IamEndPointUserRole object: %s", err.Error())
 	}
 
 	if err := d.Set("end_point_user", flattenMapIamEndPointUserRelationship(s.GetEndPointUser(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property EndPointUser: %+v", err)
+		return diag.Errorf("error occurred while setting property EndPointUser in IamEndPointUserRole object: %s", err.Error())
 	}
 
 	if err := d.Set("end_point_user_policy", flattenMapIamEndPointUserPolicyRelationship(s.GetEndPointUserPolicy(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property EndPointUserPolicy: %+v", err)
+		return diag.Errorf("error occurred while setting property EndPointUserPolicy in IamEndPointUserRole object: %s", err.Error())
 	}
 
 	if err := d.Set("is_password_set", (s.GetIsPasswordSet())); err != nil {
-		return fmt.Errorf("error occurred while setting property IsPasswordSet: %+v", err)
+		return diag.Errorf("error occurred while setting property IsPasswordSet in IamEndPointUserRole object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in IamEndPointUserRole object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in IamEndPointUserRole object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in IamEndPointUserRole object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceIamEndPointUserRoleUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceIamEndPointUserRoleUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -705,23 +712,24 @@ func resourceIamEndPointUserRoleUpdate(d *schema.ResourceData, meta interface{})
 	}
 
 	r := conn.ApiClient.IamApi.UpdateIamEndPointUserRole(conn.ctx, d.Id()).IamEndPointUserRole(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating IamEndPointUserRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamEndPointUserRoleRead(d, meta)
+	return resourceIamEndPointUserRoleRead(c, d, meta)
 }
 
-func resourceIamEndPointUserRoleDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceIamEndPointUserRoleDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamEndPointUserRole(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting IamEndPointUserRole object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceSoftwareHyperflexBundleDistributable() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceSoftwareHyperflexBundleDistributableRead,
+		ReadContext: dataSourceSoftwareHyperflexBundleDistributableRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -65,7 +66,7 @@ func dataSourceSoftwareHyperflexBundleDistributable() *schema.Resource {
 				Computed: true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -435,10 +436,11 @@ func dataSourceSoftwareHyperflexBundleDistributable() *schema.Resource {
 	}
 }
 
-func dataSourceSoftwareHyperflexBundleDistributableRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceSoftwareHyperflexBundleDistributableRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.SoftwareHyperflexBundleDistributable{}
 	if v, ok := d.GetOk("bundle_type"); ok {
 		x := (v.(string))
@@ -535,25 +537,25 @@ func dataSourceSoftwareHyperflexBundleDistributableRead(d *schema.ResourceData, 
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of SoftwareHyperflexBundleDistributable object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.SoftwareApi.GetSoftwareHyperflexBundleDistributableList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.SoftwareApi.GetSoftwareHyperflexBundleDistributableList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching SoftwareHyperflexBundleDistributable: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for SoftwareHyperflexBundleDistributable list: %s", err.Error())
 	}
 	var s = &models.SoftwareHyperflexBundleDistributableList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to SoftwareHyperflexBundleDistributable: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to SoftwareHyperflexBundleDistributable list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for SoftwareHyperflexBundleDistributable did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -562,113 +564,113 @@ func dataSourceSoftwareHyperflexBundleDistributableRead(d *schema.ResourceData, 
 			var s = &models.SoftwareHyperflexBundleDistributable{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("bundle_type", (s.GetBundleType())); err != nil {
-				return fmt.Errorf("error occurred while setting property BundleType: %+v", err)
+				return diag.Errorf("error occurred while setting property BundleType: %s", err.Error())
 			}
 
 			if err := d.Set("catalog", flattenMapSoftwarerepositoryCatalogRelationship(s.GetCatalog(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Catalog: %+v", err)
+				return diag.Errorf("error occurred while setting property Catalog: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 
 			if err := d.Set("component_meta", flattenListFirmwareComponentMeta(s.GetComponentMeta(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property ComponentMeta: %+v", err)
+				return diag.Errorf("error occurred while setting property ComponentMeta: %s", err.Error())
 			}
 			if err := d.Set("description", (s.GetDescription())); err != nil {
-				return fmt.Errorf("error occurred while setting property Description: %+v", err)
+				return diag.Errorf("error occurred while setting property Description: %s", err.Error())
 			}
 
 			if err := d.Set("distributable_metas", flattenListFirmwareDistributableMetaRelationship(s.GetDistributableMetas(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property DistributableMetas: %+v", err)
+				return diag.Errorf("error occurred while setting property DistributableMetas: %s", err.Error())
 			}
 			if err := d.Set("download_count", (s.GetDownloadCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property DownloadCount: %+v", err)
+				return diag.Errorf("error occurred while setting property DownloadCount: %s", err.Error())
 			}
 			if err := d.Set("guid", (s.GetGuid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Guid: %+v", err)
+				return diag.Errorf("error occurred while setting property Guid: %s", err.Error())
 			}
 
 			if err := d.Set("images", flattenListSoftwareHyperflexDistributableRelationship(s.GetImages(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Images: %+v", err)
+				return diag.Errorf("error occurred while setting property Images: %s", err.Error())
 			}
 			if err := d.Set("import_action", (s.GetImportAction())); err != nil {
-				return fmt.Errorf("error occurred while setting property ImportAction: %+v", err)
+				return diag.Errorf("error occurred while setting property ImportAction: %s", err.Error())
 			}
 			if err := d.Set("import_state", (s.GetImportState())); err != nil {
-				return fmt.Errorf("error occurred while setting property ImportState: %+v", err)
+				return diag.Errorf("error occurred while setting property ImportState: %s", err.Error())
 			}
 			if err := d.Set("md5e_tag", (s.GetMd5eTag())); err != nil {
-				return fmt.Errorf("error occurred while setting property Md5eTag: %+v", err)
+				return diag.Errorf("error occurred while setting property Md5eTag: %s", err.Error())
 			}
 			if err := d.Set("md5sum", (s.GetMd5sum())); err != nil {
-				return fmt.Errorf("error occurred while setting property Md5sum: %+v", err)
+				return diag.Errorf("error occurred while setting property Md5sum: %s", err.Error())
 			}
 			if err := d.Set("mdfid", (s.GetMdfid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Mdfid: %+v", err)
+				return diag.Errorf("error occurred while setting property Mdfid: %s", err.Error())
 			}
 			if err := d.Set("model", (s.GetModel())); err != nil {
-				return fmt.Errorf("error occurred while setting property Model: %+v", err)
+				return diag.Errorf("error occurred while setting property Model: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("name", (s.GetName())); err != nil {
-				return fmt.Errorf("error occurred while setting property Name: %+v", err)
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("platform_type", (s.GetPlatformType())); err != nil {
-				return fmt.Errorf("error occurred while setting property PlatformType: %+v", err)
+				return diag.Errorf("error occurred while setting property PlatformType: %s", err.Error())
 			}
 			if err := d.Set("recommended_build", (s.GetRecommendedBuild())); err != nil {
-				return fmt.Errorf("error occurred while setting property RecommendedBuild: %+v", err)
+				return diag.Errorf("error occurred while setting property RecommendedBuild: %s", err.Error())
 			}
 
 			if err := d.Set("release", flattenMapSoftwarerepositoryReleaseRelationship(s.GetRelease(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Release: %+v", err)
+				return diag.Errorf("error occurred while setting property Release: %s", err.Error())
 			}
 			if err := d.Set("release_notes_url", (s.GetReleaseNotesUrl())); err != nil {
-				return fmt.Errorf("error occurred while setting property ReleaseNotesUrl: %+v", err)
+				return diag.Errorf("error occurred while setting property ReleaseNotesUrl: %s", err.Error())
 			}
 			if err := d.Set("sha512sum", (s.GetSha512sum())); err != nil {
-				return fmt.Errorf("error occurred while setting property Sha512sum: %+v", err)
+				return diag.Errorf("error occurred while setting property Sha512sum: %s", err.Error())
 			}
 			if err := d.Set("size", (s.GetSize())); err != nil {
-				return fmt.Errorf("error occurred while setting property Size: %+v", err)
+				return diag.Errorf("error occurred while setting property Size: %s", err.Error())
 			}
 			if err := d.Set("software_advisory_url", (s.GetSoftwareAdvisoryUrl())); err != nil {
-				return fmt.Errorf("error occurred while setting property SoftwareAdvisoryUrl: %+v", err)
+				return diag.Errorf("error occurred while setting property SoftwareAdvisoryUrl: %s", err.Error())
 			}
 			if err := d.Set("software_type_id", (s.GetSoftwareTypeId())); err != nil {
-				return fmt.Errorf("error occurred while setting property SoftwareTypeId: %+v", err)
+				return diag.Errorf("error occurred while setting property SoftwareTypeId: %s", err.Error())
 			}
 
 			if err := d.Set("nr_source", flattenMapSoftwarerepositoryFileServer(s.GetSource(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Source: %+v", err)
+				return diag.Errorf("error occurred while setting property Source: %s", err.Error())
 			}
 			if err := d.Set("supported_models", (s.GetSupportedModels())); err != nil {
-				return fmt.Errorf("error occurred while setting property SupportedModels: %+v", err)
+				return diag.Errorf("error occurred while setting property SupportedModels: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("vendor", (s.GetVendor())); err != nil {
-				return fmt.Errorf("error occurred while setting property Vendor: %+v", err)
+				return diag.Errorf("error occurred while setting property Vendor: %s", err.Error())
 			}
 			if err := d.Set("nr_version", (s.GetVersion())); err != nil {
-				return fmt.Errorf("error occurred while setting property Version: %+v", err)
+				return diag.Errorf("error occurred while setting property Version: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

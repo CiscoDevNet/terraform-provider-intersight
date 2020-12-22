@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceNetworkconfigPolicy() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceNetworkconfigPolicyRead,
+		ReadContext: dataSourceNetworkconfigPolicyRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -69,7 +70,7 @@ func dataSourceNetworkconfigPolicy() *schema.Resource {
 				Computed: true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -115,7 +116,7 @@ func dataSourceNetworkconfigPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -234,10 +235,11 @@ func dataSourceNetworkconfigPolicy() *schema.Resource {
 	}
 }
 
-func dataSourceNetworkconfigPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceNetworkconfigPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.NetworkconfigPolicy{}
 	if v, ok := d.GetOk("alternate_ipv4dns_server"); ok {
 		x := (v.(string))
@@ -298,25 +300,25 @@ func dataSourceNetworkconfigPolicyRead(d *schema.ResourceData, meta interface{})
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of NetworkconfigPolicy object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.NetworkconfigApi.GetNetworkconfigPolicyList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.NetworkconfigApi.GetNetworkconfigPolicyList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching NetworkconfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for NetworkconfigPolicy list: %s", err.Error())
 	}
 	var s = &models.NetworkconfigPolicyList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to NetworkconfigPolicy: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to NetworkconfigPolicy list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for NetworkconfigPolicy did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -325,71 +327,71 @@ func dataSourceNetworkconfigPolicyRead(d *schema.ResourceData, meta interface{})
 			var s = &models.NetworkconfigPolicy{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("alternate_ipv4dns_server", (s.GetAlternateIpv4dnsServer())); err != nil {
-				return fmt.Errorf("error occurred while setting property AlternateIpv4dnsServer: %+v", err)
+				return diag.Errorf("error occurred while setting property AlternateIpv4dnsServer: %s", err.Error())
 			}
 			if err := d.Set("alternate_ipv6dns_server", (s.GetAlternateIpv6dnsServer())); err != nil {
-				return fmt.Errorf("error occurred while setting property AlternateIpv6dnsServer: %+v", err)
+				return diag.Errorf("error occurred while setting property AlternateIpv6dnsServer: %s", err.Error())
 			}
 
 			if err := d.Set("appliance_account", flattenMapIamAccountRelationship(s.GetApplianceAccount(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property ApplianceAccount: %+v", err)
+				return diag.Errorf("error occurred while setting property ApplianceAccount: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("description", (s.GetDescription())); err != nil {
-				return fmt.Errorf("error occurred while setting property Description: %+v", err)
+				return diag.Errorf("error occurred while setting property Description: %s", err.Error())
 			}
 			if err := d.Set("dynamic_dns_domain", (s.GetDynamicDnsDomain())); err != nil {
-				return fmt.Errorf("error occurred while setting property DynamicDnsDomain: %+v", err)
+				return diag.Errorf("error occurred while setting property DynamicDnsDomain: %s", err.Error())
 			}
 			if err := d.Set("enable_dynamic_dns", (s.GetEnableDynamicDns())); err != nil {
-				return fmt.Errorf("error occurred while setting property EnableDynamicDns: %+v", err)
+				return diag.Errorf("error occurred while setting property EnableDynamicDns: %s", err.Error())
 			}
 			if err := d.Set("enable_ipv4dns_from_dhcp", (s.GetEnableIpv4dnsFromDhcp())); err != nil {
-				return fmt.Errorf("error occurred while setting property EnableIpv4dnsFromDhcp: %+v", err)
+				return diag.Errorf("error occurred while setting property EnableIpv4dnsFromDhcp: %s", err.Error())
 			}
 			if err := d.Set("enable_ipv6", (s.GetEnableIpv6())); err != nil {
-				return fmt.Errorf("error occurred while setting property EnableIpv6: %+v", err)
+				return diag.Errorf("error occurred while setting property EnableIpv6: %s", err.Error())
 			}
 			if err := d.Set("enable_ipv6dns_from_dhcp", (s.GetEnableIpv6dnsFromDhcp())); err != nil {
-				return fmt.Errorf("error occurred while setting property EnableIpv6dnsFromDhcp: %+v", err)
+				return diag.Errorf("error occurred while setting property EnableIpv6dnsFromDhcp: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("name", (s.GetName())); err != nil {
-				return fmt.Errorf("error occurred while setting property Name: %+v", err)
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 
 			if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+				return diag.Errorf("error occurred while setting property Organization: %s", err.Error())
 			}
 			if err := d.Set("preferred_ipv4dns_server", (s.GetPreferredIpv4dnsServer())); err != nil {
-				return fmt.Errorf("error occurred while setting property PreferredIpv4dnsServer: %+v", err)
+				return diag.Errorf("error occurred while setting property PreferredIpv4dnsServer: %s", err.Error())
 			}
 			if err := d.Set("preferred_ipv6dns_server", (s.GetPreferredIpv6dnsServer())); err != nil {
-				return fmt.Errorf("error occurred while setting property PreferredIpv6dnsServer: %+v", err)
+				return diag.Errorf("error occurred while setting property PreferredIpv6dnsServer: %s", err.Error())
 			}
 
 			if err := d.Set("profiles", flattenListPolicyAbstractConfigProfileRelationship(s.GetProfiles(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Profiles: %+v", err)
+				return diag.Errorf("error occurred while setting property Profiles: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

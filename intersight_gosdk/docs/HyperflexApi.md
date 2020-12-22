@@ -15,6 +15,8 @@ Method | HTTP request | Description
 [**CreateHyperflexExtIscsiStoragePolicy**](HyperflexApi.md#CreateHyperflexExtIscsiStoragePolicy) | **Post** /api/v1/hyperflex/ExtIscsiStoragePolicies | Create a &#39;hyperflex.ExtIscsiStoragePolicy&#39; resource.
 [**CreateHyperflexFeatureLimitExternal**](HyperflexApi.md#CreateHyperflexFeatureLimitExternal) | **Post** /api/v1/hyperflex/FeatureLimitExternals | Create a &#39;hyperflex.FeatureLimitExternal&#39; resource.
 [**CreateHyperflexFeatureLimitInternal**](HyperflexApi.md#CreateHyperflexFeatureLimitInternal) | **Post** /api/v1/hyperflex/FeatureLimitInternals | Create a &#39;hyperflex.FeatureLimitInternal&#39; resource.
+[**CreateHyperflexHealthCheckDefinition**](HyperflexApi.md#CreateHyperflexHealthCheckDefinition) | **Post** /api/v1/hyperflex/HealthCheckDefinitions | Create a &#39;hyperflex.HealthCheckDefinition&#39; resource.
+[**CreateHyperflexHealthCheckPackageChecksum**](HyperflexApi.md#CreateHyperflexHealthCheckPackageChecksum) | **Post** /api/v1/hyperflex/HealthCheckPackageChecksums | Create a &#39;hyperflex.HealthCheckPackageChecksum&#39; resource.
 [**CreateHyperflexHxapDatacenter**](HyperflexApi.md#CreateHyperflexHxapDatacenter) | **Post** /api/v1/hyperflex/HxapDatacenters | Create a &#39;hyperflex.HxapDatacenter&#39; resource.
 [**CreateHyperflexHxdpVersion**](HyperflexApi.md#CreateHyperflexHxdpVersion) | **Post** /api/v1/hyperflex/HxdpVersions | Create a &#39;hyperflex.HxdpVersion&#39; resource.
 [**CreateHyperflexLocalCredentialPolicy**](HyperflexApi.md#CreateHyperflexLocalCredentialPolicy) | **Post** /api/v1/hyperflex/LocalCredentialPolicies | Create a &#39;hyperflex.LocalCredentialPolicy&#39; resource.
@@ -22,6 +24,7 @@ Method | HTTP request | Description
 [**CreateHyperflexNodeProfile**](HyperflexApi.md#CreateHyperflexNodeProfile) | **Post** /api/v1/hyperflex/NodeProfiles | Create a &#39;hyperflex.NodeProfile&#39; resource.
 [**CreateHyperflexProxySettingPolicy**](HyperflexApi.md#CreateHyperflexProxySettingPolicy) | **Post** /api/v1/hyperflex/ProxySettingPolicies | Create a &#39;hyperflex.ProxySettingPolicy&#39; resource.
 [**CreateHyperflexServerFirmwareVersion**](HyperflexApi.md#CreateHyperflexServerFirmwareVersion) | **Post** /api/v1/hyperflex/ServerFirmwareVersions | Create a &#39;hyperflex.ServerFirmwareVersion&#39; resource.
+[**CreateHyperflexServerFirmwareVersionEntry**](HyperflexApi.md#CreateHyperflexServerFirmwareVersionEntry) | **Post** /api/v1/hyperflex/ServerFirmwareVersionEntries | Create a &#39;hyperflex.ServerFirmwareVersionEntry&#39; resource.
 [**CreateHyperflexServerModel**](HyperflexApi.md#CreateHyperflexServerModel) | **Post** /api/v1/hyperflex/ServerModels | Create a &#39;hyperflex.ServerModel&#39; resource.
 [**CreateHyperflexSoftwareVersionPolicy**](HyperflexApi.md#CreateHyperflexSoftwareVersionPolicy) | **Post** /api/v1/hyperflex/SoftwareVersionPolicies | Create a &#39;hyperflex.SoftwareVersionPolicy&#39; resource.
 [**CreateHyperflexSysConfigPolicy**](HyperflexApi.md#CreateHyperflexSysConfigPolicy) | **Post** /api/v1/hyperflex/SysConfigPolicies | Create a &#39;hyperflex.SysConfigPolicy&#39; resource.
@@ -37,6 +40,8 @@ Method | HTTP request | Description
 [**DeleteHyperflexExtIscsiStoragePolicy**](HyperflexApi.md#DeleteHyperflexExtIscsiStoragePolicy) | **Delete** /api/v1/hyperflex/ExtIscsiStoragePolicies/{Moid} | Delete a &#39;hyperflex.ExtIscsiStoragePolicy&#39; resource.
 [**DeleteHyperflexFeatureLimitExternal**](HyperflexApi.md#DeleteHyperflexFeatureLimitExternal) | **Delete** /api/v1/hyperflex/FeatureLimitExternals/{Moid} | Delete a &#39;hyperflex.FeatureLimitExternal&#39; resource.
 [**DeleteHyperflexFeatureLimitInternal**](HyperflexApi.md#DeleteHyperflexFeatureLimitInternal) | **Delete** /api/v1/hyperflex/FeatureLimitInternals/{Moid} | Delete a &#39;hyperflex.FeatureLimitInternal&#39; resource.
+[**DeleteHyperflexHealthCheckDefinition**](HyperflexApi.md#DeleteHyperflexHealthCheckDefinition) | **Delete** /api/v1/hyperflex/HealthCheckDefinitions/{Moid} | Delete a &#39;hyperflex.HealthCheckDefinition&#39; resource.
+[**DeleteHyperflexHealthCheckPackageChecksum**](HyperflexApi.md#DeleteHyperflexHealthCheckPackageChecksum) | **Delete** /api/v1/hyperflex/HealthCheckPackageChecksums/{Moid} | Delete a &#39;hyperflex.HealthCheckPackageChecksum&#39; resource.
 [**DeleteHyperflexHxapDatacenter**](HyperflexApi.md#DeleteHyperflexHxapDatacenter) | **Delete** /api/v1/hyperflex/HxapDatacenters/{Moid} | Delete a &#39;hyperflex.HxapDatacenter&#39; resource.
 [**DeleteHyperflexHxdpVersion**](HyperflexApi.md#DeleteHyperflexHxdpVersion) | **Delete** /api/v1/hyperflex/HxdpVersions/{Moid} | Delete a &#39;hyperflex.HxdpVersion&#39; resource.
 [**DeleteHyperflexLocalCredentialPolicy**](HyperflexApi.md#DeleteHyperflexLocalCredentialPolicy) | **Delete** /api/v1/hyperflex/LocalCredentialPolicies/{Moid} | Delete a &#39;hyperflex.LocalCredentialPolicy&#39; resource.
@@ -44,6 +49,7 @@ Method | HTTP request | Description
 [**DeleteHyperflexNodeProfile**](HyperflexApi.md#DeleteHyperflexNodeProfile) | **Delete** /api/v1/hyperflex/NodeProfiles/{Moid} | Delete a &#39;hyperflex.NodeProfile&#39; resource.
 [**DeleteHyperflexProxySettingPolicy**](HyperflexApi.md#DeleteHyperflexProxySettingPolicy) | **Delete** /api/v1/hyperflex/ProxySettingPolicies/{Moid} | Delete a &#39;hyperflex.ProxySettingPolicy&#39; resource.
 [**DeleteHyperflexServerFirmwareVersion**](HyperflexApi.md#DeleteHyperflexServerFirmwareVersion) | **Delete** /api/v1/hyperflex/ServerFirmwareVersions/{Moid} | Delete a &#39;hyperflex.ServerFirmwareVersion&#39; resource.
+[**DeleteHyperflexServerFirmwareVersionEntry**](HyperflexApi.md#DeleteHyperflexServerFirmwareVersionEntry) | **Delete** /api/v1/hyperflex/ServerFirmwareVersionEntries/{Moid} | Delete a &#39;hyperflex.ServerFirmwareVersionEntry&#39; resource.
 [**DeleteHyperflexServerModel**](HyperflexApi.md#DeleteHyperflexServerModel) | **Delete** /api/v1/hyperflex/ServerModels/{Moid} | Delete a &#39;hyperflex.ServerModel&#39; resource.
 [**DeleteHyperflexSoftwareVersionPolicy**](HyperflexApi.md#DeleteHyperflexSoftwareVersionPolicy) | **Delete** /api/v1/hyperflex/SoftwareVersionPolicies/{Moid} | Delete a &#39;hyperflex.SoftwareVersionPolicy&#39; resource.
 [**DeleteHyperflexSysConfigPolicy**](HyperflexApi.md#DeleteHyperflexSysConfigPolicy) | **Delete** /api/v1/hyperflex/SysConfigPolicies/{Moid} | Delete a &#39;hyperflex.SysConfigPolicy&#39; resource.
@@ -60,6 +66,8 @@ Method | HTTP request | Description
 [**GetHyperflexCiscoHypervisorManagerByMoid**](HyperflexApi.md#GetHyperflexCiscoHypervisorManagerByMoid) | **Get** /api/v1/hyperflex/CiscoHypervisorManagers/{Moid} | Read a &#39;hyperflex.CiscoHypervisorManager&#39; resource.
 [**GetHyperflexCiscoHypervisorManagerList**](HyperflexApi.md#GetHyperflexCiscoHypervisorManagerList) | **Get** /api/v1/hyperflex/CiscoHypervisorManagers | Read a &#39;hyperflex.CiscoHypervisorManager&#39; resource.
 [**GetHyperflexClusterByMoid**](HyperflexApi.md#GetHyperflexClusterByMoid) | **Get** /api/v1/hyperflex/Clusters/{Moid} | Read a &#39;hyperflex.Cluster&#39; resource.
+[**GetHyperflexClusterHealthCheckExecutionSnapshotByMoid**](HyperflexApi.md#GetHyperflexClusterHealthCheckExecutionSnapshotByMoid) | **Get** /api/v1/hyperflex/ClusterHealthCheckExecutionSnapshots/{Moid} | Read a &#39;hyperflex.ClusterHealthCheckExecutionSnapshot&#39; resource.
+[**GetHyperflexClusterHealthCheckExecutionSnapshotList**](HyperflexApi.md#GetHyperflexClusterHealthCheckExecutionSnapshotList) | **Get** /api/v1/hyperflex/ClusterHealthCheckExecutionSnapshots | Read a &#39;hyperflex.ClusterHealthCheckExecutionSnapshot&#39; resource.
 [**GetHyperflexClusterList**](HyperflexApi.md#GetHyperflexClusterList) | **Get** /api/v1/hyperflex/Clusters | Read a &#39;hyperflex.Cluster&#39; resource.
 [**GetHyperflexClusterNetworkPolicyByMoid**](HyperflexApi.md#GetHyperflexClusterNetworkPolicyByMoid) | **Get** /api/v1/hyperflex/ClusterNetworkPolicies/{Moid} | Read a &#39;hyperflex.ClusterNetworkPolicy&#39; resource.
 [**GetHyperflexClusterNetworkPolicyList**](HyperflexApi.md#GetHyperflexClusterNetworkPolicyList) | **Get** /api/v1/hyperflex/ClusterNetworkPolicies | Read a &#39;hyperflex.ClusterNetworkPolicy&#39; resource.
@@ -71,6 +79,8 @@ Method | HTTP request | Description
 [**GetHyperflexConfigResultEntryByMoid**](HyperflexApi.md#GetHyperflexConfigResultEntryByMoid) | **Get** /api/v1/hyperflex/ConfigResultEntries/{Moid} | Read a &#39;hyperflex.ConfigResultEntry&#39; resource.
 [**GetHyperflexConfigResultEntryList**](HyperflexApi.md#GetHyperflexConfigResultEntryList) | **Get** /api/v1/hyperflex/ConfigResultEntries | Read a &#39;hyperflex.ConfigResultEntry&#39; resource.
 [**GetHyperflexConfigResultList**](HyperflexApi.md#GetHyperflexConfigResultList) | **Get** /api/v1/hyperflex/ConfigResults | Read a &#39;hyperflex.ConfigResult&#39; resource.
+[**GetHyperflexDevicePackageDownloadStateByMoid**](HyperflexApi.md#GetHyperflexDevicePackageDownloadStateByMoid) | **Get** /api/v1/hyperflex/DevicePackageDownloadStates/{Moid} | Read a &#39;hyperflex.DevicePackageDownloadState&#39; resource.
+[**GetHyperflexDevicePackageDownloadStateList**](HyperflexApi.md#GetHyperflexDevicePackageDownloadStateList) | **Get** /api/v1/hyperflex/DevicePackageDownloadStates | Read a &#39;hyperflex.DevicePackageDownloadState&#39; resource.
 [**GetHyperflexExtFcStoragePolicyByMoid**](HyperflexApi.md#GetHyperflexExtFcStoragePolicyByMoid) | **Get** /api/v1/hyperflex/ExtFcStoragePolicies/{Moid} | Read a &#39;hyperflex.ExtFcStoragePolicy&#39; resource.
 [**GetHyperflexExtFcStoragePolicyList**](HyperflexApi.md#GetHyperflexExtFcStoragePolicyList) | **Get** /api/v1/hyperflex/ExtFcStoragePolicies | Read a &#39;hyperflex.ExtFcStoragePolicy&#39; resource.
 [**GetHyperflexExtIscsiStoragePolicyByMoid**](HyperflexApi.md#GetHyperflexExtIscsiStoragePolicyByMoid) | **Get** /api/v1/hyperflex/ExtIscsiStoragePolicies/{Moid} | Read a &#39;hyperflex.ExtIscsiStoragePolicy&#39; resource.
@@ -80,6 +90,14 @@ Method | HTTP request | Description
 [**GetHyperflexFeatureLimitInternalByMoid**](HyperflexApi.md#GetHyperflexFeatureLimitInternalByMoid) | **Get** /api/v1/hyperflex/FeatureLimitInternals/{Moid} | Read a &#39;hyperflex.FeatureLimitInternal&#39; resource.
 [**GetHyperflexFeatureLimitInternalList**](HyperflexApi.md#GetHyperflexFeatureLimitInternalList) | **Get** /api/v1/hyperflex/FeatureLimitInternals | Read a &#39;hyperflex.FeatureLimitInternal&#39; resource.
 [**GetHyperflexHealthByMoid**](HyperflexApi.md#GetHyperflexHealthByMoid) | **Get** /api/v1/hyperflex/Healths/{Moid} | Read a &#39;hyperflex.Health&#39; resource.
+[**GetHyperflexHealthCheckDefinitionByMoid**](HyperflexApi.md#GetHyperflexHealthCheckDefinitionByMoid) | **Get** /api/v1/hyperflex/HealthCheckDefinitions/{Moid} | Read a &#39;hyperflex.HealthCheckDefinition&#39; resource.
+[**GetHyperflexHealthCheckDefinitionList**](HyperflexApi.md#GetHyperflexHealthCheckDefinitionList) | **Get** /api/v1/hyperflex/HealthCheckDefinitions | Read a &#39;hyperflex.HealthCheckDefinition&#39; resource.
+[**GetHyperflexHealthCheckExecutionByMoid**](HyperflexApi.md#GetHyperflexHealthCheckExecutionByMoid) | **Get** /api/v1/hyperflex/HealthCheckExecutions/{Moid} | Read a &#39;hyperflex.HealthCheckExecution&#39; resource.
+[**GetHyperflexHealthCheckExecutionList**](HyperflexApi.md#GetHyperflexHealthCheckExecutionList) | **Get** /api/v1/hyperflex/HealthCheckExecutions | Read a &#39;hyperflex.HealthCheckExecution&#39; resource.
+[**GetHyperflexHealthCheckExecutionSnapshotByMoid**](HyperflexApi.md#GetHyperflexHealthCheckExecutionSnapshotByMoid) | **Get** /api/v1/hyperflex/HealthCheckExecutionSnapshots/{Moid} | Read a &#39;hyperflex.HealthCheckExecutionSnapshot&#39; resource.
+[**GetHyperflexHealthCheckExecutionSnapshotList**](HyperflexApi.md#GetHyperflexHealthCheckExecutionSnapshotList) | **Get** /api/v1/hyperflex/HealthCheckExecutionSnapshots | Read a &#39;hyperflex.HealthCheckExecutionSnapshot&#39; resource.
+[**GetHyperflexHealthCheckPackageChecksumByMoid**](HyperflexApi.md#GetHyperflexHealthCheckPackageChecksumByMoid) | **Get** /api/v1/hyperflex/HealthCheckPackageChecksums/{Moid} | Read a &#39;hyperflex.HealthCheckPackageChecksum&#39; resource.
+[**GetHyperflexHealthCheckPackageChecksumList**](HyperflexApi.md#GetHyperflexHealthCheckPackageChecksumList) | **Get** /api/v1/hyperflex/HealthCheckPackageChecksums | Read a &#39;hyperflex.HealthCheckPackageChecksum&#39; resource.
 [**GetHyperflexHealthList**](HyperflexApi.md#GetHyperflexHealthList) | **Get** /api/v1/hyperflex/Healths | Read a &#39;hyperflex.Health&#39; resource.
 [**GetHyperflexHxapClusterByMoid**](HyperflexApi.md#GetHyperflexHxapClusterByMoid) | **Get** /api/v1/hyperflex/HxapClusters/{Moid} | Read a &#39;hyperflex.HxapCluster&#39; resource.
 [**GetHyperflexHxapClusterList**](HyperflexApi.md#GetHyperflexHxapClusterList) | **Get** /api/v1/hyperflex/HxapClusters | Read a &#39;hyperflex.HxapCluster&#39; resource.
@@ -106,6 +124,8 @@ Method | HTTP request | Description
 [**GetHyperflexProxySettingPolicyByMoid**](HyperflexApi.md#GetHyperflexProxySettingPolicyByMoid) | **Get** /api/v1/hyperflex/ProxySettingPolicies/{Moid} | Read a &#39;hyperflex.ProxySettingPolicy&#39; resource.
 [**GetHyperflexProxySettingPolicyList**](HyperflexApi.md#GetHyperflexProxySettingPolicyList) | **Get** /api/v1/hyperflex/ProxySettingPolicies | Read a &#39;hyperflex.ProxySettingPolicy&#39; resource.
 [**GetHyperflexServerFirmwareVersionByMoid**](HyperflexApi.md#GetHyperflexServerFirmwareVersionByMoid) | **Get** /api/v1/hyperflex/ServerFirmwareVersions/{Moid} | Read a &#39;hyperflex.ServerFirmwareVersion&#39; resource.
+[**GetHyperflexServerFirmwareVersionEntryByMoid**](HyperflexApi.md#GetHyperflexServerFirmwareVersionEntryByMoid) | **Get** /api/v1/hyperflex/ServerFirmwareVersionEntries/{Moid} | Read a &#39;hyperflex.ServerFirmwareVersionEntry&#39; resource.
+[**GetHyperflexServerFirmwareVersionEntryList**](HyperflexApi.md#GetHyperflexServerFirmwareVersionEntryList) | **Get** /api/v1/hyperflex/ServerFirmwareVersionEntries | Read a &#39;hyperflex.ServerFirmwareVersionEntry&#39; resource.
 [**GetHyperflexServerFirmwareVersionList**](HyperflexApi.md#GetHyperflexServerFirmwareVersionList) | **Get** /api/v1/hyperflex/ServerFirmwareVersions | Read a &#39;hyperflex.ServerFirmwareVersion&#39; resource.
 [**GetHyperflexServerModelByMoid**](HyperflexApi.md#GetHyperflexServerModelByMoid) | **Get** /api/v1/hyperflex/ServerModels/{Moid} | Read a &#39;hyperflex.ServerModel&#39; resource.
 [**GetHyperflexServerModelList**](HyperflexApi.md#GetHyperflexServerModelList) | **Get** /api/v1/hyperflex/ServerModels | Read a &#39;hyperflex.ServerModel&#39; resource.
@@ -129,6 +149,8 @@ Method | HTTP request | Description
 [**PatchHyperflexExtIscsiStoragePolicy**](HyperflexApi.md#PatchHyperflexExtIscsiStoragePolicy) | **Patch** /api/v1/hyperflex/ExtIscsiStoragePolicies/{Moid} | Update a &#39;hyperflex.ExtIscsiStoragePolicy&#39; resource.
 [**PatchHyperflexFeatureLimitExternal**](HyperflexApi.md#PatchHyperflexFeatureLimitExternal) | **Patch** /api/v1/hyperflex/FeatureLimitExternals/{Moid} | Update a &#39;hyperflex.FeatureLimitExternal&#39; resource.
 [**PatchHyperflexFeatureLimitInternal**](HyperflexApi.md#PatchHyperflexFeatureLimitInternal) | **Patch** /api/v1/hyperflex/FeatureLimitInternals/{Moid} | Update a &#39;hyperflex.FeatureLimitInternal&#39; resource.
+[**PatchHyperflexHealthCheckDefinition**](HyperflexApi.md#PatchHyperflexHealthCheckDefinition) | **Patch** /api/v1/hyperflex/HealthCheckDefinitions/{Moid} | Update a &#39;hyperflex.HealthCheckDefinition&#39; resource.
+[**PatchHyperflexHealthCheckPackageChecksum**](HyperflexApi.md#PatchHyperflexHealthCheckPackageChecksum) | **Patch** /api/v1/hyperflex/HealthCheckPackageChecksums/{Moid} | Update a &#39;hyperflex.HealthCheckPackageChecksum&#39; resource.
 [**PatchHyperflexHxapCluster**](HyperflexApi.md#PatchHyperflexHxapCluster) | **Patch** /api/v1/hyperflex/HxapClusters/{Moid} | Update a &#39;hyperflex.HxapCluster&#39; resource.
 [**PatchHyperflexHxapDatacenter**](HyperflexApi.md#PatchHyperflexHxapDatacenter) | **Patch** /api/v1/hyperflex/HxapDatacenters/{Moid} | Update a &#39;hyperflex.HxapDatacenter&#39; resource.
 [**PatchHyperflexHxapEvent**](HyperflexApi.md#PatchHyperflexHxapEvent) | **Patch** /api/v1/hyperflex/HxapEvents/{Moid} | Update a &#39;hyperflex.HxapEvent&#39; resource.
@@ -141,6 +163,7 @@ Method | HTTP request | Description
 [**PatchHyperflexNodeProfile**](HyperflexApi.md#PatchHyperflexNodeProfile) | **Patch** /api/v1/hyperflex/NodeProfiles/{Moid} | Update a &#39;hyperflex.NodeProfile&#39; resource.
 [**PatchHyperflexProxySettingPolicy**](HyperflexApi.md#PatchHyperflexProxySettingPolicy) | **Patch** /api/v1/hyperflex/ProxySettingPolicies/{Moid} | Update a &#39;hyperflex.ProxySettingPolicy&#39; resource.
 [**PatchHyperflexServerFirmwareVersion**](HyperflexApi.md#PatchHyperflexServerFirmwareVersion) | **Patch** /api/v1/hyperflex/ServerFirmwareVersions/{Moid} | Update a &#39;hyperflex.ServerFirmwareVersion&#39; resource.
+[**PatchHyperflexServerFirmwareVersionEntry**](HyperflexApi.md#PatchHyperflexServerFirmwareVersionEntry) | **Patch** /api/v1/hyperflex/ServerFirmwareVersionEntries/{Moid} | Update a &#39;hyperflex.ServerFirmwareVersionEntry&#39; resource.
 [**PatchHyperflexServerModel**](HyperflexApi.md#PatchHyperflexServerModel) | **Patch** /api/v1/hyperflex/ServerModels/{Moid} | Update a &#39;hyperflex.ServerModel&#39; resource.
 [**PatchHyperflexSoftwareVersionPolicy**](HyperflexApi.md#PatchHyperflexSoftwareVersionPolicy) | **Patch** /api/v1/hyperflex/SoftwareVersionPolicies/{Moid} | Update a &#39;hyperflex.SoftwareVersionPolicy&#39; resource.
 [**PatchHyperflexSysConfigPolicy**](HyperflexApi.md#PatchHyperflexSysConfigPolicy) | **Patch** /api/v1/hyperflex/SysConfigPolicies/{Moid} | Update a &#39;hyperflex.SysConfigPolicy&#39; resource.
@@ -158,6 +181,8 @@ Method | HTTP request | Description
 [**UpdateHyperflexExtIscsiStoragePolicy**](HyperflexApi.md#UpdateHyperflexExtIscsiStoragePolicy) | **Post** /api/v1/hyperflex/ExtIscsiStoragePolicies/{Moid} | Update a &#39;hyperflex.ExtIscsiStoragePolicy&#39; resource.
 [**UpdateHyperflexFeatureLimitExternal**](HyperflexApi.md#UpdateHyperflexFeatureLimitExternal) | **Post** /api/v1/hyperflex/FeatureLimitExternals/{Moid} | Update a &#39;hyperflex.FeatureLimitExternal&#39; resource.
 [**UpdateHyperflexFeatureLimitInternal**](HyperflexApi.md#UpdateHyperflexFeatureLimitInternal) | **Post** /api/v1/hyperflex/FeatureLimitInternals/{Moid} | Update a &#39;hyperflex.FeatureLimitInternal&#39; resource.
+[**UpdateHyperflexHealthCheckDefinition**](HyperflexApi.md#UpdateHyperflexHealthCheckDefinition) | **Post** /api/v1/hyperflex/HealthCheckDefinitions/{Moid} | Update a &#39;hyperflex.HealthCheckDefinition&#39; resource.
+[**UpdateHyperflexHealthCheckPackageChecksum**](HyperflexApi.md#UpdateHyperflexHealthCheckPackageChecksum) | **Post** /api/v1/hyperflex/HealthCheckPackageChecksums/{Moid} | Update a &#39;hyperflex.HealthCheckPackageChecksum&#39; resource.
 [**UpdateHyperflexHxapCluster**](HyperflexApi.md#UpdateHyperflexHxapCluster) | **Post** /api/v1/hyperflex/HxapClusters/{Moid} | Update a &#39;hyperflex.HxapCluster&#39; resource.
 [**UpdateHyperflexHxapDatacenter**](HyperflexApi.md#UpdateHyperflexHxapDatacenter) | **Post** /api/v1/hyperflex/HxapDatacenters/{Moid} | Update a &#39;hyperflex.HxapDatacenter&#39; resource.
 [**UpdateHyperflexHxapEvent**](HyperflexApi.md#UpdateHyperflexHxapEvent) | **Post** /api/v1/hyperflex/HxapEvents/{Moid} | Update a &#39;hyperflex.HxapEvent&#39; resource.
@@ -170,6 +195,7 @@ Method | HTTP request | Description
 [**UpdateHyperflexNodeProfile**](HyperflexApi.md#UpdateHyperflexNodeProfile) | **Post** /api/v1/hyperflex/NodeProfiles/{Moid} | Update a &#39;hyperflex.NodeProfile&#39; resource.
 [**UpdateHyperflexProxySettingPolicy**](HyperflexApi.md#UpdateHyperflexProxySettingPolicy) | **Post** /api/v1/hyperflex/ProxySettingPolicies/{Moid} | Update a &#39;hyperflex.ProxySettingPolicy&#39; resource.
 [**UpdateHyperflexServerFirmwareVersion**](HyperflexApi.md#UpdateHyperflexServerFirmwareVersion) | **Post** /api/v1/hyperflex/ServerFirmwareVersions/{Moid} | Update a &#39;hyperflex.ServerFirmwareVersion&#39; resource.
+[**UpdateHyperflexServerFirmwareVersionEntry**](HyperflexApi.md#UpdateHyperflexServerFirmwareVersionEntry) | **Post** /api/v1/hyperflex/ServerFirmwareVersionEntries/{Moid} | Update a &#39;hyperflex.ServerFirmwareVersionEntry&#39; resource.
 [**UpdateHyperflexServerModel**](HyperflexApi.md#UpdateHyperflexServerModel) | **Post** /api/v1/hyperflex/ServerModels/{Moid} | Update a &#39;hyperflex.ServerModel&#39; resource.
 [**UpdateHyperflexSoftwareVersionPolicy**](HyperflexApi.md#UpdateHyperflexSoftwareVersionPolicy) | **Post** /api/v1/hyperflex/SoftwareVersionPolicies/{Moid} | Update a &#39;hyperflex.SoftwareVersionPolicy&#39; resource.
 [**UpdateHyperflexSysConfigPolicy**](HyperflexApi.md#UpdateHyperflexSysConfigPolicy) | **Post** /api/v1/hyperflex/SysConfigPolicies/{Moid} | Update a &#39;hyperflex.SysConfigPolicy&#39; resource.
@@ -197,14 +223,14 @@ import (
 )
 
 func main() {
-    hyperflexAppCatalog := *openapiclient.Newhyperflex.AppCatalog("ClassId_example", "ObjectType_example") // HyperflexAppCatalog | The 'hyperflex.AppCatalog' resource to create.
+    hyperflexAppCatalog := *openapiclient.NewHyperflexAppCatalog("ClassId_example", "ObjectType_example") // HyperflexAppCatalog | The 'hyperflex.AppCatalog' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.CreateHyperflexAppCatalog(context.Background()).HyperflexAppCatalog(hyperflexAppCatalog).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexAppCatalog``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -265,14 +291,14 @@ import (
 )
 
 func main() {
-    hyperflexAutoSupportPolicy := *openapiclient.Newhyperflex.AutoSupportPolicy("ClassId_example", "ObjectType_example") // HyperflexAutoSupportPolicy | The 'hyperflex.AutoSupportPolicy' resource to create.
+    hyperflexAutoSupportPolicy := *openapiclient.NewHyperflexAutoSupportPolicy("ClassId_example", "ObjectType_example") // HyperflexAutoSupportPolicy | The 'hyperflex.AutoSupportPolicy' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.CreateHyperflexAutoSupportPolicy(context.Background()).HyperflexAutoSupportPolicy(hyperflexAutoSupportPolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexAutoSupportPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -333,14 +359,14 @@ import (
 )
 
 func main() {
-    hyperflexCapabilityInfo := *openapiclient.Newhyperflex.CapabilityInfo("ClassId_example", "ObjectType_example") // HyperflexCapabilityInfo | The 'hyperflex.CapabilityInfo' resource to create.
+    hyperflexCapabilityInfo := *openapiclient.NewHyperflexCapabilityInfo("ClassId_example", "ObjectType_example") // HyperflexCapabilityInfo | The 'hyperflex.CapabilityInfo' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.CreateHyperflexCapabilityInfo(context.Background()).HyperflexCapabilityInfo(hyperflexCapabilityInfo).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexCapabilityInfo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -401,14 +427,14 @@ import (
 )
 
 func main() {
-    hyperflexCiscoHypervisorManager := *openapiclient.Newhyperflex.CiscoHypervisorManager("ClassId_example", "ObjectType_example") // HyperflexCiscoHypervisorManager | The 'hyperflex.CiscoHypervisorManager' resource to create.
+    hyperflexCiscoHypervisorManager := *openapiclient.NewHyperflexCiscoHypervisorManager("ClassId_example", "ObjectType_example") // HyperflexCiscoHypervisorManager | The 'hyperflex.CiscoHypervisorManager' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.CreateHyperflexCiscoHypervisorManager(context.Background()).HyperflexCiscoHypervisorManager(hyperflexCiscoHypervisorManager).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexCiscoHypervisorManager``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -469,14 +495,14 @@ import (
 )
 
 func main() {
-    hyperflexClusterNetworkPolicy := *openapiclient.Newhyperflex.ClusterNetworkPolicy("ClassId_example", "ObjectType_example") // HyperflexClusterNetworkPolicy | The 'hyperflex.ClusterNetworkPolicy' resource to create.
+    hyperflexClusterNetworkPolicy := *openapiclient.NewHyperflexClusterNetworkPolicy("ClassId_example", "ObjectType_example") // HyperflexClusterNetworkPolicy | The 'hyperflex.ClusterNetworkPolicy' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.CreateHyperflexClusterNetworkPolicy(context.Background()).HyperflexClusterNetworkPolicy(hyperflexClusterNetworkPolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexClusterNetworkPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -537,14 +563,14 @@ import (
 )
 
 func main() {
-    hyperflexClusterProfile := *openapiclient.Newhyperflex.ClusterProfile("ClassId_example", "ObjectType_example") // HyperflexClusterProfile | The 'hyperflex.ClusterProfile' resource to create.
+    hyperflexClusterProfile := *openapiclient.NewHyperflexClusterProfile("ClassId_example", "ObjectType_example") // HyperflexClusterProfile | The 'hyperflex.ClusterProfile' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.CreateHyperflexClusterProfile(context.Background()).HyperflexClusterProfile(hyperflexClusterProfile).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexClusterProfile``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -605,14 +631,14 @@ import (
 )
 
 func main() {
-    hyperflexClusterStoragePolicy := *openapiclient.Newhyperflex.ClusterStoragePolicy("ClassId_example", "ObjectType_example") // HyperflexClusterStoragePolicy | The 'hyperflex.ClusterStoragePolicy' resource to create.
+    hyperflexClusterStoragePolicy := *openapiclient.NewHyperflexClusterStoragePolicy("ClassId_example", "ObjectType_example") // HyperflexClusterStoragePolicy | The 'hyperflex.ClusterStoragePolicy' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.CreateHyperflexClusterStoragePolicy(context.Background()).HyperflexClusterStoragePolicy(hyperflexClusterStoragePolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexClusterStoragePolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -673,14 +699,14 @@ import (
 )
 
 func main() {
-    hyperflexExtFcStoragePolicy := *openapiclient.Newhyperflex.ExtFcStoragePolicy("ClassId_example", "ObjectType_example") // HyperflexExtFcStoragePolicy | The 'hyperflex.ExtFcStoragePolicy' resource to create.
+    hyperflexExtFcStoragePolicy := *openapiclient.NewHyperflexExtFcStoragePolicy("ClassId_example", "ObjectType_example") // HyperflexExtFcStoragePolicy | The 'hyperflex.ExtFcStoragePolicy' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.CreateHyperflexExtFcStoragePolicy(context.Background()).HyperflexExtFcStoragePolicy(hyperflexExtFcStoragePolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexExtFcStoragePolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -741,14 +767,14 @@ import (
 )
 
 func main() {
-    hyperflexExtIscsiStoragePolicy := *openapiclient.Newhyperflex.ExtIscsiStoragePolicy("ClassId_example", "ObjectType_example") // HyperflexExtIscsiStoragePolicy | The 'hyperflex.ExtIscsiStoragePolicy' resource to create.
+    hyperflexExtIscsiStoragePolicy := *openapiclient.NewHyperflexExtIscsiStoragePolicy("ClassId_example", "ObjectType_example") // HyperflexExtIscsiStoragePolicy | The 'hyperflex.ExtIscsiStoragePolicy' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.CreateHyperflexExtIscsiStoragePolicy(context.Background()).HyperflexExtIscsiStoragePolicy(hyperflexExtIscsiStoragePolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexExtIscsiStoragePolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -809,14 +835,14 @@ import (
 )
 
 func main() {
-    hyperflexFeatureLimitExternal := *openapiclient.Newhyperflex.FeatureLimitExternal("ClassId_example", "ObjectType_example") // HyperflexFeatureLimitExternal | The 'hyperflex.FeatureLimitExternal' resource to create.
+    hyperflexFeatureLimitExternal := *openapiclient.NewHyperflexFeatureLimitExternal("ClassId_example", "ObjectType_example") // HyperflexFeatureLimitExternal | The 'hyperflex.FeatureLimitExternal' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.CreateHyperflexFeatureLimitExternal(context.Background()).HyperflexFeatureLimitExternal(hyperflexFeatureLimitExternal).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexFeatureLimitExternal``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -877,14 +903,14 @@ import (
 )
 
 func main() {
-    hyperflexFeatureLimitInternal := *openapiclient.Newhyperflex.FeatureLimitInternal("ClassId_example", "ObjectType_example") // HyperflexFeatureLimitInternal | The 'hyperflex.FeatureLimitInternal' resource to create.
+    hyperflexFeatureLimitInternal := *openapiclient.NewHyperflexFeatureLimitInternal("ClassId_example", "ObjectType_example") // HyperflexFeatureLimitInternal | The 'hyperflex.FeatureLimitInternal' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.CreateHyperflexFeatureLimitInternal(context.Background()).HyperflexFeatureLimitInternal(hyperflexFeatureLimitInternal).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexFeatureLimitInternal``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -926,6 +952,142 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateHyperflexHealthCheckDefinition
+
+> HyperflexHealthCheckDefinition CreateHyperflexHealthCheckDefinition(ctx).HyperflexHealthCheckDefinition(hyperflexHealthCheckDefinition).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'hyperflex.HealthCheckDefinition' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    hyperflexHealthCheckDefinition := *openapiclient.NewHyperflexHealthCheckDefinition("ClassId_example", "ObjectType_example") // HyperflexHealthCheckDefinition | The 'hyperflex.HealthCheckDefinition' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.CreateHyperflexHealthCheckDefinition(context.Background()).HyperflexHealthCheckDefinition(hyperflexHealthCheckDefinition).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexHealthCheckDefinition``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateHyperflexHealthCheckDefinition`: HyperflexHealthCheckDefinition
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.CreateHyperflexHealthCheckDefinition`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateHyperflexHealthCheckDefinitionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hyperflexHealthCheckDefinition** | [**HyperflexHealthCheckDefinition**](HyperflexHealthCheckDefinition.md) | The &#39;hyperflex.HealthCheckDefinition&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**HyperflexHealthCheckDefinition**](hyperflex.HealthCheckDefinition.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateHyperflexHealthCheckPackageChecksum
+
+> HyperflexHealthCheckPackageChecksum CreateHyperflexHealthCheckPackageChecksum(ctx).HyperflexHealthCheckPackageChecksum(hyperflexHealthCheckPackageChecksum).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'hyperflex.HealthCheckPackageChecksum' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    hyperflexHealthCheckPackageChecksum := *openapiclient.NewHyperflexHealthCheckPackageChecksum("ClassId_example", "ObjectType_example") // HyperflexHealthCheckPackageChecksum | The 'hyperflex.HealthCheckPackageChecksum' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.CreateHyperflexHealthCheckPackageChecksum(context.Background()).HyperflexHealthCheckPackageChecksum(hyperflexHealthCheckPackageChecksum).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexHealthCheckPackageChecksum``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateHyperflexHealthCheckPackageChecksum`: HyperflexHealthCheckPackageChecksum
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.CreateHyperflexHealthCheckPackageChecksum`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateHyperflexHealthCheckPackageChecksumRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hyperflexHealthCheckPackageChecksum** | [**HyperflexHealthCheckPackageChecksum**](HyperflexHealthCheckPackageChecksum.md) | The &#39;hyperflex.HealthCheckPackageChecksum&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**HyperflexHealthCheckPackageChecksum**](hyperflex.HealthCheckPackageChecksum.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## CreateHyperflexHxapDatacenter
 
 > HyperflexHxapDatacenter CreateHyperflexHxapDatacenter(ctx).HyperflexHxapDatacenter(hyperflexHxapDatacenter).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
@@ -945,14 +1107,14 @@ import (
 )
 
 func main() {
-    hyperflexHxapDatacenter := *openapiclient.Newhyperflex.HxapDatacenter("ClassId_example", "ObjectType_example") // HyperflexHxapDatacenter | The 'hyperflex.HxapDatacenter' resource to create.
+    hyperflexHxapDatacenter := *openapiclient.NewHyperflexHxapDatacenter("ClassId_example", "ObjectType_example") // HyperflexHxapDatacenter | The 'hyperflex.HxapDatacenter' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.CreateHyperflexHxapDatacenter(context.Background()).HyperflexHxapDatacenter(hyperflexHxapDatacenter).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexHxapDatacenter``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -1013,14 +1175,14 @@ import (
 )
 
 func main() {
-    hyperflexHxdpVersion := *openapiclient.Newhyperflex.HxdpVersion("ClassId_example", "ObjectType_example") // HyperflexHxdpVersion | The 'hyperflex.HxdpVersion' resource to create.
+    hyperflexHxdpVersion := *openapiclient.NewHyperflexHxdpVersion("ClassId_example", "ObjectType_example") // HyperflexHxdpVersion | The 'hyperflex.HxdpVersion' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.CreateHyperflexHxdpVersion(context.Background()).HyperflexHxdpVersion(hyperflexHxdpVersion).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexHxdpVersion``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -1081,14 +1243,14 @@ import (
 )
 
 func main() {
-    hyperflexLocalCredentialPolicy := *openapiclient.Newhyperflex.LocalCredentialPolicy("ClassId_example", "ObjectType_example") // HyperflexLocalCredentialPolicy | The 'hyperflex.LocalCredentialPolicy' resource to create.
+    hyperflexLocalCredentialPolicy := *openapiclient.NewHyperflexLocalCredentialPolicy("ClassId_example", "ObjectType_example") // HyperflexLocalCredentialPolicy | The 'hyperflex.LocalCredentialPolicy' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.CreateHyperflexLocalCredentialPolicy(context.Background()).HyperflexLocalCredentialPolicy(hyperflexLocalCredentialPolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexLocalCredentialPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -1149,14 +1311,14 @@ import (
 )
 
 func main() {
-    hyperflexNodeConfigPolicy := *openapiclient.Newhyperflex.NodeConfigPolicy("ClassId_example", "ObjectType_example") // HyperflexNodeConfigPolicy | The 'hyperflex.NodeConfigPolicy' resource to create.
+    hyperflexNodeConfigPolicy := *openapiclient.NewHyperflexNodeConfigPolicy("ClassId_example", "ObjectType_example") // HyperflexNodeConfigPolicy | The 'hyperflex.NodeConfigPolicy' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.CreateHyperflexNodeConfigPolicy(context.Background()).HyperflexNodeConfigPolicy(hyperflexNodeConfigPolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexNodeConfigPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -1217,14 +1379,14 @@ import (
 )
 
 func main() {
-    hyperflexNodeProfile := *openapiclient.Newhyperflex.NodeProfile("ClassId_example", "ObjectType_example") // HyperflexNodeProfile | The 'hyperflex.NodeProfile' resource to create.
+    hyperflexNodeProfile := *openapiclient.NewHyperflexNodeProfile("ClassId_example", "ObjectType_example") // HyperflexNodeProfile | The 'hyperflex.NodeProfile' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.CreateHyperflexNodeProfile(context.Background()).HyperflexNodeProfile(hyperflexNodeProfile).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexNodeProfile``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -1285,14 +1447,14 @@ import (
 )
 
 func main() {
-    hyperflexProxySettingPolicy := *openapiclient.Newhyperflex.ProxySettingPolicy("ClassId_example", "ObjectType_example") // HyperflexProxySettingPolicy | The 'hyperflex.ProxySettingPolicy' resource to create.
+    hyperflexProxySettingPolicy := *openapiclient.NewHyperflexProxySettingPolicy("ClassId_example", "ObjectType_example") // HyperflexProxySettingPolicy | The 'hyperflex.ProxySettingPolicy' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.CreateHyperflexProxySettingPolicy(context.Background()).HyperflexProxySettingPolicy(hyperflexProxySettingPolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexProxySettingPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -1353,14 +1515,14 @@ import (
 )
 
 func main() {
-    hyperflexServerFirmwareVersion := *openapiclient.Newhyperflex.ServerFirmwareVersion("ClassId_example", "ObjectType_example") // HyperflexServerFirmwareVersion | The 'hyperflex.ServerFirmwareVersion' resource to create.
+    hyperflexServerFirmwareVersion := *openapiclient.NewHyperflexServerFirmwareVersion("ClassId_example", "ObjectType_example") // HyperflexServerFirmwareVersion | The 'hyperflex.ServerFirmwareVersion' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.CreateHyperflexServerFirmwareVersion(context.Background()).HyperflexServerFirmwareVersion(hyperflexServerFirmwareVersion).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexServerFirmwareVersion``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -1402,6 +1564,74 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateHyperflexServerFirmwareVersionEntry
+
+> HyperflexServerFirmwareVersionEntry CreateHyperflexServerFirmwareVersionEntry(ctx).HyperflexServerFirmwareVersionEntry(hyperflexServerFirmwareVersionEntry).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'hyperflex.ServerFirmwareVersionEntry' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    hyperflexServerFirmwareVersionEntry := *openapiclient.NewHyperflexServerFirmwareVersionEntry("ClassId_example", "ObjectType_example") // HyperflexServerFirmwareVersionEntry | The 'hyperflex.ServerFirmwareVersionEntry' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.CreateHyperflexServerFirmwareVersionEntry(context.Background()).HyperflexServerFirmwareVersionEntry(hyperflexServerFirmwareVersionEntry).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexServerFirmwareVersionEntry``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateHyperflexServerFirmwareVersionEntry`: HyperflexServerFirmwareVersionEntry
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.CreateHyperflexServerFirmwareVersionEntry`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateHyperflexServerFirmwareVersionEntryRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hyperflexServerFirmwareVersionEntry** | [**HyperflexServerFirmwareVersionEntry**](HyperflexServerFirmwareVersionEntry.md) | The &#39;hyperflex.ServerFirmwareVersionEntry&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**HyperflexServerFirmwareVersionEntry**](hyperflex.ServerFirmwareVersionEntry.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## CreateHyperflexServerModel
 
 > HyperflexServerModel CreateHyperflexServerModel(ctx).HyperflexServerModel(hyperflexServerModel).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
@@ -1421,14 +1651,14 @@ import (
 )
 
 func main() {
-    hyperflexServerModel := *openapiclient.Newhyperflex.ServerModel("ClassId_example", "ObjectType_example") // HyperflexServerModel | The 'hyperflex.ServerModel' resource to create.
+    hyperflexServerModel := *openapiclient.NewHyperflexServerModel("ClassId_example", "ObjectType_example") // HyperflexServerModel | The 'hyperflex.ServerModel' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.CreateHyperflexServerModel(context.Background()).HyperflexServerModel(hyperflexServerModel).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexServerModel``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -1489,14 +1719,14 @@ import (
 )
 
 func main() {
-    hyperflexSoftwareVersionPolicy := *openapiclient.Newhyperflex.SoftwareVersionPolicy("ClassId_example", "ObjectType_example") // HyperflexSoftwareVersionPolicy | The 'hyperflex.SoftwareVersionPolicy' resource to create.
+    hyperflexSoftwareVersionPolicy := *openapiclient.NewHyperflexSoftwareVersionPolicy("ClassId_example", "ObjectType_example") // HyperflexSoftwareVersionPolicy | The 'hyperflex.SoftwareVersionPolicy' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.CreateHyperflexSoftwareVersionPolicy(context.Background()).HyperflexSoftwareVersionPolicy(hyperflexSoftwareVersionPolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexSoftwareVersionPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -1557,14 +1787,14 @@ import (
 )
 
 func main() {
-    hyperflexSysConfigPolicy := *openapiclient.Newhyperflex.SysConfigPolicy("ClassId_example", "ObjectType_example") // HyperflexSysConfigPolicy | The 'hyperflex.SysConfigPolicy' resource to create.
+    hyperflexSysConfigPolicy := *openapiclient.NewHyperflexSysConfigPolicy("ClassId_example", "ObjectType_example") // HyperflexSysConfigPolicy | The 'hyperflex.SysConfigPolicy' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.CreateHyperflexSysConfigPolicy(context.Background()).HyperflexSysConfigPolicy(hyperflexSysConfigPolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexSysConfigPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -1625,14 +1855,14 @@ import (
 )
 
 func main() {
-    hyperflexUcsmConfigPolicy := *openapiclient.Newhyperflex.UcsmConfigPolicy("ClassId_example", "ObjectType_example") // HyperflexUcsmConfigPolicy | The 'hyperflex.UcsmConfigPolicy' resource to create.
+    hyperflexUcsmConfigPolicy := *openapiclient.NewHyperflexUcsmConfigPolicy("ClassId_example", "ObjectType_example") // HyperflexUcsmConfigPolicy | The 'hyperflex.UcsmConfigPolicy' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.CreateHyperflexUcsmConfigPolicy(context.Background()).HyperflexUcsmConfigPolicy(hyperflexUcsmConfigPolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexUcsmConfigPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -1693,14 +1923,14 @@ import (
 )
 
 func main() {
-    hyperflexVcenterConfigPolicy := *openapiclient.Newhyperflex.VcenterConfigPolicy("ClassId_example", "ObjectType_example") // HyperflexVcenterConfigPolicy | The 'hyperflex.VcenterConfigPolicy' resource to create.
+    hyperflexVcenterConfigPolicy := *openapiclient.NewHyperflexVcenterConfigPolicy("ClassId_example", "ObjectType_example") // HyperflexVcenterConfigPolicy | The 'hyperflex.VcenterConfigPolicy' resource to create.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
     ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.CreateHyperflexVcenterConfigPolicy(context.Background()).HyperflexVcenterConfigPolicy(hyperflexVcenterConfigPolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexVcenterConfigPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -1766,7 +1996,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.DeleteHyperflexAppCatalog(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexAppCatalog``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -1832,7 +2062,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.DeleteHyperflexAutoSupportPolicy(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexAutoSupportPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -1898,7 +2128,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.DeleteHyperflexCapabilityInfo(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexCapabilityInfo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -1964,7 +2194,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.DeleteHyperflexClusterNetworkPolicy(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexClusterNetworkPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -2030,7 +2260,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.DeleteHyperflexClusterProfile(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexClusterProfile``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -2096,7 +2326,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.DeleteHyperflexClusterStoragePolicy(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexClusterStoragePolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -2162,7 +2392,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.DeleteHyperflexExtFcStoragePolicy(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexExtFcStoragePolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -2228,7 +2458,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.DeleteHyperflexExtIscsiStoragePolicy(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexExtIscsiStoragePolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -2294,7 +2524,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.DeleteHyperflexFeatureLimitExternal(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexFeatureLimitExternal``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -2360,7 +2590,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.DeleteHyperflexFeatureLimitInternal(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexFeatureLimitInternal``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -2378,6 +2608,138 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteHyperflexFeatureLimitInternalRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteHyperflexHealthCheckDefinition
+
+> DeleteHyperflexHealthCheckDefinition(ctx, moid).Execute()
+
+Delete a 'hyperflex.HealthCheckDefinition' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.DeleteHyperflexHealthCheckDefinition(context.Background(), moid).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexHealthCheckDefinition``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteHyperflexHealthCheckDefinitionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteHyperflexHealthCheckPackageChecksum
+
+> DeleteHyperflexHealthCheckPackageChecksum(ctx, moid).Execute()
+
+Delete a 'hyperflex.HealthCheckPackageChecksum' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.DeleteHyperflexHealthCheckPackageChecksum(context.Background(), moid).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexHealthCheckPackageChecksum``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteHyperflexHealthCheckPackageChecksumRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -2426,7 +2788,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.DeleteHyperflexHxapDatacenter(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexHxapDatacenter``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -2492,7 +2854,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.DeleteHyperflexHxdpVersion(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexHxdpVersion``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -2558,7 +2920,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.DeleteHyperflexLocalCredentialPolicy(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexLocalCredentialPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -2624,7 +2986,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.DeleteHyperflexNodeConfigPolicy(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexNodeConfigPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -2690,7 +3052,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.DeleteHyperflexNodeProfile(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexNodeProfile``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -2756,7 +3118,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.DeleteHyperflexProxySettingPolicy(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexProxySettingPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -2822,7 +3184,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.DeleteHyperflexServerFirmwareVersion(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexServerFirmwareVersion``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -2840,6 +3202,72 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteHyperflexServerFirmwareVersionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteHyperflexServerFirmwareVersionEntry
+
+> DeleteHyperflexServerFirmwareVersionEntry(ctx, moid).Execute()
+
+Delete a 'hyperflex.ServerFirmwareVersionEntry' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.DeleteHyperflexServerFirmwareVersionEntry(context.Background(), moid).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexServerFirmwareVersionEntry``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteHyperflexServerFirmwareVersionEntryRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -2888,7 +3316,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.DeleteHyperflexServerModel(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexServerModel``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -2954,7 +3382,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.DeleteHyperflexSoftwareVersionPolicy(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexSoftwareVersionPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -3020,7 +3448,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.DeleteHyperflexSysConfigPolicy(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexSysConfigPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -3086,7 +3514,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.DeleteHyperflexUcsmConfigPolicy(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexUcsmConfigPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -3152,7 +3580,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.DeleteHyperflexVcenterConfigPolicy(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexVcenterConfigPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -3218,7 +3646,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexAlarmByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexAlarmByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -3281,22 +3709,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexAlarmList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexAlarmList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -3370,7 +3798,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexAppCatalogByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexAppCatalogByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -3433,22 +3861,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexAppCatalogList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexAppCatalogList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -3522,7 +3950,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexAutoSupportPolicyByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexAutoSupportPolicyByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -3585,22 +4013,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexAutoSupportPolicyList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexAutoSupportPolicyList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -3674,7 +4102,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexCapabilityInfoByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexCapabilityInfoByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -3737,22 +4165,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexCapabilityInfoList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexCapabilityInfoList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -3826,7 +4254,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexCiscoHypervisorManagerByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexCiscoHypervisorManagerByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -3889,22 +4317,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexCiscoHypervisorManagerList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexCiscoHypervisorManagerList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -3978,7 +4406,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexClusterByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexClusterByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -4022,6 +4450,158 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetHyperflexClusterHealthCheckExecutionSnapshotByMoid
+
+> HyperflexClusterHealthCheckExecutionSnapshot GetHyperflexClusterHealthCheckExecutionSnapshotByMoid(ctx, moid).Execute()
+
+Read a 'hyperflex.ClusterHealthCheckExecutionSnapshot' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexClusterHealthCheckExecutionSnapshotByMoid(context.Background(), moid).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexClusterHealthCheckExecutionSnapshotByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexClusterHealthCheckExecutionSnapshotByMoid`: HyperflexClusterHealthCheckExecutionSnapshot
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexClusterHealthCheckExecutionSnapshotByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexClusterHealthCheckExecutionSnapshotByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HyperflexClusterHealthCheckExecutionSnapshot**](hyperflex.ClusterHealthCheckExecutionSnapshot.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexClusterHealthCheckExecutionSnapshotList
+
+> HyperflexClusterHealthCheckExecutionSnapshotResponse GetHyperflexClusterHealthCheckExecutionSnapshotList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'hyperflex.ClusterHealthCheckExecutionSnapshot' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexClusterHealthCheckExecutionSnapshotList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexClusterHealthCheckExecutionSnapshotList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexClusterHealthCheckExecutionSnapshotList`: HyperflexClusterHealthCheckExecutionSnapshotResponse
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexClusterHealthCheckExecutionSnapshotList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexClusterHealthCheckExecutionSnapshotListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**HyperflexClusterHealthCheckExecutionSnapshotResponse**](hyperflex.ClusterHealthCheckExecutionSnapshot.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetHyperflexClusterList
 
 > HyperflexClusterResponse GetHyperflexClusterList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
@@ -4041,22 +4621,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexClusterList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexClusterList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -4130,7 +4710,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexClusterNetworkPolicyByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexClusterNetworkPolicyByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -4193,22 +4773,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexClusterNetworkPolicyList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexClusterNetworkPolicyList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -4282,7 +4862,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexClusterProfileByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexClusterProfileByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -4345,22 +4925,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexClusterProfileList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexClusterProfileList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -4434,7 +5014,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexClusterStoragePolicyByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexClusterStoragePolicyByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -4497,22 +5077,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexClusterStoragePolicyList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexClusterStoragePolicyList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -4586,7 +5166,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexConfigResultByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexConfigResultByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -4654,7 +5234,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexConfigResultEntryByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexConfigResultEntryByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -4717,22 +5297,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexConfigResultEntryList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexConfigResultEntryList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -4801,22 +5381,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexConfigResultList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexConfigResultList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -4866,6 +5446,158 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetHyperflexDevicePackageDownloadStateByMoid
+
+> HyperflexDevicePackageDownloadState GetHyperflexDevicePackageDownloadStateByMoid(ctx, moid).Execute()
+
+Read a 'hyperflex.DevicePackageDownloadState' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexDevicePackageDownloadStateByMoid(context.Background(), moid).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexDevicePackageDownloadStateByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexDevicePackageDownloadStateByMoid`: HyperflexDevicePackageDownloadState
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexDevicePackageDownloadStateByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexDevicePackageDownloadStateByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HyperflexDevicePackageDownloadState**](hyperflex.DevicePackageDownloadState.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexDevicePackageDownloadStateList
+
+> HyperflexDevicePackageDownloadStateResponse GetHyperflexDevicePackageDownloadStateList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'hyperflex.DevicePackageDownloadState' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexDevicePackageDownloadStateList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexDevicePackageDownloadStateList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexDevicePackageDownloadStateList`: HyperflexDevicePackageDownloadStateResponse
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexDevicePackageDownloadStateList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexDevicePackageDownloadStateListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**HyperflexDevicePackageDownloadStateResponse**](hyperflex.DevicePackageDownloadState.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetHyperflexExtFcStoragePolicyByMoid
 
 > HyperflexExtFcStoragePolicy GetHyperflexExtFcStoragePolicyByMoid(ctx, moid).Execute()
@@ -4890,7 +5622,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexExtFcStoragePolicyByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexExtFcStoragePolicyByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -4953,22 +5685,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexExtFcStoragePolicyList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexExtFcStoragePolicyList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -5042,7 +5774,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexExtIscsiStoragePolicyByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexExtIscsiStoragePolicyByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -5105,22 +5837,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexExtIscsiStoragePolicyList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexExtIscsiStoragePolicyList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -5194,7 +5926,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexFeatureLimitExternalByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexFeatureLimitExternalByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -5257,22 +5989,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexFeatureLimitExternalList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexFeatureLimitExternalList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -5346,7 +6078,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexFeatureLimitInternalByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexFeatureLimitInternalByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -5409,22 +6141,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexFeatureLimitInternalList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexFeatureLimitInternalList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -5498,7 +6230,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexHealthByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHealthByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -5542,6 +6274,614 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetHyperflexHealthCheckDefinitionByMoid
+
+> HyperflexHealthCheckDefinition GetHyperflexHealthCheckDefinitionByMoid(ctx, moid).Execute()
+
+Read a 'hyperflex.HealthCheckDefinition' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexHealthCheckDefinitionByMoid(context.Background(), moid).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHealthCheckDefinitionByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexHealthCheckDefinitionByMoid`: HyperflexHealthCheckDefinition
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexHealthCheckDefinitionByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexHealthCheckDefinitionByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HyperflexHealthCheckDefinition**](hyperflex.HealthCheckDefinition.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexHealthCheckDefinitionList
+
+> HyperflexHealthCheckDefinitionResponse GetHyperflexHealthCheckDefinitionList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'hyperflex.HealthCheckDefinition' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexHealthCheckDefinitionList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHealthCheckDefinitionList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexHealthCheckDefinitionList`: HyperflexHealthCheckDefinitionResponse
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexHealthCheckDefinitionList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexHealthCheckDefinitionListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**HyperflexHealthCheckDefinitionResponse**](hyperflex.HealthCheckDefinition.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexHealthCheckExecutionByMoid
+
+> HyperflexHealthCheckExecution GetHyperflexHealthCheckExecutionByMoid(ctx, moid).Execute()
+
+Read a 'hyperflex.HealthCheckExecution' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexHealthCheckExecutionByMoid(context.Background(), moid).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHealthCheckExecutionByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexHealthCheckExecutionByMoid`: HyperflexHealthCheckExecution
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexHealthCheckExecutionByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexHealthCheckExecutionByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HyperflexHealthCheckExecution**](hyperflex.HealthCheckExecution.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexHealthCheckExecutionList
+
+> HyperflexHealthCheckExecutionResponse GetHyperflexHealthCheckExecutionList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'hyperflex.HealthCheckExecution' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexHealthCheckExecutionList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHealthCheckExecutionList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexHealthCheckExecutionList`: HyperflexHealthCheckExecutionResponse
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexHealthCheckExecutionList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexHealthCheckExecutionListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**HyperflexHealthCheckExecutionResponse**](hyperflex.HealthCheckExecution.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexHealthCheckExecutionSnapshotByMoid
+
+> HyperflexHealthCheckExecutionSnapshot GetHyperflexHealthCheckExecutionSnapshotByMoid(ctx, moid).Execute()
+
+Read a 'hyperflex.HealthCheckExecutionSnapshot' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexHealthCheckExecutionSnapshotByMoid(context.Background(), moid).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHealthCheckExecutionSnapshotByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexHealthCheckExecutionSnapshotByMoid`: HyperflexHealthCheckExecutionSnapshot
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexHealthCheckExecutionSnapshotByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexHealthCheckExecutionSnapshotByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HyperflexHealthCheckExecutionSnapshot**](hyperflex.HealthCheckExecutionSnapshot.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexHealthCheckExecutionSnapshotList
+
+> HyperflexHealthCheckExecutionSnapshotResponse GetHyperflexHealthCheckExecutionSnapshotList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'hyperflex.HealthCheckExecutionSnapshot' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexHealthCheckExecutionSnapshotList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHealthCheckExecutionSnapshotList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexHealthCheckExecutionSnapshotList`: HyperflexHealthCheckExecutionSnapshotResponse
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexHealthCheckExecutionSnapshotList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexHealthCheckExecutionSnapshotListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**HyperflexHealthCheckExecutionSnapshotResponse**](hyperflex.HealthCheckExecutionSnapshot.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexHealthCheckPackageChecksumByMoid
+
+> HyperflexHealthCheckPackageChecksum GetHyperflexHealthCheckPackageChecksumByMoid(ctx, moid).Execute()
+
+Read a 'hyperflex.HealthCheckPackageChecksum' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexHealthCheckPackageChecksumByMoid(context.Background(), moid).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHealthCheckPackageChecksumByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexHealthCheckPackageChecksumByMoid`: HyperflexHealthCheckPackageChecksum
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexHealthCheckPackageChecksumByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexHealthCheckPackageChecksumByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HyperflexHealthCheckPackageChecksum**](hyperflex.HealthCheckPackageChecksum.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexHealthCheckPackageChecksumList
+
+> HyperflexHealthCheckPackageChecksumResponse GetHyperflexHealthCheckPackageChecksumList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'hyperflex.HealthCheckPackageChecksum' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexHealthCheckPackageChecksumList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHealthCheckPackageChecksumList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexHealthCheckPackageChecksumList`: HyperflexHealthCheckPackageChecksumResponse
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexHealthCheckPackageChecksumList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexHealthCheckPackageChecksumListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**HyperflexHealthCheckPackageChecksumResponse**](hyperflex.HealthCheckPackageChecksum.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetHyperflexHealthList
 
 > HyperflexHealthResponse GetHyperflexHealthList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
@@ -5561,22 +6901,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexHealthList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHealthList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -5650,7 +6990,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexHxapClusterByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapClusterByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -5713,22 +7053,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexHxapClusterList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapClusterList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -5802,7 +7142,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexHxapDatacenterByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapDatacenterByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -5865,22 +7205,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexHxapDatacenterList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapDatacenterList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -5954,7 +7294,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexHxapEventByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapEventByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -6017,22 +7357,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexHxapEventList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapEventList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -6106,7 +7446,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexHxapHostByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapHostByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -6169,22 +7509,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexHxapHostList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapHostList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -6258,7 +7598,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexHxapVirtualDiskByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapVirtualDiskByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -6321,22 +7661,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexHxapVirtualDiskList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapVirtualDiskList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -6410,7 +7750,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexHxapVirtualMachineByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapVirtualMachineByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -6473,22 +7813,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexHxapVirtualMachineList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxapVirtualMachineList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -6562,7 +7902,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexHxdpVersionByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxdpVersionByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -6625,22 +7965,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexHxdpVersionList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexHxdpVersionList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -6714,7 +8054,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexLocalCredentialPolicyByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexLocalCredentialPolicyByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -6777,22 +8117,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexLocalCredentialPolicyList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexLocalCredentialPolicyList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -6866,7 +8206,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexNodeByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexNodeByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -6934,7 +8274,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexNodeConfigPolicyByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexNodeConfigPolicyByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -6997,22 +8337,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexNodeConfigPolicyList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexNodeConfigPolicyList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -7081,22 +8421,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexNodeList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexNodeList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -7170,7 +8510,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexNodeProfileByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexNodeProfileByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -7233,22 +8573,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexNodeProfileList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexNodeProfileList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -7322,7 +8662,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexProxySettingPolicyByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexProxySettingPolicyByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -7385,22 +8725,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexProxySettingPolicyList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexProxySettingPolicyList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -7474,7 +8814,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexServerFirmwareVersionByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexServerFirmwareVersionByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -7518,6 +8858,158 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetHyperflexServerFirmwareVersionEntryByMoid
+
+> HyperflexServerFirmwareVersionEntry GetHyperflexServerFirmwareVersionEntryByMoid(ctx, moid).Execute()
+
+Read a 'hyperflex.ServerFirmwareVersionEntry' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexServerFirmwareVersionEntryByMoid(context.Background(), moid).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexServerFirmwareVersionEntryByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexServerFirmwareVersionEntryByMoid`: HyperflexServerFirmwareVersionEntry
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexServerFirmwareVersionEntryByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexServerFirmwareVersionEntryByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HyperflexServerFirmwareVersionEntry**](hyperflex.ServerFirmwareVersionEntry.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexServerFirmwareVersionEntryList
+
+> HyperflexServerFirmwareVersionEntryResponse GetHyperflexServerFirmwareVersionEntryList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'hyperflex.ServerFirmwareVersionEntry' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexServerFirmwareVersionEntryList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexServerFirmwareVersionEntryList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexServerFirmwareVersionEntryList`: HyperflexServerFirmwareVersionEntryResponse
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexServerFirmwareVersionEntryList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexServerFirmwareVersionEntryListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**HyperflexServerFirmwareVersionEntryResponse**](hyperflex.ServerFirmwareVersionEntry.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetHyperflexServerFirmwareVersionList
 
 > HyperflexServerFirmwareVersionResponse GetHyperflexServerFirmwareVersionList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
@@ -7537,22 +9029,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexServerFirmwareVersionList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexServerFirmwareVersionList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -7626,7 +9118,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexServerModelByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexServerModelByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -7689,22 +9181,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexServerModelList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexServerModelList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -7778,7 +9270,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexSoftwareVersionPolicyByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexSoftwareVersionPolicyByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -7841,22 +9333,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexSoftwareVersionPolicyList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexSoftwareVersionPolicyList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -7930,7 +9422,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexSysConfigPolicyByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexSysConfigPolicyByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -7993,22 +9485,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexSysConfigPolicyList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexSysConfigPolicyList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -8082,7 +9574,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexUcsmConfigPolicyByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexUcsmConfigPolicyByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -8145,22 +9637,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexUcsmConfigPolicyList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexUcsmConfigPolicyList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -8234,7 +9726,7 @@ func main() {
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexVcenterConfigPolicyByMoid(context.Background(), moid).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexVcenterConfigPolicyByMoid``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -8297,22 +9789,22 @@ import (
 )
 
 func main() {
-    filter := "filter_example" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
-    orderby := "orderby_example" // string | Determines what properties are used to sort the collection of resources. (optional)
-    top := 987 // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
-    skip := 987 // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
-    select_ := "select__example" // string | Specifies a subset of properties to return. (optional) (default to "")
-    expand := "expand_example" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
     apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
     count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
-    inlinecount := "inlinecount_example" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
-    at := "at_example" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
     tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.GetHyperflexVcenterConfigPolicyList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexVcenterConfigPolicyList``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -8382,13 +9874,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexAppCatalog := *openapiclient.Newhyperflex.AppCatalog("ClassId_example", "ObjectType_example") // HyperflexAppCatalog | The 'hyperflex.AppCatalog' resource to update.
+    hyperflexAppCatalog := *openapiclient.NewHyperflexAppCatalog("ClassId_example", "ObjectType_example") // HyperflexAppCatalog | The 'hyperflex.AppCatalog' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexAppCatalog(context.Background(), moid).HyperflexAppCatalog(hyperflexAppCatalog).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexAppCatalog``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -8454,13 +9946,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexAutoSupportPolicy := *openapiclient.Newhyperflex.AutoSupportPolicy("ClassId_example", "ObjectType_example") // HyperflexAutoSupportPolicy | The 'hyperflex.AutoSupportPolicy' resource to update.
+    hyperflexAutoSupportPolicy := *openapiclient.NewHyperflexAutoSupportPolicy("ClassId_example", "ObjectType_example") // HyperflexAutoSupportPolicy | The 'hyperflex.AutoSupportPolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexAutoSupportPolicy(context.Background(), moid).HyperflexAutoSupportPolicy(hyperflexAutoSupportPolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexAutoSupportPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -8526,13 +10018,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexCapabilityInfo := *openapiclient.Newhyperflex.CapabilityInfo("ClassId_example", "ObjectType_example") // HyperflexCapabilityInfo | The 'hyperflex.CapabilityInfo' resource to update.
+    hyperflexCapabilityInfo := *openapiclient.NewHyperflexCapabilityInfo("ClassId_example", "ObjectType_example") // HyperflexCapabilityInfo | The 'hyperflex.CapabilityInfo' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexCapabilityInfo(context.Background(), moid).HyperflexCapabilityInfo(hyperflexCapabilityInfo).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexCapabilityInfo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -8598,13 +10090,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexCiscoHypervisorManager := *openapiclient.Newhyperflex.CiscoHypervisorManager("ClassId_example", "ObjectType_example") // HyperflexCiscoHypervisorManager | The 'hyperflex.CiscoHypervisorManager' resource to update.
+    hyperflexCiscoHypervisorManager := *openapiclient.NewHyperflexCiscoHypervisorManager("ClassId_example", "ObjectType_example") // HyperflexCiscoHypervisorManager | The 'hyperflex.CiscoHypervisorManager' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexCiscoHypervisorManager(context.Background(), moid).HyperflexCiscoHypervisorManager(hyperflexCiscoHypervisorManager).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexCiscoHypervisorManager``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -8670,13 +10162,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexCluster := *openapiclient.Newhyperflex.Cluster("ClassId_example", "ObjectType_example") // HyperflexCluster | The 'hyperflex.Cluster' resource to update.
+    hyperflexCluster := *openapiclient.NewHyperflexCluster("ClassId_example", "ObjectType_example") // HyperflexCluster | The 'hyperflex.Cluster' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexCluster(context.Background(), moid).HyperflexCluster(hyperflexCluster).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexCluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -8742,13 +10234,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexClusterNetworkPolicy := *openapiclient.Newhyperflex.ClusterNetworkPolicy("ClassId_example", "ObjectType_example") // HyperflexClusterNetworkPolicy | The 'hyperflex.ClusterNetworkPolicy' resource to update.
+    hyperflexClusterNetworkPolicy := *openapiclient.NewHyperflexClusterNetworkPolicy("ClassId_example", "ObjectType_example") // HyperflexClusterNetworkPolicy | The 'hyperflex.ClusterNetworkPolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexClusterNetworkPolicy(context.Background(), moid).HyperflexClusterNetworkPolicy(hyperflexClusterNetworkPolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexClusterNetworkPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -8814,13 +10306,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexClusterProfile := *openapiclient.Newhyperflex.ClusterProfile("ClassId_example", "ObjectType_example") // HyperflexClusterProfile | The 'hyperflex.ClusterProfile' resource to update.
+    hyperflexClusterProfile := *openapiclient.NewHyperflexClusterProfile("ClassId_example", "ObjectType_example") // HyperflexClusterProfile | The 'hyperflex.ClusterProfile' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexClusterProfile(context.Background(), moid).HyperflexClusterProfile(hyperflexClusterProfile).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexClusterProfile``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -8886,13 +10378,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexClusterStoragePolicy := *openapiclient.Newhyperflex.ClusterStoragePolicy("ClassId_example", "ObjectType_example") // HyperflexClusterStoragePolicy | The 'hyperflex.ClusterStoragePolicy' resource to update.
+    hyperflexClusterStoragePolicy := *openapiclient.NewHyperflexClusterStoragePolicy("ClassId_example", "ObjectType_example") // HyperflexClusterStoragePolicy | The 'hyperflex.ClusterStoragePolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexClusterStoragePolicy(context.Background(), moid).HyperflexClusterStoragePolicy(hyperflexClusterStoragePolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexClusterStoragePolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -8958,13 +10450,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexExtFcStoragePolicy := *openapiclient.Newhyperflex.ExtFcStoragePolicy("ClassId_example", "ObjectType_example") // HyperflexExtFcStoragePolicy | The 'hyperflex.ExtFcStoragePolicy' resource to update.
+    hyperflexExtFcStoragePolicy := *openapiclient.NewHyperflexExtFcStoragePolicy("ClassId_example", "ObjectType_example") // HyperflexExtFcStoragePolicy | The 'hyperflex.ExtFcStoragePolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexExtFcStoragePolicy(context.Background(), moid).HyperflexExtFcStoragePolicy(hyperflexExtFcStoragePolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexExtFcStoragePolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -9030,13 +10522,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexExtIscsiStoragePolicy := *openapiclient.Newhyperflex.ExtIscsiStoragePolicy("ClassId_example", "ObjectType_example") // HyperflexExtIscsiStoragePolicy | The 'hyperflex.ExtIscsiStoragePolicy' resource to update.
+    hyperflexExtIscsiStoragePolicy := *openapiclient.NewHyperflexExtIscsiStoragePolicy("ClassId_example", "ObjectType_example") // HyperflexExtIscsiStoragePolicy | The 'hyperflex.ExtIscsiStoragePolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexExtIscsiStoragePolicy(context.Background(), moid).HyperflexExtIscsiStoragePolicy(hyperflexExtIscsiStoragePolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexExtIscsiStoragePolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -9102,13 +10594,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexFeatureLimitExternal := *openapiclient.Newhyperflex.FeatureLimitExternal("ClassId_example", "ObjectType_example") // HyperflexFeatureLimitExternal | The 'hyperflex.FeatureLimitExternal' resource to update.
+    hyperflexFeatureLimitExternal := *openapiclient.NewHyperflexFeatureLimitExternal("ClassId_example", "ObjectType_example") // HyperflexFeatureLimitExternal | The 'hyperflex.FeatureLimitExternal' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexFeatureLimitExternal(context.Background(), moid).HyperflexFeatureLimitExternal(hyperflexFeatureLimitExternal).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexFeatureLimitExternal``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -9174,13 +10666,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexFeatureLimitInternal := *openapiclient.Newhyperflex.FeatureLimitInternal("ClassId_example", "ObjectType_example") // HyperflexFeatureLimitInternal | The 'hyperflex.FeatureLimitInternal' resource to update.
+    hyperflexFeatureLimitInternal := *openapiclient.NewHyperflexFeatureLimitInternal("ClassId_example", "ObjectType_example") // HyperflexFeatureLimitInternal | The 'hyperflex.FeatureLimitInternal' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexFeatureLimitInternal(context.Background(), moid).HyperflexFeatureLimitInternal(hyperflexFeatureLimitInternal).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexFeatureLimitInternal``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -9226,6 +10718,150 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PatchHyperflexHealthCheckDefinition
+
+> HyperflexHealthCheckDefinition PatchHyperflexHealthCheckDefinition(ctx, moid).HyperflexHealthCheckDefinition(hyperflexHealthCheckDefinition).IfMatch(ifMatch).Execute()
+
+Update a 'hyperflex.HealthCheckDefinition' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    hyperflexHealthCheckDefinition := *openapiclient.NewHyperflexHealthCheckDefinition("ClassId_example", "ObjectType_example") // HyperflexHealthCheckDefinition | The 'hyperflex.HealthCheckDefinition' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.PatchHyperflexHealthCheckDefinition(context.Background(), moid).HyperflexHealthCheckDefinition(hyperflexHealthCheckDefinition).IfMatch(ifMatch).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexHealthCheckDefinition``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchHyperflexHealthCheckDefinition`: HyperflexHealthCheckDefinition
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.PatchHyperflexHealthCheckDefinition`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchHyperflexHealthCheckDefinitionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **hyperflexHealthCheckDefinition** | [**HyperflexHealthCheckDefinition**](HyperflexHealthCheckDefinition.md) | The &#39;hyperflex.HealthCheckDefinition&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**HyperflexHealthCheckDefinition**](hyperflex.HealthCheckDefinition.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchHyperflexHealthCheckPackageChecksum
+
+> HyperflexHealthCheckPackageChecksum PatchHyperflexHealthCheckPackageChecksum(ctx, moid).HyperflexHealthCheckPackageChecksum(hyperflexHealthCheckPackageChecksum).IfMatch(ifMatch).Execute()
+
+Update a 'hyperflex.HealthCheckPackageChecksum' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    hyperflexHealthCheckPackageChecksum := *openapiclient.NewHyperflexHealthCheckPackageChecksum("ClassId_example", "ObjectType_example") // HyperflexHealthCheckPackageChecksum | The 'hyperflex.HealthCheckPackageChecksum' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.PatchHyperflexHealthCheckPackageChecksum(context.Background(), moid).HyperflexHealthCheckPackageChecksum(hyperflexHealthCheckPackageChecksum).IfMatch(ifMatch).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexHealthCheckPackageChecksum``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchHyperflexHealthCheckPackageChecksum`: HyperflexHealthCheckPackageChecksum
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.PatchHyperflexHealthCheckPackageChecksum`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchHyperflexHealthCheckPackageChecksumRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **hyperflexHealthCheckPackageChecksum** | [**HyperflexHealthCheckPackageChecksum**](HyperflexHealthCheckPackageChecksum.md) | The &#39;hyperflex.HealthCheckPackageChecksum&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**HyperflexHealthCheckPackageChecksum**](hyperflex.HealthCheckPackageChecksum.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PatchHyperflexHxapCluster
 
 > HyperflexHxapCluster PatchHyperflexHxapCluster(ctx, moid).HyperflexHxapCluster(hyperflexHxapCluster).IfMatch(ifMatch).Execute()
@@ -9246,13 +10882,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexHxapCluster := *openapiclient.Newhyperflex.HxapCluster("ClassId_example", "ObjectType_example") // HyperflexHxapCluster | The 'hyperflex.HxapCluster' resource to update.
+    hyperflexHxapCluster := *openapiclient.NewHyperflexHxapCluster("ClassId_example", "ObjectType_example") // HyperflexHxapCluster | The 'hyperflex.HxapCluster' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexHxapCluster(context.Background(), moid).HyperflexHxapCluster(hyperflexHxapCluster).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexHxapCluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -9318,13 +10954,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexHxapDatacenter := *openapiclient.Newhyperflex.HxapDatacenter("ClassId_example", "ObjectType_example") // HyperflexHxapDatacenter | The 'hyperflex.HxapDatacenter' resource to update.
+    hyperflexHxapDatacenter := *openapiclient.NewHyperflexHxapDatacenter("ClassId_example", "ObjectType_example") // HyperflexHxapDatacenter | The 'hyperflex.HxapDatacenter' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexHxapDatacenter(context.Background(), moid).HyperflexHxapDatacenter(hyperflexHxapDatacenter).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexHxapDatacenter``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -9390,13 +11026,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexHxapEvent := *openapiclient.Newhyperflex.HxapEvent("ClassId_example", "ObjectType_example") // HyperflexHxapEvent | The 'hyperflex.HxapEvent' resource to update.
+    hyperflexHxapEvent := *openapiclient.NewHyperflexHxapEvent("ClassId_example", "ObjectType_example") // HyperflexHxapEvent | The 'hyperflex.HxapEvent' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexHxapEvent(context.Background(), moid).HyperflexHxapEvent(hyperflexHxapEvent).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexHxapEvent``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -9462,13 +11098,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexHxapHost := *openapiclient.Newhyperflex.HxapHost("ClassId_example", "ObjectType_example") // HyperflexHxapHost | The 'hyperflex.HxapHost' resource to update.
+    hyperflexHxapHost := *openapiclient.NewHyperflexHxapHost("ClassId_example", "ObjectType_example") // HyperflexHxapHost | The 'hyperflex.HxapHost' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexHxapHost(context.Background(), moid).HyperflexHxapHost(hyperflexHxapHost).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexHxapHost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -9534,13 +11170,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexHxapVirtualDisk := *openapiclient.Newhyperflex.HxapVirtualDisk("ClassId_example", "ObjectType_example") // HyperflexHxapVirtualDisk | The 'hyperflex.HxapVirtualDisk' resource to update.
+    hyperflexHxapVirtualDisk := *openapiclient.NewHyperflexHxapVirtualDisk("ClassId_example", "ObjectType_example") // HyperflexHxapVirtualDisk | The 'hyperflex.HxapVirtualDisk' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexHxapVirtualDisk(context.Background(), moid).HyperflexHxapVirtualDisk(hyperflexHxapVirtualDisk).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexHxapVirtualDisk``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -9606,13 +11242,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexHxapVirtualMachine := *openapiclient.Newhyperflex.HxapVirtualMachine("ClassId_example", "ObjectType_example") // HyperflexHxapVirtualMachine | The 'hyperflex.HxapVirtualMachine' resource to update.
+    hyperflexHxapVirtualMachine := *openapiclient.NewHyperflexHxapVirtualMachine("ClassId_example", "ObjectType_example") // HyperflexHxapVirtualMachine | The 'hyperflex.HxapVirtualMachine' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexHxapVirtualMachine(context.Background(), moid).HyperflexHxapVirtualMachine(hyperflexHxapVirtualMachine).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexHxapVirtualMachine``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -9678,13 +11314,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexHxdpVersion := *openapiclient.Newhyperflex.HxdpVersion("ClassId_example", "ObjectType_example") // HyperflexHxdpVersion | The 'hyperflex.HxdpVersion' resource to update.
+    hyperflexHxdpVersion := *openapiclient.NewHyperflexHxdpVersion("ClassId_example", "ObjectType_example") // HyperflexHxdpVersion | The 'hyperflex.HxdpVersion' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexHxdpVersion(context.Background(), moid).HyperflexHxdpVersion(hyperflexHxdpVersion).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexHxdpVersion``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -9750,13 +11386,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexLocalCredentialPolicy := *openapiclient.Newhyperflex.LocalCredentialPolicy("ClassId_example", "ObjectType_example") // HyperflexLocalCredentialPolicy | The 'hyperflex.LocalCredentialPolicy' resource to update.
+    hyperflexLocalCredentialPolicy := *openapiclient.NewHyperflexLocalCredentialPolicy("ClassId_example", "ObjectType_example") // HyperflexLocalCredentialPolicy | The 'hyperflex.LocalCredentialPolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexLocalCredentialPolicy(context.Background(), moid).HyperflexLocalCredentialPolicy(hyperflexLocalCredentialPolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexLocalCredentialPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -9822,13 +11458,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexNodeConfigPolicy := *openapiclient.Newhyperflex.NodeConfigPolicy("ClassId_example", "ObjectType_example") // HyperflexNodeConfigPolicy | The 'hyperflex.NodeConfigPolicy' resource to update.
+    hyperflexNodeConfigPolicy := *openapiclient.NewHyperflexNodeConfigPolicy("ClassId_example", "ObjectType_example") // HyperflexNodeConfigPolicy | The 'hyperflex.NodeConfigPolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexNodeConfigPolicy(context.Background(), moid).HyperflexNodeConfigPolicy(hyperflexNodeConfigPolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexNodeConfigPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -9894,13 +11530,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexNodeProfile := *openapiclient.Newhyperflex.NodeProfile("ClassId_example", "ObjectType_example") // HyperflexNodeProfile | The 'hyperflex.NodeProfile' resource to update.
+    hyperflexNodeProfile := *openapiclient.NewHyperflexNodeProfile("ClassId_example", "ObjectType_example") // HyperflexNodeProfile | The 'hyperflex.NodeProfile' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexNodeProfile(context.Background(), moid).HyperflexNodeProfile(hyperflexNodeProfile).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexNodeProfile``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -9966,13 +11602,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexProxySettingPolicy := *openapiclient.Newhyperflex.ProxySettingPolicy("ClassId_example", "ObjectType_example") // HyperflexProxySettingPolicy | The 'hyperflex.ProxySettingPolicy' resource to update.
+    hyperflexProxySettingPolicy := *openapiclient.NewHyperflexProxySettingPolicy("ClassId_example", "ObjectType_example") // HyperflexProxySettingPolicy | The 'hyperflex.ProxySettingPolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexProxySettingPolicy(context.Background(), moid).HyperflexProxySettingPolicy(hyperflexProxySettingPolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexProxySettingPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -10038,13 +11674,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexServerFirmwareVersion := *openapiclient.Newhyperflex.ServerFirmwareVersion("ClassId_example", "ObjectType_example") // HyperflexServerFirmwareVersion | The 'hyperflex.ServerFirmwareVersion' resource to update.
+    hyperflexServerFirmwareVersion := *openapiclient.NewHyperflexServerFirmwareVersion("ClassId_example", "ObjectType_example") // HyperflexServerFirmwareVersion | The 'hyperflex.ServerFirmwareVersion' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexServerFirmwareVersion(context.Background(), moid).HyperflexServerFirmwareVersion(hyperflexServerFirmwareVersion).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexServerFirmwareVersion``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -10090,6 +11726,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PatchHyperflexServerFirmwareVersionEntry
+
+> HyperflexServerFirmwareVersionEntry PatchHyperflexServerFirmwareVersionEntry(ctx, moid).HyperflexServerFirmwareVersionEntry(hyperflexServerFirmwareVersionEntry).IfMatch(ifMatch).Execute()
+
+Update a 'hyperflex.ServerFirmwareVersionEntry' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    hyperflexServerFirmwareVersionEntry := *openapiclient.NewHyperflexServerFirmwareVersionEntry("ClassId_example", "ObjectType_example") // HyperflexServerFirmwareVersionEntry | The 'hyperflex.ServerFirmwareVersionEntry' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.PatchHyperflexServerFirmwareVersionEntry(context.Background(), moid).HyperflexServerFirmwareVersionEntry(hyperflexServerFirmwareVersionEntry).IfMatch(ifMatch).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexServerFirmwareVersionEntry``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchHyperflexServerFirmwareVersionEntry`: HyperflexServerFirmwareVersionEntry
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.PatchHyperflexServerFirmwareVersionEntry`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchHyperflexServerFirmwareVersionEntryRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **hyperflexServerFirmwareVersionEntry** | [**HyperflexServerFirmwareVersionEntry**](HyperflexServerFirmwareVersionEntry.md) | The &#39;hyperflex.ServerFirmwareVersionEntry&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**HyperflexServerFirmwareVersionEntry**](hyperflex.ServerFirmwareVersionEntry.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PatchHyperflexServerModel
 
 > HyperflexServerModel PatchHyperflexServerModel(ctx, moid).HyperflexServerModel(hyperflexServerModel).IfMatch(ifMatch).Execute()
@@ -10110,13 +11818,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexServerModel := *openapiclient.Newhyperflex.ServerModel("ClassId_example", "ObjectType_example") // HyperflexServerModel | The 'hyperflex.ServerModel' resource to update.
+    hyperflexServerModel := *openapiclient.NewHyperflexServerModel("ClassId_example", "ObjectType_example") // HyperflexServerModel | The 'hyperflex.ServerModel' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexServerModel(context.Background(), moid).HyperflexServerModel(hyperflexServerModel).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexServerModel``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -10182,13 +11890,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexSoftwareVersionPolicy := *openapiclient.Newhyperflex.SoftwareVersionPolicy("ClassId_example", "ObjectType_example") // HyperflexSoftwareVersionPolicy | The 'hyperflex.SoftwareVersionPolicy' resource to update.
+    hyperflexSoftwareVersionPolicy := *openapiclient.NewHyperflexSoftwareVersionPolicy("ClassId_example", "ObjectType_example") // HyperflexSoftwareVersionPolicy | The 'hyperflex.SoftwareVersionPolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexSoftwareVersionPolicy(context.Background(), moid).HyperflexSoftwareVersionPolicy(hyperflexSoftwareVersionPolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexSoftwareVersionPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -10254,13 +11962,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexSysConfigPolicy := *openapiclient.Newhyperflex.SysConfigPolicy("ClassId_example", "ObjectType_example") // HyperflexSysConfigPolicy | The 'hyperflex.SysConfigPolicy' resource to update.
+    hyperflexSysConfigPolicy := *openapiclient.NewHyperflexSysConfigPolicy("ClassId_example", "ObjectType_example") // HyperflexSysConfigPolicy | The 'hyperflex.SysConfigPolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexSysConfigPolicy(context.Background(), moid).HyperflexSysConfigPolicy(hyperflexSysConfigPolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexSysConfigPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -10326,13 +12034,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexUcsmConfigPolicy := *openapiclient.Newhyperflex.UcsmConfigPolicy("ClassId_example", "ObjectType_example") // HyperflexUcsmConfigPolicy | The 'hyperflex.UcsmConfigPolicy' resource to update.
+    hyperflexUcsmConfigPolicy := *openapiclient.NewHyperflexUcsmConfigPolicy("ClassId_example", "ObjectType_example") // HyperflexUcsmConfigPolicy | The 'hyperflex.UcsmConfigPolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexUcsmConfigPolicy(context.Background(), moid).HyperflexUcsmConfigPolicy(hyperflexUcsmConfigPolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexUcsmConfigPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -10398,13 +12106,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexVcenterConfigPolicy := *openapiclient.Newhyperflex.VcenterConfigPolicy("ClassId_example", "ObjectType_example") // HyperflexVcenterConfigPolicy | The 'hyperflex.VcenterConfigPolicy' resource to update.
+    hyperflexVcenterConfigPolicy := *openapiclient.NewHyperflexVcenterConfigPolicy("ClassId_example", "ObjectType_example") // HyperflexVcenterConfigPolicy | The 'hyperflex.VcenterConfigPolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.PatchHyperflexVcenterConfigPolicy(context.Background(), moid).HyperflexVcenterConfigPolicy(hyperflexVcenterConfigPolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexVcenterConfigPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -10470,13 +12178,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexAppCatalog :=  // HyperflexAppCatalog | The 'hyperflex.AppCatalog' resource to update.
+    hyperflexAppCatalog := *openapiclient.NewHyperflexAppCatalog("ClassId_example", "ObjectType_example") // HyperflexAppCatalog | The 'hyperflex.AppCatalog' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexAppCatalog(context.Background(), moid).HyperflexAppCatalog(hyperflexAppCatalog).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexAppCatalog``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -10542,13 +12250,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexAutoSupportPolicy :=  // HyperflexAutoSupportPolicy | The 'hyperflex.AutoSupportPolicy' resource to update.
+    hyperflexAutoSupportPolicy := *openapiclient.NewHyperflexAutoSupportPolicy("ClassId_example", "ObjectType_example") // HyperflexAutoSupportPolicy | The 'hyperflex.AutoSupportPolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexAutoSupportPolicy(context.Background(), moid).HyperflexAutoSupportPolicy(hyperflexAutoSupportPolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexAutoSupportPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -10614,13 +12322,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexCapabilityInfo :=  // HyperflexCapabilityInfo | The 'hyperflex.CapabilityInfo' resource to update.
+    hyperflexCapabilityInfo := *openapiclient.NewHyperflexCapabilityInfo("ClassId_example", "ObjectType_example") // HyperflexCapabilityInfo | The 'hyperflex.CapabilityInfo' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexCapabilityInfo(context.Background(), moid).HyperflexCapabilityInfo(hyperflexCapabilityInfo).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexCapabilityInfo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -10686,13 +12394,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexCiscoHypervisorManager :=  // HyperflexCiscoHypervisorManager | The 'hyperflex.CiscoHypervisorManager' resource to update.
+    hyperflexCiscoHypervisorManager := *openapiclient.NewHyperflexCiscoHypervisorManager("ClassId_example", "ObjectType_example") // HyperflexCiscoHypervisorManager | The 'hyperflex.CiscoHypervisorManager' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexCiscoHypervisorManager(context.Background(), moid).HyperflexCiscoHypervisorManager(hyperflexCiscoHypervisorManager).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexCiscoHypervisorManager``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -10758,13 +12466,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexCluster := *openapiclient.Newhyperflex.Cluster("ClassId_example", "ObjectType_example") // HyperflexCluster | The 'hyperflex.Cluster' resource to update.
+    hyperflexCluster := *openapiclient.NewHyperflexCluster("ClassId_example", "ObjectType_example") // HyperflexCluster | The 'hyperflex.Cluster' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexCluster(context.Background(), moid).HyperflexCluster(hyperflexCluster).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexCluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -10830,13 +12538,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexClusterNetworkPolicy :=  // HyperflexClusterNetworkPolicy | The 'hyperflex.ClusterNetworkPolicy' resource to update.
+    hyperflexClusterNetworkPolicy := *openapiclient.NewHyperflexClusterNetworkPolicy("ClassId_example", "ObjectType_example") // HyperflexClusterNetworkPolicy | The 'hyperflex.ClusterNetworkPolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexClusterNetworkPolicy(context.Background(), moid).HyperflexClusterNetworkPolicy(hyperflexClusterNetworkPolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexClusterNetworkPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -10902,13 +12610,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexClusterProfile :=  // HyperflexClusterProfile | The 'hyperflex.ClusterProfile' resource to update.
+    hyperflexClusterProfile := *openapiclient.NewHyperflexClusterProfile("ClassId_example", "ObjectType_example") // HyperflexClusterProfile | The 'hyperflex.ClusterProfile' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexClusterProfile(context.Background(), moid).HyperflexClusterProfile(hyperflexClusterProfile).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexClusterProfile``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -10974,13 +12682,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexClusterStoragePolicy :=  // HyperflexClusterStoragePolicy | The 'hyperflex.ClusterStoragePolicy' resource to update.
+    hyperflexClusterStoragePolicy := *openapiclient.NewHyperflexClusterStoragePolicy("ClassId_example", "ObjectType_example") // HyperflexClusterStoragePolicy | The 'hyperflex.ClusterStoragePolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexClusterStoragePolicy(context.Background(), moid).HyperflexClusterStoragePolicy(hyperflexClusterStoragePolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexClusterStoragePolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -11046,13 +12754,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexExtFcStoragePolicy :=  // HyperflexExtFcStoragePolicy | The 'hyperflex.ExtFcStoragePolicy' resource to update.
+    hyperflexExtFcStoragePolicy := *openapiclient.NewHyperflexExtFcStoragePolicy("ClassId_example", "ObjectType_example") // HyperflexExtFcStoragePolicy | The 'hyperflex.ExtFcStoragePolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexExtFcStoragePolicy(context.Background(), moid).HyperflexExtFcStoragePolicy(hyperflexExtFcStoragePolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexExtFcStoragePolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -11118,13 +12826,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexExtIscsiStoragePolicy :=  // HyperflexExtIscsiStoragePolicy | The 'hyperflex.ExtIscsiStoragePolicy' resource to update.
+    hyperflexExtIscsiStoragePolicy := *openapiclient.NewHyperflexExtIscsiStoragePolicy("ClassId_example", "ObjectType_example") // HyperflexExtIscsiStoragePolicy | The 'hyperflex.ExtIscsiStoragePolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexExtIscsiStoragePolicy(context.Background(), moid).HyperflexExtIscsiStoragePolicy(hyperflexExtIscsiStoragePolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexExtIscsiStoragePolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -11190,13 +12898,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexFeatureLimitExternal :=  // HyperflexFeatureLimitExternal | The 'hyperflex.FeatureLimitExternal' resource to update.
+    hyperflexFeatureLimitExternal := *openapiclient.NewHyperflexFeatureLimitExternal("ClassId_example", "ObjectType_example") // HyperflexFeatureLimitExternal | The 'hyperflex.FeatureLimitExternal' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexFeatureLimitExternal(context.Background(), moid).HyperflexFeatureLimitExternal(hyperflexFeatureLimitExternal).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexFeatureLimitExternal``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -11262,13 +12970,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexFeatureLimitInternal :=  // HyperflexFeatureLimitInternal | The 'hyperflex.FeatureLimitInternal' resource to update.
+    hyperflexFeatureLimitInternal := *openapiclient.NewHyperflexFeatureLimitInternal("ClassId_example", "ObjectType_example") // HyperflexFeatureLimitInternal | The 'hyperflex.FeatureLimitInternal' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexFeatureLimitInternal(context.Background(), moid).HyperflexFeatureLimitInternal(hyperflexFeatureLimitInternal).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexFeatureLimitInternal``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -11314,6 +13022,150 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## UpdateHyperflexHealthCheckDefinition
+
+> HyperflexHealthCheckDefinition UpdateHyperflexHealthCheckDefinition(ctx, moid).HyperflexHealthCheckDefinition(hyperflexHealthCheckDefinition).IfMatch(ifMatch).Execute()
+
+Update a 'hyperflex.HealthCheckDefinition' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    hyperflexHealthCheckDefinition := *openapiclient.NewHyperflexHealthCheckDefinition("ClassId_example", "ObjectType_example") // HyperflexHealthCheckDefinition | The 'hyperflex.HealthCheckDefinition' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.UpdateHyperflexHealthCheckDefinition(context.Background(), moid).HyperflexHealthCheckDefinition(hyperflexHealthCheckDefinition).IfMatch(ifMatch).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexHealthCheckDefinition``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateHyperflexHealthCheckDefinition`: HyperflexHealthCheckDefinition
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.UpdateHyperflexHealthCheckDefinition`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateHyperflexHealthCheckDefinitionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **hyperflexHealthCheckDefinition** | [**HyperflexHealthCheckDefinition**](HyperflexHealthCheckDefinition.md) | The &#39;hyperflex.HealthCheckDefinition&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**HyperflexHealthCheckDefinition**](hyperflex.HealthCheckDefinition.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateHyperflexHealthCheckPackageChecksum
+
+> HyperflexHealthCheckPackageChecksum UpdateHyperflexHealthCheckPackageChecksum(ctx, moid).HyperflexHealthCheckPackageChecksum(hyperflexHealthCheckPackageChecksum).IfMatch(ifMatch).Execute()
+
+Update a 'hyperflex.HealthCheckPackageChecksum' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    hyperflexHealthCheckPackageChecksum := *openapiclient.NewHyperflexHealthCheckPackageChecksum("ClassId_example", "ObjectType_example") // HyperflexHealthCheckPackageChecksum | The 'hyperflex.HealthCheckPackageChecksum' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.UpdateHyperflexHealthCheckPackageChecksum(context.Background(), moid).HyperflexHealthCheckPackageChecksum(hyperflexHealthCheckPackageChecksum).IfMatch(ifMatch).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexHealthCheckPackageChecksum``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateHyperflexHealthCheckPackageChecksum`: HyperflexHealthCheckPackageChecksum
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.UpdateHyperflexHealthCheckPackageChecksum`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateHyperflexHealthCheckPackageChecksumRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **hyperflexHealthCheckPackageChecksum** | [**HyperflexHealthCheckPackageChecksum**](HyperflexHealthCheckPackageChecksum.md) | The &#39;hyperflex.HealthCheckPackageChecksum&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**HyperflexHealthCheckPackageChecksum**](hyperflex.HealthCheckPackageChecksum.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateHyperflexHxapCluster
 
 > HyperflexHxapCluster UpdateHyperflexHxapCluster(ctx, moid).HyperflexHxapCluster(hyperflexHxapCluster).IfMatch(ifMatch).Execute()
@@ -11334,13 +13186,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexHxapCluster := *openapiclient.Newhyperflex.HxapCluster("ClassId_example", "ObjectType_example") // HyperflexHxapCluster | The 'hyperflex.HxapCluster' resource to update.
+    hyperflexHxapCluster := *openapiclient.NewHyperflexHxapCluster("ClassId_example", "ObjectType_example") // HyperflexHxapCluster | The 'hyperflex.HxapCluster' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexHxapCluster(context.Background(), moid).HyperflexHxapCluster(hyperflexHxapCluster).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexHxapCluster``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -11406,13 +13258,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexHxapDatacenter :=  // HyperflexHxapDatacenter | The 'hyperflex.HxapDatacenter' resource to update.
+    hyperflexHxapDatacenter := *openapiclient.NewHyperflexHxapDatacenter("ClassId_example", "ObjectType_example") // HyperflexHxapDatacenter | The 'hyperflex.HxapDatacenter' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexHxapDatacenter(context.Background(), moid).HyperflexHxapDatacenter(hyperflexHxapDatacenter).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexHxapDatacenter``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -11478,13 +13330,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexHxapEvent := *openapiclient.Newhyperflex.HxapEvent("ClassId_example", "ObjectType_example") // HyperflexHxapEvent | The 'hyperflex.HxapEvent' resource to update.
+    hyperflexHxapEvent := *openapiclient.NewHyperflexHxapEvent("ClassId_example", "ObjectType_example") // HyperflexHxapEvent | The 'hyperflex.HxapEvent' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexHxapEvent(context.Background(), moid).HyperflexHxapEvent(hyperflexHxapEvent).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexHxapEvent``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -11550,13 +13402,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexHxapHost := *openapiclient.Newhyperflex.HxapHost("ClassId_example", "ObjectType_example") // HyperflexHxapHost | The 'hyperflex.HxapHost' resource to update.
+    hyperflexHxapHost := *openapiclient.NewHyperflexHxapHost("ClassId_example", "ObjectType_example") // HyperflexHxapHost | The 'hyperflex.HxapHost' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexHxapHost(context.Background(), moid).HyperflexHxapHost(hyperflexHxapHost).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexHxapHost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -11622,13 +13474,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexHxapVirtualDisk := *openapiclient.Newhyperflex.HxapVirtualDisk("ClassId_example", "ObjectType_example") // HyperflexHxapVirtualDisk | The 'hyperflex.HxapVirtualDisk' resource to update.
+    hyperflexHxapVirtualDisk := *openapiclient.NewHyperflexHxapVirtualDisk("ClassId_example", "ObjectType_example") // HyperflexHxapVirtualDisk | The 'hyperflex.HxapVirtualDisk' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexHxapVirtualDisk(context.Background(), moid).HyperflexHxapVirtualDisk(hyperflexHxapVirtualDisk).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexHxapVirtualDisk``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -11694,13 +13546,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexHxapVirtualMachine := *openapiclient.Newhyperflex.HxapVirtualMachine("ClassId_example", "ObjectType_example") // HyperflexHxapVirtualMachine | The 'hyperflex.HxapVirtualMachine' resource to update.
+    hyperflexHxapVirtualMachine := *openapiclient.NewHyperflexHxapVirtualMachine("ClassId_example", "ObjectType_example") // HyperflexHxapVirtualMachine | The 'hyperflex.HxapVirtualMachine' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexHxapVirtualMachine(context.Background(), moid).HyperflexHxapVirtualMachine(hyperflexHxapVirtualMachine).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexHxapVirtualMachine``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -11766,13 +13618,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexHxdpVersion :=  // HyperflexHxdpVersion | The 'hyperflex.HxdpVersion' resource to update.
+    hyperflexHxdpVersion := *openapiclient.NewHyperflexHxdpVersion("ClassId_example", "ObjectType_example") // HyperflexHxdpVersion | The 'hyperflex.HxdpVersion' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexHxdpVersion(context.Background(), moid).HyperflexHxdpVersion(hyperflexHxdpVersion).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexHxdpVersion``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -11838,13 +13690,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexLocalCredentialPolicy :=  // HyperflexLocalCredentialPolicy | The 'hyperflex.LocalCredentialPolicy' resource to update.
+    hyperflexLocalCredentialPolicy := *openapiclient.NewHyperflexLocalCredentialPolicy("ClassId_example", "ObjectType_example") // HyperflexLocalCredentialPolicy | The 'hyperflex.LocalCredentialPolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexLocalCredentialPolicy(context.Background(), moid).HyperflexLocalCredentialPolicy(hyperflexLocalCredentialPolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexLocalCredentialPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -11910,13 +13762,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexNodeConfigPolicy :=  // HyperflexNodeConfigPolicy | The 'hyperflex.NodeConfigPolicy' resource to update.
+    hyperflexNodeConfigPolicy := *openapiclient.NewHyperflexNodeConfigPolicy("ClassId_example", "ObjectType_example") // HyperflexNodeConfigPolicy | The 'hyperflex.NodeConfigPolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexNodeConfigPolicy(context.Background(), moid).HyperflexNodeConfigPolicy(hyperflexNodeConfigPolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexNodeConfigPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -11982,13 +13834,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexNodeProfile :=  // HyperflexNodeProfile | The 'hyperflex.NodeProfile' resource to update.
+    hyperflexNodeProfile := *openapiclient.NewHyperflexNodeProfile("ClassId_example", "ObjectType_example") // HyperflexNodeProfile | The 'hyperflex.NodeProfile' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexNodeProfile(context.Background(), moid).HyperflexNodeProfile(hyperflexNodeProfile).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexNodeProfile``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -12054,13 +13906,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexProxySettingPolicy :=  // HyperflexProxySettingPolicy | The 'hyperflex.ProxySettingPolicy' resource to update.
+    hyperflexProxySettingPolicy := *openapiclient.NewHyperflexProxySettingPolicy("ClassId_example", "ObjectType_example") // HyperflexProxySettingPolicy | The 'hyperflex.ProxySettingPolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexProxySettingPolicy(context.Background(), moid).HyperflexProxySettingPolicy(hyperflexProxySettingPolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexProxySettingPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -12126,13 +13978,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexServerFirmwareVersion :=  // HyperflexServerFirmwareVersion | The 'hyperflex.ServerFirmwareVersion' resource to update.
+    hyperflexServerFirmwareVersion := *openapiclient.NewHyperflexServerFirmwareVersion("ClassId_example", "ObjectType_example") // HyperflexServerFirmwareVersion | The 'hyperflex.ServerFirmwareVersion' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexServerFirmwareVersion(context.Background(), moid).HyperflexServerFirmwareVersion(hyperflexServerFirmwareVersion).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexServerFirmwareVersion``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -12178,6 +14030,78 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## UpdateHyperflexServerFirmwareVersionEntry
+
+> HyperflexServerFirmwareVersionEntry UpdateHyperflexServerFirmwareVersionEntry(ctx, moid).HyperflexServerFirmwareVersionEntry(hyperflexServerFirmwareVersionEntry).IfMatch(ifMatch).Execute()
+
+Update a 'hyperflex.ServerFirmwareVersionEntry' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    hyperflexServerFirmwareVersionEntry := *openapiclient.NewHyperflexServerFirmwareVersionEntry("ClassId_example", "ObjectType_example") // HyperflexServerFirmwareVersionEntry | The 'hyperflex.ServerFirmwareVersionEntry' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.UpdateHyperflexServerFirmwareVersionEntry(context.Background(), moid).HyperflexServerFirmwareVersionEntry(hyperflexServerFirmwareVersionEntry).IfMatch(ifMatch).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexServerFirmwareVersionEntry``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateHyperflexServerFirmwareVersionEntry`: HyperflexServerFirmwareVersionEntry
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.UpdateHyperflexServerFirmwareVersionEntry`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateHyperflexServerFirmwareVersionEntryRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **hyperflexServerFirmwareVersionEntry** | [**HyperflexServerFirmwareVersionEntry**](HyperflexServerFirmwareVersionEntry.md) | The &#39;hyperflex.ServerFirmwareVersionEntry&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**HyperflexServerFirmwareVersionEntry**](hyperflex.ServerFirmwareVersionEntry.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateHyperflexServerModel
 
 > HyperflexServerModel UpdateHyperflexServerModel(ctx, moid).HyperflexServerModel(hyperflexServerModel).IfMatch(ifMatch).Execute()
@@ -12198,13 +14122,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexServerModel :=  // HyperflexServerModel | The 'hyperflex.ServerModel' resource to update.
+    hyperflexServerModel := *openapiclient.NewHyperflexServerModel("ClassId_example", "ObjectType_example") // HyperflexServerModel | The 'hyperflex.ServerModel' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexServerModel(context.Background(), moid).HyperflexServerModel(hyperflexServerModel).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexServerModel``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -12270,13 +14194,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexSoftwareVersionPolicy :=  // HyperflexSoftwareVersionPolicy | The 'hyperflex.SoftwareVersionPolicy' resource to update.
+    hyperflexSoftwareVersionPolicy := *openapiclient.NewHyperflexSoftwareVersionPolicy("ClassId_example", "ObjectType_example") // HyperflexSoftwareVersionPolicy | The 'hyperflex.SoftwareVersionPolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexSoftwareVersionPolicy(context.Background(), moid).HyperflexSoftwareVersionPolicy(hyperflexSoftwareVersionPolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexSoftwareVersionPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -12342,13 +14266,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexSysConfigPolicy :=  // HyperflexSysConfigPolicy | The 'hyperflex.SysConfigPolicy' resource to update.
+    hyperflexSysConfigPolicy := *openapiclient.NewHyperflexSysConfigPolicy("ClassId_example", "ObjectType_example") // HyperflexSysConfigPolicy | The 'hyperflex.SysConfigPolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexSysConfigPolicy(context.Background(), moid).HyperflexSysConfigPolicy(hyperflexSysConfigPolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexSysConfigPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -12414,13 +14338,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexUcsmConfigPolicy :=  // HyperflexUcsmConfigPolicy | The 'hyperflex.UcsmConfigPolicy' resource to update.
+    hyperflexUcsmConfigPolicy := *openapiclient.NewHyperflexUcsmConfigPolicy("ClassId_example", "ObjectType_example") // HyperflexUcsmConfigPolicy | The 'hyperflex.UcsmConfigPolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexUcsmConfigPolicy(context.Background(), moid).HyperflexUcsmConfigPolicy(hyperflexUcsmConfigPolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexUcsmConfigPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
@@ -12486,13 +14410,13 @@ import (
 
 func main() {
     moid := "moid_example" // string | The unique Moid identifier of a resource instance.
-    hyperflexVcenterConfigPolicy :=  // HyperflexVcenterConfigPolicy | The 'hyperflex.VcenterConfigPolicy' resource to update.
+    hyperflexVcenterConfigPolicy := *openapiclient.NewHyperflexVcenterConfigPolicy("ClassId_example", "ObjectType_example") // HyperflexVcenterConfigPolicy | The 'hyperflex.VcenterConfigPolicy' resource to update.
     ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
     resp, r, err := api_client.HyperflexApi.UpdateHyperflexVcenterConfigPolicy(context.Background(), moid).HyperflexVcenterConfigPolicy(hyperflexVcenterConfigPolicy).IfMatch(ifMatch).Execute()
-    if err != nil {
+    if err.Error() != "" {
         fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexVcenterConfigPolicy``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }

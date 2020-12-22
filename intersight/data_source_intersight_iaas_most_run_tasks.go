@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceIaasMostRunTasks() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceIaasMostRunTasksRead,
+		ReadContext: dataSourceIaasMostRunTasksRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -20,7 +21,7 @@ func dataSourceIaasMostRunTasks() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -70,7 +71,7 @@ func dataSourceIaasMostRunTasks() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -126,10 +127,11 @@ func dataSourceIaasMostRunTasks() *schema.Resource {
 	}
 }
 
-func dataSourceIaasMostRunTasksRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceIaasMostRunTasksRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IaasMostRunTasks{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -162,25 +164,25 @@ func dataSourceIaasMostRunTasksRead(d *schema.ResourceData, meta interface{}) er
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of IaasMostRunTasks object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.IaasApi.GetIaasMostRunTasksList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.IaasApi.GetIaasMostRunTasksList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching IaasMostRunTasks: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for IaasMostRunTasks list: %s", err.Error())
 	}
 	var s = &models.IaasMostRunTasksList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to IaasMostRunTasks: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to IaasMostRunTasks list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for IaasMostRunTasks did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -189,42 +191,42 @@ func dataSourceIaasMostRunTasksRead(d *schema.ResourceData, meta interface{}) er
 			var s = &models.IaasMostRunTasks{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 
 			if err := d.Set("guid", flattenMapIaasUcsdInfoRelationship(s.GetGuid(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Guid: %+v", err)
+				return diag.Errorf("error occurred while setting property Guid: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("task_category", (s.GetTaskCategory())); err != nil {
-				return fmt.Errorf("error occurred while setting property TaskCategory: %+v", err)
+				return diag.Errorf("error occurred while setting property TaskCategory: %s", err.Error())
 			}
 			if err := d.Set("task_execution_count", (s.GetTaskExecutionCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property TaskExecutionCount: %+v", err)
+				return diag.Errorf("error occurred while setting property TaskExecutionCount: %s", err.Error())
 			}
 			if err := d.Set("task_name", (s.GetTaskName())); err != nil {
-				return fmt.Errorf("error occurred while setting property TaskName: %+v", err)
+				return diag.Errorf("error occurred while setting property TaskName: %s", err.Error())
 			}
 			if err := d.Set("task_type", (s.GetTaskType())); err != nil {
-				return fmt.Errorf("error occurred while setting property TaskType: %+v", err)
+				return diag.Errorf("error occurred while setting property TaskType: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

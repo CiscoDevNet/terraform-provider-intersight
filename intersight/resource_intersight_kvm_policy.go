@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceKvmPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceKvmPolicyCreate,
-		Read:   resourceKvmPolicyRead,
-		Update: resourceKvmPolicyUpdate,
-		Delete: resourceKvmPolicyDelete,
+		CreateContext: resourceKvmPolicyCreate,
+		ReadContext:   resourceKvmPolicyRead,
+		UpdateContext: resourceKvmPolicyUpdate,
+		DeleteContext: resourceKvmPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -36,21 +39,25 @@ func resourceKvmPolicy() *schema.Resource {
 				Description: "If enabled, displays KVM session on any monitor attached to the server.",
 				Type:        schema.TypeBool,
 				Optional:    true,
+				Default:     true,
 			},
 			"enable_video_encryption": {
 				Description: "If enabled, encrypts all video information sent through KVM.",
 				Type:        schema.TypeBool,
 				Optional:    true,
+				Default:     true,
 			},
 			"enabled": {
 				Description: "State of the vKVM service on the endpoint.",
 				Type:        schema.TypeBool,
 				Optional:    true,
+				Default:     true,
 			},
 			"maximum_sessions": {
 				Description: "The maximum number of concurrent KVM sessions allowed.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+				Default:     4,
 			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
@@ -156,6 +163,7 @@ func resourceKvmPolicy() *schema.Resource {
 				Description: "The port used for KVM communication.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+				Default:     2068,
 			},
 			"tags": {
 				Type:     schema.TypeList,
@@ -184,7 +192,7 @@ func resourceKvmPolicy() *schema.Resource {
 	}
 }
 
-func resourceKvmPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceKvmPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -363,105 +371,110 @@ func resourceKvmPolicyCreate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	r := conn.ApiClient.KvmApi.CreateKvmPolicy(conn.ctx).KvmPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating KvmPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceKvmPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceKvmPolicyRead(c, d, meta)
 }
-func detachKvmPolicyProfiles(d *schema.ResourceData, meta interface{}) error {
+func detachKvmPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.KvmPolicy{}
 	o.SetClassId("kvm.Policy")
 	o.SetObjectType("kvm.Policy")
 	o.SetProfiles([]models.PolicyAbstractConfigProfileRelationship{})
 
 	r := conn.ApiClient.KvmApi.UpdateKvmPolicy(conn.ctx, d.Id()).KvmPolicy(*o)
-	_, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while creating: %s", err.Error())
+	_, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	return err
+	return de
 }
 
-func resourceKvmPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceKvmPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.KvmApi.GetKvmPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "KvmPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching KvmPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in KvmPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in KvmPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in KvmPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("enable_local_server_video", (s.GetEnableLocalServerVideo())); err != nil {
-		return fmt.Errorf("error occurred while setting property EnableLocalServerVideo: %+v", err)
+		return diag.Errorf("error occurred while setting property EnableLocalServerVideo in KvmPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("enable_video_encryption", (s.GetEnableVideoEncryption())); err != nil {
-		return fmt.Errorf("error occurred while setting property EnableVideoEncryption: %+v", err)
+		return diag.Errorf("error occurred while setting property EnableVideoEncryption in KvmPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("enabled", (s.GetEnabled())); err != nil {
-		return fmt.Errorf("error occurred while setting property Enabled: %+v", err)
+		return diag.Errorf("error occurred while setting property Enabled in KvmPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("maximum_sessions", (s.GetMaximumSessions())); err != nil {
-		return fmt.Errorf("error occurred while setting property MaximumSessions: %+v", err)
+		return diag.Errorf("error occurred while setting property MaximumSessions in KvmPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in KvmPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in KvmPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in KvmPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in KvmPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("profiles", flattenListPolicyAbstractConfigProfileRelationship(s.GetProfiles(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Profiles: %+v", err)
+		return diag.Errorf("error occurred while setting property Profiles in KvmPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("remote_port", (s.GetRemotePort())); err != nil {
-		return fmt.Errorf("error occurred while setting property RemotePort: %+v", err)
+		return diag.Errorf("error occurred while setting property RemotePort in KvmPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in KvmPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceKvmPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceKvmPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -652,31 +665,32 @@ func resourceKvmPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	r := conn.ApiClient.KvmApi.UpdateKvmPolicy(conn.ctx, d.Id()).KvmPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating KvmPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceKvmPolicyRead(d, meta)
+	return resourceKvmPolicyRead(c, d, meta)
 }
 
-func resourceKvmPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceKvmPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profiles"); ok {
 		if len(p.([]interface{})) > 0 {
 			e := detachKvmPolicyProfiles(d, meta)
-			if e != nil {
+			if e.HasError() {
 				return e
 			}
 		}
 	}
 	p := conn.ApiClient.KvmApi.DeleteKvmPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting KvmPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

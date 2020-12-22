@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **OsVendor** | Pointer to **string** | Vendor of the Operating System running on the server. | [optional] 
 **OsVersion** | Pointer to **string** | Version of the Operating System running on the server. | [optional] 
 **ProcessorModel** | Pointer to **string** | Model of the processor present in the server. | [optional] 
-**Products** | Pointer to [**[]HclProduct**](hcl.Product.md) |  | [optional] 
+**Products** | Pointer to [**[]HclProduct**](HclProduct.md) |  | [optional] 
 **ServerModel** | Pointer to **string** | Model of the server as returned by UCSM/CIMC XML API. | [optional] 
 **ServerRevision** | Pointer to **string** | Revision of the server model. | [optional] 
 **UcsVersion** | Pointer to **string** | Version of the UCS software. | [optional] 

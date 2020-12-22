@@ -1,21 +1,24 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceTamAdvisoryDefinition() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceTamAdvisoryDefinitionCreate,
-		Read:   resourceTamAdvisoryDefinitionRead,
-		Update: resourceTamAdvisoryDefinitionUpdate,
-		Delete: resourceTamAdvisoryDefinitionDelete,
+		CreateContext: resourceTamAdvisoryDefinitionCreate,
+		ReadContext:   resourceTamAdvisoryDefinitionRead,
+		UpdateContext: resourceTamAdvisoryDefinitionUpdate,
+		DeleteContext: resourceTamAdvisoryDefinitionDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"actions": {
 				Type:     schema.TypeList,
@@ -281,7 +284,7 @@ func resourceTamAdvisoryDefinition() *schema.Resource {
 				Computed:   true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -449,7 +452,7 @@ func resourceTamAdvisoryDefinition() *schema.Resource {
 	}
 }
 
-func resourceTamAdvisoryDefinitionCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceTamAdvisoryDefinitionCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -923,117 +926,121 @@ func resourceTamAdvisoryDefinitionCreate(d *schema.ResourceData, meta interface{
 	}
 
 	r := conn.ApiClient.TamApi.CreateTamAdvisoryDefinition(conn.ctx).TamAdvisoryDefinition(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating TamAdvisoryDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceTamAdvisoryDefinitionRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceTamAdvisoryDefinitionRead(c, d, meta)
 }
 
-func resourceTamAdvisoryDefinitionRead(d *schema.ResourceData, meta interface{}) error {
+func resourceTamAdvisoryDefinitionRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.TamApi.GetTamAdvisoryDefinitionByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "TamAdvisoryDefinition object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching TamAdvisoryDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("actions", flattenListTamAction(s.GetActions(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Actions: %+v", err)
+		return diag.Errorf("error occurred while setting property Actions in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("advisory_details", flattenMapTamBaseAdvisoryDetails(s.GetAdvisoryDetails(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdvisoryDetails: %+v", err)
+		return diag.Errorf("error occurred while setting property AdvisoryDetails in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("advisory_id", (s.GetAdvisoryId())); err != nil {
-		return fmt.Errorf("error occurred while setting property AdvisoryId: %+v", err)
+		return diag.Errorf("error occurred while setting property AdvisoryId in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("api_data_sources", flattenListTamApiDataSource(s.GetApiDataSources(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ApiDataSources: %+v", err)
+		return diag.Errorf("error occurred while setting property ApiDataSources in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("date_published", (s.GetDatePublished()).String()); err != nil {
-		return fmt.Errorf("error occurred while setting property DatePublished: %+v", err)
+		return diag.Errorf("error occurred while setting property DatePublished in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("date_updated", (s.GetDateUpdated()).String()); err != nil {
-		return fmt.Errorf("error occurred while setting property DateUpdated: %+v", err)
+		return diag.Errorf("error occurred while setting property DateUpdated in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("external_url", (s.GetExternalUrl())); err != nil {
-		return fmt.Errorf("error occurred while setting property ExternalUrl: %+v", err)
+		return diag.Errorf("error occurred while setting property ExternalUrl in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("recommendation", (s.GetRecommendation())); err != nil {
-		return fmt.Errorf("error occurred while setting property Recommendation: %+v", err)
+		return diag.Errorf("error occurred while setting property Recommendation in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("severity", flattenMapTamSeverity(s.GetSeverity(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Severity: %+v", err)
+		return diag.Errorf("error occurred while setting property Severity in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("state", (s.GetState())); err != nil {
-		return fmt.Errorf("error occurred while setting property State: %+v", err)
+		return diag.Errorf("error occurred while setting property State in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("type", (s.GetType())); err != nil {
-		return fmt.Errorf("error occurred while setting property Type: %+v", err)
+		return diag.Errorf("error occurred while setting property Type in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("nr_version", (s.GetVersion())); err != nil {
-		return fmt.Errorf("error occurred while setting property Version: %+v", err)
+		return diag.Errorf("error occurred while setting property Version in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("workaround", (s.GetWorkaround())); err != nil {
-		return fmt.Errorf("error occurred while setting property Workaround: %+v", err)
+		return diag.Errorf("error occurred while setting property Workaround in TamAdvisoryDefinition object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceTamAdvisoryDefinitionUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceTamAdvisoryDefinitionUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1526,23 +1533,24 @@ func resourceTamAdvisoryDefinitionUpdate(d *schema.ResourceData, meta interface{
 	}
 
 	r := conn.ApiClient.TamApi.UpdateTamAdvisoryDefinition(conn.ctx, d.Id()).TamAdvisoryDefinition(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating TamAdvisoryDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceTamAdvisoryDefinitionRead(d, meta)
+	return resourceTamAdvisoryDefinitionRead(c, d, meta)
 }
 
-func resourceTamAdvisoryDefinitionDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceTamAdvisoryDefinitionDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.TamApi.DeleteTamAdvisoryDefinition(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting TamAdvisoryDefinition object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

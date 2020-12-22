@@ -1,13 +1,12 @@
-
 ---
+subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_cluster_storage_policy"
-sidebar_current: "docs-intersight-resource-hyperflex-cluster-storage-policy"
 description: |-
   A policy specifying HyperFlex cluster storage settings (optional).
 ---
 
-# Resource: intersight_hyperflex._cluster_storage_policy
+# Resource: intersight_hyperflex_cluster_storage_policy
 A policy specifying HyperFlex cluster storage settings (optional).
 ## Argument Reference
 The following arguments are supported:
@@ -49,3 +48,10 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `vdi_optimization`:(bool) Enable or disable VDI optimization (hybrid HyperFlex systems only). 
+
+
+## Import
+`intersight_hyperflex_cluster_storage_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_hyperflex_cluster_storage_policy.example 1234567890987654321abcde
+```

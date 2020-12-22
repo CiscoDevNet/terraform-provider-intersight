@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceSshPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceSshPolicyCreate,
-		Read:   resourceSshPolicyRead,
-		Update: resourceSshPolicyUpdate,
-		Delete: resourceSshPolicyDelete,
+		CreateContext: resourceSshPolicyCreate,
+		ReadContext:   resourceSshPolicyRead,
+		UpdateContext: resourceSshPolicyUpdate,
+		DeleteContext: resourceSshPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -22,7 +25,7 @@ func resourceSshPolicy() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -36,6 +39,7 @@ func resourceSshPolicy() *schema.Resource {
 				Description: "State of SSH service on the endpoint.",
 				Type:        schema.TypeBool,
 				Optional:    true,
+				Default:     true,
 			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
@@ -101,6 +105,7 @@ func resourceSshPolicy() *schema.Resource {
 				Description: "Port used for secure shell access.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+				Default:     22,
 			},
 			"profiles": {
 				Description: "An array of relationships to policyAbstractConfigProfile resources.",
@@ -169,12 +174,13 @@ func resourceSshPolicy() *schema.Resource {
 				Description: "Number of seconds to wait before the system considers a SSH request to have timed out.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+				Default:     1800,
 			},
 		},
 	}
 }
 
-func resourceSshPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceSshPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -343,97 +349,102 @@ func resourceSshPolicyCreate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	r := conn.ApiClient.SshApi.CreateSshPolicy(conn.ctx).SshPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating SshPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceSshPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceSshPolicyRead(c, d, meta)
 }
-func detachSshPolicyProfiles(d *schema.ResourceData, meta interface{}) error {
+func detachSshPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.SshPolicy{}
 	o.SetClassId("ssh.Policy")
 	o.SetObjectType("ssh.Policy")
 	o.SetProfiles([]models.PolicyAbstractConfigProfileRelationship{})
 
 	r := conn.ApiClient.SshApi.UpdateSshPolicy(conn.ctx, d.Id()).SshPolicy(*o)
-	_, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while creating: %s", err.Error())
+	_, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	return err
+	return de
 }
 
-func resourceSshPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceSshPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.SshApi.GetSshPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "SshPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching SshPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in SshPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in SshPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in SshPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("enabled", (s.GetEnabled())); err != nil {
-		return fmt.Errorf("error occurred while setting property Enabled: %+v", err)
+		return diag.Errorf("error occurred while setting property Enabled in SshPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in SshPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in SshPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in SshPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in SshPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("port", (s.GetPort())); err != nil {
-		return fmt.Errorf("error occurred while setting property Port: %+v", err)
+		return diag.Errorf("error occurred while setting property Port in SshPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("profiles", flattenListPolicyAbstractConfigProfileRelationship(s.GetProfiles(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Profiles: %+v", err)
+		return diag.Errorf("error occurred while setting property Profiles in SshPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in SshPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("timeout", (s.GetTimeout())); err != nil {
-		return fmt.Errorf("error occurred while setting property Timeout: %+v", err)
+		return diag.Errorf("error occurred while setting property Timeout in SshPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceSshPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceSshPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -612,31 +623,32 @@ func resourceSshPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	r := conn.ApiClient.SshApi.UpdateSshPolicy(conn.ctx, d.Id()).SshPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating SshPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceSshPolicyRead(d, meta)
+	return resourceSshPolicyRead(c, d, meta)
 }
 
-func resourceSshPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceSshPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profiles"); ok {
 		if len(p.([]interface{})) > 0 {
 			e := detachSshPolicyProfiles(d, meta)
-			if e != nil {
+			if e.HasError() {
 				return e
 			}
 		}
 	}
 	p := conn.ApiClient.SshApi.DeleteSshPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting SshPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

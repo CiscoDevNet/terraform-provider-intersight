@@ -1,13 +1,12 @@
-
 ---
+subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_eth_network_group_policy"
-sidebar_current: "docs-intersight-resource-fabric-eth-network-group-policy"
 description: |-
   The allowed VLAN/s on an interface.
 ---
 
-# Resource: intersight_fabric._eth_network_group_policy
+# Resource: intersight_fabric_eth_network_group_policy
 The allowed VLAN/s on an interface.
 ## Argument Reference
 The following arguments are supported:
@@ -40,3 +39,10 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `native_vlan`:(int) Native VLAN ID of the virtual interface or the corresponding vethernet on the peer Fabric Interconnect to which the virtual interface is connected. Setting the ID to 0 will not associate any native VLAN to the traffic on the virtual interface. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+
+
+## Import
+`intersight_fabric_eth_network_group_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_fabric_eth_network_group_policy.example 1234567890987654321abcde
+```

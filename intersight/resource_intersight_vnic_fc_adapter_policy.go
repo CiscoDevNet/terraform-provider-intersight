@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceVnicFcAdapterPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceVnicFcAdapterPolicyCreate,
-		Read:   resourceVnicFcAdapterPolicyRead,
-		Update: resourceVnicFcAdapterPolicyUpdate,
-		Delete: resourceVnicFcAdapterPolicyDelete,
+		CreateContext: resourceVnicFcAdapterPolicyCreate,
+		ReadContext:   resourceVnicFcAdapterPolicyRead,
+		UpdateContext: resourceVnicFcAdapterPolicyUpdate,
+		DeleteContext: resourceVnicFcAdapterPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -36,6 +39,7 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 				Description: "Error Detection Timeout, also referred to as EDTOV, is the number of milliseconds to wait before the system assumes that an error has occurred.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+				Default:     2000,
 			},
 			"error_recovery_settings": {
 				Description: "Fibre Channel Error Recovery Settings.",
@@ -64,19 +68,22 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 							Description: "The number of times an I/O request to a port is retried because the port is busy before the system decides the port is unavailable.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     8,
 						},
 						"io_retry_timeout": {
 							Description: "The number of seconds the adapter waits before aborting the pending command and resending the same IO request.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     5,
 						},
 						"link_down_timeout": {
 							Description: "The number of milliseconds the port should actually be down before it is marked down and fabric connectivity is lost.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     30000,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -85,6 +92,7 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 							Description: "The number of milliseconds a remote Fibre Channel port should be offline before informing the SCSI upper layer that the port is unavailable. For a server with a VIC adapter running ESXi, the recommended value is 10000. For a server with a port used to boot a Windows OS from the SAN, the recommended value is 5000 milliseconds.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     10000,
 						},
 					},
 				},
@@ -119,11 +127,13 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 							Description: "The number of times that the system tries to log in to the fabric after the first failure.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     8,
 						},
 						"timeout": {
 							Description: "The number of milliseconds that the system waits before it tries to log in again.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     4000,
 						},
 					},
 				},
@@ -169,16 +179,19 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 				Description: "The maximum number of data or control I/O operations that can be pending for the virtual interface at one time. If this value is exceeded, the additional I/O operations wait in the queue until the number of pending I/O operations decreases and the additional operations can be processed.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+				Default:     512,
 			},
 			"lun_count": {
 				Description: "The maximum number of LUNs that the Fibre Channel driver will export or show. The maximum number of LUNs is usually controlled by the operating system running on the server.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+				Default:     1024,
 			},
 			"lun_queue_depth": {
 				Description: "The number of commands that the HBA can send and receive in a single transmission per LUN.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+				Default:     20,
 			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
@@ -268,11 +281,13 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 							Description: "The number of times that the system tries to log in to a port after the first failure.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     8,
 						},
 						"timeout": {
 							Description: "The number of milliseconds that the system waits before it tries to log in again.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     20000,
 						},
 					},
 				},
@@ -283,6 +298,7 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 				Description: "Resource Allocation Timeout, also referred to as RATOV, is the number of milliseconds to wait before the system assumes that a resource cannot be properly allocated.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+				Default:     10000,
 			},
 			"rx_queue_settings": {
 				Description: "Fibre Channel Receive Queue Settings.",
@@ -318,6 +334,7 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 							Description: "The number of descriptors in each queue.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     64,
 						},
 					},
 				},
@@ -346,6 +363,7 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 							Description: "The number of SCSI I/O queue resources the system should allocate.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     1,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -357,6 +375,7 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 							Description: "The number of descriptors in each SCSI I/O queue.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     512,
 						},
 					},
 				},
@@ -420,6 +439,7 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 							Description: "The number of descriptors in each queue.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     64,
 						},
 					},
 				},
@@ -430,7 +450,7 @@ func resourceVnicFcAdapterPolicy() *schema.Resource {
 	}
 }
 
-func resourceVnicFcAdapterPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicFcAdapterPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -880,113 +900,117 @@ func resourceVnicFcAdapterPolicyCreate(d *schema.ResourceData, meta interface{})
 	}
 
 	r := conn.ApiClient.VnicApi.CreateVnicFcAdapterPolicy(conn.ctx).VnicFcAdapterPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating VnicFcAdapterPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceVnicFcAdapterPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceVnicFcAdapterPolicyRead(c, d, meta)
 }
 
-func resourceVnicFcAdapterPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicFcAdapterPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.VnicApi.GetVnicFcAdapterPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "VnicFcAdapterPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching VnicFcAdapterPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in VnicFcAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in VnicFcAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in VnicFcAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("error_detection_timeout", (s.GetErrorDetectionTimeout())); err != nil {
-		return fmt.Errorf("error occurred while setting property ErrorDetectionTimeout: %+v", err)
+		return diag.Errorf("error occurred while setting property ErrorDetectionTimeout in VnicFcAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("error_recovery_settings", flattenMapVnicFcErrorRecoverySettings(s.GetErrorRecoverySettings(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ErrorRecoverySettings: %+v", err)
+		return diag.Errorf("error occurred while setting property ErrorRecoverySettings in VnicFcAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("flogi_settings", flattenMapVnicFlogiSettings(s.GetFlogiSettings(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property FlogiSettings: %+v", err)
+		return diag.Errorf("error occurred while setting property FlogiSettings in VnicFcAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("interrupt_settings", flattenMapVnicFcInterruptSettings(s.GetInterruptSettings(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property InterruptSettings: %+v", err)
+		return diag.Errorf("error occurred while setting property InterruptSettings in VnicFcAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("io_throttle_count", (s.GetIoThrottleCount())); err != nil {
-		return fmt.Errorf("error occurred while setting property IoThrottleCount: %+v", err)
+		return diag.Errorf("error occurred while setting property IoThrottleCount in VnicFcAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("lun_count", (s.GetLunCount())); err != nil {
-		return fmt.Errorf("error occurred while setting property LunCount: %+v", err)
+		return diag.Errorf("error occurred while setting property LunCount in VnicFcAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("lun_queue_depth", (s.GetLunQueueDepth())); err != nil {
-		return fmt.Errorf("error occurred while setting property LunQueueDepth: %+v", err)
+		return diag.Errorf("error occurred while setting property LunQueueDepth in VnicFcAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in VnicFcAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in VnicFcAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in VnicFcAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in VnicFcAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("plogi_settings", flattenMapVnicPlogiSettings(s.GetPlogiSettings(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property PlogiSettings: %+v", err)
+		return diag.Errorf("error occurred while setting property PlogiSettings in VnicFcAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("resource_allocation_timeout", (s.GetResourceAllocationTimeout())); err != nil {
-		return fmt.Errorf("error occurred while setting property ResourceAllocationTimeout: %+v", err)
+		return diag.Errorf("error occurred while setting property ResourceAllocationTimeout in VnicFcAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("rx_queue_settings", flattenMapVnicFcQueueSettings(s.GetRxQueueSettings(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property RxQueueSettings: %+v", err)
+		return diag.Errorf("error occurred while setting property RxQueueSettings in VnicFcAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("scsi_queue_settings", flattenMapVnicScsiQueueSettings(s.GetScsiQueueSettings(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ScsiQueueSettings: %+v", err)
+		return diag.Errorf("error occurred while setting property ScsiQueueSettings in VnicFcAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in VnicFcAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tx_queue_settings", flattenMapVnicFcQueueSettings(s.GetTxQueueSettings(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property TxQueueSettings: %+v", err)
+		return diag.Errorf("error occurred while setting property TxQueueSettings in VnicFcAdapterPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceVnicFcAdapterPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicFcAdapterPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1454,23 +1478,24 @@ func resourceVnicFcAdapterPolicyUpdate(d *schema.ResourceData, meta interface{})
 	}
 
 	r := conn.ApiClient.VnicApi.UpdateVnicFcAdapterPolicy(conn.ctx, d.Id()).VnicFcAdapterPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating VnicFcAdapterPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceVnicFcAdapterPolicyRead(d, meta)
+	return resourceVnicFcAdapterPolicyRead(c, d, meta)
 }
 
-func resourceVnicFcAdapterPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicFcAdapterPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.VnicApi.DeleteVnicFcAdapterPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting VnicFcAdapterPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

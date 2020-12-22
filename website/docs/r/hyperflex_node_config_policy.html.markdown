@@ -1,13 +1,12 @@
-
 ---
+subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_node_config_policy"
-sidebar_current: "docs-intersight-resource-hyperflex-node-config-policy"
 description: |-
   A policy specifying node details such as management and storage data IP ranges. For HyperFlex Edge, storage data IP range is pre-defined.
 ---
 
-# Resource: intersight_hyperflex._node_config_policy
+# Resource: intersight_hyperflex_node_config_policy
 A policy specifying node details such as management and storage data IP ranges. For HyperFlex Edge, storage data IP range is pre-defined.
 ## Argument Reference
 The following arguments are supported:
@@ -30,7 +29,7 @@ This complex property has following sub-properties:
   + `end_addr`:(string) The end IPv4 address of the range. 
   + `gateway`:(string) The default gateway for the start and end IPv4 addresses. 
   + `netmask`:(string) The netmask specified in dot decimal notation.The start address, end address, and gateway must all be within the network specified by this netmask. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `start_addr`:(string) The start IPv4 address of the range. 
 * `description`:(string) Description of the policy. 
 * `hxdp_ip_range`:(Array with Maximum of one item) - The range of storage management IPs to be assigned to the nodes. 
@@ -41,7 +40,17 @@ This complex property has following sub-properties:
   + `end_addr`:(string) The end IPv4 address of the range. 
   + `gateway`:(string) The default gateway for the start and end IPv4 addresses. 
   + `netmask`:(string) The netmask specified in dot decimal notation.The start address, end address, and gateway must all be within the network specified by this netmask. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `start_addr`:(string) The start IPv4 address of the range. 
+* `hypervisor_control_ip_range`:(Array with Maximum of one item) - The range of IPs to be assigned to each hypervisor node for VM migration and hypervior control. 
+This complex property has following sub-properties:
+  + `additional_properties`:
+(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
+  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `end_addr`:(string) The end IPv4 address of the range. 
+  + `gateway`:(string) The default gateway for the start and end IPv4 addresses. 
+  + `netmask`:(string) The netmask specified in dot decimal notation.The start address, end address, and gateway must all be within the network specified by this netmask. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `start_addr`:(string) The start IPv4 address of the range. 
 * `mgmt_ip_range`:(Array with Maximum of one item) - The range of management IPs to be assigned to the nodes. 
 This complex property has following sub-properties:
@@ -51,12 +60,12 @@ This complex property has following sub-properties:
   + `end_addr`:(string) The end IPv4 address of the range. 
   + `gateway`:(string) The default gateway for the start and end IPv4 addresses. 
   + `netmask`:(string) The netmask specified in dot decimal notation.The start address, end address, and gateway must all be within the network specified by this netmask. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `start_addr`:(string) The start IPv4 address of the range. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the concrete policy. 
 * `node_name_prefix`:(string) The node name prefix that is used to automatically generate the default hostname for each server.A dash (-) will be appended to the prefix followed by the node number to form a hostname.This default naming scheme can be manually overridden in the node configuration.The maximum length of a prefix is 60, must only contain alphanumeric characters or dash (-), and muststart with an alphanumeric character. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `organization`:(Array with Maximum of one item) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `additional_properties`:
@@ -71,3 +80,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_hyperflex_node_config_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_hyperflex_node_config_policy.example 1234567890987654321abcde
+```

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Count** | Pointer to **int32** | The total number of &#39;boot.SdDevice&#39; resources matching the request, accross all pages. The &#39;Count&#39; attribute is included when the HTTP GET request includes the &#39;$inlinecount&#39; parameter. | [optional] 
-**Results** | Pointer to [**[]BootSdDevice**](boot.SdDevice.md) | The array of &#39;boot.SdDevice&#39; resources matching the request. | [optional] 
+**Results** | Pointer to [**[]BootSdDevice**](BootSdDevice.md) | The array of &#39;boot.SdDevice&#39; resources matching the request. | [optional] 
 
 ## Methods
 

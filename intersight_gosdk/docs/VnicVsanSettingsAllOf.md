@@ -6,7 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.VsanSettings"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.VsanSettings"]
-**Id** | Pointer to **int64** | Default VLAN of the virtual interface. Setting the value to 0 is equivalent to None and will not associate any Default VLAN to the traffic on the virtual interface. | [optional] 
+**DefaultVlanId** | Pointer to **int64** | Default VLAN of the virtual interface in Standalone Rack server. Setting the value to 0 is equivalent to None and will not associate any Default VLAN to the traffic on the virtual interface (0-4094). | [optional] [default to 0]
+**Id** | Pointer to **int64** | VSAN ID of the virtual interface in FI attached server (1-4094). | [optional] [default to 1]
 
 ## Methods
 
@@ -66,6 +67,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetDefaultVlanId
+
+`func (o *VnicVsanSettingsAllOf) GetDefaultVlanId() int64`
+
+GetDefaultVlanId returns the DefaultVlanId field if non-nil, zero value otherwise.
+
+### GetDefaultVlanIdOk
+
+`func (o *VnicVsanSettingsAllOf) GetDefaultVlanIdOk() (*int64, bool)`
+
+GetDefaultVlanIdOk returns a tuple with the DefaultVlanId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDefaultVlanId
+
+`func (o *VnicVsanSettingsAllOf) SetDefaultVlanId(v int64)`
+
+SetDefaultVlanId sets DefaultVlanId field to given value.
+
+### HasDefaultVlanId
+
+`func (o *VnicVsanSettingsAllOf) HasDefaultVlanId() bool`
+
+HasDefaultVlanId returns a boolean if a field has been set.
 
 ### GetId
 

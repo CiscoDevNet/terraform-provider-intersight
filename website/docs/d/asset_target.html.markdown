@@ -1,23 +1,20 @@
-
 ---
+subcategory: "asset"
 layout: "intersight"
 page_title: "Intersight: intersight_asset_target"
-sidebar_current: "docs-intersight-data-source-asset-target"
 description: |-
-Target represents an entity which can be managed by Intersight. This includes physical entities like UCS and HyperFlex servers and software entities like VMware vCenter and Microsoft Azure cloud accounts.
+  Target represents an entity which can be managed by Intersight. This includes physical entities like UCS and HyperFlex servers and software entities like VMware vCenter and Microsoft Azure cloud accounts.
 ---
 
-# Data Source: intersight_asset._target
+# Data Source: intersight_asset_target
 Target represents an entity which can be managed by Intersight. This includes physical entities like UCS and HyperFlex servers and software entities like VMware vCenter and Microsoft Azure cloud accounts.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `claimed_by_user_name`:(string) The name or email id of the user who claimed the target. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `connector_version`:(string) The Device Connector version for target types which are managed by via embedded Device Connector. 
 * `external_ip_address`:(string) ExternalIpAddress is applicable for targets which are managed via an Intersight Device Connector. The value is the IP Address of the target as seen from Intersight. It is either the IP Address of the managed target's interface which has a route to the internet or a NAT IP Addresss when the target is deployed in a private network. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) A user provided name for the managed target. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `read_only`:(bool) For targets which are managed by an embedded Intersight Device Connector, this field indicates that an administrator of the target has disabled management operations of the Device Connector and only monitoring is permitted. 
 * `status`:(string) Status indicates if Intersight can establish a connection and authenticate with the managed target. Status does not include information about the functional health of the target.* `` - The target details have been persisted but Intersight has not yet attempted to connect to the target.* `Connected` - Intersight is able to establish a connection to the target and initiate management activities.* `NotConnected` - Intersight is unable to establish a connection to the target.* `ClaimInProgress` - Claim of the target is in progress. A connection to the target has not been fully established.* `Unclaimed` - The device was un-claimed from the users account by an Administrator of the device. Also indicates the failure to claim Custom Target details in Intersight.* `Claimed` - Custom Target is successfully claimed in Intersight. Currently no validation is performed to verify the Target connectivity from Intersight at the time of creation. However invoking API from Intersight Orchestrator fails if this Target is not reachable from Intersight or if Target credentials are incorrect. 
 * `status_error_reason`:(string) StatusErrorReason provides additional context for the Status. 

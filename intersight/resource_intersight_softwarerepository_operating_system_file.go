@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceSoftwarerepositoryOperatingSystemFile() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceSoftwarerepositoryOperatingSystemFileCreate,
-		Read:   resourceSoftwarerepositoryOperatingSystemFileRead,
-		Update: resourceSoftwarerepositoryOperatingSystemFileUpdate,
-		Delete: resourceSoftwarerepositoryOperatingSystemFileDelete,
+		CreateContext: resourceSoftwarerepositoryOperatingSystemFileCreate,
+		ReadContext:   resourceSoftwarerepositoryOperatingSystemFileRead,
+		UpdateContext: resourceSoftwarerepositoryOperatingSystemFileUpdate,
+		DeleteContext: resourceSoftwarerepositoryOperatingSystemFileDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -64,7 +67,7 @@ func resourceSoftwarerepositoryOperatingSystemFile() *schema.Resource {
 				ForceNew:   true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -203,7 +206,7 @@ func resourceSoftwarerepositoryOperatingSystemFile() *schema.Resource {
 	}
 }
 
-func resourceSoftwarerepositoryOperatingSystemFileCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceSoftwarerepositoryOperatingSystemFileCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -396,109 +399,113 @@ func resourceSoftwarerepositoryOperatingSystemFileCreate(d *schema.ResourceData,
 	}
 
 	r := conn.ApiClient.SoftwarerepositoryApi.CreateSoftwarerepositoryOperatingSystemFile(conn.ctx).SoftwarerepositoryOperatingSystemFile(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating SoftwarerepositoryOperatingSystemFile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceSoftwarerepositoryOperatingSystemFileRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceSoftwarerepositoryOperatingSystemFileRead(c, d, meta)
 }
 
-func resourceSoftwarerepositoryOperatingSystemFileRead(d *schema.ResourceData, meta interface{}) error {
+func resourceSoftwarerepositoryOperatingSystemFileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.SoftwarerepositoryApi.GetSoftwarerepositoryOperatingSystemFileByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "SoftwarerepositoryOperatingSystemFile object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching SoftwarerepositoryOperatingSystemFile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	if err := d.Set("catalog", flattenMapSoftwarerepositoryCatalogRelationship(s.GetCatalog(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Catalog: %+v", err)
+		return diag.Errorf("error occurred while setting property Catalog in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	if err := d.Set("download_count", (s.GetDownloadCount())); err != nil {
-		return fmt.Errorf("error occurred while setting property DownloadCount: %+v", err)
+		return diag.Errorf("error occurred while setting property DownloadCount in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	if err := d.Set("import_action", (s.GetImportAction())); err != nil {
-		return fmt.Errorf("error occurred while setting property ImportAction: %+v", err)
+		return diag.Errorf("error occurred while setting property ImportAction in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	if err := d.Set("import_state", (s.GetImportState())); err != nil {
-		return fmt.Errorf("error occurred while setting property ImportState: %+v", err)
+		return diag.Errorf("error occurred while setting property ImportState in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	if err := d.Set("md5e_tag", (s.GetMd5eTag())); err != nil {
-		return fmt.Errorf("error occurred while setting property Md5eTag: %+v", err)
+		return diag.Errorf("error occurred while setting property Md5eTag in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	if err := d.Set("md5sum", (s.GetMd5sum())); err != nil {
-		return fmt.Errorf("error occurred while setting property Md5sum: %+v", err)
+		return diag.Errorf("error occurred while setting property Md5sum in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	if err := d.Set("sha512sum", (s.GetSha512sum())); err != nil {
-		return fmt.Errorf("error occurred while setting property Sha512sum: %+v", err)
+		return diag.Errorf("error occurred while setting property Sha512sum in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	if err := d.Set("size", (s.GetSize())); err != nil {
-		return fmt.Errorf("error occurred while setting property Size: %+v", err)
+		return diag.Errorf("error occurred while setting property Size in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	if err := d.Set("software_advisory_url", (s.GetSoftwareAdvisoryUrl())); err != nil {
-		return fmt.Errorf("error occurred while setting property SoftwareAdvisoryUrl: %+v", err)
+		return diag.Errorf("error occurred while setting property SoftwareAdvisoryUrl in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	if err := d.Set("nr_source", flattenMapSoftwarerepositoryFileServer(s.GetSource(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Source: %+v", err)
+		return diag.Errorf("error occurred while setting property Source in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	if err := d.Set("vendor", (s.GetVendor())); err != nil {
-		return fmt.Errorf("error occurred while setting property Vendor: %+v", err)
+		return diag.Errorf("error occurred while setting property Vendor in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	if err := d.Set("nr_version", (s.GetVersion())); err != nil {
-		return fmt.Errorf("error occurred while setting property Version: %+v", err)
+		return diag.Errorf("error occurred while setting property Version in SoftwarerepositoryOperatingSystemFile object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceSoftwarerepositoryOperatingSystemFileUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceSoftwarerepositoryOperatingSystemFileUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -708,23 +715,24 @@ func resourceSoftwarerepositoryOperatingSystemFileUpdate(d *schema.ResourceData,
 	}
 
 	r := conn.ApiClient.SoftwarerepositoryApi.UpdateSoftwarerepositoryOperatingSystemFile(conn.ctx, d.Id()).SoftwarerepositoryOperatingSystemFile(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating SoftwarerepositoryOperatingSystemFile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceSoftwarerepositoryOperatingSystemFileRead(d, meta)
+	return resourceSoftwarerepositoryOperatingSystemFileRead(c, d, meta)
 }
 
-func resourceSoftwarerepositoryOperatingSystemFileDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceSoftwarerepositoryOperatingSystemFileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.SoftwarerepositoryApi.DeleteSoftwarerepositoryOperatingSystemFile(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting SoftwarerepositoryOperatingSystemFile object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceHyperflexClusterStoragePolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceHyperflexClusterStoragePolicyCreate,
-		Read:   resourceHyperflexClusterStoragePolicyRead,
-		Update: resourceHyperflexClusterStoragePolicyUpdate,
-		Delete: resourceHyperflexClusterStoragePolicyDelete,
+		CreateContext: resourceHyperflexClusterStoragePolicyCreate,
+		ReadContext:   resourceHyperflexClusterStoragePolicyRead,
+		UpdateContext: resourceHyperflexClusterStoragePolicyUpdate,
+		DeleteContext: resourceHyperflexClusterStoragePolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -93,6 +96,7 @@ func resourceHyperflexClusterStoragePolicy() *schema.Resource {
 							Description: "Enable or disable Logical Availability Zones (LAZ).\nIf enabled, HyperFlex Data Platform automatically selects and groups nodes into different availability zones. For HyperFlex Data Platform versions prior to 3.0 release, this setting does not apply. For HyperFlex Data Platform versions 3.0 or higher, this setting is only applicable to Fabric Interconnect attached HyperFlex systems with 8 or more converged nodes.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     false,
 						},
 						"class_id": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -203,7 +207,7 @@ func resourceHyperflexClusterStoragePolicy() *schema.Resource {
 	}
 }
 
-func resourceHyperflexClusterStoragePolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexClusterStoragePolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -404,81 +408,85 @@ func resourceHyperflexClusterStoragePolicyCreate(d *schema.ResourceData, meta in
 	}
 
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexClusterStoragePolicy(conn.ctx).HyperflexClusterStoragePolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating HyperflexClusterStoragePolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceHyperflexClusterStoragePolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceHyperflexClusterStoragePolicyRead(c, d, meta)
 }
 
-func resourceHyperflexClusterStoragePolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexClusterStoragePolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.HyperflexApi.GetHyperflexClusterStoragePolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "HyperflexClusterStoragePolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching HyperflexClusterStoragePolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in HyperflexClusterStoragePolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in HyperflexClusterStoragePolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cluster_profiles", flattenListHyperflexClusterProfileRelationship(s.GetClusterProfiles(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ClusterProfiles: %+v", err)
+		return diag.Errorf("error occurred while setting property ClusterProfiles in HyperflexClusterStoragePolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in HyperflexClusterStoragePolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("disk_partition_cleanup", (s.GetDiskPartitionCleanup())); err != nil {
-		return fmt.Errorf("error occurred while setting property DiskPartitionCleanup: %+v", err)
+		return diag.Errorf("error occurred while setting property DiskPartitionCleanup in HyperflexClusterStoragePolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("logical_avalability_zone_config", flattenMapHyperflexLogicalAvailabilityZone(s.GetLogicalAvalabilityZoneConfig(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property LogicalAvalabilityZoneConfig: %+v", err)
+		return diag.Errorf("error occurred while setting property LogicalAvalabilityZoneConfig in HyperflexClusterStoragePolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in HyperflexClusterStoragePolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in HyperflexClusterStoragePolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in HyperflexClusterStoragePolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in HyperflexClusterStoragePolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in HyperflexClusterStoragePolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("vdi_optimization", (s.GetVdiOptimization())); err != nil {
-		return fmt.Errorf("error occurred while setting property VdiOptimization: %+v", err)
+		return diag.Errorf("error occurred while setting property VdiOptimization in HyperflexClusterStoragePolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceHyperflexClusterStoragePolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexClusterStoragePolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -689,23 +697,24 @@ func resourceHyperflexClusterStoragePolicyUpdate(d *schema.ResourceData, meta in
 	}
 
 	r := conn.ApiClient.HyperflexApi.UpdateHyperflexClusterStoragePolicy(conn.ctx, d.Id()).HyperflexClusterStoragePolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating HyperflexClusterStoragePolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexClusterStoragePolicyRead(d, meta)
+	return resourceHyperflexClusterStoragePolicyRead(c, d, meta)
 }
 
-func resourceHyperflexClusterStoragePolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexClusterStoragePolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexClusterStoragePolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting HyperflexClusterStoragePolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

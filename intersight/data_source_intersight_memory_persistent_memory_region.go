@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceMemoryPersistentMemoryRegion() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceMemoryPersistentMemoryRegionRead,
+		ReadContext: dataSourceMemoryPersistentMemoryRegionRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -20,7 +21,7 @@ func dataSourceMemoryPersistentMemoryRegion() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -145,7 +146,7 @@ func dataSourceMemoryPersistentMemoryRegion() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -290,10 +291,11 @@ func dataSourceMemoryPersistentMemoryRegion() *schema.Resource {
 	}
 }
 
-func dataSourceMemoryPersistentMemoryRegionRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceMemoryPersistentMemoryRegionRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.MemoryPersistentMemoryRegion{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -358,25 +360,25 @@ func dataSourceMemoryPersistentMemoryRegionRead(d *schema.ResourceData, meta int
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of MemoryPersistentMemoryRegion object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.MemoryApi.GetMemoryPersistentMemoryRegionList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.MemoryApi.GetMemoryPersistentMemoryRegionList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching MemoryPersistentMemoryRegion: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for MemoryPersistentMemoryRegion list: %s", err.Error())
 	}
 	var s = &models.MemoryPersistentMemoryRegionList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to MemoryPersistentMemoryRegion: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to MemoryPersistentMemoryRegion list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for MemoryPersistentMemoryRegion did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -385,78 +387,78 @@ func dataSourceMemoryPersistentMemoryRegionRead(d *schema.ResourceData, meta int
 			var s = &models.MemoryPersistentMemoryRegion{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("device_mo_id", (s.GetDeviceMoId())); err != nil {
-				return fmt.Errorf("error occurred while setting property DeviceMoId: %+v", err)
+				return diag.Errorf("error occurred while setting property DeviceMoId: %s", err.Error())
 			}
 			if err := d.Set("dn", (s.GetDn())); err != nil {
-				return fmt.Errorf("error occurred while setting property Dn: %+v", err)
+				return diag.Errorf("error occurred while setting property Dn: %s", err.Error())
 			}
 			if err := d.Set("free_capacity", (s.GetFreeCapacity())); err != nil {
-				return fmt.Errorf("error occurred while setting property FreeCapacity: %+v", err)
+				return diag.Errorf("error occurred while setting property FreeCapacity: %s", err.Error())
 			}
 			if err := d.Set("health_state", (s.GetHealthState())); err != nil {
-				return fmt.Errorf("error occurred while setting property HealthState: %+v", err)
+				return diag.Errorf("error occurred while setting property HealthState: %s", err.Error())
 			}
 			if err := d.Set("interleaved_set_id", (s.GetInterleavedSetId())); err != nil {
-				return fmt.Errorf("error occurred while setting property InterleavedSetId: %+v", err)
+				return diag.Errorf("error occurred while setting property InterleavedSetId: %s", err.Error())
 			}
 
 			if err := d.Set("inventory_device_info", flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property InventoryDeviceInfo: %+v", err)
+				return diag.Errorf("error occurred while setting property InventoryDeviceInfo: %s", err.Error())
 			}
 			if err := d.Set("locater_ids", (s.GetLocaterIds())); err != nil {
-				return fmt.Errorf("error occurred while setting property LocaterIds: %+v", err)
+				return diag.Errorf("error occurred while setting property LocaterIds: %s", err.Error())
 			}
 
 			if err := d.Set("memory_persistent_memory_configuration", flattenMapMemoryPersistentMemoryConfigurationRelationship(s.GetMemoryPersistentMemoryConfiguration(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property MemoryPersistentMemoryConfiguration: %+v", err)
+				return diag.Errorf("error occurred while setting property MemoryPersistentMemoryConfiguration: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 
 			if err := d.Set("persistent_memory_namespaces", flattenListMemoryPersistentMemoryNamespaceRelationship(s.GetPersistentMemoryNamespaces(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property PersistentMemoryNamespaces: %+v", err)
+				return diag.Errorf("error occurred while setting property PersistentMemoryNamespaces: %s", err.Error())
 			}
 			if err := d.Set("persistent_memory_type", (s.GetPersistentMemoryType())); err != nil {
-				return fmt.Errorf("error occurred while setting property PersistentMemoryType: %+v", err)
+				return diag.Errorf("error occurred while setting property PersistentMemoryType: %s", err.Error())
 			}
 			if err := d.Set("region_id", (s.GetRegionId())); err != nil {
-				return fmt.Errorf("error occurred while setting property RegionId: %+v", err)
+				return diag.Errorf("error occurred while setting property RegionId: %s", err.Error())
 			}
 
 			if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property RegisteredDevice: %+v", err)
+				return diag.Errorf("error occurred while setting property RegisteredDevice: %s", err.Error())
 			}
 			if err := d.Set("rn", (s.GetRn())); err != nil {
-				return fmt.Errorf("error occurred while setting property Rn: %+v", err)
+				return diag.Errorf("error occurred while setting property Rn: %s", err.Error())
 			}
 			if err := d.Set("socket_id", (s.GetSocketId())); err != nil {
-				return fmt.Errorf("error occurred while setting property SocketId: %+v", err)
+				return diag.Errorf("error occurred while setting property SocketId: %s", err.Error())
 			}
 			if err := d.Set("socket_memory_id", (s.GetSocketMemoryId())); err != nil {
-				return fmt.Errorf("error occurred while setting property SocketMemoryId: %+v", err)
+				return diag.Errorf("error occurred while setting property SocketMemoryId: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("total_capacity", (s.GetTotalCapacity())); err != nil {
-				return fmt.Errorf("error occurred while setting property TotalCapacity: %+v", err)
+				return diag.Errorf("error occurred while setting property TotalCapacity: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

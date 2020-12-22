@@ -1,19 +1,17 @@
-
 ---
+subcategory: "niatelemetry"
 layout: "intersight"
 page_title: "Intersight: intersight_niatelemetry_tenant"
-sidebar_current: "docs-intersight-data-source-niatelemetry-tenant"
 description: |-
-Object is available at Tenant scope.
+  Object is available at Tenant scope.
 ---
 
-# Data Source: intersight_niatelemetry._tenant
+# Data Source: intersight_niatelemetry_tenant
 Object is available at Tenant scope.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `bfd_if_pol_count`:(int) Number of Bidirectional Forwarding Detection bfdIfPol Model Objects. 
 * `bfd_ifp_count`:(int) Number of objects with Bidirectional Forwarding Detection Interface Policy. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `dhcp_rs_prov_count`:(int) Number of tenants with Dynamic Host Configuration Protocol enabled. 
 * `dn`:(string) Dn for the tenants present. 
 * `fhs_bd_pol_count`:(int) Number of objects with First hop security. Checks for presence of IP source gaurd, dynamic arp inspection. 
@@ -32,7 +30,6 @@ The following arguments can be used to get data of already created objects in In
 * `l3_multicast_if_count`:(int) Number of layer 3 multicast IfP. 
 * `l3out_count`:(int) Number of L3 out objects for the tenants present. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `qos_custom_pol_count`:(int) Number of Quality Of Service Custom Policy. 
 * `record_type`:(string) Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. 
 * `record_version`:(string) Version of record being pushed. This determines what was the API version for data available from the device. 

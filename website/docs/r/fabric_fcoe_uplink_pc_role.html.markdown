@@ -1,13 +1,12 @@
-
 ---
+subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_fcoe_uplink_pc_role"
-sidebar_current: "docs-intersight-resource-fabric-fcoe-uplink-pc-role"
 description: |-
   Object sent by user to configure a fcoe uplink port-channel on the collection of ports.
 ---
 
-# Resource: intersight_fabric._fcoe_uplink_pc_role
+# Resource: intersight_fabric_fcoe_uplink_pc_role
 Object sent by user to configure a fcoe uplink port-channel on the collection of ports.
 ## Argument Reference
 The following arguments are supported:
@@ -42,3 +41,10 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `udld_admin_state`:(string) Admin configured state for UDLD for this port.* `Disabled` - Admin configured Disabled State.* `Enabled` - Admin configured Enabled State. 
+
+
+## Import
+`intersight_fabric_fcoe_uplink_pc_role` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_fabric_fcoe_uplink_pc_role.example 1234567890987654321abcde
+```

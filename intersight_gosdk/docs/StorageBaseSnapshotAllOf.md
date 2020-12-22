@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "storage.PureVolumeSnapshot"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | [default to "storage.PureVolumeSnapshot"]
-**CreatedTime** | Pointer to [**time.Time**](time.Time.md) | Exact date and time at which snapshot was created. | [optional] [readonly] 
+**CreatedTime** | Pointer to **time.Time** | Exact date and time at which snapshot was created. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name of the snapshot which represents point-in-time copy of volume. | [optional] [readonly] 
 **ProtectionGroupName** | Pointer to **string** | Name of the protection group to which the snapshot belongs. Value is empty, if the snapshot is created directly on volume. | [optional] [readonly] 
 **Size** | Pointer to **int64** | Snapshot size represented in bytes. | [optional] [readonly] 

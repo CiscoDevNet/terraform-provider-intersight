@@ -1,18 +1,16 @@
-
 ---
+subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_flex_flash_controller_props"
-sidebar_current: "docs-intersight-data-source-storage-flex-flash-controller-props"
 description: |-
-Flex flash controller properties.
+  Flex flash controller properties.
 ---
 
-# Data Source: intersight_storage._flex_flash_controller_props
+# Data Source: intersight_storage_flex_flash_controller_props
 Flex flash controller properties.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `cards_manageable`:(string) Manageable card on the flex flash controller. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `configured_mode`:(string) Mode configured on the flex flash controller. 
 * `controller_name`:(string) The current name of the flex flash controller. 
 * `controller_status`:(string) The current status of the flex flash controller. 
@@ -22,7 +20,6 @@ The following arguments can be used to get data of already created objects in In
 * `internal_state`:(string) Internal state of the flex flash controller. 
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `operating_mode`:(string) Operating mode of flex flash controller. 
 * `physical_drive_count`:(string) Number of connected physical drives to a specific Flex flash controller. 
 * `product_name`:(string) Product name of the flex flash controller. 

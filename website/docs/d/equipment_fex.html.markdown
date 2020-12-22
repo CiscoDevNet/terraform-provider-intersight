@@ -1,17 +1,15 @@
-
 ---
+subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_fex"
-sidebar_current: "docs-intersight-data-source-equipment-fex"
 description: |-
-Fabric Extender which can mutiplex traffic from the host facing ports.
+  Fabric Extender which can mutiplex traffic from the host facing ports.
 ---
 
-# Data Source: intersight_equipment._fex
+# Data Source: intersight_equipment_fex
 Fabric Extender which can mutiplex traffic from the host facing ports.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `connection_status`:(string) Connectivity Status of FEX/IOM to Switch - A or B or AB. 
 * `description`:(string) This field is to provide description for the iocard module model. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
@@ -20,7 +18,6 @@ The following arguments can be used to get data of already created objects in In
 * `model`:(string) This field identifies the model of the given component. 
 * `module_id`:(int) Module Identifier for the IO module. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `oper_state`:(string) Operational state of IO card or fabric extender. 
 * `part_number`:(string) Part Number identifier for the IO module. 
 * `pid`:(string) This field identifies the Product ID for the IO module. 
@@ -31,5 +28,5 @@ The following arguments can be used to get data of already created objects in In
 * `serial`:(string) This field identifies the serial of the given component. 
 * `sku`:(string) This field identifies the Stock Keeping Unit for the IO card module. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
-* `version`:(string) This field identifies the version of the IO card module. 
+* `nr_version`:(string) This field identifies the version of the IO card module. 
 * `vid`:(string) This field identifies the Vendor ID for the IO card module. 

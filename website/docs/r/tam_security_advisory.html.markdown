@@ -1,13 +1,12 @@
-
 ---
+subcategory: "tam"
 layout: "intersight"
 page_title: "Intersight: intersight_tam_security_advisory"
-sidebar_current: "docs-intersight-resource-tam-security-advisory"
 description: |-
   Intersight representation of a Cisco PSIRT (https://tools.cisco.com/security/center/publicationListing.x) advisory definition. It includes the description of the security advisory and a corresponding reference to the published advisory. It also includes the Intersight data sources needed to evaluate the applicability of this advisory for relevant Intersight managed objects. A PSIRT definition is evaluated against all managed object referenced using the included data sources. Only Cisco TAC and Intersight devops engineers have the ability to create PSIRT definitions in Intersight.
 ---
 
-# Resource: intersight_tam._security_advisory
+# Resource: intersight_tam_security_advisory
 Intersight representation of a Cisco PSIRT (https://tools.cisco.com/security/center/publicationListing.x) advisory definition. It includes the description of the security advisory and a corresponding reference to the published advisory. It also includes the Intersight data sources needed to evaluate the applicability of this advisory for relevant Intersight managed objects. A PSIRT definition is evaluated against all managed object referenced using the included data sources. Only Cisco TAC and Intersight devops engineers have the ability to create PSIRT definitions in Intersight.
 ## Argument Reference
 The following arguments are supported:
@@ -61,7 +60,7 @@ This complex property has following sub-properties:
     + `query`:(string) A SparkSQL query to be used on a given data source. 
   + `type`:(string) Type of data source (for e.g. TextFsmTempalate based, Intersight API based etc.).* `nxos` - Collector type for this data collection is NXOS.* `intersightApi` - Collector type for this data collection is Intersight APIs. 
 * `base_score`:(float) CVSS version 3 base score for the security Advisory. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `cve_ids`:
                 (Array of schema.TypeString) -
 * `date_published`:(string) Date when the security advisory was first published by Cisco. 
@@ -96,5 +95,12 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `temporal_score`:(float) CVSS version 3 temporal score for the security Advisory. 
-* `version`:(string) Cisco assigned advisory version after latest revision. 
+* `nr_version`:(string) Cisco assigned advisory version after latest revision. 
 * `workaround`:(string) Workarounds available for the advisory. 
+
+
+## Import
+`intersight_tam_security_advisory` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_tam_security_advisory.example 1234567890987654321abcde
+```

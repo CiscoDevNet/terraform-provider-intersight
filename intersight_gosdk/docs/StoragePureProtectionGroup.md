@@ -10,10 +10,10 @@ Name | Type | Description | Notes
 **Source** | Pointer to **string** | Name of PureStorage array name on which the protection group is created. | [optional] [readonly] 
 **Targets** | Pointer to **[]string** |  | [optional] 
 **Array** | Pointer to [**StoragePureArrayRelationship**](storage.PureArray.Relationship.md) |  | [optional] 
-**HostGroups** | Pointer to [**[]StoragePureHostGroupRelationship**](storage.PureHostGroup.Relationship.md) | An array of relationships to storagePureHostGroup resources. | [optional] [readonly] 
-**Hosts** | Pointer to [**[]StoragePureHostRelationship**](storage.PureHost.Relationship.md) | An array of relationships to storagePureHost resources. | [optional] [readonly] 
+**HostGroups** | Pointer to [**[]StoragePureHostGroupRelationship**](StoragePureHostGroupRelationship.md) | An array of relationships to storagePureHostGroup resources. | [optional] [readonly] 
+**Hosts** | Pointer to [**[]StoragePureHostRelationship**](StoragePureHostRelationship.md) | An array of relationships to storagePureHost resources. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
-**Volumes** | Pointer to [**[]StoragePureVolumeRelationship**](storage.PureVolume.Relationship.md) | An array of relationships to storagePureVolume resources. | [optional] [readonly] 
+**Volumes** | Pointer to [**[]StoragePureVolumeRelationship**](StoragePureVolumeRelationship.md) | An array of relationships to storagePureVolume resources. | [optional] [readonly] 
 
 ## Methods
 

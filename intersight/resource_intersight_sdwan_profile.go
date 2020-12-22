@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceSdwanProfile() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceSdwanProfileCreate,
-		Read:   resourceSdwanProfileRead,
-		Update: resourceSdwanProfileUpdate,
-		Delete: resourceSdwanProfileDelete,
+		CreateContext: resourceSdwanProfileCreate,
+		ReadContext:   resourceSdwanProfileRead,
+		UpdateContext: resourceSdwanProfileUpdate,
+		DeleteContext: resourceSdwanProfileDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"action": {
 				Description: "User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign.",
@@ -67,7 +70,7 @@ func resourceSdwanProfile() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -344,7 +347,7 @@ func resourceSdwanProfile() *schema.Resource {
 	}
 }
 
-func resourceSdwanProfileCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceSdwanProfileCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -692,93 +695,97 @@ func resourceSdwanProfileCreate(d *schema.ResourceData, meta interface{}) error 
 	}
 
 	r := conn.ApiClient.SdwanApi.CreateSdwanProfile(conn.ctx).SdwanProfile(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating SdwanProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceSdwanProfileRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceSdwanProfileRead(c, d, meta)
 }
 
-func resourceSdwanProfileRead(d *schema.ResourceData, meta interface{}) error {
+func resourceSdwanProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.SdwanApi.GetSdwanProfileByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "SdwanProfile object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching SdwanProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("action", (s.GetAction())); err != nil {
-		return fmt.Errorf("error occurred while setting property Action: %+v", err)
+		return diag.Errorf("error occurred while setting property Action in SdwanProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in SdwanProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in SdwanProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("config_context", flattenMapPolicyConfigContext(s.GetConfigContext(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ConfigContext: %+v", err)
+		return diag.Errorf("error occurred while setting property ConfigContext in SdwanProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in SdwanProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in SdwanProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in SdwanProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in SdwanProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in SdwanProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("router_nodes", flattenListSdwanRouterNodeRelationship(s.GetRouterNodes(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property RouterNodes: %+v", err)
+		return diag.Errorf("error occurred while setting property RouterNodes in SdwanProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("router_policy", flattenMapSdwanRouterPolicyRelationship(s.GetRouterPolicy(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property RouterPolicy: %+v", err)
+		return diag.Errorf("error occurred while setting property RouterPolicy in SdwanProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("src_template", flattenMapPolicyAbstractProfileRelationship(s.GetSrcTemplate(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property SrcTemplate: %+v", err)
+		return diag.Errorf("error occurred while setting property SrcTemplate in SdwanProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in SdwanProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("type", (s.GetType())); err != nil {
-		return fmt.Errorf("error occurred while setting property Type: %+v", err)
+		return diag.Errorf("error occurred while setting property Type in SdwanProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("vmanage_account", flattenMapSdwanVmanageAccountPolicyRelationship(s.GetVmanageAccount(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property VmanageAccount: %+v", err)
+		return diag.Errorf("error occurred while setting property VmanageAccount in SdwanProfile object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceSdwanProfileUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceSdwanProfileUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1139,23 +1146,24 @@ func resourceSdwanProfileUpdate(d *schema.ResourceData, meta interface{}) error 
 	}
 
 	r := conn.ApiClient.SdwanApi.UpdateSdwanProfile(conn.ctx, d.Id()).SdwanProfile(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating SdwanProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceSdwanProfileRead(d, meta)
+	return resourceSdwanProfileRead(c, d, meta)
 }
 
-func resourceSdwanProfileDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceSdwanProfileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.SdwanApi.DeleteSdwanProfile(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting SdwanProfile object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

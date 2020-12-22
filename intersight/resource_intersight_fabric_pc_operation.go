@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceFabricPcOperation() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceFabricPcOperationCreate,
-		Read:   resourceFabricPcOperationRead,
-		Update: resourceFabricPcOperationUpdate,
-		Delete: resourceFabricPcOperationDelete,
+		CreateContext: resourceFabricPcOperationCreate,
+		ReadContext:   resourceFabricPcOperationRead,
+		UpdateContext: resourceFabricPcOperationUpdate,
+		DeleteContext: resourceFabricPcOperationDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -119,7 +122,7 @@ func resourceFabricPcOperation() *schema.Resource {
 	}
 }
 
-func resourceFabricPcOperationCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricPcOperationCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -231,65 +234,69 @@ func resourceFabricPcOperationCreate(d *schema.ResourceData, meta interface{}) e
 	}
 
 	r := conn.ApiClient.FabricApi.CreateFabricPcOperation(conn.ctx).FabricPcOperation(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating FabricPcOperation: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceFabricPcOperationRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceFabricPcOperationRead(c, d, meta)
 }
 
-func resourceFabricPcOperationRead(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricPcOperationRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.FabricApi.GetFabricPcOperationByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "FabricPcOperation object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching FabricPcOperation: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in FabricPcOperation object: %s", err.Error())
 	}
 
 	if err := d.Set("admin_state", (s.GetAdminState())); err != nil {
-		return fmt.Errorf("error occurred while setting property AdminState: %+v", err)
+		return diag.Errorf("error occurred while setting property AdminState in FabricPcOperation object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in FabricPcOperation object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in FabricPcOperation object: %s", err.Error())
 	}
 
 	if err := d.Set("network_element", flattenMapNetworkElementRelationship(s.GetNetworkElement(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property NetworkElement: %+v", err)
+		return diag.Errorf("error occurred while setting property NetworkElement in FabricPcOperation object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in FabricPcOperation object: %s", err.Error())
 	}
 
 	if err := d.Set("pc_id", (s.GetPcId())); err != nil {
-		return fmt.Errorf("error occurred while setting property PcId: %+v", err)
+		return diag.Errorf("error occurred while setting property PcId in FabricPcOperation object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in FabricPcOperation object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceFabricPcOperationUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricPcOperationUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -407,23 +414,24 @@ func resourceFabricPcOperationUpdate(d *schema.ResourceData, meta interface{}) e
 	}
 
 	r := conn.ApiClient.FabricApi.UpdateFabricPcOperation(conn.ctx, d.Id()).FabricPcOperation(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating FabricPcOperation: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFabricPcOperationRead(d, meta)
+	return resourceFabricPcOperationRead(c, d, meta)
 }
 
-func resourceFabricPcOperationDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricPcOperationDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.FabricApi.DeleteFabricPcOperation(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting FabricPcOperation object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

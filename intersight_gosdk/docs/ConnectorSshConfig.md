@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "connector.SshConfig"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "connector.SshConfig"]
+**JumpHost** | Pointer to **string** | A jump host for establishing a connection to a server. Plugin will first establish a connection to this server, then create a tunneled connection to the target host. | [optional] 
 **Password** | Pointer to **string** | Password to use in the connection credentials (If empty the private key will be used). | [optional] 
 **Pkey** | Pointer to **string** | The private key to use in the connection credentials (Optional if password is given). | [optional] 
 **Target** | Pointer to **string** | The remote server to connect to. | [optional] 
@@ -69,6 +70,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetJumpHost
+
+`func (o *ConnectorSshConfig) GetJumpHost() string`
+
+GetJumpHost returns the JumpHost field if non-nil, zero value otherwise.
+
+### GetJumpHostOk
+
+`func (o *ConnectorSshConfig) GetJumpHostOk() (*string, bool)`
+
+GetJumpHostOk returns a tuple with the JumpHost field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetJumpHost
+
+`func (o *ConnectorSshConfig) SetJumpHost(v string)`
+
+SetJumpHost sets JumpHost field to given value.
+
+### HasJumpHost
+
+`func (o *ConnectorSshConfig) HasJumpHost() bool`
+
+HasJumpHost returns a boolean if a field has been set.
 
 ### GetPassword
 

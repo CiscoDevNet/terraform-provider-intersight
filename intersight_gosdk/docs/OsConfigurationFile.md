@@ -8,12 +8,12 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "os.ConfigurationFile"]
 **Description** | Pointer to **string** | Description of the OS ConfigurationFile. | [optional] 
 **FileContent** | Pointer to **string** | The content of the entire configuration file is stored as value. The content can either be a static file content or a template content. The template is expected to conform to the golang template syntax. The values from os.Answers properties will be used to populate this template. | [optional] 
-**Internal** | Pointer to **bool** | The internal flag is set to true when configuration file is uploaded from OS Install wizard. Internal Configuration files will not be displayed in Answer Management Page. | [optional] 
+**Internal** | Pointer to **bool** | The internal flag is set to true when configuration file is uploaded from OS Install wizard. Internal Configuration files will not be displayed in Answer Management Page. | [optional] [default to false]
 **Name** | Pointer to **string** | The name of the OS ConfigurationFile that uniquely identifies the configuration file. | [optional] 
-**Placeholders** | Pointer to [**[]OsPlaceHolder**](os.PlaceHolder.md) |  | [optional] 
+**Placeholders** | Pointer to [**[]OsPlaceHolder**](OsPlaceHolder.md) |  | [optional] 
 **Supported** | Pointer to **bool** | An internal property that is used to distinguish between the pre-canned OS configuration file entries and user provided entries. | [optional] [readonly] 
 **Catalog** | Pointer to [**OsCatalogRelationship**](os.Catalog.Relationship.md) |  | [optional] 
-**Distributions** | Pointer to [**[]HclOperatingSystemRelationship**](hcl.OperatingSystem.Relationship.md) | An array of relationships to hclOperatingSystem resources. | [optional] 
+**Distributions** | Pointer to [**[]HclOperatingSystemRelationship**](HclOperatingSystemRelationship.md) | An array of relationships to hclOperatingSystem resources. | [optional] 
 
 ## Methods
 

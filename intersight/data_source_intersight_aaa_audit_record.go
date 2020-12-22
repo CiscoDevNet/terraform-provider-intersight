@@ -1,19 +1,20 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceAaaAuditRecord() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceAaaAuditRecordRead,
+		ReadContext: dataSourceAaaAuditRecordRead,
 		Schema: map[string]*schema.Schema{
 			"account": {
 				Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -246,10 +247,11 @@ func dataSourceAaaAuditRecord() *schema.Resource {
 	}
 }
 
-func dataSourceAaaAuditRecordRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceAaaAuditRecordRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.AaaAuditRecord{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -306,25 +308,25 @@ func dataSourceAaaAuditRecordRead(d *schema.ResourceData, meta interface{}) erro
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of AaaAuditRecord object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.AaaApi.GetAaaAuditRecordList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.AaaApi.GetAaaAuditRecordList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching AaaAuditRecord: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for AaaAuditRecord list: %s", err.Error())
 	}
 	var s = &models.AaaAuditRecordList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to AaaAuditRecord: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to AaaAuditRecord list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for AaaAuditRecord did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -333,69 +335,69 @@ func dataSourceAaaAuditRecordRead(d *schema.ResourceData, meta interface{}) erro
 			var s = &models.AaaAuditRecord{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 
 			if err := d.Set("account", flattenMapIamAccountRelationship(s.GetAccount(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Account: %+v", err)
+				return diag.Errorf("error occurred while setting property Account: %s", err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("email", (s.GetEmail())); err != nil {
-				return fmt.Errorf("error occurred while setting property Email: %+v", err)
+				return diag.Errorf("error occurred while setting property Email: %s", err.Error())
 			}
 			if err := d.Set("event", (s.GetEvent())); err != nil {
-				return fmt.Errorf("error occurred while setting property Event: %+v", err)
+				return diag.Errorf("error occurred while setting property Event: %s", err.Error())
 			}
 			if err := d.Set("inst_id", (s.GetInstId())); err != nil {
-				return fmt.Errorf("error occurred while setting property InstId: %+v", err)
+				return diag.Errorf("error occurred while setting property InstId: %s", err.Error())
 			}
 			if err := d.Set("mo_type", (s.GetMoType())); err != nil {
-				return fmt.Errorf("error occurred while setting property MoType: %+v", err)
+				return diag.Errorf("error occurred while setting property MoType: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("object_moid", (s.GetObjectMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectMoid: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectMoid: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("session_id", (s.GetSessionId())); err != nil {
-				return fmt.Errorf("error occurred while setting property SessionId: %+v", err)
+				return diag.Errorf("error occurred while setting property SessionId: %s", err.Error())
 			}
 
 			if err := d.Set("sessions", flattenMapIamSessionRelationship(s.GetSessions(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Sessions: %+v", err)
+				return diag.Errorf("error occurred while setting property Sessions: %s", err.Error())
 			}
 			if err := d.Set("source_ip", (s.GetSourceIp())); err != nil {
-				return fmt.Errorf("error occurred while setting property SourceIp: %+v", err)
+				return diag.Errorf("error occurred while setting property SourceIp: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 
 			if err := d.Set("timestamp", (s.GetTimestamp()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property Timestamp: %+v", err)
+				return diag.Errorf("error occurred while setting property Timestamp: %s", err.Error())
 			}
 			if err := d.Set("trace_id", (s.GetTraceId())); err != nil {
-				return fmt.Errorf("error occurred while setting property TraceId: %+v", err)
+				return diag.Errorf("error occurred while setting property TraceId: %s", err.Error())
 			}
 
 			if err := d.Set("user", flattenMapIamUserRelationship(s.GetUser(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property User: %+v", err)
+				return diag.Errorf("error occurred while setting property User: %s", err.Error())
 			}
 			if err := d.Set("user_id_or_email", (s.GetUserIdOrEmail())); err != nil {
-				return fmt.Errorf("error occurred while setting property UserIdOrEmail: %+v", err)
+				return diag.Errorf("error occurred while setting property UserIdOrEmail: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

@@ -1,17 +1,15 @@
-
 ---
+subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_switch_card"
-sidebar_current: "docs-intersight-data-source-equipment-switch-card"
 description: |-
-Fixed / Removable module on a Fabric Interconnect / Switch.
+  Fixed / Removable module on a Fabric Interconnect / Switch.
 ---
 
-# Data Source: intersight_equipment._switch_card
+# Data Source: intersight_equipment_switch_card
 Fixed / Removable module on a Fabric Interconnect / Switch.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `description`:(string) Detailed description of this switch hardware. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
@@ -20,7 +18,6 @@ The following arguments can be used to get data of already created objects in In
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `num_ports`:(int) Number of ports present in this switch hardware. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `out_of_band_ip_address`:(string) Field specifies this Switch's Out-of-band IP address. 
 * `out_of_band_ip_gateway`:(string) Field specifies this Switch's default gateway for the out-of-band management interface. 
 * `presence`:(string) Presence for this switch hardware. 

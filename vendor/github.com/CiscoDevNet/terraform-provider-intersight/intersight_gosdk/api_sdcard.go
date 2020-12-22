@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -12,6 +12,7 @@
 package intersight
 
 import (
+	"bytes"
 	_context "context"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
@@ -48,7 +49,7 @@ func (r ApiCreateSdcardPolicyRequest) IfNoneMatch(ifNoneMatch string) ApiCreateS
 	return r
 }
 
-func (r ApiCreateSdcardPolicyRequest) Execute() (SdcardPolicy, *_nethttp.Response, error) {
+func (r ApiCreateSdcardPolicyRequest) Execute() (SdcardPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateSdcardPolicyExecute(r)
 }
 
@@ -68,19 +69,21 @@ func (a *SdcardApiService) CreateSdcardPolicy(ctx _context.Context) ApiCreateSdc
  * Execute executes the request
  * @return SdcardPolicy
  */
-func (a *SdcardApiService) CreateSdcardPolicyExecute(r ApiCreateSdcardPolicyRequest) (SdcardPolicy, *_nethttp.Response, error) {
+func (a *SdcardApiService) CreateSdcardPolicyExecute(r ApiCreateSdcardPolicyRequest) (SdcardPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdcardPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdcardApiService.CreateSdcardPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdcard/Policies"
@@ -89,7 +92,8 @@ func (a *SdcardApiService) CreateSdcardPolicyExecute(r ApiCreateSdcardPolicyRequ
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.sdcardPolicy == nil {
-		return localVarReturnValue, nil, reportError("sdcardPolicy is required and must be specified")
+		executionError.error = "sdcardPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -119,18 +123,22 @@ func (a *SdcardApiService) CreateSdcardPolicyExecute(r ApiCreateSdcardPolicyRequ
 	localVarPostBody = r.sdcardPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -197,7 +205,7 @@ func (a *SdcardApiService) CreateSdcardPolicyExecute(r ApiCreateSdcardPolicyRequ
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiDeleteSdcardPolicyRequest struct {
@@ -206,7 +214,7 @@ type ApiDeleteSdcardPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteSdcardPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteSdcardPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteSdcardPolicyExecute(r)
 }
 
@@ -227,18 +235,20 @@ func (a *SdcardApiService) DeleteSdcardPolicy(ctx _context.Context, moid string)
 /*
  * Execute executes the request
  */
-func (a *SdcardApiService) DeleteSdcardPolicyExecute(r ApiDeleteSdcardPolicyRequest) (*_nethttp.Response, error) {
+func (a *SdcardApiService) DeleteSdcardPolicyExecute(r ApiDeleteSdcardPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdcardApiService.DeleteSdcardPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdcard/Policies/{Moid}"
@@ -267,18 +277,22 @@ func (a *SdcardApiService) DeleteSdcardPolicyExecute(r ApiDeleteSdcardPolicyRequ
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -336,7 +350,7 @@ func (a *SdcardApiService) DeleteSdcardPolicyExecute(r ApiDeleteSdcardPolicyRequ
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiGetSdcardPolicyByMoidRequest struct {
@@ -345,7 +359,7 @@ type ApiGetSdcardPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetSdcardPolicyByMoidRequest) Execute() (SdcardPolicy, *_nethttp.Response, error) {
+func (r ApiGetSdcardPolicyByMoidRequest) Execute() (SdcardPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetSdcardPolicyByMoidExecute(r)
 }
 
@@ -367,19 +381,21 @@ func (a *SdcardApiService) GetSdcardPolicyByMoid(ctx _context.Context, moid stri
  * Execute executes the request
  * @return SdcardPolicy
  */
-func (a *SdcardApiService) GetSdcardPolicyByMoidExecute(r ApiGetSdcardPolicyByMoidRequest) (SdcardPolicy, *_nethttp.Response, error) {
+func (a *SdcardApiService) GetSdcardPolicyByMoidExecute(r ApiGetSdcardPolicyByMoidRequest) (SdcardPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdcardPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdcardApiService.GetSdcardPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdcard/Policies/{Moid}"
@@ -408,18 +424,22 @@ func (a *SdcardApiService) GetSdcardPolicyByMoidExecute(r ApiGetSdcardPolicyByMo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -486,7 +506,7 @@ func (a *SdcardApiService) GetSdcardPolicyByMoidExecute(r ApiGetSdcardPolicyByMo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetSdcardPolicyListRequest struct {
@@ -550,7 +570,7 @@ func (r ApiGetSdcardPolicyListRequest) Tags(tags string) ApiGetSdcardPolicyListR
 	return r
 }
 
-func (r ApiGetSdcardPolicyListRequest) Execute() (SdcardPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetSdcardPolicyListRequest) Execute() (SdcardPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetSdcardPolicyListExecute(r)
 }
 
@@ -570,19 +590,21 @@ func (a *SdcardApiService) GetSdcardPolicyList(ctx _context.Context) ApiGetSdcar
  * Execute executes the request
  * @return SdcardPolicyResponse
  */
-func (a *SdcardApiService) GetSdcardPolicyListExecute(r ApiGetSdcardPolicyListRequest) (SdcardPolicyResponse, *_nethttp.Response, error) {
+func (a *SdcardApiService) GetSdcardPolicyListExecute(r ApiGetSdcardPolicyListRequest) (SdcardPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdcardPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdcardApiService.GetSdcardPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdcard/Policies"
@@ -643,18 +665,22 @@ func (a *SdcardApiService) GetSdcardPolicyListExecute(r ApiGetSdcardPolicyListRe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -721,7 +747,7 @@ func (a *SdcardApiService) GetSdcardPolicyListExecute(r ApiGetSdcardPolicyListRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchSdcardPolicyRequest struct {
@@ -741,7 +767,7 @@ func (r ApiPatchSdcardPolicyRequest) IfMatch(ifMatch string) ApiPatchSdcardPolic
 	return r
 }
 
-func (r ApiPatchSdcardPolicyRequest) Execute() (SdcardPolicy, *_nethttp.Response, error) {
+func (r ApiPatchSdcardPolicyRequest) Execute() (SdcardPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchSdcardPolicyExecute(r)
 }
 
@@ -763,19 +789,21 @@ func (a *SdcardApiService) PatchSdcardPolicy(ctx _context.Context, moid string) 
  * Execute executes the request
  * @return SdcardPolicy
  */
-func (a *SdcardApiService) PatchSdcardPolicyExecute(r ApiPatchSdcardPolicyRequest) (SdcardPolicy, *_nethttp.Response, error) {
+func (a *SdcardApiService) PatchSdcardPolicyExecute(r ApiPatchSdcardPolicyRequest) (SdcardPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdcardPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdcardApiService.PatchSdcardPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdcard/Policies/{Moid}"
@@ -785,7 +813,8 @@ func (a *SdcardApiService) PatchSdcardPolicyExecute(r ApiPatchSdcardPolicyReques
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.sdcardPolicy == nil {
-		return localVarReturnValue, nil, reportError("sdcardPolicy is required and must be specified")
+		executionError.error = "sdcardPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -812,18 +841,22 @@ func (a *SdcardApiService) PatchSdcardPolicyExecute(r ApiPatchSdcardPolicyReques
 	localVarPostBody = r.sdcardPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -890,7 +923,7 @@ func (a *SdcardApiService) PatchSdcardPolicyExecute(r ApiPatchSdcardPolicyReques
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateSdcardPolicyRequest struct {
@@ -910,7 +943,7 @@ func (r ApiUpdateSdcardPolicyRequest) IfMatch(ifMatch string) ApiUpdateSdcardPol
 	return r
 }
 
-func (r ApiUpdateSdcardPolicyRequest) Execute() (SdcardPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateSdcardPolicyRequest) Execute() (SdcardPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateSdcardPolicyExecute(r)
 }
 
@@ -932,19 +965,21 @@ func (a *SdcardApiService) UpdateSdcardPolicy(ctx _context.Context, moid string)
  * Execute executes the request
  * @return SdcardPolicy
  */
-func (a *SdcardApiService) UpdateSdcardPolicyExecute(r ApiUpdateSdcardPolicyRequest) (SdcardPolicy, *_nethttp.Response, error) {
+func (a *SdcardApiService) UpdateSdcardPolicyExecute(r ApiUpdateSdcardPolicyRequest) (SdcardPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdcardPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdcardApiService.UpdateSdcardPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdcard/Policies/{Moid}"
@@ -954,7 +989,8 @@ func (a *SdcardApiService) UpdateSdcardPolicyExecute(r ApiUpdateSdcardPolicyRequ
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.sdcardPolicy == nil {
-		return localVarReturnValue, nil, reportError("sdcardPolicy is required and must be specified")
+		executionError.error = "sdcardPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -981,18 +1017,22 @@ func (a *SdcardApiService) UpdateSdcardPolicyExecute(r ApiUpdateSdcardPolicyRequ
 	localVarPostBody = r.sdcardPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1059,5 +1099,5 @@ func (a *SdcardApiService) UpdateSdcardPolicyExecute(r ApiUpdateSdcardPolicyRequ
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }

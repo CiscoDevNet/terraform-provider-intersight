@@ -1,13 +1,12 @@
-
 ---
+subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_server_role"
-sidebar_current: "docs-intersight-resource-fabric-server-role"
 description: |-
   Configuration object sent by user to create a server port.
 ---
 
-# Resource: intersight_fabric._server_role
+# Resource: intersight_fabric_server_role
 Configuration object sent by user to create a server port.
 ## Argument Reference
 The following arguments are supported:
@@ -33,3 +32,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_fabric_server_role` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_fabric_server_role.example 1234567890987654321abcde
+```

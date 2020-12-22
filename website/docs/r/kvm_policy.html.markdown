@@ -1,13 +1,12 @@
-
 ---
+subcategory: "kvm"
 layout: "intersight"
 page_title: "Intersight: intersight_kvm_policy"
-sidebar_current: "docs-intersight-resource-kvm-policy"
 description: |-
   Policy to configure KVM Launch settings.
 ---
 
-# Resource: intersight_kvm._policy
+# Resource: intersight_kvm_policy
 Policy to configure KVM Launch settings.
 ## Argument Reference
 The following arguments are supported:
@@ -45,3 +44,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_kvm_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_kvm_policy.example 1234567890987654321abcde
+```

@@ -9,6 +9,10 @@ Name | Type | Description | Notes
 **FilePath** | Pointer to **string** | The path of the file in S3/minio bucket. | [optional] [readonly] 
 **SolutionName** | Pointer to **string** | The name of the solution in which the image belongs. | [optional] 
 **SubType** | Pointer to **string** | The type of the file like OS image, Script etc. * &#x60;osimage&#x60; - The solution OS image for deployment. * &#x60;script&#x60; - The Python script for the solution VM configuration and deployment. | [optional] [default to "osimage"]
+**Var0Version** | Pointer to [**KubernetesVersionRelationship**](kubernetes.Version.Relationship.md) |  | [optional] 
+**Var1Version** | Pointer to [**KubernetesVersionRelationship**](kubernetes.Version.Relationship.md) |  | [optional] 
+**Var2Version** | Pointer to [**KubernetesVersionRelationship**](kubernetes.Version.Relationship.md) |  | [optional] 
+**Var3Version** | Pointer to [**KubernetesVersionRelationship**](kubernetes.Version.Relationship.md) |  | [optional] 
 **Catalog** | Pointer to [**SoftwarerepositoryCatalogRelationship**](softwarerepository.Catalog.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -144,6 +148,106 @@ SetSubType sets SubType field to given value.
 `func (o *SoftwareSolutionDistributableAllOf) HasSubType() bool`
 
 HasSubType returns a boolean if a field has been set.
+
+### GetVar0Version
+
+`func (o *SoftwareSolutionDistributableAllOf) GetVar0Version() KubernetesVersionRelationship`
+
+GetVar0Version returns the Var0Version field if non-nil, zero value otherwise.
+
+### GetVar0VersionOk
+
+`func (o *SoftwareSolutionDistributableAllOf) GetVar0VersionOk() (*KubernetesVersionRelationship, bool)`
+
+GetVar0VersionOk returns a tuple with the Var0Version field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVar0Version
+
+`func (o *SoftwareSolutionDistributableAllOf) SetVar0Version(v KubernetesVersionRelationship)`
+
+SetVar0Version sets Var0Version field to given value.
+
+### HasVar0Version
+
+`func (o *SoftwareSolutionDistributableAllOf) HasVar0Version() bool`
+
+HasVar0Version returns a boolean if a field has been set.
+
+### GetVar1Version
+
+`func (o *SoftwareSolutionDistributableAllOf) GetVar1Version() KubernetesVersionRelationship`
+
+GetVar1Version returns the Var1Version field if non-nil, zero value otherwise.
+
+### GetVar1VersionOk
+
+`func (o *SoftwareSolutionDistributableAllOf) GetVar1VersionOk() (*KubernetesVersionRelationship, bool)`
+
+GetVar1VersionOk returns a tuple with the Var1Version field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVar1Version
+
+`func (o *SoftwareSolutionDistributableAllOf) SetVar1Version(v KubernetesVersionRelationship)`
+
+SetVar1Version sets Var1Version field to given value.
+
+### HasVar1Version
+
+`func (o *SoftwareSolutionDistributableAllOf) HasVar1Version() bool`
+
+HasVar1Version returns a boolean if a field has been set.
+
+### GetVar2Version
+
+`func (o *SoftwareSolutionDistributableAllOf) GetVar2Version() KubernetesVersionRelationship`
+
+GetVar2Version returns the Var2Version field if non-nil, zero value otherwise.
+
+### GetVar2VersionOk
+
+`func (o *SoftwareSolutionDistributableAllOf) GetVar2VersionOk() (*KubernetesVersionRelationship, bool)`
+
+GetVar2VersionOk returns a tuple with the Var2Version field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVar2Version
+
+`func (o *SoftwareSolutionDistributableAllOf) SetVar2Version(v KubernetesVersionRelationship)`
+
+SetVar2Version sets Var2Version field to given value.
+
+### HasVar2Version
+
+`func (o *SoftwareSolutionDistributableAllOf) HasVar2Version() bool`
+
+HasVar2Version returns a boolean if a field has been set.
+
+### GetVar3Version
+
+`func (o *SoftwareSolutionDistributableAllOf) GetVar3Version() KubernetesVersionRelationship`
+
+GetVar3Version returns the Var3Version field if non-nil, zero value otherwise.
+
+### GetVar3VersionOk
+
+`func (o *SoftwareSolutionDistributableAllOf) GetVar3VersionOk() (*KubernetesVersionRelationship, bool)`
+
+GetVar3VersionOk returns a tuple with the Var3Version field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVar3Version
+
+`func (o *SoftwareSolutionDistributableAllOf) SetVar3Version(v KubernetesVersionRelationship)`
+
+SetVar3Version sets Var3Version field to given value.
+
+### HasVar3Version
+
+`func (o *SoftwareSolutionDistributableAllOf) HasVar3Version() bool`
+
+HasVar3Version returns a boolean if a field has been set.
 
 ### GetCatalog
 

@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -12,6 +12,7 @@
 package intersight
 
 import (
+	"bytes"
 	_context "context"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
@@ -33,7 +34,7 @@ type ApiGetCondAlarmAggregationByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCondAlarmAggregationByMoidRequest) Execute() (CondAlarmAggregation, *_nethttp.Response, error) {
+func (r ApiGetCondAlarmAggregationByMoidRequest) Execute() (CondAlarmAggregation, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetCondAlarmAggregationByMoidExecute(r)
 }
 
@@ -55,19 +56,21 @@ func (a *CondApiService) GetCondAlarmAggregationByMoid(ctx _context.Context, moi
  * Execute executes the request
  * @return CondAlarmAggregation
  */
-func (a *CondApiService) GetCondAlarmAggregationByMoidExecute(r ApiGetCondAlarmAggregationByMoidRequest) (CondAlarmAggregation, *_nethttp.Response, error) {
+func (a *CondApiService) GetCondAlarmAggregationByMoidExecute(r ApiGetCondAlarmAggregationByMoidRequest) (CondAlarmAggregation, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  CondAlarmAggregation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CondApiService.GetCondAlarmAggregationByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/cond/AlarmAggregations/{Moid}"
@@ -96,18 +99,22 @@ func (a *CondApiService) GetCondAlarmAggregationByMoidExecute(r ApiGetCondAlarmA
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -174,7 +181,7 @@ func (a *CondApiService) GetCondAlarmAggregationByMoidExecute(r ApiGetCondAlarmA
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetCondAlarmAggregationListRequest struct {
@@ -238,7 +245,7 @@ func (r ApiGetCondAlarmAggregationListRequest) Tags(tags string) ApiGetCondAlarm
 	return r
 }
 
-func (r ApiGetCondAlarmAggregationListRequest) Execute() (CondAlarmAggregationResponse, *_nethttp.Response, error) {
+func (r ApiGetCondAlarmAggregationListRequest) Execute() (CondAlarmAggregationResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetCondAlarmAggregationListExecute(r)
 }
 
@@ -258,19 +265,21 @@ func (a *CondApiService) GetCondAlarmAggregationList(ctx _context.Context) ApiGe
  * Execute executes the request
  * @return CondAlarmAggregationResponse
  */
-func (a *CondApiService) GetCondAlarmAggregationListExecute(r ApiGetCondAlarmAggregationListRequest) (CondAlarmAggregationResponse, *_nethttp.Response, error) {
+func (a *CondApiService) GetCondAlarmAggregationListExecute(r ApiGetCondAlarmAggregationListRequest) (CondAlarmAggregationResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  CondAlarmAggregationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CondApiService.GetCondAlarmAggregationList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/cond/AlarmAggregations"
@@ -331,18 +340,22 @@ func (a *CondApiService) GetCondAlarmAggregationListExecute(r ApiGetCondAlarmAgg
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -409,7 +422,7 @@ func (a *CondApiService) GetCondAlarmAggregationListExecute(r ApiGetCondAlarmAgg
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetCondAlarmByMoidRequest struct {
@@ -418,7 +431,7 @@ type ApiGetCondAlarmByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCondAlarmByMoidRequest) Execute() (CondAlarm, *_nethttp.Response, error) {
+func (r ApiGetCondAlarmByMoidRequest) Execute() (CondAlarm, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetCondAlarmByMoidExecute(r)
 }
 
@@ -440,19 +453,21 @@ func (a *CondApiService) GetCondAlarmByMoid(ctx _context.Context, moid string) A
  * Execute executes the request
  * @return CondAlarm
  */
-func (a *CondApiService) GetCondAlarmByMoidExecute(r ApiGetCondAlarmByMoidRequest) (CondAlarm, *_nethttp.Response, error) {
+func (a *CondApiService) GetCondAlarmByMoidExecute(r ApiGetCondAlarmByMoidRequest) (CondAlarm, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  CondAlarm
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CondApiService.GetCondAlarmByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/cond/Alarms/{Moid}"
@@ -481,18 +496,22 @@ func (a *CondApiService) GetCondAlarmByMoidExecute(r ApiGetCondAlarmByMoidReques
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -559,7 +578,7 @@ func (a *CondApiService) GetCondAlarmByMoidExecute(r ApiGetCondAlarmByMoidReques
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetCondAlarmListRequest struct {
@@ -623,7 +642,7 @@ func (r ApiGetCondAlarmListRequest) Tags(tags string) ApiGetCondAlarmListRequest
 	return r
 }
 
-func (r ApiGetCondAlarmListRequest) Execute() (CondAlarmResponse, *_nethttp.Response, error) {
+func (r ApiGetCondAlarmListRequest) Execute() (CondAlarmResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetCondAlarmListExecute(r)
 }
 
@@ -643,19 +662,21 @@ func (a *CondApiService) GetCondAlarmList(ctx _context.Context) ApiGetCondAlarmL
  * Execute executes the request
  * @return CondAlarmResponse
  */
-func (a *CondApiService) GetCondAlarmListExecute(r ApiGetCondAlarmListRequest) (CondAlarmResponse, *_nethttp.Response, error) {
+func (a *CondApiService) GetCondAlarmListExecute(r ApiGetCondAlarmListRequest) (CondAlarmResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  CondAlarmResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CondApiService.GetCondAlarmList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/cond/Alarms"
@@ -716,18 +737,22 @@ func (a *CondApiService) GetCondAlarmListExecute(r ApiGetCondAlarmListRequest) (
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -794,7 +819,7 @@ func (a *CondApiService) GetCondAlarmListExecute(r ApiGetCondAlarmListRequest) (
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetCondHclStatusByMoidRequest struct {
@@ -803,7 +828,7 @@ type ApiGetCondHclStatusByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCondHclStatusByMoidRequest) Execute() (CondHclStatus, *_nethttp.Response, error) {
+func (r ApiGetCondHclStatusByMoidRequest) Execute() (CondHclStatus, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetCondHclStatusByMoidExecute(r)
 }
 
@@ -825,19 +850,21 @@ func (a *CondApiService) GetCondHclStatusByMoid(ctx _context.Context, moid strin
  * Execute executes the request
  * @return CondHclStatus
  */
-func (a *CondApiService) GetCondHclStatusByMoidExecute(r ApiGetCondHclStatusByMoidRequest) (CondHclStatus, *_nethttp.Response, error) {
+func (a *CondApiService) GetCondHclStatusByMoidExecute(r ApiGetCondHclStatusByMoidRequest) (CondHclStatus, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  CondHclStatus
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CondApiService.GetCondHclStatusByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/cond/HclStatuses/{Moid}"
@@ -866,18 +893,22 @@ func (a *CondApiService) GetCondHclStatusByMoidExecute(r ApiGetCondHclStatusByMo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -944,7 +975,7 @@ func (a *CondApiService) GetCondHclStatusByMoidExecute(r ApiGetCondHclStatusByMo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetCondHclStatusDetailByMoidRequest struct {
@@ -953,7 +984,7 @@ type ApiGetCondHclStatusDetailByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCondHclStatusDetailByMoidRequest) Execute() (CondHclStatusDetail, *_nethttp.Response, error) {
+func (r ApiGetCondHclStatusDetailByMoidRequest) Execute() (CondHclStatusDetail, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetCondHclStatusDetailByMoidExecute(r)
 }
 
@@ -975,19 +1006,21 @@ func (a *CondApiService) GetCondHclStatusDetailByMoid(ctx _context.Context, moid
  * Execute executes the request
  * @return CondHclStatusDetail
  */
-func (a *CondApiService) GetCondHclStatusDetailByMoidExecute(r ApiGetCondHclStatusDetailByMoidRequest) (CondHclStatusDetail, *_nethttp.Response, error) {
+func (a *CondApiService) GetCondHclStatusDetailByMoidExecute(r ApiGetCondHclStatusDetailByMoidRequest) (CondHclStatusDetail, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  CondHclStatusDetail
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CondApiService.GetCondHclStatusDetailByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/cond/HclStatusDetails/{Moid}"
@@ -1016,18 +1049,22 @@ func (a *CondApiService) GetCondHclStatusDetailByMoidExecute(r ApiGetCondHclStat
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1094,7 +1131,7 @@ func (a *CondApiService) GetCondHclStatusDetailByMoidExecute(r ApiGetCondHclStat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetCondHclStatusDetailListRequest struct {
@@ -1158,7 +1195,7 @@ func (r ApiGetCondHclStatusDetailListRequest) Tags(tags string) ApiGetCondHclSta
 	return r
 }
 
-func (r ApiGetCondHclStatusDetailListRequest) Execute() (CondHclStatusDetailResponse, *_nethttp.Response, error) {
+func (r ApiGetCondHclStatusDetailListRequest) Execute() (CondHclStatusDetailResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetCondHclStatusDetailListExecute(r)
 }
 
@@ -1178,19 +1215,21 @@ func (a *CondApiService) GetCondHclStatusDetailList(ctx _context.Context) ApiGet
  * Execute executes the request
  * @return CondHclStatusDetailResponse
  */
-func (a *CondApiService) GetCondHclStatusDetailListExecute(r ApiGetCondHclStatusDetailListRequest) (CondHclStatusDetailResponse, *_nethttp.Response, error) {
+func (a *CondApiService) GetCondHclStatusDetailListExecute(r ApiGetCondHclStatusDetailListRequest) (CondHclStatusDetailResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  CondHclStatusDetailResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CondApiService.GetCondHclStatusDetailList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/cond/HclStatusDetails"
@@ -1251,18 +1290,22 @@ func (a *CondApiService) GetCondHclStatusDetailListExecute(r ApiGetCondHclStatus
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1329,7 +1372,7 @@ func (a *CondApiService) GetCondHclStatusDetailListExecute(r ApiGetCondHclStatus
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetCondHclStatusJobByMoidRequest struct {
@@ -1338,7 +1381,7 @@ type ApiGetCondHclStatusJobByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCondHclStatusJobByMoidRequest) Execute() (CondHclStatusJob, *_nethttp.Response, error) {
+func (r ApiGetCondHclStatusJobByMoidRequest) Execute() (CondHclStatusJob, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetCondHclStatusJobByMoidExecute(r)
 }
 
@@ -1360,19 +1403,21 @@ func (a *CondApiService) GetCondHclStatusJobByMoid(ctx _context.Context, moid st
  * Execute executes the request
  * @return CondHclStatusJob
  */
-func (a *CondApiService) GetCondHclStatusJobByMoidExecute(r ApiGetCondHclStatusJobByMoidRequest) (CondHclStatusJob, *_nethttp.Response, error) {
+func (a *CondApiService) GetCondHclStatusJobByMoidExecute(r ApiGetCondHclStatusJobByMoidRequest) (CondHclStatusJob, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  CondHclStatusJob
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CondApiService.GetCondHclStatusJobByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/cond/HclStatusJobs/{Moid}"
@@ -1401,18 +1446,22 @@ func (a *CondApiService) GetCondHclStatusJobByMoidExecute(r ApiGetCondHclStatusJ
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1479,7 +1528,7 @@ func (a *CondApiService) GetCondHclStatusJobByMoidExecute(r ApiGetCondHclStatusJ
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetCondHclStatusJobListRequest struct {
@@ -1543,7 +1592,7 @@ func (r ApiGetCondHclStatusJobListRequest) Tags(tags string) ApiGetCondHclStatus
 	return r
 }
 
-func (r ApiGetCondHclStatusJobListRequest) Execute() (CondHclStatusJobResponse, *_nethttp.Response, error) {
+func (r ApiGetCondHclStatusJobListRequest) Execute() (CondHclStatusJobResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetCondHclStatusJobListExecute(r)
 }
 
@@ -1563,19 +1612,21 @@ func (a *CondApiService) GetCondHclStatusJobList(ctx _context.Context) ApiGetCon
  * Execute executes the request
  * @return CondHclStatusJobResponse
  */
-func (a *CondApiService) GetCondHclStatusJobListExecute(r ApiGetCondHclStatusJobListRequest) (CondHclStatusJobResponse, *_nethttp.Response, error) {
+func (a *CondApiService) GetCondHclStatusJobListExecute(r ApiGetCondHclStatusJobListRequest) (CondHclStatusJobResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  CondHclStatusJobResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CondApiService.GetCondHclStatusJobList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/cond/HclStatusJobs"
@@ -1636,18 +1687,22 @@ func (a *CondApiService) GetCondHclStatusJobListExecute(r ApiGetCondHclStatusJob
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1714,7 +1769,7 @@ func (a *CondApiService) GetCondHclStatusJobListExecute(r ApiGetCondHclStatusJob
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetCondHclStatusListRequest struct {
@@ -1778,7 +1833,7 @@ func (r ApiGetCondHclStatusListRequest) Tags(tags string) ApiGetCondHclStatusLis
 	return r
 }
 
-func (r ApiGetCondHclStatusListRequest) Execute() (CondHclStatusResponse, *_nethttp.Response, error) {
+func (r ApiGetCondHclStatusListRequest) Execute() (CondHclStatusResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetCondHclStatusListExecute(r)
 }
 
@@ -1798,19 +1853,21 @@ func (a *CondApiService) GetCondHclStatusList(ctx _context.Context) ApiGetCondHc
  * Execute executes the request
  * @return CondHclStatusResponse
  */
-func (a *CondApiService) GetCondHclStatusListExecute(r ApiGetCondHclStatusListRequest) (CondHclStatusResponse, *_nethttp.Response, error) {
+func (a *CondApiService) GetCondHclStatusListExecute(r ApiGetCondHclStatusListRequest) (CondHclStatusResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  CondHclStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CondApiService.GetCondHclStatusList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/cond/HclStatuses"
@@ -1871,18 +1928,22 @@ func (a *CondApiService) GetCondHclStatusListExecute(r ApiGetCondHclStatusListRe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1949,7 +2010,7 @@ func (a *CondApiService) GetCondHclStatusListExecute(r ApiGetCondHclStatusListRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchCondAlarmRequest struct {
@@ -1969,7 +2030,7 @@ func (r ApiPatchCondAlarmRequest) IfMatch(ifMatch string) ApiPatchCondAlarmReque
 	return r
 }
 
-func (r ApiPatchCondAlarmRequest) Execute() (CondAlarm, *_nethttp.Response, error) {
+func (r ApiPatchCondAlarmRequest) Execute() (CondAlarm, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchCondAlarmExecute(r)
 }
 
@@ -1991,19 +2052,21 @@ func (a *CondApiService) PatchCondAlarm(ctx _context.Context, moid string) ApiPa
  * Execute executes the request
  * @return CondAlarm
  */
-func (a *CondApiService) PatchCondAlarmExecute(r ApiPatchCondAlarmRequest) (CondAlarm, *_nethttp.Response, error) {
+func (a *CondApiService) PatchCondAlarmExecute(r ApiPatchCondAlarmRequest) (CondAlarm, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  CondAlarm
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CondApiService.PatchCondAlarm")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/cond/Alarms/{Moid}"
@@ -2013,7 +2076,8 @@ func (a *CondApiService) PatchCondAlarmExecute(r ApiPatchCondAlarmRequest) (Cond
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.condAlarm == nil {
-		return localVarReturnValue, nil, reportError("condAlarm is required and must be specified")
+		executionError.error = "condAlarm is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -2040,18 +2104,22 @@ func (a *CondApiService) PatchCondAlarmExecute(r ApiPatchCondAlarmRequest) (Cond
 	localVarPostBody = r.condAlarm
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2118,7 +2186,7 @@ func (a *CondApiService) PatchCondAlarmExecute(r ApiPatchCondAlarmRequest) (Cond
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateCondAlarmRequest struct {
@@ -2138,7 +2206,7 @@ func (r ApiUpdateCondAlarmRequest) IfMatch(ifMatch string) ApiUpdateCondAlarmReq
 	return r
 }
 
-func (r ApiUpdateCondAlarmRequest) Execute() (CondAlarm, *_nethttp.Response, error) {
+func (r ApiUpdateCondAlarmRequest) Execute() (CondAlarm, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateCondAlarmExecute(r)
 }
 
@@ -2160,19 +2228,21 @@ func (a *CondApiService) UpdateCondAlarm(ctx _context.Context, moid string) ApiU
  * Execute executes the request
  * @return CondAlarm
  */
-func (a *CondApiService) UpdateCondAlarmExecute(r ApiUpdateCondAlarmRequest) (CondAlarm, *_nethttp.Response, error) {
+func (a *CondApiService) UpdateCondAlarmExecute(r ApiUpdateCondAlarmRequest) (CondAlarm, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  CondAlarm
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CondApiService.UpdateCondAlarm")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/cond/Alarms/{Moid}"
@@ -2182,7 +2252,8 @@ func (a *CondApiService) UpdateCondAlarmExecute(r ApiUpdateCondAlarmRequest) (Co
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.condAlarm == nil {
-		return localVarReturnValue, nil, reportError("condAlarm is required and must be specified")
+		executionError.error = "condAlarm is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -2209,18 +2280,22 @@ func (a *CondApiService) UpdateCondAlarmExecute(r ApiUpdateCondAlarmRequest) (Co
 	localVarPostBody = r.condAlarm
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2287,5 +2362,5 @@ func (a *CondApiService) UpdateCondAlarmExecute(r ApiUpdateCondAlarmRequest) (Co
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }

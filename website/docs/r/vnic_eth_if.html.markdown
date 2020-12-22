@@ -1,13 +1,12 @@
-
 ---
+subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_eth_if"
-sidebar_current: "docs-intersight-resource-vnic-eth-if"
 description: |-
   Virtual Ethernet Interface.
 ---
 
-# Resource: intersight_vnic._eth_if
+# Resource: intersight_vnic_eth_if
 Virtual Ethernet Interface.
 ## Argument Reference
 The following arguments are supported:
@@ -19,9 +18,9 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
-  + `source`:(string) Source of the CDN. It can either be user specified or be the same as the vNIC name.* `vnic` - Source of the CDN is the same as the vNIC name.* `user` - Source of the CDN is specified by the user. 
+  + `nr_source`:(string) Source of the CDN. It can either be user specified or be the same as the vNIC name.* `vnic` - Source of the CDN is the same as the vNIC name.* `user` - Source of the CDN is specified by the user. 
   + `value`:(string) The CDN value entered in case of user defined mode. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `eth_adapter_policy`:(Array with Maximum of one item) - A reference to a vnicEthAdapterPolicy resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `additional_properties`:
@@ -139,7 +138,7 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `cos`:(int) Class of Service to be used for traffic on the usNIC. 
-  + `count`:(int) Number of usNIC interfaces to be created. 
+  + `nr_count`:(int) Number of usNIC interfaces to be created. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `usnic_adapter_policy`:(string) Ethernet Adapter policy to be associated with the usNICs. 
 * `vif_id`:(int)(Computed) The Vif Id should be same as the channel number of the vethernet created on switch in order to set up the data path. The property is applicable only for FI attached servers where a vethernet is created on the switch for every vNIC. 
@@ -153,5 +152,12 @@ This complex property has following sub-properties:
   + `num_interrupts`:(int) The number of interrupt resources to be allocated. Recommended value is the number of CPU threads or logical processors available in the server. 
   + `num_sub_vnics`:(int) The number of sub vNICs to be created. 
   + `num_vmqs`:(int) The number of hardware Virtual Machine Queues to be allocated. The number of VMQs per adapter must be one more than the maximum number of VM NICs. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `vmmq_adapter_policy`:(string) Ethernet Adapter policy to be associated with the Sub vNICs. The Transmit Queue and Receive Queue resource value of VMMQ adapter policy should be greater than or equal to the configured number of sub vNICs. 
+
+
+## Import
+`intersight_vnic_eth_if` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_vnic_eth_if.example 1234567890987654321abcde
+```

@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -12,6 +12,7 @@
 package intersight
 
 import (
+	"bytes"
 	_context "context"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
@@ -48,7 +49,7 @@ func (r ApiCreateSshPolicyRequest) IfNoneMatch(ifNoneMatch string) ApiCreateSshP
 	return r
 }
 
-func (r ApiCreateSshPolicyRequest) Execute() (SshPolicy, *_nethttp.Response, error) {
+func (r ApiCreateSshPolicyRequest) Execute() (SshPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateSshPolicyExecute(r)
 }
 
@@ -68,19 +69,21 @@ func (a *SshApiService) CreateSshPolicy(ctx _context.Context) ApiCreateSshPolicy
  * Execute executes the request
  * @return SshPolicy
  */
-func (a *SshApiService) CreateSshPolicyExecute(r ApiCreateSshPolicyRequest) (SshPolicy, *_nethttp.Response, error) {
+func (a *SshApiService) CreateSshPolicyExecute(r ApiCreateSshPolicyRequest) (SshPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SshPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SshApiService.CreateSshPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/ssh/Policies"
@@ -89,7 +92,8 @@ func (a *SshApiService) CreateSshPolicyExecute(r ApiCreateSshPolicyRequest) (Ssh
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.sshPolicy == nil {
-		return localVarReturnValue, nil, reportError("sshPolicy is required and must be specified")
+		executionError.error = "sshPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -119,18 +123,22 @@ func (a *SshApiService) CreateSshPolicyExecute(r ApiCreateSshPolicyRequest) (Ssh
 	localVarPostBody = r.sshPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -197,7 +205,7 @@ func (a *SshApiService) CreateSshPolicyExecute(r ApiCreateSshPolicyRequest) (Ssh
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiDeleteSshPolicyRequest struct {
@@ -206,7 +214,7 @@ type ApiDeleteSshPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteSshPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteSshPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteSshPolicyExecute(r)
 }
 
@@ -227,18 +235,20 @@ func (a *SshApiService) DeleteSshPolicy(ctx _context.Context, moid string) ApiDe
 /*
  * Execute executes the request
  */
-func (a *SshApiService) DeleteSshPolicyExecute(r ApiDeleteSshPolicyRequest) (*_nethttp.Response, error) {
+func (a *SshApiService) DeleteSshPolicyExecute(r ApiDeleteSshPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SshApiService.DeleteSshPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/ssh/Policies/{Moid}"
@@ -267,18 +277,22 @@ func (a *SshApiService) DeleteSshPolicyExecute(r ApiDeleteSshPolicyRequest) (*_n
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -336,7 +350,7 @@ func (a *SshApiService) DeleteSshPolicyExecute(r ApiDeleteSshPolicyRequest) (*_n
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiGetSshPolicyByMoidRequest struct {
@@ -345,7 +359,7 @@ type ApiGetSshPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetSshPolicyByMoidRequest) Execute() (SshPolicy, *_nethttp.Response, error) {
+func (r ApiGetSshPolicyByMoidRequest) Execute() (SshPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetSshPolicyByMoidExecute(r)
 }
 
@@ -367,19 +381,21 @@ func (a *SshApiService) GetSshPolicyByMoid(ctx _context.Context, moid string) Ap
  * Execute executes the request
  * @return SshPolicy
  */
-func (a *SshApiService) GetSshPolicyByMoidExecute(r ApiGetSshPolicyByMoidRequest) (SshPolicy, *_nethttp.Response, error) {
+func (a *SshApiService) GetSshPolicyByMoidExecute(r ApiGetSshPolicyByMoidRequest) (SshPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SshPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SshApiService.GetSshPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/ssh/Policies/{Moid}"
@@ -408,18 +424,22 @@ func (a *SshApiService) GetSshPolicyByMoidExecute(r ApiGetSshPolicyByMoidRequest
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -486,7 +506,7 @@ func (a *SshApiService) GetSshPolicyByMoidExecute(r ApiGetSshPolicyByMoidRequest
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetSshPolicyListRequest struct {
@@ -550,7 +570,7 @@ func (r ApiGetSshPolicyListRequest) Tags(tags string) ApiGetSshPolicyListRequest
 	return r
 }
 
-func (r ApiGetSshPolicyListRequest) Execute() (SshPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetSshPolicyListRequest) Execute() (SshPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetSshPolicyListExecute(r)
 }
 
@@ -570,19 +590,21 @@ func (a *SshApiService) GetSshPolicyList(ctx _context.Context) ApiGetSshPolicyLi
  * Execute executes the request
  * @return SshPolicyResponse
  */
-func (a *SshApiService) GetSshPolicyListExecute(r ApiGetSshPolicyListRequest) (SshPolicyResponse, *_nethttp.Response, error) {
+func (a *SshApiService) GetSshPolicyListExecute(r ApiGetSshPolicyListRequest) (SshPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SshPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SshApiService.GetSshPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/ssh/Policies"
@@ -643,18 +665,22 @@ func (a *SshApiService) GetSshPolicyListExecute(r ApiGetSshPolicyListRequest) (S
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -721,7 +747,7 @@ func (a *SshApiService) GetSshPolicyListExecute(r ApiGetSshPolicyListRequest) (S
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchSshPolicyRequest struct {
@@ -741,7 +767,7 @@ func (r ApiPatchSshPolicyRequest) IfMatch(ifMatch string) ApiPatchSshPolicyReque
 	return r
 }
 
-func (r ApiPatchSshPolicyRequest) Execute() (SshPolicy, *_nethttp.Response, error) {
+func (r ApiPatchSshPolicyRequest) Execute() (SshPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchSshPolicyExecute(r)
 }
 
@@ -763,19 +789,21 @@ func (a *SshApiService) PatchSshPolicy(ctx _context.Context, moid string) ApiPat
  * Execute executes the request
  * @return SshPolicy
  */
-func (a *SshApiService) PatchSshPolicyExecute(r ApiPatchSshPolicyRequest) (SshPolicy, *_nethttp.Response, error) {
+func (a *SshApiService) PatchSshPolicyExecute(r ApiPatchSshPolicyRequest) (SshPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SshPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SshApiService.PatchSshPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/ssh/Policies/{Moid}"
@@ -785,7 +813,8 @@ func (a *SshApiService) PatchSshPolicyExecute(r ApiPatchSshPolicyRequest) (SshPo
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.sshPolicy == nil {
-		return localVarReturnValue, nil, reportError("sshPolicy is required and must be specified")
+		executionError.error = "sshPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -812,18 +841,22 @@ func (a *SshApiService) PatchSshPolicyExecute(r ApiPatchSshPolicyRequest) (SshPo
 	localVarPostBody = r.sshPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -890,7 +923,7 @@ func (a *SshApiService) PatchSshPolicyExecute(r ApiPatchSshPolicyRequest) (SshPo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateSshPolicyRequest struct {
@@ -910,7 +943,7 @@ func (r ApiUpdateSshPolicyRequest) IfMatch(ifMatch string) ApiUpdateSshPolicyReq
 	return r
 }
 
-func (r ApiUpdateSshPolicyRequest) Execute() (SshPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateSshPolicyRequest) Execute() (SshPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateSshPolicyExecute(r)
 }
 
@@ -932,19 +965,21 @@ func (a *SshApiService) UpdateSshPolicy(ctx _context.Context, moid string) ApiUp
  * Execute executes the request
  * @return SshPolicy
  */
-func (a *SshApiService) UpdateSshPolicyExecute(r ApiUpdateSshPolicyRequest) (SshPolicy, *_nethttp.Response, error) {
+func (a *SshApiService) UpdateSshPolicyExecute(r ApiUpdateSshPolicyRequest) (SshPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SshPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SshApiService.UpdateSshPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/ssh/Policies/{Moid}"
@@ -954,7 +989,8 @@ func (a *SshApiService) UpdateSshPolicyExecute(r ApiUpdateSshPolicyRequest) (Ssh
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.sshPolicy == nil {
-		return localVarReturnValue, nil, reportError("sshPolicy is required and must be specified")
+		executionError.error = "sshPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -981,18 +1017,22 @@ func (a *SshApiService) UpdateSshPolicyExecute(r ApiUpdateSshPolicyRequest) (Ssh
 	localVarPostBody = r.sshPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1059,5 +1099,5 @@ func (a *SshApiService) UpdateSshPolicyExecute(r ApiUpdateSshPolicyRequest) (Ssh
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }

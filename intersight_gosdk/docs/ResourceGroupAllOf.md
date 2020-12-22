@@ -7,11 +7,11 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "resource.Group"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "resource.Group"]
 **Name** | Pointer to **string** | The name of this resource group. | [optional] 
-**PerTypeCombinedSelector** | Pointer to [**[]ResourcePerTypeCombinedSelector**](resource.PerTypeCombinedSelector.md) |  | [optional] 
+**PerTypeCombinedSelector** | Pointer to [**[]ResourcePerTypeCombinedSelector**](ResourcePerTypeCombinedSelector.md) |  | [optional] 
 **Qualifier** | Pointer to **string** | Qualifier shall be used to specify if we want to organize resources using multiple resource group or single For an account, resource groups can be of only one of the above types. (Both the types are mutually exclusive for an account.). * &#x60;Allow-Selectors&#x60; - Resources will be added to resource groups based on ODATA filter. Multiple resource group can be created to organize resources. * &#x60;Allow-All&#x60; - All resources will become part of the Resource Group. Only one resource group can be created to organize resources. | [optional] [default to "Allow-Selectors"]
-**Selectors** | Pointer to [**[]ResourceSelector**](resource.Selector.md) |  | [optional] 
+**Selectors** | Pointer to [**[]ResourceSelector**](ResourceSelector.md) |  | [optional] 
 **Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
-**Organizations** | Pointer to [**[]OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) | An array of relationships to organizationOrganization resources. | [optional] 
+**Organizations** | Pointer to [**[]OrganizationOrganizationRelationship**](OrganizationOrganizationRelationship.md) | An array of relationships to organizationOrganization resources. | [optional] 
 
 ## Methods
 

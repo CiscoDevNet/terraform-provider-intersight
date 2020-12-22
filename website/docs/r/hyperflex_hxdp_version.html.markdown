@@ -1,13 +1,12 @@
-
 ---
+subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_hxdp_version"
-sidebar_current: "docs-intersight-resource-hyperflex-hxdp-version"
 description: |-
   A HyperFlex Data Platform version.
 ---
 
-# Resource: intersight_hyperflex._hxdp_version
+# Resource: intersight_hyperflex_hxdp_version
 A HyperFlex Data Platform version.
 ## Argument Reference
 The following arguments are supported:
@@ -30,4 +29,11 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
-* `version`:(string) The HyperFlex Data Platform version. 
+* `nr_version`:(string) The HyperFlex Data Platform version. 
+
+
+## Import
+`intersight_hyperflex_hxdp_version` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_hyperflex_hxdp_version.example 1234567890987654321abcde
+```

@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -12,6 +12,7 @@
 package intersight
 
 import (
+	"bytes"
 	_context "context"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
@@ -48,7 +49,7 @@ func (r ApiCreateLicenseIwoLicenseCountRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateLicenseIwoLicenseCountRequest) Execute() (LicenseIwoLicenseCount, *_nethttp.Response, error) {
+func (r ApiCreateLicenseIwoLicenseCountRequest) Execute() (LicenseIwoLicenseCount, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateLicenseIwoLicenseCountExecute(r)
 }
 
@@ -68,19 +69,21 @@ func (a *LicenseApiService) CreateLicenseIwoLicenseCount(ctx _context.Context) A
  * Execute executes the request
  * @return LicenseIwoLicenseCount
  */
-func (a *LicenseApiService) CreateLicenseIwoLicenseCountExecute(r ApiCreateLicenseIwoLicenseCountRequest) (LicenseIwoLicenseCount, *_nethttp.Response, error) {
+func (a *LicenseApiService) CreateLicenseIwoLicenseCountExecute(r ApiCreateLicenseIwoLicenseCountRequest) (LicenseIwoLicenseCount, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseIwoLicenseCount
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.CreateLicenseIwoLicenseCount")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/IwoLicenseCounts"
@@ -89,7 +92,8 @@ func (a *LicenseApiService) CreateLicenseIwoLicenseCountExecute(r ApiCreateLicen
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.licenseIwoLicenseCount == nil {
-		return localVarReturnValue, nil, reportError("licenseIwoLicenseCount is required and must be specified")
+		executionError.error = "licenseIwoLicenseCount is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -119,18 +123,22 @@ func (a *LicenseApiService) CreateLicenseIwoLicenseCountExecute(r ApiCreateLicen
 	localVarPostBody = r.licenseIwoLicenseCount
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -197,7 +205,7 @@ func (a *LicenseApiService) CreateLicenseIwoLicenseCountExecute(r ApiCreateLicen
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateLicenseLicenseInfoRequest struct {
@@ -221,7 +229,7 @@ func (r ApiCreateLicenseLicenseInfoRequest) IfNoneMatch(ifNoneMatch string) ApiC
 	return r
 }
 
-func (r ApiCreateLicenseLicenseInfoRequest) Execute() (LicenseLicenseInfo, *_nethttp.Response, error) {
+func (r ApiCreateLicenseLicenseInfoRequest) Execute() (LicenseLicenseInfo, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateLicenseLicenseInfoExecute(r)
 }
 
@@ -241,19 +249,21 @@ func (a *LicenseApiService) CreateLicenseLicenseInfo(ctx _context.Context) ApiCr
  * Execute executes the request
  * @return LicenseLicenseInfo
  */
-func (a *LicenseApiService) CreateLicenseLicenseInfoExecute(r ApiCreateLicenseLicenseInfoRequest) (LicenseLicenseInfo, *_nethttp.Response, error) {
+func (a *LicenseApiService) CreateLicenseLicenseInfoExecute(r ApiCreateLicenseLicenseInfoRequest) (LicenseLicenseInfo, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseLicenseInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.CreateLicenseLicenseInfo")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/LicenseInfos"
@@ -262,7 +272,8 @@ func (a *LicenseApiService) CreateLicenseLicenseInfoExecute(r ApiCreateLicenseLi
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.licenseLicenseInfo == nil {
-		return localVarReturnValue, nil, reportError("licenseLicenseInfo is required and must be specified")
+		executionError.error = "licenseLicenseInfo is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -292,18 +303,22 @@ func (a *LicenseApiService) CreateLicenseLicenseInfoExecute(r ApiCreateLicenseLi
 	localVarPostBody = r.licenseLicenseInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -370,7 +385,7 @@ func (a *LicenseApiService) CreateLicenseLicenseInfoExecute(r ApiCreateLicenseLi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateLicenseLicenseReservationOpRequest struct {
@@ -394,7 +409,7 @@ func (r ApiCreateLicenseLicenseReservationOpRequest) IfNoneMatch(ifNoneMatch str
 	return r
 }
 
-func (r ApiCreateLicenseLicenseReservationOpRequest) Execute() (LicenseLicenseReservationOp, *_nethttp.Response, error) {
+func (r ApiCreateLicenseLicenseReservationOpRequest) Execute() (LicenseLicenseReservationOp, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateLicenseLicenseReservationOpExecute(r)
 }
 
@@ -414,19 +429,21 @@ func (a *LicenseApiService) CreateLicenseLicenseReservationOp(ctx _context.Conte
  * Execute executes the request
  * @return LicenseLicenseReservationOp
  */
-func (a *LicenseApiService) CreateLicenseLicenseReservationOpExecute(r ApiCreateLicenseLicenseReservationOpRequest) (LicenseLicenseReservationOp, *_nethttp.Response, error) {
+func (a *LicenseApiService) CreateLicenseLicenseReservationOpExecute(r ApiCreateLicenseLicenseReservationOpRequest) (LicenseLicenseReservationOp, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseLicenseReservationOp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.CreateLicenseLicenseReservationOp")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/LicenseReservationOps"
@@ -435,7 +452,8 @@ func (a *LicenseApiService) CreateLicenseLicenseReservationOpExecute(r ApiCreate
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.licenseLicenseReservationOp == nil {
-		return localVarReturnValue, nil, reportError("licenseLicenseReservationOp is required and must be specified")
+		executionError.error = "licenseLicenseReservationOp is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -465,18 +483,22 @@ func (a *LicenseApiService) CreateLicenseLicenseReservationOpExecute(r ApiCreate
 	localVarPostBody = r.licenseLicenseReservationOp
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -543,7 +565,7 @@ func (a *LicenseApiService) CreateLicenseLicenseReservationOpExecute(r ApiCreate
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetLicenseAccountLicenseDataByMoidRequest struct {
@@ -552,7 +574,7 @@ type ApiGetLicenseAccountLicenseDataByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetLicenseAccountLicenseDataByMoidRequest) Execute() (LicenseAccountLicenseData, *_nethttp.Response, error) {
+func (r ApiGetLicenseAccountLicenseDataByMoidRequest) Execute() (LicenseAccountLicenseData, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetLicenseAccountLicenseDataByMoidExecute(r)
 }
 
@@ -574,19 +596,21 @@ func (a *LicenseApiService) GetLicenseAccountLicenseDataByMoid(ctx _context.Cont
  * Execute executes the request
  * @return LicenseAccountLicenseData
  */
-func (a *LicenseApiService) GetLicenseAccountLicenseDataByMoidExecute(r ApiGetLicenseAccountLicenseDataByMoidRequest) (LicenseAccountLicenseData, *_nethttp.Response, error) {
+func (a *LicenseApiService) GetLicenseAccountLicenseDataByMoidExecute(r ApiGetLicenseAccountLicenseDataByMoidRequest) (LicenseAccountLicenseData, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseAccountLicenseData
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.GetLicenseAccountLicenseDataByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/AccountLicenseData/{Moid}"
@@ -615,18 +639,22 @@ func (a *LicenseApiService) GetLicenseAccountLicenseDataByMoidExecute(r ApiGetLi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -693,7 +721,7 @@ func (a *LicenseApiService) GetLicenseAccountLicenseDataByMoidExecute(r ApiGetLi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetLicenseAccountLicenseDataListRequest struct {
@@ -757,7 +785,7 @@ func (r ApiGetLicenseAccountLicenseDataListRequest) Tags(tags string) ApiGetLice
 	return r
 }
 
-func (r ApiGetLicenseAccountLicenseDataListRequest) Execute() (LicenseAccountLicenseDataResponse, *_nethttp.Response, error) {
+func (r ApiGetLicenseAccountLicenseDataListRequest) Execute() (LicenseAccountLicenseDataResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetLicenseAccountLicenseDataListExecute(r)
 }
 
@@ -777,19 +805,21 @@ func (a *LicenseApiService) GetLicenseAccountLicenseDataList(ctx _context.Contex
  * Execute executes the request
  * @return LicenseAccountLicenseDataResponse
  */
-func (a *LicenseApiService) GetLicenseAccountLicenseDataListExecute(r ApiGetLicenseAccountLicenseDataListRequest) (LicenseAccountLicenseDataResponse, *_nethttp.Response, error) {
+func (a *LicenseApiService) GetLicenseAccountLicenseDataListExecute(r ApiGetLicenseAccountLicenseDataListRequest) (LicenseAccountLicenseDataResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseAccountLicenseDataResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.GetLicenseAccountLicenseDataList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/AccountLicenseData"
@@ -850,18 +880,22 @@ func (a *LicenseApiService) GetLicenseAccountLicenseDataListExecute(r ApiGetLice
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -928,7 +962,7 @@ func (a *LicenseApiService) GetLicenseAccountLicenseDataListExecute(r ApiGetLice
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetLicenseCustomerOpByMoidRequest struct {
@@ -937,7 +971,7 @@ type ApiGetLicenseCustomerOpByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetLicenseCustomerOpByMoidRequest) Execute() (LicenseCustomerOp, *_nethttp.Response, error) {
+func (r ApiGetLicenseCustomerOpByMoidRequest) Execute() (LicenseCustomerOp, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetLicenseCustomerOpByMoidExecute(r)
 }
 
@@ -959,19 +993,21 @@ func (a *LicenseApiService) GetLicenseCustomerOpByMoid(ctx _context.Context, moi
  * Execute executes the request
  * @return LicenseCustomerOp
  */
-func (a *LicenseApiService) GetLicenseCustomerOpByMoidExecute(r ApiGetLicenseCustomerOpByMoidRequest) (LicenseCustomerOp, *_nethttp.Response, error) {
+func (a *LicenseApiService) GetLicenseCustomerOpByMoidExecute(r ApiGetLicenseCustomerOpByMoidRequest) (LicenseCustomerOp, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseCustomerOp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.GetLicenseCustomerOpByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/CustomerOps/{Moid}"
@@ -1000,18 +1036,22 @@ func (a *LicenseApiService) GetLicenseCustomerOpByMoidExecute(r ApiGetLicenseCus
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1078,7 +1118,7 @@ func (a *LicenseApiService) GetLicenseCustomerOpByMoidExecute(r ApiGetLicenseCus
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetLicenseCustomerOpListRequest struct {
@@ -1142,7 +1182,7 @@ func (r ApiGetLicenseCustomerOpListRequest) Tags(tags string) ApiGetLicenseCusto
 	return r
 }
 
-func (r ApiGetLicenseCustomerOpListRequest) Execute() (LicenseCustomerOpResponse, *_nethttp.Response, error) {
+func (r ApiGetLicenseCustomerOpListRequest) Execute() (LicenseCustomerOpResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetLicenseCustomerOpListExecute(r)
 }
 
@@ -1162,19 +1202,21 @@ func (a *LicenseApiService) GetLicenseCustomerOpList(ctx _context.Context) ApiGe
  * Execute executes the request
  * @return LicenseCustomerOpResponse
  */
-func (a *LicenseApiService) GetLicenseCustomerOpListExecute(r ApiGetLicenseCustomerOpListRequest) (LicenseCustomerOpResponse, *_nethttp.Response, error) {
+func (a *LicenseApiService) GetLicenseCustomerOpListExecute(r ApiGetLicenseCustomerOpListRequest) (LicenseCustomerOpResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseCustomerOpResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.GetLicenseCustomerOpList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/CustomerOps"
@@ -1235,18 +1277,22 @@ func (a *LicenseApiService) GetLicenseCustomerOpListExecute(r ApiGetLicenseCusto
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1313,7 +1359,7 @@ func (a *LicenseApiService) GetLicenseCustomerOpListExecute(r ApiGetLicenseCusto
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetLicenseIwoCustomerOpByMoidRequest struct {
@@ -1322,7 +1368,7 @@ type ApiGetLicenseIwoCustomerOpByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetLicenseIwoCustomerOpByMoidRequest) Execute() (LicenseIwoCustomerOp, *_nethttp.Response, error) {
+func (r ApiGetLicenseIwoCustomerOpByMoidRequest) Execute() (LicenseIwoCustomerOp, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetLicenseIwoCustomerOpByMoidExecute(r)
 }
 
@@ -1344,19 +1390,21 @@ func (a *LicenseApiService) GetLicenseIwoCustomerOpByMoid(ctx _context.Context, 
  * Execute executes the request
  * @return LicenseIwoCustomerOp
  */
-func (a *LicenseApiService) GetLicenseIwoCustomerOpByMoidExecute(r ApiGetLicenseIwoCustomerOpByMoidRequest) (LicenseIwoCustomerOp, *_nethttp.Response, error) {
+func (a *LicenseApiService) GetLicenseIwoCustomerOpByMoidExecute(r ApiGetLicenseIwoCustomerOpByMoidRequest) (LicenseIwoCustomerOp, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseIwoCustomerOp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.GetLicenseIwoCustomerOpByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/IwoCustomerOps/{Moid}"
@@ -1385,18 +1433,22 @@ func (a *LicenseApiService) GetLicenseIwoCustomerOpByMoidExecute(r ApiGetLicense
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1463,7 +1515,7 @@ func (a *LicenseApiService) GetLicenseIwoCustomerOpByMoidExecute(r ApiGetLicense
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetLicenseIwoCustomerOpListRequest struct {
@@ -1527,7 +1579,7 @@ func (r ApiGetLicenseIwoCustomerOpListRequest) Tags(tags string) ApiGetLicenseIw
 	return r
 }
 
-func (r ApiGetLicenseIwoCustomerOpListRequest) Execute() (LicenseIwoCustomerOpResponse, *_nethttp.Response, error) {
+func (r ApiGetLicenseIwoCustomerOpListRequest) Execute() (LicenseIwoCustomerOpResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetLicenseIwoCustomerOpListExecute(r)
 }
 
@@ -1547,19 +1599,21 @@ func (a *LicenseApiService) GetLicenseIwoCustomerOpList(ctx _context.Context) Ap
  * Execute executes the request
  * @return LicenseIwoCustomerOpResponse
  */
-func (a *LicenseApiService) GetLicenseIwoCustomerOpListExecute(r ApiGetLicenseIwoCustomerOpListRequest) (LicenseIwoCustomerOpResponse, *_nethttp.Response, error) {
+func (a *LicenseApiService) GetLicenseIwoCustomerOpListExecute(r ApiGetLicenseIwoCustomerOpListRequest) (LicenseIwoCustomerOpResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseIwoCustomerOpResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.GetLicenseIwoCustomerOpList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/IwoCustomerOps"
@@ -1620,18 +1674,22 @@ func (a *LicenseApiService) GetLicenseIwoCustomerOpListExecute(r ApiGetLicenseIw
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1698,7 +1756,7 @@ func (a *LicenseApiService) GetLicenseIwoCustomerOpListExecute(r ApiGetLicenseIw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetLicenseIwoLicenseCountByMoidRequest struct {
@@ -1707,7 +1765,7 @@ type ApiGetLicenseIwoLicenseCountByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetLicenseIwoLicenseCountByMoidRequest) Execute() (LicenseIwoLicenseCount, *_nethttp.Response, error) {
+func (r ApiGetLicenseIwoLicenseCountByMoidRequest) Execute() (LicenseIwoLicenseCount, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetLicenseIwoLicenseCountByMoidExecute(r)
 }
 
@@ -1729,19 +1787,21 @@ func (a *LicenseApiService) GetLicenseIwoLicenseCountByMoid(ctx _context.Context
  * Execute executes the request
  * @return LicenseIwoLicenseCount
  */
-func (a *LicenseApiService) GetLicenseIwoLicenseCountByMoidExecute(r ApiGetLicenseIwoLicenseCountByMoidRequest) (LicenseIwoLicenseCount, *_nethttp.Response, error) {
+func (a *LicenseApiService) GetLicenseIwoLicenseCountByMoidExecute(r ApiGetLicenseIwoLicenseCountByMoidRequest) (LicenseIwoLicenseCount, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseIwoLicenseCount
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.GetLicenseIwoLicenseCountByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/IwoLicenseCounts/{Moid}"
@@ -1770,18 +1830,22 @@ func (a *LicenseApiService) GetLicenseIwoLicenseCountByMoidExecute(r ApiGetLicen
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1848,7 +1912,7 @@ func (a *LicenseApiService) GetLicenseIwoLicenseCountByMoidExecute(r ApiGetLicen
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetLicenseIwoLicenseCountListRequest struct {
@@ -1912,7 +1976,7 @@ func (r ApiGetLicenseIwoLicenseCountListRequest) Tags(tags string) ApiGetLicense
 	return r
 }
 
-func (r ApiGetLicenseIwoLicenseCountListRequest) Execute() (LicenseIwoLicenseCountResponse, *_nethttp.Response, error) {
+func (r ApiGetLicenseIwoLicenseCountListRequest) Execute() (LicenseIwoLicenseCountResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetLicenseIwoLicenseCountListExecute(r)
 }
 
@@ -1932,19 +1996,21 @@ func (a *LicenseApiService) GetLicenseIwoLicenseCountList(ctx _context.Context) 
  * Execute executes the request
  * @return LicenseIwoLicenseCountResponse
  */
-func (a *LicenseApiService) GetLicenseIwoLicenseCountListExecute(r ApiGetLicenseIwoLicenseCountListRequest) (LicenseIwoLicenseCountResponse, *_nethttp.Response, error) {
+func (a *LicenseApiService) GetLicenseIwoLicenseCountListExecute(r ApiGetLicenseIwoLicenseCountListRequest) (LicenseIwoLicenseCountResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseIwoLicenseCountResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.GetLicenseIwoLicenseCountList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/IwoLicenseCounts"
@@ -2005,18 +2071,22 @@ func (a *LicenseApiService) GetLicenseIwoLicenseCountListExecute(r ApiGetLicense
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2083,7 +2153,7 @@ func (a *LicenseApiService) GetLicenseIwoLicenseCountListExecute(r ApiGetLicense
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetLicenseLicenseInfoByMoidRequest struct {
@@ -2092,7 +2162,7 @@ type ApiGetLicenseLicenseInfoByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetLicenseLicenseInfoByMoidRequest) Execute() (LicenseLicenseInfo, *_nethttp.Response, error) {
+func (r ApiGetLicenseLicenseInfoByMoidRequest) Execute() (LicenseLicenseInfo, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetLicenseLicenseInfoByMoidExecute(r)
 }
 
@@ -2114,19 +2184,21 @@ func (a *LicenseApiService) GetLicenseLicenseInfoByMoid(ctx _context.Context, mo
  * Execute executes the request
  * @return LicenseLicenseInfo
  */
-func (a *LicenseApiService) GetLicenseLicenseInfoByMoidExecute(r ApiGetLicenseLicenseInfoByMoidRequest) (LicenseLicenseInfo, *_nethttp.Response, error) {
+func (a *LicenseApiService) GetLicenseLicenseInfoByMoidExecute(r ApiGetLicenseLicenseInfoByMoidRequest) (LicenseLicenseInfo, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseLicenseInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.GetLicenseLicenseInfoByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/LicenseInfos/{Moid}"
@@ -2155,18 +2227,22 @@ func (a *LicenseApiService) GetLicenseLicenseInfoByMoidExecute(r ApiGetLicenseLi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2233,7 +2309,7 @@ func (a *LicenseApiService) GetLicenseLicenseInfoByMoidExecute(r ApiGetLicenseLi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetLicenseLicenseInfoListRequest struct {
@@ -2297,7 +2373,7 @@ func (r ApiGetLicenseLicenseInfoListRequest) Tags(tags string) ApiGetLicenseLice
 	return r
 }
 
-func (r ApiGetLicenseLicenseInfoListRequest) Execute() (LicenseLicenseInfoResponse, *_nethttp.Response, error) {
+func (r ApiGetLicenseLicenseInfoListRequest) Execute() (LicenseLicenseInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetLicenseLicenseInfoListExecute(r)
 }
 
@@ -2317,19 +2393,21 @@ func (a *LicenseApiService) GetLicenseLicenseInfoList(ctx _context.Context) ApiG
  * Execute executes the request
  * @return LicenseLicenseInfoResponse
  */
-func (a *LicenseApiService) GetLicenseLicenseInfoListExecute(r ApiGetLicenseLicenseInfoListRequest) (LicenseLicenseInfoResponse, *_nethttp.Response, error) {
+func (a *LicenseApiService) GetLicenseLicenseInfoListExecute(r ApiGetLicenseLicenseInfoListRequest) (LicenseLicenseInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseLicenseInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.GetLicenseLicenseInfoList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/LicenseInfos"
@@ -2390,18 +2468,22 @@ func (a *LicenseApiService) GetLicenseLicenseInfoListExecute(r ApiGetLicenseLice
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2468,7 +2550,7 @@ func (a *LicenseApiService) GetLicenseLicenseInfoListExecute(r ApiGetLicenseLice
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetLicenseLicenseReservationOpByMoidRequest struct {
@@ -2477,7 +2559,7 @@ type ApiGetLicenseLicenseReservationOpByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetLicenseLicenseReservationOpByMoidRequest) Execute() (LicenseLicenseReservationOp, *_nethttp.Response, error) {
+func (r ApiGetLicenseLicenseReservationOpByMoidRequest) Execute() (LicenseLicenseReservationOp, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetLicenseLicenseReservationOpByMoidExecute(r)
 }
 
@@ -2499,19 +2581,21 @@ func (a *LicenseApiService) GetLicenseLicenseReservationOpByMoid(ctx _context.Co
  * Execute executes the request
  * @return LicenseLicenseReservationOp
  */
-func (a *LicenseApiService) GetLicenseLicenseReservationOpByMoidExecute(r ApiGetLicenseLicenseReservationOpByMoidRequest) (LicenseLicenseReservationOp, *_nethttp.Response, error) {
+func (a *LicenseApiService) GetLicenseLicenseReservationOpByMoidExecute(r ApiGetLicenseLicenseReservationOpByMoidRequest) (LicenseLicenseReservationOp, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseLicenseReservationOp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.GetLicenseLicenseReservationOpByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/LicenseReservationOps/{Moid}"
@@ -2540,18 +2624,22 @@ func (a *LicenseApiService) GetLicenseLicenseReservationOpByMoidExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2618,7 +2706,7 @@ func (a *LicenseApiService) GetLicenseLicenseReservationOpByMoidExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetLicenseLicenseReservationOpListRequest struct {
@@ -2682,7 +2770,7 @@ func (r ApiGetLicenseLicenseReservationOpListRequest) Tags(tags string) ApiGetLi
 	return r
 }
 
-func (r ApiGetLicenseLicenseReservationOpListRequest) Execute() (LicenseLicenseReservationOpResponse, *_nethttp.Response, error) {
+func (r ApiGetLicenseLicenseReservationOpListRequest) Execute() (LicenseLicenseReservationOpResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetLicenseLicenseReservationOpListExecute(r)
 }
 
@@ -2702,19 +2790,21 @@ func (a *LicenseApiService) GetLicenseLicenseReservationOpList(ctx _context.Cont
  * Execute executes the request
  * @return LicenseLicenseReservationOpResponse
  */
-func (a *LicenseApiService) GetLicenseLicenseReservationOpListExecute(r ApiGetLicenseLicenseReservationOpListRequest) (LicenseLicenseReservationOpResponse, *_nethttp.Response, error) {
+func (a *LicenseApiService) GetLicenseLicenseReservationOpListExecute(r ApiGetLicenseLicenseReservationOpListRequest) (LicenseLicenseReservationOpResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseLicenseReservationOpResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.GetLicenseLicenseReservationOpList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/LicenseReservationOps"
@@ -2775,18 +2865,22 @@ func (a *LicenseApiService) GetLicenseLicenseReservationOpListExecute(r ApiGetLi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2853,7 +2947,7 @@ func (a *LicenseApiService) GetLicenseLicenseReservationOpListExecute(r ApiGetLi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetLicenseSmartlicenseTokenByMoidRequest struct {
@@ -2862,7 +2956,7 @@ type ApiGetLicenseSmartlicenseTokenByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetLicenseSmartlicenseTokenByMoidRequest) Execute() (LicenseSmartlicenseToken, *_nethttp.Response, error) {
+func (r ApiGetLicenseSmartlicenseTokenByMoidRequest) Execute() (LicenseSmartlicenseToken, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetLicenseSmartlicenseTokenByMoidExecute(r)
 }
 
@@ -2884,19 +2978,21 @@ func (a *LicenseApiService) GetLicenseSmartlicenseTokenByMoid(ctx _context.Conte
  * Execute executes the request
  * @return LicenseSmartlicenseToken
  */
-func (a *LicenseApiService) GetLicenseSmartlicenseTokenByMoidExecute(r ApiGetLicenseSmartlicenseTokenByMoidRequest) (LicenseSmartlicenseToken, *_nethttp.Response, error) {
+func (a *LicenseApiService) GetLicenseSmartlicenseTokenByMoidExecute(r ApiGetLicenseSmartlicenseTokenByMoidRequest) (LicenseSmartlicenseToken, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseSmartlicenseToken
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.GetLicenseSmartlicenseTokenByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/SmartlicenseTokens/{Moid}"
@@ -2925,18 +3021,22 @@ func (a *LicenseApiService) GetLicenseSmartlicenseTokenByMoidExecute(r ApiGetLic
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3003,7 +3103,7 @@ func (a *LicenseApiService) GetLicenseSmartlicenseTokenByMoidExecute(r ApiGetLic
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetLicenseSmartlicenseTokenListRequest struct {
@@ -3067,7 +3167,7 @@ func (r ApiGetLicenseSmartlicenseTokenListRequest) Tags(tags string) ApiGetLicen
 	return r
 }
 
-func (r ApiGetLicenseSmartlicenseTokenListRequest) Execute() (LicenseSmartlicenseTokenResponse, *_nethttp.Response, error) {
+func (r ApiGetLicenseSmartlicenseTokenListRequest) Execute() (LicenseSmartlicenseTokenResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetLicenseSmartlicenseTokenListExecute(r)
 }
 
@@ -3087,19 +3187,21 @@ func (a *LicenseApiService) GetLicenseSmartlicenseTokenList(ctx _context.Context
  * Execute executes the request
  * @return LicenseSmartlicenseTokenResponse
  */
-func (a *LicenseApiService) GetLicenseSmartlicenseTokenListExecute(r ApiGetLicenseSmartlicenseTokenListRequest) (LicenseSmartlicenseTokenResponse, *_nethttp.Response, error) {
+func (a *LicenseApiService) GetLicenseSmartlicenseTokenListExecute(r ApiGetLicenseSmartlicenseTokenListRequest) (LicenseSmartlicenseTokenResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseSmartlicenseTokenResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.GetLicenseSmartlicenseTokenList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/SmartlicenseTokens"
@@ -3160,18 +3262,22 @@ func (a *LicenseApiService) GetLicenseSmartlicenseTokenListExecute(r ApiGetLicen
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3238,7 +3344,7 @@ func (a *LicenseApiService) GetLicenseSmartlicenseTokenListExecute(r ApiGetLicen
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchLicenseAccountLicenseDataRequest struct {
@@ -3258,7 +3364,7 @@ func (r ApiPatchLicenseAccountLicenseDataRequest) IfMatch(ifMatch string) ApiPat
 	return r
 }
 
-func (r ApiPatchLicenseAccountLicenseDataRequest) Execute() (LicenseAccountLicenseData, *_nethttp.Response, error) {
+func (r ApiPatchLicenseAccountLicenseDataRequest) Execute() (LicenseAccountLicenseData, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchLicenseAccountLicenseDataExecute(r)
 }
 
@@ -3280,19 +3386,21 @@ func (a *LicenseApiService) PatchLicenseAccountLicenseData(ctx _context.Context,
  * Execute executes the request
  * @return LicenseAccountLicenseData
  */
-func (a *LicenseApiService) PatchLicenseAccountLicenseDataExecute(r ApiPatchLicenseAccountLicenseDataRequest) (LicenseAccountLicenseData, *_nethttp.Response, error) {
+func (a *LicenseApiService) PatchLicenseAccountLicenseDataExecute(r ApiPatchLicenseAccountLicenseDataRequest) (LicenseAccountLicenseData, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseAccountLicenseData
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.PatchLicenseAccountLicenseData")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/AccountLicenseData/{Moid}"
@@ -3302,7 +3410,8 @@ func (a *LicenseApiService) PatchLicenseAccountLicenseDataExecute(r ApiPatchLice
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.licenseAccountLicenseData == nil {
-		return localVarReturnValue, nil, reportError("licenseAccountLicenseData is required and must be specified")
+		executionError.error = "licenseAccountLicenseData is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3329,18 +3438,22 @@ func (a *LicenseApiService) PatchLicenseAccountLicenseDataExecute(r ApiPatchLice
 	localVarPostBody = r.licenseAccountLicenseData
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3407,7 +3520,7 @@ func (a *LicenseApiService) PatchLicenseAccountLicenseDataExecute(r ApiPatchLice
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchLicenseCustomerOpRequest struct {
@@ -3427,7 +3540,7 @@ func (r ApiPatchLicenseCustomerOpRequest) IfMatch(ifMatch string) ApiPatchLicens
 	return r
 }
 
-func (r ApiPatchLicenseCustomerOpRequest) Execute() (LicenseCustomerOp, *_nethttp.Response, error) {
+func (r ApiPatchLicenseCustomerOpRequest) Execute() (LicenseCustomerOp, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchLicenseCustomerOpExecute(r)
 }
 
@@ -3449,19 +3562,21 @@ func (a *LicenseApiService) PatchLicenseCustomerOp(ctx _context.Context, moid st
  * Execute executes the request
  * @return LicenseCustomerOp
  */
-func (a *LicenseApiService) PatchLicenseCustomerOpExecute(r ApiPatchLicenseCustomerOpRequest) (LicenseCustomerOp, *_nethttp.Response, error) {
+func (a *LicenseApiService) PatchLicenseCustomerOpExecute(r ApiPatchLicenseCustomerOpRequest) (LicenseCustomerOp, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseCustomerOp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.PatchLicenseCustomerOp")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/CustomerOps/{Moid}"
@@ -3471,7 +3586,8 @@ func (a *LicenseApiService) PatchLicenseCustomerOpExecute(r ApiPatchLicenseCusto
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.licenseCustomerOp == nil {
-		return localVarReturnValue, nil, reportError("licenseCustomerOp is required and must be specified")
+		executionError.error = "licenseCustomerOp is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3498,18 +3614,22 @@ func (a *LicenseApiService) PatchLicenseCustomerOpExecute(r ApiPatchLicenseCusto
 	localVarPostBody = r.licenseCustomerOp
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3576,7 +3696,7 @@ func (a *LicenseApiService) PatchLicenseCustomerOpExecute(r ApiPatchLicenseCusto
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchLicenseIwoCustomerOpRequest struct {
@@ -3596,7 +3716,7 @@ func (r ApiPatchLicenseIwoCustomerOpRequest) IfMatch(ifMatch string) ApiPatchLic
 	return r
 }
 
-func (r ApiPatchLicenseIwoCustomerOpRequest) Execute() (LicenseIwoCustomerOp, *_nethttp.Response, error) {
+func (r ApiPatchLicenseIwoCustomerOpRequest) Execute() (LicenseIwoCustomerOp, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchLicenseIwoCustomerOpExecute(r)
 }
 
@@ -3618,19 +3738,21 @@ func (a *LicenseApiService) PatchLicenseIwoCustomerOp(ctx _context.Context, moid
  * Execute executes the request
  * @return LicenseIwoCustomerOp
  */
-func (a *LicenseApiService) PatchLicenseIwoCustomerOpExecute(r ApiPatchLicenseIwoCustomerOpRequest) (LicenseIwoCustomerOp, *_nethttp.Response, error) {
+func (a *LicenseApiService) PatchLicenseIwoCustomerOpExecute(r ApiPatchLicenseIwoCustomerOpRequest) (LicenseIwoCustomerOp, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseIwoCustomerOp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.PatchLicenseIwoCustomerOp")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/IwoCustomerOps/{Moid}"
@@ -3640,7 +3762,8 @@ func (a *LicenseApiService) PatchLicenseIwoCustomerOpExecute(r ApiPatchLicenseIw
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.licenseIwoCustomerOp == nil {
-		return localVarReturnValue, nil, reportError("licenseIwoCustomerOp is required and must be specified")
+		executionError.error = "licenseIwoCustomerOp is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3667,18 +3790,22 @@ func (a *LicenseApiService) PatchLicenseIwoCustomerOpExecute(r ApiPatchLicenseIw
 	localVarPostBody = r.licenseIwoCustomerOp
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3745,7 +3872,7 @@ func (a *LicenseApiService) PatchLicenseIwoCustomerOpExecute(r ApiPatchLicenseIw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchLicenseIwoLicenseCountRequest struct {
@@ -3765,7 +3892,7 @@ func (r ApiPatchLicenseIwoLicenseCountRequest) IfMatch(ifMatch string) ApiPatchL
 	return r
 }
 
-func (r ApiPatchLicenseIwoLicenseCountRequest) Execute() (LicenseIwoLicenseCount, *_nethttp.Response, error) {
+func (r ApiPatchLicenseIwoLicenseCountRequest) Execute() (LicenseIwoLicenseCount, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchLicenseIwoLicenseCountExecute(r)
 }
 
@@ -3787,19 +3914,21 @@ func (a *LicenseApiService) PatchLicenseIwoLicenseCount(ctx _context.Context, mo
  * Execute executes the request
  * @return LicenseIwoLicenseCount
  */
-func (a *LicenseApiService) PatchLicenseIwoLicenseCountExecute(r ApiPatchLicenseIwoLicenseCountRequest) (LicenseIwoLicenseCount, *_nethttp.Response, error) {
+func (a *LicenseApiService) PatchLicenseIwoLicenseCountExecute(r ApiPatchLicenseIwoLicenseCountRequest) (LicenseIwoLicenseCount, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseIwoLicenseCount
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.PatchLicenseIwoLicenseCount")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/IwoLicenseCounts/{Moid}"
@@ -3809,7 +3938,8 @@ func (a *LicenseApiService) PatchLicenseIwoLicenseCountExecute(r ApiPatchLicense
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.licenseIwoLicenseCount == nil {
-		return localVarReturnValue, nil, reportError("licenseIwoLicenseCount is required and must be specified")
+		executionError.error = "licenseIwoLicenseCount is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3836,18 +3966,22 @@ func (a *LicenseApiService) PatchLicenseIwoLicenseCountExecute(r ApiPatchLicense
 	localVarPostBody = r.licenseIwoLicenseCount
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3914,7 +4048,7 @@ func (a *LicenseApiService) PatchLicenseIwoLicenseCountExecute(r ApiPatchLicense
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchLicenseLicenseInfoRequest struct {
@@ -3934,7 +4068,7 @@ func (r ApiPatchLicenseLicenseInfoRequest) IfMatch(ifMatch string) ApiPatchLicen
 	return r
 }
 
-func (r ApiPatchLicenseLicenseInfoRequest) Execute() (LicenseLicenseInfo, *_nethttp.Response, error) {
+func (r ApiPatchLicenseLicenseInfoRequest) Execute() (LicenseLicenseInfo, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchLicenseLicenseInfoExecute(r)
 }
 
@@ -3956,19 +4090,21 @@ func (a *LicenseApiService) PatchLicenseLicenseInfo(ctx _context.Context, moid s
  * Execute executes the request
  * @return LicenseLicenseInfo
  */
-func (a *LicenseApiService) PatchLicenseLicenseInfoExecute(r ApiPatchLicenseLicenseInfoRequest) (LicenseLicenseInfo, *_nethttp.Response, error) {
+func (a *LicenseApiService) PatchLicenseLicenseInfoExecute(r ApiPatchLicenseLicenseInfoRequest) (LicenseLicenseInfo, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseLicenseInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.PatchLicenseLicenseInfo")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/LicenseInfos/{Moid}"
@@ -3978,7 +4114,8 @@ func (a *LicenseApiService) PatchLicenseLicenseInfoExecute(r ApiPatchLicenseLice
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.licenseLicenseInfo == nil {
-		return localVarReturnValue, nil, reportError("licenseLicenseInfo is required and must be specified")
+		executionError.error = "licenseLicenseInfo is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -4005,18 +4142,22 @@ func (a *LicenseApiService) PatchLicenseLicenseInfoExecute(r ApiPatchLicenseLice
 	localVarPostBody = r.licenseLicenseInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4083,7 +4224,7 @@ func (a *LicenseApiService) PatchLicenseLicenseInfoExecute(r ApiPatchLicenseLice
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchLicenseLicenseReservationOpRequest struct {
@@ -4103,7 +4244,7 @@ func (r ApiPatchLicenseLicenseReservationOpRequest) IfMatch(ifMatch string) ApiP
 	return r
 }
 
-func (r ApiPatchLicenseLicenseReservationOpRequest) Execute() (LicenseLicenseReservationOp, *_nethttp.Response, error) {
+func (r ApiPatchLicenseLicenseReservationOpRequest) Execute() (LicenseLicenseReservationOp, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchLicenseLicenseReservationOpExecute(r)
 }
 
@@ -4125,19 +4266,21 @@ func (a *LicenseApiService) PatchLicenseLicenseReservationOp(ctx _context.Contex
  * Execute executes the request
  * @return LicenseLicenseReservationOp
  */
-func (a *LicenseApiService) PatchLicenseLicenseReservationOpExecute(r ApiPatchLicenseLicenseReservationOpRequest) (LicenseLicenseReservationOp, *_nethttp.Response, error) {
+func (a *LicenseApiService) PatchLicenseLicenseReservationOpExecute(r ApiPatchLicenseLicenseReservationOpRequest) (LicenseLicenseReservationOp, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseLicenseReservationOp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.PatchLicenseLicenseReservationOp")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/LicenseReservationOps/{Moid}"
@@ -4147,7 +4290,8 @@ func (a *LicenseApiService) PatchLicenseLicenseReservationOpExecute(r ApiPatchLi
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.licenseLicenseReservationOp == nil {
-		return localVarReturnValue, nil, reportError("licenseLicenseReservationOp is required and must be specified")
+		executionError.error = "licenseLicenseReservationOp is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -4174,18 +4318,22 @@ func (a *LicenseApiService) PatchLicenseLicenseReservationOpExecute(r ApiPatchLi
 	localVarPostBody = r.licenseLicenseReservationOp
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4252,7 +4400,7 @@ func (a *LicenseApiService) PatchLicenseLicenseReservationOpExecute(r ApiPatchLi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchLicenseSmartlicenseTokenRequest struct {
@@ -4272,7 +4420,7 @@ func (r ApiPatchLicenseSmartlicenseTokenRequest) IfMatch(ifMatch string) ApiPatc
 	return r
 }
 
-func (r ApiPatchLicenseSmartlicenseTokenRequest) Execute() (LicenseSmartlicenseToken, *_nethttp.Response, error) {
+func (r ApiPatchLicenseSmartlicenseTokenRequest) Execute() (LicenseSmartlicenseToken, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchLicenseSmartlicenseTokenExecute(r)
 }
 
@@ -4294,19 +4442,21 @@ func (a *LicenseApiService) PatchLicenseSmartlicenseToken(ctx _context.Context, 
  * Execute executes the request
  * @return LicenseSmartlicenseToken
  */
-func (a *LicenseApiService) PatchLicenseSmartlicenseTokenExecute(r ApiPatchLicenseSmartlicenseTokenRequest) (LicenseSmartlicenseToken, *_nethttp.Response, error) {
+func (a *LicenseApiService) PatchLicenseSmartlicenseTokenExecute(r ApiPatchLicenseSmartlicenseTokenRequest) (LicenseSmartlicenseToken, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseSmartlicenseToken
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.PatchLicenseSmartlicenseToken")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/SmartlicenseTokens/{Moid}"
@@ -4316,7 +4466,8 @@ func (a *LicenseApiService) PatchLicenseSmartlicenseTokenExecute(r ApiPatchLicen
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.licenseSmartlicenseToken == nil {
-		return localVarReturnValue, nil, reportError("licenseSmartlicenseToken is required and must be specified")
+		executionError.error = "licenseSmartlicenseToken is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -4343,18 +4494,22 @@ func (a *LicenseApiService) PatchLicenseSmartlicenseTokenExecute(r ApiPatchLicen
 	localVarPostBody = r.licenseSmartlicenseToken
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4421,7 +4576,7 @@ func (a *LicenseApiService) PatchLicenseSmartlicenseTokenExecute(r ApiPatchLicen
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateLicenseAccountLicenseDataRequest struct {
@@ -4441,7 +4596,7 @@ func (r ApiUpdateLicenseAccountLicenseDataRequest) IfMatch(ifMatch string) ApiUp
 	return r
 }
 
-func (r ApiUpdateLicenseAccountLicenseDataRequest) Execute() (LicenseAccountLicenseData, *_nethttp.Response, error) {
+func (r ApiUpdateLicenseAccountLicenseDataRequest) Execute() (LicenseAccountLicenseData, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateLicenseAccountLicenseDataExecute(r)
 }
 
@@ -4463,19 +4618,21 @@ func (a *LicenseApiService) UpdateLicenseAccountLicenseData(ctx _context.Context
  * Execute executes the request
  * @return LicenseAccountLicenseData
  */
-func (a *LicenseApiService) UpdateLicenseAccountLicenseDataExecute(r ApiUpdateLicenseAccountLicenseDataRequest) (LicenseAccountLicenseData, *_nethttp.Response, error) {
+func (a *LicenseApiService) UpdateLicenseAccountLicenseDataExecute(r ApiUpdateLicenseAccountLicenseDataRequest) (LicenseAccountLicenseData, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseAccountLicenseData
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.UpdateLicenseAccountLicenseData")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/AccountLicenseData/{Moid}"
@@ -4485,7 +4642,8 @@ func (a *LicenseApiService) UpdateLicenseAccountLicenseDataExecute(r ApiUpdateLi
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.licenseAccountLicenseData == nil {
-		return localVarReturnValue, nil, reportError("licenseAccountLicenseData is required and must be specified")
+		executionError.error = "licenseAccountLicenseData is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -4512,18 +4670,22 @@ func (a *LicenseApiService) UpdateLicenseAccountLicenseDataExecute(r ApiUpdateLi
 	localVarPostBody = r.licenseAccountLicenseData
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4590,7 +4752,7 @@ func (a *LicenseApiService) UpdateLicenseAccountLicenseDataExecute(r ApiUpdateLi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateLicenseCustomerOpRequest struct {
@@ -4610,7 +4772,7 @@ func (r ApiUpdateLicenseCustomerOpRequest) IfMatch(ifMatch string) ApiUpdateLice
 	return r
 }
 
-func (r ApiUpdateLicenseCustomerOpRequest) Execute() (LicenseCustomerOp, *_nethttp.Response, error) {
+func (r ApiUpdateLicenseCustomerOpRequest) Execute() (LicenseCustomerOp, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateLicenseCustomerOpExecute(r)
 }
 
@@ -4632,19 +4794,21 @@ func (a *LicenseApiService) UpdateLicenseCustomerOp(ctx _context.Context, moid s
  * Execute executes the request
  * @return LicenseCustomerOp
  */
-func (a *LicenseApiService) UpdateLicenseCustomerOpExecute(r ApiUpdateLicenseCustomerOpRequest) (LicenseCustomerOp, *_nethttp.Response, error) {
+func (a *LicenseApiService) UpdateLicenseCustomerOpExecute(r ApiUpdateLicenseCustomerOpRequest) (LicenseCustomerOp, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseCustomerOp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.UpdateLicenseCustomerOp")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/CustomerOps/{Moid}"
@@ -4654,7 +4818,8 @@ func (a *LicenseApiService) UpdateLicenseCustomerOpExecute(r ApiUpdateLicenseCus
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.licenseCustomerOp == nil {
-		return localVarReturnValue, nil, reportError("licenseCustomerOp is required and must be specified")
+		executionError.error = "licenseCustomerOp is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -4681,18 +4846,22 @@ func (a *LicenseApiService) UpdateLicenseCustomerOpExecute(r ApiUpdateLicenseCus
 	localVarPostBody = r.licenseCustomerOp
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4759,7 +4928,7 @@ func (a *LicenseApiService) UpdateLicenseCustomerOpExecute(r ApiUpdateLicenseCus
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateLicenseIwoCustomerOpRequest struct {
@@ -4779,7 +4948,7 @@ func (r ApiUpdateLicenseIwoCustomerOpRequest) IfMatch(ifMatch string) ApiUpdateL
 	return r
 }
 
-func (r ApiUpdateLicenseIwoCustomerOpRequest) Execute() (LicenseIwoCustomerOp, *_nethttp.Response, error) {
+func (r ApiUpdateLicenseIwoCustomerOpRequest) Execute() (LicenseIwoCustomerOp, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateLicenseIwoCustomerOpExecute(r)
 }
 
@@ -4801,19 +4970,21 @@ func (a *LicenseApiService) UpdateLicenseIwoCustomerOp(ctx _context.Context, moi
  * Execute executes the request
  * @return LicenseIwoCustomerOp
  */
-func (a *LicenseApiService) UpdateLicenseIwoCustomerOpExecute(r ApiUpdateLicenseIwoCustomerOpRequest) (LicenseIwoCustomerOp, *_nethttp.Response, error) {
+func (a *LicenseApiService) UpdateLicenseIwoCustomerOpExecute(r ApiUpdateLicenseIwoCustomerOpRequest) (LicenseIwoCustomerOp, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseIwoCustomerOp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.UpdateLicenseIwoCustomerOp")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/IwoCustomerOps/{Moid}"
@@ -4823,7 +4994,8 @@ func (a *LicenseApiService) UpdateLicenseIwoCustomerOpExecute(r ApiUpdateLicense
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.licenseIwoCustomerOp == nil {
-		return localVarReturnValue, nil, reportError("licenseIwoCustomerOp is required and must be specified")
+		executionError.error = "licenseIwoCustomerOp is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -4850,18 +5022,22 @@ func (a *LicenseApiService) UpdateLicenseIwoCustomerOpExecute(r ApiUpdateLicense
 	localVarPostBody = r.licenseIwoCustomerOp
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4928,7 +5104,7 @@ func (a *LicenseApiService) UpdateLicenseIwoCustomerOpExecute(r ApiUpdateLicense
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateLicenseIwoLicenseCountRequest struct {
@@ -4948,7 +5124,7 @@ func (r ApiUpdateLicenseIwoLicenseCountRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateLicenseIwoLicenseCountRequest) Execute() (LicenseIwoLicenseCount, *_nethttp.Response, error) {
+func (r ApiUpdateLicenseIwoLicenseCountRequest) Execute() (LicenseIwoLicenseCount, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateLicenseIwoLicenseCountExecute(r)
 }
 
@@ -4970,19 +5146,21 @@ func (a *LicenseApiService) UpdateLicenseIwoLicenseCount(ctx _context.Context, m
  * Execute executes the request
  * @return LicenseIwoLicenseCount
  */
-func (a *LicenseApiService) UpdateLicenseIwoLicenseCountExecute(r ApiUpdateLicenseIwoLicenseCountRequest) (LicenseIwoLicenseCount, *_nethttp.Response, error) {
+func (a *LicenseApiService) UpdateLicenseIwoLicenseCountExecute(r ApiUpdateLicenseIwoLicenseCountRequest) (LicenseIwoLicenseCount, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseIwoLicenseCount
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.UpdateLicenseIwoLicenseCount")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/IwoLicenseCounts/{Moid}"
@@ -4992,7 +5170,8 @@ func (a *LicenseApiService) UpdateLicenseIwoLicenseCountExecute(r ApiUpdateLicen
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.licenseIwoLicenseCount == nil {
-		return localVarReturnValue, nil, reportError("licenseIwoLicenseCount is required and must be specified")
+		executionError.error = "licenseIwoLicenseCount is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -5019,18 +5198,22 @@ func (a *LicenseApiService) UpdateLicenseIwoLicenseCountExecute(r ApiUpdateLicen
 	localVarPostBody = r.licenseIwoLicenseCount
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5097,7 +5280,7 @@ func (a *LicenseApiService) UpdateLicenseIwoLicenseCountExecute(r ApiUpdateLicen
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateLicenseLicenseInfoRequest struct {
@@ -5117,7 +5300,7 @@ func (r ApiUpdateLicenseLicenseInfoRequest) IfMatch(ifMatch string) ApiUpdateLic
 	return r
 }
 
-func (r ApiUpdateLicenseLicenseInfoRequest) Execute() (LicenseLicenseInfo, *_nethttp.Response, error) {
+func (r ApiUpdateLicenseLicenseInfoRequest) Execute() (LicenseLicenseInfo, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateLicenseLicenseInfoExecute(r)
 }
 
@@ -5139,19 +5322,21 @@ func (a *LicenseApiService) UpdateLicenseLicenseInfo(ctx _context.Context, moid 
  * Execute executes the request
  * @return LicenseLicenseInfo
  */
-func (a *LicenseApiService) UpdateLicenseLicenseInfoExecute(r ApiUpdateLicenseLicenseInfoRequest) (LicenseLicenseInfo, *_nethttp.Response, error) {
+func (a *LicenseApiService) UpdateLicenseLicenseInfoExecute(r ApiUpdateLicenseLicenseInfoRequest) (LicenseLicenseInfo, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseLicenseInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.UpdateLicenseLicenseInfo")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/LicenseInfos/{Moid}"
@@ -5161,7 +5346,8 @@ func (a *LicenseApiService) UpdateLicenseLicenseInfoExecute(r ApiUpdateLicenseLi
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.licenseLicenseInfo == nil {
-		return localVarReturnValue, nil, reportError("licenseLicenseInfo is required and must be specified")
+		executionError.error = "licenseLicenseInfo is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -5188,18 +5374,22 @@ func (a *LicenseApiService) UpdateLicenseLicenseInfoExecute(r ApiUpdateLicenseLi
 	localVarPostBody = r.licenseLicenseInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5266,7 +5456,7 @@ func (a *LicenseApiService) UpdateLicenseLicenseInfoExecute(r ApiUpdateLicenseLi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateLicenseLicenseReservationOpRequest struct {
@@ -5286,7 +5476,7 @@ func (r ApiUpdateLicenseLicenseReservationOpRequest) IfMatch(ifMatch string) Api
 	return r
 }
 
-func (r ApiUpdateLicenseLicenseReservationOpRequest) Execute() (LicenseLicenseReservationOp, *_nethttp.Response, error) {
+func (r ApiUpdateLicenseLicenseReservationOpRequest) Execute() (LicenseLicenseReservationOp, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateLicenseLicenseReservationOpExecute(r)
 }
 
@@ -5308,19 +5498,21 @@ func (a *LicenseApiService) UpdateLicenseLicenseReservationOp(ctx _context.Conte
  * Execute executes the request
  * @return LicenseLicenseReservationOp
  */
-func (a *LicenseApiService) UpdateLicenseLicenseReservationOpExecute(r ApiUpdateLicenseLicenseReservationOpRequest) (LicenseLicenseReservationOp, *_nethttp.Response, error) {
+func (a *LicenseApiService) UpdateLicenseLicenseReservationOpExecute(r ApiUpdateLicenseLicenseReservationOpRequest) (LicenseLicenseReservationOp, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseLicenseReservationOp
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.UpdateLicenseLicenseReservationOp")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/LicenseReservationOps/{Moid}"
@@ -5330,7 +5522,8 @@ func (a *LicenseApiService) UpdateLicenseLicenseReservationOpExecute(r ApiUpdate
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.licenseLicenseReservationOp == nil {
-		return localVarReturnValue, nil, reportError("licenseLicenseReservationOp is required and must be specified")
+		executionError.error = "licenseLicenseReservationOp is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -5357,18 +5550,22 @@ func (a *LicenseApiService) UpdateLicenseLicenseReservationOpExecute(r ApiUpdate
 	localVarPostBody = r.licenseLicenseReservationOp
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5435,7 +5632,7 @@ func (a *LicenseApiService) UpdateLicenseLicenseReservationOpExecute(r ApiUpdate
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateLicenseSmartlicenseTokenRequest struct {
@@ -5455,7 +5652,7 @@ func (r ApiUpdateLicenseSmartlicenseTokenRequest) IfMatch(ifMatch string) ApiUpd
 	return r
 }
 
-func (r ApiUpdateLicenseSmartlicenseTokenRequest) Execute() (LicenseSmartlicenseToken, *_nethttp.Response, error) {
+func (r ApiUpdateLicenseSmartlicenseTokenRequest) Execute() (LicenseSmartlicenseToken, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateLicenseSmartlicenseTokenExecute(r)
 }
 
@@ -5477,19 +5674,21 @@ func (a *LicenseApiService) UpdateLicenseSmartlicenseToken(ctx _context.Context,
  * Execute executes the request
  * @return LicenseSmartlicenseToken
  */
-func (a *LicenseApiService) UpdateLicenseSmartlicenseTokenExecute(r ApiUpdateLicenseSmartlicenseTokenRequest) (LicenseSmartlicenseToken, *_nethttp.Response, error) {
+func (a *LicenseApiService) UpdateLicenseSmartlicenseTokenExecute(r ApiUpdateLicenseSmartlicenseTokenRequest) (LicenseSmartlicenseToken, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  LicenseSmartlicenseToken
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "LicenseApiService.UpdateLicenseSmartlicenseToken")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/license/SmartlicenseTokens/{Moid}"
@@ -5499,7 +5698,8 @@ func (a *LicenseApiService) UpdateLicenseSmartlicenseTokenExecute(r ApiUpdateLic
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.licenseSmartlicenseToken == nil {
-		return localVarReturnValue, nil, reportError("licenseSmartlicenseToken is required and must be specified")
+		executionError.error = "licenseSmartlicenseToken is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -5526,18 +5726,22 @@ func (a *LicenseApiService) UpdateLicenseSmartlicenseTokenExecute(r ApiUpdateLic
 	localVarPostBody = r.licenseSmartlicenseToken
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5604,5 +5808,5 @@ func (a *LicenseApiService) UpdateLicenseSmartlicenseTokenExecute(r ApiUpdateLic
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }

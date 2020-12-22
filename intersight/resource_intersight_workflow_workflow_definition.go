@@ -1,21 +1,24 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceWorkflowWorkflowDefinition() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceWorkflowWorkflowDefinitionCreate,
-		Read:   resourceWorkflowWorkflowDefinitionRead,
-		Update: resourceWorkflowWorkflowDefinitionUpdate,
-		Delete: resourceWorkflowWorkflowDefinitionDelete,
+		CreateContext: resourceWorkflowWorkflowDefinitionCreate,
+		ReadContext:   resourceWorkflowWorkflowDefinitionRead,
+		UpdateContext: resourceWorkflowWorkflowDefinitionUpdate,
+		DeleteContext: resourceWorkflowWorkflowDefinitionDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -65,7 +68,7 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 				ForceNew:   true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -164,6 +167,7 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 										Description: "Inventory selector specified for primitive data property should be used in Intersight User Interface.",
 										Type:        schema.TypeBool,
 										Optional:    true,
+										Default:     true,
 									},
 									"object_type": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -285,6 +289,12 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"max_worker_task_count": {
+				Description: "The maximum number of external (worker) tasks that can be executed on this workflow.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Computed:    true,
+			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
 				Type:        schema.TypeString,
@@ -388,6 +398,7 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 										Description: "Inventory selector specified for primitive data property should be used in Intersight User Interface.",
 										Type:        schema.TypeBool,
 										Optional:    true,
+										Default:     true,
 									},
 									"object_type": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -468,6 +479,7 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 							Description: "When set to false the workflow is owned by the system and used for internal services. Such workflows cannot be directly used by external entities.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     false,
 							ForceNew:    true,
 						},
 						"object_type": {
@@ -480,6 +492,7 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 							Description: "When true, this workflow can be retried if has not been modified for more than a period of 2 weeks.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     false,
 						},
 						"support_status": {
 							Description: "Supported status of the definition.\n* `Supported` - The definition is a supported version and there will be no changes to the mandatory inputs or outputs.\n* `Beta` - The definition is a Beta version and this version can under go changes until the version is marked supported.\n* `Deprecated` - The version of definition is deprecated and typically there will be a higher version of the same definition that has been added.",
@@ -696,6 +709,7 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 				Description: "The version of the workflow to support multiple versions.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+				Default:     1,
 				ForceNew:    true,
 			},
 			"workflow_metadata": {
@@ -743,7 +757,7 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 	}
 }
 
-func resourceWorkflowWorkflowDefinitionCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1039,6 +1053,11 @@ func resourceWorkflowWorkflowDefinitionCreate(d *schema.ResourceData, meta inter
 	if v, ok := d.GetOk("max_task_count"); ok {
 		x := int64(v.(int))
 		o.SetMaxTaskCount(x)
+	}
+
+	if v, ok := d.GetOk("max_worker_task_count"); ok {
+		x := int64(v.(int))
+		o.SetMaxWorkerTaskCount(x)
 	}
 
 	if v, ok := d.GetOk("moid"); ok {
@@ -1538,125 +1557,133 @@ func resourceWorkflowWorkflowDefinitionCreate(d *schema.ResourceData, meta inter
 	}
 
 	r := conn.ApiClient.WorkflowApi.CreateWorkflowWorkflowDefinition(conn.ctx).WorkflowWorkflowDefinition(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating WorkflowWorkflowDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceWorkflowWorkflowDefinitionRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceWorkflowWorkflowDefinitionRead(c, d, meta)
 }
 
-func resourceWorkflowWorkflowDefinitionRead(d *schema.ResourceData, meta interface{}) error {
+func resourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowDefinitionByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "WorkflowWorkflowDefinition object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching WorkflowWorkflowDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("catalog", flattenMapWorkflowCatalogRelationship(s.GetCatalog(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Catalog: %+v", err)
+		return diag.Errorf("error occurred while setting property Catalog in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("default_version", (s.GetDefaultVersion())); err != nil {
-		return fmt.Errorf("error occurred while setting property DefaultVersion: %+v", err)
+		return diag.Errorf("error occurred while setting property DefaultVersion in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("input_definition", flattenListWorkflowBaseDataType(s.GetInputDefinition(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property InputDefinition: %+v", err)
+		return diag.Errorf("error occurred while setting property InputDefinition in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("input_parameter_set", flattenListWorkflowParameterSet(s.GetInputParameterSet(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property InputParameterSet: %+v", err)
+		return diag.Errorf("error occurred while setting property InputParameterSet in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("label", (s.GetLabel())); err != nil {
-		return fmt.Errorf("error occurred while setting property Label: %+v", err)
+		return diag.Errorf("error occurred while setting property Label in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("license_entitlement", (s.GetLicenseEntitlement())); err != nil {
-		return fmt.Errorf("error occurred while setting property LicenseEntitlement: %+v", err)
+		return diag.Errorf("error occurred while setting property LicenseEntitlement in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("max_task_count", (s.GetMaxTaskCount())); err != nil {
-		return fmt.Errorf("error occurred while setting property MaxTaskCount: %+v", err)
+		return diag.Errorf("error occurred while setting property MaxTaskCount in WorkflowWorkflowDefinition object: %s", err.Error())
+	}
+
+	if err := d.Set("max_worker_task_count", (s.GetMaxWorkerTaskCount())); err != nil {
+		return diag.Errorf("error occurred while setting property MaxWorkerTaskCount in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("output_definition", flattenListWorkflowBaseDataType(s.GetOutputDefinition(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property OutputDefinition: %+v", err)
+		return diag.Errorf("error occurred while setting property OutputDefinition in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("output_parameters", (s.GetOutputParameters())); err != nil {
-		return fmt.Errorf("error occurred while setting property OutputParameters: %+v", err)
+		return diag.Errorf("error occurred while setting property OutputParameters in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("properties", flattenMapWorkflowWorkflowProperties(s.GetProperties(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Properties: %+v", err)
+		return diag.Errorf("error occurred while setting property Properties in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("tasks", flattenListWorkflowWorkflowTask(s.GetTasks(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tasks: %+v", err)
+		return diag.Errorf("error occurred while setting property Tasks in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("ui_input_filters", flattenListWorkflowUiInputFilter(s.GetUiInputFilters(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property UiInputFilters: %+v", err)
+		return diag.Errorf("error occurred while setting property UiInputFilters in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("ui_rendering_data", (s.GetUiRenderingData())); err != nil {
-		return fmt.Errorf("error occurred while setting property UiRenderingData: %+v", err)
+		return diag.Errorf("error occurred while setting property UiRenderingData in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("validation_information", flattenMapWorkflowValidationInformation(s.GetValidationInformation(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ValidationInformation: %+v", err)
+		return diag.Errorf("error occurred while setting property ValidationInformation in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("nr_version", (s.GetVersion())); err != nil {
-		return fmt.Errorf("error occurred while setting property Version: %+v", err)
+		return diag.Errorf("error occurred while setting property Version in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("workflow_metadata", flattenMapWorkflowWorkflowMetadataRelationship(s.GetWorkflowMetadata(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property WorkflowMetadata: %+v", err)
+		return diag.Errorf("error occurred while setting property WorkflowMetadata in WorkflowWorkflowDefinition object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceWorkflowWorkflowDefinitionUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1961,6 +1988,12 @@ func resourceWorkflowWorkflowDefinitionUpdate(d *schema.ResourceData, meta inter
 		v := d.Get("max_task_count")
 		x := int64(v.(int))
 		o.SetMaxTaskCount(x)
+	}
+
+	if d.HasChange("max_worker_task_count") {
+		v := d.Get("max_worker_task_count")
+		x := int64(v.(int))
+		o.SetMaxWorkerTaskCount(x)
 	}
 
 	if d.HasChange("moid") {
@@ -2472,23 +2505,24 @@ func resourceWorkflowWorkflowDefinitionUpdate(d *schema.ResourceData, meta inter
 	}
 
 	r := conn.ApiClient.WorkflowApi.UpdateWorkflowWorkflowDefinition(conn.ctx, d.Id()).WorkflowWorkflowDefinition(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating WorkflowWorkflowDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceWorkflowWorkflowDefinitionRead(d, meta)
+	return resourceWorkflowWorkflowDefinitionRead(c, d, meta)
 }
 
-func resourceWorkflowWorkflowDefinitionDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceWorkflowWorkflowDefinitionDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.WorkflowApi.DeleteWorkflowWorkflowDefinition(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting WorkflowWorkflowDefinition object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

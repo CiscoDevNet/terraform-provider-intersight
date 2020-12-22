@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceStoragePurePort() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceStoragePurePortRead,
+		ReadContext: dataSourceStoragePurePortRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -59,7 +60,7 @@ func dataSourceStoragePurePort() *schema.Resource {
 				},
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -127,7 +128,7 @@ func dataSourceStoragePurePort() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -240,10 +241,11 @@ func dataSourceStoragePurePort() *schema.Resource {
 	}
 }
 
-func dataSourceStoragePurePortRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceStoragePurePortRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.StoragePurePort{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -300,25 +302,25 @@ func dataSourceStoragePurePortRead(d *schema.ResourceData, meta interface{}) err
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of StoragePurePort object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.StorageApi.GetStoragePurePortList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.StorageApi.GetStoragePurePortList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching StoragePurePort: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for StoragePurePort list: %s", err.Error())
 	}
 	var s = &models.StoragePurePortList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to StoragePurePort: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to StoragePurePort list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for StoragePurePort did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -327,68 +329,68 @@ func dataSourceStoragePurePortRead(d *schema.ResourceData, meta interface{}) err
 			var s = &models.StoragePurePort{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 
 			if err := d.Set("array", flattenMapStoragePureArrayRelationship(s.GetArray(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Array: %+v", err)
+				return diag.Errorf("error occurred while setting property Array: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 
 			if err := d.Set("controller", flattenMapStoragePureControllerRelationship(s.GetController(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Controller: %+v", err)
+				return diag.Errorf("error occurred while setting property Controller: %s", err.Error())
 			}
 			if err := d.Set("failover", (s.GetFailover())); err != nil {
-				return fmt.Errorf("error occurred while setting property Failover: %+v", err)
+				return diag.Errorf("error occurred while setting property Failover: %s", err.Error())
 			}
 			if err := d.Set("iqn", (s.GetIqn())); err != nil {
-				return fmt.Errorf("error occurred while setting property Iqn: %+v", err)
+				return diag.Errorf("error occurred while setting property Iqn: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("name", (s.GetName())); err != nil {
-				return fmt.Errorf("error occurred while setting property Name: %+v", err)
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("portal", (s.GetPortal())); err != nil {
-				return fmt.Errorf("error occurred while setting property Portal: %+v", err)
+				return diag.Errorf("error occurred while setting property Portal: %s", err.Error())
 			}
 
 			if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property RegisteredDevice: %+v", err)
+				return diag.Errorf("error occurred while setting property RegisteredDevice: %s", err.Error())
 			}
 			if err := d.Set("speed", (s.GetSpeed())); err != nil {
-				return fmt.Errorf("error occurred while setting property Speed: %+v", err)
+				return diag.Errorf("error occurred while setting property Speed: %s", err.Error())
 			}
 			if err := d.Set("status", (s.GetStatus())); err != nil {
-				return fmt.Errorf("error occurred while setting property Status: %+v", err)
+				return diag.Errorf("error occurred while setting property Status: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("type", (s.GetType())); err != nil {
-				return fmt.Errorf("error occurred while setting property Type: %+v", err)
+				return diag.Errorf("error occurred while setting property Type: %s", err.Error())
 			}
 			if err := d.Set("wwn", (s.GetWwn())); err != nil {
-				return fmt.Errorf("error occurred while setting property Wwn: %+v", err)
+				return diag.Errorf("error occurred while setting property Wwn: %s", err.Error())
 			}
 			if err := d.Set("wwnn", (s.GetWwnn())); err != nil {
-				return fmt.Errorf("error occurred while setting property Wwnn: %+v", err)
+				return diag.Errorf("error occurred while setting property Wwnn: %s", err.Error())
 			}
 			if err := d.Set("wwpn", (s.GetWwpn())); err != nil {
-				return fmt.Errorf("error occurred while setting property Wwpn: %+v", err)
+				return diag.Errorf("error occurred while setting property Wwpn: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

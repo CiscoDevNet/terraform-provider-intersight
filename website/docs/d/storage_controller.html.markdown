@@ -1,17 +1,15 @@
-
 ---
+subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_controller"
-sidebar_current: "docs-intersight-data-source-storage-controller"
 description: |-
-Storage Controller present in a server.
+  Storage Controller present in a server.
 ---
 
-# Data Source: intersight_storage._controller
+# Data Source: intersight_storage_controller
 Storage Controller present in a server.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `controller_flags`:(string) The flags for the storage controller. 
 * `controller_id`:(string) The Id of the storage controller. 
 * `controller_status`:(string) The current status of controller. 
@@ -23,7 +21,6 @@ The following arguments can be used to get data of already created objects in In
 * `max_volumes_supported`:(int) Maximum virtual drives that can be created on this Storage Controller. 
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `oob_interface_supported`:(string) The CIMC support for out-of-band configuration of controller. 
 * `oper_state`:(string) The current operational state of controller. 
 * `operability`:(string) Operability state of the storage controller. 

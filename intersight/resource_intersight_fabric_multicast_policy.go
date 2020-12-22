@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceFabricMulticastPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceFabricMulticastPolicyCreate,
-		Read:   resourceFabricMulticastPolicyRead,
-		Update: resourceFabricMulticastPolicyUpdate,
-		Delete: resourceFabricMulticastPolicyDelete,
+		CreateContext: resourceFabricMulticastPolicyCreate,
+		ReadContext:   resourceFabricMulticastPolicyRead,
+		UpdateContext: resourceFabricMulticastPolicyUpdate,
+		DeleteContext: resourceFabricMulticastPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -22,7 +25,7 @@ func resourceFabricMulticastPolicy() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -141,7 +144,7 @@ func resourceFabricMulticastPolicy() *schema.Resource {
 	}
 }
 
-func resourceFabricMulticastPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricMulticastPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -273,81 +276,85 @@ func resourceFabricMulticastPolicyCreate(d *schema.ResourceData, meta interface{
 	}
 
 	r := conn.ApiClient.FabricApi.CreateFabricMulticastPolicy(conn.ctx).FabricMulticastPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating FabricMulticastPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceFabricMulticastPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceFabricMulticastPolicyRead(c, d, meta)
 }
 
-func resourceFabricMulticastPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricMulticastPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.FabricApi.GetFabricMulticastPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "FabricMulticastPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching FabricMulticastPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in FabricMulticastPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in FabricMulticastPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in FabricMulticastPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in FabricMulticastPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in FabricMulticastPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in FabricMulticastPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in FabricMulticastPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("querier_ip_address", (s.GetQuerierIpAddress())); err != nil {
-		return fmt.Errorf("error occurred while setting property QuerierIpAddress: %+v", err)
+		return diag.Errorf("error occurred while setting property QuerierIpAddress in FabricMulticastPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("querier_ip_address_peer", (s.GetQuerierIpAddressPeer())); err != nil {
-		return fmt.Errorf("error occurred while setting property QuerierIpAddressPeer: %+v", err)
+		return diag.Errorf("error occurred while setting property QuerierIpAddressPeer in FabricMulticastPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("querier_state", (s.GetQuerierState())); err != nil {
-		return fmt.Errorf("error occurred while setting property QuerierState: %+v", err)
+		return diag.Errorf("error occurred while setting property QuerierState in FabricMulticastPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("snooping_state", (s.GetSnoopingState())); err != nil {
-		return fmt.Errorf("error occurred while setting property SnoopingState: %+v", err)
+		return diag.Errorf("error occurred while setting property SnoopingState in FabricMulticastPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in FabricMulticastPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceFabricMulticastPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricMulticastPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -489,23 +496,24 @@ func resourceFabricMulticastPolicyUpdate(d *schema.ResourceData, meta interface{
 	}
 
 	r := conn.ApiClient.FabricApi.UpdateFabricMulticastPolicy(conn.ctx, d.Id()).FabricMulticastPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating FabricMulticastPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFabricMulticastPolicyRead(d, meta)
+	return resourceFabricMulticastPolicyRead(c, d, meta)
 }
 
-func resourceFabricMulticastPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricMulticastPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.FabricApi.DeleteFabricMulticastPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting FabricMulticastPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceVnicEthIf() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceVnicEthIfCreate,
-		Read:   resourceVnicEthIfRead,
-		Update: resourceVnicEthIfUpdate,
-		Delete: resourceVnicEthIfDelete,
+		CreateContext: resourceVnicEthIfCreate,
+		ReadContext:   resourceVnicEthIfRead,
+		UpdateContext: resourceVnicEthIfUpdate,
+		DeleteContext: resourceVnicEthIfDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -62,7 +65,7 @@ func resourceVnicEthIf() *schema.Resource {
 				Computed:   true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -275,6 +278,7 @@ func resourceVnicEthIf() *schema.Resource {
 				Description: "Setting this to true esnures that the traffic failsover from one uplink to another auotmatically in case of an uplink failure. It is applicable for Cisco VIC adapters only which are connected to Fabric Interconnect cluster. The uplink if specified determines the primary uplink in case of a failover.",
 				Type:        schema.TypeBool,
 				Optional:    true,
+				Default:     false,
 			},
 			"lan_connectivity_policy": {
 				Description: "A reference to a vnicLanConnectivityPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -502,6 +506,7 @@ func resourceVnicEthIf() *schema.Resource {
 							Description: "The PCI Link used as transport for the virtual interface. All VIC adapters have a single PCI link except VIC 1385 which has two.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     0,
 						},
 						"switch_id": {
 							Description: "The fabric port to which the vNICs will be associated.\n* `None` - Fabric Id is not set to either A or B for the standalone case where the server is not connected to Fabric Interconnects. The value 'None' should be used.\n* `A` - Fabric A of the FI cluster.\n* `B` - Fabric B of the FI cluster.",
@@ -651,6 +656,7 @@ func resourceVnicEthIf() *schema.Resource {
 							Description: "Class of Service to be used for traffic on the usNIC.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     5,
 						},
 						"nr_count": {
 							Description: "Number of usNIC interfaces to be created.",
@@ -701,29 +707,34 @@ func resourceVnicEthIf() *schema.Resource {
 							Description: "Enables VMQ feature on the virtual interface.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     false,
 						},
 						"multi_queue_support": {
 							Description: "Enables Virtual Machine Multi-Queue feature on the virtual interface. VMMQ allows configuration of multiple I/O queues for a single VM and thus distributes traffic across multiple CPU cores in a VM.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     false,
 						},
 						"num_interrupts": {
 							Description: "The number of interrupt resources to be allocated. Recommended value is the number of CPU threads or logical processors available in the server.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     16,
 						},
 						"num_sub_vnics": {
 							Description: "The number of sub vNICs to be created.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     64,
 						},
 						"num_vmqs": {
 							Description: "The number of hardware Virtual Machine Queues to be allocated. The number of VMQs per adapter must be one more than the maximum number of VM NICs.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     4,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -742,7 +753,7 @@ func resourceVnicEthIf() *schema.Resource {
 	}
 }
 
-func resourceVnicEthIfCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1516,153 +1527,158 @@ func resourceVnicEthIfCreate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	r := conn.ApiClient.VnicApi.CreateVnicEthIf(conn.ctx).VnicEthIf(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating VnicEthIf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceVnicEthIfRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceVnicEthIfRead(c, d, meta)
 }
-func detachVnicEthIfProfiles(d *schema.ResourceData, meta interface{}) error {
+func detachVnicEthIfProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.VnicEthIf{}
 	o.SetClassId("vnic.EthIf")
 	o.SetObjectType("vnic.EthIf")
 	o.SetProfile(models.PolicyAbstractConfigProfileRelationship{})
 
 	r := conn.ApiClient.VnicApi.UpdateVnicEthIf(conn.ctx, d.Id()).VnicEthIf(*o)
-	_, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while creating: %s", err.Error())
+	_, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	return err
+	return de
 }
 
-func resourceVnicEthIfRead(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.VnicApi.GetVnicEthIfByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "VnicEthIf object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching VnicEthIf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("cdn", flattenMapVnicCdn(s.GetCdn(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Cdn: %+v", err)
+		return diag.Errorf("error occurred while setting property Cdn in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("eth_adapter_policy", flattenMapVnicEthAdapterPolicyRelationship(s.GetEthAdapterPolicy(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property EthAdapterPolicy: %+v", err)
+		return diag.Errorf("error occurred while setting property EthAdapterPolicy in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("eth_network_policy", flattenMapVnicEthNetworkPolicyRelationship(s.GetEthNetworkPolicy(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property EthNetworkPolicy: %+v", err)
+		return diag.Errorf("error occurred while setting property EthNetworkPolicy in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("eth_qos_policy", flattenMapVnicEthQosPolicyRelationship(s.GetEthQosPolicy(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property EthQosPolicy: %+v", err)
+		return diag.Errorf("error occurred while setting property EthQosPolicy in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("fabric_eth_network_control_policy", flattenMapFabricEthNetworkControlPolicyRelationship(s.GetFabricEthNetworkControlPolicy(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property FabricEthNetworkControlPolicy: %+v", err)
+		return diag.Errorf("error occurred while setting property FabricEthNetworkControlPolicy in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("fabric_eth_network_group_policy", flattenListFabricEthNetworkGroupPolicyRelationship(s.GetFabricEthNetworkGroupPolicy(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property FabricEthNetworkGroupPolicy: %+v", err)
+		return diag.Errorf("error occurred while setting property FabricEthNetworkGroupPolicy in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("failover_enabled", (s.GetFailoverEnabled())); err != nil {
-		return fmt.Errorf("error occurred while setting property FailoverEnabled: %+v", err)
+		return diag.Errorf("error occurred while setting property FailoverEnabled in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("lan_connectivity_policy", flattenMapVnicLanConnectivityPolicyRelationship(s.GetLanConnectivityPolicy(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property LanConnectivityPolicy: %+v", err)
+		return diag.Errorf("error occurred while setting property LanConnectivityPolicy in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("lcp_vnic", flattenMapVnicEthIfRelationship(s.GetLcpVnic(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property LcpVnic: %+v", err)
+		return diag.Errorf("error occurred while setting property LcpVnic in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("mac_address", (s.GetMacAddress())); err != nil {
-		return fmt.Errorf("error occurred while setting property MacAddress: %+v", err)
+		return diag.Errorf("error occurred while setting property MacAddress in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("mac_lease", flattenMapMacpoolLeaseRelationship(s.GetMacLease(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property MacLease: %+v", err)
+		return diag.Errorf("error occurred while setting property MacLease in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("mac_pool", flattenMapMacpoolPoolRelationship(s.GetMacPool(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property MacPool: %+v", err)
+		return diag.Errorf("error occurred while setting property MacPool in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("order", (s.GetOrder())); err != nil {
-		return fmt.Errorf("error occurred while setting property Order: %+v", err)
+		return diag.Errorf("error occurred while setting property Order in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("placement", flattenMapVnicPlacementSettings(s.GetPlacement(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Placement: %+v", err)
+		return diag.Errorf("error occurred while setting property Placement in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("profile", flattenMapPolicyAbstractConfigProfileRelationship(s.GetProfile(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Profile: %+v", err)
+		return diag.Errorf("error occurred while setting property Profile in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("sp_vnics", flattenListVnicEthIfRelationship(s.GetSpVnics(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property SpVnics: %+v", err)
+		return diag.Errorf("error occurred while setting property SpVnics in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("standby_vif_id", (s.GetStandbyVifId())); err != nil {
-		return fmt.Errorf("error occurred while setting property StandbyVifId: %+v", err)
+		return diag.Errorf("error occurred while setting property StandbyVifId in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("usnic_settings", flattenMapVnicUsnicSettings(s.GetUsnicSettings(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property UsnicSettings: %+v", err)
+		return diag.Errorf("error occurred while setting property UsnicSettings in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("vif_id", (s.GetVifId())); err != nil {
-		return fmt.Errorf("error occurred while setting property VifId: %+v", err)
+		return diag.Errorf("error occurred while setting property VifId in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("vmq_settings", flattenMapVnicVmqSettings(s.GetVmqSettings(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property VmqSettings: %+v", err)
+		return diag.Errorf("error occurred while setting property VmqSettings in VnicEthIf object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceVnicEthIfUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -2460,31 +2476,32 @@ func resourceVnicEthIfUpdate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	r := conn.ApiClient.VnicApi.UpdateVnicEthIf(conn.ctx, d.Id()).VnicEthIf(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating VnicEthIf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceVnicEthIfRead(d, meta)
+	return resourceVnicEthIfRead(c, d, meta)
 }
 
-func resourceVnicEthIfDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicEthIfDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profile"); ok {
 		if len(p.([]interface{})) > 0 {
 			e := detachVnicEthIfProfiles(d, meta)
-			if e != nil {
+			if e.HasError() {
 				return e
 			}
 		}
 	}
 	p := conn.ApiClient.VnicApi.DeleteVnicEthIf(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting VnicEthIf object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

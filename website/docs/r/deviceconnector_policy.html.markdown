@@ -1,24 +1,23 @@
-
 ---
+subcategory: "deviceconnector"
 layout: "intersight"
 page_title: "Intersight: intersight_deviceconnector_policy"
-sidebar_current: "docs-intersight-resource-deviceconnector-policy"
 description: |-
   Policy to control configuration changes allowed from Cisco IMC.
 ---
 
-# Resource: intersight_deviceconnector._policy
+# Resource: intersight_deviceconnector_policy
 Policy to control configuration changes allowed from Cisco IMC.
 ## Argument Reference
 The following arguments are supported:
 * `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `description`:(string) Description of the policy. 
 * `lockout_enabled`:(bool) Enables configuration lockout on the endpoint. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the concrete policy. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `organization`:(Array with Maximum of one item) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `additional_properties`:
@@ -41,3 +40,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_deviceconnector_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_deviceconnector_policy.example 1234567890987654321abcde
+```

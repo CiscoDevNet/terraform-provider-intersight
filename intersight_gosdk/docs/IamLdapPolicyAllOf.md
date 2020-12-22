@@ -9,14 +9,14 @@ Name | Type | Description | Notes
 **BaseProperties** | Pointer to [**NullableIamLdapBaseProperties**](iam.LdapBaseProperties.md) |  | [optional] 
 **DnsParameters** | Pointer to [**NullableIamLdapDnsParameters**](iam.LdapDnsParameters.md) |  | [optional] 
 **EnableDns** | Pointer to **bool** | Enables DNS to access LDAP servers. | [optional] 
-**Enabled** | Pointer to **bool** | LDAP server performs authentication. | [optional] 
+**Enabled** | Pointer to **bool** | LDAP server performs authentication. | [optional] [default to true]
 **UserSearchPrecedence** | Pointer to **string** | Search precedence between local user database and LDAP user database. * &#x60;LocalUserDb&#x60; - Precedence is given to local user database while searching. * &#x60;LDAPUserDb&#x60; - Precedence is given to LADP user database while searching. | [optional] [default to "LocalUserDb"]
 **Var0Idp** | Pointer to [**IamIdpRelationship**](iam.Idp.Relationship.md) |  | [optional] 
 **ApplianceAccount** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
-**Groups** | Pointer to [**[]IamLdapGroupRelationship**](iam.LdapGroup.Relationship.md) | An array of relationships to iamLdapGroup resources. | [optional] 
+**Groups** | Pointer to [**[]IamLdapGroupRelationship**](IamLdapGroupRelationship.md) | An array of relationships to iamLdapGroup resources. | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
-**Profiles** | Pointer to [**[]PolicyAbstractConfigProfileRelationship**](policy.AbstractConfigProfile.Relationship.md) | An array of relationships to policyAbstractConfigProfile resources. | [optional] 
-**Providers** | Pointer to [**[]IamLdapProviderRelationship**](iam.LdapProvider.Relationship.md) | An array of relationships to iamLdapProvider resources. | [optional] 
+**Profiles** | Pointer to [**[]PolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) | An array of relationships to policyAbstractConfigProfile resources. | [optional] 
+**Providers** | Pointer to [**[]IamLdapProviderRelationship**](IamLdapProviderRelationship.md) | An array of relationships to iamLdapProvider resources. | [optional] 
 
 ## Methods
 

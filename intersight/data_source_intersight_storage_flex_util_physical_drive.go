@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceStorageFlexUtilPhysicalDrive() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceStorageFlexUtilPhysicalDriveRead,
+		ReadContext: dataSourceStorageFlexUtilPhysicalDriveRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -30,7 +31,7 @@ func dataSourceStorageFlexUtilPhysicalDrive() *schema.Resource {
 				Optional:    true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -123,7 +124,7 @@ func dataSourceStorageFlexUtilPhysicalDrive() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -312,10 +313,11 @@ func dataSourceStorageFlexUtilPhysicalDrive() *schema.Resource {
 	}
 }
 
-func dataSourceStorageFlexUtilPhysicalDriveRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceStorageFlexUtilPhysicalDriveRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.StorageFlexUtilPhysicalDrive{}
 	if v, ok := d.GetOk("block_size"); ok {
 		x := (v.(string))
@@ -432,25 +434,25 @@ func dataSourceStorageFlexUtilPhysicalDriveRead(d *schema.ResourceData, meta int
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of StorageFlexUtilPhysicalDrive object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.StorageApi.GetStorageFlexUtilPhysicalDriveList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.StorageApi.GetStorageFlexUtilPhysicalDriveList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching StorageFlexUtilPhysicalDrive: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for StorageFlexUtilPhysicalDrive list: %s", err.Error())
 	}
 	var s = &models.StorageFlexUtilPhysicalDriveList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to StorageFlexUtilPhysicalDrive: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to StorageFlexUtilPhysicalDrive list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for StorageFlexUtilPhysicalDrive did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -459,113 +461,113 @@ func dataSourceStorageFlexUtilPhysicalDriveRead(d *schema.ResourceData, meta int
 			var s = &models.StorageFlexUtilPhysicalDrive{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("block_size", (s.GetBlockSize())); err != nil {
-				return fmt.Errorf("error occurred while setting property BlockSize: %+v", err)
+				return diag.Errorf("error occurred while setting property BlockSize: %s", err.Error())
 			}
 			if err := d.Set("capacity", (s.GetCapacity())); err != nil {
-				return fmt.Errorf("error occurred while setting property Capacity: %+v", err)
+				return diag.Errorf("error occurred while setting property Capacity: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("controller", (s.GetController())); err != nil {
-				return fmt.Errorf("error occurred while setting property Controller: %+v", err)
+				return diag.Errorf("error occurred while setting property Controller: %s", err.Error())
 			}
 			if err := d.Set("device_mo_id", (s.GetDeviceMoId())); err != nil {
-				return fmt.Errorf("error occurred while setting property DeviceMoId: %+v", err)
+				return diag.Errorf("error occurred while setting property DeviceMoId: %s", err.Error())
 			}
 			if err := d.Set("dn", (s.GetDn())); err != nil {
-				return fmt.Errorf("error occurred while setting property Dn: %+v", err)
+				return diag.Errorf("error occurred while setting property Dn: %s", err.Error())
 			}
 			if err := d.Set("drives_enabled", (s.GetDrivesEnabled())); err != nil {
-				return fmt.Errorf("error occurred while setting property DrivesEnabled: %+v", err)
+				return diag.Errorf("error occurred while setting property DrivesEnabled: %s", err.Error())
 			}
 			if err := d.Set("health", (s.GetHealth())); err != nil {
-				return fmt.Errorf("error occurred while setting property Health: %+v", err)
+				return diag.Errorf("error occurred while setting property Health: %s", err.Error())
 			}
 
 			if err := d.Set("inventory_device_info", flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property InventoryDeviceInfo: %+v", err)
+				return diag.Errorf("error occurred while setting property InventoryDeviceInfo: %s", err.Error())
 			}
 			if err := d.Set("manufacturer_date", (s.GetManufacturerDate())); err != nil {
-				return fmt.Errorf("error occurred while setting property ManufacturerDate: %+v", err)
+				return diag.Errorf("error occurred while setting property ManufacturerDate: %s", err.Error())
 			}
 			if err := d.Set("manufacturer_id", (s.GetManufacturerId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ManufacturerId: %+v", err)
+				return diag.Errorf("error occurred while setting property ManufacturerId: %s", err.Error())
 			}
 			if err := d.Set("model", (s.GetModel())); err != nil {
-				return fmt.Errorf("error occurred while setting property Model: %+v", err)
+				return diag.Errorf("error occurred while setting property Model: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("oem_id", (s.GetOemId())); err != nil {
-				return fmt.Errorf("error occurred while setting property OemId: %+v", err)
+				return diag.Errorf("error occurred while setting property OemId: %s", err.Error())
 			}
 			if err := d.Set("partition_count", (s.GetPartitionCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property PartitionCount: %+v", err)
+				return diag.Errorf("error occurred while setting property PartitionCount: %s", err.Error())
 			}
 			if err := d.Set("pd_status", (s.GetPdStatus())); err != nil {
-				return fmt.Errorf("error occurred while setting property PdStatus: %+v", err)
+				return diag.Errorf("error occurred while setting property PdStatus: %s", err.Error())
 			}
 			if err := d.Set("physical_drive", (s.GetPhysicalDrive())); err != nil {
-				return fmt.Errorf("error occurred while setting property PhysicalDrive: %+v", err)
+				return diag.Errorf("error occurred while setting property PhysicalDrive: %s", err.Error())
 			}
 			if err := d.Set("product_name", (s.GetProductName())); err != nil {
-				return fmt.Errorf("error occurred while setting property ProductName: %+v", err)
+				return diag.Errorf("error occurred while setting property ProductName: %s", err.Error())
 			}
 			if err := d.Set("product_revision", (s.GetProductRevision())); err != nil {
-				return fmt.Errorf("error occurred while setting property ProductRevision: %+v", err)
+				return diag.Errorf("error occurred while setting property ProductRevision: %s", err.Error())
 			}
 			if err := d.Set("read_error_count", (s.GetReadErrorCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property ReadErrorCount: %+v", err)
+				return diag.Errorf("error occurred while setting property ReadErrorCount: %s", err.Error())
 			}
 			if err := d.Set("read_error_threshold", (s.GetReadErrorThreshold())); err != nil {
-				return fmt.Errorf("error occurred while setting property ReadErrorThreshold: %+v", err)
+				return diag.Errorf("error occurred while setting property ReadErrorThreshold: %s", err.Error())
 			}
 
 			if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property RegisteredDevice: %+v", err)
+				return diag.Errorf("error occurred while setting property RegisteredDevice: %s", err.Error())
 			}
 			if err := d.Set("revision", (s.GetRevision())); err != nil {
-				return fmt.Errorf("error occurred while setting property Revision: %+v", err)
+				return diag.Errorf("error occurred while setting property Revision: %s", err.Error())
 			}
 			if err := d.Set("rn", (s.GetRn())); err != nil {
-				return fmt.Errorf("error occurred while setting property Rn: %+v", err)
+				return diag.Errorf("error occurred while setting property Rn: %s", err.Error())
 			}
 			if err := d.Set("serial", (s.GetSerial())); err != nil {
-				return fmt.Errorf("error occurred while setting property Serial: %+v", err)
+				return diag.Errorf("error occurred while setting property Serial: %s", err.Error())
 			}
 
 			if err := d.Set("storage_flex_util_controller", flattenMapStorageFlexUtilControllerRelationship(s.GetStorageFlexUtilController(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property StorageFlexUtilController: %+v", err)
+				return diag.Errorf("error occurred while setting property StorageFlexUtilController: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("vendor", (s.GetVendor())); err != nil {
-				return fmt.Errorf("error occurred while setting property Vendor: %+v", err)
+				return diag.Errorf("error occurred while setting property Vendor: %s", err.Error())
 			}
 			if err := d.Set("write_enabled", (s.GetWriteEnabled())); err != nil {
-				return fmt.Errorf("error occurred while setting property WriteEnabled: %+v", err)
+				return diag.Errorf("error occurred while setting property WriteEnabled: %s", err.Error())
 			}
 			if err := d.Set("write_error_count", (s.GetWriteErrorCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property WriteErrorCount: %+v", err)
+				return diag.Errorf("error occurred while setting property WriteErrorCount: %s", err.Error())
 			}
 			if err := d.Set("write_error_threshold", (s.GetWriteErrorThreshold())); err != nil {
-				return fmt.Errorf("error occurred while setting property WriteErrorThreshold: %+v", err)
+				return diag.Errorf("error occurred while setting property WriteErrorThreshold: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

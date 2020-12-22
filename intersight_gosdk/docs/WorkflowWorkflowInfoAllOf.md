@@ -7,15 +7,15 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "workflow.WorkflowInfo"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.WorkflowInfo"]
 **Action** | Pointer to **string** | The action of the workflow such as start, cancel, retry, pause. * &#x60;None&#x60; - No action is set, this is the default value for action field. * &#x60;Create&#x60; - Create a new instance of the workflow but it does not start the execution of the workflow. Use the Start action to start execution of the workflow. * &#x60;Start&#x60; - Start a new execution of the workflow. * &#x60;Pause&#x60; - Pause the workflow, this can only be issued on workflows that are in running state. * &#x60;Resume&#x60; - Resume the workflow which was previously paused through pause action on the workflow. * &#x60;Retry&#x60; - Retry the workflow that has previously reached a final state and has the retryable property set to true on the workflow. A running or waiting workflow cannot be retried. If the property retryFromTaskName is also passed along with this action, the workflow will be started from that specific task, otherwise the workflow will be restarted. The task name must be one of the tasks that completed or failed in the previous run, you cannot retry a workflow from a task which wasn&#39;t run in the previous iteration. * &#x60;RetryFailed&#x60; - Retry the workflow that has failed. A running or waiting workflow or a workflow that completed successfully cannot be retried. Only the tasks that failed in the previous run will be retried and the rest of workflow will be run. This action does not restart the workflow and also does not support retrying from a specific task. * &#x60;Cancel&#x60; - Cancel the workflow that is in running or waiting state. | [optional] [default to "None"]
-**CleanupTime** | Pointer to [**time.Time**](time.Time.md) | The time when the workflow info will be removed from database. | [optional] [readonly] 
+**CleanupTime** | Pointer to **time.Time** | The time when the workflow info will be removed from database. | [optional] [readonly] 
 **Email** | Pointer to **string** | The email address of the user who started this workflow. | [optional] [readonly] 
-**EndTime** | Pointer to [**time.Time**](time.Time.md) | The time when the workflow reached a final state. | [optional] [readonly] 
-**FailedWorkflowCleanupDuration** | Pointer to **int64** | The duration in hours after which the workflow info for failed, terminated or timed out workflow will be removed from database. | [optional] 
+**EndTime** | Pointer to **time.Time** | The time when the workflow reached a final state. | [optional] [readonly] 
+**FailedWorkflowCleanupDuration** | Pointer to **int64** | The duration in hours after which the workflow info for failed, terminated or timed out workflow will be removed from database. | [optional] [default to 2160]
 **Input** | Pointer to **interface{}** | All the given inputs for the workflow. | [optional] 
 **InstId** | Pointer to **string** | A workflow instance Id which is the unique identified for the workflow execution. | [optional] [readonly] 
 **Internal** | Pointer to **bool** | Denotes if this workflow is internal and should be hidden from user view of running workflows. | [optional] 
 **LastAction** | Pointer to **string** | The last action that was issued on the workflow is saved in this field. * &#x60;None&#x60; - No action is set, this is the default value for action field. * &#x60;Create&#x60; - Create a new instance of the workflow but it does not start the execution of the workflow. Use the Start action to start execution of the workflow. * &#x60;Start&#x60; - Start a new execution of the workflow. * &#x60;Pause&#x60; - Pause the workflow, this can only be issued on workflows that are in running state. * &#x60;Resume&#x60; - Resume the workflow which was previously paused through pause action on the workflow. * &#x60;Retry&#x60; - Retry the workflow that has previously reached a final state and has the retryable property set to true on the workflow. A running or waiting workflow cannot be retried. If the property retryFromTaskName is also passed along with this action, the workflow will be started from that specific task, otherwise the workflow will be restarted. The task name must be one of the tasks that completed or failed in the previous run, you cannot retry a workflow from a task which wasn&#39;t run in the previous iteration. * &#x60;RetryFailed&#x60; - Retry the workflow that has failed. A running or waiting workflow or a workflow that completed successfully cannot be retried. Only the tasks that failed in the previous run will be retried and the rest of workflow will be run. This action does not restart the workflow and also does not support retrying from a specific task. * &#x60;Cancel&#x60; - Cancel the workflow that is in running or waiting state. | [optional] [readonly] [default to "None"]
-**Message** | Pointer to [**[]WorkflowMessage**](workflow.Message.md) |  | [optional] 
+**Message** | Pointer to [**[]WorkflowMessage**](WorkflowMessage.md) |  | [optional] 
 **MetaVersion** | Pointer to **int64** | Version of the workflow metadata for which this workflow execution was started. | [optional] 
 **Name** | Pointer to **string** | A name of the workflow execution instance. | [optional] 
 **Output** | Pointer to **interface{}** | All the generated outputs for the workflow. | [optional] [readonly] 
@@ -24,27 +24,29 @@ Name | Type | Description | Notes
 **Properties** | Pointer to [**NullableWorkflowWorkflowInfoProperties**](workflow.WorkflowInfoProperties.md) |  | [optional] 
 **RetryFromTaskName** | Pointer to **string** | This field is applicable when Retry action is issued for a workflow which is in a final state. When this field is not specified then the workflow will retry from the start of the workflow. When this field is specified then the workflow will be retried from the specified task. The field should carry the task name which is the unique name of the task within the workflow. The task name must be one of the tasks that completed or failed in the previous run, you cannot retry a workflow from a task which wasn&#39;t run in the previous iteration. | [optional] 
 **Src** | Pointer to **string** | The source microservice name which is the owner for this workflow. | [optional] [readonly] 
-**StartTime** | Pointer to [**time.Time**](time.Time.md) | The time when the workflow was started for execution. | [optional] [readonly] 
+**StartTime** | Pointer to **time.Time** | The time when the workflow was started for execution. | [optional] [readonly] 
 **Status** | Pointer to **string** | A status of the workflow (RUNNING, WAITING, COMPLETED, TIME_OUT, FAILED). | [optional] [readonly] 
-**SuccessWorkflowCleanupDuration** | Pointer to **int64** | The duration in hours after which the workflow info for successful workflow will be removed from database. | [optional] 
+**SuccessWorkflowCleanupDuration** | Pointer to **int64** | The duration in hours after which the workflow info for successful workflow will be removed from database. | [optional] [default to 2160]
 **TraceId** | Pointer to **string** | The trace id to keep track of workflow execution. | [optional] [readonly] 
 **Type** | Pointer to **string** | A type of the workflow (serverconfig, ansible_monitoring). | [optional] [readonly] 
-**UserActionRequired** | Pointer to **bool** | Property will be set when an user action is required on the workflow. This can be because the workflow is waiting for a wait task to be updated, workflow is paused or workflow launched by a configuration object has failed and needs to be retried in order to complete successfully. | [optional] [readonly] 
+**UserActionRequired** | Pointer to **bool** | Property will be set when an user action is required on the workflow. This can be because the workflow is waiting for a wait task to be updated, workflow is paused or workflow launched by a configuration object has failed and needs to be retried in order to complete successfully. | [optional] [readonly] [default to false]
 **UserId** | Pointer to **string** | The user identifier which indicates the user that started this workflow. | [optional] [readonly] 
 **WaitReason** | Pointer to **string** | Denotes the reason workflow is in waiting status. * &#x60;None&#x60; - Wait reason is none, which indicates there is no reason for the waiting state. * &#x60;GatherTasks&#x60; - Wait reason is gathering tasks, which indicates the workflow is in this state in order to gather tasks. * &#x60;Duplicate&#x60; - Wait reason is duplicate, which indicates the workflow is a duplicate of current running workflow. * &#x60;RateLimit&#x60; - Wait reason is rate limit, which indicates the workflow is rate limited by account/instance level throttling threshold. * &#x60;WaitTask&#x60; - Wait reason when there are one or more wait tasks in the workflow which are yet to receive a task status update. * &#x60;PendingRetryFailed&#x60; - Wait reason when the workflow is pending a RetryFailed action. | [optional] [default to "None"]
 **WorkflowCtx** | Pointer to [**NullableWorkflowWorkflowCtx**](workflow.WorkflowCtx.md) |  | [optional] 
 **WorkflowMetaType** | Pointer to **string** | The type of workflow meta. Derived from the workflow meta that is used to launch this workflow instance. * &#x60;SystemDefined&#x60; - System defined workflow definition. * &#x60;UserDefined&#x60; - User defined workflow definition. * &#x60;Dynamic&#x60; - Dynamically defined workflow definition. | [optional] [default to "SystemDefined"]
 **WorkflowTaskCount** | Pointer to **int64** | Total number of workflow tasks in this workflow. | [optional] [readonly] 
+**WorkflowWorkerTaskCount** | Pointer to **int64** | Total number of worker tasks in this workflow. This count doesn&#39;t include the control tasks in the workflow. | [optional] [readonly] 
 **Var0RollbackWorkflow** | Pointer to [**WorkflowRollbackWorkflowRelationship**](workflow.RollbackWorkflow.Relationship.md) |  | [optional] 
-**Var1SwitchProfile** | Pointer to [**FabricSwitchProfileRelationship**](fabric.SwitchProfile.Relationship.md) |  | [optional] 
-**Var2ClusterProfile** | Pointer to [**HyperflexClusterProfileRelationship**](hyperflex.ClusterProfile.Relationship.md) |  | [optional] 
+**Var1Profile** | Pointer to [**ChassisProfileRelationship**](chassis.Profile.Relationship.md) |  | [optional] 
+**Var2SwitchProfile** | Pointer to [**FabricSwitchProfileRelationship**](fabric.SwitchProfile.Relationship.md) |  | [optional] 
+**Var3ClusterProfile** | Pointer to [**HyperflexClusterProfileRelationship**](hyperflex.ClusterProfile.Relationship.md) |  | [optional] 
 **Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
 **AssociatedObject** | Pointer to [**MoBaseMoRelationship**](mo.BaseMo.Relationship.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 **ParentTaskInfo** | Pointer to [**WorkflowTaskInfoRelationship**](workflow.TaskInfo.Relationship.md) |  | [optional] 
 **PendingDynamicWorkflowInfo** | Pointer to [**WorkflowPendingDynamicWorkflowInfoRelationship**](workflow.PendingDynamicWorkflowInfo.Relationship.md) |  | [optional] 
 **Permission** | Pointer to [**IamPermissionRelationship**](iam.Permission.Relationship.md) |  | [optional] 
-**TaskInfos** | Pointer to [**[]WorkflowTaskInfoRelationship**](workflow.TaskInfo.Relationship.md) | An array of relationships to workflowTaskInfo resources. | [optional] [readonly] 
+**TaskInfos** | Pointer to [**[]WorkflowTaskInfoRelationship**](WorkflowTaskInfoRelationship.md) | An array of relationships to workflowTaskInfo resources. | [optional] [readonly] 
 **WorkflowDefinition** | Pointer to [**WorkflowWorkflowDefinitionRelationship**](workflow.WorkflowDefinition.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -881,6 +883,31 @@ SetWorkflowTaskCount sets WorkflowTaskCount field to given value.
 
 HasWorkflowTaskCount returns a boolean if a field has been set.
 
+### GetWorkflowWorkerTaskCount
+
+`func (o *WorkflowWorkflowInfoAllOf) GetWorkflowWorkerTaskCount() int64`
+
+GetWorkflowWorkerTaskCount returns the WorkflowWorkerTaskCount field if non-nil, zero value otherwise.
+
+### GetWorkflowWorkerTaskCountOk
+
+`func (o *WorkflowWorkflowInfoAllOf) GetWorkflowWorkerTaskCountOk() (*int64, bool)`
+
+GetWorkflowWorkerTaskCountOk returns a tuple with the WorkflowWorkerTaskCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWorkflowWorkerTaskCount
+
+`func (o *WorkflowWorkflowInfoAllOf) SetWorkflowWorkerTaskCount(v int64)`
+
+SetWorkflowWorkerTaskCount sets WorkflowWorkerTaskCount field to given value.
+
+### HasWorkflowWorkerTaskCount
+
+`func (o *WorkflowWorkflowInfoAllOf) HasWorkflowWorkerTaskCount() bool`
+
+HasWorkflowWorkerTaskCount returns a boolean if a field has been set.
+
 ### GetVar0RollbackWorkflow
 
 `func (o *WorkflowWorkflowInfoAllOf) GetVar0RollbackWorkflow() WorkflowRollbackWorkflowRelationship`
@@ -906,55 +933,80 @@ SetVar0RollbackWorkflow sets Var0RollbackWorkflow field to given value.
 
 HasVar0RollbackWorkflow returns a boolean if a field has been set.
 
-### GetVar1SwitchProfile
+### GetVar1Profile
 
-`func (o *WorkflowWorkflowInfoAllOf) GetVar1SwitchProfile() FabricSwitchProfileRelationship`
+`func (o *WorkflowWorkflowInfoAllOf) GetVar1Profile() ChassisProfileRelationship`
 
-GetVar1SwitchProfile returns the Var1SwitchProfile field if non-nil, zero value otherwise.
+GetVar1Profile returns the Var1Profile field if non-nil, zero value otherwise.
 
-### GetVar1SwitchProfileOk
+### GetVar1ProfileOk
 
-`func (o *WorkflowWorkflowInfoAllOf) GetVar1SwitchProfileOk() (*FabricSwitchProfileRelationship, bool)`
+`func (o *WorkflowWorkflowInfoAllOf) GetVar1ProfileOk() (*ChassisProfileRelationship, bool)`
 
-GetVar1SwitchProfileOk returns a tuple with the Var1SwitchProfile field if it's non-nil, zero value otherwise
+GetVar1ProfileOk returns a tuple with the Var1Profile field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetVar1SwitchProfile
+### SetVar1Profile
 
-`func (o *WorkflowWorkflowInfoAllOf) SetVar1SwitchProfile(v FabricSwitchProfileRelationship)`
+`func (o *WorkflowWorkflowInfoAllOf) SetVar1Profile(v ChassisProfileRelationship)`
 
-SetVar1SwitchProfile sets Var1SwitchProfile field to given value.
+SetVar1Profile sets Var1Profile field to given value.
 
-### HasVar1SwitchProfile
+### HasVar1Profile
 
-`func (o *WorkflowWorkflowInfoAllOf) HasVar1SwitchProfile() bool`
+`func (o *WorkflowWorkflowInfoAllOf) HasVar1Profile() bool`
 
-HasVar1SwitchProfile returns a boolean if a field has been set.
+HasVar1Profile returns a boolean if a field has been set.
 
-### GetVar2ClusterProfile
+### GetVar2SwitchProfile
 
-`func (o *WorkflowWorkflowInfoAllOf) GetVar2ClusterProfile() HyperflexClusterProfileRelationship`
+`func (o *WorkflowWorkflowInfoAllOf) GetVar2SwitchProfile() FabricSwitchProfileRelationship`
 
-GetVar2ClusterProfile returns the Var2ClusterProfile field if non-nil, zero value otherwise.
+GetVar2SwitchProfile returns the Var2SwitchProfile field if non-nil, zero value otherwise.
 
-### GetVar2ClusterProfileOk
+### GetVar2SwitchProfileOk
 
-`func (o *WorkflowWorkflowInfoAllOf) GetVar2ClusterProfileOk() (*HyperflexClusterProfileRelationship, bool)`
+`func (o *WorkflowWorkflowInfoAllOf) GetVar2SwitchProfileOk() (*FabricSwitchProfileRelationship, bool)`
 
-GetVar2ClusterProfileOk returns a tuple with the Var2ClusterProfile field if it's non-nil, zero value otherwise
+GetVar2SwitchProfileOk returns a tuple with the Var2SwitchProfile field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetVar2ClusterProfile
+### SetVar2SwitchProfile
 
-`func (o *WorkflowWorkflowInfoAllOf) SetVar2ClusterProfile(v HyperflexClusterProfileRelationship)`
+`func (o *WorkflowWorkflowInfoAllOf) SetVar2SwitchProfile(v FabricSwitchProfileRelationship)`
 
-SetVar2ClusterProfile sets Var2ClusterProfile field to given value.
+SetVar2SwitchProfile sets Var2SwitchProfile field to given value.
 
-### HasVar2ClusterProfile
+### HasVar2SwitchProfile
 
-`func (o *WorkflowWorkflowInfoAllOf) HasVar2ClusterProfile() bool`
+`func (o *WorkflowWorkflowInfoAllOf) HasVar2SwitchProfile() bool`
 
-HasVar2ClusterProfile returns a boolean if a field has been set.
+HasVar2SwitchProfile returns a boolean if a field has been set.
+
+### GetVar3ClusterProfile
+
+`func (o *WorkflowWorkflowInfoAllOf) GetVar3ClusterProfile() HyperflexClusterProfileRelationship`
+
+GetVar3ClusterProfile returns the Var3ClusterProfile field if non-nil, zero value otherwise.
+
+### GetVar3ClusterProfileOk
+
+`func (o *WorkflowWorkflowInfoAllOf) GetVar3ClusterProfileOk() (*HyperflexClusterProfileRelationship, bool)`
+
+GetVar3ClusterProfileOk returns a tuple with the Var3ClusterProfile field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVar3ClusterProfile
+
+`func (o *WorkflowWorkflowInfoAllOf) SetVar3ClusterProfile(v HyperflexClusterProfileRelationship)`
+
+SetVar3ClusterProfile sets Var3ClusterProfile field to given value.
+
+### HasVar3ClusterProfile
+
+`func (o *WorkflowWorkflowInfoAllOf) HasVar3ClusterProfile() bool`
+
+HasVar3ClusterProfile returns a boolean if a field has been set.
 
 ### GetAccount
 

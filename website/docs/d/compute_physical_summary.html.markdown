@@ -1,13 +1,12 @@
-
 ---
+subcategory: "compute"
 layout: "intersight"
 page_title: "Intersight: intersight_compute_physical_summary"
-sidebar_current: "docs-intersight-data-source-compute-physical-summary"
 description: |-
-Consolidated view of Blades and RackUnits.
+  Consolidated view of Blades and RackUnits.
 ---
 
-# Data Source: intersight_compute._physical_summary
+# Data Source: intersight_compute_physical_summary
 Consolidated view of Blades and RackUnits.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
@@ -16,7 +15,6 @@ The following arguments can be used to get data of already created objects in In
 * `available_memory`:(int) The amount of memory available on the server. 
 * `bios_post_complete`:(bool) The BIOS POST completion status of the server. 
 * `chassis_id`:(string) The id of the chassis that the blade is located in. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `connection_status`:(string) Connectivity Status of RackUnit to Switch - A or B or AB. 
 * `cpu_capacity`:(float) CPU Capacity = Number of CPU Sockets x Enabled Cores x Speed (GHz). 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
@@ -37,7 +35,6 @@ The following arguments can be used to get data of already created objects in In
 * `num_eth_host_interfaces`:(int) The total number of vNICs which are visible to a host on the server. 
 * `num_fc_host_interfaces`:(int) The total number of vHBAs which are visible to a host on the server. 
 * `num_threads`:(int) The total number of threads the server is capable of handling. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `oper_power_state`:(string) The actual power state of the server. 
 * `oper_state`:(string) The operational state of the server. 
 * `operability`:(string) The operability of the server. 

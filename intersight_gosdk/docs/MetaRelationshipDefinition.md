@@ -11,7 +11,8 @@ Name | Type | Description | Notes
 **Export** | Pointer to **bool** | When turned off, the peer MO is not exported when the local MO is exported. | [optional] [readonly] 
 **ExportWithPeer** | Pointer to **bool** | When turned on, the local MO is exported when the peer is exported. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the relationship. | [optional] [readonly] 
-**Type** | Pointer to **string** | Fully qualified type of the foreign managed object. | [optional] [readonly] 
+**PeerRelName** | Pointer to **string** | Name of relationship in peer managed object. | [optional] [readonly] 
+**Type** | Pointer to **string** | Fully qualified type of the peer managed object. | [optional] [readonly] 
 
 ## Methods
 
@@ -196,6 +197,31 @@ SetName sets Name field to given value.
 `func (o *MetaRelationshipDefinition) HasName() bool`
 
 HasName returns a boolean if a field has been set.
+
+### GetPeerRelName
+
+`func (o *MetaRelationshipDefinition) GetPeerRelName() string`
+
+GetPeerRelName returns the PeerRelName field if non-nil, zero value otherwise.
+
+### GetPeerRelNameOk
+
+`func (o *MetaRelationshipDefinition) GetPeerRelNameOk() (*string, bool)`
+
+GetPeerRelNameOk returns a tuple with the PeerRelName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPeerRelName
+
+`func (o *MetaRelationshipDefinition) SetPeerRelName(v string)`
+
+SetPeerRelName sets PeerRelName field to given value.
+
+### HasPeerRelName
+
+`func (o *MetaRelationshipDefinition) HasPeerRelName() bool`
+
+HasPeerRelName returns a boolean if a field has been set.
 
 ### GetType
 

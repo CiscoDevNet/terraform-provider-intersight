@@ -1,24 +1,21 @@
-
 ---
+subcategory: "ether"
 layout: "intersight"
 page_title: "Intersight: intersight_ether_host_port"
-sidebar_current: "docs-intersight-data-source-ether-host-port"
 description: |-
-Model object contains the details of host port available on IO card or fabric extender.
+  Model object contains the details of host port available on IO card or fabric extender.
 ---
 
-# Data Source: intersight_ether._host_port
+# Data Source: intersight_ether_host_port
 Model object contains the details of host port available on IO card or fabric extender.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `mac_address`:(string) Mac Address of a port in the Fabric Interconnect. 
 * `mode`:(string) Operating mode of this port. 
 * `module_id`:(int) Fabric extender identifier for this port. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `oper_speed`:(string) Current Operational speed for this port. 
 * `oper_state`:(string) Operational state of this port (enabled/disabled). 
 * `oper_state_qual`:(string) Reason for this port's Operational state. 

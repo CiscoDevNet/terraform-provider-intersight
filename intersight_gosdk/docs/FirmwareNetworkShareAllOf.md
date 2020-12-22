@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.NetworkShare"]
 **CifsServer** | Pointer to [**NullableFirmwareCifsServer**](firmware.CifsServer.md) |  | [optional] 
 **HttpServer** | Pointer to [**NullableFirmwareHttpServer**](firmware.HttpServer.md) |  | [optional] 
-**IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] 
+**IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] [default to false]
 **MapType** | Pointer to **string** | File server protocols such as CIFS, NFS, WWW for HTTP (S) that hosts the image. * &#x60;nfs&#x60; - File server protocol used is NFS. * &#x60;cifs&#x60; - File server protocol used is CIFS. * &#x60;www&#x60; - File server protocol used is WWW. | [optional] [default to "nfs"]
 **NfsServer** | Pointer to [**NullableFirmwareNfsServer**](firmware.NfsServer.md) |  | [optional] 
 **Password** | Pointer to **string** | Password as configured on the file server. | [optional] 

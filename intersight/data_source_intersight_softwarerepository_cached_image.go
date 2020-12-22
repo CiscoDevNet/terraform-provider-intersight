@@ -1,19 +1,20 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceSoftwarerepositoryCachedImage() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceSoftwarerepositoryCachedImageRead,
+		ReadContext: dataSourceSoftwarerepositoryCachedImageRead,
 		Schema: map[string]*schema.Schema{
 			"action": {
 				Description: "The action to be performed on the imported file. If 'PreCache' is set, the image will be cached in endpoint. If 'Evict' is set, the cached file will be removed. Applicable in Intersight appliance deployment. If 'Cancel' is set, the ImportState is marked as 'Failed'. Applicable for local machine source.\n* `None` - No action should be taken on the imported file.\n* `GeneratePreSignedUploadUrl` - Generate pre signed URL of file for importing into the repository.\n* `GeneratePreSignedDownloadUrl` - Generate pre signed URL of file in the repository to download.\n* `CompleteImportProcess` - Mark that the import process of the file into the repository is complete.\n* `MarkImportFailed` - Mark to indicate that the import process of the file into the repository failed.\n* `PreCache` - Cache the file into the Intersight Appliance.\n* `Cancel` - The cancel import process for the file into the repository.\n* `Extract` - The action to extract the file in the external repository.\n* `Evict` - Evict the cached file from the Intersight Appliance.",
@@ -235,10 +236,11 @@ func dataSourceSoftwarerepositoryCachedImage() *schema.Resource {
 	}
 }
 
-func dataSourceSoftwarerepositoryCachedImageRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceSoftwarerepositoryCachedImageRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.SoftwarerepositoryCachedImage{}
 	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
@@ -295,25 +297,25 @@ func dataSourceSoftwarerepositoryCachedImageRead(d *schema.ResourceData, meta in
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of SoftwarerepositoryCachedImage object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.SoftwarerepositoryApi.GetSoftwarerepositoryCachedImageList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.SoftwarerepositoryApi.GetSoftwarerepositoryCachedImageList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching SoftwarerepositoryCachedImage: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for SoftwarerepositoryCachedImage list: %s", err.Error())
 	}
 	var s = &models.SoftwarerepositoryCachedImageList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to SoftwarerepositoryCachedImage: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to SoftwarerepositoryCachedImage list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for SoftwarerepositoryCachedImage did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -322,72 +324,72 @@ func dataSourceSoftwarerepositoryCachedImageRead(d *schema.ResourceData, meta in
 			var s = &models.SoftwarerepositoryCachedImage{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("action", (s.GetAction())); err != nil {
-				return fmt.Errorf("error occurred while setting property Action: %+v", err)
+				return diag.Errorf("error occurred while setting property Action: %s", err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("cache_state", (s.GetCacheState())); err != nil {
-				return fmt.Errorf("error occurred while setting property CacheState: %+v", err)
+				return diag.Errorf("error occurred while setting property CacheState: %s", err.Error())
 			}
 
 			if err := d.Set("cached_time", (s.GetCachedTime()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property CachedTime: %+v", err)
+				return diag.Errorf("error occurred while setting property CachedTime: %s", err.Error())
 			}
 
 			if err := d.Set("checksum", flattenMapConnectorFileChecksum(s.GetChecksum(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Checksum: %+v", err)
+				return diag.Errorf("error occurred while setting property Checksum: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("download_error", (s.GetDownloadError())); err != nil {
-				return fmt.Errorf("error occurred while setting property DownloadError: %+v", err)
+				return diag.Errorf("error occurred while setting property DownloadError: %s", err.Error())
 			}
 			if err := d.Set("download_progress", (s.GetDownloadProgress())); err != nil {
-				return fmt.Errorf("error occurred while setting property DownloadProgress: %+v", err)
+				return diag.Errorf("error occurred while setting property DownloadProgress: %s", err.Error())
 			}
 			if err := d.Set("download_retries", (s.GetDownloadRetries())); err != nil {
-				return fmt.Errorf("error occurred while setting property DownloadRetries: %+v", err)
+				return diag.Errorf("error occurred while setting property DownloadRetries: %s", err.Error())
 			}
 
 			if err := d.Set("file", flattenMapSoftwarerepositoryFileRelationship(s.GetFile(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property File: %+v", err)
+				return diag.Errorf("error occurred while setting property File: %s", err.Error())
 			}
 			if err := d.Set("md5sum", (s.GetMd5sum())); err != nil {
-				return fmt.Errorf("error occurred while setting property Md5sum: %+v", err)
+				return diag.Errorf("error occurred while setting property Md5sum: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 
 			if err := d.Set("network_element", flattenMapNetworkElementRelationship(s.GetNetworkElement(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property NetworkElement: %+v", err)
+				return diag.Errorf("error occurred while setting property NetworkElement: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("original_sha512sum", (s.GetOriginalSha512sum())); err != nil {
-				return fmt.Errorf("error occurred while setting property OriginalSha512sum: %+v", err)
+				return diag.Errorf("error occurred while setting property OriginalSha512sum: %s", err.Error())
 			}
 			if err := d.Set("path", (s.GetPath())); err != nil {
-				return fmt.Errorf("error occurred while setting property Path: %+v", err)
+				return diag.Errorf("error occurred while setting property Path: %s", err.Error())
 			}
 			if err := d.Set("registered_workflows", (s.GetRegisteredWorkflows())); err != nil {
-				return fmt.Errorf("error occurred while setting property RegisteredWorkflows: %+v", err)
+				return diag.Errorf("error occurred while setting property RegisteredWorkflows: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("used_count", (s.GetUsedCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property UsedCount: %+v", err)
+				return diag.Errorf("error occurred while setting property UsedCount: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

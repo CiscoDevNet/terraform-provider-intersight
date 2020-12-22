@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -34,7 +34,9 @@ type MetaRelationshipDefinition struct {
 	ExportWithPeer *bool `json:"ExportWithPeer,omitempty"`
 	// The name of the relationship.
 	Name *string `json:"Name,omitempty"`
-	// Fully qualified type of the foreign managed object.
+	// Name of relationship in peer managed object.
+	PeerRelName *string `json:"PeerRelName,omitempty"`
+	// Fully qualified type of the peer managed object.
 	Type                 *string `json:"Type,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -276,6 +278,38 @@ func (o *MetaRelationshipDefinition) SetName(v string) {
 	o.Name = &v
 }
 
+// GetPeerRelName returns the PeerRelName field value if set, zero value otherwise.
+func (o *MetaRelationshipDefinition) GetPeerRelName() string {
+	if o == nil || o.PeerRelName == nil {
+		var ret string
+		return ret
+	}
+	return *o.PeerRelName
+}
+
+// GetPeerRelNameOk returns a tuple with the PeerRelName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *MetaRelationshipDefinition) GetPeerRelNameOk() (*string, bool) {
+	if o == nil || o.PeerRelName == nil {
+		return nil, false
+	}
+	return o.PeerRelName, true
+}
+
+// HasPeerRelName returns a boolean if a field has been set.
+func (o *MetaRelationshipDefinition) HasPeerRelName() bool {
+	if o != nil && o.PeerRelName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPeerRelName gets a reference to the given string and assigns it to the PeerRelName field.
+func (o *MetaRelationshipDefinition) SetPeerRelName(v string) {
+	o.PeerRelName = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *MetaRelationshipDefinition) GetType() string {
 	if o == nil || o.Type == nil {
@@ -339,6 +373,9 @@ func (o MetaRelationshipDefinition) MarshalJSON() ([]byte, error) {
 	if o.Name != nil {
 		toSerialize["Name"] = o.Name
 	}
+	if o.PeerRelName != nil {
+		toSerialize["PeerRelName"] = o.PeerRelName
+	}
 	if o.Type != nil {
 		toSerialize["Type"] = o.Type
 	}
@@ -366,7 +403,9 @@ func (o *MetaRelationshipDefinition) UnmarshalJSON(bytes []byte) (err error) {
 		ExportWithPeer *bool `json:"ExportWithPeer,omitempty"`
 		// The name of the relationship.
 		Name *string `json:"Name,omitempty"`
-		// Fully qualified type of the foreign managed object.
+		// Name of relationship in peer managed object.
+		PeerRelName *string `json:"PeerRelName,omitempty"`
+		// Fully qualified type of the peer managed object.
 		Type *string `json:"Type,omitempty"`
 	}
 
@@ -382,6 +421,7 @@ func (o *MetaRelationshipDefinition) UnmarshalJSON(bytes []byte) (err error) {
 		varMetaRelationshipDefinition.Export = varMetaRelationshipDefinitionWithoutEmbeddedStruct.Export
 		varMetaRelationshipDefinition.ExportWithPeer = varMetaRelationshipDefinitionWithoutEmbeddedStruct.ExportWithPeer
 		varMetaRelationshipDefinition.Name = varMetaRelationshipDefinitionWithoutEmbeddedStruct.Name
+		varMetaRelationshipDefinition.PeerRelName = varMetaRelationshipDefinitionWithoutEmbeddedStruct.PeerRelName
 		varMetaRelationshipDefinition.Type = varMetaRelationshipDefinitionWithoutEmbeddedStruct.Type
 		*o = MetaRelationshipDefinition(varMetaRelationshipDefinition)
 	} else {
@@ -407,6 +447,7 @@ func (o *MetaRelationshipDefinition) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Export")
 		delete(additionalProperties, "ExportWithPeer")
 		delete(additionalProperties, "Name")
+		delete(additionalProperties, "PeerRelName")
 		delete(additionalProperties, "Type")
 
 		// remove fields from embedded structs

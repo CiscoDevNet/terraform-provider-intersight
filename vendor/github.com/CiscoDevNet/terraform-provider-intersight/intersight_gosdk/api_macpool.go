@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -12,6 +12,7 @@
 package intersight
 
 import (
+	"bytes"
 	_context "context"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
@@ -48,7 +49,7 @@ func (r ApiCreateMacpoolPoolRequest) IfNoneMatch(ifNoneMatch string) ApiCreateMa
 	return r
 }
 
-func (r ApiCreateMacpoolPoolRequest) Execute() (MacpoolPool, *_nethttp.Response, error) {
+func (r ApiCreateMacpoolPoolRequest) Execute() (MacpoolPool, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateMacpoolPoolExecute(r)
 }
 
@@ -68,19 +69,21 @@ func (a *MacpoolApiService) CreateMacpoolPool(ctx _context.Context) ApiCreateMac
  * Execute executes the request
  * @return MacpoolPool
  */
-func (a *MacpoolApiService) CreateMacpoolPoolExecute(r ApiCreateMacpoolPoolRequest) (MacpoolPool, *_nethttp.Response, error) {
+func (a *MacpoolApiService) CreateMacpoolPoolExecute(r ApiCreateMacpoolPoolRequest) (MacpoolPool, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  MacpoolPool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MacpoolApiService.CreateMacpoolPool")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/macpool/Pools"
@@ -89,7 +92,8 @@ func (a *MacpoolApiService) CreateMacpoolPoolExecute(r ApiCreateMacpoolPoolReque
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.macpoolPool == nil {
-		return localVarReturnValue, nil, reportError("macpoolPool is required and must be specified")
+		executionError.error = "macpoolPool is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -119,18 +123,22 @@ func (a *MacpoolApiService) CreateMacpoolPoolExecute(r ApiCreateMacpoolPoolReque
 	localVarPostBody = r.macpoolPool
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -197,7 +205,7 @@ func (a *MacpoolApiService) CreateMacpoolPoolExecute(r ApiCreateMacpoolPoolReque
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiDeleteMacpoolPoolRequest struct {
@@ -206,7 +214,7 @@ type ApiDeleteMacpoolPoolRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteMacpoolPoolRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteMacpoolPoolRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteMacpoolPoolExecute(r)
 }
 
@@ -227,18 +235,20 @@ func (a *MacpoolApiService) DeleteMacpoolPool(ctx _context.Context, moid string)
 /*
  * Execute executes the request
  */
-func (a *MacpoolApiService) DeleteMacpoolPoolExecute(r ApiDeleteMacpoolPoolRequest) (*_nethttp.Response, error) {
+func (a *MacpoolApiService) DeleteMacpoolPoolExecute(r ApiDeleteMacpoolPoolRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MacpoolApiService.DeleteMacpoolPool")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/macpool/Pools/{Moid}"
@@ -267,18 +277,22 @@ func (a *MacpoolApiService) DeleteMacpoolPoolExecute(r ApiDeleteMacpoolPoolReque
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -336,7 +350,7 @@ func (a *MacpoolApiService) DeleteMacpoolPoolExecute(r ApiDeleteMacpoolPoolReque
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiGetMacpoolIdBlockByMoidRequest struct {
@@ -345,7 +359,7 @@ type ApiGetMacpoolIdBlockByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetMacpoolIdBlockByMoidRequest) Execute() (MacpoolIdBlock, *_nethttp.Response, error) {
+func (r ApiGetMacpoolIdBlockByMoidRequest) Execute() (MacpoolIdBlock, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetMacpoolIdBlockByMoidExecute(r)
 }
 
@@ -367,19 +381,21 @@ func (a *MacpoolApiService) GetMacpoolIdBlockByMoid(ctx _context.Context, moid s
  * Execute executes the request
  * @return MacpoolIdBlock
  */
-func (a *MacpoolApiService) GetMacpoolIdBlockByMoidExecute(r ApiGetMacpoolIdBlockByMoidRequest) (MacpoolIdBlock, *_nethttp.Response, error) {
+func (a *MacpoolApiService) GetMacpoolIdBlockByMoidExecute(r ApiGetMacpoolIdBlockByMoidRequest) (MacpoolIdBlock, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  MacpoolIdBlock
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MacpoolApiService.GetMacpoolIdBlockByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/macpool/IdBlocks/{Moid}"
@@ -408,18 +424,22 @@ func (a *MacpoolApiService) GetMacpoolIdBlockByMoidExecute(r ApiGetMacpoolIdBloc
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -486,7 +506,7 @@ func (a *MacpoolApiService) GetMacpoolIdBlockByMoidExecute(r ApiGetMacpoolIdBloc
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetMacpoolIdBlockListRequest struct {
@@ -550,7 +570,7 @@ func (r ApiGetMacpoolIdBlockListRequest) Tags(tags string) ApiGetMacpoolIdBlockL
 	return r
 }
 
-func (r ApiGetMacpoolIdBlockListRequest) Execute() (MacpoolIdBlockResponse, *_nethttp.Response, error) {
+func (r ApiGetMacpoolIdBlockListRequest) Execute() (MacpoolIdBlockResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetMacpoolIdBlockListExecute(r)
 }
 
@@ -570,19 +590,21 @@ func (a *MacpoolApiService) GetMacpoolIdBlockList(ctx _context.Context) ApiGetMa
  * Execute executes the request
  * @return MacpoolIdBlockResponse
  */
-func (a *MacpoolApiService) GetMacpoolIdBlockListExecute(r ApiGetMacpoolIdBlockListRequest) (MacpoolIdBlockResponse, *_nethttp.Response, error) {
+func (a *MacpoolApiService) GetMacpoolIdBlockListExecute(r ApiGetMacpoolIdBlockListRequest) (MacpoolIdBlockResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  MacpoolIdBlockResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MacpoolApiService.GetMacpoolIdBlockList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/macpool/IdBlocks"
@@ -643,18 +665,22 @@ func (a *MacpoolApiService) GetMacpoolIdBlockListExecute(r ApiGetMacpoolIdBlockL
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -721,7 +747,7 @@ func (a *MacpoolApiService) GetMacpoolIdBlockListExecute(r ApiGetMacpoolIdBlockL
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetMacpoolLeaseByMoidRequest struct {
@@ -730,7 +756,7 @@ type ApiGetMacpoolLeaseByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetMacpoolLeaseByMoidRequest) Execute() (MacpoolLease, *_nethttp.Response, error) {
+func (r ApiGetMacpoolLeaseByMoidRequest) Execute() (MacpoolLease, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetMacpoolLeaseByMoidExecute(r)
 }
 
@@ -752,19 +778,21 @@ func (a *MacpoolApiService) GetMacpoolLeaseByMoid(ctx _context.Context, moid str
  * Execute executes the request
  * @return MacpoolLease
  */
-func (a *MacpoolApiService) GetMacpoolLeaseByMoidExecute(r ApiGetMacpoolLeaseByMoidRequest) (MacpoolLease, *_nethttp.Response, error) {
+func (a *MacpoolApiService) GetMacpoolLeaseByMoidExecute(r ApiGetMacpoolLeaseByMoidRequest) (MacpoolLease, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  MacpoolLease
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MacpoolApiService.GetMacpoolLeaseByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/macpool/Leases/{Moid}"
@@ -793,18 +821,22 @@ func (a *MacpoolApiService) GetMacpoolLeaseByMoidExecute(r ApiGetMacpoolLeaseByM
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -871,7 +903,7 @@ func (a *MacpoolApiService) GetMacpoolLeaseByMoidExecute(r ApiGetMacpoolLeaseByM
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetMacpoolLeaseListRequest struct {
@@ -935,7 +967,7 @@ func (r ApiGetMacpoolLeaseListRequest) Tags(tags string) ApiGetMacpoolLeaseListR
 	return r
 }
 
-func (r ApiGetMacpoolLeaseListRequest) Execute() (MacpoolLeaseResponse, *_nethttp.Response, error) {
+func (r ApiGetMacpoolLeaseListRequest) Execute() (MacpoolLeaseResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetMacpoolLeaseListExecute(r)
 }
 
@@ -955,19 +987,21 @@ func (a *MacpoolApiService) GetMacpoolLeaseList(ctx _context.Context) ApiGetMacp
  * Execute executes the request
  * @return MacpoolLeaseResponse
  */
-func (a *MacpoolApiService) GetMacpoolLeaseListExecute(r ApiGetMacpoolLeaseListRequest) (MacpoolLeaseResponse, *_nethttp.Response, error) {
+func (a *MacpoolApiService) GetMacpoolLeaseListExecute(r ApiGetMacpoolLeaseListRequest) (MacpoolLeaseResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  MacpoolLeaseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MacpoolApiService.GetMacpoolLeaseList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/macpool/Leases"
@@ -1028,18 +1062,22 @@ func (a *MacpoolApiService) GetMacpoolLeaseListExecute(r ApiGetMacpoolLeaseListR
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1106,7 +1144,7 @@ func (a *MacpoolApiService) GetMacpoolLeaseListExecute(r ApiGetMacpoolLeaseListR
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetMacpoolPoolByMoidRequest struct {
@@ -1115,7 +1153,7 @@ type ApiGetMacpoolPoolByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetMacpoolPoolByMoidRequest) Execute() (MacpoolPool, *_nethttp.Response, error) {
+func (r ApiGetMacpoolPoolByMoidRequest) Execute() (MacpoolPool, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetMacpoolPoolByMoidExecute(r)
 }
 
@@ -1137,19 +1175,21 @@ func (a *MacpoolApiService) GetMacpoolPoolByMoid(ctx _context.Context, moid stri
  * Execute executes the request
  * @return MacpoolPool
  */
-func (a *MacpoolApiService) GetMacpoolPoolByMoidExecute(r ApiGetMacpoolPoolByMoidRequest) (MacpoolPool, *_nethttp.Response, error) {
+func (a *MacpoolApiService) GetMacpoolPoolByMoidExecute(r ApiGetMacpoolPoolByMoidRequest) (MacpoolPool, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  MacpoolPool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MacpoolApiService.GetMacpoolPoolByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/macpool/Pools/{Moid}"
@@ -1178,18 +1218,22 @@ func (a *MacpoolApiService) GetMacpoolPoolByMoidExecute(r ApiGetMacpoolPoolByMoi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1256,7 +1300,7 @@ func (a *MacpoolApiService) GetMacpoolPoolByMoidExecute(r ApiGetMacpoolPoolByMoi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetMacpoolPoolListRequest struct {
@@ -1320,7 +1364,7 @@ func (r ApiGetMacpoolPoolListRequest) Tags(tags string) ApiGetMacpoolPoolListReq
 	return r
 }
 
-func (r ApiGetMacpoolPoolListRequest) Execute() (MacpoolPoolResponse, *_nethttp.Response, error) {
+func (r ApiGetMacpoolPoolListRequest) Execute() (MacpoolPoolResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetMacpoolPoolListExecute(r)
 }
 
@@ -1340,19 +1384,21 @@ func (a *MacpoolApiService) GetMacpoolPoolList(ctx _context.Context) ApiGetMacpo
  * Execute executes the request
  * @return MacpoolPoolResponse
  */
-func (a *MacpoolApiService) GetMacpoolPoolListExecute(r ApiGetMacpoolPoolListRequest) (MacpoolPoolResponse, *_nethttp.Response, error) {
+func (a *MacpoolApiService) GetMacpoolPoolListExecute(r ApiGetMacpoolPoolListRequest) (MacpoolPoolResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  MacpoolPoolResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MacpoolApiService.GetMacpoolPoolList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/macpool/Pools"
@@ -1413,18 +1459,22 @@ func (a *MacpoolApiService) GetMacpoolPoolListExecute(r ApiGetMacpoolPoolListReq
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1491,7 +1541,7 @@ func (a *MacpoolApiService) GetMacpoolPoolListExecute(r ApiGetMacpoolPoolListReq
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetMacpoolPoolMemberByMoidRequest struct {
@@ -1500,7 +1550,7 @@ type ApiGetMacpoolPoolMemberByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetMacpoolPoolMemberByMoidRequest) Execute() (MacpoolPoolMember, *_nethttp.Response, error) {
+func (r ApiGetMacpoolPoolMemberByMoidRequest) Execute() (MacpoolPoolMember, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetMacpoolPoolMemberByMoidExecute(r)
 }
 
@@ -1522,19 +1572,21 @@ func (a *MacpoolApiService) GetMacpoolPoolMemberByMoid(ctx _context.Context, moi
  * Execute executes the request
  * @return MacpoolPoolMember
  */
-func (a *MacpoolApiService) GetMacpoolPoolMemberByMoidExecute(r ApiGetMacpoolPoolMemberByMoidRequest) (MacpoolPoolMember, *_nethttp.Response, error) {
+func (a *MacpoolApiService) GetMacpoolPoolMemberByMoidExecute(r ApiGetMacpoolPoolMemberByMoidRequest) (MacpoolPoolMember, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  MacpoolPoolMember
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MacpoolApiService.GetMacpoolPoolMemberByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/macpool/PoolMembers/{Moid}"
@@ -1563,18 +1615,22 @@ func (a *MacpoolApiService) GetMacpoolPoolMemberByMoidExecute(r ApiGetMacpoolPoo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1641,7 +1697,7 @@ func (a *MacpoolApiService) GetMacpoolPoolMemberByMoidExecute(r ApiGetMacpoolPoo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetMacpoolPoolMemberListRequest struct {
@@ -1705,7 +1761,7 @@ func (r ApiGetMacpoolPoolMemberListRequest) Tags(tags string) ApiGetMacpoolPoolM
 	return r
 }
 
-func (r ApiGetMacpoolPoolMemberListRequest) Execute() (MacpoolPoolMemberResponse, *_nethttp.Response, error) {
+func (r ApiGetMacpoolPoolMemberListRequest) Execute() (MacpoolPoolMemberResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetMacpoolPoolMemberListExecute(r)
 }
 
@@ -1725,19 +1781,21 @@ func (a *MacpoolApiService) GetMacpoolPoolMemberList(ctx _context.Context) ApiGe
  * Execute executes the request
  * @return MacpoolPoolMemberResponse
  */
-func (a *MacpoolApiService) GetMacpoolPoolMemberListExecute(r ApiGetMacpoolPoolMemberListRequest) (MacpoolPoolMemberResponse, *_nethttp.Response, error) {
+func (a *MacpoolApiService) GetMacpoolPoolMemberListExecute(r ApiGetMacpoolPoolMemberListRequest) (MacpoolPoolMemberResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  MacpoolPoolMemberResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MacpoolApiService.GetMacpoolPoolMemberList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/macpool/PoolMembers"
@@ -1798,18 +1856,22 @@ func (a *MacpoolApiService) GetMacpoolPoolMemberListExecute(r ApiGetMacpoolPoolM
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1876,7 +1938,7 @@ func (a *MacpoolApiService) GetMacpoolPoolMemberListExecute(r ApiGetMacpoolPoolM
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetMacpoolUniverseByMoidRequest struct {
@@ -1885,7 +1947,7 @@ type ApiGetMacpoolUniverseByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetMacpoolUniverseByMoidRequest) Execute() (MacpoolUniverse, *_nethttp.Response, error) {
+func (r ApiGetMacpoolUniverseByMoidRequest) Execute() (MacpoolUniverse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetMacpoolUniverseByMoidExecute(r)
 }
 
@@ -1907,19 +1969,21 @@ func (a *MacpoolApiService) GetMacpoolUniverseByMoid(ctx _context.Context, moid 
  * Execute executes the request
  * @return MacpoolUniverse
  */
-func (a *MacpoolApiService) GetMacpoolUniverseByMoidExecute(r ApiGetMacpoolUniverseByMoidRequest) (MacpoolUniverse, *_nethttp.Response, error) {
+func (a *MacpoolApiService) GetMacpoolUniverseByMoidExecute(r ApiGetMacpoolUniverseByMoidRequest) (MacpoolUniverse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  MacpoolUniverse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MacpoolApiService.GetMacpoolUniverseByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/macpool/Universes/{Moid}"
@@ -1948,18 +2012,22 @@ func (a *MacpoolApiService) GetMacpoolUniverseByMoidExecute(r ApiGetMacpoolUnive
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2026,7 +2094,7 @@ func (a *MacpoolApiService) GetMacpoolUniverseByMoidExecute(r ApiGetMacpoolUnive
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetMacpoolUniverseListRequest struct {
@@ -2090,7 +2158,7 @@ func (r ApiGetMacpoolUniverseListRequest) Tags(tags string) ApiGetMacpoolUnivers
 	return r
 }
 
-func (r ApiGetMacpoolUniverseListRequest) Execute() (MacpoolUniverseResponse, *_nethttp.Response, error) {
+func (r ApiGetMacpoolUniverseListRequest) Execute() (MacpoolUniverseResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetMacpoolUniverseListExecute(r)
 }
 
@@ -2110,19 +2178,21 @@ func (a *MacpoolApiService) GetMacpoolUniverseList(ctx _context.Context) ApiGetM
  * Execute executes the request
  * @return MacpoolUniverseResponse
  */
-func (a *MacpoolApiService) GetMacpoolUniverseListExecute(r ApiGetMacpoolUniverseListRequest) (MacpoolUniverseResponse, *_nethttp.Response, error) {
+func (a *MacpoolApiService) GetMacpoolUniverseListExecute(r ApiGetMacpoolUniverseListRequest) (MacpoolUniverseResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  MacpoolUniverseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MacpoolApiService.GetMacpoolUniverseList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/macpool/Universes"
@@ -2183,18 +2253,22 @@ func (a *MacpoolApiService) GetMacpoolUniverseListExecute(r ApiGetMacpoolUnivers
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2261,7 +2335,7 @@ func (a *MacpoolApiService) GetMacpoolUniverseListExecute(r ApiGetMacpoolUnivers
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchMacpoolPoolRequest struct {
@@ -2281,7 +2355,7 @@ func (r ApiPatchMacpoolPoolRequest) IfMatch(ifMatch string) ApiPatchMacpoolPoolR
 	return r
 }
 
-func (r ApiPatchMacpoolPoolRequest) Execute() (MacpoolPool, *_nethttp.Response, error) {
+func (r ApiPatchMacpoolPoolRequest) Execute() (MacpoolPool, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchMacpoolPoolExecute(r)
 }
 
@@ -2303,19 +2377,21 @@ func (a *MacpoolApiService) PatchMacpoolPool(ctx _context.Context, moid string) 
  * Execute executes the request
  * @return MacpoolPool
  */
-func (a *MacpoolApiService) PatchMacpoolPoolExecute(r ApiPatchMacpoolPoolRequest) (MacpoolPool, *_nethttp.Response, error) {
+func (a *MacpoolApiService) PatchMacpoolPoolExecute(r ApiPatchMacpoolPoolRequest) (MacpoolPool, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  MacpoolPool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MacpoolApiService.PatchMacpoolPool")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/macpool/Pools/{Moid}"
@@ -2325,7 +2401,8 @@ func (a *MacpoolApiService) PatchMacpoolPoolExecute(r ApiPatchMacpoolPoolRequest
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.macpoolPool == nil {
-		return localVarReturnValue, nil, reportError("macpoolPool is required and must be specified")
+		executionError.error = "macpoolPool is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -2352,18 +2429,22 @@ func (a *MacpoolApiService) PatchMacpoolPoolExecute(r ApiPatchMacpoolPoolRequest
 	localVarPostBody = r.macpoolPool
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2430,7 +2511,7 @@ func (a *MacpoolApiService) PatchMacpoolPoolExecute(r ApiPatchMacpoolPoolRequest
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateMacpoolPoolRequest struct {
@@ -2450,7 +2531,7 @@ func (r ApiUpdateMacpoolPoolRequest) IfMatch(ifMatch string) ApiUpdateMacpoolPoo
 	return r
 }
 
-func (r ApiUpdateMacpoolPoolRequest) Execute() (MacpoolPool, *_nethttp.Response, error) {
+func (r ApiUpdateMacpoolPoolRequest) Execute() (MacpoolPool, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateMacpoolPoolExecute(r)
 }
 
@@ -2472,19 +2553,21 @@ func (a *MacpoolApiService) UpdateMacpoolPool(ctx _context.Context, moid string)
  * Execute executes the request
  * @return MacpoolPool
  */
-func (a *MacpoolApiService) UpdateMacpoolPoolExecute(r ApiUpdateMacpoolPoolRequest) (MacpoolPool, *_nethttp.Response, error) {
+func (a *MacpoolApiService) UpdateMacpoolPoolExecute(r ApiUpdateMacpoolPoolRequest) (MacpoolPool, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  MacpoolPool
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "MacpoolApiService.UpdateMacpoolPool")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/macpool/Pools/{Moid}"
@@ -2494,7 +2577,8 @@ func (a *MacpoolApiService) UpdateMacpoolPoolExecute(r ApiUpdateMacpoolPoolReque
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.macpoolPool == nil {
-		return localVarReturnValue, nil, reportError("macpoolPool is required and must be specified")
+		executionError.error = "macpoolPool is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -2521,18 +2605,22 @@ func (a *MacpoolApiService) UpdateMacpoolPoolExecute(r ApiUpdateMacpoolPoolReque
 	localVarPostBody = r.macpoolPool
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2599,5 +2687,5 @@ func (a *MacpoolApiService) UpdateMacpoolPoolExecute(r ApiUpdateMacpoolPoolReque
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }

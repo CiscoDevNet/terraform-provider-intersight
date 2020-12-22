@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Timestamp** | Pointer to [**time.Time**](time.Time.md) | The ISO 8601 timestamp. | [optional] 
+**Timestamp** | Pointer to **time.Time** | The ISO 8601 timestamp. | [optional] 
 **Result** | Pointer to **[]map[string]interface{}** | A list of dimension values | [optional] 
 
 ## Methods

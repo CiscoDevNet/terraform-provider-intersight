@@ -1,13 +1,12 @@
-
 ---
+subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_task_definition"
-sidebar_current: "docs-intersight-resource-workflow-task-definition"
 description: |-
   Used to define a task which can be included within a workflow. Task definition conveys the intent that we want to achieve with the task. We can have a standalone task definition that is bound to a single implementation for that task, or we can define an TaskDefinition that will serve as the interface task definition which is linked to multiple implementation tasks. Each implemented TaskDefinition will be bound to its own implementation so we can achieve a case where single TaskDefinition has multiple implementations.
 ---
 
-# Resource: intersight_workflow._task_definition
+# Resource: intersight_workflow_task_definition
 Used to define a task which can be included within a workflow. Task definition conveys the intent that we want to achieve with the task. We can have a standalone task definition that is bound to a single implementation for that task, or we can define an TaskDefinition that will serve as the interface task definition which is linked to multiple implementation tasks. Each implemented TaskDefinition will be bound to its own implementation so we can achieve a case where single TaskDefinition has multiple implementations.
 ## Argument Reference
 The following arguments are supported:
@@ -21,7 +20,7 @@ This complex property has following sub-properties:
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `default_version`:(bool) When true this will be the task version that is used when a specific task definition version is not specified. The very first task definition created with a name will be set as the default version, after that user can explicitly set any version of the task definition as the default version. 
 * `description`:(string) The task definition description to describe what this task will do when executed. 
 * `implemented_tasks`:(Array) An array of relationships to workflowTaskDefinition resources. 
@@ -54,7 +53,7 @@ This complex property has following sub-properties:
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
     + `target_data_type`: List of property constraints that helps to narrow down task implementations based on target device input. 
   + `internal`:(bool)(Computed) Denotes this is an internal task. Internal tasks will be hidden from the UI when executing a workflow. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `owner`:(string)(Computed) The service that owns and is responsible for execution of the task. 
 * `label`:(string) A user friendly short name to identify the task definition. Label can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), space ( ), single quote ('), or an underscore (_). 
 * `license_entitlement`:(string)(Computed) License entitlement required to run this task. It is determined by license requirement of features.* `Base` - Base as a License type. It is default license type.* `Essential` - Essential as a License type.* `Standard` - Standard as a License type.* `Advantage` - Advantage as a License type.* `Premier` - Premier as a License type.* `IWO-Essential` - IWO-Essential as a License type.* `IWO-Advantage` - IWO-Advantage as a License type.* `IWO-Premier` - IWO-Premier as a License type. 
@@ -65,7 +64,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `external_meta`:(bool) When set to false the task definition can only be used by internal system workflows. When set to true then the task can be included in user defined workflows. 
   + `input_definition`:(Array)
 This complex property has following sub-properties:
@@ -94,7 +93,7 @@ This complex property has following sub-properties:
   + `name`:(string) Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `required`:(bool) Specifies whether this parameter is required. The field is applicable for task and workflow. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `output_definition`:(Array)
 This complex property has following sub-properties:
     + `additional_properties`:
@@ -139,7 +138,7 @@ This complex property has following sub-properties:
   + `name`:(string) Name of the task definition which is capable of doing rollback of this task. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `task_moid`:(string) The resolved referenced rollback task definition managed object. 
-  + `version`:(int) The version of the task definition. 
+  + `nr_version`:(int) The version of the task definition. 
 * `secure_prop_access`:(bool) If set to true, the task requires access to secure properties and uses an encyption token associated with a workflow moid to encrypt or decrypt the secure properties. 
 * `tags`:(Array)
 This complex property has following sub-properties:
@@ -155,4 +154,11 @@ This complex property has following sub-properties:
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `version`:(int) The version of the task definition so we can support multiple versions of a task definition. 
+* `nr_version`:(int) The version of the task definition so we can support multiple versions of a task definition. 
+
+
+## Import
+`intersight_workflow_task_definition` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_workflow_task_definition.example 1234567890987654321abcde
+```

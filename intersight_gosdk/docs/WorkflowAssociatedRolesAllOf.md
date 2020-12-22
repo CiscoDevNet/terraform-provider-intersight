@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Moid** | Pointer to **string** | Stores the identifier of the task definition for which the required roles are cached in the workflow definition. In the case of sub workflow tasks, this property stores the identifier of the workflow that is wrapped in the sub workflow task. | [optional] [readonly] 
 **Roles** | Pointer to **[]string** |  | [optional] 
 **TaskNames** | Pointer to **[]string** |  | [optional] 
-**WorkflowRoles** | Pointer to [**[]WorkflowAssociatedRoles**](workflow.AssociatedRoles.md) |  | [optional] 
+**WorkflowRoles** | Pointer to [**[]WorkflowAssociatedRoles**](WorkflowAssociatedRoles.md) |  | [optional] 
 
 ## Methods
 

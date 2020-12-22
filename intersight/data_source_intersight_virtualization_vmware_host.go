@@ -1,19 +1,20 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceVirtualizationVmwareHost() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceVirtualizationVmwareHostRead,
+		ReadContext: dataSourceVirtualizationVmwareHostRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -251,7 +252,7 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 				Optional:    true,
 			},
 			"hypervisor_type": {
-				Description: "Identifies the broad type of the underlying hypervisor.\n* `ESXi` - A Vmware ESXi hypervisor of any version.\n* `HXAP` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
+				Description: "Identifies the broad type of the underlying hypervisor.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -561,10 +562,11 @@ func dataSourceVirtualizationVmwareHost() *schema.Resource {
 	}
 }
 
-func dataSourceVirtualizationVmwareHostRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceVirtualizationVmwareHostRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.VirtualizationVmwareHost{}
 	if v, ok := d.GetOk("boot_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
@@ -645,25 +647,25 @@ func dataSourceVirtualizationVmwareHostRead(d *schema.ResourceData, meta interfa
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of VirtualizationVmwareHost object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.VirtualizationApi.GetVirtualizationVmwareHostList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.VirtualizationApi.GetVirtualizationVmwareHostList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching VirtualizationVmwareHost: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for VirtualizationVmwareHost list: %s", err.Error())
 	}
 	var s = &models.VirtualizationVmwareHostList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to VirtualizationVmwareHost: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to VirtualizationVmwareHost list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for VirtualizationVmwareHost did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -672,115 +674,115 @@ func dataSourceVirtualizationVmwareHostRead(d *schema.ResourceData, meta interfa
 			var s = &models.VirtualizationVmwareHost{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 
 			if err := d.Set("boot_time", (s.GetBootTime()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property BootTime: %+v", err)
+				return diag.Errorf("error occurred while setting property BootTime: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 
 			if err := d.Set("cluster", flattenMapVirtualizationVmwareClusterRelationship(s.GetCluster(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Cluster: %+v", err)
+				return diag.Errorf("error occurred while setting property Cluster: %s", err.Error())
 			}
 			if err := d.Set("connection_state", (s.GetConnectionState())); err != nil {
-				return fmt.Errorf("error occurred while setting property ConnectionState: %+v", err)
+				return diag.Errorf("error occurred while setting property ConnectionState: %s", err.Error())
 			}
 
 			if err := d.Set("cpu_info", flattenMapVirtualizationCpuInfo(s.GetCpuInfo(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property CpuInfo: %+v", err)
+				return diag.Errorf("error occurred while setting property CpuInfo: %s", err.Error())
 			}
 
 			if err := d.Set("datacenter", flattenMapVirtualizationVmwareDatacenterRelationship(s.GetDatacenter(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Datacenter: %+v", err)
+				return diag.Errorf("error occurred while setting property Datacenter: %s", err.Error())
 			}
 
 			if err := d.Set("datastores", flattenListVirtualizationVmwareDatastoreRelationship(s.GetDatastores(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Datastores: %+v", err)
+				return diag.Errorf("error occurred while setting property Datastores: %s", err.Error())
 			}
 
 			if err := d.Set("hardware_info", flattenMapInfraHardwareInfo(s.GetHardwareInfo(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property HardwareInfo: %+v", err)
+				return diag.Errorf("error occurred while setting property HardwareInfo: %s", err.Error())
 			}
 			if err := d.Set("hw_power_state", (s.GetHwPowerState())); err != nil {
-				return fmt.Errorf("error occurred while setting property HwPowerState: %+v", err)
+				return diag.Errorf("error occurred while setting property HwPowerState: %s", err.Error())
 			}
 			if err := d.Set("hypervisor_type", (s.GetHypervisorType())); err != nil {
-				return fmt.Errorf("error occurred while setting property HypervisorType: %+v", err)
+				return diag.Errorf("error occurred while setting property HypervisorType: %s", err.Error())
 			}
 			if err := d.Set("identity", (s.GetIdentity())); err != nil {
-				return fmt.Errorf("error occurred while setting property Identity: %+v", err)
+				return diag.Errorf("error occurred while setting property Identity: %s", err.Error())
 			}
 			if err := d.Set("maintenance_mode", (s.GetMaintenanceMode())); err != nil {
-				return fmt.Errorf("error occurred while setting property MaintenanceMode: %+v", err)
+				return diag.Errorf("error occurred while setting property MaintenanceMode: %s", err.Error())
 			}
 
 			if err := d.Set("memory_capacity", flattenMapVirtualizationMemoryCapacity(s.GetMemoryCapacity(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property MemoryCapacity: %+v", err)
+				return diag.Errorf("error occurred while setting property MemoryCapacity: %s", err.Error())
 			}
 			if err := d.Set("model", (s.GetModel())); err != nil {
-				return fmt.Errorf("error occurred while setting property Model: %+v", err)
+				return diag.Errorf("error occurred while setting property Model: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("name", (s.GetName())); err != nil {
-				return fmt.Errorf("error occurred while setting property Name: %+v", err)
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("network_adapter_count", (s.GetNetworkAdapterCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property NetworkAdapterCount: %+v", err)
+				return diag.Errorf("error occurred while setting property NetworkAdapterCount: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 
 			if err := d.Set("processor_capacity", flattenMapVirtualizationComputeCapacity(s.GetProcessorCapacity(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property ProcessorCapacity: %+v", err)
+				return diag.Errorf("error occurred while setting property ProcessorCapacity: %s", err.Error())
 			}
 
 			if err := d.Set("product_info", flattenMapVirtualizationProductInfo(s.GetProductInfo(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property ProductInfo: %+v", err)
+				return diag.Errorf("error occurred while setting property ProductInfo: %s", err.Error())
 			}
 
 			if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property RegisteredDevice: %+v", err)
+				return diag.Errorf("error occurred while setting property RegisteredDevice: %s", err.Error())
 			}
 
 			if err := d.Set("resource_consumed", flattenMapVirtualizationVmwareResourceConsumption(s.GetResourceConsumed(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property ResourceConsumed: %+v", err)
+				return diag.Errorf("error occurred while setting property ResourceConsumed: %s", err.Error())
 			}
 			if err := d.Set("serial", (s.GetSerial())); err != nil {
-				return fmt.Errorf("error occurred while setting property Serial: %+v", err)
+				return diag.Errorf("error occurred while setting property Serial: %s", err.Error())
 			}
 			if err := d.Set("status", (s.GetStatus())); err != nil {
-				return fmt.Errorf("error occurred while setting property Status: %+v", err)
+				return diag.Errorf("error occurred while setting property Status: %s", err.Error())
 			}
 			if err := d.Set("storage_adapter_count", (s.GetStorageAdapterCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property StorageAdapterCount: %+v", err)
+				return diag.Errorf("error occurred while setting property StorageAdapterCount: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("up_time", (s.GetUpTime())); err != nil {
-				return fmt.Errorf("error occurred while setting property UpTime: %+v", err)
+				return diag.Errorf("error occurred while setting property UpTime: %s", err.Error())
 			}
 			if err := d.Set("uuid", (s.GetUuid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Uuid: %+v", err)
+				return diag.Errorf("error occurred while setting property Uuid: %s", err.Error())
 			}
 			if err := d.Set("vcenter_host_id", (s.GetVcenterHostId())); err != nil {
-				return fmt.Errorf("error occurred while setting property VcenterHostId: %+v", err)
+				return diag.Errorf("error occurred while setting property VcenterHostId: %s", err.Error())
 			}
 			if err := d.Set("vendor", (s.GetVendor())); err != nil {
-				return fmt.Errorf("error occurred while setting property Vendor: %+v", err)
+				return diag.Errorf("error occurred while setting property Vendor: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

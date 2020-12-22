@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hcl.SupportedDriverName"]
 **OsVendor** | Pointer to **string** | Vendor distributing the Operating System. | [optional] 
 **OsVersion** | Pointer to **string** | Version of the Operating System. | [optional] 
-**ProductList** | Pointer to [**[]HclProduct**](hcl.Product.md) |  | [optional] 
+**ProductList** | Pointer to [**[]HclProduct**](HclProduct.md) |  | [optional] 
 
 ## Methods
 

@@ -9,8 +9,9 @@ Name | Type | Description | Notes
 **HxdpVersion** | Pointer to **string** | Desired HyperFlex Data Platform software version to apply on the HyperFlex cluster. | [optional] 
 **HypervisorVersion** | Pointer to **string** | Desired  hypervisor version to apply for all the nodes on the HyperFlex cluster. | [optional] 
 **ServerFirmwareVersion** | Pointer to **string** | Desired server firmware version to apply on the HyperFlex Cluster. | [optional] 
+**ServerFirmwareVersions** | Pointer to [**[]HyperflexServerFirmwareVersionInfo**](HyperflexServerFirmwareVersionInfo.md) |  | [optional] 
 **UpgradeTypes** | Pointer to **[]string** |  | [optional] 
-**ClusterProfiles** | Pointer to [**[]HyperflexClusterProfileRelationship**](hyperflex.ClusterProfile.Relationship.md) | An array of relationships to hyperflexClusterProfile resources. | [optional] 
+**ClusterProfiles** | Pointer to [**[]HyperflexClusterProfileRelationship**](HyperflexClusterProfileRelationship.md) | An array of relationships to hyperflexClusterProfile resources. | [optional] 
 **HxdpVersionInfo** | Pointer to [**SoftwareHyperflexDistributableRelationship**](software.HyperflexDistributable.Relationship.md) |  | [optional] 
 **HypervisorVersionInfo** | Pointer to [**SoftwareHyperflexDistributableRelationship**](software.HyperflexDistributable.Relationship.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
@@ -150,6 +151,41 @@ SetServerFirmwareVersion sets ServerFirmwareVersion field to given value.
 
 HasServerFirmwareVersion returns a boolean if a field has been set.
 
+### GetServerFirmwareVersions
+
+`func (o *HyperflexSoftwareVersionPolicy) GetServerFirmwareVersions() []HyperflexServerFirmwareVersionInfo`
+
+GetServerFirmwareVersions returns the ServerFirmwareVersions field if non-nil, zero value otherwise.
+
+### GetServerFirmwareVersionsOk
+
+`func (o *HyperflexSoftwareVersionPolicy) GetServerFirmwareVersionsOk() (*[]HyperflexServerFirmwareVersionInfo, bool)`
+
+GetServerFirmwareVersionsOk returns a tuple with the ServerFirmwareVersions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServerFirmwareVersions
+
+`func (o *HyperflexSoftwareVersionPolicy) SetServerFirmwareVersions(v []HyperflexServerFirmwareVersionInfo)`
+
+SetServerFirmwareVersions sets ServerFirmwareVersions field to given value.
+
+### HasServerFirmwareVersions
+
+`func (o *HyperflexSoftwareVersionPolicy) HasServerFirmwareVersions() bool`
+
+HasServerFirmwareVersions returns a boolean if a field has been set.
+
+### SetServerFirmwareVersionsNil
+
+`func (o *HyperflexSoftwareVersionPolicy) SetServerFirmwareVersionsNil(b bool)`
+
+ SetServerFirmwareVersionsNil sets the value for ServerFirmwareVersions to be an explicit nil
+
+### UnsetServerFirmwareVersions
+`func (o *HyperflexSoftwareVersionPolicy) UnsetServerFirmwareVersions()`
+
+UnsetServerFirmwareVersions ensures that no value is present for ServerFirmwareVersions, not even an explicit nil
 ### GetUpgradeTypes
 
 `func (o *HyperflexSoftwareVersionPolicy) GetUpgradeTypes() []string`

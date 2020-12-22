@@ -1,13 +1,12 @@
-
 ---
+subcategory: "fault"
 layout: "intersight"
 page_title: "Intersight: intersight_fault_instance"
-sidebar_current: "docs-intersight-data-source-fault-instance"
 description: |-
-An endpoint anomaly is represented by this object.
+  An endpoint anomaly is represented by this object.
 ---
 
-# Data Source: intersight_fault._instance
+# Data Source: intersight_fault_instance
 An endpoint anomaly is represented by this object.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
@@ -17,7 +16,6 @@ The following arguments can be used to get data of already created objects in In
 * `affected_mo_type`:(string) Managed object type which was affected. 
 * `ancestor_mo_id`:(string) Object Id of the parent of the Managed object which was affected. 
 * `ancestor_mo_type`:(string) Object type of the parent of the Managed object which was affected. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `code`:(string) Numerical fault code of the fault found. 
 * `creation_time`:(string) The time of creation of the fault instance. 
 * `description`:(string) Detailed message of the fault. 
@@ -26,7 +24,6 @@ The following arguments can be used to get data of already created objects in In
 * `last_transition_time`:(string) Last transition time of the fault. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `num_occurrences`:(int) The number of times this fault has occured. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `original_severity`:(string) Current Severity of the fault found. 
 * `previous_severity`:(string) The Severity of the fault prior to user update. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 

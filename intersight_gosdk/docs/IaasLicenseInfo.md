@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iaas.LicenseInfo"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iaas.LicenseInfo"]
 **LicenseExpirationDate** | Pointer to **string** | UCS Director license expiration date. | [optional] [readonly] 
-**LicenseKeysInfo** | Pointer to [**[]IaasLicenseKeysInfo**](iaas.LicenseKeysInfo.md) |  | [optional] 
+**LicenseKeysInfo** | Pointer to [**[]IaasLicenseKeysInfo**](IaasLicenseKeysInfo.md) |  | [optional] 
 **LicenseType** | Pointer to **string** | License type of UCSD whether it is EVAL/Permanent/Subscription.. | [optional] [readonly] 
-**LicenseUtilizationInfo** | Pointer to [**[]IaasLicenseUtilizationInfo**](iaas.LicenseUtilizationInfo.md) |  | [optional] 
+**LicenseUtilizationInfo** | Pointer to [**[]IaasLicenseUtilizationInfo**](IaasLicenseUtilizationInfo.md) |  | [optional] 
 **Guid** | Pointer to [**IaasUcsdInfoRelationship**](iaas.UcsdInfo.Relationship.md) |  | [optional] 
 
 ## Methods

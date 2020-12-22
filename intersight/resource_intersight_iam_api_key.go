@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceIamApiKey() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceIamApiKeyCreate,
-		Read:   resourceIamApiKeyRead,
-		Update: resourceIamApiKeyUpdate,
-		Delete: resourceIamApiKeyDelete,
+		CreateContext: resourceIamApiKeyCreate,
+		ReadContext:   resourceIamApiKeyRead,
+		UpdateContext: resourceIamApiKeyUpdate,
+		DeleteContext: resourceIamApiKeyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -22,7 +25,7 @@ func resourceIamApiKey() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -78,7 +81,7 @@ func resourceIamApiKey() *schema.Resource {
 				ForceNew:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -209,7 +212,7 @@ func resourceIamApiKey() *schema.Resource {
 	}
 }
 
-func resourceIamApiKeyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceIamApiKeyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -411,81 +414,85 @@ func resourceIamApiKeyCreate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	r := conn.ApiClient.IamApi.CreateIamApiKey(conn.ctx).IamApiKey(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating IamApiKey: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceIamApiKeyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceIamApiKeyRead(c, d, meta)
 }
 
-func resourceIamApiKeyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.IamApi.GetIamApiKeyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "IamApiKey object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching IamApiKey: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in IamApiKey object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in IamApiKey object: %s", err.Error())
 	}
 
 	if err := d.Set("hash_algorithm", (s.GetHashAlgorithm())); err != nil {
-		return fmt.Errorf("error occurred while setting property HashAlgorithm: %+v", err)
+		return diag.Errorf("error occurred while setting property HashAlgorithm in IamApiKey object: %s", err.Error())
 	}
 
 	if err := d.Set("key_spec", flattenMapPkixKeyGenerationSpec(s.GetKeySpec(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property KeySpec: %+v", err)
+		return diag.Errorf("error occurred while setting property KeySpec in IamApiKey object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in IamApiKey object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in IamApiKey object: %s", err.Error())
 	}
 
 	if err := d.Set("permission", flattenMapIamPermissionRelationship(s.GetPermission(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Permission: %+v", err)
+		return diag.Errorf("error occurred while setting property Permission in IamApiKey object: %s", err.Error())
 	}
 
 	if err := d.Set("private_key", (s.GetPrivateKey())); err != nil {
-		return fmt.Errorf("error occurred while setting property PrivateKey: %+v", err)
+		return diag.Errorf("error occurred while setting property PrivateKey in IamApiKey object: %s", err.Error())
 	}
 
 	if err := d.Set("purpose", (s.GetPurpose())); err != nil {
-		return fmt.Errorf("error occurred while setting property Purpose: %+v", err)
+		return diag.Errorf("error occurred while setting property Purpose in IamApiKey object: %s", err.Error())
 	}
 
 	if err := d.Set("signing_algorithm", (s.GetSigningAlgorithm())); err != nil {
-		return fmt.Errorf("error occurred while setting property SigningAlgorithm: %+v", err)
+		return diag.Errorf("error occurred while setting property SigningAlgorithm in IamApiKey object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in IamApiKey object: %s", err.Error())
 	}
 
 	if err := d.Set("user", flattenMapIamUserRelationship(s.GetUser(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property User: %+v", err)
+		return diag.Errorf("error occurred while setting property User in IamApiKey object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceIamApiKeyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceIamApiKeyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -697,23 +704,24 @@ func resourceIamApiKeyUpdate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	r := conn.ApiClient.IamApi.UpdateIamApiKey(conn.ctx, d.Id()).IamApiKey(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating IamApiKey: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamApiKeyRead(d, meta)
+	return resourceIamApiKeyRead(c, d, meta)
 }
 
-func resourceIamApiKeyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceIamApiKeyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamApiKey(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting IamApiKey object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

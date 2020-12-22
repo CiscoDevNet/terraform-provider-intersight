@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "syslog.Policy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "syslog.Policy"]
-**LocalClients** | Pointer to [**[]SyslogLocalClientBase**](syslog.LocalClientBase.md) |  | [optional] 
-**RemoteClients** | Pointer to [**[]SyslogRemoteClientBase**](syslog.RemoteClientBase.md) |  | [optional] 
+**LocalClients** | Pointer to [**[]SyslogLocalClientBase**](SyslogLocalClientBase.md) |  | [optional] 
+**RemoteClients** | Pointer to [**[]SyslogRemoteClientBase**](SyslogRemoteClientBase.md) |  | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
-**Profiles** | Pointer to [**[]PolicyAbstractConfigProfileRelationship**](policy.AbstractConfigProfile.Relationship.md) | An array of relationships to policyAbstractConfigProfile resources. | [optional] 
+**Profiles** | Pointer to [**[]PolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) | An array of relationships to policyAbstractConfigProfile resources. | [optional] 
 
 ## Methods
 

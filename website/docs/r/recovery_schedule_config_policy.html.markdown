@@ -1,13 +1,12 @@
-
 ---
+subcategory: "recovery"
 layout: "intersight"
 page_title: "Intersight: intersight_recovery_schedule_config_policy"
-sidebar_current: "docs-intersight-resource-recovery-schedule-config-policy"
 description: |-
   Base Schedule config which contains all the required inputs to do schedule on a local or remote server.
 ---
 
-# Resource: intersight_recovery._schedule_config_policy
+# Resource: intersight_recovery_schedule_config_policy
 Base Schedule config which contains all the required inputs to do schedule on a local or remote server.
 ## Argument Reference
 The following arguments are supported:
@@ -49,3 +48,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_recovery_schedule_config_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_recovery_schedule_config_policy.example 1234567890987654321abcde
+```

@@ -12,7 +12,6 @@ import (
 	"log"
 	"net/http"
 	"net/http/httptrace"
-	"os"
 	"time"
 
 	gosdk "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
@@ -38,7 +37,7 @@ type Client struct {
 	skipTlsVerification bool
 }
 
-func (c *Client) SetInputs(apiKeyId, apiKeyFile, hostName string, ignoreTls bool) context.Context {
+func (c *Client) SetInputs(apiKeyId, apiKeyFile, hostName string, ignoreTls bool) (context.Context, error) {
 	c.hostname = hostName
 	c.skipTlsVerification = ignoreTls
 
@@ -47,13 +46,12 @@ func (c *Client) SetInputs(apiKeyId, apiKeyFile, hostName string, ignoreTls bool
 	if apiKeyId != "" {
 		ctx, err = c.getHttpSignatureContext(ctx, apiKeyId, apiKeyFile)
 		if err != nil {
-			log.Fatalf("Failed to get signature context: %v", err)
+			return nil, fmt.Errorf("failed to get signature context: %v", err.Error())
 		}
 	} else {
-		fmt.Printf("Missing API Key and ID. Please specify API Key and for authentication\n")
-		os.Exit(2)
+		return nil, fmt.Errorf("missing API key and ID, required for authentication")
 	}
-	return ctx
+	return ctx, nil
 }
 
 func newTransport(t http.RoundTripper) *transport {

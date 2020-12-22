@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -28,7 +28,7 @@ type SnmpTrap struct {
 	Destination *string `json:"Destination,omitempty"`
 	// Enables/disables the trap on the server If enabled, trap is active on the server.
 	Enabled *bool `json:"Enabled,omitempty"`
-	// Port used by the server to communicate with trap destination. Enter a value between 1-65535. Reserved ports not allowed (22, 23, 80, 123, 389, 443, 623, 636, 2068, 3268, 3269).
+	// Port used by the server to communicate with the trap destination. Enter a value between 1-65535.
 	Port *int64 `json:"Port,omitempty"`
 	// Type of trap which decides whether to receive a notification when a trap is received at the destination. * `Trap` - Do not receive notifications when trap is sent to the destination. * `Inform` - Receive notifications when trap is sent to the destination. This option is valid only for V2 users.
 	Type *string `json:"Type,omitempty"`
@@ -49,6 +49,10 @@ func NewSnmpTrap(classId string, objectType string) *SnmpTrap {
 	this := SnmpTrap{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var enabled bool = true
+	this.Enabled = &enabled
+	var port int64 = 162
+	this.Port = &port
 	var type_ string = "Trap"
 	this.Type = &type_
 	var version string = "V3"
@@ -65,6 +69,10 @@ func NewSnmpTrapWithDefaults() *SnmpTrap {
 	this.ClassId = classId
 	var objectType string = "snmp.Trap"
 	this.ObjectType = objectType
+	var enabled bool = true
+	this.Enabled = &enabled
+	var port int64 = 162
+	this.Port = &port
 	var type_ string = "Trap"
 	this.Type = &type_
 	var version string = "V3"
@@ -364,7 +372,7 @@ func (o *SnmpTrap) UnmarshalJSON(bytes []byte) (err error) {
 		Destination *string `json:"Destination,omitempty"`
 		// Enables/disables the trap on the server If enabled, trap is active on the server.
 		Enabled *bool `json:"Enabled,omitempty"`
-		// Port used by the server to communicate with trap destination. Enter a value between 1-65535. Reserved ports not allowed (22, 23, 80, 123, 389, 443, 623, 636, 2068, 3268, 3269).
+		// Port used by the server to communicate with the trap destination. Enter a value between 1-65535.
 		Port *int64 `json:"Port,omitempty"`
 		// Type of trap which decides whether to receive a notification when a trap is received at the destination. * `Trap` - Do not receive notifications when trap is sent to the destination. * `Inform` - Receive notifications when trap is sent to the destination. This option is valid only for V2 users.
 		Type *string `json:"Type,omitempty"`

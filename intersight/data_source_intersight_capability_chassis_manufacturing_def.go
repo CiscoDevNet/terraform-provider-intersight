@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceCapabilityChassisManufacturingDef() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceCapabilityChassisManufacturingDefRead,
+		ReadContext: dataSourceCapabilityChassisManufacturingDefRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -30,7 +31,7 @@ func dataSourceCapabilityChassisManufacturingDef() *schema.Resource {
 				Optional:    true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -51,7 +52,7 @@ func dataSourceCapabilityChassisManufacturingDef() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -65,45 +66,6 @@ func dataSourceCapabilityChassisManufacturingDef() *schema.Resource {
 				Description: "Product Name for Chassis enclosure.",
 				Type:        schema.TypeString,
 				Optional:    true,
-			},
-			"section": {
-				Description: "A reference to a capabilitySection resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
 			},
 			"sku": {
 				Description: "SKU information for Chassis enclosure.",
@@ -142,10 +104,11 @@ func dataSourceCapabilityChassisManufacturingDef() *schema.Resource {
 	}
 }
 
-func dataSourceCapabilityChassisManufacturingDefRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceCapabilityChassisManufacturingDefRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.CapabilityChassisManufacturingDef{}
 	if v, ok := d.GetOk("caption"); ok {
 		x := (v.(string))
@@ -194,25 +157,25 @@ func dataSourceCapabilityChassisManufacturingDefRead(d *schema.ResourceData, met
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of CapabilityChassisManufacturingDef object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.CapabilityApi.GetCapabilityChassisManufacturingDefList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.CapabilityApi.GetCapabilityChassisManufacturingDefList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching CapabilityChassisManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for CapabilityChassisManufacturingDef list: %s", err.Error())
 	}
 	var s = &models.CapabilityChassisManufacturingDefList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to CapabilityChassisManufacturingDef: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to CapabilityChassisManufacturingDef list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for CapabilityChassisManufacturingDef did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -221,54 +184,50 @@ func dataSourceCapabilityChassisManufacturingDefRead(d *schema.ResourceData, met
 			var s = &models.CapabilityChassisManufacturingDef{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("caption", (s.GetCaption())); err != nil {
-				return fmt.Errorf("error occurred while setting property Caption: %+v", err)
+				return diag.Errorf("error occurred while setting property Caption: %s", err.Error())
 			}
 			if err := d.Set("chassis_code_name", (s.GetChassisCodeName())); err != nil {
-				return fmt.Errorf("error occurred while setting property ChassisCodeName: %+v", err)
+				return diag.Errorf("error occurred while setting property ChassisCodeName: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("description", (s.GetDescription())); err != nil {
-				return fmt.Errorf("error occurred while setting property Description: %+v", err)
+				return diag.Errorf("error occurred while setting property Description: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("name", (s.GetName())); err != nil {
-				return fmt.Errorf("error occurred while setting property Name: %+v", err)
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("pid", (s.GetPid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Pid: %+v", err)
+				return diag.Errorf("error occurred while setting property Pid: %s", err.Error())
 			}
 			if err := d.Set("product_name", (s.GetProductName())); err != nil {
-				return fmt.Errorf("error occurred while setting property ProductName: %+v", err)
-			}
-
-			if err := d.Set("section", flattenMapCapabilitySectionRelationship(s.GetSection(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Section: %+v", err)
+				return diag.Errorf("error occurred while setting property ProductName: %s", err.Error())
 			}
 			if err := d.Set("sku", (s.GetSku())); err != nil {
-				return fmt.Errorf("error occurred while setting property Sku: %+v", err)
+				return diag.Errorf("error occurred while setting property Sku: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("vid", (s.GetVid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Vid: %+v", err)
+				return diag.Errorf("error occurred while setting property Vid: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

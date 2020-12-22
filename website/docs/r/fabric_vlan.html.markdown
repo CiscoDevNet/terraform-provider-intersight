@@ -1,19 +1,19 @@
-
 ---
+subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_vlan"
-sidebar_current: "docs-intersight-resource-fabric-vlan"
 description: |-
   Configuration object for Virtual LAN.
 ---
 
-# Resource: intersight_fabric._vlan
+# Resource: intersight_fabric_vlan
 Configuration object for Virtual LAN.
 ## Argument Reference
 The following arguments are supported:
 * `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
+* `auto_allow_on_uplinks`:(bool) Used to determine whether this VLAN will be allowed on all uplink ports and PCs in this FI. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `eth_network_policy`:(Array with Maximum of one item) - A reference to a fabricEthNetworkPolicy resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `additional_properties`:
@@ -41,3 +41,10 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `vlan_id`:(int) The identifier for this Virtual LAN. 
+
+
+## Import
+`intersight_fabric_vlan` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_fabric_vlan.example 1234567890987654321abcde
+```

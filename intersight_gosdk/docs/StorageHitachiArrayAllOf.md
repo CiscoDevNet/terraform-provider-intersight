@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Ctl1MicroVersion** | Pointer to **string** | GUM (Gateway for Unified Management) version of the controller 1. | [optional] [readonly] 
 **Ctl2Ip** | Pointer to **string** | IP address of controller 2 of the storage system. | [optional] [readonly] 
 **Ctl2MicroVersion** | Pointer to **string** | GUM (Gateway for Unified Management) version of the controller 2. | [optional] [readonly] 
-**DeviceId** | Pointer to **string** | Storage device ID. | [optional] [readonly] 
+**DeviceId** | Pointer to **string** | ID of the Storage device. | [optional] [readonly] 
 **SvpIp** | Pointer to **string** | IP address of the SVP. | [optional] [readonly] 
 **TargetCtl** | Pointer to **string** | Controller operated by the REST API. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 

@@ -1,13 +1,12 @@
-
 ---
+subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_apic_hweol"
-sidebar_current: "docs-intersight-data-source-niaapi-apic-hweol"
 description: |-
-The hardware end of life notice for APIC.
+  The hardware end of life notice for APIC.
 ---
 
-# Data Source: intersight_niaapi._apic_hweol
+# Data Source: intersight_niaapi_apic_hweol
 The hardware end of life notice for APIC.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
@@ -15,7 +14,6 @@ The following arguments can be used to get data of already created objects in In
 * `announcement_date`:(string) When this notice is announced. 
 * `announcement_date_epoch`:(int) Epoch time of Announcement Date. 
 * `bulletin_no`:(string) The bulletinno of this hardware end of life notice. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `description`:(string) The description of this hardware end of life notice. 
 * `endof_new_service_attachment_date`:(string) Date time of end of new services attachment  . 
 * `endof_new_service_attachment_date_epoch`:(int) Epoch time of New service attachment Date . 
@@ -37,4 +35,3 @@ The following arguments can be used to get data of already created objects in In
 * `last_ship_date_epoch`:(int) Epoch time of last ship Date. 
 * `migration_url`:(string) The URL of this migration notice. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 

@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceHyperflexNode() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceHyperflexNodeRead,
+		ReadContext: dataSourceHyperflexNodeRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -20,12 +21,13 @@ func dataSourceHyperflexNode() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"build_number": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Description: "The build number of the hypervisor running on the host.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -108,25 +110,29 @@ func dataSourceHyperflexNode() *schema.Resource {
 				},
 			},
 			"display_version": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Description: "The user-friendly string representation of the hypervisor version of the host.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"host_name": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Description: "The hostname configured for the hypervisor running on the host.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"hypervisor": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Description: "The type of hypervisor running on the host.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"identity": {
-				Type:     schema.TypeList,
-				MaxItems: 1,
-				Optional: true,
-				Computed: true,
+				Description: "The unique identifier of the host.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -155,30 +161,34 @@ func dataSourceHyperflexNode() *schema.Resource {
 										Optional:    true,
 									},
 									"comments": {
-										Type:     schema.TypeString,
-										Optional: true,
-										Computed: true,
+										Description: "A description that provides additional context for usage of the resource.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
 									},
 									"href": {
-										Type:     schema.TypeString,
-										Optional: true,
-										Computed: true,
+										Description: "The URI of resource. Target URL for making REST call.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
 									},
 									"method": {
-										Type:     schema.TypeString,
-										Optional: true,
-										Computed: true,
+										Description: "The HTTP method to use when making the REST call to this resource.\n* `POST` - The http verb for creating POST requests to a rest endpoint.\n* `GET` - The http verb for creating GET requests to a rest endpoint.\n* `PUT` - The http verb for creating PUT requests to a rest endpoint.\n* `DELETE` - The http verb for creating DELETE requests to a rest endpoint.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
 									},
 									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
 									},
 									"rel": {
-										Type:     schema.TypeString,
-										Optional: true,
-										Computed: true,
+										Description: "The relationship of the link to this resource.",
+										Type:        schema.TypeString,
+										Optional:    true,
+										Computed:    true,
 									},
 								},
 							},
@@ -191,18 +201,20 @@ func dataSourceHyperflexNode() *schema.Resource {
 							Computed:    true,
 						},
 						"uuid": {
-							Type:     schema.TypeString,
-							Optional: true,
-							Computed: true,
+							Description: "The unique identifier string of an entity.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
 						},
 					},
 				},
 			},
 			"ip": {
-				Type:     schema.TypeList,
-				MaxItems: 1,
-				Optional: true,
-				Computed: true,
+				Description: "The hypervisor management address. This can be a FQDN or IP address.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -211,9 +223,10 @@ func dataSourceHyperflexNode() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"address": {
-							Type:     schema.TypeString,
-							Optional: true,
-							Computed: true,
+							Description: "The network address as an FQDN or IPv4 address.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
 						},
 						"class_id": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -221,14 +234,16 @@ func dataSourceHyperflexNode() *schema.Resource {
 							Optional:    true,
 						},
 						"fqdn": {
-							Type:     schema.TypeString,
-							Optional: true,
-							Computed: true,
+							Description: "The fully qualified domain name for the network address.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
 						},
 						"ip": {
-							Type:     schema.TypeString,
-							Optional: true,
-							Computed: true,
+							Description: "The network address as an IPv4 address.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
@@ -240,14 +255,16 @@ func dataSourceHyperflexNode() *schema.Resource {
 				},
 			},
 			"lockdown": {
-				Type:     schema.TypeBool,
-				Optional: true,
-				Computed: true,
+				Description: "The admin state of lockdown mode on the host. If 'true', lockdown mode is enabled.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Computed:    true,
 			},
 			"model_number": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Description: "The model of the host server.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
@@ -256,7 +273,7 @@ func dataSourceHyperflexNode() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -301,19 +318,22 @@ func dataSourceHyperflexNode() *schema.Resource {
 				},
 			},
 			"role": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Description: "The role of the host in the HyperFlex cluster. Specifies whether this host is used for compute or for both compute and storage.\n* `UNKNOWN` - The role of the HyperFlex cluster node is not known.\n* `STORAGE` - The HyperFlex cluster node provides both storage and compute resources for the cluster.\n* `COMPUTE` - The HyperFlex cluster node provides compute resources for the cluster.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"serial_number": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Description: "The serial of the host server.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"status": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Description: "The status of the host. Indicates whether the hypervisor is online.\n* `UNKNOWN` - The host status cannot be determined.\n* `ONLINE` - The host is online and operational.\n* `OFFLINE` - The host is offline and is currently not participating in the HyperFlex cluster.\n* `INMAINTENANCE` - The host is not participating in the HyperFlex cluster because of a maintenance operation, such as firmware or data platform upgrade.\n* `DEGRADED` - The host is degraded and may not be performing in its full operational capacity.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 			"tags": {
 				Type:     schema.TypeList,
@@ -339,18 +359,20 @@ func dataSourceHyperflexNode() *schema.Resource {
 				},
 			},
 			"nr_version": {
-				Type:     schema.TypeString,
-				Optional: true,
-				Computed: true,
+				Description: "The version of the hypervisor running on the host.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
 			},
 		},
 	}
 }
 
-func dataSourceHyperflexNodeRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceHyperflexNodeRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.HyperflexNode{}
 	if v, ok := d.GetOk("build_number"); ok {
 		x := (v.(string))
@@ -407,25 +429,25 @@ func dataSourceHyperflexNodeRead(d *schema.ResourceData, meta interface{}) error
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of HyperflexNode object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.HyperflexApi.GetHyperflexNodeList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexNodeList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching HyperflexNode: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for HyperflexNode list: %s", err.Error())
 	}
 	var s = &models.HyperflexNodeList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to HyperflexNode: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to HyperflexNode list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for HyperflexNode did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -434,76 +456,76 @@ func dataSourceHyperflexNodeRead(d *schema.ResourceData, meta interface{}) error
 			var s = &models.HyperflexNode{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("build_number", (s.GetBuildNumber())); err != nil {
-				return fmt.Errorf("error occurred while setting property BuildNumber: %+v", err)
+				return diag.Errorf("error occurred while setting property BuildNumber: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 
 			if err := d.Set("cluster", flattenMapHyperflexClusterRelationship(s.GetCluster(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Cluster: %+v", err)
+				return diag.Errorf("error occurred while setting property Cluster: %s", err.Error())
 			}
 
 			if err := d.Set("cluster_member", flattenMapAssetClusterMemberRelationship(s.GetClusterMember(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property ClusterMember: %+v", err)
+				return diag.Errorf("error occurred while setting property ClusterMember: %s", err.Error())
 			}
 			if err := d.Set("display_version", (s.GetDisplayVersion())); err != nil {
-				return fmt.Errorf("error occurred while setting property DisplayVersion: %+v", err)
+				return diag.Errorf("error occurred while setting property DisplayVersion: %s", err.Error())
 			}
 			if err := d.Set("host_name", (s.GetHostName())); err != nil {
-				return fmt.Errorf("error occurred while setting property HostName: %+v", err)
+				return diag.Errorf("error occurred while setting property HostName: %s", err.Error())
 			}
 			if err := d.Set("hypervisor", (s.GetHypervisor())); err != nil {
-				return fmt.Errorf("error occurred while setting property Hypervisor: %+v", err)
+				return diag.Errorf("error occurred while setting property Hypervisor: %s", err.Error())
 			}
 
 			if err := d.Set("identity", flattenMapHyperflexHxUuIdDt(s.GetIdentity(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Identity: %+v", err)
+				return diag.Errorf("error occurred while setting property Identity: %s", err.Error())
 			}
 
 			if err := d.Set("ip", flattenMapHyperflexHxNetworkAddressDt(s.GetIp(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Ip: %+v", err)
+				return diag.Errorf("error occurred while setting property Ip: %s", err.Error())
 			}
 			if err := d.Set("lockdown", (s.GetLockdown())); err != nil {
-				return fmt.Errorf("error occurred while setting property Lockdown: %+v", err)
+				return diag.Errorf("error occurred while setting property Lockdown: %s", err.Error())
 			}
 			if err := d.Set("model_number", (s.GetModelNumber())); err != nil {
-				return fmt.Errorf("error occurred while setting property ModelNumber: %+v", err)
+				return diag.Errorf("error occurred while setting property ModelNumber: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 
 			if err := d.Set("physical_server", flattenMapComputePhysicalRelationship(s.GetPhysicalServer(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property PhysicalServer: %+v", err)
+				return diag.Errorf("error occurred while setting property PhysicalServer: %s", err.Error())
 			}
 			if err := d.Set("role", (s.GetRole())); err != nil {
-				return fmt.Errorf("error occurred while setting property Role: %+v", err)
+				return diag.Errorf("error occurred while setting property Role: %s", err.Error())
 			}
 			if err := d.Set("serial_number", (s.GetSerialNumber())); err != nil {
-				return fmt.Errorf("error occurred while setting property SerialNumber: %+v", err)
+				return diag.Errorf("error occurred while setting property SerialNumber: %s", err.Error())
 			}
 			if err := d.Set("status", (s.GetStatus())); err != nil {
-				return fmt.Errorf("error occurred while setting property Status: %+v", err)
+				return diag.Errorf("error occurred while setting property Status: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("nr_version", (s.GetVersion())); err != nil {
-				return fmt.Errorf("error occurred while setting property Version: %+v", err)
+				return diag.Errorf("error occurred while setting property Version: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

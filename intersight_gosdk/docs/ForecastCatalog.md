@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "forecast.Catalog"]
 **SchedTime** | Pointer to **string** | The time at which the regression model needs to run for all the metrics specified in catalog. | [optional] [readonly] 
 **Version** | Pointer to **string** | The catalog version used in forecast configuration service. | [optional] [readonly] 
-**Definition** | Pointer to [**[]ForecastDefinitionRelationship**](forecast.Definition.Relationship.md) | An array of relationships to forecastDefinition resources. | [optional] [readonly] 
+**Definition** | Pointer to [**[]ForecastDefinitionRelationship**](ForecastDefinitionRelationship.md) | An array of relationships to forecastDefinition resources. | [optional] [readonly] 
 
 ## Methods
 

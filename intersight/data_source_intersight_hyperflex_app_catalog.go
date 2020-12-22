@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceHyperflexAppCatalog() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceHyperflexAppCatalogRead,
+		ReadContext: dataSourceHyperflexAppCatalogRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -20,7 +21,7 @@ func dataSourceHyperflexAppCatalog() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -338,10 +339,11 @@ func dataSourceHyperflexAppCatalog() *schema.Resource {
 	}
 }
 
-func dataSourceHyperflexAppCatalogRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceHyperflexAppCatalogRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.HyperflexAppCatalog{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -362,25 +364,25 @@ func dataSourceHyperflexAppCatalogRead(d *schema.ResourceData, meta interface{})
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of HyperflexAppCatalog object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.HyperflexApi.GetHyperflexAppCatalogList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexAppCatalogList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching HyperflexAppCatalog: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for HyperflexAppCatalog list: %s", err.Error())
 	}
 	var s = &models.HyperflexAppCatalogList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to HyperflexAppCatalog: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to HyperflexAppCatalog list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for HyperflexAppCatalog did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -389,57 +391,57 @@ func dataSourceHyperflexAppCatalogRead(d *schema.ResourceData, meta interface{})
 			var s = &models.HyperflexAppCatalog{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 
 			if err := d.Set("feature_limit_external", flattenMapHyperflexFeatureLimitExternalRelationship(s.GetFeatureLimitExternal(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property FeatureLimitExternal: %+v", err)
+				return diag.Errorf("error occurred while setting property FeatureLimitExternal: %s", err.Error())
 			}
 
 			if err := d.Set("feature_limit_internal", flattenMapHyperflexFeatureLimitInternalRelationship(s.GetFeatureLimitInternal(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property FeatureLimitInternal: %+v", err)
+				return diag.Errorf("error occurred while setting property FeatureLimitInternal: %s", err.Error())
 			}
 
 			if err := d.Set("hxdp_versions", flattenListHyperflexHxdpVersionRelationship(s.GetHxdpVersions(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property HxdpVersions: %+v", err)
+				return diag.Errorf("error occurred while setting property HxdpVersions: %s", err.Error())
 			}
 
 			if err := d.Set("hyperflex_capability_infos", flattenListHyperflexCapabilityInfoRelationship(s.GetHyperflexCapabilityInfos(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property HyperflexCapabilityInfos: %+v", err)
+				return diag.Errorf("error occurred while setting property HyperflexCapabilityInfos: %s", err.Error())
 			}
 
 			if err := d.Set("hyperflex_software_compatibility_infos", flattenListHclHyperflexSoftwareCompatibilityInfoRelationship(s.GetHyperflexSoftwareCompatibilityInfos(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property HyperflexSoftwareCompatibilityInfos: %+v", err)
+				return diag.Errorf("error occurred while setting property HyperflexSoftwareCompatibilityInfos: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 
 			if err := d.Set("server_firmware_version", flattenMapHyperflexServerFirmwareVersionRelationship(s.GetServerFirmwareVersion(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property ServerFirmwareVersion: %+v", err)
+				return diag.Errorf("error occurred while setting property ServerFirmwareVersion: %s", err.Error())
 			}
 
 			if err := d.Set("server_model", flattenMapHyperflexServerModelRelationship(s.GetServerModel(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property ServerModel: %+v", err)
+				return diag.Errorf("error occurred while setting property ServerModel: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("nr_version", (s.GetVersion())); err != nil {
-				return fmt.Errorf("error occurred while setting property Version: %+v", err)
+				return diag.Errorf("error occurred while setting property Version: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

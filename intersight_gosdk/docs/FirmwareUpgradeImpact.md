@@ -6,12 +6,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.UpgradeImpact"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.UpgradeImpact"]
-**Chassis** | Pointer to [**[]EquipmentChassisRelationship**](equipment.Chassis.Relationship.md) | An array of relationships to equipmentChassis resources. | [optional] 
-**Device** | Pointer to [**[]AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) | An array of relationships to assetDeviceRegistration resources. | [optional] [readonly] 
+**Chassis** | Pointer to [**[]EquipmentChassisRelationship**](EquipmentChassisRelationship.md) | An array of relationships to equipmentChassis resources. | [optional] 
+**Device** | Pointer to [**[]AssetDeviceRegistrationRelationship**](AssetDeviceRegistrationRelationship.md) | An array of relationships to assetDeviceRegistration resources. | [optional] [readonly] 
 **Distributable** | Pointer to [**FirmwareDistributableRelationship**](firmware.Distributable.Relationship.md) |  | [optional] 
-**NetworkElements** | Pointer to [**[]NetworkElementRelationship**](network.Element.Relationship.md) | An array of relationships to networkElement resources. | [optional] 
+**NetworkElements** | Pointer to [**[]NetworkElementRelationship**](NetworkElementRelationship.md) | An array of relationships to networkElement resources. | [optional] 
 **Release** | Pointer to [**SoftwarerepositoryReleaseRelationship**](softwarerepository.Release.Relationship.md) |  | [optional] 
-**Server** | Pointer to [**[]ComputePhysicalRelationship**](compute.Physical.Relationship.md) | An array of relationships to computePhysical resources. | [optional] 
+**Server** | Pointer to [**[]ComputePhysicalRelationship**](ComputePhysicalRelationship.md) | An array of relationships to computePhysical resources. | [optional] 
 
 ## Methods
 

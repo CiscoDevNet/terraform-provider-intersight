@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceVnicEthAdapterPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceVnicEthAdapterPolicyCreate,
-		Read:   resourceVnicEthAdapterPolicyRead,
-		Update: resourceVnicEthAdapterPolicyUpdate,
-		Delete: resourceVnicEthAdapterPolicyDelete,
+		CreateContext: resourceVnicEthAdapterPolicyCreate,
+		ReadContext:   resourceVnicEthAdapterPolicyRead,
+		UpdateContext: resourceVnicEthAdapterPolicyUpdate,
+		DeleteContext: resourceVnicEthAdapterPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -25,6 +28,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 				Description: "Enables advanced filtering on the interface.",
 				Type:        schema.TypeBool,
 				Optional:    true,
+				Default:     false,
 			},
 			"arfs_settings": {
 				Description: "Settings for Accelerated Receive Flow Steering to reduce the network latency and increase CPU cache efficiency.",
@@ -48,6 +52,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Description: "Status of Accelerated Receive Flow Steering on the virtual ethernet interface.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     false,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -88,6 +93,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Description: "The number of completion queue resources to allocate. In general, the number of completion queue resources to allocate is equal to the number of transmit queue resources plus the number of receive queue resources.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     5,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -115,6 +121,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 				Description: "Enables Interrupt Scaling on the interface.",
 				Type:        schema.TypeBool,
 				Optional:    true,
+				Default:     false,
 			},
 			"interrupt_settings": {
 				Description: "Interrupt Settings for the virtual ethernet interface.",
@@ -138,6 +145,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Description: "The time to wait between interrupts or the idle period that must be encountered before an interrupt is sent. To turn off interrupt coalescing, enter 0 (zero) in this field.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     125,
 						},
 						"coalescing_type": {
 							Description: "Interrupt Coalescing Type. This can be one of the following:- MIN  - The system waits for the time specified in the Coalescing Time field before sending another interrupt event IDLE - The system does not send an interrupt until there is a period of no activity lasting as least as long as the time specified in the Coalescing Time field.\n* `MIN` - The system waits for the time specified in the Coalescing Time field before sending another interrupt event.\n* `IDLE` - The system does not send an interrupt until there is a period of no activity lasting as least as long as the time specified in the Coalescing Time field.",
@@ -149,6 +157,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Description: "The number of interrupt resources to allocate. Typical value is be equal to the number of completion queue resources.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     8,
 						},
 						"mode": {
 							Description: "Preferred driver interrupt mode. This can be one of the following:- MSIx - Message Signaled Interrupts (MSI) with the optional extension. MSI  - MSI only. INTx - PCI INTx interrupts. MSIx is the recommended option.\n* `MSIx` - Message Signaled Interrupt (MSI) mechanism with the optional extension (MSIx). MSIx is the recommended and default option.\n* `MSI` - Message Signaled Interrupt (MSI) mechanism that treats messages as interrupts.\n* `INTx` - Line-based interrupt (INTx) mechanism similar to the one used in Legacy systems.",
@@ -201,6 +210,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Description: "Status of the Network Virtualization using Generic Routing Encapsulation on the virtual ethernet interface.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     false,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -294,6 +304,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Description: "The number of memory regions per adapter. Recommended value = integer power of 2.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     131072,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -305,11 +316,13 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Description: "The number of queue pairs per adapter. Recommended value = integer power of 2.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     256,
 						},
 						"resource_groups": {
 							Description: "The number of resource groups per adapter. Recommended value = be an integer power of 2 greater than or equal to the number of CPU cores on the system for optimum performance.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     4,
 						},
 						"nr_version": {
 							Description: "Configure RDMA over Converged Ethernet (RoCE) version on the virtual interface. Only RoCEv1 is supported on Cisco VIC 13xx series adapters and only RoCEv2 is supported on Cisco VIC 14xx series adapters.\n* `1` - RDMA over Converged Ethernet Protocol Version 1.\n* `2` - RDMA over Converged Ethernet Protocol Version 2.",
@@ -344,16 +357,19 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Description: "When enabled, the IPv4 address is used for traffic distribution.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     true,
 						},
 						"ipv6_ext_hash": {
 							Description: "When enabled, the IPv6 extensions are used for traffic distribution.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     false,
 						},
 						"ipv6_hash": {
 							Description: "When enabled, the IPv6 address is used for traffic distribution.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -365,26 +381,31 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Description: "When enabled, both the IPv4 address and TCP port number are used for traffic distribution.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     true,
 						},
 						"tcp_ipv6_ext_hash": {
 							Description: "When enabled, both the IPv6 extensions and TCP port number are used for traffic distribution.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     false,
 						},
 						"tcp_ipv6_hash": {
 							Description: "When enabled, both the IPv6 address and TCP port number are used for traffic distribution.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     true,
 						},
 						"udp_ipv4_hash": {
 							Description: "When enabled, both the IPv4 address and UDP port number are used for traffic distribution.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     false,
 						},
 						"udp_ipv6_hash": {
 							Description: "When enabled, both the IPv6 address and UDP port number are used for traffic distribution.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     false,
 						},
 					},
 				},
@@ -395,6 +416,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 				Description: "Receive Side Scaling allows the incoming traffic to be spread across multiple CPU cores.",
 				Type:        schema.TypeBool,
 				Optional:    true,
+				Default:     true,
 			},
 			"rx_queue_settings": {
 				Description: "Receive Queue resouce settings.",
@@ -418,6 +440,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Description: "The number of queue resources to allocate.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     4,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -429,6 +452,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Description: "The number of descriptors in each queue.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     512,
 						},
 					},
 				},
@@ -480,11 +504,13 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Description: "Enables the reassembly of segmented packets in hardware before sending them to the CPU.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     true,
 						},
 						"large_send": {
 							Description: "Enables the CPU to send large packets to the hardware for segmentation.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     true,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -496,11 +522,13 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Description: "When enabled, the CPU sends all packet checksums to the hardware for validation.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     true,
 						},
 						"tx_checksum": {
 							Description: "When enabled, the CPU sends all packets to the hardware so that the checksum can be calculated.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     true,
 						},
 					},
 				},
@@ -529,6 +557,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Description: "The number of queue resources to allocate.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     1,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -540,6 +569,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Description: "The number of descriptors in each queue.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     256,
 						},
 					},
 				},
@@ -550,6 +580,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 				Description: "Uplink Failback Timeout in seconds when uplink failover is enabled for a vNIC. After a vNIC has started using its secondary interface, this setting controls how long the primary interface must be available before the system resumes using the primary interface for the vNIC.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+				Default:     5,
 			},
 			"vxlan_settings": {
 				Description: "Virtual Extensible LAN Protocol Settings.",
@@ -573,6 +604,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 							Description: "Status of the Virtual Extensible LAN Protocol on the virtual ethernet interface.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     false,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -589,7 +621,7 @@ func resourceVnicEthAdapterPolicy() *schema.Resource {
 	}
 }
 
-func resourceVnicEthAdapterPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicEthAdapterPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1217,121 +1249,125 @@ func resourceVnicEthAdapterPolicyCreate(d *schema.ResourceData, meta interface{}
 	}
 
 	r := conn.ApiClient.VnicApi.CreateVnicEthAdapterPolicy(conn.ctx).VnicEthAdapterPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating VnicEthAdapterPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceVnicEthAdapterPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceVnicEthAdapterPolicyRead(c, d, meta)
 }
 
-func resourceVnicEthAdapterPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicEthAdapterPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.VnicApi.GetVnicEthAdapterPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "VnicEthAdapterPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching VnicEthAdapterPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("advanced_filter", (s.GetAdvancedFilter())); err != nil {
-		return fmt.Errorf("error occurred while setting property AdvancedFilter: %+v", err)
+		return diag.Errorf("error occurred while setting property AdvancedFilter in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("arfs_settings", flattenMapVnicArfsSettings(s.GetArfsSettings(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ArfsSettings: %+v", err)
+		return diag.Errorf("error occurred while setting property ArfsSettings in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("completion_queue_settings", flattenMapVnicCompletionQueueSettings(s.GetCompletionQueueSettings(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property CompletionQueueSettings: %+v", err)
+		return diag.Errorf("error occurred while setting property CompletionQueueSettings in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("interrupt_scaling", (s.GetInterruptScaling())); err != nil {
-		return fmt.Errorf("error occurred while setting property InterruptScaling: %+v", err)
+		return diag.Errorf("error occurred while setting property InterruptScaling in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("interrupt_settings", flattenMapVnicEthInterruptSettings(s.GetInterruptSettings(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property InterruptSettings: %+v", err)
+		return diag.Errorf("error occurred while setting property InterruptSettings in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("nvgre_settings", flattenMapVnicNvgreSettings(s.GetNvgreSettings(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property NvgreSettings: %+v", err)
+		return diag.Errorf("error occurred while setting property NvgreSettings in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("roce_settings", flattenMapVnicRoceSettings(s.GetRoceSettings(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property RoceSettings: %+v", err)
+		return diag.Errorf("error occurred while setting property RoceSettings in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("rss_hash_settings", flattenMapVnicRssHashSettings(s.GetRssHashSettings(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property RssHashSettings: %+v", err)
+		return diag.Errorf("error occurred while setting property RssHashSettings in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("rss_settings", (s.GetRssSettings())); err != nil {
-		return fmt.Errorf("error occurred while setting property RssSettings: %+v", err)
+		return diag.Errorf("error occurred while setting property RssSettings in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("rx_queue_settings", flattenMapVnicEthRxQueueSettings(s.GetRxQueueSettings(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property RxQueueSettings: %+v", err)
+		return diag.Errorf("error occurred while setting property RxQueueSettings in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tcp_offload_settings", flattenMapVnicTcpOffloadSettings(s.GetTcpOffloadSettings(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property TcpOffloadSettings: %+v", err)
+		return diag.Errorf("error occurred while setting property TcpOffloadSettings in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tx_queue_settings", flattenMapVnicEthTxQueueSettings(s.GetTxQueueSettings(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property TxQueueSettings: %+v", err)
+		return diag.Errorf("error occurred while setting property TxQueueSettings in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("uplink_failback_timeout", (s.GetUplinkFailbackTimeout())); err != nil {
-		return fmt.Errorf("error occurred while setting property UplinkFailbackTimeout: %+v", err)
+		return diag.Errorf("error occurred while setting property UplinkFailbackTimeout in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("vxlan_settings", flattenMapVnicVxlanSettings(s.GetVxlanSettings(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property VxlanSettings: %+v", err)
+		return diag.Errorf("error occurred while setting property VxlanSettings in VnicEthAdapterPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceVnicEthAdapterPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicEthAdapterPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1979,23 +2015,24 @@ func resourceVnicEthAdapterPolicyUpdate(d *schema.ResourceData, meta interface{}
 	}
 
 	r := conn.ApiClient.VnicApi.UpdateVnicEthAdapterPolicy(conn.ctx, d.Id()).VnicEthAdapterPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating VnicEthAdapterPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceVnicEthAdapterPolicyRead(d, meta)
+	return resourceVnicEthAdapterPolicyRead(c, d, meta)
 }
 
-func resourceVnicEthAdapterPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicEthAdapterPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.VnicApi.DeleteVnicEthAdapterPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting VnicEthAdapterPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

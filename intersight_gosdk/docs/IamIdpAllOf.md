@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.Idp"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.Idp"]
 **DomainName** | Pointer to **string** | Email domain name of the user for this IdP. When a user enters an email during login in the Intersight home page, the IdP is picked by matching this domain name with the email domain name for authentication. | [optional] 
+**EnableSingleLogout** | Pointer to **bool** | Setting that indicates whether &#39;Single Logout (SLO)&#39; has been enabled for this IdP. | [optional] 
 **IdpEntityId** | Pointer to **string** | The Entity ID of the IdP. In SAML, the entity ID uniquely identifies the IdP or Service Provider. | [optional] [readonly] 
 **Metadata** | Pointer to **string** | SAML metadata of the IdP. | [optional] 
 **Name** | Pointer to **string** | The name of the Identity Provider, for example Cisco, Okta, or OneID. | [optional] 
@@ -14,9 +15,9 @@ Name | Type | Description | Notes
 **Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
 **LdapPolicy** | Pointer to [**IamLdapPolicyRelationship**](iam.LdapPolicy.Relationship.md) |  | [optional] 
 **System** | Pointer to [**IamSystemRelationship**](iam.System.Relationship.md) |  | [optional] 
-**UserPreferences** | Pointer to [**[]IamUserPreferenceRelationship**](iam.UserPreference.Relationship.md) | An array of relationships to iamUserPreference resources. | [optional] [readonly] 
-**Usergroups** | Pointer to [**[]IamUserGroupRelationship**](iam.UserGroup.Relationship.md) | An array of relationships to iamUserGroup resources. | [optional] 
-**Users** | Pointer to [**[]IamUserRelationship**](iam.User.Relationship.md) | An array of relationships to iamUser resources. | [optional] 
+**UserPreferences** | Pointer to [**[]IamUserPreferenceRelationship**](IamUserPreferenceRelationship.md) | An array of relationships to iamUserPreference resources. | [optional] [readonly] 
+**Usergroups** | Pointer to [**[]IamUserGroupRelationship**](IamUserGroupRelationship.md) | An array of relationships to iamUserGroup resources. | [optional] 
+**Users** | Pointer to [**[]IamUserRelationship**](IamUserRelationship.md) | An array of relationships to iamUser resources. | [optional] 
 
 ## Methods
 
@@ -101,6 +102,31 @@ SetDomainName sets DomainName field to given value.
 `func (o *IamIdpAllOf) HasDomainName() bool`
 
 HasDomainName returns a boolean if a field has been set.
+
+### GetEnableSingleLogout
+
+`func (o *IamIdpAllOf) GetEnableSingleLogout() bool`
+
+GetEnableSingleLogout returns the EnableSingleLogout field if non-nil, zero value otherwise.
+
+### GetEnableSingleLogoutOk
+
+`func (o *IamIdpAllOf) GetEnableSingleLogoutOk() (*bool, bool)`
+
+GetEnableSingleLogoutOk returns a tuple with the EnableSingleLogout field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableSingleLogout
+
+`func (o *IamIdpAllOf) SetEnableSingleLogout(v bool)`
+
+SetEnableSingleLogout sets EnableSingleLogout field to given value.
+
+### HasEnableSingleLogout
+
+`func (o *IamIdpAllOf) HasEnableSingleLogout() bool`
+
+HasEnableSingleLogout returns a boolean if a field has been set.
 
 ### GetIdpEntityId
 

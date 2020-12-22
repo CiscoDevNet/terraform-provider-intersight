@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceCondHclStatus() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceCondHclStatusRead,
+		ReadContext: dataSourceCondHclStatusRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -20,7 +21,7 @@ func dataSourceCondHclStatus() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -168,7 +169,7 @@ func dataSourceCondHclStatus() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -259,10 +260,11 @@ func dataSourceCondHclStatus() *schema.Resource {
 	}
 }
 
-func dataSourceCondHclStatusRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceCondHclStatusRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.CondHclStatus{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -343,25 +345,25 @@ func dataSourceCondHclStatusRead(d *schema.ResourceData, meta interface{}) error
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of CondHclStatus object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.CondApi.GetCondHclStatusList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.CondApi.GetCondHclStatusList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching CondHclStatus: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for CondHclStatus list: %s", err.Error())
 	}
 	var s = &models.CondHclStatusList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to CondHclStatus: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to CondHclStatus list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for CondHclStatus did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -370,86 +372,86 @@ func dataSourceCondHclStatusRead(d *schema.ResourceData, meta interface{}) error
 			var s = &models.CondHclStatus{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("component_status", (s.GetComponentStatus())); err != nil {
-				return fmt.Errorf("error occurred while setting property ComponentStatus: %+v", err)
+				return diag.Errorf("error occurred while setting property ComponentStatus: %s", err.Error())
 			}
 
 			if err := d.Set("details", flattenListCondHclStatusDetailRelationship(s.GetDetails(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Details: %+v", err)
+				return diag.Errorf("error occurred while setting property Details: %s", err.Error())
 			}
 			if err := d.Set("hardware_status", (s.GetHardwareStatus())); err != nil {
-				return fmt.Errorf("error occurred while setting property HardwareStatus: %+v", err)
+				return diag.Errorf("error occurred while setting property HardwareStatus: %s", err.Error())
 			}
 			if err := d.Set("hcl_firmware_version", (s.GetHclFirmwareVersion())); err != nil {
-				return fmt.Errorf("error occurred while setting property HclFirmwareVersion: %+v", err)
+				return diag.Errorf("error occurred while setting property HclFirmwareVersion: %s", err.Error())
 			}
 			if err := d.Set("hcl_model", (s.GetHclModel())); err != nil {
-				return fmt.Errorf("error occurred while setting property HclModel: %+v", err)
+				return diag.Errorf("error occurred while setting property HclModel: %s", err.Error())
 			}
 			if err := d.Set("hcl_os_vendor", (s.GetHclOsVendor())); err != nil {
-				return fmt.Errorf("error occurred while setting property HclOsVendor: %+v", err)
+				return diag.Errorf("error occurred while setting property HclOsVendor: %s", err.Error())
 			}
 			if err := d.Set("hcl_os_version", (s.GetHclOsVersion())); err != nil {
-				return fmt.Errorf("error occurred while setting property HclOsVersion: %+v", err)
+				return diag.Errorf("error occurred while setting property HclOsVersion: %s", err.Error())
 			}
 			if err := d.Set("hcl_processor", (s.GetHclProcessor())); err != nil {
-				return fmt.Errorf("error occurred while setting property HclProcessor: %+v", err)
+				return diag.Errorf("error occurred while setting property HclProcessor: %s", err.Error())
 			}
 			if err := d.Set("inv_firmware_version", (s.GetInvFirmwareVersion())); err != nil {
-				return fmt.Errorf("error occurred while setting property InvFirmwareVersion: %+v", err)
+				return diag.Errorf("error occurred while setting property InvFirmwareVersion: %s", err.Error())
 			}
 			if err := d.Set("inv_model", (s.GetInvModel())); err != nil {
-				return fmt.Errorf("error occurred while setting property InvModel: %+v", err)
+				return diag.Errorf("error occurred while setting property InvModel: %s", err.Error())
 			}
 			if err := d.Set("inv_os_vendor", (s.GetInvOsVendor())); err != nil {
-				return fmt.Errorf("error occurred while setting property InvOsVendor: %+v", err)
+				return diag.Errorf("error occurred while setting property InvOsVendor: %s", err.Error())
 			}
 			if err := d.Set("inv_os_version", (s.GetInvOsVersion())); err != nil {
-				return fmt.Errorf("error occurred while setting property InvOsVersion: %+v", err)
+				return diag.Errorf("error occurred while setting property InvOsVersion: %s", err.Error())
 			}
 			if err := d.Set("inv_processor", (s.GetInvProcessor())); err != nil {
-				return fmt.Errorf("error occurred while setting property InvProcessor: %+v", err)
+				return diag.Errorf("error occurred while setting property InvProcessor: %s", err.Error())
 			}
 
 			if err := d.Set("managed_object", flattenMapInventoryBaseRelationship(s.GetManagedObject(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property ManagedObject: %+v", err)
+				return diag.Errorf("error occurred while setting property ManagedObject: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("reason", (s.GetReason())); err != nil {
-				return fmt.Errorf("error occurred while setting property Reason: %+v", err)
+				return diag.Errorf("error occurred while setting property Reason: %s", err.Error())
 			}
 
 			if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property RegisteredDevice: %+v", err)
+				return diag.Errorf("error occurred while setting property RegisteredDevice: %s", err.Error())
 			}
 			if err := d.Set("server_reason", (s.GetServerReason())); err != nil {
-				return fmt.Errorf("error occurred while setting property ServerReason: %+v", err)
+				return diag.Errorf("error occurred while setting property ServerReason: %s", err.Error())
 			}
 			if err := d.Set("software_status", (s.GetSoftwareStatus())); err != nil {
-				return fmt.Errorf("error occurred while setting property SoftwareStatus: %+v", err)
+				return diag.Errorf("error occurred while setting property SoftwareStatus: %s", err.Error())
 			}
 			if err := d.Set("status", (s.GetStatus())); err != nil {
-				return fmt.Errorf("error occurred while setting property Status: %+v", err)
+				return diag.Errorf("error occurred while setting property Status: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

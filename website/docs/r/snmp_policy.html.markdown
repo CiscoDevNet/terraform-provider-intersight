@@ -1,13 +1,12 @@
-
 ---
+subcategory: "snmp"
 layout: "intersight"
 page_title: "Intersight: intersight_snmp_policy"
-sidebar_current: "docs-intersight-resource-snmp-policy"
 description: |-
   Policy to configure SNMP settings on endpoint.
 ---
 
-# Resource: intersight_snmp._policy
+# Resource: intersight_snmp_policy
 Policy to configure SNMP settings on endpoint.
 ## Argument Reference
 The following arguments are supported:
@@ -38,7 +37,7 @@ This complex property has following sub-properties:
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `snmp_port`:(int) Port on which Cisco IMC SNMP agent runs. Enter a value between 1-65535. Reserved ports not allowed (22, 23, 80, 123, 389, 443, 623, 636, 2068, 3268, 3269). 
+* `snmp_port`:(int) Port on which Cisco IMC SNMP agent runs. Enter a value between 1-65535. 
 * `snmp_traps`:(Array)
 This complex property has following sub-properties:
   + `additional_properties`:
@@ -46,11 +45,11 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `destination`:(string) Address to which the SNMP trap information is sent. 
   + `enabled`:(bool) Enables/disables the trap on the server If enabled, trap is active on the server. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
-  + `port`:(int) Port used by the server to communicate with trap destination. Enter a value between 1-65535. Reserved ports not allowed (22, 23, 80, 123, 389, 443, 623, 636, 2068, 3268, 3269). 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `port`:(int) Port used by the server to communicate with the trap destination. Enter a value between 1-65535. 
   + `type`:(string) Type of trap which decides whether to receive a notification when a trap is received at the destination.* `Trap` - Do not receive notifications when trap is sent to the destination.* `Inform` - Receive notifications when trap is sent to the destination. This option is valid only for V2 users. 
   + `user`:(string) SNMP user for the trap. Applicable only to SNMPv3. 
-  + `version`:(string) SNMP version used for the trap.* `V3` - SNMP v3 trap version notifications.* `V2` - SNMP v2 trap version notifications. 
+  + `nr_version`:(string) SNMP version used for the trap.* `V3` - SNMP v3 trap version notifications.* `V2` - SNMP v2 trap version notifications. 
 * `snmp_users`:(Array)
 This complex property has following sub-properties:
   + `additional_properties`:
@@ -74,3 +73,10 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `trap_community`:(string) SNMP community group used for sending SNMP trap to other devices. Valid only for SNMPv2c users. 
+
+
+## Import
+`intersight_snmp_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_snmp_policy.example 1234567890987654321abcde
+```

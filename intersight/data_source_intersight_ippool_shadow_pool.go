@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceIppoolShadowPool() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceIppoolShadowPoolRead,
+		ReadContext: dataSourceIppoolShadowPoolRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -31,7 +32,7 @@ func dataSourceIppoolShadowPool() *schema.Resource {
 				Optional:    true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -151,7 +152,7 @@ func dataSourceIppoolShadowPool() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -418,10 +419,11 @@ func dataSourceIppoolShadowPool() *schema.Resource {
 	}
 }
 
-func dataSourceIppoolShadowPoolRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceIppoolShadowPoolRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IppoolShadowPool{}
 	if v, ok := d.GetOk("assigned"); ok {
 		x := int64(v.(int))
@@ -474,25 +476,25 @@ func dataSourceIppoolShadowPoolRead(d *schema.ResourceData, meta interface{}) er
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of IppoolShadowPool object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.IppoolApi.GetIppoolShadowPoolList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.IppoolApi.GetIppoolShadowPoolList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching IppoolShadowPool: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for IppoolShadowPool list: %s", err.Error())
 	}
 	var s = &models.IppoolShadowPoolList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to IppoolShadowPool: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to IppoolShadowPool list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for IppoolShadowPool did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -501,81 +503,81 @@ func dataSourceIppoolShadowPoolRead(d *schema.ResourceData, meta interface{}) er
 			var s = &models.IppoolShadowPool{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("assigned", (s.GetAssigned())); err != nil {
-				return fmt.Errorf("error occurred while setting property Assigned: %+v", err)
+				return diag.Errorf("error occurred while setting property Assigned: %s", err.Error())
 			}
 			if err := d.Set("assignment_order", (s.GetAssignmentOrder())); err != nil {
-				return fmt.Errorf("error occurred while setting property AssignmentOrder: %+v", err)
+				return diag.Errorf("error occurred while setting property AssignmentOrder: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("description", (s.GetDescription())); err != nil {
-				return fmt.Errorf("error occurred while setting property Description: %+v", err)
+				return diag.Errorf("error occurred while setting property Description: %s", err.Error())
 			}
 
 			if err := d.Set("ip_block_heads", flattenListIppoolShadowBlockRelationship(s.GetIpBlockHeads(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property IpBlockHeads: %+v", err)
+				return diag.Errorf("error occurred while setting property IpBlockHeads: %s", err.Error())
 			}
 
 			if err := d.Set("ip_v4_blocks", flattenListIppoolIpV4Block(s.GetIpV4Blocks(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property IpV4Blocks: %+v", err)
+				return diag.Errorf("error occurred while setting property IpV4Blocks: %s", err.Error())
 			}
 
 			if err := d.Set("ip_v4_config", flattenMapIppoolIpV4Config(s.GetIpV4Config(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property IpV4Config: %+v", err)
+				return diag.Errorf("error occurred while setting property IpV4Config: %s", err.Error())
 			}
 
 			if err := d.Set("ip_v6_blocks", flattenListIppoolIpV6Block(s.GetIpV6Blocks(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property IpV6Blocks: %+v", err)
+				return diag.Errorf("error occurred while setting property IpV6Blocks: %s", err.Error())
 			}
 
 			if err := d.Set("ip_v6_config", flattenMapIppoolIpV6Config(s.GetIpV6Config(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property IpV6Config: %+v", err)
+				return diag.Errorf("error occurred while setting property IpV6Config: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("name", (s.GetName())); err != nil {
-				return fmt.Errorf("error occurred while setting property Name: %+v", err)
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 
 			if err := d.Set("pool", flattenMapIppoolPoolRelationship(s.GetPool(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Pool: %+v", err)
+				return diag.Errorf("error occurred while setting property Pool: %s", err.Error())
 			}
 			if err := d.Set("size", (s.GetSize())); err != nil {
-				return fmt.Errorf("error occurred while setting property Size: %+v", err)
+				return diag.Errorf("error occurred while setting property Size: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("v4_assigned", (s.GetV4Assigned())); err != nil {
-				return fmt.Errorf("error occurred while setting property V4Assigned: %+v", err)
+				return diag.Errorf("error occurred while setting property V4Assigned: %s", err.Error())
 			}
 			if err := d.Set("v4_size", (s.GetV4Size())); err != nil {
-				return fmt.Errorf("error occurred while setting property V4Size: %+v", err)
+				return diag.Errorf("error occurred while setting property V4Size: %s", err.Error())
 			}
 			if err := d.Set("v6_assigned", (s.GetV6Assigned())); err != nil {
-				return fmt.Errorf("error occurred while setting property V6Assigned: %+v", err)
+				return diag.Errorf("error occurred while setting property V6Assigned: %s", err.Error())
 			}
 			if err := d.Set("v6_size", (s.GetV6Size())); err != nil {
-				return fmt.Errorf("error occurred while setting property V6Size: %+v", err)
+				return diag.Errorf("error occurred while setting property V6Size: %s", err.Error())
 			}
 
 			if err := d.Set("vrf", flattenMapVrfVrfRelationship(s.GetVrf(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Vrf: %+v", err)
+				return diag.Errorf("error occurred while setting property Vrf: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

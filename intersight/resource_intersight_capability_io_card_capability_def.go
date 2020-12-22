@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceCapabilityIoCardCapabilityDef() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceCapabilityIoCardCapabilityDefCreate,
-		Read:   resourceCapabilityIoCardCapabilityDefRead,
-		Update: resourceCapabilityIoCardCapabilityDefUpdate,
-		Delete: resourceCapabilityIoCardCapabilityDefDelete,
+		CreateContext: resourceCapabilityIoCardCapabilityDefCreate,
+		ReadContext:   resourceCapabilityIoCardCapabilityDefRead,
+		UpdateContext: resourceCapabilityIoCardCapabilityDefUpdate,
+		DeleteContext: resourceCapabilityIoCardCapabilityDefDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -45,51 +48,10 @@ func resourceCapabilityIoCardCapabilityDef() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
-			"section": {
-				Description: "A reference to a capabilitySection resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				ConfigMode: schema.SchemaConfigModeAttr,
-				Computed:   true,
 			},
 			"tags": {
 				Type:     schema.TypeList,
@@ -118,7 +80,7 @@ func resourceCapabilityIoCardCapabilityDef() *schema.Resource {
 	}
 }
 
-func resourceCapabilityIoCardCapabilityDefCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceCapabilityIoCardCapabilityDefCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -150,49 +112,6 @@ func resourceCapabilityIoCardCapabilityDefCreate(d *schema.ResourceData, meta in
 	}
 
 	o.SetObjectType("capability.IoCardCapabilityDef")
-
-	if v, ok := d.GetOk("section"); ok {
-		p := make([]models.CapabilitySectionRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsCapabilitySectionRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetSection(x)
-		}
-	}
 
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
@@ -230,65 +149,65 @@ func resourceCapabilityIoCardCapabilityDefCreate(d *schema.ResourceData, meta in
 	}
 
 	r := conn.ApiClient.CapabilityApi.CreateCapabilityIoCardCapabilityDef(conn.ctx).CapabilityIoCardCapabilityDef(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating CapabilityIoCardCapabilityDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceCapabilityIoCardCapabilityDefRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceCapabilityIoCardCapabilityDefRead(c, d, meta)
 }
 
-func resourceCapabilityIoCardCapabilityDefRead(d *schema.ResourceData, meta interface{}) error {
+func resourceCapabilityIoCardCapabilityDefRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.CapabilityApi.GetCapabilityIoCardCapabilityDefByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "CapabilityIoCardCapabilityDef object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching CapabilityIoCardCapabilityDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in CapabilityIoCardCapabilityDef object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in CapabilityIoCardCapabilityDef object: %s", err.Error())
 	}
 
 	if err := d.Set("dc_supported", (s.GetDcSupported())); err != nil {
-		return fmt.Errorf("error occurred while setting property DcSupported: %+v", err)
+		return diag.Errorf("error occurred while setting property DcSupported in CapabilityIoCardCapabilityDef object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in CapabilityIoCardCapabilityDef object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in CapabilityIoCardCapabilityDef object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
-	}
-
-	if err := d.Set("section", flattenMapCapabilitySectionRelationship(s.GetSection(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Section: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in CapabilityIoCardCapabilityDef object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in CapabilityIoCardCapabilityDef object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceCapabilityIoCardCapabilityDefUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceCapabilityIoCardCapabilityDefUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -324,50 +243,6 @@ func resourceCapabilityIoCardCapabilityDefUpdate(d *schema.ResourceData, meta in
 	}
 
 	o.SetObjectType("capability.IoCardCapabilityDef")
-
-	if d.HasChange("section") {
-		v := d.Get("section")
-		p := make([]models.CapabilitySectionRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsCapabilitySectionRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetSection(x)
-		}
-	}
 
 	if d.HasChange("tags") {
 		v := d.Get("tags")
@@ -406,23 +281,24 @@ func resourceCapabilityIoCardCapabilityDefUpdate(d *schema.ResourceData, meta in
 	}
 
 	r := conn.ApiClient.CapabilityApi.UpdateCapabilityIoCardCapabilityDef(conn.ctx, d.Id()).CapabilityIoCardCapabilityDef(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating CapabilityIoCardCapabilityDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceCapabilityIoCardCapabilityDefRead(d, meta)
+	return resourceCapabilityIoCardCapabilityDefRead(c, d, meta)
 }
 
-func resourceCapabilityIoCardCapabilityDefDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceCapabilityIoCardCapabilityDefDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilityIoCardCapabilityDef(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting CapabilityIoCardCapabilityDef object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

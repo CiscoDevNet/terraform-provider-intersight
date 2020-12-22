@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "compute.PersistentMemoryOperation"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "compute.PersistentMemoryOperation"]
 **AdminAction** | Pointer to **string** | Administrative actions that can be performed on the Persistent Memory Modules. * &#x60;None&#x60; - No action on the selected Persistent Memory Modules. * &#x60;SecureErase&#x60; - Secure Erase action on the selected Persistent Memory Modules. * &#x60;Unlock&#x60; - Unlock action on the selected Persistent Memory Modules. | [optional] [default to "None"]
-**IsSecurePassphraseSet** | Pointer to **bool** | Indicates whether the value of the &#39;securePassphrase&#39; property has been set. | [optional] [readonly] 
-**Modules** | Pointer to [**[]ComputePersistentMemoryModule**](compute.PersistentMemoryModule.md) |  | [optional] 
+**IsSecurePassphraseSet** | Pointer to **bool** | Indicates whether the value of the &#39;securePassphrase&#39; property has been set. | [optional] [readonly] [default to false]
+**Modules** | Pointer to [**[]ComputePersistentMemoryModule**](ComputePersistentMemoryModule.md) |  | [optional] 
 **SecurePassphrase** | Pointer to **string** | Secure passphrase of the Persistent Memory Modules of the server. | [optional] 
 
 ## Methods

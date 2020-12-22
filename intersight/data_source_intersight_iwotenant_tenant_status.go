@@ -1,18 +1,20 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
+	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceIwotenantTenantStatus() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceIwotenantTenantStatusRead,
+		ReadContext: dataSourceIwotenantTenantStatusRead,
 		Schema: map[string]*schema.Schema{
 			"account": {
 				Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -82,7 +84,13 @@ func dataSourceIwotenantTenantStatus() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"reference_time": {
+				Description: "During IWO tenant upgrade (or reconfiguration), deployStatus is set to InProgress and referenceTime set to current time. When tenant upgrade (or reconfiguration) does not complete within a pre-defined time using this as reference, deployStatus is set as Failed.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -114,10 +122,11 @@ func dataSourceIwotenantTenantStatus() *schema.Resource {
 	}
 }
 
-func dataSourceIwotenantTenantStatusRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceIwotenantTenantStatusRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IwotenantTenantStatus{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -139,28 +148,32 @@ func dataSourceIwotenantTenantStatusRead(d *schema.ResourceData, meta interface{
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
+	if v, ok := d.GetOk("reference_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetReferenceTime(x)
+	}
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of IwotenantTenantStatus object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.IwotenantApi.GetIwotenantTenantStatusList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.IwotenantApi.GetIwotenantTenantStatusList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching IwotenantTenantStatus: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for IwotenantTenantStatus list: %s", err.Error())
 	}
 	var s = &models.IwotenantTenantStatusList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to IwotenantTenantStatus: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to IwotenantTenantStatus list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for IwotenantTenantStatus did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -169,36 +182,40 @@ func dataSourceIwotenantTenantStatusRead(d *schema.ResourceData, meta interface{
 			var s = &models.IwotenantTenantStatus{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 
 			if err := d.Set("account", flattenMapIamAccountRelationship(s.GetAccount(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Account: %+v", err)
+				return diag.Errorf("error occurred while setting property Account: %s", err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("deploy_status", (s.GetDeployStatus())); err != nil {
-				return fmt.Errorf("error occurred while setting property DeployStatus: %+v", err)
+				return diag.Errorf("error occurred while setting property DeployStatus: %s", err.Error())
 			}
 			if err := d.Set("iwo_id", (s.GetIwoId())); err != nil {
-				return fmt.Errorf("error occurred while setting property IwoId: %+v", err)
+				return diag.Errorf("error occurred while setting property IwoId: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
+			}
+
+			if err := d.Set("reference_time", (s.GetReferenceTime()).String()); err != nil {
+				return diag.Errorf("error occurred while setting property ReferenceTime: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

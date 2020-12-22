@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceVnicLanConnectivityPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceVnicLanConnectivityPolicyCreate,
-		Read:   resourceVnicLanConnectivityPolicyRead,
-		Update: resourceVnicLanConnectivityPolicyUpdate,
-		Delete: resourceVnicLanConnectivityPolicyDelete,
+		CreateContext: resourceVnicLanConnectivityPolicyCreate,
+		ReadContext:   resourceVnicLanConnectivityPolicyRead,
+		UpdateContext: resourceVnicLanConnectivityPolicyUpdate,
+		DeleteContext: resourceVnicLanConnectivityPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -211,7 +214,7 @@ func resourceVnicLanConnectivityPolicy() *schema.Resource {
 	}
 }
 
-func resourceVnicLanConnectivityPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicLanConnectivityPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -417,97 +420,102 @@ func resourceVnicLanConnectivityPolicyCreate(d *schema.ResourceData, meta interf
 	}
 
 	r := conn.ApiClient.VnicApi.CreateVnicLanConnectivityPolicy(conn.ctx).VnicLanConnectivityPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating VnicLanConnectivityPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceVnicLanConnectivityPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceVnicLanConnectivityPolicyRead(c, d, meta)
 }
-func detachVnicLanConnectivityPolicyProfiles(d *schema.ResourceData, meta interface{}) error {
+func detachVnicLanConnectivityPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.VnicLanConnectivityPolicy{}
 	o.SetClassId("vnic.LanConnectivityPolicy")
 	o.SetObjectType("vnic.LanConnectivityPolicy")
 	o.SetProfiles([]models.PolicyAbstractConfigProfileRelationship{})
 
 	r := conn.ApiClient.VnicApi.UpdateVnicLanConnectivityPolicy(conn.ctx, d.Id()).VnicLanConnectivityPolicy(*o)
-	_, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while creating: %s", err.Error())
+	_, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	return err
+	return de
 }
 
-func resourceVnicLanConnectivityPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicLanConnectivityPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.VnicApi.GetVnicLanConnectivityPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "VnicLanConnectivityPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching VnicLanConnectivityPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in VnicLanConnectivityPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in VnicLanConnectivityPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in VnicLanConnectivityPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("eth_ifs", flattenListVnicEthIfRelationship(s.GetEthIfs(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property EthIfs: %+v", err)
+		return diag.Errorf("error occurred while setting property EthIfs in VnicLanConnectivityPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in VnicLanConnectivityPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in VnicLanConnectivityPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in VnicLanConnectivityPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in VnicLanConnectivityPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("placement_mode", (s.GetPlacementMode())); err != nil {
-		return fmt.Errorf("error occurred while setting property PlacementMode: %+v", err)
+		return diag.Errorf("error occurred while setting property PlacementMode in VnicLanConnectivityPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("profiles", flattenListPolicyAbstractConfigProfileRelationship(s.GetProfiles(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Profiles: %+v", err)
+		return diag.Errorf("error occurred while setting property Profiles in VnicLanConnectivityPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in VnicLanConnectivityPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("target_platform", (s.GetTargetPlatform())); err != nil {
-		return fmt.Errorf("error occurred while setting property TargetPlatform: %+v", err)
+		return diag.Errorf("error occurred while setting property TargetPlatform in VnicLanConnectivityPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceVnicLanConnectivityPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicLanConnectivityPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -723,31 +731,32 @@ func resourceVnicLanConnectivityPolicyUpdate(d *schema.ResourceData, meta interf
 	}
 
 	r := conn.ApiClient.VnicApi.UpdateVnicLanConnectivityPolicy(conn.ctx, d.Id()).VnicLanConnectivityPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating VnicLanConnectivityPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceVnicLanConnectivityPolicyRead(d, meta)
+	return resourceVnicLanConnectivityPolicyRead(c, d, meta)
 }
 
-func resourceVnicLanConnectivityPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceVnicLanConnectivityPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profiles"); ok {
 		if len(p.([]interface{})) > 0 {
 			e := detachVnicLanConnectivityPolicyProfiles(d, meta)
-			if e != nil {
+			if e.HasError() {
 				return e
 			}
 		}
 	}
 	p := conn.ApiClient.VnicApi.DeleteVnicLanConnectivityPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting VnicLanConnectivityPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

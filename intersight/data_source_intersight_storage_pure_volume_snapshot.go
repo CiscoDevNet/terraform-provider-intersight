@@ -1,19 +1,20 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceStoragePureVolumeSnapshot() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceStoragePureVolumeSnapshotRead,
+		ReadContext: dataSourceStoragePureVolumeSnapshotRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -256,10 +257,11 @@ func dataSourceStoragePureVolumeSnapshot() *schema.Resource {
 	}
 }
 
-func dataSourceStoragePureVolumeSnapshotRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceStoragePureVolumeSnapshotRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.StoragePureVolumeSnapshot{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -300,25 +302,25 @@ func dataSourceStoragePureVolumeSnapshotRead(d *schema.ResourceData, meta interf
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of StoragePureVolumeSnapshot object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.StorageApi.GetStoragePureVolumeSnapshotList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.StorageApi.GetStoragePureVolumeSnapshotList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching StoragePureVolumeSnapshot: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for StoragePureVolumeSnapshot list: %s", err.Error())
 	}
 	var s = &models.StoragePureVolumeSnapshotList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to StoragePureVolumeSnapshot: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to StoragePureVolumeSnapshot list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for StoragePureVolumeSnapshot did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -327,61 +329,61 @@ func dataSourceStoragePureVolumeSnapshotRead(d *schema.ResourceData, meta interf
 			var s = &models.StoragePureVolumeSnapshot{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 
 			if err := d.Set("array", flattenMapStoragePureArrayRelationship(s.GetArray(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Array: %+v", err)
+				return diag.Errorf("error occurred while setting property Array: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 
 			if err := d.Set("created_time", (s.GetCreatedTime()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property CreatedTime: %+v", err)
+				return diag.Errorf("error occurred while setting property CreatedTime: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("name", (s.GetName())); err != nil {
-				return fmt.Errorf("error occurred while setting property Name: %+v", err)
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("protection_group_name", (s.GetProtectionGroupName())); err != nil {
-				return fmt.Errorf("error occurred while setting property ProtectionGroupName: %+v", err)
+				return diag.Errorf("error occurred while setting property ProtectionGroupName: %s", err.Error())
 			}
 
 			if err := d.Set("protection_group_snapshot", flattenMapStoragePureProtectionGroupSnapshotRelationship(s.GetProtectionGroupSnapshot(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property ProtectionGroupSnapshot: %+v", err)
+				return diag.Errorf("error occurred while setting property ProtectionGroupSnapshot: %s", err.Error())
 			}
 
 			if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property RegisteredDevice: %+v", err)
+				return diag.Errorf("error occurred while setting property RegisteredDevice: %s", err.Error())
 			}
 			if err := d.Set("serial", (s.GetSerial())); err != nil {
-				return fmt.Errorf("error occurred while setting property Serial: %+v", err)
+				return diag.Errorf("error occurred while setting property Serial: %s", err.Error())
 			}
 			if err := d.Set("size", (s.GetSize())); err != nil {
-				return fmt.Errorf("error occurred while setting property Size: %+v", err)
+				return diag.Errorf("error occurred while setting property Size: %s", err.Error())
 			}
 			if err := d.Set("nr_source", (s.GetSource())); err != nil {
-				return fmt.Errorf("error occurred while setting property Source: %+v", err)
+				return diag.Errorf("error occurred while setting property Source: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 
 			if err := d.Set("volume", flattenMapStoragePureVolumeRelationship(s.GetVolume(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Volume: %+v", err)
+				return diag.Errorf("error occurred while setting property Volume: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

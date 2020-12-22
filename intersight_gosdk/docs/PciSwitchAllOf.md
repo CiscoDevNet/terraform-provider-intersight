@@ -20,9 +20,9 @@ Name | Type | Description | Notes
 **VendorId** | Pointer to **string** | The vendor id of the switch. | [optional] [readonly] 
 **ComputeBoard** | Pointer to [**ComputeBoardRelationship**](compute.Board.Relationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
-**Links** | Pointer to [**[]PciLinkRelationship**](pci.Link.Relationship.md) | An array of relationships to pciLink resources. | [optional] [readonly] 
+**Links** | Pointer to [**[]PciLinkRelationship**](PciLinkRelationship.md) | An array of relationships to pciLink resources. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
-**RunningFirmware** | Pointer to [**[]FirmwareRunningFirmwareRelationship**](firmware.RunningFirmware.Relationship.md) | An array of relationships to firmwareRunningFirmware resources. | [optional] [readonly] 
+**RunningFirmware** | Pointer to [**[]FirmwareRunningFirmwareRelationship**](FirmwareRunningFirmwareRelationship.md) | An array of relationships to firmwareRunningFirmware resources. | [optional] [readonly] 
 
 ## Methods
 

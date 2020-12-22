@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Description** | Pointer to **string** | The informative description about the usage of this organization. | [optional] 
 **Name** | Pointer to **string** | The name of the organization. There can be multiple organizations under an account. | [optional] 
 **Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
-**ResourceGroups** | Pointer to [**[]ResourceGroupRelationship**](resource.Group.Relationship.md) | An array of relationships to resourceGroup resources. | [optional] 
+**ResourceGroups** | Pointer to [**[]ResourceGroupRelationship**](ResourceGroupRelationship.md) | An array of relationships to resourceGroup resources. | [optional] 
 
 ## Methods
 

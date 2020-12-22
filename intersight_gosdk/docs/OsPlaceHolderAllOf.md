@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "os.PlaceHolder"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "os.PlaceHolder"]
-**IsValueSet** | Pointer to **bool** | Flag to indicate if value is set. Value will be used to check if any edit. | [optional] 
+**IsValueSet** | Pointer to **bool** | Flag to indicate if value is set. Value will be used to check if any edit. | [optional] [default to true]
 **Type** | Pointer to [**WorkflowPrimitiveDataType**](workflow.PrimitiveDataType.md) |  | [optional] 
 **Value** | Pointer to **interface{}** | Value for placeholder provided by user. | [optional] 
 

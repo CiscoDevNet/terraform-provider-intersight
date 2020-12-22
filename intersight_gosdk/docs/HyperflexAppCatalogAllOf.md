@@ -9,9 +9,9 @@ Name | Type | Description | Notes
 **Version** | Pointer to **string** | The catalog version used in HyperFlex cluster configuration service. | [optional] 
 **FeatureLimitExternal** | Pointer to [**HyperflexFeatureLimitExternalRelationship**](hyperflex.FeatureLimitExternal.Relationship.md) |  | [optional] 
 **FeatureLimitInternal** | Pointer to [**HyperflexFeatureLimitInternalRelationship**](hyperflex.FeatureLimitInternal.Relationship.md) |  | [optional] 
-**HxdpVersions** | Pointer to [**[]HyperflexHxdpVersionRelationship**](hyperflex.HxdpVersion.Relationship.md) | An array of relationships to hyperflexHxdpVersion resources. | [optional] 
-**HyperflexCapabilityInfos** | Pointer to [**[]HyperflexCapabilityInfoRelationship**](hyperflex.CapabilityInfo.Relationship.md) | An array of relationships to hyperflexCapabilityInfo resources. | [optional] 
-**HyperflexSoftwareCompatibilityInfos** | Pointer to [**[]HclHyperflexSoftwareCompatibilityInfoRelationship**](hcl.HyperflexSoftwareCompatibilityInfo.Relationship.md) | An array of relationships to hclHyperflexSoftwareCompatibilityInfo resources. | [optional] 
+**HxdpVersions** | Pointer to [**[]HyperflexHxdpVersionRelationship**](HyperflexHxdpVersionRelationship.md) | An array of relationships to hyperflexHxdpVersion resources. | [optional] 
+**HyperflexCapabilityInfos** | Pointer to [**[]HyperflexCapabilityInfoRelationship**](HyperflexCapabilityInfoRelationship.md) | An array of relationships to hyperflexCapabilityInfo resources. | [optional] 
+**HyperflexSoftwareCompatibilityInfos** | Pointer to [**[]HclHyperflexSoftwareCompatibilityInfoRelationship**](HclHyperflexSoftwareCompatibilityInfoRelationship.md) | An array of relationships to hclHyperflexSoftwareCompatibilityInfo resources. | [optional] 
 **ServerFirmwareVersion** | Pointer to [**HyperflexServerFirmwareVersionRelationship**](hyperflex.ServerFirmwareVersion.Relationship.md) |  | [optional] 
 **ServerModel** | Pointer to [**HyperflexServerModelRelationship**](hyperflex.ServerModel.Relationship.md) |  | [optional] 
 

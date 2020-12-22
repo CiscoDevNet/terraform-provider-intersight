@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -26,6 +26,10 @@ type IamLocalUserPassword struct {
 	ObjectType string `json:"ObjectType"`
 	// User-entered passsord to be compared to password for change password function.
 	CurrentPassword *string `json:"CurrentPassword,omitempty"`
+	// Indicates whether the value of the 'currentPassword' property has been set.
+	IsCurrentPasswordSet *bool `json:"IsCurrentPasswordSet,omitempty"`
+	// Indicates whether the value of the 'newPassword' property has been set.
+	IsNewPasswordSet *bool `json:"IsNewPasswordSet,omitempty"`
 	// New password that the user's password should be changed to.
 	NewPassword *string `json:"NewPassword,omitempty"`
 	// User's current valid passsord.
@@ -44,6 +48,10 @@ func NewIamLocalUserPassword(classId string, objectType string) *IamLocalUserPas
 	this := IamLocalUserPassword{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var isCurrentPasswordSet bool = false
+	this.IsCurrentPasswordSet = &isCurrentPasswordSet
+	var isNewPasswordSet bool = false
+	this.IsNewPasswordSet = &isNewPasswordSet
 	return &this
 }
 
@@ -56,6 +64,10 @@ func NewIamLocalUserPasswordWithDefaults() *IamLocalUserPassword {
 	this.ClassId = classId
 	var objectType string = "iam.LocalUserPassword"
 	this.ObjectType = objectType
+	var isCurrentPasswordSet bool = false
+	this.IsCurrentPasswordSet = &isCurrentPasswordSet
+	var isNewPasswordSet bool = false
+	this.IsNewPasswordSet = &isNewPasswordSet
 	return &this
 }
 
@@ -137,6 +149,70 @@ func (o *IamLocalUserPassword) HasCurrentPassword() bool {
 // SetCurrentPassword gets a reference to the given string and assigns it to the CurrentPassword field.
 func (o *IamLocalUserPassword) SetCurrentPassword(v string) {
 	o.CurrentPassword = &v
+}
+
+// GetIsCurrentPasswordSet returns the IsCurrentPasswordSet field value if set, zero value otherwise.
+func (o *IamLocalUserPassword) GetIsCurrentPasswordSet() bool {
+	if o == nil || o.IsCurrentPasswordSet == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsCurrentPasswordSet
+}
+
+// GetIsCurrentPasswordSetOk returns a tuple with the IsCurrentPasswordSet field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamLocalUserPassword) GetIsCurrentPasswordSetOk() (*bool, bool) {
+	if o == nil || o.IsCurrentPasswordSet == nil {
+		return nil, false
+	}
+	return o.IsCurrentPasswordSet, true
+}
+
+// HasIsCurrentPasswordSet returns a boolean if a field has been set.
+func (o *IamLocalUserPassword) HasIsCurrentPasswordSet() bool {
+	if o != nil && o.IsCurrentPasswordSet != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsCurrentPasswordSet gets a reference to the given bool and assigns it to the IsCurrentPasswordSet field.
+func (o *IamLocalUserPassword) SetIsCurrentPasswordSet(v bool) {
+	o.IsCurrentPasswordSet = &v
+}
+
+// GetIsNewPasswordSet returns the IsNewPasswordSet field value if set, zero value otherwise.
+func (o *IamLocalUserPassword) GetIsNewPasswordSet() bool {
+	if o == nil || o.IsNewPasswordSet == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsNewPasswordSet
+}
+
+// GetIsNewPasswordSetOk returns a tuple with the IsNewPasswordSet field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *IamLocalUserPassword) GetIsNewPasswordSetOk() (*bool, bool) {
+	if o == nil || o.IsNewPasswordSet == nil {
+		return nil, false
+	}
+	return o.IsNewPasswordSet, true
+}
+
+// HasIsNewPasswordSet returns a boolean if a field has been set.
+func (o *IamLocalUserPassword) HasIsNewPasswordSet() bool {
+	if o != nil && o.IsNewPasswordSet != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsNewPasswordSet gets a reference to the given bool and assigns it to the IsNewPasswordSet field.
+func (o *IamLocalUserPassword) SetIsNewPasswordSet(v bool) {
+	o.IsNewPasswordSet = &v
 }
 
 // GetNewPassword returns the NewPassword field value if set, zero value otherwise.
@@ -254,6 +330,12 @@ func (o IamLocalUserPassword) MarshalJSON() ([]byte, error) {
 	if o.CurrentPassword != nil {
 		toSerialize["CurrentPassword"] = o.CurrentPassword
 	}
+	if o.IsCurrentPasswordSet != nil {
+		toSerialize["IsCurrentPasswordSet"] = o.IsCurrentPasswordSet
+	}
+	if o.IsNewPasswordSet != nil {
+		toSerialize["IsNewPasswordSet"] = o.IsNewPasswordSet
+	}
 	if o.NewPassword != nil {
 		toSerialize["NewPassword"] = o.NewPassword
 	}
@@ -279,6 +361,10 @@ func (o *IamLocalUserPassword) UnmarshalJSON(bytes []byte) (err error) {
 		ObjectType string `json:"ObjectType"`
 		// User-entered passsord to be compared to password for change password function.
 		CurrentPassword *string `json:"CurrentPassword,omitempty"`
+		// Indicates whether the value of the 'currentPassword' property has been set.
+		IsCurrentPasswordSet *bool `json:"IsCurrentPasswordSet,omitempty"`
+		// Indicates whether the value of the 'newPassword' property has been set.
+		IsNewPasswordSet *bool `json:"IsNewPasswordSet,omitempty"`
 		// New password that the user's password should be changed to.
 		NewPassword *string `json:"NewPassword,omitempty"`
 		// User's current valid passsord.
@@ -294,6 +380,8 @@ func (o *IamLocalUserPassword) UnmarshalJSON(bytes []byte) (err error) {
 		varIamLocalUserPassword.ClassId = varIamLocalUserPasswordWithoutEmbeddedStruct.ClassId
 		varIamLocalUserPassword.ObjectType = varIamLocalUserPasswordWithoutEmbeddedStruct.ObjectType
 		varIamLocalUserPassword.CurrentPassword = varIamLocalUserPasswordWithoutEmbeddedStruct.CurrentPassword
+		varIamLocalUserPassword.IsCurrentPasswordSet = varIamLocalUserPasswordWithoutEmbeddedStruct.IsCurrentPasswordSet
+		varIamLocalUserPassword.IsNewPasswordSet = varIamLocalUserPasswordWithoutEmbeddedStruct.IsNewPasswordSet
 		varIamLocalUserPassword.NewPassword = varIamLocalUserPasswordWithoutEmbeddedStruct.NewPassword
 		varIamLocalUserPassword.Password = varIamLocalUserPasswordWithoutEmbeddedStruct.Password
 		varIamLocalUserPassword.User = varIamLocalUserPasswordWithoutEmbeddedStruct.User
@@ -317,6 +405,8 @@ func (o *IamLocalUserPassword) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "CurrentPassword")
+		delete(additionalProperties, "IsCurrentPasswordSet")
+		delete(additionalProperties, "IsNewPasswordSet")
 		delete(additionalProperties, "NewPassword")
 		delete(additionalProperties, "Password")
 		delete(additionalProperties, "User")

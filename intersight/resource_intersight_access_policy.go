@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceAccessPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceAccessPolicyCreate,
-		Read:   resourceAccessPolicyRead,
-		Update: resourceAccessPolicyUpdate,
-		Delete: resourceAccessPolicyDelete,
+		CreateContext: resourceAccessPolicyCreate,
+		ReadContext:   resourceAccessPolicyRead,
+		UpdateContext: resourceAccessPolicyUpdate,
+		DeleteContext: resourceAccessPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -43,11 +46,13 @@ func resourceAccessPolicy() *schema.Resource {
 							Description: "This flag enables the use of IPv4 address for end-point access.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     true,
 						},
 						"enable_ip_v6": {
 							Description: "This flag enables the use of IPv6 address for end-point access.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     false,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -285,7 +290,7 @@ func resourceAccessPolicy() *schema.Resource {
 	}
 }
 
-func resourceAccessPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceAccessPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -573,101 +578,106 @@ func resourceAccessPolicyCreate(d *schema.ResourceData, meta interface{}) error 
 	}
 
 	r := conn.ApiClient.AccessApi.CreateAccessPolicy(conn.ctx).AccessPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating AccessPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceAccessPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceAccessPolicyRead(c, d, meta)
 }
-func detachAccessPolicyProfiles(d *schema.ResourceData, meta interface{}) error {
+func detachAccessPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.AccessPolicy{}
 	o.SetClassId("access.Policy")
 	o.SetObjectType("access.Policy")
 	o.SetProfiles([]models.PolicyAbstractConfigProfileRelationship{})
 
 	r := conn.ApiClient.AccessApi.UpdateAccessPolicy(conn.ctx, d.Id()).AccessPolicy(*o)
-	_, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while creating: %s", err.Error())
+	_, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	return err
+	return de
 }
 
-func resourceAccessPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceAccessPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.AccessApi.GetAccessPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "AccessPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching AccessPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in AccessPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("address_type", flattenMapAccessAddressType(s.GetAddressType(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property AddressType: %+v", err)
+		return diag.Errorf("error occurred while setting property AddressType in AccessPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in AccessPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in AccessPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("inband_ip_pool", flattenMapIppoolPoolRelationship(s.GetInbandIpPool(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property InbandIpPool: %+v", err)
+		return diag.Errorf("error occurred while setting property InbandIpPool in AccessPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("inband_vlan", (s.GetInbandVlan())); err != nil {
-		return fmt.Errorf("error occurred while setting property InbandVlan: %+v", err)
+		return diag.Errorf("error occurred while setting property InbandVlan in AccessPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("inband_vrf", flattenMapVrfVrfRelationship(s.GetInbandVrf(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property InbandVrf: %+v", err)
+		return diag.Errorf("error occurred while setting property InbandVrf in AccessPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in AccessPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in AccessPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in AccessPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in AccessPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("profiles", flattenListPolicyAbstractConfigProfileRelationship(s.GetProfiles(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Profiles: %+v", err)
+		return diag.Errorf("error occurred while setting property Profiles in AccessPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in AccessPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceAccessPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceAccessPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -966,31 +976,32 @@ func resourceAccessPolicyUpdate(d *schema.ResourceData, meta interface{}) error 
 	}
 
 	r := conn.ApiClient.AccessApi.UpdateAccessPolicy(conn.ctx, d.Id()).AccessPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating AccessPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceAccessPolicyRead(d, meta)
+	return resourceAccessPolicyRead(c, d, meta)
 }
 
-func resourceAccessPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceAccessPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profiles"); ok {
 		if len(p.([]interface{})) > 0 {
 			e := detachAccessPolicyProfiles(d, meta)
-			if e != nil {
+			if e.HasError() {
 				return e
 			}
 		}
 	}
 	p := conn.ApiClient.AccessApi.DeleteAccessPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting AccessPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

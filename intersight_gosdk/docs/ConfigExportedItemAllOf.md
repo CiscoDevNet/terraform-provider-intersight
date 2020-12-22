@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **StatusMessage** | Pointer to **string** | Progress or error message for the MO&#39;s export operation. | [optional] [readonly] 
 **Exporter** | Pointer to [**ConfigExporterRelationship**](config.Exporter.Relationship.md) |  | [optional] 
 **ParentItem** | Pointer to [**ConfigExportedItemRelationship**](config.ExportedItem.Relationship.md) |  | [optional] 
-**RelatedItems** | Pointer to [**[]ConfigExportedItemRelationship**](config.ExportedItem.Relationship.md) | An array of relationships to configExportedItem resources. | [optional] [readonly] 
+**RelatedItems** | Pointer to [**[]ConfigExportedItemRelationship**](ConfigExportedItemRelationship.md) | An array of relationships to configExportedItem resources. | [optional] [readonly] 
 
 ## Methods
 

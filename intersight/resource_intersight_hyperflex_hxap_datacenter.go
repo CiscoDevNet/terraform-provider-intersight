@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceHyperflexHxapDatacenter() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceHyperflexHxapDatacenterCreate,
-		Read:   resourceHyperflexHxapDatacenterRead,
-		Update: resourceHyperflexHxapDatacenterUpdate,
-		Delete: resourceHyperflexHxapDatacenterDelete,
+		CreateContext: resourceHyperflexHxapDatacenterCreate,
+		ReadContext:   resourceHyperflexHxapDatacenterRead,
+		UpdateContext: resourceHyperflexHxapDatacenterUpdate,
+		DeleteContext: resourceHyperflexHxapDatacenterDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"account": {
 				Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -201,7 +204,7 @@ func resourceHyperflexHxapDatacenter() *schema.Resource {
 	}
 }
 
-func resourceHyperflexHxapDatacenterCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexHxapDatacenterCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -399,73 +402,77 @@ func resourceHyperflexHxapDatacenterCreate(d *schema.ResourceData, meta interfac
 	}
 
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexHxapDatacenter(conn.ctx).HyperflexHxapDatacenter(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating HyperflexHxapDatacenter: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceHyperflexHxapDatacenterRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceHyperflexHxapDatacenterRead(c, d, meta)
 }
 
-func resourceHyperflexHxapDatacenterRead(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexHxapDatacenterRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.HyperflexApi.GetHyperflexHxapDatacenterByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "HyperflexHxapDatacenter object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching HyperflexHxapDatacenter: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("account", flattenMapIamAccountRelationship(s.GetAccount(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Account: %+v", err)
+		return diag.Errorf("error occurred while setting property Account in HyperflexHxapDatacenter object: %s", err.Error())
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in HyperflexHxapDatacenter object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in HyperflexHxapDatacenter object: %s", err.Error())
 	}
 
 	if err := d.Set("hypervisor_manager", flattenMapHyperflexCiscoHypervisorManagerRelationship(s.GetHypervisorManager(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property HypervisorManager: %+v", err)
+		return diag.Errorf("error occurred while setting property HypervisorManager in HyperflexHxapDatacenter object: %s", err.Error())
 	}
 
 	if err := d.Set("identity", (s.GetIdentity())); err != nil {
-		return fmt.Errorf("error occurred while setting property Identity: %+v", err)
+		return diag.Errorf("error occurred while setting property Identity in HyperflexHxapDatacenter object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in HyperflexHxapDatacenter object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in HyperflexHxapDatacenter object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in HyperflexHxapDatacenter object: %s", err.Error())
 	}
 
 	if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property RegisteredDevice: %+v", err)
+		return diag.Errorf("error occurred while setting property RegisteredDevice in HyperflexHxapDatacenter object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in HyperflexHxapDatacenter object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceHyperflexHxapDatacenterUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexHxapDatacenterUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -671,23 +678,24 @@ func resourceHyperflexHxapDatacenterUpdate(d *schema.ResourceData, meta interfac
 	}
 
 	r := conn.ApiClient.HyperflexApi.UpdateHyperflexHxapDatacenter(conn.ctx, d.Id()).HyperflexHxapDatacenter(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating HyperflexHxapDatacenter: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexHxapDatacenterRead(d, meta)
+	return resourceHyperflexHxapDatacenterRead(c, d, meta)
 }
 
-func resourceHyperflexHxapDatacenterDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexHxapDatacenterDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexHxapDatacenter(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting HyperflexHxapDatacenter object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

@@ -1,19 +1,18 @@
-
 ---
+subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_switch_capability"
-sidebar_current: "docs-intersight-resource-capability-switch-capability"
 description: |-
   Type to represent additional switch specific capabilities.
 ---
 
-# Resource: intersight_capability._switch_capability
+# Resource: intersight_capability_switch_capability
 Type to represent additional switch specific capabilities.
 ## Argument Reference
 The following arguments are supported:
 * `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `default_fcoe_vlan`:(int) Default Fcoe VLAN associated with this switch. 
 * `dynamic_vifs_supported`:(bool) Dynamic VIFs support on this switch. 
 * `fan_modules_supported`:(bool) Fan Modules support on this switch. 
@@ -146,14 +145,6 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `start_port_id`:(int) Starting Port ID in this range of ports. 
   + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
-* `section`:(Array with Maximum of one item) - A reference to a capabilitySection resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
-This complex property has following sub-properties:
-  + `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
-  + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
-  + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
-  + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `sereno_netflow_supported`:(bool) Sereno Adaptor with Netflow support on this switch. 
 * `sku`:(string) SKU information for Switch/Fabric-Interconnect. 
 * `storage_limits`:(Array with Maximum of one item) - List of storage limitations for this switch. 
@@ -202,3 +193,10 @@ This complex property has following sub-properties:
   + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
 * `unified_rule`:(string) The Slider rule for Unified ports on this switch. 
 * `vid`:(string) VID information for Switch/Fabric-Interconnect. 
+
+
+## Import
+`intersight_capability_switch_capability` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_capability_switch_capability.example 1234567890987654321abcde
+```

@@ -15,11 +15,11 @@ Name | Type | Description | Notes
 **Type** | Pointer to **string** | This represent the type of storage enclosure. | [optional] [readonly] 
 **ComputeBlade** | Pointer to [**ComputeBladeRelationship**](compute.Blade.Relationship.md) |  | [optional] 
 **ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](compute.RackUnit.Relationship.md) |  | [optional] 
-**EnclosureDiskSlots** | Pointer to [**[]StorageEnclosureDiskSlotEpRelationship**](storage.EnclosureDiskSlotEp.Relationship.md) | An array of relationships to storageEnclosureDiskSlotEp resources. | [optional] [readonly] 
-**EnclosureDisks** | Pointer to [**[]StorageEnclosureDiskRelationship**](storage.EnclosureDisk.Relationship.md) | An array of relationships to storageEnclosureDisk resources. | [optional] [readonly] 
+**EnclosureDiskSlots** | Pointer to [**[]StorageEnclosureDiskSlotEpRelationship**](StorageEnclosureDiskSlotEpRelationship.md) | An array of relationships to storageEnclosureDiskSlotEp resources. | [optional] [readonly] 
+**EnclosureDisks** | Pointer to [**[]StorageEnclosureDiskRelationship**](StorageEnclosureDiskRelationship.md) | An array of relationships to storageEnclosureDisk resources. | [optional] [readonly] 
 **EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](equipment.Chassis.Relationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
-**PhysicalDisks** | Pointer to [**[]StoragePhysicalDiskRelationship**](storage.PhysicalDisk.Relationship.md) | An array of relationships to storagePhysicalDisk resources. | [optional] [readonly] 
+**PhysicalDisks** | Pointer to [**[]StoragePhysicalDiskRelationship**](StoragePhysicalDiskRelationship.md) | An array of relationships to storagePhysicalDisk resources. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
 ## Methods

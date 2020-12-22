@@ -1,19 +1,20 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceLicenseAccountLicenseData() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceLicenseAccountLicenseDataRead,
+		ReadContext: dataSourceLicenseAccountLicenseDataRead,
 		Schema: map[string]*schema.Schema{
 			"account": {
 				Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -428,10 +429,11 @@ func dataSourceLicenseAccountLicenseData() *schema.Resource {
 	}
 }
 
-func dataSourceLicenseAccountLicenseDataRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceLicenseAccountLicenseDataRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.LicenseAccountLicenseData{}
 	if v, ok := d.GetOk("account_id"); ok {
 		x := (v.(string))
@@ -536,25 +538,25 @@ func dataSourceLicenseAccountLicenseDataRead(d *schema.ResourceData, meta interf
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of LicenseAccountLicenseData object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.LicenseApi.GetLicenseAccountLicenseDataList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.LicenseApi.GetLicenseAccountLicenseDataList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching LicenseAccountLicenseData: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for LicenseAccountLicenseData list: %s", err.Error())
 	}
 	var s = &models.LicenseAccountLicenseDataList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to LicenseAccountLicenseData: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to LicenseAccountLicenseData list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for LicenseAccountLicenseData did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -563,118 +565,118 @@ func dataSourceLicenseAccountLicenseDataRead(d *schema.ResourceData, meta interf
 			var s = &models.LicenseAccountLicenseData{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 
 			if err := d.Set("account", flattenMapIamAccountRelationship(s.GetAccount(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Account: %+v", err)
+				return diag.Errorf("error occurred while setting property Account: %s", err.Error())
 			}
 			if err := d.Set("account_id", (s.GetAccountId())); err != nil {
-				return fmt.Errorf("error occurred while setting property AccountId: %+v", err)
+				return diag.Errorf("error occurred while setting property AccountId: %s", err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("agent_data", (s.GetAgentData())); err != nil {
-				return fmt.Errorf("error occurred while setting property AgentData: %+v", err)
+				return diag.Errorf("error occurred while setting property AgentData: %s", err.Error())
 			}
 			if err := d.Set("auth_expire_time", (s.GetAuthExpireTime())); err != nil {
-				return fmt.Errorf("error occurred while setting property AuthExpireTime: %+v", err)
+				return diag.Errorf("error occurred while setting property AuthExpireTime: %s", err.Error())
 			}
 			if err := d.Set("auth_initial_time", (s.GetAuthInitialTime())); err != nil {
-				return fmt.Errorf("error occurred while setting property AuthInitialTime: %+v", err)
+				return diag.Errorf("error occurred while setting property AuthInitialTime: %s", err.Error())
 			}
 			if err := d.Set("auth_next_time", (s.GetAuthNextTime())); err != nil {
-				return fmt.Errorf("error occurred while setting property AuthNextTime: %+v", err)
+				return diag.Errorf("error occurred while setting property AuthNextTime: %s", err.Error())
 			}
 			if err := d.Set("category", (s.GetCategory())); err != nil {
-				return fmt.Errorf("error occurred while setting property Category: %+v", err)
+				return diag.Errorf("error occurred while setting property Category: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 
 			if err := d.Set("customer_op", flattenMapLicenseCustomerOpRelationship(s.GetCustomerOp(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property CustomerOp: %+v", err)
+				return diag.Errorf("error occurred while setting property CustomerOp: %s", err.Error())
 			}
 			if err := d.Set("default_license_type", (s.GetDefaultLicenseType())); err != nil {
-				return fmt.Errorf("error occurred while setting property DefaultLicenseType: %+v", err)
+				return diag.Errorf("error occurred while setting property DefaultLicenseType: %s", err.Error())
 			}
 			if err := d.Set("error_desc", (s.GetErrorDesc())); err != nil {
-				return fmt.Errorf("error occurred while setting property ErrorDesc: %+v", err)
+				return diag.Errorf("error occurred while setting property ErrorDesc: %s", err.Error())
 			}
 			if err := d.Set("group", (s.GetGroup())); err != nil {
-				return fmt.Errorf("error occurred while setting property Group: %+v", err)
+				return diag.Errorf("error occurred while setting property Group: %s", err.Error())
 			}
 			if err := d.Set("highest_compliant_license_tier", (s.GetHighestCompliantLicenseTier())); err != nil {
-				return fmt.Errorf("error occurred while setting property HighestCompliantLicenseTier: %+v", err)
+				return diag.Errorf("error occurred while setting property HighestCompliantLicenseTier: %s", err.Error())
 			}
 
 			if err := d.Set("iwo_customer_op", flattenMapLicenseIwoCustomerOpRelationship(s.GetIwoCustomerOp(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property IwoCustomerOp: %+v", err)
+				return diag.Errorf("error occurred while setting property IwoCustomerOp: %s", err.Error())
 			}
 
 			if err := d.Set("iwo_license_count", flattenMapLicenseIwoLicenseCountRelationship(s.GetIwoLicenseCount(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property IwoLicenseCount: %+v", err)
+				return diag.Errorf("error occurred while setting property IwoLicenseCount: %s", err.Error())
 			}
 
 			if err := d.Set("last_sync", (s.GetLastSync()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property LastSync: %+v", err)
+				return diag.Errorf("error occurred while setting property LastSync: %s", err.Error())
 			}
 
 			if err := d.Set("last_updated_time", (s.GetLastUpdatedTime()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property LastUpdatedTime: %+v", err)
+				return diag.Errorf("error occurred while setting property LastUpdatedTime: %s", err.Error())
 			}
 			if err := d.Set("license_state", (s.GetLicenseState())); err != nil {
-				return fmt.Errorf("error occurred while setting property LicenseState: %+v", err)
+				return diag.Errorf("error occurred while setting property LicenseState: %s", err.Error())
 			}
 			if err := d.Set("license_tech_support_info", (s.GetLicenseTechSupportInfo())); err != nil {
-				return fmt.Errorf("error occurred while setting property LicenseTechSupportInfo: %+v", err)
+				return diag.Errorf("error occurred while setting property LicenseTechSupportInfo: %s", err.Error())
 			}
 
 			if err := d.Set("licenseinfos", flattenListLicenseLicenseInfoRelationship(s.GetLicenseinfos(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Licenseinfos: %+v", err)
+				return diag.Errorf("error occurred while setting property Licenseinfos: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("register_expire_time", (s.GetRegisterExpireTime())); err != nil {
-				return fmt.Errorf("error occurred while setting property RegisterExpireTime: %+v", err)
+				return diag.Errorf("error occurred while setting property RegisterExpireTime: %s", err.Error())
 			}
 			if err := d.Set("register_initial_time", (s.GetRegisterInitialTime())); err != nil {
-				return fmt.Errorf("error occurred while setting property RegisterInitialTime: %+v", err)
+				return diag.Errorf("error occurred while setting property RegisterInitialTime: %s", err.Error())
 			}
 			if err := d.Set("register_next_time", (s.GetRegisterNextTime())); err != nil {
-				return fmt.Errorf("error occurred while setting property RegisterNextTime: %+v", err)
+				return diag.Errorf("error occurred while setting property RegisterNextTime: %s", err.Error())
 			}
 			if err := d.Set("registration_status", (s.GetRegistrationStatus())); err != nil {
-				return fmt.Errorf("error occurred while setting property RegistrationStatus: %+v", err)
+				return diag.Errorf("error occurred while setting property RegistrationStatus: %s", err.Error())
 			}
 			if err := d.Set("renew_failure_string", (s.GetRenewFailureString())); err != nil {
-				return fmt.Errorf("error occurred while setting property RenewFailureString: %+v", err)
+				return diag.Errorf("error occurred while setting property RenewFailureString: %s", err.Error())
 			}
 			if err := d.Set("smart_account", (s.GetSmartAccount())); err != nil {
-				return fmt.Errorf("error occurred while setting property SmartAccount: %+v", err)
+				return diag.Errorf("error occurred while setting property SmartAccount: %s", err.Error())
 			}
 
 			if err := d.Set("smartlicense_token", flattenMapLicenseSmartlicenseTokenRelationship(s.GetSmartlicenseToken(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property SmartlicenseToken: %+v", err)
+				return diag.Errorf("error occurred while setting property SmartlicenseToken: %s", err.Error())
 			}
 			if err := d.Set("sync_status", (s.GetSyncStatus())); err != nil {
-				return fmt.Errorf("error occurred while setting property SyncStatus: %+v", err)
+				return diag.Errorf("error occurred while setting property SyncStatus: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("virtual_account", (s.GetVirtualAccount())); err != nil {
-				return fmt.Errorf("error occurred while setting property VirtualAccount: %+v", err)
+				return diag.Errorf("error occurred while setting property VirtualAccount: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }
