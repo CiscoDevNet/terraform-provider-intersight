@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -24,6 +24,8 @@ type SoftwarerepositoryCatalog struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
+	// The status of the image catalog synchronization operation.
+	IsImagePullFailure *bool `json:"IsImagePullFailure,omitempty"`
 	// The name of the catalog. The names are populated and predefined during MO creation.
 	Name                 *string                               `json:"Name,omitempty"`
 	Organization         *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
@@ -102,6 +104,38 @@ func (o *SoftwarerepositoryCatalog) GetObjectTypeOk() (*string, bool) {
 // SetObjectType sets field value
 func (o *SoftwarerepositoryCatalog) SetObjectType(v string) {
 	o.ObjectType = v
+}
+
+// GetIsImagePullFailure returns the IsImagePullFailure field value if set, zero value otherwise.
+func (o *SoftwarerepositoryCatalog) GetIsImagePullFailure() bool {
+	if o == nil || o.IsImagePullFailure == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsImagePullFailure
+}
+
+// GetIsImagePullFailureOk returns a tuple with the IsImagePullFailure field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SoftwarerepositoryCatalog) GetIsImagePullFailureOk() (*bool, bool) {
+	if o == nil || o.IsImagePullFailure == nil {
+		return nil, false
+	}
+	return o.IsImagePullFailure, true
+}
+
+// HasIsImagePullFailure returns a boolean if a field has been set.
+func (o *SoftwarerepositoryCatalog) HasIsImagePullFailure() bool {
+	if o != nil && o.IsImagePullFailure != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsImagePullFailure gets a reference to the given bool and assigns it to the IsImagePullFailure field.
+func (o *SoftwarerepositoryCatalog) SetIsImagePullFailure(v bool) {
+	o.IsImagePullFailure = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -216,6 +250,9 @@ func (o SoftwarerepositoryCatalog) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
+	if o.IsImagePullFailure != nil {
+		toSerialize["IsImagePullFailure"] = o.IsImagePullFailure
+	}
 	if o.Name != nil {
 		toSerialize["Name"] = o.Name
 	}
@@ -239,6 +276,8 @@ func (o *SoftwarerepositoryCatalog) UnmarshalJSON(bytes []byte) (err error) {
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string `json:"ObjectType"`
+		// The status of the image catalog synchronization operation.
+		IsImagePullFailure *bool `json:"IsImagePullFailure,omitempty"`
 		// The name of the catalog. The names are populated and predefined during MO creation.
 		Name         *string                               `json:"Name,omitempty"`
 		Organization *OrganizationOrganizationRelationship `json:"Organization,omitempty"`
@@ -252,6 +291,7 @@ func (o *SoftwarerepositoryCatalog) UnmarshalJSON(bytes []byte) (err error) {
 		varSoftwarerepositoryCatalog := _SoftwarerepositoryCatalog{}
 		varSoftwarerepositoryCatalog.ClassId = varSoftwarerepositoryCatalogWithoutEmbeddedStruct.ClassId
 		varSoftwarerepositoryCatalog.ObjectType = varSoftwarerepositoryCatalogWithoutEmbeddedStruct.ObjectType
+		varSoftwarerepositoryCatalog.IsImagePullFailure = varSoftwarerepositoryCatalogWithoutEmbeddedStruct.IsImagePullFailure
 		varSoftwarerepositoryCatalog.Name = varSoftwarerepositoryCatalogWithoutEmbeddedStruct.Name
 		varSoftwarerepositoryCatalog.Organization = varSoftwarerepositoryCatalogWithoutEmbeddedStruct.Organization
 		varSoftwarerepositoryCatalog.System = varSoftwarerepositoryCatalogWithoutEmbeddedStruct.System
@@ -274,6 +314,7 @@ func (o *SoftwarerepositoryCatalog) UnmarshalJSON(bytes []byte) (err error) {
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
+		delete(additionalProperties, "IsImagePullFailure")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "Organization")
 		delete(additionalProperties, "System")

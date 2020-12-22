@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -79,10 +79,13 @@ type WorkflowWorkflowInfo struct {
 	// The type of workflow meta. Derived from the workflow meta that is used to launch this workflow instance. * `SystemDefined` - System defined workflow definition. * `UserDefined` - User defined workflow definition. * `Dynamic` - Dynamically defined workflow definition.
 	WorkflowMetaType *string `json:"WorkflowMetaType,omitempty"`
 	// Total number of workflow tasks in this workflow.
-	WorkflowTaskCount          *int64                                          `json:"WorkflowTaskCount,omitempty"`
+	WorkflowTaskCount *int64 `json:"WorkflowTaskCount,omitempty"`
+	// Total number of worker tasks in this workflow. This count doesn't include the control tasks in the workflow.
+	WorkflowWorkerTaskCount    *int64                                          `json:"WorkflowWorkerTaskCount,omitempty"`
 	Var0RollbackWorkflow       *WorkflowRollbackWorkflowRelationship           `json:"_0_RollbackWorkflow,omitempty"`
-	Var1SwitchProfile          *FabricSwitchProfileRelationship                `json:"_1_SwitchProfile,omitempty"`
-	Var2ClusterProfile         *HyperflexClusterProfileRelationship            `json:"_2_ClusterProfile,omitempty"`
+	Var1Profile                *ChassisProfileRelationship                     `json:"_1_Profile,omitempty"`
+	Var2SwitchProfile          *FabricSwitchProfileRelationship                `json:"_2_SwitchProfile,omitempty"`
+	Var3ClusterProfile         *HyperflexClusterProfileRelationship            `json:"_3_ClusterProfile,omitempty"`
 	Account                    *IamAccountRelationship                         `json:"Account,omitempty"`
 	AssociatedObject           *MoBaseMoRelationship                           `json:"AssociatedObject,omitempty"`
 	Organization               *OrganizationOrganizationRelationship           `json:"Organization,omitempty"`
@@ -107,10 +110,16 @@ func NewWorkflowWorkflowInfo(classId string, objectType string) *WorkflowWorkflo
 	this.ObjectType = objectType
 	var action string = "None"
 	this.Action = &action
+	var failedWorkflowCleanupDuration int64 = 2160
+	this.FailedWorkflowCleanupDuration = &failedWorkflowCleanupDuration
 	var lastAction string = "None"
 	this.LastAction = &lastAction
 	var pauseReason string = "None"
 	this.PauseReason = &pauseReason
+	var successWorkflowCleanupDuration int64 = 2160
+	this.SuccessWorkflowCleanupDuration = &successWorkflowCleanupDuration
+	var userActionRequired bool = false
+	this.UserActionRequired = &userActionRequired
 	var waitReason string = "None"
 	this.WaitReason = &waitReason
 	var workflowMetaType string = "SystemDefined"
@@ -129,10 +138,16 @@ func NewWorkflowWorkflowInfoWithDefaults() *WorkflowWorkflowInfo {
 	this.ObjectType = objectType
 	var action string = "None"
 	this.Action = &action
+	var failedWorkflowCleanupDuration int64 = 2160
+	this.FailedWorkflowCleanupDuration = &failedWorkflowCleanupDuration
 	var lastAction string = "None"
 	this.LastAction = &lastAction
 	var pauseReason string = "None"
 	this.PauseReason = &pauseReason
+	var successWorkflowCleanupDuration int64 = 2160
+	this.SuccessWorkflowCleanupDuration = &successWorkflowCleanupDuration
+	var userActionRequired bool = false
+	this.UserActionRequired = &userActionRequired
 	var waitReason string = "None"
 	this.WaitReason = &waitReason
 	var workflowMetaType string = "SystemDefined"
@@ -1141,6 +1156,38 @@ func (o *WorkflowWorkflowInfo) SetWorkflowTaskCount(v int64) {
 	o.WorkflowTaskCount = &v
 }
 
+// GetWorkflowWorkerTaskCount returns the WorkflowWorkerTaskCount field value if set, zero value otherwise.
+func (o *WorkflowWorkflowInfo) GetWorkflowWorkerTaskCount() int64 {
+	if o == nil || o.WorkflowWorkerTaskCount == nil {
+		var ret int64
+		return ret
+	}
+	return *o.WorkflowWorkerTaskCount
+}
+
+// GetWorkflowWorkerTaskCountOk returns a tuple with the WorkflowWorkerTaskCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowWorkflowInfo) GetWorkflowWorkerTaskCountOk() (*int64, bool) {
+	if o == nil || o.WorkflowWorkerTaskCount == nil {
+		return nil, false
+	}
+	return o.WorkflowWorkerTaskCount, true
+}
+
+// HasWorkflowWorkerTaskCount returns a boolean if a field has been set.
+func (o *WorkflowWorkflowInfo) HasWorkflowWorkerTaskCount() bool {
+	if o != nil && o.WorkflowWorkerTaskCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetWorkflowWorkerTaskCount gets a reference to the given int64 and assigns it to the WorkflowWorkerTaskCount field.
+func (o *WorkflowWorkflowInfo) SetWorkflowWorkerTaskCount(v int64) {
+	o.WorkflowWorkerTaskCount = &v
+}
+
 // GetVar0RollbackWorkflow returns the Var0RollbackWorkflow field value if set, zero value otherwise.
 func (o *WorkflowWorkflowInfo) GetVar0RollbackWorkflow() WorkflowRollbackWorkflowRelationship {
 	if o == nil || o.Var0RollbackWorkflow == nil {
@@ -1173,68 +1220,100 @@ func (o *WorkflowWorkflowInfo) SetVar0RollbackWorkflow(v WorkflowRollbackWorkflo
 	o.Var0RollbackWorkflow = &v
 }
 
-// GetVar1SwitchProfile returns the Var1SwitchProfile field value if set, zero value otherwise.
-func (o *WorkflowWorkflowInfo) GetVar1SwitchProfile() FabricSwitchProfileRelationship {
-	if o == nil || o.Var1SwitchProfile == nil {
+// GetVar1Profile returns the Var1Profile field value if set, zero value otherwise.
+func (o *WorkflowWorkflowInfo) GetVar1Profile() ChassisProfileRelationship {
+	if o == nil || o.Var1Profile == nil {
+		var ret ChassisProfileRelationship
+		return ret
+	}
+	return *o.Var1Profile
+}
+
+// GetVar1ProfileOk returns a tuple with the Var1Profile field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowWorkflowInfo) GetVar1ProfileOk() (*ChassisProfileRelationship, bool) {
+	if o == nil || o.Var1Profile == nil {
+		return nil, false
+	}
+	return o.Var1Profile, true
+}
+
+// HasVar1Profile returns a boolean if a field has been set.
+func (o *WorkflowWorkflowInfo) HasVar1Profile() bool {
+	if o != nil && o.Var1Profile != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVar1Profile gets a reference to the given ChassisProfileRelationship and assigns it to the Var1Profile field.
+func (o *WorkflowWorkflowInfo) SetVar1Profile(v ChassisProfileRelationship) {
+	o.Var1Profile = &v
+}
+
+// GetVar2SwitchProfile returns the Var2SwitchProfile field value if set, zero value otherwise.
+func (o *WorkflowWorkflowInfo) GetVar2SwitchProfile() FabricSwitchProfileRelationship {
+	if o == nil || o.Var2SwitchProfile == nil {
 		var ret FabricSwitchProfileRelationship
 		return ret
 	}
-	return *o.Var1SwitchProfile
+	return *o.Var2SwitchProfile
 }
 
-// GetVar1SwitchProfileOk returns a tuple with the Var1SwitchProfile field value if set, nil otherwise
+// GetVar2SwitchProfileOk returns a tuple with the Var2SwitchProfile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowWorkflowInfo) GetVar1SwitchProfileOk() (*FabricSwitchProfileRelationship, bool) {
-	if o == nil || o.Var1SwitchProfile == nil {
+func (o *WorkflowWorkflowInfo) GetVar2SwitchProfileOk() (*FabricSwitchProfileRelationship, bool) {
+	if o == nil || o.Var2SwitchProfile == nil {
 		return nil, false
 	}
-	return o.Var1SwitchProfile, true
+	return o.Var2SwitchProfile, true
 }
 
-// HasVar1SwitchProfile returns a boolean if a field has been set.
-func (o *WorkflowWorkflowInfo) HasVar1SwitchProfile() bool {
-	if o != nil && o.Var1SwitchProfile != nil {
+// HasVar2SwitchProfile returns a boolean if a field has been set.
+func (o *WorkflowWorkflowInfo) HasVar2SwitchProfile() bool {
+	if o != nil && o.Var2SwitchProfile != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetVar1SwitchProfile gets a reference to the given FabricSwitchProfileRelationship and assigns it to the Var1SwitchProfile field.
-func (o *WorkflowWorkflowInfo) SetVar1SwitchProfile(v FabricSwitchProfileRelationship) {
-	o.Var1SwitchProfile = &v
+// SetVar2SwitchProfile gets a reference to the given FabricSwitchProfileRelationship and assigns it to the Var2SwitchProfile field.
+func (o *WorkflowWorkflowInfo) SetVar2SwitchProfile(v FabricSwitchProfileRelationship) {
+	o.Var2SwitchProfile = &v
 }
 
-// GetVar2ClusterProfile returns the Var2ClusterProfile field value if set, zero value otherwise.
-func (o *WorkflowWorkflowInfo) GetVar2ClusterProfile() HyperflexClusterProfileRelationship {
-	if o == nil || o.Var2ClusterProfile == nil {
+// GetVar3ClusterProfile returns the Var3ClusterProfile field value if set, zero value otherwise.
+func (o *WorkflowWorkflowInfo) GetVar3ClusterProfile() HyperflexClusterProfileRelationship {
+	if o == nil || o.Var3ClusterProfile == nil {
 		var ret HyperflexClusterProfileRelationship
 		return ret
 	}
-	return *o.Var2ClusterProfile
+	return *o.Var3ClusterProfile
 }
 
-// GetVar2ClusterProfileOk returns a tuple with the Var2ClusterProfile field value if set, nil otherwise
+// GetVar3ClusterProfileOk returns a tuple with the Var3ClusterProfile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkflowWorkflowInfo) GetVar2ClusterProfileOk() (*HyperflexClusterProfileRelationship, bool) {
-	if o == nil || o.Var2ClusterProfile == nil {
+func (o *WorkflowWorkflowInfo) GetVar3ClusterProfileOk() (*HyperflexClusterProfileRelationship, bool) {
+	if o == nil || o.Var3ClusterProfile == nil {
 		return nil, false
 	}
-	return o.Var2ClusterProfile, true
+	return o.Var3ClusterProfile, true
 }
 
-// HasVar2ClusterProfile returns a boolean if a field has been set.
-func (o *WorkflowWorkflowInfo) HasVar2ClusterProfile() bool {
-	if o != nil && o.Var2ClusterProfile != nil {
+// HasVar3ClusterProfile returns a boolean if a field has been set.
+func (o *WorkflowWorkflowInfo) HasVar3ClusterProfile() bool {
+	if o != nil && o.Var3ClusterProfile != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetVar2ClusterProfile gets a reference to the given HyperflexClusterProfileRelationship and assigns it to the Var2ClusterProfile field.
-func (o *WorkflowWorkflowInfo) SetVar2ClusterProfile(v HyperflexClusterProfileRelationship) {
-	o.Var2ClusterProfile = &v
+// SetVar3ClusterProfile gets a reference to the given HyperflexClusterProfileRelationship and assigns it to the Var3ClusterProfile field.
+func (o *WorkflowWorkflowInfo) SetVar3ClusterProfile(v HyperflexClusterProfileRelationship) {
+	o.Var3ClusterProfile = &v
 }
 
 // GetAccount returns the Account field value if set, zero value otherwise.
@@ -1597,14 +1676,20 @@ func (o WorkflowWorkflowInfo) MarshalJSON() ([]byte, error) {
 	if o.WorkflowTaskCount != nil {
 		toSerialize["WorkflowTaskCount"] = o.WorkflowTaskCount
 	}
+	if o.WorkflowWorkerTaskCount != nil {
+		toSerialize["WorkflowWorkerTaskCount"] = o.WorkflowWorkerTaskCount
+	}
 	if o.Var0RollbackWorkflow != nil {
 		toSerialize["_0_RollbackWorkflow"] = o.Var0RollbackWorkflow
 	}
-	if o.Var1SwitchProfile != nil {
-		toSerialize["_1_SwitchProfile"] = o.Var1SwitchProfile
+	if o.Var1Profile != nil {
+		toSerialize["_1_Profile"] = o.Var1Profile
 	}
-	if o.Var2ClusterProfile != nil {
-		toSerialize["_2_ClusterProfile"] = o.Var2ClusterProfile
+	if o.Var2SwitchProfile != nil {
+		toSerialize["_2_SwitchProfile"] = o.Var2SwitchProfile
+	}
+	if o.Var3ClusterProfile != nil {
+		toSerialize["_3_ClusterProfile"] = o.Var3ClusterProfile
 	}
 	if o.Account != nil {
 		toSerialize["Account"] = o.Account
@@ -1698,10 +1783,13 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		// The type of workflow meta. Derived from the workflow meta that is used to launch this workflow instance. * `SystemDefined` - System defined workflow definition. * `UserDefined` - User defined workflow definition. * `Dynamic` - Dynamically defined workflow definition.
 		WorkflowMetaType *string `json:"WorkflowMetaType,omitempty"`
 		// Total number of workflow tasks in this workflow.
-		WorkflowTaskCount          *int64                                          `json:"WorkflowTaskCount,omitempty"`
+		WorkflowTaskCount *int64 `json:"WorkflowTaskCount,omitempty"`
+		// Total number of worker tasks in this workflow. This count doesn't include the control tasks in the workflow.
+		WorkflowWorkerTaskCount    *int64                                          `json:"WorkflowWorkerTaskCount,omitempty"`
 		Var0RollbackWorkflow       *WorkflowRollbackWorkflowRelationship           `json:"_0_RollbackWorkflow,omitempty"`
-		Var1SwitchProfile          *FabricSwitchProfileRelationship                `json:"_1_SwitchProfile,omitempty"`
-		Var2ClusterProfile         *HyperflexClusterProfileRelationship            `json:"_2_ClusterProfile,omitempty"`
+		Var1Profile                *ChassisProfileRelationship                     `json:"_1_Profile,omitempty"`
+		Var2SwitchProfile          *FabricSwitchProfileRelationship                `json:"_2_SwitchProfile,omitempty"`
+		Var3ClusterProfile         *HyperflexClusterProfileRelationship            `json:"_3_ClusterProfile,omitempty"`
 		Account                    *IamAccountRelationship                         `json:"Account,omitempty"`
 		AssociatedObject           *MoBaseMoRelationship                           `json:"AssociatedObject,omitempty"`
 		Organization               *OrganizationOrganizationRelationship           `json:"Organization,omitempty"`
@@ -1749,9 +1837,11 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		varWorkflowWorkflowInfo.WorkflowCtx = varWorkflowWorkflowInfoWithoutEmbeddedStruct.WorkflowCtx
 		varWorkflowWorkflowInfo.WorkflowMetaType = varWorkflowWorkflowInfoWithoutEmbeddedStruct.WorkflowMetaType
 		varWorkflowWorkflowInfo.WorkflowTaskCount = varWorkflowWorkflowInfoWithoutEmbeddedStruct.WorkflowTaskCount
+		varWorkflowWorkflowInfo.WorkflowWorkerTaskCount = varWorkflowWorkflowInfoWithoutEmbeddedStruct.WorkflowWorkerTaskCount
 		varWorkflowWorkflowInfo.Var0RollbackWorkflow = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Var0RollbackWorkflow
-		varWorkflowWorkflowInfo.Var1SwitchProfile = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Var1SwitchProfile
-		varWorkflowWorkflowInfo.Var2ClusterProfile = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Var2ClusterProfile
+		varWorkflowWorkflowInfo.Var1Profile = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Var1Profile
+		varWorkflowWorkflowInfo.Var2SwitchProfile = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Var2SwitchProfile
+		varWorkflowWorkflowInfo.Var3ClusterProfile = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Var3ClusterProfile
 		varWorkflowWorkflowInfo.Account = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Account
 		varWorkflowWorkflowInfo.AssociatedObject = varWorkflowWorkflowInfoWithoutEmbeddedStruct.AssociatedObject
 		varWorkflowWorkflowInfo.Organization = varWorkflowWorkflowInfoWithoutEmbeddedStruct.Organization
@@ -1808,9 +1898,11 @@ func (o *WorkflowWorkflowInfo) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "WorkflowCtx")
 		delete(additionalProperties, "WorkflowMetaType")
 		delete(additionalProperties, "WorkflowTaskCount")
+		delete(additionalProperties, "WorkflowWorkerTaskCount")
 		delete(additionalProperties, "_0_RollbackWorkflow")
-		delete(additionalProperties, "_1_SwitchProfile")
-		delete(additionalProperties, "_2_ClusterProfile")
+		delete(additionalProperties, "_1_Profile")
+		delete(additionalProperties, "_2_SwitchProfile")
+		delete(additionalProperties, "_3_ClusterProfile")
 		delete(additionalProperties, "Account")
 		delete(additionalProperties, "AssociatedObject")
 		delete(additionalProperties, "Organization")

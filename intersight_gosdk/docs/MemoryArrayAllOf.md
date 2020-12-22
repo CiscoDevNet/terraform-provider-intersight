@@ -18,9 +18,9 @@ Name | Type | Description | Notes
 **ComputeBoard** | Pointer to [**ComputeBoardRelationship**](compute.Board.Relationship.md) |  | [optional] 
 **ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](compute.RackUnit.Relationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
-**PersistentMemoryUnits** | Pointer to [**[]MemoryPersistentMemoryUnitRelationship**](memory.PersistentMemoryUnit.Relationship.md) | An array of relationships to memoryPersistentMemoryUnit resources. | [optional] [readonly] 
+**PersistentMemoryUnits** | Pointer to [**[]MemoryPersistentMemoryUnitRelationship**](MemoryPersistentMemoryUnitRelationship.md) | An array of relationships to memoryPersistentMemoryUnit resources. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
-**Units** | Pointer to [**[]MemoryUnitRelationship**](memory.Unit.Relationship.md) | An array of relationships to memoryUnit resources. | [optional] [readonly] 
+**Units** | Pointer to [**[]MemoryUnitRelationship**](MemoryUnitRelationship.md) | An array of relationships to memoryUnit resources. | [optional] [readonly] 
 
 ## Methods
 

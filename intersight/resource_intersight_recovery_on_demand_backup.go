@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceRecoveryOnDemandBackup() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceRecoveryOnDemandBackupCreate,
-		Read:   resourceRecoveryOnDemandBackupRead,
-		Update: resourceRecoveryOnDemandBackupUpdate,
-		Delete: resourceRecoveryOnDemandBackupDelete,
+		CreateContext: resourceRecoveryOnDemandBackupCreate,
+		ReadContext:   resourceRecoveryOnDemandBackupRead,
+		UpdateContext: resourceRecoveryOnDemandBackupUpdate,
+		DeleteContext: resourceRecoveryOnDemandBackupDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -144,7 +147,7 @@ func resourceRecoveryOnDemandBackup() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -211,6 +214,7 @@ func resourceRecoveryOnDemandBackup() *schema.Resource {
 				Description: "Number of backup copies maintained on the local or remote server. When the created backup files exceed this number, the initial backup files are overwritten in a sequential manner.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+				Default:     10,
 			},
 			"tags": {
 				Type:     schema.TypeList,
@@ -244,7 +248,7 @@ func resourceRecoveryOnDemandBackup() *schema.Resource {
 	}
 }
 
-func resourceRecoveryOnDemandBackupCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceRecoveryOnDemandBackupCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -482,101 +486,105 @@ func resourceRecoveryOnDemandBackupCreate(d *schema.ResourceData, meta interface
 	}
 
 	r := conn.ApiClient.RecoveryApi.CreateRecoveryOnDemandBackup(conn.ctx).RecoveryOnDemandBackup(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating RecoveryOnDemandBackup: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceRecoveryOnDemandBackupRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceRecoveryOnDemandBackupRead(c, d, meta)
 }
 
-func resourceRecoveryOnDemandBackupRead(d *schema.ResourceData, meta interface{}) error {
+func resourceRecoveryOnDemandBackupRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.RecoveryApi.GetRecoveryOnDemandBackupByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "RecoveryOnDemandBackup object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching RecoveryOnDemandBackup: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in RecoveryOnDemandBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in RecoveryOnDemandBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("config_result", flattenMapRecoveryConfigResultRelationship(s.GetConfigResult(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ConfigResult: %+v", err)
+		return diag.Errorf("error occurred while setting property ConfigResult in RecoveryOnDemandBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in RecoveryOnDemandBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("device_id", flattenMapAssetDeviceRegistrationRelationship(s.GetDeviceId(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property DeviceId: %+v", err)
+		return diag.Errorf("error occurred while setting property DeviceId in RecoveryOnDemandBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("file_name_prefix", (s.GetFileNamePrefix())); err != nil {
-		return fmt.Errorf("error occurred while setting property FileNamePrefix: %+v", err)
+		return diag.Errorf("error occurred while setting property FileNamePrefix in RecoveryOnDemandBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("is_password_set", (s.GetIsPasswordSet())); err != nil {
-		return fmt.Errorf("error occurred while setting property IsPasswordSet: %+v", err)
+		return diag.Errorf("error occurred while setting property IsPasswordSet in RecoveryOnDemandBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("location_type", (s.GetLocationType())); err != nil {
-		return fmt.Errorf("error occurred while setting property LocationType: %+v", err)
+		return diag.Errorf("error occurred while setting property LocationType in RecoveryOnDemandBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in RecoveryOnDemandBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in RecoveryOnDemandBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in RecoveryOnDemandBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in RecoveryOnDemandBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("path", (s.GetPath())); err != nil {
-		return fmt.Errorf("error occurred while setting property Path: %+v", err)
+		return diag.Errorf("error occurred while setting property Path in RecoveryOnDemandBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("protocol", (s.GetProtocol())); err != nil {
-		return fmt.Errorf("error occurred while setting property Protocol: %+v", err)
+		return diag.Errorf("error occurred while setting property Protocol in RecoveryOnDemandBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("retention_count", (s.GetRetentionCount())); err != nil {
-		return fmt.Errorf("error occurred while setting property RetentionCount: %+v", err)
+		return diag.Errorf("error occurred while setting property RetentionCount in RecoveryOnDemandBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in RecoveryOnDemandBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("user_name", (s.GetUserName())); err != nil {
-		return fmt.Errorf("error occurred while setting property UserName: %+v", err)
+		return diag.Errorf("error occurred while setting property UserName in RecoveryOnDemandBackup object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceRecoveryOnDemandBackupUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceRecoveryOnDemandBackupUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -830,23 +838,24 @@ func resourceRecoveryOnDemandBackupUpdate(d *schema.ResourceData, meta interface
 	}
 
 	r := conn.ApiClient.RecoveryApi.UpdateRecoveryOnDemandBackup(conn.ctx, d.Id()).RecoveryOnDemandBackup(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating RecoveryOnDemandBackup: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceRecoveryOnDemandBackupRead(d, meta)
+	return resourceRecoveryOnDemandBackupRead(c, d, meta)
 }
 
-func resourceRecoveryOnDemandBackupDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceRecoveryOnDemandBackupDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.RecoveryApi.DeleteRecoveryOnDemandBackup(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting RecoveryOnDemandBackup object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

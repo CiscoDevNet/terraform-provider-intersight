@@ -1,13 +1,12 @@
-
 ---
+subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_vsan"
-sidebar_current: "docs-intersight-resource-fabric-vsan"
 description: |-
   Configuration object sent by user to create VSAN configurations.
 ---
 
-# Resource: intersight_fabric._vsan
+# Resource: intersight_fabric_vsan
 Configuration object sent by user to create VSAN configurations.
 ## Argument Reference
 The following arguments are supported:
@@ -35,3 +34,10 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `vsan_id`:(int) Virtual San Identifier in the switch. 
+
+
+## Import
+`intersight_fabric_vsan` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_fabric_vsan.example 1234567890987654321abcde
+```

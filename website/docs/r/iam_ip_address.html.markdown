@@ -1,13 +1,12 @@
-
 ---
+subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_ip_address"
-sidebar_current: "docs-intersight-resource-iam-ip-address"
 description: |-
   Add an IP address to enable IP address based access management.
 ---
 
-# Resource: intersight_iam._ip_address
+# Resource: intersight_iam_ip_address
 Add an IP address to enable IP address based access management.
 ## Argument Reference
 The following arguments are supported:
@@ -32,3 +31,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_iam_ip_address` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_iam_ip_address.example 1234567890987654321abcde
+```

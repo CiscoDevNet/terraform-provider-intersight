@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceCapabilityFanModuleManufacturingDef() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceCapabilityFanModuleManufacturingDefCreate,
-		Read:   resourceCapabilityFanModuleManufacturingDefRead,
-		Update: resourceCapabilityFanModuleManufacturingDefUpdate,
-		Delete: resourceCapabilityFanModuleManufacturingDefDelete,
+		CreateContext: resourceCapabilityFanModuleManufacturingDefCreate,
+		ReadContext:   resourceCapabilityFanModuleManufacturingDefRead,
+		UpdateContext: resourceCapabilityFanModuleManufacturingDefUpdate,
+		DeleteContext: resourceCapabilityFanModuleManufacturingDefDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -65,47 +68,6 @@ func resourceCapabilityFanModuleManufacturingDef() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-			"section": {
-				Description: "A reference to a capabilitySection resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				ConfigMode: schema.SchemaConfigModeAttr,
-				Computed:   true,
-			},
 			"sku": {
 				Description: "SKU information for a fan module.",
 				Type:        schema.TypeString,
@@ -143,7 +105,7 @@ func resourceCapabilityFanModuleManufacturingDef() *schema.Resource {
 	}
 }
 
-func resourceCapabilityFanModuleManufacturingDefCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceCapabilityFanModuleManufacturingDefCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -189,49 +151,6 @@ func resourceCapabilityFanModuleManufacturingDefCreate(d *schema.ResourceData, m
 	if v, ok := d.GetOk("product_name"); ok {
 		x := (v.(string))
 		o.SetProductName(x)
-	}
-
-	if v, ok := d.GetOk("section"); ok {
-		p := make([]models.CapabilitySectionRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsCapabilitySectionRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetSection(x)
-		}
 	}
 
 	if v, ok := d.GetOk("sku"); ok {
@@ -280,85 +199,85 @@ func resourceCapabilityFanModuleManufacturingDefCreate(d *schema.ResourceData, m
 	}
 
 	r := conn.ApiClient.CapabilityApi.CreateCapabilityFanModuleManufacturingDef(conn.ctx).CapabilityFanModuleManufacturingDef(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating CapabilityFanModuleManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceCapabilityFanModuleManufacturingDefRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceCapabilityFanModuleManufacturingDefRead(c, d, meta)
 }
 
-func resourceCapabilityFanModuleManufacturingDefRead(d *schema.ResourceData, meta interface{}) error {
+func resourceCapabilityFanModuleManufacturingDefRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.CapabilityApi.GetCapabilityFanModuleManufacturingDefByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "CapabilityFanModuleManufacturingDef object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching CapabilityFanModuleManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in CapabilityFanModuleManufacturingDef object: %s", err.Error())
 	}
 
 	if err := d.Set("caption", (s.GetCaption())); err != nil {
-		return fmt.Errorf("error occurred while setting property Caption: %+v", err)
+		return diag.Errorf("error occurred while setting property Caption in CapabilityFanModuleManufacturingDef object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in CapabilityFanModuleManufacturingDef object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in CapabilityFanModuleManufacturingDef object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in CapabilityFanModuleManufacturingDef object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in CapabilityFanModuleManufacturingDef object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in CapabilityFanModuleManufacturingDef object: %s", err.Error())
 	}
 
 	if err := d.Set("pid", (s.GetPid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Pid: %+v", err)
+		return diag.Errorf("error occurred while setting property Pid in CapabilityFanModuleManufacturingDef object: %s", err.Error())
 	}
 
 	if err := d.Set("product_name", (s.GetProductName())); err != nil {
-		return fmt.Errorf("error occurred while setting property ProductName: %+v", err)
-	}
-
-	if err := d.Set("section", flattenMapCapabilitySectionRelationship(s.GetSection(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Section: %+v", err)
+		return diag.Errorf("error occurred while setting property ProductName in CapabilityFanModuleManufacturingDef object: %s", err.Error())
 	}
 
 	if err := d.Set("sku", (s.GetSku())); err != nil {
-		return fmt.Errorf("error occurred while setting property Sku: %+v", err)
+		return diag.Errorf("error occurred while setting property Sku in CapabilityFanModuleManufacturingDef object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in CapabilityFanModuleManufacturingDef object: %s", err.Error())
 	}
 
 	if err := d.Set("vid", (s.GetVid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Vid: %+v", err)
+		return diag.Errorf("error occurred while setting property Vid in CapabilityFanModuleManufacturingDef object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceCapabilityFanModuleManufacturingDefUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceCapabilityFanModuleManufacturingDefUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -413,50 +332,6 @@ func resourceCapabilityFanModuleManufacturingDefUpdate(d *schema.ResourceData, m
 		o.SetProductName(x)
 	}
 
-	if d.HasChange("section") {
-		v := d.Get("section")
-		p := make([]models.CapabilitySectionRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsCapabilitySectionRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetSection(x)
-		}
-	}
-
 	if d.HasChange("sku") {
 		v := d.Get("sku")
 		x := (v.(string))
@@ -506,23 +381,24 @@ func resourceCapabilityFanModuleManufacturingDefUpdate(d *schema.ResourceData, m
 	}
 
 	r := conn.ApiClient.CapabilityApi.UpdateCapabilityFanModuleManufacturingDef(conn.ctx, d.Id()).CapabilityFanModuleManufacturingDef(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating CapabilityFanModuleManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceCapabilityFanModuleManufacturingDefRead(d, meta)
+	return resourceCapabilityFanModuleManufacturingDefRead(c, d, meta)
 }
 
-func resourceCapabilityFanModuleManufacturingDefDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceCapabilityFanModuleManufacturingDefDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilityFanModuleManufacturingDef(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting CapabilityFanModuleManufacturingDef object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

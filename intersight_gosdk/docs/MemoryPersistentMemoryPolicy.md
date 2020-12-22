@@ -6,13 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "memory.PersistentMemoryPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "memory.PersistentMemoryPolicy"]
-**Goals** | Pointer to [**[]MemoryPersistentMemoryGoal**](memory.PersistentMemoryGoal.md) |  | [optional] 
+**Goals** | Pointer to [**[]MemoryPersistentMemoryGoal**](MemoryPersistentMemoryGoal.md) |  | [optional] 
 **LocalSecurity** | Pointer to [**NullableMemoryPersistentMemoryLocalSecurity**](memory.PersistentMemoryLocalSecurity.md) |  | [optional] 
-**LogicalNamespaces** | Pointer to [**[]MemoryPersistentMemoryLogicalNamespace**](memory.PersistentMemoryLogicalNamespace.md) |  | [optional] 
+**LogicalNamespaces** | Pointer to [**[]MemoryPersistentMemoryLogicalNamespace**](MemoryPersistentMemoryLogicalNamespace.md) |  | [optional] 
 **ManagementMode** | Pointer to **string** | Management Mode of the policy. This can be either Configured from Intersight or Configured from Operating System. * &#x60;configured-from-intersight&#x60; - The Persistent Memory Modules are configured from Intersight thorugh Persistent Memory policy. * &#x60;configured-from-operating-system&#x60; - The Persistent Memory Modules are configured from operating system thorugh OS tools. | [optional] [default to "configured-from-intersight"]
-**RetainNamespaces** | Pointer to **bool** | Persistent Memory Namespaces to be retained or not. | [optional] 
+**RetainNamespaces** | Pointer to **bool** | Persistent Memory Namespaces to be retained or not. | [optional] [default to true]
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
-**Profiles** | Pointer to [**[]PolicyAbstractConfigProfileRelationship**](policy.AbstractConfigProfile.Relationship.md) | An array of relationships to policyAbstractConfigProfile resources. | [optional] 
+**Profiles** | Pointer to [**[]PolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) | An array of relationships to policyAbstractConfigProfile resources. | [optional] 
 
 ## Methods
 

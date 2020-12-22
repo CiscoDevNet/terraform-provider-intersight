@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceIamEndPointUserPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceIamEndPointUserPolicyCreate,
-		Read:   resourceIamEndPointUserPolicyRead,
-		Update: resourceIamEndPointUserPolicyUpdate,
-		Delete: resourceIamEndPointUserPolicyDelete,
+		CreateContext: resourceIamEndPointUserPolicyCreate,
+		ReadContext:   resourceIamEndPointUserPolicyRead,
+		UpdateContext: resourceIamEndPointUserPolicyUpdate,
+		DeleteContext: resourceIamEndPointUserPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -22,7 +25,7 @@ func resourceIamEndPointUserPolicy() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -85,7 +88,7 @@ func resourceIamEndPointUserPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -154,26 +157,31 @@ func resourceIamEndPointUserPolicy() *schema.Resource {
 							Description: "Enables password expiry on the endpoint.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     false,
 						},
 						"enforce_strong_password": {
 							Description: "Enables a strong password policy. Strong password requirements: A. The password must have a minimum of 8 and a maximum of 20 characters. B. The password must not contain the User's Name. C. The password must contain characters from three of the following four categories. 1) English uppercase characters (A through Z). 2) English lowercase characters (a through z). 3) Base 10 digits (0 through 9). 4) Non-alphabetic characters (! , @, #, $, %, ^, &, *, -, _, +, =).",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     true,
 						},
 						"force_send_password": {
 							Description: "User password will always be sent to endpoint device. If the option is not selected, then user password will be sent to endpoint device for new users and if user password is changed for existing users.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     false,
 						},
 						"grace_period": {
 							Description: "Time period until when you can use the existing password, after it expires.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     0,
 						},
 						"notification_period": {
 							Description: "The duration after which the password will expire.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     15,
 						},
 						"object_type": {
 							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -185,11 +193,13 @@ func resourceIamEndPointUserPolicy() *schema.Resource {
 							Description: "Set time period for password expiration. Value should be greater than notification period and grace period.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     90,
 						},
 						"password_history": {
 							Description: "Tracks password change history. Specifies in number of instances, that the new password was already used.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     5,
 						},
 					},
 				},
@@ -263,7 +273,7 @@ func resourceIamEndPointUserPolicy() *schema.Resource {
 	}
 }
 
-func resourceIamEndPointUserPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceIamEndPointUserPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -532,93 +542,98 @@ func resourceIamEndPointUserPolicyCreate(d *schema.ResourceData, meta interface{
 	}
 
 	r := conn.ApiClient.IamApi.CreateIamEndPointUserPolicy(conn.ctx).IamEndPointUserPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating IamEndPointUserPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceIamEndPointUserPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceIamEndPointUserPolicyRead(c, d, meta)
 }
-func detachIamEndPointUserPolicyProfiles(d *schema.ResourceData, meta interface{}) error {
+func detachIamEndPointUserPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IamEndPointUserPolicy{}
 	o.SetClassId("iam.EndPointUserPolicy")
 	o.SetObjectType("iam.EndPointUserPolicy")
 	o.SetProfiles([]models.PolicyAbstractConfigProfileRelationship{})
 
 	r := conn.ApiClient.IamApi.UpdateIamEndPointUserPolicy(conn.ctx, d.Id()).IamEndPointUserPolicy(*o)
-	_, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while creating: %s", err.Error())
+	_, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	return err
+	return de
 }
 
-func resourceIamEndPointUserPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceIamEndPointUserPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.IamApi.GetIamEndPointUserPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "IamEndPointUserPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching IamEndPointUserPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in IamEndPointUserPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in IamEndPointUserPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in IamEndPointUserPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("end_point_user_roles", flattenListIamEndPointUserRoleRelationship(s.GetEndPointUserRoles(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property EndPointUserRoles: %+v", err)
+		return diag.Errorf("error occurred while setting property EndPointUserRoles in IamEndPointUserPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in IamEndPointUserPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in IamEndPointUserPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in IamEndPointUserPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in IamEndPointUserPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("password_properties", flattenMapIamEndPointPasswordProperties(s.GetPasswordProperties(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property PasswordProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property PasswordProperties in IamEndPointUserPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("profiles", flattenListPolicyAbstractConfigProfileRelationship(s.GetProfiles(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Profiles: %+v", err)
+		return diag.Errorf("error occurred while setting property Profiles in IamEndPointUserPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in IamEndPointUserPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceIamEndPointUserPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceIamEndPointUserPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -896,31 +911,32 @@ func resourceIamEndPointUserPolicyUpdate(d *schema.ResourceData, meta interface{
 	}
 
 	r := conn.ApiClient.IamApi.UpdateIamEndPointUserPolicy(conn.ctx, d.Id()).IamEndPointUserPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating IamEndPointUserPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamEndPointUserPolicyRead(d, meta)
+	return resourceIamEndPointUserPolicyRead(c, d, meta)
 }
 
-func resourceIamEndPointUserPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceIamEndPointUserPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profiles"); ok {
 		if len(p.([]interface{})) > 0 {
 			e := detachIamEndPointUserPolicyProfiles(d, meta)
-			if e != nil {
+			if e.HasError() {
 				return e
 			}
 		}
 	}
 	p := conn.ApiClient.IamApi.DeleteIamEndPointUserPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting IamEndPointUserPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

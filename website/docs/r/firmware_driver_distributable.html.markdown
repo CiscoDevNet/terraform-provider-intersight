@@ -1,13 +1,12 @@
-
 ---
+subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_driver_distributable"
-sidebar_current: "docs-intersight-resource-firmware-driver-distributable"
 description: |-
   A device driver image distributed by Cisco.
 ---
 
-# Resource: intersight_firmware._driver_distributable
+# Resource: intersight_firmware_driver_distributable
 A device driver image distributed by Cisco.
 ## Argument Reference
 The following arguments are supported:
@@ -80,7 +79,7 @@ This complex property has following sub-properties:
 * `size`:(int) The size (in bytes) of the file. This information is available for all Cisco distributed images and files imported to the local repository. 
 * `software_advisory_url`:(string) The software advisory, if any, provided by the vendor for this file. 
 * `software_type_id`:(string)(Computed) The software type id provided by cisco.com. 
-* `source`:(Array with Maximum of one item) - Location of the file in an external repository. 
+* `nr_source`:(Array with Maximum of one item) - Location of the file in an external repository. 
 This complex property has following sub-properties:
   + `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
@@ -95,4 +94,11 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `vendor`:(string) The vendor or publisher of this file. 
-* `version`:(string) Vendor provided version for the file. 
+* `nr_version`:(string) Vendor provided version for the file. 
+
+
+## Import
+`intersight_firmware_driver_distributable` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_firmware_driver_distributable.example 1234567890987654321abcde
+```

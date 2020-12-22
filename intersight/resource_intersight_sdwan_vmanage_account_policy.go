@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceSdwanVmanageAccountPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceSdwanVmanageAccountPolicyCreate,
-		Read:   resourceSdwanVmanageAccountPolicyRead,
-		Update: resourceSdwanVmanageAccountPolicyUpdate,
-		Delete: resourceSdwanVmanageAccountPolicyDelete,
+		CreateContext: resourceSdwanVmanageAccountPolicyCreate,
+		ReadContext:   resourceSdwanVmanageAccountPolicyRead,
+		UpdateContext: resourceSdwanVmanageAccountPolicyUpdate,
+		DeleteContext: resourceSdwanVmanageAccountPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -112,6 +115,7 @@ func resourceSdwanVmanageAccountPolicy() *schema.Resource {
 				Description: "VManage Port number on which the application is running.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+				Default:     8443,
 			},
 			"profiles": {
 				Description: "An array of relationships to sdwanProfile resources.",
@@ -185,7 +189,7 @@ func resourceSdwanVmanageAccountPolicy() *schema.Resource {
 	}
 }
 
-func resourceSdwanVmanageAccountPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceSdwanVmanageAccountPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -364,85 +368,89 @@ func resourceSdwanVmanageAccountPolicyCreate(d *schema.ResourceData, meta interf
 	}
 
 	r := conn.ApiClient.SdwanApi.CreateSdwanVmanageAccountPolicy(conn.ctx).SdwanVmanageAccountPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating SdwanVmanageAccountPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceSdwanVmanageAccountPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceSdwanVmanageAccountPolicyRead(c, d, meta)
 }
 
-func resourceSdwanVmanageAccountPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceSdwanVmanageAccountPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.SdwanApi.GetSdwanVmanageAccountPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "SdwanVmanageAccountPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching SdwanVmanageAccountPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in SdwanVmanageAccountPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in SdwanVmanageAccountPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in SdwanVmanageAccountPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("endpoint_address", (s.GetEndpointAddress())); err != nil {
-		return fmt.Errorf("error occurred while setting property EndpointAddress: %+v", err)
+		return diag.Errorf("error occurred while setting property EndpointAddress in SdwanVmanageAccountPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("is_password_set", (s.GetIsPasswordSet())); err != nil {
-		return fmt.Errorf("error occurred while setting property IsPasswordSet: %+v", err)
+		return diag.Errorf("error occurred while setting property IsPasswordSet in SdwanVmanageAccountPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in SdwanVmanageAccountPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in SdwanVmanageAccountPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in SdwanVmanageAccountPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in SdwanVmanageAccountPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("port", (s.GetPort())); err != nil {
-		return fmt.Errorf("error occurred while setting property Port: %+v", err)
+		return diag.Errorf("error occurred while setting property Port in SdwanVmanageAccountPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("profiles", flattenListSdwanProfileRelationship(s.GetProfiles(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Profiles: %+v", err)
+		return diag.Errorf("error occurred while setting property Profiles in SdwanVmanageAccountPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in SdwanVmanageAccountPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("username", (s.GetUsername())); err != nil {
-		return fmt.Errorf("error occurred while setting property Username: %+v", err)
+		return diag.Errorf("error occurred while setting property Username in SdwanVmanageAccountPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceSdwanVmanageAccountPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceSdwanVmanageAccountPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -633,23 +641,24 @@ func resourceSdwanVmanageAccountPolicyUpdate(d *schema.ResourceData, meta interf
 	}
 
 	r := conn.ApiClient.SdwanApi.UpdateSdwanVmanageAccountPolicy(conn.ctx, d.Id()).SdwanVmanageAccountPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating SdwanVmanageAccountPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceSdwanVmanageAccountPolicyRead(d, meta)
+	return resourceSdwanVmanageAccountPolicyRead(c, d, meta)
 }
 
-func resourceSdwanVmanageAccountPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceSdwanVmanageAccountPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.SdwanApi.DeleteSdwanVmanageAccountPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting SdwanVmanageAccountPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

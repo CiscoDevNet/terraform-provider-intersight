@@ -1,13 +1,12 @@
-
 ---
+subcategory: "software"
 layout: "intersight"
 page_title: "Intersight: intersight_software_solution_distributable"
-sidebar_current: "docs-intersight-resource-software-solution-distributable"
 description: |-
   A solution image distributed by Cisco.
 ---
 
-# Resource: intersight_software._solution_distributable
+# Resource: intersight_software_solution_distributable
 A solution image distributed by Cisco.
 ## Argument Reference
 The following arguments are supported:
@@ -61,7 +60,7 @@ This complex property has following sub-properties:
 * `model`:(string) The endpoint model for which this firmware image is applicable. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of the file. It is populated as part of the image import operation. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `platform_type`:(string)(Computed) The platform type of the image. 
 * `recommended_build`:(string) The build which is recommended by Cisco. 
 * `release`:(Array with Maximum of one item) - A reference to a softwarerepositoryRelease resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -78,7 +77,7 @@ This complex property has following sub-properties:
 * `software_advisory_url`:(string) The software advisory, if any, provided by the vendor for this file. 
 * `software_type_id`:(string)(Computed) The software type id provided by cisco.com. 
 * `solution_name`:(string) The name of the solution in which the image belongs. 
-* `source`:(Array with Maximum of one item) - Location of the file in an external repository. 
+* `nr_source`:(Array with Maximum of one item) - Location of the file in an external repository. 
 This complex property has following sub-properties:
   + `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
@@ -94,4 +93,11 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `vendor`:(string) The vendor or publisher of this file. 
-* `version`:(string) Vendor provided version for the file. 
+* `nr_version`:(string) Vendor provided version for the file. 
+
+
+## Import
+`intersight_software_solution_distributable` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_software_solution_distributable.example 1234567890987654321abcde
+```

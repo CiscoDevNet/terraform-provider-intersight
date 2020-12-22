@@ -1,13 +1,12 @@
-
 ---
+subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_switch_cluster_profile"
-sidebar_current: "docs-intersight-resource-fabric-switch-cluster-profile"
 description: |-
   This specifies the configuration policies for a cluster of switches.
 ---
 
-# Resource: intersight_fabric._switch_cluster_profile
+# Resource: intersight_fabric_switch_cluster_profile
 This specifies the configuration policies for a cluster of switches.
 ## Argument Reference
 The following arguments are supported:
@@ -22,7 +21,7 @@ This complex property has following sub-properties:
   + `config_state`:(string)(Computed) Indicates a profile's configuration deploying state. Values -- Assigned, Not-assigned, Associated, Pending-changes, Validating, Configuring, Failed. 
   + `control_action`:(string) System action to trigger the appropriate workflow. Values -- No_op, ConfigChange, Deploy, Unbind. 
   + `error_state`:(string) Indicates a profile's error state. Values -- Validation-error (Static validation error), Pre-config-error (Runtime validation error), Config-error (Runtime configuration error). 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `oper_state`:(string)(Computed) Combined state (configState, and operational state of the associated physical resource) to indicate the current state of the profile. Values -- n/a, Power-off, Pending-changes, Configuring, Ok, Failed. 
 * `description`:(string) Description of the profile. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
@@ -60,3 +59,10 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `type`:(string) Defines the type of the profile. Accepted value is instance.* `instance` - The profile defines the configuration for a specific instance of a target. 
+
+
+## Import
+`intersight_fabric_switch_cluster_profile` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_fabric_switch_cluster_profile.example 1234567890987654321abcde
+```

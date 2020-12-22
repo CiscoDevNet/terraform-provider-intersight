@@ -1,13 +1,12 @@
-
 ---
+subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_eth_adapter_policy"
-sidebar_current: "docs-intersight-resource-vnic-eth-adapter-policy"
 description: |-
   An Ethernet adapter policy governs the host-side behavior of the adapter, including how the adapter handles traffic. For each VIC Virtual Ethernet Interface various features like VXLAN, NVGRE, ARFS, Interrupt settings, and TCP Offload settings can be configured.
 ---
 
-# Resource: intersight_vnic._eth_adapter_policy
+# Resource: intersight_vnic_eth_adapter_policy
 An Ethernet adapter policy governs the host-side behavior of the adapter, including how the adapter handles traffic. For each VIC Virtual Ethernet Interface various features like VXLAN, NVGRE, ARFS, Interrupt settings, and TCP Offload settings can be configured.
 ## Argument Reference
 The following arguments are supported:
@@ -27,7 +26,7 @@ This complex property has following sub-properties:
   + `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
-  + `count`:(int) The number of completion queue resources to allocate. In general, the number of completion queue resources to allocate is equal to the number of transmit queue resources plus the number of receive queue resources. 
+  + `nr_count`:(int) The number of completion queue resources to allocate. In general, the number of completion queue resources to allocate is equal to the number of transmit queue resources plus the number of receive queue resources. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `ring_size`:(int)(Computed) The number of descriptors in each completion queue. 
 * `description`:(string) Description of the policy. 
@@ -39,7 +38,7 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `coalescing_time`:(int) The time to wait between interrupts or the idle period that must be encountered before an interrupt is sent. To turn off interrupt coalescing, enter 0 (zero) in this field. 
   + `coalescing_type`:(string) Interrupt Coalescing Type. This can be one of the following:- MIN  - The system waits for the time specified in the Coalescing Time field before sending another interrupt event IDLE - The system does not send an interrupt until there is a period of no activity lasting as least as long as the time specified in the Coalescing Time field.* `MIN` - The system waits for the time specified in the Coalescing Time field before sending another interrupt event.* `IDLE` - The system does not send an interrupt until there is a period of no activity lasting as least as long as the time specified in the Coalescing Time field. 
-  + `count`:(int) The number of interrupt resources to allocate. Typical value is be equal to the number of completion queue resources. 
+  + `nr_count`:(int) The number of interrupt resources to allocate. Typical value is be equal to the number of completion queue resources. 
   + `mode`:(string) Preferred driver interrupt mode. This can be one of the following:- MSIx - Message Signaled Interrupts (MSI) with the optional extension. MSI  - MSI only. INTx - PCI INTx interrupts. MSIx is the recommended option.* `MSIx` - Message Signaled Interrupt (MSI) mechanism with the optional extension (MSIx). MSIx is the recommended and default option.* `MSI` - Message Signaled Interrupt (MSI) mechanism that treats messages as interrupts.* `INTx` - Line-based interrupt (INTx) mechanism similar to the one used in Legacy systems. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
@@ -71,7 +70,7 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `queue_pairs`:(int) The number of queue pairs per adapter. Recommended value = integer power of 2. 
   + `resource_groups`:(int) The number of resource groups per adapter. Recommended value = be an integer power of 2 greater than or equal to the number of CPU cores on the system for optimum performance. 
-  + `version`:(int) Configure RDMA over Converged Ethernet (RoCE) version on the virtual interface. Only RoCEv1 is supported on Cisco VIC 13xx series adapters and only RoCEv2 is supported on Cisco VIC 14xx series adapters.* `1` - RDMA over Converged Ethernet Protocol Version 1.* `2` - RDMA over Converged Ethernet Protocol Version 2. 
+  + `nr_version`:(int) Configure RDMA over Converged Ethernet (RoCE) version on the virtual interface. Only RoCEv1 is supported on Cisco VIC 13xx series adapters and only RoCEv2 is supported on Cisco VIC 14xx series adapters.* `1` - RDMA over Converged Ethernet Protocol Version 1.* `2` - RDMA over Converged Ethernet Protocol Version 2. 
 * `rss_hash_settings`:(Array with Maximum of one item) - Receive Side Scaling allows the incoming traffic to be spread across multiple CPU cores. 
 This complex property has following sub-properties:
   + `additional_properties`:
@@ -92,7 +91,7 @@ This complex property has following sub-properties:
   + `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
-  + `count`:(int) The number of queue resources to allocate. 
+  + `nr_count`:(int) The number of queue resources to allocate. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `ring_size`:(int) The number of descriptors in each queue. 
 * `tags`:(Array)
@@ -116,7 +115,7 @@ This complex property has following sub-properties:
   + `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
-  + `count`:(int) The number of queue resources to allocate. 
+  + `nr_count`:(int) The number of queue resources to allocate. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `ring_size`:(int) The number of descriptors in each queue. 
 * `uplink_failback_timeout`:(int) Uplink Failback Timeout in seconds when uplink failover is enabled for a vNIC. After a vNIC has started using its secondary interface, this setting controls how long the primary interface must be available before the system resumes using the primary interface for the vNIC. 
@@ -127,3 +126,10 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `enabled`:(bool) Status of the Virtual Extensible LAN Protocol on the virtual ethernet interface. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+
+
+## Import
+`intersight_vnic_eth_adapter_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_vnic_eth_adapter_policy.example 1234567890987654321abcde
+```

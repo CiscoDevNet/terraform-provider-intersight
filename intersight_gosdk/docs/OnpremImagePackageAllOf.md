@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **FilePath** | Pointer to **string** | Optional file path of the image package. | [optional] [readonly] 
 **FileSha** | Pointer to **string** | Image file&#39;s fingerprint. Fingerprint is calculated using SHA256 algorithm. | [optional] [readonly] 
 **FileSize** | Pointer to **int64** | Image file size in bytes. | [optional] [readonly] 
-**FileTime** | Pointer to [**time.Time**](time.Time.md) | Image file&#39;s last modified date and time. | [optional] [readonly] 
+**FileTime** | Pointer to **time.Time** | Image file&#39;s last modified date and time. | [optional] [readonly] 
 **Filename** | Pointer to **string** | Filename of the image package. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name of the software image package. | [optional] [readonly] 
 **PackageType** | Pointer to **string** | Image package type (e.g. service, system etc.). | [optional] [readonly] 

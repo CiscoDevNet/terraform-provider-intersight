@@ -1,13 +1,12 @@
-
 ---
+subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_switch_control_policy"
-sidebar_current: "docs-intersight-resource-fabric-switch-control-policy"
 description: |-
   A policy to configure the Switching Mode, Port VLAN Optimization, MAC Aging Time, Reserved VLAN Range of the FI.
 ---
 
-# Resource: intersight_fabric._switch_control_policy
+# Resource: intersight_fabric_switch_control_policy
 A policy to configure the Switching Mode, Port VLAN Optimization, MAC Aging Time, Reserved VLAN Range of the FI.
 ## Argument Reference
 The following arguments are supported:
@@ -41,3 +40,10 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `vlan_port_optimization_enabled`:(bool) To enable or disable the VLAN port count optimization. 
+
+
+## Import
+`intersight_fabric_switch_control_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_fabric_switch_control_policy.example 1234567890987654321abcde
+```

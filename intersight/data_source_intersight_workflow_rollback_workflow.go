@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceWorkflowRollbackWorkflow() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceWorkflowRollbackWorkflowRead,
+		ReadContext: dataSourceWorkflowRollbackWorkflowRead,
 		Schema: map[string]*schema.Schema{
 			"action": {
 				Description: "The action of the rollback workflow such as Create and Start.\n* `None` - If no action is set, then the default value is set to none for the action field.\n* `Create` - Create rollback workflow data for the execution of the rollback workflow.\n* `Start` - Start a new execution of the rollback workflow.",
@@ -25,7 +26,7 @@ func dataSourceWorkflowRollbackWorkflow() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -112,7 +113,7 @@ func dataSourceWorkflowRollbackWorkflow() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -220,7 +221,7 @@ func dataSourceWorkflowRollbackWorkflow() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -296,10 +297,11 @@ func dataSourceWorkflowRollbackWorkflow() *schema.Resource {
 	}
 }
 
-func dataSourceWorkflowRollbackWorkflowRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceWorkflowRollbackWorkflowRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.WorkflowRollbackWorkflow{}
 	if v, ok := d.GetOk("action"); ok {
 		x := (v.(string))
@@ -328,25 +330,25 @@ func dataSourceWorkflowRollbackWorkflowRead(d *schema.ResourceData, meta interfa
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of WorkflowRollbackWorkflow object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.WorkflowApi.GetWorkflowRollbackWorkflowList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowRollbackWorkflowList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching WorkflowRollbackWorkflow: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for WorkflowRollbackWorkflow list: %s", err.Error())
 	}
 	var s = &models.WorkflowRollbackWorkflowList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to WorkflowRollbackWorkflow: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to WorkflowRollbackWorkflow list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for WorkflowRollbackWorkflow did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -355,51 +357,51 @@ func dataSourceWorkflowRollbackWorkflowRead(d *schema.ResourceData, meta interfa
 			var s = &models.WorkflowRollbackWorkflow{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("action", (s.GetAction())); err != nil {
-				return fmt.Errorf("error occurred while setting property Action: %+v", err)
+				return diag.Errorf("error occurred while setting property Action: %s", err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("continue_on_task_failure", (s.GetContinueOnTaskFailure())); err != nil {
-				return fmt.Errorf("error occurred while setting property ContinueOnTaskFailure: %+v", err)
+				return diag.Errorf("error occurred while setting property ContinueOnTaskFailure: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 
 			if err := d.Set("primary_workflow", flattenMapWorkflowWorkflowInfoRelationship(s.GetPrimaryWorkflow(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property PrimaryWorkflow: %+v", err)
+				return diag.Errorf("error occurred while setting property PrimaryWorkflow: %s", err.Error())
 			}
 
 			if err := d.Set("rollback_tasks", flattenListWorkflowRollbackWorkflowTask(s.GetRollbackTasks(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property RollbackTasks: %+v", err)
+				return diag.Errorf("error occurred while setting property RollbackTasks: %s", err.Error())
 			}
 
 			if err := d.Set("rollback_workflows", flattenListWorkflowWorkflowInfoRelationship(s.GetRollbackWorkflows(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property RollbackWorkflows: %+v", err)
+				return diag.Errorf("error occurred while setting property RollbackWorkflows: %s", err.Error())
 			}
 
 			if err := d.Set("selected_tasks", flattenListWorkflowRollbackWorkflowTask(s.GetSelectedTasks(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property SelectedTasks: %+v", err)
+				return diag.Errorf("error occurred while setting property SelectedTasks: %s", err.Error())
 			}
 			if err := d.Set("status", (s.GetStatus())); err != nil {
-				return fmt.Errorf("error occurred while setting property Status: %+v", err)
+				return diag.Errorf("error occurred while setting property Status: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

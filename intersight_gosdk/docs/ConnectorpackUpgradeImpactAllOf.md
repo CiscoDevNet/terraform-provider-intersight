@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "connectorpack.UpgradeImpact"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "connectorpack.UpgradeImpact"]
-**ConnectorPack** | Pointer to [**[]ConnectorpackConnectorPackUpdate**](connectorpack.ConnectorPackUpdate.md) |  | [optional] 
+**ConnectorPack** | Pointer to [**[]ConnectorpackConnectorPackUpdate**](ConnectorpackConnectorPackUpdate.md) |  | [optional] 
 **IsEligibleForUpgrade** | Pointer to **bool** | States whether the UCS Director is eligible for an upgrade. Set to true if connector packs are available for upgrade, else set to false. | [optional] [readonly] 
 **IsUpdateDownloaded** | Pointer to **bool** | States whether all the requisite updates have been downloaded to the target UCS Director. Set to true if all connector packs required to upgrade UCS Director to the next iteration have been downloaded, else set to false. | [optional] [readonly] 
 **UcsdInfo** | Pointer to [**IaasUcsdInfoRelationship**](iaas.UcsdInfo.Relationship.md) |  | [optional] 

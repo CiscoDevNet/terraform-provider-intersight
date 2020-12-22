@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceFcpoolPool() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceFcpoolPoolRead,
+		ReadContext: dataSourceFcpoolPoolRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -131,7 +132,7 @@ func dataSourceFcpoolPool() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -213,10 +214,11 @@ func dataSourceFcpoolPool() *schema.Resource {
 	}
 }
 
-func dataSourceFcpoolPoolRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceFcpoolPoolRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.FcpoolPool{}
 	if v, ok := d.GetOk("assigned"); ok {
 		x := int64(v.(int))
@@ -257,25 +259,25 @@ func dataSourceFcpoolPoolRead(d *schema.ResourceData, meta interface{}) error {
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of FcpoolPool object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.FcpoolApi.GetFcpoolPoolList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.FcpoolApi.GetFcpoolPoolList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching FcpoolPool: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for FcpoolPool list: %s", err.Error())
 	}
 	var s = &models.FcpoolPoolList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to FcpoolPool: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to FcpoolPool list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for FcpoolPool did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -284,56 +286,56 @@ func dataSourceFcpoolPoolRead(d *schema.ResourceData, meta interface{}) error {
 			var s = &models.FcpoolPool{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("assigned", (s.GetAssigned())); err != nil {
-				return fmt.Errorf("error occurred while setting property Assigned: %+v", err)
+				return diag.Errorf("error occurred while setting property Assigned: %s", err.Error())
 			}
 			if err := d.Set("assignment_order", (s.GetAssignmentOrder())); err != nil {
-				return fmt.Errorf("error occurred while setting property AssignmentOrder: %+v", err)
+				return diag.Errorf("error occurred while setting property AssignmentOrder: %s", err.Error())
 			}
 
 			if err := d.Set("block_heads", flattenListFcpoolFcBlockRelationship(s.GetBlockHeads(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property BlockHeads: %+v", err)
+				return diag.Errorf("error occurred while setting property BlockHeads: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("description", (s.GetDescription())); err != nil {
-				return fmt.Errorf("error occurred while setting property Description: %+v", err)
+				return diag.Errorf("error occurred while setting property Description: %s", err.Error())
 			}
 
 			if err := d.Set("id_blocks", flattenListFcpoolBlock(s.GetIdBlocks(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property IdBlocks: %+v", err)
+				return diag.Errorf("error occurred while setting property IdBlocks: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("name", (s.GetName())); err != nil {
-				return fmt.Errorf("error occurred while setting property Name: %+v", err)
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 
 			if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+				return diag.Errorf("error occurred while setting property Organization: %s", err.Error())
 			}
 			if err := d.Set("pool_purpose", (s.GetPoolPurpose())); err != nil {
-				return fmt.Errorf("error occurred while setting property PoolPurpose: %+v", err)
+				return diag.Errorf("error occurred while setting property PoolPurpose: %s", err.Error())
 			}
 			if err := d.Set("size", (s.GetSize())); err != nil {
-				return fmt.Errorf("error occurred while setting property Size: %+v", err)
+				return diag.Errorf("error occurred while setting property Size: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

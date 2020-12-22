@@ -1,17 +1,15 @@
-
 ---
+subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_hitachi_port"
-sidebar_current: "docs-intersight-data-source-storage-hitachi-port"
 description: |-
-Port entity in Hitachi storage array.
+  Port entity in Hitachi storage array.
 ---
 
-# Data Source: intersight_storage._hitachi_port
+# Data Source: intersight_storage_hitachi_port
 Port entity in Hitachi storage array.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `fabric_mode`:(bool) Fabric mode of the port. true, Set. false, Not set. 
 * `ipv4_address`:(string) IPv4 address. 
 * `ipv6_global_address`:(string) IPv6 global address value. 
@@ -21,7 +19,6 @@ The following arguments can be used to get data of already created objects in In
 * `loop_id`:(string) The value set for the port loop ID (AL_PA). 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the physical port available in storage array. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `port_connection`:(string) Topology setting for the port. 
 * `port_lun_security`:(bool) LUN security setting for the port. 
 * `shortport_id`:(string) Port ID (short) of the port. 

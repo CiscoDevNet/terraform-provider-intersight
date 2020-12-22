@@ -1,19 +1,17 @@
-
 ---
+subcategory: "firmware"
 layout: "intersight"
 page_title: "Intersight: intersight_firmware_driver_distributable"
-sidebar_current: "docs-intersight-data-source-firmware-driver-distributable"
 description: |-
-A device driver image distributed by Cisco.
+  A device driver image distributed by Cisco.
 ---
 
-# Data Source: intersight_firmware._driver_distributable
+# Data Source: intersight_firmware_driver_distributable
 A device driver image distributed by Cisco.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `bundle_type`:(string) The bundle type of the image, as published on cisco.com. 
 * `category`:(string) The device type on which the driver is installable. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `description`:(string) User provided description about the file. Cisco provided description for image inventoried from a Cisco repository. 
 * `directory`:(string) Indicates in which directory path this driver will be added. 
 * `download_count`:(int) The number of times this file has been downloaded from the local repository. It is used by the repository monitoring process to determine the files that are to be evicted from the cache. 
@@ -26,7 +24,6 @@ The following arguments can be used to get data of already created objects in In
 * `model`:(string) The endpoint model for which this firmware image is applicable. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of the file. It is populated as part of the image import operation. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `osname`:(string) The operating system name to which this driver is compatible. 
 * `osversion`:(string) OS Version. It is populated as part of the image import operation. 
 * `platform_type`:(string) The platform type of the image. 
@@ -37,4 +34,4 @@ The following arguments can be used to get data of already created objects in In
 * `software_advisory_url`:(string) The software advisory, if any, provided by the vendor for this file. 
 * `software_type_id`:(string) The software type id provided by cisco.com. 
 * `vendor`:(string) The vendor or publisher of this file. 
-* `version`:(string) Vendor provided version for the file. 
+* `nr_version`:(string) Vendor provided version for the file. 

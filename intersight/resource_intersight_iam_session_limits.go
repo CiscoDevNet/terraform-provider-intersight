@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceIamSessionLimits() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceIamSessionLimitsCreate,
-		Read:   resourceIamSessionLimitsRead,
-		Update: resourceIamSessionLimitsUpdate,
-		Delete: resourceIamSessionLimitsDelete,
+		CreateContext: resourceIamSessionLimitsCreate,
+		ReadContext:   resourceIamSessionLimitsRead,
+		UpdateContext: resourceIamSessionLimitsUpdate,
+		DeleteContext: resourceIamSessionLimitsDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"account": {
 				Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -63,7 +66,7 @@ func resourceIamSessionLimits() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -72,6 +75,7 @@ func resourceIamSessionLimits() *schema.Resource {
 				Description: "The idle timeout interval for the web session in seconds. When a session is not refreshed for this duration, the session is marked as idle and removed. The minimum value is 300 seconds and the maximum value is 18000 seconds (5 hours). The system default value is 1800 seconds.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+				Default:     1800,
 			},
 			"maximum_limit": {
 				Description: "The maximum number of sessions allowed in an account. The default value is 128.",
@@ -96,6 +100,7 @@ func resourceIamSessionLimits() *schema.Resource {
 				Description: "The maximum number of sessions allowed per user. Default value is 32.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+				Default:     32,
 			},
 			"permission": {
 				Description: "A reference to a iamPermission resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -142,6 +147,7 @@ func resourceIamSessionLimits() *schema.Resource {
 				Description: "The session expiry duration in seconds. The minimum value is 350 seconds and the maximum value is 31536000 seconds (1 year). The system default value is 57600 seconds.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+				Default:     57600,
 			},
 			"tags": {
 				Type:     schema.TypeList,
@@ -170,7 +176,7 @@ func resourceIamSessionLimits() *schema.Resource {
 	}
 }
 
-func resourceIamSessionLimitsCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceIamSessionLimitsCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -335,77 +341,81 @@ func resourceIamSessionLimitsCreate(d *schema.ResourceData, meta interface{}) er
 	}
 
 	r := conn.ApiClient.IamApi.CreateIamSessionLimits(conn.ctx).IamSessionLimits(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating IamSessionLimits: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceIamSessionLimitsRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceIamSessionLimitsRead(c, d, meta)
 }
 
-func resourceIamSessionLimitsRead(d *schema.ResourceData, meta interface{}) error {
+func resourceIamSessionLimitsRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.IamApi.GetIamSessionLimitsByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "IamSessionLimits object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching IamSessionLimits: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("account", flattenMapIamAccountRelationship(s.GetAccount(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Account: %+v", err)
+		return diag.Errorf("error occurred while setting property Account in IamSessionLimits object: %s", err.Error())
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in IamSessionLimits object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in IamSessionLimits object: %s", err.Error())
 	}
 
 	if err := d.Set("idle_time_out", (s.GetIdleTimeOut())); err != nil {
-		return fmt.Errorf("error occurred while setting property IdleTimeOut: %+v", err)
+		return diag.Errorf("error occurred while setting property IdleTimeOut in IamSessionLimits object: %s", err.Error())
 	}
 
 	if err := d.Set("maximum_limit", (s.GetMaximumLimit())); err != nil {
-		return fmt.Errorf("error occurred while setting property MaximumLimit: %+v", err)
+		return diag.Errorf("error occurred while setting property MaximumLimit in IamSessionLimits object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in IamSessionLimits object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in IamSessionLimits object: %s", err.Error())
 	}
 
 	if err := d.Set("per_user_limit", (s.GetPerUserLimit())); err != nil {
-		return fmt.Errorf("error occurred while setting property PerUserLimit: %+v", err)
+		return diag.Errorf("error occurred while setting property PerUserLimit in IamSessionLimits object: %s", err.Error())
 	}
 
 	if err := d.Set("permission", flattenMapIamPermissionRelationship(s.GetPermission(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Permission: %+v", err)
+		return diag.Errorf("error occurred while setting property Permission in IamSessionLimits object: %s", err.Error())
 	}
 
 	if err := d.Set("session_time_out", (s.GetSessionTimeOut())); err != nil {
-		return fmt.Errorf("error occurred while setting property SessionTimeOut: %+v", err)
+		return diag.Errorf("error occurred while setting property SessionTimeOut in IamSessionLimits object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in IamSessionLimits object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceIamSessionLimitsUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceIamSessionLimitsUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -579,23 +589,24 @@ func resourceIamSessionLimitsUpdate(d *schema.ResourceData, meta interface{}) er
 	}
 
 	r := conn.ApiClient.IamApi.UpdateIamSessionLimits(conn.ctx, d.Id()).IamSessionLimits(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating IamSessionLimits: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamSessionLimitsRead(d, meta)
+	return resourceIamSessionLimitsRead(c, d, meta)
 }
 
-func resourceIamSessionLimitsDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceIamSessionLimitsDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamSessionLimits(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting IamSessionLimits object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

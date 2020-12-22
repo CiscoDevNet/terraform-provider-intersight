@@ -1,17 +1,15 @@
-
 ---
+subcategory: "pci"
 layout: "intersight"
 page_title: "Intersight: intersight_pci_switch"
-sidebar_current: "docs-intersight-data-source-pci-switch"
 description: |-
-PCI Switch present in a server connected to two GPUs and one PCIe adapter.
+  PCI Switch present in a server connected to two GPUs and one PCIe adapter.
 ---
 
-# Data Source: intersight_pci._switch
+# Data Source: intersight_pci_switch
 PCI Switch present in a server connected to two GPUs and one PCIe adapter.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `device_id`:(string) The device id of the switch. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
@@ -19,7 +17,6 @@ The following arguments can be used to get data of already created objects in In
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `num_of_adaptors`:(string) The number of GPUs and PCI adapters connected the switch. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `pci_address`:(string) The PCI address of the switch. 
 * `pci_slot`:(string) The PCI slot name of the switch. 
 * `product_name`:(string) The model information for the switch. 

@@ -1,21 +1,24 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceIamCertificateRequest() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceIamCertificateRequestCreate,
-		Read:   resourceIamCertificateRequestRead,
-		Update: resourceIamCertificateRequestUpdate,
-		Delete: resourceIamCertificateRequestDelete,
+		CreateContext: resourceIamCertificateRequestCreate,
+		ReadContext:   resourceIamCertificateRequestRead,
+		UpdateContext: resourceIamCertificateRequestUpdate,
+		DeleteContext: resourceIamCertificateRequestDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"account": {
 				Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -106,7 +109,7 @@ func resourceIamCertificateRequest() *schema.Resource {
 				ForceNew:   true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -130,7 +133,7 @@ func resourceIamCertificateRequest() *schema.Resource {
 				ForceNew:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -282,7 +285,7 @@ func resourceIamCertificateRequest() *schema.Resource {
 							Elem: &schema.Schema{
 								Type: schema.TypeString}},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -324,7 +327,7 @@ func resourceIamCertificateRequest() *schema.Resource {
 	}
 }
 
-func resourceIamCertificateRequestCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceIamCertificateRequestCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -708,89 +711,93 @@ func resourceIamCertificateRequestCreate(d *schema.ResourceData, meta interface{
 	}
 
 	r := conn.ApiClient.IamApi.CreateIamCertificateRequest(conn.ctx).IamCertificateRequest(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating IamCertificateRequest: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceIamCertificateRequestRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceIamCertificateRequestRead(c, d, meta)
 }
 
-func resourceIamCertificateRequestRead(d *schema.ResourceData, meta interface{}) error {
+func resourceIamCertificateRequestRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.IamApi.GetIamCertificateRequestByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "IamCertificateRequest object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching IamCertificateRequest: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("account", flattenMapIamAccountRelationship(s.GetAccount(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Account: %+v", err)
+		return diag.Errorf("error occurred while setting property Account in IamCertificateRequest object: %s", err.Error())
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in IamCertificateRequest object: %s", err.Error())
 	}
 
 	if err := d.Set("certificate", flattenMapIamCertificateRelationship(s.GetCertificate(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Certificate: %+v", err)
+		return diag.Errorf("error occurred while setting property Certificate in IamCertificateRequest object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in IamCertificateRequest object: %s", err.Error())
 	}
 
 	if err := d.Set("email_address", (s.GetEmailAddress())); err != nil {
-		return fmt.Errorf("error occurred while setting property EmailAddress: %+v", err)
+		return diag.Errorf("error occurred while setting property EmailAddress in IamCertificateRequest object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in IamCertificateRequest object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in IamCertificateRequest object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in IamCertificateRequest object: %s", err.Error())
 	}
 
 	if err := d.Set("private_key_spec", flattenMapIamPrivateKeySpecRelationship(s.GetPrivateKeySpec(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property PrivateKeySpec: %+v", err)
+		return diag.Errorf("error occurred while setting property PrivateKeySpec in IamCertificateRequest object: %s", err.Error())
 	}
 
 	if err := d.Set("request", (s.GetRequest())); err != nil {
-		return fmt.Errorf("error occurred while setting property Request: %+v", err)
+		return diag.Errorf("error occurred while setting property Request in IamCertificateRequest object: %s", err.Error())
 	}
 
 	if err := d.Set("self_signed", (s.GetSelfSigned())); err != nil {
-		return fmt.Errorf("error occurred while setting property SelfSigned: %+v", err)
+		return diag.Errorf("error occurred while setting property SelfSigned in IamCertificateRequest object: %s", err.Error())
 	}
 
 	if err := d.Set("subject", flattenMapPkixDistinguishedName(s.GetSubject(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Subject: %+v", err)
+		return diag.Errorf("error occurred while setting property Subject in IamCertificateRequest object: %s", err.Error())
 	}
 
 	if err := d.Set("subject_alternate_name", flattenMapPkixSubjectAlternateName(s.GetSubjectAlternateName(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property SubjectAlternateName: %+v", err)
+		return diag.Errorf("error occurred while setting property SubjectAlternateName in IamCertificateRequest object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in IamCertificateRequest object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceIamCertificateRequestUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceIamCertificateRequestUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1186,23 +1193,24 @@ func resourceIamCertificateRequestUpdate(d *schema.ResourceData, meta interface{
 	}
 
 	r := conn.ApiClient.IamApi.UpdateIamCertificateRequest(conn.ctx, d.Id()).IamCertificateRequest(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating IamCertificateRequest: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamCertificateRequestRead(d, meta)
+	return resourceIamCertificateRequestRead(c, d, meta)
 }
 
-func resourceIamCertificateRequestDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceIamCertificateRequestDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamCertificateRequest(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting IamCertificateRequest object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

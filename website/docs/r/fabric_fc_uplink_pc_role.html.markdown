@@ -1,13 +1,12 @@
-
 ---
+subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_fc_uplink_pc_role"
-sidebar_current: "docs-intersight-resource-fabric-fc-uplink-pc-role"
 description: |-
   Object sent by user to configure a fc uplink port-channel on the collection of ports.
 ---
 
-# Resource: intersight_fabric._fc_uplink_pc_role
+# Resource: intersight_fabric_fc_uplink_pc_role
 Object sent by user to configure a fc uplink port-channel on the collection of ports.
 ## Argument Reference
 The following arguments are supported:
@@ -17,7 +16,7 @@ The following arguments are supported:
 * `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `fill_pattern`:(string) Fill pattern to differentiate the configs in NPIV.* `Idle` - Fc Fill Pattern type Idle.* `Arbff` - Fc Fill Pattern type Arbff. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `pc_id`:(int) Unique Identifier of the port-channel, local to this switch. 
 * `port_policy`:(Array with Maximum of one item) - A reference to a fabricPortPolicy resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
@@ -43,3 +42,10 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `vsan_id`:(int) Virtual San Identifier associated to the FC port. 
+
+
+## Import
+`intersight_fabric_fc_uplink_pc_role` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_fabric_fc_uplink_pc_role.example 1234567890987654321abcde
+```

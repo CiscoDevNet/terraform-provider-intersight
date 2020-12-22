@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceHyperflexClusterNetworkPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceHyperflexClusterNetworkPolicyCreate,
-		Read:   resourceHyperflexClusterNetworkPolicyRead,
-		Update: resourceHyperflexClusterNetworkPolicyUpdate,
-		Delete: resourceHyperflexClusterNetworkPolicyDelete,
+		CreateContext: resourceHyperflexClusterNetworkPolicyCreate,
+		ReadContext:   resourceHyperflexClusterNetworkPolicyRead,
+		UpdateContext: resourceHyperflexClusterNetworkPolicyUpdate,
+		DeleteContext: resourceHyperflexClusterNetworkPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -22,7 +25,7 @@ func resourceHyperflexClusterNetworkPolicy() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -111,7 +114,7 @@ func resourceHyperflexClusterNetworkPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -294,7 +297,7 @@ func resourceHyperflexClusterNetworkPolicy() *schema.Resource {
 				Default:     "default",
 			},
 			"vm_migration_vlan": {
-				Description: "The VM migration VLAN.\nThis VLAN is used for transfering VMs from one host to another during operations such a cluster upgrade.",
+				Description: "The VM migration VLAN.\nThis VLAN is used for transfering VMs from one host to another during operations such a cluster upgrade.\nFor HyperFlex Application Platform clusters, this VLAN is also used for hypervisor control traffic such as\nnode to node communication, pod-to-pod communication, etc.",
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
@@ -373,7 +376,7 @@ func resourceHyperflexClusterNetworkPolicy() *schema.Resource {
 	}
 }
 
-func resourceHyperflexClusterNetworkPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexClusterNetworkPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -763,97 +766,101 @@ func resourceHyperflexClusterNetworkPolicyCreate(d *schema.ResourceData, meta in
 	}
 
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexClusterNetworkPolicy(conn.ctx).HyperflexClusterNetworkPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating HyperflexClusterNetworkPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceHyperflexClusterNetworkPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceHyperflexClusterNetworkPolicyRead(c, d, meta)
 }
 
-func resourceHyperflexClusterNetworkPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexClusterNetworkPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.HyperflexApi.GetHyperflexClusterNetworkPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "HyperflexClusterNetworkPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching HyperflexClusterNetworkPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in HyperflexClusterNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in HyperflexClusterNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cluster_profiles", flattenListHyperflexClusterProfileRelationship(s.GetClusterProfiles(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ClusterProfiles: %+v", err)
+		return diag.Errorf("error occurred while setting property ClusterProfiles in HyperflexClusterNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in HyperflexClusterNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("jumbo_frame", (s.GetJumboFrame())); err != nil {
-		return fmt.Errorf("error occurred while setting property JumboFrame: %+v", err)
+		return diag.Errorf("error occurred while setting property JumboFrame in HyperflexClusterNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("kvm_ip_range", flattenMapHyperflexIpAddrRange(s.GetKvmIpRange(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property KvmIpRange: %+v", err)
+		return diag.Errorf("error occurred while setting property KvmIpRange in HyperflexClusterNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("mac_prefix_range", flattenMapHyperflexMacAddrPrefixRange(s.GetMacPrefixRange(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property MacPrefixRange: %+v", err)
+		return diag.Errorf("error occurred while setting property MacPrefixRange in HyperflexClusterNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("mgmt_vlan", flattenMapHyperflexNamedVlan(s.GetMgmtVlan(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property MgmtVlan: %+v", err)
+		return diag.Errorf("error occurred while setting property MgmtVlan in HyperflexClusterNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in HyperflexClusterNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in HyperflexClusterNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in HyperflexClusterNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in HyperflexClusterNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in HyperflexClusterNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("uplink_speed", (s.GetUplinkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property UplinkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property UplinkSpeed in HyperflexClusterNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("vm_migration_vlan", flattenMapHyperflexNamedVlan(s.GetVmMigrationVlan(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property VmMigrationVlan: %+v", err)
+		return diag.Errorf("error occurred while setting property VmMigrationVlan in HyperflexClusterNetworkPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("vm_network_vlans", flattenListHyperflexNamedVlan(s.GetVmNetworkVlans(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property VmNetworkVlans: %+v", err)
+		return diag.Errorf("error occurred while setting property VmNetworkVlans in HyperflexClusterNetworkPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceHyperflexClusterNetworkPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexClusterNetworkPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1257,23 +1264,24 @@ func resourceHyperflexClusterNetworkPolicyUpdate(d *schema.ResourceData, meta in
 	}
 
 	r := conn.ApiClient.HyperflexApi.UpdateHyperflexClusterNetworkPolicy(conn.ctx, d.Id()).HyperflexClusterNetworkPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating HyperflexClusterNetworkPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexClusterNetworkPolicyRead(d, meta)
+	return resourceHyperflexClusterNetworkPolicyRead(c, d, meta)
 }
 
-func resourceHyperflexClusterNetworkPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexClusterNetworkPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexClusterNetworkPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting HyperflexClusterNetworkPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

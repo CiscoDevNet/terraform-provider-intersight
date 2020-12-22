@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceHyperflexAutoSupportPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceHyperflexAutoSupportPolicyCreate,
-		Read:   resourceHyperflexAutoSupportPolicyRead,
-		Update: resourceHyperflexAutoSupportPolicyUpdate,
-		Delete: resourceHyperflexAutoSupportPolicyDelete,
+		CreateContext: resourceHyperflexAutoSupportPolicyCreate,
+		ReadContext:   resourceHyperflexAutoSupportPolicyRead,
+		UpdateContext: resourceHyperflexAutoSupportPolicyUpdate,
+		DeleteContext: resourceHyperflexAutoSupportPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -22,9 +25,10 @@ func resourceHyperflexAutoSupportPolicy() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"admin_state": {
-				Description: "Enable or disable Auto Support.",
+				Description: "Enable or disable Auto-Support.",
 				Type:        schema.TypeBool,
 				Optional:    true,
+				Default:     true,
 			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
@@ -169,7 +173,7 @@ func resourceHyperflexAutoSupportPolicy() *schema.Resource {
 	}
 }
 
-func resourceHyperflexAutoSupportPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexAutoSupportPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -333,77 +337,81 @@ func resourceHyperflexAutoSupportPolicyCreate(d *schema.ResourceData, meta inter
 	}
 
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexAutoSupportPolicy(conn.ctx).HyperflexAutoSupportPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating HyperflexAutoSupportPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceHyperflexAutoSupportPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceHyperflexAutoSupportPolicyRead(c, d, meta)
 }
 
-func resourceHyperflexAutoSupportPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexAutoSupportPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.HyperflexApi.GetHyperflexAutoSupportPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "HyperflexAutoSupportPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching HyperflexAutoSupportPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in HyperflexAutoSupportPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("admin_state", (s.GetAdminState())); err != nil {
-		return fmt.Errorf("error occurred while setting property AdminState: %+v", err)
+		return diag.Errorf("error occurred while setting property AdminState in HyperflexAutoSupportPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in HyperflexAutoSupportPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cluster_profiles", flattenListHyperflexClusterProfileRelationship(s.GetClusterProfiles(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ClusterProfiles: %+v", err)
+		return diag.Errorf("error occurred while setting property ClusterProfiles in HyperflexAutoSupportPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in HyperflexAutoSupportPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in HyperflexAutoSupportPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in HyperflexAutoSupportPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in HyperflexAutoSupportPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in HyperflexAutoSupportPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("service_ticket_receipient", (s.GetServiceTicketReceipient())); err != nil {
-		return fmt.Errorf("error occurred while setting property ServiceTicketReceipient: %+v", err)
+		return diag.Errorf("error occurred while setting property ServiceTicketReceipient in HyperflexAutoSupportPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in HyperflexAutoSupportPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceHyperflexAutoSupportPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexAutoSupportPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -576,23 +584,24 @@ func resourceHyperflexAutoSupportPolicyUpdate(d *schema.ResourceData, meta inter
 	}
 
 	r := conn.ApiClient.HyperflexApi.UpdateHyperflexAutoSupportPolicy(conn.ctx, d.Id()).HyperflexAutoSupportPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating HyperflexAutoSupportPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexAutoSupportPolicyRead(d, meta)
+	return resourceHyperflexAutoSupportPolicyRead(c, d, meta)
 }
 
-func resourceHyperflexAutoSupportPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexAutoSupportPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexAutoSupportPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting HyperflexAutoSupportPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

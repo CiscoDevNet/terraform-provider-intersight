@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **ConfigState** | Pointer to **string** | Configuration state of server profile config context. | [optional] [readonly] 
 **ControlAction** | Pointer to **string** | Control action of server profile config context. | [optional] [readonly] 
 **ErrorState** | Pointer to **string** | Error state of server profile config context. | [optional] [readonly] 
-**JobInfo** | Pointer to [**[]PolicyinventoryJobInfo**](policyinventory.JobInfo.md) |  | [optional] 
+**JobInfo** | Pointer to [**[]PolicyinventoryJobInfo**](PolicyinventoryJobInfo.md) |  | [optional] 
 **OperState** | Pointer to **string** | Operational state of server profile config context. | [optional] [readonly] 
 **ProfileMoId** | Pointer to **string** | Server profile MO ID of the server. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 

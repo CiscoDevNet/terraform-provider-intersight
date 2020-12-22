@@ -1,19 +1,22 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceFirmwareEula() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceFirmwareEulaCreate,
-		Read:   resourceFirmwareEulaRead,
-		Delete: resourceFirmwareEulaDelete,
+		CreateContext: resourceFirmwareEulaCreate,
+		ReadContext:   resourceFirmwareEulaRead,
+		DeleteContext: resourceFirmwareEulaDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"accepted": {
 				Description: "EULA acceptance status for the account.",
@@ -76,7 +79,7 @@ func resourceFirmwareEula() *schema.Resource {
 				ForceNew:         true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -134,7 +137,7 @@ func resourceFirmwareEula() *schema.Resource {
 	}
 }
 
-func resourceFirmwareEulaCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceFirmwareEulaCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -246,90 +249,93 @@ func resourceFirmwareEulaCreate(d *schema.ResourceData, meta interface{}) error 
 	}
 
 	r := conn.ApiClient.FirmwareApi.CreateFirmwareEula(conn.ctx).FirmwareEula(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating FirmwareEula: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceFirmwareEulaRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceFirmwareEulaRead(c, d, meta)
 }
 
-func resourceFirmwareEulaRead(d *schema.ResourceData, meta interface{}) error {
+func resourceFirmwareEulaRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.FirmwareApi.GetFirmwareEulaByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "FirmwareEula object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching FirmwareEula: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("accepted", (s.GetAccepted())); err != nil {
-		return fmt.Errorf("error occurred while setting property Accepted: %+v", err)
+		return diag.Errorf("error occurred while setting property Accepted in FirmwareEula object: %s", err.Error())
 	}
 
 	if err := d.Set("account", flattenMapIamAccountRelationship(s.GetAccount(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Account: %+v", err)
+		return diag.Errorf("error occurred while setting property Account in FirmwareEula object: %s", err.Error())
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in FirmwareEula object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in FirmwareEula object: %s", err.Error())
 	}
 
 	if err := d.Set("content", (s.GetContent())); err != nil {
-		return fmt.Errorf("error occurred while setting property Content: %+v", err)
+		return diag.Errorf("error occurred while setting property Content in FirmwareEula object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in FirmwareEula object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in FirmwareEula object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in FirmwareEula object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceFirmwareEulaDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceFirmwareEulaDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	x := d.Get("workflow_info").([]interface{})[0].(map[string]interface{})
 	moid := x["moid"].(string)
-	getWorkflow, _, err := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowInfoByMoid(conn.ctx, moid).Execute()
-	if err != nil {
-		log.Printf("error occurred while fetching workflow info: %s", err.Error())
-		return err
+	getWorkflow, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowInfoByMoid(conn.ctx, moid).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching workflow info for FirmwareEula: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	if getWorkflow.GetStatus() == "RUNNING" {
 		status := "Cancel"
 		var o = &models.WorkflowWorkflowInfo{Action: &status}
 		o.SetClassId("workflow.WorkflowInfo")
 		o.SetObjectType("workflow.WorkflowInfo")
-		_, _, err = conn.ApiClient.WorkflowApi.UpdateWorkflowWorkflowInfo(conn.ctx, moid).WorkflowWorkflowInfo(*o).Execute()
-		if err != nil {
-			log.Printf("error occurred while cancelling workflow: %s", err.Error())
-			return err
+		_, _, responseErr = conn.ApiClient.WorkflowApi.UpdateWorkflowWorkflowInfo(conn.ctx, moid).WorkflowWorkflowInfo(*o).Execute()
+		if responseErr.Error() != "" {
+			return diag.Errorf("error occurred while cancelling workflow triggered by FirmwareEula: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		p := conn.ApiClient.WorkflowApi.DeleteWorkflowWorkflowInfo(conn.ctx, moid)
+		_, responseErr = p.Execute()
+		if responseErr.Error() != "" {
+			return diag.Errorf("error occurred while deleting workflow triggered by FirmwareEula: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 	}
-	p := conn.ApiClient.WorkflowApi.DeleteWorkflowWorkflowInfo(conn.ctx, moid)
-	_, err = p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
-	}
-	return err
+	return de
 }

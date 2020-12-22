@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceSoftwarerepositoryCategoryMapper() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceSoftwarerepositoryCategoryMapperRead,
+		ReadContext: dataSourceSoftwarerepositoryCategoryMapperRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -25,7 +26,7 @@ func dataSourceSoftwarerepositoryCategoryMapper() *schema.Resource {
 				Optional:    true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -60,45 +61,6 @@ func dataSourceSoftwarerepositoryCategoryMapper() *schema.Resource {
 				Description: "The regex that all images of this category follow.",
 				Type:        schema.TypeString,
 				Optional:    true,
-			},
-			"section": {
-				Description: "A reference to a capabilitySection resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
 			},
 			"nr_source": {
 				Description: "The image can be downloaded from cisco.com or external cloud store.\n* `Cisco` - External repository hosted on cisco.com.\n* `IntersightCloud` - Repository hosted by the Intersight Cloud.\n* `LocalMachine` - The file is available on the local client machine. Used as an upload source type.\n* `NetworkShare` - External repository in the customer datacenter. This will typically be a file server.",
@@ -152,10 +114,11 @@ func dataSourceSoftwarerepositoryCategoryMapper() *schema.Resource {
 	}
 }
 
-func dataSourceSoftwarerepositoryCategoryMapperRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceSoftwarerepositoryCategoryMapperRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.SoftwarerepositoryCategoryMapper{}
 	if v, ok := d.GetOk("category"); ok {
 		x := (v.(string))
@@ -204,25 +167,25 @@ func dataSourceSoftwarerepositoryCategoryMapperRead(d *schema.ResourceData, meta
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of SoftwarerepositoryCategoryMapper object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.SoftwarerepositoryApi.GetSoftwarerepositoryCategoryMapperList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.SoftwarerepositoryApi.GetSoftwarerepositoryCategoryMapperList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching SoftwarerepositoryCategoryMapper: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for SoftwarerepositoryCategoryMapper list: %s", err.Error())
 	}
 	var s = &models.SoftwarerepositoryCategoryMapperList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to SoftwarerepositoryCategoryMapper: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to SoftwarerepositoryCategoryMapper list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for SoftwarerepositoryCategoryMapper did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -231,60 +194,56 @@ func dataSourceSoftwarerepositoryCategoryMapperRead(d *schema.ResourceData, meta
 			var s = &models.SoftwarerepositoryCategoryMapper{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("category", (s.GetCategory())); err != nil {
-				return fmt.Errorf("error occurred while setting property Category: %+v", err)
+				return diag.Errorf("error occurred while setting property Category: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("file_type", (s.GetFileType())); err != nil {
-				return fmt.Errorf("error occurred while setting property FileType: %+v", err)
+				return diag.Errorf("error occurred while setting property FileType: %s", err.Error())
 			}
 			if err := d.Set("mdf_id", (s.GetMdfId())); err != nil {
-				return fmt.Errorf("error occurred while setting property MdfId: %+v", err)
+				return diag.Errorf("error occurred while setting property MdfId: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("name", (s.GetName())); err != nil {
-				return fmt.Errorf("error occurred while setting property Name: %+v", err)
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("regex_pattern", (s.GetRegexPattern())); err != nil {
-				return fmt.Errorf("error occurred while setting property RegexPattern: %+v", err)
-			}
-
-			if err := d.Set("section", flattenMapCapabilitySectionRelationship(s.GetSection(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Section: %+v", err)
+				return diag.Errorf("error occurred while setting property RegexPattern: %s", err.Error())
 			}
 			if err := d.Set("nr_source", (s.GetSource())); err != nil {
-				return fmt.Errorf("error occurred while setting property Source: %+v", err)
+				return diag.Errorf("error occurred while setting property Source: %s", err.Error())
 			}
 			if err := d.Set("supported_models", (s.GetSupportedModels())); err != nil {
-				return fmt.Errorf("error occurred while setting property SupportedModels: %+v", err)
+				return diag.Errorf("error occurred while setting property SupportedModels: %s", err.Error())
 			}
 			if err := d.Set("sw_id", (s.GetSwId())); err != nil {
-				return fmt.Errorf("error occurred while setting property SwId: %+v", err)
+				return diag.Errorf("error occurred while setting property SwId: %s", err.Error())
 			}
 			if err := d.Set("tag_types", (s.GetTagTypes())); err != nil {
-				return fmt.Errorf("error occurred while setting property TagTypes: %+v", err)
+				return diag.Errorf("error occurred while setting property TagTypes: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("nr_version", (s.GetVersion())); err != nil {
-				return fmt.Errorf("error occurred while setting property Version: %+v", err)
+				return diag.Errorf("error occurred while setting property Version: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceSdwanRouterNode() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceSdwanRouterNodeCreate,
-		Read:   resourceSdwanRouterNodeRead,
-		Update: resourceSdwanRouterNodeUpdate,
-		Delete: resourceSdwanRouterNodeDelete,
+		CreateContext: resourceSdwanRouterNodeCreate,
+		ReadContext:   resourceSdwanRouterNodeRead,
+		UpdateContext: resourceSdwanRouterNodeUpdate,
+		DeleteContext: resourceSdwanRouterNodeDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -260,6 +263,7 @@ func resourceSdwanRouterNode() *schema.Resource {
 							Description: "Defines if the input is editable.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     false,
 						},
 						"key": {
 							Description: "Name of the dynamic input key specified in the vManage template.",
@@ -267,7 +271,7 @@ func resourceSdwanRouterNode() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -276,6 +280,7 @@ func resourceSdwanRouterNode() *schema.Resource {
 							Description: "Defines if the input is optional or required.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     false,
 						},
 						"template": {
 							Description: "Refers to the name of the vManage template that this inputs belongs to.",
@@ -292,6 +297,7 @@ func resourceSdwanRouterNode() *schema.Resource {
 							Description: "Defines the object type for the input.",
 							Type:        schema.TypeString,
 							Optional:    true,
+							Default:     "string",
 						},
 						"value": {
 							Description: "Value of the dynamic input key specfied in the vManage template.",
@@ -312,7 +318,7 @@ func resourceSdwanRouterNode() *schema.Resource {
 	}
 }
 
-func resourceSdwanRouterNodeCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceSdwanRouterNodeCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -635,85 +641,89 @@ func resourceSdwanRouterNodeCreate(d *schema.ResourceData, meta interface{}) err
 	}
 
 	r := conn.ApiClient.SdwanApi.CreateSdwanRouterNode(conn.ctx).SdwanRouterNode(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating SdwanRouterNode: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceSdwanRouterNodeRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceSdwanRouterNodeRead(c, d, meta)
 }
 
-func resourceSdwanRouterNodeRead(d *schema.ResourceData, meta interface{}) error {
+func resourceSdwanRouterNodeRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.SdwanApi.GetSdwanRouterNodeByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "SdwanRouterNode object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching SdwanRouterNode: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in SdwanRouterNode object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in SdwanRouterNode object: %s", err.Error())
 	}
 
 	if err := d.Set("device_template", (s.GetDeviceTemplate())); err != nil {
-		return fmt.Errorf("error occurred while setting property DeviceTemplate: %+v", err)
+		return diag.Errorf("error occurred while setting property DeviceTemplate in SdwanRouterNode object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in SdwanRouterNode object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in SdwanRouterNode object: %s", err.Error())
 	}
 
 	if err := d.Set("network_configuration", flattenListSdwanNetworkConfigurationType(s.GetNetworkConfiguration(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property NetworkConfiguration: %+v", err)
+		return diag.Errorf("error occurred while setting property NetworkConfiguration in SdwanRouterNode object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in SdwanRouterNode object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in SdwanRouterNode object: %s", err.Error())
 	}
 
 	if err := d.Set("profile", flattenMapSdwanProfileRelationship(s.GetProfile(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Profile: %+v", err)
+		return diag.Errorf("error occurred while setting property Profile in SdwanRouterNode object: %s", err.Error())
 	}
 
 	if err := d.Set("server_node", flattenMapAssetDeviceRegistrationRelationship(s.GetServerNode(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ServerNode: %+v", err)
+		return diag.Errorf("error occurred while setting property ServerNode in SdwanRouterNode object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in SdwanRouterNode object: %s", err.Error())
 	}
 
 	if err := d.Set("template_inputs", flattenListSdwanTemplateInputsType(s.GetTemplateInputs(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property TemplateInputs: %+v", err)
+		return diag.Errorf("error occurred while setting property TemplateInputs in SdwanRouterNode object: %s", err.Error())
 	}
 
 	if err := d.Set("uuid", (s.GetUuid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Uuid: %+v", err)
+		return diag.Errorf("error occurred while setting property Uuid in SdwanRouterNode object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceSdwanRouterNodeUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceSdwanRouterNodeUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1047,23 +1057,24 @@ func resourceSdwanRouterNodeUpdate(d *schema.ResourceData, meta interface{}) err
 	}
 
 	r := conn.ApiClient.SdwanApi.UpdateSdwanRouterNode(conn.ctx, d.Id()).SdwanRouterNode(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating SdwanRouterNode: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceSdwanRouterNodeRead(d, meta)
+	return resourceSdwanRouterNodeRead(c, d, meta)
 }
 
-func resourceSdwanRouterNodeDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceSdwanRouterNodeDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.SdwanApi.DeleteSdwanRouterNode(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting SdwanRouterNode object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

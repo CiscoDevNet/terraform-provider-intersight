@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **ExtaTraffic** | Pointer to [**NullableHyperflexNamedVsan**](hyperflex.NamedVsan.md) |  | [optional] 
 **ExtbTraffic** | Pointer to [**NullableHyperflexNamedVsan**](hyperflex.NamedVsan.md) |  | [optional] 
 **WwxnPrefixRange** | Pointer to [**NullableHyperflexWwxnPrefixRange**](hyperflex.WwxnPrefixRange.md) |  | [optional] 
-**ClusterProfiles** | Pointer to [**[]HyperflexClusterProfileRelationship**](hyperflex.ClusterProfile.Relationship.md) | An array of relationships to hyperflexClusterProfile resources. | [optional] 
+**ClusterProfiles** | Pointer to [**[]HyperflexClusterProfileRelationship**](HyperflexClusterProfileRelationship.md) | An array of relationships to hyperflexClusterProfile resources. | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 
 ## Methods

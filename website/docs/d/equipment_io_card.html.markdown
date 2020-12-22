@@ -1,17 +1,15 @@
-
 ---
+subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_io_card"
-sidebar_current: "docs-intersight-data-source-equipment-io-card"
 description: |-
-I/O module on a chassis which multiplexes traffic from blade servers.
+  I/O module on a chassis which multiplexes traffic from blade servers.
 ---
 
-# Data Source: intersight_equipment._io_card
+# Data Source: intersight_equipment_io_card
 I/O module on a chassis which multiplexes traffic from blade servers.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `connection_path`:(string) Switch Id to which the IOM is connected to. The value can be A or B. 
 * `connection_status`:(string) Connectivity Status of FEX/IOM to Switch - A or B or AB. 
 * `dc_supported`:(bool) IOM device connector support. 
@@ -21,7 +19,6 @@ The following arguments can be used to get data of already created objects in In
 * `model`:(string) This field identifies the model of the given component. 
 * `module_id`:(int) Module Identifier for the IO module. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `oper_state`:(string) Operational state of IO card or fabric extender. 
 * `part_number`:(string) Part Number identifier for the IO module. 
 * `pid`:(string) This field identifies the Product ID for the IO module. 
@@ -33,5 +30,5 @@ The following arguments can be used to get data of already created objects in In
 * `side`:(string) Location of IOM within a chassis. The value can be left or right. 
 * `sku`:(string) This field identifies the Stock Keeping Unit for the IO card module. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
-* `version`:(string) This field identifies the version of the IO card module. 
+* `nr_version`:(string) This field identifies the version of the IO card module. 
 * `vid`:(string) This field identifies the Vendor ID for the IO card module. 

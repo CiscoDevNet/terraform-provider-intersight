@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceBiosPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceBiosPolicyCreate,
-		Read:   resourceBiosPolicyRead,
-		Update: resourceBiosPolicyUpdate,
-		Delete: resourceBiosPolicyDelete,
+		CreateContext: resourceBiosPolicyCreate,
+		ReadContext:   resourceBiosPolicyRead,
+		UpdateContext: resourceBiosPolicyUpdate,
+		DeleteContext: resourceBiosPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"acs_control_gpu1state": {
 				Description: "BIOS Token for setting ACS Control GPU-1 configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
@@ -642,6 +645,7 @@ func resourceBiosPolicy() *schema.Resource {
 				Description: "BIOS Token for setting Memory Size Limit in GiB configuration (0-65535).",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Default:     "platform-default",
 			},
 			"mirroring_mode": {
 				Description: "BIOS Token for setting Mirroring Mode configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `inter-socket` - Value - inter-socket for configuring MirroringMode token.\n* `intra-socket` - Value - intra-socket for configuring MirroringMode token.",
@@ -686,7 +690,7 @@ func resourceBiosPolicy() *schema.Resource {
 				Default:     "platform-default",
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -797,26 +801,31 @@ func resourceBiosPolicy() *schema.Resource {
 				Description: "BIOS Token for setting Partial Mirror percentage configuration (0.00-50.00).",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Default:     "platform-default",
 			},
 			"partial_mirror_value1": {
 				Description: "BIOS Token for setting Partial Mirror1 Size in GiB configuration (0-65535).",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Default:     "platform-default",
 			},
 			"partial_mirror_value2": {
 				Description: "BIOS Token for setting Partial Mirror2 Size in GiB configuration (0-65535).",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Default:     "platform-default",
 			},
 			"partial_mirror_value3": {
 				Description: "BIOS Token for setting Partial Mirror3 Size in GiB configuration (0-65535).",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Default:     "platform-default",
 			},
 			"partial_mirror_value4": {
 				Description: "BIOS Token for setting Partial Mirror4 Size in GiB configuration (0-65535).",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Default:     "platform-default",
 			},
 			"patrol_scrub": {
 				Description: "BIOS Token for setting Patrol Scrub configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
@@ -828,6 +837,7 @@ func resourceBiosPolicy() *schema.Resource {
 				Description: "BIOS Token for setting Patrol Scrub Interval configuration (5-23).",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Default:     "platform-default",
 			},
 			"pc_ie_ras_support": {
 				Description: "BIOS Token for setting PCIe RAS Support configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
@@ -1868,7 +1878,7 @@ func resourceBiosPolicy() *schema.Resource {
 	}
 }
 
-func resourceBiosPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceBiosPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -3452,1229 +3462,1234 @@ func resourceBiosPolicyCreate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	r := conn.ApiClient.BiosApi.CreateBiosPolicy(conn.ctx).BiosPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating BiosPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceBiosPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceBiosPolicyRead(c, d, meta)
 }
-func detachBiosPolicyProfiles(d *schema.ResourceData, meta interface{}) error {
+func detachBiosPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.BiosPolicy{}
 	o.SetClassId("bios.Policy")
 	o.SetObjectType("bios.Policy")
 	o.SetProfiles([]models.PolicyAbstractConfigProfileRelationship{})
 
 	r := conn.ApiClient.BiosApi.UpdateBiosPolicy(conn.ctx, d.Id()).BiosPolicy(*o)
-	_, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while creating: %s", err.Error())
+	_, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	return err
+	return de
 }
 
-func resourceBiosPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.BiosApi.GetBiosPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "BiosPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching BiosPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("acs_control_gpu1state", (s.GetAcsControlGpu1state())); err != nil {
-		return fmt.Errorf("error occurred while setting property AcsControlGpu1state: %+v", err)
+		return diag.Errorf("error occurred while setting property AcsControlGpu1state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("acs_control_gpu2state", (s.GetAcsControlGpu2state())); err != nil {
-		return fmt.Errorf("error occurred while setting property AcsControlGpu2state: %+v", err)
+		return diag.Errorf("error occurred while setting property AcsControlGpu2state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("acs_control_gpu3state", (s.GetAcsControlGpu3state())); err != nil {
-		return fmt.Errorf("error occurred while setting property AcsControlGpu3state: %+v", err)
+		return diag.Errorf("error occurred while setting property AcsControlGpu3state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("acs_control_gpu4state", (s.GetAcsControlGpu4state())); err != nil {
-		return fmt.Errorf("error occurred while setting property AcsControlGpu4state: %+v", err)
+		return diag.Errorf("error occurred while setting property AcsControlGpu4state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("acs_control_gpu5state", (s.GetAcsControlGpu5state())); err != nil {
-		return fmt.Errorf("error occurred while setting property AcsControlGpu5state: %+v", err)
+		return diag.Errorf("error occurred while setting property AcsControlGpu5state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("acs_control_gpu6state", (s.GetAcsControlGpu6state())); err != nil {
-		return fmt.Errorf("error occurred while setting property AcsControlGpu6state: %+v", err)
+		return diag.Errorf("error occurred while setting property AcsControlGpu6state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("acs_control_gpu7state", (s.GetAcsControlGpu7state())); err != nil {
-		return fmt.Errorf("error occurred while setting property AcsControlGpu7state: %+v", err)
+		return diag.Errorf("error occurred while setting property AcsControlGpu7state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("acs_control_gpu8state", (s.GetAcsControlGpu8state())); err != nil {
-		return fmt.Errorf("error occurred while setting property AcsControlGpu8state: %+v", err)
+		return diag.Errorf("error occurred while setting property AcsControlGpu8state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("acs_control_slot11state", (s.GetAcsControlSlot11state())); err != nil {
-		return fmt.Errorf("error occurred while setting property AcsControlSlot11state: %+v", err)
+		return diag.Errorf("error occurred while setting property AcsControlSlot11state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("acs_control_slot12state", (s.GetAcsControlSlot12state())); err != nil {
-		return fmt.Errorf("error occurred while setting property AcsControlSlot12state: %+v", err)
+		return diag.Errorf("error occurred while setting property AcsControlSlot12state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("acs_control_slot13state", (s.GetAcsControlSlot13state())); err != nil {
-		return fmt.Errorf("error occurred while setting property AcsControlSlot13state: %+v", err)
+		return diag.Errorf("error occurred while setting property AcsControlSlot13state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("acs_control_slot14state", (s.GetAcsControlSlot14state())); err != nil {
-		return fmt.Errorf("error occurred while setting property AcsControlSlot14state: %+v", err)
+		return diag.Errorf("error occurred while setting property AcsControlSlot14state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("adjacent_cache_line_prefetch", (s.GetAdjacentCacheLinePrefetch())); err != nil {
-		return fmt.Errorf("error occurred while setting property AdjacentCacheLinePrefetch: %+v", err)
+		return diag.Errorf("error occurred while setting property AdjacentCacheLinePrefetch in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("all_usb_devices", (s.GetAllUsbDevices())); err != nil {
-		return fmt.Errorf("error occurred while setting property AllUsbDevices: %+v", err)
+		return diag.Errorf("error occurred while setting property AllUsbDevices in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("altitude", (s.GetAltitude())); err != nil {
-		return fmt.Errorf("error occurred while setting property Altitude: %+v", err)
+		return diag.Errorf("error occurred while setting property Altitude in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("aspm_support", (s.GetAspmSupport())); err != nil {
-		return fmt.Errorf("error occurred while setting property AspmSupport: %+v", err)
+		return diag.Errorf("error occurred while setting property AspmSupport in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("assert_nmi_on_perr", (s.GetAssertNmiOnPerr())); err != nil {
-		return fmt.Errorf("error occurred while setting property AssertNmiOnPerr: %+v", err)
+		return diag.Errorf("error occurred while setting property AssertNmiOnPerr in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("assert_nmi_on_serr", (s.GetAssertNmiOnSerr())); err != nil {
-		return fmt.Errorf("error occurred while setting property AssertNmiOnSerr: %+v", err)
+		return diag.Errorf("error occurred while setting property AssertNmiOnSerr in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("auto_cc_state", (s.GetAutoCcState())); err != nil {
-		return fmt.Errorf("error occurred while setting property AutoCcState: %+v", err)
+		return diag.Errorf("error occurred while setting property AutoCcState in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("autonumous_cstate_enable", (s.GetAutonumousCstateEnable())); err != nil {
-		return fmt.Errorf("error occurred while setting property AutonumousCstateEnable: %+v", err)
+		return diag.Errorf("error occurred while setting property AutonumousCstateEnable in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("baud_rate", (s.GetBaudRate())); err != nil {
-		return fmt.Errorf("error occurred while setting property BaudRate: %+v", err)
+		return diag.Errorf("error occurred while setting property BaudRate in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("bme_dma_mitigation", (s.GetBmeDmaMitigation())); err != nil {
-		return fmt.Errorf("error occurred while setting property BmeDmaMitigation: %+v", err)
+		return diag.Errorf("error occurred while setting property BmeDmaMitigation in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("boot_option_num_retry", (s.GetBootOptionNumRetry())); err != nil {
-		return fmt.Errorf("error occurred while setting property BootOptionNumRetry: %+v", err)
+		return diag.Errorf("error occurred while setting property BootOptionNumRetry in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("boot_option_re_cool_down", (s.GetBootOptionReCoolDown())); err != nil {
-		return fmt.Errorf("error occurred while setting property BootOptionReCoolDown: %+v", err)
+		return diag.Errorf("error occurred while setting property BootOptionReCoolDown in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("boot_option_retry", (s.GetBootOptionRetry())); err != nil {
-		return fmt.Errorf("error occurred while setting property BootOptionRetry: %+v", err)
+		return diag.Errorf("error occurred while setting property BootOptionRetry in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("boot_performance_mode", (s.GetBootPerformanceMode())); err != nil {
-		return fmt.Errorf("error occurred while setting property BootPerformanceMode: %+v", err)
+		return diag.Errorf("error occurred while setting property BootPerformanceMode in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cbs_cmn_cpu_cpb", (s.GetCbsCmnCpuCpb())); err != nil {
-		return fmt.Errorf("error occurred while setting property CbsCmnCpuCpb: %+v", err)
+		return diag.Errorf("error occurred while setting property CbsCmnCpuCpb in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cbs_cmn_cpu_gen_downcore_ctrl", (s.GetCbsCmnCpuGenDowncoreCtrl())); err != nil {
-		return fmt.Errorf("error occurred while setting property CbsCmnCpuGenDowncoreCtrl: %+v", err)
+		return diag.Errorf("error occurred while setting property CbsCmnCpuGenDowncoreCtrl in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cbs_cmn_cpu_global_cstate_ctrl", (s.GetCbsCmnCpuGlobalCstateCtrl())); err != nil {
-		return fmt.Errorf("error occurred while setting property CbsCmnCpuGlobalCstateCtrl: %+v", err)
+		return diag.Errorf("error occurred while setting property CbsCmnCpuGlobalCstateCtrl in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cbs_cmn_cpu_l1stream_hw_prefetcher", (s.GetCbsCmnCpuL1streamHwPrefetcher())); err != nil {
-		return fmt.Errorf("error occurred while setting property CbsCmnCpuL1streamHwPrefetcher: %+v", err)
+		return diag.Errorf("error occurred while setting property CbsCmnCpuL1streamHwPrefetcher in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cbs_cmn_cpu_l2stream_hw_prefetcher", (s.GetCbsCmnCpuL2streamHwPrefetcher())); err != nil {
-		return fmt.Errorf("error occurred while setting property CbsCmnCpuL2streamHwPrefetcher: %+v", err)
+		return diag.Errorf("error occurred while setting property CbsCmnCpuL2streamHwPrefetcher in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cbs_cmn_determinism_slider", (s.GetCbsCmnDeterminismSlider())); err != nil {
-		return fmt.Errorf("error occurred while setting property CbsCmnDeterminismSlider: %+v", err)
+		return diag.Errorf("error occurred while setting property CbsCmnDeterminismSlider in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cbs_cmn_gnb_nb_iommu", (s.GetCbsCmnGnbNbIommu())); err != nil {
-		return fmt.Errorf("error occurred while setting property CbsCmnGnbNbIommu: %+v", err)
+		return diag.Errorf("error occurred while setting property CbsCmnGnbNbIommu in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cbs_cmn_mem_ctrl_bank_group_swap_ddr4", (s.GetCbsCmnMemCtrlBankGroupSwapDdr4())); err != nil {
-		return fmt.Errorf("error occurred while setting property CbsCmnMemCtrlBankGroupSwapDdr4: %+v", err)
+		return diag.Errorf("error occurred while setting property CbsCmnMemCtrlBankGroupSwapDdr4 in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cbs_cmn_mem_map_bank_interleave_ddr4", (s.GetCbsCmnMemMapBankInterleaveDdr4())); err != nil {
-		return fmt.Errorf("error occurred while setting property CbsCmnMemMapBankInterleaveDdr4: %+v", err)
+		return diag.Errorf("error occurred while setting property CbsCmnMemMapBankInterleaveDdr4 in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cbs_cmnc_tdp_ctl", (s.GetCbsCmncTdpCtl())); err != nil {
-		return fmt.Errorf("error occurred while setting property CbsCmncTdpCtl: %+v", err)
+		return diag.Errorf("error occurred while setting property CbsCmncTdpCtl in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cbs_df_cmn_mem_intlv", (s.GetCbsDfCmnMemIntlv())); err != nil {
-		return fmt.Errorf("error occurred while setting property CbsDfCmnMemIntlv: %+v", err)
+		return diag.Errorf("error occurred while setting property CbsDfCmnMemIntlv in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cbs_df_cmn_mem_intlv_size", (s.GetCbsDfCmnMemIntlvSize())); err != nil {
-		return fmt.Errorf("error occurred while setting property CbsDfCmnMemIntlvSize: %+v", err)
+		return diag.Errorf("error occurred while setting property CbsDfCmnMemIntlvSize in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cdn_enable", (s.GetCdnEnable())); err != nil {
-		return fmt.Errorf("error occurred while setting property CdnEnable: %+v", err)
+		return diag.Errorf("error occurred while setting property CdnEnable in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cdn_support", (s.GetCdnSupport())); err != nil {
-		return fmt.Errorf("error occurred while setting property CdnSupport: %+v", err)
+		return diag.Errorf("error occurred while setting property CdnSupport in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("channel_inter_leave", (s.GetChannelInterLeave())); err != nil {
-		return fmt.Errorf("error occurred while setting property ChannelInterLeave: %+v", err)
+		return diag.Errorf("error occurred while setting property ChannelInterLeave in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cisco_adaptive_mem_training", (s.GetCiscoAdaptiveMemTraining())); err != nil {
-		return fmt.Errorf("error occurred while setting property CiscoAdaptiveMemTraining: %+v", err)
+		return diag.Errorf("error occurred while setting property CiscoAdaptiveMemTraining in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cisco_debug_level", (s.GetCiscoDebugLevel())); err != nil {
-		return fmt.Errorf("error occurred while setting property CiscoDebugLevel: %+v", err)
+		return diag.Errorf("error occurred while setting property CiscoDebugLevel in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cisco_oprom_launch_optimization", (s.GetCiscoOpromLaunchOptimization())); err != nil {
-		return fmt.Errorf("error occurred while setting property CiscoOpromLaunchOptimization: %+v", err)
+		return diag.Errorf("error occurred while setting property CiscoOpromLaunchOptimization in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cke_low_policy", (s.GetCkeLowPolicy())); err != nil {
-		return fmt.Errorf("error occurred while setting property CkeLowPolicy: %+v", err)
+		return diag.Errorf("error occurred while setting property CkeLowPolicy in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("closed_loop_therm_throtl", (s.GetClosedLoopThermThrotl())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClosedLoopThermThrotl: %+v", err)
+		return diag.Errorf("error occurred while setting property ClosedLoopThermThrotl in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cmci_enable", (s.GetCmciEnable())); err != nil {
-		return fmt.Errorf("error occurred while setting property CmciEnable: %+v", err)
+		return diag.Errorf("error occurred while setting property CmciEnable in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("config_tdp", (s.GetConfigTdp())); err != nil {
-		return fmt.Errorf("error occurred while setting property ConfigTdp: %+v", err)
+		return diag.Errorf("error occurred while setting property ConfigTdp in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("config_tdp_level", (s.GetConfigTdpLevel())); err != nil {
-		return fmt.Errorf("error occurred while setting property ConfigTdpLevel: %+v", err)
+		return diag.Errorf("error occurred while setting property ConfigTdpLevel in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("console_redirection", (s.GetConsoleRedirection())); err != nil {
-		return fmt.Errorf("error occurred while setting property ConsoleRedirection: %+v", err)
+		return diag.Errorf("error occurred while setting property ConsoleRedirection in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("core_multi_processing", (s.GetCoreMultiProcessing())); err != nil {
-		return fmt.Errorf("error occurred while setting property CoreMultiProcessing: %+v", err)
+		return diag.Errorf("error occurred while setting property CoreMultiProcessing in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cpu_energy_performance", (s.GetCpuEnergyPerformance())); err != nil {
-		return fmt.Errorf("error occurred while setting property CpuEnergyPerformance: %+v", err)
+		return diag.Errorf("error occurred while setting property CpuEnergyPerformance in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cpu_frequency_floor", (s.GetCpuFrequencyFloor())); err != nil {
-		return fmt.Errorf("error occurred while setting property CpuFrequencyFloor: %+v", err)
+		return diag.Errorf("error occurred while setting property CpuFrequencyFloor in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cpu_performance", (s.GetCpuPerformance())); err != nil {
-		return fmt.Errorf("error occurred while setting property CpuPerformance: %+v", err)
+		return diag.Errorf("error occurred while setting property CpuPerformance in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cpu_power_management", (s.GetCpuPowerManagement())); err != nil {
-		return fmt.Errorf("error occurred while setting property CpuPowerManagement: %+v", err)
+		return diag.Errorf("error occurred while setting property CpuPowerManagement in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cr_qos", (s.GetCrQos())); err != nil {
-		return fmt.Errorf("error occurred while setting property CrQos: %+v", err)
+		return diag.Errorf("error occurred while setting property CrQos in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("crfastgo_config", (s.GetCrfastgoConfig())); err != nil {
-		return fmt.Errorf("error occurred while setting property CrfastgoConfig: %+v", err)
+		return diag.Errorf("error occurred while setting property CrfastgoConfig in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("dcpmm_firmware_downgrade", (s.GetDcpmmFirmwareDowngrade())); err != nil {
-		return fmt.Errorf("error occurred while setting property DcpmmFirmwareDowngrade: %+v", err)
+		return diag.Errorf("error occurred while setting property DcpmmFirmwareDowngrade in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("demand_scrub", (s.GetDemandScrub())); err != nil {
-		return fmt.Errorf("error occurred while setting property DemandScrub: %+v", err)
+		return diag.Errorf("error occurred while setting property DemandScrub in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("direct_cache_access", (s.GetDirectCacheAccess())); err != nil {
-		return fmt.Errorf("error occurred while setting property DirectCacheAccess: %+v", err)
+		return diag.Errorf("error occurred while setting property DirectCacheAccess in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("dram_clock_throttling", (s.GetDramClockThrottling())); err != nil {
-		return fmt.Errorf("error occurred while setting property DramClockThrottling: %+v", err)
+		return diag.Errorf("error occurred while setting property DramClockThrottling in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("dram_refresh_rate", (s.GetDramRefreshRate())); err != nil {
-		return fmt.Errorf("error occurred while setting property DramRefreshRate: %+v", err)
+		return diag.Errorf("error occurred while setting property DramRefreshRate in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("enable_clock_spread_spec", (s.GetEnableClockSpreadSpec())); err != nil {
-		return fmt.Errorf("error occurred while setting property EnableClockSpreadSpec: %+v", err)
+		return diag.Errorf("error occurred while setting property EnableClockSpreadSpec in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("energy_efficient_turbo", (s.GetEnergyEfficientTurbo())); err != nil {
-		return fmt.Errorf("error occurred while setting property EnergyEfficientTurbo: %+v", err)
+		return diag.Errorf("error occurred while setting property EnergyEfficientTurbo in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("eng_perf_tuning", (s.GetEngPerfTuning())); err != nil {
-		return fmt.Errorf("error occurred while setting property EngPerfTuning: %+v", err)
+		return diag.Errorf("error occurred while setting property EngPerfTuning in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("enhanced_intel_speed_step_tech", (s.GetEnhancedIntelSpeedStepTech())); err != nil {
-		return fmt.Errorf("error occurred while setting property EnhancedIntelSpeedStepTech: %+v", err)
+		return diag.Errorf("error occurred while setting property EnhancedIntelSpeedStepTech in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("epp_profile", (s.GetEppProfile())); err != nil {
-		return fmt.Errorf("error occurred while setting property EppProfile: %+v", err)
+		return diag.Errorf("error occurred while setting property EppProfile in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("execute_disable_bit", (s.GetExecuteDisableBit())); err != nil {
-		return fmt.Errorf("error occurred while setting property ExecuteDisableBit: %+v", err)
+		return diag.Errorf("error occurred while setting property ExecuteDisableBit in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("extended_apic", (s.GetExtendedApic())); err != nil {
-		return fmt.Errorf("error occurred while setting property ExtendedApic: %+v", err)
+		return diag.Errorf("error occurred while setting property ExtendedApic in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("flow_control", (s.GetFlowControl())); err != nil {
-		return fmt.Errorf("error occurred while setting property FlowControl: %+v", err)
+		return diag.Errorf("error occurred while setting property FlowControl in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("frb2enable", (s.GetFrb2enable())); err != nil {
-		return fmt.Errorf("error occurred while setting property Frb2enable: %+v", err)
+		return diag.Errorf("error occurred while setting property Frb2enable in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("hardware_prefetch", (s.GetHardwarePrefetch())); err != nil {
-		return fmt.Errorf("error occurred while setting property HardwarePrefetch: %+v", err)
+		return diag.Errorf("error occurred while setting property HardwarePrefetch in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("hwpm_enable", (s.GetHwpmEnable())); err != nil {
-		return fmt.Errorf("error occurred while setting property HwpmEnable: %+v", err)
+		return diag.Errorf("error occurred while setting property HwpmEnable in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("imc_interleave", (s.GetImcInterleave())); err != nil {
-		return fmt.Errorf("error occurred while setting property ImcInterleave: %+v", err)
+		return diag.Errorf("error occurred while setting property ImcInterleave in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("intel_hyper_threading_tech", (s.GetIntelHyperThreadingTech())); err != nil {
-		return fmt.Errorf("error occurred while setting property IntelHyperThreadingTech: %+v", err)
+		return diag.Errorf("error occurred while setting property IntelHyperThreadingTech in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("intel_speed_select", (s.GetIntelSpeedSelect())); err != nil {
-		return fmt.Errorf("error occurred while setting property IntelSpeedSelect: %+v", err)
+		return diag.Errorf("error occurred while setting property IntelSpeedSelect in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("intel_turbo_boost_tech", (s.GetIntelTurboBoostTech())); err != nil {
-		return fmt.Errorf("error occurred while setting property IntelTurboBoostTech: %+v", err)
+		return diag.Errorf("error occurred while setting property IntelTurboBoostTech in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("intel_virtualization_technology", (s.GetIntelVirtualizationTechnology())); err != nil {
-		return fmt.Errorf("error occurred while setting property IntelVirtualizationTechnology: %+v", err)
+		return diag.Errorf("error occurred while setting property IntelVirtualizationTechnology in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("intel_vt_for_directed_io", (s.GetIntelVtForDirectedIo())); err != nil {
-		return fmt.Errorf("error occurred while setting property IntelVtForDirectedIo: %+v", err)
+		return diag.Errorf("error occurred while setting property IntelVtForDirectedIo in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("intel_vtd_coherency_support", (s.GetIntelVtdCoherencySupport())); err != nil {
-		return fmt.Errorf("error occurred while setting property IntelVtdCoherencySupport: %+v", err)
+		return diag.Errorf("error occurred while setting property IntelVtdCoherencySupport in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("intel_vtd_interrupt_remapping", (s.GetIntelVtdInterruptRemapping())); err != nil {
-		return fmt.Errorf("error occurred while setting property IntelVtdInterruptRemapping: %+v", err)
+		return diag.Errorf("error occurred while setting property IntelVtdInterruptRemapping in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("intel_vtd_pass_through_dma_support", (s.GetIntelVtdPassThroughDmaSupport())); err != nil {
-		return fmt.Errorf("error occurred while setting property IntelVtdPassThroughDmaSupport: %+v", err)
+		return diag.Errorf("error occurred while setting property IntelVtdPassThroughDmaSupport in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("intel_vtdats_support", (s.GetIntelVtdatsSupport())); err != nil {
-		return fmt.Errorf("error occurred while setting property IntelVtdatsSupport: %+v", err)
+		return diag.Errorf("error occurred while setting property IntelVtdatsSupport in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("ioh_error_enable", (s.GetIohErrorEnable())); err != nil {
-		return fmt.Errorf("error occurred while setting property IohErrorEnable: %+v", err)
+		return diag.Errorf("error occurred while setting property IohErrorEnable in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("ioh_resource", (s.GetIohResource())); err != nil {
-		return fmt.Errorf("error occurred while setting property IohResource: %+v", err)
+		return diag.Errorf("error occurred while setting property IohResource in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("ip_prefetch", (s.GetIpPrefetch())); err != nil {
-		return fmt.Errorf("error occurred while setting property IpPrefetch: %+v", err)
+		return diag.Errorf("error occurred while setting property IpPrefetch in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("ipv4pxe", (s.GetIpv4pxe())); err != nil {
-		return fmt.Errorf("error occurred while setting property Ipv4pxe: %+v", err)
+		return diag.Errorf("error occurred while setting property Ipv4pxe in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("ipv6pxe", (s.GetIpv6pxe())); err != nil {
-		return fmt.Errorf("error occurred while setting property Ipv6pxe: %+v", err)
+		return diag.Errorf("error occurred while setting property Ipv6pxe in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("kti_prefetch", (s.GetKtiPrefetch())); err != nil {
-		return fmt.Errorf("error occurred while setting property KtiPrefetch: %+v", err)
+		return diag.Errorf("error occurred while setting property KtiPrefetch in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("legacy_os_redirection", (s.GetLegacyOsRedirection())); err != nil {
-		return fmt.Errorf("error occurred while setting property LegacyOsRedirection: %+v", err)
+		return diag.Errorf("error occurred while setting property LegacyOsRedirection in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("legacy_usb_support", (s.GetLegacyUsbSupport())); err != nil {
-		return fmt.Errorf("error occurred while setting property LegacyUsbSupport: %+v", err)
+		return diag.Errorf("error occurred while setting property LegacyUsbSupport in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("llc_prefetch", (s.GetLlcPrefetch())); err != nil {
-		return fmt.Errorf("error occurred while setting property LlcPrefetch: %+v", err)
+		return diag.Errorf("error occurred while setting property LlcPrefetch in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("lom_port0state", (s.GetLomPort0state())); err != nil {
-		return fmt.Errorf("error occurred while setting property LomPort0state: %+v", err)
+		return diag.Errorf("error occurred while setting property LomPort0state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("lom_port1state", (s.GetLomPort1state())); err != nil {
-		return fmt.Errorf("error occurred while setting property LomPort1state: %+v", err)
+		return diag.Errorf("error occurred while setting property LomPort1state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("lom_port2state", (s.GetLomPort2state())); err != nil {
-		return fmt.Errorf("error occurred while setting property LomPort2state: %+v", err)
+		return diag.Errorf("error occurred while setting property LomPort2state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("lom_port3state", (s.GetLomPort3state())); err != nil {
-		return fmt.Errorf("error occurred while setting property LomPort3state: %+v", err)
+		return diag.Errorf("error occurred while setting property LomPort3state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("lom_ports_all_state", (s.GetLomPortsAllState())); err != nil {
-		return fmt.Errorf("error occurred while setting property LomPortsAllState: %+v", err)
+		return diag.Errorf("error occurred while setting property LomPortsAllState in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("lv_ddr_mode", (s.GetLvDdrMode())); err != nil {
-		return fmt.Errorf("error occurred while setting property LvDdrMode: %+v", err)
+		return diag.Errorf("error occurred while setting property LvDdrMode in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("make_device_non_bootable", (s.GetMakeDeviceNonBootable())); err != nil {
-		return fmt.Errorf("error occurred while setting property MakeDeviceNonBootable: %+v", err)
+		return diag.Errorf("error occurred while setting property MakeDeviceNonBootable in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("memory_inter_leave", (s.GetMemoryInterLeave())); err != nil {
-		return fmt.Errorf("error occurred while setting property MemoryInterLeave: %+v", err)
+		return diag.Errorf("error occurred while setting property MemoryInterLeave in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("memory_mapped_io_above4gb", (s.GetMemoryMappedIoAbove4gb())); err != nil {
-		return fmt.Errorf("error occurred while setting property MemoryMappedIoAbove4gb: %+v", err)
+		return diag.Errorf("error occurred while setting property MemoryMappedIoAbove4gb in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("memory_size_limit", (s.GetMemorySizeLimit())); err != nil {
-		return fmt.Errorf("error occurred while setting property MemorySizeLimit: %+v", err)
+		return diag.Errorf("error occurred while setting property MemorySizeLimit in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("mirroring_mode", (s.GetMirroringMode())); err != nil {
-		return fmt.Errorf("error occurred while setting property MirroringMode: %+v", err)
+		return diag.Errorf("error occurred while setting property MirroringMode in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("mmcfg_base", (s.GetMmcfgBase())); err != nil {
-		return fmt.Errorf("error occurred while setting property MmcfgBase: %+v", err)
+		return diag.Errorf("error occurred while setting property MmcfgBase in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("network_stack", (s.GetNetworkStack())); err != nil {
-		return fmt.Errorf("error occurred while setting property NetworkStack: %+v", err)
+		return diag.Errorf("error occurred while setting property NetworkStack in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("numa_optimized", (s.GetNumaOptimized())); err != nil {
-		return fmt.Errorf("error occurred while setting property NumaOptimized: %+v", err)
+		return diag.Errorf("error occurred while setting property NumaOptimized in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("nvmdimm_perform_config", (s.GetNvmdimmPerformConfig())); err != nil {
-		return fmt.Errorf("error occurred while setting property NvmdimmPerformConfig: %+v", err)
+		return diag.Errorf("error occurred while setting property NvmdimmPerformConfig in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("onboard10gbit_lom", (s.GetOnboard10gbitLom())); err != nil {
-		return fmt.Errorf("error occurred while setting property Onboard10gbitLom: %+v", err)
+		return diag.Errorf("error occurred while setting property Onboard10gbitLom in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("onboard_gbit_lom", (s.GetOnboardGbitLom())); err != nil {
-		return fmt.Errorf("error occurred while setting property OnboardGbitLom: %+v", err)
+		return diag.Errorf("error occurred while setting property OnboardGbitLom in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("onboard_scu_storage_support", (s.GetOnboardScuStorageSupport())); err != nil {
-		return fmt.Errorf("error occurred while setting property OnboardScuStorageSupport: %+v", err)
+		return diag.Errorf("error occurred while setting property OnboardScuStorageSupport in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("onboard_scu_storage_sw_stack", (s.GetOnboardScuStorageSwStack())); err != nil {
-		return fmt.Errorf("error occurred while setting property OnboardScuStorageSwStack: %+v", err)
+		return diag.Errorf("error occurred while setting property OnboardScuStorageSwStack in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("os_boot_watchdog_timer", (s.GetOsBootWatchdogTimer())); err != nil {
-		return fmt.Errorf("error occurred while setting property OsBootWatchdogTimer: %+v", err)
+		return diag.Errorf("error occurred while setting property OsBootWatchdogTimer in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("os_boot_watchdog_timer_policy", (s.GetOsBootWatchdogTimerPolicy())); err != nil {
-		return fmt.Errorf("error occurred while setting property OsBootWatchdogTimerPolicy: %+v", err)
+		return diag.Errorf("error occurred while setting property OsBootWatchdogTimerPolicy in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("os_boot_watchdog_timer_timeout", (s.GetOsBootWatchdogTimerTimeout())); err != nil {
-		return fmt.Errorf("error occurred while setting property OsBootWatchdogTimerTimeout: %+v", err)
+		return diag.Errorf("error occurred while setting property OsBootWatchdogTimerTimeout in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("out_of_band_mgmt_port", (s.GetOutOfBandMgmtPort())); err != nil {
-		return fmt.Errorf("error occurred while setting property OutOfBandMgmtPort: %+v", err)
+		return diag.Errorf("error occurred while setting property OutOfBandMgmtPort in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("package_cstate_limit", (s.GetPackageCstateLimit())); err != nil {
-		return fmt.Errorf("error occurred while setting property PackageCstateLimit: %+v", err)
+		return diag.Errorf("error occurred while setting property PackageCstateLimit in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("partial_mirror_mode_config", (s.GetPartialMirrorModeConfig())); err != nil {
-		return fmt.Errorf("error occurred while setting property PartialMirrorModeConfig: %+v", err)
+		return diag.Errorf("error occurred while setting property PartialMirrorModeConfig in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("partial_mirror_percent", (s.GetPartialMirrorPercent())); err != nil {
-		return fmt.Errorf("error occurred while setting property PartialMirrorPercent: %+v", err)
+		return diag.Errorf("error occurred while setting property PartialMirrorPercent in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("partial_mirror_value1", (s.GetPartialMirrorValue1())); err != nil {
-		return fmt.Errorf("error occurred while setting property PartialMirrorValue1: %+v", err)
+		return diag.Errorf("error occurred while setting property PartialMirrorValue1 in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("partial_mirror_value2", (s.GetPartialMirrorValue2())); err != nil {
-		return fmt.Errorf("error occurred while setting property PartialMirrorValue2: %+v", err)
+		return diag.Errorf("error occurred while setting property PartialMirrorValue2 in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("partial_mirror_value3", (s.GetPartialMirrorValue3())); err != nil {
-		return fmt.Errorf("error occurred while setting property PartialMirrorValue3: %+v", err)
+		return diag.Errorf("error occurred while setting property PartialMirrorValue3 in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("partial_mirror_value4", (s.GetPartialMirrorValue4())); err != nil {
-		return fmt.Errorf("error occurred while setting property PartialMirrorValue4: %+v", err)
+		return diag.Errorf("error occurred while setting property PartialMirrorValue4 in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("patrol_scrub", (s.GetPatrolScrub())); err != nil {
-		return fmt.Errorf("error occurred while setting property PatrolScrub: %+v", err)
+		return diag.Errorf("error occurred while setting property PatrolScrub in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("patrol_scrub_duration", (s.GetPatrolScrubDuration())); err != nil {
-		return fmt.Errorf("error occurred while setting property PatrolScrubDuration: %+v", err)
+		return diag.Errorf("error occurred while setting property PatrolScrubDuration in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pc_ie_ras_support", (s.GetPcIeRasSupport())); err != nil {
-		return fmt.Errorf("error occurred while setting property PcIeRasSupport: %+v", err)
+		return diag.Errorf("error occurred while setting property PcIeRasSupport in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pc_ie_ssd_hot_plug_support", (s.GetPcIeSsdHotPlugSupport())); err != nil {
-		return fmt.Errorf("error occurred while setting property PcIeSsdHotPlugSupport: %+v", err)
+		return diag.Errorf("error occurred while setting property PcIeSsdHotPlugSupport in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pch_usb30mode", (s.GetPchUsb30mode())); err != nil {
-		return fmt.Errorf("error occurred while setting property PchUsb30mode: %+v", err)
+		return diag.Errorf("error occurred while setting property PchUsb30mode in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pci_option_ro_ms", (s.GetPciOptionRoMs())); err != nil {
-		return fmt.Errorf("error occurred while setting property PciOptionRoMs: %+v", err)
+		return diag.Errorf("error occurred while setting property PciOptionRoMs in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pci_rom_clp", (s.GetPciRomClp())); err != nil {
-		return fmt.Errorf("error occurred while setting property PciRomClp: %+v", err)
+		return diag.Errorf("error occurred while setting property PciRomClp in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pcie_ari_support", (s.GetPcieAriSupport())); err != nil {
-		return fmt.Errorf("error occurred while setting property PcieAriSupport: %+v", err)
+		return diag.Errorf("error occurred while setting property PcieAriSupport in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pcie_pll_ssc", (s.GetPciePllSsc())); err != nil {
-		return fmt.Errorf("error occurred while setting property PciePllSsc: %+v", err)
+		return diag.Errorf("error occurred while setting property PciePllSsc in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pcie_slot_mstorraid_option_rom", (s.GetPcieSlotMstorraidOptionRom())); err != nil {
-		return fmt.Errorf("error occurred while setting property PcieSlotMstorraidOptionRom: %+v", err)
+		return diag.Errorf("error occurred while setting property PcieSlotMstorraidOptionRom in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pcie_slot_nvme1link_speed", (s.GetPcieSlotNvme1linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property PcieSlotNvme1linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property PcieSlotNvme1linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pcie_slot_nvme1option_rom", (s.GetPcieSlotNvme1optionRom())); err != nil {
-		return fmt.Errorf("error occurred while setting property PcieSlotNvme1optionRom: %+v", err)
+		return diag.Errorf("error occurred while setting property PcieSlotNvme1optionRom in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pcie_slot_nvme2link_speed", (s.GetPcieSlotNvme2linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property PcieSlotNvme2linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property PcieSlotNvme2linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pcie_slot_nvme2option_rom", (s.GetPcieSlotNvme2optionRom())); err != nil {
-		return fmt.Errorf("error occurred while setting property PcieSlotNvme2optionRom: %+v", err)
+		return diag.Errorf("error occurred while setting property PcieSlotNvme2optionRom in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pcie_slot_nvme3link_speed", (s.GetPcieSlotNvme3linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property PcieSlotNvme3linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property PcieSlotNvme3linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pcie_slot_nvme3option_rom", (s.GetPcieSlotNvme3optionRom())); err != nil {
-		return fmt.Errorf("error occurred while setting property PcieSlotNvme3optionRom: %+v", err)
+		return diag.Errorf("error occurred while setting property PcieSlotNvme3optionRom in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pcie_slot_nvme4link_speed", (s.GetPcieSlotNvme4linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property PcieSlotNvme4linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property PcieSlotNvme4linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pcie_slot_nvme4option_rom", (s.GetPcieSlotNvme4optionRom())); err != nil {
-		return fmt.Errorf("error occurred while setting property PcieSlotNvme4optionRom: %+v", err)
+		return diag.Errorf("error occurred while setting property PcieSlotNvme4optionRom in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pcie_slot_nvme5link_speed", (s.GetPcieSlotNvme5linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property PcieSlotNvme5linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property PcieSlotNvme5linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pcie_slot_nvme5option_rom", (s.GetPcieSlotNvme5optionRom())); err != nil {
-		return fmt.Errorf("error occurred while setting property PcieSlotNvme5optionRom: %+v", err)
+		return diag.Errorf("error occurred while setting property PcieSlotNvme5optionRom in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pcie_slot_nvme6link_speed", (s.GetPcieSlotNvme6linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property PcieSlotNvme6linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property PcieSlotNvme6linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pcie_slot_nvme6option_rom", (s.GetPcieSlotNvme6optionRom())); err != nil {
-		return fmt.Errorf("error occurred while setting property PcieSlotNvme6optionRom: %+v", err)
+		return diag.Errorf("error occurred while setting property PcieSlotNvme6optionRom in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pop_support", (s.GetPopSupport())); err != nil {
-		return fmt.Errorf("error occurred while setting property PopSupport: %+v", err)
+		return diag.Errorf("error occurred while setting property PopSupport in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("post_error_pause", (s.GetPostErrorPause())); err != nil {
-		return fmt.Errorf("error occurred while setting property PostErrorPause: %+v", err)
+		return diag.Errorf("error occurred while setting property PostErrorPause in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("processor_c1e", (s.GetProcessorC1e())); err != nil {
-		return fmt.Errorf("error occurred while setting property ProcessorC1e: %+v", err)
+		return diag.Errorf("error occurred while setting property ProcessorC1e in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("processor_c3report", (s.GetProcessorC3report())); err != nil {
-		return fmt.Errorf("error occurred while setting property ProcessorC3report: %+v", err)
+		return diag.Errorf("error occurred while setting property ProcessorC3report in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("processor_c6report", (s.GetProcessorC6report())); err != nil {
-		return fmt.Errorf("error occurred while setting property ProcessorC6report: %+v", err)
+		return diag.Errorf("error occurred while setting property ProcessorC6report in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("processor_cstate", (s.GetProcessorCstate())); err != nil {
-		return fmt.Errorf("error occurred while setting property ProcessorCstate: %+v", err)
+		return diag.Errorf("error occurred while setting property ProcessorCstate in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("profiles", flattenListPolicyAbstractConfigProfileRelationship(s.GetProfiles(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Profiles: %+v", err)
+		return diag.Errorf("error occurred while setting property Profiles in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("psata", (s.GetPsata())); err != nil {
-		return fmt.Errorf("error occurred while setting property Psata: %+v", err)
+		return diag.Errorf("error occurred while setting property Psata in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pstate_coord_type", (s.GetPstateCoordType())); err != nil {
-		return fmt.Errorf("error occurred while setting property PstateCoordType: %+v", err)
+		return diag.Errorf("error occurred while setting property PstateCoordType in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("putty_key_pad", (s.GetPuttyKeyPad())); err != nil {
-		return fmt.Errorf("error occurred while setting property PuttyKeyPad: %+v", err)
+		return diag.Errorf("error occurred while setting property PuttyKeyPad in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("pwr_perf_tuning", (s.GetPwrPerfTuning())); err != nil {
-		return fmt.Errorf("error occurred while setting property PwrPerfTuning: %+v", err)
+		return diag.Errorf("error occurred while setting property PwrPerfTuning in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("qpi_link_frequency", (s.GetQpiLinkFrequency())); err != nil {
-		return fmt.Errorf("error occurred while setting property QpiLinkFrequency: %+v", err)
+		return diag.Errorf("error occurred while setting property QpiLinkFrequency in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("qpi_link_speed", (s.GetQpiLinkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property QpiLinkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property QpiLinkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("qpi_snoop_mode", (s.GetQpiSnoopMode())); err != nil {
-		return fmt.Errorf("error occurred while setting property QpiSnoopMode: %+v", err)
+		return diag.Errorf("error occurred while setting property QpiSnoopMode in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("rank_inter_leave", (s.GetRankInterLeave())); err != nil {
-		return fmt.Errorf("error occurred while setting property RankInterLeave: %+v", err)
+		return diag.Errorf("error occurred while setting property RankInterLeave in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("redirection_after_post", (s.GetRedirectionAfterPost())); err != nil {
-		return fmt.Errorf("error occurred while setting property RedirectionAfterPost: %+v", err)
+		return diag.Errorf("error occurred while setting property RedirectionAfterPost in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("sata_mode_select", (s.GetSataModeSelect())); err != nil {
-		return fmt.Errorf("error occurred while setting property SataModeSelect: %+v", err)
+		return diag.Errorf("error occurred while setting property SataModeSelect in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("select_memory_ras_configuration", (s.GetSelectMemoryRasConfiguration())); err != nil {
-		return fmt.Errorf("error occurred while setting property SelectMemoryRasConfiguration: %+v", err)
+		return diag.Errorf("error occurred while setting property SelectMemoryRasConfiguration in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("select_ppr_type", (s.GetSelectPprType())); err != nil {
-		return fmt.Errorf("error occurred while setting property SelectPprType: %+v", err)
+		return diag.Errorf("error occurred while setting property SelectPprType in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("serial_port_aenable", (s.GetSerialPortAenable())); err != nil {
-		return fmt.Errorf("error occurred while setting property SerialPortAenable: %+v", err)
+		return diag.Errorf("error occurred while setting property SerialPortAenable in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("single_pctl_enable", (s.GetSinglePctlEnable())); err != nil {
-		return fmt.Errorf("error occurred while setting property SinglePctlEnable: %+v", err)
+		return diag.Errorf("error occurred while setting property SinglePctlEnable in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot10link_speed", (s.GetSlot10linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot10linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot10linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot10state", (s.GetSlot10state())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot10state: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot10state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot11link_speed", (s.GetSlot11linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot11linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot11linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot11state", (s.GetSlot11state())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot11state: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot11state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot12link_speed", (s.GetSlot12linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot12linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot12linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot12state", (s.GetSlot12state())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot12state: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot12state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot13state", (s.GetSlot13state())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot13state: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot13state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot14state", (s.GetSlot14state())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot14state: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot14state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot1link_speed", (s.GetSlot1linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot1linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot1linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot1state", (s.GetSlot1state())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot1state: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot1state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot2link_speed", (s.GetSlot2linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot2linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot2linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot2state", (s.GetSlot2state())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot2state: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot2state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot3link_speed", (s.GetSlot3linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot3linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot3linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot3state", (s.GetSlot3state())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot3state: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot3state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot4link_speed", (s.GetSlot4linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot4linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot4linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot4state", (s.GetSlot4state())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot4state: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot4state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot5link_speed", (s.GetSlot5linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot5linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot5linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot5state", (s.GetSlot5state())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot5state: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot5state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot6link_speed", (s.GetSlot6linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot6linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot6linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot6state", (s.GetSlot6state())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot6state: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot6state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot7link_speed", (s.GetSlot7linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot7linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot7linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot7state", (s.GetSlot7state())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot7state: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot7state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot8link_speed", (s.GetSlot8linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot8linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot8linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot8state", (s.GetSlot8state())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot8state: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot8state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot9link_speed", (s.GetSlot9linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot9linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot9linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot9state", (s.GetSlot9state())); err != nil {
-		return fmt.Errorf("error occurred while setting property Slot9state: %+v", err)
+		return diag.Errorf("error occurred while setting property Slot9state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_flom_link_speed", (s.GetSlotFlomLinkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotFlomLinkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotFlomLinkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_front_nvme1link_speed", (s.GetSlotFrontNvme1linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotFrontNvme1linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotFrontNvme1linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_front_nvme2link_speed", (s.GetSlotFrontNvme2linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotFrontNvme2linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotFrontNvme2linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_front_slot5link_speed", (s.GetSlotFrontSlot5linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotFrontSlot5linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotFrontSlot5linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_front_slot6link_speed", (s.GetSlotFrontSlot6linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotFrontSlot6linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotFrontSlot6linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_gpu1state", (s.GetSlotGpu1state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotGpu1state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotGpu1state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_gpu2state", (s.GetSlotGpu2state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotGpu2state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotGpu2state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_gpu3state", (s.GetSlotGpu3state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotGpu3state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotGpu3state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_gpu4state", (s.GetSlotGpu4state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotGpu4state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotGpu4state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_gpu5state", (s.GetSlotGpu5state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotGpu5state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotGpu5state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_gpu6state", (s.GetSlotGpu6state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotGpu6state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotGpu6state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_gpu7state", (s.GetSlotGpu7state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotGpu7state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotGpu7state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_gpu8state", (s.GetSlotGpu8state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotGpu8state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotGpu8state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_hba_link_speed", (s.GetSlotHbaLinkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotHbaLinkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotHbaLinkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_hba_state", (s.GetSlotHbaState())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotHbaState: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotHbaState in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_lom1link", (s.GetSlotLom1link())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotLom1link: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotLom1link in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_lom2link", (s.GetSlotLom2link())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotLom2link: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotLom2link in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_mezz_state", (s.GetSlotMezzState())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotMezzState: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotMezzState in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_mlom_link_speed", (s.GetSlotMlomLinkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotMlomLinkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotMlomLinkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_mlom_state", (s.GetSlotMlomState())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotMlomState: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotMlomState in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_mraid_link_speed", (s.GetSlotMraidLinkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotMraidLinkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotMraidLinkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_mraid_state", (s.GetSlotMraidState())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotMraidState: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotMraidState in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n10state", (s.GetSlotN10state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN10state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN10state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n11state", (s.GetSlotN11state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN11state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN11state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n12state", (s.GetSlotN12state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN12state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN12state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n13state", (s.GetSlotN13state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN13state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN13state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n14state", (s.GetSlotN14state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN14state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN14state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n15state", (s.GetSlotN15state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN15state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN15state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n16state", (s.GetSlotN16state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN16state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN16state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n17state", (s.GetSlotN17state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN17state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN17state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n18state", (s.GetSlotN18state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN18state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN18state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n19state", (s.GetSlotN19state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN19state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN19state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n1state", (s.GetSlotN1state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN1state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN1state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n20state", (s.GetSlotN20state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN20state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN20state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n21state", (s.GetSlotN21state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN21state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN21state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n22state", (s.GetSlotN22state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN22state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN22state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n23state", (s.GetSlotN23state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN23state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN23state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n24state", (s.GetSlotN24state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN24state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN24state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n2state", (s.GetSlotN2state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN2state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN2state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n3state", (s.GetSlotN3state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN3state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN3state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n4state", (s.GetSlotN4state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN4state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN4state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n5state", (s.GetSlotN5state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN5state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN5state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n6state", (s.GetSlotN6state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN6state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN6state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n7state", (s.GetSlotN7state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN7state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN7state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n8state", (s.GetSlotN8state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN8state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN8state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_n9state", (s.GetSlotN9state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotN9state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotN9state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_raid_link_speed", (s.GetSlotRaidLinkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotRaidLinkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotRaidLinkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_raid_state", (s.GetSlotRaidState())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotRaidState: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotRaidState in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_rear_nvme1link_speed", (s.GetSlotRearNvme1linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotRearNvme1linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotRearNvme1linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_rear_nvme1state", (s.GetSlotRearNvme1state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotRearNvme1state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotRearNvme1state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_rear_nvme2link_speed", (s.GetSlotRearNvme2linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotRearNvme2linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotRearNvme2linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_rear_nvme2state", (s.GetSlotRearNvme2state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotRearNvme2state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotRearNvme2state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_rear_nvme3state", (s.GetSlotRearNvme3state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotRearNvme3state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotRearNvme3state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_rear_nvme4state", (s.GetSlotRearNvme4state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotRearNvme4state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotRearNvme4state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_rear_nvme5state", (s.GetSlotRearNvme5state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotRearNvme5state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotRearNvme5state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_rear_nvme6state", (s.GetSlotRearNvme6state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotRearNvme6state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotRearNvme6state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_rear_nvme7state", (s.GetSlotRearNvme7state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotRearNvme7state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotRearNvme7state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_rear_nvme8state", (s.GetSlotRearNvme8state())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotRearNvme8state: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotRearNvme8state in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_riser1link_speed", (s.GetSlotRiser1linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotRiser1linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotRiser1linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_riser1slot1link_speed", (s.GetSlotRiser1slot1linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotRiser1slot1linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotRiser1slot1linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_riser1slot2link_speed", (s.GetSlotRiser1slot2linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotRiser1slot2linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotRiser1slot2linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_riser1slot3link_speed", (s.GetSlotRiser1slot3linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotRiser1slot3linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotRiser1slot3linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_riser2link_speed", (s.GetSlotRiser2linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotRiser2linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotRiser2linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_riser2slot4link_speed", (s.GetSlotRiser2slot4linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotRiser2slot4linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotRiser2slot4linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_riser2slot5link_speed", (s.GetSlotRiser2slot5linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotRiser2slot5linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotRiser2slot5linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_riser2slot6link_speed", (s.GetSlotRiser2slot6linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotRiser2slot6linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotRiser2slot6linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_sas_state", (s.GetSlotSasState())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotSasState: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotSasState in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_ssd_slot1link_speed", (s.GetSlotSsdSlot1linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotSsdSlot1linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotSsdSlot1linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("slot_ssd_slot2link_speed", (s.GetSlotSsdSlot2linkSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property SlotSsdSlot2linkSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property SlotSsdSlot2linkSpeed in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("smee", (s.GetSmee())); err != nil {
-		return fmt.Errorf("error occurred while setting property Smee: %+v", err)
+		return diag.Errorf("error occurred while setting property Smee in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("smt_mode", (s.GetSmtMode())); err != nil {
-		return fmt.Errorf("error occurred while setting property SmtMode: %+v", err)
+		return diag.Errorf("error occurred while setting property SmtMode in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("snc", (s.GetSnc())); err != nil {
-		return fmt.Errorf("error occurred while setting property Snc: %+v", err)
+		return diag.Errorf("error occurred while setting property Snc in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("snoopy_mode_for2lm", (s.GetSnoopyModeFor2lm())); err != nil {
-		return fmt.Errorf("error occurred while setting property SnoopyModeFor2lm: %+v", err)
+		return diag.Errorf("error occurred while setting property SnoopyModeFor2lm in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("snoopy_mode_for_ad", (s.GetSnoopyModeForAd())); err != nil {
-		return fmt.Errorf("error occurred while setting property SnoopyModeForAd: %+v", err)
+		return diag.Errorf("error occurred while setting property SnoopyModeForAd in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("sparing_mode", (s.GetSparingMode())); err != nil {
-		return fmt.Errorf("error occurred while setting property SparingMode: %+v", err)
+		return diag.Errorf("error occurred while setting property SparingMode in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("sr_iov", (s.GetSrIov())); err != nil {
-		return fmt.Errorf("error occurred while setting property SrIov: %+v", err)
+		return diag.Errorf("error occurred while setting property SrIov in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("streamer_prefetch", (s.GetStreamerPrefetch())); err != nil {
-		return fmt.Errorf("error occurred while setting property StreamerPrefetch: %+v", err)
+		return diag.Errorf("error occurred while setting property StreamerPrefetch in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("svm_mode", (s.GetSvmMode())); err != nil {
-		return fmt.Errorf("error occurred while setting property SvmMode: %+v", err)
+		return diag.Errorf("error occurred while setting property SvmMode in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("terminal_type", (s.GetTerminalType())); err != nil {
-		return fmt.Errorf("error occurred while setting property TerminalType: %+v", err)
+		return diag.Errorf("error occurred while setting property TerminalType in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tpm_control", (s.GetTpmControl())); err != nil {
-		return fmt.Errorf("error occurred while setting property TpmControl: %+v", err)
+		return diag.Errorf("error occurred while setting property TpmControl in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tpm_support", (s.GetTpmSupport())); err != nil {
-		return fmt.Errorf("error occurred while setting property TpmSupport: %+v", err)
+		return diag.Errorf("error occurred while setting property TpmSupport in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("txt_support", (s.GetTxtSupport())); err != nil {
-		return fmt.Errorf("error occurred while setting property TxtSupport: %+v", err)
+		return diag.Errorf("error occurred while setting property TxtSupport in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("ucsm_boot_order_rule", (s.GetUcsmBootOrderRule())); err != nil {
-		return fmt.Errorf("error occurred while setting property UcsmBootOrderRule: %+v", err)
+		return diag.Errorf("error occurred while setting property UcsmBootOrderRule in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("ufs_disable", (s.GetUfsDisable())); err != nil {
-		return fmt.Errorf("error occurred while setting property UfsDisable: %+v", err)
+		return diag.Errorf("error occurred while setting property UfsDisable in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("usb_emul6064", (s.GetUsbEmul6064())); err != nil {
-		return fmt.Errorf("error occurred while setting property UsbEmul6064: %+v", err)
+		return diag.Errorf("error occurred while setting property UsbEmul6064 in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("usb_port_front", (s.GetUsbPortFront())); err != nil {
-		return fmt.Errorf("error occurred while setting property UsbPortFront: %+v", err)
+		return diag.Errorf("error occurred while setting property UsbPortFront in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("usb_port_internal", (s.GetUsbPortInternal())); err != nil {
-		return fmt.Errorf("error occurred while setting property UsbPortInternal: %+v", err)
+		return diag.Errorf("error occurred while setting property UsbPortInternal in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("usb_port_kvm", (s.GetUsbPortKvm())); err != nil {
-		return fmt.Errorf("error occurred while setting property UsbPortKvm: %+v", err)
+		return diag.Errorf("error occurred while setting property UsbPortKvm in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("usb_port_rear", (s.GetUsbPortRear())); err != nil {
-		return fmt.Errorf("error occurred while setting property UsbPortRear: %+v", err)
+		return diag.Errorf("error occurred while setting property UsbPortRear in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("usb_port_sd_card", (s.GetUsbPortSdCard())); err != nil {
-		return fmt.Errorf("error occurred while setting property UsbPortSdCard: %+v", err)
+		return diag.Errorf("error occurred while setting property UsbPortSdCard in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("usb_port_vmedia", (s.GetUsbPortVmedia())); err != nil {
-		return fmt.Errorf("error occurred while setting property UsbPortVmedia: %+v", err)
+		return diag.Errorf("error occurred while setting property UsbPortVmedia in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("usb_xhci_support", (s.GetUsbXhciSupport())); err != nil {
-		return fmt.Errorf("error occurred while setting property UsbXhciSupport: %+v", err)
+		return diag.Errorf("error occurred while setting property UsbXhciSupport in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("vga_priority", (s.GetVgaPriority())); err != nil {
-		return fmt.Errorf("error occurred while setting property VgaPriority: %+v", err)
+		return diag.Errorf("error occurred while setting property VgaPriority in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("vmd_enable", (s.GetVmdEnable())); err != nil {
-		return fmt.Errorf("error occurred while setting property VmdEnable: %+v", err)
+		return diag.Errorf("error occurred while setting property VmdEnable in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("work_load_config", (s.GetWorkLoadConfig())); err != nil {
-		return fmt.Errorf("error occurred while setting property WorkLoadConfig: %+v", err)
+		return diag.Errorf("error occurred while setting property WorkLoadConfig in BiosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("xpt_prefetch", (s.GetXptPrefetch())); err != nil {
-		return fmt.Errorf("error occurred while setting property XptPrefetch: %+v", err)
+		return diag.Errorf("error occurred while setting property XptPrefetch in BiosPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceBiosPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceBiosPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -6551,31 +6566,32 @@ func resourceBiosPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	r := conn.ApiClient.BiosApi.UpdateBiosPolicy(conn.ctx, d.Id()).BiosPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating BiosPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceBiosPolicyRead(d, meta)
+	return resourceBiosPolicyRead(c, d, meta)
 }
 
-func resourceBiosPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceBiosPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profiles"); ok {
 		if len(p.([]interface{})) > 0 {
 			e := detachBiosPolicyProfiles(d, meta)
-			if e != nil {
+			if e.HasError() {
 				return e
 			}
 		}
 	}
 	p := conn.ApiClient.BiosApi.DeleteBiosPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting BiosPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | The name of the role which has to be granted to user. | [optional] 
 **PrivilegeNames** | Pointer to **[]string** |  | [optional] 
 **Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
-**PrivilegeSets** | Pointer to [**[]IamPrivilegeSetRelationship**](iam.PrivilegeSet.Relationship.md) | An array of relationships to iamPrivilegeSet resources. | [optional] [readonly] 
+**PrivilegeSets** | Pointer to [**[]IamPrivilegeSetRelationship**](IamPrivilegeSetRelationship.md) | An array of relationships to iamPrivilegeSet resources. | [optional] [readonly] 
 **System** | Pointer to [**IamSystemRelationship**](iam.System.Relationship.md) |  | [optional] 
 
 ## Methods

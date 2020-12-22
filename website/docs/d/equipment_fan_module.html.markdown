@@ -1,24 +1,21 @@
-
 ---
+subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_fan_module"
-sidebar_current: "docs-intersight-data-source-equipment-fan-module"
 description: |-
-This represents Fan module housing multiple fans for chassis/server.
+  This represents Fan module housing multiple fans for chassis/server.
 ---
 
-# Data Source: intersight_equipment._fan_module
+# Data Source: intersight_equipment_fan_module
 This represents Fan module housing multiple fans for chassis/server.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `description`:(string) This field is to provide description for the fan module. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `model`:(string) This field identifies the model of the given component. 
 * `module_id`:(int) This field acts as the identifier for this particular Module, within the Fabric Interconnect. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `oper_state`:(string) This field is used to indicate this fan module's operational state. 
 * `part_number`:(string) This field identifies the Part Number for this Fan Module. 
 * `pid`:(string) This field identifies the Product ID for the fan module. 

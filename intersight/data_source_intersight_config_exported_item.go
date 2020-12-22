@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceConfigExportedItem() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceConfigExportedItemRead,
+		ReadContext: dataSourceConfigExportedItemRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -242,10 +243,11 @@ func dataSourceConfigExportedItem() *schema.Resource {
 	}
 }
 
-func dataSourceConfigExportedItemRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceConfigExportedItemRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.ConfigExportedItem{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -282,25 +284,25 @@ func dataSourceConfigExportedItemRead(d *schema.ResourceData, meta interface{}) 
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of ConfigExportedItem object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.ConfigApi.GetConfigExportedItemList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.ConfigApi.GetConfigExportedItemList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching ConfigExportedItem: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for ConfigExportedItem list: %s", err.Error())
 	}
 	var s = &models.ConfigExportedItemList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to ConfigExportedItem: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to ConfigExportedItem list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for ConfigExportedItem did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -309,57 +311,57 @@ func dataSourceConfigExportedItemRead(d *schema.ResourceData, meta interface{}) 
 			var s = &models.ConfigExportedItem{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 
 			if err := d.Set("exporter", flattenMapConfigExporterRelationship(s.GetExporter(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Exporter: %+v", err)
+				return diag.Errorf("error occurred while setting property Exporter: %s", err.Error())
 			}
 			if err := d.Set("file_name", (s.GetFileName())); err != nil {
-				return fmt.Errorf("error occurred while setting property FileName: %+v", err)
+				return diag.Errorf("error occurred while setting property FileName: %s", err.Error())
 			}
 
 			if err := d.Set("item", flattenMapConfigMoRef(s.GetItem(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Item: %+v", err)
+				return diag.Errorf("error occurred while setting property Item: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("name", (s.GetName())); err != nil {
-				return fmt.Errorf("error occurred while setting property Name: %+v", err)
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 
 			if err := d.Set("parent_item", flattenMapConfigExportedItemRelationship(s.GetParentItem(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property ParentItem: %+v", err)
+				return diag.Errorf("error occurred while setting property ParentItem: %s", err.Error())
 			}
 
 			if err := d.Set("related_items", flattenListConfigExportedItemRelationship(s.GetRelatedItems(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property RelatedItems: %+v", err)
+				return diag.Errorf("error occurred while setting property RelatedItems: %s", err.Error())
 			}
 			if err := d.Set("service_version", (s.GetServiceVersion())); err != nil {
-				return fmt.Errorf("error occurred while setting property ServiceVersion: %+v", err)
+				return diag.Errorf("error occurred while setting property ServiceVersion: %s", err.Error())
 			}
 			if err := d.Set("status", (s.GetStatus())); err != nil {
-				return fmt.Errorf("error occurred while setting property Status: %+v", err)
+				return diag.Errorf("error occurred while setting property Status: %s", err.Error())
 			}
 			if err := d.Set("status_message", (s.GetStatusMessage())); err != nil {
-				return fmt.Errorf("error occurred while setting property StatusMessage: %+v", err)
+				return diag.Errorf("error occurred while setting property StatusMessage: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "resource.Membership"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "resource.Membership"]
-**GroupPermissionRoles** | Pointer to [**[]IamGroupPermissionToRoles**](iam.GroupPermissionToRoles.md) |  | [optional] 
+**GroupPermissionRoles** | Pointer to [**[]IamGroupPermissionToRoles**](IamGroupPermissionToRoles.md) |  | [optional] 
 **TargetApp** | Pointer to **string** | Name of the Service owning the resource. | [optional] [readonly] 
 **Holder** | Pointer to [**ResourceMembershipHolderRelationship**](resource.MembershipHolder.Relationship.md) |  | [optional] 
 **Resource** | Pointer to [**MoBaseMoRelationship**](mo.BaseMo.Relationship.md) |  | [optional] 

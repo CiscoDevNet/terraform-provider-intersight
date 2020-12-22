@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.HxUuIdDt"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.HxUuIdDt"]
-**Links** | Pointer to [**[]HyperflexHxLinkDt**](hyperflex.HxLinkDt.md) |  | [optional] 
-**Uuid** | Pointer to **string** |  | [optional] [readonly] 
+**Links** | Pointer to [**[]HyperflexHxLinkDt**](HyperflexHxLinkDt.md) |  | [optional] 
+**Uuid** | Pointer to **string** | The unique identifier string of an entity. | [optional] [readonly] 
 
 ## Methods
 

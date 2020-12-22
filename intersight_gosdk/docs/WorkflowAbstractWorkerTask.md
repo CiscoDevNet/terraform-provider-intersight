@@ -9,7 +9,8 @@ Name | Type | Description | Notes
 **InputParameters** | Pointer to **interface{}** | JSON formatted map that defines the input given to the task. JSONPath is used for chaining output from previous tasks as inputs into the current task. The format to specify the mapping is &#39;${Source.input/output.JsonPath}&#39;. &#39;Source&#39; can be either workflow or the name of the task within the workflow. You can map the task input to either a workflow input or a task output. Following this is JSON path expression to extract JSON fragment from source&#39;s input/output. | [optional] 
 **OnFailure** | Pointer to **string** | This specifies the name of the next task to run if Task fails.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. | [optional] 
 **OnSuccess** | Pointer to **string** | This specifies the name of the next task to run if Task succeeds.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node. | [optional] 
-**RollbackDisabled** | Pointer to **bool** | The task is disabled/enabled for rollback operation in this workflow if the task has rollback support. | [optional] 
+**RollbackDisabled** | Pointer to **bool** | The task is disabled/enabled for rollback operation in this workflow if the task has rollback support. | [optional] [default to false]
+**UseDefault** | Pointer to **bool** | UseDefault when set to true, means the default version of the task or workflow will be used at the time of execution. When this property is set then version for task or subworkflow cannot be set. When workflow is created or updated the default version of task or subworkflow will be used for validation, but when the workflow is executed the default version that that time will be used for validation and subsequent execution. | [optional] [default to false]
 
 ## Methods
 
@@ -179,6 +180,31 @@ SetRollbackDisabled sets RollbackDisabled field to given value.
 `func (o *WorkflowAbstractWorkerTask) HasRollbackDisabled() bool`
 
 HasRollbackDisabled returns a boolean if a field has been set.
+
+### GetUseDefault
+
+`func (o *WorkflowAbstractWorkerTask) GetUseDefault() bool`
+
+GetUseDefault returns the UseDefault field if non-nil, zero value otherwise.
+
+### GetUseDefaultOk
+
+`func (o *WorkflowAbstractWorkerTask) GetUseDefaultOk() (*bool, bool)`
+
+GetUseDefaultOk returns a tuple with the UseDefault field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUseDefault
+
+`func (o *WorkflowAbstractWorkerTask) SetUseDefault(v bool)`
+
+SetUseDefault sets UseDefault field to given value.
+
+### HasUseDefault
+
+`func (o *WorkflowAbstractWorkerTask) HasUseDefault() bool`
+
+HasUseDefault returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

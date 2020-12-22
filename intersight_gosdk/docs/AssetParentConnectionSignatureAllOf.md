@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **DeviceId** | Pointer to **string** | The moid of the parent device registration. | [optional] 
 **NodeId** | Pointer to **string** | The node identity of the parent device, corresponds to the parents ClusterMember.memberIdentity. Used on connect to establish through which device in a cluster the child is connected through. | [optional] 
 **Signature** | Pointer to **string** | The result of signing the deviceId appended with the timeStamp fields with the devices private key. | [optional] 
-**TimeStamp** | Pointer to [**time.Time**](time.Time.md) | The time at which the signature was generated. Date is accurate to Intersights clock. Used to expire the signature. | [optional] 
+**TimeStamp** | Pointer to **time.Time** | The time at which the signature was generated. Date is accurate to Intersights clock. Used to expire the signature. | [optional] 
 
 ## Methods
 

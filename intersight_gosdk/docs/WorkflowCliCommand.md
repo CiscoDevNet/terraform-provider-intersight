@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "workflow.CliCommand"]
 **Command** | Pointer to **string** | The command to run on the device connector. | [optional] 
 **EndPrompt** | Pointer to **string** | The regex string that identifies the end of the command response. | [optional] 
-**ExpectPrompts** | Pointer to [**[]WorkflowExpectPrompt**](workflow.ExpectPrompt.md) |  | [optional] 
+**ExpectPrompts** | Pointer to [**[]WorkflowExpectPrompt**](WorkflowExpectPrompt.md) |  | [optional] 
 **SkipStatusCheck** | Pointer to **bool** | Skips the execution status check of the terminal command. One use case for this is while exiting the terminal session from esxi host. | [optional] 
 **TerminalEnd** | Pointer to **bool** | If this flag is set, it marks the end of the terminal session where the previous commands were executed. | [optional] 
 **TerminalStart** | Pointer to **bool** | If this flag is set, the execution of this command initiates a terminal session in which the subsequent CLI commands are executed until a command with terminalEnd flag is encountered or the end of the batch. | [optional] 

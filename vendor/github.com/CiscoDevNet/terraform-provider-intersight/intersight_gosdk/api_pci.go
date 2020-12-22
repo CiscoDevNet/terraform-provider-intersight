@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -12,6 +12,7 @@
 package intersight
 
 import (
+	"bytes"
 	_context "context"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
@@ -33,7 +34,7 @@ type ApiGetPciCoprocessorCardByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetPciCoprocessorCardByMoidRequest) Execute() (PciCoprocessorCard, *_nethttp.Response, error) {
+func (r ApiGetPciCoprocessorCardByMoidRequest) Execute() (PciCoprocessorCard, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetPciCoprocessorCardByMoidExecute(r)
 }
 
@@ -55,19 +56,21 @@ func (a *PciApiService) GetPciCoprocessorCardByMoid(ctx _context.Context, moid s
  * Execute executes the request
  * @return PciCoprocessorCard
  */
-func (a *PciApiService) GetPciCoprocessorCardByMoidExecute(r ApiGetPciCoprocessorCardByMoidRequest) (PciCoprocessorCard, *_nethttp.Response, error) {
+func (a *PciApiService) GetPciCoprocessorCardByMoidExecute(r ApiGetPciCoprocessorCardByMoidRequest) (PciCoprocessorCard, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PciCoprocessorCard
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PciApiService.GetPciCoprocessorCardByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/pci/CoprocessorCards/{Moid}"
@@ -96,18 +99,22 @@ func (a *PciApiService) GetPciCoprocessorCardByMoidExecute(r ApiGetPciCoprocesso
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -174,7 +181,7 @@ func (a *PciApiService) GetPciCoprocessorCardByMoidExecute(r ApiGetPciCoprocesso
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetPciCoprocessorCardListRequest struct {
@@ -238,7 +245,7 @@ func (r ApiGetPciCoprocessorCardListRequest) Tags(tags string) ApiGetPciCoproces
 	return r
 }
 
-func (r ApiGetPciCoprocessorCardListRequest) Execute() (PciCoprocessorCardResponse, *_nethttp.Response, error) {
+func (r ApiGetPciCoprocessorCardListRequest) Execute() (PciCoprocessorCardResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetPciCoprocessorCardListExecute(r)
 }
 
@@ -258,19 +265,21 @@ func (a *PciApiService) GetPciCoprocessorCardList(ctx _context.Context) ApiGetPc
  * Execute executes the request
  * @return PciCoprocessorCardResponse
  */
-func (a *PciApiService) GetPciCoprocessorCardListExecute(r ApiGetPciCoprocessorCardListRequest) (PciCoprocessorCardResponse, *_nethttp.Response, error) {
+func (a *PciApiService) GetPciCoprocessorCardListExecute(r ApiGetPciCoprocessorCardListRequest) (PciCoprocessorCardResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PciCoprocessorCardResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PciApiService.GetPciCoprocessorCardList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/pci/CoprocessorCards"
@@ -331,18 +340,22 @@ func (a *PciApiService) GetPciCoprocessorCardListExecute(r ApiGetPciCoprocessorC
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -409,7 +422,7 @@ func (a *PciApiService) GetPciCoprocessorCardListExecute(r ApiGetPciCoprocessorC
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetPciDeviceByMoidRequest struct {
@@ -418,7 +431,7 @@ type ApiGetPciDeviceByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetPciDeviceByMoidRequest) Execute() (PciDevice, *_nethttp.Response, error) {
+func (r ApiGetPciDeviceByMoidRequest) Execute() (PciDevice, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetPciDeviceByMoidExecute(r)
 }
 
@@ -440,19 +453,21 @@ func (a *PciApiService) GetPciDeviceByMoid(ctx _context.Context, moid string) Ap
  * Execute executes the request
  * @return PciDevice
  */
-func (a *PciApiService) GetPciDeviceByMoidExecute(r ApiGetPciDeviceByMoidRequest) (PciDevice, *_nethttp.Response, error) {
+func (a *PciApiService) GetPciDeviceByMoidExecute(r ApiGetPciDeviceByMoidRequest) (PciDevice, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PciDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PciApiService.GetPciDeviceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/pci/Devices/{Moid}"
@@ -481,18 +496,22 @@ func (a *PciApiService) GetPciDeviceByMoidExecute(r ApiGetPciDeviceByMoidRequest
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -559,7 +578,7 @@ func (a *PciApiService) GetPciDeviceByMoidExecute(r ApiGetPciDeviceByMoidRequest
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetPciDeviceListRequest struct {
@@ -623,7 +642,7 @@ func (r ApiGetPciDeviceListRequest) Tags(tags string) ApiGetPciDeviceListRequest
 	return r
 }
 
-func (r ApiGetPciDeviceListRequest) Execute() (PciDeviceResponse, *_nethttp.Response, error) {
+func (r ApiGetPciDeviceListRequest) Execute() (PciDeviceResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetPciDeviceListExecute(r)
 }
 
@@ -643,19 +662,21 @@ func (a *PciApiService) GetPciDeviceList(ctx _context.Context) ApiGetPciDeviceLi
  * Execute executes the request
  * @return PciDeviceResponse
  */
-func (a *PciApiService) GetPciDeviceListExecute(r ApiGetPciDeviceListRequest) (PciDeviceResponse, *_nethttp.Response, error) {
+func (a *PciApiService) GetPciDeviceListExecute(r ApiGetPciDeviceListRequest) (PciDeviceResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PciDeviceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PciApiService.GetPciDeviceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/pci/Devices"
@@ -716,18 +737,22 @@ func (a *PciApiService) GetPciDeviceListExecute(r ApiGetPciDeviceListRequest) (P
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -794,7 +819,7 @@ func (a *PciApiService) GetPciDeviceListExecute(r ApiGetPciDeviceListRequest) (P
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetPciLinkByMoidRequest struct {
@@ -803,7 +828,7 @@ type ApiGetPciLinkByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetPciLinkByMoidRequest) Execute() (PciLink, *_nethttp.Response, error) {
+func (r ApiGetPciLinkByMoidRequest) Execute() (PciLink, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetPciLinkByMoidExecute(r)
 }
 
@@ -825,19 +850,21 @@ func (a *PciApiService) GetPciLinkByMoid(ctx _context.Context, moid string) ApiG
  * Execute executes the request
  * @return PciLink
  */
-func (a *PciApiService) GetPciLinkByMoidExecute(r ApiGetPciLinkByMoidRequest) (PciLink, *_nethttp.Response, error) {
+func (a *PciApiService) GetPciLinkByMoidExecute(r ApiGetPciLinkByMoidRequest) (PciLink, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PciLink
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PciApiService.GetPciLinkByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/pci/Links/{Moid}"
@@ -866,18 +893,22 @@ func (a *PciApiService) GetPciLinkByMoidExecute(r ApiGetPciLinkByMoidRequest) (P
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -944,7 +975,7 @@ func (a *PciApiService) GetPciLinkByMoidExecute(r ApiGetPciLinkByMoidRequest) (P
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetPciLinkListRequest struct {
@@ -1008,7 +1039,7 @@ func (r ApiGetPciLinkListRequest) Tags(tags string) ApiGetPciLinkListRequest {
 	return r
 }
 
-func (r ApiGetPciLinkListRequest) Execute() (PciLinkResponse, *_nethttp.Response, error) {
+func (r ApiGetPciLinkListRequest) Execute() (PciLinkResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetPciLinkListExecute(r)
 }
 
@@ -1028,19 +1059,21 @@ func (a *PciApiService) GetPciLinkList(ctx _context.Context) ApiGetPciLinkListRe
  * Execute executes the request
  * @return PciLinkResponse
  */
-func (a *PciApiService) GetPciLinkListExecute(r ApiGetPciLinkListRequest) (PciLinkResponse, *_nethttp.Response, error) {
+func (a *PciApiService) GetPciLinkListExecute(r ApiGetPciLinkListRequest) (PciLinkResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PciLinkResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PciApiService.GetPciLinkList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/pci/Links"
@@ -1101,18 +1134,22 @@ func (a *PciApiService) GetPciLinkListExecute(r ApiGetPciLinkListRequest) (PciLi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1179,7 +1216,7 @@ func (a *PciApiService) GetPciLinkListExecute(r ApiGetPciLinkListRequest) (PciLi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetPciSwitchByMoidRequest struct {
@@ -1188,7 +1225,7 @@ type ApiGetPciSwitchByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetPciSwitchByMoidRequest) Execute() (PciSwitch, *_nethttp.Response, error) {
+func (r ApiGetPciSwitchByMoidRequest) Execute() (PciSwitch, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetPciSwitchByMoidExecute(r)
 }
 
@@ -1210,19 +1247,21 @@ func (a *PciApiService) GetPciSwitchByMoid(ctx _context.Context, moid string) Ap
  * Execute executes the request
  * @return PciSwitch
  */
-func (a *PciApiService) GetPciSwitchByMoidExecute(r ApiGetPciSwitchByMoidRequest) (PciSwitch, *_nethttp.Response, error) {
+func (a *PciApiService) GetPciSwitchByMoidExecute(r ApiGetPciSwitchByMoidRequest) (PciSwitch, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PciSwitch
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PciApiService.GetPciSwitchByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/pci/Switches/{Moid}"
@@ -1251,18 +1290,22 @@ func (a *PciApiService) GetPciSwitchByMoidExecute(r ApiGetPciSwitchByMoidRequest
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1329,7 +1372,7 @@ func (a *PciApiService) GetPciSwitchByMoidExecute(r ApiGetPciSwitchByMoidRequest
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetPciSwitchListRequest struct {
@@ -1393,7 +1436,7 @@ func (r ApiGetPciSwitchListRequest) Tags(tags string) ApiGetPciSwitchListRequest
 	return r
 }
 
-func (r ApiGetPciSwitchListRequest) Execute() (PciSwitchResponse, *_nethttp.Response, error) {
+func (r ApiGetPciSwitchListRequest) Execute() (PciSwitchResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetPciSwitchListExecute(r)
 }
 
@@ -1413,19 +1456,21 @@ func (a *PciApiService) GetPciSwitchList(ctx _context.Context) ApiGetPciSwitchLi
  * Execute executes the request
  * @return PciSwitchResponse
  */
-func (a *PciApiService) GetPciSwitchListExecute(r ApiGetPciSwitchListRequest) (PciSwitchResponse, *_nethttp.Response, error) {
+func (a *PciApiService) GetPciSwitchListExecute(r ApiGetPciSwitchListRequest) (PciSwitchResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PciSwitchResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PciApiService.GetPciSwitchList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/pci/Switches"
@@ -1486,18 +1531,22 @@ func (a *PciApiService) GetPciSwitchListExecute(r ApiGetPciSwitchListRequest) (P
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1564,7 +1613,7 @@ func (a *PciApiService) GetPciSwitchListExecute(r ApiGetPciSwitchListRequest) (P
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchPciDeviceRequest struct {
@@ -1584,7 +1633,7 @@ func (r ApiPatchPciDeviceRequest) IfMatch(ifMatch string) ApiPatchPciDeviceReque
 	return r
 }
 
-func (r ApiPatchPciDeviceRequest) Execute() (PciDevice, *_nethttp.Response, error) {
+func (r ApiPatchPciDeviceRequest) Execute() (PciDevice, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchPciDeviceExecute(r)
 }
 
@@ -1606,19 +1655,21 @@ func (a *PciApiService) PatchPciDevice(ctx _context.Context, moid string) ApiPat
  * Execute executes the request
  * @return PciDevice
  */
-func (a *PciApiService) PatchPciDeviceExecute(r ApiPatchPciDeviceRequest) (PciDevice, *_nethttp.Response, error) {
+func (a *PciApiService) PatchPciDeviceExecute(r ApiPatchPciDeviceRequest) (PciDevice, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PciDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PciApiService.PatchPciDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/pci/Devices/{Moid}"
@@ -1628,7 +1679,8 @@ func (a *PciApiService) PatchPciDeviceExecute(r ApiPatchPciDeviceRequest) (PciDe
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.pciDevice == nil {
-		return localVarReturnValue, nil, reportError("pciDevice is required and must be specified")
+		executionError.error = "pciDevice is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -1655,18 +1707,22 @@ func (a *PciApiService) PatchPciDeviceExecute(r ApiPatchPciDeviceRequest) (PciDe
 	localVarPostBody = r.pciDevice
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1733,7 +1789,7 @@ func (a *PciApiService) PatchPciDeviceExecute(r ApiPatchPciDeviceRequest) (PciDe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchPciLinkRequest struct {
@@ -1753,7 +1809,7 @@ func (r ApiPatchPciLinkRequest) IfMatch(ifMatch string) ApiPatchPciLinkRequest {
 	return r
 }
 
-func (r ApiPatchPciLinkRequest) Execute() (PciLink, *_nethttp.Response, error) {
+func (r ApiPatchPciLinkRequest) Execute() (PciLink, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchPciLinkExecute(r)
 }
 
@@ -1775,19 +1831,21 @@ func (a *PciApiService) PatchPciLink(ctx _context.Context, moid string) ApiPatch
  * Execute executes the request
  * @return PciLink
  */
-func (a *PciApiService) PatchPciLinkExecute(r ApiPatchPciLinkRequest) (PciLink, *_nethttp.Response, error) {
+func (a *PciApiService) PatchPciLinkExecute(r ApiPatchPciLinkRequest) (PciLink, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PciLink
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PciApiService.PatchPciLink")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/pci/Links/{Moid}"
@@ -1797,7 +1855,8 @@ func (a *PciApiService) PatchPciLinkExecute(r ApiPatchPciLinkRequest) (PciLink, 
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.pciLink == nil {
-		return localVarReturnValue, nil, reportError("pciLink is required and must be specified")
+		executionError.error = "pciLink is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -1824,18 +1883,22 @@ func (a *PciApiService) PatchPciLinkExecute(r ApiPatchPciLinkRequest) (PciLink, 
 	localVarPostBody = r.pciLink
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1902,7 +1965,7 @@ func (a *PciApiService) PatchPciLinkExecute(r ApiPatchPciLinkRequest) (PciLink, 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchPciSwitchRequest struct {
@@ -1922,7 +1985,7 @@ func (r ApiPatchPciSwitchRequest) IfMatch(ifMatch string) ApiPatchPciSwitchReque
 	return r
 }
 
-func (r ApiPatchPciSwitchRequest) Execute() (PciSwitch, *_nethttp.Response, error) {
+func (r ApiPatchPciSwitchRequest) Execute() (PciSwitch, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchPciSwitchExecute(r)
 }
 
@@ -1944,19 +2007,21 @@ func (a *PciApiService) PatchPciSwitch(ctx _context.Context, moid string) ApiPat
  * Execute executes the request
  * @return PciSwitch
  */
-func (a *PciApiService) PatchPciSwitchExecute(r ApiPatchPciSwitchRequest) (PciSwitch, *_nethttp.Response, error) {
+func (a *PciApiService) PatchPciSwitchExecute(r ApiPatchPciSwitchRequest) (PciSwitch, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PciSwitch
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PciApiService.PatchPciSwitch")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/pci/Switches/{Moid}"
@@ -1966,7 +2031,8 @@ func (a *PciApiService) PatchPciSwitchExecute(r ApiPatchPciSwitchRequest) (PciSw
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.pciSwitch == nil {
-		return localVarReturnValue, nil, reportError("pciSwitch is required and must be specified")
+		executionError.error = "pciSwitch is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -1993,18 +2059,22 @@ func (a *PciApiService) PatchPciSwitchExecute(r ApiPatchPciSwitchRequest) (PciSw
 	localVarPostBody = r.pciSwitch
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2071,7 +2141,7 @@ func (a *PciApiService) PatchPciSwitchExecute(r ApiPatchPciSwitchRequest) (PciSw
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdatePciDeviceRequest struct {
@@ -2091,7 +2161,7 @@ func (r ApiUpdatePciDeviceRequest) IfMatch(ifMatch string) ApiUpdatePciDeviceReq
 	return r
 }
 
-func (r ApiUpdatePciDeviceRequest) Execute() (PciDevice, *_nethttp.Response, error) {
+func (r ApiUpdatePciDeviceRequest) Execute() (PciDevice, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdatePciDeviceExecute(r)
 }
 
@@ -2113,19 +2183,21 @@ func (a *PciApiService) UpdatePciDevice(ctx _context.Context, moid string) ApiUp
  * Execute executes the request
  * @return PciDevice
  */
-func (a *PciApiService) UpdatePciDeviceExecute(r ApiUpdatePciDeviceRequest) (PciDevice, *_nethttp.Response, error) {
+func (a *PciApiService) UpdatePciDeviceExecute(r ApiUpdatePciDeviceRequest) (PciDevice, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PciDevice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PciApiService.UpdatePciDevice")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/pci/Devices/{Moid}"
@@ -2135,7 +2207,8 @@ func (a *PciApiService) UpdatePciDeviceExecute(r ApiUpdatePciDeviceRequest) (Pci
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.pciDevice == nil {
-		return localVarReturnValue, nil, reportError("pciDevice is required and must be specified")
+		executionError.error = "pciDevice is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -2162,18 +2235,22 @@ func (a *PciApiService) UpdatePciDeviceExecute(r ApiUpdatePciDeviceRequest) (Pci
 	localVarPostBody = r.pciDevice
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2240,7 +2317,7 @@ func (a *PciApiService) UpdatePciDeviceExecute(r ApiUpdatePciDeviceRequest) (Pci
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdatePciLinkRequest struct {
@@ -2260,7 +2337,7 @@ func (r ApiUpdatePciLinkRequest) IfMatch(ifMatch string) ApiUpdatePciLinkRequest
 	return r
 }
 
-func (r ApiUpdatePciLinkRequest) Execute() (PciLink, *_nethttp.Response, error) {
+func (r ApiUpdatePciLinkRequest) Execute() (PciLink, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdatePciLinkExecute(r)
 }
 
@@ -2282,19 +2359,21 @@ func (a *PciApiService) UpdatePciLink(ctx _context.Context, moid string) ApiUpda
  * Execute executes the request
  * @return PciLink
  */
-func (a *PciApiService) UpdatePciLinkExecute(r ApiUpdatePciLinkRequest) (PciLink, *_nethttp.Response, error) {
+func (a *PciApiService) UpdatePciLinkExecute(r ApiUpdatePciLinkRequest) (PciLink, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PciLink
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PciApiService.UpdatePciLink")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/pci/Links/{Moid}"
@@ -2304,7 +2383,8 @@ func (a *PciApiService) UpdatePciLinkExecute(r ApiUpdatePciLinkRequest) (PciLink
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.pciLink == nil {
-		return localVarReturnValue, nil, reportError("pciLink is required and must be specified")
+		executionError.error = "pciLink is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -2331,18 +2411,22 @@ func (a *PciApiService) UpdatePciLinkExecute(r ApiUpdatePciLinkRequest) (PciLink
 	localVarPostBody = r.pciLink
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2409,7 +2493,7 @@ func (a *PciApiService) UpdatePciLinkExecute(r ApiUpdatePciLinkRequest) (PciLink
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdatePciSwitchRequest struct {
@@ -2429,7 +2513,7 @@ func (r ApiUpdatePciSwitchRequest) IfMatch(ifMatch string) ApiUpdatePciSwitchReq
 	return r
 }
 
-func (r ApiUpdatePciSwitchRequest) Execute() (PciSwitch, *_nethttp.Response, error) {
+func (r ApiUpdatePciSwitchRequest) Execute() (PciSwitch, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdatePciSwitchExecute(r)
 }
 
@@ -2451,19 +2535,21 @@ func (a *PciApiService) UpdatePciSwitch(ctx _context.Context, moid string) ApiUp
  * Execute executes the request
  * @return PciSwitch
  */
-func (a *PciApiService) UpdatePciSwitchExecute(r ApiUpdatePciSwitchRequest) (PciSwitch, *_nethttp.Response, error) {
+func (a *PciApiService) UpdatePciSwitchExecute(r ApiUpdatePciSwitchRequest) (PciSwitch, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  PciSwitch
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PciApiService.UpdatePciSwitch")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/pci/Switches/{Moid}"
@@ -2473,7 +2559,8 @@ func (a *PciApiService) UpdatePciSwitchExecute(r ApiUpdatePciSwitchRequest) (Pci
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.pciSwitch == nil {
-		return localVarReturnValue, nil, reportError("pciSwitch is required and must be specified")
+		executionError.error = "pciSwitch is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -2500,18 +2587,22 @@ func (a *PciApiService) UpdatePciSwitchExecute(r ApiUpdatePciSwitchRequest) (Pci
 	localVarPostBody = r.pciSwitch
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2578,5 +2669,5 @@ func (a *PciApiService) UpdatePciSwitchExecute(r ApiUpdatePciSwitchRequest) (Pci
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }

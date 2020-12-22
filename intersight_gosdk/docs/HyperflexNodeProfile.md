@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.NodeProfile"]
 **HxdpDataIp** | Pointer to **string** | IP address for storage data network (Controller VM interface). | [optional] 
 **HxdpMgmtIp** | Pointer to **string** | IP address for HyperFlex management network. | [optional] 
+**HypervisorControlIp** | Pointer to **string** | IP address for hypervisor control such as VM migration or pod management. | [optional] 
 **HypervisorDataIp** | Pointer to **string** | IP address for storage data network (Hypervisor interface). | [optional] 
 **HypervisorMgmtIp** | Pointer to **string** | IP address for Hypervisor management network. | [optional] 
 **AssignedServer** | Pointer to [**ComputeRackUnitRelationship**](compute.RackUnit.Relationship.md) |  | [optional] 
@@ -121,6 +122,31 @@ SetHxdpMgmtIp sets HxdpMgmtIp field to given value.
 `func (o *HyperflexNodeProfile) HasHxdpMgmtIp() bool`
 
 HasHxdpMgmtIp returns a boolean if a field has been set.
+
+### GetHypervisorControlIp
+
+`func (o *HyperflexNodeProfile) GetHypervisorControlIp() string`
+
+GetHypervisorControlIp returns the HypervisorControlIp field if non-nil, zero value otherwise.
+
+### GetHypervisorControlIpOk
+
+`func (o *HyperflexNodeProfile) GetHypervisorControlIpOk() (*string, bool)`
+
+GetHypervisorControlIpOk returns a tuple with the HypervisorControlIp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHypervisorControlIp
+
+`func (o *HyperflexNodeProfile) SetHypervisorControlIp(v string)`
+
+SetHypervisorControlIp sets HypervisorControlIp field to given value.
+
+### HasHypervisorControlIp
+
+`func (o *HyperflexNodeProfile) HasHypervisorControlIp() bool`
+
+HasHypervisorControlIp returns a boolean if a field has been set.
 
 ### GetHypervisorDataIp
 

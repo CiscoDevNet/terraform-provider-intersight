@@ -1,13 +1,12 @@
-
 ---
+subcategory: "tam"
 layout: "intersight"
 page_title: "Intersight: intersight_tam_advisory_info"
-sidebar_current: "docs-intersight-resource-tam-advisory-info"
 description: |-
   State of an advisory in the context of a given account. Used to capture a given account's preferences regarding  associated advisory.
 ---
 
-# Resource: intersight_tam._advisory_info
+# Resource: intersight_tam_advisory_info
 State of an advisory in the context of a given account. Used to capture a given account's preferences regarding  associated advisory.
 ## Argument Reference
 The following arguments are supported:
@@ -39,3 +38,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_tam_advisory_info` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_tam_advisory_info.example 1234567890987654321abcde
+```

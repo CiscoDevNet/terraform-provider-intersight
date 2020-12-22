@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceIamIdp() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceIamIdpCreate,
-		Read:   resourceIamIdpRead,
-		Update: resourceIamIdpUpdate,
-		Delete: resourceIamIdpDelete,
+		CreateContext: resourceIamIdpCreate,
+		ReadContext:   resourceIamIdpRead,
+		UpdateContext: resourceIamIdpUpdate,
+		DeleteContext: resourceIamIdpDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"account": {
 				Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -63,7 +66,7 @@ func resourceIamIdp() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -71,6 +74,11 @@ func resourceIamIdp() *schema.Resource {
 			"domain_name": {
 				Description: "Email domain name of the user for this IdP. When a user enters an email during login in the Intersight home page, the IdP is picked by matching this domain name with the email domain name for authentication.",
 				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"enable_single_logout": {
+				Description: "Setting that indicates whether 'Single Logout (SLO)' has been enabled for this IdP.",
+				Type:        schema.TypeBool,
 				Optional:    true,
 			},
 			"idp_entity_id": {
@@ -138,7 +146,7 @@ func resourceIamIdp() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -337,7 +345,7 @@ func resourceIamIdp() *schema.Resource {
 	}
 }
 
-func resourceIamIdpCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceIamIdpCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -399,6 +407,11 @@ func resourceIamIdpCreate(d *schema.ResourceData, meta interface{}) error {
 	if v, ok := d.GetOk("domain_name"); ok {
 		x := (v.(string))
 		o.SetDomainName(x)
+	}
+
+	if v, ok := d.GetOkExists("enable_single_logout"); ok {
+		x := v.(bool)
+		o.SetEnableSingleLogout(x)
 	}
 
 	if v, ok := d.GetOk("idp_entity_id"); ok {
@@ -676,97 +689,105 @@ func resourceIamIdpCreate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	r := conn.ApiClient.IamApi.CreateIamIdp(conn.ctx).IamIdp(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating IamIdp: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceIamIdpRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceIamIdpRead(c, d, meta)
 }
 
-func resourceIamIdpRead(d *schema.ResourceData, meta interface{}) error {
+func resourceIamIdpRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.IamApi.GetIamIdpByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "IamIdp object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching IamIdp: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("account", flattenMapIamAccountRelationship(s.GetAccount(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Account: %+v", err)
+		return diag.Errorf("error occurred while setting property Account in IamIdp object: %s", err.Error())
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in IamIdp object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in IamIdp object: %s", err.Error())
 	}
 
 	if err := d.Set("domain_name", (s.GetDomainName())); err != nil {
-		return fmt.Errorf("error occurred while setting property DomainName: %+v", err)
+		return diag.Errorf("error occurred while setting property DomainName in IamIdp object: %s", err.Error())
+	}
+
+	if err := d.Set("enable_single_logout", (s.GetEnableSingleLogout())); err != nil {
+		return diag.Errorf("error occurred while setting property EnableSingleLogout in IamIdp object: %s", err.Error())
 	}
 
 	if err := d.Set("idp_entity_id", (s.GetIdpEntityId())); err != nil {
-		return fmt.Errorf("error occurred while setting property IdpEntityId: %+v", err)
+		return diag.Errorf("error occurred while setting property IdpEntityId in IamIdp object: %s", err.Error())
 	}
 
 	if err := d.Set("ldap_policy", flattenMapIamLdapPolicyRelationship(s.GetLdapPolicy(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property LdapPolicy: %+v", err)
+		return diag.Errorf("error occurred while setting property LdapPolicy in IamIdp object: %s", err.Error())
 	}
 
 	if err := d.Set("metadata", (s.GetMetadata())); err != nil {
-		return fmt.Errorf("error occurred while setting property Metadata: %+v", err)
+		return diag.Errorf("error occurred while setting property Metadata in IamIdp object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in IamIdp object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in IamIdp object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in IamIdp object: %s", err.Error())
 	}
 
 	if err := d.Set("system", flattenMapIamSystemRelationship(s.GetSystem(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property System: %+v", err)
+		return diag.Errorf("error occurred while setting property System in IamIdp object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in IamIdp object: %s", err.Error())
 	}
 
 	if err := d.Set("type", (s.GetType())); err != nil {
-		return fmt.Errorf("error occurred while setting property Type: %+v", err)
+		return diag.Errorf("error occurred while setting property Type in IamIdp object: %s", err.Error())
 	}
 
 	if err := d.Set("user_preferences", flattenListIamUserPreferenceRelationship(s.GetUserPreferences(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property UserPreferences: %+v", err)
+		return diag.Errorf("error occurred while setting property UserPreferences in IamIdp object: %s", err.Error())
 	}
 
 	if err := d.Set("usergroups", flattenListIamUserGroupRelationship(s.GetUsergroups(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Usergroups: %+v", err)
+		return diag.Errorf("error occurred while setting property Usergroups in IamIdp object: %s", err.Error())
 	}
 
 	if err := d.Set("users", flattenListIamUserRelationship(s.GetUsers(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Users: %+v", err)
+		return diag.Errorf("error occurred while setting property Users in IamIdp object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceIamIdpUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceIamIdpUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -831,6 +852,12 @@ func resourceIamIdpUpdate(d *schema.ResourceData, meta interface{}) error {
 		v := d.Get("domain_name")
 		x := (v.(string))
 		o.SetDomainName(x)
+	}
+
+	if d.HasChange("enable_single_logout") {
+		v := d.Get("enable_single_logout")
+		x := (v.(bool))
+		o.SetEnableSingleLogout(x)
 	}
 
 	if d.HasChange("idp_entity_id") {
@@ -1119,23 +1146,24 @@ func resourceIamIdpUpdate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	r := conn.ApiClient.IamApi.UpdateIamIdp(conn.ctx, d.Id()).IamIdp(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating IamIdp: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamIdpRead(d, meta)
+	return resourceIamIdpRead(c, d, meta)
 }
 
-func resourceIamIdpDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceIamIdpDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamIdp(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting IamIdp object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

@@ -1,13 +1,12 @@
-
 ---
+subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_hxap_datacenter"
-sidebar_current: "docs-intersight-resource-hyperflex-hxap-datacenter"
 description: |-
   A datacenter object in HyperFlex Application Platform. It is a pre-defined object created internally by the system which acts as a container (logically) for all other objects (Host, VirtualMachine, Volume etc).
 ---
 
-# Resource: intersight_hyperflex._hxap_datacenter
+# Resource: intersight_hyperflex_hxap_datacenter
 A datacenter object in HyperFlex Application Platform. It is a pre-defined object created internally by the system which acts as a container (logically) for all other objects (Host, VirtualMachine, Volume etc).
 ## Argument Reference
 The following arguments are supported:
@@ -48,3 +47,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_hyperflex_hxap_datacenter` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_hyperflex_hxap_datacenter.example 1234567890987654321abcde
+```

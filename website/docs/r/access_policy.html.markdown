@@ -1,14 +1,13 @@
-
 ---
+subcategory: "access"
 layout: "intersight"
 page_title: "Intersight: intersight_access_policy"
-sidebar_current: "docs-intersight-resource-access-policy"
 description: |-
-  Policy to configure server management options via CIMC.
+  Policy to configure server or chassis management options.
 ---
 
-# Resource: intersight_access._policy
-Policy to configure server management options via CIMC.
+# Resource: intersight_access_policy
+Policy to configure server or chassis management options.
 ## Argument Reference
 The following arguments are supported:
 * `additional_properties`:
@@ -65,3 +64,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_access_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_access_policy.example 1234567890987654321abcde
+```

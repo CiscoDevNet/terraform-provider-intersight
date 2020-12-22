@@ -1,19 +1,20 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceApplianceSetupInfo() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceApplianceSetupInfoRead,
+		ReadContext: dataSourceApplianceSetupInfoRead,
 		Schema: map[string]*schema.Schema{
 			"account": {
 				Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -103,7 +104,7 @@ func dataSourceApplianceSetupInfo() *schema.Resource {
 				Computed: true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -132,7 +133,7 @@ func dataSourceApplianceSetupInfo() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -175,10 +176,11 @@ func dataSourceApplianceSetupInfo() *schema.Resource {
 	}
 }
 
-func dataSourceApplianceSetupInfoRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceApplianceSetupInfoRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.ApplianceSetupInfo{}
 	if v, ok := d.GetOk("build_type"); ok {
 		x := (v.(string))
@@ -215,25 +217,25 @@ func dataSourceApplianceSetupInfoRead(d *schema.ResourceData, meta interface{}) 
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of ApplianceSetupInfo object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.ApplianceApi.GetApplianceSetupInfoList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.ApplianceApi.GetApplianceSetupInfoList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching ApplianceSetupInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for ApplianceSetupInfo list: %s", err.Error())
 	}
 	var s = &models.ApplianceSetupInfoList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to ApplianceSetupInfo: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to ApplianceSetupInfo list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for ApplianceSetupInfo did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -242,54 +244,54 @@ func dataSourceApplianceSetupInfoRead(d *schema.ResourceData, meta interface{}) 
 			var s = &models.ApplianceSetupInfo{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 
 			if err := d.Set("account", flattenMapIamAccountRelationship(s.GetAccount(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Account: %+v", err)
+				return diag.Errorf("error occurred while setting property Account: %s", err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("build_type", (s.GetBuildType())); err != nil {
-				return fmt.Errorf("error occurred while setting property BuildType: %+v", err)
+				return diag.Errorf("error occurred while setting property BuildType: %s", err.Error())
 			}
 
 			if err := d.Set("capabilities", flattenListApplianceKeyValuePair(s.GetCapabilities(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Capabilities: %+v", err)
+				return diag.Errorf("error occurred while setting property Capabilities: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("cloud_url", (s.GetCloudUrl())); err != nil {
-				return fmt.Errorf("error occurred while setting property CloudUrl: %+v", err)
+				return diag.Errorf("error occurred while setting property CloudUrl: %s", err.Error())
 			}
 			if err := d.Set("deployment_mode", (s.GetDeploymentMode())); err != nil {
-				return fmt.Errorf("error occurred while setting property DeploymentMode: %+v", err)
+				return diag.Errorf("error occurred while setting property DeploymentMode: %s", err.Error())
 			}
 
 			if err := d.Set("end_time", (s.GetEndTime()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property EndTime: %+v", err)
+				return diag.Errorf("error occurred while setting property EndTime: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("setup_states", (s.GetSetupStates())); err != nil {
-				return fmt.Errorf("error occurred while setting property SetupStates: %+v", err)
+				return diag.Errorf("error occurred while setting property SetupStates: %s", err.Error())
 			}
 
 			if err := d.Set("start_time", (s.GetStartTime()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property StartTime: %+v", err)
+				return diag.Errorf("error occurred while setting property StartTime: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

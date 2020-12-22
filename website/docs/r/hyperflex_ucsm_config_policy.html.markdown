@@ -1,13 +1,12 @@
-
 ---
+subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_ucsm_config_policy"
-sidebar_current: "docs-intersight-resource-hyperflex-ucsm-config-policy"
 description: |-
   A policy specifying UCS Manager settings such as service profile org, KVM IP addresses, and MAC prefix for server configuration in Fabric Interconnect environment.
 ---
 
-# Resource: intersight_hyperflex._ucsm_config_policy
+# Resource: intersight_hyperflex_ucsm_config_policy
 A policy specifying UCS Manager settings such as service profile org, KVM IP addresses, and MAC prefix for server configuration in Fabric Interconnect environment.
 ## Argument Reference
 The following arguments are supported:
@@ -31,7 +30,7 @@ This complex property has following sub-properties:
   + `end_addr`:(string) The end IPv4 address of the range. 
   + `gateway`:(string) The default gateway for the start and end IPv4 addresses. 
   + `netmask`:(string) The netmask specified in dot decimal notation.The start address, end address, and gateway must all be within the network specified by this netmask. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `start_addr`:(string) The start IPv4 address of the range. 
 * `mac_prefix_range`:(Array with Maximum of one item) - The MAC address prefix range for configuring vNICs.Configures the service profiles to use MAC address prefixes within this range for setting the MAC address of server vNICs. 
 This complex property has following sub-properties:
@@ -43,7 +42,7 @@ This complex property has following sub-properties:
   + `start_addr`:(string) The start MAC address prefix of a MAC address prefix range in the form of 00:25:B5:XX. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the concrete policy. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `organization`:(Array with Maximum of one item) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `additional_properties`:
@@ -59,3 +58,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_hyperflex_ucsm_config_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_hyperflex_ucsm_config_policy.example 1234567890987654321abcde
+```

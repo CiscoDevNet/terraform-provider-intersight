@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "niaapi.NiaMetadata"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "niaapi.NiaMetadata"]
-**Content** | Pointer to [**[]NiaapiDetail**](niaapi.Detail.md) |  | [optional] 
-**Date** | Pointer to [**time.Time**](time.Time.md) | The date when this package is generated. | [optional] 
+**Content** | Pointer to [**[]NiaapiDetail**](NiaapiDetail.md) |  | [optional] 
+**Date** | Pointer to **time.Time** | The date when this package is generated. | [optional] 
 **MetadataChksum** | Pointer to **string** | Chksum used to check the integrity of the Metadata file downloaded. | [optional] 
 **MetadataFilename** | Pointer to **string** | The Filename of this Metadata package. | [optional] 
 **Version** | Pointer to **int64** | The version number of the Metadata package. | [optional] 

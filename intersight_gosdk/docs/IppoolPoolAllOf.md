@@ -6,16 +6,16 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "ippool.Pool"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "ippool.Pool"]
-**IpV4Blocks** | Pointer to [**[]IppoolIpV4Block**](ippool.IpV4Block.md) |  | [optional] 
+**IpV4Blocks** | Pointer to [**[]IppoolIpV4Block**](IppoolIpV4Block.md) |  | [optional] 
 **IpV4Config** | Pointer to [**NullableIppoolIpV4Config**](ippool.IpV4Config.md) |  | [optional] 
-**IpV6Blocks** | Pointer to [**[]IppoolIpV6Block**](ippool.IpV6Block.md) |  | [optional] 
+**IpV6Blocks** | Pointer to [**[]IppoolIpV6Block**](IppoolIpV6Block.md) |  | [optional] 
 **IpV6Config** | Pointer to [**NullableIppoolIpV6Config**](ippool.IpV6Config.md) |  | [optional] 
 **V4Assigned** | Pointer to **int64** | Number of IPv4 addresses currently in use. | [optional] [readonly] 
 **V4Size** | Pointer to **int64** | Number of IPv4 addresses in this pool. | [optional] [readonly] 
 **V6Assigned** | Pointer to **int64** | Number of IPv6 addresses currently in use. | [optional] [readonly] 
 **V6Size** | Pointer to **int64** | Number of IPv6 addresses in this pool. | [optional] [readonly] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
-**ShadowPools** | Pointer to [**[]IppoolShadowPoolRelationship**](ippool.ShadowPool.Relationship.md) | An array of relationships to ippoolShadowPool resources. | [optional] [readonly] 
+**ShadowPools** | Pointer to [**[]IppoolShadowPoolRelationship**](IppoolShadowPoolRelationship.md) | An array of relationships to ippoolShadowPool resources. | [optional] [readonly] 
 
 ## Methods
 

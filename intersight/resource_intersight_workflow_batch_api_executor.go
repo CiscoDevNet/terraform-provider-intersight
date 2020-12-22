@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceWorkflowBatchApiExecutor() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceWorkflowBatchApiExecutorCreate,
-		Read:   resourceWorkflowBatchApiExecutorRead,
-		Update: resourceWorkflowBatchApiExecutorUpdate,
-		Delete: resourceWorkflowBatchApiExecutorDelete,
+		CreateContext: resourceWorkflowBatchApiExecutorCreate,
+		ReadContext:   resourceWorkflowBatchApiExecutorRead,
+		UpdateContext: resourceWorkflowBatchApiExecutorUpdate,
+		DeleteContext: resourceWorkflowBatchApiExecutorDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -209,7 +212,7 @@ func resourceWorkflowBatchApiExecutor() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -307,7 +310,7 @@ func resourceWorkflowBatchApiExecutor() *schema.Resource {
 	}
 }
 
-func resourceWorkflowBatchApiExecutorCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceWorkflowBatchApiExecutorCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -615,93 +618,97 @@ func resourceWorkflowBatchApiExecutorCreate(d *schema.ResourceData, meta interfa
 	}
 
 	r := conn.ApiClient.WorkflowApi.CreateWorkflowBatchApiExecutor(conn.ctx).WorkflowBatchApiExecutor(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating WorkflowBatchApiExecutor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceWorkflowBatchApiExecutorRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceWorkflowBatchApiExecutorRead(c, d, meta)
 }
 
-func resourceWorkflowBatchApiExecutorRead(d *schema.ResourceData, meta interface{}) error {
+func resourceWorkflowBatchApiExecutorRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.WorkflowApi.GetWorkflowBatchApiExecutorByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "WorkflowBatchApiExecutor object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching WorkflowBatchApiExecutor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in WorkflowBatchApiExecutor object: %s", err.Error())
 	}
 
 	if err := d.Set("batch", flattenListWorkflowApi(s.GetBatch(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Batch: %+v", err)
+		return diag.Errorf("error occurred while setting property Batch in WorkflowBatchApiExecutor object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in WorkflowBatchApiExecutor object: %s", err.Error())
 	}
 
 	if err := d.Set("constraints", flattenMapWorkflowTaskConstraints(s.GetConstraints(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Constraints: %+v", err)
+		return diag.Errorf("error occurred while setting property Constraints in WorkflowBatchApiExecutor object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in WorkflowBatchApiExecutor object: %s", err.Error())
 	}
 
 	if err := d.Set("error_response_handler", flattenMapWorkflowErrorResponseHandlerRelationship(s.GetErrorResponseHandler(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ErrorResponseHandler: %+v", err)
+		return diag.Errorf("error occurred while setting property ErrorResponseHandler in WorkflowBatchApiExecutor object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in WorkflowBatchApiExecutor object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in WorkflowBatchApiExecutor object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in WorkflowBatchApiExecutor object: %s", err.Error())
 	}
 
 	if err := d.Set("outcomes", (s.GetOutcomes())); err != nil {
-		return fmt.Errorf("error occurred while setting property Outcomes: %+v", err)
+		return diag.Errorf("error occurred while setting property Outcomes in WorkflowBatchApiExecutor object: %s", err.Error())
 	}
 
 	if err := d.Set("output", (s.GetOutput())); err != nil {
-		return fmt.Errorf("error occurred while setting property Output: %+v", err)
+		return diag.Errorf("error occurred while setting property Output in WorkflowBatchApiExecutor object: %s", err.Error())
 	}
 
 	if err := d.Set("retry_from_failed_api", (s.GetRetryFromFailedApi())); err != nil {
-		return fmt.Errorf("error occurred while setting property RetryFromFailedApi: %+v", err)
+		return diag.Errorf("error occurred while setting property RetryFromFailedApi in WorkflowBatchApiExecutor object: %s", err.Error())
 	}
 
 	if err := d.Set("skip_on_condition", (s.GetSkipOnCondition())); err != nil {
-		return fmt.Errorf("error occurred while setting property SkipOnCondition: %+v", err)
+		return diag.Errorf("error occurred while setting property SkipOnCondition in WorkflowBatchApiExecutor object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in WorkflowBatchApiExecutor object: %s", err.Error())
 	}
 
 	if err := d.Set("task_definition", flattenMapWorkflowTaskDefinitionRelationship(s.GetTaskDefinition(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property TaskDefinition: %+v", err)
+		return diag.Errorf("error occurred while setting property TaskDefinition in WorkflowBatchApiExecutor object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceWorkflowBatchApiExecutorUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceWorkflowBatchApiExecutorUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1022,23 +1029,24 @@ func resourceWorkflowBatchApiExecutorUpdate(d *schema.ResourceData, meta interfa
 	}
 
 	r := conn.ApiClient.WorkflowApi.UpdateWorkflowBatchApiExecutor(conn.ctx, d.Id()).WorkflowBatchApiExecutor(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating WorkflowBatchApiExecutor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceWorkflowBatchApiExecutorRead(d, meta)
+	return resourceWorkflowBatchApiExecutorRead(c, d, meta)
 }
 
-func resourceWorkflowBatchApiExecutorDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceWorkflowBatchApiExecutorDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.WorkflowApi.DeleteWorkflowBatchApiExecutor(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting WorkflowBatchApiExecutor object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

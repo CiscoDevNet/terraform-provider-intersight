@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -12,6 +12,7 @@
 package intersight
 
 import (
+	"bytes"
 	_context "context"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
@@ -33,7 +34,7 @@ type ApiDeleteComputeBladeIdentityRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteComputeBladeIdentityRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteComputeBladeIdentityRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteComputeBladeIdentityExecute(r)
 }
 
@@ -54,18 +55,20 @@ func (a *ComputeApiService) DeleteComputeBladeIdentity(ctx _context.Context, moi
 /*
  * Execute executes the request
  */
-func (a *ComputeApiService) DeleteComputeBladeIdentityExecute(r ApiDeleteComputeBladeIdentityRequest) (*_nethttp.Response, error) {
+func (a *ComputeApiService) DeleteComputeBladeIdentityExecute(r ApiDeleteComputeBladeIdentityRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.DeleteComputeBladeIdentity")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/BladeIdentities/{Moid}"
@@ -94,18 +97,22 @@ func (a *ComputeApiService) DeleteComputeBladeIdentityExecute(r ApiDeleteCompute
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -163,7 +170,7 @@ func (a *ComputeApiService) DeleteComputeBladeIdentityExecute(r ApiDeleteCompute
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteComputeRackUnitIdentityRequest struct {
@@ -172,7 +179,7 @@ type ApiDeleteComputeRackUnitIdentityRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteComputeRackUnitIdentityRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteComputeRackUnitIdentityRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteComputeRackUnitIdentityExecute(r)
 }
 
@@ -193,18 +200,20 @@ func (a *ComputeApiService) DeleteComputeRackUnitIdentity(ctx _context.Context, 
 /*
  * Execute executes the request
  */
-func (a *ComputeApiService) DeleteComputeRackUnitIdentityExecute(r ApiDeleteComputeRackUnitIdentityRequest) (*_nethttp.Response, error) {
+func (a *ComputeApiService) DeleteComputeRackUnitIdentityExecute(r ApiDeleteComputeRackUnitIdentityRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.DeleteComputeRackUnitIdentity")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/RackUnitIdentities/{Moid}"
@@ -233,18 +242,22 @@ func (a *ComputeApiService) DeleteComputeRackUnitIdentityExecute(r ApiDeleteComp
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -302,7 +315,7 @@ func (a *ComputeApiService) DeleteComputeRackUnitIdentityExecute(r ApiDeleteComp
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiGetComputeBladeByMoidRequest struct {
@@ -311,7 +324,7 @@ type ApiGetComputeBladeByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetComputeBladeByMoidRequest) Execute() (ComputeBlade, *_nethttp.Response, error) {
+func (r ApiGetComputeBladeByMoidRequest) Execute() (ComputeBlade, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetComputeBladeByMoidExecute(r)
 }
 
@@ -333,19 +346,21 @@ func (a *ComputeApiService) GetComputeBladeByMoid(ctx _context.Context, moid str
  * Execute executes the request
  * @return ComputeBlade
  */
-func (a *ComputeApiService) GetComputeBladeByMoidExecute(r ApiGetComputeBladeByMoidRequest) (ComputeBlade, *_nethttp.Response, error) {
+func (a *ComputeApiService) GetComputeBladeByMoidExecute(r ApiGetComputeBladeByMoidRequest) (ComputeBlade, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeBlade
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.GetComputeBladeByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/Blades/{Moid}"
@@ -374,18 +389,22 @@ func (a *ComputeApiService) GetComputeBladeByMoidExecute(r ApiGetComputeBladeByM
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -452,7 +471,7 @@ func (a *ComputeApiService) GetComputeBladeByMoidExecute(r ApiGetComputeBladeByM
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetComputeBladeIdentityByMoidRequest struct {
@@ -461,7 +480,7 @@ type ApiGetComputeBladeIdentityByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetComputeBladeIdentityByMoidRequest) Execute() (ComputeBladeIdentity, *_nethttp.Response, error) {
+func (r ApiGetComputeBladeIdentityByMoidRequest) Execute() (ComputeBladeIdentity, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetComputeBladeIdentityByMoidExecute(r)
 }
 
@@ -483,19 +502,21 @@ func (a *ComputeApiService) GetComputeBladeIdentityByMoid(ctx _context.Context, 
  * Execute executes the request
  * @return ComputeBladeIdentity
  */
-func (a *ComputeApiService) GetComputeBladeIdentityByMoidExecute(r ApiGetComputeBladeIdentityByMoidRequest) (ComputeBladeIdentity, *_nethttp.Response, error) {
+func (a *ComputeApiService) GetComputeBladeIdentityByMoidExecute(r ApiGetComputeBladeIdentityByMoidRequest) (ComputeBladeIdentity, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeBladeIdentity
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.GetComputeBladeIdentityByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/BladeIdentities/{Moid}"
@@ -524,18 +545,22 @@ func (a *ComputeApiService) GetComputeBladeIdentityByMoidExecute(r ApiGetCompute
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -602,7 +627,7 @@ func (a *ComputeApiService) GetComputeBladeIdentityByMoidExecute(r ApiGetCompute
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetComputeBladeIdentityListRequest struct {
@@ -666,7 +691,7 @@ func (r ApiGetComputeBladeIdentityListRequest) Tags(tags string) ApiGetComputeBl
 	return r
 }
 
-func (r ApiGetComputeBladeIdentityListRequest) Execute() (ComputeBladeIdentityResponse, *_nethttp.Response, error) {
+func (r ApiGetComputeBladeIdentityListRequest) Execute() (ComputeBladeIdentityResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetComputeBladeIdentityListExecute(r)
 }
 
@@ -686,19 +711,21 @@ func (a *ComputeApiService) GetComputeBladeIdentityList(ctx _context.Context) Ap
  * Execute executes the request
  * @return ComputeBladeIdentityResponse
  */
-func (a *ComputeApiService) GetComputeBladeIdentityListExecute(r ApiGetComputeBladeIdentityListRequest) (ComputeBladeIdentityResponse, *_nethttp.Response, error) {
+func (a *ComputeApiService) GetComputeBladeIdentityListExecute(r ApiGetComputeBladeIdentityListRequest) (ComputeBladeIdentityResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeBladeIdentityResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.GetComputeBladeIdentityList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/BladeIdentities"
@@ -759,18 +786,22 @@ func (a *ComputeApiService) GetComputeBladeIdentityListExecute(r ApiGetComputeBl
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -837,7 +868,7 @@ func (a *ComputeApiService) GetComputeBladeIdentityListExecute(r ApiGetComputeBl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetComputeBladeListRequest struct {
@@ -901,7 +932,7 @@ func (r ApiGetComputeBladeListRequest) Tags(tags string) ApiGetComputeBladeListR
 	return r
 }
 
-func (r ApiGetComputeBladeListRequest) Execute() (ComputeBladeResponse, *_nethttp.Response, error) {
+func (r ApiGetComputeBladeListRequest) Execute() (ComputeBladeResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetComputeBladeListExecute(r)
 }
 
@@ -921,19 +952,21 @@ func (a *ComputeApiService) GetComputeBladeList(ctx _context.Context) ApiGetComp
  * Execute executes the request
  * @return ComputeBladeResponse
  */
-func (a *ComputeApiService) GetComputeBladeListExecute(r ApiGetComputeBladeListRequest) (ComputeBladeResponse, *_nethttp.Response, error) {
+func (a *ComputeApiService) GetComputeBladeListExecute(r ApiGetComputeBladeListRequest) (ComputeBladeResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeBladeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.GetComputeBladeList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/Blades"
@@ -994,18 +1027,22 @@ func (a *ComputeApiService) GetComputeBladeListExecute(r ApiGetComputeBladeListR
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1072,7 +1109,7 @@ func (a *ComputeApiService) GetComputeBladeListExecute(r ApiGetComputeBladeListR
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetComputeBoardByMoidRequest struct {
@@ -1081,7 +1118,7 @@ type ApiGetComputeBoardByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetComputeBoardByMoidRequest) Execute() (ComputeBoard, *_nethttp.Response, error) {
+func (r ApiGetComputeBoardByMoidRequest) Execute() (ComputeBoard, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetComputeBoardByMoidExecute(r)
 }
 
@@ -1103,19 +1140,21 @@ func (a *ComputeApiService) GetComputeBoardByMoid(ctx _context.Context, moid str
  * Execute executes the request
  * @return ComputeBoard
  */
-func (a *ComputeApiService) GetComputeBoardByMoidExecute(r ApiGetComputeBoardByMoidRequest) (ComputeBoard, *_nethttp.Response, error) {
+func (a *ComputeApiService) GetComputeBoardByMoidExecute(r ApiGetComputeBoardByMoidRequest) (ComputeBoard, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeBoard
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.GetComputeBoardByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/Boards/{Moid}"
@@ -1144,18 +1183,22 @@ func (a *ComputeApiService) GetComputeBoardByMoidExecute(r ApiGetComputeBoardByM
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1222,7 +1265,7 @@ func (a *ComputeApiService) GetComputeBoardByMoidExecute(r ApiGetComputeBoardByM
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetComputeBoardListRequest struct {
@@ -1286,7 +1329,7 @@ func (r ApiGetComputeBoardListRequest) Tags(tags string) ApiGetComputeBoardListR
 	return r
 }
 
-func (r ApiGetComputeBoardListRequest) Execute() (ComputeBoardResponse, *_nethttp.Response, error) {
+func (r ApiGetComputeBoardListRequest) Execute() (ComputeBoardResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetComputeBoardListExecute(r)
 }
 
@@ -1306,19 +1349,21 @@ func (a *ComputeApiService) GetComputeBoardList(ctx _context.Context) ApiGetComp
  * Execute executes the request
  * @return ComputeBoardResponse
  */
-func (a *ComputeApiService) GetComputeBoardListExecute(r ApiGetComputeBoardListRequest) (ComputeBoardResponse, *_nethttp.Response, error) {
+func (a *ComputeApiService) GetComputeBoardListExecute(r ApiGetComputeBoardListRequest) (ComputeBoardResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeBoardResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.GetComputeBoardList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/Boards"
@@ -1379,18 +1424,22 @@ func (a *ComputeApiService) GetComputeBoardListExecute(r ApiGetComputeBoardListR
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1457,7 +1506,7 @@ func (a *ComputeApiService) GetComputeBoardListExecute(r ApiGetComputeBoardListR
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetComputePhysicalSummaryByMoidRequest struct {
@@ -1466,7 +1515,7 @@ type ApiGetComputePhysicalSummaryByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetComputePhysicalSummaryByMoidRequest) Execute() (ComputePhysicalSummary, *_nethttp.Response, error) {
+func (r ApiGetComputePhysicalSummaryByMoidRequest) Execute() (ComputePhysicalSummary, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetComputePhysicalSummaryByMoidExecute(r)
 }
 
@@ -1488,19 +1537,21 @@ func (a *ComputeApiService) GetComputePhysicalSummaryByMoid(ctx _context.Context
  * Execute executes the request
  * @return ComputePhysicalSummary
  */
-func (a *ComputeApiService) GetComputePhysicalSummaryByMoidExecute(r ApiGetComputePhysicalSummaryByMoidRequest) (ComputePhysicalSummary, *_nethttp.Response, error) {
+func (a *ComputeApiService) GetComputePhysicalSummaryByMoidExecute(r ApiGetComputePhysicalSummaryByMoidRequest) (ComputePhysicalSummary, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputePhysicalSummary
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.GetComputePhysicalSummaryByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/PhysicalSummaries/{Moid}"
@@ -1529,18 +1580,22 @@ func (a *ComputeApiService) GetComputePhysicalSummaryByMoidExecute(r ApiGetCompu
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1607,7 +1662,7 @@ func (a *ComputeApiService) GetComputePhysicalSummaryByMoidExecute(r ApiGetCompu
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetComputePhysicalSummaryListRequest struct {
@@ -1671,7 +1726,7 @@ func (r ApiGetComputePhysicalSummaryListRequest) Tags(tags string) ApiGetCompute
 	return r
 }
 
-func (r ApiGetComputePhysicalSummaryListRequest) Execute() (ComputePhysicalSummaryResponse, *_nethttp.Response, error) {
+func (r ApiGetComputePhysicalSummaryListRequest) Execute() (ComputePhysicalSummaryResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetComputePhysicalSummaryListExecute(r)
 }
 
@@ -1691,19 +1746,21 @@ func (a *ComputeApiService) GetComputePhysicalSummaryList(ctx _context.Context) 
  * Execute executes the request
  * @return ComputePhysicalSummaryResponse
  */
-func (a *ComputeApiService) GetComputePhysicalSummaryListExecute(r ApiGetComputePhysicalSummaryListRequest) (ComputePhysicalSummaryResponse, *_nethttp.Response, error) {
+func (a *ComputeApiService) GetComputePhysicalSummaryListExecute(r ApiGetComputePhysicalSummaryListRequest) (ComputePhysicalSummaryResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputePhysicalSummaryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.GetComputePhysicalSummaryList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/PhysicalSummaries"
@@ -1764,18 +1821,22 @@ func (a *ComputeApiService) GetComputePhysicalSummaryListExecute(r ApiGetCompute
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1842,7 +1903,7 @@ func (a *ComputeApiService) GetComputePhysicalSummaryListExecute(r ApiGetCompute
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetComputeRackUnitByMoidRequest struct {
@@ -1851,7 +1912,7 @@ type ApiGetComputeRackUnitByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetComputeRackUnitByMoidRequest) Execute() (ComputeRackUnit, *_nethttp.Response, error) {
+func (r ApiGetComputeRackUnitByMoidRequest) Execute() (ComputeRackUnit, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetComputeRackUnitByMoidExecute(r)
 }
 
@@ -1873,19 +1934,21 @@ func (a *ComputeApiService) GetComputeRackUnitByMoid(ctx _context.Context, moid 
  * Execute executes the request
  * @return ComputeRackUnit
  */
-func (a *ComputeApiService) GetComputeRackUnitByMoidExecute(r ApiGetComputeRackUnitByMoidRequest) (ComputeRackUnit, *_nethttp.Response, error) {
+func (a *ComputeApiService) GetComputeRackUnitByMoidExecute(r ApiGetComputeRackUnitByMoidRequest) (ComputeRackUnit, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeRackUnit
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.GetComputeRackUnitByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/RackUnits/{Moid}"
@@ -1914,18 +1977,22 @@ func (a *ComputeApiService) GetComputeRackUnitByMoidExecute(r ApiGetComputeRackU
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1992,7 +2059,7 @@ func (a *ComputeApiService) GetComputeRackUnitByMoidExecute(r ApiGetComputeRackU
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetComputeRackUnitIdentityByMoidRequest struct {
@@ -2001,7 +2068,7 @@ type ApiGetComputeRackUnitIdentityByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetComputeRackUnitIdentityByMoidRequest) Execute() (ComputeRackUnitIdentity, *_nethttp.Response, error) {
+func (r ApiGetComputeRackUnitIdentityByMoidRequest) Execute() (ComputeRackUnitIdentity, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetComputeRackUnitIdentityByMoidExecute(r)
 }
 
@@ -2023,19 +2090,21 @@ func (a *ComputeApiService) GetComputeRackUnitIdentityByMoid(ctx _context.Contex
  * Execute executes the request
  * @return ComputeRackUnitIdentity
  */
-func (a *ComputeApiService) GetComputeRackUnitIdentityByMoidExecute(r ApiGetComputeRackUnitIdentityByMoidRequest) (ComputeRackUnitIdentity, *_nethttp.Response, error) {
+func (a *ComputeApiService) GetComputeRackUnitIdentityByMoidExecute(r ApiGetComputeRackUnitIdentityByMoidRequest) (ComputeRackUnitIdentity, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeRackUnitIdentity
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.GetComputeRackUnitIdentityByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/RackUnitIdentities/{Moid}"
@@ -2064,18 +2133,22 @@ func (a *ComputeApiService) GetComputeRackUnitIdentityByMoidExecute(r ApiGetComp
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2142,7 +2215,7 @@ func (a *ComputeApiService) GetComputeRackUnitIdentityByMoidExecute(r ApiGetComp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetComputeRackUnitIdentityListRequest struct {
@@ -2206,7 +2279,7 @@ func (r ApiGetComputeRackUnitIdentityListRequest) Tags(tags string) ApiGetComput
 	return r
 }
 
-func (r ApiGetComputeRackUnitIdentityListRequest) Execute() (ComputeRackUnitIdentityResponse, *_nethttp.Response, error) {
+func (r ApiGetComputeRackUnitIdentityListRequest) Execute() (ComputeRackUnitIdentityResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetComputeRackUnitIdentityListExecute(r)
 }
 
@@ -2226,19 +2299,21 @@ func (a *ComputeApiService) GetComputeRackUnitIdentityList(ctx _context.Context)
  * Execute executes the request
  * @return ComputeRackUnitIdentityResponse
  */
-func (a *ComputeApiService) GetComputeRackUnitIdentityListExecute(r ApiGetComputeRackUnitIdentityListRequest) (ComputeRackUnitIdentityResponse, *_nethttp.Response, error) {
+func (a *ComputeApiService) GetComputeRackUnitIdentityListExecute(r ApiGetComputeRackUnitIdentityListRequest) (ComputeRackUnitIdentityResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeRackUnitIdentityResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.GetComputeRackUnitIdentityList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/RackUnitIdentities"
@@ -2299,18 +2374,22 @@ func (a *ComputeApiService) GetComputeRackUnitIdentityListExecute(r ApiGetComput
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2377,7 +2456,7 @@ func (a *ComputeApiService) GetComputeRackUnitIdentityListExecute(r ApiGetComput
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetComputeRackUnitListRequest struct {
@@ -2441,7 +2520,7 @@ func (r ApiGetComputeRackUnitListRequest) Tags(tags string) ApiGetComputeRackUni
 	return r
 }
 
-func (r ApiGetComputeRackUnitListRequest) Execute() (ComputeRackUnitResponse, *_nethttp.Response, error) {
+func (r ApiGetComputeRackUnitListRequest) Execute() (ComputeRackUnitResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetComputeRackUnitListExecute(r)
 }
 
@@ -2461,19 +2540,21 @@ func (a *ComputeApiService) GetComputeRackUnitList(ctx _context.Context) ApiGetC
  * Execute executes the request
  * @return ComputeRackUnitResponse
  */
-func (a *ComputeApiService) GetComputeRackUnitListExecute(r ApiGetComputeRackUnitListRequest) (ComputeRackUnitResponse, *_nethttp.Response, error) {
+func (a *ComputeApiService) GetComputeRackUnitListExecute(r ApiGetComputeRackUnitListRequest) (ComputeRackUnitResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeRackUnitResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.GetComputeRackUnitList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/RackUnits"
@@ -2534,18 +2615,22 @@ func (a *ComputeApiService) GetComputeRackUnitListExecute(r ApiGetComputeRackUni
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2612,7 +2697,7 @@ func (a *ComputeApiService) GetComputeRackUnitListExecute(r ApiGetComputeRackUni
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetComputeServerSettingByMoidRequest struct {
@@ -2621,7 +2706,7 @@ type ApiGetComputeServerSettingByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetComputeServerSettingByMoidRequest) Execute() (ComputeServerSetting, *_nethttp.Response, error) {
+func (r ApiGetComputeServerSettingByMoidRequest) Execute() (ComputeServerSetting, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetComputeServerSettingByMoidExecute(r)
 }
 
@@ -2643,19 +2728,21 @@ func (a *ComputeApiService) GetComputeServerSettingByMoid(ctx _context.Context, 
  * Execute executes the request
  * @return ComputeServerSetting
  */
-func (a *ComputeApiService) GetComputeServerSettingByMoidExecute(r ApiGetComputeServerSettingByMoidRequest) (ComputeServerSetting, *_nethttp.Response, error) {
+func (a *ComputeApiService) GetComputeServerSettingByMoidExecute(r ApiGetComputeServerSettingByMoidRequest) (ComputeServerSetting, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeServerSetting
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.GetComputeServerSettingByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/ServerSettings/{Moid}"
@@ -2684,18 +2771,22 @@ func (a *ComputeApiService) GetComputeServerSettingByMoidExecute(r ApiGetCompute
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2762,7 +2853,7 @@ func (a *ComputeApiService) GetComputeServerSettingByMoidExecute(r ApiGetCompute
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetComputeServerSettingListRequest struct {
@@ -2826,7 +2917,7 @@ func (r ApiGetComputeServerSettingListRequest) Tags(tags string) ApiGetComputeSe
 	return r
 }
 
-func (r ApiGetComputeServerSettingListRequest) Execute() (ComputeServerSettingResponse, *_nethttp.Response, error) {
+func (r ApiGetComputeServerSettingListRequest) Execute() (ComputeServerSettingResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetComputeServerSettingListExecute(r)
 }
 
@@ -2846,19 +2937,21 @@ func (a *ComputeApiService) GetComputeServerSettingList(ctx _context.Context) Ap
  * Execute executes the request
  * @return ComputeServerSettingResponse
  */
-func (a *ComputeApiService) GetComputeServerSettingListExecute(r ApiGetComputeServerSettingListRequest) (ComputeServerSettingResponse, *_nethttp.Response, error) {
+func (a *ComputeApiService) GetComputeServerSettingListExecute(r ApiGetComputeServerSettingListRequest) (ComputeServerSettingResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeServerSettingResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.GetComputeServerSettingList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/ServerSettings"
@@ -2919,18 +3012,22 @@ func (a *ComputeApiService) GetComputeServerSettingListExecute(r ApiGetComputeSe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2997,7 +3094,7 @@ func (a *ComputeApiService) GetComputeServerSettingListExecute(r ApiGetComputeSe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchComputeBladeRequest struct {
@@ -3017,7 +3114,7 @@ func (r ApiPatchComputeBladeRequest) IfMatch(ifMatch string) ApiPatchComputeBlad
 	return r
 }
 
-func (r ApiPatchComputeBladeRequest) Execute() (ComputeBlade, *_nethttp.Response, error) {
+func (r ApiPatchComputeBladeRequest) Execute() (ComputeBlade, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchComputeBladeExecute(r)
 }
 
@@ -3039,19 +3136,21 @@ func (a *ComputeApiService) PatchComputeBlade(ctx _context.Context, moid string)
  * Execute executes the request
  * @return ComputeBlade
  */
-func (a *ComputeApiService) PatchComputeBladeExecute(r ApiPatchComputeBladeRequest) (ComputeBlade, *_nethttp.Response, error) {
+func (a *ComputeApiService) PatchComputeBladeExecute(r ApiPatchComputeBladeRequest) (ComputeBlade, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeBlade
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.PatchComputeBlade")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/Blades/{Moid}"
@@ -3061,7 +3160,8 @@ func (a *ComputeApiService) PatchComputeBladeExecute(r ApiPatchComputeBladeReque
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.computeBlade == nil {
-		return localVarReturnValue, nil, reportError("computeBlade is required and must be specified")
+		executionError.error = "computeBlade is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3088,18 +3188,22 @@ func (a *ComputeApiService) PatchComputeBladeExecute(r ApiPatchComputeBladeReque
 	localVarPostBody = r.computeBlade
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3166,7 +3270,7 @@ func (a *ComputeApiService) PatchComputeBladeExecute(r ApiPatchComputeBladeReque
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchComputeBladeIdentityRequest struct {
@@ -3186,7 +3290,7 @@ func (r ApiPatchComputeBladeIdentityRequest) IfMatch(ifMatch string) ApiPatchCom
 	return r
 }
 
-func (r ApiPatchComputeBladeIdentityRequest) Execute() (ComputeBladeIdentity, *_nethttp.Response, error) {
+func (r ApiPatchComputeBladeIdentityRequest) Execute() (ComputeBladeIdentity, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchComputeBladeIdentityExecute(r)
 }
 
@@ -3208,19 +3312,21 @@ func (a *ComputeApiService) PatchComputeBladeIdentity(ctx _context.Context, moid
  * Execute executes the request
  * @return ComputeBladeIdentity
  */
-func (a *ComputeApiService) PatchComputeBladeIdentityExecute(r ApiPatchComputeBladeIdentityRequest) (ComputeBladeIdentity, *_nethttp.Response, error) {
+func (a *ComputeApiService) PatchComputeBladeIdentityExecute(r ApiPatchComputeBladeIdentityRequest) (ComputeBladeIdentity, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeBladeIdentity
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.PatchComputeBladeIdentity")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/BladeIdentities/{Moid}"
@@ -3230,7 +3336,8 @@ func (a *ComputeApiService) PatchComputeBladeIdentityExecute(r ApiPatchComputeBl
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.computeBladeIdentity == nil {
-		return localVarReturnValue, nil, reportError("computeBladeIdentity is required and must be specified")
+		executionError.error = "computeBladeIdentity is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3257,18 +3364,22 @@ func (a *ComputeApiService) PatchComputeBladeIdentityExecute(r ApiPatchComputeBl
 	localVarPostBody = r.computeBladeIdentity
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3335,7 +3446,7 @@ func (a *ComputeApiService) PatchComputeBladeIdentityExecute(r ApiPatchComputeBl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchComputeBoardRequest struct {
@@ -3355,7 +3466,7 @@ func (r ApiPatchComputeBoardRequest) IfMatch(ifMatch string) ApiPatchComputeBoar
 	return r
 }
 
-func (r ApiPatchComputeBoardRequest) Execute() (ComputeBoard, *_nethttp.Response, error) {
+func (r ApiPatchComputeBoardRequest) Execute() (ComputeBoard, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchComputeBoardExecute(r)
 }
 
@@ -3377,19 +3488,21 @@ func (a *ComputeApiService) PatchComputeBoard(ctx _context.Context, moid string)
  * Execute executes the request
  * @return ComputeBoard
  */
-func (a *ComputeApiService) PatchComputeBoardExecute(r ApiPatchComputeBoardRequest) (ComputeBoard, *_nethttp.Response, error) {
+func (a *ComputeApiService) PatchComputeBoardExecute(r ApiPatchComputeBoardRequest) (ComputeBoard, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeBoard
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.PatchComputeBoard")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/Boards/{Moid}"
@@ -3399,7 +3512,8 @@ func (a *ComputeApiService) PatchComputeBoardExecute(r ApiPatchComputeBoardReque
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.computeBoard == nil {
-		return localVarReturnValue, nil, reportError("computeBoard is required and must be specified")
+		executionError.error = "computeBoard is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3426,18 +3540,22 @@ func (a *ComputeApiService) PatchComputeBoardExecute(r ApiPatchComputeBoardReque
 	localVarPostBody = r.computeBoard
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3504,7 +3622,7 @@ func (a *ComputeApiService) PatchComputeBoardExecute(r ApiPatchComputeBoardReque
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchComputeRackUnitRequest struct {
@@ -3524,7 +3642,7 @@ func (r ApiPatchComputeRackUnitRequest) IfMatch(ifMatch string) ApiPatchComputeR
 	return r
 }
 
-func (r ApiPatchComputeRackUnitRequest) Execute() (ComputeRackUnit, *_nethttp.Response, error) {
+func (r ApiPatchComputeRackUnitRequest) Execute() (ComputeRackUnit, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchComputeRackUnitExecute(r)
 }
 
@@ -3546,19 +3664,21 @@ func (a *ComputeApiService) PatchComputeRackUnit(ctx _context.Context, moid stri
  * Execute executes the request
  * @return ComputeRackUnit
  */
-func (a *ComputeApiService) PatchComputeRackUnitExecute(r ApiPatchComputeRackUnitRequest) (ComputeRackUnit, *_nethttp.Response, error) {
+func (a *ComputeApiService) PatchComputeRackUnitExecute(r ApiPatchComputeRackUnitRequest) (ComputeRackUnit, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeRackUnit
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.PatchComputeRackUnit")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/RackUnits/{Moid}"
@@ -3568,7 +3688,8 @@ func (a *ComputeApiService) PatchComputeRackUnitExecute(r ApiPatchComputeRackUni
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.computeRackUnit == nil {
-		return localVarReturnValue, nil, reportError("computeRackUnit is required and must be specified")
+		executionError.error = "computeRackUnit is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3595,18 +3716,22 @@ func (a *ComputeApiService) PatchComputeRackUnitExecute(r ApiPatchComputeRackUni
 	localVarPostBody = r.computeRackUnit
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3673,7 +3798,7 @@ func (a *ComputeApiService) PatchComputeRackUnitExecute(r ApiPatchComputeRackUni
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchComputeRackUnitIdentityRequest struct {
@@ -3693,7 +3818,7 @@ func (r ApiPatchComputeRackUnitIdentityRequest) IfMatch(ifMatch string) ApiPatch
 	return r
 }
 
-func (r ApiPatchComputeRackUnitIdentityRequest) Execute() (ComputeRackUnitIdentity, *_nethttp.Response, error) {
+func (r ApiPatchComputeRackUnitIdentityRequest) Execute() (ComputeRackUnitIdentity, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchComputeRackUnitIdentityExecute(r)
 }
 
@@ -3715,19 +3840,21 @@ func (a *ComputeApiService) PatchComputeRackUnitIdentity(ctx _context.Context, m
  * Execute executes the request
  * @return ComputeRackUnitIdentity
  */
-func (a *ComputeApiService) PatchComputeRackUnitIdentityExecute(r ApiPatchComputeRackUnitIdentityRequest) (ComputeRackUnitIdentity, *_nethttp.Response, error) {
+func (a *ComputeApiService) PatchComputeRackUnitIdentityExecute(r ApiPatchComputeRackUnitIdentityRequest) (ComputeRackUnitIdentity, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeRackUnitIdentity
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.PatchComputeRackUnitIdentity")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/RackUnitIdentities/{Moid}"
@@ -3737,7 +3864,8 @@ func (a *ComputeApiService) PatchComputeRackUnitIdentityExecute(r ApiPatchComput
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.computeRackUnitIdentity == nil {
-		return localVarReturnValue, nil, reportError("computeRackUnitIdentity is required and must be specified")
+		executionError.error = "computeRackUnitIdentity is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3764,18 +3892,22 @@ func (a *ComputeApiService) PatchComputeRackUnitIdentityExecute(r ApiPatchComput
 	localVarPostBody = r.computeRackUnitIdentity
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3842,7 +3974,7 @@ func (a *ComputeApiService) PatchComputeRackUnitIdentityExecute(r ApiPatchComput
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchComputeServerSettingRequest struct {
@@ -3862,7 +3994,7 @@ func (r ApiPatchComputeServerSettingRequest) IfMatch(ifMatch string) ApiPatchCom
 	return r
 }
 
-func (r ApiPatchComputeServerSettingRequest) Execute() (ComputeServerSetting, *_nethttp.Response, error) {
+func (r ApiPatchComputeServerSettingRequest) Execute() (ComputeServerSetting, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchComputeServerSettingExecute(r)
 }
 
@@ -3884,19 +4016,21 @@ func (a *ComputeApiService) PatchComputeServerSetting(ctx _context.Context, moid
  * Execute executes the request
  * @return ComputeServerSetting
  */
-func (a *ComputeApiService) PatchComputeServerSettingExecute(r ApiPatchComputeServerSettingRequest) (ComputeServerSetting, *_nethttp.Response, error) {
+func (a *ComputeApiService) PatchComputeServerSettingExecute(r ApiPatchComputeServerSettingRequest) (ComputeServerSetting, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeServerSetting
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.PatchComputeServerSetting")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/ServerSettings/{Moid}"
@@ -3906,7 +4040,8 @@ func (a *ComputeApiService) PatchComputeServerSettingExecute(r ApiPatchComputeSe
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.computeServerSetting == nil {
-		return localVarReturnValue, nil, reportError("computeServerSetting is required and must be specified")
+		executionError.error = "computeServerSetting is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3933,18 +4068,22 @@ func (a *ComputeApiService) PatchComputeServerSettingExecute(r ApiPatchComputeSe
 	localVarPostBody = r.computeServerSetting
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4011,7 +4150,7 @@ func (a *ComputeApiService) PatchComputeServerSettingExecute(r ApiPatchComputeSe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateComputeBladeRequest struct {
@@ -4031,7 +4170,7 @@ func (r ApiUpdateComputeBladeRequest) IfMatch(ifMatch string) ApiUpdateComputeBl
 	return r
 }
 
-func (r ApiUpdateComputeBladeRequest) Execute() (ComputeBlade, *_nethttp.Response, error) {
+func (r ApiUpdateComputeBladeRequest) Execute() (ComputeBlade, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateComputeBladeExecute(r)
 }
 
@@ -4053,19 +4192,21 @@ func (a *ComputeApiService) UpdateComputeBlade(ctx _context.Context, moid string
  * Execute executes the request
  * @return ComputeBlade
  */
-func (a *ComputeApiService) UpdateComputeBladeExecute(r ApiUpdateComputeBladeRequest) (ComputeBlade, *_nethttp.Response, error) {
+func (a *ComputeApiService) UpdateComputeBladeExecute(r ApiUpdateComputeBladeRequest) (ComputeBlade, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeBlade
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.UpdateComputeBlade")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/Blades/{Moid}"
@@ -4075,7 +4216,8 @@ func (a *ComputeApiService) UpdateComputeBladeExecute(r ApiUpdateComputeBladeReq
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.computeBlade == nil {
-		return localVarReturnValue, nil, reportError("computeBlade is required and must be specified")
+		executionError.error = "computeBlade is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -4102,18 +4244,22 @@ func (a *ComputeApiService) UpdateComputeBladeExecute(r ApiUpdateComputeBladeReq
 	localVarPostBody = r.computeBlade
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4180,7 +4326,7 @@ func (a *ComputeApiService) UpdateComputeBladeExecute(r ApiUpdateComputeBladeReq
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateComputeBladeIdentityRequest struct {
@@ -4200,7 +4346,7 @@ func (r ApiUpdateComputeBladeIdentityRequest) IfMatch(ifMatch string) ApiUpdateC
 	return r
 }
 
-func (r ApiUpdateComputeBladeIdentityRequest) Execute() (ComputeBladeIdentity, *_nethttp.Response, error) {
+func (r ApiUpdateComputeBladeIdentityRequest) Execute() (ComputeBladeIdentity, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateComputeBladeIdentityExecute(r)
 }
 
@@ -4222,19 +4368,21 @@ func (a *ComputeApiService) UpdateComputeBladeIdentity(ctx _context.Context, moi
  * Execute executes the request
  * @return ComputeBladeIdentity
  */
-func (a *ComputeApiService) UpdateComputeBladeIdentityExecute(r ApiUpdateComputeBladeIdentityRequest) (ComputeBladeIdentity, *_nethttp.Response, error) {
+func (a *ComputeApiService) UpdateComputeBladeIdentityExecute(r ApiUpdateComputeBladeIdentityRequest) (ComputeBladeIdentity, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeBladeIdentity
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.UpdateComputeBladeIdentity")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/BladeIdentities/{Moid}"
@@ -4244,7 +4392,8 @@ func (a *ComputeApiService) UpdateComputeBladeIdentityExecute(r ApiUpdateCompute
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.computeBladeIdentity == nil {
-		return localVarReturnValue, nil, reportError("computeBladeIdentity is required and must be specified")
+		executionError.error = "computeBladeIdentity is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -4271,18 +4420,22 @@ func (a *ComputeApiService) UpdateComputeBladeIdentityExecute(r ApiUpdateCompute
 	localVarPostBody = r.computeBladeIdentity
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4349,7 +4502,7 @@ func (a *ComputeApiService) UpdateComputeBladeIdentityExecute(r ApiUpdateCompute
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateComputeBoardRequest struct {
@@ -4369,7 +4522,7 @@ func (r ApiUpdateComputeBoardRequest) IfMatch(ifMatch string) ApiUpdateComputeBo
 	return r
 }
 
-func (r ApiUpdateComputeBoardRequest) Execute() (ComputeBoard, *_nethttp.Response, error) {
+func (r ApiUpdateComputeBoardRequest) Execute() (ComputeBoard, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateComputeBoardExecute(r)
 }
 
@@ -4391,19 +4544,21 @@ func (a *ComputeApiService) UpdateComputeBoard(ctx _context.Context, moid string
  * Execute executes the request
  * @return ComputeBoard
  */
-func (a *ComputeApiService) UpdateComputeBoardExecute(r ApiUpdateComputeBoardRequest) (ComputeBoard, *_nethttp.Response, error) {
+func (a *ComputeApiService) UpdateComputeBoardExecute(r ApiUpdateComputeBoardRequest) (ComputeBoard, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeBoard
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.UpdateComputeBoard")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/Boards/{Moid}"
@@ -4413,7 +4568,8 @@ func (a *ComputeApiService) UpdateComputeBoardExecute(r ApiUpdateComputeBoardReq
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.computeBoard == nil {
-		return localVarReturnValue, nil, reportError("computeBoard is required and must be specified")
+		executionError.error = "computeBoard is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -4440,18 +4596,22 @@ func (a *ComputeApiService) UpdateComputeBoardExecute(r ApiUpdateComputeBoardReq
 	localVarPostBody = r.computeBoard
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4518,7 +4678,7 @@ func (a *ComputeApiService) UpdateComputeBoardExecute(r ApiUpdateComputeBoardReq
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateComputeRackUnitRequest struct {
@@ -4538,7 +4698,7 @@ func (r ApiUpdateComputeRackUnitRequest) IfMatch(ifMatch string) ApiUpdateComput
 	return r
 }
 
-func (r ApiUpdateComputeRackUnitRequest) Execute() (ComputeRackUnit, *_nethttp.Response, error) {
+func (r ApiUpdateComputeRackUnitRequest) Execute() (ComputeRackUnit, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateComputeRackUnitExecute(r)
 }
 
@@ -4560,19 +4720,21 @@ func (a *ComputeApiService) UpdateComputeRackUnit(ctx _context.Context, moid str
  * Execute executes the request
  * @return ComputeRackUnit
  */
-func (a *ComputeApiService) UpdateComputeRackUnitExecute(r ApiUpdateComputeRackUnitRequest) (ComputeRackUnit, *_nethttp.Response, error) {
+func (a *ComputeApiService) UpdateComputeRackUnitExecute(r ApiUpdateComputeRackUnitRequest) (ComputeRackUnit, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeRackUnit
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.UpdateComputeRackUnit")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/RackUnits/{Moid}"
@@ -4582,7 +4744,8 @@ func (a *ComputeApiService) UpdateComputeRackUnitExecute(r ApiUpdateComputeRackU
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.computeRackUnit == nil {
-		return localVarReturnValue, nil, reportError("computeRackUnit is required and must be specified")
+		executionError.error = "computeRackUnit is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -4609,18 +4772,22 @@ func (a *ComputeApiService) UpdateComputeRackUnitExecute(r ApiUpdateComputeRackU
 	localVarPostBody = r.computeRackUnit
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4687,7 +4854,7 @@ func (a *ComputeApiService) UpdateComputeRackUnitExecute(r ApiUpdateComputeRackU
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateComputeRackUnitIdentityRequest struct {
@@ -4707,7 +4874,7 @@ func (r ApiUpdateComputeRackUnitIdentityRequest) IfMatch(ifMatch string) ApiUpda
 	return r
 }
 
-func (r ApiUpdateComputeRackUnitIdentityRequest) Execute() (ComputeRackUnitIdentity, *_nethttp.Response, error) {
+func (r ApiUpdateComputeRackUnitIdentityRequest) Execute() (ComputeRackUnitIdentity, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateComputeRackUnitIdentityExecute(r)
 }
 
@@ -4729,19 +4896,21 @@ func (a *ComputeApiService) UpdateComputeRackUnitIdentity(ctx _context.Context, 
  * Execute executes the request
  * @return ComputeRackUnitIdentity
  */
-func (a *ComputeApiService) UpdateComputeRackUnitIdentityExecute(r ApiUpdateComputeRackUnitIdentityRequest) (ComputeRackUnitIdentity, *_nethttp.Response, error) {
+func (a *ComputeApiService) UpdateComputeRackUnitIdentityExecute(r ApiUpdateComputeRackUnitIdentityRequest) (ComputeRackUnitIdentity, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeRackUnitIdentity
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.UpdateComputeRackUnitIdentity")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/RackUnitIdentities/{Moid}"
@@ -4751,7 +4920,8 @@ func (a *ComputeApiService) UpdateComputeRackUnitIdentityExecute(r ApiUpdateComp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.computeRackUnitIdentity == nil {
-		return localVarReturnValue, nil, reportError("computeRackUnitIdentity is required and must be specified")
+		executionError.error = "computeRackUnitIdentity is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -4778,18 +4948,22 @@ func (a *ComputeApiService) UpdateComputeRackUnitIdentityExecute(r ApiUpdateComp
 	localVarPostBody = r.computeRackUnitIdentity
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4856,7 +5030,7 @@ func (a *ComputeApiService) UpdateComputeRackUnitIdentityExecute(r ApiUpdateComp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateComputeServerSettingRequest struct {
@@ -4876,7 +5050,7 @@ func (r ApiUpdateComputeServerSettingRequest) IfMatch(ifMatch string) ApiUpdateC
 	return r
 }
 
-func (r ApiUpdateComputeServerSettingRequest) Execute() (ComputeServerSetting, *_nethttp.Response, error) {
+func (r ApiUpdateComputeServerSettingRequest) Execute() (ComputeServerSetting, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateComputeServerSettingExecute(r)
 }
 
@@ -4898,19 +5072,21 @@ func (a *ComputeApiService) UpdateComputeServerSetting(ctx _context.Context, moi
  * Execute executes the request
  * @return ComputeServerSetting
  */
-func (a *ComputeApiService) UpdateComputeServerSettingExecute(r ApiUpdateComputeServerSettingRequest) (ComputeServerSetting, *_nethttp.Response, error) {
+func (a *ComputeApiService) UpdateComputeServerSettingExecute(r ApiUpdateComputeServerSettingRequest) (ComputeServerSetting, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ComputeServerSetting
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ComputeApiService.UpdateComputeServerSetting")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/compute/ServerSettings/{Moid}"
@@ -4920,7 +5096,8 @@ func (a *ComputeApiService) UpdateComputeServerSettingExecute(r ApiUpdateCompute
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.computeServerSetting == nil {
-		return localVarReturnValue, nil, reportError("computeServerSetting is required and must be specified")
+		executionError.error = "computeServerSetting is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -4947,18 +5124,22 @@ func (a *ComputeApiService) UpdateComputeServerSettingExecute(r ApiUpdateCompute
 	localVarPostBody = r.computeServerSetting
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5025,5 +5206,5 @@ func (a *ComputeApiService) UpdateComputeServerSettingExecute(r ApiUpdateCompute
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }

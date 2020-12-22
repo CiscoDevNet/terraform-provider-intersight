@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Count** | Pointer to **int32** | The total number of &#39;softwarerepository.CategoryMapper&#39; resources matching the request, accross all pages. The &#39;Count&#39; attribute is included when the HTTP GET request includes the &#39;$inlinecount&#39; parameter. | [optional] 
-**Results** | Pointer to [**[]SoftwarerepositoryCategoryMapper**](softwarerepository.CategoryMapper.md) | The array of &#39;softwarerepository.CategoryMapper&#39; resources matching the request. | [optional] 
+**Results** | Pointer to [**[]SoftwarerepositoryCategoryMapper**](SoftwarerepositoryCategoryMapper.md) | The array of &#39;softwarerepository.CategoryMapper&#39; resources matching the request. | [optional] 
 
 ## Methods
 

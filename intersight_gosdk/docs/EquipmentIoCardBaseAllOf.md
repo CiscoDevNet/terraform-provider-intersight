@@ -17,9 +17,9 @@ Name | Type | Description | Notes
 **Sku** | Pointer to **string** | This field identifies the Stock Keeping Unit for the IO card module. | [optional] [readonly] 
 **Version** | Pointer to **string** | This field identifies the version of the IO card module. | [optional] [readonly] 
 **Vid** | Pointer to **string** | This field identifies the Vendor ID for the IO card module. | [optional] [readonly] 
-**HostPorts** | Pointer to [**[]EtherHostPortRelationship**](ether.HostPort.Relationship.md) | An array of relationships to etherHostPort resources. | [optional] 
+**HostPorts** | Pointer to [**[]EtherHostPortRelationship**](EtherHostPortRelationship.md) | An array of relationships to etherHostPort resources. | [optional] 
 **MgmtController** | Pointer to [**ManagementControllerRelationship**](management.Controller.Relationship.md) |  | [optional] 
-**NetworkPorts** | Pointer to [**[]EtherNetworkPortRelationship**](ether.NetworkPort.Relationship.md) | An array of relationships to etherNetworkPort resources. | [optional] 
+**NetworkPorts** | Pointer to [**[]EtherNetworkPortRelationship**](EtherNetworkPortRelationship.md) | An array of relationships to etherNetworkPort resources. | [optional] 
 
 ## Methods
 

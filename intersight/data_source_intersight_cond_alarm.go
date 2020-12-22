@@ -1,19 +1,20 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceCondAlarm() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceCondAlarmRead,
+		ReadContext: dataSourceCondAlarmRead,
 		Schema: map[string]*schema.Schema{
 			"acknowledge": {
 				Description: "Alarm acknowledgment state. Default value is None.\n* `None` - The Enum value None represents that the alarm is not acknowledged and is included as part of health status and overall alarm count.\n* `Acknowledge` - The Enum value Acknowledge represents that the alarm is acknowledged by user. The alarm will be ignored from the health status and overall alarm count.",
@@ -76,6 +77,12 @@ func dataSourceCondAlarm() *schema.Resource {
 				},
 				Computed: true,
 			},
+			"affected_mo_display_name": {
+				Description: "Display name of the affected object on which the alarm is raised. The name uniquely identifies an alarm target such that it can be distinguished from similar objects managed by Intersight.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"affected_mo_id": {
 				Description: "MoId of the affected object from the managed system's point of view.",
 				Type:        schema.TypeString,
@@ -101,7 +108,7 @@ func dataSourceCondAlarm() *schema.Resource {
 				Computed:    true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -231,10 +238,11 @@ func dataSourceCondAlarm() *schema.Resource {
 	}
 }
 
-func dataSourceCondAlarmRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceCondAlarmRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.CondAlarm{}
 	if v, ok := d.GetOk("acknowledge"); ok {
 		x := (v.(string))
@@ -247,6 +255,10 @@ func dataSourceCondAlarmRead(d *schema.ResourceData, meta interface{}) error {
 	if v, ok := d.GetOk("acknowledge_time"); ok {
 		x, _ := time.Parse(v.(string), time.RFC1123)
 		o.SetAcknowledgeTime(x)
+	}
+	if v, ok := d.GetOk("affected_mo_display_name"); ok {
+		x := (v.(string))
+		o.SetAffectedMoDisplayName(x)
 	}
 	if v, ok := d.GetOk("affected_mo_id"); ok {
 		x := (v.(string))
@@ -311,25 +323,25 @@ func dataSourceCondAlarmRead(d *schema.ResourceData, meta interface{}) error {
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of CondAlarm object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.CondApi.GetCondAlarmList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.CondApi.GetCondAlarmList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching CondAlarm: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for CondAlarm list: %s", err.Error())
 	}
 	var s = &models.CondAlarmList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to CondAlarm: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to CondAlarm list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for CondAlarm did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -338,82 +350,85 @@ func dataSourceCondAlarmRead(d *schema.ResourceData, meta interface{}) error {
 			var s = &models.CondAlarm{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("acknowledge", (s.GetAcknowledge())); err != nil {
-				return fmt.Errorf("error occurred while setting property Acknowledge: %+v", err)
+				return diag.Errorf("error occurred while setting property Acknowledge: %s", err.Error())
 			}
 			if err := d.Set("acknowledge_by", (s.GetAcknowledgeBy())); err != nil {
-				return fmt.Errorf("error occurred while setting property AcknowledgeBy: %+v", err)
+				return diag.Errorf("error occurred while setting property AcknowledgeBy: %s", err.Error())
 			}
 
 			if err := d.Set("acknowledge_time", (s.GetAcknowledgeTime()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property AcknowledgeTime: %+v", err)
+				return diag.Errorf("error occurred while setting property AcknowledgeTime: %s", err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 
 			if err := d.Set("affected_mo", flattenMapMoBaseMoRelationship(s.GetAffectedMo(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property AffectedMo: %+v", err)
+				return diag.Errorf("error occurred while setting property AffectedMo: %s", err.Error())
+			}
+			if err := d.Set("affected_mo_display_name", (s.GetAffectedMoDisplayName())); err != nil {
+				return diag.Errorf("error occurred while setting property AffectedMoDisplayName: %s", err.Error())
 			}
 			if err := d.Set("affected_mo_id", (s.GetAffectedMoId())); err != nil {
-				return fmt.Errorf("error occurred while setting property AffectedMoId: %+v", err)
+				return diag.Errorf("error occurred while setting property AffectedMoId: %s", err.Error())
 			}
 			if err := d.Set("affected_mo_type", (s.GetAffectedMoType())); err != nil {
-				return fmt.Errorf("error occurred while setting property AffectedMoType: %+v", err)
+				return diag.Errorf("error occurred while setting property AffectedMoType: %s", err.Error())
 			}
 			if err := d.Set("ancestor_mo_id", (s.GetAncestorMoId())); err != nil {
-				return fmt.Errorf("error occurred while setting property AncestorMoId: %+v", err)
+				return diag.Errorf("error occurred while setting property AncestorMoId: %s", err.Error())
 			}
 			if err := d.Set("ancestor_mo_type", (s.GetAncestorMoType())); err != nil {
-				return fmt.Errorf("error occurred while setting property AncestorMoType: %+v", err)
+				return diag.Errorf("error occurred while setting property AncestorMoType: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("code", (s.GetCode())); err != nil {
-				return fmt.Errorf("error occurred while setting property Code: %+v", err)
+				return diag.Errorf("error occurred while setting property Code: %s", err.Error())
 			}
 
 			if err := d.Set("creation_time", (s.GetCreationTime()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property CreationTime: %+v", err)
+				return diag.Errorf("error occurred while setting property CreationTime: %s", err.Error())
 			}
 			if err := d.Set("description", (s.GetDescription())); err != nil {
-				return fmt.Errorf("error occurred while setting property Description: %+v", err)
+				return diag.Errorf("error occurred while setting property Description: %s", err.Error())
 			}
 
 			if err := d.Set("last_transition_time", (s.GetLastTransitionTime()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property LastTransitionTime: %+v", err)
+				return diag.Errorf("error occurred while setting property LastTransitionTime: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("ms_affected_object", (s.GetMsAffectedObject())); err != nil {
-				return fmt.Errorf("error occurred while setting property MsAffectedObject: %+v", err)
+				return diag.Errorf("error occurred while setting property MsAffectedObject: %s", err.Error())
 			}
 			if err := d.Set("name", (s.GetName())); err != nil {
-				return fmt.Errorf("error occurred while setting property Name: %+v", err)
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("orig_severity", (s.GetOrigSeverity())); err != nil {
-				return fmt.Errorf("error occurred while setting property OrigSeverity: %+v", err)
+				return diag.Errorf("error occurred while setting property OrigSeverity: %s", err.Error())
 			}
 
 			if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property RegisteredDevice: %+v", err)
+				return diag.Errorf("error occurred while setting property RegisteredDevice: %s", err.Error())
 			}
 			if err := d.Set("severity", (s.GetSeverity())); err != nil {
-				return fmt.Errorf("error occurred while setting property Severity: %+v", err)
+				return diag.Errorf("error occurred while setting property Severity: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.UsnicSettings"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.UsnicSettings"]
-**Cos** | Pointer to **int64** | Class of Service to be used for traffic on the usNIC. | [optional] 
+**Cos** | Pointer to **int64** | Class of Service to be used for traffic on the usNIC. | [optional] [default to 5]
 **Count** | Pointer to **int64** | Number of usNIC interfaces to be created. | [optional] 
 **UsnicAdapterPolicy** | Pointer to **string** | Ethernet Adapter policy to be associated with the usNICs. | [optional] 
 

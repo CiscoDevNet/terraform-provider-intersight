@@ -1,8 +1,7 @@
-
 ---
+subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_app_registration"
-sidebar_current: "docs-intersight-resource-iam-app-registration"
 description: |-
   AppRegistration encapsulates the meta-data values of a registered OAuth2 client application, as described in
 https://tools.ietf.org/html/rfc7591#section-2.
@@ -19,7 +18,7 @@ To register an OAuth2 application, the following information must be provided.
 When an AppRegistration is created, a unique OAuth2 clientId is generated and returned in the HTTP response.
 ---
 
-# Resource: intersight_iam._app_registration
+# Resource: intersight_iam_app_registration
 AppRegistration encapsulates the meta-data values of a registered OAuth2 client application, as described in
 https://tools.ietf.org/html/rfc7591#section-2.
 Registered client applications have a set of metadata values associated with their client identifier
@@ -62,7 +61,7 @@ This complex property has following sub-properties:
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `permission`:(Array with Maximum of one item) -(Computed) A reference to a iamPermission resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `additional_properties`:
@@ -100,3 +99,10 @@ This complex property has following sub-properties:
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+
+
+## Import
+`intersight_iam_app_registration` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_iam_app_registration.example 1234567890987654321abcde
+```

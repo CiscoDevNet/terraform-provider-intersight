@@ -1,19 +1,18 @@
-
 ---
+subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_app_catalog"
-sidebar_current: "docs-intersight-resource-hyperflex-app-catalog"
 description: |-
   A catalog for managing application settings for HyperFlex cluster configuration service.
 ---
 
-# Resource: intersight_hyperflex._app_catalog
+# Resource: intersight_hyperflex_app_catalog
 A catalog for managing application settings for HyperFlex cluster configuration service.
 ## Argument Reference
 The following arguments are supported:
 * `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `feature_limit_external`:(Array with Maximum of one item) - A reference to a hyperflexFeatureLimitExternal resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `additional_properties`:
@@ -78,4 +77,11 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
-* `version`:(string) The catalog version used in HyperFlex cluster configuration service. 
+* `nr_version`:(string) The catalog version used in HyperFlex cluster configuration service. 
+
+
+## Import
+`intersight_hyperflex_app_catalog` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_hyperflex_app_catalog.example 1234567890987654321abcde
+```

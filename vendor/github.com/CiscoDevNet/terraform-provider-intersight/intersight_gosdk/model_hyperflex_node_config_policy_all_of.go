@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -20,10 +20,11 @@ type HyperflexNodeConfigPolicyAllOf struct {
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType  string                       `json:"ObjectType"`
-	DataIpRange NullableHyperflexIpAddrRange `json:"DataIpRange,omitempty"`
-	HxdpIpRange NullableHyperflexIpAddrRange `json:"HxdpIpRange,omitempty"`
-	MgmtIpRange NullableHyperflexIpAddrRange `json:"MgmtIpRange,omitempty"`
+	ObjectType               string                       `json:"ObjectType"`
+	DataIpRange              NullableHyperflexIpAddrRange `json:"DataIpRange,omitempty"`
+	HxdpIpRange              NullableHyperflexIpAddrRange `json:"HxdpIpRange,omitempty"`
+	HypervisorControlIpRange NullableHyperflexIpAddrRange `json:"HypervisorControlIpRange,omitempty"`
+	MgmtIpRange              NullableHyperflexIpAddrRange `json:"MgmtIpRange,omitempty"`
 	// The node name prefix that is used to automatically generate the default hostname for each server. A dash (-) will be appended to the prefix followed by the node number to form a hostname. This default naming scheme can be manually overridden in the node configuration. The maximum length of a prefix is 60, must only contain alphanumeric characters or dash (-), and must start with an alphanumeric character.
 	NodeNamePrefix *string `json:"NodeNamePrefix,omitempty"`
 	// An array of relationships to hyperflexClusterProfile resources.
@@ -191,6 +192,49 @@ func (o *HyperflexNodeConfigPolicyAllOf) UnsetHxdpIpRange() {
 	o.HxdpIpRange.Unset()
 }
 
+// GetHypervisorControlIpRange returns the HypervisorControlIpRange field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *HyperflexNodeConfigPolicyAllOf) GetHypervisorControlIpRange() HyperflexIpAddrRange {
+	if o == nil || o.HypervisorControlIpRange.Get() == nil {
+		var ret HyperflexIpAddrRange
+		return ret
+	}
+	return *o.HypervisorControlIpRange.Get()
+}
+
+// GetHypervisorControlIpRangeOk returns a tuple with the HypervisorControlIpRange field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *HyperflexNodeConfigPolicyAllOf) GetHypervisorControlIpRangeOk() (*HyperflexIpAddrRange, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.HypervisorControlIpRange.Get(), o.HypervisorControlIpRange.IsSet()
+}
+
+// HasHypervisorControlIpRange returns a boolean if a field has been set.
+func (o *HyperflexNodeConfigPolicyAllOf) HasHypervisorControlIpRange() bool {
+	if o != nil && o.HypervisorControlIpRange.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetHypervisorControlIpRange gets a reference to the given NullableHyperflexIpAddrRange and assigns it to the HypervisorControlIpRange field.
+func (o *HyperflexNodeConfigPolicyAllOf) SetHypervisorControlIpRange(v HyperflexIpAddrRange) {
+	o.HypervisorControlIpRange.Set(&v)
+}
+
+// SetHypervisorControlIpRangeNil sets the value for HypervisorControlIpRange to be an explicit nil
+func (o *HyperflexNodeConfigPolicyAllOf) SetHypervisorControlIpRangeNil() {
+	o.HypervisorControlIpRange.Set(nil)
+}
+
+// UnsetHypervisorControlIpRange ensures that no value is present for HypervisorControlIpRange, not even an explicit nil
+func (o *HyperflexNodeConfigPolicyAllOf) UnsetHypervisorControlIpRange() {
+	o.HypervisorControlIpRange.Unset()
+}
+
 // GetMgmtIpRange returns the MgmtIpRange field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *HyperflexNodeConfigPolicyAllOf) GetMgmtIpRange() HyperflexIpAddrRange {
 	if o == nil || o.MgmtIpRange.Get() == nil {
@@ -345,6 +389,9 @@ func (o HyperflexNodeConfigPolicyAllOf) MarshalJSON() ([]byte, error) {
 	if o.HxdpIpRange.IsSet() {
 		toSerialize["HxdpIpRange"] = o.HxdpIpRange.Get()
 	}
+	if o.HypervisorControlIpRange.IsSet() {
+		toSerialize["HypervisorControlIpRange"] = o.HypervisorControlIpRange.Get()
+	}
 	if o.MgmtIpRange.IsSet() {
 		toSerialize["MgmtIpRange"] = o.MgmtIpRange.Get()
 	}
@@ -379,6 +426,7 @@ func (o *HyperflexNodeConfigPolicyAllOf) UnmarshalJSON(bytes []byte) (err error)
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "DataIpRange")
 		delete(additionalProperties, "HxdpIpRange")
+		delete(additionalProperties, "HypervisorControlIpRange")
 		delete(additionalProperties, "MgmtIpRange")
 		delete(additionalProperties, "NodeNamePrefix")
 		delete(additionalProperties, "ClusterProfiles")

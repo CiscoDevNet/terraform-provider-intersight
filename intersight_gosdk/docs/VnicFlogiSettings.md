@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.FlogiSettings"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.FlogiSettings"]
-**Retries** | Pointer to **int64** | The number of times that the system tries to log in to the fabric after the first failure. | [optional] 
-**Timeout** | Pointer to **int64** | The number of milliseconds that the system waits before it tries to log in again. | [optional] 
+**Retries** | Pointer to **int64** | The number of times that the system tries to log in to the fabric after the first failure. | [optional] [default to 8]
+**Timeout** | Pointer to **int64** | The number of milliseconds that the system waits before it tries to log in again. | [optional] [default to 4000]
 
 ## Methods
 

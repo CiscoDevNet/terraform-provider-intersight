@@ -1,15 +1,14 @@
-
 ---
+subcategory: "appliance"
 layout: "intersight"
 page_title: "Intersight: intersight_appliance_restore"
-sidebar_current: "docs-intersight-resource-appliance-restore"
 description: |-
   Restore tracks requests to restore the Intersight Appliance. There will be only
 one Restore managed object with a 'Started' state at any time. All other Restore
 managed objects will be in terminal states.
 ---
 
-# Resource: intersight_appliance._restore
+# Resource: intersight_appliance_restore
 Restore tracks requests to restore the Intersight Appliance. There will be only
 one Restore managed object with a 'Started' state at any time. All other Restore
 managed objects will be in terminal states.
@@ -33,7 +32,7 @@ This complex property has following sub-properties:
 * `messages`:
                 (Array of schema.TypeString) -
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `password`:(string) Password for authenticating with the file server. 
 * `protocol`:(string) Communication protocol used by the file server (e.g. scp or sftp).* `scp` - Secure Copy Protocol (SCP) to access the file server.* `sftp` - SSH File Transfer Protocol (SFTP) to access file server. 
 * `remote_host`:(string) Hostname of the remote file server. 
@@ -48,3 +47,10 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `username`:(string) Username to authenticate the fileserver. 
+
+
+## Import
+`intersight_appliance_restore` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_appliance_restore.example 1234567890987654321abcde
+```

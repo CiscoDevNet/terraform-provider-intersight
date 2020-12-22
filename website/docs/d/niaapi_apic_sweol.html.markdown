@@ -1,13 +1,12 @@
-
 ---
+subcategory: "niaapi"
 layout: "intersight"
 page_title: "Intersight: intersight_niaapi_apic_sweol"
-sidebar_current: "docs-intersight-data-source-niaapi-apic-sweol"
 description: |-
-The software end of life notice for APIC.
+  The software end of life notice for APIC.
 ---
 
-# Data Source: intersight_niaapi._apic_sweol
+# Data Source: intersight_niaapi_apic_sweol
 The software end of life notice for APIC.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
@@ -15,7 +14,6 @@ The following arguments can be used to get data of already created objects in In
 * `announcement_date`:(string) Date time of this notice Announced. 
 * `announcement_date_epoch`:(int) Epoch time of this notice Announced. 
 * `bulletin_no`:(string) The bulletinno of this software release end of life notice. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `description`:(string) The description of this software release end of life notice. 
 * `endof_new_service_attachment_date`:(string) Date time of End of New service attachment . 
 * `endof_new_service_attachment_date_epoch`:(int) Epoch time of End of New service attachment . 
@@ -30,5 +28,4 @@ The following arguments can be used to get data of already created objects in In
 * `last_ship_date_epoch`:(int) Epoch time of Lastship Date. 
 * `migration_url`:(string) The URL of this migration notice. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `software_eol_url`:(string) Software end of life notice URL link to the notice webpage. 

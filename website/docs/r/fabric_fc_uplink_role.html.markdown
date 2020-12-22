@@ -1,13 +1,12 @@
-
 ---
+subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_fc_uplink_role"
-sidebar_current: "docs-intersight-resource-fabric-fc-uplink-role"
 description: |-
   Configuration object sent by user to create a fc uplink port.
 ---
 
-# Resource: intersight_fabric._fc_uplink_role
+# Resource: intersight_fabric_fc_uplink_role
 Configuration object sent by user to create a fc uplink port.
 ## Argument Reference
 The following arguments are supported:
@@ -15,7 +14,7 @@ The following arguments are supported:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
 * `admin_speed`:(string) Admin configured speed for the port.* `Auto` - Admin configurable speed AUTO ( default ).* `8Gbps` - Admin configurable speed 8Gbps.* `16Gbps` - Admin configurable speed 16Gbps.* `32Gbps` - Admin configurable speed 32Gbps. 
 * `aggregate_port_id`:(int) Breakout port Identifier of the Switch Interface.When a port is not configured as a breakout port, the aggregatePortId is set to 0, and unused.When a port is configured as a breakout port, the 'aggregatePortId' port number as labeled on the equipment,e.g. the id of the port on the switch. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `fill_pattern`:(string) Fill pattern to differentiate the configs in NPIV.* `Idle` - Fc Fill Pattern type Idle.* `Arbff` - Fc Fill Pattern type Arbff. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
@@ -36,3 +35,10 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `vsan_id`:(int) Virtual San Identifier associated to the FC port. 
+
+
+## Import
+`intersight_fabric_fc_uplink_role` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_fabric_fc_uplink_role.example 1234567890987654321abcde
+```

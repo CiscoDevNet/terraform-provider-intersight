@@ -1,19 +1,20 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceUcsdBackupInfo() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceUcsdBackupInfoRead,
+		ReadContext: dataSourceUcsdBackupInfoRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -88,7 +89,7 @@ func dataSourceUcsdBackupInfo() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -256,10 +257,11 @@ func dataSourceUcsdBackupInfo() *schema.Resource {
 	}
 }
 
-func dataSourceUcsdBackupInfoRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceUcsdBackupInfoRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.UcsdBackupInfo{}
 	if v, ok := d.GetOk("backup_file_name"); ok {
 		x := (v.(string))
@@ -336,25 +338,25 @@ func dataSourceUcsdBackupInfoRead(d *schema.ResourceData, meta interface{}) erro
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of UcsdBackupInfo object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.UcsdApi.GetUcsdBackupInfoList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.UcsdApi.GetUcsdBackupInfoList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching UcsdBackupInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for UcsdBackupInfo list: %s", err.Error())
 	}
 	var s = &models.UcsdBackupInfoList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to UcsdBackupInfo: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to UcsdBackupInfo list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for UcsdBackupInfo did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -363,78 +365,78 @@ func dataSourceUcsdBackupInfoRead(d *schema.ResourceData, meta interface{}) erro
 			var s = &models.UcsdBackupInfo{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("backup_file_name", (s.GetBackupFileName())); err != nil {
-				return fmt.Errorf("error occurred while setting property BackupFileName: %+v", err)
+				return diag.Errorf("error occurred while setting property BackupFileName: %s", err.Error())
 			}
 			if err := d.Set("backup_location", (s.GetBackupLocation())); err != nil {
-				return fmt.Errorf("error occurred while setting property BackupLocation: %+v", err)
+				return diag.Errorf("error occurred while setting property BackupLocation: %s", err.Error())
 			}
 			if err := d.Set("backup_server_ip", (s.GetBackupServerIp())); err != nil {
-				return fmt.Errorf("error occurred while setting property BackupServerIp: %+v", err)
+				return diag.Errorf("error occurred while setting property BackupServerIp: %s", err.Error())
 			}
 			if err := d.Set("backup_size", (s.GetBackupSize())); err != nil {
-				return fmt.Errorf("error occurred while setting property BackupSize: %+v", err)
+				return diag.Errorf("error occurred while setting property BackupSize: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 
 			if err := d.Set("connectors", flattenListUcsdConnectorPack(s.GetConnectors(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Connectors: %+v", err)
+				return diag.Errorf("error occurred while setting property Connectors: %s", err.Error())
 			}
 			if err := d.Set("duration", (s.GetDuration())); err != nil {
-				return fmt.Errorf("error occurred while setting property Duration: %+v", err)
+				return diag.Errorf("error occurred while setting property Duration: %s", err.Error())
 			}
 			if err := d.Set("failure_reason", (s.GetFailureReason())); err != nil {
-				return fmt.Errorf("error occurred while setting property FailureReason: %+v", err)
+				return diag.Errorf("error occurred while setting property FailureReason: %s", err.Error())
 			}
 			if err := d.Set("is_purged", (s.GetIsPurged())); err != nil {
-				return fmt.Errorf("error occurred while setting property IsPurged: %+v", err)
+				return diag.Errorf("error occurred while setting property IsPurged: %s", err.Error())
 			}
 
 			if err := d.Set("last_modified", (s.GetLastModified()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property LastModified: %+v", err)
+				return diag.Errorf("error occurred while setting property LastModified: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("percentage_completion", (s.GetPercentageCompletion())); err != nil {
-				return fmt.Errorf("error occurred while setting property PercentageCompletion: %+v", err)
+				return diag.Errorf("error occurred while setting property PercentageCompletion: %s", err.Error())
 			}
 			if err := d.Set("product_version", (s.GetProductVersion())); err != nil {
-				return fmt.Errorf("error occurred while setting property ProductVersion: %+v", err)
+				return diag.Errorf("error occurred while setting property ProductVersion: %s", err.Error())
 			}
 			if err := d.Set("protocol", (s.GetProtocol())); err != nil {
-				return fmt.Errorf("error occurred while setting property Protocol: %+v", err)
+				return diag.Errorf("error occurred while setting property Protocol: %s", err.Error())
 			}
 
 			if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property RegisteredDevice: %+v", err)
+				return diag.Errorf("error occurred while setting property RegisteredDevice: %s", err.Error())
 			}
 			if err := d.Set("stage_completion", (s.GetStageCompletion())); err != nil {
-				return fmt.Errorf("error occurred while setting property StageCompletion: %+v", err)
+				return diag.Errorf("error occurred while setting property StageCompletion: %s", err.Error())
 			}
 
 			if err := d.Set("start_time", (s.GetStartTime()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property StartTime: %+v", err)
+				return diag.Errorf("error occurred while setting property StartTime: %s", err.Error())
 			}
 			if err := d.Set("status", (s.GetStatus())); err != nil {
-				return fmt.Errorf("error occurred while setting property Status: %+v", err)
+				return diag.Errorf("error occurred while setting property Status: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

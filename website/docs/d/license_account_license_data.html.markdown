@@ -1,13 +1,12 @@
-
 ---
+subcategory: "license"
 layout: "intersight"
 page_title: "Intersight: intersight_license_account_license_data"
-sidebar_current: "docs-intersight-data-source-license-account-license-data"
 description: |-
-License information for an account.
+  License information for an account.
 ---
 
-# Data Source: intersight_license._account_license_data
+# Data Source: intersight_license_account_license_data
 License information for an account.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
@@ -17,7 +16,6 @@ The following arguments can be used to get data of already created objects in In
 * `auth_initial_time`:(string) Intial authorization time. 
 * `auth_next_time`:(string) Next time for the authorization. 
 * `category`:(string) Account license data category name. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `default_license_type`:(string) Default license tier set by user.* `Base` - Base as a License type. It is default license type.* `Essential` - Essential as a License type.* `Standard` - Standard as a License type.* `Advantage` - Advantage as a License type.* `Premier` - Premier as a License type.* `IWO-Essential` - IWO-Essential as a License type.* `IWO-Advantage` - IWO-Advantage as a License type.* `IWO-Premier` - IWO-Premier as a License type. 
 * `error_desc`:(string) The detailed error message when there is any error related to license sync of this account. 
 * `group`:(string) Account license data group name. 
@@ -27,7 +25,6 @@ The following arguments can be used to get data of already created objects in In
 * `license_state`:(string) Aggregrated mode for the agent. 
 * `license_tech_support_info`:(string) Tech-support info of a smart-agent. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `register_expire_time`:(string) Registration exipiration time. 
 * `register_initial_time`:(string) Initial time of registration. 
 * `register_next_time`:(string) Next time for the license registration. 

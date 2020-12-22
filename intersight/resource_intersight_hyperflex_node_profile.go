@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceHyperflexNodeProfile() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceHyperflexNodeProfileCreate,
-		Read:   resourceHyperflexNodeProfileRead,
-		Update: resourceHyperflexNodeProfileUpdate,
-		Delete: resourceHyperflexNodeProfileDelete,
+		CreateContext: resourceHyperflexNodeProfileCreate,
+		ReadContext:   resourceHyperflexNodeProfileRead,
+		UpdateContext: resourceHyperflexNodeProfileUpdate,
+		DeleteContext: resourceHyperflexNodeProfileDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -124,6 +127,11 @@ func resourceHyperflexNodeProfile() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"hypervisor_control_ip": {
+				Description: "IP address for hypervisor control such as VM migration or pod management.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"hypervisor_data_ip": {
 				Description: "IP address for storage data network (Hypervisor interface).",
 				Type:        schema.TypeString,
@@ -147,7 +155,7 @@ func resourceHyperflexNodeProfile() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -226,7 +234,7 @@ func resourceHyperflexNodeProfile() *schema.Resource {
 	}
 }
 
-func resourceHyperflexNodeProfileCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexNodeProfileCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -343,6 +351,11 @@ func resourceHyperflexNodeProfileCreate(d *schema.ResourceData, meta interface{}
 		o.SetHxdpMgmtIp(x)
 	}
 
+	if v, ok := d.GetOk("hypervisor_control_ip"); ok {
+		x := (v.(string))
+		o.SetHypervisorControlIp(x)
+	}
+
 	if v, ok := d.GetOk("hypervisor_data_ip"); ok {
 		x := (v.(string))
 		o.SetHypervisorDataIp(x)
@@ -449,93 +462,101 @@ func resourceHyperflexNodeProfileCreate(d *schema.ResourceData, meta interface{}
 	}
 
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexNodeProfile(conn.ctx).HyperflexNodeProfile(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating HyperflexNodeProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceHyperflexNodeProfileRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceHyperflexNodeProfileRead(c, d, meta)
 }
 
-func resourceHyperflexNodeProfileRead(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexNodeProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.HyperflexApi.GetHyperflexNodeProfileByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "HyperflexNodeProfile object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching HyperflexNodeProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in HyperflexNodeProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("assigned_server", flattenMapComputeRackUnitRelationship(s.GetAssignedServer(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property AssignedServer: %+v", err)
+		return diag.Errorf("error occurred while setting property AssignedServer in HyperflexNodeProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in HyperflexNodeProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("cluster_profile", flattenMapHyperflexClusterProfileRelationship(s.GetClusterProfile(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ClusterProfile: %+v", err)
+		return diag.Errorf("error occurred while setting property ClusterProfile in HyperflexNodeProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in HyperflexNodeProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("hxdp_data_ip", (s.GetHxdpDataIp())); err != nil {
-		return fmt.Errorf("error occurred while setting property HxdpDataIp: %+v", err)
+		return diag.Errorf("error occurred while setting property HxdpDataIp in HyperflexNodeProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("hxdp_mgmt_ip", (s.GetHxdpMgmtIp())); err != nil {
-		return fmt.Errorf("error occurred while setting property HxdpMgmtIp: %+v", err)
+		return diag.Errorf("error occurred while setting property HxdpMgmtIp in HyperflexNodeProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("hypervisor_control_ip", (s.GetHypervisorControlIp())); err != nil {
+		return diag.Errorf("error occurred while setting property HypervisorControlIp in HyperflexNodeProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("hypervisor_data_ip", (s.GetHypervisorDataIp())); err != nil {
-		return fmt.Errorf("error occurred while setting property HypervisorDataIp: %+v", err)
+		return diag.Errorf("error occurred while setting property HypervisorDataIp in HyperflexNodeProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("hypervisor_mgmt_ip", (s.GetHypervisorMgmtIp())); err != nil {
-		return fmt.Errorf("error occurred while setting property HypervisorMgmtIp: %+v", err)
+		return diag.Errorf("error occurred while setting property HypervisorMgmtIp in HyperflexNodeProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in HyperflexNodeProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in HyperflexNodeProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in HyperflexNodeProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("src_template", flattenMapPolicyAbstractProfileRelationship(s.GetSrcTemplate(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property SrcTemplate: %+v", err)
+		return diag.Errorf("error occurred while setting property SrcTemplate in HyperflexNodeProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in HyperflexNodeProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("type", (s.GetType())); err != nil {
-		return fmt.Errorf("error occurred while setting property Type: %+v", err)
+		return diag.Errorf("error occurred while setting property Type in HyperflexNodeProfile object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceHyperflexNodeProfileUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexNodeProfileUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -658,6 +679,12 @@ func resourceHyperflexNodeProfileUpdate(d *schema.ResourceData, meta interface{}
 		o.SetHxdpMgmtIp(x)
 	}
 
+	if d.HasChange("hypervisor_control_ip") {
+		v := d.Get("hypervisor_control_ip")
+		x := (v.(string))
+		o.SetHypervisorControlIp(x)
+	}
+
 	if d.HasChange("hypervisor_data_ip") {
 		v := d.Get("hypervisor_data_ip")
 		x := (v.(string))
@@ -771,23 +798,24 @@ func resourceHyperflexNodeProfileUpdate(d *schema.ResourceData, meta interface{}
 	}
 
 	r := conn.ApiClient.HyperflexApi.UpdateHyperflexNodeProfile(conn.ctx, d.Id()).HyperflexNodeProfile(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating HyperflexNodeProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexNodeProfileRead(d, meta)
+	return resourceHyperflexNodeProfileRead(c, d, meta)
 }
 
-func resourceHyperflexNodeProfileDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexNodeProfileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexNodeProfile(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting HyperflexNodeProfile object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

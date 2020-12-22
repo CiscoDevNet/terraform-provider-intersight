@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.TcpOffloadSettings"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.TcpOffloadSettings"]
-**LargeReceive** | Pointer to **bool** | Enables the reassembly of segmented packets in hardware before sending them to the CPU. | [optional] 
-**LargeSend** | Pointer to **bool** | Enables the CPU to send large packets to the hardware for segmentation. | [optional] 
-**RxChecksum** | Pointer to **bool** | When enabled, the CPU sends all packet checksums to the hardware for validation. | [optional] 
-**TxChecksum** | Pointer to **bool** | When enabled, the CPU sends all packets to the hardware so that the checksum can be calculated. | [optional] 
+**LargeReceive** | Pointer to **bool** | Enables the reassembly of segmented packets in hardware before sending them to the CPU. | [optional] [default to true]
+**LargeSend** | Pointer to **bool** | Enables the CPU to send large packets to the hardware for segmentation. | [optional] [default to true]
+**RxChecksum** | Pointer to **bool** | When enabled, the CPU sends all packet checksums to the hardware for validation. | [optional] [default to true]
+**TxChecksum** | Pointer to **bool** | When enabled, the CPU sends all packets to the hardware so that the checksum can be calculated. | [optional] [default to true]
 
 ## Methods
 

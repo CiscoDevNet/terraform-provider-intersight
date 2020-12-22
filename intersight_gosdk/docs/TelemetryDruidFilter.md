@@ -8,9 +8,9 @@ Name | Type | Description | Notes
 **ExtractionFn** | Pointer to **map[string]interface{}** | All filters except the \&quot;spatial\&quot; filter support extraction functions. An extraction function is defined by setting the \&quot;extractionFn\&quot; field on a filter. See Extraction function for more details on extraction functions. If specified, the extraction function will be used to transform input values before the filter is applied. The example below shows a selector filter combined with an extraction function. This filter will transform input values according to the values defined in the lookup map; transformed values will then be matched with the string \&quot;bar_1\&quot;. | [optional] 
 **Dimension** | **string** | null | 
 **Value** | **string** | The value of a dimension. | 
-**Dimensions** | [**[]TelemetryDruidDimensionSpec**](telemetry.DruidDimensionSpec.md) | A list of DimensionSpecs, making it possible to apply an extraction function if needed. | 
+**Dimensions** | [**[]TelemetryDruidDimensionSpec**](TelemetryDruidDimensionSpec.md) | A list of DimensionSpecs, making it possible to apply an extraction function if needed. | 
 **Pattern** | **string** | null | 
-**Fields** | [**[]TelemetryDruidFilter**](telemetry.DruidFilter.md) |  | 
+**Fields** | [**[]TelemetryDruidFilter**](TelemetryDruidFilter.md) |  | 
 **Field** | [**TelemetryDruidFilter**](telemetry.DruidFilter.md) |  | 
 
 ## Methods

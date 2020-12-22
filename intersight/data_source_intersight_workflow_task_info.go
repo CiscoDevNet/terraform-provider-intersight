@@ -1,19 +1,20 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceWorkflowTaskInfo() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceWorkflowTaskInfoRead,
+		ReadContext: dataSourceWorkflowTaskInfoRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -21,7 +22,7 @@ func dataSourceWorkflowTaskInfo() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -117,7 +118,7 @@ func dataSourceWorkflowTaskInfo() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -344,10 +345,11 @@ func dataSourceWorkflowTaskInfo() *schema.Resource {
 	}
 }
 
-func dataSourceWorkflowTaskInfoRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceWorkflowTaskInfoRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.WorkflowTaskInfo{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -416,25 +418,25 @@ func dataSourceWorkflowTaskInfoRead(d *schema.ResourceData, meta interface{}) er
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of WorkflowTaskInfo object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.WorkflowApi.GetWorkflowTaskInfoList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowTaskInfoList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching WorkflowTaskInfo: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for WorkflowTaskInfo list: %s", err.Error())
 	}
 	var s = &models.WorkflowTaskInfoList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to WorkflowTaskInfo: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to WorkflowTaskInfo list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for WorkflowTaskInfo did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -443,87 +445,87 @@ func dataSourceWorkflowTaskInfoRead(d *schema.ResourceData, meta interface{}) er
 			var s = &models.WorkflowTaskInfo{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("description", (s.GetDescription())); err != nil {
-				return fmt.Errorf("error occurred while setting property Description: %+v", err)
+				return diag.Errorf("error occurred while setting property Description: %s", err.Error())
 			}
 
 			if err := d.Set("end_time", (s.GetEndTime()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property EndTime: %+v", err)
+				return diag.Errorf("error occurred while setting property EndTime: %s", err.Error())
 			}
 			if err := d.Set("failure_reason", (s.GetFailureReason())); err != nil {
-				return fmt.Errorf("error occurred while setting property FailureReason: %+v", err)
+				return diag.Errorf("error occurred while setting property FailureReason: %s", err.Error())
 			}
 			if err := d.Set("inst_id", (s.GetInstId())); err != nil {
-				return fmt.Errorf("error occurred while setting property InstId: %+v", err)
+				return diag.Errorf("error occurred while setting property InstId: %s", err.Error())
 			}
 			if err := d.Set("internal", (s.GetInternal())); err != nil {
-				return fmt.Errorf("error occurred while setting property Internal: %+v", err)
+				return diag.Errorf("error occurred while setting property Internal: %s", err.Error())
 			}
 			if err := d.Set("label", (s.GetLabel())); err != nil {
-				return fmt.Errorf("error occurred while setting property Label: %+v", err)
+				return diag.Errorf("error occurred while setting property Label: %s", err.Error())
 			}
 
 			if err := d.Set("message", flattenListWorkflowMessage(s.GetMessage(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Message: %+v", err)
+				return diag.Errorf("error occurred while setting property Message: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("name", (s.GetName())); err != nil {
-				return fmt.Errorf("error occurred while setting property Name: %+v", err)
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("ref_name", (s.GetRefName())); err != nil {
-				return fmt.Errorf("error occurred while setting property RefName: %+v", err)
+				return diag.Errorf("error occurred while setting property RefName: %s", err.Error())
 			}
 			if err := d.Set("retry_count", (s.GetRetryCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property RetryCount: %+v", err)
+				return diag.Errorf("error occurred while setting property RetryCount: %s", err.Error())
 			}
 			if err := d.Set("rollback_disabled", (s.GetRollbackDisabled())); err != nil {
-				return fmt.Errorf("error occurred while setting property RollbackDisabled: %+v", err)
+				return diag.Errorf("error occurred while setting property RollbackDisabled: %s", err.Error())
 			}
 			if err := d.Set("running_inst_id", (s.GetRunningInstId())); err != nil {
-				return fmt.Errorf("error occurred while setting property RunningInstId: %+v", err)
+				return diag.Errorf("error occurred while setting property RunningInstId: %s", err.Error())
 			}
 
 			if err := d.Set("start_time", (s.GetStartTime()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property StartTime: %+v", err)
+				return diag.Errorf("error occurred while setting property StartTime: %s", err.Error())
 			}
 			if err := d.Set("status", (s.GetStatus())); err != nil {
-				return fmt.Errorf("error occurred while setting property Status: %+v", err)
+				return diag.Errorf("error occurred while setting property Status: %s", err.Error())
 			}
 
 			if err := d.Set("sub_workflow_info", flattenMapWorkflowWorkflowInfoRelationship(s.GetSubWorkflowInfo(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property SubWorkflowInfo: %+v", err)
+				return diag.Errorf("error occurred while setting property SubWorkflowInfo: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 
 			if err := d.Set("task_definition", flattenMapWorkflowTaskDefinitionRelationship(s.GetTaskDefinition(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property TaskDefinition: %+v", err)
+				return diag.Errorf("error occurred while setting property TaskDefinition: %s", err.Error())
 			}
 
 			if err := d.Set("task_inst_id_list", flattenListWorkflowTaskRetryInfo(s.GetTaskInstIdList(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property TaskInstIdList: %+v", err)
+				return diag.Errorf("error occurred while setting property TaskInstIdList: %s", err.Error())
 			}
 
 			if err := d.Set("workflow_info", flattenMapWorkflowWorkflowInfoRelationship(s.GetWorkflowInfo(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property WorkflowInfo: %+v", err)
+				return diag.Errorf("error occurred while setting property WorkflowInfo: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

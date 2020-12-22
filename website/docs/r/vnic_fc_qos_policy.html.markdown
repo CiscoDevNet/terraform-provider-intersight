@@ -1,13 +1,12 @@
-
 ---
+subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_fc_qos_policy"
-sidebar_current: "docs-intersight-resource-vnic-fc-qos-policy"
 description: |-
   A Fibre Channel Quality of Service (QoS) policy assigns a system class to the outgoing traffic for a vHBA. This system class determines the quality of service for the outgoing traffic. For certain adapters additional controls can also be specified like burst and rate on the outgoing traffic.
 ---
 
-# Resource: intersight_vnic._fc_qos_policy
+# Resource: intersight_vnic_fc_qos_policy
 A Fibre Channel Quality of Service (QoS) policy assigns a system class to the outgoing traffic for a vHBA. This system class determines the quality of service for the outgoing traffic. For certain adapters additional controls can also be specified like burst and rate on the outgoing traffic.
 ## Argument Reference
 The following arguments are supported:
@@ -36,3 +35,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_vnic_fc_qos_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_vnic_fc_qos_policy.example 1234567890987654321abcde
+```

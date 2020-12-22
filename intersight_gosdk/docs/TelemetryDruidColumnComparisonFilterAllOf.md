@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Dimensions** | [**[]TelemetryDruidDimensionSpec**](telemetry.DruidDimensionSpec.md) | A list of DimensionSpecs, making it possible to apply an extraction function if needed. | 
+**Dimensions** | [**[]TelemetryDruidDimensionSpec**](TelemetryDruidDimensionSpec.md) | A list of DimensionSpecs, making it possible to apply an extraction function if needed. | 
 
 ## Methods
 

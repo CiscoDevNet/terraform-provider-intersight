@@ -1,13 +1,12 @@
-
 ---
+subcategory: "ippool"
 layout: "intersight"
 page_title: "Intersight: intersight_ippool_pool"
-sidebar_current: "docs-intersight-resource-ippool-pool"
 description: |-
   Pool represents a collection of IPv4 and/or IPv6 addresses that can be allocated to other configuration entities like server profiles.
 ---
 
-# Resource: intersight_ippool._pool
+# Resource: intersight_ippool_pool
 Pool represents a collection of IPv4 and/or IPv6 addresses that can be allocated to other configuration entities like server profiles.
 ## Argument Reference
 The following arguments are supported:
@@ -15,7 +14,7 @@ The following arguments are supported:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
 * `assigned`:(int)(Computed) Number of IDs that are currently assigned. 
 * `assignment_order`:(string) Assignment order decides the order in which the next identifier is allocated.* `sequential` - Identifiers are assigned in a sequential order.* `default` - Assignment order is decided by the system. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `description`:(string) Description of the policy. 
 * `ip_v4_blocks`:(Array)
 This complex property has following sub-properties:
@@ -33,7 +32,7 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `gateway`:(string)(Computed) IP address of the default IPv4 gateway. 
   + `netmask`:(string)(Computed) A subnet mask is a 32-bit number that masks an IP address and divides the IP address into network address and host address. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `primary_dns`:(string)(Computed) IP Address of the primary Domain Name System (DNS) server. 
   + `secondary_dns`:(string)(Computed) IP Address of the secondary Domain Name System (DNS) server. 
 * `ip_v6_blocks`:(Array)
@@ -85,3 +84,10 @@ This complex property has following sub-properties:
 * `v4_size`:(int)(Computed) Number of IPv4 addresses in this pool. 
 * `v6_assigned`:(int)(Computed) Number of IPv6 addresses currently in use. 
 * `v6_size`:(int)(Computed) Number of IPv6 addresses in this pool. 
+
+
+## Import
+`intersight_ippool_pool` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_ippool_pool.example 1234567890987654321abcde
+```

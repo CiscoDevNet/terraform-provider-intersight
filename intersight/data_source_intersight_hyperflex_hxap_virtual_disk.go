@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceHyperflexHxapVirtualDisk() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceHyperflexHxapVirtualDiskRead,
+		ReadContext: dataSourceHyperflexHxapVirtualDiskRead,
 		Schema: map[string]*schema.Schema{
 			"access_mode": {
 				Description: "Access mode of the virtual disk.\n* `ReadWriteOnce` - Read write permisisons to a Virtual disk by a single virtual machine.\n* `ReadWriteMany` - Read write permisisons to a Virtual disk by multiple virtual machines.\n* `ReadOnlyMany` - Read only permisisons to a Virtual disk by multiple virtual machines.",
@@ -265,10 +266,11 @@ func dataSourceHyperflexHxapVirtualDisk() *schema.Resource {
 	}
 }
 
-func dataSourceHyperflexHxapVirtualDiskRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceHyperflexHxapVirtualDiskRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.HyperflexHxapVirtualDisk{}
 	if v, ok := d.GetOk("access_mode"); ok {
 		x := (v.(string))
@@ -313,25 +315,25 @@ func dataSourceHyperflexHxapVirtualDiskRead(d *schema.ResourceData, meta interfa
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of HyperflexHxapVirtualDisk object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.HyperflexApi.GetHyperflexHxapVirtualDiskList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.HyperflexApi.GetHyperflexHxapVirtualDiskList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching HyperflexHxapVirtualDisk: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for HyperflexHxapVirtualDisk list: %s", err.Error())
 	}
 	var s = &models.HyperflexHxapVirtualDiskList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to HyperflexHxapVirtualDisk: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to HyperflexHxapVirtualDisk list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for HyperflexHxapVirtualDisk did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -340,63 +342,63 @@ func dataSourceHyperflexHxapVirtualDiskRead(d *schema.ResourceData, meta interfa
 			var s = &models.HyperflexHxapVirtualDisk{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("access_mode", (s.GetAccessMode())); err != nil {
-				return fmt.Errorf("error occurred while setting property AccessMode: %+v", err)
+				return diag.Errorf("error occurred while setting property AccessMode: %s", err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("capacity", (s.GetCapacity())); err != nil {
-				return fmt.Errorf("error occurred while setting property Capacity: %+v", err)
+				return diag.Errorf("error occurred while setting property Capacity: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 
 			if err := d.Set("cluster", flattenMapHyperflexHxapClusterRelationship(s.GetCluster(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Cluster: %+v", err)
+				return diag.Errorf("error occurred while setting property Cluster: %s", err.Error())
 			}
 			if err := d.Set("mode", (s.GetMode())); err != nil {
-				return fmt.Errorf("error occurred while setting property Mode: %+v", err)
+				return diag.Errorf("error occurred while setting property Mode: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("name", (s.GetName())); err != nil {
-				return fmt.Errorf("error occurred while setting property Name: %+v", err)
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 
 			if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property RegisteredDevice: %+v", err)
+				return diag.Errorf("error occurred while setting property RegisteredDevice: %s", err.Error())
 			}
 			if err := d.Set("source_file_path", (s.GetSourceFilePath())); err != nil {
-				return fmt.Errorf("error occurred while setting property SourceFilePath: %+v", err)
+				return diag.Errorf("error occurred while setting property SourceFilePath: %s", err.Error())
 			}
 			if err := d.Set("source_virtual_disk", (s.GetSourceVirtualDisk())); err != nil {
-				return fmt.Errorf("error occurred while setting property SourceVirtualDisk: %+v", err)
+				return diag.Errorf("error occurred while setting property SourceVirtualDisk: %s", err.Error())
 			}
 
 			if err := d.Set("status", flattenMapHyperflexDiskStatus(s.GetStatus(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Status: %+v", err)
+				return diag.Errorf("error occurred while setting property Status: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("uuid", (s.GetUuid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Uuid: %+v", err)
+				return diag.Errorf("error occurred while setting property Uuid: %s", err.Error())
 			}
 
 			if err := d.Set("virtual_machine", flattenMapHyperflexHxapVirtualMachineRelationship(s.GetVirtualMachine(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property VirtualMachine: %+v", err)
+				return diag.Errorf("error occurred while setting property VirtualMachine: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

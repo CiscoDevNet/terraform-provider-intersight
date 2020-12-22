@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceCapabilitySwitchCapability() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceCapabilitySwitchCapabilityCreate,
-		Read:   resourceCapabilitySwitchCapabilityRead,
-		Update: resourceCapabilitySwitchCapabilityUpdate,
-		Delete: resourceCapabilitySwitchCapabilityDelete,
+		CreateContext: resourceCapabilitySwitchCapabilityCreate,
+		ReadContext:   resourceCapabilitySwitchCapabilityRead,
+		UpdateContext: resourceCapabilitySwitchCapabilityUpdate,
+		DeleteContext: resourceCapabilitySwitchCapabilityDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -22,7 +25,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -660,47 +663,6 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 			},
-			"section": {
-				Description: "A reference to a capabilitySection resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				ConfigMode: schema.SchemaConfigModeAttr,
-				Computed:   true,
-			},
 			"sereno_netflow_supported": {
 				Description: "Sereno Adaptor with Netflow support on this switch.",
 				Type:        schema.TypeBool,
@@ -931,7 +893,7 @@ func resourceCapabilitySwitchCapability() *schema.Resource {
 	}
 }
 
-func resourceCapabilitySwitchCapabilityCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceCapabilitySwitchCapabilityCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1660,49 +1622,6 @@ func resourceCapabilitySwitchCapabilityCreate(d *schema.ResourceData, meta inter
 		}
 	}
 
-	if v, ok := d.GetOk("section"); ok {
-		p := make([]models.CapabilitySectionRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := models.NewMoMoRefWithDefaults()
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsCapabilitySectionRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetSection(x)
-		}
-	}
-
 	if v, ok := d.GetOkExists("sereno_netflow_supported"); ok {
 		x := v.(bool)
 		o.SetSerenoNetflowSupported(x)
@@ -1965,169 +1884,169 @@ func resourceCapabilitySwitchCapabilityCreate(d *schema.ResourceData, meta inter
 	}
 
 	r := conn.ApiClient.CapabilityApi.CreateCapabilitySwitchCapability(conn.ctx).CapabilitySwitchCapability(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating CapabilitySwitchCapability: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceCapabilitySwitchCapabilityRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceCapabilitySwitchCapabilityRead(c, d, meta)
 }
 
-func resourceCapabilitySwitchCapabilityRead(d *schema.ResourceData, meta interface{}) error {
+func resourceCapabilitySwitchCapabilityRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.CapabilityApi.GetCapabilitySwitchCapabilityByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "CapabilitySwitchCapability object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching CapabilitySwitchCapability: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("default_fcoe_vlan", (s.GetDefaultFcoeVlan())); err != nil {
-		return fmt.Errorf("error occurred while setting property DefaultFcoeVlan: %+v", err)
+		return diag.Errorf("error occurred while setting property DefaultFcoeVlan in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("dynamic_vifs_supported", (s.GetDynamicVifsSupported())); err != nil {
-		return fmt.Errorf("error occurred while setting property DynamicVifsSupported: %+v", err)
+		return diag.Errorf("error occurred while setting property DynamicVifsSupported in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("fan_modules_supported", (s.GetFanModulesSupported())); err != nil {
-		return fmt.Errorf("error occurred while setting property FanModulesSupported: %+v", err)
+		return diag.Errorf("error occurred while setting property FanModulesSupported in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("fc_end_host_mode_reserved_vsans", flattenListCapabilityPortRange(s.GetFcEndHostModeReservedVsans(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property FcEndHostModeReservedVsans: %+v", err)
+		return diag.Errorf("error occurred while setting property FcEndHostModeReservedVsans in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("fc_uplink_ports_auto_negotiation_supported", (s.GetFcUplinkPortsAutoNegotiationSupported())); err != nil {
-		return fmt.Errorf("error occurred while setting property FcUplinkPortsAutoNegotiationSupported: %+v", err)
+		return diag.Errorf("error occurred while setting property FcUplinkPortsAutoNegotiationSupported in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("locator_beacon_supported", (s.GetLocatorBeaconSupported())); err != nil {
-		return fmt.Errorf("error occurred while setting property LocatorBeaconSupported: %+v", err)
+		return diag.Errorf("error occurred while setting property LocatorBeaconSupported in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("max_ports", (s.GetMaxPorts())); err != nil {
-		return fmt.Errorf("error occurred while setting property MaxPorts: %+v", err)
+		return diag.Errorf("error occurred while setting property MaxPorts in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("max_slots", (s.GetMaxSlots())); err != nil {
-		return fmt.Errorf("error occurred while setting property MaxSlots: %+v", err)
+		return diag.Errorf("error occurred while setting property MaxSlots in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("network_limits", flattenMapCapabilitySwitchNetworkLimits(s.GetNetworkLimits(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property NetworkLimits: %+v", err)
+		return diag.Errorf("error occurred while setting property NetworkLimits in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("pid", (s.GetPid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Pid: %+v", err)
+		return diag.Errorf("error occurred while setting property Pid in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("ports_supporting100g_speed", flattenListCapabilityPortRange(s.GetPortsSupporting100gSpeed(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property PortsSupporting100gSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property PortsSupporting100gSpeed in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("ports_supporting10g_speed", flattenListCapabilityPortRange(s.GetPortsSupporting10gSpeed(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property PortsSupporting10gSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property PortsSupporting10gSpeed in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("ports_supporting1g_speed", flattenListCapabilityPortRange(s.GetPortsSupporting1gSpeed(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property PortsSupporting1gSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property PortsSupporting1gSpeed in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("ports_supporting25g_speed", flattenListCapabilityPortRange(s.GetPortsSupporting25gSpeed(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property PortsSupporting25gSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property PortsSupporting25gSpeed in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("ports_supporting40g_speed", flattenListCapabilityPortRange(s.GetPortsSupporting40gSpeed(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property PortsSupporting40gSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property PortsSupporting40gSpeed in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("ports_supporting_breakout", flattenListCapabilityPortRange(s.GetPortsSupportingBreakout(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property PortsSupportingBreakout: %+v", err)
+		return diag.Errorf("error occurred while setting property PortsSupportingBreakout in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("ports_supporting_fcoe", flattenListCapabilityPortRange(s.GetPortsSupportingFcoe(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property PortsSupportingFcoe: %+v", err)
+		return diag.Errorf("error occurred while setting property PortsSupportingFcoe in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("ports_supporting_server_role", flattenListCapabilityPortRange(s.GetPortsSupportingServerRole(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property PortsSupportingServerRole: %+v", err)
+		return diag.Errorf("error occurred while setting property PortsSupportingServerRole in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("reserved_vsans", flattenListCapabilityPortRange(s.GetReservedVsans(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ReservedVsans: %+v", err)
-	}
-
-	if err := d.Set("section", flattenMapCapabilitySectionRelationship(s.GetSection(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Section: %+v", err)
+		return diag.Errorf("error occurred while setting property ReservedVsans in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("sereno_netflow_supported", (s.GetSerenoNetflowSupported())); err != nil {
-		return fmt.Errorf("error occurred while setting property SerenoNetflowSupported: %+v", err)
+		return diag.Errorf("error occurred while setting property SerenoNetflowSupported in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("sku", (s.GetSku())); err != nil {
-		return fmt.Errorf("error occurred while setting property Sku: %+v", err)
+		return diag.Errorf("error occurred while setting property Sku in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("storage_limits", flattenMapCapabilitySwitchStorageLimits(s.GetStorageLimits(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property StorageLimits: %+v", err)
+		return diag.Errorf("error occurred while setting property StorageLimits in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("switching_mode_capabilities", flattenListCapabilitySwitchingModeCapability(s.GetSwitchingModeCapabilities(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property SwitchingModeCapabilities: %+v", err)
+		return diag.Errorf("error occurred while setting property SwitchingModeCapabilities in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("system_limits", flattenMapCapabilitySwitchSystemLimits(s.GetSystemLimits(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property SystemLimits: %+v", err)
+		return diag.Errorf("error occurred while setting property SystemLimits in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("unified_ports", flattenListCapabilityPortRange(s.GetUnifiedPorts(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property UnifiedPorts: %+v", err)
+		return diag.Errorf("error occurred while setting property UnifiedPorts in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("unified_rule", (s.GetUnifiedRule())); err != nil {
-		return fmt.Errorf("error occurred while setting property UnifiedRule: %+v", err)
+		return diag.Errorf("error occurred while setting property UnifiedRule in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	if err := d.Set("vid", (s.GetVid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Vid: %+v", err)
+		return diag.Errorf("error occurred while setting property Vid in CapabilitySwitchCapability object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceCapabilitySwitchCapabilityUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceCapabilitySwitchCapabilityUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -2878,50 +2797,6 @@ func resourceCapabilitySwitchCapabilityUpdate(d *schema.ResourceData, meta inter
 		}
 	}
 
-	if d.HasChange("section") {
-		v := d.Get("section")
-		p := make([]models.CapabilitySectionRelationship, 0, 1)
-		s := v.([]interface{})
-		for i := 0; i < len(s); i++ {
-			l := s[i].(map[string]interface{})
-			o := &models.MoMoRef{}
-			if v, ok := l["additional_properties"]; ok {
-				{
-					x := []byte(v.(string))
-					var x1 interface{}
-					err := json.Unmarshal(x, &x1)
-					if err == nil && x1 != nil {
-						o.AdditionalProperties = x1.(map[string]interface{})
-					}
-				}
-			}
-			o.SetClassId("mo.MoRef")
-			if v, ok := l["moid"]; ok {
-				{
-					x := (v.(string))
-					o.SetMoid(x)
-				}
-			}
-			if v, ok := l["object_type"]; ok {
-				{
-					x := (v.(string))
-					o.SetObjectType(x)
-				}
-			}
-			if v, ok := l["selector"]; ok {
-				{
-					x := (v.(string))
-					o.SetSelector(x)
-				}
-			}
-			p = append(p, models.MoMoRefAsCapabilitySectionRelationship(o))
-		}
-		if len(p) > 0 {
-			x := p[0]
-			o.SetSection(x)
-		}
-	}
-
 	if d.HasChange("sereno_netflow_supported") {
 		v := d.Get("sereno_netflow_supported")
 		x := (v.(bool))
@@ -3193,23 +3068,24 @@ func resourceCapabilitySwitchCapabilityUpdate(d *schema.ResourceData, meta inter
 	}
 
 	r := conn.ApiClient.CapabilityApi.UpdateCapabilitySwitchCapability(conn.ctx, d.Id()).CapabilitySwitchCapability(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating CapabilitySwitchCapability: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceCapabilitySwitchCapabilityRead(d, meta)
+	return resourceCapabilitySwitchCapabilityRead(c, d, meta)
 }
 
-func resourceCapabilitySwitchCapabilityDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceCapabilitySwitchCapabilityDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilitySwitchCapability(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting CapabilitySwitchCapability object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

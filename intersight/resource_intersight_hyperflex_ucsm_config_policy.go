@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceHyperflexUcsmConfigPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceHyperflexUcsmConfigPolicyCreate,
-		Read:   resourceHyperflexUcsmConfigPolicyRead,
-		Update: resourceHyperflexUcsmConfigPolicyUpdate,
-		Delete: resourceHyperflexUcsmConfigPolicyDelete,
+		CreateContext: resourceHyperflexUcsmConfigPolicyCreate,
+		ReadContext:   resourceHyperflexUcsmConfigPolicyRead,
+		UpdateContext: resourceHyperflexUcsmConfigPolicyUpdate,
+		DeleteContext: resourceHyperflexUcsmConfigPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -106,7 +109,7 @@ func resourceHyperflexUcsmConfigPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -173,7 +176,7 @@ func resourceHyperflexUcsmConfigPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -252,7 +255,7 @@ func resourceHyperflexUcsmConfigPolicy() *schema.Resource {
 	}
 }
 
-func resourceHyperflexUcsmConfigPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexUcsmConfigPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -509,81 +512,85 @@ func resourceHyperflexUcsmConfigPolicyCreate(d *schema.ResourceData, meta interf
 	}
 
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexUcsmConfigPolicy(conn.ctx).HyperflexUcsmConfigPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating HyperflexUcsmConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceHyperflexUcsmConfigPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceHyperflexUcsmConfigPolicyRead(c, d, meta)
 }
 
-func resourceHyperflexUcsmConfigPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexUcsmConfigPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.HyperflexApi.GetHyperflexUcsmConfigPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "HyperflexUcsmConfigPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching HyperflexUcsmConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in HyperflexUcsmConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in HyperflexUcsmConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cluster_profiles", flattenListHyperflexClusterProfileRelationship(s.GetClusterProfiles(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ClusterProfiles: %+v", err)
+		return diag.Errorf("error occurred while setting property ClusterProfiles in HyperflexUcsmConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in HyperflexUcsmConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("kvm_ip_range", flattenMapHyperflexIpAddrRange(s.GetKvmIpRange(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property KvmIpRange: %+v", err)
+		return diag.Errorf("error occurred while setting property KvmIpRange in HyperflexUcsmConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("mac_prefix_range", flattenMapHyperflexMacAddrPrefixRange(s.GetMacPrefixRange(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property MacPrefixRange: %+v", err)
+		return diag.Errorf("error occurred while setting property MacPrefixRange in HyperflexUcsmConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in HyperflexUcsmConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in HyperflexUcsmConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in HyperflexUcsmConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in HyperflexUcsmConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("server_firmware_version", (s.GetServerFirmwareVersion())); err != nil {
-		return fmt.Errorf("error occurred while setting property ServerFirmwareVersion: %+v", err)
+		return diag.Errorf("error occurred while setting property ServerFirmwareVersion in HyperflexUcsmConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in HyperflexUcsmConfigPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceHyperflexUcsmConfigPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexUcsmConfigPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -850,23 +857,24 @@ func resourceHyperflexUcsmConfigPolicyUpdate(d *schema.ResourceData, meta interf
 	}
 
 	r := conn.ApiClient.HyperflexApi.UpdateHyperflexUcsmConfigPolicy(conn.ctx, d.Id()).HyperflexUcsmConfigPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating HyperflexUcsmConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexUcsmConfigPolicyRead(d, meta)
+	return resourceHyperflexUcsmConfigPolicyRead(c, d, meta)
 }
 
-func resourceHyperflexUcsmConfigPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexUcsmConfigPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexUcsmConfigPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting HyperflexUcsmConfigPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

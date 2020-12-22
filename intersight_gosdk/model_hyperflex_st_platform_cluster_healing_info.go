@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -17,20 +17,25 @@ import (
 	"strings"
 )
 
-// HyperflexStPlatformClusterHealingInfo struct for HyperflexStPlatformClusterHealingInfo
+// HyperflexStPlatformClusterHealingInfo The detailed status of the cluster healing process.
 type HyperflexStPlatformClusterHealingInfo struct {
 	MoBaseComplexType
 	// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-	ObjectType                       string      `json:"ObjectType"`
-	EstimatedCompletionTimeInSeconds *int64      `json:"EstimatedCompletionTimeInSeconds,omitempty"`
-	InProgress                       *bool       `json:"InProgress,omitempty"`
-	Messages                         []string    `json:"Messages,omitempty"`
-	MessagesIterator                 interface{} `json:"MessagesIterator,omitempty"`
-	MessagesSize                     *int64      `json:"MessagesSize,omitempty"`
-	PercentComplete                  *int64      `json:"PercentComplete,omitempty"`
-	AdditionalProperties             map[string]interface{}
+	ObjectType string `json:"ObjectType"`
+	// The estimated time in seconds it will take to complete the auto-healing process.
+	EstimatedCompletionTimeInSeconds *int64 `json:"EstimatedCompletionTimeInSeconds,omitempty"`
+	// The status of the cluster's auto-healing process. If 'true', auto-healing is in progress for the cluster.
+	InProgress *bool    `json:"InProgress,omitempty"`
+	Messages   []string `json:"Messages,omitempty"`
+	// The current message describing the auto-healing process of the cluster.
+	MessagesIterator interface{} `json:"MessagesIterator,omitempty"`
+	// The number of elements in the messages collection.
+	MessagesSize *int64 `json:"MessagesSize,omitempty"`
+	// The progress of the auto-healing process as a percentage.
+	PercentComplete      *int64 `json:"PercentComplete,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _HyperflexStPlatformClusterHealingInfo HyperflexStPlatformClusterHealingInfo
@@ -347,13 +352,18 @@ func (o *HyperflexStPlatformClusterHealingInfo) UnmarshalJSON(bytes []byte) (err
 		// The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data.
 		ClassId string `json:"ClassId"`
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
-		ObjectType                       string      `json:"ObjectType"`
-		EstimatedCompletionTimeInSeconds *int64      `json:"EstimatedCompletionTimeInSeconds,omitempty"`
-		InProgress                       *bool       `json:"InProgress,omitempty"`
-		Messages                         []string    `json:"Messages,omitempty"`
-		MessagesIterator                 interface{} `json:"MessagesIterator,omitempty"`
-		MessagesSize                     *int64      `json:"MessagesSize,omitempty"`
-		PercentComplete                  *int64      `json:"PercentComplete,omitempty"`
+		ObjectType string `json:"ObjectType"`
+		// The estimated time in seconds it will take to complete the auto-healing process.
+		EstimatedCompletionTimeInSeconds *int64 `json:"EstimatedCompletionTimeInSeconds,omitempty"`
+		// The status of the cluster's auto-healing process. If 'true', auto-healing is in progress for the cluster.
+		InProgress *bool    `json:"InProgress,omitempty"`
+		Messages   []string `json:"Messages,omitempty"`
+		// The current message describing the auto-healing process of the cluster.
+		MessagesIterator interface{} `json:"MessagesIterator,omitempty"`
+		// The number of elements in the messages collection.
+		MessagesSize *int64 `json:"MessagesSize,omitempty"`
+		// The progress of the auto-healing process as a percentage.
+		PercentComplete *int64 `json:"PercentComplete,omitempty"`
 	}
 
 	varHyperflexStPlatformClusterHealingInfoWithoutEmbeddedStruct := HyperflexStPlatformClusterHealingInfoWithoutEmbeddedStruct{}

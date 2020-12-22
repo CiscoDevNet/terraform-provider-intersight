@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceHyperflexHxdpVersion() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceHyperflexHxdpVersionCreate,
-		Read:   resourceHyperflexHxdpVersionRead,
-		Update: resourceHyperflexHxdpVersionUpdate,
-		Delete: resourceHyperflexHxdpVersionDelete,
+		CreateContext: resourceHyperflexHxdpVersionCreate,
+		ReadContext:   resourceHyperflexHxdpVersionRead,
+		UpdateContext: resourceHyperflexHxdpVersionUpdate,
+		DeleteContext: resourceHyperflexHxdpVersionDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -113,7 +116,7 @@ func resourceHyperflexHxdpVersion() *schema.Resource {
 	}
 }
 
-func resourceHyperflexHxdpVersionCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexHxdpVersionCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -220,61 +223,65 @@ func resourceHyperflexHxdpVersionCreate(d *schema.ResourceData, meta interface{}
 	}
 
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexHxdpVersion(conn.ctx).HyperflexHxdpVersion(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating HyperflexHxdpVersion: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceHyperflexHxdpVersionRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceHyperflexHxdpVersionRead(c, d, meta)
 }
 
-func resourceHyperflexHxdpVersionRead(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexHxdpVersionRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.HyperflexApi.GetHyperflexHxdpVersionByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "HyperflexHxdpVersion object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching HyperflexHxdpVersion: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in HyperflexHxdpVersion object: %s", err.Error())
 	}
 
 	if err := d.Set("app_catalog", flattenMapHyperflexAppCatalogRelationship(s.GetAppCatalog(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property AppCatalog: %+v", err)
+		return diag.Errorf("error occurred while setting property AppCatalog in HyperflexHxdpVersion object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in HyperflexHxdpVersion object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in HyperflexHxdpVersion object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in HyperflexHxdpVersion object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in HyperflexHxdpVersion object: %s", err.Error())
 	}
 
 	if err := d.Set("nr_version", (s.GetVersion())); err != nil {
-		return fmt.Errorf("error occurred while setting property Version: %+v", err)
+		return diag.Errorf("error occurred while setting property Version in HyperflexHxdpVersion object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceHyperflexHxdpVersionUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexHxdpVersionUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -386,23 +393,24 @@ func resourceHyperflexHxdpVersionUpdate(d *schema.ResourceData, meta interface{}
 	}
 
 	r := conn.ApiClient.HyperflexApi.UpdateHyperflexHxdpVersion(conn.ctx, d.Id()).HyperflexHxdpVersion(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating HyperflexHxdpVersion: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexHxdpVersionRead(d, meta)
+	return resourceHyperflexHxdpVersionRead(c, d, meta)
 }
 
-func resourceHyperflexHxdpVersionDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexHxdpVersionDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexHxdpVersion(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting HyperflexHxdpVersion object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

@@ -1,19 +1,20 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceIamAppRegistration() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceIamAppRegistrationRead,
+		ReadContext: dataSourceIamAppRegistrationRead,
 		Schema: map[string]*schema.Schema{
 			"account": {
 				Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -140,7 +141,7 @@ func dataSourceIamAppRegistration() *schema.Resource {
 				},
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -314,10 +315,11 @@ func dataSourceIamAppRegistration() *schema.Resource {
 	}
 }
 
-func dataSourceIamAppRegistrationRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceIamAppRegistrationRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IamAppRegistration{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -366,25 +368,25 @@ func dataSourceIamAppRegistrationRead(d *schema.ResourceData, meta interface{}) 
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of IamAppRegistration object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.IamApi.GetIamAppRegistrationList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.IamApi.GetIamAppRegistrationList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching IamAppRegistration: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for IamAppRegistration list: %s", err.Error())
 	}
 	var s = &models.IamAppRegistrationList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to IamAppRegistration: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to IamAppRegistration list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for IamAppRegistration did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -393,80 +395,80 @@ func dataSourceIamAppRegistrationRead(d *schema.ResourceData, meta interface{}) 
 			var s = &models.IamAppRegistration{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 
 			if err := d.Set("account", flattenMapIamAccountRelationship(s.GetAccount(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Account: %+v", err)
+				return diag.Errorf("error occurred while setting property Account: %s", err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("client_id", (s.GetClientId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClientId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClientId: %s", err.Error())
 			}
 			if err := d.Set("client_name", (s.GetClientName())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClientName: %+v", err)
+				return diag.Errorf("error occurred while setting property ClientName: %s", err.Error())
 			}
 			if err := d.Set("client_secret", (s.GetClientSecret())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClientSecret: %+v", err)
+				return diag.Errorf("error occurred while setting property ClientSecret: %s", err.Error())
 			}
 			if err := d.Set("client_type", (s.GetClientType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClientType: %+v", err)
+				return diag.Errorf("error occurred while setting property ClientType: %s", err.Error())
 			}
 			if err := d.Set("description", (s.GetDescription())); err != nil {
-				return fmt.Errorf("error occurred while setting property Description: %+v", err)
+				return diag.Errorf("error occurred while setting property Description: %s", err.Error())
 			}
 			if err := d.Set("grant_types", (s.GetGrantTypes())); err != nil {
-				return fmt.Errorf("error occurred while setting property GrantTypes: %+v", err)
+				return diag.Errorf("error occurred while setting property GrantTypes: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 
 			if err := d.Set("oauth_tokens", flattenListIamOAuthTokenRelationship(s.GetOauthTokens(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property OauthTokens: %+v", err)
+				return diag.Errorf("error occurred while setting property OauthTokens: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 
 			if err := d.Set("permission", flattenMapIamPermissionRelationship(s.GetPermission(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Permission: %+v", err)
+				return diag.Errorf("error occurred while setting property Permission: %s", err.Error())
 			}
 			if err := d.Set("redirect_uris", (s.GetRedirectUris())); err != nil {
-				return fmt.Errorf("error occurred while setting property RedirectUris: %+v", err)
+				return diag.Errorf("error occurred while setting property RedirectUris: %s", err.Error())
 			}
 			if err := d.Set("renew_client_secret", (s.GetRenewClientSecret())); err != nil {
-				return fmt.Errorf("error occurred while setting property RenewClientSecret: %+v", err)
+				return diag.Errorf("error occurred while setting property RenewClientSecret: %s", err.Error())
 			}
 			if err := d.Set("response_types", (s.GetResponseTypes())); err != nil {
-				return fmt.Errorf("error occurred while setting property ResponseTypes: %+v", err)
+				return diag.Errorf("error occurred while setting property ResponseTypes: %s", err.Error())
 			}
 
 			if err := d.Set("revocation_timestamp", (s.GetRevocationTimestamp()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property RevocationTimestamp: %+v", err)
+				return diag.Errorf("error occurred while setting property RevocationTimestamp: %s", err.Error())
 			}
 			if err := d.Set("revoke", (s.GetRevoke())); err != nil {
-				return fmt.Errorf("error occurred while setting property Revoke: %+v", err)
+				return diag.Errorf("error occurred while setting property Revoke: %s", err.Error())
 			}
 
 			if err := d.Set("roles", flattenListIamRoleRelationship(s.GetRoles(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Roles: %+v", err)
+				return diag.Errorf("error occurred while setting property Roles: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 
 			if err := d.Set("user", flattenMapIamUserRelationship(s.GetUser(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property User: %+v", err)
+				return diag.Errorf("error occurred while setting property User: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

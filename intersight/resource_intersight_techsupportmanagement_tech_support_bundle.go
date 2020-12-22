@@ -1,19 +1,22 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceTechsupportmanagementTechSupportBundle() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceTechsupportmanagementTechSupportBundleCreate,
-		Read:   resourceTechsupportmanagementTechSupportBundleRead,
-		Delete: resourceTechsupportmanagementTechSupportBundleDelete,
+		CreateContext: resourceTechsupportmanagementTechSupportBundleCreate,
+		ReadContext:   resourceTechsupportmanagementTechSupportBundleRead,
+		DeleteContext: resourceTechsupportmanagementTechSupportBundleDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -97,7 +100,7 @@ func resourceTechsupportmanagementTechSupportBundle() *schema.Resource {
 				ForceNew:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -280,7 +283,7 @@ func resourceTechsupportmanagementTechSupportBundle() *schema.Resource {
 	}
 }
 
-func resourceTechsupportmanagementTechSupportBundleCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceTechsupportmanagementTechSupportBundleCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -524,96 +527,101 @@ func resourceTechsupportmanagementTechSupportBundleCreate(d *schema.ResourceData
 	}
 
 	r := conn.ApiClient.TechsupportmanagementApi.CreateTechsupportmanagementTechSupportBundle(conn.ctx).TechsupportmanagementTechSupportBundle(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating TechsupportmanagementTechSupportBundle: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceTechsupportmanagementTechSupportBundleRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceTechsupportmanagementTechSupportBundleRead(c, d, meta)
 }
 
-func resourceTechsupportmanagementTechSupportBundleRead(d *schema.ResourceData, meta interface{}) error {
+func resourceTechsupportmanagementTechSupportBundleRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.TechsupportmanagementApi.GetTechsupportmanagementTechSupportBundleByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "TechsupportmanagementTechSupportBundle object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching TechsupportmanagementTechSupportBundle: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in TechsupportmanagementTechSupportBundle object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in TechsupportmanagementTechSupportBundle object: %s", err.Error())
 	}
 
 	if err := d.Set("device_identifier", (s.GetDeviceIdentifier())); err != nil {
-		return fmt.Errorf("error occurred while setting property DeviceIdentifier: %+v", err)
+		return diag.Errorf("error occurred while setting property DeviceIdentifier in TechsupportmanagementTechSupportBundle object: %s", err.Error())
 	}
 
 	if err := d.Set("device_registration", flattenMapAssetDeviceRegistrationRelationship(s.GetDeviceRegistration(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property DeviceRegistration: %+v", err)
+		return diag.Errorf("error occurred while setting property DeviceRegistration in TechsupportmanagementTechSupportBundle object: %s", err.Error())
 	}
 
 	if err := d.Set("device_type", (s.GetDeviceType())); err != nil {
-		return fmt.Errorf("error occurred while setting property DeviceType: %+v", err)
+		return diag.Errorf("error occurred while setting property DeviceType in TechsupportmanagementTechSupportBundle object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in TechsupportmanagementTechSupportBundle object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in TechsupportmanagementTechSupportBundle object: %s", err.Error())
 	}
 
 	if err := d.Set("pid", (s.GetPid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Pid: %+v", err)
+		return diag.Errorf("error occurred while setting property Pid in TechsupportmanagementTechSupportBundle object: %s", err.Error())
 	}
 
 	if err := d.Set("platform_param", flattenMapConnectorPlatformParamBase(s.GetPlatformParam(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property PlatformParam: %+v", err)
+		return diag.Errorf("error occurred while setting property PlatformParam in TechsupportmanagementTechSupportBundle object: %s", err.Error())
 	}
 
 	if err := d.Set("platform_type", (s.GetPlatformType())); err != nil {
-		return fmt.Errorf("error occurred while setting property PlatformType: %+v", err)
+		return diag.Errorf("error occurred while setting property PlatformType in TechsupportmanagementTechSupportBundle object: %s", err.Error())
 	}
 
 	if err := d.Set("serial", (s.GetSerial())); err != nil {
-		return fmt.Errorf("error occurred while setting property Serial: %+v", err)
+		return diag.Errorf("error occurred while setting property Serial in TechsupportmanagementTechSupportBundle object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in TechsupportmanagementTechSupportBundle object: %s", err.Error())
 	}
 
 	if err := d.Set("target_resource", flattenMapMoBaseMoRelationship(s.GetTargetResource(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property TargetResource: %+v", err)
+		return diag.Errorf("error occurred while setting property TargetResource in TechsupportmanagementTechSupportBundle object: %s", err.Error())
 	}
 
 	if err := d.Set("tech_support_status", flattenMapTechsupportmanagementTechSupportStatusRelationship(s.GetTechSupportStatus(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property TechSupportStatus: %+v", err)
+		return diag.Errorf("error occurred while setting property TechSupportStatus in TechsupportmanagementTechSupportBundle object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceTechsupportmanagementTechSupportBundleDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceTechsupportmanagementTechSupportBundleDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.TechsupportmanagementApi.DeleteTechsupportmanagementTechSupportBundle(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting TechsupportmanagementTechSupportBundle object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

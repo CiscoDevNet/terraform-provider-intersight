@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -12,6 +12,7 @@
 package intersight
 
 import (
+	"bytes"
 	_context "context"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
@@ -48,7 +49,7 @@ func (r ApiCreateRecoveryBackupConfigPolicyRequest) IfNoneMatch(ifNoneMatch stri
 	return r
 }
 
-func (r ApiCreateRecoveryBackupConfigPolicyRequest) Execute() (RecoveryBackupConfigPolicy, *_nethttp.Response, error) {
+func (r ApiCreateRecoveryBackupConfigPolicyRequest) Execute() (RecoveryBackupConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateRecoveryBackupConfigPolicyExecute(r)
 }
 
@@ -68,19 +69,21 @@ func (a *RecoveryApiService) CreateRecoveryBackupConfigPolicy(ctx _context.Conte
  * Execute executes the request
  * @return RecoveryBackupConfigPolicy
  */
-func (a *RecoveryApiService) CreateRecoveryBackupConfigPolicyExecute(r ApiCreateRecoveryBackupConfigPolicyRequest) (RecoveryBackupConfigPolicy, *_nethttp.Response, error) {
+func (a *RecoveryApiService) CreateRecoveryBackupConfigPolicyExecute(r ApiCreateRecoveryBackupConfigPolicyRequest) (RecoveryBackupConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryBackupConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.CreateRecoveryBackupConfigPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/BackupConfigPolicies"
@@ -89,7 +92,8 @@ func (a *RecoveryApiService) CreateRecoveryBackupConfigPolicyExecute(r ApiCreate
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.recoveryBackupConfigPolicy == nil {
-		return localVarReturnValue, nil, reportError("recoveryBackupConfigPolicy is required and must be specified")
+		executionError.error = "recoveryBackupConfigPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -119,18 +123,22 @@ func (a *RecoveryApiService) CreateRecoveryBackupConfigPolicyExecute(r ApiCreate
 	localVarPostBody = r.recoveryBackupConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -197,7 +205,7 @@ func (a *RecoveryApiService) CreateRecoveryBackupConfigPolicyExecute(r ApiCreate
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateRecoveryBackupProfileRequest struct {
@@ -221,7 +229,7 @@ func (r ApiCreateRecoveryBackupProfileRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateRecoveryBackupProfileRequest) Execute() (RecoveryBackupProfile, *_nethttp.Response, error) {
+func (r ApiCreateRecoveryBackupProfileRequest) Execute() (RecoveryBackupProfile, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateRecoveryBackupProfileExecute(r)
 }
 
@@ -241,19 +249,21 @@ func (a *RecoveryApiService) CreateRecoveryBackupProfile(ctx _context.Context) A
  * Execute executes the request
  * @return RecoveryBackupProfile
  */
-func (a *RecoveryApiService) CreateRecoveryBackupProfileExecute(r ApiCreateRecoveryBackupProfileRequest) (RecoveryBackupProfile, *_nethttp.Response, error) {
+func (a *RecoveryApiService) CreateRecoveryBackupProfileExecute(r ApiCreateRecoveryBackupProfileRequest) (RecoveryBackupProfile, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryBackupProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.CreateRecoveryBackupProfile")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/BackupProfiles"
@@ -262,7 +272,8 @@ func (a *RecoveryApiService) CreateRecoveryBackupProfileExecute(r ApiCreateRecov
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.recoveryBackupProfile == nil {
-		return localVarReturnValue, nil, reportError("recoveryBackupProfile is required and must be specified")
+		executionError.error = "recoveryBackupProfile is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -292,18 +303,22 @@ func (a *RecoveryApiService) CreateRecoveryBackupProfileExecute(r ApiCreateRecov
 	localVarPostBody = r.recoveryBackupProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -370,7 +385,7 @@ func (a *RecoveryApiService) CreateRecoveryBackupProfileExecute(r ApiCreateRecov
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateRecoveryOnDemandBackupRequest struct {
@@ -394,7 +409,7 @@ func (r ApiCreateRecoveryOnDemandBackupRequest) IfNoneMatch(ifNoneMatch string) 
 	return r
 }
 
-func (r ApiCreateRecoveryOnDemandBackupRequest) Execute() (RecoveryOnDemandBackup, *_nethttp.Response, error) {
+func (r ApiCreateRecoveryOnDemandBackupRequest) Execute() (RecoveryOnDemandBackup, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateRecoveryOnDemandBackupExecute(r)
 }
 
@@ -414,19 +429,21 @@ func (a *RecoveryApiService) CreateRecoveryOnDemandBackup(ctx _context.Context) 
  * Execute executes the request
  * @return RecoveryOnDemandBackup
  */
-func (a *RecoveryApiService) CreateRecoveryOnDemandBackupExecute(r ApiCreateRecoveryOnDemandBackupRequest) (RecoveryOnDemandBackup, *_nethttp.Response, error) {
+func (a *RecoveryApiService) CreateRecoveryOnDemandBackupExecute(r ApiCreateRecoveryOnDemandBackupRequest) (RecoveryOnDemandBackup, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryOnDemandBackup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.CreateRecoveryOnDemandBackup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/OnDemandBackups"
@@ -435,7 +452,8 @@ func (a *RecoveryApiService) CreateRecoveryOnDemandBackupExecute(r ApiCreateReco
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.recoveryOnDemandBackup == nil {
-		return localVarReturnValue, nil, reportError("recoveryOnDemandBackup is required and must be specified")
+		executionError.error = "recoveryOnDemandBackup is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -465,18 +483,22 @@ func (a *RecoveryApiService) CreateRecoveryOnDemandBackupExecute(r ApiCreateReco
 	localVarPostBody = r.recoveryOnDemandBackup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -543,7 +565,7 @@ func (a *RecoveryApiService) CreateRecoveryOnDemandBackupExecute(r ApiCreateReco
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateRecoveryRestoreRequest struct {
@@ -567,7 +589,7 @@ func (r ApiCreateRecoveryRestoreRequest) IfNoneMatch(ifNoneMatch string) ApiCrea
 	return r
 }
 
-func (r ApiCreateRecoveryRestoreRequest) Execute() (RecoveryRestore, *_nethttp.Response, error) {
+func (r ApiCreateRecoveryRestoreRequest) Execute() (RecoveryRestore, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateRecoveryRestoreExecute(r)
 }
 
@@ -587,19 +609,21 @@ func (a *RecoveryApiService) CreateRecoveryRestore(ctx _context.Context) ApiCrea
  * Execute executes the request
  * @return RecoveryRestore
  */
-func (a *RecoveryApiService) CreateRecoveryRestoreExecute(r ApiCreateRecoveryRestoreRequest) (RecoveryRestore, *_nethttp.Response, error) {
+func (a *RecoveryApiService) CreateRecoveryRestoreExecute(r ApiCreateRecoveryRestoreRequest) (RecoveryRestore, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryRestore
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.CreateRecoveryRestore")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/Restores"
@@ -608,7 +632,8 @@ func (a *RecoveryApiService) CreateRecoveryRestoreExecute(r ApiCreateRecoveryRes
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.recoveryRestore == nil {
-		return localVarReturnValue, nil, reportError("recoveryRestore is required and must be specified")
+		executionError.error = "recoveryRestore is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -638,18 +663,22 @@ func (a *RecoveryApiService) CreateRecoveryRestoreExecute(r ApiCreateRecoveryRes
 	localVarPostBody = r.recoveryRestore
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -716,7 +745,7 @@ func (a *RecoveryApiService) CreateRecoveryRestoreExecute(r ApiCreateRecoveryRes
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateRecoveryScheduleConfigPolicyRequest struct {
@@ -740,7 +769,7 @@ func (r ApiCreateRecoveryScheduleConfigPolicyRequest) IfNoneMatch(ifNoneMatch st
 	return r
 }
 
-func (r ApiCreateRecoveryScheduleConfigPolicyRequest) Execute() (RecoveryScheduleConfigPolicy, *_nethttp.Response, error) {
+func (r ApiCreateRecoveryScheduleConfigPolicyRequest) Execute() (RecoveryScheduleConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateRecoveryScheduleConfigPolicyExecute(r)
 }
 
@@ -760,19 +789,21 @@ func (a *RecoveryApiService) CreateRecoveryScheduleConfigPolicy(ctx _context.Con
  * Execute executes the request
  * @return RecoveryScheduleConfigPolicy
  */
-func (a *RecoveryApiService) CreateRecoveryScheduleConfigPolicyExecute(r ApiCreateRecoveryScheduleConfigPolicyRequest) (RecoveryScheduleConfigPolicy, *_nethttp.Response, error) {
+func (a *RecoveryApiService) CreateRecoveryScheduleConfigPolicyExecute(r ApiCreateRecoveryScheduleConfigPolicyRequest) (RecoveryScheduleConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryScheduleConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.CreateRecoveryScheduleConfigPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/ScheduleConfigPolicies"
@@ -781,7 +812,8 @@ func (a *RecoveryApiService) CreateRecoveryScheduleConfigPolicyExecute(r ApiCrea
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.recoveryScheduleConfigPolicy == nil {
-		return localVarReturnValue, nil, reportError("recoveryScheduleConfigPolicy is required and must be specified")
+		executionError.error = "recoveryScheduleConfigPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -811,18 +843,22 @@ func (a *RecoveryApiService) CreateRecoveryScheduleConfigPolicyExecute(r ApiCrea
 	localVarPostBody = r.recoveryScheduleConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -889,7 +925,7 @@ func (a *RecoveryApiService) CreateRecoveryScheduleConfigPolicyExecute(r ApiCrea
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiDeleteRecoveryBackupConfigPolicyRequest struct {
@@ -898,7 +934,7 @@ type ApiDeleteRecoveryBackupConfigPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteRecoveryBackupConfigPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteRecoveryBackupConfigPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteRecoveryBackupConfigPolicyExecute(r)
 }
 
@@ -919,18 +955,20 @@ func (a *RecoveryApiService) DeleteRecoveryBackupConfigPolicy(ctx _context.Conte
 /*
  * Execute executes the request
  */
-func (a *RecoveryApiService) DeleteRecoveryBackupConfigPolicyExecute(r ApiDeleteRecoveryBackupConfigPolicyRequest) (*_nethttp.Response, error) {
+func (a *RecoveryApiService) DeleteRecoveryBackupConfigPolicyExecute(r ApiDeleteRecoveryBackupConfigPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.DeleteRecoveryBackupConfigPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/BackupConfigPolicies/{Moid}"
@@ -959,18 +997,22 @@ func (a *RecoveryApiService) DeleteRecoveryBackupConfigPolicyExecute(r ApiDelete
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1028,7 +1070,7 @@ func (a *RecoveryApiService) DeleteRecoveryBackupConfigPolicyExecute(r ApiDelete
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteRecoveryBackupProfileRequest struct {
@@ -1037,7 +1079,7 @@ type ApiDeleteRecoveryBackupProfileRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteRecoveryBackupProfileRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteRecoveryBackupProfileRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteRecoveryBackupProfileExecute(r)
 }
 
@@ -1058,18 +1100,20 @@ func (a *RecoveryApiService) DeleteRecoveryBackupProfile(ctx _context.Context, m
 /*
  * Execute executes the request
  */
-func (a *RecoveryApiService) DeleteRecoveryBackupProfileExecute(r ApiDeleteRecoveryBackupProfileRequest) (*_nethttp.Response, error) {
+func (a *RecoveryApiService) DeleteRecoveryBackupProfileExecute(r ApiDeleteRecoveryBackupProfileRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.DeleteRecoveryBackupProfile")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/BackupProfiles/{Moid}"
@@ -1098,18 +1142,22 @@ func (a *RecoveryApiService) DeleteRecoveryBackupProfileExecute(r ApiDeleteRecov
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1167,7 +1215,7 @@ func (a *RecoveryApiService) DeleteRecoveryBackupProfileExecute(r ApiDeleteRecov
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteRecoveryOnDemandBackupRequest struct {
@@ -1176,7 +1224,7 @@ type ApiDeleteRecoveryOnDemandBackupRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteRecoveryOnDemandBackupRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteRecoveryOnDemandBackupRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteRecoveryOnDemandBackupExecute(r)
 }
 
@@ -1197,18 +1245,20 @@ func (a *RecoveryApiService) DeleteRecoveryOnDemandBackup(ctx _context.Context, 
 /*
  * Execute executes the request
  */
-func (a *RecoveryApiService) DeleteRecoveryOnDemandBackupExecute(r ApiDeleteRecoveryOnDemandBackupRequest) (*_nethttp.Response, error) {
+func (a *RecoveryApiService) DeleteRecoveryOnDemandBackupExecute(r ApiDeleteRecoveryOnDemandBackupRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.DeleteRecoveryOnDemandBackup")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/OnDemandBackups/{Moid}"
@@ -1237,18 +1287,22 @@ func (a *RecoveryApiService) DeleteRecoveryOnDemandBackupExecute(r ApiDeleteReco
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1306,7 +1360,7 @@ func (a *RecoveryApiService) DeleteRecoveryOnDemandBackupExecute(r ApiDeleteReco
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteRecoveryRestoreRequest struct {
@@ -1315,7 +1369,7 @@ type ApiDeleteRecoveryRestoreRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteRecoveryRestoreRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteRecoveryRestoreRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteRecoveryRestoreExecute(r)
 }
 
@@ -1336,18 +1390,20 @@ func (a *RecoveryApiService) DeleteRecoveryRestore(ctx _context.Context, moid st
 /*
  * Execute executes the request
  */
-func (a *RecoveryApiService) DeleteRecoveryRestoreExecute(r ApiDeleteRecoveryRestoreRequest) (*_nethttp.Response, error) {
+func (a *RecoveryApiService) DeleteRecoveryRestoreExecute(r ApiDeleteRecoveryRestoreRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.DeleteRecoveryRestore")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/Restores/{Moid}"
@@ -1376,18 +1432,22 @@ func (a *RecoveryApiService) DeleteRecoveryRestoreExecute(r ApiDeleteRecoveryRes
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1445,7 +1505,7 @@ func (a *RecoveryApiService) DeleteRecoveryRestoreExecute(r ApiDeleteRecoveryRes
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteRecoveryScheduleConfigPolicyRequest struct {
@@ -1454,7 +1514,7 @@ type ApiDeleteRecoveryScheduleConfigPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteRecoveryScheduleConfigPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteRecoveryScheduleConfigPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteRecoveryScheduleConfigPolicyExecute(r)
 }
 
@@ -1475,18 +1535,20 @@ func (a *RecoveryApiService) DeleteRecoveryScheduleConfigPolicy(ctx _context.Con
 /*
  * Execute executes the request
  */
-func (a *RecoveryApiService) DeleteRecoveryScheduleConfigPolicyExecute(r ApiDeleteRecoveryScheduleConfigPolicyRequest) (*_nethttp.Response, error) {
+func (a *RecoveryApiService) DeleteRecoveryScheduleConfigPolicyExecute(r ApiDeleteRecoveryScheduleConfigPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.DeleteRecoveryScheduleConfigPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/ScheduleConfigPolicies/{Moid}"
@@ -1515,18 +1577,22 @@ func (a *RecoveryApiService) DeleteRecoveryScheduleConfigPolicyExecute(r ApiDele
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1584,7 +1650,7 @@ func (a *RecoveryApiService) DeleteRecoveryScheduleConfigPolicyExecute(r ApiDele
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiGetRecoveryBackupConfigPolicyByMoidRequest struct {
@@ -1593,7 +1659,7 @@ type ApiGetRecoveryBackupConfigPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetRecoveryBackupConfigPolicyByMoidRequest) Execute() (RecoveryBackupConfigPolicy, *_nethttp.Response, error) {
+func (r ApiGetRecoveryBackupConfigPolicyByMoidRequest) Execute() (RecoveryBackupConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetRecoveryBackupConfigPolicyByMoidExecute(r)
 }
 
@@ -1615,19 +1681,21 @@ func (a *RecoveryApiService) GetRecoveryBackupConfigPolicyByMoid(ctx _context.Co
  * Execute executes the request
  * @return RecoveryBackupConfigPolicy
  */
-func (a *RecoveryApiService) GetRecoveryBackupConfigPolicyByMoidExecute(r ApiGetRecoveryBackupConfigPolicyByMoidRequest) (RecoveryBackupConfigPolicy, *_nethttp.Response, error) {
+func (a *RecoveryApiService) GetRecoveryBackupConfigPolicyByMoidExecute(r ApiGetRecoveryBackupConfigPolicyByMoidRequest) (RecoveryBackupConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryBackupConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.GetRecoveryBackupConfigPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/BackupConfigPolicies/{Moid}"
@@ -1656,18 +1724,22 @@ func (a *RecoveryApiService) GetRecoveryBackupConfigPolicyByMoidExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1734,7 +1806,7 @@ func (a *RecoveryApiService) GetRecoveryBackupConfigPolicyByMoidExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetRecoveryBackupConfigPolicyListRequest struct {
@@ -1798,7 +1870,7 @@ func (r ApiGetRecoveryBackupConfigPolicyListRequest) Tags(tags string) ApiGetRec
 	return r
 }
 
-func (r ApiGetRecoveryBackupConfigPolicyListRequest) Execute() (RecoveryBackupConfigPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetRecoveryBackupConfigPolicyListRequest) Execute() (RecoveryBackupConfigPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetRecoveryBackupConfigPolicyListExecute(r)
 }
 
@@ -1818,19 +1890,21 @@ func (a *RecoveryApiService) GetRecoveryBackupConfigPolicyList(ctx _context.Cont
  * Execute executes the request
  * @return RecoveryBackupConfigPolicyResponse
  */
-func (a *RecoveryApiService) GetRecoveryBackupConfigPolicyListExecute(r ApiGetRecoveryBackupConfigPolicyListRequest) (RecoveryBackupConfigPolicyResponse, *_nethttp.Response, error) {
+func (a *RecoveryApiService) GetRecoveryBackupConfigPolicyListExecute(r ApiGetRecoveryBackupConfigPolicyListRequest) (RecoveryBackupConfigPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryBackupConfigPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.GetRecoveryBackupConfigPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/BackupConfigPolicies"
@@ -1891,18 +1965,22 @@ func (a *RecoveryApiService) GetRecoveryBackupConfigPolicyListExecute(r ApiGetRe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1969,7 +2047,7 @@ func (a *RecoveryApiService) GetRecoveryBackupConfigPolicyListExecute(r ApiGetRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetRecoveryBackupProfileByMoidRequest struct {
@@ -1978,7 +2056,7 @@ type ApiGetRecoveryBackupProfileByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetRecoveryBackupProfileByMoidRequest) Execute() (RecoveryBackupProfile, *_nethttp.Response, error) {
+func (r ApiGetRecoveryBackupProfileByMoidRequest) Execute() (RecoveryBackupProfile, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetRecoveryBackupProfileByMoidExecute(r)
 }
 
@@ -2000,19 +2078,21 @@ func (a *RecoveryApiService) GetRecoveryBackupProfileByMoid(ctx _context.Context
  * Execute executes the request
  * @return RecoveryBackupProfile
  */
-func (a *RecoveryApiService) GetRecoveryBackupProfileByMoidExecute(r ApiGetRecoveryBackupProfileByMoidRequest) (RecoveryBackupProfile, *_nethttp.Response, error) {
+func (a *RecoveryApiService) GetRecoveryBackupProfileByMoidExecute(r ApiGetRecoveryBackupProfileByMoidRequest) (RecoveryBackupProfile, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryBackupProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.GetRecoveryBackupProfileByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/BackupProfiles/{Moid}"
@@ -2041,18 +2121,22 @@ func (a *RecoveryApiService) GetRecoveryBackupProfileByMoidExecute(r ApiGetRecov
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2119,7 +2203,7 @@ func (a *RecoveryApiService) GetRecoveryBackupProfileByMoidExecute(r ApiGetRecov
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetRecoveryBackupProfileListRequest struct {
@@ -2183,7 +2267,7 @@ func (r ApiGetRecoveryBackupProfileListRequest) Tags(tags string) ApiGetRecovery
 	return r
 }
 
-func (r ApiGetRecoveryBackupProfileListRequest) Execute() (RecoveryBackupProfileResponse, *_nethttp.Response, error) {
+func (r ApiGetRecoveryBackupProfileListRequest) Execute() (RecoveryBackupProfileResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetRecoveryBackupProfileListExecute(r)
 }
 
@@ -2203,19 +2287,21 @@ func (a *RecoveryApiService) GetRecoveryBackupProfileList(ctx _context.Context) 
  * Execute executes the request
  * @return RecoveryBackupProfileResponse
  */
-func (a *RecoveryApiService) GetRecoveryBackupProfileListExecute(r ApiGetRecoveryBackupProfileListRequest) (RecoveryBackupProfileResponse, *_nethttp.Response, error) {
+func (a *RecoveryApiService) GetRecoveryBackupProfileListExecute(r ApiGetRecoveryBackupProfileListRequest) (RecoveryBackupProfileResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryBackupProfileResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.GetRecoveryBackupProfileList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/BackupProfiles"
@@ -2276,18 +2362,22 @@ func (a *RecoveryApiService) GetRecoveryBackupProfileListExecute(r ApiGetRecover
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2354,7 +2444,7 @@ func (a *RecoveryApiService) GetRecoveryBackupProfileListExecute(r ApiGetRecover
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetRecoveryConfigResultByMoidRequest struct {
@@ -2363,7 +2453,7 @@ type ApiGetRecoveryConfigResultByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetRecoveryConfigResultByMoidRequest) Execute() (RecoveryConfigResult, *_nethttp.Response, error) {
+func (r ApiGetRecoveryConfigResultByMoidRequest) Execute() (RecoveryConfigResult, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetRecoveryConfigResultByMoidExecute(r)
 }
 
@@ -2385,19 +2475,21 @@ func (a *RecoveryApiService) GetRecoveryConfigResultByMoid(ctx _context.Context,
  * Execute executes the request
  * @return RecoveryConfigResult
  */
-func (a *RecoveryApiService) GetRecoveryConfigResultByMoidExecute(r ApiGetRecoveryConfigResultByMoidRequest) (RecoveryConfigResult, *_nethttp.Response, error) {
+func (a *RecoveryApiService) GetRecoveryConfigResultByMoidExecute(r ApiGetRecoveryConfigResultByMoidRequest) (RecoveryConfigResult, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryConfigResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.GetRecoveryConfigResultByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/ConfigResults/{Moid}"
@@ -2426,18 +2518,22 @@ func (a *RecoveryApiService) GetRecoveryConfigResultByMoidExecute(r ApiGetRecove
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2504,7 +2600,7 @@ func (a *RecoveryApiService) GetRecoveryConfigResultByMoidExecute(r ApiGetRecove
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetRecoveryConfigResultEntryByMoidRequest struct {
@@ -2513,7 +2609,7 @@ type ApiGetRecoveryConfigResultEntryByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetRecoveryConfigResultEntryByMoidRequest) Execute() (RecoveryConfigResultEntry, *_nethttp.Response, error) {
+func (r ApiGetRecoveryConfigResultEntryByMoidRequest) Execute() (RecoveryConfigResultEntry, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetRecoveryConfigResultEntryByMoidExecute(r)
 }
 
@@ -2535,19 +2631,21 @@ func (a *RecoveryApiService) GetRecoveryConfigResultEntryByMoid(ctx _context.Con
  * Execute executes the request
  * @return RecoveryConfigResultEntry
  */
-func (a *RecoveryApiService) GetRecoveryConfigResultEntryByMoidExecute(r ApiGetRecoveryConfigResultEntryByMoidRequest) (RecoveryConfigResultEntry, *_nethttp.Response, error) {
+func (a *RecoveryApiService) GetRecoveryConfigResultEntryByMoidExecute(r ApiGetRecoveryConfigResultEntryByMoidRequest) (RecoveryConfigResultEntry, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryConfigResultEntry
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.GetRecoveryConfigResultEntryByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/ConfigResultEntries/{Moid}"
@@ -2576,18 +2674,22 @@ func (a *RecoveryApiService) GetRecoveryConfigResultEntryByMoidExecute(r ApiGetR
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2654,7 +2756,7 @@ func (a *RecoveryApiService) GetRecoveryConfigResultEntryByMoidExecute(r ApiGetR
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetRecoveryConfigResultEntryListRequest struct {
@@ -2718,7 +2820,7 @@ func (r ApiGetRecoveryConfigResultEntryListRequest) Tags(tags string) ApiGetReco
 	return r
 }
 
-func (r ApiGetRecoveryConfigResultEntryListRequest) Execute() (RecoveryConfigResultEntryResponse, *_nethttp.Response, error) {
+func (r ApiGetRecoveryConfigResultEntryListRequest) Execute() (RecoveryConfigResultEntryResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetRecoveryConfigResultEntryListExecute(r)
 }
 
@@ -2738,19 +2840,21 @@ func (a *RecoveryApiService) GetRecoveryConfigResultEntryList(ctx _context.Conte
  * Execute executes the request
  * @return RecoveryConfigResultEntryResponse
  */
-func (a *RecoveryApiService) GetRecoveryConfigResultEntryListExecute(r ApiGetRecoveryConfigResultEntryListRequest) (RecoveryConfigResultEntryResponse, *_nethttp.Response, error) {
+func (a *RecoveryApiService) GetRecoveryConfigResultEntryListExecute(r ApiGetRecoveryConfigResultEntryListRequest) (RecoveryConfigResultEntryResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryConfigResultEntryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.GetRecoveryConfigResultEntryList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/ConfigResultEntries"
@@ -2811,18 +2915,22 @@ func (a *RecoveryApiService) GetRecoveryConfigResultEntryListExecute(r ApiGetRec
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2889,7 +2997,7 @@ func (a *RecoveryApiService) GetRecoveryConfigResultEntryListExecute(r ApiGetRec
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetRecoveryConfigResultListRequest struct {
@@ -2953,7 +3061,7 @@ func (r ApiGetRecoveryConfigResultListRequest) Tags(tags string) ApiGetRecoveryC
 	return r
 }
 
-func (r ApiGetRecoveryConfigResultListRequest) Execute() (RecoveryConfigResultResponse, *_nethttp.Response, error) {
+func (r ApiGetRecoveryConfigResultListRequest) Execute() (RecoveryConfigResultResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetRecoveryConfigResultListExecute(r)
 }
 
@@ -2973,19 +3081,21 @@ func (a *RecoveryApiService) GetRecoveryConfigResultList(ctx _context.Context) A
  * Execute executes the request
  * @return RecoveryConfigResultResponse
  */
-func (a *RecoveryApiService) GetRecoveryConfigResultListExecute(r ApiGetRecoveryConfigResultListRequest) (RecoveryConfigResultResponse, *_nethttp.Response, error) {
+func (a *RecoveryApiService) GetRecoveryConfigResultListExecute(r ApiGetRecoveryConfigResultListRequest) (RecoveryConfigResultResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryConfigResultResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.GetRecoveryConfigResultList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/ConfigResults"
@@ -3046,18 +3156,22 @@ func (a *RecoveryApiService) GetRecoveryConfigResultListExecute(r ApiGetRecovery
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3124,7 +3238,7 @@ func (a *RecoveryApiService) GetRecoveryConfigResultListExecute(r ApiGetRecovery
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetRecoveryOnDemandBackupByMoidRequest struct {
@@ -3133,7 +3247,7 @@ type ApiGetRecoveryOnDemandBackupByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetRecoveryOnDemandBackupByMoidRequest) Execute() (RecoveryOnDemandBackup, *_nethttp.Response, error) {
+func (r ApiGetRecoveryOnDemandBackupByMoidRequest) Execute() (RecoveryOnDemandBackup, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetRecoveryOnDemandBackupByMoidExecute(r)
 }
 
@@ -3155,19 +3269,21 @@ func (a *RecoveryApiService) GetRecoveryOnDemandBackupByMoid(ctx _context.Contex
  * Execute executes the request
  * @return RecoveryOnDemandBackup
  */
-func (a *RecoveryApiService) GetRecoveryOnDemandBackupByMoidExecute(r ApiGetRecoveryOnDemandBackupByMoidRequest) (RecoveryOnDemandBackup, *_nethttp.Response, error) {
+func (a *RecoveryApiService) GetRecoveryOnDemandBackupByMoidExecute(r ApiGetRecoveryOnDemandBackupByMoidRequest) (RecoveryOnDemandBackup, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryOnDemandBackup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.GetRecoveryOnDemandBackupByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/OnDemandBackups/{Moid}"
@@ -3196,18 +3312,22 @@ func (a *RecoveryApiService) GetRecoveryOnDemandBackupByMoidExecute(r ApiGetReco
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3274,7 +3394,7 @@ func (a *RecoveryApiService) GetRecoveryOnDemandBackupByMoidExecute(r ApiGetReco
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetRecoveryOnDemandBackupListRequest struct {
@@ -3338,7 +3458,7 @@ func (r ApiGetRecoveryOnDemandBackupListRequest) Tags(tags string) ApiGetRecover
 	return r
 }
 
-func (r ApiGetRecoveryOnDemandBackupListRequest) Execute() (RecoveryOnDemandBackupResponse, *_nethttp.Response, error) {
+func (r ApiGetRecoveryOnDemandBackupListRequest) Execute() (RecoveryOnDemandBackupResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetRecoveryOnDemandBackupListExecute(r)
 }
 
@@ -3358,19 +3478,21 @@ func (a *RecoveryApiService) GetRecoveryOnDemandBackupList(ctx _context.Context)
  * Execute executes the request
  * @return RecoveryOnDemandBackupResponse
  */
-func (a *RecoveryApiService) GetRecoveryOnDemandBackupListExecute(r ApiGetRecoveryOnDemandBackupListRequest) (RecoveryOnDemandBackupResponse, *_nethttp.Response, error) {
+func (a *RecoveryApiService) GetRecoveryOnDemandBackupListExecute(r ApiGetRecoveryOnDemandBackupListRequest) (RecoveryOnDemandBackupResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryOnDemandBackupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.GetRecoveryOnDemandBackupList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/OnDemandBackups"
@@ -3431,18 +3553,22 @@ func (a *RecoveryApiService) GetRecoveryOnDemandBackupListExecute(r ApiGetRecove
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3509,7 +3635,7 @@ func (a *RecoveryApiService) GetRecoveryOnDemandBackupListExecute(r ApiGetRecove
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetRecoveryRestoreByMoidRequest struct {
@@ -3518,7 +3644,7 @@ type ApiGetRecoveryRestoreByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetRecoveryRestoreByMoidRequest) Execute() (RecoveryRestore, *_nethttp.Response, error) {
+func (r ApiGetRecoveryRestoreByMoidRequest) Execute() (RecoveryRestore, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetRecoveryRestoreByMoidExecute(r)
 }
 
@@ -3540,19 +3666,21 @@ func (a *RecoveryApiService) GetRecoveryRestoreByMoid(ctx _context.Context, moid
  * Execute executes the request
  * @return RecoveryRestore
  */
-func (a *RecoveryApiService) GetRecoveryRestoreByMoidExecute(r ApiGetRecoveryRestoreByMoidRequest) (RecoveryRestore, *_nethttp.Response, error) {
+func (a *RecoveryApiService) GetRecoveryRestoreByMoidExecute(r ApiGetRecoveryRestoreByMoidRequest) (RecoveryRestore, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryRestore
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.GetRecoveryRestoreByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/Restores/{Moid}"
@@ -3581,18 +3709,22 @@ func (a *RecoveryApiService) GetRecoveryRestoreByMoidExecute(r ApiGetRecoveryRes
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3659,7 +3791,7 @@ func (a *RecoveryApiService) GetRecoveryRestoreByMoidExecute(r ApiGetRecoveryRes
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetRecoveryRestoreListRequest struct {
@@ -3723,7 +3855,7 @@ func (r ApiGetRecoveryRestoreListRequest) Tags(tags string) ApiGetRecoveryRestor
 	return r
 }
 
-func (r ApiGetRecoveryRestoreListRequest) Execute() (RecoveryRestoreResponse, *_nethttp.Response, error) {
+func (r ApiGetRecoveryRestoreListRequest) Execute() (RecoveryRestoreResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetRecoveryRestoreListExecute(r)
 }
 
@@ -3743,19 +3875,21 @@ func (a *RecoveryApiService) GetRecoveryRestoreList(ctx _context.Context) ApiGet
  * Execute executes the request
  * @return RecoveryRestoreResponse
  */
-func (a *RecoveryApiService) GetRecoveryRestoreListExecute(r ApiGetRecoveryRestoreListRequest) (RecoveryRestoreResponse, *_nethttp.Response, error) {
+func (a *RecoveryApiService) GetRecoveryRestoreListExecute(r ApiGetRecoveryRestoreListRequest) (RecoveryRestoreResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryRestoreResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.GetRecoveryRestoreList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/Restores"
@@ -3816,18 +3950,22 @@ func (a *RecoveryApiService) GetRecoveryRestoreListExecute(r ApiGetRecoveryResto
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3894,7 +4032,7 @@ func (a *RecoveryApiService) GetRecoveryRestoreListExecute(r ApiGetRecoveryResto
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetRecoveryScheduleConfigPolicyByMoidRequest struct {
@@ -3903,7 +4041,7 @@ type ApiGetRecoveryScheduleConfigPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetRecoveryScheduleConfigPolicyByMoidRequest) Execute() (RecoveryScheduleConfigPolicy, *_nethttp.Response, error) {
+func (r ApiGetRecoveryScheduleConfigPolicyByMoidRequest) Execute() (RecoveryScheduleConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetRecoveryScheduleConfigPolicyByMoidExecute(r)
 }
 
@@ -3925,19 +4063,21 @@ func (a *RecoveryApiService) GetRecoveryScheduleConfigPolicyByMoid(ctx _context.
  * Execute executes the request
  * @return RecoveryScheduleConfigPolicy
  */
-func (a *RecoveryApiService) GetRecoveryScheduleConfigPolicyByMoidExecute(r ApiGetRecoveryScheduleConfigPolicyByMoidRequest) (RecoveryScheduleConfigPolicy, *_nethttp.Response, error) {
+func (a *RecoveryApiService) GetRecoveryScheduleConfigPolicyByMoidExecute(r ApiGetRecoveryScheduleConfigPolicyByMoidRequest) (RecoveryScheduleConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryScheduleConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.GetRecoveryScheduleConfigPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/ScheduleConfigPolicies/{Moid}"
@@ -3966,18 +4106,22 @@ func (a *RecoveryApiService) GetRecoveryScheduleConfigPolicyByMoidExecute(r ApiG
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4044,7 +4188,7 @@ func (a *RecoveryApiService) GetRecoveryScheduleConfigPolicyByMoidExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetRecoveryScheduleConfigPolicyListRequest struct {
@@ -4108,7 +4252,7 @@ func (r ApiGetRecoveryScheduleConfigPolicyListRequest) Tags(tags string) ApiGetR
 	return r
 }
 
-func (r ApiGetRecoveryScheduleConfigPolicyListRequest) Execute() (RecoveryScheduleConfigPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetRecoveryScheduleConfigPolicyListRequest) Execute() (RecoveryScheduleConfigPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetRecoveryScheduleConfigPolicyListExecute(r)
 }
 
@@ -4128,19 +4272,21 @@ func (a *RecoveryApiService) GetRecoveryScheduleConfigPolicyList(ctx _context.Co
  * Execute executes the request
  * @return RecoveryScheduleConfigPolicyResponse
  */
-func (a *RecoveryApiService) GetRecoveryScheduleConfigPolicyListExecute(r ApiGetRecoveryScheduleConfigPolicyListRequest) (RecoveryScheduleConfigPolicyResponse, *_nethttp.Response, error) {
+func (a *RecoveryApiService) GetRecoveryScheduleConfigPolicyListExecute(r ApiGetRecoveryScheduleConfigPolicyListRequest) (RecoveryScheduleConfigPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryScheduleConfigPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.GetRecoveryScheduleConfigPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/ScheduleConfigPolicies"
@@ -4201,18 +4347,22 @@ func (a *RecoveryApiService) GetRecoveryScheduleConfigPolicyListExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4279,7 +4429,7 @@ func (a *RecoveryApiService) GetRecoveryScheduleConfigPolicyListExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchRecoveryBackupConfigPolicyRequest struct {
@@ -4299,7 +4449,7 @@ func (r ApiPatchRecoveryBackupConfigPolicyRequest) IfMatch(ifMatch string) ApiPa
 	return r
 }
 
-func (r ApiPatchRecoveryBackupConfigPolicyRequest) Execute() (RecoveryBackupConfigPolicy, *_nethttp.Response, error) {
+func (r ApiPatchRecoveryBackupConfigPolicyRequest) Execute() (RecoveryBackupConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchRecoveryBackupConfigPolicyExecute(r)
 }
 
@@ -4321,19 +4471,21 @@ func (a *RecoveryApiService) PatchRecoveryBackupConfigPolicy(ctx _context.Contex
  * Execute executes the request
  * @return RecoveryBackupConfigPolicy
  */
-func (a *RecoveryApiService) PatchRecoveryBackupConfigPolicyExecute(r ApiPatchRecoveryBackupConfigPolicyRequest) (RecoveryBackupConfigPolicy, *_nethttp.Response, error) {
+func (a *RecoveryApiService) PatchRecoveryBackupConfigPolicyExecute(r ApiPatchRecoveryBackupConfigPolicyRequest) (RecoveryBackupConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryBackupConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.PatchRecoveryBackupConfigPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/BackupConfigPolicies/{Moid}"
@@ -4343,7 +4495,8 @@ func (a *RecoveryApiService) PatchRecoveryBackupConfigPolicyExecute(r ApiPatchRe
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.recoveryBackupConfigPolicy == nil {
-		return localVarReturnValue, nil, reportError("recoveryBackupConfigPolicy is required and must be specified")
+		executionError.error = "recoveryBackupConfigPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -4370,18 +4523,22 @@ func (a *RecoveryApiService) PatchRecoveryBackupConfigPolicyExecute(r ApiPatchRe
 	localVarPostBody = r.recoveryBackupConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4448,7 +4605,7 @@ func (a *RecoveryApiService) PatchRecoveryBackupConfigPolicyExecute(r ApiPatchRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchRecoveryBackupProfileRequest struct {
@@ -4468,7 +4625,7 @@ func (r ApiPatchRecoveryBackupProfileRequest) IfMatch(ifMatch string) ApiPatchRe
 	return r
 }
 
-func (r ApiPatchRecoveryBackupProfileRequest) Execute() (RecoveryBackupProfile, *_nethttp.Response, error) {
+func (r ApiPatchRecoveryBackupProfileRequest) Execute() (RecoveryBackupProfile, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchRecoveryBackupProfileExecute(r)
 }
 
@@ -4490,19 +4647,21 @@ func (a *RecoveryApiService) PatchRecoveryBackupProfile(ctx _context.Context, mo
  * Execute executes the request
  * @return RecoveryBackupProfile
  */
-func (a *RecoveryApiService) PatchRecoveryBackupProfileExecute(r ApiPatchRecoveryBackupProfileRequest) (RecoveryBackupProfile, *_nethttp.Response, error) {
+func (a *RecoveryApiService) PatchRecoveryBackupProfileExecute(r ApiPatchRecoveryBackupProfileRequest) (RecoveryBackupProfile, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryBackupProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.PatchRecoveryBackupProfile")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/BackupProfiles/{Moid}"
@@ -4512,7 +4671,8 @@ func (a *RecoveryApiService) PatchRecoveryBackupProfileExecute(r ApiPatchRecover
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.recoveryBackupProfile == nil {
-		return localVarReturnValue, nil, reportError("recoveryBackupProfile is required and must be specified")
+		executionError.error = "recoveryBackupProfile is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -4539,18 +4699,22 @@ func (a *RecoveryApiService) PatchRecoveryBackupProfileExecute(r ApiPatchRecover
 	localVarPostBody = r.recoveryBackupProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4617,7 +4781,7 @@ func (a *RecoveryApiService) PatchRecoveryBackupProfileExecute(r ApiPatchRecover
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchRecoveryOnDemandBackupRequest struct {
@@ -4637,7 +4801,7 @@ func (r ApiPatchRecoveryOnDemandBackupRequest) IfMatch(ifMatch string) ApiPatchR
 	return r
 }
 
-func (r ApiPatchRecoveryOnDemandBackupRequest) Execute() (RecoveryOnDemandBackup, *_nethttp.Response, error) {
+func (r ApiPatchRecoveryOnDemandBackupRequest) Execute() (RecoveryOnDemandBackup, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchRecoveryOnDemandBackupExecute(r)
 }
 
@@ -4659,19 +4823,21 @@ func (a *RecoveryApiService) PatchRecoveryOnDemandBackup(ctx _context.Context, m
  * Execute executes the request
  * @return RecoveryOnDemandBackup
  */
-func (a *RecoveryApiService) PatchRecoveryOnDemandBackupExecute(r ApiPatchRecoveryOnDemandBackupRequest) (RecoveryOnDemandBackup, *_nethttp.Response, error) {
+func (a *RecoveryApiService) PatchRecoveryOnDemandBackupExecute(r ApiPatchRecoveryOnDemandBackupRequest) (RecoveryOnDemandBackup, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryOnDemandBackup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.PatchRecoveryOnDemandBackup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/OnDemandBackups/{Moid}"
@@ -4681,7 +4847,8 @@ func (a *RecoveryApiService) PatchRecoveryOnDemandBackupExecute(r ApiPatchRecove
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.recoveryOnDemandBackup == nil {
-		return localVarReturnValue, nil, reportError("recoveryOnDemandBackup is required and must be specified")
+		executionError.error = "recoveryOnDemandBackup is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -4708,18 +4875,22 @@ func (a *RecoveryApiService) PatchRecoveryOnDemandBackupExecute(r ApiPatchRecove
 	localVarPostBody = r.recoveryOnDemandBackup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4786,7 +4957,7 @@ func (a *RecoveryApiService) PatchRecoveryOnDemandBackupExecute(r ApiPatchRecove
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchRecoveryScheduleConfigPolicyRequest struct {
@@ -4806,7 +4977,7 @@ func (r ApiPatchRecoveryScheduleConfigPolicyRequest) IfMatch(ifMatch string) Api
 	return r
 }
 
-func (r ApiPatchRecoveryScheduleConfigPolicyRequest) Execute() (RecoveryScheduleConfigPolicy, *_nethttp.Response, error) {
+func (r ApiPatchRecoveryScheduleConfigPolicyRequest) Execute() (RecoveryScheduleConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchRecoveryScheduleConfigPolicyExecute(r)
 }
 
@@ -4828,19 +4999,21 @@ func (a *RecoveryApiService) PatchRecoveryScheduleConfigPolicy(ctx _context.Cont
  * Execute executes the request
  * @return RecoveryScheduleConfigPolicy
  */
-func (a *RecoveryApiService) PatchRecoveryScheduleConfigPolicyExecute(r ApiPatchRecoveryScheduleConfigPolicyRequest) (RecoveryScheduleConfigPolicy, *_nethttp.Response, error) {
+func (a *RecoveryApiService) PatchRecoveryScheduleConfigPolicyExecute(r ApiPatchRecoveryScheduleConfigPolicyRequest) (RecoveryScheduleConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryScheduleConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.PatchRecoveryScheduleConfigPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/ScheduleConfigPolicies/{Moid}"
@@ -4850,7 +5023,8 @@ func (a *RecoveryApiService) PatchRecoveryScheduleConfigPolicyExecute(r ApiPatch
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.recoveryScheduleConfigPolicy == nil {
-		return localVarReturnValue, nil, reportError("recoveryScheduleConfigPolicy is required and must be specified")
+		executionError.error = "recoveryScheduleConfigPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -4877,18 +5051,22 @@ func (a *RecoveryApiService) PatchRecoveryScheduleConfigPolicyExecute(r ApiPatch
 	localVarPostBody = r.recoveryScheduleConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4955,7 +5133,7 @@ func (a *RecoveryApiService) PatchRecoveryScheduleConfigPolicyExecute(r ApiPatch
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateRecoveryBackupConfigPolicyRequest struct {
@@ -4975,7 +5153,7 @@ func (r ApiUpdateRecoveryBackupConfigPolicyRequest) IfMatch(ifMatch string) ApiU
 	return r
 }
 
-func (r ApiUpdateRecoveryBackupConfigPolicyRequest) Execute() (RecoveryBackupConfigPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateRecoveryBackupConfigPolicyRequest) Execute() (RecoveryBackupConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateRecoveryBackupConfigPolicyExecute(r)
 }
 
@@ -4997,19 +5175,21 @@ func (a *RecoveryApiService) UpdateRecoveryBackupConfigPolicy(ctx _context.Conte
  * Execute executes the request
  * @return RecoveryBackupConfigPolicy
  */
-func (a *RecoveryApiService) UpdateRecoveryBackupConfigPolicyExecute(r ApiUpdateRecoveryBackupConfigPolicyRequest) (RecoveryBackupConfigPolicy, *_nethttp.Response, error) {
+func (a *RecoveryApiService) UpdateRecoveryBackupConfigPolicyExecute(r ApiUpdateRecoveryBackupConfigPolicyRequest) (RecoveryBackupConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryBackupConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.UpdateRecoveryBackupConfigPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/BackupConfigPolicies/{Moid}"
@@ -5019,7 +5199,8 @@ func (a *RecoveryApiService) UpdateRecoveryBackupConfigPolicyExecute(r ApiUpdate
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.recoveryBackupConfigPolicy == nil {
-		return localVarReturnValue, nil, reportError("recoveryBackupConfigPolicy is required and must be specified")
+		executionError.error = "recoveryBackupConfigPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -5046,18 +5227,22 @@ func (a *RecoveryApiService) UpdateRecoveryBackupConfigPolicyExecute(r ApiUpdate
 	localVarPostBody = r.recoveryBackupConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5124,7 +5309,7 @@ func (a *RecoveryApiService) UpdateRecoveryBackupConfigPolicyExecute(r ApiUpdate
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateRecoveryBackupProfileRequest struct {
@@ -5144,7 +5329,7 @@ func (r ApiUpdateRecoveryBackupProfileRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateRecoveryBackupProfileRequest) Execute() (RecoveryBackupProfile, *_nethttp.Response, error) {
+func (r ApiUpdateRecoveryBackupProfileRequest) Execute() (RecoveryBackupProfile, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateRecoveryBackupProfileExecute(r)
 }
 
@@ -5166,19 +5351,21 @@ func (a *RecoveryApiService) UpdateRecoveryBackupProfile(ctx _context.Context, m
  * Execute executes the request
  * @return RecoveryBackupProfile
  */
-func (a *RecoveryApiService) UpdateRecoveryBackupProfileExecute(r ApiUpdateRecoveryBackupProfileRequest) (RecoveryBackupProfile, *_nethttp.Response, error) {
+func (a *RecoveryApiService) UpdateRecoveryBackupProfileExecute(r ApiUpdateRecoveryBackupProfileRequest) (RecoveryBackupProfile, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryBackupProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.UpdateRecoveryBackupProfile")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/BackupProfiles/{Moid}"
@@ -5188,7 +5375,8 @@ func (a *RecoveryApiService) UpdateRecoveryBackupProfileExecute(r ApiUpdateRecov
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.recoveryBackupProfile == nil {
-		return localVarReturnValue, nil, reportError("recoveryBackupProfile is required and must be specified")
+		executionError.error = "recoveryBackupProfile is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -5215,18 +5403,22 @@ func (a *RecoveryApiService) UpdateRecoveryBackupProfileExecute(r ApiUpdateRecov
 	localVarPostBody = r.recoveryBackupProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5293,7 +5485,7 @@ func (a *RecoveryApiService) UpdateRecoveryBackupProfileExecute(r ApiUpdateRecov
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateRecoveryOnDemandBackupRequest struct {
@@ -5313,7 +5505,7 @@ func (r ApiUpdateRecoveryOnDemandBackupRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateRecoveryOnDemandBackupRequest) Execute() (RecoveryOnDemandBackup, *_nethttp.Response, error) {
+func (r ApiUpdateRecoveryOnDemandBackupRequest) Execute() (RecoveryOnDemandBackup, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateRecoveryOnDemandBackupExecute(r)
 }
 
@@ -5335,19 +5527,21 @@ func (a *RecoveryApiService) UpdateRecoveryOnDemandBackup(ctx _context.Context, 
  * Execute executes the request
  * @return RecoveryOnDemandBackup
  */
-func (a *RecoveryApiService) UpdateRecoveryOnDemandBackupExecute(r ApiUpdateRecoveryOnDemandBackupRequest) (RecoveryOnDemandBackup, *_nethttp.Response, error) {
+func (a *RecoveryApiService) UpdateRecoveryOnDemandBackupExecute(r ApiUpdateRecoveryOnDemandBackupRequest) (RecoveryOnDemandBackup, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryOnDemandBackup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.UpdateRecoveryOnDemandBackup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/OnDemandBackups/{Moid}"
@@ -5357,7 +5551,8 @@ func (a *RecoveryApiService) UpdateRecoveryOnDemandBackupExecute(r ApiUpdateReco
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.recoveryOnDemandBackup == nil {
-		return localVarReturnValue, nil, reportError("recoveryOnDemandBackup is required and must be specified")
+		executionError.error = "recoveryOnDemandBackup is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -5384,18 +5579,22 @@ func (a *RecoveryApiService) UpdateRecoveryOnDemandBackupExecute(r ApiUpdateReco
 	localVarPostBody = r.recoveryOnDemandBackup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5462,7 +5661,7 @@ func (a *RecoveryApiService) UpdateRecoveryOnDemandBackupExecute(r ApiUpdateReco
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateRecoveryScheduleConfigPolicyRequest struct {
@@ -5482,7 +5681,7 @@ func (r ApiUpdateRecoveryScheduleConfigPolicyRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiUpdateRecoveryScheduleConfigPolicyRequest) Execute() (RecoveryScheduleConfigPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateRecoveryScheduleConfigPolicyRequest) Execute() (RecoveryScheduleConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateRecoveryScheduleConfigPolicyExecute(r)
 }
 
@@ -5504,19 +5703,21 @@ func (a *RecoveryApiService) UpdateRecoveryScheduleConfigPolicy(ctx _context.Con
  * Execute executes the request
  * @return RecoveryScheduleConfigPolicy
  */
-func (a *RecoveryApiService) UpdateRecoveryScheduleConfigPolicyExecute(r ApiUpdateRecoveryScheduleConfigPolicyRequest) (RecoveryScheduleConfigPolicy, *_nethttp.Response, error) {
+func (a *RecoveryApiService) UpdateRecoveryScheduleConfigPolicyExecute(r ApiUpdateRecoveryScheduleConfigPolicyRequest) (RecoveryScheduleConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  RecoveryScheduleConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RecoveryApiService.UpdateRecoveryScheduleConfigPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/recovery/ScheduleConfigPolicies/{Moid}"
@@ -5526,7 +5727,8 @@ func (a *RecoveryApiService) UpdateRecoveryScheduleConfigPolicyExecute(r ApiUpda
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.recoveryScheduleConfigPolicy == nil {
-		return localVarReturnValue, nil, reportError("recoveryScheduleConfigPolicy is required and must be specified")
+		executionError.error = "recoveryScheduleConfigPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -5553,18 +5755,22 @@ func (a *RecoveryApiService) UpdateRecoveryScheduleConfigPolicyExecute(r ApiUpda
 	localVarPostBody = r.recoveryScheduleConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5631,5 +5837,5 @@ func (a *RecoveryApiService) UpdateRecoveryScheduleConfigPolicyExecute(r ApiUpda
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }

@@ -1,13 +1,12 @@
-
 ---
+subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_capability_info"
-sidebar_current: "docs-intersight-resource-hyperflex-capability-info"
 description: |-
   A capabilityInfo is like a feature set and/or feature limit for different components of a HyperFlex Cluster. A set of constraints defines the rules, and the corresponding value either determines if the feature would work on a HyperFlex cluster with specific component set, or corresponds to a limit for a set of HyperFlex components. For example, minUcsVersion for HyperFlex version 4.0.1a corresponds to 3.2.3 or minHxdpVersion for HyperFlex Upgrade operation is 4.0.1a etc. This data can be captured as a capability and at run-time, decision can be made to proceed with the intended operation or not, or proceed with the intended operation with a value catered to specific feature sets.
 ---
 
-# Resource: intersight_hyperflex._capability_info
+# Resource: intersight_hyperflex_capability_info
 A capabilityInfo is like a feature set and/or feature limit for different components of a HyperFlex Cluster. A set of constraints defines the rules, and the corresponding value either determines if the feature would work on a HyperFlex cluster with specific component set, or corresponds to a limit for a set of HyperFlex components. For example, "minUcsVersion" for HyperFlex version "4.0.1a" corresponds to "3.2.3" or "minHxdpVersion" for HyperFlex Upgrade operation is "4.0.1a" etc. This data can be captured as a capability and at run-time, decision can be made to proceed with the intended operation or not, or proceed with the intended operation with a value catered to specific feature sets.
 ## Argument Reference
 The following arguments are supported:
@@ -40,3 +39,10 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `value`:(string)(Computed) Capability Value which is valid only iff all specified constraints match. 
+
+
+## Import
+`intersight_hyperflex_capability_info` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_hyperflex_capability_info.example 1234567890987654321abcde
+```

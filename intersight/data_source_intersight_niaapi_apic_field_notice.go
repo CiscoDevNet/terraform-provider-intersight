@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceNiaapiApicFieldNotice() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceNiaapiApicFieldNoticeRead,
+		ReadContext: dataSourceNiaapiApicFieldNoticeRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -143,10 +144,11 @@ func dataSourceNiaapiApicFieldNotice() *schema.Resource {
 	}
 }
 
-func dataSourceNiaapiApicFieldNoticeRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceNiaapiApicFieldNoticeRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.NiaapiApicFieldNotice{}
 	if v, ok := d.GetOk("bugid"); ok {
 		x := (v.(string))
@@ -195,25 +197,25 @@ func dataSourceNiaapiApicFieldNoticeRead(d *schema.ResourceData, meta interface{
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of NiaapiApicFieldNotice object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.NiaapiApi.GetNiaapiApicFieldNoticeList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.NiaapiApi.GetNiaapiApicFieldNoticeList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching NiaapiApicFieldNotice: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for NiaapiApicFieldNotice list: %s", err.Error())
 	}
 	var s = &models.NiaapiApicFieldNoticeList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to NiaapiApicFieldNotice: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to NiaapiApicFieldNotice list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for NiaapiApicFieldNotice did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -222,54 +224,54 @@ func dataSourceNiaapiApicFieldNoticeRead(d *schema.ResourceData, meta interface{
 			var s = &models.NiaapiApicFieldNotice{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("bugid", (s.GetBugid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Bugid: %+v", err)
+				return diag.Errorf("error occurred while setting property Bugid: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("field_notice_desc", (s.GetFieldNoticeDesc())); err != nil {
-				return fmt.Errorf("error occurred while setting property FieldNoticeDesc: %+v", err)
+				return diag.Errorf("error occurred while setting property FieldNoticeDesc: %s", err.Error())
 			}
 			if err := d.Set("field_notice_id", (s.GetFieldNoticeId())); err != nil {
-				return fmt.Errorf("error occurred while setting property FieldNoticeId: %+v", err)
+				return diag.Errorf("error occurred while setting property FieldNoticeId: %s", err.Error())
 			}
 			if err := d.Set("field_notice_url", (s.GetFieldNoticeUrl())); err != nil {
-				return fmt.Errorf("error occurred while setting property FieldNoticeUrl: %+v", err)
+				return diag.Errorf("error occurred while setting property FieldNoticeUrl: %s", err.Error())
 			}
 			if err := d.Set("headline", (s.GetHeadline())); err != nil {
-				return fmt.Errorf("error occurred while setting property Headline: %+v", err)
+				return diag.Errorf("error occurred while setting property Headline: %s", err.Error())
 			}
 			if err := d.Set("hwpid", (s.GetHwpid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Hwpid: %+v", err)
+				return diag.Errorf("error occurred while setting property Hwpid: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 
 			if err := d.Set("revision_info", flattenListNiaapiRevisionInfo(s.GetRevisionInfo(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property RevisionInfo: %+v", err)
+				return diag.Errorf("error occurred while setting property RevisionInfo: %s", err.Error())
 			}
 			if err := d.Set("sw_release", (s.GetSwRelease())); err != nil {
-				return fmt.Errorf("error occurred while setting property SwRelease: %+v", err)
+				return diag.Errorf("error occurred while setting property SwRelease: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("workaround_url", (s.GetWorkaroundUrl())); err != nil {
-				return fmt.Errorf("error occurred while setting property WorkaroundUrl: %+v", err)
+				return diag.Errorf("error occurred while setting property WorkaroundUrl: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

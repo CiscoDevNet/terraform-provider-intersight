@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceNiatelemetryNiaInventoryRead,
+		ReadContext: dataSourceNiatelemetryNiaInventoryRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -313,10 +314,11 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 	}
 }
 
-func dataSourceNiatelemetryNiaInventoryRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.NiatelemetryNiaInventory{}
 	if v, ok := d.GetOk("bgp_peer_count"); ok {
 		x := int64(v.(int))
@@ -433,25 +435,25 @@ func dataSourceNiatelemetryNiaInventoryRead(d *schema.ResourceData, meta interfa
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of NiatelemetryNiaInventory object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.NiatelemetryApi.GetNiatelemetryNiaInventoryList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.NiatelemetryApi.GetNiatelemetryNiaInventoryList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching NiatelemetryNiaInventory: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for NiatelemetryNiaInventory list: %s", err.Error())
 	}
 	var s = &models.NiatelemetryNiaInventoryList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to NiatelemetryNiaInventory: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to NiatelemetryNiaInventory list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for NiatelemetryNiaInventory did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -460,113 +462,113 @@ func dataSourceNiatelemetryNiaInventoryRead(d *schema.ResourceData, meta interfa
 			var s = &models.NiatelemetryNiaInventory{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("bgp_peer_count", (s.GetBgpPeerCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property BgpPeerCount: %+v", err)
+				return diag.Errorf("error occurred while setting property BgpPeerCount: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("cpu", (s.GetCpu())); err != nil {
-				return fmt.Errorf("error occurred while setting property Cpu: %+v", err)
+				return diag.Errorf("error occurred while setting property Cpu: %s", err.Error())
 			}
 			if err := d.Set("crash_reset_logs", (s.GetCrashResetLogs())); err != nil {
-				return fmt.Errorf("error occurred while setting property CrashResetLogs: %+v", err)
+				return diag.Errorf("error occurred while setting property CrashResetLogs: %s", err.Error())
 			}
 			if err := d.Set("device_name", (s.GetDeviceName())); err != nil {
-				return fmt.Errorf("error occurred while setting property DeviceName: %+v", err)
+				return diag.Errorf("error occurred while setting property DeviceName: %s", err.Error())
 			}
 			if err := d.Set("device_type", (s.GetDeviceType())); err != nil {
-				return fmt.Errorf("error occurred while setting property DeviceType: %+v", err)
+				return diag.Errorf("error occurred while setting property DeviceType: %s", err.Error())
 			}
 
 			if err := d.Set("disk", flattenMapNiatelemetryDiskinfo(s.GetDisk(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Disk: %+v", err)
+				return diag.Errorf("error occurred while setting property Disk: %s", err.Error())
 			}
 			if err := d.Set("dn", (s.GetDn())); err != nil {
-				return fmt.Errorf("error occurred while setting property Dn: %+v", err)
+				return diag.Errorf("error occurred while setting property Dn: %s", err.Error())
 			}
 			if err := d.Set("fex_count", (s.GetFexCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property FexCount: %+v", err)
+				return diag.Errorf("error occurred while setting property FexCount: %s", err.Error())
 			}
 			if err := d.Set("infra_wi_node_count", (s.GetInfraWiNodeCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property InfraWiNodeCount: %+v", err)
+				return diag.Errorf("error occurred while setting property InfraWiNodeCount: %s", err.Error())
 			}
 			if err := d.Set("ip_address", (s.GetIpAddress())); err != nil {
-				return fmt.Errorf("error occurred while setting property IpAddress: %+v", err)
+				return diag.Errorf("error occurred while setting property IpAddress: %s", err.Error())
 			}
 
 			if err := d.Set("license_state", flattenMapNiatelemetryNiaLicenseStateRelationship(s.GetLicenseState(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property LicenseState: %+v", err)
+				return diag.Errorf("error occurred while setting property LicenseState: %s", err.Error())
 			}
 			if err := d.Set("log_in_time", (s.GetLogInTime())); err != nil {
-				return fmt.Errorf("error occurred while setting property LogInTime: %+v", err)
+				return diag.Errorf("error occurred while setting property LogInTime: %s", err.Error())
 			}
 			if err := d.Set("log_out_time", (s.GetLogOutTime())); err != nil {
-				return fmt.Errorf("error occurred while setting property LogOutTime: %+v", err)
+				return diag.Errorf("error occurred while setting property LogOutTime: %s", err.Error())
 			}
 			if err := d.Set("mac_sec_count", (s.GetMacSecCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property MacSecCount: %+v", err)
+				return diag.Errorf("error occurred while setting property MacSecCount: %s", err.Error())
 			}
 			if err := d.Set("mac_sec_fab_count", (s.GetMacSecFabCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property MacSecFabCount: %+v", err)
+				return diag.Errorf("error occurred while setting property MacSecFabCount: %s", err.Error())
 			}
 			if err := d.Set("macsec_total_count", (s.GetMacsecTotalCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property MacsecTotalCount: %+v", err)
+				return diag.Errorf("error occurred while setting property MacsecTotalCount: %s", err.Error())
 			}
 			if err := d.Set("memory", (s.GetMemory())); err != nil {
-				return fmt.Errorf("error occurred while setting property Memory: %+v", err)
+				return diag.Errorf("error occurred while setting property Memory: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("node_id", (s.GetNodeId())); err != nil {
-				return fmt.Errorf("error occurred while setting property NodeId: %+v", err)
+				return diag.Errorf("error occurred while setting property NodeId: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("record_type", (s.GetRecordType())); err != nil {
-				return fmt.Errorf("error occurred while setting property RecordType: %+v", err)
+				return diag.Errorf("error occurred while setting property RecordType: %s", err.Error())
 			}
 			if err := d.Set("record_version", (s.GetRecordVersion())); err != nil {
-				return fmt.Errorf("error occurred while setting property RecordVersion: %+v", err)
+				return diag.Errorf("error occurred while setting property RecordVersion: %s", err.Error())
 			}
 
 			if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property RegisteredDevice: %+v", err)
+				return diag.Errorf("error occurred while setting property RegisteredDevice: %s", err.Error())
 			}
 			if err := d.Set("route_prefix_count", (s.GetRoutePrefixCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property RoutePrefixCount: %+v", err)
+				return diag.Errorf("error occurred while setting property RoutePrefixCount: %s", err.Error())
 			}
 			if err := d.Set("route_prefix_v4_count", (s.GetRoutePrefixV4Count())); err != nil {
-				return fmt.Errorf("error occurred while setting property RoutePrefixV4Count: %+v", err)
+				return diag.Errorf("error occurred while setting property RoutePrefixV4Count: %s", err.Error())
 			}
 			if err := d.Set("route_prefix_v6_count", (s.GetRoutePrefixV6Count())); err != nil {
-				return fmt.Errorf("error occurred while setting property RoutePrefixV6Count: %+v", err)
+				return diag.Errorf("error occurred while setting property RoutePrefixV6Count: %s", err.Error())
 			}
 			if err := d.Set("serial", (s.GetSerial())); err != nil {
-				return fmt.Errorf("error occurred while setting property Serial: %+v", err)
+				return diag.Errorf("error occurred while setting property Serial: %s", err.Error())
 			}
 			if err := d.Set("software_download", (s.GetSoftwareDownload())); err != nil {
-				return fmt.Errorf("error occurred while setting property SoftwareDownload: %+v", err)
+				return diag.Errorf("error occurred while setting property SoftwareDownload: %s", err.Error())
 			}
 			if err := d.Set("system_up_time", (s.GetSystemUpTime())); err != nil {
-				return fmt.Errorf("error occurred while setting property SystemUpTime: %+v", err)
+				return diag.Errorf("error occurred while setting property SystemUpTime: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("nr_version", (s.GetVersion())); err != nil {
-				return fmt.Errorf("error occurred while setting property Version: %+v", err)
+				return diag.Errorf("error occurred while setting property Version: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

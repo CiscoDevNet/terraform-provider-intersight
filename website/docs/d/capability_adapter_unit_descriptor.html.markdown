@@ -1,17 +1,15 @@
-
 ---
+subcategory: "capability"
 layout: "intersight"
 page_title: "Intersight: intersight_capability_adapter_unit_descriptor"
-sidebar_current: "docs-intersight-data-source-capability-adapter-unit-descriptor"
 description: |-
-Descriptor that uniquely identifies an adaptor.
+  Descriptor that uniquely identifies an adaptor.
 ---
 
-# Data Source: intersight_capability._adapter_unit_descriptor
+# Data Source: intersight_capability_adapter_unit_descriptor
 Descriptor that uniquely identifies an adaptor.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `connectivity_order`:(string) Order in which the ports are connected; sequential or cyclic. 
 * `description`:(string) Detailed information about the endpoint. 
 * `ethernet_port_speed`:(int) The port speed for ethernet ports in Mbps. 
@@ -19,7 +17,6 @@ The following arguments can be used to get data of already created objects in In
 * `model`:(string) The model of the endpoint, for which this capability information is applicable. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `num_dce_ports`:(int) Number of Dce Ports for the adaptor. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `prom_card_type`:(string) Prom card type for the adaptor. 
 * `vendor`:(string) The vendor of the endpoint, for which this capability information is applicable. 
-* `version`:(string) The firmware or software version of the endpoint, for which this capability information is applicable. 
+* `nr_version`:(string) The firmware or software version of the endpoint, for which this capability information is applicable. 

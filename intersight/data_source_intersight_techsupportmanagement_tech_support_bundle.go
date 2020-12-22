@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceTechsupportmanagementTechSupportBundle() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceTechsupportmanagementTechSupportBundleRead,
+		ReadContext: dataSourceTechsupportmanagementTechSupportBundleRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -82,7 +83,7 @@ func dataSourceTechsupportmanagementTechSupportBundle() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -234,10 +235,11 @@ func dataSourceTechsupportmanagementTechSupportBundle() *schema.Resource {
 	}
 }
 
-func dataSourceTechsupportmanagementTechSupportBundleRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceTechsupportmanagementTechSupportBundleRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.TechsupportmanagementTechSupportBundle{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -274,25 +276,25 @@ func dataSourceTechsupportmanagementTechSupportBundleRead(d *schema.ResourceData
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of TechsupportmanagementTechSupportBundle object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.TechsupportmanagementApi.GetTechsupportmanagementTechSupportBundleList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.TechsupportmanagementApi.GetTechsupportmanagementTechSupportBundleList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching TechsupportmanagementTechSupportBundle: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for TechsupportmanagementTechSupportBundle list: %s", err.Error())
 	}
 	var s = &models.TechsupportmanagementTechSupportBundleList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to TechsupportmanagementTechSupportBundle: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to TechsupportmanagementTechSupportBundle list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for TechsupportmanagementTechSupportBundle did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -301,57 +303,57 @@ func dataSourceTechsupportmanagementTechSupportBundleRead(d *schema.ResourceData
 			var s = &models.TechsupportmanagementTechSupportBundle{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("device_identifier", (s.GetDeviceIdentifier())); err != nil {
-				return fmt.Errorf("error occurred while setting property DeviceIdentifier: %+v", err)
+				return diag.Errorf("error occurred while setting property DeviceIdentifier: %s", err.Error())
 			}
 
 			if err := d.Set("device_registration", flattenMapAssetDeviceRegistrationRelationship(s.GetDeviceRegistration(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property DeviceRegistration: %+v", err)
+				return diag.Errorf("error occurred while setting property DeviceRegistration: %s", err.Error())
 			}
 			if err := d.Set("device_type", (s.GetDeviceType())); err != nil {
-				return fmt.Errorf("error occurred while setting property DeviceType: %+v", err)
+				return diag.Errorf("error occurred while setting property DeviceType: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("pid", (s.GetPid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Pid: %+v", err)
+				return diag.Errorf("error occurred while setting property Pid: %s", err.Error())
 			}
 
 			if err := d.Set("platform_param", flattenMapConnectorPlatformParamBase(s.GetPlatformParam(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property PlatformParam: %+v", err)
+				return diag.Errorf("error occurred while setting property PlatformParam: %s", err.Error())
 			}
 			if err := d.Set("platform_type", (s.GetPlatformType())); err != nil {
-				return fmt.Errorf("error occurred while setting property PlatformType: %+v", err)
+				return diag.Errorf("error occurred while setting property PlatformType: %s", err.Error())
 			}
 			if err := d.Set("serial", (s.GetSerial())); err != nil {
-				return fmt.Errorf("error occurred while setting property Serial: %+v", err)
+				return diag.Errorf("error occurred while setting property Serial: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 
 			if err := d.Set("target_resource", flattenMapMoBaseMoRelationship(s.GetTargetResource(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property TargetResource: %+v", err)
+				return diag.Errorf("error occurred while setting property TargetResource: %s", err.Error())
 			}
 
 			if err := d.Set("tech_support_status", flattenMapTechsupportmanagementTechSupportStatusRelationship(s.GetTechSupportStatus(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property TechSupportStatus: %+v", err)
+				return diag.Errorf("error occurred while setting property TechSupportStatus: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

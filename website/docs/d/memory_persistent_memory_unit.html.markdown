@@ -1,13 +1,12 @@
-
 ---
+subcategory: "memory"
 layout: "intersight"
 page_title: "Intersight: intersight_memory_persistent_memory_unit"
-sidebar_current: "docs-intersight-data-source-memory-persistent-memory-unit"
 description: |-
-Persistent Memory Module on a server.
+  Persistent Memory Module on a server.
 ---
 
-# Data Source: intersight_memory._persistent_memory_unit
+# Data Source: intersight_memory_persistent_memory_unit
 Persistent Memory Module on a server.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
@@ -16,7 +15,6 @@ The following arguments can be used to get data of already created objects in In
 * `array_id`:(int) This represents the memory array to which the memory unit belongs to. 
 * `bank`:(int) This represents the memory bank of the memory unit on a server. 
 * `capacity`:(string) This represents the memory capacity in MiB of the memory unit on a server. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `clock`:(string) This represents the clock of the memory unit on a server. 
 * `count_status`:(string) Count status of the Persistent Memory Module on a server. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
@@ -32,7 +30,6 @@ The following arguments can be used to get data of already created objects in In
 * `memory_id`:(int) ID of the Persistent Memory Module on a server. 
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `oper_power_state`:(string) This represents the operational power state of the memory unit on a server. 
 * `oper_state`:(string) This represents the operational state of the memory unit on a server. 
 * `operability`:(string) This represents the operability of the memory unit on a server. 

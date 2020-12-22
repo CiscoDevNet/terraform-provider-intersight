@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Timestamp** | Pointer to [**time.Time**](time.Time.md) | The ISO 8601 timestamp. | [optional] 
+**Timestamp** | Pointer to **time.Time** | The ISO 8601 timestamp. | [optional] 
 **Result** | Pointer to **map[string]interface{}** | The corresponding timestamps for query. May contain maxTime, minTime, or both (default). | [optional] 
 
 ## Methods

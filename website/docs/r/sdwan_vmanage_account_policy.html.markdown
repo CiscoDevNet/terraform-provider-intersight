@@ -1,13 +1,12 @@
-
 ---
+subcategory: "sdwan"
 layout: "intersight"
 page_title: "Intersight: intersight_sdwan_vmanage_account_policy"
-sidebar_current: "docs-intersight-resource-sdwan-vmanage-account-policy"
 description: |-
   A policy specifying vManage account details.
 ---
 
-# Resource: intersight_sdwan._vmanage_account_policy
+# Resource: intersight_sdwan_vmanage_account_policy
 A policy specifying vManage account details.
 ## Argument Reference
 The following arguments are supported:
@@ -45,3 +44,10 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `username`:(string) Local username for authenticating with the vManage server. 
+
+
+## Import
+`intersight_sdwan_vmanage_account_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_sdwan_vmanage_account_policy.example 1234567890987654321abcde
+```

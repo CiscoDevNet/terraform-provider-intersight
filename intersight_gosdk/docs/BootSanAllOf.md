@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "boot.San"]
 **Bootloader** | Pointer to [**NullableBootBootloader**](boot.Bootloader.md) |  | [optional] 
 **InterfaceName** | Pointer to **string** | The name of the underlying vHBA interface to be used by the SAN boot device. | [optional] 
-**Lun** | Pointer to **int64** | The Logical Unit Number (LUN) of the device. | [optional] 
+**Lun** | Pointer to **int64** | The Logical Unit Number (LUN) of the device. | [optional] [default to 0]
 **Slot** | Pointer to **string** | Slot ID of the device. Supported values are ( 1 - 255, \&quot;MLOM\&quot;, \&quot;L1\&quot;, \&quot;L2\&quot; ). | [optional] 
 **Wwpn** | Pointer to **string** | The WWPN Address of the underlying fiber channel interface used by the SAN boot device. Value must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx. Allowed ranges are 20:00:00:00:00:00:00:00 to 20:FF:FF:FF:FF:FF:FF:FF or from 50:00:00:00:00:00:00:00 to 5F:FF:FF:FF:FF:FF:FF:FF. | [optional] 
 

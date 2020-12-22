@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -48,6 +48,8 @@ type VirtualizationVmwareVirtualMachineAllOf struct {
 	GuestState *string `json:"GuestState,omitempty"`
 	// UUID assigned by vCenter to every VM.
 	InstanceUuid *string `json:"InstanceUuid,omitempty"`
+	// Inventory path to the VM. Example - /DC/vm/folder/VMName.
+	InventoryPath *string `json:"InventoryPath,omitempty"`
 	// If true, indicates that the entity refers to a template of a virtual machine and not a real virtual machine.
 	IsTemplate *bool                                         `json:"IsTemplate,omitempty"`
 	MacAddress []string                                      `json:"MacAddress,omitempty"`
@@ -715,6 +717,38 @@ func (o *VirtualizationVmwareVirtualMachineAllOf) HasInstanceUuid() bool {
 // SetInstanceUuid gets a reference to the given string and assigns it to the InstanceUuid field.
 func (o *VirtualizationVmwareVirtualMachineAllOf) SetInstanceUuid(v string) {
 	o.InstanceUuid = &v
+}
+
+// GetInventoryPath returns the InventoryPath field value if set, zero value otherwise.
+func (o *VirtualizationVmwareVirtualMachineAllOf) GetInventoryPath() string {
+	if o == nil || o.InventoryPath == nil {
+		var ret string
+		return ret
+	}
+	return *o.InventoryPath
+}
+
+// GetInventoryPathOk returns a tuple with the InventoryPath field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VirtualizationVmwareVirtualMachineAllOf) GetInventoryPathOk() (*string, bool) {
+	if o == nil || o.InventoryPath == nil {
+		return nil, false
+	}
+	return o.InventoryPath, true
+}
+
+// HasInventoryPath returns a boolean if a field has been set.
+func (o *VirtualizationVmwareVirtualMachineAllOf) HasInventoryPath() bool {
+	if o != nil && o.InventoryPath != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInventoryPath gets a reference to the given string and assigns it to the InventoryPath field.
+func (o *VirtualizationVmwareVirtualMachineAllOf) SetInventoryPath(v string) {
+	o.InventoryPath = &v
 }
 
 // GetIsTemplate returns the IsTemplate field value if set, zero value otherwise.
@@ -1566,6 +1600,9 @@ func (o VirtualizationVmwareVirtualMachineAllOf) MarshalJSON() ([]byte, error) {
 	if o.InstanceUuid != nil {
 		toSerialize["InstanceUuid"] = o.InstanceUuid
 	}
+	if o.InventoryPath != nil {
+		toSerialize["InventoryPath"] = o.InventoryPath
+	}
 	if o.IsTemplate != nil {
 		toSerialize["IsTemplate"] = o.IsTemplate
 	}
@@ -1674,6 +1711,7 @@ func (o *VirtualizationVmwareVirtualMachineAllOf) UnmarshalJSON(bytes []byte) (e
 		delete(additionalProperties, "Folder")
 		delete(additionalProperties, "GuestState")
 		delete(additionalProperties, "InstanceUuid")
+		delete(additionalProperties, "InventoryPath")
 		delete(additionalProperties, "IsTemplate")
 		delete(additionalProperties, "MacAddress")
 		delete(additionalProperties, "MemShares")

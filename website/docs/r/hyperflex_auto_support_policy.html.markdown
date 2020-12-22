@@ -1,19 +1,18 @@
-
 ---
+subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_auto_support_policy"
-sidebar_current: "docs-intersight-resource-hyperflex-auto-support-policy"
 description: |-
   A policy specifying the configuration to automatically generate support tickets with Cisco TAC.
 ---
 
-# Resource: intersight_hyperflex._auto_support_policy
+# Resource: intersight_hyperflex_auto_support_policy
 A policy specifying the configuration to automatically generate support tickets with Cisco TAC.
 ## Argument Reference
 The following arguments are supported:
 * `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-* `admin_state`:(bool) Enable or disable Auto Support. 
+* `admin_state`:(bool) Enable or disable Auto-Support. 
 * `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `cluster_profiles`:(Array) An array of relationships to hyperflexClusterProfile resources. 
 This complex property has following sub-properties:
@@ -42,3 +41,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_hyperflex_auto_support_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_hyperflex_auto_support_policy.example 1234567890987654321abcde
+```

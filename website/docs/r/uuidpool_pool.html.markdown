@@ -1,13 +1,12 @@
-
 ---
+subcategory: "uuidpool"
 layout: "intersight"
 page_title: "Intersight: intersight_uuidpool_pool"
-sidebar_current: "docs-intersight-resource-uuidpool-pool"
 description: |-
   Pool represents a collection of UUID items that can be allocated to server profiles.
 ---
 
-# Resource: intersight_uuidpool._pool
+# Resource: intersight_uuidpool_pool
 Pool represents a collection of UUID items that can be allocated to server profiles.
 ## Argument Reference
 The following arguments are supported:
@@ -27,7 +26,7 @@ This complex property has following sub-properties:
 * `description`:(string) Description of the policy. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the concrete policy. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `organization`:(Array with Maximum of one item) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `additional_properties`:
@@ -53,3 +52,10 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `size`:(int)(Computed) Number of identifiers this block can hold. 
   + `to`:(string) Starting UUID suffix of the block must be in hexadecimal format xxxx-xxxxxxxxxxxx. 
+
+
+## Import
+`intersight_uuidpool_pool` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_uuidpool_pool.example 1234567890987654321abcde
+```

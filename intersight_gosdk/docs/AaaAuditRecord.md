@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **InstId** | Pointer to **string** | The instance id of AuditRecordLocal, which is used to identify if the comming AuditRecordLocal was already processed before. | [optional] 
 **SessionId** | Pointer to **string** | The sessionId in which the user made the change. In case that the session is later deleted, we still have some reference to the information. | [optional] 
 **SourceIp** | Pointer to **string** | The source IP of the client. | [optional] 
-**Timestamp** | Pointer to [**time.Time**](time.Time.md) | The creation time of AuditRecordLocal, which is the time when the affected MO was created/modified/deleted. | [optional] [readonly] 
+**Timestamp** | Pointer to **time.Time** | The creation time of AuditRecordLocal, which is the time when the affected MO was created/modified/deleted. | [optional] [readonly] 
 **UserIdOrEmail** | Pointer to **string** | The userId or the email of the associated user that made the change. In case that user is later deleted, we still have some reference to the information. | [optional] 
 **Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
 **Sessions** | Pointer to [**IamSessionRelationship**](iam.Session.Relationship.md) |  | [optional] 

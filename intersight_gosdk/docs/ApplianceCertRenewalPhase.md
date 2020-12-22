@@ -6,11 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "appliance.CertRenewalPhase"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.CertRenewalPhase"]
-**EndTime** | Pointer to [**time.Time**](time.Time.md) | End date of the cert renewal phase. | [optional] [readonly] 
+**EndTime** | Pointer to **time.Time** | End date of the cert renewal phase. | [optional] [readonly] 
 **Failed** | Pointer to **bool** | Indicates if the cert renewal phase has failed or not. | [optional] [readonly] 
 **Message** | Pointer to **string** | Status message set during the cert renewal phase. | [optional] [readonly] 
 **Name** | Pointer to **string** | Name of the cert renewal phase phase. * &#x60;Init&#x60; - New certificate detected, cleanup the old process if any running. * &#x60;ScheduleCertificateAddOperation&#x60; - Certificate Add Operation Schedulled. * &#x60;WaitForCertCollectionByEndpoint&#x60; - Monitor cert collection by endpoint. * &#x60;Success&#x60; - Certificate Renewal Task Success. * &#x60;Fail&#x60; - Certificate Renewal Task Fail. * &#x60;Cancel&#x60; - Certificate Renewal Task Cancel. | [optional] [readonly] [default to "Init"]
-**StartTime** | Pointer to [**time.Time**](time.Time.md) | Start date of the cert renewal phase. | [optional] [readonly] 
+**StartTime** | Pointer to **time.Time** | Start date of the cert renewal phase. | [optional] [readonly] 
 
 ## Methods
 

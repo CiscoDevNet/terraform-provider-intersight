@@ -1,13 +1,12 @@
-
 ---
+subcategory: "recovery"
 layout: "intersight"
 page_title: "Intersight: intersight_recovery_on_demand_backup"
-sidebar_current: "docs-intersight-resource-recovery-on-demand-backup"
 description: |-
   Handles requests for on demand backup for a given endpoint.
 ---
 
-# Resource: intersight_recovery._on_demand_backup
+# Resource: intersight_recovery_on_demand_backup
 Handles requests for on demand backup for a given endpoint.
 ## Argument Reference
 The following arguments are supported:
@@ -36,7 +35,7 @@ This complex property has following sub-properties:
 * `location_type`:(string) Specifies whether the backup will be stored locally or remotely.* `Network Share` - The backup is stored remotely on a separate server.* `Local Storage` - The backup is stored locally on the endpoint. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the concrete policy. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `organization`:(Array with Maximum of one item) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `additional_properties`:
@@ -56,3 +55,10 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `user_name`:(string) Username for the backup server. 
+
+
+## Import
+`intersight_recovery_on_demand_backup` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_recovery_on_demand_backup.example 1234567890987654321abcde
+```

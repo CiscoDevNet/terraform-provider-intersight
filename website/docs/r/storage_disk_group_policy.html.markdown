@@ -1,13 +1,12 @@
-
 ---
+subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_disk_group_policy"
-sidebar_current: "docs-intersight-resource-storage-disk-group-policy"
 description: |-
   A reusable RAID disk group configuration that can be applied across multiple servers. Also provides options to move JBOD disks in the disk group to Unconfigured Good state before they are used in the disk group.
 ---
 
-# Resource: intersight_storage._disk_group_policy
+# Resource: intersight_storage_disk_group_policy
 A reusable RAID disk group configuration that can be applied across multiple servers. Also provides options to move JBOD disks in the disk group to Unconfigured Good state before they are used in the disk group.
 ## Argument Reference
 The following arguments are supported:
@@ -62,3 +61,10 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `use_jbods`:(bool) Selected disks in the disk group in JBOD state will be set to Unconfigured Good state before they are used in virtual drive creation. 
+
+
+## Import
+`intersight_storage_disk_group_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_storage_disk_group_policy.example 1234567890987654321abcde
+```

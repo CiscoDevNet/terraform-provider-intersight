@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **MetricName** | Pointer to **string** | The name of the metric for which regression model is generated. | [optional] [readonly] 
 **MinDaysForForecast** | Pointer to **int64** | The minimum number of days the HyperFlex cluster should be up for computing forecast. | [optional] [readonly] 
 **Model** | Pointer to [**NullableForecastModel**](forecast.Model.md) |  | [optional] 
-**ThresholdDays** | Pointer to **int64** | The number of days remaining before the device reaches the specified threshold for the metric as defined in definition. | [optional] [readonly] 
+**ThresholdDays** | Pointer to **int64** | The number of days remaining before the device reaches the specified threshold for the metric as defined in definition. | [optional] [readonly] [default to 2147483647]
 **ForecastDef** | Pointer to [**ForecastDefinitionRelationship**](forecast.Definition.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 

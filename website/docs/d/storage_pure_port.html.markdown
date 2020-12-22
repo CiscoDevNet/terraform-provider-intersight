@@ -1,22 +1,19 @@
-
 ---
+subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_pure_port"
-sidebar_current: "docs-intersight-data-source-storage-pure-port"
 description: |-
-Port entity in Pure FlashArray.
+  Port entity in Pure FlashArray.
 ---
 
-# Data Source: intersight_storage._pure_port
+# Data Source: intersight_storage_pure_port
 Port entity in Pure FlashArray.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `failover`:(string) Name of the port to which this port has failed over. 
 * `iqn`:(string) ISCSI qualified name applicable for ethernet port. Example - 'iqn.2008-05.com.storage:fnm00151300643-514f0c50141faf05'. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the physical port available in storage array. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `portal`:(string) Ip address of iSCSI portal configured on the port. 
 * `speed`:(int) Operational speed of physical port measured in Gbps. 
 * `status`:(string) Status of storage array port.* `Unknown` - Component status is not available.* `Ok` - Component is healthy and no issues found.* `Degraded` - Functioning, but not at full capability due to a non-fatal failure.* `Critical` - Not functioning or requiring immediate attention.* `Offline` - Component is installed, but powered off.* `Identifying` - Component is in initialization process.* `NotAvailable` - Component is not installed or not available.* `Updating` - Software update is in progress.* `Unrecognized` - Component is not recognized. It may be because the component is not installed properly or it is not supported. 

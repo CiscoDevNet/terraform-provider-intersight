@@ -7,11 +7,11 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "os.ValidInstallTarget"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "os.ValidInstallTarget"]
 **Error** | Pointer to **string** | Error message if any errors are encountered while fetching and validating Install targets for the server. | [optional] [readonly] 
-**M2Jbod** | Pointer to [**[]OsPhysicalDiskResponse**](os.PhysicalDiskResponse.md) |  | [optional] 
-**M2VirtualDrives** | Pointer to [**[]OsVirtualDriveResponse**](os.VirtualDriveResponse.md) |  | [optional] 
-**MraidJbod** | Pointer to [**[]OsPhysicalDiskResponse**](os.PhysicalDiskResponse.md) |  | [optional] 
-**MraidVirtualDrives** | Pointer to [**[]OsVirtualDriveResponse**](os.VirtualDriveResponse.md) |  | [optional] 
-**Servers** | Pointer to [**[]ComputePhysicalRelationship**](compute.Physical.Relationship.md) | An array of relationships to computePhysical resources. | [optional] 
+**M2Jbod** | Pointer to [**[]OsPhysicalDiskResponse**](OsPhysicalDiskResponse.md) |  | [optional] 
+**M2VirtualDrives** | Pointer to [**[]OsVirtualDriveResponse**](OsVirtualDriveResponse.md) |  | [optional] 
+**MraidJbod** | Pointer to [**[]OsPhysicalDiskResponse**](OsPhysicalDiskResponse.md) |  | [optional] 
+**MraidVirtualDrives** | Pointer to [**[]OsVirtualDriveResponse**](OsVirtualDriveResponse.md) |  | [optional] 
+**Servers** | Pointer to [**[]ComputePhysicalRelationship**](ComputePhysicalRelationship.md) | An array of relationships to computePhysical resources. | [optional] 
 
 ## Methods
 

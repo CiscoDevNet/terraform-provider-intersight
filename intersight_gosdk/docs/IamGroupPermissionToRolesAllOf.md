@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.GroupPermissionToRoles"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.GroupPermissionToRoles"]
 **Group** | Pointer to [**NullableCmrfCmRf**](cmrf.CmRf.md) |  | [optional] 
-**Orgs** | Pointer to [**[]CmrfCmRf**](cmrf.CmRf.md) |  | [optional] 
+**Orgs** | Pointer to [**[]CmrfCmRf**](CmrfCmRf.md) |  | [optional] 
 
 ## Methods
 

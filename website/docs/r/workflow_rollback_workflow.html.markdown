@@ -1,20 +1,19 @@
-
 ---
+subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_rollback_workflow"
-sidebar_current: "docs-intersight-resource-workflow-rollback-workflow"
 description: |-
   Rollback workflow contains details about the workflow instance, tasks to be rollback along with the status and workflow instances.
 ---
 
-# Resource: intersight_workflow._rollback_workflow
+# Resource: intersight_workflow_rollback_workflow
 Rollback workflow contains details about the workflow instance, tasks to be rollback along with the status and workflow instances.
 ## Argument Reference
 The following arguments are supported:
 * `action`:(string) The action of the rollback workflow such as Create and Start.* `None` - If no action is set, then the default value is set to none for the action field.* `Create` - Create rollback workflow data for the execution of the rollback workflow.* `Start` - Start a new execution of the rollback workflow. 
 * `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `continue_on_task_failure`:(bool) When set to true, if a task in the workflow fails, the rollback workflow continues to the subsequent task. When set to false, the rollback workflow execution halts if a task fails. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
@@ -33,7 +32,7 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `description`:(string)(Computed) Description of the rollback task. 
   + `name`:(string) Name of TaskInfo that needs to be rolled back. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `ref_name`:(string) Reference name of TaskInfo that need to be rolled back. 
   + `rollback_completed`:(bool)(Computed) Status of the rollback operation for the task. 
   + `rollback_task_name`:(string)(Computed) Name of TaskInfo that performs the rollback operation. 
@@ -55,7 +54,7 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `description`:(string)(Computed) Description of the rollback task. 
   + `name`:(string) Name of TaskInfo that needs to be rolled back. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `ref_name`:(string) Reference name of TaskInfo that need to be rolled back. 
   + `rollback_completed`:(bool)(Computed) Status of the rollback operation for the task. 
   + `rollback_task_name`:(string)(Computed) Name of TaskInfo that performs the rollback operation. 
@@ -69,3 +68,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_workflow_rollback_workflow` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_workflow_rollback_workflow.example 1234567890987654321abcde
+```

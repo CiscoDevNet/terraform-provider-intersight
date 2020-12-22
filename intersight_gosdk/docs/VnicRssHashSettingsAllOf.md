@@ -6,14 +6,14 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.RssHashSettings"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.RssHashSettings"]
-**Ipv4Hash** | Pointer to **bool** | When enabled, the IPv4 address is used for traffic distribution. | [optional] 
-**Ipv6ExtHash** | Pointer to **bool** | When enabled, the IPv6 extensions are used for traffic distribution. | [optional] 
-**Ipv6Hash** | Pointer to **bool** | When enabled, the IPv6 address is used for traffic distribution. | [optional] 
-**TcpIpv4Hash** | Pointer to **bool** | When enabled, both the IPv4 address and TCP port number are used for traffic distribution. | [optional] 
-**TcpIpv6ExtHash** | Pointer to **bool** | When enabled, both the IPv6 extensions and TCP port number are used for traffic distribution. | [optional] 
-**TcpIpv6Hash** | Pointer to **bool** | When enabled, both the IPv6 address and TCP port number are used for traffic distribution. | [optional] 
-**UdpIpv4Hash** | Pointer to **bool** | When enabled, both the IPv4 address and UDP port number are used for traffic distribution. | [optional] 
-**UdpIpv6Hash** | Pointer to **bool** | When enabled, both the IPv6 address and UDP port number are used for traffic distribution. | [optional] 
+**Ipv4Hash** | Pointer to **bool** | When enabled, the IPv4 address is used for traffic distribution. | [optional] [default to true]
+**Ipv6ExtHash** | Pointer to **bool** | When enabled, the IPv6 extensions are used for traffic distribution. | [optional] [default to false]
+**Ipv6Hash** | Pointer to **bool** | When enabled, the IPv6 address is used for traffic distribution. | [optional] [default to true]
+**TcpIpv4Hash** | Pointer to **bool** | When enabled, both the IPv4 address and TCP port number are used for traffic distribution. | [optional] [default to true]
+**TcpIpv6ExtHash** | Pointer to **bool** | When enabled, both the IPv6 extensions and TCP port number are used for traffic distribution. | [optional] [default to false]
+**TcpIpv6Hash** | Pointer to **bool** | When enabled, both the IPv6 address and TCP port number are used for traffic distribution. | [optional] [default to true]
+**UdpIpv4Hash** | Pointer to **bool** | When enabled, both the IPv4 address and UDP port number are used for traffic distribution. | [optional] [default to false]
+**UdpIpv6Hash** | Pointer to **bool** | When enabled, both the IPv6 address and UDP port number are used for traffic distribution. | [optional] [default to false]
 
 ## Methods
 

@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceHyperflexServerModel() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceHyperflexServerModelCreate,
-		Read:   resourceHyperflexServerModelRead,
-		Update: resourceHyperflexServerModelUpdate,
-		Delete: resourceHyperflexServerModelDelete,
+		CreateContext: resourceHyperflexServerModelCreate,
+		ReadContext:   resourceHyperflexServerModelRead,
+		UpdateContext: resourceHyperflexServerModelUpdate,
+		DeleteContext: resourceHyperflexServerModelDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -121,7 +124,7 @@ func resourceHyperflexServerModel() *schema.Resource {
 										Optional:    true,
 									},
 									"hypervisor_type": {
-										Description: "The hypervisor type for the HyperFlex cluster.\n* `ESXi` - A Vmware ESXi hypervisor of any version.\n* `HXAP` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
+										Description: "The hypervisor type for the HyperFlex cluster.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Default:     "ESXi",
@@ -133,7 +136,7 @@ func resourceHyperflexServerModel() *schema.Resource {
 										Default:     "FI",
 									},
 									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
@@ -196,7 +199,7 @@ func resourceHyperflexServerModel() *schema.Resource {
 	}
 }
 
-func resourceHyperflexServerModelCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexServerModelCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -396,61 +399,65 @@ func resourceHyperflexServerModelCreate(d *schema.ResourceData, meta interface{}
 	}
 
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexServerModel(conn.ctx).HyperflexServerModel(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating HyperflexServerModel: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceHyperflexServerModelRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceHyperflexServerModelRead(c, d, meta)
 }
 
-func resourceHyperflexServerModelRead(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexServerModelRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.HyperflexApi.GetHyperflexServerModelByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "HyperflexServerModel object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching HyperflexServerModel: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in HyperflexServerModel object: %s", err.Error())
 	}
 
 	if err := d.Set("app_catalog", flattenMapHyperflexAppCatalogRelationship(s.GetAppCatalog(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property AppCatalog: %+v", err)
+		return diag.Errorf("error occurred while setting property AppCatalog in HyperflexServerModel object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in HyperflexServerModel object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in HyperflexServerModel object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in HyperflexServerModel object: %s", err.Error())
 	}
 
 	if err := d.Set("server_model_entries", flattenListHyperflexServerModelEntry(s.GetServerModelEntries(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ServerModelEntries: %+v", err)
+		return diag.Errorf("error occurred while setting property ServerModelEntries in HyperflexServerModel object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in HyperflexServerModel object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceHyperflexServerModelUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexServerModelUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -655,23 +662,24 @@ func resourceHyperflexServerModelUpdate(d *schema.ResourceData, meta interface{}
 	}
 
 	r := conn.ApiClient.HyperflexApi.UpdateHyperflexServerModel(conn.ctx, d.Id()).HyperflexServerModel(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating HyperflexServerModel: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexServerModelRead(d, meta)
+	return resourceHyperflexServerModelRead(c, d, meta)
 }
 
-func resourceHyperflexServerModelDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexServerModelDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexServerModel(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting HyperflexServerModel object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

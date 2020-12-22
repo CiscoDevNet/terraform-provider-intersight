@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceOsInstall() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceOsInstallCreate,
-		Read:   resourceOsInstallRead,
-		Delete: resourceOsInstallDelete,
+		CreateContext: resourceOsInstallCreate,
+		ReadContext:   resourceOsInstallRead,
+		DeleteContext: resourceOsInstallDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_parameters": {
 				Type:     schema.TypeList,
@@ -38,6 +41,7 @@ func resourceOsInstall() *schema.Resource {
 							Description: "Flag to indicate if value is set. Value will be used to check if any edit.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     true,
 							ForceNew:    true,
 						},
 						"object_type": {
@@ -144,6 +148,7 @@ func resourceOsInstall() *schema.Resource {
 													Description: "Inventory selector specified for primitive data property should be used in Intersight User Interface.",
 													Type:        schema.TypeBool,
 													Optional:    true,
+													Default:     true,
 													ForceNew:    true,
 												},
 												"object_type": {
@@ -277,13 +282,13 @@ func resourceOsInstall() *schema.Resource {
 																ForceNew:   true,
 															},
 															"max": {
-																Description: "Allowed maximum value of the parameter if parameter is integer/float or maximum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked.",
+																Description: "Allowed maximum value of the parameter if parameter is integer/float or maximum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. The maximum number supported is 1.797693134862315708145274237317043567981e+308 or (2**1023 * (2**53 - 1) / 2**52). When a number bigger than this is given as Maximum value, the constraints will not be enforced.",
 																Type:        schema.TypeFloat,
 																Optional:    true,
 																ForceNew:    true,
 															},
 															"min": {
-																Description: "Allowed minimum value of the parameter if parameter is integer/float or minimum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked.",
+																Description: "Allowed minimum value of the parameter if parameter is integer/float or minimum length of the parameter if the parameter is string. When max and min are set to 0, then the limits are not checked. The minimum number supported is 4.940656458412465441765687928682213723651e-324 or (1 / 2 ** (1023 - 1 + 52)). When a number smaller than this is given as minimum value, the constraints will not be enforced.",
 																Type:        schema.TypeFloat,
 																Optional:    true,
 																ForceNew:    true,
@@ -545,7 +550,7 @@ func resourceOsInstall() *schema.Resource {
 				ForceNew:   true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -963,7 +968,7 @@ func resourceOsInstall() *schema.Resource {
 	}
 }
 
-func resourceOsInstallCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceOsInstallCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1864,130 +1869,133 @@ func resourceOsInstallCreate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	r := conn.ApiClient.OsApi.CreateOsInstall(conn.ctx).OsInstall(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating OsInstall: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceOsInstallRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceOsInstallRead(c, d, meta)
 }
 
-func resourceOsInstallRead(d *schema.ResourceData, meta interface{}) error {
+func resourceOsInstallRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.OsApi.GetOsInstallByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "OsInstall object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching OsInstall: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_parameters", flattenListOsPlaceHolder(s.GetAdditionalParameters(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalParameters: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalParameters in OsInstall object: %s", err.Error())
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in OsInstall object: %s", err.Error())
 	}
 
 	if err := d.Set("answers", flattenMapOsAnswers(s.GetAnswers(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Answers: %+v", err)
+		return diag.Errorf("error occurred while setting property Answers in OsInstall object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in OsInstall object: %s", err.Error())
 	}
 
 	if err := d.Set("configuration_file", flattenMapOsConfigurationFileRelationship(s.GetConfigurationFile(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ConfigurationFile: %+v", err)
+		return diag.Errorf("error occurred while setting property ConfigurationFile in OsInstall object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in OsInstall object: %s", err.Error())
 	}
 
 	if err := d.Set("image", flattenMapSoftwarerepositoryOperatingSystemFileRelationship(s.GetImage(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Image: %+v", err)
+		return diag.Errorf("error occurred while setting property Image in OsInstall object: %s", err.Error())
 	}
 
 	if err := d.Set("install_method", (s.GetInstallMethod())); err != nil {
-		return fmt.Errorf("error occurred while setting property InstallMethod: %+v", err)
+		return diag.Errorf("error occurred while setting property InstallMethod in OsInstall object: %s", err.Error())
 	}
 
 	if err := d.Set("install_target", flattenMapOsInstallTarget(s.GetInstallTarget(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property InstallTarget: %+v", err)
+		return diag.Errorf("error occurred while setting property InstallTarget in OsInstall object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in OsInstall object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in OsInstall object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in OsInstall object: %s", err.Error())
 	}
 
 	if err := d.Set("operating_system_parameters", flattenMapOsOperatingSystemParameters(s.GetOperatingSystemParameters(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property OperatingSystemParameters: %+v", err)
+		return diag.Errorf("error occurred while setting property OperatingSystemParameters in OsInstall object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in OsInstall object: %s", err.Error())
 	}
 
 	if err := d.Set("osdu_image", flattenMapFirmwareServerConfigurationUtilityDistributableRelationship(s.GetOsduImage(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property OsduImage: %+v", err)
+		return diag.Errorf("error occurred while setting property OsduImage in OsInstall object: %s", err.Error())
 	}
 
 	if err := d.Set("server", flattenMapComputePhysicalRelationship(s.GetServer(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Server: %+v", err)
+		return diag.Errorf("error occurred while setting property Server in OsInstall object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in OsInstall object: %s", err.Error())
 	}
 
 	if err := d.Set("workflow_info", flattenMapWorkflowWorkflowInfoRelationship(s.GetWorkflowInfo(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property WorkflowInfo: %+v", err)
+		return diag.Errorf("error occurred while setting property WorkflowInfo in OsInstall object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceOsInstallDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceOsInstallDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	x := d.Get("workflow_info").([]interface{})[0].(map[string]interface{})
 	moid := x["moid"].(string)
-	getWorkflow, _, err := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowInfoByMoid(conn.ctx, moid).Execute()
-	if err != nil {
-		log.Printf("error occurred while fetching workflow info: %s", err.Error())
-		return err
+	getWorkflow, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowInfoByMoid(conn.ctx, moid).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching workflow info for OsInstall: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	if getWorkflow.GetStatus() == "RUNNING" {
 		status := "Cancel"
 		var o = &models.WorkflowWorkflowInfo{Action: &status}
 		o.SetClassId("workflow.WorkflowInfo")
 		o.SetObjectType("workflow.WorkflowInfo")
-		_, _, err = conn.ApiClient.WorkflowApi.UpdateWorkflowWorkflowInfo(conn.ctx, moid).WorkflowWorkflowInfo(*o).Execute()
-		if err != nil {
-			log.Printf("error occurred while cancelling workflow: %s", err.Error())
-			return err
+		_, _, responseErr = conn.ApiClient.WorkflowApi.UpdateWorkflowWorkflowInfo(conn.ctx, moid).WorkflowWorkflowInfo(*o).Execute()
+		if responseErr.Error() != "" {
+			return diag.Errorf("error occurred while cancelling workflow triggered by OsInstall: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
+		}
+		p := conn.ApiClient.WorkflowApi.DeleteWorkflowWorkflowInfo(conn.ctx, moid)
+		_, responseErr = p.Execute()
+		if responseErr.Error() != "" {
+			return diag.Errorf("error occurred while deleting workflow triggered by OsInstall: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 	}
-	p := conn.ApiClient.WorkflowApi.DeleteWorkflowWorkflowInfo(conn.ctx, moid)
-	_, err = p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
-	}
-	return err
+	return de
 }

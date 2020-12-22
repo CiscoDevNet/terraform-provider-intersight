@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **Name** | Pointer to **string** | An unique identifer for a capability descriptor. | [optional] 
-**Section** | Pointer to [**CapabilitySectionRelationship**](capability.Section.Relationship.md) |  | [optional] 
 
 ## Methods
 
@@ -92,31 +91,6 @@ SetName sets Name field to given value.
 `func (o *CapabilityCapabilityAllOf) HasName() bool`
 
 HasName returns a boolean if a field has been set.
-
-### GetSection
-
-`func (o *CapabilityCapabilityAllOf) GetSection() CapabilitySectionRelationship`
-
-GetSection returns the Section field if non-nil, zero value otherwise.
-
-### GetSectionOk
-
-`func (o *CapabilityCapabilityAllOf) GetSectionOk() (*CapabilitySectionRelationship, bool)`
-
-GetSectionOk returns a tuple with the Section field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSection
-
-`func (o *CapabilityCapabilityAllOf) SetSection(v CapabilitySectionRelationship)`
-
-SetSection sets Section field to given value.
-
-### HasSection
-
-`func (o *CapabilityCapabilityAllOf) HasSection() bool`
-
-HasSection returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

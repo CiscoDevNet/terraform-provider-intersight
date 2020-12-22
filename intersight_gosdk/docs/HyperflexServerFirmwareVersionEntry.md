@@ -7,7 +7,9 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "hyperflex.ServerFirmwareVersionEntry"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.ServerFirmwareVersionEntry"]
 **Constraint** | Pointer to [**NullableHyperflexAppSettingConstraint**](hyperflex.AppSettingConstraint.md) |  | [optional] 
-**Label** | Pointer to **string** | The display name for server firmware bundle version in UI. | [optional] 
+**ServerPlatform** | Pointer to **string** | The server platform type that is applicable for the server firmware bundle version. * &#x60;M5&#x60; - M5 generation of UCS server. * &#x60;M4&#x60; - M4 generation of UCS server. | [optional] [default to "M5"]
+**Version** | Pointer to **string** | The server firmware bundle version. | [optional] 
+**ServerFirmwareVersion** | Pointer to [**HyperflexServerFirmwareVersionRelationship**](hyperflex.ServerFirmwareVersion.Relationship.md) |  | [optional] 
 
 ## Methods
 
@@ -103,30 +105,80 @@ HasConstraint returns a boolean if a field has been set.
 `func (o *HyperflexServerFirmwareVersionEntry) UnsetConstraint()`
 
 UnsetConstraint ensures that no value is present for Constraint, not even an explicit nil
-### GetLabel
+### GetServerPlatform
 
-`func (o *HyperflexServerFirmwareVersionEntry) GetLabel() string`
+`func (o *HyperflexServerFirmwareVersionEntry) GetServerPlatform() string`
 
-GetLabel returns the Label field if non-nil, zero value otherwise.
+GetServerPlatform returns the ServerPlatform field if non-nil, zero value otherwise.
 
-### GetLabelOk
+### GetServerPlatformOk
 
-`func (o *HyperflexServerFirmwareVersionEntry) GetLabelOk() (*string, bool)`
+`func (o *HyperflexServerFirmwareVersionEntry) GetServerPlatformOk() (*string, bool)`
 
-GetLabelOk returns a tuple with the Label field if it's non-nil, zero value otherwise
+GetServerPlatformOk returns a tuple with the ServerPlatform field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetLabel
+### SetServerPlatform
 
-`func (o *HyperflexServerFirmwareVersionEntry) SetLabel(v string)`
+`func (o *HyperflexServerFirmwareVersionEntry) SetServerPlatform(v string)`
 
-SetLabel sets Label field to given value.
+SetServerPlatform sets ServerPlatform field to given value.
 
-### HasLabel
+### HasServerPlatform
 
-`func (o *HyperflexServerFirmwareVersionEntry) HasLabel() bool`
+`func (o *HyperflexServerFirmwareVersionEntry) HasServerPlatform() bool`
 
-HasLabel returns a boolean if a field has been set.
+HasServerPlatform returns a boolean if a field has been set.
+
+### GetVersion
+
+`func (o *HyperflexServerFirmwareVersionEntry) GetVersion() string`
+
+GetVersion returns the Version field if non-nil, zero value otherwise.
+
+### GetVersionOk
+
+`func (o *HyperflexServerFirmwareVersionEntry) GetVersionOk() (*string, bool)`
+
+GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVersion
+
+`func (o *HyperflexServerFirmwareVersionEntry) SetVersion(v string)`
+
+SetVersion sets Version field to given value.
+
+### HasVersion
+
+`func (o *HyperflexServerFirmwareVersionEntry) HasVersion() bool`
+
+HasVersion returns a boolean if a field has been set.
+
+### GetServerFirmwareVersion
+
+`func (o *HyperflexServerFirmwareVersionEntry) GetServerFirmwareVersion() HyperflexServerFirmwareVersionRelationship`
+
+GetServerFirmwareVersion returns the ServerFirmwareVersion field if non-nil, zero value otherwise.
+
+### GetServerFirmwareVersionOk
+
+`func (o *HyperflexServerFirmwareVersionEntry) GetServerFirmwareVersionOk() (*HyperflexServerFirmwareVersionRelationship, bool)`
+
+GetServerFirmwareVersionOk returns a tuple with the ServerFirmwareVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetServerFirmwareVersion
+
+`func (o *HyperflexServerFirmwareVersionEntry) SetServerFirmwareVersion(v HyperflexServerFirmwareVersionRelationship)`
+
+SetServerFirmwareVersion sets ServerFirmwareVersion field to given value.
+
+### HasServerFirmwareVersion
+
+`func (o *HyperflexServerFirmwareVersionEntry) HasServerFirmwareVersion() bool`
+
+HasServerFirmwareVersion returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

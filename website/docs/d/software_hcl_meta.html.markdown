@@ -1,18 +1,16 @@
-
 ---
+subcategory: "software"
 layout: "intersight"
 page_title: "Intersight: intersight_software_hcl_meta"
-sidebar_current: "docs-intersight-data-source-software-hcl-meta"
 description: |-
-A JSON file wth HCL metadata uploaded for consumption by the HCL service.
+  A JSON file wth HCL metadata uploaded for consumption by the HCL service.
 ---
 
-# Data Source: intersight_software._hcl_meta
+# Data Source: intersight_software_hcl_meta
 A JSON file wth HCL metadata uploaded for consumption by the HCL service.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `bundle_type`:(string) The bundle type of the image, as published on cisco.com. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `content_type`:(string) The type of content that the Json file holds (Incremental or full dump).* `Full` - Indicates that the JSON File does have full content for HCL metadata.* `Incremental` - Indicates that the JSON File does have only the diff of the Hcl meta to be uploaded. 
 * `description`:(string) User provided description about the file. Cisco provided description for image inventoried from a Cisco repository. 
 * `download_count`:(int) The number of times this file has been downloaded from the local repository. It is used by the repository monitoring process to determine the files that are to be evicted from the cache. 
@@ -25,7 +23,6 @@ The following arguments can be used to get data of already created objects in In
 * `model`:(string) The endpoint model for which this firmware image is applicable. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of the file. It is populated as part of the image import operation. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `platform_type`:(string) The platform type of the image. 
 * `recommended_build`:(string) The build which is recommended by Cisco. 
 * `release_notes_url`:(string) The url for the release notes of this image. 
@@ -34,4 +31,4 @@ The following arguments can be used to get data of already created objects in In
 * `software_advisory_url`:(string) The software advisory, if any, provided by the vendor for this file. 
 * `software_type_id`:(string) The software type id provided by cisco.com. 
 * `vendor`:(string) The vendor or publisher of this file. 
-* `version`:(string) Vendor provided version for the file. 
+* `nr_version`:(string) Vendor provided version for the file. 

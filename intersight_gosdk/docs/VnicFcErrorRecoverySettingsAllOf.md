@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.FcErrorRecoverySettings"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.FcErrorRecoverySettings"]
 **Enabled** | Pointer to **bool** | Enables Fibre Channel Error recovery. | [optional] 
-**IoRetryCount** | Pointer to **int64** | The number of times an I/O request to a port is retried because the port is busy before the system decides the port is unavailable. | [optional] 
-**IoRetryTimeout** | Pointer to **int64** | The number of seconds the adapter waits before aborting the pending command and resending the same IO request. | [optional] 
-**LinkDownTimeout** | Pointer to **int64** | The number of milliseconds the port should actually be down before it is marked down and fabric connectivity is lost. | [optional] 
-**PortDownTimeout** | Pointer to **int64** | The number of milliseconds a remote Fibre Channel port should be offline before informing the SCSI upper layer that the port is unavailable. For a server with a VIC adapter running ESXi, the recommended value is 10000. For a server with a port used to boot a Windows OS from the SAN, the recommended value is 5000 milliseconds. | [optional] 
+**IoRetryCount** | Pointer to **int64** | The number of times an I/O request to a port is retried because the port is busy before the system decides the port is unavailable. | [optional] [default to 8]
+**IoRetryTimeout** | Pointer to **int64** | The number of seconds the adapter waits before aborting the pending command and resending the same IO request. | [optional] [default to 5]
+**LinkDownTimeout** | Pointer to **int64** | The number of milliseconds the port should actually be down before it is marked down and fabric connectivity is lost. | [optional] [default to 30000]
+**PortDownTimeout** | Pointer to **int64** | The number of milliseconds a remote Fibre Channel port should be offline before informing the SCSI upper layer that the port is unavailable. For a server with a VIC adapter running ESXi, the recommended value is 10000. For a server with a port used to boot a Windows OS from the SAN, the recommended value is 5000 milliseconds. | [optional] [default to 10000]
 
 ## Methods
 

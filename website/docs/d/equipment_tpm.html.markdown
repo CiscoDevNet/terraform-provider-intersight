@@ -1,24 +1,21 @@
-
 ---
+subcategory: "equipment"
 layout: "intersight"
 page_title: "Intersight: intersight_equipment_tpm"
-sidebar_current: "docs-intersight-data-source-equipment-tpm"
 description: |-
-TPM security chip on server board.
+  TPM security chip on server board.
 ---
 
-# Data Source: intersight_equipment._tpm
+# Data Source: intersight_equipment_tpm
 TPM security chip on server board.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `activation_status`:(string) Identifies the activation status of the TPM. 
 * `admin_state`:(string) Identifies the admin configured state of the TPM. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `ownership`:(string) Identifies the ownership information of the TPM. 
 * `presence`:(string) Identifies the presence of the trusted platform module. 
 * `revision`:(string) This field identifies the revision of the given component. 
@@ -26,4 +23,4 @@ The following arguments can be used to get data of already created objects in In
 * `serial`:(string) This field identifies the serial of the given component. 
 * `tpm_id`:(int) Enter  the ID of the trusted platform module. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
-* `version`:(string) Identifies the revision of the Trusted Platform Module. 
+* `nr_version`:(string) Identifies the revision of the Trusted Platform Module. 

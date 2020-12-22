@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "firmware.FirmwareSummary"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "firmware.FirmwareSummary"]
 **BundleVersion** | Pointer to **string** | Version details at the bundle level for the each of server. | [optional] 
-**ComponentsFwInventory** | Pointer to [**[]FirmwareFirmwareInventory**](firmware.FirmwareInventory.md) |  | [optional] 
+**ComponentsFwInventory** | Pointer to [**[]FirmwareFirmwareInventory**](FirmwareFirmwareInventory.md) |  | [optional] 
 **Server** | Pointer to [**ComputePhysicalRelationship**](compute.Physical.Relationship.md) |  | [optional] 
 
 ## Methods

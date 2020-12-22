@@ -1,21 +1,24 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceHyperflexSoftwareVersionPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceHyperflexSoftwareVersionPolicyCreate,
-		Read:   resourceHyperflexSoftwareVersionPolicyRead,
-		Update: resourceHyperflexSoftwareVersionPolicyUpdate,
-		Delete: resourceHyperflexSoftwareVersionPolicyDelete,
+		CreateContext: resourceHyperflexSoftwareVersionPolicyCreate,
+		ReadContext:   resourceHyperflexSoftwareVersionPolicyRead,
+		UpdateContext: resourceHyperflexSoftwareVersionPolicyUpdate,
+		DeleteContext: resourceHyperflexSoftwareVersionPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -23,7 +26,7 @@ func resourceHyperflexSoftwareVersionPolicy() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -271,6 +274,44 @@ func resourceHyperflexSoftwareVersionPolicy() *schema.Resource {
 				},
 				ConfigMode: schema.SchemaConfigModeAttr,
 			},
+			"server_firmware_versions": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"server_platform": {
+							Description: "The platform type for UCS server.\n* `M5` - M5 generation of UCS server.\n* `M4` - M4 generation of UCS server.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Default:     "M5",
+						},
+						"nr_version": {
+							Description: "The server firmware bundle version.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+			},
 			"tags": {
 				Type:     schema.TypeList,
 				Optional: true,
@@ -303,7 +344,7 @@ func resourceHyperflexSoftwareVersionPolicy() *schema.Resource {
 	}
 }
 
-func resourceHyperflexSoftwareVersionPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexSoftwareVersionPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -565,6 +606,48 @@ func resourceHyperflexSoftwareVersionPolicyCreate(d *schema.ResourceData, meta i
 		}
 	}
 
+	if v, ok := d.GetOk("server_firmware_versions"); ok {
+		x := make([]models.HyperflexServerFirmwareVersionInfo, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := models.NewHyperflexServerFirmwareVersionInfoWithDefaults()
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("hyperflex.ServerFirmwareVersionInfo")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["server_platform"]; ok {
+				{
+					x := (v.(string))
+					o.SetServerPlatform(x)
+				}
+			}
+			if v, ok := l["nr_version"]; ok {
+				{
+					x := (v.(string))
+					o.SetVersion(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetServerFirmwareVersions(x)
+		}
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -612,97 +695,105 @@ func resourceHyperflexSoftwareVersionPolicyCreate(d *schema.ResourceData, meta i
 	}
 
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexSoftwareVersionPolicy(conn.ctx).HyperflexSoftwareVersionPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating HyperflexSoftwareVersionPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceHyperflexSoftwareVersionPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceHyperflexSoftwareVersionPolicyRead(c, d, meta)
 }
 
-func resourceHyperflexSoftwareVersionPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexSoftwareVersionPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.HyperflexApi.GetHyperflexSoftwareVersionPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "HyperflexSoftwareVersionPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching HyperflexSoftwareVersionPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in HyperflexSoftwareVersionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in HyperflexSoftwareVersionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cluster_profiles", flattenListHyperflexClusterProfileRelationship(s.GetClusterProfiles(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ClusterProfiles: %+v", err)
+		return diag.Errorf("error occurred while setting property ClusterProfiles in HyperflexSoftwareVersionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in HyperflexSoftwareVersionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("hxdp_version", (s.GetHxdpVersion())); err != nil {
-		return fmt.Errorf("error occurred while setting property HxdpVersion: %+v", err)
+		return diag.Errorf("error occurred while setting property HxdpVersion in HyperflexSoftwareVersionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("hxdp_version_info", flattenMapSoftwareHyperflexDistributableRelationship(s.GetHxdpVersionInfo(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property HxdpVersionInfo: %+v", err)
+		return diag.Errorf("error occurred while setting property HxdpVersionInfo in HyperflexSoftwareVersionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("hypervisor_version", (s.GetHypervisorVersion())); err != nil {
-		return fmt.Errorf("error occurred while setting property HypervisorVersion: %+v", err)
+		return diag.Errorf("error occurred while setting property HypervisorVersion in HyperflexSoftwareVersionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("hypervisor_version_info", flattenMapSoftwareHyperflexDistributableRelationship(s.GetHypervisorVersionInfo(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property HypervisorVersionInfo: %+v", err)
+		return diag.Errorf("error occurred while setting property HypervisorVersionInfo in HyperflexSoftwareVersionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in HyperflexSoftwareVersionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in HyperflexSoftwareVersionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in HyperflexSoftwareVersionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in HyperflexSoftwareVersionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("server_firmware_version", (s.GetServerFirmwareVersion())); err != nil {
-		return fmt.Errorf("error occurred while setting property ServerFirmwareVersion: %+v", err)
+		return diag.Errorf("error occurred while setting property ServerFirmwareVersion in HyperflexSoftwareVersionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("server_firmware_version_info", flattenMapFirmwareDistributableRelationship(s.GetServerFirmwareVersionInfo(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ServerFirmwareVersionInfo: %+v", err)
+		return diag.Errorf("error occurred while setting property ServerFirmwareVersionInfo in HyperflexSoftwareVersionPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("server_firmware_versions", flattenListHyperflexServerFirmwareVersionInfo(s.GetServerFirmwareVersions(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ServerFirmwareVersions in HyperflexSoftwareVersionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in HyperflexSoftwareVersionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("upgrade_types", (s.GetUpgradeTypes())); err != nil {
-		return fmt.Errorf("error occurred while setting property UpgradeTypes: %+v", err)
+		return diag.Errorf("error occurred while setting property UpgradeTypes in HyperflexSoftwareVersionPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceHyperflexSoftwareVersionPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexSoftwareVersionPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -976,6 +1067,49 @@ func resourceHyperflexSoftwareVersionPolicyUpdate(d *schema.ResourceData, meta i
 		}
 	}
 
+	if d.HasChange("server_firmware_versions") {
+		v := d.Get("server_firmware_versions")
+		x := make([]models.HyperflexServerFirmwareVersionInfo, 0)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			o := &models.HyperflexServerFirmwareVersionInfo{}
+			l := s[i].(map[string]interface{})
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("hyperflex.ServerFirmwareVersionInfo")
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["server_platform"]; ok {
+				{
+					x := (v.(string))
+					o.SetServerPlatform(x)
+				}
+			}
+			if v, ok := l["nr_version"]; ok {
+				{
+					x := (v.(string))
+					o.SetVersion(x)
+				}
+			}
+			x = append(x, *o)
+		}
+		if len(x) > 0 {
+			o.SetServerFirmwareVersions(x)
+		}
+	}
+
 	if d.HasChange("tags") {
 		v := d.Get("tags")
 		x := make([]models.MoTag, 0)
@@ -1025,23 +1159,24 @@ func resourceHyperflexSoftwareVersionPolicyUpdate(d *schema.ResourceData, meta i
 	}
 
 	r := conn.ApiClient.HyperflexApi.UpdateHyperflexSoftwareVersionPolicy(conn.ctx, d.Id()).HyperflexSoftwareVersionPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating HyperflexSoftwareVersionPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexSoftwareVersionPolicyRead(d, meta)
+	return resourceHyperflexSoftwareVersionPolicyRead(c, d, meta)
 }
 
-func resourceHyperflexSoftwareVersionPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexSoftwareVersionPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexSoftwareVersionPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting HyperflexSoftwareVersionPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

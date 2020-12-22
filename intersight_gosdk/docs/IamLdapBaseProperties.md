@@ -15,10 +15,10 @@ Name | Type | Description | Notes
 **EnableGroupAuthorization** | Pointer to **bool** | If enabled, user authorization is also done at the group level for LDAP users not in the local user database. | [optional] 
 **Filter** | Pointer to **string** | Criteria to identify entries in search requests. | [optional] 
 **GroupAttribute** | Pointer to **string** | Groups to which an LDAP entry belongs. | [optional] 
-**IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] 
-**NestedGroupSearchDepth** | Pointer to **int64** | Search depth to look for a nested LDAP group in an LDAP group map. | [optional] 
+**IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] [default to false]
+**NestedGroupSearchDepth** | Pointer to **int64** | Search depth to look for a nested LDAP group in an LDAP group map. | [optional] [default to 128]
 **Password** | Pointer to **string** | The password of the user for initial bind process. It can be any string that adheres to the following constraints. It can have character except spaces, tabs, line breaks. It cannot be more than 254 characters. | [optional] 
-**Timeout** | Pointer to **int64** | LDAP authentication timeout duration, in seconds. | [optional] 
+**Timeout** | Pointer to **int64** | LDAP authentication timeout duration, in seconds. | [optional] [default to 0]
 
 ## Methods
 

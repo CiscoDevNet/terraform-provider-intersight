@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "iam.LdapProvider"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.LdapProvider"]
-**Port** | Pointer to **int64** | LDAP Server Port for connection establishment. | [optional] 
+**Port** | Pointer to **int64** | LDAP Server Port for connection establishment. | [optional] [default to 389]
 **Server** | Pointer to **string** | LDAP Server Address, can be IP address or hostname. | [optional] 
 **LdapPolicy** | Pointer to [**IamLdapPolicyRelationship**](iam.LdapPolicy.Relationship.md) |  | [optional] 
 

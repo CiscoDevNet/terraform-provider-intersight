@@ -1,13 +1,12 @@
-
 ---
+subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_port_policy"
-sidebar_current: "docs-intersight-resource-fabric-port-policy"
 description: |-
   A policy for all the physical ports of the Fabric Interconnect.
 ---
 
-# Resource: intersight_fabric._port_policy
+# Resource: intersight_fabric_port_policy
 A policy for all the physical ports of the Fabric Interconnect.
 ## Argument Reference
 The following arguments are supported:
@@ -41,3 +40,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_fabric_port_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_fabric_port_policy.example 1234567890987654321abcde
+```

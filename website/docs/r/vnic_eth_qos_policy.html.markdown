@@ -1,13 +1,12 @@
-
 ---
+subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_eth_qos_policy"
-sidebar_current: "docs-intersight-resource-vnic-eth-qos-policy"
 description: |-
   An Ethernet Quality of Service (QoS) policy assigns a system class to the outgoing traffic for a vNIC. This system class determines the quality of service for the outgoing traffic. For certain adapters additional controls can be specified like burst and rate on the outgoing traffic.
 ---
 
-# Resource: intersight_vnic._eth_qos_policy
+# Resource: intersight_vnic_eth_qos_policy
 An Ethernet Quality of Service (QoS) policy assigns a system class to the outgoing traffic for a vNIC. This system class determines the quality of service for the outgoing traffic. For certain adapters additional controls can be specified like burst and rate on the outgoing traffic.
 ## Argument Reference
 The following arguments are supported:
@@ -37,3 +36,10 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `trust_host_cos`:(bool) Enables usage of the Class of Service provided by the operating system. 
+
+
+## Import
+`intersight_vnic_eth_qos_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_vnic_eth_qos_policy.example 1234567890987654321abcde
+```

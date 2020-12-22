@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -12,6 +12,7 @@
 package intersight
 
 import (
+	"bytes"
 	_context "context"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
@@ -48,7 +49,7 @@ func (r ApiCreateApplianceBackupRequest) IfNoneMatch(ifNoneMatch string) ApiCrea
 	return r
 }
 
-func (r ApiCreateApplianceBackupRequest) Execute() (ApplianceBackup, *_nethttp.Response, error) {
+func (r ApiCreateApplianceBackupRequest) Execute() (ApplianceBackup, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateApplianceBackupExecute(r)
 }
 
@@ -68,19 +69,21 @@ func (a *ApplianceApiService) CreateApplianceBackup(ctx _context.Context) ApiCre
  * Execute executes the request
  * @return ApplianceBackup
  */
-func (a *ApplianceApiService) CreateApplianceBackupExecute(r ApiCreateApplianceBackupRequest) (ApplianceBackup, *_nethttp.Response, error) {
+func (a *ApplianceApiService) CreateApplianceBackupExecute(r ApiCreateApplianceBackupRequest) (ApplianceBackup, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceBackup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.CreateApplianceBackup")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/Backups"
@@ -89,7 +92,8 @@ func (a *ApplianceApiService) CreateApplianceBackupExecute(r ApiCreateApplianceB
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceBackup == nil {
-		return localVarReturnValue, nil, reportError("applianceBackup is required and must be specified")
+		executionError.error = "applianceBackup is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -119,18 +123,22 @@ func (a *ApplianceApiService) CreateApplianceBackupExecute(r ApiCreateApplianceB
 	localVarPostBody = r.applianceBackup
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -197,7 +205,7 @@ func (a *ApplianceApiService) CreateApplianceBackupExecute(r ApiCreateApplianceB
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateApplianceBackupPolicyRequest struct {
@@ -221,7 +229,7 @@ func (r ApiCreateApplianceBackupPolicyRequest) IfNoneMatch(ifNoneMatch string) A
 	return r
 }
 
-func (r ApiCreateApplianceBackupPolicyRequest) Execute() (ApplianceBackupPolicy, *_nethttp.Response, error) {
+func (r ApiCreateApplianceBackupPolicyRequest) Execute() (ApplianceBackupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateApplianceBackupPolicyExecute(r)
 }
 
@@ -241,19 +249,21 @@ func (a *ApplianceApiService) CreateApplianceBackupPolicy(ctx _context.Context) 
  * Execute executes the request
  * @return ApplianceBackupPolicy
  */
-func (a *ApplianceApiService) CreateApplianceBackupPolicyExecute(r ApiCreateApplianceBackupPolicyRequest) (ApplianceBackupPolicy, *_nethttp.Response, error) {
+func (a *ApplianceApiService) CreateApplianceBackupPolicyExecute(r ApiCreateApplianceBackupPolicyRequest) (ApplianceBackupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceBackupPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.CreateApplianceBackupPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/BackupPolicies"
@@ -262,7 +272,8 @@ func (a *ApplianceApiService) CreateApplianceBackupPolicyExecute(r ApiCreateAppl
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceBackupPolicy == nil {
-		return localVarReturnValue, nil, reportError("applianceBackupPolicy is required and must be specified")
+		executionError.error = "applianceBackupPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -292,18 +303,22 @@ func (a *ApplianceApiService) CreateApplianceBackupPolicyExecute(r ApiCreateAppl
 	localVarPostBody = r.applianceBackupPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -370,7 +385,7 @@ func (a *ApplianceApiService) CreateApplianceBackupPolicyExecute(r ApiCreateAppl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateApplianceDataExportPolicyRequest struct {
@@ -394,7 +409,7 @@ func (r ApiCreateApplianceDataExportPolicyRequest) IfNoneMatch(ifNoneMatch strin
 	return r
 }
 
-func (r ApiCreateApplianceDataExportPolicyRequest) Execute() (ApplianceDataExportPolicy, *_nethttp.Response, error) {
+func (r ApiCreateApplianceDataExportPolicyRequest) Execute() (ApplianceDataExportPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateApplianceDataExportPolicyExecute(r)
 }
 
@@ -414,19 +429,21 @@ func (a *ApplianceApiService) CreateApplianceDataExportPolicy(ctx _context.Conte
  * Execute executes the request
  * @return ApplianceDataExportPolicy
  */
-func (a *ApplianceApiService) CreateApplianceDataExportPolicyExecute(r ApiCreateApplianceDataExportPolicyRequest) (ApplianceDataExportPolicy, *_nethttp.Response, error) {
+func (a *ApplianceApiService) CreateApplianceDataExportPolicyExecute(r ApiCreateApplianceDataExportPolicyRequest) (ApplianceDataExportPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceDataExportPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.CreateApplianceDataExportPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/DataExportPolicies"
@@ -435,7 +452,8 @@ func (a *ApplianceApiService) CreateApplianceDataExportPolicyExecute(r ApiCreate
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceDataExportPolicy == nil {
-		return localVarReturnValue, nil, reportError("applianceDataExportPolicy is required and must be specified")
+		executionError.error = "applianceDataExportPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -465,18 +483,22 @@ func (a *ApplianceApiService) CreateApplianceDataExportPolicyExecute(r ApiCreate
 	localVarPostBody = r.applianceDataExportPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -543,7 +565,7 @@ func (a *ApplianceApiService) CreateApplianceDataExportPolicyExecute(r ApiCreate
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateApplianceDeviceClaimRequest struct {
@@ -567,7 +589,7 @@ func (r ApiCreateApplianceDeviceClaimRequest) IfNoneMatch(ifNoneMatch string) Ap
 	return r
 }
 
-func (r ApiCreateApplianceDeviceClaimRequest) Execute() (ApplianceDeviceClaim, *_nethttp.Response, error) {
+func (r ApiCreateApplianceDeviceClaimRequest) Execute() (ApplianceDeviceClaim, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateApplianceDeviceClaimExecute(r)
 }
 
@@ -587,19 +609,21 @@ func (a *ApplianceApiService) CreateApplianceDeviceClaim(ctx _context.Context) A
  * Execute executes the request
  * @return ApplianceDeviceClaim
  */
-func (a *ApplianceApiService) CreateApplianceDeviceClaimExecute(r ApiCreateApplianceDeviceClaimRequest) (ApplianceDeviceClaim, *_nethttp.Response, error) {
+func (a *ApplianceApiService) CreateApplianceDeviceClaimExecute(r ApiCreateApplianceDeviceClaimRequest) (ApplianceDeviceClaim, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceDeviceClaim
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.CreateApplianceDeviceClaim")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/DeviceClaims"
@@ -608,7 +632,8 @@ func (a *ApplianceApiService) CreateApplianceDeviceClaimExecute(r ApiCreateAppli
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceDeviceClaim == nil {
-		return localVarReturnValue, nil, reportError("applianceDeviceClaim is required and must be specified")
+		executionError.error = "applianceDeviceClaim is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -638,18 +663,22 @@ func (a *ApplianceApiService) CreateApplianceDeviceClaimExecute(r ApiCreateAppli
 	localVarPostBody = r.applianceDeviceClaim
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -716,7 +745,7 @@ func (a *ApplianceApiService) CreateApplianceDeviceClaimExecute(r ApiCreateAppli
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateApplianceDiagSettingRequest struct {
@@ -740,7 +769,7 @@ func (r ApiCreateApplianceDiagSettingRequest) IfNoneMatch(ifNoneMatch string) Ap
 	return r
 }
 
-func (r ApiCreateApplianceDiagSettingRequest) Execute() (ApplianceDiagSetting, *_nethttp.Response, error) {
+func (r ApiCreateApplianceDiagSettingRequest) Execute() (ApplianceDiagSetting, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateApplianceDiagSettingExecute(r)
 }
 
@@ -760,19 +789,21 @@ func (a *ApplianceApiService) CreateApplianceDiagSetting(ctx _context.Context) A
  * Execute executes the request
  * @return ApplianceDiagSetting
  */
-func (a *ApplianceApiService) CreateApplianceDiagSettingExecute(r ApiCreateApplianceDiagSettingRequest) (ApplianceDiagSetting, *_nethttp.Response, error) {
+func (a *ApplianceApiService) CreateApplianceDiagSettingExecute(r ApiCreateApplianceDiagSettingRequest) (ApplianceDiagSetting, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceDiagSetting
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.CreateApplianceDiagSetting")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/DiagSettings"
@@ -781,7 +812,8 @@ func (a *ApplianceApiService) CreateApplianceDiagSettingExecute(r ApiCreateAppli
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceDiagSetting == nil {
-		return localVarReturnValue, nil, reportError("applianceDiagSetting is required and must be specified")
+		executionError.error = "applianceDiagSetting is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -811,18 +843,22 @@ func (a *ApplianceApiService) CreateApplianceDiagSettingExecute(r ApiCreateAppli
 	localVarPostBody = r.applianceDiagSetting
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -889,7 +925,7 @@ func (a *ApplianceApiService) CreateApplianceDiagSettingExecute(r ApiCreateAppli
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateApplianceRestoreRequest struct {
@@ -913,7 +949,7 @@ func (r ApiCreateApplianceRestoreRequest) IfNoneMatch(ifNoneMatch string) ApiCre
 	return r
 }
 
-func (r ApiCreateApplianceRestoreRequest) Execute() (ApplianceRestore, *_nethttp.Response, error) {
+func (r ApiCreateApplianceRestoreRequest) Execute() (ApplianceRestore, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateApplianceRestoreExecute(r)
 }
 
@@ -933,19 +969,21 @@ func (a *ApplianceApiService) CreateApplianceRestore(ctx _context.Context) ApiCr
  * Execute executes the request
  * @return ApplianceRestore
  */
-func (a *ApplianceApiService) CreateApplianceRestoreExecute(r ApiCreateApplianceRestoreRequest) (ApplianceRestore, *_nethttp.Response, error) {
+func (a *ApplianceApiService) CreateApplianceRestoreExecute(r ApiCreateApplianceRestoreRequest) (ApplianceRestore, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceRestore
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.CreateApplianceRestore")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/Restores"
@@ -954,7 +992,8 @@ func (a *ApplianceApiService) CreateApplianceRestoreExecute(r ApiCreateAppliance
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceRestore == nil {
-		return localVarReturnValue, nil, reportError("applianceRestore is required and must be specified")
+		executionError.error = "applianceRestore is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -984,18 +1023,22 @@ func (a *ApplianceApiService) CreateApplianceRestoreExecute(r ApiCreateAppliance
 	localVarPostBody = r.applianceRestore
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1062,7 +1105,7 @@ func (a *ApplianceApiService) CreateApplianceRestoreExecute(r ApiCreateAppliance
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiDeleteApplianceBackupRequest struct {
@@ -1071,7 +1114,7 @@ type ApiDeleteApplianceBackupRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteApplianceBackupRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteApplianceBackupRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteApplianceBackupExecute(r)
 }
 
@@ -1092,18 +1135,20 @@ func (a *ApplianceApiService) DeleteApplianceBackup(ctx _context.Context, moid s
 /*
  * Execute executes the request
  */
-func (a *ApplianceApiService) DeleteApplianceBackupExecute(r ApiDeleteApplianceBackupRequest) (*_nethttp.Response, error) {
+func (a *ApplianceApiService) DeleteApplianceBackupExecute(r ApiDeleteApplianceBackupRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.DeleteApplianceBackup")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/Backups/{Moid}"
@@ -1132,18 +1177,22 @@ func (a *ApplianceApiService) DeleteApplianceBackupExecute(r ApiDeleteApplianceB
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1201,7 +1250,7 @@ func (a *ApplianceApiService) DeleteApplianceBackupExecute(r ApiDeleteApplianceB
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteApplianceRestoreRequest struct {
@@ -1210,7 +1259,7 @@ type ApiDeleteApplianceRestoreRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteApplianceRestoreRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteApplianceRestoreRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteApplianceRestoreExecute(r)
 }
 
@@ -1231,18 +1280,20 @@ func (a *ApplianceApiService) DeleteApplianceRestore(ctx _context.Context, moid 
 /*
  * Execute executes the request
  */
-func (a *ApplianceApiService) DeleteApplianceRestoreExecute(r ApiDeleteApplianceRestoreRequest) (*_nethttp.Response, error) {
+func (a *ApplianceApiService) DeleteApplianceRestoreExecute(r ApiDeleteApplianceRestoreRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.DeleteApplianceRestore")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/Restores/{Moid}"
@@ -1271,18 +1322,22 @@ func (a *ApplianceApiService) DeleteApplianceRestoreExecute(r ApiDeleteAppliance
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1340,7 +1395,7 @@ func (a *ApplianceApiService) DeleteApplianceRestoreExecute(r ApiDeleteAppliance
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceAppStatusByMoidRequest struct {
@@ -1349,7 +1404,7 @@ type ApiGetApplianceAppStatusByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetApplianceAppStatusByMoidRequest) Execute() (ApplianceAppStatus, *_nethttp.Response, error) {
+func (r ApiGetApplianceAppStatusByMoidRequest) Execute() (ApplianceAppStatus, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceAppStatusByMoidExecute(r)
 }
 
@@ -1371,19 +1426,21 @@ func (a *ApplianceApiService) GetApplianceAppStatusByMoid(ctx _context.Context, 
  * Execute executes the request
  * @return ApplianceAppStatus
  */
-func (a *ApplianceApiService) GetApplianceAppStatusByMoidExecute(r ApiGetApplianceAppStatusByMoidRequest) (ApplianceAppStatus, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceAppStatusByMoidExecute(r ApiGetApplianceAppStatusByMoidRequest) (ApplianceAppStatus, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceAppStatus
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceAppStatusByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/AppStatuses/{Moid}"
@@ -1412,18 +1469,22 @@ func (a *ApplianceApiService) GetApplianceAppStatusByMoidExecute(r ApiGetApplian
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1490,7 +1551,7 @@ func (a *ApplianceApiService) GetApplianceAppStatusByMoidExecute(r ApiGetApplian
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceAppStatusListRequest struct {
@@ -1554,7 +1615,7 @@ func (r ApiGetApplianceAppStatusListRequest) Tags(tags string) ApiGetApplianceAp
 	return r
 }
 
-func (r ApiGetApplianceAppStatusListRequest) Execute() (ApplianceAppStatusResponse, *_nethttp.Response, error) {
+func (r ApiGetApplianceAppStatusListRequest) Execute() (ApplianceAppStatusResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceAppStatusListExecute(r)
 }
 
@@ -1574,19 +1635,21 @@ func (a *ApplianceApiService) GetApplianceAppStatusList(ctx _context.Context) Ap
  * Execute executes the request
  * @return ApplianceAppStatusResponse
  */
-func (a *ApplianceApiService) GetApplianceAppStatusListExecute(r ApiGetApplianceAppStatusListRequest) (ApplianceAppStatusResponse, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceAppStatusListExecute(r ApiGetApplianceAppStatusListRequest) (ApplianceAppStatusResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceAppStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceAppStatusList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/AppStatuses"
@@ -1647,18 +1710,22 @@ func (a *ApplianceApiService) GetApplianceAppStatusListExecute(r ApiGetAppliance
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1725,7 +1792,7 @@ func (a *ApplianceApiService) GetApplianceAppStatusListExecute(r ApiGetAppliance
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceBackupByMoidRequest struct {
@@ -1734,7 +1801,7 @@ type ApiGetApplianceBackupByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetApplianceBackupByMoidRequest) Execute() (ApplianceBackup, *_nethttp.Response, error) {
+func (r ApiGetApplianceBackupByMoidRequest) Execute() (ApplianceBackup, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceBackupByMoidExecute(r)
 }
 
@@ -1756,19 +1823,21 @@ func (a *ApplianceApiService) GetApplianceBackupByMoid(ctx _context.Context, moi
  * Execute executes the request
  * @return ApplianceBackup
  */
-func (a *ApplianceApiService) GetApplianceBackupByMoidExecute(r ApiGetApplianceBackupByMoidRequest) (ApplianceBackup, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceBackupByMoidExecute(r ApiGetApplianceBackupByMoidRequest) (ApplianceBackup, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceBackup
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceBackupByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/Backups/{Moid}"
@@ -1797,18 +1866,22 @@ func (a *ApplianceApiService) GetApplianceBackupByMoidExecute(r ApiGetApplianceB
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1875,7 +1948,7 @@ func (a *ApplianceApiService) GetApplianceBackupByMoidExecute(r ApiGetApplianceB
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceBackupListRequest struct {
@@ -1939,7 +2012,7 @@ func (r ApiGetApplianceBackupListRequest) Tags(tags string) ApiGetApplianceBacku
 	return r
 }
 
-func (r ApiGetApplianceBackupListRequest) Execute() (ApplianceBackupResponse, *_nethttp.Response, error) {
+func (r ApiGetApplianceBackupListRequest) Execute() (ApplianceBackupResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceBackupListExecute(r)
 }
 
@@ -1959,19 +2032,21 @@ func (a *ApplianceApiService) GetApplianceBackupList(ctx _context.Context) ApiGe
  * Execute executes the request
  * @return ApplianceBackupResponse
  */
-func (a *ApplianceApiService) GetApplianceBackupListExecute(r ApiGetApplianceBackupListRequest) (ApplianceBackupResponse, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceBackupListExecute(r ApiGetApplianceBackupListRequest) (ApplianceBackupResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceBackupResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceBackupList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/Backups"
@@ -2032,18 +2107,22 @@ func (a *ApplianceApiService) GetApplianceBackupListExecute(r ApiGetApplianceBac
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2110,7 +2189,7 @@ func (a *ApplianceApiService) GetApplianceBackupListExecute(r ApiGetApplianceBac
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceBackupPolicyByMoidRequest struct {
@@ -2119,7 +2198,7 @@ type ApiGetApplianceBackupPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetApplianceBackupPolicyByMoidRequest) Execute() (ApplianceBackupPolicy, *_nethttp.Response, error) {
+func (r ApiGetApplianceBackupPolicyByMoidRequest) Execute() (ApplianceBackupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceBackupPolicyByMoidExecute(r)
 }
 
@@ -2141,19 +2220,21 @@ func (a *ApplianceApiService) GetApplianceBackupPolicyByMoid(ctx _context.Contex
  * Execute executes the request
  * @return ApplianceBackupPolicy
  */
-func (a *ApplianceApiService) GetApplianceBackupPolicyByMoidExecute(r ApiGetApplianceBackupPolicyByMoidRequest) (ApplianceBackupPolicy, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceBackupPolicyByMoidExecute(r ApiGetApplianceBackupPolicyByMoidRequest) (ApplianceBackupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceBackupPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceBackupPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/BackupPolicies/{Moid}"
@@ -2182,18 +2263,22 @@ func (a *ApplianceApiService) GetApplianceBackupPolicyByMoidExecute(r ApiGetAppl
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2260,7 +2345,7 @@ func (a *ApplianceApiService) GetApplianceBackupPolicyByMoidExecute(r ApiGetAppl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceBackupPolicyListRequest struct {
@@ -2324,7 +2409,7 @@ func (r ApiGetApplianceBackupPolicyListRequest) Tags(tags string) ApiGetApplianc
 	return r
 }
 
-func (r ApiGetApplianceBackupPolicyListRequest) Execute() (ApplianceBackupPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetApplianceBackupPolicyListRequest) Execute() (ApplianceBackupPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceBackupPolicyListExecute(r)
 }
 
@@ -2344,19 +2429,21 @@ func (a *ApplianceApiService) GetApplianceBackupPolicyList(ctx _context.Context)
  * Execute executes the request
  * @return ApplianceBackupPolicyResponse
  */
-func (a *ApplianceApiService) GetApplianceBackupPolicyListExecute(r ApiGetApplianceBackupPolicyListRequest) (ApplianceBackupPolicyResponse, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceBackupPolicyListExecute(r ApiGetApplianceBackupPolicyListRequest) (ApplianceBackupPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceBackupPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceBackupPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/BackupPolicies"
@@ -2417,18 +2504,22 @@ func (a *ApplianceApiService) GetApplianceBackupPolicyListExecute(r ApiGetApplia
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2495,7 +2586,7 @@ func (a *ApplianceApiService) GetApplianceBackupPolicyListExecute(r ApiGetApplia
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceCertificateSettingByMoidRequest struct {
@@ -2504,7 +2595,7 @@ type ApiGetApplianceCertificateSettingByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetApplianceCertificateSettingByMoidRequest) Execute() (ApplianceCertificateSetting, *_nethttp.Response, error) {
+func (r ApiGetApplianceCertificateSettingByMoidRequest) Execute() (ApplianceCertificateSetting, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceCertificateSettingByMoidExecute(r)
 }
 
@@ -2526,19 +2617,21 @@ func (a *ApplianceApiService) GetApplianceCertificateSettingByMoid(ctx _context.
  * Execute executes the request
  * @return ApplianceCertificateSetting
  */
-func (a *ApplianceApiService) GetApplianceCertificateSettingByMoidExecute(r ApiGetApplianceCertificateSettingByMoidRequest) (ApplianceCertificateSetting, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceCertificateSettingByMoidExecute(r ApiGetApplianceCertificateSettingByMoidRequest) (ApplianceCertificateSetting, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceCertificateSetting
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceCertificateSettingByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/CertificateSettings/{Moid}"
@@ -2567,18 +2660,22 @@ func (a *ApplianceApiService) GetApplianceCertificateSettingByMoidExecute(r ApiG
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2645,7 +2742,7 @@ func (a *ApplianceApiService) GetApplianceCertificateSettingByMoidExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceCertificateSettingListRequest struct {
@@ -2709,7 +2806,7 @@ func (r ApiGetApplianceCertificateSettingListRequest) Tags(tags string) ApiGetAp
 	return r
 }
 
-func (r ApiGetApplianceCertificateSettingListRequest) Execute() (ApplianceCertificateSettingResponse, *_nethttp.Response, error) {
+func (r ApiGetApplianceCertificateSettingListRequest) Execute() (ApplianceCertificateSettingResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceCertificateSettingListExecute(r)
 }
 
@@ -2729,19 +2826,21 @@ func (a *ApplianceApiService) GetApplianceCertificateSettingList(ctx _context.Co
  * Execute executes the request
  * @return ApplianceCertificateSettingResponse
  */
-func (a *ApplianceApiService) GetApplianceCertificateSettingListExecute(r ApiGetApplianceCertificateSettingListRequest) (ApplianceCertificateSettingResponse, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceCertificateSettingListExecute(r ApiGetApplianceCertificateSettingListRequest) (ApplianceCertificateSettingResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceCertificateSettingResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceCertificateSettingList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/CertificateSettings"
@@ -2802,18 +2901,22 @@ func (a *ApplianceApiService) GetApplianceCertificateSettingListExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2880,7 +2983,7 @@ func (a *ApplianceApiService) GetApplianceCertificateSettingListExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceDataExportPolicyByMoidRequest struct {
@@ -2889,7 +2992,7 @@ type ApiGetApplianceDataExportPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetApplianceDataExportPolicyByMoidRequest) Execute() (ApplianceDataExportPolicy, *_nethttp.Response, error) {
+func (r ApiGetApplianceDataExportPolicyByMoidRequest) Execute() (ApplianceDataExportPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceDataExportPolicyByMoidExecute(r)
 }
 
@@ -2911,19 +3014,21 @@ func (a *ApplianceApiService) GetApplianceDataExportPolicyByMoid(ctx _context.Co
  * Execute executes the request
  * @return ApplianceDataExportPolicy
  */
-func (a *ApplianceApiService) GetApplianceDataExportPolicyByMoidExecute(r ApiGetApplianceDataExportPolicyByMoidRequest) (ApplianceDataExportPolicy, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceDataExportPolicyByMoidExecute(r ApiGetApplianceDataExportPolicyByMoidRequest) (ApplianceDataExportPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceDataExportPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceDataExportPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/DataExportPolicies/{Moid}"
@@ -2952,18 +3057,22 @@ func (a *ApplianceApiService) GetApplianceDataExportPolicyByMoidExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3030,7 +3139,7 @@ func (a *ApplianceApiService) GetApplianceDataExportPolicyByMoidExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceDataExportPolicyListRequest struct {
@@ -3094,7 +3203,7 @@ func (r ApiGetApplianceDataExportPolicyListRequest) Tags(tags string) ApiGetAppl
 	return r
 }
 
-func (r ApiGetApplianceDataExportPolicyListRequest) Execute() (ApplianceDataExportPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetApplianceDataExportPolicyListRequest) Execute() (ApplianceDataExportPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceDataExportPolicyListExecute(r)
 }
 
@@ -3114,19 +3223,21 @@ func (a *ApplianceApiService) GetApplianceDataExportPolicyList(ctx _context.Cont
  * Execute executes the request
  * @return ApplianceDataExportPolicyResponse
  */
-func (a *ApplianceApiService) GetApplianceDataExportPolicyListExecute(r ApiGetApplianceDataExportPolicyListRequest) (ApplianceDataExportPolicyResponse, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceDataExportPolicyListExecute(r ApiGetApplianceDataExportPolicyListRequest) (ApplianceDataExportPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceDataExportPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceDataExportPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/DataExportPolicies"
@@ -3187,18 +3298,22 @@ func (a *ApplianceApiService) GetApplianceDataExportPolicyListExecute(r ApiGetAp
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3265,7 +3380,7 @@ func (a *ApplianceApiService) GetApplianceDataExportPolicyListExecute(r ApiGetAp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceDeviceCertificateByMoidRequest struct {
@@ -3274,7 +3389,7 @@ type ApiGetApplianceDeviceCertificateByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetApplianceDeviceCertificateByMoidRequest) Execute() (ApplianceDeviceCertificate, *_nethttp.Response, error) {
+func (r ApiGetApplianceDeviceCertificateByMoidRequest) Execute() (ApplianceDeviceCertificate, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceDeviceCertificateByMoidExecute(r)
 }
 
@@ -3296,19 +3411,21 @@ func (a *ApplianceApiService) GetApplianceDeviceCertificateByMoid(ctx _context.C
  * Execute executes the request
  * @return ApplianceDeviceCertificate
  */
-func (a *ApplianceApiService) GetApplianceDeviceCertificateByMoidExecute(r ApiGetApplianceDeviceCertificateByMoidRequest) (ApplianceDeviceCertificate, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceDeviceCertificateByMoidExecute(r ApiGetApplianceDeviceCertificateByMoidRequest) (ApplianceDeviceCertificate, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceDeviceCertificate
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceDeviceCertificateByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/DeviceCertificates/{Moid}"
@@ -3337,18 +3454,22 @@ func (a *ApplianceApiService) GetApplianceDeviceCertificateByMoidExecute(r ApiGe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3415,7 +3536,7 @@ func (a *ApplianceApiService) GetApplianceDeviceCertificateByMoidExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceDeviceCertificateListRequest struct {
@@ -3479,7 +3600,7 @@ func (r ApiGetApplianceDeviceCertificateListRequest) Tags(tags string) ApiGetApp
 	return r
 }
 
-func (r ApiGetApplianceDeviceCertificateListRequest) Execute() (ApplianceDeviceCertificateResponse, *_nethttp.Response, error) {
+func (r ApiGetApplianceDeviceCertificateListRequest) Execute() (ApplianceDeviceCertificateResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceDeviceCertificateListExecute(r)
 }
 
@@ -3499,19 +3620,21 @@ func (a *ApplianceApiService) GetApplianceDeviceCertificateList(ctx _context.Con
  * Execute executes the request
  * @return ApplianceDeviceCertificateResponse
  */
-func (a *ApplianceApiService) GetApplianceDeviceCertificateListExecute(r ApiGetApplianceDeviceCertificateListRequest) (ApplianceDeviceCertificateResponse, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceDeviceCertificateListExecute(r ApiGetApplianceDeviceCertificateListRequest) (ApplianceDeviceCertificateResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceDeviceCertificateResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceDeviceCertificateList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/DeviceCertificates"
@@ -3572,18 +3695,22 @@ func (a *ApplianceApiService) GetApplianceDeviceCertificateListExecute(r ApiGetA
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3650,7 +3777,7 @@ func (a *ApplianceApiService) GetApplianceDeviceCertificateListExecute(r ApiGetA
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceDeviceClaimByMoidRequest struct {
@@ -3659,7 +3786,7 @@ type ApiGetApplianceDeviceClaimByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetApplianceDeviceClaimByMoidRequest) Execute() (ApplianceDeviceClaim, *_nethttp.Response, error) {
+func (r ApiGetApplianceDeviceClaimByMoidRequest) Execute() (ApplianceDeviceClaim, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceDeviceClaimByMoidExecute(r)
 }
 
@@ -3681,19 +3808,21 @@ func (a *ApplianceApiService) GetApplianceDeviceClaimByMoid(ctx _context.Context
  * Execute executes the request
  * @return ApplianceDeviceClaim
  */
-func (a *ApplianceApiService) GetApplianceDeviceClaimByMoidExecute(r ApiGetApplianceDeviceClaimByMoidRequest) (ApplianceDeviceClaim, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceDeviceClaimByMoidExecute(r ApiGetApplianceDeviceClaimByMoidRequest) (ApplianceDeviceClaim, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceDeviceClaim
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceDeviceClaimByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/DeviceClaims/{Moid}"
@@ -3722,18 +3851,22 @@ func (a *ApplianceApiService) GetApplianceDeviceClaimByMoidExecute(r ApiGetAppli
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3800,7 +3933,7 @@ func (a *ApplianceApiService) GetApplianceDeviceClaimByMoidExecute(r ApiGetAppli
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceDeviceClaimListRequest struct {
@@ -3864,7 +3997,7 @@ func (r ApiGetApplianceDeviceClaimListRequest) Tags(tags string) ApiGetAppliance
 	return r
 }
 
-func (r ApiGetApplianceDeviceClaimListRequest) Execute() (ApplianceDeviceClaimResponse, *_nethttp.Response, error) {
+func (r ApiGetApplianceDeviceClaimListRequest) Execute() (ApplianceDeviceClaimResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceDeviceClaimListExecute(r)
 }
 
@@ -3884,19 +4017,21 @@ func (a *ApplianceApiService) GetApplianceDeviceClaimList(ctx _context.Context) 
  * Execute executes the request
  * @return ApplianceDeviceClaimResponse
  */
-func (a *ApplianceApiService) GetApplianceDeviceClaimListExecute(r ApiGetApplianceDeviceClaimListRequest) (ApplianceDeviceClaimResponse, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceDeviceClaimListExecute(r ApiGetApplianceDeviceClaimListRequest) (ApplianceDeviceClaimResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceDeviceClaimResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceDeviceClaimList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/DeviceClaims"
@@ -3957,18 +4092,22 @@ func (a *ApplianceApiService) GetApplianceDeviceClaimListExecute(r ApiGetApplian
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4035,7 +4174,7 @@ func (a *ApplianceApiService) GetApplianceDeviceClaimListExecute(r ApiGetApplian
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceDiagSettingByMoidRequest struct {
@@ -4044,7 +4183,7 @@ type ApiGetApplianceDiagSettingByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetApplianceDiagSettingByMoidRequest) Execute() (ApplianceDiagSetting, *_nethttp.Response, error) {
+func (r ApiGetApplianceDiagSettingByMoidRequest) Execute() (ApplianceDiagSetting, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceDiagSettingByMoidExecute(r)
 }
 
@@ -4066,19 +4205,21 @@ func (a *ApplianceApiService) GetApplianceDiagSettingByMoid(ctx _context.Context
  * Execute executes the request
  * @return ApplianceDiagSetting
  */
-func (a *ApplianceApiService) GetApplianceDiagSettingByMoidExecute(r ApiGetApplianceDiagSettingByMoidRequest) (ApplianceDiagSetting, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceDiagSettingByMoidExecute(r ApiGetApplianceDiagSettingByMoidRequest) (ApplianceDiagSetting, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceDiagSetting
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceDiagSettingByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/DiagSettings/{Moid}"
@@ -4107,18 +4248,22 @@ func (a *ApplianceApiService) GetApplianceDiagSettingByMoidExecute(r ApiGetAppli
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4185,7 +4330,7 @@ func (a *ApplianceApiService) GetApplianceDiagSettingByMoidExecute(r ApiGetAppli
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceDiagSettingListRequest struct {
@@ -4249,7 +4394,7 @@ func (r ApiGetApplianceDiagSettingListRequest) Tags(tags string) ApiGetAppliance
 	return r
 }
 
-func (r ApiGetApplianceDiagSettingListRequest) Execute() (ApplianceDiagSettingResponse, *_nethttp.Response, error) {
+func (r ApiGetApplianceDiagSettingListRequest) Execute() (ApplianceDiagSettingResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceDiagSettingListExecute(r)
 }
 
@@ -4269,19 +4414,21 @@ func (a *ApplianceApiService) GetApplianceDiagSettingList(ctx _context.Context) 
  * Execute executes the request
  * @return ApplianceDiagSettingResponse
  */
-func (a *ApplianceApiService) GetApplianceDiagSettingListExecute(r ApiGetApplianceDiagSettingListRequest) (ApplianceDiagSettingResponse, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceDiagSettingListExecute(r ApiGetApplianceDiagSettingListRequest) (ApplianceDiagSettingResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceDiagSettingResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceDiagSettingList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/DiagSettings"
@@ -4342,18 +4489,22 @@ func (a *ApplianceApiService) GetApplianceDiagSettingListExecute(r ApiGetApplian
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4420,7 +4571,7 @@ func (a *ApplianceApiService) GetApplianceDiagSettingListExecute(r ApiGetApplian
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceExternalSyslogSettingByMoidRequest struct {
@@ -4429,7 +4580,7 @@ type ApiGetApplianceExternalSyslogSettingByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetApplianceExternalSyslogSettingByMoidRequest) Execute() (ApplianceExternalSyslogSetting, *_nethttp.Response, error) {
+func (r ApiGetApplianceExternalSyslogSettingByMoidRequest) Execute() (ApplianceExternalSyslogSetting, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceExternalSyslogSettingByMoidExecute(r)
 }
 
@@ -4451,19 +4602,21 @@ func (a *ApplianceApiService) GetApplianceExternalSyslogSettingByMoid(ctx _conte
  * Execute executes the request
  * @return ApplianceExternalSyslogSetting
  */
-func (a *ApplianceApiService) GetApplianceExternalSyslogSettingByMoidExecute(r ApiGetApplianceExternalSyslogSettingByMoidRequest) (ApplianceExternalSyslogSetting, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceExternalSyslogSettingByMoidExecute(r ApiGetApplianceExternalSyslogSettingByMoidRequest) (ApplianceExternalSyslogSetting, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceExternalSyslogSetting
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceExternalSyslogSettingByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/ExternalSyslogSettings/{Moid}"
@@ -4492,18 +4645,22 @@ func (a *ApplianceApiService) GetApplianceExternalSyslogSettingByMoidExecute(r A
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4570,7 +4727,7 @@ func (a *ApplianceApiService) GetApplianceExternalSyslogSettingByMoidExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceExternalSyslogSettingListRequest struct {
@@ -4634,7 +4791,7 @@ func (r ApiGetApplianceExternalSyslogSettingListRequest) Tags(tags string) ApiGe
 	return r
 }
 
-func (r ApiGetApplianceExternalSyslogSettingListRequest) Execute() (ApplianceExternalSyslogSettingResponse, *_nethttp.Response, error) {
+func (r ApiGetApplianceExternalSyslogSettingListRequest) Execute() (ApplianceExternalSyslogSettingResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceExternalSyslogSettingListExecute(r)
 }
 
@@ -4654,19 +4811,21 @@ func (a *ApplianceApiService) GetApplianceExternalSyslogSettingList(ctx _context
  * Execute executes the request
  * @return ApplianceExternalSyslogSettingResponse
  */
-func (a *ApplianceApiService) GetApplianceExternalSyslogSettingListExecute(r ApiGetApplianceExternalSyslogSettingListRequest) (ApplianceExternalSyslogSettingResponse, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceExternalSyslogSettingListExecute(r ApiGetApplianceExternalSyslogSettingListRequest) (ApplianceExternalSyslogSettingResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceExternalSyslogSettingResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceExternalSyslogSettingList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/ExternalSyslogSettings"
@@ -4727,18 +4886,22 @@ func (a *ApplianceApiService) GetApplianceExternalSyslogSettingListExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4805,7 +4968,7 @@ func (a *ApplianceApiService) GetApplianceExternalSyslogSettingListExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceFileSystemStatusByMoidRequest struct {
@@ -4814,7 +4977,7 @@ type ApiGetApplianceFileSystemStatusByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetApplianceFileSystemStatusByMoidRequest) Execute() (ApplianceFileSystemStatus, *_nethttp.Response, error) {
+func (r ApiGetApplianceFileSystemStatusByMoidRequest) Execute() (ApplianceFileSystemStatus, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceFileSystemStatusByMoidExecute(r)
 }
 
@@ -4836,19 +4999,21 @@ func (a *ApplianceApiService) GetApplianceFileSystemStatusByMoid(ctx _context.Co
  * Execute executes the request
  * @return ApplianceFileSystemStatus
  */
-func (a *ApplianceApiService) GetApplianceFileSystemStatusByMoidExecute(r ApiGetApplianceFileSystemStatusByMoidRequest) (ApplianceFileSystemStatus, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceFileSystemStatusByMoidExecute(r ApiGetApplianceFileSystemStatusByMoidRequest) (ApplianceFileSystemStatus, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceFileSystemStatus
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceFileSystemStatusByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/FileSystemStatuses/{Moid}"
@@ -4877,18 +5042,22 @@ func (a *ApplianceApiService) GetApplianceFileSystemStatusByMoidExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4955,7 +5124,7 @@ func (a *ApplianceApiService) GetApplianceFileSystemStatusByMoidExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceFileSystemStatusListRequest struct {
@@ -5019,7 +5188,7 @@ func (r ApiGetApplianceFileSystemStatusListRequest) Tags(tags string) ApiGetAppl
 	return r
 }
 
-func (r ApiGetApplianceFileSystemStatusListRequest) Execute() (ApplianceFileSystemStatusResponse, *_nethttp.Response, error) {
+func (r ApiGetApplianceFileSystemStatusListRequest) Execute() (ApplianceFileSystemStatusResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceFileSystemStatusListExecute(r)
 }
 
@@ -5039,19 +5208,21 @@ func (a *ApplianceApiService) GetApplianceFileSystemStatusList(ctx _context.Cont
  * Execute executes the request
  * @return ApplianceFileSystemStatusResponse
  */
-func (a *ApplianceApiService) GetApplianceFileSystemStatusListExecute(r ApiGetApplianceFileSystemStatusListRequest) (ApplianceFileSystemStatusResponse, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceFileSystemStatusListExecute(r ApiGetApplianceFileSystemStatusListRequest) (ApplianceFileSystemStatusResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceFileSystemStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceFileSystemStatusList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/FileSystemStatuses"
@@ -5112,18 +5283,22 @@ func (a *ApplianceApiService) GetApplianceFileSystemStatusListExecute(r ApiGetAp
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5190,7 +5365,7 @@ func (a *ApplianceApiService) GetApplianceFileSystemStatusListExecute(r ApiGetAp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceGroupStatusByMoidRequest struct {
@@ -5199,7 +5374,7 @@ type ApiGetApplianceGroupStatusByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetApplianceGroupStatusByMoidRequest) Execute() (ApplianceGroupStatus, *_nethttp.Response, error) {
+func (r ApiGetApplianceGroupStatusByMoidRequest) Execute() (ApplianceGroupStatus, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceGroupStatusByMoidExecute(r)
 }
 
@@ -5221,19 +5396,21 @@ func (a *ApplianceApiService) GetApplianceGroupStatusByMoid(ctx _context.Context
  * Execute executes the request
  * @return ApplianceGroupStatus
  */
-func (a *ApplianceApiService) GetApplianceGroupStatusByMoidExecute(r ApiGetApplianceGroupStatusByMoidRequest) (ApplianceGroupStatus, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceGroupStatusByMoidExecute(r ApiGetApplianceGroupStatusByMoidRequest) (ApplianceGroupStatus, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceGroupStatus
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceGroupStatusByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/GroupStatuses/{Moid}"
@@ -5262,18 +5439,22 @@ func (a *ApplianceApiService) GetApplianceGroupStatusByMoidExecute(r ApiGetAppli
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5340,7 +5521,7 @@ func (a *ApplianceApiService) GetApplianceGroupStatusByMoidExecute(r ApiGetAppli
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceGroupStatusListRequest struct {
@@ -5404,7 +5585,7 @@ func (r ApiGetApplianceGroupStatusListRequest) Tags(tags string) ApiGetAppliance
 	return r
 }
 
-func (r ApiGetApplianceGroupStatusListRequest) Execute() (ApplianceGroupStatusResponse, *_nethttp.Response, error) {
+func (r ApiGetApplianceGroupStatusListRequest) Execute() (ApplianceGroupStatusResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceGroupStatusListExecute(r)
 }
 
@@ -5424,19 +5605,21 @@ func (a *ApplianceApiService) GetApplianceGroupStatusList(ctx _context.Context) 
  * Execute executes the request
  * @return ApplianceGroupStatusResponse
  */
-func (a *ApplianceApiService) GetApplianceGroupStatusListExecute(r ApiGetApplianceGroupStatusListRequest) (ApplianceGroupStatusResponse, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceGroupStatusListExecute(r ApiGetApplianceGroupStatusListRequest) (ApplianceGroupStatusResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceGroupStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceGroupStatusList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/GroupStatuses"
@@ -5497,18 +5680,22 @@ func (a *ApplianceApiService) GetApplianceGroupStatusListExecute(r ApiGetApplian
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5575,7 +5762,7 @@ func (a *ApplianceApiService) GetApplianceGroupStatusListExecute(r ApiGetApplian
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceImageBundleByMoidRequest struct {
@@ -5584,7 +5771,7 @@ type ApiGetApplianceImageBundleByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetApplianceImageBundleByMoidRequest) Execute() (ApplianceImageBundle, *_nethttp.Response, error) {
+func (r ApiGetApplianceImageBundleByMoidRequest) Execute() (ApplianceImageBundle, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceImageBundleByMoidExecute(r)
 }
 
@@ -5606,19 +5793,21 @@ func (a *ApplianceApiService) GetApplianceImageBundleByMoid(ctx _context.Context
  * Execute executes the request
  * @return ApplianceImageBundle
  */
-func (a *ApplianceApiService) GetApplianceImageBundleByMoidExecute(r ApiGetApplianceImageBundleByMoidRequest) (ApplianceImageBundle, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceImageBundleByMoidExecute(r ApiGetApplianceImageBundleByMoidRequest) (ApplianceImageBundle, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceImageBundle
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceImageBundleByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/ImageBundles/{Moid}"
@@ -5647,18 +5836,22 @@ func (a *ApplianceApiService) GetApplianceImageBundleByMoidExecute(r ApiGetAppli
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5725,7 +5918,7 @@ func (a *ApplianceApiService) GetApplianceImageBundleByMoidExecute(r ApiGetAppli
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceImageBundleListRequest struct {
@@ -5789,7 +5982,7 @@ func (r ApiGetApplianceImageBundleListRequest) Tags(tags string) ApiGetAppliance
 	return r
 }
 
-func (r ApiGetApplianceImageBundleListRequest) Execute() (ApplianceImageBundleResponse, *_nethttp.Response, error) {
+func (r ApiGetApplianceImageBundleListRequest) Execute() (ApplianceImageBundleResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceImageBundleListExecute(r)
 }
 
@@ -5809,19 +6002,21 @@ func (a *ApplianceApiService) GetApplianceImageBundleList(ctx _context.Context) 
  * Execute executes the request
  * @return ApplianceImageBundleResponse
  */
-func (a *ApplianceApiService) GetApplianceImageBundleListExecute(r ApiGetApplianceImageBundleListRequest) (ApplianceImageBundleResponse, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceImageBundleListExecute(r ApiGetApplianceImageBundleListRequest) (ApplianceImageBundleResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceImageBundleResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceImageBundleList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/ImageBundles"
@@ -5882,18 +6077,22 @@ func (a *ApplianceApiService) GetApplianceImageBundleListExecute(r ApiGetApplian
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5960,7 +6159,7 @@ func (a *ApplianceApiService) GetApplianceImageBundleListExecute(r ApiGetApplian
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceNodeInfoByMoidRequest struct {
@@ -5969,7 +6168,7 @@ type ApiGetApplianceNodeInfoByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetApplianceNodeInfoByMoidRequest) Execute() (ApplianceNodeInfo, *_nethttp.Response, error) {
+func (r ApiGetApplianceNodeInfoByMoidRequest) Execute() (ApplianceNodeInfo, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceNodeInfoByMoidExecute(r)
 }
 
@@ -5991,19 +6190,21 @@ func (a *ApplianceApiService) GetApplianceNodeInfoByMoid(ctx _context.Context, m
  * Execute executes the request
  * @return ApplianceNodeInfo
  */
-func (a *ApplianceApiService) GetApplianceNodeInfoByMoidExecute(r ApiGetApplianceNodeInfoByMoidRequest) (ApplianceNodeInfo, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceNodeInfoByMoidExecute(r ApiGetApplianceNodeInfoByMoidRequest) (ApplianceNodeInfo, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceNodeInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceNodeInfoByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/NodeInfos/{Moid}"
@@ -6032,18 +6233,22 @@ func (a *ApplianceApiService) GetApplianceNodeInfoByMoidExecute(r ApiGetApplianc
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6110,7 +6315,7 @@ func (a *ApplianceApiService) GetApplianceNodeInfoByMoidExecute(r ApiGetApplianc
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceNodeInfoListRequest struct {
@@ -6174,7 +6379,7 @@ func (r ApiGetApplianceNodeInfoListRequest) Tags(tags string) ApiGetApplianceNod
 	return r
 }
 
-func (r ApiGetApplianceNodeInfoListRequest) Execute() (ApplianceNodeInfoResponse, *_nethttp.Response, error) {
+func (r ApiGetApplianceNodeInfoListRequest) Execute() (ApplianceNodeInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceNodeInfoListExecute(r)
 }
 
@@ -6194,19 +6399,21 @@ func (a *ApplianceApiService) GetApplianceNodeInfoList(ctx _context.Context) Api
  * Execute executes the request
  * @return ApplianceNodeInfoResponse
  */
-func (a *ApplianceApiService) GetApplianceNodeInfoListExecute(r ApiGetApplianceNodeInfoListRequest) (ApplianceNodeInfoResponse, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceNodeInfoListExecute(r ApiGetApplianceNodeInfoListRequest) (ApplianceNodeInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceNodeInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceNodeInfoList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/NodeInfos"
@@ -6267,18 +6474,22 @@ func (a *ApplianceApiService) GetApplianceNodeInfoListExecute(r ApiGetApplianceN
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6345,7 +6556,7 @@ func (a *ApplianceApiService) GetApplianceNodeInfoListExecute(r ApiGetApplianceN
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceNodeStatusByMoidRequest struct {
@@ -6354,7 +6565,7 @@ type ApiGetApplianceNodeStatusByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetApplianceNodeStatusByMoidRequest) Execute() (ApplianceNodeStatus, *_nethttp.Response, error) {
+func (r ApiGetApplianceNodeStatusByMoidRequest) Execute() (ApplianceNodeStatus, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceNodeStatusByMoidExecute(r)
 }
 
@@ -6376,19 +6587,21 @@ func (a *ApplianceApiService) GetApplianceNodeStatusByMoid(ctx _context.Context,
  * Execute executes the request
  * @return ApplianceNodeStatus
  */
-func (a *ApplianceApiService) GetApplianceNodeStatusByMoidExecute(r ApiGetApplianceNodeStatusByMoidRequest) (ApplianceNodeStatus, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceNodeStatusByMoidExecute(r ApiGetApplianceNodeStatusByMoidRequest) (ApplianceNodeStatus, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceNodeStatus
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceNodeStatusByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/NodeStatuses/{Moid}"
@@ -6417,18 +6630,22 @@ func (a *ApplianceApiService) GetApplianceNodeStatusByMoidExecute(r ApiGetApplia
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6495,7 +6712,7 @@ func (a *ApplianceApiService) GetApplianceNodeStatusByMoidExecute(r ApiGetApplia
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceNodeStatusListRequest struct {
@@ -6559,7 +6776,7 @@ func (r ApiGetApplianceNodeStatusListRequest) Tags(tags string) ApiGetApplianceN
 	return r
 }
 
-func (r ApiGetApplianceNodeStatusListRequest) Execute() (ApplianceNodeStatusResponse, *_nethttp.Response, error) {
+func (r ApiGetApplianceNodeStatusListRequest) Execute() (ApplianceNodeStatusResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceNodeStatusListExecute(r)
 }
 
@@ -6579,19 +6796,21 @@ func (a *ApplianceApiService) GetApplianceNodeStatusList(ctx _context.Context) A
  * Execute executes the request
  * @return ApplianceNodeStatusResponse
  */
-func (a *ApplianceApiService) GetApplianceNodeStatusListExecute(r ApiGetApplianceNodeStatusListRequest) (ApplianceNodeStatusResponse, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceNodeStatusListExecute(r ApiGetApplianceNodeStatusListRequest) (ApplianceNodeStatusResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceNodeStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceNodeStatusList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/NodeStatuses"
@@ -6652,18 +6871,22 @@ func (a *ApplianceApiService) GetApplianceNodeStatusListExecute(r ApiGetApplianc
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6730,7 +6953,7 @@ func (a *ApplianceApiService) GetApplianceNodeStatusListExecute(r ApiGetApplianc
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceReleaseNoteByMoidRequest struct {
@@ -6739,7 +6962,7 @@ type ApiGetApplianceReleaseNoteByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetApplianceReleaseNoteByMoidRequest) Execute() (ApplianceReleaseNote, *_nethttp.Response, error) {
+func (r ApiGetApplianceReleaseNoteByMoidRequest) Execute() (ApplianceReleaseNote, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceReleaseNoteByMoidExecute(r)
 }
 
@@ -6761,19 +6984,21 @@ func (a *ApplianceApiService) GetApplianceReleaseNoteByMoid(ctx _context.Context
  * Execute executes the request
  * @return ApplianceReleaseNote
  */
-func (a *ApplianceApiService) GetApplianceReleaseNoteByMoidExecute(r ApiGetApplianceReleaseNoteByMoidRequest) (ApplianceReleaseNote, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceReleaseNoteByMoidExecute(r ApiGetApplianceReleaseNoteByMoidRequest) (ApplianceReleaseNote, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceReleaseNote
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceReleaseNoteByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/ReleaseNotes/{Moid}"
@@ -6802,18 +7027,22 @@ func (a *ApplianceApiService) GetApplianceReleaseNoteByMoidExecute(r ApiGetAppli
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6880,7 +7109,7 @@ func (a *ApplianceApiService) GetApplianceReleaseNoteByMoidExecute(r ApiGetAppli
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceReleaseNoteListRequest struct {
@@ -6944,7 +7173,7 @@ func (r ApiGetApplianceReleaseNoteListRequest) Tags(tags string) ApiGetAppliance
 	return r
 }
 
-func (r ApiGetApplianceReleaseNoteListRequest) Execute() (ApplianceReleaseNoteResponse, *_nethttp.Response, error) {
+func (r ApiGetApplianceReleaseNoteListRequest) Execute() (ApplianceReleaseNoteResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceReleaseNoteListExecute(r)
 }
 
@@ -6964,19 +7193,21 @@ func (a *ApplianceApiService) GetApplianceReleaseNoteList(ctx _context.Context) 
  * Execute executes the request
  * @return ApplianceReleaseNoteResponse
  */
-func (a *ApplianceApiService) GetApplianceReleaseNoteListExecute(r ApiGetApplianceReleaseNoteListRequest) (ApplianceReleaseNoteResponse, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceReleaseNoteListExecute(r ApiGetApplianceReleaseNoteListRequest) (ApplianceReleaseNoteResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceReleaseNoteResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceReleaseNoteList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/ReleaseNotes"
@@ -7037,18 +7268,22 @@ func (a *ApplianceApiService) GetApplianceReleaseNoteListExecute(r ApiGetApplian
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7115,7 +7350,7 @@ func (a *ApplianceApiService) GetApplianceReleaseNoteListExecute(r ApiGetApplian
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceRestoreByMoidRequest struct {
@@ -7124,7 +7359,7 @@ type ApiGetApplianceRestoreByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetApplianceRestoreByMoidRequest) Execute() (ApplianceRestore, *_nethttp.Response, error) {
+func (r ApiGetApplianceRestoreByMoidRequest) Execute() (ApplianceRestore, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceRestoreByMoidExecute(r)
 }
 
@@ -7146,19 +7381,21 @@ func (a *ApplianceApiService) GetApplianceRestoreByMoid(ctx _context.Context, mo
  * Execute executes the request
  * @return ApplianceRestore
  */
-func (a *ApplianceApiService) GetApplianceRestoreByMoidExecute(r ApiGetApplianceRestoreByMoidRequest) (ApplianceRestore, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceRestoreByMoidExecute(r ApiGetApplianceRestoreByMoidRequest) (ApplianceRestore, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceRestore
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceRestoreByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/Restores/{Moid}"
@@ -7187,18 +7424,22 @@ func (a *ApplianceApiService) GetApplianceRestoreByMoidExecute(r ApiGetAppliance
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7265,7 +7506,7 @@ func (a *ApplianceApiService) GetApplianceRestoreByMoidExecute(r ApiGetAppliance
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceRestoreListRequest struct {
@@ -7329,7 +7570,7 @@ func (r ApiGetApplianceRestoreListRequest) Tags(tags string) ApiGetApplianceRest
 	return r
 }
 
-func (r ApiGetApplianceRestoreListRequest) Execute() (ApplianceRestoreResponse, *_nethttp.Response, error) {
+func (r ApiGetApplianceRestoreListRequest) Execute() (ApplianceRestoreResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceRestoreListExecute(r)
 }
 
@@ -7349,19 +7590,21 @@ func (a *ApplianceApiService) GetApplianceRestoreList(ctx _context.Context) ApiG
  * Execute executes the request
  * @return ApplianceRestoreResponse
  */
-func (a *ApplianceApiService) GetApplianceRestoreListExecute(r ApiGetApplianceRestoreListRequest) (ApplianceRestoreResponse, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceRestoreListExecute(r ApiGetApplianceRestoreListRequest) (ApplianceRestoreResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceRestoreResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceRestoreList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/Restores"
@@ -7422,18 +7665,22 @@ func (a *ApplianceApiService) GetApplianceRestoreListExecute(r ApiGetApplianceRe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7500,7 +7747,7 @@ func (a *ApplianceApiService) GetApplianceRestoreListExecute(r ApiGetApplianceRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceSetupInfoByMoidRequest struct {
@@ -7509,7 +7756,7 @@ type ApiGetApplianceSetupInfoByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetApplianceSetupInfoByMoidRequest) Execute() (ApplianceSetupInfo, *_nethttp.Response, error) {
+func (r ApiGetApplianceSetupInfoByMoidRequest) Execute() (ApplianceSetupInfo, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceSetupInfoByMoidExecute(r)
 }
 
@@ -7531,19 +7778,21 @@ func (a *ApplianceApiService) GetApplianceSetupInfoByMoid(ctx _context.Context, 
  * Execute executes the request
  * @return ApplianceSetupInfo
  */
-func (a *ApplianceApiService) GetApplianceSetupInfoByMoidExecute(r ApiGetApplianceSetupInfoByMoidRequest) (ApplianceSetupInfo, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceSetupInfoByMoidExecute(r ApiGetApplianceSetupInfoByMoidRequest) (ApplianceSetupInfo, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceSetupInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceSetupInfoByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/SetupInfos/{Moid}"
@@ -7572,18 +7821,22 @@ func (a *ApplianceApiService) GetApplianceSetupInfoByMoidExecute(r ApiGetApplian
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7650,7 +7903,7 @@ func (a *ApplianceApiService) GetApplianceSetupInfoByMoidExecute(r ApiGetApplian
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceSetupInfoListRequest struct {
@@ -7714,7 +7967,7 @@ func (r ApiGetApplianceSetupInfoListRequest) Tags(tags string) ApiGetApplianceSe
 	return r
 }
 
-func (r ApiGetApplianceSetupInfoListRequest) Execute() (ApplianceSetupInfoResponse, *_nethttp.Response, error) {
+func (r ApiGetApplianceSetupInfoListRequest) Execute() (ApplianceSetupInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceSetupInfoListExecute(r)
 }
 
@@ -7734,19 +7987,21 @@ func (a *ApplianceApiService) GetApplianceSetupInfoList(ctx _context.Context) Ap
  * Execute executes the request
  * @return ApplianceSetupInfoResponse
  */
-func (a *ApplianceApiService) GetApplianceSetupInfoListExecute(r ApiGetApplianceSetupInfoListRequest) (ApplianceSetupInfoResponse, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceSetupInfoListExecute(r ApiGetApplianceSetupInfoListRequest) (ApplianceSetupInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceSetupInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceSetupInfoList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/SetupInfos"
@@ -7807,18 +8062,22 @@ func (a *ApplianceApiService) GetApplianceSetupInfoListExecute(r ApiGetAppliance
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7885,7 +8144,7 @@ func (a *ApplianceApiService) GetApplianceSetupInfoListExecute(r ApiGetAppliance
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceSystemInfoByMoidRequest struct {
@@ -7894,7 +8153,7 @@ type ApiGetApplianceSystemInfoByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetApplianceSystemInfoByMoidRequest) Execute() (ApplianceSystemInfo, *_nethttp.Response, error) {
+func (r ApiGetApplianceSystemInfoByMoidRequest) Execute() (ApplianceSystemInfo, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceSystemInfoByMoidExecute(r)
 }
 
@@ -7916,19 +8175,21 @@ func (a *ApplianceApiService) GetApplianceSystemInfoByMoid(ctx _context.Context,
  * Execute executes the request
  * @return ApplianceSystemInfo
  */
-func (a *ApplianceApiService) GetApplianceSystemInfoByMoidExecute(r ApiGetApplianceSystemInfoByMoidRequest) (ApplianceSystemInfo, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceSystemInfoByMoidExecute(r ApiGetApplianceSystemInfoByMoidRequest) (ApplianceSystemInfo, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceSystemInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceSystemInfoByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/SystemInfos/{Moid}"
@@ -7957,18 +8218,22 @@ func (a *ApplianceApiService) GetApplianceSystemInfoByMoidExecute(r ApiGetApplia
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8035,7 +8300,7 @@ func (a *ApplianceApiService) GetApplianceSystemInfoByMoidExecute(r ApiGetApplia
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceSystemInfoListRequest struct {
@@ -8099,7 +8364,7 @@ func (r ApiGetApplianceSystemInfoListRequest) Tags(tags string) ApiGetApplianceS
 	return r
 }
 
-func (r ApiGetApplianceSystemInfoListRequest) Execute() (ApplianceSystemInfoResponse, *_nethttp.Response, error) {
+func (r ApiGetApplianceSystemInfoListRequest) Execute() (ApplianceSystemInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceSystemInfoListExecute(r)
 }
 
@@ -8119,19 +8384,21 @@ func (a *ApplianceApiService) GetApplianceSystemInfoList(ctx _context.Context) A
  * Execute executes the request
  * @return ApplianceSystemInfoResponse
  */
-func (a *ApplianceApiService) GetApplianceSystemInfoListExecute(r ApiGetApplianceSystemInfoListRequest) (ApplianceSystemInfoResponse, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceSystemInfoListExecute(r ApiGetApplianceSystemInfoListRequest) (ApplianceSystemInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceSystemInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceSystemInfoList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/SystemInfos"
@@ -8192,18 +8459,22 @@ func (a *ApplianceApiService) GetApplianceSystemInfoListExecute(r ApiGetApplianc
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8270,7 +8541,7 @@ func (a *ApplianceApiService) GetApplianceSystemInfoListExecute(r ApiGetApplianc
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceSystemStatusByMoidRequest struct {
@@ -8279,7 +8550,7 @@ type ApiGetApplianceSystemStatusByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetApplianceSystemStatusByMoidRequest) Execute() (ApplianceSystemStatus, *_nethttp.Response, error) {
+func (r ApiGetApplianceSystemStatusByMoidRequest) Execute() (ApplianceSystemStatus, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceSystemStatusByMoidExecute(r)
 }
 
@@ -8301,19 +8572,21 @@ func (a *ApplianceApiService) GetApplianceSystemStatusByMoid(ctx _context.Contex
  * Execute executes the request
  * @return ApplianceSystemStatus
  */
-func (a *ApplianceApiService) GetApplianceSystemStatusByMoidExecute(r ApiGetApplianceSystemStatusByMoidRequest) (ApplianceSystemStatus, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceSystemStatusByMoidExecute(r ApiGetApplianceSystemStatusByMoidRequest) (ApplianceSystemStatus, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceSystemStatus
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceSystemStatusByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/SystemStatuses/{Moid}"
@@ -8342,18 +8615,22 @@ func (a *ApplianceApiService) GetApplianceSystemStatusByMoidExecute(r ApiGetAppl
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8420,7 +8697,7 @@ func (a *ApplianceApiService) GetApplianceSystemStatusByMoidExecute(r ApiGetAppl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceSystemStatusListRequest struct {
@@ -8484,7 +8761,7 @@ func (r ApiGetApplianceSystemStatusListRequest) Tags(tags string) ApiGetApplianc
 	return r
 }
 
-func (r ApiGetApplianceSystemStatusListRequest) Execute() (ApplianceSystemStatusResponse, *_nethttp.Response, error) {
+func (r ApiGetApplianceSystemStatusListRequest) Execute() (ApplianceSystemStatusResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceSystemStatusListExecute(r)
 }
 
@@ -8504,19 +8781,21 @@ func (a *ApplianceApiService) GetApplianceSystemStatusList(ctx _context.Context)
  * Execute executes the request
  * @return ApplianceSystemStatusResponse
  */
-func (a *ApplianceApiService) GetApplianceSystemStatusListExecute(r ApiGetApplianceSystemStatusListRequest) (ApplianceSystemStatusResponse, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceSystemStatusListExecute(r ApiGetApplianceSystemStatusListRequest) (ApplianceSystemStatusResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceSystemStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceSystemStatusList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/SystemStatuses"
@@ -8577,18 +8856,22 @@ func (a *ApplianceApiService) GetApplianceSystemStatusListExecute(r ApiGetApplia
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8655,7 +8938,7 @@ func (a *ApplianceApiService) GetApplianceSystemStatusListExecute(r ApiGetApplia
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceUpgradeByMoidRequest struct {
@@ -8664,7 +8947,7 @@ type ApiGetApplianceUpgradeByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetApplianceUpgradeByMoidRequest) Execute() (ApplianceUpgrade, *_nethttp.Response, error) {
+func (r ApiGetApplianceUpgradeByMoidRequest) Execute() (ApplianceUpgrade, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceUpgradeByMoidExecute(r)
 }
 
@@ -8686,19 +8969,21 @@ func (a *ApplianceApiService) GetApplianceUpgradeByMoid(ctx _context.Context, mo
  * Execute executes the request
  * @return ApplianceUpgrade
  */
-func (a *ApplianceApiService) GetApplianceUpgradeByMoidExecute(r ApiGetApplianceUpgradeByMoidRequest) (ApplianceUpgrade, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceUpgradeByMoidExecute(r ApiGetApplianceUpgradeByMoidRequest) (ApplianceUpgrade, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceUpgrade
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceUpgradeByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/Upgrades/{Moid}"
@@ -8727,18 +9012,22 @@ func (a *ApplianceApiService) GetApplianceUpgradeByMoidExecute(r ApiGetAppliance
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8805,7 +9094,7 @@ func (a *ApplianceApiService) GetApplianceUpgradeByMoidExecute(r ApiGetAppliance
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceUpgradeListRequest struct {
@@ -8869,7 +9158,7 @@ func (r ApiGetApplianceUpgradeListRequest) Tags(tags string) ApiGetApplianceUpgr
 	return r
 }
 
-func (r ApiGetApplianceUpgradeListRequest) Execute() (ApplianceUpgradeResponse, *_nethttp.Response, error) {
+func (r ApiGetApplianceUpgradeListRequest) Execute() (ApplianceUpgradeResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceUpgradeListExecute(r)
 }
 
@@ -8889,19 +9178,21 @@ func (a *ApplianceApiService) GetApplianceUpgradeList(ctx _context.Context) ApiG
  * Execute executes the request
  * @return ApplianceUpgradeResponse
  */
-func (a *ApplianceApiService) GetApplianceUpgradeListExecute(r ApiGetApplianceUpgradeListRequest) (ApplianceUpgradeResponse, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceUpgradeListExecute(r ApiGetApplianceUpgradeListRequest) (ApplianceUpgradeResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceUpgradeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceUpgradeList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/Upgrades"
@@ -8962,18 +9253,22 @@ func (a *ApplianceApiService) GetApplianceUpgradeListExecute(r ApiGetApplianceUp
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9040,7 +9335,7 @@ func (a *ApplianceApiService) GetApplianceUpgradeListExecute(r ApiGetApplianceUp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceUpgradePolicyByMoidRequest struct {
@@ -9049,7 +9344,7 @@ type ApiGetApplianceUpgradePolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetApplianceUpgradePolicyByMoidRequest) Execute() (ApplianceUpgradePolicy, *_nethttp.Response, error) {
+func (r ApiGetApplianceUpgradePolicyByMoidRequest) Execute() (ApplianceUpgradePolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceUpgradePolicyByMoidExecute(r)
 }
 
@@ -9071,19 +9366,21 @@ func (a *ApplianceApiService) GetApplianceUpgradePolicyByMoid(ctx _context.Conte
  * Execute executes the request
  * @return ApplianceUpgradePolicy
  */
-func (a *ApplianceApiService) GetApplianceUpgradePolicyByMoidExecute(r ApiGetApplianceUpgradePolicyByMoidRequest) (ApplianceUpgradePolicy, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceUpgradePolicyByMoidExecute(r ApiGetApplianceUpgradePolicyByMoidRequest) (ApplianceUpgradePolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceUpgradePolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceUpgradePolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/UpgradePolicies/{Moid}"
@@ -9112,18 +9409,22 @@ func (a *ApplianceApiService) GetApplianceUpgradePolicyByMoidExecute(r ApiGetApp
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9190,7 +9491,7 @@ func (a *ApplianceApiService) GetApplianceUpgradePolicyByMoidExecute(r ApiGetApp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetApplianceUpgradePolicyListRequest struct {
@@ -9254,7 +9555,7 @@ func (r ApiGetApplianceUpgradePolicyListRequest) Tags(tags string) ApiGetApplian
 	return r
 }
 
-func (r ApiGetApplianceUpgradePolicyListRequest) Execute() (ApplianceUpgradePolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetApplianceUpgradePolicyListRequest) Execute() (ApplianceUpgradePolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetApplianceUpgradePolicyListExecute(r)
 }
 
@@ -9274,19 +9575,21 @@ func (a *ApplianceApiService) GetApplianceUpgradePolicyList(ctx _context.Context
  * Execute executes the request
  * @return ApplianceUpgradePolicyResponse
  */
-func (a *ApplianceApiService) GetApplianceUpgradePolicyListExecute(r ApiGetApplianceUpgradePolicyListRequest) (ApplianceUpgradePolicyResponse, *_nethttp.Response, error) {
+func (a *ApplianceApiService) GetApplianceUpgradePolicyListExecute(r ApiGetApplianceUpgradePolicyListRequest) (ApplianceUpgradePolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceUpgradePolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.GetApplianceUpgradePolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/UpgradePolicies"
@@ -9347,18 +9650,22 @@ func (a *ApplianceApiService) GetApplianceUpgradePolicyListExecute(r ApiGetAppli
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9425,7 +9732,7 @@ func (a *ApplianceApiService) GetApplianceUpgradePolicyListExecute(r ApiGetAppli
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchApplianceBackupPolicyRequest struct {
@@ -9445,7 +9752,7 @@ func (r ApiPatchApplianceBackupPolicyRequest) IfMatch(ifMatch string) ApiPatchAp
 	return r
 }
 
-func (r ApiPatchApplianceBackupPolicyRequest) Execute() (ApplianceBackupPolicy, *_nethttp.Response, error) {
+func (r ApiPatchApplianceBackupPolicyRequest) Execute() (ApplianceBackupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchApplianceBackupPolicyExecute(r)
 }
 
@@ -9467,19 +9774,21 @@ func (a *ApplianceApiService) PatchApplianceBackupPolicy(ctx _context.Context, m
  * Execute executes the request
  * @return ApplianceBackupPolicy
  */
-func (a *ApplianceApiService) PatchApplianceBackupPolicyExecute(r ApiPatchApplianceBackupPolicyRequest) (ApplianceBackupPolicy, *_nethttp.Response, error) {
+func (a *ApplianceApiService) PatchApplianceBackupPolicyExecute(r ApiPatchApplianceBackupPolicyRequest) (ApplianceBackupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceBackupPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.PatchApplianceBackupPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/BackupPolicies/{Moid}"
@@ -9489,7 +9798,8 @@ func (a *ApplianceApiService) PatchApplianceBackupPolicyExecute(r ApiPatchApplia
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceBackupPolicy == nil {
-		return localVarReturnValue, nil, reportError("applianceBackupPolicy is required and must be specified")
+		executionError.error = "applianceBackupPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -9516,18 +9826,22 @@ func (a *ApplianceApiService) PatchApplianceBackupPolicyExecute(r ApiPatchApplia
 	localVarPostBody = r.applianceBackupPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9594,7 +9908,7 @@ func (a *ApplianceApiService) PatchApplianceBackupPolicyExecute(r ApiPatchApplia
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchApplianceCertificateSettingRequest struct {
@@ -9614,7 +9928,7 @@ func (r ApiPatchApplianceCertificateSettingRequest) IfMatch(ifMatch string) ApiP
 	return r
 }
 
-func (r ApiPatchApplianceCertificateSettingRequest) Execute() (ApplianceCertificateSetting, *_nethttp.Response, error) {
+func (r ApiPatchApplianceCertificateSettingRequest) Execute() (ApplianceCertificateSetting, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchApplianceCertificateSettingExecute(r)
 }
 
@@ -9636,19 +9950,21 @@ func (a *ApplianceApiService) PatchApplianceCertificateSetting(ctx _context.Cont
  * Execute executes the request
  * @return ApplianceCertificateSetting
  */
-func (a *ApplianceApiService) PatchApplianceCertificateSettingExecute(r ApiPatchApplianceCertificateSettingRequest) (ApplianceCertificateSetting, *_nethttp.Response, error) {
+func (a *ApplianceApiService) PatchApplianceCertificateSettingExecute(r ApiPatchApplianceCertificateSettingRequest) (ApplianceCertificateSetting, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceCertificateSetting
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.PatchApplianceCertificateSetting")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/CertificateSettings/{Moid}"
@@ -9658,7 +9974,8 @@ func (a *ApplianceApiService) PatchApplianceCertificateSettingExecute(r ApiPatch
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceCertificateSetting == nil {
-		return localVarReturnValue, nil, reportError("applianceCertificateSetting is required and must be specified")
+		executionError.error = "applianceCertificateSetting is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -9685,18 +10002,22 @@ func (a *ApplianceApiService) PatchApplianceCertificateSettingExecute(r ApiPatch
 	localVarPostBody = r.applianceCertificateSetting
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9763,7 +10084,7 @@ func (a *ApplianceApiService) PatchApplianceCertificateSettingExecute(r ApiPatch
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchApplianceDataExportPolicyRequest struct {
@@ -9783,7 +10104,7 @@ func (r ApiPatchApplianceDataExportPolicyRequest) IfMatch(ifMatch string) ApiPat
 	return r
 }
 
-func (r ApiPatchApplianceDataExportPolicyRequest) Execute() (ApplianceDataExportPolicy, *_nethttp.Response, error) {
+func (r ApiPatchApplianceDataExportPolicyRequest) Execute() (ApplianceDataExportPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchApplianceDataExportPolicyExecute(r)
 }
 
@@ -9805,19 +10126,21 @@ func (a *ApplianceApiService) PatchApplianceDataExportPolicy(ctx _context.Contex
  * Execute executes the request
  * @return ApplianceDataExportPolicy
  */
-func (a *ApplianceApiService) PatchApplianceDataExportPolicyExecute(r ApiPatchApplianceDataExportPolicyRequest) (ApplianceDataExportPolicy, *_nethttp.Response, error) {
+func (a *ApplianceApiService) PatchApplianceDataExportPolicyExecute(r ApiPatchApplianceDataExportPolicyRequest) (ApplianceDataExportPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceDataExportPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.PatchApplianceDataExportPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/DataExportPolicies/{Moid}"
@@ -9827,7 +10150,8 @@ func (a *ApplianceApiService) PatchApplianceDataExportPolicyExecute(r ApiPatchAp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceDataExportPolicy == nil {
-		return localVarReturnValue, nil, reportError("applianceDataExportPolicy is required and must be specified")
+		executionError.error = "applianceDataExportPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -9854,18 +10178,22 @@ func (a *ApplianceApiService) PatchApplianceDataExportPolicyExecute(r ApiPatchAp
 	localVarPostBody = r.applianceDataExportPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9932,7 +10260,7 @@ func (a *ApplianceApiService) PatchApplianceDataExportPolicyExecute(r ApiPatchAp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchApplianceDeviceClaimRequest struct {
@@ -9952,7 +10280,7 @@ func (r ApiPatchApplianceDeviceClaimRequest) IfMatch(ifMatch string) ApiPatchApp
 	return r
 }
 
-func (r ApiPatchApplianceDeviceClaimRequest) Execute() (ApplianceDeviceClaim, *_nethttp.Response, error) {
+func (r ApiPatchApplianceDeviceClaimRequest) Execute() (ApplianceDeviceClaim, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchApplianceDeviceClaimExecute(r)
 }
 
@@ -9974,19 +10302,21 @@ func (a *ApplianceApiService) PatchApplianceDeviceClaim(ctx _context.Context, mo
  * Execute executes the request
  * @return ApplianceDeviceClaim
  */
-func (a *ApplianceApiService) PatchApplianceDeviceClaimExecute(r ApiPatchApplianceDeviceClaimRequest) (ApplianceDeviceClaim, *_nethttp.Response, error) {
+func (a *ApplianceApiService) PatchApplianceDeviceClaimExecute(r ApiPatchApplianceDeviceClaimRequest) (ApplianceDeviceClaim, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceDeviceClaim
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.PatchApplianceDeviceClaim")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/DeviceClaims/{Moid}"
@@ -9996,7 +10326,8 @@ func (a *ApplianceApiService) PatchApplianceDeviceClaimExecute(r ApiPatchApplian
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceDeviceClaim == nil {
-		return localVarReturnValue, nil, reportError("applianceDeviceClaim is required and must be specified")
+		executionError.error = "applianceDeviceClaim is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -10023,18 +10354,22 @@ func (a *ApplianceApiService) PatchApplianceDeviceClaimExecute(r ApiPatchApplian
 	localVarPostBody = r.applianceDeviceClaim
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10101,7 +10436,7 @@ func (a *ApplianceApiService) PatchApplianceDeviceClaimExecute(r ApiPatchApplian
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchApplianceDiagSettingRequest struct {
@@ -10121,7 +10456,7 @@ func (r ApiPatchApplianceDiagSettingRequest) IfMatch(ifMatch string) ApiPatchApp
 	return r
 }
 
-func (r ApiPatchApplianceDiagSettingRequest) Execute() (ApplianceDiagSetting, *_nethttp.Response, error) {
+func (r ApiPatchApplianceDiagSettingRequest) Execute() (ApplianceDiagSetting, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchApplianceDiagSettingExecute(r)
 }
 
@@ -10143,19 +10478,21 @@ func (a *ApplianceApiService) PatchApplianceDiagSetting(ctx _context.Context, mo
  * Execute executes the request
  * @return ApplianceDiagSetting
  */
-func (a *ApplianceApiService) PatchApplianceDiagSettingExecute(r ApiPatchApplianceDiagSettingRequest) (ApplianceDiagSetting, *_nethttp.Response, error) {
+func (a *ApplianceApiService) PatchApplianceDiagSettingExecute(r ApiPatchApplianceDiagSettingRequest) (ApplianceDiagSetting, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceDiagSetting
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.PatchApplianceDiagSetting")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/DiagSettings/{Moid}"
@@ -10165,7 +10502,8 @@ func (a *ApplianceApiService) PatchApplianceDiagSettingExecute(r ApiPatchApplian
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceDiagSetting == nil {
-		return localVarReturnValue, nil, reportError("applianceDiagSetting is required and must be specified")
+		executionError.error = "applianceDiagSetting is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -10192,18 +10530,22 @@ func (a *ApplianceApiService) PatchApplianceDiagSettingExecute(r ApiPatchApplian
 	localVarPostBody = r.applianceDiagSetting
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10270,7 +10612,7 @@ func (a *ApplianceApiService) PatchApplianceDiagSettingExecute(r ApiPatchApplian
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchApplianceExternalSyslogSettingRequest struct {
@@ -10290,7 +10632,7 @@ func (r ApiPatchApplianceExternalSyslogSettingRequest) IfMatch(ifMatch string) A
 	return r
 }
 
-func (r ApiPatchApplianceExternalSyslogSettingRequest) Execute() (ApplianceExternalSyslogSetting, *_nethttp.Response, error) {
+func (r ApiPatchApplianceExternalSyslogSettingRequest) Execute() (ApplianceExternalSyslogSetting, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchApplianceExternalSyslogSettingExecute(r)
 }
 
@@ -10312,19 +10654,21 @@ func (a *ApplianceApiService) PatchApplianceExternalSyslogSetting(ctx _context.C
  * Execute executes the request
  * @return ApplianceExternalSyslogSetting
  */
-func (a *ApplianceApiService) PatchApplianceExternalSyslogSettingExecute(r ApiPatchApplianceExternalSyslogSettingRequest) (ApplianceExternalSyslogSetting, *_nethttp.Response, error) {
+func (a *ApplianceApiService) PatchApplianceExternalSyslogSettingExecute(r ApiPatchApplianceExternalSyslogSettingRequest) (ApplianceExternalSyslogSetting, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceExternalSyslogSetting
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.PatchApplianceExternalSyslogSetting")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/ExternalSyslogSettings/{Moid}"
@@ -10334,7 +10678,8 @@ func (a *ApplianceApiService) PatchApplianceExternalSyslogSettingExecute(r ApiPa
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceExternalSyslogSetting == nil {
-		return localVarReturnValue, nil, reportError("applianceExternalSyslogSetting is required and must be specified")
+		executionError.error = "applianceExternalSyslogSetting is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -10361,18 +10706,22 @@ func (a *ApplianceApiService) PatchApplianceExternalSyslogSettingExecute(r ApiPa
 	localVarPostBody = r.applianceExternalSyslogSetting
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10439,7 +10788,7 @@ func (a *ApplianceApiService) PatchApplianceExternalSyslogSettingExecute(r ApiPa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchApplianceSetupInfoRequest struct {
@@ -10459,7 +10808,7 @@ func (r ApiPatchApplianceSetupInfoRequest) IfMatch(ifMatch string) ApiPatchAppli
 	return r
 }
 
-func (r ApiPatchApplianceSetupInfoRequest) Execute() (ApplianceSetupInfo, *_nethttp.Response, error) {
+func (r ApiPatchApplianceSetupInfoRequest) Execute() (ApplianceSetupInfo, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchApplianceSetupInfoExecute(r)
 }
 
@@ -10481,19 +10830,21 @@ func (a *ApplianceApiService) PatchApplianceSetupInfo(ctx _context.Context, moid
  * Execute executes the request
  * @return ApplianceSetupInfo
  */
-func (a *ApplianceApiService) PatchApplianceSetupInfoExecute(r ApiPatchApplianceSetupInfoRequest) (ApplianceSetupInfo, *_nethttp.Response, error) {
+func (a *ApplianceApiService) PatchApplianceSetupInfoExecute(r ApiPatchApplianceSetupInfoRequest) (ApplianceSetupInfo, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceSetupInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.PatchApplianceSetupInfo")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/SetupInfos/{Moid}"
@@ -10503,7 +10854,8 @@ func (a *ApplianceApiService) PatchApplianceSetupInfoExecute(r ApiPatchAppliance
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceSetupInfo == nil {
-		return localVarReturnValue, nil, reportError("applianceSetupInfo is required and must be specified")
+		executionError.error = "applianceSetupInfo is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -10530,18 +10882,22 @@ func (a *ApplianceApiService) PatchApplianceSetupInfoExecute(r ApiPatchAppliance
 	localVarPostBody = r.applianceSetupInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10608,7 +10964,7 @@ func (a *ApplianceApiService) PatchApplianceSetupInfoExecute(r ApiPatchAppliance
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchApplianceUpgradeRequest struct {
@@ -10628,7 +10984,7 @@ func (r ApiPatchApplianceUpgradeRequest) IfMatch(ifMatch string) ApiPatchApplian
 	return r
 }
 
-func (r ApiPatchApplianceUpgradeRequest) Execute() (ApplianceUpgrade, *_nethttp.Response, error) {
+func (r ApiPatchApplianceUpgradeRequest) Execute() (ApplianceUpgrade, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchApplianceUpgradeExecute(r)
 }
 
@@ -10650,19 +11006,21 @@ func (a *ApplianceApiService) PatchApplianceUpgrade(ctx _context.Context, moid s
  * Execute executes the request
  * @return ApplianceUpgrade
  */
-func (a *ApplianceApiService) PatchApplianceUpgradeExecute(r ApiPatchApplianceUpgradeRequest) (ApplianceUpgrade, *_nethttp.Response, error) {
+func (a *ApplianceApiService) PatchApplianceUpgradeExecute(r ApiPatchApplianceUpgradeRequest) (ApplianceUpgrade, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceUpgrade
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.PatchApplianceUpgrade")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/Upgrades/{Moid}"
@@ -10672,7 +11030,8 @@ func (a *ApplianceApiService) PatchApplianceUpgradeExecute(r ApiPatchApplianceUp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceUpgrade == nil {
-		return localVarReturnValue, nil, reportError("applianceUpgrade is required and must be specified")
+		executionError.error = "applianceUpgrade is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -10699,18 +11058,22 @@ func (a *ApplianceApiService) PatchApplianceUpgradeExecute(r ApiPatchApplianceUp
 	localVarPostBody = r.applianceUpgrade
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10777,7 +11140,7 @@ func (a *ApplianceApiService) PatchApplianceUpgradeExecute(r ApiPatchApplianceUp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchApplianceUpgradePolicyRequest struct {
@@ -10797,7 +11160,7 @@ func (r ApiPatchApplianceUpgradePolicyRequest) IfMatch(ifMatch string) ApiPatchA
 	return r
 }
 
-func (r ApiPatchApplianceUpgradePolicyRequest) Execute() (ApplianceUpgradePolicy, *_nethttp.Response, error) {
+func (r ApiPatchApplianceUpgradePolicyRequest) Execute() (ApplianceUpgradePolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchApplianceUpgradePolicyExecute(r)
 }
 
@@ -10819,19 +11182,21 @@ func (a *ApplianceApiService) PatchApplianceUpgradePolicy(ctx _context.Context, 
  * Execute executes the request
  * @return ApplianceUpgradePolicy
  */
-func (a *ApplianceApiService) PatchApplianceUpgradePolicyExecute(r ApiPatchApplianceUpgradePolicyRequest) (ApplianceUpgradePolicy, *_nethttp.Response, error) {
+func (a *ApplianceApiService) PatchApplianceUpgradePolicyExecute(r ApiPatchApplianceUpgradePolicyRequest) (ApplianceUpgradePolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceUpgradePolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.PatchApplianceUpgradePolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/UpgradePolicies/{Moid}"
@@ -10841,7 +11206,8 @@ func (a *ApplianceApiService) PatchApplianceUpgradePolicyExecute(r ApiPatchAppli
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceUpgradePolicy == nil {
-		return localVarReturnValue, nil, reportError("applianceUpgradePolicy is required and must be specified")
+		executionError.error = "applianceUpgradePolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -10868,18 +11234,22 @@ func (a *ApplianceApiService) PatchApplianceUpgradePolicyExecute(r ApiPatchAppli
 	localVarPostBody = r.applianceUpgradePolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10946,7 +11316,7 @@ func (a *ApplianceApiService) PatchApplianceUpgradePolicyExecute(r ApiPatchAppli
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateApplianceBackupPolicyRequest struct {
@@ -10966,7 +11336,7 @@ func (r ApiUpdateApplianceBackupPolicyRequest) IfMatch(ifMatch string) ApiUpdate
 	return r
 }
 
-func (r ApiUpdateApplianceBackupPolicyRequest) Execute() (ApplianceBackupPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateApplianceBackupPolicyRequest) Execute() (ApplianceBackupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateApplianceBackupPolicyExecute(r)
 }
 
@@ -10988,19 +11358,21 @@ func (a *ApplianceApiService) UpdateApplianceBackupPolicy(ctx _context.Context, 
  * Execute executes the request
  * @return ApplianceBackupPolicy
  */
-func (a *ApplianceApiService) UpdateApplianceBackupPolicyExecute(r ApiUpdateApplianceBackupPolicyRequest) (ApplianceBackupPolicy, *_nethttp.Response, error) {
+func (a *ApplianceApiService) UpdateApplianceBackupPolicyExecute(r ApiUpdateApplianceBackupPolicyRequest) (ApplianceBackupPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceBackupPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.UpdateApplianceBackupPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/BackupPolicies/{Moid}"
@@ -11010,7 +11382,8 @@ func (a *ApplianceApiService) UpdateApplianceBackupPolicyExecute(r ApiUpdateAppl
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceBackupPolicy == nil {
-		return localVarReturnValue, nil, reportError("applianceBackupPolicy is required and must be specified")
+		executionError.error = "applianceBackupPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -11037,18 +11410,22 @@ func (a *ApplianceApiService) UpdateApplianceBackupPolicyExecute(r ApiUpdateAppl
 	localVarPostBody = r.applianceBackupPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11115,7 +11492,7 @@ func (a *ApplianceApiService) UpdateApplianceBackupPolicyExecute(r ApiUpdateAppl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateApplianceCertificateSettingRequest struct {
@@ -11135,7 +11512,7 @@ func (r ApiUpdateApplianceCertificateSettingRequest) IfMatch(ifMatch string) Api
 	return r
 }
 
-func (r ApiUpdateApplianceCertificateSettingRequest) Execute() (ApplianceCertificateSetting, *_nethttp.Response, error) {
+func (r ApiUpdateApplianceCertificateSettingRequest) Execute() (ApplianceCertificateSetting, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateApplianceCertificateSettingExecute(r)
 }
 
@@ -11157,19 +11534,21 @@ func (a *ApplianceApiService) UpdateApplianceCertificateSetting(ctx _context.Con
  * Execute executes the request
  * @return ApplianceCertificateSetting
  */
-func (a *ApplianceApiService) UpdateApplianceCertificateSettingExecute(r ApiUpdateApplianceCertificateSettingRequest) (ApplianceCertificateSetting, *_nethttp.Response, error) {
+func (a *ApplianceApiService) UpdateApplianceCertificateSettingExecute(r ApiUpdateApplianceCertificateSettingRequest) (ApplianceCertificateSetting, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceCertificateSetting
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.UpdateApplianceCertificateSetting")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/CertificateSettings/{Moid}"
@@ -11179,7 +11558,8 @@ func (a *ApplianceApiService) UpdateApplianceCertificateSettingExecute(r ApiUpda
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceCertificateSetting == nil {
-		return localVarReturnValue, nil, reportError("applianceCertificateSetting is required and must be specified")
+		executionError.error = "applianceCertificateSetting is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -11206,18 +11586,22 @@ func (a *ApplianceApiService) UpdateApplianceCertificateSettingExecute(r ApiUpda
 	localVarPostBody = r.applianceCertificateSetting
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11284,7 +11668,7 @@ func (a *ApplianceApiService) UpdateApplianceCertificateSettingExecute(r ApiUpda
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateApplianceDataExportPolicyRequest struct {
@@ -11304,7 +11688,7 @@ func (r ApiUpdateApplianceDataExportPolicyRequest) IfMatch(ifMatch string) ApiUp
 	return r
 }
 
-func (r ApiUpdateApplianceDataExportPolicyRequest) Execute() (ApplianceDataExportPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateApplianceDataExportPolicyRequest) Execute() (ApplianceDataExportPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateApplianceDataExportPolicyExecute(r)
 }
 
@@ -11326,19 +11710,21 @@ func (a *ApplianceApiService) UpdateApplianceDataExportPolicy(ctx _context.Conte
  * Execute executes the request
  * @return ApplianceDataExportPolicy
  */
-func (a *ApplianceApiService) UpdateApplianceDataExportPolicyExecute(r ApiUpdateApplianceDataExportPolicyRequest) (ApplianceDataExportPolicy, *_nethttp.Response, error) {
+func (a *ApplianceApiService) UpdateApplianceDataExportPolicyExecute(r ApiUpdateApplianceDataExportPolicyRequest) (ApplianceDataExportPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceDataExportPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.UpdateApplianceDataExportPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/DataExportPolicies/{Moid}"
@@ -11348,7 +11734,8 @@ func (a *ApplianceApiService) UpdateApplianceDataExportPolicyExecute(r ApiUpdate
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceDataExportPolicy == nil {
-		return localVarReturnValue, nil, reportError("applianceDataExportPolicy is required and must be specified")
+		executionError.error = "applianceDataExportPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -11375,18 +11762,22 @@ func (a *ApplianceApiService) UpdateApplianceDataExportPolicyExecute(r ApiUpdate
 	localVarPostBody = r.applianceDataExportPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11453,7 +11844,7 @@ func (a *ApplianceApiService) UpdateApplianceDataExportPolicyExecute(r ApiUpdate
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateApplianceDeviceClaimRequest struct {
@@ -11473,7 +11864,7 @@ func (r ApiUpdateApplianceDeviceClaimRequest) IfMatch(ifMatch string) ApiUpdateA
 	return r
 }
 
-func (r ApiUpdateApplianceDeviceClaimRequest) Execute() (ApplianceDeviceClaim, *_nethttp.Response, error) {
+func (r ApiUpdateApplianceDeviceClaimRequest) Execute() (ApplianceDeviceClaim, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateApplianceDeviceClaimExecute(r)
 }
 
@@ -11495,19 +11886,21 @@ func (a *ApplianceApiService) UpdateApplianceDeviceClaim(ctx _context.Context, m
  * Execute executes the request
  * @return ApplianceDeviceClaim
  */
-func (a *ApplianceApiService) UpdateApplianceDeviceClaimExecute(r ApiUpdateApplianceDeviceClaimRequest) (ApplianceDeviceClaim, *_nethttp.Response, error) {
+func (a *ApplianceApiService) UpdateApplianceDeviceClaimExecute(r ApiUpdateApplianceDeviceClaimRequest) (ApplianceDeviceClaim, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceDeviceClaim
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.UpdateApplianceDeviceClaim")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/DeviceClaims/{Moid}"
@@ -11517,7 +11910,8 @@ func (a *ApplianceApiService) UpdateApplianceDeviceClaimExecute(r ApiUpdateAppli
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceDeviceClaim == nil {
-		return localVarReturnValue, nil, reportError("applianceDeviceClaim is required and must be specified")
+		executionError.error = "applianceDeviceClaim is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -11544,18 +11938,22 @@ func (a *ApplianceApiService) UpdateApplianceDeviceClaimExecute(r ApiUpdateAppli
 	localVarPostBody = r.applianceDeviceClaim
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11622,7 +12020,7 @@ func (a *ApplianceApiService) UpdateApplianceDeviceClaimExecute(r ApiUpdateAppli
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateApplianceDiagSettingRequest struct {
@@ -11642,7 +12040,7 @@ func (r ApiUpdateApplianceDiagSettingRequest) IfMatch(ifMatch string) ApiUpdateA
 	return r
 }
 
-func (r ApiUpdateApplianceDiagSettingRequest) Execute() (ApplianceDiagSetting, *_nethttp.Response, error) {
+func (r ApiUpdateApplianceDiagSettingRequest) Execute() (ApplianceDiagSetting, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateApplianceDiagSettingExecute(r)
 }
 
@@ -11664,19 +12062,21 @@ func (a *ApplianceApiService) UpdateApplianceDiagSetting(ctx _context.Context, m
  * Execute executes the request
  * @return ApplianceDiagSetting
  */
-func (a *ApplianceApiService) UpdateApplianceDiagSettingExecute(r ApiUpdateApplianceDiagSettingRequest) (ApplianceDiagSetting, *_nethttp.Response, error) {
+func (a *ApplianceApiService) UpdateApplianceDiagSettingExecute(r ApiUpdateApplianceDiagSettingRequest) (ApplianceDiagSetting, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceDiagSetting
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.UpdateApplianceDiagSetting")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/DiagSettings/{Moid}"
@@ -11686,7 +12086,8 @@ func (a *ApplianceApiService) UpdateApplianceDiagSettingExecute(r ApiUpdateAppli
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceDiagSetting == nil {
-		return localVarReturnValue, nil, reportError("applianceDiagSetting is required and must be specified")
+		executionError.error = "applianceDiagSetting is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -11713,18 +12114,22 @@ func (a *ApplianceApiService) UpdateApplianceDiagSettingExecute(r ApiUpdateAppli
 	localVarPostBody = r.applianceDiagSetting
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11791,7 +12196,7 @@ func (a *ApplianceApiService) UpdateApplianceDiagSettingExecute(r ApiUpdateAppli
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateApplianceExternalSyslogSettingRequest struct {
@@ -11811,7 +12216,7 @@ func (r ApiUpdateApplianceExternalSyslogSettingRequest) IfMatch(ifMatch string) 
 	return r
 }
 
-func (r ApiUpdateApplianceExternalSyslogSettingRequest) Execute() (ApplianceExternalSyslogSetting, *_nethttp.Response, error) {
+func (r ApiUpdateApplianceExternalSyslogSettingRequest) Execute() (ApplianceExternalSyslogSetting, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateApplianceExternalSyslogSettingExecute(r)
 }
 
@@ -11833,19 +12238,21 @@ func (a *ApplianceApiService) UpdateApplianceExternalSyslogSetting(ctx _context.
  * Execute executes the request
  * @return ApplianceExternalSyslogSetting
  */
-func (a *ApplianceApiService) UpdateApplianceExternalSyslogSettingExecute(r ApiUpdateApplianceExternalSyslogSettingRequest) (ApplianceExternalSyslogSetting, *_nethttp.Response, error) {
+func (a *ApplianceApiService) UpdateApplianceExternalSyslogSettingExecute(r ApiUpdateApplianceExternalSyslogSettingRequest) (ApplianceExternalSyslogSetting, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceExternalSyslogSetting
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.UpdateApplianceExternalSyslogSetting")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/ExternalSyslogSettings/{Moid}"
@@ -11855,7 +12262,8 @@ func (a *ApplianceApiService) UpdateApplianceExternalSyslogSettingExecute(r ApiU
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceExternalSyslogSetting == nil {
-		return localVarReturnValue, nil, reportError("applianceExternalSyslogSetting is required and must be specified")
+		executionError.error = "applianceExternalSyslogSetting is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -11882,18 +12290,22 @@ func (a *ApplianceApiService) UpdateApplianceExternalSyslogSettingExecute(r ApiU
 	localVarPostBody = r.applianceExternalSyslogSetting
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11960,7 +12372,7 @@ func (a *ApplianceApiService) UpdateApplianceExternalSyslogSettingExecute(r ApiU
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateApplianceSetupInfoRequest struct {
@@ -11980,7 +12392,7 @@ func (r ApiUpdateApplianceSetupInfoRequest) IfMatch(ifMatch string) ApiUpdateApp
 	return r
 }
 
-func (r ApiUpdateApplianceSetupInfoRequest) Execute() (ApplianceSetupInfo, *_nethttp.Response, error) {
+func (r ApiUpdateApplianceSetupInfoRequest) Execute() (ApplianceSetupInfo, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateApplianceSetupInfoExecute(r)
 }
 
@@ -12002,19 +12414,21 @@ func (a *ApplianceApiService) UpdateApplianceSetupInfo(ctx _context.Context, moi
  * Execute executes the request
  * @return ApplianceSetupInfo
  */
-func (a *ApplianceApiService) UpdateApplianceSetupInfoExecute(r ApiUpdateApplianceSetupInfoRequest) (ApplianceSetupInfo, *_nethttp.Response, error) {
+func (a *ApplianceApiService) UpdateApplianceSetupInfoExecute(r ApiUpdateApplianceSetupInfoRequest) (ApplianceSetupInfo, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceSetupInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.UpdateApplianceSetupInfo")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/SetupInfos/{Moid}"
@@ -12024,7 +12438,8 @@ func (a *ApplianceApiService) UpdateApplianceSetupInfoExecute(r ApiUpdateApplian
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceSetupInfo == nil {
-		return localVarReturnValue, nil, reportError("applianceSetupInfo is required and must be specified")
+		executionError.error = "applianceSetupInfo is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -12051,18 +12466,22 @@ func (a *ApplianceApiService) UpdateApplianceSetupInfoExecute(r ApiUpdateApplian
 	localVarPostBody = r.applianceSetupInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12129,7 +12548,7 @@ func (a *ApplianceApiService) UpdateApplianceSetupInfoExecute(r ApiUpdateApplian
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateApplianceUpgradeRequest struct {
@@ -12149,7 +12568,7 @@ func (r ApiUpdateApplianceUpgradeRequest) IfMatch(ifMatch string) ApiUpdateAppli
 	return r
 }
 
-func (r ApiUpdateApplianceUpgradeRequest) Execute() (ApplianceUpgrade, *_nethttp.Response, error) {
+func (r ApiUpdateApplianceUpgradeRequest) Execute() (ApplianceUpgrade, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateApplianceUpgradeExecute(r)
 }
 
@@ -12171,19 +12590,21 @@ func (a *ApplianceApiService) UpdateApplianceUpgrade(ctx _context.Context, moid 
  * Execute executes the request
  * @return ApplianceUpgrade
  */
-func (a *ApplianceApiService) UpdateApplianceUpgradeExecute(r ApiUpdateApplianceUpgradeRequest) (ApplianceUpgrade, *_nethttp.Response, error) {
+func (a *ApplianceApiService) UpdateApplianceUpgradeExecute(r ApiUpdateApplianceUpgradeRequest) (ApplianceUpgrade, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceUpgrade
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.UpdateApplianceUpgrade")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/Upgrades/{Moid}"
@@ -12193,7 +12614,8 @@ func (a *ApplianceApiService) UpdateApplianceUpgradeExecute(r ApiUpdateAppliance
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceUpgrade == nil {
-		return localVarReturnValue, nil, reportError("applianceUpgrade is required and must be specified")
+		executionError.error = "applianceUpgrade is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -12220,18 +12642,22 @@ func (a *ApplianceApiService) UpdateApplianceUpgradeExecute(r ApiUpdateAppliance
 	localVarPostBody = r.applianceUpgrade
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12298,7 +12724,7 @@ func (a *ApplianceApiService) UpdateApplianceUpgradeExecute(r ApiUpdateAppliance
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateApplianceUpgradePolicyRequest struct {
@@ -12318,7 +12744,7 @@ func (r ApiUpdateApplianceUpgradePolicyRequest) IfMatch(ifMatch string) ApiUpdat
 	return r
 }
 
-func (r ApiUpdateApplianceUpgradePolicyRequest) Execute() (ApplianceUpgradePolicy, *_nethttp.Response, error) {
+func (r ApiUpdateApplianceUpgradePolicyRequest) Execute() (ApplianceUpgradePolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateApplianceUpgradePolicyExecute(r)
 }
 
@@ -12340,19 +12766,21 @@ func (a *ApplianceApiService) UpdateApplianceUpgradePolicy(ctx _context.Context,
  * Execute executes the request
  * @return ApplianceUpgradePolicy
  */
-func (a *ApplianceApiService) UpdateApplianceUpgradePolicyExecute(r ApiUpdateApplianceUpgradePolicyRequest) (ApplianceUpgradePolicy, *_nethttp.Response, error) {
+func (a *ApplianceApiService) UpdateApplianceUpgradePolicyExecute(r ApiUpdateApplianceUpgradePolicyRequest) (ApplianceUpgradePolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  ApplianceUpgradePolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ApplianceApiService.UpdateApplianceUpgradePolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/appliance/UpgradePolicies/{Moid}"
@@ -12362,7 +12790,8 @@ func (a *ApplianceApiService) UpdateApplianceUpgradePolicyExecute(r ApiUpdateApp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.applianceUpgradePolicy == nil {
-		return localVarReturnValue, nil, reportError("applianceUpgradePolicy is required and must be specified")
+		executionError.error = "applianceUpgradePolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -12389,18 +12818,22 @@ func (a *ApplianceApiService) UpdateApplianceUpgradePolicyExecute(r ApiUpdateApp
 	localVarPostBody = r.applianceUpgradePolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12467,5 +12900,5 @@ func (a *ApplianceApiService) UpdateApplianceUpgradePolicyExecute(r ApiUpdateApp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }

@@ -1,19 +1,20 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceNiaapiDcnmCcoPost() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceNiaapiDcnmCcoPostRead,
+		ReadContext: dataSourceNiaapiDcnmCcoPostRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -151,10 +152,11 @@ func dataSourceNiaapiDcnmCcoPost() *schema.Resource {
 	}
 }
 
-func dataSourceNiaapiDcnmCcoPostRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceNiaapiDcnmCcoPostRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.NiaapiDcnmCcoPost{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -187,25 +189,25 @@ func dataSourceNiaapiDcnmCcoPostRead(d *schema.ResourceData, meta interface{}) e
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of NiaapiDcnmCcoPost object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.NiaapiApi.GetNiaapiDcnmCcoPostList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.NiaapiApi.GetNiaapiDcnmCcoPostList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching NiaapiDcnmCcoPost: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for NiaapiDcnmCcoPost list: %s", err.Error())
 	}
 	var s = &models.NiaapiDcnmCcoPostList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to NiaapiDcnmCcoPost: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to NiaapiDcnmCcoPost list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for NiaapiDcnmCcoPost did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -214,43 +216,43 @@ func dataSourceNiaapiDcnmCcoPostRead(d *schema.ResourceData, meta interface{}) e
 			var s = &models.NiaapiDcnmCcoPost{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 
 			if err := d.Set("post_date", (s.GetPostDate()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property PostDate: %+v", err)
+				return diag.Errorf("error occurred while setting property PostDate: %s", err.Error())
 			}
 
 			if err := d.Set("post_detail", flattenMapNiaapiNewReleaseDetail(s.GetPostDetail(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property PostDetail: %+v", err)
+				return diag.Errorf("error occurred while setting property PostDetail: %s", err.Error())
 			}
 			if err := d.Set("post_type", (s.GetPostType())); err != nil {
-				return fmt.Errorf("error occurred while setting property PostType: %+v", err)
+				return diag.Errorf("error occurred while setting property PostType: %s", err.Error())
 			}
 			if err := d.Set("postid", (s.GetPostid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Postid: %+v", err)
+				return diag.Errorf("error occurred while setting property Postid: %s", err.Error())
 			}
 			if err := d.Set("revision", (s.GetRevision())); err != nil {
-				return fmt.Errorf("error occurred while setting property Revision: %+v", err)
+				return diag.Errorf("error occurred while setting property Revision: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

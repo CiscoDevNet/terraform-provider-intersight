@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceIppoolPool() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceIppoolPoolCreate,
-		Read:   resourceIppoolPoolRead,
-		Update: resourceIppoolPoolUpdate,
-		Delete: resourceIppoolPoolDelete,
+		CreateContext: resourceIppoolPoolCreate,
+		ReadContext:   resourceIppoolPoolRead,
+		UpdateContext: resourceIppoolPoolUpdate,
+		DeleteContext: resourceIppoolPoolDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -34,7 +37,7 @@ func resourceIppoolPool() *schema.Resource {
 				Default:     "sequential",
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -120,7 +123,7 @@ func resourceIppoolPool() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -397,7 +400,7 @@ func resourceIppoolPool() *schema.Resource {
 	}
 }
 
-func resourceIppoolPoolCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceIppoolPoolCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -792,113 +795,117 @@ func resourceIppoolPoolCreate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	r := conn.ApiClient.IppoolApi.CreateIppoolPool(conn.ctx).IppoolPool(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating IppoolPool: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceIppoolPoolRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceIppoolPoolRead(c, d, meta)
 }
 
-func resourceIppoolPoolRead(d *schema.ResourceData, meta interface{}) error {
+func resourceIppoolPoolRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.IppoolApi.GetIppoolPoolByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "IppoolPool object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching IppoolPool: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in IppoolPool object: %s", err.Error())
 	}
 
 	if err := d.Set("assigned", (s.GetAssigned())); err != nil {
-		return fmt.Errorf("error occurred while setting property Assigned: %+v", err)
+		return diag.Errorf("error occurred while setting property Assigned in IppoolPool object: %s", err.Error())
 	}
 
 	if err := d.Set("assignment_order", (s.GetAssignmentOrder())); err != nil {
-		return fmt.Errorf("error occurred while setting property AssignmentOrder: %+v", err)
+		return diag.Errorf("error occurred while setting property AssignmentOrder in IppoolPool object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in IppoolPool object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in IppoolPool object: %s", err.Error())
 	}
 
 	if err := d.Set("ip_v4_blocks", flattenListIppoolIpV4Block(s.GetIpV4Blocks(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property IpV4Blocks: %+v", err)
+		return diag.Errorf("error occurred while setting property IpV4Blocks in IppoolPool object: %s", err.Error())
 	}
 
 	if err := d.Set("ip_v4_config", flattenMapIppoolIpV4Config(s.GetIpV4Config(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property IpV4Config: %+v", err)
+		return diag.Errorf("error occurred while setting property IpV4Config in IppoolPool object: %s", err.Error())
 	}
 
 	if err := d.Set("ip_v6_blocks", flattenListIppoolIpV6Block(s.GetIpV6Blocks(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property IpV6Blocks: %+v", err)
+		return diag.Errorf("error occurred while setting property IpV6Blocks in IppoolPool object: %s", err.Error())
 	}
 
 	if err := d.Set("ip_v6_config", flattenMapIppoolIpV6Config(s.GetIpV6Config(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property IpV6Config: %+v", err)
+		return diag.Errorf("error occurred while setting property IpV6Config in IppoolPool object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in IppoolPool object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in IppoolPool object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in IppoolPool object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in IppoolPool object: %s", err.Error())
 	}
 
 	if err := d.Set("shadow_pools", flattenListIppoolShadowPoolRelationship(s.GetShadowPools(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ShadowPools: %+v", err)
+		return diag.Errorf("error occurred while setting property ShadowPools in IppoolPool object: %s", err.Error())
 	}
 
 	if err := d.Set("size", (s.GetSize())); err != nil {
-		return fmt.Errorf("error occurred while setting property Size: %+v", err)
+		return diag.Errorf("error occurred while setting property Size in IppoolPool object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in IppoolPool object: %s", err.Error())
 	}
 
 	if err := d.Set("v4_assigned", (s.GetV4Assigned())); err != nil {
-		return fmt.Errorf("error occurred while setting property V4Assigned: %+v", err)
+		return diag.Errorf("error occurred while setting property V4Assigned in IppoolPool object: %s", err.Error())
 	}
 
 	if err := d.Set("v4_size", (s.GetV4Size())); err != nil {
-		return fmt.Errorf("error occurred while setting property V4Size: %+v", err)
+		return diag.Errorf("error occurred while setting property V4Size in IppoolPool object: %s", err.Error())
 	}
 
 	if err := d.Set("v6_assigned", (s.GetV6Assigned())); err != nil {
-		return fmt.Errorf("error occurred while setting property V6Assigned: %+v", err)
+		return diag.Errorf("error occurred while setting property V6Assigned in IppoolPool object: %s", err.Error())
 	}
 
 	if err := d.Set("v6_size", (s.GetV6Size())); err != nil {
-		return fmt.Errorf("error occurred while setting property V6Size: %+v", err)
+		return diag.Errorf("error occurred while setting property V6Size in IppoolPool object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceIppoolPoolUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceIppoolPoolUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1311,23 +1318,24 @@ func resourceIppoolPoolUpdate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	r := conn.ApiClient.IppoolApi.UpdateIppoolPool(conn.ctx, d.Id()).IppoolPool(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating IppoolPool: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIppoolPoolRead(d, meta)
+	return resourceIppoolPoolRead(c, d, meta)
 }
 
-func resourceIppoolPoolDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceIppoolPoolDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.IppoolApi.DeleteIppoolPool(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting IppoolPool object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

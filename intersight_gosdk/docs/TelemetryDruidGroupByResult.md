@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Timestamp** | Pointer to [**time.Time**](time.Time.md) | The ISO 8601 timestamp. | [optional] 
+**Timestamp** | Pointer to **time.Time** | The ISO 8601 timestamp. | [optional] 
 **Version** | Pointer to **string** | The version of the Druid GroupBy Engine used in query | [optional] 
 **Event** | Pointer to **map[string]interface{}** | Grouped aggregate dimension(s) with values | [optional] 
 

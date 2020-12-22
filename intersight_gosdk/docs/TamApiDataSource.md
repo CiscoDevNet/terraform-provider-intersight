@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "tam.ApiDataSource"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "tam.ApiDataSource"]
 **MoType** | Pointer to **string** | Type of Intersight managed object used as data source. | [optional] 
-**Queries** | Pointer to [**[]TamQueryEntry**](tam.QueryEntry.md) |  | [optional] 
+**Queries** | Pointer to [**[]TamQueryEntry**](TamQueryEntry.md) |  | [optional] 
 
 ## Methods
 

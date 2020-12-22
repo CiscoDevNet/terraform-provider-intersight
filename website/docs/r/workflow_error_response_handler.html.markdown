@@ -1,8 +1,7 @@
-
 ---
+subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_error_response_handler"
-sidebar_current: "docs-intersight-resource-workflow-error-response-handler"
 description: |-
   Intersight allows generic API tasks to be created by taking the API request
 body and a response parser specification in the form of content.Grammar object.
@@ -13,7 +12,7 @@ the response specification provided for the API request does not define
 error parameters.
 ---
 
-# Resource: intersight_workflow._error_response_handler
+# Resource: intersight_workflow_error_response_handler
 Intersight allows generic API tasks to be created by taking the API request
 body and a response parser specification in the form of content.Grammar object.
 Error Response Handler allows to create a generic error response specification
@@ -37,7 +36,7 @@ This complex property has following sub-properties:
 * `description`:(string) A detailed description about the error response handler. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name for the error response handler. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `parameters`:(Array)
 This complex property has following sub-properties:
   + `accept_single_value`:(bool) The flag that allows single values in content to be extracted as asingle element collection in case the parameter is of Collection type.This flag is applicable for parameters of type Collection only. 
@@ -76,3 +75,10 @@ This complex property has following sub-properties:
     + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
     + `path`:(string) The content specific path information that identifies the parametervalue within the content. The value is usually a XPath or JSONPath or aregular expression in case of text content. 
     + `type`:(string) The type of the parameter. Accepted values are simple, complex,collection.* `simple` - The parameter value to be extracted is of the type simple. All the common scalar typessuch as int, bool, string, etc are represented by the simple enum.* `string` - The parameter value to be extracted is of the string type.* `integer` - The parameter value to be extracted is of the number type.* `float` - The parameter value to be extracted is of the float number type.* `boolean` - The parameter value to be extracted is of the boolean type.* `json` - The parameter values to be extracted is of the generic JSON literal. JSON type is applicable only if the content to be parsed is of JSON type.* `complex` - The parameter value to be extracted is a complex parameter that itself isanother collection of simple/complex parameters.* `collection` - The parameter value to be extracted is a collection parameter whose item typeshall be either simple type or complex type. 
+
+
+## Import
+`intersight_workflow_error_response_handler` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_workflow_error_response_handler.example 1234567890987654321abcde
+```

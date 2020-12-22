@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceAssetTarget() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceAssetTargetRead,
+		ReadContext: dataSourceAssetTargetRead,
 		Schema: map[string]*schema.Schema{
 			"account": {
 				Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -189,7 +190,7 @@ func dataSourceAssetTarget() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -345,10 +346,11 @@ func dataSourceAssetTarget() *schema.Resource {
 	}
 }
 
-func dataSourceAssetTargetRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceAssetTargetRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.AssetTarget{}
 	if v, ok := d.GetOk("claimed_by_user_name"); ok {
 		x := (v.(string))
@@ -397,25 +399,25 @@ func dataSourceAssetTargetRead(d *schema.ResourceData, meta interface{}) error {
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of AssetTarget object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.AssetApi.GetAssetTargetList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.AssetApi.GetAssetTargetList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching AssetTarget: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for AssetTarget list: %s", err.Error())
 	}
 	var s = &models.AssetTargetList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to AssetTarget: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to AssetTarget list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for AssetTarget did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -424,79 +426,79 @@ func dataSourceAssetTargetRead(d *schema.ResourceData, meta interface{}) error {
 			var s = &models.AssetTarget{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 
 			if err := d.Set("account", flattenMapIamAccountRelationship(s.GetAccount(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Account: %+v", err)
+				return diag.Errorf("error occurred while setting property Account: %s", err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 
 			if err := d.Set("assist", flattenMapAssetTargetRelationship(s.GetAssist(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Assist: %+v", err)
+				return diag.Errorf("error occurred while setting property Assist: %s", err.Error())
 			}
 			if err := d.Set("claimed_by_user_name", (s.GetClaimedByUserName())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClaimedByUserName: %+v", err)
+				return diag.Errorf("error occurred while setting property ClaimedByUserName: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 
 			if err := d.Set("connections", flattenListAssetConnection(s.GetConnections(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Connections: %+v", err)
+				return diag.Errorf("error occurred while setting property Connections: %s", err.Error())
 			}
 			if err := d.Set("connector_version", (s.GetConnectorVersion())); err != nil {
-				return fmt.Errorf("error occurred while setting property ConnectorVersion: %+v", err)
+				return diag.Errorf("error occurred while setting property ConnectorVersion: %s", err.Error())
 			}
 			if err := d.Set("external_ip_address", (s.GetExternalIpAddress())); err != nil {
-				return fmt.Errorf("error occurred while setting property ExternalIpAddress: %+v", err)
+				return diag.Errorf("error occurred while setting property ExternalIpAddress: %s", err.Error())
 			}
 			if err := d.Set("ip_address", (s.GetIpAddress())); err != nil {
-				return fmt.Errorf("error occurred while setting property IpAddress: %+v", err)
+				return diag.Errorf("error occurred while setting property IpAddress: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("name", (s.GetName())); err != nil {
-				return fmt.Errorf("error occurred while setting property Name: %+v", err)
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("product_id", (s.GetProductId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ProductId: %+v", err)
+				return diag.Errorf("error occurred while setting property ProductId: %s", err.Error())
 			}
 			if err := d.Set("read_only", (s.GetReadOnly())); err != nil {
-				return fmt.Errorf("error occurred while setting property ReadOnly: %+v", err)
+				return diag.Errorf("error occurred while setting property ReadOnly: %s", err.Error())
 			}
 
 			if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property RegisteredDevice: %+v", err)
+				return diag.Errorf("error occurred while setting property RegisteredDevice: %s", err.Error())
 			}
 
 			if err := d.Set("services", flattenListAssetService(s.GetServices(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Services: %+v", err)
+				return diag.Errorf("error occurred while setting property Services: %s", err.Error())
 			}
 			if err := d.Set("status", (s.GetStatus())); err != nil {
-				return fmt.Errorf("error occurred while setting property Status: %+v", err)
+				return diag.Errorf("error occurred while setting property Status: %s", err.Error())
 			}
 			if err := d.Set("status_error_reason", (s.GetStatusErrorReason())); err != nil {
-				return fmt.Errorf("error occurred while setting property StatusErrorReason: %+v", err)
+				return diag.Errorf("error occurred while setting property StatusErrorReason: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("target_id", (s.GetTargetId())); err != nil {
-				return fmt.Errorf("error occurred while setting property TargetId: %+v", err)
+				return diag.Errorf("error occurred while setting property TargetId: %s", err.Error())
 			}
 			if err := d.Set("target_type", (s.GetTargetType())); err != nil {
-				return fmt.Errorf("error occurred while setting property TargetType: %+v", err)
+				return diag.Errorf("error occurred while setting property TargetType: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

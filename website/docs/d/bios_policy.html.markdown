@@ -1,13 +1,12 @@
-
 ---
+subcategory: "bios"
 layout: "intersight"
 page_title: "Intersight: intersight_bios_policy"
-sidebar_current: "docs-intersight-data-source-bios-policy"
 description: |-
-Policy for setting BIOS tokens on the endpoint.
+  Policy for setting BIOS tokens on the endpoint.
 ---
 
-# Data Source: intersight_bios._policy
+# Data Source: intersight_bios_policy
 Policy for setting BIOS tokens on the endpoint.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
@@ -56,7 +55,6 @@ The following arguments can be used to get data of already created objects in In
 * `cisco_debug_level`:(string) BIOS Token for setting BIOS Techlog Level configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `Maximum` - Value - Maximum for configuring CiscoDebugLevel token.* `Minimum` - Value - Minimum for configuring CiscoDebugLevel token.* `Normal` - Value - Normal for configuring CiscoDebugLevel token. 
 * `cisco_oprom_launch_optimization`:(string) BIOS Token for setting OptionROM Launch Optimization configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `enabled` - Enables the BIOS setting.* `disabled` - Disables the BIOS setting. 
 * `cke_low_policy`:(string) BIOS Token for setting CKE Low Policy configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `auto` - Value - auto for configuring CkeLowPolicy token.* `disabled` - Value - disabled for configuring CkeLowPolicy token.* `fast` - Value - fast for configuring CkeLowPolicy token.* `slow` - Value - slow for configuring CkeLowPolicy token. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `closed_loop_therm_throtl`:(string) BIOS Token for setting Closed Loop Therm Throt configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `enabled` - Enables the BIOS setting.* `disabled` - Disables the BIOS setting. 
 * `cmci_enable`:(string) BIOS Token for setting Processor CMCI configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `enabled` - Enables the BIOS setting.* `disabled` - Disables the BIOS setting. 
 * `config_tdp`:(string) BIOS Token for setting Config TDP configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `enabled` - Enables the BIOS setting.* `disabled` - Disables the BIOS setting. 
@@ -122,7 +120,6 @@ The following arguments can be used to get data of already created objects in In
 * `network_stack`:(string) BIOS Token for setting Network Stack configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `enabled` - Enables the BIOS setting.* `disabled` - Disables the BIOS setting. 
 * `numa_optimized`:(string) BIOS Token for setting NUMA optimized configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `enabled` - Enables the BIOS setting.* `disabled` - Disables the BIOS setting. 
 * `nvmdimm_perform_config`:(string) BIOS Token for setting NVM Performance Setting configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `BW Optimized` - Value - BW Optimized for configuring NvmdimmPerformConfig token.* `Balanced Profile` - Value - Balanced Profile for configuring NvmdimmPerformConfig token.* `Latency Optimized` - Value - Latency Optimized for configuring NvmdimmPerformConfig token. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `onboard10gbit_lom`:(string) BIOS Token for setting Onboard 10Gbit LOM configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `enabled` - Enables the BIOS setting.* `disabled` - Disables the BIOS setting. 
 * `onboard_gbit_lom`:(string) BIOS Token for setting Onboard Gbit LOM configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `enabled` - Enables the BIOS setting.* `disabled` - Disables the BIOS setting. 
 * `onboard_scu_storage_support`:(string) BIOS Token for setting Onboard SCU Storage Support configuration.* `platform-default` - Default value used by the platform for the BIOS setting.* `enabled` - Enables the BIOS setting.* `disabled` - Disables the BIOS setting. 

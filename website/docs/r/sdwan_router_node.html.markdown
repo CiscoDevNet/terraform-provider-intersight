@@ -1,13 +1,12 @@
-
 ---
+subcategory: "sdwan"
 layout: "intersight"
 page_title: "Intersight: intersight_sdwan_router_node"
-sidebar_current: "docs-intersight-resource-sdwan-router-node"
 description: |-
   Configuration settings for a SDWAN vEdge router.
 ---
 
-# Resource: intersight_sdwan._router_node
+# Resource: intersight_sdwan_router_node
 Configuration settings for a SDWAN vEdge router.
 ## Argument Reference
 The following arguments are supported:
@@ -64,10 +63,17 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `editable`:(bool) Defines if the input is editable. 
   + `key`:(string) Name of the dynamic input key specified in the vManage template. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `required`:(bool) Defines if the input is optional or required. 
   + `template`:(string)(Computed) Refers to the name of the vManage template that this inputs belongs to. 
   + `title`:(string) Label for the property being saved in the current instance of template Input. 
   + `type`:(string) Defines the object type for the input. 
   + `value`:(string) Value of the dynamic input key specfied in the vManage template. 
 * `uuid`:(string) Uniquely identifies the router by its chassis number. 
+
+
+## Import
+`intersight_sdwan_router_node` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_sdwan_router_node.example 1234567890987654321abcde
+```

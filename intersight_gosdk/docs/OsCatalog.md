@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "os.Catalog"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "os.Catalog"]
 **Name** | Pointer to **string** | The catalog name. There will be one for system and one for each user account. | [optional] 
-**ConfigurationFiles** | Pointer to [**[]OsConfigurationFileRelationship**](os.ConfigurationFile.Relationship.md) | An array of relationships to osConfigurationFile resources. | [optional] 
-**Distributions** | Pointer to [**[]OsDistributionRelationship**](os.Distribution.Relationship.md) | An array of relationships to osDistribution resources. | [optional] 
+**ConfigurationFiles** | Pointer to [**[]OsConfigurationFileRelationship**](OsConfigurationFileRelationship.md) | An array of relationships to osConfigurationFile resources. | [optional] 
+**Distributions** | Pointer to [**[]OsDistributionRelationship**](OsDistributionRelationship.md) | An array of relationships to osDistribution resources. | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 
 ## Methods

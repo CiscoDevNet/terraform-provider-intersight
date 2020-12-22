@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -12,6 +12,7 @@
 package intersight
 
 import (
+	"bytes"
 	_context "context"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
@@ -33,7 +34,7 @@ type ApiDeleteIaasUcsdInfoRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteIaasUcsdInfoRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteIaasUcsdInfoRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteIaasUcsdInfoExecute(r)
 }
 
@@ -54,18 +55,20 @@ func (a *IaasApiService) DeleteIaasUcsdInfo(ctx _context.Context, moid string) A
 /*
  * Execute executes the request
  */
-func (a *IaasApiService) DeleteIaasUcsdInfoExecute(r ApiDeleteIaasUcsdInfoRequest) (*_nethttp.Response, error) {
+func (a *IaasApiService) DeleteIaasUcsdInfoExecute(r ApiDeleteIaasUcsdInfoRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.DeleteIaasUcsdInfo")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/UcsdInfos/{Moid}"
@@ -94,18 +97,22 @@ func (a *IaasApiService) DeleteIaasUcsdInfoExecute(r ApiDeleteIaasUcsdInfoReques
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -163,7 +170,7 @@ func (a *IaasApiService) DeleteIaasUcsdInfoExecute(r ApiDeleteIaasUcsdInfoReques
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiGetIaasConnectorPackByMoidRequest struct {
@@ -172,7 +179,7 @@ type ApiGetIaasConnectorPackByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetIaasConnectorPackByMoidRequest) Execute() (IaasConnectorPack, *_nethttp.Response, error) {
+func (r ApiGetIaasConnectorPackByMoidRequest) Execute() (IaasConnectorPack, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetIaasConnectorPackByMoidExecute(r)
 }
 
@@ -194,19 +201,21 @@ func (a *IaasApiService) GetIaasConnectorPackByMoid(ctx _context.Context, moid s
  * Execute executes the request
  * @return IaasConnectorPack
  */
-func (a *IaasApiService) GetIaasConnectorPackByMoidExecute(r ApiGetIaasConnectorPackByMoidRequest) (IaasConnectorPack, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasConnectorPackByMoidExecute(r ApiGetIaasConnectorPackByMoidRequest) (IaasConnectorPack, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  IaasConnectorPack
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasConnectorPackByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/ConnectorPacks/{Moid}"
@@ -235,18 +244,22 @@ func (a *IaasApiService) GetIaasConnectorPackByMoidExecute(r ApiGetIaasConnector
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -313,7 +326,7 @@ func (a *IaasApiService) GetIaasConnectorPackByMoidExecute(r ApiGetIaasConnector
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetIaasConnectorPackListRequest struct {
@@ -377,7 +390,7 @@ func (r ApiGetIaasConnectorPackListRequest) Tags(tags string) ApiGetIaasConnecto
 	return r
 }
 
-func (r ApiGetIaasConnectorPackListRequest) Execute() (IaasConnectorPackResponse, *_nethttp.Response, error) {
+func (r ApiGetIaasConnectorPackListRequest) Execute() (IaasConnectorPackResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetIaasConnectorPackListExecute(r)
 }
 
@@ -397,19 +410,21 @@ func (a *IaasApiService) GetIaasConnectorPackList(ctx _context.Context) ApiGetIa
  * Execute executes the request
  * @return IaasConnectorPackResponse
  */
-func (a *IaasApiService) GetIaasConnectorPackListExecute(r ApiGetIaasConnectorPackListRequest) (IaasConnectorPackResponse, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasConnectorPackListExecute(r ApiGetIaasConnectorPackListRequest) (IaasConnectorPackResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  IaasConnectorPackResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasConnectorPackList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/ConnectorPacks"
@@ -470,18 +485,22 @@ func (a *IaasApiService) GetIaasConnectorPackListExecute(r ApiGetIaasConnectorPa
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -548,7 +567,7 @@ func (a *IaasApiService) GetIaasConnectorPackListExecute(r ApiGetIaasConnectorPa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetIaasDeviceStatusByMoidRequest struct {
@@ -557,7 +576,7 @@ type ApiGetIaasDeviceStatusByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetIaasDeviceStatusByMoidRequest) Execute() (IaasDeviceStatus, *_nethttp.Response, error) {
+func (r ApiGetIaasDeviceStatusByMoidRequest) Execute() (IaasDeviceStatus, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetIaasDeviceStatusByMoidExecute(r)
 }
 
@@ -579,19 +598,21 @@ func (a *IaasApiService) GetIaasDeviceStatusByMoid(ctx _context.Context, moid st
  * Execute executes the request
  * @return IaasDeviceStatus
  */
-func (a *IaasApiService) GetIaasDeviceStatusByMoidExecute(r ApiGetIaasDeviceStatusByMoidRequest) (IaasDeviceStatus, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasDeviceStatusByMoidExecute(r ApiGetIaasDeviceStatusByMoidRequest) (IaasDeviceStatus, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  IaasDeviceStatus
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasDeviceStatusByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/DeviceStatuses/{Moid}"
@@ -620,18 +641,22 @@ func (a *IaasApiService) GetIaasDeviceStatusByMoidExecute(r ApiGetIaasDeviceStat
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -698,7 +723,7 @@ func (a *IaasApiService) GetIaasDeviceStatusByMoidExecute(r ApiGetIaasDeviceStat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetIaasDeviceStatusListRequest struct {
@@ -762,7 +787,7 @@ func (r ApiGetIaasDeviceStatusListRequest) Tags(tags string) ApiGetIaasDeviceSta
 	return r
 }
 
-func (r ApiGetIaasDeviceStatusListRequest) Execute() (IaasDeviceStatusResponse, *_nethttp.Response, error) {
+func (r ApiGetIaasDeviceStatusListRequest) Execute() (IaasDeviceStatusResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetIaasDeviceStatusListExecute(r)
 }
 
@@ -782,19 +807,21 @@ func (a *IaasApiService) GetIaasDeviceStatusList(ctx _context.Context) ApiGetIaa
  * Execute executes the request
  * @return IaasDeviceStatusResponse
  */
-func (a *IaasApiService) GetIaasDeviceStatusListExecute(r ApiGetIaasDeviceStatusListRequest) (IaasDeviceStatusResponse, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasDeviceStatusListExecute(r ApiGetIaasDeviceStatusListRequest) (IaasDeviceStatusResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  IaasDeviceStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasDeviceStatusList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/DeviceStatuses"
@@ -855,18 +882,22 @@ func (a *IaasApiService) GetIaasDeviceStatusListExecute(r ApiGetIaasDeviceStatus
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -933,7 +964,7 @@ func (a *IaasApiService) GetIaasDeviceStatusListExecute(r ApiGetIaasDeviceStatus
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetIaasDiagnosticMessagesByMoidRequest struct {
@@ -942,7 +973,7 @@ type ApiGetIaasDiagnosticMessagesByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetIaasDiagnosticMessagesByMoidRequest) Execute() (IaasDiagnosticMessages, *_nethttp.Response, error) {
+func (r ApiGetIaasDiagnosticMessagesByMoidRequest) Execute() (IaasDiagnosticMessages, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetIaasDiagnosticMessagesByMoidExecute(r)
 }
 
@@ -964,19 +995,21 @@ func (a *IaasApiService) GetIaasDiagnosticMessagesByMoid(ctx _context.Context, m
  * Execute executes the request
  * @return IaasDiagnosticMessages
  */
-func (a *IaasApiService) GetIaasDiagnosticMessagesByMoidExecute(r ApiGetIaasDiagnosticMessagesByMoidRequest) (IaasDiagnosticMessages, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasDiagnosticMessagesByMoidExecute(r ApiGetIaasDiagnosticMessagesByMoidRequest) (IaasDiagnosticMessages, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  IaasDiagnosticMessages
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasDiagnosticMessagesByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/DiagnosticMessages/{Moid}"
@@ -1005,18 +1038,22 @@ func (a *IaasApiService) GetIaasDiagnosticMessagesByMoidExecute(r ApiGetIaasDiag
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1083,7 +1120,7 @@ func (a *IaasApiService) GetIaasDiagnosticMessagesByMoidExecute(r ApiGetIaasDiag
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetIaasDiagnosticMessagesListRequest struct {
@@ -1147,7 +1184,7 @@ func (r ApiGetIaasDiagnosticMessagesListRequest) Tags(tags string) ApiGetIaasDia
 	return r
 }
 
-func (r ApiGetIaasDiagnosticMessagesListRequest) Execute() (IaasDiagnosticMessagesResponse, *_nethttp.Response, error) {
+func (r ApiGetIaasDiagnosticMessagesListRequest) Execute() (IaasDiagnosticMessagesResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetIaasDiagnosticMessagesListExecute(r)
 }
 
@@ -1167,19 +1204,21 @@ func (a *IaasApiService) GetIaasDiagnosticMessagesList(ctx _context.Context) Api
  * Execute executes the request
  * @return IaasDiagnosticMessagesResponse
  */
-func (a *IaasApiService) GetIaasDiagnosticMessagesListExecute(r ApiGetIaasDiagnosticMessagesListRequest) (IaasDiagnosticMessagesResponse, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasDiagnosticMessagesListExecute(r ApiGetIaasDiagnosticMessagesListRequest) (IaasDiagnosticMessagesResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  IaasDiagnosticMessagesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasDiagnosticMessagesList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/DiagnosticMessages"
@@ -1240,18 +1279,22 @@ func (a *IaasApiService) GetIaasDiagnosticMessagesListExecute(r ApiGetIaasDiagno
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1318,7 +1361,7 @@ func (a *IaasApiService) GetIaasDiagnosticMessagesListExecute(r ApiGetIaasDiagno
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetIaasLicenseInfoByMoidRequest struct {
@@ -1327,7 +1370,7 @@ type ApiGetIaasLicenseInfoByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetIaasLicenseInfoByMoidRequest) Execute() (IaasLicenseInfo, *_nethttp.Response, error) {
+func (r ApiGetIaasLicenseInfoByMoidRequest) Execute() (IaasLicenseInfo, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetIaasLicenseInfoByMoidExecute(r)
 }
 
@@ -1349,19 +1392,21 @@ func (a *IaasApiService) GetIaasLicenseInfoByMoid(ctx _context.Context, moid str
  * Execute executes the request
  * @return IaasLicenseInfo
  */
-func (a *IaasApiService) GetIaasLicenseInfoByMoidExecute(r ApiGetIaasLicenseInfoByMoidRequest) (IaasLicenseInfo, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasLicenseInfoByMoidExecute(r ApiGetIaasLicenseInfoByMoidRequest) (IaasLicenseInfo, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  IaasLicenseInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasLicenseInfoByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/LicenseInfos/{Moid}"
@@ -1390,18 +1435,22 @@ func (a *IaasApiService) GetIaasLicenseInfoByMoidExecute(r ApiGetIaasLicenseInfo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1468,7 +1517,7 @@ func (a *IaasApiService) GetIaasLicenseInfoByMoidExecute(r ApiGetIaasLicenseInfo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetIaasLicenseInfoListRequest struct {
@@ -1532,7 +1581,7 @@ func (r ApiGetIaasLicenseInfoListRequest) Tags(tags string) ApiGetIaasLicenseInf
 	return r
 }
 
-func (r ApiGetIaasLicenseInfoListRequest) Execute() (IaasLicenseInfoResponse, *_nethttp.Response, error) {
+func (r ApiGetIaasLicenseInfoListRequest) Execute() (IaasLicenseInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetIaasLicenseInfoListExecute(r)
 }
 
@@ -1552,19 +1601,21 @@ func (a *IaasApiService) GetIaasLicenseInfoList(ctx _context.Context) ApiGetIaas
  * Execute executes the request
  * @return IaasLicenseInfoResponse
  */
-func (a *IaasApiService) GetIaasLicenseInfoListExecute(r ApiGetIaasLicenseInfoListRequest) (IaasLicenseInfoResponse, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasLicenseInfoListExecute(r ApiGetIaasLicenseInfoListRequest) (IaasLicenseInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  IaasLicenseInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasLicenseInfoList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/LicenseInfos"
@@ -1625,18 +1676,22 @@ func (a *IaasApiService) GetIaasLicenseInfoListExecute(r ApiGetIaasLicenseInfoLi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1703,7 +1758,7 @@ func (a *IaasApiService) GetIaasLicenseInfoListExecute(r ApiGetIaasLicenseInfoLi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetIaasMostRunTasksByMoidRequest struct {
@@ -1712,7 +1767,7 @@ type ApiGetIaasMostRunTasksByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetIaasMostRunTasksByMoidRequest) Execute() (IaasMostRunTasks, *_nethttp.Response, error) {
+func (r ApiGetIaasMostRunTasksByMoidRequest) Execute() (IaasMostRunTasks, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetIaasMostRunTasksByMoidExecute(r)
 }
 
@@ -1734,19 +1789,21 @@ func (a *IaasApiService) GetIaasMostRunTasksByMoid(ctx _context.Context, moid st
  * Execute executes the request
  * @return IaasMostRunTasks
  */
-func (a *IaasApiService) GetIaasMostRunTasksByMoidExecute(r ApiGetIaasMostRunTasksByMoidRequest) (IaasMostRunTasks, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasMostRunTasksByMoidExecute(r ApiGetIaasMostRunTasksByMoidRequest) (IaasMostRunTasks, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  IaasMostRunTasks
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasMostRunTasksByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/MostRunTasks/{Moid}"
@@ -1775,18 +1832,22 @@ func (a *IaasApiService) GetIaasMostRunTasksByMoidExecute(r ApiGetIaasMostRunTas
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1853,7 +1914,7 @@ func (a *IaasApiService) GetIaasMostRunTasksByMoidExecute(r ApiGetIaasMostRunTas
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetIaasMostRunTasksListRequest struct {
@@ -1917,7 +1978,7 @@ func (r ApiGetIaasMostRunTasksListRequest) Tags(tags string) ApiGetIaasMostRunTa
 	return r
 }
 
-func (r ApiGetIaasMostRunTasksListRequest) Execute() (IaasMostRunTasksResponse, *_nethttp.Response, error) {
+func (r ApiGetIaasMostRunTasksListRequest) Execute() (IaasMostRunTasksResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetIaasMostRunTasksListExecute(r)
 }
 
@@ -1937,19 +1998,21 @@ func (a *IaasApiService) GetIaasMostRunTasksList(ctx _context.Context) ApiGetIaa
  * Execute executes the request
  * @return IaasMostRunTasksResponse
  */
-func (a *IaasApiService) GetIaasMostRunTasksListExecute(r ApiGetIaasMostRunTasksListRequest) (IaasMostRunTasksResponse, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasMostRunTasksListExecute(r ApiGetIaasMostRunTasksListRequest) (IaasMostRunTasksResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  IaasMostRunTasksResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasMostRunTasksList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/MostRunTasks"
@@ -2010,18 +2073,22 @@ func (a *IaasApiService) GetIaasMostRunTasksListExecute(r ApiGetIaasMostRunTasks
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2088,7 +2155,7 @@ func (a *IaasApiService) GetIaasMostRunTasksListExecute(r ApiGetIaasMostRunTasks
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetIaasServiceRequestByMoidRequest struct {
@@ -2097,7 +2164,7 @@ type ApiGetIaasServiceRequestByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetIaasServiceRequestByMoidRequest) Execute() (IaasServiceRequest, *_nethttp.Response, error) {
+func (r ApiGetIaasServiceRequestByMoidRequest) Execute() (IaasServiceRequest, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetIaasServiceRequestByMoidExecute(r)
 }
 
@@ -2119,19 +2186,21 @@ func (a *IaasApiService) GetIaasServiceRequestByMoid(ctx _context.Context, moid 
  * Execute executes the request
  * @return IaasServiceRequest
  */
-func (a *IaasApiService) GetIaasServiceRequestByMoidExecute(r ApiGetIaasServiceRequestByMoidRequest) (IaasServiceRequest, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasServiceRequestByMoidExecute(r ApiGetIaasServiceRequestByMoidRequest) (IaasServiceRequest, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  IaasServiceRequest
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasServiceRequestByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/ServiceRequests/{Moid}"
@@ -2160,18 +2229,22 @@ func (a *IaasApiService) GetIaasServiceRequestByMoidExecute(r ApiGetIaasServiceR
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2238,7 +2311,7 @@ func (a *IaasApiService) GetIaasServiceRequestByMoidExecute(r ApiGetIaasServiceR
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetIaasServiceRequestListRequest struct {
@@ -2302,7 +2375,7 @@ func (r ApiGetIaasServiceRequestListRequest) Tags(tags string) ApiGetIaasService
 	return r
 }
 
-func (r ApiGetIaasServiceRequestListRequest) Execute() (IaasServiceRequestResponse, *_nethttp.Response, error) {
+func (r ApiGetIaasServiceRequestListRequest) Execute() (IaasServiceRequestResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetIaasServiceRequestListExecute(r)
 }
 
@@ -2322,19 +2395,21 @@ func (a *IaasApiService) GetIaasServiceRequestList(ctx _context.Context) ApiGetI
  * Execute executes the request
  * @return IaasServiceRequestResponse
  */
-func (a *IaasApiService) GetIaasServiceRequestListExecute(r ApiGetIaasServiceRequestListRequest) (IaasServiceRequestResponse, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasServiceRequestListExecute(r ApiGetIaasServiceRequestListRequest) (IaasServiceRequestResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  IaasServiceRequestResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasServiceRequestList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/ServiceRequests"
@@ -2395,18 +2470,22 @@ func (a *IaasApiService) GetIaasServiceRequestListExecute(r ApiGetIaasServiceReq
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2473,7 +2552,7 @@ func (a *IaasApiService) GetIaasServiceRequestListExecute(r ApiGetIaasServiceReq
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetIaasUcsdInfoByMoidRequest struct {
@@ -2482,7 +2561,7 @@ type ApiGetIaasUcsdInfoByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetIaasUcsdInfoByMoidRequest) Execute() (IaasUcsdInfo, *_nethttp.Response, error) {
+func (r ApiGetIaasUcsdInfoByMoidRequest) Execute() (IaasUcsdInfo, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetIaasUcsdInfoByMoidExecute(r)
 }
 
@@ -2504,19 +2583,21 @@ func (a *IaasApiService) GetIaasUcsdInfoByMoid(ctx _context.Context, moid string
  * Execute executes the request
  * @return IaasUcsdInfo
  */
-func (a *IaasApiService) GetIaasUcsdInfoByMoidExecute(r ApiGetIaasUcsdInfoByMoidRequest) (IaasUcsdInfo, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasUcsdInfoByMoidExecute(r ApiGetIaasUcsdInfoByMoidRequest) (IaasUcsdInfo, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  IaasUcsdInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasUcsdInfoByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/UcsdInfos/{Moid}"
@@ -2545,18 +2626,22 @@ func (a *IaasApiService) GetIaasUcsdInfoByMoidExecute(r ApiGetIaasUcsdInfoByMoid
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2623,7 +2708,7 @@ func (a *IaasApiService) GetIaasUcsdInfoByMoidExecute(r ApiGetIaasUcsdInfoByMoid
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetIaasUcsdInfoListRequest struct {
@@ -2687,7 +2772,7 @@ func (r ApiGetIaasUcsdInfoListRequest) Tags(tags string) ApiGetIaasUcsdInfoListR
 	return r
 }
 
-func (r ApiGetIaasUcsdInfoListRequest) Execute() (IaasUcsdInfoResponse, *_nethttp.Response, error) {
+func (r ApiGetIaasUcsdInfoListRequest) Execute() (IaasUcsdInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetIaasUcsdInfoListExecute(r)
 }
 
@@ -2707,19 +2792,21 @@ func (a *IaasApiService) GetIaasUcsdInfoList(ctx _context.Context) ApiGetIaasUcs
  * Execute executes the request
  * @return IaasUcsdInfoResponse
  */
-func (a *IaasApiService) GetIaasUcsdInfoListExecute(r ApiGetIaasUcsdInfoListRequest) (IaasUcsdInfoResponse, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasUcsdInfoListExecute(r ApiGetIaasUcsdInfoListRequest) (IaasUcsdInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  IaasUcsdInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasUcsdInfoList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/UcsdInfos"
@@ -2780,18 +2867,22 @@ func (a *IaasApiService) GetIaasUcsdInfoListExecute(r ApiGetIaasUcsdInfoListRequ
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2858,7 +2949,7 @@ func (a *IaasApiService) GetIaasUcsdInfoListExecute(r ApiGetIaasUcsdInfoListRequ
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetIaasUcsdManagedInfraByMoidRequest struct {
@@ -2867,7 +2958,7 @@ type ApiGetIaasUcsdManagedInfraByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetIaasUcsdManagedInfraByMoidRequest) Execute() (IaasUcsdManagedInfra, *_nethttp.Response, error) {
+func (r ApiGetIaasUcsdManagedInfraByMoidRequest) Execute() (IaasUcsdManagedInfra, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetIaasUcsdManagedInfraByMoidExecute(r)
 }
 
@@ -2889,19 +2980,21 @@ func (a *IaasApiService) GetIaasUcsdManagedInfraByMoid(ctx _context.Context, moi
  * Execute executes the request
  * @return IaasUcsdManagedInfra
  */
-func (a *IaasApiService) GetIaasUcsdManagedInfraByMoidExecute(r ApiGetIaasUcsdManagedInfraByMoidRequest) (IaasUcsdManagedInfra, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasUcsdManagedInfraByMoidExecute(r ApiGetIaasUcsdManagedInfraByMoidRequest) (IaasUcsdManagedInfra, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  IaasUcsdManagedInfra
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasUcsdManagedInfraByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/UcsdManagedInfras/{Moid}"
@@ -2930,18 +3023,22 @@ func (a *IaasApiService) GetIaasUcsdManagedInfraByMoidExecute(r ApiGetIaasUcsdMa
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3008,7 +3105,7 @@ func (a *IaasApiService) GetIaasUcsdManagedInfraByMoidExecute(r ApiGetIaasUcsdMa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetIaasUcsdManagedInfraListRequest struct {
@@ -3072,7 +3169,7 @@ func (r ApiGetIaasUcsdManagedInfraListRequest) Tags(tags string) ApiGetIaasUcsdM
 	return r
 }
 
-func (r ApiGetIaasUcsdManagedInfraListRequest) Execute() (IaasUcsdManagedInfraResponse, *_nethttp.Response, error) {
+func (r ApiGetIaasUcsdManagedInfraListRequest) Execute() (IaasUcsdManagedInfraResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetIaasUcsdManagedInfraListExecute(r)
 }
 
@@ -3092,19 +3189,21 @@ func (a *IaasApiService) GetIaasUcsdManagedInfraList(ctx _context.Context) ApiGe
  * Execute executes the request
  * @return IaasUcsdManagedInfraResponse
  */
-func (a *IaasApiService) GetIaasUcsdManagedInfraListExecute(r ApiGetIaasUcsdManagedInfraListRequest) (IaasUcsdManagedInfraResponse, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasUcsdManagedInfraListExecute(r ApiGetIaasUcsdManagedInfraListRequest) (IaasUcsdManagedInfraResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  IaasUcsdManagedInfraResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasUcsdManagedInfraList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/UcsdManagedInfras"
@@ -3165,18 +3264,22 @@ func (a *IaasApiService) GetIaasUcsdManagedInfraListExecute(r ApiGetIaasUcsdMana
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3243,7 +3346,7 @@ func (a *IaasApiService) GetIaasUcsdManagedInfraListExecute(r ApiGetIaasUcsdMana
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetIaasUcsdMessagesByMoidRequest struct {
@@ -3252,7 +3355,7 @@ type ApiGetIaasUcsdMessagesByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetIaasUcsdMessagesByMoidRequest) Execute() (IaasUcsdMessages, *_nethttp.Response, error) {
+func (r ApiGetIaasUcsdMessagesByMoidRequest) Execute() (IaasUcsdMessages, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetIaasUcsdMessagesByMoidExecute(r)
 }
 
@@ -3274,19 +3377,21 @@ func (a *IaasApiService) GetIaasUcsdMessagesByMoid(ctx _context.Context, moid st
  * Execute executes the request
  * @return IaasUcsdMessages
  */
-func (a *IaasApiService) GetIaasUcsdMessagesByMoidExecute(r ApiGetIaasUcsdMessagesByMoidRequest) (IaasUcsdMessages, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasUcsdMessagesByMoidExecute(r ApiGetIaasUcsdMessagesByMoidRequest) (IaasUcsdMessages, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  IaasUcsdMessages
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasUcsdMessagesByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/UcsdMessages/{Moid}"
@@ -3315,18 +3420,22 @@ func (a *IaasApiService) GetIaasUcsdMessagesByMoidExecute(r ApiGetIaasUcsdMessag
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3393,7 +3502,7 @@ func (a *IaasApiService) GetIaasUcsdMessagesByMoidExecute(r ApiGetIaasUcsdMessag
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetIaasUcsdMessagesListRequest struct {
@@ -3457,7 +3566,7 @@ func (r ApiGetIaasUcsdMessagesListRequest) Tags(tags string) ApiGetIaasUcsdMessa
 	return r
 }
 
-func (r ApiGetIaasUcsdMessagesListRequest) Execute() (IaasUcsdMessagesResponse, *_nethttp.Response, error) {
+func (r ApiGetIaasUcsdMessagesListRequest) Execute() (IaasUcsdMessagesResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetIaasUcsdMessagesListExecute(r)
 }
 
@@ -3477,19 +3586,21 @@ func (a *IaasApiService) GetIaasUcsdMessagesList(ctx _context.Context) ApiGetIaa
  * Execute executes the request
  * @return IaasUcsdMessagesResponse
  */
-func (a *IaasApiService) GetIaasUcsdMessagesListExecute(r ApiGetIaasUcsdMessagesListRequest) (IaasUcsdMessagesResponse, *_nethttp.Response, error) {
+func (a *IaasApiService) GetIaasUcsdMessagesListExecute(r ApiGetIaasUcsdMessagesListRequest) (IaasUcsdMessagesResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  IaasUcsdMessagesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.GetIaasUcsdMessagesList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/UcsdMessages"
@@ -3550,18 +3661,22 @@ func (a *IaasApiService) GetIaasUcsdMessagesListExecute(r ApiGetIaasUcsdMessages
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3628,7 +3743,7 @@ func (a *IaasApiService) GetIaasUcsdMessagesListExecute(r ApiGetIaasUcsdMessages
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchIaasUcsdInfoRequest struct {
@@ -3648,7 +3763,7 @@ func (r ApiPatchIaasUcsdInfoRequest) IfMatch(ifMatch string) ApiPatchIaasUcsdInf
 	return r
 }
 
-func (r ApiPatchIaasUcsdInfoRequest) Execute() (IaasUcsdInfo, *_nethttp.Response, error) {
+func (r ApiPatchIaasUcsdInfoRequest) Execute() (IaasUcsdInfo, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchIaasUcsdInfoExecute(r)
 }
 
@@ -3670,19 +3785,21 @@ func (a *IaasApiService) PatchIaasUcsdInfo(ctx _context.Context, moid string) Ap
  * Execute executes the request
  * @return IaasUcsdInfo
  */
-func (a *IaasApiService) PatchIaasUcsdInfoExecute(r ApiPatchIaasUcsdInfoRequest) (IaasUcsdInfo, *_nethttp.Response, error) {
+func (a *IaasApiService) PatchIaasUcsdInfoExecute(r ApiPatchIaasUcsdInfoRequest) (IaasUcsdInfo, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  IaasUcsdInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.PatchIaasUcsdInfo")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/UcsdInfos/{Moid}"
@@ -3692,7 +3809,8 @@ func (a *IaasApiService) PatchIaasUcsdInfoExecute(r ApiPatchIaasUcsdInfoRequest)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.iaasUcsdInfo == nil {
-		return localVarReturnValue, nil, reportError("iaasUcsdInfo is required and must be specified")
+		executionError.error = "iaasUcsdInfo is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3719,18 +3837,22 @@ func (a *IaasApiService) PatchIaasUcsdInfoExecute(r ApiPatchIaasUcsdInfoRequest)
 	localVarPostBody = r.iaasUcsdInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3797,7 +3919,7 @@ func (a *IaasApiService) PatchIaasUcsdInfoExecute(r ApiPatchIaasUcsdInfoRequest)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateIaasUcsdInfoRequest struct {
@@ -3817,7 +3939,7 @@ func (r ApiUpdateIaasUcsdInfoRequest) IfMatch(ifMatch string) ApiUpdateIaasUcsdI
 	return r
 }
 
-func (r ApiUpdateIaasUcsdInfoRequest) Execute() (IaasUcsdInfo, *_nethttp.Response, error) {
+func (r ApiUpdateIaasUcsdInfoRequest) Execute() (IaasUcsdInfo, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateIaasUcsdInfoExecute(r)
 }
 
@@ -3839,19 +3961,21 @@ func (a *IaasApiService) UpdateIaasUcsdInfo(ctx _context.Context, moid string) A
  * Execute executes the request
  * @return IaasUcsdInfo
  */
-func (a *IaasApiService) UpdateIaasUcsdInfoExecute(r ApiUpdateIaasUcsdInfoRequest) (IaasUcsdInfo, *_nethttp.Response, error) {
+func (a *IaasApiService) UpdateIaasUcsdInfoExecute(r ApiUpdateIaasUcsdInfoRequest) (IaasUcsdInfo, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  IaasUcsdInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "IaasApiService.UpdateIaasUcsdInfo")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/iaas/UcsdInfos/{Moid}"
@@ -3861,7 +3985,8 @@ func (a *IaasApiService) UpdateIaasUcsdInfoExecute(r ApiUpdateIaasUcsdInfoReques
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.iaasUcsdInfo == nil {
-		return localVarReturnValue, nil, reportError("iaasUcsdInfo is required and must be specified")
+		executionError.error = "iaasUcsdInfo is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3888,18 +4013,22 @@ func (a *IaasApiService) UpdateIaasUcsdInfoExecute(r ApiUpdateIaasUcsdInfoReques
 	localVarPostBody = r.iaasUcsdInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3966,5 +4095,5 @@ func (a *IaasApiService) UpdateIaasUcsdInfoExecute(r ApiUpdateIaasUcsdInfoReques
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }

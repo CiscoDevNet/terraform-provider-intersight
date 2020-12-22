@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.UpgradePolicy"]
 **AutoUpgrade** | Pointer to **bool** | Indicates if the upgrade service is set to automatically start the software upgrade or not. If autoUpgrade is true, then the value of the schedule field is ignored. | [optional] 
 **BlackoutDatesEnabled** | Pointer to **bool** | If enabled, allows the user to define a blackout period during which the appliance will not be upgraded. | [optional] 
-**BlackoutEndDate** | Pointer to [**time.Time**](time.Time.md) | End date of the black out period. | [optional] 
-**BlackoutStartDate** | Pointer to [**time.Time**](time.Time.md) | Start date of the black out period. The appliance will not be upgraded during this period. | [optional] 
+**BlackoutEndDate** | Pointer to **time.Time** | End date of the black out period. | [optional] 
+**BlackoutStartDate** | Pointer to **time.Time** | Start date of the black out period. The appliance will not be upgraded during this period. | [optional] 
 **Schedule** | Pointer to [**NullableOnpremSchedule**](onprem.Schedule.md) |  | [optional] 
 **Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
 

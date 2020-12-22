@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceBootPrecisionPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceBootPrecisionPolicyCreate,
-		Read:   resourceBootPrecisionPolicyRead,
-		Update: resourceBootPrecisionPolicyUpdate,
-		Delete: resourceBootPrecisionPolicyDelete,
+		CreateContext: resourceBootPrecisionPolicyCreate,
+		ReadContext:   resourceBootPrecisionPolicyRead,
+		UpdateContext: resourceBootPrecisionPolicyUpdate,
+		DeleteContext: resourceBootPrecisionPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -41,6 +44,7 @@ func resourceBootPrecisionPolicy() *schema.Resource {
 							Description: "Specifies if the boot device is enabled or disabled.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     false,
 						},
 						"name": {
 							Description: "A name that helps identify a boot device. It can be any string that adheres to the following constraints. It should start and end with an alphanumeric character. It can have underscores and hyphens. It cannot be more than 30 characters.",
@@ -79,6 +83,7 @@ func resourceBootPrecisionPolicy() *schema.Resource {
 				Description: "If UEFI secure boot is enabled, the boot mode is set to UEFI by default. Secure boot enforces that device boots using only software that is trusted by the Original Equipment Manufacturer (OEM).",
 				Type:        schema.TypeBool,
 				Optional:    true,
+				Default:     false,
 			},
 			"moid": {
 				Description: "The unique identifier of this Managed Object instance.",
@@ -207,7 +212,7 @@ func resourceBootPrecisionPolicy() *schema.Resource {
 	}
 }
 
-func resourceBootPrecisionPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceBootPrecisionPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -413,97 +418,102 @@ func resourceBootPrecisionPolicyCreate(d *schema.ResourceData, meta interface{})
 	}
 
 	r := conn.ApiClient.BootApi.CreateBootPrecisionPolicy(conn.ctx).BootPrecisionPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating BootPrecisionPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceBootPrecisionPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceBootPrecisionPolicyRead(c, d, meta)
 }
-func detachBootPrecisionPolicyProfiles(d *schema.ResourceData, meta interface{}) error {
+func detachBootPrecisionPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.BootPrecisionPolicy{}
 	o.SetClassId("boot.PrecisionPolicy")
 	o.SetObjectType("boot.PrecisionPolicy")
 	o.SetProfiles([]models.PolicyAbstractConfigProfileRelationship{})
 
 	r := conn.ApiClient.BootApi.UpdateBootPrecisionPolicy(conn.ctx, d.Id()).BootPrecisionPolicy(*o)
-	_, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while creating: %s", err.Error())
+	_, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	return err
+	return de
 }
 
-func resourceBootPrecisionPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceBootPrecisionPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.BootApi.GetBootPrecisionPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "BootPrecisionPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching BootPrecisionPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in BootPrecisionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("boot_devices", flattenListBootDeviceBase(s.GetBootDevices(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property BootDevices: %+v", err)
+		return diag.Errorf("error occurred while setting property BootDevices in BootPrecisionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in BootPrecisionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("configured_boot_mode", (s.GetConfiguredBootMode())); err != nil {
-		return fmt.Errorf("error occurred while setting property ConfiguredBootMode: %+v", err)
+		return diag.Errorf("error occurred while setting property ConfiguredBootMode in BootPrecisionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in BootPrecisionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("enforce_uefi_secure_boot", (s.GetEnforceUefiSecureBoot())); err != nil {
-		return fmt.Errorf("error occurred while setting property EnforceUefiSecureBoot: %+v", err)
+		return diag.Errorf("error occurred while setting property EnforceUefiSecureBoot in BootPrecisionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in BootPrecisionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in BootPrecisionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in BootPrecisionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in BootPrecisionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("profiles", flattenListPolicyAbstractConfigProfileRelationship(s.GetProfiles(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Profiles: %+v", err)
+		return diag.Errorf("error occurred while setting property Profiles in BootPrecisionPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in BootPrecisionPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceBootPrecisionPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceBootPrecisionPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -719,31 +729,32 @@ func resourceBootPrecisionPolicyUpdate(d *schema.ResourceData, meta interface{})
 	}
 
 	r := conn.ApiClient.BootApi.UpdateBootPrecisionPolicy(conn.ctx, d.Id()).BootPrecisionPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating BootPrecisionPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceBootPrecisionPolicyRead(d, meta)
+	return resourceBootPrecisionPolicyRead(c, d, meta)
 }
 
-func resourceBootPrecisionPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceBootPrecisionPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profiles"); ok {
 		if len(p.([]interface{})) > 0 {
 			e := detachBootPrecisionPolicyProfiles(d, meta)
-			if e != nil {
+			if e.HasError() {
 				return e
 			}
 		}
 	}
 	p := conn.ApiClient.BootApi.DeleteBootPrecisionPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting BootPrecisionPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

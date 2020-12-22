@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Endpoint** | Pointer to **string** | The endpoint represented by this holder. | [optional] [readonly] 
 **ComputeBlade** | Pointer to [**ComputeBladeRelationship**](compute.Blade.Relationship.md) |  | [optional] 
 **ComputeRackUnit** | Pointer to [**ComputeRackUnitRelationship**](compute.RackUnit.Relationship.md) |  | [optional] 
-**GenericInventory** | Pointer to [**[]InventoryGenericInventoryRelationship**](inventory.GenericInventory.Relationship.md) | An array of relationships to inventoryGenericInventory resources. | [optional] [readonly] 
+**GenericInventory** | Pointer to [**[]InventoryGenericInventoryRelationship**](InventoryGenericInventoryRelationship.md) | An array of relationships to inventoryGenericInventory resources. | [optional] [readonly] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 

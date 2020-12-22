@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "virtualization.VmwareVirtualMachine"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "virtualization.VmwareVirtualMachine"]
 **Annotation** | Pointer to **string** | List of annotations provided to this VM by user. Can be long. | [optional] 
-**BootTime** | Pointer to [**time.Time**](time.Time.md) | Time when this VM booted up. | [optional] 
+**BootTime** | Pointer to **time.Time** | Time when this VM booted up. | [optional] 
 **ConfigName** | Pointer to **string** | The configuration name for this VM. This maybe the same as the guest hostname. | [optional] 
 **ConnectionState** | Pointer to **string** | Shows if virtual machine is connected to vCenter. Values are Connected, Disconnected, Orphaned, Inaccessible, and Invalid. | [optional] 
 **CpuHotAddEnabled** | Pointer to **bool** | Indicates if the capability to add CPUs to a running VM is enabled. | [optional] 
@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **Folder** | Pointer to **string** | The folder name associated with this VM. | [optional] 
 **GuestState** | Pointer to **string** | The state of the guest OS running on this VM. Could be running, not running etc. * &#x60;Unknown&#x60; - Indicates that the guest OS state cannot be determined. * &#x60;NotRunning&#x60; - Indicates that the guest OS is not running. * &#x60;Resetting&#x60; - Indicates that the guest OS is resetting. * &#x60;Running&#x60; - Indicates that the guest OS is running normally. * &#x60;ShuttingDown&#x60; - Indicates that the guest OS is shutting down. * &#x60;Standby&#x60; - Indicates that the guest OS is in standby mode. | [optional] [default to "Unknown"]
 **InstanceUuid** | Pointer to **string** | UUID assigned by vCenter to every VM. | [optional] 
+**InventoryPath** | Pointer to **string** | Inventory path to the VM. Example - /DC/vm/folder/VMName. | [optional] 
 **IsTemplate** | Pointer to **bool** | If true, indicates that the entity refers to a template of a virtual machine and not a real virtual machine. | [optional] 
 **MacAddress** | Pointer to **[]string** |  | [optional] 
 **MemShares** | Pointer to [**NullableVirtualizationVmwareVmMemoryShareInfo**](virtualization.VmwareVmMemoryShareInfo.md) |  | [optional] 
@@ -44,7 +45,7 @@ Name | Type | Description | Notes
 **VnicDeviceConfigId** | Pointer to **string** | Information related to the guest info&#39;s VNIC virtual device. It is a comma-separated list. | [optional] 
 **Cluster** | Pointer to [**VirtualizationVmwareClusterRelationship**](virtualization.VmwareCluster.Relationship.md) |  | [optional] 
 **Datacenter** | Pointer to [**VirtualizationVmwareDatacenterRelationship**](virtualization.VmwareDatacenter.Relationship.md) |  | [optional] 
-**Datastores** | Pointer to [**[]VirtualizationVmwareDatastoreRelationship**](virtualization.VmwareDatastore.Relationship.md) | An array of relationships to virtualizationVmwareDatastore resources. | [optional] [readonly] 
+**Datastores** | Pointer to [**[]VirtualizationVmwareDatastoreRelationship**](VirtualizationVmwareDatastoreRelationship.md) | An array of relationships to virtualizationVmwareDatastore resources. | [optional] [readonly] 
 **Host** | Pointer to [**VirtualizationVmwareHostRelationship**](virtualization.VmwareHost.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -565,6 +566,31 @@ SetInstanceUuid sets InstanceUuid field to given value.
 `func (o *VirtualizationVmwareVirtualMachineAllOf) HasInstanceUuid() bool`
 
 HasInstanceUuid returns a boolean if a field has been set.
+
+### GetInventoryPath
+
+`func (o *VirtualizationVmwareVirtualMachineAllOf) GetInventoryPath() string`
+
+GetInventoryPath returns the InventoryPath field if non-nil, zero value otherwise.
+
+### GetInventoryPathOk
+
+`func (o *VirtualizationVmwareVirtualMachineAllOf) GetInventoryPathOk() (*string, bool)`
+
+GetInventoryPathOk returns a tuple with the InventoryPath field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInventoryPath
+
+`func (o *VirtualizationVmwareVirtualMachineAllOf) SetInventoryPath(v string)`
+
+SetInventoryPath sets InventoryPath field to given value.
+
+### HasInventoryPath
+
+`func (o *VirtualizationVmwareVirtualMachineAllOf) HasInventoryPath() bool`
+
+HasInventoryPath returns a boolean if a field has been set.
 
 ### GetIsTemplate
 

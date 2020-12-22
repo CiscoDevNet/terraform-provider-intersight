@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **FieldNoticeUrl** | Pointer to **string** | Field notice URL link to the notice webpage. | [optional] 
 **Headline** | Pointer to **string** | The headline of this field notice. | [optional] 
 **Hwpid** | Pointer to **string** | Hardware PID for affected models. | [optional] 
-**RevisionInfo** | Pointer to [**[]NiaapiRevisionInfo**](niaapi.RevisionInfo.md) |  | [optional] 
+**RevisionInfo** | Pointer to [**[]NiaapiRevisionInfo**](NiaapiRevisionInfo.md) |  | [optional] 
 **SwRelease** | Pointer to **string** | Software Release number for affected versions. | [optional] 
 **WorkaroundUrl** | Pointer to **string** | URL of workaround of this notice. | [optional] 
 

@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceWorkflowTaskDefinition() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceWorkflowTaskDefinitionCreate,
-		Read:   resourceWorkflowTaskDefinitionRead,
-		Update: resourceWorkflowTaskDefinitionUpdate,
-		Delete: resourceWorkflowTaskDefinitionDelete,
+		CreateContext: resourceWorkflowTaskDefinitionCreate,
+		ReadContext:   resourceWorkflowTaskDefinitionRead,
+		UpdateContext: resourceWorkflowTaskDefinitionUpdate,
+		DeleteContext: resourceWorkflowTaskDefinitionDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -64,7 +67,7 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 				ForceNew:   true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -230,7 +233,7 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -288,7 +291,7 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -297,6 +300,7 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 							Description: "When set to false the task definition can only be used by internal system workflows. When set to true then the task can be included in user defined workflows.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     false,
 							ForceNew:    true,
 						},
 						"input_definition": {
@@ -383,6 +387,7 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 													Description: "Inventory selector specified for primitive data property should be used in Intersight User Interface.",
 													Type:        schema.TypeBool,
 													Optional:    true,
+													Default:     true,
 												},
 												"object_type": {
 													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -435,7 +440,7 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 							Computed:   true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -524,6 +529,7 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 													Description: "Inventory selector specified for primitive data property should be used in Intersight User Interface.",
 													Type:        schema.TypeBool,
 													Optional:    true,
+													Default:     true,
 												},
 												"object_type": {
 													Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -579,11 +585,13 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 							Description: "The number of times a task should be tried before marking as failed.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     3,
 						},
 						"retry_delay": {
 							Description: "The delay in seconds after which the the task is re-tried.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     60,
 						},
 						"retry_policy": {
 							Description: "The retry policy for the task.\n* `Fixed` - The enum specifies the option as Fixed where the task retry happens after fixed time specified by RetryDelay.",
@@ -601,6 +609,7 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 							Description: "The timeout value in seconds after which task will be marked as timed out. Max allowed value is 7 days.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     600,
 						},
 						"timeout_policy": {
 							Description: "The timeout policy for the task.\n* `Timeout` - The enum specifies the option as Timeout where task will be timed out after the specified time in Timeout property.\n* `Retry` - The enum specifies the option as Retry where task will be re-tried.",
@@ -745,13 +754,14 @@ func resourceWorkflowTaskDefinition() *schema.Resource {
 				Description: "The version of the task definition so we can support multiple versions of a task definition.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+				Default:     1,
 				ForceNew:    true,
 			},
 		},
 	}
 }
 
-func resourceWorkflowTaskDefinitionCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceWorkflowTaskDefinitionCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1540,109 +1550,113 @@ func resourceWorkflowTaskDefinitionCreate(d *schema.ResourceData, meta interface
 	}
 
 	r := conn.ApiClient.WorkflowApi.CreateWorkflowTaskDefinition(conn.ctx).WorkflowTaskDefinition(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating WorkflowTaskDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceWorkflowTaskDefinitionRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceWorkflowTaskDefinitionRead(c, d, meta)
 }
 
-func resourceWorkflowTaskDefinitionRead(d *schema.ResourceData, meta interface{}) error {
+func resourceWorkflowTaskDefinitionRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.WorkflowApi.GetWorkflowTaskDefinitionByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "WorkflowTaskDefinition object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching WorkflowTaskDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in WorkflowTaskDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("catalog", flattenMapWorkflowCatalogRelationship(s.GetCatalog(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Catalog: %+v", err)
+		return diag.Errorf("error occurred while setting property Catalog in WorkflowTaskDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in WorkflowTaskDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("default_version", (s.GetDefaultVersion())); err != nil {
-		return fmt.Errorf("error occurred while setting property DefaultVersion: %+v", err)
+		return diag.Errorf("error occurred while setting property DefaultVersion in WorkflowTaskDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in WorkflowTaskDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("implemented_tasks", flattenListWorkflowTaskDefinitionRelationship(s.GetImplementedTasks(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ImplementedTasks: %+v", err)
+		return diag.Errorf("error occurred while setting property ImplementedTasks in WorkflowTaskDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("interface_task", flattenMapWorkflowTaskDefinitionRelationship(s.GetInterfaceTask(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property InterfaceTask: %+v", err)
+		return diag.Errorf("error occurred while setting property InterfaceTask in WorkflowTaskDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("internal_properties", flattenMapWorkflowInternalProperties(s.GetInternalProperties(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property InternalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property InternalProperties in WorkflowTaskDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("label", (s.GetLabel())); err != nil {
-		return fmt.Errorf("error occurred while setting property Label: %+v", err)
+		return diag.Errorf("error occurred while setting property Label in WorkflowTaskDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("license_entitlement", (s.GetLicenseEntitlement())); err != nil {
-		return fmt.Errorf("error occurred while setting property LicenseEntitlement: %+v", err)
+		return diag.Errorf("error occurred while setting property LicenseEntitlement in WorkflowTaskDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in WorkflowTaskDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in WorkflowTaskDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in WorkflowTaskDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("properties", flattenMapWorkflowProperties(s.GetProperties(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Properties: %+v", err)
+		return diag.Errorf("error occurred while setting property Properties in WorkflowTaskDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("rollback_tasks", flattenListWorkflowRollbackTask(s.GetRollbackTasks(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property RollbackTasks: %+v", err)
+		return diag.Errorf("error occurred while setting property RollbackTasks in WorkflowTaskDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("secure_prop_access", (s.GetSecurePropAccess())); err != nil {
-		return fmt.Errorf("error occurred while setting property SecurePropAccess: %+v", err)
+		return diag.Errorf("error occurred while setting property SecurePropAccess in WorkflowTaskDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in WorkflowTaskDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("task_metadata", flattenMapWorkflowTaskMetadataRelationship(s.GetTaskMetadata(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property TaskMetadata: %+v", err)
+		return diag.Errorf("error occurred while setting property TaskMetadata in WorkflowTaskDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("nr_version", (s.GetVersion())); err != nil {
-		return fmt.Errorf("error occurred while setting property Version: %+v", err)
+		return diag.Errorf("error occurred while setting property Version in WorkflowTaskDefinition object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceWorkflowTaskDefinitionUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceWorkflowTaskDefinitionUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -2448,23 +2462,24 @@ func resourceWorkflowTaskDefinitionUpdate(d *schema.ResourceData, meta interface
 	}
 
 	r := conn.ApiClient.WorkflowApi.UpdateWorkflowTaskDefinition(conn.ctx, d.Id()).WorkflowTaskDefinition(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating WorkflowTaskDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceWorkflowTaskDefinitionRead(d, meta)
+	return resourceWorkflowTaskDefinitionRead(c, d, meta)
 }
 
-func resourceWorkflowTaskDefinitionDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceWorkflowTaskDefinitionDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.WorkflowApi.DeleteWorkflowTaskDefinition(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting WorkflowTaskDefinition object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

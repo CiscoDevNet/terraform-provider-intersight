@@ -1,13 +1,12 @@
-
 ---
+subcategory: "organization"
 layout: "intersight"
 page_title: "Intersight: intersight_organization_organization"
-sidebar_current: "docs-intersight-resource-organization-organization"
 description: |-
   Organization provides multi-tenancy within an account. Multiple organizations can be present under an account. Resources are associated to organization using resource groups. Organization can have heterogeneous resources. Resources can be shared among multiple organizations. Organizations are associated to user permissions and privileges can be specified to provide access control. User can have access to multiple organizations in same permission and with different privileges on each organization.
 ---
 
-# Resource: intersight_organization._organization
+# Resource: intersight_organization_organization
 Organization provides multi-tenancy within an account. Multiple organizations can be present under an account. Resources are associated to organization using resource groups. Organization can have heterogeneous resources. Resources can be shared among multiple organizations. Organizations are associated to user permissions and privileges can be specified to provide access control. User can have access to multiple organizations in same permission and with different privileges on each organization.
 ## Argument Reference
 The following arguments are supported:
@@ -40,3 +39,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_organization_organization` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_organization_organization.example 1234567890987654321abcde
+```

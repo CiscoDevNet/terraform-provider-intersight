@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceHyperflexClusterProfile() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceHyperflexClusterProfileCreate,
-		Read:   resourceHyperflexClusterProfileRead,
-		Update: resourceHyperflexClusterProfileUpdate,
-		Delete: resourceHyperflexClusterProfileDelete,
+		CreateContext: resourceHyperflexClusterProfileCreate,
+		ReadContext:   resourceHyperflexClusterProfileRead,
+		UpdateContext: resourceHyperflexClusterProfileUpdate,
+		DeleteContext: resourceHyperflexClusterProfileDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"action": {
 				Description: "User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign.",
@@ -67,6 +70,47 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 			},
+			"associated_compute_cluster": {
+				Description: "A reference to a hyperflexHxapCluster resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				ConfigMode: schema.SchemaConfigModeAttr,
+			},
 			"auto_support": {
 				Description: "A reference to a hyperflexAutoSupportPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -109,7 +153,7 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 				Computed:   true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -231,7 +275,7 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -380,8 +424,59 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 			},
+			"host_name_prefix": {
+				Description: "The node name prefix that is used to automatically generate the default hostname for each server.\nA dash (-) will be appended to the prefix followed by the node number to form a hostname.\nThis default naming scheme can be manually overridden in the node configuration.\nThe maximum length of a prefix is 60, must only contain alphanumeric characters or dash (-), and must\nstart with an alphanumeric character.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"httpproxypolicy": {
+				Description: "A reference to a commHttpProxyPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+			},
+			"hypervisor_control_ip_address": {
+				Description: "The hypervisor control virtual IP address for the HyperFlex compute cluster that is used for node/pod management.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"hypervisor_type": {
-				Description: "The hypervisor type for the HyperFlex cluster.\n* `ESXi` - A Vmware ESXi hypervisor of any version.\n* `HXAP` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
+				Description: "The hypervisor type for the HyperFlex cluster.\n* `ESXi` - The hypervisor running on the HyperFlex cluster is a Vmware ESXi hypervisor of any version.\n* `HyperFlexAp` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Default:     "ESXi",
@@ -792,6 +887,12 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 			},
+			"storage_type": {
+				Description: "The storage type used for the HyperFlex cluster (HyperFlex Storage or 3rd party).\n* `HyperFlexDp` - The type of storage is HyperFlex Data Platform.\n* `ThirdParty` - The type of storage is 3rd Party Storage (PureStorage, etc..).",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "HyperFlexDp",
+			},
 			"sys_config": {
 				Description: "A reference to a hyperflexSysConfigPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -953,7 +1054,7 @@ func resourceHyperflexClusterProfile() *schema.Resource {
 	}
 }
 
-func resourceHyperflexClusterProfileCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexClusterProfileCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1012,6 +1113,49 @@ func resourceHyperflexClusterProfileCreate(d *schema.ResourceData, meta interfac
 		if len(p) > 0 {
 			x := p[0]
 			o.SetAssociatedCluster(x)
+		}
+	}
+
+	if v, ok := d.GetOk("associated_compute_cluster"); ok {
+		p := make([]models.HyperflexHxapClusterRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoMoRefWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsHyperflexHxapClusterRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAssociatedComputeCluster(x)
 		}
 	}
 
@@ -1338,6 +1482,59 @@ func resourceHyperflexClusterProfileCreate(d *schema.ResourceData, meta interfac
 			x := p[0]
 			o.SetExtIscsiStorage(x)
 		}
+	}
+
+	if v, ok := d.GetOk("host_name_prefix"); ok {
+		x := (v.(string))
+		o.SetHostNamePrefix(x)
+	}
+
+	if v, ok := d.GetOk("httpproxypolicy"); ok {
+		p := make([]models.CommHttpProxyPolicyRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoMoRefWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsCommHttpProxyPolicyRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetHttpproxypolicy(x)
+		}
+	}
+
+	if v, ok := d.GetOk("hypervisor_control_ip_address"); ok {
+		x := (v.(string))
+		o.SetHypervisorControlIpAddress(x)
 	}
 
 	if v, ok := d.GetOk("hypervisor_type"); ok {
@@ -1762,6 +1959,11 @@ func resourceHyperflexClusterProfileCreate(d *schema.ResourceData, meta interfac
 		}
 	}
 
+	if v, ok := d.GetOk("storage_type"); ok {
+		x := (v.(string))
+		o.SetStorageType(x)
+	}
+
 	if v, ok := d.GetOk("sys_config"); ok {
 		p := make([]models.HyperflexSysConfigPolicyRelationship, 0, 1)
 		s := v.([]interface{})
@@ -1937,177 +2139,201 @@ func resourceHyperflexClusterProfileCreate(d *schema.ResourceData, meta interfac
 	}
 
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexClusterProfile(conn.ctx).HyperflexClusterProfile(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating HyperflexClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceHyperflexClusterProfileRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceHyperflexClusterProfileRead(c, d, meta)
 }
 
-func resourceHyperflexClusterProfileRead(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexClusterProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.HyperflexApi.GetHyperflexClusterProfileByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "HyperflexClusterProfile object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching HyperflexClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("action", (s.GetAction())); err != nil {
-		return fmt.Errorf("error occurred while setting property Action: %+v", err)
+		return diag.Errorf("error occurred while setting property Action in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("associated_cluster", flattenMapHyperflexClusterRelationship(s.GetAssociatedCluster(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property AssociatedCluster: %+v", err)
+		return diag.Errorf("error occurred while setting property AssociatedCluster in HyperflexClusterProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("associated_compute_cluster", flattenMapHyperflexHxapClusterRelationship(s.GetAssociatedComputeCluster(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property AssociatedComputeCluster in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("auto_support", flattenMapHyperflexAutoSupportPolicyRelationship(s.GetAutoSupport(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property AutoSupport: %+v", err)
+		return diag.Errorf("error occurred while setting property AutoSupport in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("cluster_network", flattenMapHyperflexClusterNetworkPolicyRelationship(s.GetClusterNetwork(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ClusterNetwork: %+v", err)
+		return diag.Errorf("error occurred while setting property ClusterNetwork in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("cluster_storage", flattenMapHyperflexClusterStoragePolicyRelationship(s.GetClusterStorage(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ClusterStorage: %+v", err)
+		return diag.Errorf("error occurred while setting property ClusterStorage in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("config_context", flattenMapPolicyConfigContext(s.GetConfigContext(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ConfigContext: %+v", err)
+		return diag.Errorf("error occurred while setting property ConfigContext in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("config_result", flattenMapHyperflexConfigResultRelationship(s.GetConfigResult(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ConfigResult: %+v", err)
+		return diag.Errorf("error occurred while setting property ConfigResult in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("data_ip_address", (s.GetDataIpAddress())); err != nil {
-		return fmt.Errorf("error occurred while setting property DataIpAddress: %+v", err)
+		return diag.Errorf("error occurred while setting property DataIpAddress in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("ext_fc_storage", flattenMapHyperflexExtFcStoragePolicyRelationship(s.GetExtFcStorage(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ExtFcStorage: %+v", err)
+		return diag.Errorf("error occurred while setting property ExtFcStorage in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("ext_iscsi_storage", flattenMapHyperflexExtIscsiStoragePolicyRelationship(s.GetExtIscsiStorage(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ExtIscsiStorage: %+v", err)
+		return diag.Errorf("error occurred while setting property ExtIscsiStorage in HyperflexClusterProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("host_name_prefix", (s.GetHostNamePrefix())); err != nil {
+		return diag.Errorf("error occurred while setting property HostNamePrefix in HyperflexClusterProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("httpproxypolicy", flattenMapCommHttpProxyPolicyRelationship(s.GetHttpproxypolicy(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property Httpproxypolicy in HyperflexClusterProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("hypervisor_control_ip_address", (s.GetHypervisorControlIpAddress())); err != nil {
+		return diag.Errorf("error occurred while setting property HypervisorControlIpAddress in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("hypervisor_type", (s.GetHypervisorType())); err != nil {
-		return fmt.Errorf("error occurred while setting property HypervisorType: %+v", err)
+		return diag.Errorf("error occurred while setting property HypervisorType in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("local_credential", flattenMapHyperflexLocalCredentialPolicyRelationship(s.GetLocalCredential(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property LocalCredential: %+v", err)
+		return diag.Errorf("error occurred while setting property LocalCredential in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("mac_address_prefix", (s.GetMacAddressPrefix())); err != nil {
-		return fmt.Errorf("error occurred while setting property MacAddressPrefix: %+v", err)
+		return diag.Errorf("error occurred while setting property MacAddressPrefix in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("mgmt_ip_address", (s.GetMgmtIpAddress())); err != nil {
-		return fmt.Errorf("error occurred while setting property MgmtIpAddress: %+v", err)
+		return diag.Errorf("error occurred while setting property MgmtIpAddress in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("mgmt_platform", (s.GetMgmtPlatform())); err != nil {
-		return fmt.Errorf("error occurred while setting property MgmtPlatform: %+v", err)
+		return diag.Errorf("error occurred while setting property MgmtPlatform in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("node_config", flattenMapHyperflexNodeConfigPolicyRelationship(s.GetNodeConfig(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property NodeConfig: %+v", err)
+		return diag.Errorf("error occurred while setting property NodeConfig in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("node_profile_config", flattenListHyperflexNodeProfileRelationship(s.GetNodeProfileConfig(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property NodeProfileConfig: %+v", err)
+		return diag.Errorf("error occurred while setting property NodeProfileConfig in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("proxy_setting", flattenMapHyperflexProxySettingPolicyRelationship(s.GetProxySetting(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ProxySetting: %+v", err)
+		return diag.Errorf("error occurred while setting property ProxySetting in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("replication", (s.GetReplication())); err != nil {
-		return fmt.Errorf("error occurred while setting property Replication: %+v", err)
+		return diag.Errorf("error occurred while setting property Replication in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("running_workflows", flattenListWorkflowWorkflowInfoRelationship(s.GetRunningWorkflows(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property RunningWorkflows: %+v", err)
+		return diag.Errorf("error occurred while setting property RunningWorkflows in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("software_version", flattenMapHyperflexSoftwareVersionPolicyRelationship(s.GetSoftwareVersion(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property SoftwareVersion: %+v", err)
+		return diag.Errorf("error occurred while setting property SoftwareVersion in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("src_template", flattenMapPolicyAbstractProfileRelationship(s.GetSrcTemplate(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property SrcTemplate: %+v", err)
+		return diag.Errorf("error occurred while setting property SrcTemplate in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("storage_data_vlan", flattenMapHyperflexNamedVlan(s.GetStorageDataVlan(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property StorageDataVlan: %+v", err)
+		return diag.Errorf("error occurred while setting property StorageDataVlan in HyperflexClusterProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("storage_type", (s.GetStorageType())); err != nil {
+		return diag.Errorf("error occurred while setting property StorageType in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("sys_config", flattenMapHyperflexSysConfigPolicyRelationship(s.GetSysConfig(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property SysConfig: %+v", err)
+		return diag.Errorf("error occurred while setting property SysConfig in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("type", (s.GetType())); err != nil {
-		return fmt.Errorf("error occurred while setting property Type: %+v", err)
+		return diag.Errorf("error occurred while setting property Type in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("ucsm_config", flattenMapHyperflexUcsmConfigPolicyRelationship(s.GetUcsmConfig(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property UcsmConfig: %+v", err)
+		return diag.Errorf("error occurred while setting property UcsmConfig in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("vcenter_config", flattenMapHyperflexVcenterConfigPolicyRelationship(s.GetVcenterConfig(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property VcenterConfig: %+v", err)
+		return diag.Errorf("error occurred while setting property VcenterConfig in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("wwxn_prefix", (s.GetWwxnPrefix())); err != nil {
-		return fmt.Errorf("error occurred while setting property WwxnPrefix: %+v", err)
+		return diag.Errorf("error occurred while setting property WwxnPrefix in HyperflexClusterProfile object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceHyperflexClusterProfileUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexClusterProfileUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -2169,6 +2395,50 @@ func resourceHyperflexClusterProfileUpdate(d *schema.ResourceData, meta interfac
 		if len(p) > 0 {
 			x := p[0]
 			o.SetAssociatedCluster(x)
+		}
+	}
+
+	if d.HasChange("associated_compute_cluster") {
+		v := d.Get("associated_compute_cluster")
+		p := make([]models.HyperflexHxapClusterRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsHyperflexHxapClusterRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetAssociatedComputeCluster(x)
 		}
 	}
 
@@ -2504,6 +2774,62 @@ func resourceHyperflexClusterProfileUpdate(d *schema.ResourceData, meta interfac
 			x := p[0]
 			o.SetExtIscsiStorage(x)
 		}
+	}
+
+	if d.HasChange("host_name_prefix") {
+		v := d.Get("host_name_prefix")
+		x := (v.(string))
+		o.SetHostNamePrefix(x)
+	}
+
+	if d.HasChange("httpproxypolicy") {
+		v := d.Get("httpproxypolicy")
+		p := make([]models.CommHttpProxyPolicyRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsCommHttpProxyPolicyRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetHttpproxypolicy(x)
+		}
+	}
+
+	if d.HasChange("hypervisor_control_ip_address") {
+		v := d.Get("hypervisor_control_ip_address")
+		x := (v.(string))
+		o.SetHypervisorControlIpAddress(x)
 	}
 
 	if d.HasChange("hypervisor_type") {
@@ -2944,6 +3270,12 @@ func resourceHyperflexClusterProfileUpdate(d *schema.ResourceData, meta interfac
 		}
 	}
 
+	if d.HasChange("storage_type") {
+		v := d.Get("storage_type")
+		x := (v.(string))
+		o.SetStorageType(x)
+	}
+
 	if d.HasChange("sys_config") {
 		v := d.Get("sys_config")
 		p := make([]models.HyperflexSysConfigPolicyRelationship, 0, 1)
@@ -3125,23 +3457,24 @@ func resourceHyperflexClusterProfileUpdate(d *schema.ResourceData, meta interfac
 	}
 
 	r := conn.ApiClient.HyperflexApi.UpdateHyperflexClusterProfile(conn.ctx, d.Id()).HyperflexClusterProfile(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating HyperflexClusterProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexClusterProfileRead(d, meta)
+	return resourceHyperflexClusterProfileRead(c, d, meta)
 }
 
-func resourceHyperflexClusterProfileDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexClusterProfileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexClusterProfile(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting HyperflexClusterProfile object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceHyperflexServerFirmwareVersion() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceHyperflexServerFirmwareVersionCreate,
-		Read:   resourceHyperflexServerFirmwareVersionRead,
-		Update: resourceHyperflexServerFirmwareVersionUpdate,
-		Delete: resourceHyperflexServerFirmwareVersionDelete,
+		CreateContext: resourceHyperflexServerFirmwareVersionCreate,
+		ReadContext:   resourceHyperflexServerFirmwareVersionRead,
+		UpdateContext: resourceHyperflexServerFirmwareVersionUpdate,
+		DeleteContext: resourceHyperflexServerFirmwareVersionDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -82,8 +85,9 @@ func resourceHyperflexServerFirmwareVersion() *schema.Resource {
 				Computed:    true,
 			},
 			"server_firmware_version_entries": {
-				Type:     schema.TypeList,
-				Optional: true,
+				Description: "An array of relationships to hyperflexServerFirmwareVersionEntry resources.",
+				Type:        schema.TypeList,
+				Optional:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -92,82 +96,28 @@ func resourceHyperflexServerFirmwareVersion() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
 						},
-						"constraint": {
-							Description: "The conditions that must be satisfied before applying the AppSetting.",
-							Type:        schema.TypeList,
-							MaxItems:    1,
-							Optional:    true,
-							Elem: &schema.Resource{
-								Schema: map[string]*schema.Schema{
-									"additional_properties": {
-										Type:             schema.TypeString,
-										Optional:         true,
-										DiffSuppressFunc: SuppressDiffAdditionProps,
-									},
-									"class_id": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"hxdp_version": {
-										Description: "The supported HyperFlex Data Platform version in regex format.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-									"hypervisor_type": {
-										Description: "The hypervisor type for the HyperFlex cluster.\n* `ESXi` - A Vmware ESXi hypervisor of any version.\n* `HXAP` - The hypervisor running on the HyperFlex cluster is Cisco HyperFlex Application Platform.\n* `Hyper-V` - The hypervisor running on the HyperFlex cluster is Microsoft Hyper-V.\n* `Unknown` - The hypervisor running on the HyperFlex cluster is not known.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "ESXi",
-									},
-									"mgmt_platform": {
-										Description: "The supported management platform for the HyperFlex Cluster.\n* `FI` - The host servers used in the cluster deployment are managed by a UCS Fabric Interconnect.\n* `EDGE` - The host servers used in the cluster deployment are standalone severs.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Default:     "FI",
-									},
-									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
-										Type:        schema.TypeString,
-										Optional:    true,
-										Computed:    true,
-									},
-									"server_model": {
-										Description: "The supported server models in regex format.",
-										Type:        schema.TypeString,
-										Optional:    true,
-									},
-								},
-							},
-							ConfigMode: schema.SchemaConfigModeAttr,
-							Computed:   true,
-						},
-						"label": {
-							Description: "The display name for server firmware bundle version in UI.",
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
 							Type:        schema.TypeString,
 							Optional:    true,
-						},
-						"name": {
-							Description: "The application setting identifier.",
-							Type:        schema.TypeString,
-							Optional:    true,
+							Computed:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
 						},
-						"value": {
-							Description: "The application setting value.",
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
 							Type:        schema.TypeString,
 							Optional:    true,
+							Computed:    true,
 						},
 					},
 				},
@@ -201,7 +151,7 @@ func resourceHyperflexServerFirmwareVersion() *schema.Resource {
 	}
 }
 
-func resourceHyperflexServerFirmwareVersionCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexServerFirmwareVersionCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -268,10 +218,10 @@ func resourceHyperflexServerFirmwareVersionCreate(d *schema.ResourceData, meta i
 	o.SetObjectType("hyperflex.ServerFirmwareVersion")
 
 	if v, ok := d.GetOk("server_firmware_version_entries"); ok {
-		x := make([]models.HyperflexServerFirmwareVersionEntry, 0)
+		x := make([]models.HyperflexServerFirmwareVersionEntryRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := models.NewHyperflexServerFirmwareVersionEntryWithDefaults()
+			o := models.NewMoMoRefWithDefaults()
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -283,73 +233,11 @@ func resourceHyperflexServerFirmwareVersionCreate(d *schema.ResourceData, meta i
 					}
 				}
 			}
-			o.SetClassId("hyperflex.ServerFirmwareVersionEntry")
-			if v, ok := l["constraint"]; ok {
-				{
-					p := make([]models.HyperflexAppSettingConstraint, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewHyperflexAppSettingConstraintWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("hyperflex.AppSettingConstraint")
-						if v, ok := l["hxdp_version"]; ok {
-							{
-								x := (v.(string))
-								o.SetHxdpVersion(x)
-							}
-						}
-						if v, ok := l["hypervisor_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetHypervisorType(x)
-							}
-						}
-						if v, ok := l["mgmt_platform"]; ok {
-							{
-								x := (v.(string))
-								o.SetMgmtPlatform(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["server_model"]; ok {
-							{
-								x := (v.(string))
-								o.SetServerModel(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetConstraint(x)
-					}
-				}
-			}
-			if v, ok := l["label"]; ok {
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
-					o.SetLabel(x)
-				}
-			}
-			if v, ok := l["name"]; ok {
-				{
-					x := (v.(string))
-					o.SetName(x)
+					o.SetMoid(x)
 				}
 			}
 			if v, ok := l["object_type"]; ok {
@@ -358,13 +246,13 @@ func resourceHyperflexServerFirmwareVersionCreate(d *schema.ResourceData, meta i
 					o.SetObjectType(x)
 				}
 			}
-			if v, ok := l["value"]; ok {
+			if v, ok := l["selector"]; ok {
 				{
 					x := (v.(string))
-					o.SetValue(x)
+					o.SetSelector(x)
 				}
 			}
-			x = append(x, *o)
+			x = append(x, models.MoMoRefAsHyperflexServerFirmwareVersionEntryRelationship(o))
 		}
 		if len(x) > 0 {
 			o.SetServerFirmwareVersionEntries(x)
@@ -407,61 +295,65 @@ func resourceHyperflexServerFirmwareVersionCreate(d *schema.ResourceData, meta i
 	}
 
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexServerFirmwareVersion(conn.ctx).HyperflexServerFirmwareVersion(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating HyperflexServerFirmwareVersion: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceHyperflexServerFirmwareVersionRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceHyperflexServerFirmwareVersionRead(c, d, meta)
 }
 
-func resourceHyperflexServerFirmwareVersionRead(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexServerFirmwareVersionRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.HyperflexApi.GetHyperflexServerFirmwareVersionByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "HyperflexServerFirmwareVersion object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching HyperflexServerFirmwareVersion: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in HyperflexServerFirmwareVersion object: %s", err.Error())
 	}
 
 	if err := d.Set("app_catalog", flattenMapHyperflexAppCatalogRelationship(s.GetAppCatalog(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property AppCatalog: %+v", err)
+		return diag.Errorf("error occurred while setting property AppCatalog in HyperflexServerFirmwareVersion object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in HyperflexServerFirmwareVersion object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in HyperflexServerFirmwareVersion object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in HyperflexServerFirmwareVersion object: %s", err.Error())
 	}
 
-	if err := d.Set("server_firmware_version_entries", flattenListHyperflexServerFirmwareVersionEntry(s.GetServerFirmwareVersionEntries(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ServerFirmwareVersionEntries: %+v", err)
+	if err := d.Set("server_firmware_version_entries", flattenListHyperflexServerFirmwareVersionEntryRelationship(s.GetServerFirmwareVersionEntries(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property ServerFirmwareVersionEntries in HyperflexServerFirmwareVersion object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in HyperflexServerFirmwareVersion object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceHyperflexServerFirmwareVersionUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexServerFirmwareVersionUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -532,10 +424,10 @@ func resourceHyperflexServerFirmwareVersionUpdate(d *schema.ResourceData, meta i
 
 	if d.HasChange("server_firmware_version_entries") {
 		v := d.Get("server_firmware_version_entries")
-		x := make([]models.HyperflexServerFirmwareVersionEntry, 0)
+		x := make([]models.HyperflexServerFirmwareVersionEntryRelationship, 0)
 		s := v.([]interface{})
 		for i := 0; i < len(s); i++ {
-			o := &models.HyperflexServerFirmwareVersionEntry{}
+			o := &models.MoMoRef{}
 			l := s[i].(map[string]interface{})
 			if v, ok := l["additional_properties"]; ok {
 				{
@@ -547,73 +439,11 @@ func resourceHyperflexServerFirmwareVersionUpdate(d *schema.ResourceData, meta i
 					}
 				}
 			}
-			o.SetClassId("hyperflex.ServerFirmwareVersionEntry")
-			if v, ok := l["constraint"]; ok {
-				{
-					p := make([]models.HyperflexAppSettingConstraint, 0, 1)
-					s := v.([]interface{})
-					for i := 0; i < len(s); i++ {
-						l := s[i].(map[string]interface{})
-						o := models.NewHyperflexAppSettingConstraintWithDefaults()
-						if v, ok := l["additional_properties"]; ok {
-							{
-								x := []byte(v.(string))
-								var x1 interface{}
-								err := json.Unmarshal(x, &x1)
-								if err == nil && x1 != nil {
-									o.AdditionalProperties = x1.(map[string]interface{})
-								}
-							}
-						}
-						o.SetClassId("hyperflex.AppSettingConstraint")
-						if v, ok := l["hxdp_version"]; ok {
-							{
-								x := (v.(string))
-								o.SetHxdpVersion(x)
-							}
-						}
-						if v, ok := l["hypervisor_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetHypervisorType(x)
-							}
-						}
-						if v, ok := l["mgmt_platform"]; ok {
-							{
-								x := (v.(string))
-								o.SetMgmtPlatform(x)
-							}
-						}
-						if v, ok := l["object_type"]; ok {
-							{
-								x := (v.(string))
-								o.SetObjectType(x)
-							}
-						}
-						if v, ok := l["server_model"]; ok {
-							{
-								x := (v.(string))
-								o.SetServerModel(x)
-							}
-						}
-						p = append(p, *o)
-					}
-					if len(p) > 0 {
-						x := p[0]
-						o.SetConstraint(x)
-					}
-				}
-			}
-			if v, ok := l["label"]; ok {
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
 				{
 					x := (v.(string))
-					o.SetLabel(x)
-				}
-			}
-			if v, ok := l["name"]; ok {
-				{
-					x := (v.(string))
-					o.SetName(x)
+					o.SetMoid(x)
 				}
 			}
 			if v, ok := l["object_type"]; ok {
@@ -622,13 +452,13 @@ func resourceHyperflexServerFirmwareVersionUpdate(d *schema.ResourceData, meta i
 					o.SetObjectType(x)
 				}
 			}
-			if v, ok := l["value"]; ok {
+			if v, ok := l["selector"]; ok {
 				{
 					x := (v.(string))
-					o.SetValue(x)
+					o.SetSelector(x)
 				}
 			}
-			x = append(x, *o)
+			x = append(x, models.MoMoRefAsHyperflexServerFirmwareVersionEntryRelationship(o))
 		}
 		if len(x) > 0 {
 			o.SetServerFirmwareVersionEntries(x)
@@ -672,23 +502,24 @@ func resourceHyperflexServerFirmwareVersionUpdate(d *schema.ResourceData, meta i
 	}
 
 	r := conn.ApiClient.HyperflexApi.UpdateHyperflexServerFirmwareVersion(conn.ctx, d.Id()).HyperflexServerFirmwareVersion(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating HyperflexServerFirmwareVersion: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexServerFirmwareVersionRead(d, meta)
+	return resourceHyperflexServerFirmwareVersionRead(c, d, meta)
 }
 
-func resourceHyperflexServerFirmwareVersionDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexServerFirmwareVersionDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexServerFirmwareVersion(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting HyperflexServerFirmwareVersion object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

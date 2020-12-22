@@ -1,13 +1,12 @@
-
 ---
+subcategory: "recovery"
 layout: "intersight"
 page_title: "Intersight: intersight_recovery_backup_config_policy"
-sidebar_current: "docs-intersight-resource-recovery-backup-config-policy"
 description: |-
   Backup config policy which contains all the required inputs to do backup on a local or remote server.
 ---
 
-# Resource: intersight_recovery._backup_config_policy
+# Resource: intersight_recovery_backup_config_policy
 Backup config policy which contains all the required inputs to do backup on a local or remote server.
 ## Argument Reference
 The following arguments are supported:
@@ -48,3 +47,10 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `user_name`:(string) Username for the backup server. 
+
+
+## Import
+`intersight_recovery_backup_config_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_recovery_backup_config_policy.example 1234567890987654321abcde
+```

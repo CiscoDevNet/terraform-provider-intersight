@@ -1,13 +1,12 @@
-
 ---
+subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_system_qos_policy"
-sidebar_current: "docs-intersight-resource-fabric-system-qos-policy"
 description: |-
   Configuration object sent by user to setup Quality of Service (QoS) for this switch.
 ---
 
-# Resource: intersight_fabric._system_qos_policy
+# Resource: intersight_fabric_system_qos_policy
 Configuration object sent by user to setup Quality of Service (QoS) for this switch.
 ## Argument Reference
 The following arguments are supported:
@@ -54,3 +53,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_fabric_system_qos_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_fabric_system_qos_policy.example 1234567890987654321abcde
+```

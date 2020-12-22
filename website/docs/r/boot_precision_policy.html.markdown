@@ -1,13 +1,12 @@
-
 ---
+subcategory: "boot"
 layout: "intersight"
 page_title: "Intersight: intersight_boot_precision_policy"
-sidebar_current: "docs-intersight-resource-boot-precision-policy"
 description: |-
   Boot order policy models a reusable boot order configuration that can be applied to multiple servers via profile association. It supports advanced boot order configuration on Cisco CIMC servers.
 ---
 
-# Resource: intersight_boot._precision_policy
+# Resource: intersight_boot_precision_policy
 Boot order policy models a reusable boot order configuration that can be applied to multiple servers via profile association. It supports advanced boot order configuration on Cisco CIMC servers.
 ## Argument Reference
 The following arguments are supported:
@@ -50,3 +49,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_boot_precision_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_boot_precision_policy.example 1234567890987654321abcde
+```

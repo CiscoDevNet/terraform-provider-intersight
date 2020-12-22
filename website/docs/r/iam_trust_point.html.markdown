@@ -1,15 +1,14 @@
-
 ---
+subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_trust_point"
-sidebar_current: "docs-intersight-resource-iam-trust-point"
 description: |-
   To affirm the identity of trusted source.
 Allows import of third-party CA certificates in X.509 (CER) format.
 It can be a root CA or an trust chain that leads to a root CA.
 ---
 
-# Resource: intersight_iam._trust_point
+# Resource: intersight_iam_trust_point
 To affirm the identity of trusted source.
 Allows import of third-party CA certificates in X.509 (CER) format.
 It can be a root CA or an trust chain that leads to a root CA.
@@ -47,7 +46,7 @@ This complex property has following sub-properties:
                 (Array of schema.TypeString) -
     + `state`:
                 (Array of schema.TypeString) -
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `pem_certificate`:(string) The base64 encoded certificate in PEM format. 
   + `sha256_fingerprint`:(string)(Computed) The computed SHA-256 fingerprint of the certificate. Equivalent to 'openssl x509 -fingerprint -sha256'. 
   + `signature_algorithm`:(string)(Computed) Signature algorithm, as specified in [RFC 5280](https://tools.ietf.org/html/rfc5280). 
@@ -78,3 +77,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_iam_trust_point` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_iam_trust_point.example 1234567890987654321abcde
+```

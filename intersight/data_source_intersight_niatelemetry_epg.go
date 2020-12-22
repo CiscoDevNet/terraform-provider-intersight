@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceNiatelemetryEpg() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceNiatelemetryEpgRead,
+		ReadContext: dataSourceNiatelemetryEpgRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -25,7 +26,7 @@ func dataSourceNiatelemetryEpg() *schema.Resource {
 				Optional:    true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -187,10 +188,11 @@ func dataSourceNiatelemetryEpg() *schema.Resource {
 	}
 }
 
-func dataSourceNiatelemetryEpgRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceNiatelemetryEpgRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.NiatelemetryEpg{}
 	if v, ok := d.GetOk("azure_pack_count"); ok {
 		x := int64(v.(int))
@@ -275,25 +277,25 @@ func dataSourceNiatelemetryEpgRead(d *schema.ResourceData, meta interface{}) err
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of NiatelemetryEpg object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.NiatelemetryApi.GetNiatelemetryEpgList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.NiatelemetryApi.GetNiatelemetryEpgList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching NiatelemetryEpg: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for NiatelemetryEpg list: %s", err.Error())
 	}
 	var s = &models.NiatelemetryEpgList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to NiatelemetryEpg: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to NiatelemetryEpg list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for NiatelemetryEpg did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -302,81 +304,81 @@ func dataSourceNiatelemetryEpgRead(d *schema.ResourceData, meta interface{}) err
 			var s = &models.NiatelemetryEpg{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("azure_pack_count", (s.GetAzurePackCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property AzurePackCount: %+v", err)
+				return diag.Errorf("error occurred while setting property AzurePackCount: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("dn", (s.GetDn())); err != nil {
-				return fmt.Errorf("error occurred while setting property Dn: %+v", err)
+				return diag.Errorf("error occurred while setting property Dn: %s", err.Error())
 			}
 			if err := d.Set("epg_delimiter_count", (s.GetEpgDelimiterCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property EpgDelimiterCount: %+v", err)
+				return diag.Errorf("error occurred while setting property EpgDelimiterCount: %s", err.Error())
 			}
 			if err := d.Set("fc_npv_count", (s.GetFcNpvCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property FcNpvCount: %+v", err)
+				return diag.Errorf("error occurred while setting property FcNpvCount: %s", err.Error())
 			}
 			if err := d.Set("fcoe_count", (s.GetFcoeCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property FcoeCount: %+v", err)
+				return diag.Errorf("error occurred while setting property FcoeCount: %s", err.Error())
 			}
 			if err := d.Set("fv_rs_dom_att_count", (s.GetFvRsDomAttCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property FvRsDomAttCount: %+v", err)
+				return diag.Errorf("error occurred while setting property FvRsDomAttCount: %s", err.Error())
 			}
 			if err := d.Set("intra_epg_dvs_bm_count", (s.GetIntraEpgDvsBmCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property IntraEpgDvsBmCount: %+v", err)
+				return diag.Errorf("error occurred while setting property IntraEpgDvsBmCount: %s", err.Error())
 			}
 			if err := d.Set("intra_epg_hyperv", (s.GetIntraEpgHyperv())); err != nil {
-				return fmt.Errorf("error occurred while setting property IntraEpgHyperv: %+v", err)
+				return diag.Errorf("error occurred while setting property IntraEpgHyperv: %s", err.Error())
 			}
 			if err := d.Set("is_attr_based", (s.GetIsAttrBased())); err != nil {
-				return fmt.Errorf("error occurred while setting property IsAttrBased: %+v", err)
+				return diag.Errorf("error occurred while setting property IsAttrBased: %s", err.Error())
 			}
 			if err := d.Set("microsegmentation", (s.GetMicrosegmentation())); err != nil {
-				return fmt.Errorf("error occurred while setting property Microsegmentation: %+v", err)
+				return diag.Errorf("error occurred while setting property Microsegmentation: %s", err.Error())
 			}
 			if err := d.Set("microsoft_useg_count", (s.GetMicrosoftUsegCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property MicrosoftUsegCount: %+v", err)
+				return diag.Errorf("error occurred while setting property MicrosoftUsegCount: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("name", (s.GetName())); err != nil {
-				return fmt.Errorf("error occurred while setting property Name: %+v", err)
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("orchsl_dev_vip_cfg_count", (s.GetOrchslDevVipCfgCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property OrchslDevVipCfgCount: %+v", err)
+				return diag.Errorf("error occurred while setting property OrchslDevVipCfgCount: %s", err.Error())
 			}
 			if err := d.Set("record_type", (s.GetRecordType())); err != nil {
-				return fmt.Errorf("error occurred while setting property RecordType: %+v", err)
+				return diag.Errorf("error occurred while setting property RecordType: %s", err.Error())
 			}
 			if err := d.Set("record_version", (s.GetRecordVersion())); err != nil {
-				return fmt.Errorf("error occurred while setting property RecordVersion: %+v", err)
+				return diag.Errorf("error occurred while setting property RecordVersion: %s", err.Error())
 			}
 
 			if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property RegisteredDevice: %+v", err)
+				return diag.Errorf("error occurred while setting property RegisteredDevice: %s", err.Error())
 			}
 			if err := d.Set("site_name", (s.GetSiteName())); err != nil {
-				return fmt.Errorf("error occurred while setting property SiteName: %+v", err)
+				return diag.Errorf("error occurred while setting property SiteName: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("useg_hyperv_count", (s.GetUsegHypervCount())); err != nil {
-				return fmt.Errorf("error occurred while setting property UsegHypervCount: %+v", err)
+				return diag.Errorf("error occurred while setting property UsegHypervCount: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

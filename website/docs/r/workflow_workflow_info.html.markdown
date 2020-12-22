@@ -1,13 +1,12 @@
-
 ---
+subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_workflow_info"
-sidebar_current: "docs-intersight-resource-workflow-workflow-info"
 description: |-
   Contains information for a workflow execution which is a runtime instance of workflow.
 ---
 
-# Resource: intersight_workflow._workflow_info
+# Resource: intersight_workflow_workflow_info
 Contains information for a workflow execution which is a runtime instance of workflow.
 ## Argument Reference
 The following arguments are supported:
@@ -155,3 +154,11 @@ This complex property has following sub-properties:
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `workflow_meta_type`:(string) The type of workflow meta. Derived from the workflow meta that is used to launch this workflow instance.* `SystemDefined` - System defined workflow definition.* `UserDefined` - User defined workflow definition.* `Dynamic` - Dynamically defined workflow definition. 
 * `workflow_task_count`:(int)(Computed) Total number of workflow tasks in this workflow. 
+* `workflow_worker_task_count`:(int)(Computed) Total number of worker tasks in this workflow. This count doesn't include the control tasks in the workflow. 
+
+
+## Import
+`intersight_workflow_workflow_info` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_workflow_workflow_info.example 1234567890987654321abcde
+```

@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -12,6 +12,7 @@
 package intersight
 
 import (
+	"bytes"
 	_context "context"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
@@ -48,7 +49,7 @@ func (r ApiCreateSdwanProfileRequest) IfNoneMatch(ifNoneMatch string) ApiCreateS
 	return r
 }
 
-func (r ApiCreateSdwanProfileRequest) Execute() (SdwanProfile, *_nethttp.Response, error) {
+func (r ApiCreateSdwanProfileRequest) Execute() (SdwanProfile, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateSdwanProfileExecute(r)
 }
 
@@ -68,19 +69,21 @@ func (a *SdwanApiService) CreateSdwanProfile(ctx _context.Context) ApiCreateSdwa
  * Execute executes the request
  * @return SdwanProfile
  */
-func (a *SdwanApiService) CreateSdwanProfileExecute(r ApiCreateSdwanProfileRequest) (SdwanProfile, *_nethttp.Response, error) {
+func (a *SdwanApiService) CreateSdwanProfileExecute(r ApiCreateSdwanProfileRequest) (SdwanProfile, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdwanProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.CreateSdwanProfile")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/Profiles"
@@ -89,7 +92,8 @@ func (a *SdwanApiService) CreateSdwanProfileExecute(r ApiCreateSdwanProfileReque
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.sdwanProfile == nil {
-		return localVarReturnValue, nil, reportError("sdwanProfile is required and must be specified")
+		executionError.error = "sdwanProfile is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -119,18 +123,22 @@ func (a *SdwanApiService) CreateSdwanProfileExecute(r ApiCreateSdwanProfileReque
 	localVarPostBody = r.sdwanProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -197,7 +205,7 @@ func (a *SdwanApiService) CreateSdwanProfileExecute(r ApiCreateSdwanProfileReque
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateSdwanRouterNodeRequest struct {
@@ -221,7 +229,7 @@ func (r ApiCreateSdwanRouterNodeRequest) IfNoneMatch(ifNoneMatch string) ApiCrea
 	return r
 }
 
-func (r ApiCreateSdwanRouterNodeRequest) Execute() (SdwanRouterNode, *_nethttp.Response, error) {
+func (r ApiCreateSdwanRouterNodeRequest) Execute() (SdwanRouterNode, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateSdwanRouterNodeExecute(r)
 }
 
@@ -241,19 +249,21 @@ func (a *SdwanApiService) CreateSdwanRouterNode(ctx _context.Context) ApiCreateS
  * Execute executes the request
  * @return SdwanRouterNode
  */
-func (a *SdwanApiService) CreateSdwanRouterNodeExecute(r ApiCreateSdwanRouterNodeRequest) (SdwanRouterNode, *_nethttp.Response, error) {
+func (a *SdwanApiService) CreateSdwanRouterNodeExecute(r ApiCreateSdwanRouterNodeRequest) (SdwanRouterNode, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdwanRouterNode
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.CreateSdwanRouterNode")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/RouterNodes"
@@ -262,7 +272,8 @@ func (a *SdwanApiService) CreateSdwanRouterNodeExecute(r ApiCreateSdwanRouterNod
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.sdwanRouterNode == nil {
-		return localVarReturnValue, nil, reportError("sdwanRouterNode is required and must be specified")
+		executionError.error = "sdwanRouterNode is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -292,18 +303,22 @@ func (a *SdwanApiService) CreateSdwanRouterNodeExecute(r ApiCreateSdwanRouterNod
 	localVarPostBody = r.sdwanRouterNode
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -370,7 +385,7 @@ func (a *SdwanApiService) CreateSdwanRouterNodeExecute(r ApiCreateSdwanRouterNod
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateSdwanRouterPolicyRequest struct {
@@ -394,7 +409,7 @@ func (r ApiCreateSdwanRouterPolicyRequest) IfNoneMatch(ifNoneMatch string) ApiCr
 	return r
 }
 
-func (r ApiCreateSdwanRouterPolicyRequest) Execute() (SdwanRouterPolicy, *_nethttp.Response, error) {
+func (r ApiCreateSdwanRouterPolicyRequest) Execute() (SdwanRouterPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateSdwanRouterPolicyExecute(r)
 }
 
@@ -414,19 +429,21 @@ func (a *SdwanApiService) CreateSdwanRouterPolicy(ctx _context.Context) ApiCreat
  * Execute executes the request
  * @return SdwanRouterPolicy
  */
-func (a *SdwanApiService) CreateSdwanRouterPolicyExecute(r ApiCreateSdwanRouterPolicyRequest) (SdwanRouterPolicy, *_nethttp.Response, error) {
+func (a *SdwanApiService) CreateSdwanRouterPolicyExecute(r ApiCreateSdwanRouterPolicyRequest) (SdwanRouterPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdwanRouterPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.CreateSdwanRouterPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/RouterPolicies"
@@ -435,7 +452,8 @@ func (a *SdwanApiService) CreateSdwanRouterPolicyExecute(r ApiCreateSdwanRouterP
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.sdwanRouterPolicy == nil {
-		return localVarReturnValue, nil, reportError("sdwanRouterPolicy is required and must be specified")
+		executionError.error = "sdwanRouterPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -465,18 +483,22 @@ func (a *SdwanApiService) CreateSdwanRouterPolicyExecute(r ApiCreateSdwanRouterP
 	localVarPostBody = r.sdwanRouterPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -543,7 +565,7 @@ func (a *SdwanApiService) CreateSdwanRouterPolicyExecute(r ApiCreateSdwanRouterP
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiCreateSdwanVmanageAccountPolicyRequest struct {
@@ -567,7 +589,7 @@ func (r ApiCreateSdwanVmanageAccountPolicyRequest) IfNoneMatch(ifNoneMatch strin
 	return r
 }
 
-func (r ApiCreateSdwanVmanageAccountPolicyRequest) Execute() (SdwanVmanageAccountPolicy, *_nethttp.Response, error) {
+func (r ApiCreateSdwanVmanageAccountPolicyRequest) Execute() (SdwanVmanageAccountPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateSdwanVmanageAccountPolicyExecute(r)
 }
 
@@ -587,19 +609,21 @@ func (a *SdwanApiService) CreateSdwanVmanageAccountPolicy(ctx _context.Context) 
  * Execute executes the request
  * @return SdwanVmanageAccountPolicy
  */
-func (a *SdwanApiService) CreateSdwanVmanageAccountPolicyExecute(r ApiCreateSdwanVmanageAccountPolicyRequest) (SdwanVmanageAccountPolicy, *_nethttp.Response, error) {
+func (a *SdwanApiService) CreateSdwanVmanageAccountPolicyExecute(r ApiCreateSdwanVmanageAccountPolicyRequest) (SdwanVmanageAccountPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdwanVmanageAccountPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.CreateSdwanVmanageAccountPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/VmanageAccountPolicies"
@@ -608,7 +632,8 @@ func (a *SdwanApiService) CreateSdwanVmanageAccountPolicyExecute(r ApiCreateSdwa
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.sdwanVmanageAccountPolicy == nil {
-		return localVarReturnValue, nil, reportError("sdwanVmanageAccountPolicy is required and must be specified")
+		executionError.error = "sdwanVmanageAccountPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -638,18 +663,22 @@ func (a *SdwanApiService) CreateSdwanVmanageAccountPolicyExecute(r ApiCreateSdwa
 	localVarPostBody = r.sdwanVmanageAccountPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -716,7 +745,7 @@ func (a *SdwanApiService) CreateSdwanVmanageAccountPolicyExecute(r ApiCreateSdwa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiDeleteSdwanProfileRequest struct {
@@ -725,7 +754,7 @@ type ApiDeleteSdwanProfileRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteSdwanProfileRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteSdwanProfileRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteSdwanProfileExecute(r)
 }
 
@@ -746,18 +775,20 @@ func (a *SdwanApiService) DeleteSdwanProfile(ctx _context.Context, moid string) 
 /*
  * Execute executes the request
  */
-func (a *SdwanApiService) DeleteSdwanProfileExecute(r ApiDeleteSdwanProfileRequest) (*_nethttp.Response, error) {
+func (a *SdwanApiService) DeleteSdwanProfileExecute(r ApiDeleteSdwanProfileRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.DeleteSdwanProfile")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/Profiles/{Moid}"
@@ -786,18 +817,22 @@ func (a *SdwanApiService) DeleteSdwanProfileExecute(r ApiDeleteSdwanProfileReque
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -855,7 +890,7 @@ func (a *SdwanApiService) DeleteSdwanProfileExecute(r ApiDeleteSdwanProfileReque
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteSdwanRouterNodeRequest struct {
@@ -864,7 +899,7 @@ type ApiDeleteSdwanRouterNodeRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteSdwanRouterNodeRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteSdwanRouterNodeRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteSdwanRouterNodeExecute(r)
 }
 
@@ -885,18 +920,20 @@ func (a *SdwanApiService) DeleteSdwanRouterNode(ctx _context.Context, moid strin
 /*
  * Execute executes the request
  */
-func (a *SdwanApiService) DeleteSdwanRouterNodeExecute(r ApiDeleteSdwanRouterNodeRequest) (*_nethttp.Response, error) {
+func (a *SdwanApiService) DeleteSdwanRouterNodeExecute(r ApiDeleteSdwanRouterNodeRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.DeleteSdwanRouterNode")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/RouterNodes/{Moid}"
@@ -925,18 +962,22 @@ func (a *SdwanApiService) DeleteSdwanRouterNodeExecute(r ApiDeleteSdwanRouterNod
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -994,7 +1035,7 @@ func (a *SdwanApiService) DeleteSdwanRouterNodeExecute(r ApiDeleteSdwanRouterNod
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteSdwanRouterPolicyRequest struct {
@@ -1003,7 +1044,7 @@ type ApiDeleteSdwanRouterPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteSdwanRouterPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteSdwanRouterPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteSdwanRouterPolicyExecute(r)
 }
 
@@ -1024,18 +1065,20 @@ func (a *SdwanApiService) DeleteSdwanRouterPolicy(ctx _context.Context, moid str
 /*
  * Execute executes the request
  */
-func (a *SdwanApiService) DeleteSdwanRouterPolicyExecute(r ApiDeleteSdwanRouterPolicyRequest) (*_nethttp.Response, error) {
+func (a *SdwanApiService) DeleteSdwanRouterPolicyExecute(r ApiDeleteSdwanRouterPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.DeleteSdwanRouterPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/RouterPolicies/{Moid}"
@@ -1064,18 +1107,22 @@ func (a *SdwanApiService) DeleteSdwanRouterPolicyExecute(r ApiDeleteSdwanRouterP
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1133,7 +1180,7 @@ func (a *SdwanApiService) DeleteSdwanRouterPolicyExecute(r ApiDeleteSdwanRouterP
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiDeleteSdwanVmanageAccountPolicyRequest struct {
@@ -1142,7 +1189,7 @@ type ApiDeleteSdwanVmanageAccountPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteSdwanVmanageAccountPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteSdwanVmanageAccountPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteSdwanVmanageAccountPolicyExecute(r)
 }
 
@@ -1163,18 +1210,20 @@ func (a *SdwanApiService) DeleteSdwanVmanageAccountPolicy(ctx _context.Context, 
 /*
  * Execute executes the request
  */
-func (a *SdwanApiService) DeleteSdwanVmanageAccountPolicyExecute(r ApiDeleteSdwanVmanageAccountPolicyRequest) (*_nethttp.Response, error) {
+func (a *SdwanApiService) DeleteSdwanVmanageAccountPolicyExecute(r ApiDeleteSdwanVmanageAccountPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.DeleteSdwanVmanageAccountPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/VmanageAccountPolicies/{Moid}"
@@ -1203,18 +1252,22 @@ func (a *SdwanApiService) DeleteSdwanVmanageAccountPolicyExecute(r ApiDeleteSdwa
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1272,7 +1325,7 @@ func (a *SdwanApiService) DeleteSdwanVmanageAccountPolicyExecute(r ApiDeleteSdwa
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiGetSdwanProfileByMoidRequest struct {
@@ -1281,7 +1334,7 @@ type ApiGetSdwanProfileByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetSdwanProfileByMoidRequest) Execute() (SdwanProfile, *_nethttp.Response, error) {
+func (r ApiGetSdwanProfileByMoidRequest) Execute() (SdwanProfile, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetSdwanProfileByMoidExecute(r)
 }
 
@@ -1303,19 +1356,21 @@ func (a *SdwanApiService) GetSdwanProfileByMoid(ctx _context.Context, moid strin
  * Execute executes the request
  * @return SdwanProfile
  */
-func (a *SdwanApiService) GetSdwanProfileByMoidExecute(r ApiGetSdwanProfileByMoidRequest) (SdwanProfile, *_nethttp.Response, error) {
+func (a *SdwanApiService) GetSdwanProfileByMoidExecute(r ApiGetSdwanProfileByMoidRequest) (SdwanProfile, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdwanProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.GetSdwanProfileByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/Profiles/{Moid}"
@@ -1344,18 +1399,22 @@ func (a *SdwanApiService) GetSdwanProfileByMoidExecute(r ApiGetSdwanProfileByMoi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1422,7 +1481,7 @@ func (a *SdwanApiService) GetSdwanProfileByMoidExecute(r ApiGetSdwanProfileByMoi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetSdwanProfileListRequest struct {
@@ -1486,7 +1545,7 @@ func (r ApiGetSdwanProfileListRequest) Tags(tags string) ApiGetSdwanProfileListR
 	return r
 }
 
-func (r ApiGetSdwanProfileListRequest) Execute() (SdwanProfileResponse, *_nethttp.Response, error) {
+func (r ApiGetSdwanProfileListRequest) Execute() (SdwanProfileResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetSdwanProfileListExecute(r)
 }
 
@@ -1506,19 +1565,21 @@ func (a *SdwanApiService) GetSdwanProfileList(ctx _context.Context) ApiGetSdwanP
  * Execute executes the request
  * @return SdwanProfileResponse
  */
-func (a *SdwanApiService) GetSdwanProfileListExecute(r ApiGetSdwanProfileListRequest) (SdwanProfileResponse, *_nethttp.Response, error) {
+func (a *SdwanApiService) GetSdwanProfileListExecute(r ApiGetSdwanProfileListRequest) (SdwanProfileResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdwanProfileResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.GetSdwanProfileList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/Profiles"
@@ -1579,18 +1640,22 @@ func (a *SdwanApiService) GetSdwanProfileListExecute(r ApiGetSdwanProfileListReq
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1657,7 +1722,7 @@ func (a *SdwanApiService) GetSdwanProfileListExecute(r ApiGetSdwanProfileListReq
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetSdwanRouterNodeByMoidRequest struct {
@@ -1666,7 +1731,7 @@ type ApiGetSdwanRouterNodeByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetSdwanRouterNodeByMoidRequest) Execute() (SdwanRouterNode, *_nethttp.Response, error) {
+func (r ApiGetSdwanRouterNodeByMoidRequest) Execute() (SdwanRouterNode, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetSdwanRouterNodeByMoidExecute(r)
 }
 
@@ -1688,19 +1753,21 @@ func (a *SdwanApiService) GetSdwanRouterNodeByMoid(ctx _context.Context, moid st
  * Execute executes the request
  * @return SdwanRouterNode
  */
-func (a *SdwanApiService) GetSdwanRouterNodeByMoidExecute(r ApiGetSdwanRouterNodeByMoidRequest) (SdwanRouterNode, *_nethttp.Response, error) {
+func (a *SdwanApiService) GetSdwanRouterNodeByMoidExecute(r ApiGetSdwanRouterNodeByMoidRequest) (SdwanRouterNode, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdwanRouterNode
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.GetSdwanRouterNodeByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/RouterNodes/{Moid}"
@@ -1729,18 +1796,22 @@ func (a *SdwanApiService) GetSdwanRouterNodeByMoidExecute(r ApiGetSdwanRouterNod
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1807,7 +1878,7 @@ func (a *SdwanApiService) GetSdwanRouterNodeByMoidExecute(r ApiGetSdwanRouterNod
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetSdwanRouterNodeListRequest struct {
@@ -1871,7 +1942,7 @@ func (r ApiGetSdwanRouterNodeListRequest) Tags(tags string) ApiGetSdwanRouterNod
 	return r
 }
 
-func (r ApiGetSdwanRouterNodeListRequest) Execute() (SdwanRouterNodeResponse, *_nethttp.Response, error) {
+func (r ApiGetSdwanRouterNodeListRequest) Execute() (SdwanRouterNodeResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetSdwanRouterNodeListExecute(r)
 }
 
@@ -1891,19 +1962,21 @@ func (a *SdwanApiService) GetSdwanRouterNodeList(ctx _context.Context) ApiGetSdw
  * Execute executes the request
  * @return SdwanRouterNodeResponse
  */
-func (a *SdwanApiService) GetSdwanRouterNodeListExecute(r ApiGetSdwanRouterNodeListRequest) (SdwanRouterNodeResponse, *_nethttp.Response, error) {
+func (a *SdwanApiService) GetSdwanRouterNodeListExecute(r ApiGetSdwanRouterNodeListRequest) (SdwanRouterNodeResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdwanRouterNodeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.GetSdwanRouterNodeList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/RouterNodes"
@@ -1964,18 +2037,22 @@ func (a *SdwanApiService) GetSdwanRouterNodeListExecute(r ApiGetSdwanRouterNodeL
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2042,7 +2119,7 @@ func (a *SdwanApiService) GetSdwanRouterNodeListExecute(r ApiGetSdwanRouterNodeL
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetSdwanRouterPolicyByMoidRequest struct {
@@ -2051,7 +2128,7 @@ type ApiGetSdwanRouterPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetSdwanRouterPolicyByMoidRequest) Execute() (SdwanRouterPolicy, *_nethttp.Response, error) {
+func (r ApiGetSdwanRouterPolicyByMoidRequest) Execute() (SdwanRouterPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetSdwanRouterPolicyByMoidExecute(r)
 }
 
@@ -2073,19 +2150,21 @@ func (a *SdwanApiService) GetSdwanRouterPolicyByMoid(ctx _context.Context, moid 
  * Execute executes the request
  * @return SdwanRouterPolicy
  */
-func (a *SdwanApiService) GetSdwanRouterPolicyByMoidExecute(r ApiGetSdwanRouterPolicyByMoidRequest) (SdwanRouterPolicy, *_nethttp.Response, error) {
+func (a *SdwanApiService) GetSdwanRouterPolicyByMoidExecute(r ApiGetSdwanRouterPolicyByMoidRequest) (SdwanRouterPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdwanRouterPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.GetSdwanRouterPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/RouterPolicies/{Moid}"
@@ -2114,18 +2193,22 @@ func (a *SdwanApiService) GetSdwanRouterPolicyByMoidExecute(r ApiGetSdwanRouterP
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2192,7 +2275,7 @@ func (a *SdwanApiService) GetSdwanRouterPolicyByMoidExecute(r ApiGetSdwanRouterP
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetSdwanRouterPolicyListRequest struct {
@@ -2256,7 +2339,7 @@ func (r ApiGetSdwanRouterPolicyListRequest) Tags(tags string) ApiGetSdwanRouterP
 	return r
 }
 
-func (r ApiGetSdwanRouterPolicyListRequest) Execute() (SdwanRouterPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetSdwanRouterPolicyListRequest) Execute() (SdwanRouterPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetSdwanRouterPolicyListExecute(r)
 }
 
@@ -2276,19 +2359,21 @@ func (a *SdwanApiService) GetSdwanRouterPolicyList(ctx _context.Context) ApiGetS
  * Execute executes the request
  * @return SdwanRouterPolicyResponse
  */
-func (a *SdwanApiService) GetSdwanRouterPolicyListExecute(r ApiGetSdwanRouterPolicyListRequest) (SdwanRouterPolicyResponse, *_nethttp.Response, error) {
+func (a *SdwanApiService) GetSdwanRouterPolicyListExecute(r ApiGetSdwanRouterPolicyListRequest) (SdwanRouterPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdwanRouterPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.GetSdwanRouterPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/RouterPolicies"
@@ -2349,18 +2434,22 @@ func (a *SdwanApiService) GetSdwanRouterPolicyListExecute(r ApiGetSdwanRouterPol
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2427,7 +2516,7 @@ func (a *SdwanApiService) GetSdwanRouterPolicyListExecute(r ApiGetSdwanRouterPol
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetSdwanVmanageAccountPolicyByMoidRequest struct {
@@ -2436,7 +2525,7 @@ type ApiGetSdwanVmanageAccountPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetSdwanVmanageAccountPolicyByMoidRequest) Execute() (SdwanVmanageAccountPolicy, *_nethttp.Response, error) {
+func (r ApiGetSdwanVmanageAccountPolicyByMoidRequest) Execute() (SdwanVmanageAccountPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetSdwanVmanageAccountPolicyByMoidExecute(r)
 }
 
@@ -2458,19 +2547,21 @@ func (a *SdwanApiService) GetSdwanVmanageAccountPolicyByMoid(ctx _context.Contex
  * Execute executes the request
  * @return SdwanVmanageAccountPolicy
  */
-func (a *SdwanApiService) GetSdwanVmanageAccountPolicyByMoidExecute(r ApiGetSdwanVmanageAccountPolicyByMoidRequest) (SdwanVmanageAccountPolicy, *_nethttp.Response, error) {
+func (a *SdwanApiService) GetSdwanVmanageAccountPolicyByMoidExecute(r ApiGetSdwanVmanageAccountPolicyByMoidRequest) (SdwanVmanageAccountPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdwanVmanageAccountPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.GetSdwanVmanageAccountPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/VmanageAccountPolicies/{Moid}"
@@ -2499,18 +2590,22 @@ func (a *SdwanApiService) GetSdwanVmanageAccountPolicyByMoidExecute(r ApiGetSdwa
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2577,7 +2672,7 @@ func (a *SdwanApiService) GetSdwanVmanageAccountPolicyByMoidExecute(r ApiGetSdwa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetSdwanVmanageAccountPolicyListRequest struct {
@@ -2641,7 +2736,7 @@ func (r ApiGetSdwanVmanageAccountPolicyListRequest) Tags(tags string) ApiGetSdwa
 	return r
 }
 
-func (r ApiGetSdwanVmanageAccountPolicyListRequest) Execute() (SdwanVmanageAccountPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetSdwanVmanageAccountPolicyListRequest) Execute() (SdwanVmanageAccountPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetSdwanVmanageAccountPolicyListExecute(r)
 }
 
@@ -2661,19 +2756,21 @@ func (a *SdwanApiService) GetSdwanVmanageAccountPolicyList(ctx _context.Context)
  * Execute executes the request
  * @return SdwanVmanageAccountPolicyResponse
  */
-func (a *SdwanApiService) GetSdwanVmanageAccountPolicyListExecute(r ApiGetSdwanVmanageAccountPolicyListRequest) (SdwanVmanageAccountPolicyResponse, *_nethttp.Response, error) {
+func (a *SdwanApiService) GetSdwanVmanageAccountPolicyListExecute(r ApiGetSdwanVmanageAccountPolicyListRequest) (SdwanVmanageAccountPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdwanVmanageAccountPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.GetSdwanVmanageAccountPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/VmanageAccountPolicies"
@@ -2734,18 +2831,22 @@ func (a *SdwanApiService) GetSdwanVmanageAccountPolicyListExecute(r ApiGetSdwanV
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2812,7 +2913,7 @@ func (a *SdwanApiService) GetSdwanVmanageAccountPolicyListExecute(r ApiGetSdwanV
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchSdwanProfileRequest struct {
@@ -2832,7 +2933,7 @@ func (r ApiPatchSdwanProfileRequest) IfMatch(ifMatch string) ApiPatchSdwanProfil
 	return r
 }
 
-func (r ApiPatchSdwanProfileRequest) Execute() (SdwanProfile, *_nethttp.Response, error) {
+func (r ApiPatchSdwanProfileRequest) Execute() (SdwanProfile, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchSdwanProfileExecute(r)
 }
 
@@ -2854,19 +2955,21 @@ func (a *SdwanApiService) PatchSdwanProfile(ctx _context.Context, moid string) A
  * Execute executes the request
  * @return SdwanProfile
  */
-func (a *SdwanApiService) PatchSdwanProfileExecute(r ApiPatchSdwanProfileRequest) (SdwanProfile, *_nethttp.Response, error) {
+func (a *SdwanApiService) PatchSdwanProfileExecute(r ApiPatchSdwanProfileRequest) (SdwanProfile, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdwanProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.PatchSdwanProfile")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/Profiles/{Moid}"
@@ -2876,7 +2979,8 @@ func (a *SdwanApiService) PatchSdwanProfileExecute(r ApiPatchSdwanProfileRequest
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.sdwanProfile == nil {
-		return localVarReturnValue, nil, reportError("sdwanProfile is required and must be specified")
+		executionError.error = "sdwanProfile is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -2903,18 +3007,22 @@ func (a *SdwanApiService) PatchSdwanProfileExecute(r ApiPatchSdwanProfileRequest
 	localVarPostBody = r.sdwanProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2981,7 +3089,7 @@ func (a *SdwanApiService) PatchSdwanProfileExecute(r ApiPatchSdwanProfileRequest
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchSdwanRouterNodeRequest struct {
@@ -3001,7 +3109,7 @@ func (r ApiPatchSdwanRouterNodeRequest) IfMatch(ifMatch string) ApiPatchSdwanRou
 	return r
 }
 
-func (r ApiPatchSdwanRouterNodeRequest) Execute() (SdwanRouterNode, *_nethttp.Response, error) {
+func (r ApiPatchSdwanRouterNodeRequest) Execute() (SdwanRouterNode, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchSdwanRouterNodeExecute(r)
 }
 
@@ -3023,19 +3131,21 @@ func (a *SdwanApiService) PatchSdwanRouterNode(ctx _context.Context, moid string
  * Execute executes the request
  * @return SdwanRouterNode
  */
-func (a *SdwanApiService) PatchSdwanRouterNodeExecute(r ApiPatchSdwanRouterNodeRequest) (SdwanRouterNode, *_nethttp.Response, error) {
+func (a *SdwanApiService) PatchSdwanRouterNodeExecute(r ApiPatchSdwanRouterNodeRequest) (SdwanRouterNode, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdwanRouterNode
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.PatchSdwanRouterNode")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/RouterNodes/{Moid}"
@@ -3045,7 +3155,8 @@ func (a *SdwanApiService) PatchSdwanRouterNodeExecute(r ApiPatchSdwanRouterNodeR
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.sdwanRouterNode == nil {
-		return localVarReturnValue, nil, reportError("sdwanRouterNode is required and must be specified")
+		executionError.error = "sdwanRouterNode is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3072,18 +3183,22 @@ func (a *SdwanApiService) PatchSdwanRouterNodeExecute(r ApiPatchSdwanRouterNodeR
 	localVarPostBody = r.sdwanRouterNode
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3150,7 +3265,7 @@ func (a *SdwanApiService) PatchSdwanRouterNodeExecute(r ApiPatchSdwanRouterNodeR
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchSdwanRouterPolicyRequest struct {
@@ -3170,7 +3285,7 @@ func (r ApiPatchSdwanRouterPolicyRequest) IfMatch(ifMatch string) ApiPatchSdwanR
 	return r
 }
 
-func (r ApiPatchSdwanRouterPolicyRequest) Execute() (SdwanRouterPolicy, *_nethttp.Response, error) {
+func (r ApiPatchSdwanRouterPolicyRequest) Execute() (SdwanRouterPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchSdwanRouterPolicyExecute(r)
 }
 
@@ -3192,19 +3307,21 @@ func (a *SdwanApiService) PatchSdwanRouterPolicy(ctx _context.Context, moid stri
  * Execute executes the request
  * @return SdwanRouterPolicy
  */
-func (a *SdwanApiService) PatchSdwanRouterPolicyExecute(r ApiPatchSdwanRouterPolicyRequest) (SdwanRouterPolicy, *_nethttp.Response, error) {
+func (a *SdwanApiService) PatchSdwanRouterPolicyExecute(r ApiPatchSdwanRouterPolicyRequest) (SdwanRouterPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdwanRouterPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.PatchSdwanRouterPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/RouterPolicies/{Moid}"
@@ -3214,7 +3331,8 @@ func (a *SdwanApiService) PatchSdwanRouterPolicyExecute(r ApiPatchSdwanRouterPol
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.sdwanRouterPolicy == nil {
-		return localVarReturnValue, nil, reportError("sdwanRouterPolicy is required and must be specified")
+		executionError.error = "sdwanRouterPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3241,18 +3359,22 @@ func (a *SdwanApiService) PatchSdwanRouterPolicyExecute(r ApiPatchSdwanRouterPol
 	localVarPostBody = r.sdwanRouterPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3319,7 +3441,7 @@ func (a *SdwanApiService) PatchSdwanRouterPolicyExecute(r ApiPatchSdwanRouterPol
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchSdwanVmanageAccountPolicyRequest struct {
@@ -3339,7 +3461,7 @@ func (r ApiPatchSdwanVmanageAccountPolicyRequest) IfMatch(ifMatch string) ApiPat
 	return r
 }
 
-func (r ApiPatchSdwanVmanageAccountPolicyRequest) Execute() (SdwanVmanageAccountPolicy, *_nethttp.Response, error) {
+func (r ApiPatchSdwanVmanageAccountPolicyRequest) Execute() (SdwanVmanageAccountPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchSdwanVmanageAccountPolicyExecute(r)
 }
 
@@ -3361,19 +3483,21 @@ func (a *SdwanApiService) PatchSdwanVmanageAccountPolicy(ctx _context.Context, m
  * Execute executes the request
  * @return SdwanVmanageAccountPolicy
  */
-func (a *SdwanApiService) PatchSdwanVmanageAccountPolicyExecute(r ApiPatchSdwanVmanageAccountPolicyRequest) (SdwanVmanageAccountPolicy, *_nethttp.Response, error) {
+func (a *SdwanApiService) PatchSdwanVmanageAccountPolicyExecute(r ApiPatchSdwanVmanageAccountPolicyRequest) (SdwanVmanageAccountPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdwanVmanageAccountPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.PatchSdwanVmanageAccountPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/VmanageAccountPolicies/{Moid}"
@@ -3383,7 +3507,8 @@ func (a *SdwanApiService) PatchSdwanVmanageAccountPolicyExecute(r ApiPatchSdwanV
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.sdwanVmanageAccountPolicy == nil {
-		return localVarReturnValue, nil, reportError("sdwanVmanageAccountPolicy is required and must be specified")
+		executionError.error = "sdwanVmanageAccountPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3410,18 +3535,22 @@ func (a *SdwanApiService) PatchSdwanVmanageAccountPolicyExecute(r ApiPatchSdwanV
 	localVarPostBody = r.sdwanVmanageAccountPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3488,7 +3617,7 @@ func (a *SdwanApiService) PatchSdwanVmanageAccountPolicyExecute(r ApiPatchSdwanV
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateSdwanProfileRequest struct {
@@ -3508,7 +3637,7 @@ func (r ApiUpdateSdwanProfileRequest) IfMatch(ifMatch string) ApiUpdateSdwanProf
 	return r
 }
 
-func (r ApiUpdateSdwanProfileRequest) Execute() (SdwanProfile, *_nethttp.Response, error) {
+func (r ApiUpdateSdwanProfileRequest) Execute() (SdwanProfile, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateSdwanProfileExecute(r)
 }
 
@@ -3530,19 +3659,21 @@ func (a *SdwanApiService) UpdateSdwanProfile(ctx _context.Context, moid string) 
  * Execute executes the request
  * @return SdwanProfile
  */
-func (a *SdwanApiService) UpdateSdwanProfileExecute(r ApiUpdateSdwanProfileRequest) (SdwanProfile, *_nethttp.Response, error) {
+func (a *SdwanApiService) UpdateSdwanProfileExecute(r ApiUpdateSdwanProfileRequest) (SdwanProfile, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdwanProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.UpdateSdwanProfile")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/Profiles/{Moid}"
@@ -3552,7 +3683,8 @@ func (a *SdwanApiService) UpdateSdwanProfileExecute(r ApiUpdateSdwanProfileReque
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.sdwanProfile == nil {
-		return localVarReturnValue, nil, reportError("sdwanProfile is required and must be specified")
+		executionError.error = "sdwanProfile is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3579,18 +3711,22 @@ func (a *SdwanApiService) UpdateSdwanProfileExecute(r ApiUpdateSdwanProfileReque
 	localVarPostBody = r.sdwanProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3657,7 +3793,7 @@ func (a *SdwanApiService) UpdateSdwanProfileExecute(r ApiUpdateSdwanProfileReque
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateSdwanRouterNodeRequest struct {
@@ -3677,7 +3813,7 @@ func (r ApiUpdateSdwanRouterNodeRequest) IfMatch(ifMatch string) ApiUpdateSdwanR
 	return r
 }
 
-func (r ApiUpdateSdwanRouterNodeRequest) Execute() (SdwanRouterNode, *_nethttp.Response, error) {
+func (r ApiUpdateSdwanRouterNodeRequest) Execute() (SdwanRouterNode, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateSdwanRouterNodeExecute(r)
 }
 
@@ -3699,19 +3835,21 @@ func (a *SdwanApiService) UpdateSdwanRouterNode(ctx _context.Context, moid strin
  * Execute executes the request
  * @return SdwanRouterNode
  */
-func (a *SdwanApiService) UpdateSdwanRouterNodeExecute(r ApiUpdateSdwanRouterNodeRequest) (SdwanRouterNode, *_nethttp.Response, error) {
+func (a *SdwanApiService) UpdateSdwanRouterNodeExecute(r ApiUpdateSdwanRouterNodeRequest) (SdwanRouterNode, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdwanRouterNode
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.UpdateSdwanRouterNode")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/RouterNodes/{Moid}"
@@ -3721,7 +3859,8 @@ func (a *SdwanApiService) UpdateSdwanRouterNodeExecute(r ApiUpdateSdwanRouterNod
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.sdwanRouterNode == nil {
-		return localVarReturnValue, nil, reportError("sdwanRouterNode is required and must be specified")
+		executionError.error = "sdwanRouterNode is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3748,18 +3887,22 @@ func (a *SdwanApiService) UpdateSdwanRouterNodeExecute(r ApiUpdateSdwanRouterNod
 	localVarPostBody = r.sdwanRouterNode
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3826,7 +3969,7 @@ func (a *SdwanApiService) UpdateSdwanRouterNodeExecute(r ApiUpdateSdwanRouterNod
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateSdwanRouterPolicyRequest struct {
@@ -3846,7 +3989,7 @@ func (r ApiUpdateSdwanRouterPolicyRequest) IfMatch(ifMatch string) ApiUpdateSdwa
 	return r
 }
 
-func (r ApiUpdateSdwanRouterPolicyRequest) Execute() (SdwanRouterPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateSdwanRouterPolicyRequest) Execute() (SdwanRouterPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateSdwanRouterPolicyExecute(r)
 }
 
@@ -3868,19 +4011,21 @@ func (a *SdwanApiService) UpdateSdwanRouterPolicy(ctx _context.Context, moid str
  * Execute executes the request
  * @return SdwanRouterPolicy
  */
-func (a *SdwanApiService) UpdateSdwanRouterPolicyExecute(r ApiUpdateSdwanRouterPolicyRequest) (SdwanRouterPolicy, *_nethttp.Response, error) {
+func (a *SdwanApiService) UpdateSdwanRouterPolicyExecute(r ApiUpdateSdwanRouterPolicyRequest) (SdwanRouterPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdwanRouterPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.UpdateSdwanRouterPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/RouterPolicies/{Moid}"
@@ -3890,7 +4035,8 @@ func (a *SdwanApiService) UpdateSdwanRouterPolicyExecute(r ApiUpdateSdwanRouterP
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.sdwanRouterPolicy == nil {
-		return localVarReturnValue, nil, reportError("sdwanRouterPolicy is required and must be specified")
+		executionError.error = "sdwanRouterPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -3917,18 +4063,22 @@ func (a *SdwanApiService) UpdateSdwanRouterPolicyExecute(r ApiUpdateSdwanRouterP
 	localVarPostBody = r.sdwanRouterPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3995,7 +4145,7 @@ func (a *SdwanApiService) UpdateSdwanRouterPolicyExecute(r ApiUpdateSdwanRouterP
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateSdwanVmanageAccountPolicyRequest struct {
@@ -4015,7 +4165,7 @@ func (r ApiUpdateSdwanVmanageAccountPolicyRequest) IfMatch(ifMatch string) ApiUp
 	return r
 }
 
-func (r ApiUpdateSdwanVmanageAccountPolicyRequest) Execute() (SdwanVmanageAccountPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateSdwanVmanageAccountPolicyRequest) Execute() (SdwanVmanageAccountPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateSdwanVmanageAccountPolicyExecute(r)
 }
 
@@ -4037,19 +4187,21 @@ func (a *SdwanApiService) UpdateSdwanVmanageAccountPolicy(ctx _context.Context, 
  * Execute executes the request
  * @return SdwanVmanageAccountPolicy
  */
-func (a *SdwanApiService) UpdateSdwanVmanageAccountPolicyExecute(r ApiUpdateSdwanVmanageAccountPolicyRequest) (SdwanVmanageAccountPolicy, *_nethttp.Response, error) {
+func (a *SdwanApiService) UpdateSdwanVmanageAccountPolicyExecute(r ApiUpdateSdwanVmanageAccountPolicyRequest) (SdwanVmanageAccountPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  SdwanVmanageAccountPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SdwanApiService.UpdateSdwanVmanageAccountPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/sdwan/VmanageAccountPolicies/{Moid}"
@@ -4059,7 +4211,8 @@ func (a *SdwanApiService) UpdateSdwanVmanageAccountPolicyExecute(r ApiUpdateSdwa
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.sdwanVmanageAccountPolicy == nil {
-		return localVarReturnValue, nil, reportError("sdwanVmanageAccountPolicy is required and must be specified")
+		executionError.error = "sdwanVmanageAccountPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -4086,18 +4239,22 @@ func (a *SdwanApiService) UpdateSdwanVmanageAccountPolicyExecute(r ApiUpdateSdwa
 	localVarPostBody = r.sdwanVmanageAccountPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4164,5 +4321,5 @@ func (a *SdwanApiService) UpdateSdwanVmanageAccountPolicyExecute(r ApiUpdateSdwa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }

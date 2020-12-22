@@ -1,8 +1,7 @@
-
 ---
+subcategory: "workflow"
 layout: "intersight"
 page_title: "Intersight: intersight_workflow_batch_api_executor"
-sidebar_current: "docs-intersight-resource-workflow-batch-api-executor"
 description: |-
   Intersight allows generic API tasks to be created by taking the API request
 body and a response parser specification in the form of content.Grammar object.
@@ -11,7 +10,7 @@ task execution. Each API request takes the request body and a response parser
 specification.
 ---
 
-# Resource: intersight_workflow._batch_api_executor
+# Resource: intersight_workflow_batch_api_executor
 Intersight allows generic API tasks to be created by taking the API request
 body and a response parser specification in the form of content.Grammar object.
 Batch API associates the list of API requests to be executed as part of single
@@ -57,7 +56,7 @@ This complex property has following sub-properties:
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name for the batch API task. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `outcomes`: All the possible outcomes of this task are captured here. Outcomes propertyis a collection property of type workflow.Outcome objects.The outcomes can be mapped to the message to be shown. The outcomes areevaluated in the order they are given. At the end of the outcomes list,an catchall success/fail outcome can be added with condition as 'true'.This is an optionalproperty and if not specified the task will be marked as success. 
 * `output`: Intersight Orchestrator allows the extraction of required values from APIresponses using the API response grammar. These extracted values can be mappedto task output parameters defined in task definition.The mapping of API output parameters to the task output parameters is providedas JSON in this property. 
 * `retry_from_failed_api`:(bool) When an execution of a nth API in the Batch fails,Retry from falied API flag indicates if the execution should start from the nth API or the first API during task retry.By default the value is set to false. 
@@ -76,3 +75,10 @@ This complex property has following sub-properties:
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
+
+
+## Import
+`intersight_workflow_batch_api_executor` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_workflow_batch_api_executor.example 1234567890987654321abcde
+```

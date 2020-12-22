@@ -1,13 +1,12 @@
-
 ---
+subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_user"
-sidebar_current: "docs-intersight-resource-iam-user"
 description: |-
   The Intersight account user.
 ---
 
-# Resource: intersight_iam._user
+# Resource: intersight_iam_user
 The Intersight account user.
 ## Argument Reference
 The following arguments are supported:
@@ -95,3 +94,10 @@ This complex property has following sub-properties:
 * `user_id_or_email`:(string) UserID or email as configured in the IdP. 
 * `user_type`:(string)(Computed) Type of the User. If a user is added manually by specifying the email address, or has logged in using groups, based on the IdP attributes received during authentication. If added manually, the user type will be static, otherwise dynamic. 
 * `user_unique_identifier`:(string)(Computed) Unique id of the user used by the identity provider to store the user. 
+
+
+## Import
+`intersight_iam_user` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_iam_user.example 1234567890987654321abcde
+```

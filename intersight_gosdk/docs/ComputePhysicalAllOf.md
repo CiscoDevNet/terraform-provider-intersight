@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **AvailableMemory** | Pointer to **int64** | The amount of memory available on the server. | [optional] [readonly] 
 **BiosPostComplete** | Pointer to **bool** | The BIOS POST completion status of the server. | [optional] 
 **FaultSummary** | Pointer to **int64** | The fault summary for the server. | [optional] 
-**KvmIpAddresses** | Pointer to [**[]ComputeIpAddress**](compute.IpAddress.md) |  | [optional] 
+**KvmIpAddresses** | Pointer to [**[]ComputeIpAddress**](ComputeIpAddress.md) |  | [optional] 
 **ManagementMode** | Pointer to **string** | The management mode of the server. * &#x60;IntersightStandalone&#x60; - Intersight Standalone mode of operation. * &#x60;UCSM&#x60; - Unified Computing System Manager mode of operation. * &#x60;Intersight&#x60; - Intersight managed mode of operation. | [optional] [default to "IntersightStandalone"]
 **MemorySpeed** | Pointer to **string** | The maximum memory speed in MHz available on the server. | [optional] [readonly] 
 **MgmtIpAddress** | Pointer to **string** | Management address of the server. | [optional] 
@@ -32,17 +32,18 @@ Name | Type | Description | Notes
 **TotalMemory** | Pointer to **int64** | The total memory available on the server. | [optional] [readonly] 
 **UserLabel** | Pointer to **string** | The user defined label assigned to the server. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | The universally unique identity of the server. | [optional] [readonly] 
-**BootCddDevices** | Pointer to [**[]BootCddDeviceRelationship**](boot.CddDevice.Relationship.md) | An array of relationships to bootCddDevice resources. | [optional] 
-**BootHddDevices** | Pointer to [**[]BootHddDeviceRelationship**](boot.HddDevice.Relationship.md) | An array of relationships to bootHddDevice resources. | [optional] 
-**BootIscsiDevices** | Pointer to [**[]BootIscsiDeviceRelationship**](boot.IscsiDevice.Relationship.md) | An array of relationships to bootIscsiDevice resources. | [optional] 
-**BootNvmeDevices** | Pointer to [**[]BootNvmeDeviceRelationship**](boot.NvmeDevice.Relationship.md) | An array of relationships to bootNvmeDevice resources. | [optional] 
-**BootPchStorageDevices** | Pointer to [**[]BootPchStorageDeviceRelationship**](boot.PchStorageDevice.Relationship.md) | An array of relationships to bootPchStorageDevice resources. | [optional] 
-**BootPxeDevices** | Pointer to [**[]BootPxeDeviceRelationship**](boot.PxeDevice.Relationship.md) | An array of relationships to bootPxeDevice resources. | [optional] 
-**BootSanDevices** | Pointer to [**[]BootSanDeviceRelationship**](boot.SanDevice.Relationship.md) | An array of relationships to bootSanDevice resources. | [optional] 
-**BootSdDevices** | Pointer to [**[]BootSdDeviceRelationship**](boot.SdDevice.Relationship.md) | An array of relationships to bootSdDevice resources. | [optional] 
-**BootUefiShellDevices** | Pointer to [**[]BootUefiShellDeviceRelationship**](boot.UefiShellDevice.Relationship.md) | An array of relationships to bootUefiShellDevice resources. | [optional] 
-**BootUsbDevices** | Pointer to [**[]BootUsbDeviceRelationship**](boot.UsbDevice.Relationship.md) | An array of relationships to bootUsbDevice resources. | [optional] 
-**BootVmediaDevices** | Pointer to [**[]BootVmediaDeviceRelationship**](boot.VmediaDevice.Relationship.md) | An array of relationships to bootVmediaDevice resources. | [optional] 
+**BootCddDevices** | Pointer to [**[]BootCddDeviceRelationship**](BootCddDeviceRelationship.md) | An array of relationships to bootCddDevice resources. | [optional] 
+**BootDeviceBootSecurity** | Pointer to [**BootDeviceBootSecurityRelationship**](boot.DeviceBootSecurity.Relationship.md) |  | [optional] 
+**BootHddDevices** | Pointer to [**[]BootHddDeviceRelationship**](BootHddDeviceRelationship.md) | An array of relationships to bootHddDevice resources. | [optional] 
+**BootIscsiDevices** | Pointer to [**[]BootIscsiDeviceRelationship**](BootIscsiDeviceRelationship.md) | An array of relationships to bootIscsiDevice resources. | [optional] 
+**BootNvmeDevices** | Pointer to [**[]BootNvmeDeviceRelationship**](BootNvmeDeviceRelationship.md) | An array of relationships to bootNvmeDevice resources. | [optional] 
+**BootPchStorageDevices** | Pointer to [**[]BootPchStorageDeviceRelationship**](BootPchStorageDeviceRelationship.md) | An array of relationships to bootPchStorageDevice resources. | [optional] 
+**BootPxeDevices** | Pointer to [**[]BootPxeDeviceRelationship**](BootPxeDeviceRelationship.md) | An array of relationships to bootPxeDevice resources. | [optional] 
+**BootSanDevices** | Pointer to [**[]BootSanDeviceRelationship**](BootSanDeviceRelationship.md) | An array of relationships to bootSanDevice resources. | [optional] 
+**BootSdDevices** | Pointer to [**[]BootSdDeviceRelationship**](BootSdDeviceRelationship.md) | An array of relationships to bootSdDevice resources. | [optional] 
+**BootUefiShellDevices** | Pointer to [**[]BootUefiShellDeviceRelationship**](BootUefiShellDeviceRelationship.md) | An array of relationships to bootUefiShellDevice resources. | [optional] 
+**BootUsbDevices** | Pointer to [**[]BootUsbDeviceRelationship**](BootUsbDeviceRelationship.md) | An array of relationships to bootUsbDevice resources. | [optional] 
+**BootVmediaDevices** | Pointer to [**[]BootVmediaDeviceRelationship**](BootVmediaDeviceRelationship.md) | An array of relationships to bootVmediaDevice resources. | [optional] 
 **MgmtIdentity** | Pointer to [**EquipmentPhysicalIdentityRelationship**](equipment.PhysicalIdentity.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -809,6 +810,31 @@ HasBootCddDevices returns a boolean if a field has been set.
 `func (o *ComputePhysicalAllOf) UnsetBootCddDevices()`
 
 UnsetBootCddDevices ensures that no value is present for BootCddDevices, not even an explicit nil
+### GetBootDeviceBootSecurity
+
+`func (o *ComputePhysicalAllOf) GetBootDeviceBootSecurity() BootDeviceBootSecurityRelationship`
+
+GetBootDeviceBootSecurity returns the BootDeviceBootSecurity field if non-nil, zero value otherwise.
+
+### GetBootDeviceBootSecurityOk
+
+`func (o *ComputePhysicalAllOf) GetBootDeviceBootSecurityOk() (*BootDeviceBootSecurityRelationship, bool)`
+
+GetBootDeviceBootSecurityOk returns a tuple with the BootDeviceBootSecurity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBootDeviceBootSecurity
+
+`func (o *ComputePhysicalAllOf) SetBootDeviceBootSecurity(v BootDeviceBootSecurityRelationship)`
+
+SetBootDeviceBootSecurity sets BootDeviceBootSecurity field to given value.
+
+### HasBootDeviceBootSecurity
+
+`func (o *ComputePhysicalAllOf) HasBootDeviceBootSecurity() bool`
+
+HasBootDeviceBootSecurity returns a boolean if a field has been set.
+
 ### GetBootHddDevices
 
 `func (o *ComputePhysicalAllOf) GetBootHddDevices() []BootHddDeviceRelationship`

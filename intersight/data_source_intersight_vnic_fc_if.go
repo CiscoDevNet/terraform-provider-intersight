@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceVnicFcIf() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceVnicFcIfRead,
+		ReadContext: dataSourceVnicFcIfRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -492,10 +493,11 @@ func dataSourceVnicFcIf() *schema.Resource {
 	}
 }
 
-func dataSourceVnicFcIfRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.VnicFcIf{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -536,25 +538,25 @@ func dataSourceVnicFcIfRead(d *schema.ResourceData, meta interface{}) error {
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of VnicFcIf object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.VnicApi.GetVnicFcIfList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.VnicApi.GetVnicFcIfList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching VnicFcIf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for VnicFcIf list: %s", err.Error())
 	}
 	var s = &models.VnicFcIfList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to VnicFcIf: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to VnicFcIf list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for VnicFcIf did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -563,84 +565,84 @@ func dataSourceVnicFcIfRead(d *schema.ResourceData, meta interface{}) error {
 			var s = &models.VnicFcIf{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 
 			if err := d.Set("fc_adapter_policy", flattenMapVnicFcAdapterPolicyRelationship(s.GetFcAdapterPolicy(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property FcAdapterPolicy: %+v", err)
+				return diag.Errorf("error occurred while setting property FcAdapterPolicy: %s", err.Error())
 			}
 
 			if err := d.Set("fc_network_policy", flattenMapVnicFcNetworkPolicyRelationship(s.GetFcNetworkPolicy(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property FcNetworkPolicy: %+v", err)
+				return diag.Errorf("error occurred while setting property FcNetworkPolicy: %s", err.Error())
 			}
 
 			if err := d.Set("fc_qos_policy", flattenMapVnicFcQosPolicyRelationship(s.GetFcQosPolicy(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property FcQosPolicy: %+v", err)
+				return diag.Errorf("error occurred while setting property FcQosPolicy: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("name", (s.GetName())); err != nil {
-				return fmt.Errorf("error occurred while setting property Name: %+v", err)
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("order", (s.GetOrder())); err != nil {
-				return fmt.Errorf("error occurred while setting property Order: %+v", err)
+				return diag.Errorf("error occurred while setting property Order: %s", err.Error())
 			}
 			if err := d.Set("persistent_bindings", (s.GetPersistentBindings())); err != nil {
-				return fmt.Errorf("error occurred while setting property PersistentBindings: %+v", err)
+				return diag.Errorf("error occurred while setting property PersistentBindings: %s", err.Error())
 			}
 
 			if err := d.Set("placement", flattenMapVnicPlacementSettings(s.GetPlacement(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Placement: %+v", err)
+				return diag.Errorf("error occurred while setting property Placement: %s", err.Error())
 			}
 
 			if err := d.Set("profile", flattenMapPolicyAbstractConfigProfileRelationship(s.GetProfile(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Profile: %+v", err)
+				return diag.Errorf("error occurred while setting property Profile: %s", err.Error())
 			}
 
 			if err := d.Set("san_connectivity_policy", flattenMapVnicSanConnectivityPolicyRelationship(s.GetSanConnectivityPolicy(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property SanConnectivityPolicy: %+v", err)
+				return diag.Errorf("error occurred while setting property SanConnectivityPolicy: %s", err.Error())
 			}
 
 			if err := d.Set("scp_vhba", flattenMapVnicFcIfRelationship(s.GetScpVhba(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property ScpVhba: %+v", err)
+				return diag.Errorf("error occurred while setting property ScpVhba: %s", err.Error())
 			}
 
 			if err := d.Set("sp_vhbas", flattenListVnicFcIfRelationship(s.GetSpVhbas(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property SpVhbas: %+v", err)
+				return diag.Errorf("error occurred while setting property SpVhbas: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("type", (s.GetType())); err != nil {
-				return fmt.Errorf("error occurred while setting property Type: %+v", err)
+				return diag.Errorf("error occurred while setting property Type: %s", err.Error())
 			}
 			if err := d.Set("vif_id", (s.GetVifId())); err != nil {
-				return fmt.Errorf("error occurred while setting property VifId: %+v", err)
+				return diag.Errorf("error occurred while setting property VifId: %s", err.Error())
 			}
 			if err := d.Set("wwpn", (s.GetWwpn())); err != nil {
-				return fmt.Errorf("error occurred while setting property Wwpn: %+v", err)
+				return diag.Errorf("error occurred while setting property Wwpn: %s", err.Error())
 			}
 
 			if err := d.Set("wwpn_lease", flattenMapFcpoolLeaseRelationship(s.GetWwpnLease(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property WwpnLease: %+v", err)
+				return diag.Errorf("error occurred while setting property WwpnLease: %s", err.Error())
 			}
 
 			if err := d.Set("wwpn_pool", flattenMapFcpoolPoolRelationship(s.GetWwpnPool(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property WwpnPool: %+v", err)
+				return diag.Errorf("error occurred while setting property WwpnPool: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

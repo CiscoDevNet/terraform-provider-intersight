@@ -1,13 +1,12 @@
-
 ---
+subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_port_operation"
-sidebar_current: "docs-intersight-resource-fabric-port-operation"
 description: |-
   PortOperation objects allows the user to alter the state of the port.
 ---
 
-# Resource: intersight_fabric._port_operation
+# Resource: intersight_fabric_port_operation
 PortOperation objects allows the user to alter the state of the port.
 ## Argument Reference
 The following arguments are supported:
@@ -34,3 +33,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_fabric_port_operation` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_fabric_port_operation.example 1234567890987654321abcde
+```

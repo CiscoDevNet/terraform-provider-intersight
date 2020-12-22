@@ -1,13 +1,12 @@
-
 ---
+subcategory: "hyperflex"
 layout: "intersight"
 page_title: "Intersight: intersight_hyperflex_vcenter_config_policy"
-sidebar_current: "docs-intersight-resource-hyperflex-vcenter-config-policy"
 description: |-
   A policy specifying vCenter configuration.
 ---
 
-# Resource: intersight_hyperflex._vcenter_config_policy
+# Resource: intersight_hyperflex_vcenter_config_policy
 A policy specifying vCenter configuration.
 ## Argument Reference
 The following arguments are supported:
@@ -46,3 +45,10 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `username`:(string) The vCenter username (e.g. administrator@vsphere.local). 
+
+
+## Import
+`intersight_hyperflex_vcenter_config_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_hyperflex_vcenter_config_policy.example 1234567890987654321abcde
+```

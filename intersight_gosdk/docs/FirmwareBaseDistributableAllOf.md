@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. The enum values provides the list of concrete types that can be instantiated from this abstract type. | 
 **BundleType** | Pointer to **string** | The bundle type of the image, as published on cisco.com. | [optional] [readonly] 
-**ComponentMeta** | Pointer to [**[]FirmwareComponentMeta**](firmware.ComponentMeta.md) |  | [optional] 
+**ComponentMeta** | Pointer to [**[]FirmwareComponentMeta**](FirmwareComponentMeta.md) |  | [optional] 
 **Guid** | Pointer to **string** | The unique identifier for an image in a Cisco repository. | [optional] [readonly] 
 **Mdfid** | Pointer to **string** | The mdfid of the image provided by cisco.com. | [optional] 
 **Model** | Pointer to **string** | The endpoint model for which this firmware image is applicable. | [optional] 
@@ -16,8 +16,8 @@ Name | Type | Description | Notes
 **ReleaseNotesUrl** | Pointer to **string** | The url for the release notes of this image. | [optional] 
 **SoftwareTypeId** | Pointer to **string** | The software type id provided by cisco.com. | [optional] [readonly] 
 **SupportedModels** | Pointer to **[]string** |  | [optional] 
-**Vendor** | Pointer to **string** | The vendor or publisher of this file. | [optional] 
-**DistributableMetas** | Pointer to [**[]FirmwareDistributableMetaRelationship**](firmware.DistributableMeta.Relationship.md) | An array of relationships to firmwareDistributableMeta resources. | [optional] 
+**Vendor** | Pointer to **string** | The vendor or publisher of this file. | [optional] [default to "Cisco"]
+**DistributableMetas** | Pointer to [**[]FirmwareDistributableMetaRelationship**](FirmwareDistributableMetaRelationship.md) | An array of relationships to firmwareDistributableMeta resources. | [optional] 
 **Release** | Pointer to [**SoftwarerepositoryReleaseRelationship**](softwarerepository.Release.Relationship.md) |  | [optional] 
 
 ## Methods

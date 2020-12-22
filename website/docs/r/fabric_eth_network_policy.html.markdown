@@ -1,13 +1,12 @@
-
 ---
+subcategory: "fabric"
 layout: "intersight"
 page_title: "Intersight: intersight_fabric_eth_network_policy"
-sidebar_current: "docs-intersight-resource-fabric-eth-network-policy"
 description: |-
   A policy for all the Virtual LAN networks to be deployed on the Fabric Interconnect.
 ---
 
-# Resource: intersight_fabric._eth_network_policy
+# Resource: intersight_fabric_eth_network_policy
 A policy for all the Virtual LAN networks to be deployed on the Fabric Interconnect.
 ## Argument Reference
 The following arguments are supported:
@@ -40,3 +39,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_fabric_eth_network_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_fabric_eth_network_policy.example 1234567890987654321abcde
+```

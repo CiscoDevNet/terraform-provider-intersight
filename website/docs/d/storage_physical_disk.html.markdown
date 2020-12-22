@@ -1,19 +1,17 @@
-
 ---
+subcategory: "storage"
 layout: "intersight"
 page_title: "Intersight: intersight_storage_physical_disk"
-sidebar_current: "docs-intersight-data-source-storage-physical-disk"
 description: |-
-Physical Disk on a server.
+  Physical Disk on a server.
 ---
 
-# Data Source: intersight_storage._physical_disk
+# Data Source: intersight_storage_physical_disk
 Physical Disk on a server.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
 * `block_size`:(string) The block size of the physical disk in bytes. 
 * `bootable`:(string) This field identifies the disk drive as bootable if set to true. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `configuration_checkpoint`:(string) The current configuration checkpoint of the physical disk. 
 * `configuration_state`:(string) The current configuration state of the physical disk. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
@@ -30,7 +28,6 @@ The following arguments can be used to get data of already created objects in In
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `num_blocks`:(string) The number of blocks present on the physical disk. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `oper_power_state`:(string) Operational power of the physical disk. 
 * `oper_qualifier_reason`:(string) This reason for the operational status of the disk. 
 * `operability`:(string) This field identifies the disk operability of the disk. 

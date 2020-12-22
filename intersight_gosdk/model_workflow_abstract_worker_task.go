@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -31,7 +31,9 @@ type WorkflowAbstractWorkerTask struct {
 	// This specifies the name of the next task to run if Task succeeds.  This is the unique name given to the task instance within the workflow. In a graph model, denotes an edge to another Task Node.
 	OnSuccess *string `json:"OnSuccess,omitempty"`
 	// The task is disabled/enabled for rollback operation in this workflow if the task has rollback support.
-	RollbackDisabled     *bool `json:"RollbackDisabled,omitempty"`
+	RollbackDisabled *bool `json:"RollbackDisabled,omitempty"`
+	// UseDefault when set to true, means the default version of the task or workflow will be used at the time of execution. When this property is set then version for task or subworkflow cannot be set. When workflow is created or updated the default version of task or subworkflow will be used for validation, but when the workflow is executed the default version that that time will be used for validation and subsequent execution.
+	UseDefault           *bool `json:"UseDefault,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,6 +47,10 @@ func NewWorkflowAbstractWorkerTask(classId string, objectType string) *WorkflowA
 	this := WorkflowAbstractWorkerTask{}
 	this.ClassId = classId
 	this.ObjectType = objectType
+	var rollbackDisabled bool = false
+	this.RollbackDisabled = &rollbackDisabled
+	var useDefault bool = false
+	this.UseDefault = &useDefault
 	return &this
 }
 
@@ -53,6 +59,10 @@ func NewWorkflowAbstractWorkerTask(classId string, objectType string) *WorkflowA
 // but it doesn't guarantee that properties required by API are set
 func NewWorkflowAbstractWorkerTaskWithDefaults() *WorkflowAbstractWorkerTask {
 	this := WorkflowAbstractWorkerTask{}
+	var rollbackDisabled bool = false
+	this.RollbackDisabled = &rollbackDisabled
+	var useDefault bool = false
+	this.UseDefault = &useDefault
 	return &this
 }
 
@@ -233,6 +243,38 @@ func (o *WorkflowAbstractWorkerTask) SetRollbackDisabled(v bool) {
 	o.RollbackDisabled = &v
 }
 
+// GetUseDefault returns the UseDefault field value if set, zero value otherwise.
+func (o *WorkflowAbstractWorkerTask) GetUseDefault() bool {
+	if o == nil || o.UseDefault == nil {
+		var ret bool
+		return ret
+	}
+	return *o.UseDefault
+}
+
+// GetUseDefaultOk returns a tuple with the UseDefault field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WorkflowAbstractWorkerTask) GetUseDefaultOk() (*bool, bool) {
+	if o == nil || o.UseDefault == nil {
+		return nil, false
+	}
+	return o.UseDefault, true
+}
+
+// HasUseDefault returns a boolean if a field has been set.
+func (o *WorkflowAbstractWorkerTask) HasUseDefault() bool {
+	if o != nil && o.UseDefault != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUseDefault gets a reference to the given bool and assigns it to the UseDefault field.
+func (o *WorkflowAbstractWorkerTask) SetUseDefault(v bool) {
+	o.UseDefault = &v
+}
+
 func (o WorkflowAbstractWorkerTask) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	serializedWorkflowWorkflowTask, errWorkflowWorkflowTask := json.Marshal(o.WorkflowWorkflowTask)
@@ -261,6 +303,9 @@ func (o WorkflowAbstractWorkerTask) MarshalJSON() ([]byte, error) {
 	if o.RollbackDisabled != nil {
 		toSerialize["RollbackDisabled"] = o.RollbackDisabled
 	}
+	if o.UseDefault != nil {
+		toSerialize["UseDefault"] = o.UseDefault
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -283,6 +328,8 @@ func (o *WorkflowAbstractWorkerTask) UnmarshalJSON(bytes []byte) (err error) {
 		OnSuccess *string `json:"OnSuccess,omitempty"`
 		// The task is disabled/enabled for rollback operation in this workflow if the task has rollback support.
 		RollbackDisabled *bool `json:"RollbackDisabled,omitempty"`
+		// UseDefault when set to true, means the default version of the task or workflow will be used at the time of execution. When this property is set then version for task or subworkflow cannot be set. When workflow is created or updated the default version of task or subworkflow will be used for validation, but when the workflow is executed the default version that that time will be used for validation and subsequent execution.
+		UseDefault *bool `json:"UseDefault,omitempty"`
 	}
 
 	varWorkflowAbstractWorkerTaskWithoutEmbeddedStruct := WorkflowAbstractWorkerTaskWithoutEmbeddedStruct{}
@@ -296,6 +343,7 @@ func (o *WorkflowAbstractWorkerTask) UnmarshalJSON(bytes []byte) (err error) {
 		varWorkflowAbstractWorkerTask.OnFailure = varWorkflowAbstractWorkerTaskWithoutEmbeddedStruct.OnFailure
 		varWorkflowAbstractWorkerTask.OnSuccess = varWorkflowAbstractWorkerTaskWithoutEmbeddedStruct.OnSuccess
 		varWorkflowAbstractWorkerTask.RollbackDisabled = varWorkflowAbstractWorkerTaskWithoutEmbeddedStruct.RollbackDisabled
+		varWorkflowAbstractWorkerTask.UseDefault = varWorkflowAbstractWorkerTaskWithoutEmbeddedStruct.UseDefault
 		*o = WorkflowAbstractWorkerTask(varWorkflowAbstractWorkerTask)
 	} else {
 		return err
@@ -319,6 +367,7 @@ func (o *WorkflowAbstractWorkerTask) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "OnFailure")
 		delete(additionalProperties, "OnSuccess")
 		delete(additionalProperties, "RollbackDisabled")
+		delete(additionalProperties, "UseDefault")
 
 		// remove fields from embedded structs
 		reflectWorkflowWorkflowTask := reflect.ValueOf(o.WorkflowWorkflowTask)

@@ -8,9 +8,10 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "hyperflex.NodeConfigPolicy"]
 **DataIpRange** | Pointer to [**NullableHyperflexIpAddrRange**](hyperflex.IpAddrRange.md) |  | [optional] 
 **HxdpIpRange** | Pointer to [**NullableHyperflexIpAddrRange**](hyperflex.IpAddrRange.md) |  | [optional] 
+**HypervisorControlIpRange** | Pointer to [**NullableHyperflexIpAddrRange**](hyperflex.IpAddrRange.md) |  | [optional] 
 **MgmtIpRange** | Pointer to [**NullableHyperflexIpAddrRange**](hyperflex.IpAddrRange.md) |  | [optional] 
 **NodeNamePrefix** | Pointer to **string** | The node name prefix that is used to automatically generate the default hostname for each server. A dash (-) will be appended to the prefix followed by the node number to form a hostname. This default naming scheme can be manually overridden in the node configuration. The maximum length of a prefix is 60, must only contain alphanumeric characters or dash (-), and must start with an alphanumeric character. | [optional] 
-**ClusterProfiles** | Pointer to [**[]HyperflexClusterProfileRelationship**](hyperflex.ClusterProfile.Relationship.md) | An array of relationships to hyperflexClusterProfile resources. | [optional] 
+**ClusterProfiles** | Pointer to [**[]HyperflexClusterProfileRelationship**](HyperflexClusterProfileRelationship.md) | An array of relationships to hyperflexClusterProfile resources. | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 
 ## Methods
@@ -142,6 +143,41 @@ HasHxdpIpRange returns a boolean if a field has been set.
 `func (o *HyperflexNodeConfigPolicy) UnsetHxdpIpRange()`
 
 UnsetHxdpIpRange ensures that no value is present for HxdpIpRange, not even an explicit nil
+### GetHypervisorControlIpRange
+
+`func (o *HyperflexNodeConfigPolicy) GetHypervisorControlIpRange() HyperflexIpAddrRange`
+
+GetHypervisorControlIpRange returns the HypervisorControlIpRange field if non-nil, zero value otherwise.
+
+### GetHypervisorControlIpRangeOk
+
+`func (o *HyperflexNodeConfigPolicy) GetHypervisorControlIpRangeOk() (*HyperflexIpAddrRange, bool)`
+
+GetHypervisorControlIpRangeOk returns a tuple with the HypervisorControlIpRange field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHypervisorControlIpRange
+
+`func (o *HyperflexNodeConfigPolicy) SetHypervisorControlIpRange(v HyperflexIpAddrRange)`
+
+SetHypervisorControlIpRange sets HypervisorControlIpRange field to given value.
+
+### HasHypervisorControlIpRange
+
+`func (o *HyperflexNodeConfigPolicy) HasHypervisorControlIpRange() bool`
+
+HasHypervisorControlIpRange returns a boolean if a field has been set.
+
+### SetHypervisorControlIpRangeNil
+
+`func (o *HyperflexNodeConfigPolicy) SetHypervisorControlIpRangeNil(b bool)`
+
+ SetHypervisorControlIpRangeNil sets the value for HypervisorControlIpRange to be an explicit nil
+
+### UnsetHypervisorControlIpRange
+`func (o *HyperflexNodeConfigPolicy) UnsetHypervisorControlIpRange()`
+
+UnsetHypervisorControlIpRange ensures that no value is present for HypervisorControlIpRange, not even an explicit nil
 ### GetMgmtIpRange
 
 `func (o *HyperflexNodeConfigPolicy) GetMgmtIpRange() HyperflexIpAddrRange`

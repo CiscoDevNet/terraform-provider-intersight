@@ -1,22 +1,25 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
+	"strings"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceServerProfile() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceServerProfileCreate,
-		Read:   resourceServerProfileRead,
-		Update: resourceServerProfileUpdate,
-		Delete: resourceServerProfileDelete,
+		CreateContext: resourceServerProfileCreate,
+		ReadContext:   resourceServerProfileRead,
+		UpdateContext: resourceServerProfileUpdate,
+		DeleteContext: resourceServerProfileDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"action": {
 				Description: "User initiated action. Each profile type has its own supported actions. For HyperFlex cluster profile, the supported actions are -- Validate, Deploy, Continue, Retry, Abort, Unassign For server profile, the support actions are -- Deploy, Unassign.",
@@ -230,7 +233,7 @@ func resourceServerProfile() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -483,7 +486,7 @@ func resourceServerProfile() *schema.Resource {
 	}
 }
 
-func resourceServerProfileCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceServerProfileCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -986,113 +989,117 @@ func resourceServerProfileCreate(d *schema.ResourceData, meta interface{}) error
 	}
 
 	r := conn.ApiClient.ServerApi.CreateServerProfile(conn.ctx).ServerProfile(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating ServerProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceServerProfileRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceServerProfileRead(c, d, meta)
 }
 
-func resourceServerProfileRead(d *schema.ResourceData, meta interface{}) error {
+func resourceServerProfileRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.ServerApi.GetServerProfileByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "ServerProfile object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching ServerProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("action", (s.GetAction())); err != nil {
-		return fmt.Errorf("error occurred while setting property Action: %+v", err)
+		return diag.Errorf("error occurred while setting property Action in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("assigned_server", flattenMapComputePhysicalRelationship(s.GetAssignedServer(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property AssignedServer: %+v", err)
+		return diag.Errorf("error occurred while setting property AssignedServer in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("associated_server", flattenMapComputePhysicalRelationship(s.GetAssociatedServer(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property AssociatedServer: %+v", err)
+		return diag.Errorf("error occurred while setting property AssociatedServer in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("config_change_details", flattenListServerConfigChangeDetailRelationship(s.GetConfigChangeDetails(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ConfigChangeDetails: %+v", err)
+		return diag.Errorf("error occurred while setting property ConfigChangeDetails in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("config_changes", flattenMapPolicyConfigChange(s.GetConfigChanges(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ConfigChanges: %+v", err)
+		return diag.Errorf("error occurred while setting property ConfigChanges in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("config_context", flattenMapPolicyConfigContext(s.GetConfigContext(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ConfigContext: %+v", err)
+		return diag.Errorf("error occurred while setting property ConfigContext in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("config_result", flattenMapServerConfigResultRelationship(s.GetConfigResult(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ConfigResult: %+v", err)
+		return diag.Errorf("error occurred while setting property ConfigResult in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("is_pmc_deployed_secure_passphrase_set", (s.GetIsPmcDeployedSecurePassphraseSet())); err != nil {
-		return fmt.Errorf("error occurred while setting property IsPmcDeployedSecurePassphraseSet: %+v", err)
+		return diag.Errorf("error occurred while setting property IsPmcDeployedSecurePassphraseSet in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("running_workflows", flattenListWorkflowWorkflowInfoRelationship(s.GetRunningWorkflows(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property RunningWorkflows: %+v", err)
+		return diag.Errorf("error occurred while setting property RunningWorkflows in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("src_template", flattenMapPolicyAbstractProfileRelationship(s.GetSrcTemplate(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property SrcTemplate: %+v", err)
+		return diag.Errorf("error occurred while setting property SrcTemplate in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("target_platform", (s.GetTargetPlatform())); err != nil {
-		return fmt.Errorf("error occurred while setting property TargetPlatform: %+v", err)
+		return diag.Errorf("error occurred while setting property TargetPlatform in ServerProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("type", (s.GetType())); err != nil {
-		return fmt.Errorf("error occurred while setting property Type: %+v", err)
+		return diag.Errorf("error occurred while setting property Type in ServerProfile object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceServerProfileUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceServerProfileUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1614,33 +1621,38 @@ func resourceServerProfileUpdate(d *schema.ResourceData, meta interface{}) error
 	}
 
 	r := conn.ApiClient.ServerApi.UpdateServerProfile(conn.ctx, d.Id()).ServerProfile(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating ServerProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceServerProfileRead(d, meta)
+	return resourceServerProfileRead(c, d, meta)
 }
 
-func resourceServerProfileDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceServerProfileDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	var o = &models.ServerProfile{}
 	o.SetClassId("server.Profile")
 	o.SetObjectType("server.Profile")
 	o.SetAction("Unassign")
 	r := conn.ApiClient.ServerApi.UpdateServerProfile(conn.ctx, d.Id()).ServerProfile(*o)
-	_, _, e := r.Execute()
-	if e != nil {
-		return fmt.Errorf("error occurred while creating: %s", e.Error())
+	_, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Severity: diag.Warning, Summary: "ServerProfile object " + d.Id() + " is already deleted"})
+			return de
+		}
+		return diag.Errorf("error occurred while detaching server from ServerProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	time.Sleep(3 * time.Second)
 	p := conn.ApiClient.ServerApi.DeleteServerProfile(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting ServerProfile object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

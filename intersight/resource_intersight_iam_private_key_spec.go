@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceIamPrivateKeySpec() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceIamPrivateKeySpecCreate,
-		Read:   resourceIamPrivateKeySpecRead,
-		Update: resourceIamPrivateKeySpecUpdate,
-		Delete: resourceIamPrivateKeySpecDelete,
+		CreateContext: resourceIamPrivateKeySpecCreate,
+		ReadContext:   resourceIamPrivateKeySpecRead,
+		UpdateContext: resourceIamPrivateKeySpecUpdate,
+		DeleteContext: resourceIamPrivateKeySpecDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -100,7 +103,7 @@ func resourceIamPrivateKeySpec() *schema.Resource {
 				ForceNew:   true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -145,7 +148,7 @@ func resourceIamPrivateKeySpec() *schema.Resource {
 	}
 }
 
-func resourceIamPrivateKeySpecCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceIamPrivateKeySpecCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -284,61 +287,65 @@ func resourceIamPrivateKeySpecCreate(d *schema.ResourceData, meta interface{}) e
 	}
 
 	r := conn.ApiClient.IamApi.CreateIamPrivateKeySpec(conn.ctx).IamPrivateKeySpec(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating IamPrivateKeySpec: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceIamPrivateKeySpecRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceIamPrivateKeySpecRead(c, d, meta)
 }
 
-func resourceIamPrivateKeySpecRead(d *schema.ResourceData, meta interface{}) error {
+func resourceIamPrivateKeySpecRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.IamApi.GetIamPrivateKeySpecByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "IamPrivateKeySpec object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching IamPrivateKeySpec: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in IamPrivateKeySpec object: %s", err.Error())
 	}
 
 	if err := d.Set("algorithm", flattenMapPkixKeyGenerationSpec(s.GetAlgorithm(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Algorithm: %+v", err)
+		return diag.Errorf("error occurred while setting property Algorithm in IamPrivateKeySpec object: %s", err.Error())
 	}
 
 	if err := d.Set("certificate_request", flattenMapIamCertificateRequestRelationship(s.GetCertificateRequest(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property CertificateRequest: %+v", err)
+		return diag.Errorf("error occurred while setting property CertificateRequest in IamPrivateKeySpec object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in IamPrivateKeySpec object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in IamPrivateKeySpec object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in IamPrivateKeySpec object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in IamPrivateKeySpec object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceIamPrivateKeySpecUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceIamPrivateKeySpecUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -482,23 +489,24 @@ func resourceIamPrivateKeySpecUpdate(d *schema.ResourceData, meta interface{}) e
 	}
 
 	r := conn.ApiClient.IamApi.UpdateIamPrivateKeySpec(conn.ctx, d.Id()).IamPrivateKeySpec(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating IamPrivateKeySpec: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceIamPrivateKeySpecRead(d, meta)
+	return resourceIamPrivateKeySpecRead(c, d, meta)
 }
 
-func resourceIamPrivateKeySpecDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceIamPrivateKeySpecDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamPrivateKeySpec(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting IamPrivateKeySpec object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

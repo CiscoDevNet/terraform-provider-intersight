@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Count** | Pointer to **int32** | The total number of &#39;equipment.Chassis&#39; resources matching the request, accross all pages. The &#39;Count&#39; attribute is included when the HTTP GET request includes the &#39;$inlinecount&#39; parameter. | [optional] 
-**Results** | Pointer to [**[]EquipmentChassis**](equipment.Chassis.md) | The array of &#39;equipment.Chassis&#39; resources matching the request. | [optional] 
+**Results** | Pointer to [**[]EquipmentChassis**](EquipmentChassis.md) | The array of &#39;equipment.Chassis&#39; resources matching the request. | [optional] 
 
 ## Methods
 

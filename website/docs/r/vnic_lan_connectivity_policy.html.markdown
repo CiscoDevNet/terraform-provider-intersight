@@ -1,13 +1,12 @@
-
 ---
+subcategory: "vnic"
 layout: "intersight"
 page_title: "Intersight: intersight_vnic_lan_connectivity_policy"
-sidebar_current: "docs-intersight-resource-vnic-lan-connectivity-policy"
 description: |-
   A LAN Connectivity Policy determines the network resources and the connections between the server and the LAN on the network. This policy uses Consistent Device Naming to configure the vNIC. You can configure a usNIC or VMQ connection for the vNIC to improve network performance.
 ---
 
-# Resource: intersight_vnic._lan_connectivity_policy
+# Resource: intersight_vnic_lan_connectivity_policy
 A LAN Connectivity Policy determines the network resources and the connections between the server and the LAN on the network. This policy uses Consistent Device Naming to configure the vNIC. You can configure a usNIC or VMQ connection for the vNIC to improve network performance.
 ## Argument Reference
 The following arguments are supported:
@@ -50,3 +49,10 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `target_platform`:(string) The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight.* `Standalone` - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected.* `FIAttached` - Servers which are connected to a Fabric Interconnect that is managed by Intersight. 
+
+
+## Import
+`intersight_vnic_lan_connectivity_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_vnic_lan_connectivity_policy.example 1234567890987654321abcde
+```

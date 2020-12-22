@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceCapabilityEquipmentSlotArray() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceCapabilityEquipmentSlotArrayRead,
+		ReadContext: dataSourceCapabilityEquipmentSlotArrayRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -91,45 +92,6 @@ func dataSourceCapabilityEquipmentSlotArray() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-			"section": {
-				Description: "A reference to a capabilitySection resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
-				Computed: true,
-			},
 			"selector": {
 				Description: "Selector information for a Switch/Fabric-Interconnect hardware.",
 				Type:        schema.TypeString,
@@ -202,10 +164,11 @@ func dataSourceCapabilityEquipmentSlotArray() *schema.Resource {
 	}
 }
 
-func dataSourceCapabilityEquipmentSlotArrayRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceCapabilityEquipmentSlotArrayRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.CapabilityEquipmentSlotArray{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -302,25 +265,25 @@ func dataSourceCapabilityEquipmentSlotArrayRead(d *schema.ResourceData, meta int
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of CapabilityEquipmentSlotArray object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.CapabilityApi.GetCapabilityEquipmentSlotArrayList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.CapabilityApi.GetCapabilityEquipmentSlotArrayList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching CapabilityEquipmentSlotArray: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for CapabilityEquipmentSlotArray list: %s", err.Error())
 	}
 	var s = &models.CapabilityEquipmentSlotArrayList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to CapabilityEquipmentSlotArray: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to CapabilityEquipmentSlotArray list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for CapabilityEquipmentSlotArray did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -329,90 +292,86 @@ func dataSourceCapabilityEquipmentSlotArrayRead(d *schema.ResourceData, meta int
 			var s = &models.CapabilityEquipmentSlotArray{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("first_index", (s.GetFirstIndex())); err != nil {
-				return fmt.Errorf("error occurred while setting property FirstIndex: %+v", err)
+				return diag.Errorf("error occurred while setting property FirstIndex: %s", err.Error())
 			}
 			if err := d.Set("height", (s.GetHeight())); err != nil {
-				return fmt.Errorf("error occurred while setting property Height: %+v", err)
+				return diag.Errorf("error occurred while setting property Height: %s", err.Error())
 			}
 			if err := d.Set("horizontal_start_offset", (s.GetHorizontalStartOffset())); err != nil {
-				return fmt.Errorf("error occurred while setting property HorizontalStartOffset: %+v", err)
+				return diag.Errorf("error occurred while setting property HorizontalStartOffset: %s", err.Error())
 			}
 			if err := d.Set("inline_group_separation", (s.GetInlineGroupSeparation())); err != nil {
-				return fmt.Errorf("error occurred while setting property InlineGroupSeparation: %+v", err)
+				return diag.Errorf("error occurred while setting property InlineGroupSeparation: %s", err.Error())
 			}
 			if err := d.Set("inline_group_size", (s.GetInlineGroupSize())); err != nil {
-				return fmt.Errorf("error occurred while setting property InlineGroupSize: %+v", err)
+				return diag.Errorf("error occurred while setting property InlineGroupSize: %s", err.Error())
 			}
 			if err := d.Set("inline_offset", (s.GetInlineOffset())); err != nil {
-				return fmt.Errorf("error occurred while setting property InlineOffset: %+v", err)
+				return diag.Errorf("error occurred while setting property InlineOffset: %s", err.Error())
 			}
 			if err := d.Set("location", (s.GetLocation())); err != nil {
-				return fmt.Errorf("error occurred while setting property Location: %+v", err)
+				return diag.Errorf("error occurred while setting property Location: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("name", (s.GetName())); err != nil {
-				return fmt.Errorf("error occurred while setting property Name: %+v", err)
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("number_of_slots", (s.GetNumberOfSlots())); err != nil {
-				return fmt.Errorf("error occurred while setting property NumberOfSlots: %+v", err)
+				return diag.Errorf("error occurred while setting property NumberOfSlots: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("orientation", (s.GetOrientation())); err != nil {
-				return fmt.Errorf("error occurred while setting property Orientation: %+v", err)
+				return diag.Errorf("error occurred while setting property Orientation: %s", err.Error())
 			}
 			if err := d.Set("pid", (s.GetPid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Pid: %+v", err)
-			}
-
-			if err := d.Set("section", flattenMapCapabilitySectionRelationship(s.GetSection(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Section: %+v", err)
+				return diag.Errorf("error occurred while setting property Pid: %s", err.Error())
 			}
 			if err := d.Set("selector", (s.GetSelector())); err != nil {
-				return fmt.Errorf("error occurred while setting property Selector: %+v", err)
+				return diag.Errorf("error occurred while setting property Selector: %s", err.Error())
 			}
 			if err := d.Set("sku", (s.GetSku())); err != nil {
-				return fmt.Errorf("error occurred while setting property Sku: %+v", err)
+				return diag.Errorf("error occurred while setting property Sku: %s", err.Error())
 			}
 			if err := d.Set("slots_per_line", (s.GetSlotsPerLine())); err != nil {
-				return fmt.Errorf("error occurred while setting property SlotsPerLine: %+v", err)
+				return diag.Errorf("error occurred while setting property SlotsPerLine: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("transverse_group_separation", (s.GetTransverseGroupSeparation())); err != nil {
-				return fmt.Errorf("error occurred while setting property TransverseGroupSeparation: %+v", err)
+				return diag.Errorf("error occurred while setting property TransverseGroupSeparation: %s", err.Error())
 			}
 			if err := d.Set("transverse_group_size", (s.GetTransverseGroupSize())); err != nil {
-				return fmt.Errorf("error occurred while setting property TransverseGroupSize: %+v", err)
+				return diag.Errorf("error occurred while setting property TransverseGroupSize: %s", err.Error())
 			}
 			if err := d.Set("transverse_offset", (s.GetTransverseOffset())); err != nil {
-				return fmt.Errorf("error occurred while setting property TransverseOffset: %+v", err)
+				return diag.Errorf("error occurred while setting property TransverseOffset: %s", err.Error())
 			}
 			if err := d.Set("vertical_start_offset", (s.GetVerticalStartOffset())); err != nil {
-				return fmt.Errorf("error occurred while setting property VerticalStartOffset: %+v", err)
+				return diag.Errorf("error occurred while setting property VerticalStartOffset: %s", err.Error())
 			}
 			if err := d.Set("vid", (s.GetVid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Vid: %+v", err)
+				return diag.Errorf("error occurred while setting property Vid: %s", err.Error())
 			}
 			if err := d.Set("width", (s.GetWidth())); err != nil {
-				return fmt.Errorf("error occurred while setting property Width: %+v", err)
+				return diag.Errorf("error occurred while setting property Width: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

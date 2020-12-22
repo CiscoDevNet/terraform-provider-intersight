@@ -1,21 +1,24 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceSoftwarerepositoryRelease() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceSoftwarerepositoryReleaseCreate,
-		Read:   resourceSoftwarerepositoryReleaseRead,
-		Update: resourceSoftwarerepositoryReleaseUpdate,
-		Delete: resourceSoftwarerepositoryReleaseDelete,
+		CreateContext: resourceSoftwarerepositoryReleaseCreate,
+		ReadContext:   resourceSoftwarerepositoryReleaseRead,
+		UpdateContext: resourceSoftwarerepositoryReleaseUpdate,
+		DeleteContext: resourceSoftwarerepositoryReleaseDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -77,7 +80,7 @@ func resourceSoftwarerepositoryRelease() *schema.Resource {
 				ForceNew:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -130,7 +133,7 @@ func resourceSoftwarerepositoryRelease() *schema.Resource {
 	}
 }
 
-func resourceSoftwarerepositoryReleaseCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceSoftwarerepositoryReleaseCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -258,73 +261,77 @@ func resourceSoftwarerepositoryReleaseCreate(d *schema.ResourceData, meta interf
 	}
 
 	r := conn.ApiClient.SoftwarerepositoryApi.CreateSoftwarerepositoryRelease(conn.ctx).SoftwarerepositoryRelease(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating SoftwarerepositoryRelease: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceSoftwarerepositoryReleaseRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceSoftwarerepositoryReleaseRead(c, d, meta)
 }
 
-func resourceSoftwarerepositoryReleaseRead(d *schema.ResourceData, meta interface{}) error {
+func resourceSoftwarerepositoryReleaseRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.SoftwarerepositoryApi.GetSoftwarerepositoryReleaseByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "SoftwarerepositoryRelease object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching SoftwarerepositoryRelease: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in SoftwarerepositoryRelease object: %s", err.Error())
 	}
 
 	if err := d.Set("catalog", flattenMapSoftwarerepositoryCatalogRelationship(s.GetCatalog(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Catalog: %+v", err)
+		return diag.Errorf("error occurred while setting property Catalog in SoftwarerepositoryRelease object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in SoftwarerepositoryRelease object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in SoftwarerepositoryRelease object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in SoftwarerepositoryRelease object: %s", err.Error())
 	}
 
 	if err := d.Set("release_notes_url", (s.GetReleaseNotesUrl())); err != nil {
-		return fmt.Errorf("error occurred while setting property ReleaseNotesUrl: %+v", err)
+		return diag.Errorf("error occurred while setting property ReleaseNotesUrl in SoftwarerepositoryRelease object: %s", err.Error())
 	}
 
 	if err := d.Set("supported_models", (s.GetSupportedModels())); err != nil {
-		return fmt.Errorf("error occurred while setting property SupportedModels: %+v", err)
+		return diag.Errorf("error occurred while setting property SupportedModels in SoftwarerepositoryRelease object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in SoftwarerepositoryRelease object: %s", err.Error())
 	}
 
 	if err := d.Set("type", (s.GetType())); err != nil {
-		return fmt.Errorf("error occurred while setting property Type: %+v", err)
+		return diag.Errorf("error occurred while setting property Type in SoftwarerepositoryRelease object: %s", err.Error())
 	}
 
 	if err := d.Set("nr_version", (s.GetVersion())); err != nil {
-		return fmt.Errorf("error occurred while setting property Version: %+v", err)
+		return diag.Errorf("error occurred while setting property Version in SoftwarerepositoryRelease object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceSoftwarerepositoryReleaseUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceSoftwarerepositoryReleaseUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -460,23 +467,24 @@ func resourceSoftwarerepositoryReleaseUpdate(d *schema.ResourceData, meta interf
 	}
 
 	r := conn.ApiClient.SoftwarerepositoryApi.UpdateSoftwarerepositoryRelease(conn.ctx, d.Id()).SoftwarerepositoryRelease(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating SoftwarerepositoryRelease: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceSoftwarerepositoryReleaseRead(d, meta)
+	return resourceSoftwarerepositoryReleaseRead(c, d, meta)
 }
 
-func resourceSoftwarerepositoryReleaseDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceSoftwarerepositoryReleaseDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.SoftwarerepositoryApi.DeleteSoftwarerepositoryRelease(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting SoftwarerepositoryRelease object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

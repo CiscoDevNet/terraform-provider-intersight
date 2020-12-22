@@ -1,19 +1,20 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceStorageHyperFlexStorageContainer() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceStorageHyperFlexStorageContainerRead,
+		ReadContext: dataSourceStorageHyperFlexStorageContainerRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -241,10 +242,11 @@ func dataSourceStorageHyperFlexStorageContainer() *schema.Resource {
 	}
 }
 
-func dataSourceStorageHyperFlexStorageContainerRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceStorageHyperFlexStorageContainerRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.StorageHyperFlexStorageContainer{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -289,25 +291,25 @@ func dataSourceStorageHyperFlexStorageContainerRead(d *schema.ResourceData, meta
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of StorageHyperFlexStorageContainer object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.StorageApi.GetStorageHyperFlexStorageContainerList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.StorageApi.GetStorageHyperFlexStorageContainerList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching StorageHyperFlexStorageContainer: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for StorageHyperFlexStorageContainer list: %s", err.Error())
 	}
 	var s = &models.StorageHyperFlexStorageContainerList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to StorageHyperFlexStorageContainer: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to StorageHyperFlexStorageContainer list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for StorageHyperFlexStorageContainer did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -316,61 +318,61 @@ func dataSourceStorageHyperFlexStorageContainerRead(d *schema.ResourceData, meta
 			var s = &models.StorageHyperFlexStorageContainer{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 
 			if err := d.Set("cluster", flattenMapHyperflexClusterRelationship(s.GetCluster(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Cluster: %+v", err)
+				return diag.Errorf("error occurred while setting property Cluster: %s", err.Error())
 			}
 
 			if err := d.Set("created_time", (s.GetCreatedTime()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property CreatedTime: %+v", err)
+				return diag.Errorf("error occurred while setting property CreatedTime: %s", err.Error())
 			}
 
 			if err := d.Set("last_modified_time", (s.GetLastModifiedTime()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property LastModifiedTime: %+v", err)
+				return diag.Errorf("error occurred while setting property LastModifiedTime: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("name", (s.GetName())); err != nil {
-				return fmt.Errorf("error occurred while setting property Name: %+v", err)
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 			if err := d.Set("provisioned_capacity", (s.GetProvisionedCapacity())); err != nil {
-				return fmt.Errorf("error occurred while setting property ProvisionedCapacity: %+v", err)
+				return diag.Errorf("error occurred while setting property ProvisionedCapacity: %s", err.Error())
 			}
 
 			if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property RegisteredDevice: %+v", err)
+				return diag.Errorf("error occurred while setting property RegisteredDevice: %s", err.Error())
 			}
 
 			if err := d.Set("storage_utilization", flattenMapStorageBaseCapacity(s.GetStorageUtilization(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property StorageUtilization: %+v", err)
+				return diag.Errorf("error occurred while setting property StorageUtilization: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("type", (s.GetType())); err != nil {
-				return fmt.Errorf("error occurred while setting property Type: %+v", err)
+				return diag.Errorf("error occurred while setting property Type: %s", err.Error())
 			}
 			if err := d.Set("un_compressed_used_bytes", (s.GetUnCompressedUsedBytes())); err != nil {
-				return fmt.Errorf("error occurred while setting property UnCompressedUsedBytes: %+v", err)
+				return diag.Errorf("error occurred while setting property UnCompressedUsedBytes: %s", err.Error())
 			}
 			if err := d.Set("uuid", (s.GetUuid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Uuid: %+v", err)
+				return diag.Errorf("error occurred while setting property Uuid: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

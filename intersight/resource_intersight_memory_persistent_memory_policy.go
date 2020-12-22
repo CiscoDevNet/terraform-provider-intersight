@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceMemoryPersistentMemoryPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceMemoryPersistentMemoryPolicyCreate,
-		Read:   resourceMemoryPersistentMemoryPolicyRead,
-		Update: resourceMemoryPersistentMemoryPolicyUpdate,
-		Delete: resourceMemoryPersistentMemoryPolicyDelete,
+		CreateContext: resourceMemoryPersistentMemoryPolicyCreate,
+		ReadContext:   resourceMemoryPersistentMemoryPolicyRead,
+		UpdateContext: resourceMemoryPersistentMemoryPolicyUpdate,
+		DeleteContext: resourceMemoryPersistentMemoryPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -99,6 +102,7 @@ func resourceMemoryPersistentMemoryPolicy() *schema.Resource {
 							Description: "Persistent Memory Security state.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     false,
 						},
 						"is_secure_passphrase_set": {
 							Description: "Indicates whether the value of the 'securePassphrase' property has been set.",
@@ -138,7 +142,7 @@ func resourceMemoryPersistentMemoryPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -197,7 +201,7 @@ func resourceMemoryPersistentMemoryPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -288,6 +292,7 @@ func resourceMemoryPersistentMemoryPolicy() *schema.Resource {
 				Description: "Persistent Memory Namespaces to be retained or not.",
 				Type:        schema.TypeBool,
 				Optional:    true,
+				Default:     true,
 			},
 			"tags": {
 				Type:     schema.TypeList,
@@ -316,7 +321,7 @@ func resourceMemoryPersistentMemoryPolicy() *schema.Resource {
 	}
 }
 
-func resourceMemoryPersistentMemoryPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceMemoryPersistentMemoryPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -637,105 +642,110 @@ func resourceMemoryPersistentMemoryPolicyCreate(d *schema.ResourceData, meta int
 	}
 
 	r := conn.ApiClient.MemoryApi.CreateMemoryPersistentMemoryPolicy(conn.ctx).MemoryPersistentMemoryPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating MemoryPersistentMemoryPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceMemoryPersistentMemoryPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceMemoryPersistentMemoryPolicyRead(c, d, meta)
 }
-func detachMemoryPersistentMemoryPolicyProfiles(d *schema.ResourceData, meta interface{}) error {
+func detachMemoryPersistentMemoryPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.MemoryPersistentMemoryPolicy{}
 	o.SetClassId("memory.PersistentMemoryPolicy")
 	o.SetObjectType("memory.PersistentMemoryPolicy")
 	o.SetProfiles([]models.PolicyAbstractConfigProfileRelationship{})
 
 	r := conn.ApiClient.MemoryApi.UpdateMemoryPersistentMemoryPolicy(conn.ctx, d.Id()).MemoryPersistentMemoryPolicy(*o)
-	_, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while creating: %s", err.Error())
+	_, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	return err
+	return de
 }
 
-func resourceMemoryPersistentMemoryPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceMemoryPersistentMemoryPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.MemoryApi.GetMemoryPersistentMemoryPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "MemoryPersistentMemoryPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching MemoryPersistentMemoryPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in MemoryPersistentMemoryPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in MemoryPersistentMemoryPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in MemoryPersistentMemoryPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("goals", flattenListMemoryPersistentMemoryGoal(s.GetGoals(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Goals: %+v", err)
+		return diag.Errorf("error occurred while setting property Goals in MemoryPersistentMemoryPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("local_security", flattenMapMemoryPersistentMemoryLocalSecurity(s.GetLocalSecurity(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property LocalSecurity: %+v", err)
+		return diag.Errorf("error occurred while setting property LocalSecurity in MemoryPersistentMemoryPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("logical_namespaces", flattenListMemoryPersistentMemoryLogicalNamespace(s.GetLogicalNamespaces(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property LogicalNamespaces: %+v", err)
+		return diag.Errorf("error occurred while setting property LogicalNamespaces in MemoryPersistentMemoryPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("management_mode", (s.GetManagementMode())); err != nil {
-		return fmt.Errorf("error occurred while setting property ManagementMode: %+v", err)
+		return diag.Errorf("error occurred while setting property ManagementMode in MemoryPersistentMemoryPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in MemoryPersistentMemoryPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in MemoryPersistentMemoryPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in MemoryPersistentMemoryPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in MemoryPersistentMemoryPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("profiles", flattenListPolicyAbstractConfigProfileRelationship(s.GetProfiles(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Profiles: %+v", err)
+		return diag.Errorf("error occurred while setting property Profiles in MemoryPersistentMemoryPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("retain_namespaces", (s.GetRetainNamespaces())); err != nil {
-		return fmt.Errorf("error occurred while setting property RetainNamespaces: %+v", err)
+		return diag.Errorf("error occurred while setting property RetainNamespaces in MemoryPersistentMemoryPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in MemoryPersistentMemoryPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceMemoryPersistentMemoryPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceMemoryPersistentMemoryPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1068,31 +1078,32 @@ func resourceMemoryPersistentMemoryPolicyUpdate(d *schema.ResourceData, meta int
 	}
 
 	r := conn.ApiClient.MemoryApi.UpdateMemoryPersistentMemoryPolicy(conn.ctx, d.Id()).MemoryPersistentMemoryPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating MemoryPersistentMemoryPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceMemoryPersistentMemoryPolicyRead(d, meta)
+	return resourceMemoryPersistentMemoryPolicyRead(c, d, meta)
 }
 
-func resourceMemoryPersistentMemoryPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceMemoryPersistentMemoryPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profiles"); ok {
 		if len(p.([]interface{})) > 0 {
 			e := detachMemoryPersistentMemoryPolicyProfiles(d, meta)
-			if e != nil {
+			if e.HasError() {
 				return e
 			}
 		}
 	}
 	p := conn.ApiClient.MemoryApi.DeleteMemoryPersistentMemoryPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting MemoryPersistentMemoryPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

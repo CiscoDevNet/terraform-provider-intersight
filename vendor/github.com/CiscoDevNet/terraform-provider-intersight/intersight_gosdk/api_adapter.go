@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-11-20T05:29:54Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2020-12-22T00:49:18Z.
  *
- * API version: 1.0.9-2713
+ * API version: 1.0.9-3127
  * Contact: intersight@cisco.com
  */
 
@@ -12,6 +12,7 @@
 package intersight
 
 import (
+	"bytes"
 	_context "context"
 	_ioutil "io/ioutil"
 	_nethttp "net/http"
@@ -48,7 +49,7 @@ func (r ApiCreateAdapterConfigPolicyRequest) IfNoneMatch(ifNoneMatch string) Api
 	return r
 }
 
-func (r ApiCreateAdapterConfigPolicyRequest) Execute() (AdapterConfigPolicy, *_nethttp.Response, error) {
+func (r ApiCreateAdapterConfigPolicyRequest) Execute() (AdapterConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.CreateAdapterConfigPolicyExecute(r)
 }
 
@@ -68,19 +69,21 @@ func (a *AdapterApiService) CreateAdapterConfigPolicy(ctx _context.Context) ApiC
  * Execute executes the request
  * @return AdapterConfigPolicy
  */
-func (a *AdapterApiService) CreateAdapterConfigPolicyExecute(r ApiCreateAdapterConfigPolicyRequest) (AdapterConfigPolicy, *_nethttp.Response, error) {
+func (a *AdapterApiService) CreateAdapterConfigPolicyExecute(r ApiCreateAdapterConfigPolicyRequest) (AdapterConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  AdapterConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.CreateAdapterConfigPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/ConfigPolicies"
@@ -89,7 +92,8 @@ func (a *AdapterApiService) CreateAdapterConfigPolicyExecute(r ApiCreateAdapterC
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.adapterConfigPolicy == nil {
-		return localVarReturnValue, nil, reportError("adapterConfigPolicy is required and must be specified")
+		executionError.error = "adapterConfigPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -119,18 +123,22 @@ func (a *AdapterApiService) CreateAdapterConfigPolicyExecute(r ApiCreateAdapterC
 	localVarPostBody = r.adapterConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -197,7 +205,7 @@ func (a *AdapterApiService) CreateAdapterConfigPolicyExecute(r ApiCreateAdapterC
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiDeleteAdapterConfigPolicyRequest struct {
@@ -206,7 +214,7 @@ type ApiDeleteAdapterConfigPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteAdapterConfigPolicyRequest) Execute() (*_nethttp.Response, error) {
+func (r ApiDeleteAdapterConfigPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.DeleteAdapterConfigPolicyExecute(r)
 }
 
@@ -227,18 +235,20 @@ func (a *AdapterApiService) DeleteAdapterConfigPolicy(ctx _context.Context, moid
 /*
  * Execute executes the request
  */
-func (a *AdapterApiService) DeleteAdapterConfigPolicyExecute(r ApiDeleteAdapterConfigPolicyRequest) (*_nethttp.Response, error) {
+func (a *AdapterApiService) DeleteAdapterConfigPolicyExecute(r ApiDeleteAdapterConfigPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.DeleteAdapterConfigPolicy")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/ConfigPolicies/{Moid}"
@@ -267,18 +277,22 @@ func (a *AdapterApiService) DeleteAdapterConfigPolicyExecute(r ApiDeleteAdapterC
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		executionError.error = err.Error()
+		return nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -336,7 +350,7 @@ func (a *AdapterApiService) DeleteAdapterConfigPolicyExecute(r ApiDeleteAdapterC
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	return localVarHTTPResponse, executionError
 }
 
 type ApiGetAdapterConfigPolicyByMoidRequest struct {
@@ -345,7 +359,7 @@ type ApiGetAdapterConfigPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetAdapterConfigPolicyByMoidRequest) Execute() (AdapterConfigPolicy, *_nethttp.Response, error) {
+func (r ApiGetAdapterConfigPolicyByMoidRequest) Execute() (AdapterConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetAdapterConfigPolicyByMoidExecute(r)
 }
 
@@ -367,19 +381,21 @@ func (a *AdapterApiService) GetAdapterConfigPolicyByMoid(ctx _context.Context, m
  * Execute executes the request
  * @return AdapterConfigPolicy
  */
-func (a *AdapterApiService) GetAdapterConfigPolicyByMoidExecute(r ApiGetAdapterConfigPolicyByMoidRequest) (AdapterConfigPolicy, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterConfigPolicyByMoidExecute(r ApiGetAdapterConfigPolicyByMoidRequest) (AdapterConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  AdapterConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterConfigPolicyByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/ConfigPolicies/{Moid}"
@@ -408,18 +424,22 @@ func (a *AdapterApiService) GetAdapterConfigPolicyByMoidExecute(r ApiGetAdapterC
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -486,7 +506,7 @@ func (a *AdapterApiService) GetAdapterConfigPolicyByMoidExecute(r ApiGetAdapterC
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetAdapterConfigPolicyListRequest struct {
@@ -550,7 +570,7 @@ func (r ApiGetAdapterConfigPolicyListRequest) Tags(tags string) ApiGetAdapterCon
 	return r
 }
 
-func (r ApiGetAdapterConfigPolicyListRequest) Execute() (AdapterConfigPolicyResponse, *_nethttp.Response, error) {
+func (r ApiGetAdapterConfigPolicyListRequest) Execute() (AdapterConfigPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetAdapterConfigPolicyListExecute(r)
 }
 
@@ -570,19 +590,21 @@ func (a *AdapterApiService) GetAdapterConfigPolicyList(ctx _context.Context) Api
  * Execute executes the request
  * @return AdapterConfigPolicyResponse
  */
-func (a *AdapterApiService) GetAdapterConfigPolicyListExecute(r ApiGetAdapterConfigPolicyListRequest) (AdapterConfigPolicyResponse, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterConfigPolicyListExecute(r ApiGetAdapterConfigPolicyListRequest) (AdapterConfigPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  AdapterConfigPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterConfigPolicyList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/ConfigPolicies"
@@ -643,18 +665,22 @@ func (a *AdapterApiService) GetAdapterConfigPolicyListExecute(r ApiGetAdapterCon
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -721,7 +747,7 @@ func (a *AdapterApiService) GetAdapterConfigPolicyListExecute(r ApiGetAdapterCon
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetAdapterExtEthInterfaceByMoidRequest struct {
@@ -730,7 +756,7 @@ type ApiGetAdapterExtEthInterfaceByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetAdapterExtEthInterfaceByMoidRequest) Execute() (AdapterExtEthInterface, *_nethttp.Response, error) {
+func (r ApiGetAdapterExtEthInterfaceByMoidRequest) Execute() (AdapterExtEthInterface, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetAdapterExtEthInterfaceByMoidExecute(r)
 }
 
@@ -752,19 +778,21 @@ func (a *AdapterApiService) GetAdapterExtEthInterfaceByMoid(ctx _context.Context
  * Execute executes the request
  * @return AdapterExtEthInterface
  */
-func (a *AdapterApiService) GetAdapterExtEthInterfaceByMoidExecute(r ApiGetAdapterExtEthInterfaceByMoidRequest) (AdapterExtEthInterface, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterExtEthInterfaceByMoidExecute(r ApiGetAdapterExtEthInterfaceByMoidRequest) (AdapterExtEthInterface, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  AdapterExtEthInterface
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterExtEthInterfaceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/ExtEthInterfaces/{Moid}"
@@ -793,18 +821,22 @@ func (a *AdapterApiService) GetAdapterExtEthInterfaceByMoidExecute(r ApiGetAdapt
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -871,7 +903,7 @@ func (a *AdapterApiService) GetAdapterExtEthInterfaceByMoidExecute(r ApiGetAdapt
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetAdapterExtEthInterfaceListRequest struct {
@@ -935,7 +967,7 @@ func (r ApiGetAdapterExtEthInterfaceListRequest) Tags(tags string) ApiGetAdapter
 	return r
 }
 
-func (r ApiGetAdapterExtEthInterfaceListRequest) Execute() (AdapterExtEthInterfaceResponse, *_nethttp.Response, error) {
+func (r ApiGetAdapterExtEthInterfaceListRequest) Execute() (AdapterExtEthInterfaceResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetAdapterExtEthInterfaceListExecute(r)
 }
 
@@ -955,19 +987,21 @@ func (a *AdapterApiService) GetAdapterExtEthInterfaceList(ctx _context.Context) 
  * Execute executes the request
  * @return AdapterExtEthInterfaceResponse
  */
-func (a *AdapterApiService) GetAdapterExtEthInterfaceListExecute(r ApiGetAdapterExtEthInterfaceListRequest) (AdapterExtEthInterfaceResponse, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterExtEthInterfaceListExecute(r ApiGetAdapterExtEthInterfaceListRequest) (AdapterExtEthInterfaceResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  AdapterExtEthInterfaceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterExtEthInterfaceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/ExtEthInterfaces"
@@ -1028,18 +1062,22 @@ func (a *AdapterApiService) GetAdapterExtEthInterfaceListExecute(r ApiGetAdapter
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1106,7 +1144,7 @@ func (a *AdapterApiService) GetAdapterExtEthInterfaceListExecute(r ApiGetAdapter
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetAdapterHostEthInterfaceByMoidRequest struct {
@@ -1115,7 +1153,7 @@ type ApiGetAdapterHostEthInterfaceByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetAdapterHostEthInterfaceByMoidRequest) Execute() (AdapterHostEthInterface, *_nethttp.Response, error) {
+func (r ApiGetAdapterHostEthInterfaceByMoidRequest) Execute() (AdapterHostEthInterface, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetAdapterHostEthInterfaceByMoidExecute(r)
 }
 
@@ -1137,19 +1175,21 @@ func (a *AdapterApiService) GetAdapterHostEthInterfaceByMoid(ctx _context.Contex
  * Execute executes the request
  * @return AdapterHostEthInterface
  */
-func (a *AdapterApiService) GetAdapterHostEthInterfaceByMoidExecute(r ApiGetAdapterHostEthInterfaceByMoidRequest) (AdapterHostEthInterface, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterHostEthInterfaceByMoidExecute(r ApiGetAdapterHostEthInterfaceByMoidRequest) (AdapterHostEthInterface, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  AdapterHostEthInterface
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterHostEthInterfaceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/HostEthInterfaces/{Moid}"
@@ -1178,18 +1218,22 @@ func (a *AdapterApiService) GetAdapterHostEthInterfaceByMoidExecute(r ApiGetAdap
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1256,7 +1300,7 @@ func (a *AdapterApiService) GetAdapterHostEthInterfaceByMoidExecute(r ApiGetAdap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetAdapterHostEthInterfaceListRequest struct {
@@ -1320,7 +1364,7 @@ func (r ApiGetAdapterHostEthInterfaceListRequest) Tags(tags string) ApiGetAdapte
 	return r
 }
 
-func (r ApiGetAdapterHostEthInterfaceListRequest) Execute() (AdapterHostEthInterfaceResponse, *_nethttp.Response, error) {
+func (r ApiGetAdapterHostEthInterfaceListRequest) Execute() (AdapterHostEthInterfaceResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetAdapterHostEthInterfaceListExecute(r)
 }
 
@@ -1340,19 +1384,21 @@ func (a *AdapterApiService) GetAdapterHostEthInterfaceList(ctx _context.Context)
  * Execute executes the request
  * @return AdapterHostEthInterfaceResponse
  */
-func (a *AdapterApiService) GetAdapterHostEthInterfaceListExecute(r ApiGetAdapterHostEthInterfaceListRequest) (AdapterHostEthInterfaceResponse, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterHostEthInterfaceListExecute(r ApiGetAdapterHostEthInterfaceListRequest) (AdapterHostEthInterfaceResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  AdapterHostEthInterfaceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterHostEthInterfaceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/HostEthInterfaces"
@@ -1413,18 +1459,22 @@ func (a *AdapterApiService) GetAdapterHostEthInterfaceListExecute(r ApiGetAdapte
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1491,7 +1541,7 @@ func (a *AdapterApiService) GetAdapterHostEthInterfaceListExecute(r ApiGetAdapte
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetAdapterHostFcInterfaceByMoidRequest struct {
@@ -1500,7 +1550,7 @@ type ApiGetAdapterHostFcInterfaceByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetAdapterHostFcInterfaceByMoidRequest) Execute() (AdapterHostFcInterface, *_nethttp.Response, error) {
+func (r ApiGetAdapterHostFcInterfaceByMoidRequest) Execute() (AdapterHostFcInterface, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetAdapterHostFcInterfaceByMoidExecute(r)
 }
 
@@ -1522,19 +1572,21 @@ func (a *AdapterApiService) GetAdapterHostFcInterfaceByMoid(ctx _context.Context
  * Execute executes the request
  * @return AdapterHostFcInterface
  */
-func (a *AdapterApiService) GetAdapterHostFcInterfaceByMoidExecute(r ApiGetAdapterHostFcInterfaceByMoidRequest) (AdapterHostFcInterface, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterHostFcInterfaceByMoidExecute(r ApiGetAdapterHostFcInterfaceByMoidRequest) (AdapterHostFcInterface, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  AdapterHostFcInterface
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterHostFcInterfaceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/HostFcInterfaces/{Moid}"
@@ -1563,18 +1615,22 @@ func (a *AdapterApiService) GetAdapterHostFcInterfaceByMoidExecute(r ApiGetAdapt
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1641,7 +1697,7 @@ func (a *AdapterApiService) GetAdapterHostFcInterfaceByMoidExecute(r ApiGetAdapt
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetAdapterHostFcInterfaceListRequest struct {
@@ -1705,7 +1761,7 @@ func (r ApiGetAdapterHostFcInterfaceListRequest) Tags(tags string) ApiGetAdapter
 	return r
 }
 
-func (r ApiGetAdapterHostFcInterfaceListRequest) Execute() (AdapterHostFcInterfaceResponse, *_nethttp.Response, error) {
+func (r ApiGetAdapterHostFcInterfaceListRequest) Execute() (AdapterHostFcInterfaceResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetAdapterHostFcInterfaceListExecute(r)
 }
 
@@ -1725,19 +1781,21 @@ func (a *AdapterApiService) GetAdapterHostFcInterfaceList(ctx _context.Context) 
  * Execute executes the request
  * @return AdapterHostFcInterfaceResponse
  */
-func (a *AdapterApiService) GetAdapterHostFcInterfaceListExecute(r ApiGetAdapterHostFcInterfaceListRequest) (AdapterHostFcInterfaceResponse, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterHostFcInterfaceListExecute(r ApiGetAdapterHostFcInterfaceListRequest) (AdapterHostFcInterfaceResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  AdapterHostFcInterfaceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterHostFcInterfaceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/HostFcInterfaces"
@@ -1798,18 +1856,22 @@ func (a *AdapterApiService) GetAdapterHostFcInterfaceListExecute(r ApiGetAdapter
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1876,7 +1938,7 @@ func (a *AdapterApiService) GetAdapterHostFcInterfaceListExecute(r ApiGetAdapter
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetAdapterHostIscsiInterfaceByMoidRequest struct {
@@ -1885,7 +1947,7 @@ type ApiGetAdapterHostIscsiInterfaceByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetAdapterHostIscsiInterfaceByMoidRequest) Execute() (AdapterHostIscsiInterface, *_nethttp.Response, error) {
+func (r ApiGetAdapterHostIscsiInterfaceByMoidRequest) Execute() (AdapterHostIscsiInterface, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetAdapterHostIscsiInterfaceByMoidExecute(r)
 }
 
@@ -1907,19 +1969,21 @@ func (a *AdapterApiService) GetAdapterHostIscsiInterfaceByMoid(ctx _context.Cont
  * Execute executes the request
  * @return AdapterHostIscsiInterface
  */
-func (a *AdapterApiService) GetAdapterHostIscsiInterfaceByMoidExecute(r ApiGetAdapterHostIscsiInterfaceByMoidRequest) (AdapterHostIscsiInterface, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterHostIscsiInterfaceByMoidExecute(r ApiGetAdapterHostIscsiInterfaceByMoidRequest) (AdapterHostIscsiInterface, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  AdapterHostIscsiInterface
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterHostIscsiInterfaceByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/HostIscsiInterfaces/{Moid}"
@@ -1948,18 +2012,22 @@ func (a *AdapterApiService) GetAdapterHostIscsiInterfaceByMoidExecute(r ApiGetAd
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2026,7 +2094,7 @@ func (a *AdapterApiService) GetAdapterHostIscsiInterfaceByMoidExecute(r ApiGetAd
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetAdapterHostIscsiInterfaceListRequest struct {
@@ -2090,7 +2158,7 @@ func (r ApiGetAdapterHostIscsiInterfaceListRequest) Tags(tags string) ApiGetAdap
 	return r
 }
 
-func (r ApiGetAdapterHostIscsiInterfaceListRequest) Execute() (AdapterHostIscsiInterfaceResponse, *_nethttp.Response, error) {
+func (r ApiGetAdapterHostIscsiInterfaceListRequest) Execute() (AdapterHostIscsiInterfaceResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetAdapterHostIscsiInterfaceListExecute(r)
 }
 
@@ -2110,19 +2178,21 @@ func (a *AdapterApiService) GetAdapterHostIscsiInterfaceList(ctx _context.Contex
  * Execute executes the request
  * @return AdapterHostIscsiInterfaceResponse
  */
-func (a *AdapterApiService) GetAdapterHostIscsiInterfaceListExecute(r ApiGetAdapterHostIscsiInterfaceListRequest) (AdapterHostIscsiInterfaceResponse, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterHostIscsiInterfaceListExecute(r ApiGetAdapterHostIscsiInterfaceListRequest) (AdapterHostIscsiInterfaceResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  AdapterHostIscsiInterfaceResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterHostIscsiInterfaceList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/HostIscsiInterfaces"
@@ -2183,18 +2253,22 @@ func (a *AdapterApiService) GetAdapterHostIscsiInterfaceListExecute(r ApiGetAdap
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2261,7 +2335,7 @@ func (a *AdapterApiService) GetAdapterHostIscsiInterfaceListExecute(r ApiGetAdap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetAdapterUnitByMoidRequest struct {
@@ -2270,7 +2344,7 @@ type ApiGetAdapterUnitByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetAdapterUnitByMoidRequest) Execute() (AdapterUnit, *_nethttp.Response, error) {
+func (r ApiGetAdapterUnitByMoidRequest) Execute() (AdapterUnit, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetAdapterUnitByMoidExecute(r)
 }
 
@@ -2292,19 +2366,21 @@ func (a *AdapterApiService) GetAdapterUnitByMoid(ctx _context.Context, moid stri
  * Execute executes the request
  * @return AdapterUnit
  */
-func (a *AdapterApiService) GetAdapterUnitByMoidExecute(r ApiGetAdapterUnitByMoidRequest) (AdapterUnit, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterUnitByMoidExecute(r ApiGetAdapterUnitByMoidRequest) (AdapterUnit, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  AdapterUnit
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterUnitByMoid")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/Units/{Moid}"
@@ -2333,18 +2409,22 @@ func (a *AdapterApiService) GetAdapterUnitByMoidExecute(r ApiGetAdapterUnitByMoi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2411,7 +2491,7 @@ func (a *AdapterApiService) GetAdapterUnitByMoidExecute(r ApiGetAdapterUnitByMoi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiGetAdapterUnitListRequest struct {
@@ -2475,7 +2555,7 @@ func (r ApiGetAdapterUnitListRequest) Tags(tags string) ApiGetAdapterUnitListReq
 	return r
 }
 
-func (r ApiGetAdapterUnitListRequest) Execute() (AdapterUnitResponse, *_nethttp.Response, error) {
+func (r ApiGetAdapterUnitListRequest) Execute() (AdapterUnitResponse, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.GetAdapterUnitListExecute(r)
 }
 
@@ -2495,19 +2575,21 @@ func (a *AdapterApiService) GetAdapterUnitList(ctx _context.Context) ApiGetAdapt
  * Execute executes the request
  * @return AdapterUnitResponse
  */
-func (a *AdapterApiService) GetAdapterUnitListExecute(r ApiGetAdapterUnitListRequest) (AdapterUnitResponse, *_nethttp.Response, error) {
+func (a *AdapterApiService) GetAdapterUnitListExecute(r ApiGetAdapterUnitListRequest) (AdapterUnitResponse, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  AdapterUnitResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.GetAdapterUnitList")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/Units"
@@ -2568,18 +2650,22 @@ func (a *AdapterApiService) GetAdapterUnitListExecute(r ApiGetAdapterUnitListReq
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2646,7 +2732,7 @@ func (a *AdapterApiService) GetAdapterUnitListExecute(r ApiGetAdapterUnitListReq
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiPatchAdapterConfigPolicyRequest struct {
@@ -2666,7 +2752,7 @@ func (r ApiPatchAdapterConfigPolicyRequest) IfMatch(ifMatch string) ApiPatchAdap
 	return r
 }
 
-func (r ApiPatchAdapterConfigPolicyRequest) Execute() (AdapterConfigPolicy, *_nethttp.Response, error) {
+func (r ApiPatchAdapterConfigPolicyRequest) Execute() (AdapterConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.PatchAdapterConfigPolicyExecute(r)
 }
 
@@ -2688,19 +2774,21 @@ func (a *AdapterApiService) PatchAdapterConfigPolicy(ctx _context.Context, moid 
  * Execute executes the request
  * @return AdapterConfigPolicy
  */
-func (a *AdapterApiService) PatchAdapterConfigPolicyExecute(r ApiPatchAdapterConfigPolicyRequest) (AdapterConfigPolicy, *_nethttp.Response, error) {
+func (a *AdapterApiService) PatchAdapterConfigPolicyExecute(r ApiPatchAdapterConfigPolicyRequest) (AdapterConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  AdapterConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.PatchAdapterConfigPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/ConfigPolicies/{Moid}"
@@ -2710,7 +2798,8 @@ func (a *AdapterApiService) PatchAdapterConfigPolicyExecute(r ApiPatchAdapterCon
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.adapterConfigPolicy == nil {
-		return localVarReturnValue, nil, reportError("adapterConfigPolicy is required and must be specified")
+		executionError.error = "adapterConfigPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -2737,18 +2826,22 @@ func (a *AdapterApiService) PatchAdapterConfigPolicyExecute(r ApiPatchAdapterCon
 	localVarPostBody = r.adapterConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2815,7 +2908,7 @@ func (a *AdapterApiService) PatchAdapterConfigPolicyExecute(r ApiPatchAdapterCon
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }
 
 type ApiUpdateAdapterConfigPolicyRequest struct {
@@ -2835,7 +2928,7 @@ func (r ApiUpdateAdapterConfigPolicyRequest) IfMatch(ifMatch string) ApiUpdateAd
 	return r
 }
 
-func (r ApiUpdateAdapterConfigPolicyRequest) Execute() (AdapterConfigPolicy, *_nethttp.Response, error) {
+func (r ApiUpdateAdapterConfigPolicyRequest) Execute() (AdapterConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	return r.ApiService.UpdateAdapterConfigPolicyExecute(r)
 }
 
@@ -2857,19 +2950,21 @@ func (a *AdapterApiService) UpdateAdapterConfigPolicy(ctx _context.Context, moid
  * Execute executes the request
  * @return AdapterConfigPolicy
  */
-func (a *AdapterApiService) UpdateAdapterConfigPolicyExecute(r ApiUpdateAdapterConfigPolicyRequest) (AdapterConfigPolicy, *_nethttp.Response, error) {
+func (a *AdapterApiService) UpdateAdapterConfigPolicyExecute(r ApiUpdateAdapterConfigPolicyRequest) (AdapterConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		executionError       GenericOpenAPIError
 		localVarReturnValue  AdapterConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AdapterApiService.UpdateAdapterConfigPolicy")
 	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarPath := localBasePath + "/api/v1/adapter/ConfigPolicies/{Moid}"
@@ -2879,7 +2974,8 @@ func (a *AdapterApiService) UpdateAdapterConfigPolicyExecute(r ApiUpdateAdapterC
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.adapterConfigPolicy == nil {
-		return localVarReturnValue, nil, reportError("adapterConfigPolicy is required and must be specified")
+		executionError.error = "adapterConfigPolicy is required and must be specified"
+		return localVarReturnValue, nil, executionError
 	}
 
 	// to determine the Content-Type header
@@ -2906,18 +3002,22 @@ func (a *AdapterApiService) UpdateAdapterConfigPolicyExecute(r ApiUpdateAdapterC
 	localVarPostBody = r.adapterConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return localVarReturnValue, nil, err
+		executionError.error = err.Error()
+		return localVarReturnValue, nil, executionError
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
+		executionError.error = err.Error()
+		return localVarReturnValue, localVarHTTPResponse, executionError
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2984,5 +3084,5 @@ func (a *AdapterApiService) UpdateAdapterConfigPolicyExecute(r ApiUpdateAdapterC
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, executionError
 }

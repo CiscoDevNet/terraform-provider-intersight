@@ -1,18 +1,19 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceIamAccount() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceIamAccountRead,
+		ReadContext: dataSourceIamAccountRead,
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -58,7 +59,7 @@ func dataSourceIamAccount() *schema.Resource {
 				},
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -226,7 +227,7 @@ func dataSourceIamAccount() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -533,10 +534,11 @@ func dataSourceIamAccount() *schema.Resource {
 	}
 }
 
-func dataSourceIamAccountRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceIamAccountRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.IamAccount{}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
@@ -561,25 +563,25 @@ func dataSourceIamAccountRead(d *schema.ResourceData, meta interface{}) error {
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of IamAccount object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.IamApi.GetIamAccountList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.IamApi.GetIamAccountList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching IamAccount: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for IamAccount list: %s", err.Error())
 	}
 	var s = &models.IamAccountList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to IamAccount: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to IamAccount list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for IamAccount did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -588,80 +590,80 @@ func dataSourceIamAccountRead(d *schema.ResourceData, meta interface{}) error {
 			var s = &models.IamAccount{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 
 			if err := d.Set("app_registrations", flattenListIamAppRegistrationRelationship(s.GetAppRegistrations(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property AppRegistrations: %+v", err)
+				return diag.Errorf("error occurred while setting property AppRegistrations: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 
 			if err := d.Set("domain_groups", flattenListIamDomainGroupRelationship(s.GetDomainGroups(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property DomainGroups: %+v", err)
+				return diag.Errorf("error occurred while setting property DomainGroups: %s", err.Error())
 			}
 
 			if err := d.Set("end_point_roles", flattenListIamEndPointRoleRelationship(s.GetEndPointRoles(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property EndPointRoles: %+v", err)
+				return diag.Errorf("error occurred while setting property EndPointRoles: %s", err.Error())
 			}
 
 			if err := d.Set("idpreferences", flattenListIamIdpReferenceRelationship(s.GetIdpreferences(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Idpreferences: %+v", err)
+				return diag.Errorf("error occurred while setting property Idpreferences: %s", err.Error())
 			}
 
 			if err := d.Set("idps", flattenListIamIdpRelationship(s.GetIdps(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Idps: %+v", err)
+				return diag.Errorf("error occurred while setting property Idps: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("name", (s.GetName())); err != nil {
-				return fmt.Errorf("error occurred while setting property Name: %+v", err)
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 
 			if err := d.Set("permissions", flattenListIamPermissionRelationship(s.GetPermissions(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Permissions: %+v", err)
+				return diag.Errorf("error occurred while setting property Permissions: %s", err.Error())
 			}
 
 			if err := d.Set("privilege_sets", flattenListIamPrivilegeSetRelationship(s.GetPrivilegeSets(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property PrivilegeSets: %+v", err)
+				return diag.Errorf("error occurred while setting property PrivilegeSets: %s", err.Error())
 			}
 
 			if err := d.Set("privileges", flattenListIamPrivilegeRelationship(s.GetPrivileges(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Privileges: %+v", err)
+				return diag.Errorf("error occurred while setting property Privileges: %s", err.Error())
 			}
 
 			if err := d.Set("resource_limits", flattenMapIamResourceLimitsRelationship(s.GetResourceLimits(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property ResourceLimits: %+v", err)
+				return diag.Errorf("error occurred while setting property ResourceLimits: %s", err.Error())
 			}
 
 			if err := d.Set("roles", flattenListIamRoleRelationship(s.GetRoles(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Roles: %+v", err)
+				return diag.Errorf("error occurred while setting property Roles: %s", err.Error())
 			}
 
 			if err := d.Set("security_holder", flattenMapIamSecurityHolderRelationship(s.GetSecurityHolder(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property SecurityHolder: %+v", err)
+				return diag.Errorf("error occurred while setting property SecurityHolder: %s", err.Error())
 			}
 
 			if err := d.Set("session_limits", flattenMapIamSessionLimitsRelationship(s.GetSessionLimits(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property SessionLimits: %+v", err)
+				return diag.Errorf("error occurred while setting property SessionLimits: %s", err.Error())
 			}
 			if err := d.Set("status", (s.GetStatus())); err != nil {
-				return fmt.Errorf("error occurred while setting property Status: %+v", err)
+				return diag.Errorf("error occurred while setting property Status: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

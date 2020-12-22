@@ -1,21 +1,24 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceFirmwareDriverDistributable() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceFirmwareDriverDistributableCreate,
-		Read:   resourceFirmwareDriverDistributableRead,
-		Update: resourceFirmwareDriverDistributableUpdate,
-		Delete: resourceFirmwareDriverDistributableDelete,
+		CreateContext: resourceFirmwareDriverDistributableCreate,
+		ReadContext:   resourceFirmwareDriverDistributableRead,
+		UpdateContext: resourceFirmwareDriverDistributableUpdate,
+		DeleteContext: resourceFirmwareDriverDistributableDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -428,6 +431,7 @@ func resourceFirmwareDriverDistributable() *schema.Resource {
 				Description: "The vendor or publisher of this file.",
 				Type:        schema.TypeString,
 				Optional:    true,
+				Default:     "Cisco",
 			},
 			"nr_version": {
 				Description: "Vendor provided version for the file.",
@@ -438,7 +442,7 @@ func resourceFirmwareDriverDistributable() *schema.Resource {
 	}
 }
 
-func resourceFirmwareDriverDistributableCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceFirmwareDriverDistributableCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -889,173 +893,177 @@ func resourceFirmwareDriverDistributableCreate(d *schema.ResourceData, meta inte
 	}
 
 	r := conn.ApiClient.FirmwareApi.CreateFirmwareDriverDistributable(conn.ctx).FirmwareDriverDistributable(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating FirmwareDriverDistributable: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceFirmwareDriverDistributableRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceFirmwareDriverDistributableRead(c, d, meta)
 }
 
-func resourceFirmwareDriverDistributableRead(d *schema.ResourceData, meta interface{}) error {
+func resourceFirmwareDriverDistributableRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.FirmwareApi.GetFirmwareDriverDistributableByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "FirmwareDriverDistributable object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching FirmwareDriverDistributable: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("bundle_type", (s.GetBundleType())); err != nil {
-		return fmt.Errorf("error occurred while setting property BundleType: %+v", err)
+		return diag.Errorf("error occurred while setting property BundleType in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("catalog", flattenMapSoftwarerepositoryCatalogRelationship(s.GetCatalog(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Catalog: %+v", err)
+		return diag.Errorf("error occurred while setting property Catalog in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("category", (s.GetCategory())); err != nil {
-		return fmt.Errorf("error occurred while setting property Category: %+v", err)
+		return diag.Errorf("error occurred while setting property Category in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("component_meta", flattenListFirmwareComponentMeta(s.GetComponentMeta(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ComponentMeta: %+v", err)
+		return diag.Errorf("error occurred while setting property ComponentMeta in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("directory", (s.GetDirectory())); err != nil {
-		return fmt.Errorf("error occurred while setting property Directory: %+v", err)
+		return diag.Errorf("error occurred while setting property Directory in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("distributable_metas", flattenListFirmwareDistributableMetaRelationship(s.GetDistributableMetas(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property DistributableMetas: %+v", err)
+		return diag.Errorf("error occurred while setting property DistributableMetas in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("download_count", (s.GetDownloadCount())); err != nil {
-		return fmt.Errorf("error occurred while setting property DownloadCount: %+v", err)
+		return diag.Errorf("error occurred while setting property DownloadCount in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("guid", (s.GetGuid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Guid: %+v", err)
+		return diag.Errorf("error occurred while setting property Guid in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("import_action", (s.GetImportAction())); err != nil {
-		return fmt.Errorf("error occurred while setting property ImportAction: %+v", err)
+		return diag.Errorf("error occurred while setting property ImportAction in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("import_state", (s.GetImportState())); err != nil {
-		return fmt.Errorf("error occurred while setting property ImportState: %+v", err)
+		return diag.Errorf("error occurred while setting property ImportState in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("md5e_tag", (s.GetMd5eTag())); err != nil {
-		return fmt.Errorf("error occurred while setting property Md5eTag: %+v", err)
+		return diag.Errorf("error occurred while setting property Md5eTag in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("md5sum", (s.GetMd5sum())); err != nil {
-		return fmt.Errorf("error occurred while setting property Md5sum: %+v", err)
+		return diag.Errorf("error occurred while setting property Md5sum in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("mdfid", (s.GetMdfid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Mdfid: %+v", err)
+		return diag.Errorf("error occurred while setting property Mdfid in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("model", (s.GetModel())); err != nil {
-		return fmt.Errorf("error occurred while setting property Model: %+v", err)
+		return diag.Errorf("error occurred while setting property Model in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("osname", (s.GetOsname())); err != nil {
-		return fmt.Errorf("error occurred while setting property Osname: %+v", err)
+		return diag.Errorf("error occurred while setting property Osname in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("osversion", (s.GetOsversion())); err != nil {
-		return fmt.Errorf("error occurred while setting property Osversion: %+v", err)
+		return diag.Errorf("error occurred while setting property Osversion in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("platform_type", (s.GetPlatformType())); err != nil {
-		return fmt.Errorf("error occurred while setting property PlatformType: %+v", err)
+		return diag.Errorf("error occurred while setting property PlatformType in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("recommended_build", (s.GetRecommendedBuild())); err != nil {
-		return fmt.Errorf("error occurred while setting property RecommendedBuild: %+v", err)
+		return diag.Errorf("error occurred while setting property RecommendedBuild in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("release", flattenMapSoftwarerepositoryReleaseRelationship(s.GetRelease(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Release: %+v", err)
+		return diag.Errorf("error occurred while setting property Release in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("release_notes_url", (s.GetReleaseNotesUrl())); err != nil {
-		return fmt.Errorf("error occurred while setting property ReleaseNotesUrl: %+v", err)
+		return diag.Errorf("error occurred while setting property ReleaseNotesUrl in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("sha512sum", (s.GetSha512sum())); err != nil {
-		return fmt.Errorf("error occurred while setting property Sha512sum: %+v", err)
+		return diag.Errorf("error occurred while setting property Sha512sum in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("size", (s.GetSize())); err != nil {
-		return fmt.Errorf("error occurred while setting property Size: %+v", err)
+		return diag.Errorf("error occurred while setting property Size in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("software_advisory_url", (s.GetSoftwareAdvisoryUrl())); err != nil {
-		return fmt.Errorf("error occurred while setting property SoftwareAdvisoryUrl: %+v", err)
+		return diag.Errorf("error occurred while setting property SoftwareAdvisoryUrl in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("software_type_id", (s.GetSoftwareTypeId())); err != nil {
-		return fmt.Errorf("error occurred while setting property SoftwareTypeId: %+v", err)
+		return diag.Errorf("error occurred while setting property SoftwareTypeId in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("nr_source", flattenMapSoftwarerepositoryFileServer(s.GetSource(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Source: %+v", err)
+		return diag.Errorf("error occurred while setting property Source in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("supported_models", (s.GetSupportedModels())); err != nil {
-		return fmt.Errorf("error occurred while setting property SupportedModels: %+v", err)
+		return diag.Errorf("error occurred while setting property SupportedModels in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("vendor", (s.GetVendor())); err != nil {
-		return fmt.Errorf("error occurred while setting property Vendor: %+v", err)
+		return diag.Errorf("error occurred while setting property Vendor in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	if err := d.Set("nr_version", (s.GetVersion())); err != nil {
-		return fmt.Errorf("error occurred while setting property Version: %+v", err)
+		return diag.Errorf("error occurred while setting property Version in FirmwareDriverDistributable object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceFirmwareDriverDistributableUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceFirmwareDriverDistributableUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1539,23 +1547,24 @@ func resourceFirmwareDriverDistributableUpdate(d *schema.ResourceData, meta inte
 	}
 
 	r := conn.ApiClient.FirmwareApi.UpdateFirmwareDriverDistributable(conn.ctx, d.Id()).FirmwareDriverDistributable(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating FirmwareDriverDistributable: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFirmwareDriverDistributableRead(d, meta)
+	return resourceFirmwareDriverDistributableRead(c, d, meta)
 }
 
-func resourceFirmwareDriverDistributableDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceFirmwareDriverDistributableDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.FirmwareApi.DeleteFirmwareDriverDistributable(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting FirmwareDriverDistributable object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

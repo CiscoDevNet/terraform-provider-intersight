@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "software.UcsdBundleDistributable"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "software.UcsdBundleDistributable"]
 **Catalog** | Pointer to [**SoftwarerepositoryCatalogRelationship**](softwarerepository.Catalog.Relationship.md) |  | [optional] 
-**Images** | Pointer to [**[]SoftwareUcsdDistributableRelationship**](software.UcsdDistributable.Relationship.md) | An array of relationships to softwareUcsdDistributable resources. | [optional] [readonly] 
+**Images** | Pointer to [**[]SoftwareUcsdDistributableRelationship**](SoftwareUcsdDistributableRelationship.md) | An array of relationships to softwareUcsdDistributable resources. | [optional] [readonly] 
 
 ## Methods
 

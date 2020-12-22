@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Duration** | Pointer to **string** | The duration of the running configuration or workflow. | [optional] 
 **StartTime** | Pointer to **string** | The start time of the configuration or workflow. | [optional] 
 **ClusterProfile** | Pointer to [**HyperflexClusterProfileRelationship**](hyperflex.ClusterProfile.Relationship.md) |  | [optional] 
-**ResultEntries** | Pointer to [**[]HyperflexConfigResultEntryRelationship**](hyperflex.ConfigResultEntry.Relationship.md) | An array of relationships to hyperflexConfigResultEntry resources. | [optional] 
+**ResultEntries** | Pointer to [**[]HyperflexConfigResultEntryRelationship**](HyperflexConfigResultEntryRelationship.md) | An array of relationships to hyperflexConfigResultEntry resources. | [optional] 
 
 ## Methods
 

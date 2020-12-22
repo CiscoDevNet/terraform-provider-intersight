@@ -1,21 +1,24 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceWorkflowCustomDataTypeDefinition() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceWorkflowCustomDataTypeDefinitionCreate,
-		Read:   resourceWorkflowCustomDataTypeDefinitionRead,
-		Update: resourceWorkflowCustomDataTypeDefinitionUpdate,
-		Delete: resourceWorkflowCustomDataTypeDefinitionDelete,
+		CreateContext: resourceWorkflowCustomDataTypeDefinitionCreate,
+		ReadContext:   resourceWorkflowCustomDataTypeDefinitionRead,
+		UpdateContext: resourceWorkflowCustomDataTypeDefinitionUpdate,
+		DeleteContext: resourceWorkflowCustomDataTypeDefinitionDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -65,7 +68,7 @@ func resourceWorkflowCustomDataTypeDefinition() *schema.Resource {
 				ForceNew:   true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -74,6 +77,7 @@ func resourceWorkflowCustomDataTypeDefinition() *schema.Resource {
 				Description: "When true this data type definition is a collection of type definitions to represent composite data like JSON.",
 				Type:        schema.TypeBool,
 				Optional:    true,
+				Default:     false,
 			},
 			"description": {
 				Description: "A human-friendly description of this custom data type indicating it's domain and usage.",
@@ -99,7 +103,7 @@ func resourceWorkflowCustomDataTypeDefinition() *schema.Resource {
 				ForceNew:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -264,6 +268,7 @@ func resourceWorkflowCustomDataTypeDefinition() *schema.Resource {
 										Description: "Inventory selector specified for primitive data property should be used in Intersight User Interface.",
 										Type:        schema.TypeBool,
 										Optional:    true,
+										Default:     true,
 									},
 									"object_type": {
 										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -319,7 +324,7 @@ func resourceWorkflowCustomDataTypeDefinition() *schema.Resource {
 	}
 }
 
-func resourceWorkflowCustomDataTypeDefinitionCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceWorkflowCustomDataTypeDefinitionCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -655,81 +660,85 @@ func resourceWorkflowCustomDataTypeDefinitionCreate(d *schema.ResourceData, meta
 	}
 
 	r := conn.ApiClient.WorkflowApi.CreateWorkflowCustomDataTypeDefinition(conn.ctx).WorkflowCustomDataTypeDefinition(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating WorkflowCustomDataTypeDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceWorkflowCustomDataTypeDefinitionRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceWorkflowCustomDataTypeDefinitionRead(c, d, meta)
 }
 
-func resourceWorkflowCustomDataTypeDefinitionRead(d *schema.ResourceData, meta interface{}) error {
+func resourceWorkflowCustomDataTypeDefinitionRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.WorkflowApi.GetWorkflowCustomDataTypeDefinitionByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "WorkflowCustomDataTypeDefinition object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching WorkflowCustomDataTypeDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in WorkflowCustomDataTypeDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("catalog", flattenMapWorkflowCatalogRelationship(s.GetCatalog(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Catalog: %+v", err)
+		return diag.Errorf("error occurred while setting property Catalog in WorkflowCustomDataTypeDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in WorkflowCustomDataTypeDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("composite_type", (s.GetCompositeType())); err != nil {
-		return fmt.Errorf("error occurred while setting property CompositeType: %+v", err)
+		return diag.Errorf("error occurred while setting property CompositeType in WorkflowCustomDataTypeDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in WorkflowCustomDataTypeDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("label", (s.GetLabel())); err != nil {
-		return fmt.Errorf("error occurred while setting property Label: %+v", err)
+		return diag.Errorf("error occurred while setting property Label in WorkflowCustomDataTypeDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in WorkflowCustomDataTypeDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in WorkflowCustomDataTypeDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in WorkflowCustomDataTypeDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("parameter_set", flattenListWorkflowParameterSet(s.GetParameterSet(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ParameterSet: %+v", err)
+		return diag.Errorf("error occurred while setting property ParameterSet in WorkflowCustomDataTypeDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in WorkflowCustomDataTypeDefinition object: %s", err.Error())
 	}
 
 	if err := d.Set("type_definition", flattenListWorkflowBaseDataType(s.GetTypeDefinition(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property TypeDefinition: %+v", err)
+		return diag.Errorf("error occurred while setting property TypeDefinition in WorkflowCustomDataTypeDefinition object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceWorkflowCustomDataTypeDefinitionUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceWorkflowCustomDataTypeDefinitionUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1075,23 +1084,24 @@ func resourceWorkflowCustomDataTypeDefinitionUpdate(d *schema.ResourceData, meta
 	}
 
 	r := conn.ApiClient.WorkflowApi.UpdateWorkflowCustomDataTypeDefinition(conn.ctx, d.Id()).WorkflowCustomDataTypeDefinition(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating WorkflowCustomDataTypeDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceWorkflowCustomDataTypeDefinitionRead(d, meta)
+	return resourceWorkflowCustomDataTypeDefinitionRead(c, d, meta)
 }
 
-func resourceWorkflowCustomDataTypeDefinitionDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceWorkflowCustomDataTypeDefinitionDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.WorkflowApi.DeleteWorkflowCustomDataTypeDefinition(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting WorkflowCustomDataTypeDefinition object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

@@ -1,21 +1,24 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
+	"strings"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceApplianceBackup() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceApplianceBackupCreate,
-		Read:   resourceApplianceBackupRead,
-		Delete: resourceApplianceBackupDelete,
+		CreateContext: resourceApplianceBackupCreate,
+		ReadContext:   resourceApplianceBackupRead,
+		DeleteContext: resourceApplianceBackupDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"account": {
 				Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -71,7 +74,7 @@ func resourceApplianceBackup() *schema.Resource {
 				ForceNew:         true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -206,7 +209,7 @@ func resourceApplianceBackup() *schema.Resource {
 	}
 }
 
-func resourceApplianceBackupCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceApplianceBackupCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -379,112 +382,117 @@ func resourceApplianceBackupCreate(d *schema.ResourceData, meta interface{}) err
 	}
 
 	r := conn.ApiClient.ApplianceApi.CreateApplianceBackup(conn.ctx).ApplianceBackup(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating ApplianceBackup: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceApplianceBackupRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceApplianceBackupRead(c, d, meta)
 }
 
-func resourceApplianceBackupRead(d *schema.ResourceData, meta interface{}) error {
+func resourceApplianceBackupRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.ApplianceApi.GetApplianceBackupByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "ApplianceBackup object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching ApplianceBackup: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("account", flattenMapIamAccountRelationship(s.GetAccount(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Account: %+v", err)
+		return diag.Errorf("error occurred while setting property Account in ApplianceBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in ApplianceBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in ApplianceBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("elapsed_time", (s.GetElapsedTime())); err != nil {
-		return fmt.Errorf("error occurred while setting property ElapsedTime: %+v", err)
+		return diag.Errorf("error occurred while setting property ElapsedTime in ApplianceBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("end_time", (s.GetEndTime()).String()); err != nil {
-		return fmt.Errorf("error occurred while setting property EndTime: %+v", err)
+		return diag.Errorf("error occurred while setting property EndTime in ApplianceBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("filename", (s.GetFilename())); err != nil {
-		return fmt.Errorf("error occurred while setting property Filename: %+v", err)
+		return diag.Errorf("error occurred while setting property Filename in ApplianceBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("is_password_set", (s.GetIsPasswordSet())); err != nil {
-		return fmt.Errorf("error occurred while setting property IsPasswordSet: %+v", err)
+		return diag.Errorf("error occurred while setting property IsPasswordSet in ApplianceBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("messages", (s.GetMessages())); err != nil {
-		return fmt.Errorf("error occurred while setting property Messages: %+v", err)
+		return diag.Errorf("error occurred while setting property Messages in ApplianceBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in ApplianceBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in ApplianceBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("protocol", (s.GetProtocol())); err != nil {
-		return fmt.Errorf("error occurred while setting property Protocol: %+v", err)
+		return diag.Errorf("error occurred while setting property Protocol in ApplianceBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("remote_host", (s.GetRemoteHost())); err != nil {
-		return fmt.Errorf("error occurred while setting property RemoteHost: %+v", err)
+		return diag.Errorf("error occurred while setting property RemoteHost in ApplianceBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("remote_path", (s.GetRemotePath())); err != nil {
-		return fmt.Errorf("error occurred while setting property RemotePath: %+v", err)
+		return diag.Errorf("error occurred while setting property RemotePath in ApplianceBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("remote_port", (s.GetRemotePort())); err != nil {
-		return fmt.Errorf("error occurred while setting property RemotePort: %+v", err)
+		return diag.Errorf("error occurred while setting property RemotePort in ApplianceBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("start_time", (s.GetStartTime()).String()); err != nil {
-		return fmt.Errorf("error occurred while setting property StartTime: %+v", err)
+		return diag.Errorf("error occurred while setting property StartTime in ApplianceBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("status", (s.GetStatus())); err != nil {
-		return fmt.Errorf("error occurred while setting property Status: %+v", err)
+		return diag.Errorf("error occurred while setting property Status in ApplianceBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in ApplianceBackup object: %s", err.Error())
 	}
 
 	if err := d.Set("username", (s.GetUsername())); err != nil {
-		return fmt.Errorf("error occurred while setting property Username: %+v", err)
+		return diag.Errorf("error occurred while setting property Username in ApplianceBackup object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceApplianceBackupDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceApplianceBackupDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.ApplianceApi.DeleteApplianceBackup(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting ApplianceBackup object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

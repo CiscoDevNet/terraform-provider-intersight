@@ -1,17 +1,15 @@
-
 ---
+subcategory: "management"
 layout: "intersight"
 page_title: "Intersight: intersight_management_interface"
-sidebar_current: "docs-intersight-data-source-management-interface"
 description: |-
-Interface that provides access to the management controller.
+  Interface that provides access to the management controller.
 ---
 
-# Data Source: intersight_management._interface
+# Data Source: intersight_management_interface
 Interface that provides access to the management controller.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `gateway`:(string) Default gateway for the interface. 
@@ -26,7 +24,6 @@ The following arguments can be used to get data of already created objects in In
 * `mac_address`:(string) MAC address configured for the interface. 
 * `mask`:(string) Netmask for the interface. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 
 * `switch_id`:(string) Switch Id connected to the interface. 
 * `uem_conn_status`:(string) The event channel connection status for the interface. 

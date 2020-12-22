@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.OauthClientIdSecretCredential"]
 **ClientId** | Pointer to **string** | The client ID used to authenticate with a managed target. | [optional] 
 **ClientSecret** | Pointer to **string** | The client secret used to authenticate with a managed target. | [optional] 
-**IsClientSecretSet** | Pointer to **bool** | Indicates whether the value of the &#39;clientSecret&#39; property has been set. | [optional] [readonly] 
+**IsClientSecretSet** | Pointer to **bool** | Indicates whether the value of the &#39;clientSecret&#39; property has been set. | [optional] [readonly] [default to false]
 
 ## Methods
 

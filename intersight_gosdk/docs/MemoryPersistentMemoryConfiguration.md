@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **ComputeBoard** | Pointer to [**ComputeBoardRelationship**](compute.Board.Relationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
 **PersistentMemoryConfigResult** | Pointer to [**MemoryPersistentMemoryConfigResultRelationship**](memory.PersistentMemoryConfigResult.Relationship.md) |  | [optional] 
-**PersistentMemoryRegions** | Pointer to [**[]MemoryPersistentMemoryRegionRelationship**](memory.PersistentMemoryRegion.Relationship.md) | An array of relationships to memoryPersistentMemoryRegion resources. | [optional] [readonly] 
+**PersistentMemoryRegions** | Pointer to [**[]MemoryPersistentMemoryRegionRelationship**](MemoryPersistentMemoryRegionRelationship.md) | An array of relationships to memoryPersistentMemoryRegion resources. | [optional] [readonly] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
 ## Methods

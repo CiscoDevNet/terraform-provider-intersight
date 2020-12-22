@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceSnmpPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceSnmpPolicyCreate,
-		Read:   resourceSnmpPolicyRead,
-		Update: resourceSnmpPolicyUpdate,
-		Delete: resourceSnmpPolicyDelete,
+		CreateContext: resourceSnmpPolicyCreate,
+		ReadContext:   resourceSnmpPolicyRead,
+		UpdateContext: resourceSnmpPolicyUpdate,
+		DeleteContext: resourceSnmpPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"access_community_string": {
 				Description: "The default SNMPv1, SNMPv2c community name or SNMPv3 username to include on any trap messages sent to the SNMP host. The name can be 18 characters long.",
@@ -47,6 +50,7 @@ func resourceSnmpPolicy() *schema.Resource {
 				Description: "State of the SNMP Policy on the endpoint. If enabled, the endpoint sends SNMP traps to the designated host.",
 				Type:        schema.TypeBool,
 				Optional:    true,
+				Default:     true,
 			},
 			"engine_id": {
 				Description: "User-defined unique identification of the static engine.",
@@ -154,9 +158,10 @@ func resourceSnmpPolicy() *schema.Resource {
 				Computed:   true,
 			},
 			"snmp_port": {
-				Description: "Port on which Cisco IMC SNMP agent runs. Enter a value between 1-65535. Reserved ports not allowed (22, 23, 80, 123, 389, 443, 623, 636, 2068, 3268, 3269).",
+				Description: "Port on which Cisco IMC SNMP agent runs. Enter a value between 1-65535.",
 				Type:        schema.TypeInt,
 				Optional:    true,
+				Default:     161,
 			},
 			"snmp_traps": {
 				Type:     schema.TypeList,
@@ -183,17 +188,19 @@ func resourceSnmpPolicy() *schema.Resource {
 							Description: "Enables/disables the trap on the server If enabled, trap is active on the server.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
 						},
 						"port": {
-							Description: "Port used by the server to communicate with trap destination. Enter a value between 1-65535. Reserved ports not allowed (22, 23, 80, 123, 389, 443, 623, 636, 2068, 3268, 3269).",
+							Description: "Port used by the server to communicate with the trap destination. Enter a value between 1-65535.",
 							Type:        schema.TypeInt,
 							Optional:    true,
+							Default:     162,
 						},
 						"type": {
 							Description: "Type of trap which decides whether to receive a notification when a trap is received at the destination.\n* `Trap` - Do not receive notifications when trap is sent to the destination.\n* `Inform` - Receive notifications when trap is sent to the destination. This option is valid only for V2 users.",
@@ -331,7 +338,7 @@ func resourceSnmpPolicy() *schema.Resource {
 	}
 }
 
-func resourceSnmpPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceSnmpPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -669,125 +676,130 @@ func resourceSnmpPolicyCreate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	r := conn.ApiClient.SnmpApi.CreateSnmpPolicy(conn.ctx).SnmpPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating SnmpPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceSnmpPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceSnmpPolicyRead(c, d, meta)
 }
-func detachSnmpPolicyProfiles(d *schema.ResourceData, meta interface{}) error {
+func detachSnmpPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.SnmpPolicy{}
 	o.SetClassId("snmp.Policy")
 	o.SetObjectType("snmp.Policy")
 	o.SetProfiles([]models.PolicyAbstractConfigProfileRelationship{})
 
 	r := conn.ApiClient.SnmpApi.UpdateSnmpPolicy(conn.ctx, d.Id()).SnmpPolicy(*o)
-	_, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while creating: %s", err.Error())
+	_, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	return err
+	return de
 }
 
-func resourceSnmpPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceSnmpPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.SnmpApi.GetSnmpPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "SnmpPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching SnmpPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("access_community_string", (s.GetAccessCommunityString())); err != nil {
-		return fmt.Errorf("error occurred while setting property AccessCommunityString: %+v", err)
+		return diag.Errorf("error occurred while setting property AccessCommunityString in SnmpPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in SnmpPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in SnmpPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("community_access", (s.GetCommunityAccess())); err != nil {
-		return fmt.Errorf("error occurred while setting property CommunityAccess: %+v", err)
+		return diag.Errorf("error occurred while setting property CommunityAccess in SnmpPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in SnmpPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("enabled", (s.GetEnabled())); err != nil {
-		return fmt.Errorf("error occurred while setting property Enabled: %+v", err)
+		return diag.Errorf("error occurred while setting property Enabled in SnmpPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("engine_id", (s.GetEngineId())); err != nil {
-		return fmt.Errorf("error occurred while setting property EngineId: %+v", err)
+		return diag.Errorf("error occurred while setting property EngineId in SnmpPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in SnmpPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in SnmpPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in SnmpPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in SnmpPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("profiles", flattenListPolicyAbstractConfigProfileRelationship(s.GetProfiles(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Profiles: %+v", err)
+		return diag.Errorf("error occurred while setting property Profiles in SnmpPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("snmp_port", (s.GetSnmpPort())); err != nil {
-		return fmt.Errorf("error occurred while setting property SnmpPort: %+v", err)
+		return diag.Errorf("error occurred while setting property SnmpPort in SnmpPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("snmp_traps", flattenListSnmpTrap(s.GetSnmpTraps(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property SnmpTraps: %+v", err)
+		return diag.Errorf("error occurred while setting property SnmpTraps in SnmpPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("snmp_users", flattenListSnmpUser(s.GetSnmpUsers(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property SnmpUsers: %+v", err)
+		return diag.Errorf("error occurred while setting property SnmpUsers in SnmpPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("sys_contact", (s.GetSysContact())); err != nil {
-		return fmt.Errorf("error occurred while setting property SysContact: %+v", err)
+		return diag.Errorf("error occurred while setting property SysContact in SnmpPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("sys_location", (s.GetSysLocation())); err != nil {
-		return fmt.Errorf("error occurred while setting property SysLocation: %+v", err)
+		return diag.Errorf("error occurred while setting property SysLocation in SnmpPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in SnmpPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("trap_community", (s.GetTrapCommunity())); err != nil {
-		return fmt.Errorf("error occurred while setting property TrapCommunity: %+v", err)
+		return diag.Errorf("error occurred while setting property TrapCommunity in SnmpPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceSnmpPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceSnmpPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -1142,31 +1154,32 @@ func resourceSnmpPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
 	}
 
 	r := conn.ApiClient.SnmpApi.UpdateSnmpPolicy(conn.ctx, d.Id()).SnmpPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating SnmpPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceSnmpPolicyRead(d, meta)
+	return resourceSnmpPolicyRead(c, d, meta)
 }
 
-func resourceSnmpPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceSnmpPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	if p, ok := d.GetOk("profiles"); ok {
 		if len(p.([]interface{})) > 0 {
 			e := detachSnmpPolicyProfiles(d, meta)
-			if e != nil {
+			if e.HasError() {
 				return e
 			}
 		}
 	}
 	p := conn.ApiClient.SnmpApi.DeleteSnmpPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting SnmpPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceFabricFcUplinkPcRole() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceFabricFcUplinkPcRoleCreate,
-		Read:   resourceFabricFcUplinkPcRoleRead,
-		Update: resourceFabricFcUplinkPcRoleUpdate,
-		Delete: resourceFabricFcUplinkPcRoleDelete,
+		CreateContext: resourceFabricFcUplinkPcRoleCreate,
+		ReadContext:   resourceFabricFcUplinkPcRoleRead,
+		UpdateContext: resourceFabricFcUplinkPcRoleUpdate,
+		DeleteContext: resourceFabricFcUplinkPcRoleDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -47,7 +50,7 @@ func resourceFabricFcUplinkPcRole() *schema.Resource {
 				ForceNew:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -172,7 +175,7 @@ func resourceFabricFcUplinkPcRole() *schema.Resource {
 	}
 }
 
-func resourceFabricFcUplinkPcRoleCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricFcUplinkPcRoleCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -342,77 +345,81 @@ func resourceFabricFcUplinkPcRoleCreate(d *schema.ResourceData, meta interface{}
 	}
 
 	r := conn.ApiClient.FabricApi.CreateFabricFcUplinkPcRole(conn.ctx).FabricFcUplinkPcRole(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating FabricFcUplinkPcRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceFabricFcUplinkPcRoleRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceFabricFcUplinkPcRoleRead(c, d, meta)
 }
 
-func resourceFabricFcUplinkPcRoleRead(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricFcUplinkPcRoleRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.FabricApi.GetFabricFcUplinkPcRoleByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "FabricFcUplinkPcRole object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching FabricFcUplinkPcRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in FabricFcUplinkPcRole object: %s", err.Error())
 	}
 
 	if err := d.Set("admin_speed", (s.GetAdminSpeed())); err != nil {
-		return fmt.Errorf("error occurred while setting property AdminSpeed: %+v", err)
+		return diag.Errorf("error occurred while setting property AdminSpeed in FabricFcUplinkPcRole object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in FabricFcUplinkPcRole object: %s", err.Error())
 	}
 
 	if err := d.Set("fill_pattern", (s.GetFillPattern())); err != nil {
-		return fmt.Errorf("error occurred while setting property FillPattern: %+v", err)
+		return diag.Errorf("error occurred while setting property FillPattern in FabricFcUplinkPcRole object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in FabricFcUplinkPcRole object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in FabricFcUplinkPcRole object: %s", err.Error())
 	}
 
 	if err := d.Set("pc_id", (s.GetPcId())); err != nil {
-		return fmt.Errorf("error occurred while setting property PcId: %+v", err)
+		return diag.Errorf("error occurred while setting property PcId in FabricFcUplinkPcRole object: %s", err.Error())
 	}
 
 	if err := d.Set("port_policy", flattenMapFabricPortPolicyRelationship(s.GetPortPolicy(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property PortPolicy: %+v", err)
+		return diag.Errorf("error occurred while setting property PortPolicy in FabricFcUplinkPcRole object: %s", err.Error())
 	}
 
 	if err := d.Set("ports", flattenListFabricPortIdentifier(s.GetPorts(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Ports: %+v", err)
+		return diag.Errorf("error occurred while setting property Ports in FabricFcUplinkPcRole object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in FabricFcUplinkPcRole object: %s", err.Error())
 	}
 
 	if err := d.Set("vsan_id", (s.GetVsanId())); err != nil {
-		return fmt.Errorf("error occurred while setting property VsanId: %+v", err)
+		return diag.Errorf("error occurred while setting property VsanId in FabricFcUplinkPcRole object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceFabricFcUplinkPcRoleUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricFcUplinkPcRoleUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -591,23 +598,24 @@ func resourceFabricFcUplinkPcRoleUpdate(d *schema.ResourceData, meta interface{}
 	}
 
 	r := conn.ApiClient.FabricApi.UpdateFabricFcUplinkPcRole(conn.ctx, d.Id()).FabricFcUplinkPcRole(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating FabricFcUplinkPcRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFabricFcUplinkPcRoleRead(d, meta)
+	return resourceFabricFcUplinkPcRoleRead(c, d, meta)
 }
 
-func resourceFabricFcUplinkPcRoleDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricFcUplinkPcRoleDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.FabricApi.DeleteFabricFcUplinkPcRole(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting FabricFcUplinkPcRole object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

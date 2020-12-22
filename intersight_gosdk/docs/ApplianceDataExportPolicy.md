@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** | Name of the Data Export Policy. | [optional] [readonly] 
 **Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
 **ParentConfig** | Pointer to [**ApplianceDataExportPolicyRelationship**](appliance.DataExportPolicy.Relationship.md) |  | [optional] 
-**SubConfigs** | Pointer to [**[]ApplianceDataExportPolicyRelationship**](appliance.DataExportPolicy.Relationship.md) | An array of relationships to applianceDataExportPolicy resources. | [optional] [readonly] 
+**SubConfigs** | Pointer to [**[]ApplianceDataExportPolicyRelationship**](ApplianceDataExportPolicyRelationship.md) | An array of relationships to applianceDataExportPolicy resources. | [optional] [readonly] 
 
 ## Methods
 

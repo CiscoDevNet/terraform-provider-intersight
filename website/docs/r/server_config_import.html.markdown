@@ -1,13 +1,12 @@
-
 ---
+subcategory: "server"
 layout: "intersight"
 page_title: "Intersight: intersight_server_config_import"
-sidebar_current: "docs-intersight-resource-server-config-import"
 description: |-
   Configuration import action will import the existing configuration from physical server and generate Intersight policies and server profile from it. At end of successful import, server will be assigned to the generated profile which has policies associated with it. No server profile or policies will be generated if configuration import fails.
 ---
 
-# Resource: intersight_server._config_import
+# Resource: intersight_server_config_import
 Configuration import action will import the existing configuration from physical server and generate Intersight policies and server profile from it. At end of successful import, server will be assigned to the generated profile which has policies associated with it. No server profile or policies will be generated if configuration import fails.
 ## Argument Reference
 The following arguments are supported:
@@ -51,3 +50,10 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
+
+
+## Import
+`intersight_server_config_import` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_server_config_import.example 1234567890987654321abcde
+```

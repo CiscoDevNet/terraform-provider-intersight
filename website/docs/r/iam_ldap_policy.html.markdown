@@ -1,13 +1,12 @@
-
 ---
+subcategory: "iam"
 layout: "intersight"
 page_title: "Intersight: intersight_iam_ldap_policy"
-sidebar_current: "docs-intersight-resource-iam-ldap-policy"
 description: |-
   LDAP Policy configurations.
 ---
 
-# Resource: intersight_iam._ldap_policy
+# Resource: intersight_iam_ldap_policy
 LDAP Policy configurations.
 ## Argument Reference
 The following arguments are supported:
@@ -29,7 +28,7 @@ This complex property has following sub-properties:
   + `base_dn`:(string) Base Distinguished Name (DN). Starting point from where server will search for users and groups. 
   + `bind_dn`:(string) Distinguished Name (DN) of the user, that is used to authenticate against LDAP servers. 
   + `bind_method`:(string) Authentication method to access LDAP servers.* `LoginCredentials` - Requires the user credentials. If the bind process fails, then user is denied access.* `Anonymous` - Requires no username and password. If this option is selected and the LDAP server is configured for Anonymous logins, then the user gains access.* `ConfiguredCredentials` - Requires a known set of credentials to be specified for the initial bind process. If the initial bind process succeeds, then the distinguished name (DN) of the user name is queried and re-used for the re-binding process. If the re-binding process fails, then the user is denied access. 
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
+  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `domain`:(string) The IPv4 domain that all users must be in. 
   + `enable_encryption`:(bool) If enabled, the endpoint encrypts all information it sends to the LDAP server. 
   + `enable_group_authorization`:(bool) If enabled, user authorization is also done at the group level for LDAP users not in the local user database. 
@@ -50,7 +49,7 @@ This complex property has following sub-properties:
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `search_domain`:(string) Domain name that acts as a source for a DNS query. 
   + `search_forest`:(string) Forest name that acts as a source for a DNS query. 
-  + `source`:(string) Source of the domain name used for the DNS SRV request.* `Extracted` - The domain name extracted-domain from the login ID.* `Configured` - The configured-search domain.* `ConfiguredExtracted` - The domain name extracted from the login ID than the configured-search domain. 
+  + `nr_source`:(string) Source of the domain name used for the DNS SRV request.* `Extracted` - The domain name extracted-domain from the login ID.* `Configured` - The configured-search domain.* `ConfiguredExtracted` - The domain name extracted from the login ID than the configured-search domain. 
 * `enable_dns`:(bool) Enables DNS to access LDAP servers. 
 * `enabled`:(bool) LDAP server performs authentication. 
 * `groups`:(Array) An array of relationships to iamLdapGroup resources. 
@@ -80,7 +79,7 @@ This complex property has following sub-properties:
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `providers`:(Array) An array of relationships to iamLdapProvider resources. 
+* `nr_providers`:(Array) An array of relationships to iamLdapProvider resources. 
 This complex property has following sub-properties:
   + `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
@@ -95,3 +94,10 @@ This complex property has following sub-properties:
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `user_search_precedence`:(string) Search precedence between local user database and LDAP user database.* `LocalUserDb` - Precedence is given to local user database while searching.* `LDAPUserDb` - Precedence is given to LADP user database while searching. 
+
+
+## Import
+`intersight_iam_ldap_policy` can be imported using the Moid of the object, e.g.
+```
+$ terraform import intersight_iam_ldap_policy.example 1234567890987654321abcde
+```

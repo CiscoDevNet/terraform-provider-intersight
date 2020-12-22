@@ -1,19 +1,20 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 	"reflect"
 	"time"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func dataSourceApplianceUpgradePolicy() *schema.Resource {
 	return &schema.Resource{
-		Read: dataSourceApplianceUpgradePolicyRead,
+		ReadContext: dataSourceApplianceUpgradePolicyRead,
 		Schema: map[string]*schema.Schema{
 			"account": {
 				Description: "A reference to a iamAccount resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -185,10 +186,11 @@ func dataSourceApplianceUpgradePolicy() *schema.Resource {
 	}
 }
 
-func dataSourceApplianceUpgradePolicyRead(d *schema.ResourceData, meta interface{}) error {
+func dataSourceApplianceUpgradePolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
+	var de diag.Diagnostics
 	var o = &models.ApplianceUpgradePolicy{}
 	if v, ok := d.GetOk("auto_upgrade"); ok {
 		x := (v.(bool))
@@ -221,25 +223,25 @@ func dataSourceApplianceUpgradePolicyRead(d *schema.ResourceData, meta interface
 
 	data, err := o.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("Json Marshalling of data source failed with error : %+v", err)
+		return diag.Errorf("json marshal of ApplianceUpgradePolicy object failed with error : %s", err.Error())
 	}
-	res, _, err := conn.ApiClient.ApplianceApi.GetApplianceUpgradePolicyList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while sending request %+v", err)
+	resMo, _, responseErr := conn.ApiClient.ApplianceApi.GetApplianceUpgradePolicyList(conn.ctx).Filter(getRequestParams(data)).Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while fetching ApplianceUpgradePolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
-	x, err := res.MarshalJSON()
+	x, err := resMo.MarshalJSON()
 	if err != nil {
-		return fmt.Errorf("error occurred while marshalling response: %+v", err)
+		return diag.Errorf("error occurred while marshalling response for ApplianceUpgradePolicy list: %s", err.Error())
 	}
 	var s = &models.ApplianceUpgradePolicyList{}
 	err = json.Unmarshal(x, s)
 	if err != nil {
-		return fmt.Errorf("error occurred while unmarshalling response to ApplianceUpgradePolicy: %+v", err)
+		return diag.Errorf("error occurred while unmarshalling response to ApplianceUpgradePolicy list: %s", err.Error())
 	}
 	result := s.GetResults()
 	if result == nil {
-		return fmt.Errorf("your query returned no results. Please change your search criteria and try again")
+		return diag.Errorf("your query for ApplianceUpgradePolicy did not return results. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -248,48 +250,48 @@ func dataSourceApplianceUpgradePolicyRead(d *schema.ResourceData, meta interface
 			var s = &models.ApplianceUpgradePolicy{}
 			oo, _ := json.Marshal(r.Index(i).Interface())
 			if err = json.Unmarshal(oo, s); err != nil {
-				return fmt.Errorf("error occurred while unmarshalling result at index %+v: %+v", i, err)
+				return diag.Errorf("error occurred while unmarshalling result at index %+v: %s", i, err.Error())
 			}
 
 			if err := d.Set("account", flattenMapIamAccountRelationship(s.GetAccount(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Account: %+v", err)
+				return diag.Errorf("error occurred while setting property Account: %s", err.Error())
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-				return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
 			if err := d.Set("auto_upgrade", (s.GetAutoUpgrade())); err != nil {
-				return fmt.Errorf("error occurred while setting property AutoUpgrade: %+v", err)
+				return diag.Errorf("error occurred while setting property AutoUpgrade: %s", err.Error())
 			}
 			if err := d.Set("blackout_dates_enabled", (s.GetBlackoutDatesEnabled())); err != nil {
-				return fmt.Errorf("error occurred while setting property BlackoutDatesEnabled: %+v", err)
+				return diag.Errorf("error occurred while setting property BlackoutDatesEnabled: %s", err.Error())
 			}
 
 			if err := d.Set("blackout_end_date", (s.GetBlackoutEndDate()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property BlackoutEndDate: %+v", err)
+				return diag.Errorf("error occurred while setting property BlackoutEndDate: %s", err.Error())
 			}
 
 			if err := d.Set("blackout_start_date", (s.GetBlackoutStartDate()).String()); err != nil {
-				return fmt.Errorf("error occurred while setting property BlackoutStartDate: %+v", err)
+				return diag.Errorf("error occurred while setting property BlackoutStartDate: %s", err.Error())
 			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
-				return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
-				return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-				return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
 
 			if err := d.Set("schedule", flattenMapOnpremSchedule(s.GetSchedule(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Schedule: %+v", err)
+				return diag.Errorf("error occurred while setting property Schedule: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-				return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}
 	}
-	return nil
+	return de
 }

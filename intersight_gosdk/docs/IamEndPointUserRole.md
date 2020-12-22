@@ -8,9 +8,9 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "iam.EndPointUserRole"]
 **ChangePassword** | Pointer to **bool** | Denotes whether password has changed. | [optional] [readonly] 
 **Enabled** | Pointer to **bool** | Enables the user account on the endpoint. | [optional] 
-**IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] 
+**IsPasswordSet** | Pointer to **bool** | Indicates whether the value of the &#39;password&#39; property has been set. | [optional] [readonly] [default to false]
 **Password** | Pointer to **string** | Valid login password of the user. | [optional] 
-**EndPointRole** | Pointer to [**[]IamEndPointRoleRelationship**](iam.EndPointRole.Relationship.md) | An array of relationships to iamEndPointRole resources. | [optional] 
+**EndPointRole** | Pointer to [**[]IamEndPointRoleRelationship**](IamEndPointRoleRelationship.md) | An array of relationships to iamEndPointRole resources. | [optional] 
 **EndPointUser** | Pointer to [**IamEndPointUserRelationship**](iam.EndPointUser.Relationship.md) |  | [optional] 
 **EndPointUserPolicy** | Pointer to [**IamEndPointUserPolicyRelationship**](iam.EndPointUserPolicy.Relationship.md) |  | [optional] 
 

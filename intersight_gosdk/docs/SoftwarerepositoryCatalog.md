@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "softwarerepository.Catalog"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "softwarerepository.Catalog"]
+**IsImagePullFailure** | Pointer to **bool** | The status of the image catalog synchronization operation. | [optional] [readonly] 
 **Name** | Pointer to **string** | The name of the catalog. The names are populated and predefined during MO creation. | [optional] [readonly] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 **System** | Pointer to [**IamSystemRelationship**](iam.System.Relationship.md) |  | [optional] 
@@ -68,6 +69,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetIsImagePullFailure
+
+`func (o *SoftwarerepositoryCatalog) GetIsImagePullFailure() bool`
+
+GetIsImagePullFailure returns the IsImagePullFailure field if non-nil, zero value otherwise.
+
+### GetIsImagePullFailureOk
+
+`func (o *SoftwarerepositoryCatalog) GetIsImagePullFailureOk() (*bool, bool)`
+
+GetIsImagePullFailureOk returns a tuple with the IsImagePullFailure field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsImagePullFailure
+
+`func (o *SoftwarerepositoryCatalog) SetIsImagePullFailure(v bool)`
+
+SetIsImagePullFailure sets IsImagePullFailure field to given value.
+
+### HasIsImagePullFailure
+
+`func (o *SoftwarerepositoryCatalog) HasIsImagePullFailure() bool`
+
+HasIsImagePullFailure returns a boolean if a field has been set.
 
 ### GetName
 

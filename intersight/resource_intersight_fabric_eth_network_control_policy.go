@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceFabricEthNetworkControlPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceFabricEthNetworkControlPolicyCreate,
-		Read:   resourceFabricEthNetworkControlPolicyRead,
-		Update: resourceFabricEthNetworkControlPolicyUpdate,
-		Delete: resourceFabricEthNetworkControlPolicyDelete,
+		CreateContext: resourceFabricEthNetworkControlPolicyCreate,
+		ReadContext:   resourceFabricEthNetworkControlPolicyRead,
+		UpdateContext: resourceFabricEthNetworkControlPolicyUpdate,
+		DeleteContext: resourceFabricEthNetworkControlPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -25,6 +28,7 @@ func resourceFabricEthNetworkControlPolicy() *schema.Resource {
 				Description: "Enables the CDP on an interface.",
 				Type:        schema.TypeBool,
 				Optional:    true,
+				Default:     false,
 			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
@@ -71,11 +75,13 @@ func resourceFabricEthNetworkControlPolicy() *schema.Resource {
 							Description: "Determines if the LLDP frames can be received by an interface on the switch.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     false,
 						},
 						"transmit_enabled": {
 							Description: "Determines if the LLDP frames can be transmitted by an interface on the switch.",
 							Type:        schema.TypeBool,
 							Optional:    true,
+							Default:     false,
 						},
 					},
 				},
@@ -141,7 +147,7 @@ func resourceFabricEthNetworkControlPolicy() *schema.Resource {
 				Computed:   true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -221,7 +227,7 @@ func resourceFabricEthNetworkControlPolicy() *schema.Resource {
 	}
 }
 
-func resourceFabricEthNetworkControlPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricEthNetworkControlPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -438,89 +444,93 @@ func resourceFabricEthNetworkControlPolicyCreate(d *schema.ResourceData, meta in
 	}
 
 	r := conn.ApiClient.FabricApi.CreateFabricEthNetworkControlPolicy(conn.ctx).FabricEthNetworkControlPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating FabricEthNetworkControlPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceFabricEthNetworkControlPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceFabricEthNetworkControlPolicyRead(c, d, meta)
 }
 
-func resourceFabricEthNetworkControlPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricEthNetworkControlPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.FabricApi.GetFabricEthNetworkControlPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "FabricEthNetworkControlPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching FabricEthNetworkControlPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in FabricEthNetworkControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cdp_enabled", (s.GetCdpEnabled())); err != nil {
-		return fmt.Errorf("error occurred while setting property CdpEnabled: %+v", err)
+		return diag.Errorf("error occurred while setting property CdpEnabled in FabricEthNetworkControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in FabricEthNetworkControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in FabricEthNetworkControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("forge_mac", (s.GetForgeMac())); err != nil {
-		return fmt.Errorf("error occurred while setting property ForgeMac: %+v", err)
+		return diag.Errorf("error occurred while setting property ForgeMac in FabricEthNetworkControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("lldp_settings", flattenMapFabricLldpSettings(s.GetLldpSettings(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property LldpSettings: %+v", err)
+		return diag.Errorf("error occurred while setting property LldpSettings in FabricEthNetworkControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("mac_registration_mode", (s.GetMacRegistrationMode())); err != nil {
-		return fmt.Errorf("error occurred while setting property MacRegistrationMode: %+v", err)
+		return diag.Errorf("error occurred while setting property MacRegistrationMode in FabricEthNetworkControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in FabricEthNetworkControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in FabricEthNetworkControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("network_policy", flattenListVnicEthNetworkPolicyRelationship(s.GetNetworkPolicy(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property NetworkPolicy: %+v", err)
+		return diag.Errorf("error occurred while setting property NetworkPolicy in FabricEthNetworkControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in FabricEthNetworkControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in FabricEthNetworkControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in FabricEthNetworkControlPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("uplink_fail_action", (s.GetUplinkFailAction())); err != nil {
-		return fmt.Errorf("error occurred while setting property UplinkFailAction: %+v", err)
+		return diag.Errorf("error occurred while setting property UplinkFailAction in FabricEthNetworkControlPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceFabricEthNetworkControlPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricEthNetworkControlPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -749,23 +759,24 @@ func resourceFabricEthNetworkControlPolicyUpdate(d *schema.ResourceData, meta in
 	}
 
 	r := conn.ApiClient.FabricApi.UpdateFabricEthNetworkControlPolicy(conn.ctx, d.Id()).FabricEthNetworkControlPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating FabricEthNetworkControlPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceFabricEthNetworkControlPolicyRead(d, meta)
+	return resourceFabricEthNetworkControlPolicyRead(c, d, meta)
 }
 
-func resourceFabricEthNetworkControlPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceFabricEthNetworkControlPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.FabricApi.DeleteFabricEthNetworkControlPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting FabricEthNetworkControlPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }

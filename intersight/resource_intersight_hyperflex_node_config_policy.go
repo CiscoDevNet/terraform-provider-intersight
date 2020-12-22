@@ -1,20 +1,23 @@
 package intersight
 
 import (
+	"context"
 	"encoding/json"
-	"fmt"
 	"log"
+	"strings"
 
 	models "github.com/CiscoDevNet/terraform-provider-intersight/intersight_gosdk"
-	"github.com/hashicorp/terraform-plugin-sdk/helper/schema"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 )
 
 func resourceHyperflexNodeConfigPolicy() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceHyperflexNodeConfigPolicyCreate,
-		Read:   resourceHyperflexNodeConfigPolicyRead,
-		Update: resourceHyperflexNodeConfigPolicyUpdate,
-		Delete: resourceHyperflexNodeConfigPolicyDelete,
+		CreateContext: resourceHyperflexNodeConfigPolicyCreate,
+		ReadContext:   resourceHyperflexNodeConfigPolicyRead,
+		UpdateContext: resourceHyperflexNodeConfigPolicyUpdate,
+		DeleteContext: resourceHyperflexNodeConfigPolicyDelete,
+		Importer:      &schema.ResourceImporter{StateContext: schema.ImportStatePassthroughContext},
 		Schema: map[string]*schema.Schema{
 			"additional_properties": {
 				Type:             schema.TypeString,
@@ -101,7 +104,7 @@ func resourceHyperflexNodeConfigPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -155,7 +158,56 @@ func resourceHyperflexNodeConfigPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"start_addr": {
+							Description: "The start IPv4 address of the range.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+			},
+			"hypervisor_control_ip_range": {
+				Description: "The range of IPs to be assigned to each hypervisor node for VM migration and hypervior control.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"end_addr": {
+							Description: "The end IPv4 address of the range.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"gateway": {
+							Description: "The default gateway for the start and end IPv4 addresses.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"netmask": {
+							Description: "The netmask specified in dot decimal notation.\nThe start address, end address, and gateway must all be within the network specified by this netmask.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -204,7 +256,7 @@ func resourceHyperflexNodeConfigPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -237,7 +289,7 @@ func resourceHyperflexNodeConfigPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -311,7 +363,7 @@ func resourceHyperflexNodeConfigPolicy() *schema.Resource {
 	}
 }
 
-func resourceHyperflexNodeConfigPolicyCreate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexNodeConfigPolicyCreate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -484,6 +536,61 @@ func resourceHyperflexNodeConfigPolicyCreate(d *schema.ResourceData, meta interf
 		}
 	}
 
+	if v, ok := d.GetOk("hypervisor_control_ip_range"); ok {
+		p := make([]models.HyperflexIpAddrRange, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewHyperflexIpAddrRangeWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("hyperflex.IpAddrRange")
+			if v, ok := l["end_addr"]; ok {
+				{
+					x := (v.(string))
+					o.SetEndAddr(x)
+				}
+			}
+			if v, ok := l["gateway"]; ok {
+				{
+					x := (v.(string))
+					o.SetGateway(x)
+				}
+			}
+			if v, ok := l["netmask"]; ok {
+				{
+					x := (v.(string))
+					o.SetNetmask(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["start_addr"]; ok {
+				{
+					x := (v.(string))
+					o.SetStartAddr(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetHypervisorControlIpRange(x)
+		}
+	}
+
 	if v, ok := d.GetOk("mgmt_ip_range"); ok {
 		p := make([]models.HyperflexIpAddrRange, 0, 1)
 		s := v.([]interface{})
@@ -635,85 +742,93 @@ func resourceHyperflexNodeConfigPolicyCreate(d *schema.ResourceData, meta interf
 	}
 
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexNodeConfigPolicy(conn.ctx).HyperflexNodeConfigPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("Failed to invoke operation: %v", err)
+	resultMo, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("failed while creating HyperflexNodeConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
-	log.Printf("Moid: %s", result.GetMoid())
-	d.SetId(result.GetMoid())
-	return resourceHyperflexNodeConfigPolicyRead(d, meta)
+	log.Printf("Moid: %s", resultMo.GetMoid())
+	d.SetId(resultMo.GetMoid())
+	return resourceHyperflexNodeConfigPolicyRead(c, d, meta)
 }
 
-func resourceHyperflexNodeConfigPolicyRead(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexNodeConfigPolicyRead(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
-
+	var de diag.Diagnostics
 	r := conn.ApiClient.HyperflexApi.GetHyperflexNodeConfigPolicyByMoid(conn.ctx, d.Id())
-	s, _, err := r.Execute()
-
-	if err != nil {
-		return fmt.Errorf("error in unmarshaling model for read Error: %s", err.Error())
+	s, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		if strings.Contains(responseErr.Error(), "404") {
+			de = append(de, diag.Diagnostic{Summary: "HyperflexNodeConfigPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
+			d.SetId("")
+			return de
+		}
+		return diag.Errorf("error occurred while fetching HyperflexNodeConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
-		return fmt.Errorf("error occurred while setting property AdditionalProperties: %+v", err)
+		return diag.Errorf("error occurred while setting property AdditionalProperties in HyperflexNodeConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
-		return fmt.Errorf("error occurred while setting property ClassId: %+v", err)
+		return diag.Errorf("error occurred while setting property ClassId in HyperflexNodeConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("cluster_profiles", flattenListHyperflexClusterProfileRelationship(s.GetClusterProfiles(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property ClusterProfiles: %+v", err)
+		return diag.Errorf("error occurred while setting property ClusterProfiles in HyperflexNodeConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("data_ip_range", flattenMapHyperflexIpAddrRange(s.GetDataIpRange(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property DataIpRange: %+v", err)
+		return diag.Errorf("error occurred while setting property DataIpRange in HyperflexNodeConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("description", (s.GetDescription())); err != nil {
-		return fmt.Errorf("error occurred while setting property Description: %+v", err)
+		return diag.Errorf("error occurred while setting property Description in HyperflexNodeConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("hxdp_ip_range", flattenMapHyperflexIpAddrRange(s.GetHxdpIpRange(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property HxdpIpRange: %+v", err)
+		return diag.Errorf("error occurred while setting property HxdpIpRange in HyperflexNodeConfigPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("hypervisor_control_ip_range", flattenMapHyperflexIpAddrRange(s.GetHypervisorControlIpRange(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property HypervisorControlIpRange in HyperflexNodeConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("mgmt_ip_range", flattenMapHyperflexIpAddrRange(s.GetMgmtIpRange(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property MgmtIpRange: %+v", err)
+		return diag.Errorf("error occurred while setting property MgmtIpRange in HyperflexNodeConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("moid", (s.GetMoid())); err != nil {
-		return fmt.Errorf("error occurred while setting property Moid: %+v", err)
+		return diag.Errorf("error occurred while setting property Moid in HyperflexNodeConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("name", (s.GetName())); err != nil {
-		return fmt.Errorf("error occurred while setting property Name: %+v", err)
+		return diag.Errorf("error occurred while setting property Name in HyperflexNodeConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("node_name_prefix", (s.GetNodeNamePrefix())); err != nil {
-		return fmt.Errorf("error occurred while setting property NodeNamePrefix: %+v", err)
+		return diag.Errorf("error occurred while setting property NodeNamePrefix in HyperflexNodeConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("object_type", (s.GetObjectType())); err != nil {
-		return fmt.Errorf("error occurred while setting property ObjectType: %+v", err)
+		return diag.Errorf("error occurred while setting property ObjectType in HyperflexNodeConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("organization", flattenMapOrganizationOrganizationRelationship(s.GetOrganization(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Organization: %+v", err)
+		return diag.Errorf("error occurred while setting property Organization in HyperflexNodeConfigPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
-		return fmt.Errorf("error occurred while setting property Tags: %+v", err)
+		return diag.Errorf("error occurred while setting property Tags in HyperflexNodeConfigPolicy object: %s", err.Error())
 	}
 
 	log.Printf("s: %v", s)
 	log.Printf("Moid: %s", s.GetMoid())
-	return nil
+	return de
 }
 
-func resourceHyperflexNodeConfigPolicyUpdate(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexNodeConfigPolicyUpdate(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
 	conn := meta.(*Config)
@@ -891,6 +1006,62 @@ func resourceHyperflexNodeConfigPolicyUpdate(d *schema.ResourceData, meta interf
 		}
 	}
 
+	if d.HasChange("hypervisor_control_ip_range") {
+		v := d.Get("hypervisor_control_ip_range")
+		p := make([]models.HyperflexIpAddrRange, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.HyperflexIpAddrRange{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("hyperflex.IpAddrRange")
+			if v, ok := l["end_addr"]; ok {
+				{
+					x := (v.(string))
+					o.SetEndAddr(x)
+				}
+			}
+			if v, ok := l["gateway"]; ok {
+				{
+					x := (v.(string))
+					o.SetGateway(x)
+				}
+			}
+			if v, ok := l["netmask"]; ok {
+				{
+					x := (v.(string))
+					o.SetNetmask(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["start_addr"]; ok {
+				{
+					x := (v.(string))
+					o.SetStartAddr(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetHypervisorControlIpRange(x)
+		}
+	}
+
 	if d.HasChange("mgmt_ip_range") {
 		v := d.Get("mgmt_ip_range")
 		p := make([]models.HyperflexIpAddrRange, 0, 1)
@@ -1048,23 +1219,24 @@ func resourceHyperflexNodeConfigPolicyUpdate(d *schema.ResourceData, meta interf
 	}
 
 	r := conn.ApiClient.HyperflexApi.UpdateHyperflexNodeConfigPolicy(conn.ctx, d.Id()).HyperflexNodeConfigPolicy(*o)
-	result, _, err := r.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while updating: %s", err.Error())
+	result, _, responseErr := r.Execute()
+	if responseErr.Error() != "" {
+		return diag.Errorf("error occurred while updating HyperflexNodeConfigPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
 	d.SetId(result.GetMoid())
-	return resourceHyperflexNodeConfigPolicyRead(d, meta)
+	return resourceHyperflexNodeConfigPolicyRead(c, d, meta)
 }
 
-func resourceHyperflexNodeConfigPolicyDelete(d *schema.ResourceData, meta interface{}) error {
+func resourceHyperflexNodeConfigPolicyDelete(c context.Context, d *schema.ResourceData, meta interface{}) diag.Diagnostics {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.Printf("%v", meta)
+	var de diag.Diagnostics
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexNodeConfigPolicy(conn.ctx, d.Id())
-	_, err := p.Execute()
-	if err != nil {
-		return fmt.Errorf("error occurred while deleting: %s", err.Error())
+	_, deleteErr := p.Execute()
+	if deleteErr.Error() != "" {
+		return diag.Errorf("error occurred while deleting HyperflexNodeConfigPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
-	return err
+	return de
 }
