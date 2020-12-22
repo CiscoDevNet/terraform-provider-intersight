@@ -9,3 +9,7 @@ crash.log
 terraform.tfstate
 terraform.tfstate.backup
 terraform.tfvars
+
+.terraform.lock.hcl
+.terraform.tfstate.lock.info
+terraform.d/
