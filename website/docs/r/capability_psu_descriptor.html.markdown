@@ -24,7 +24,7 @@ This complex property has following sub-properties:
 * `description`:(string) Detailed information about the endpoint. 
 * `model`:(string) The model of the endpoint, for which this capability information is applicable. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `revision`:(string) Revision for the power supply. 
 * `tags`:(Array)
 This complex property has following sub-properties:

@@ -12,7 +12,7 @@ Policy to configure virtual media settings on endpoint.
 The following arguments are supported:
 * `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `description`:(string) Description of the policy. 
 * `enabled`:(bool) State of the Virtual Media service on the endpoint. 
 * `encryption`:(bool) If enabled, allows encryption of all Virtual Media communications. 
@@ -28,7 +28,7 @@ This complex property has following sub-properties:
   + `is_password_set`:(bool)(Computed) Indicates whether the value of the 'password' property has been set. 
   + `mount_options`:(string) Mount options for the Virtual Media mapping. The field can be left blank or filled in a comma separated list with the following options.\ For NFS, supported options are ro, rw, nolock, noexec, soft, port=VALUE, timeo=VALUE, retry=VALUE.\ For CIFS, supported options are soft, nounix, noserverino, guest.\ For CIFS version < 3.0, vers=VALUE is mandatory. e.g. vers=2.0\ For HTTP/HTTPS, the only supported option is noauto. 
   + `mount_protocol`:(string) Protocol to use to communicate with the remote server.* `nfs` - NFS protocol for vmedia mount.* `cifs` - CIFS protocol for vmedia mount.* `http` - HTTP protocol for vmedia mount.* `https` - HTTPS protocol for vmedia mount. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `password`:(string) Password associated with the username. 
   + `remote_file`:(string) Name of the remote file. It should be of .img format for HDD Virtual Media mapping and .iso format for CDD Virtual Media mapping. 
   + `remote_path`:(string) URL path to the location of the image on the remote server. The preferred format is '/path'. 

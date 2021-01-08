@@ -68,7 +68,7 @@ This complex property has following sub-properties:
 * `max_worker_task_count`:(int)(Computed) The maximum number of external (worker) tasks that can be executed on this workflow. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name for this workflow. You can have multiple versions of the workflow with the same name. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.) or an underscore (_). 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `output_definition`:(Array)
 This complex property has following sub-properties:
   + `additional_properties`:

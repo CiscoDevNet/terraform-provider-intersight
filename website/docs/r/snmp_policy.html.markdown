@@ -20,7 +20,7 @@ The following arguments are supported:
 * `engine_id`:(string) User-defined unique identification of the static engine. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the concrete policy. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `organization`:(Array with Maximum of one item) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `additional_properties`:
@@ -45,7 +45,7 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `destination`:(string) Address to which the SNMP trap information is sent. 
   + `enabled`:(bool) Enables/disables the trap on the server If enabled, trap is active on the server. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `port`:(int) Port used by the server to communicate with the trap destination. Enter a value between 1-65535. 
   + `type`:(string) Type of trap which decides whether to receive a notification when a trap is received at the destination.* `Trap` - Do not receive notifications when trap is sent to the destination.* `Inform` - Receive notifications when trap is sent to the destination. This option is valid only for V2 users. 
   + `user`:(string) SNMP user for the trap. Applicable only to SNMPv3. 
@@ -56,7 +56,7 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `auth_password`:(string) Authorization password for the user. 
   + `auth_type`:(string) Authorization protocol for authenticating the user.* `NA` - Authentication protocol is not applicable.* `MD5` - MD5 protocol is used to authenticate SNMP user.* `SHA` - SHA protocol is used to authenticate SNMP user. 
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
+  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `is_auth_password_set`:(bool)(Computed) Indicates whether the value of the 'authPassword' property has been set. 
   + `is_privacy_password_set`:(bool)(Computed) Indicates whether the value of the 'privacyPassword' property has been set. 
   + `name`:(string) SNMP username. Must have a minimum of 1 and and a maximum of 31 characters. 

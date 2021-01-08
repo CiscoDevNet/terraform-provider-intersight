@@ -44,7 +44,7 @@ This complex property has following sub-properties:
 * `enable`:(bool) Status of the data collection mode. If the value is 'true', then data collection is enabled. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string)(Computed) Name of the Data Export Policy. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `parent_config`:(Array with Maximum of one item) -(Computed) A reference to a applianceDataExportPolicy resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `additional_properties`:
