@@ -34,7 +34,7 @@ This complex property has following sub-properties:
 * `last_state_change_time`:(string)(Computed) Timestamp when a state change was observed on this advisory instnace. 
 * `last_verified_time`:(string)(Computed) Timestamp when this advisory was last evaluated. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `state`:(string) Current state of the advisory instance (Active/Cleared/Unknown etc.).* `unknown` - Intersight is unable to determine if the Advisory instance is applicable for the affected managed object.* `active` - Advisory instance is currently active and applicable for the affected managed object.* `cleared` - Advisory instance is no longer applicable for the affected managed object. 
 * `tags`:(Array)
 This complex property has following sub-properties:

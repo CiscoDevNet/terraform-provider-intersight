@@ -21,7 +21,7 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `min_version`:(string) Minimum version of the image. 
   + `name`:(string) Name of the contraint, used to identify constriant type. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `platform_regex`:(string) Regular expression of the image name. 
   + `supported_models`:
                 (Array of schema.TypeString) -

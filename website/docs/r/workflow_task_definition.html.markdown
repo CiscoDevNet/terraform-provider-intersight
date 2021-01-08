@@ -44,7 +44,7 @@ This complex property has following sub-properties:
   + `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `base_task_type`:(string)(Computed) This field will hold the base task type like HttpBaseTask or RemoteAnsibleBaseTask. 
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `constraints`:(Array with Maximum of one item) -(Computed) This field will hold any constraints a concrete task definition will specify in order to limit the environment where the task can execute. 
 This complex property has following sub-properties:
     + `additional_properties`:
@@ -59,7 +59,7 @@ This complex property has following sub-properties:
 * `license_entitlement`:(string)(Computed) License entitlement required to run this task. It is determined by license requirement of features.* `Base` - Base as a License type. It is default license type.* `Essential` - Essential as a License type.* `Standard` - Standard as a License type.* `Advantage` - Advantage as a License type.* `Premier` - Premier as a License type.* `IWO-Essential` - IWO-Essential as a License type.* `IWO-Advantage` - IWO-Advantage as a License type.* `IWO-Premier` - IWO-Premier as a License type. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of the task definition. The name should follow this convention <Verb or Action><Category><Vendor><Product><Noun or object> Verb or Action is a required portion of the name and this must be part of the pre-approved verb list. Category is an optional field and this will refer to the broad category of the task referring to the type of resource or endpoint. If there is no specific category then use \ Generic\  if required. Vendor is an optional field and this will refer to the specific vendor this task applies to. If the task is generic and not tied to a vendor, then do not specify anything. Product is an optional field, this will contain the vendor product and model when desired. Noun or object is a required field and  this will contain the noun or object on which the action is being performed. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-), period (.), colon (:), or an underscore (_). Examples SendEmail  - This is a task in Generic category for sending email. NewStorageVolume - This is a vendor agnostic task under Storage device category for creating a new volume. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `properties`:(Array with Maximum of one item) - Type to capture all the properties for the task definition. 
 This complex property has following sub-properties:
   + `additional_properties`:
@@ -93,7 +93,7 @@ This complex property has following sub-properties:
   + `name`:(string) Descriptive name for the data type. Name can only contain letters (a-z, A-Z), numbers (0-9), hyphen (-) or an underscore (_). The first and last character in name must be an alphanumeric character. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `required`:(bool) Specifies whether this parameter is required. The field is applicable for task and workflow. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `output_definition`:(Array)
 This complex property has following sub-properties:
     + `additional_properties`:
@@ -136,7 +136,7 @@ This complex property has following sub-properties:
   + `description`:(string) Description of rollback task definition. 
   + `input_parameters`: Input parameters mapping for rollback task from the input or output of the main task definition. 
   + `name`:(string) Name of the task definition which is capable of doing rollback of this task. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `task_moid`:(string) The resolved referenced rollback task definition managed object. 
   + `nr_version`:(int) The version of the task definition. 
 * `secure_prop_access`:(bool) If set to true, the task requires access to secure properties and uses an encyption token associated with a workflow moid to encrypt or decrypt the secure properties. 

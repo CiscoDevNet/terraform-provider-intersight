@@ -13,7 +13,7 @@ The following arguments are supported:
 * `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
 * `admin_state`:(string) Admin configured state to disable the port channel.* `Enabled` - Admin configured Enabled State.* `Disabled` - Admin configured Disabled State. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `network_element`:(Array with Maximum of one item) - A reference to a networkElement resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:

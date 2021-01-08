@@ -12,14 +12,14 @@ Intelligent Platform Management Interface Over LAN Policy.
 The following arguments are supported:
 * `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `description`:(string) Description of the policy. 
 * `enabled`:(bool) State of the IPMI Over LAN service on the endpoint. 
 * `encryption_key`:(string) The encryption key to use for IPMI communication. It should have an even number of hexadecimal characters and not exceed 40 characters. 
 * `is_encryption_key_set`:(bool)(Computed) Indicates whether the value of the 'encryptionKey' property has been set. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the concrete policy. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `organization`:(Array with Maximum of one item) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `additional_properties`:

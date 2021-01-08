@@ -32,7 +32,7 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `description`:(string)(Computed) Description of the rollback task. 
   + `name`:(string) Name of TaskInfo that needs to be rolled back. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `ref_name`:(string) Reference name of TaskInfo that need to be rolled back. 
   + `rollback_completed`:(bool)(Computed) Status of the rollback operation for the task. 
   + `rollback_task_name`:(string)(Computed) Name of TaskInfo that performs the rollback operation. 
@@ -54,7 +54,7 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `description`:(string)(Computed) Description of the rollback task. 
   + `name`:(string) Name of TaskInfo that needs to be rolled back. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `ref_name`:(string) Reference name of TaskInfo that need to be rolled back. 
   + `rollback_completed`:(bool)(Computed) Status of the rollback operation for the task. 
   + `rollback_task_name`:(string)(Computed) Name of TaskInfo that performs the rollback operation. 

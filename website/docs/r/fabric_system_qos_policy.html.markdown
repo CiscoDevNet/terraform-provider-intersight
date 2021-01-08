@@ -12,14 +12,14 @@ Configuration object sent by user to setup Quality of Service (QoS) for this swi
 The following arguments are supported:
 * `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `classes`:(Array)
 This complex property has following sub-properties:
   + `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `admin_state`:(string) Administrative state for this QoS class.* `Disabled` - Admin configured Disabled State.* `Enabled` - Admin configured Enabled State. 
   + `bandwidth_percent`:(int) Percentage of bandwidth received by the traffic tagged with this QoS. 
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
+  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `cos`:(int) Class of service received by the traffic tagged with this QoS. 
   + `mtu`:(int) Maximum transmission unit (MTU) is the largest size packet or frame,that can be sent in a packet- or frame-based network such as the Internet.User can select from the following:1. Any value between 1500 and 92162. 'Normal' (default) mapping to a value of 1500.3. 'FC' mapping to a value of 2240. 
   + `multicast_optimize`:(bool) If enabled, this QoS class will be optimized to send multiple packets. 

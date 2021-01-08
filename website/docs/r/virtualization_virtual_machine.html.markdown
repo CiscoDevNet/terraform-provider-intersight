@@ -47,7 +47,7 @@ This complex property has following sub-properties:
   + `config_type`:(string) Virtual machine cloud init configuration type.* `` - No cloud init specified. Cloud-init configurations are not sent to hypervisor, if none is selected.* `NoCloudSource` - Allows the user to provide user-data to the instance without running a network service.* `CloudConfigDrive` - Allows the user to provide user-data and network-data from cloud. 
   + `network_data`:(string) Network configuration data for a virtual machine. 
   + `network_data_base64_encoded`:(bool) Set to true, if the cloud init network data is in base64 format. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `user_data`:(string) User configuration data for a virtual machine such as adding user, group etc. 
   + `user_data_base64_encoded`:(bool) Set to true, if the cloud init user data is in base64 format. 
 * `cluster`:(Array with Maximum of one item) - A reference to a virtualizationBaseCluster resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
@@ -68,7 +68,7 @@ This complex property has following sub-properties:
   + `bus`:(string) Disk bus name given for a virtual machine.* `virtio` - Disk uses the same paths as a bare-metal system. This simplifies physical-to-virtual and virtual-to-virtual migration.* `sata` - Serial ATA (SATA, abbreviated from Serial AT Attachment) is a computer bus interface that connects host bus adapters to mass storage devices such as hard disk drives, optical drives, and solid-state drives.* `scsi` - SCSI (Small Computer System Interface) bus used.. 
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `name`:(string) Virtual machine network bridge name. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `order`:(int) Priority order of the disk. 
   + `type`:(string) Disk type hdd or cdrom for a virtual machine.* `hdd` - Allows the virtual machine to mount disk from hard disk drive (hdd) image.* `cdrom` - Allows the virtual machine to mount disk from compact disk (cd) image. 
   + `virtual_disk`:(Array with Maximum of one item) - Virtual disk configuration. 
@@ -79,7 +79,7 @@ This complex property has following sub-properties:
     + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
     + `mode`:(string) File mode of the disk, example - Filesystem, Block.* `Block` - It is a Block virtual disk.* `Filesystem` - It is a File system virtual disk. 
     + `name`:(string) Name of the virtual disk. 
-    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
     + `source_certs`:(string) Base64 encoded CA certificates of the https source to check against. 
     + `source_disk_to_clone`:(string) Source disk name from where the clone is done. 
     + `source_file_path`:(string) Disk image source for the virtual machine. 
@@ -105,7 +105,7 @@ This complex property has following sub-properties:
   + `connect_at_power_on`:(bool) Connect the adaptor at virtual machine power on. 
   + `direct_path_io`:(bool) Enable the direct path I/O. 
   + `mac_address`:(string) Virtual machine network mac address. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `inventory`:(Array with Maximum of one item) -(Computed) A reference to a virtualizationBaseVirtualMachine resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `additional_properties`:
@@ -125,7 +125,7 @@ This complex property has following sub-properties:
 * `memory`:(int) Virtual machine memory defined in mega bytes. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Virtual machine name contains only letters, numbers, allowed special character and must be unique. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `power_state`:(string) Expected power state of virtual machine (PowerOn, PowerOff, Restart).* `PowerOff` - The virtual machine will be powered off if it is already not in powered off state. If it is already powered off, no side-effects are expected.* `PowerOn` - The virtual machine will be powered on if it is already not in powered on state. If it is already powered on, no side-effects are expected.* `Suspend` - The virtual machine will be put into  a suspended state.* `ShutDownGuestOS` - The guest operating system is shut down gracefully.* `RestartGuestOS` - It can either act as a reset switch and abruptly reset the guest operating system, or it can send a restart signal to the guest operating system so that it shuts down gracefully and restarts.* `Reset` - Resets the virtual machine abruptly, with no consideration for work in progress.* `Restart` - The virtual machine will be restarted only if it is in powered on state. If it is powered off, it will not be started up.* `Unknown` - Power state of the entity is unknown. 
 * `provision_type`:(string) Identifies the provision type to create a new virtual machine.* `OVA` - Deploy virtual machine using OVA/F file.* `Template` - Provision virtual machine using a template file. 
 * `registered_device`:(Array with Maximum of one item) - A reference to a assetDeviceRegistration resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

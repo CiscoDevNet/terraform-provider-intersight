@@ -13,7 +13,7 @@ The following arguments are supported:
 * `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
 * `category`:(string) Category that the health check belongs to. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `common_causes`:(string) Static information detailing the common causes for the health check failure. 
 * `configuration`:(string) Execution configuration fo the health check script. 
 * `default_health_check_script_info`:(Array with Maximum of one item) -(Computed) Default version Script info. 
@@ -43,7 +43,7 @@ This complex property has following sub-properties:
 * `internal_name`:(string) Internal name of the health check definition. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the health check definition. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `reference`:(string) Static information containing additional reference for the health check. 
 * `resolution`:(string) Static information detailing the possible remediation actions that can be taken to remedy the health check failure. 
 * `script_execution_mode`:(string) Execution mode of the health script on the HyperFlex cluster.* `ON_DEMAND` - Execute the health check on-demand.* `SCHEDULED` - Execute the health check on a scheduled interval. 

@@ -35,7 +35,7 @@ This complex property has following sub-properties:
   + `to`:(string) Ending address of the block must be in hexadecimal format xx:xx:xx:xx:xx:xx. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the concrete policy. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `organization`:(Array with Maximum of one item) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `additional_properties`:

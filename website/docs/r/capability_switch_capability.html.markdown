@@ -23,7 +23,7 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `end_port_id`:(int) Ending Port ID in this range of ports. 
   + `end_slot_id`:(int) Ending Slot ID in this range of ports. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `start_port_id`:(int) Starting Port ID in this range of ports. 
   + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
 * `fc_uplink_ports_auto_negotiation_supported`:(bool) Fc Uplink ports auto negotiation speed support on this switch. 
@@ -36,7 +36,7 @@ This complex property has following sub-properties:
 This complex property has following sub-properties:
   + `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
+  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `max_compressed_port_vlan_count`:(int) Maximum Compressed configurable VLANs on Switch/Fabric-Interconnect. 
   + `max_uncompressed_port_vlan_count`:(int) Maximum configurable VLANs on Switch/Fabric-Interconnect. 
   + `maximum_active_traffic_monitoring_sessions`:(int) Maximum configured and enabled Traffic Monitoring sessions on this Switch/Fabric-Interconnect. 
@@ -62,7 +62,7 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `end_port_id`:(int) Ending Port ID in this range of ports. 
   + `end_slot_id`:(int) Ending Slot ID in this range of ports. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `start_port_id`:(int) Starting Port ID in this range of ports. 
   + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
 * `ports_supporting10g_speed`:(Array)
@@ -72,7 +72,7 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `end_port_id`:(int) Ending Port ID in this range of ports. 
   + `end_slot_id`:(int) Ending Slot ID in this range of ports. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `start_port_id`:(int) Starting Port ID in this range of ports. 
   + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
 * `ports_supporting1g_speed`:(Array)
@@ -82,7 +82,7 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `end_port_id`:(int) Ending Port ID in this range of ports. 
   + `end_slot_id`:(int) Ending Slot ID in this range of ports. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `start_port_id`:(int) Starting Port ID in this range of ports. 
   + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
 * `ports_supporting25g_speed`:(Array)
@@ -92,7 +92,7 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `end_port_id`:(int) Ending Port ID in this range of ports. 
   + `end_slot_id`:(int) Ending Slot ID in this range of ports. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `start_port_id`:(int) Starting Port ID in this range of ports. 
   + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
 * `ports_supporting40g_speed`:(Array)
@@ -102,7 +102,7 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `end_port_id`:(int) Ending Port ID in this range of ports. 
   + `end_slot_id`:(int) Ending Slot ID in this range of ports. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `start_port_id`:(int) Starting Port ID in this range of ports. 
   + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
 * `ports_supporting_breakout`:(Array)
@@ -112,7 +112,7 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `end_port_id`:(int) Ending Port ID in this range of ports. 
   + `end_slot_id`:(int) Ending Slot ID in this range of ports. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `start_port_id`:(int) Starting Port ID in this range of ports. 
   + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
 * `ports_supporting_fcoe`:(Array)
@@ -122,7 +122,7 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `end_port_id`:(int) Ending Port ID in this range of ports. 
   + `end_slot_id`:(int) Ending Slot ID in this range of ports. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `start_port_id`:(int) Starting Port ID in this range of ports. 
   + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
 * `ports_supporting_server_role`:(Array)
@@ -132,7 +132,7 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `end_port_id`:(int) Ending Port ID in this range of ports. 
   + `end_slot_id`:(int) Ending Slot ID in this range of ports. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `start_port_id`:(int) Starting Port ID in this range of ports. 
   + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
 * `reserved_vsans`:(Array)
@@ -142,7 +142,7 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `end_port_id`:(int) Ending Port ID in this range of ports. 
   + `end_slot_id`:(int) Ending Slot ID in this range of ports. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `start_port_id`:(int) Starting Port ID in this range of ports. 
   + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
 * `sereno_netflow_supported`:(bool) Sereno Adaptor with Netflow support on this switch. 
@@ -188,7 +188,7 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `end_port_id`:(int) Ending Port ID in this range of ports. 
   + `end_slot_id`:(int) Ending Slot ID in this range of ports. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `start_port_id`:(int) Starting Port ID in this range of ports. 
   + `start_slot_id`:(int) Starting Slot ID in this range of ports. 
 * `unified_rule`:(string) The Slider rule for Unified ports on this switch. 

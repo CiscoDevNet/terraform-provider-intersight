@@ -46,7 +46,7 @@ This complex property has following sub-properties:
                 (Array of schema.TypeString) -
     + `state`:
                 (Array of schema.TypeString) -
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `pem_certificate`:(string) The base64 encoded certificate in PEM format. 
   + `sha256_fingerprint`:(string)(Computed) The computed SHA-256 fingerprint of the certificate. Equivalent to 'openssl x509 -fingerprint -sha256'. 
   + `signature_algorithm`:(string)(Computed) Signature algorithm, as specified in [RFC 5280](https://tools.ietf.org/html/rfc5280). 

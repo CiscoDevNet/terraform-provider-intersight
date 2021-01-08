@@ -12,7 +12,7 @@ A policy specifying SD-WAN router details.
 The following arguments are supported:
 * `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `deployment_size`:(string) Scale of the SD-WAN router virtual machine deployment.* `Typical` - Typical deployment configuration with 4 vCPUs and 4GB RAM.* `Minimal` - Minimal deployment configuration with 2 vCPUs and 4GB RAM. 
 * `description`:(string) Description of the policy. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
