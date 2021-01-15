@@ -20,6 +20,11 @@ func dataSourceFcpoolLease() *schema.Resource {
 				Optional:         true,
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
+			"allocation_type": {
+				Description: "Type of the lease allocation either static or dynamic (i.e via pool).\n* `dynamic` - Identifiers to be allocated by system.\n* `static` - Identifiers are assigned by the user.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"assigned_to_entity": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -60,7 +65,7 @@ func dataSourceFcpoolLease() *schema.Resource {
 				Computed: true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -158,7 +163,6 @@ func dataSourceFcpoolLease() *schema.Resource {
 				Description: "Purpose of this WWN pool.",
 				Type:        schema.TypeString,
 				Optional:    true,
-				Computed:    true,
 			},
 			"tags": {
 				Type:     schema.TypeList,
@@ -237,6 +241,10 @@ func dataSourceFcpoolLeaseRead(c context.Context, d *schema.ResourceData, meta i
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.FcpoolLease{}
+	if v, ok := d.GetOk("allocation_type"); ok {
+		x := (v.(string))
+		o.SetAllocationType(x)
+	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -277,8 +285,12 @@ func dataSourceFcpoolLeaseRead(c context.Context, d *schema.ResourceData, meta i
 		return diag.Errorf("error occurred while unmarshalling response to FcpoolLease list: %s", err.Error())
 	}
 	result := s.GetResults()
-	if result == nil {
-		return diag.Errorf("your query for FcpoolLease did not return results. Please change your search criteria and try again")
+	length := len(result)
+	if length == 0 {
+		return diag.Errorf("your query for FcpoolLease data source did not return results. Please change your search criteria and try again")
+	}
+	if length > 1 {
+		return diag.Errorf("your query for FcpoolLease data source returned more than one result. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -291,6 +303,9 @@ func dataSourceFcpoolLeaseRead(c context.Context, d *schema.ResourceData, meta i
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
 				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
+			}
+			if err := d.Set("allocation_type", (s.GetAllocationType())); err != nil {
+				return diag.Errorf("error occurred while setting property AllocationType: %s", err.Error())
 			}
 
 			if err := d.Set("assigned_to_entity", flattenMapMoBaseMoRelationship(s.GetAssignedToEntity(), d)); err != nil {

@@ -53,7 +53,7 @@ This complex property has following sub-properties:
   + `maximum_vlans`:(int) Maximum configurable VLANs on Switch/Fabric-Interconnect. 
   + `minimum_active_fans`:(int) Minimum required fans in 'active' state for this Switch/Fabric-Interconnect. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `pid`:(string) Product Identifier for a Switch/Fabric-Interconnect.* `UCS-FI-6454` - The standard 4th generation UCS Fabric Interconnect with 54 ports.* `UCS-FI-64108` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.* `unknown` - Unknown device type, usage is TBD. 
 * `ports_supporting100g_speed`:(Array)
 This complex property has following sub-properties:
@@ -157,7 +157,7 @@ This complex property has following sub-properties:
   + `maximum_virtual_fc_interfaces_per_blade_server`:(int) Maximum configurable Virtual Fibre Channel interfaces per blade. 
   + `maximum_vsans`:(int) Maximum configurable VSANs on Switch/Fabric-Interconnect. 
   + `maximum_zone_count`:(int) Zone limit per Switch/Fabric-Interconnect. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `switching_mode_capabilities`:(Array)
 This complex property has following sub-properties:
   + `additional_properties`:

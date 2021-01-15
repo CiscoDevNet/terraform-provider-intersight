@@ -106,7 +106,7 @@ func dataSourceAssetDeviceContractInformation() *schema.Resource {
 										Computed:    true,
 									},
 									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
@@ -172,7 +172,7 @@ func dataSourceAssetDeviceContractInformation() *schema.Resource {
 							},
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -198,7 +198,13 @@ func dataSourceAssetDeviceContractInformation() *schema.Resource {
 				},
 			},
 			"contract_status": {
-				Description: "Calculated contract status that is derived based on the service line status and contract end date. It is different from serviceLineStatus property. serviceLineStatus gives us ACTIVE, OVERDUE, EXPIRED. These are transformed into Active, Expiring Soon and Not Covered.\n* `Not Covered` - The Cisco device does not have a valid support contract.\n* `Active` - The Cisco device is covered under a active support contract.\n* `Expiring Soon` - The contract for this Cisco device is going to expire in the next 30 days.",
+				Description: "Calculated contract status that is derived based on the service line status and contract end date. It is different from serviceLineStatus property. serviceLineStatus gives us ACTIVE, OVERDUE, EXPIRED. These are transformed into Active, Expiring Soon and Not Covered.\n* `Unknown` - The device's contract status cannot be determined.\n* `Not Covered` - The Cisco device does not have a valid support contract.\n* `Active` - The Cisco device is covered under a active support contract.\n* `Expiring Soon` - The contract for this Cisco device is going to expire in the next 30 days.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"contract_updated_time": {
+				Description: "Date and time indicating when the contract data is last fetched from Cisco's Contract API successfully.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -301,7 +307,7 @@ func dataSourceAssetDeviceContractInformation() *schema.Resource {
 										Computed:    true,
 									},
 									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
@@ -514,7 +520,7 @@ func dataSourceAssetDeviceContractInformation() *schema.Resource {
 										Computed:    true,
 									},
 									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
@@ -642,7 +648,7 @@ func dataSourceAssetDeviceContractInformation() *schema.Resource {
 										Computed:    true,
 									},
 									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
@@ -855,6 +861,10 @@ func dataSourceAssetDeviceContractInformationRead(c context.Context, d *schema.R
 		x := (v.(string))
 		o.SetContractStatus(x)
 	}
+	if v, ok := d.GetOk("contract_updated_time"); ok {
+		x, _ := time.Parse(v.(string), time.RFC1123)
+		o.SetContractUpdatedTime(x)
+	}
 	if v, ok := d.GetOk("covered_product_line_end_date"); ok {
 		x := (v.(string))
 		o.SetCoveredProductLineEndDate(x)
@@ -955,8 +965,12 @@ func dataSourceAssetDeviceContractInformationRead(c context.Context, d *schema.R
 		return diag.Errorf("error occurred while unmarshalling response to AssetDeviceContractInformation list: %s", err.Error())
 	}
 	result := s.GetResults()
-	if result == nil {
-		return diag.Errorf("your query for AssetDeviceContractInformation did not return results. Please change your search criteria and try again")
+	length := len(result)
+	if length == 0 {
+		return diag.Errorf("your query for AssetDeviceContractInformation data source did not return results. Please change your search criteria and try again")
+	}
+	if length > 1 {
+		return diag.Errorf("your query for AssetDeviceContractInformation data source returned more than one result. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -979,6 +993,10 @@ func dataSourceAssetDeviceContractInformationRead(c context.Context, d *schema.R
 			}
 			if err := d.Set("contract_status", (s.GetContractStatus())); err != nil {
 				return diag.Errorf("error occurred while setting property ContractStatus: %s", err.Error())
+			}
+
+			if err := d.Set("contract_updated_time", (s.GetContractUpdatedTime()).String()); err != nil {
+				return diag.Errorf("error occurred while setting property ContractUpdatedTime: %s", err.Error())
 			}
 			if err := d.Set("covered_product_line_end_date", (s.GetCoveredProductLineEndDate())); err != nil {
 				return diag.Errorf("error occurred while setting property CoveredProductLineEndDate: %s", err.Error())

@@ -25,7 +25,7 @@ This complex property has following sub-properties:
 * `active_admin`:(bool)(Computed) The license administrative state.Set this property to 'true' to activate the license entitlements. 
 * `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `days_left`:(int)(Computed) The number of days left for licenseState to stay in TrialPeriod or OutOfCompliance state. 
 * `end_time`:(string)(Computed) The date and time when the trial period expires.The value of the 'endTime' property is set when the account enters the TrialPeriod or OutOfCompliance state. 
 * `enforce_mode`:(string)(Computed) The entitlement mode reported by Cisco Smart Software Manager. 

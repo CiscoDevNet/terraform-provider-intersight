@@ -12,7 +12,7 @@ A Fibre Channel Quality of Service (QoS) policy assigns a system class to the ou
 The following arguments are supported:
 * `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `cos`:(int) Class of Service to be associated to the traffic on the virtual interface. 
 * `description`:(string) Description of the policy. 
 * `max_data_field_size`:(int) The maximum size of the Fibre Channel frame payload bytes that the virtual interface supports. 

@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-04T05:15:49Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-06T06:42:37Z.
  *
- * API version: 1.0.9-3144
+ * API version: 1.0.9-3181
  * Contact: intersight@cisco.com
  */
 
@@ -26,8 +26,10 @@ type AssetDeviceContractInformation struct {
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string                           `json:"ObjectType"`
 	Contract   NullableAssetContractInformation `json:"Contract,omitempty"`
-	// Calculated contract status that is derived based on the service line status and contract end date. It is different from serviceLineStatus property. serviceLineStatus gives us ACTIVE, OVERDUE, EXPIRED. These are transformed into Active, Expiring Soon and Not Covered. * `Not Covered` - The Cisco device does not have a valid support contract. * `Active` - The Cisco device is covered under a active support contract. * `Expiring Soon` - The contract for this Cisco device is going to expire in the next 30 days.
+	// Calculated contract status that is derived based on the service line status and contract end date. It is different from serviceLineStatus property. serviceLineStatus gives us ACTIVE, OVERDUE, EXPIRED. These are transformed into Active, Expiring Soon and Not Covered. * `Unknown` - The device's contract status cannot be determined. * `Not Covered` - The Cisco device does not have a valid support contract. * `Active` - The Cisco device is covered under a active support contract. * `Expiring Soon` - The contract for this Cisco device is going to expire in the next 30 days.
 	ContractStatus *string `json:"ContractStatus,omitempty"`
+	// Date and time indicating when the contract data is last fetched from Cisco's Contract API successfully.
+	ContractUpdatedTime *time.Time `json:"ContractUpdatedTime,omitempty"`
 	// End date of the covered product line. The coverage end date is fetched from Cisco SN2INFO API.
 	CoveredProductLineEndDate *string `json:"CoveredProductLineEndDate,omitempty"`
 	// Unique identifier of the Cisco device. This information is used to query Cisco APIx SN2INFO and CCWR databases.
@@ -82,7 +84,7 @@ func NewAssetDeviceContractInformation(classId string, objectType string) *Asset
 	this := AssetDeviceContractInformation{}
 	this.ClassId = classId
 	this.ObjectType = objectType
-	var contractStatus string = "Not Covered"
+	var contractStatus string = "Unknown"
 	this.ContractStatus = &contractStatus
 	var deviceType string = "None"
 	this.DeviceType = &deviceType
@@ -102,7 +104,7 @@ func NewAssetDeviceContractInformationWithDefaults() *AssetDeviceContractInforma
 	this.ClassId = classId
 	var objectType string = "asset.DeviceContractInformation"
 	this.ObjectType = objectType
-	var contractStatus string = "Not Covered"
+	var contractStatus string = "Unknown"
 	this.ContractStatus = &contractStatus
 	var deviceType string = "None"
 	this.DeviceType = &deviceType
@@ -234,6 +236,38 @@ func (o *AssetDeviceContractInformation) HasContractStatus() bool {
 // SetContractStatus gets a reference to the given string and assigns it to the ContractStatus field.
 func (o *AssetDeviceContractInformation) SetContractStatus(v string) {
 	o.ContractStatus = &v
+}
+
+// GetContractUpdatedTime returns the ContractUpdatedTime field value if set, zero value otherwise.
+func (o *AssetDeviceContractInformation) GetContractUpdatedTime() time.Time {
+	if o == nil || o.ContractUpdatedTime == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.ContractUpdatedTime
+}
+
+// GetContractUpdatedTimeOk returns a tuple with the ContractUpdatedTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AssetDeviceContractInformation) GetContractUpdatedTimeOk() (*time.Time, bool) {
+	if o == nil || o.ContractUpdatedTime == nil {
+		return nil, false
+	}
+	return o.ContractUpdatedTime, true
+}
+
+// HasContractUpdatedTime returns a boolean if a field has been set.
+func (o *AssetDeviceContractInformation) HasContractUpdatedTime() bool {
+	if o != nil && o.ContractUpdatedTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetContractUpdatedTime gets a reference to the given time.Time and assigns it to the ContractUpdatedTime field.
+func (o *AssetDeviceContractInformation) SetContractUpdatedTime(v time.Time) {
+	o.ContractUpdatedTime = &v
 }
 
 // GetCoveredProductLineEndDate returns the CoveredProductLineEndDate field value if set, zero value otherwise.
@@ -1038,6 +1072,9 @@ func (o AssetDeviceContractInformation) MarshalJSON() ([]byte, error) {
 	if o.ContractStatus != nil {
 		toSerialize["ContractStatus"] = o.ContractStatus
 	}
+	if o.ContractUpdatedTime != nil {
+		toSerialize["ContractUpdatedTime"] = o.ContractUpdatedTime
+	}
 	if o.CoveredProductLineEndDate != nil {
 		toSerialize["CoveredProductLineEndDate"] = o.CoveredProductLineEndDate
 	}
@@ -1122,8 +1159,10 @@ func (o *AssetDeviceContractInformation) UnmarshalJSON(bytes []byte) (err error)
 		// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 		ObjectType string                           `json:"ObjectType"`
 		Contract   NullableAssetContractInformation `json:"Contract,omitempty"`
-		// Calculated contract status that is derived based on the service line status and contract end date. It is different from serviceLineStatus property. serviceLineStatus gives us ACTIVE, OVERDUE, EXPIRED. These are transformed into Active, Expiring Soon and Not Covered. * `Not Covered` - The Cisco device does not have a valid support contract. * `Active` - The Cisco device is covered under a active support contract. * `Expiring Soon` - The contract for this Cisco device is going to expire in the next 30 days.
+		// Calculated contract status that is derived based on the service line status and contract end date. It is different from serviceLineStatus property. serviceLineStatus gives us ACTIVE, OVERDUE, EXPIRED. These are transformed into Active, Expiring Soon and Not Covered. * `Unknown` - The device's contract status cannot be determined. * `Not Covered` - The Cisco device does not have a valid support contract. * `Active` - The Cisco device is covered under a active support contract. * `Expiring Soon` - The contract for this Cisco device is going to expire in the next 30 days.
 		ContractStatus *string `json:"ContractStatus,omitempty"`
+		// Date and time indicating when the contract data is last fetched from Cisco's Contract API successfully.
+		ContractUpdatedTime *time.Time `json:"ContractUpdatedTime,omitempty"`
 		// End date of the covered product line. The coverage end date is fetched from Cisco SN2INFO API.
 		CoveredProductLineEndDate *string `json:"CoveredProductLineEndDate,omitempty"`
 		// Unique identifier of the Cisco device. This information is used to query Cisco APIx SN2INFO and CCWR databases.
@@ -1176,6 +1215,7 @@ func (o *AssetDeviceContractInformation) UnmarshalJSON(bytes []byte) (err error)
 		varAssetDeviceContractInformation.ObjectType = varAssetDeviceContractInformationWithoutEmbeddedStruct.ObjectType
 		varAssetDeviceContractInformation.Contract = varAssetDeviceContractInformationWithoutEmbeddedStruct.Contract
 		varAssetDeviceContractInformation.ContractStatus = varAssetDeviceContractInformationWithoutEmbeddedStruct.ContractStatus
+		varAssetDeviceContractInformation.ContractUpdatedTime = varAssetDeviceContractInformationWithoutEmbeddedStruct.ContractUpdatedTime
 		varAssetDeviceContractInformation.CoveredProductLineEndDate = varAssetDeviceContractInformationWithoutEmbeddedStruct.CoveredProductLineEndDate
 		varAssetDeviceContractInformation.DeviceId = varAssetDeviceContractInformationWithoutEmbeddedStruct.DeviceId
 		varAssetDeviceContractInformation.DeviceType = varAssetDeviceContractInformationWithoutEmbeddedStruct.DeviceType
@@ -1220,6 +1260,7 @@ func (o *AssetDeviceContractInformation) UnmarshalJSON(bytes []byte) (err error)
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "Contract")
 		delete(additionalProperties, "ContractStatus")
+		delete(additionalProperties, "ContractUpdatedTime")
 		delete(additionalProperties, "CoveredProductLineEndDate")
 		delete(additionalProperties, "DeviceId")
 		delete(additionalProperties, "DeviceType")

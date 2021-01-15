@@ -16,7 +16,7 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `affected_object_type`:(string) Type of the managed object that should be marked with an instance of the Alert (when operation type is create) or that should have an alert instance removed (when operation type is remove). 
   + `alert_type`:(string) Alert type is used to denote the category of an Intersight alert (FieldNotice, equipment Fault etc.).* `psirt` - Respresents the psirt alert type (https://tools.cisco.com/security/center/publicationListing.x).* `fieldNotice` - Respresents the field notice alert type (https://www.cisco.com/c/en/us/support/web/tsd-products-field-notice-summary.html). 
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
+  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `identifiers`:(Array)
 This complex property has following sub-properties:
     + `additional_properties`:
@@ -66,7 +66,7 @@ This complex property has following sub-properties:
     + `priority`:(int) An integer value depicting the priority of the query among the queries that are part of the same QueryEntry collection. 
     + `query`:(string) A SparkSQL query to be used on a given data source. 
   + `type`:(string) Type of data source (for e.g. TextFsmTempalate based, Intersight API based etc.).* `nxos` - Collector type for this data collection is NXOS.* `intersightApi` - Collector type for this data collection is Intersight APIs. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `date_published`:(string) Date when the security advisory was first published by Cisco. 
 * `date_updated`:(string) Date when the security advisory was last updated by Cisco. 
 * `description`:(string) Brief description of the advisory details. 

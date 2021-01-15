@@ -24,7 +24,7 @@ This complex property has following sub-properties:
   + `io_retry_count`:(int) The number of times an I/O request to a port is retried because the port is busy before the system decides the port is unavailable. 
   + `io_retry_timeout`:(int) The number of seconds the adapter waits before aborting the pending command and resending the same IO request. 
   + `link_down_timeout`:(int) The number of milliseconds the port should actually be down before it is marked down and fabric connectivity is lost. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `port_down_timeout`:(int) The number of milliseconds a remote Fibre Channel port should be offline before informing the SCSI upper layer that the port is unavailable. For a server with a VIC adapter running ESXi, the recommended value is 10000. For a server with a port used to boot a Windows OS from the SAN, the recommended value is 5000 milliseconds. 
 * `flogi_settings`:(Array with Maximum of one item) - Fibre Channel Flogi Settings. 
 This complex property has following sub-properties:

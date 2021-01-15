@@ -60,7 +60,7 @@ This complex property has following sub-properties:
 * `model`:(string) The endpoint model for which this firmware image is applicable. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of the file. It is populated as part of the image import operation. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `platform_type`:(string)(Computed) The platform type of the image. 
 * `recommended_build`:(string) The build which is recommended by Cisco. 
 * `release`:(Array with Maximum of one item) - A reference to a softwarerepositoryRelease resource.When the $expand query parameter is specified, the referenced resource is returned inline. 

@@ -12,7 +12,7 @@ Configuration settings for a SDWAN vEdge router.
 The following arguments are supported:
 * `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `device_template`:(string) Name of the Cisco vManage device template that the current device should be attached to. A device template consists of many feature templates that contain SD-WAN vEdge router configuration. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the router node object. 
@@ -63,7 +63,7 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `editable`:(bool) Defines if the input is editable. 
   + `key`:(string) Name of the dynamic input key specified in the vManage template. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `required`:(bool) Defines if the input is optional or required. 
   + `template`:(string)(Computed) Refers to the name of the vManage template that this inputs belongs to. 
   + `title`:(string) Label for the property being saved in the current instance of template Input. 

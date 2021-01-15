@@ -27,7 +27,7 @@ func dataSourceHyperflexNode() *schema.Resource {
 				Computed:    true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -161,19 +161,19 @@ func dataSourceHyperflexNode() *schema.Resource {
 										Optional:    true,
 									},
 									"comments": {
-										Description: "A description that provides additional context for usage of the resource.",
+										Description: "Comment for this HyperFlex resource.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
 									},
 									"href": {
-										Description: "The URI of resource. Target URL for making REST call.",
+										Description: "URI of resource. Target URL for making REST call.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
 									},
 									"method": {
-										Description: "The HTTP method to use when making the REST call to this resource.\n* `POST` - The http verb for creating POST requests to a rest endpoint.\n* `GET` - The http verb for creating GET requests to a rest endpoint.\n* `PUT` - The http verb for creating PUT requests to a rest endpoint.\n* `DELETE` - The http verb for creating DELETE requests to a rest endpoint.",
+										Description: "HTTP verb that this HyperFlex link DT is referring to.\n* `POST` - HTTP verb POST for this task definition.\n* `GET` - HTTP verb GET for this task definition.\n* `PUT` - HTTP verb PUT for this task definition.\n* `DELETE` - HTTP verb DELETE for this task definition.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
@@ -185,7 +185,7 @@ func dataSourceHyperflexNode() *schema.Resource {
 										Computed:    true,
 									},
 									"rel": {
-										Description: "The relationship of the link to this resource.",
+										Description: "Relationship of link to this resource.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
@@ -273,7 +273,7 @@ func dataSourceHyperflexNode() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -446,8 +446,12 @@ func dataSourceHyperflexNodeRead(c context.Context, d *schema.ResourceData, meta
 		return diag.Errorf("error occurred while unmarshalling response to HyperflexNode list: %s", err.Error())
 	}
 	result := s.GetResults()
-	if result == nil {
-		return diag.Errorf("your query for HyperflexNode did not return results. Please change your search criteria and try again")
+	length := len(result)
+	if length == 0 {
+		return diag.Errorf("your query for HyperflexNode data source did not return results. Please change your search criteria and try again")
+	}
+	if length > 1 {
+		return diag.Errorf("your query for HyperflexNode data source returned more than one result. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:

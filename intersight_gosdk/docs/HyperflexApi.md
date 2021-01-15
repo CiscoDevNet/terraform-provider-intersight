@@ -8,8 +8,12 @@ Method | HTTP request | Description
 [**CreateHyperflexAutoSupportPolicy**](HyperflexApi.md#CreateHyperflexAutoSupportPolicy) | **Post** /api/v1/hyperflex/AutoSupportPolicies | Create a &#39;hyperflex.AutoSupportPolicy&#39; resource.
 [**CreateHyperflexCapabilityInfo**](HyperflexApi.md#CreateHyperflexCapabilityInfo) | **Post** /api/v1/hyperflex/CapabilityInfos | Create a &#39;hyperflex.CapabilityInfo&#39; resource.
 [**CreateHyperflexCiscoHypervisorManager**](HyperflexApi.md#CreateHyperflexCiscoHypervisorManager) | **Post** /api/v1/hyperflex/CiscoHypervisorManagers | Create a &#39;hyperflex.CiscoHypervisorManager&#39; resource.
+[**CreateHyperflexClusterBackupPolicy**](HyperflexApi.md#CreateHyperflexClusterBackupPolicy) | **Post** /api/v1/hyperflex/ClusterBackupPolicies | Create a &#39;hyperflex.ClusterBackupPolicy&#39; resource.
+[**CreateHyperflexClusterBackupPolicyDeployment**](HyperflexApi.md#CreateHyperflexClusterBackupPolicyDeployment) | **Post** /api/v1/hyperflex/ClusterBackupPolicyDeployments | Create a &#39;hyperflex.ClusterBackupPolicyDeployment&#39; resource.
 [**CreateHyperflexClusterNetworkPolicy**](HyperflexApi.md#CreateHyperflexClusterNetworkPolicy) | **Post** /api/v1/hyperflex/ClusterNetworkPolicies | Create a &#39;hyperflex.ClusterNetworkPolicy&#39; resource.
 [**CreateHyperflexClusterProfile**](HyperflexApi.md#CreateHyperflexClusterProfile) | **Post** /api/v1/hyperflex/ClusterProfiles | Create a &#39;hyperflex.ClusterProfile&#39; resource.
+[**CreateHyperflexClusterReplicationNetworkPolicy**](HyperflexApi.md#CreateHyperflexClusterReplicationNetworkPolicy) | **Post** /api/v1/hyperflex/ClusterReplicationNetworkPolicies | Create a &#39;hyperflex.ClusterReplicationNetworkPolicy&#39; resource.
+[**CreateHyperflexClusterReplicationNetworkPolicyDeployment**](HyperflexApi.md#CreateHyperflexClusterReplicationNetworkPolicyDeployment) | **Post** /api/v1/hyperflex/ClusterReplicationNetworkPolicyDeployments | Create a &#39;hyperflex.ClusterReplicationNetworkPolicyDeployment&#39; resource.
 [**CreateHyperflexClusterStoragePolicy**](HyperflexApi.md#CreateHyperflexClusterStoragePolicy) | **Post** /api/v1/hyperflex/ClusterStoragePolicies | Create a &#39;hyperflex.ClusterStoragePolicy&#39; resource.
 [**CreateHyperflexExtFcStoragePolicy**](HyperflexApi.md#CreateHyperflexExtFcStoragePolicy) | **Post** /api/v1/hyperflex/ExtFcStoragePolicies | Create a &#39;hyperflex.ExtFcStoragePolicy&#39; resource.
 [**CreateHyperflexExtIscsiStoragePolicy**](HyperflexApi.md#CreateHyperflexExtIscsiStoragePolicy) | **Post** /api/v1/hyperflex/ExtIscsiStoragePolicies | Create a &#39;hyperflex.ExtIscsiStoragePolicy&#39; resource.
@@ -30,11 +34,16 @@ Method | HTTP request | Description
 [**CreateHyperflexSysConfigPolicy**](HyperflexApi.md#CreateHyperflexSysConfigPolicy) | **Post** /api/v1/hyperflex/SysConfigPolicies | Create a &#39;hyperflex.SysConfigPolicy&#39; resource.
 [**CreateHyperflexUcsmConfigPolicy**](HyperflexApi.md#CreateHyperflexUcsmConfigPolicy) | **Post** /api/v1/hyperflex/UcsmConfigPolicies | Create a &#39;hyperflex.UcsmConfigPolicy&#39; resource.
 [**CreateHyperflexVcenterConfigPolicy**](HyperflexApi.md#CreateHyperflexVcenterConfigPolicy) | **Post** /api/v1/hyperflex/VcenterConfigPolicies | Create a &#39;hyperflex.VcenterConfigPolicy&#39; resource.
+[**CreateHyperflexVmRestoreOperation**](HyperflexApi.md#CreateHyperflexVmRestoreOperation) | **Post** /api/v1/hyperflex/VmRestoreOperations | Create a &#39;hyperflex.VmRestoreOperation&#39; resource.
 [**DeleteHyperflexAppCatalog**](HyperflexApi.md#DeleteHyperflexAppCatalog) | **Delete** /api/v1/hyperflex/AppCatalogs/{Moid} | Delete a &#39;hyperflex.AppCatalog&#39; resource.
 [**DeleteHyperflexAutoSupportPolicy**](HyperflexApi.md#DeleteHyperflexAutoSupportPolicy) | **Delete** /api/v1/hyperflex/AutoSupportPolicies/{Moid} | Delete a &#39;hyperflex.AutoSupportPolicy&#39; resource.
 [**DeleteHyperflexCapabilityInfo**](HyperflexApi.md#DeleteHyperflexCapabilityInfo) | **Delete** /api/v1/hyperflex/CapabilityInfos/{Moid} | Delete a &#39;hyperflex.CapabilityInfo&#39; resource.
+[**DeleteHyperflexClusterBackupPolicy**](HyperflexApi.md#DeleteHyperflexClusterBackupPolicy) | **Delete** /api/v1/hyperflex/ClusterBackupPolicies/{Moid} | Delete a &#39;hyperflex.ClusterBackupPolicy&#39; resource.
+[**DeleteHyperflexClusterBackupPolicyDeployment**](HyperflexApi.md#DeleteHyperflexClusterBackupPolicyDeployment) | **Delete** /api/v1/hyperflex/ClusterBackupPolicyDeployments/{Moid} | Delete a &#39;hyperflex.ClusterBackupPolicyDeployment&#39; resource.
 [**DeleteHyperflexClusterNetworkPolicy**](HyperflexApi.md#DeleteHyperflexClusterNetworkPolicy) | **Delete** /api/v1/hyperflex/ClusterNetworkPolicies/{Moid} | Delete a &#39;hyperflex.ClusterNetworkPolicy&#39; resource.
 [**DeleteHyperflexClusterProfile**](HyperflexApi.md#DeleteHyperflexClusterProfile) | **Delete** /api/v1/hyperflex/ClusterProfiles/{Moid} | Delete a &#39;hyperflex.ClusterProfile&#39; resource.
+[**DeleteHyperflexClusterReplicationNetworkPolicy**](HyperflexApi.md#DeleteHyperflexClusterReplicationNetworkPolicy) | **Delete** /api/v1/hyperflex/ClusterReplicationNetworkPolicies/{Moid} | Delete a &#39;hyperflex.ClusterReplicationNetworkPolicy&#39; resource.
+[**DeleteHyperflexClusterReplicationNetworkPolicyDeployment**](HyperflexApi.md#DeleteHyperflexClusterReplicationNetworkPolicyDeployment) | **Delete** /api/v1/hyperflex/ClusterReplicationNetworkPolicyDeployments/{Moid} | Delete a &#39;hyperflex.ClusterReplicationNetworkPolicyDeployment&#39; resource.
 [**DeleteHyperflexClusterStoragePolicy**](HyperflexApi.md#DeleteHyperflexClusterStoragePolicy) | **Delete** /api/v1/hyperflex/ClusterStoragePolicies/{Moid} | Delete a &#39;hyperflex.ClusterStoragePolicy&#39; resource.
 [**DeleteHyperflexExtFcStoragePolicy**](HyperflexApi.md#DeleteHyperflexExtFcStoragePolicy) | **Delete** /api/v1/hyperflex/ExtFcStoragePolicies/{Moid} | Delete a &#39;hyperflex.ExtFcStoragePolicy&#39; resource.
 [**DeleteHyperflexExtIscsiStoragePolicy**](HyperflexApi.md#DeleteHyperflexExtIscsiStoragePolicy) | **Delete** /api/v1/hyperflex/ExtIscsiStoragePolicies/{Moid} | Delete a &#39;hyperflex.ExtIscsiStoragePolicy&#39; resource.
@@ -55,16 +64,23 @@ Method | HTTP request | Description
 [**DeleteHyperflexSysConfigPolicy**](HyperflexApi.md#DeleteHyperflexSysConfigPolicy) | **Delete** /api/v1/hyperflex/SysConfigPolicies/{Moid} | Delete a &#39;hyperflex.SysConfigPolicy&#39; resource.
 [**DeleteHyperflexUcsmConfigPolicy**](HyperflexApi.md#DeleteHyperflexUcsmConfigPolicy) | **Delete** /api/v1/hyperflex/UcsmConfigPolicies/{Moid} | Delete a &#39;hyperflex.UcsmConfigPolicy&#39; resource.
 [**DeleteHyperflexVcenterConfigPolicy**](HyperflexApi.md#DeleteHyperflexVcenterConfigPolicy) | **Delete** /api/v1/hyperflex/VcenterConfigPolicies/{Moid} | Delete a &#39;hyperflex.VcenterConfigPolicy&#39; resource.
+[**DeleteHyperflexVmRestoreOperation**](HyperflexApi.md#DeleteHyperflexVmRestoreOperation) | **Delete** /api/v1/hyperflex/VmRestoreOperations/{Moid} | Delete a &#39;hyperflex.VmRestoreOperation&#39; resource.
 [**GetHyperflexAlarmByMoid**](HyperflexApi.md#GetHyperflexAlarmByMoid) | **Get** /api/v1/hyperflex/Alarms/{Moid} | Read a &#39;hyperflex.Alarm&#39; resource.
 [**GetHyperflexAlarmList**](HyperflexApi.md#GetHyperflexAlarmList) | **Get** /api/v1/hyperflex/Alarms | Read a &#39;hyperflex.Alarm&#39; resource.
 [**GetHyperflexAppCatalogByMoid**](HyperflexApi.md#GetHyperflexAppCatalogByMoid) | **Get** /api/v1/hyperflex/AppCatalogs/{Moid} | Read a &#39;hyperflex.AppCatalog&#39; resource.
 [**GetHyperflexAppCatalogList**](HyperflexApi.md#GetHyperflexAppCatalogList) | **Get** /api/v1/hyperflex/AppCatalogs | Read a &#39;hyperflex.AppCatalog&#39; resource.
 [**GetHyperflexAutoSupportPolicyByMoid**](HyperflexApi.md#GetHyperflexAutoSupportPolicyByMoid) | **Get** /api/v1/hyperflex/AutoSupportPolicies/{Moid} | Read a &#39;hyperflex.AutoSupportPolicy&#39; resource.
 [**GetHyperflexAutoSupportPolicyList**](HyperflexApi.md#GetHyperflexAutoSupportPolicyList) | **Get** /api/v1/hyperflex/AutoSupportPolicies | Read a &#39;hyperflex.AutoSupportPolicy&#39; resource.
+[**GetHyperflexBackupClusterByMoid**](HyperflexApi.md#GetHyperflexBackupClusterByMoid) | **Get** /api/v1/hyperflex/BackupClusters/{Moid} | Read a &#39;hyperflex.BackupCluster&#39; resource.
+[**GetHyperflexBackupClusterList**](HyperflexApi.md#GetHyperflexBackupClusterList) | **Get** /api/v1/hyperflex/BackupClusters | Read a &#39;hyperflex.BackupCluster&#39; resource.
 [**GetHyperflexCapabilityInfoByMoid**](HyperflexApi.md#GetHyperflexCapabilityInfoByMoid) | **Get** /api/v1/hyperflex/CapabilityInfos/{Moid} | Read a &#39;hyperflex.CapabilityInfo&#39; resource.
 [**GetHyperflexCapabilityInfoList**](HyperflexApi.md#GetHyperflexCapabilityInfoList) | **Get** /api/v1/hyperflex/CapabilityInfos | Read a &#39;hyperflex.CapabilityInfo&#39; resource.
 [**GetHyperflexCiscoHypervisorManagerByMoid**](HyperflexApi.md#GetHyperflexCiscoHypervisorManagerByMoid) | **Get** /api/v1/hyperflex/CiscoHypervisorManagers/{Moid} | Read a &#39;hyperflex.CiscoHypervisorManager&#39; resource.
 [**GetHyperflexCiscoHypervisorManagerList**](HyperflexApi.md#GetHyperflexCiscoHypervisorManagerList) | **Get** /api/v1/hyperflex/CiscoHypervisorManagers | Read a &#39;hyperflex.CiscoHypervisorManager&#39; resource.
+[**GetHyperflexClusterBackupPolicyByMoid**](HyperflexApi.md#GetHyperflexClusterBackupPolicyByMoid) | **Get** /api/v1/hyperflex/ClusterBackupPolicies/{Moid} | Read a &#39;hyperflex.ClusterBackupPolicy&#39; resource.
+[**GetHyperflexClusterBackupPolicyDeploymentByMoid**](HyperflexApi.md#GetHyperflexClusterBackupPolicyDeploymentByMoid) | **Get** /api/v1/hyperflex/ClusterBackupPolicyDeployments/{Moid} | Read a &#39;hyperflex.ClusterBackupPolicyDeployment&#39; resource.
+[**GetHyperflexClusterBackupPolicyDeploymentList**](HyperflexApi.md#GetHyperflexClusterBackupPolicyDeploymentList) | **Get** /api/v1/hyperflex/ClusterBackupPolicyDeployments | Read a &#39;hyperflex.ClusterBackupPolicyDeployment&#39; resource.
+[**GetHyperflexClusterBackupPolicyList**](HyperflexApi.md#GetHyperflexClusterBackupPolicyList) | **Get** /api/v1/hyperflex/ClusterBackupPolicies | Read a &#39;hyperflex.ClusterBackupPolicy&#39; resource.
 [**GetHyperflexClusterByMoid**](HyperflexApi.md#GetHyperflexClusterByMoid) | **Get** /api/v1/hyperflex/Clusters/{Moid} | Read a &#39;hyperflex.Cluster&#39; resource.
 [**GetHyperflexClusterHealthCheckExecutionSnapshotByMoid**](HyperflexApi.md#GetHyperflexClusterHealthCheckExecutionSnapshotByMoid) | **Get** /api/v1/hyperflex/ClusterHealthCheckExecutionSnapshots/{Moid} | Read a &#39;hyperflex.ClusterHealthCheckExecutionSnapshot&#39; resource.
 [**GetHyperflexClusterHealthCheckExecutionSnapshotList**](HyperflexApi.md#GetHyperflexClusterHealthCheckExecutionSnapshotList) | **Get** /api/v1/hyperflex/ClusterHealthCheckExecutionSnapshots | Read a &#39;hyperflex.ClusterHealthCheckExecutionSnapshot&#39; resource.
@@ -73,6 +89,10 @@ Method | HTTP request | Description
 [**GetHyperflexClusterNetworkPolicyList**](HyperflexApi.md#GetHyperflexClusterNetworkPolicyList) | **Get** /api/v1/hyperflex/ClusterNetworkPolicies | Read a &#39;hyperflex.ClusterNetworkPolicy&#39; resource.
 [**GetHyperflexClusterProfileByMoid**](HyperflexApi.md#GetHyperflexClusterProfileByMoid) | **Get** /api/v1/hyperflex/ClusterProfiles/{Moid} | Read a &#39;hyperflex.ClusterProfile&#39; resource.
 [**GetHyperflexClusterProfileList**](HyperflexApi.md#GetHyperflexClusterProfileList) | **Get** /api/v1/hyperflex/ClusterProfiles | Read a &#39;hyperflex.ClusterProfile&#39; resource.
+[**GetHyperflexClusterReplicationNetworkPolicyByMoid**](HyperflexApi.md#GetHyperflexClusterReplicationNetworkPolicyByMoid) | **Get** /api/v1/hyperflex/ClusterReplicationNetworkPolicies/{Moid} | Read a &#39;hyperflex.ClusterReplicationNetworkPolicy&#39; resource.
+[**GetHyperflexClusterReplicationNetworkPolicyDeploymentByMoid**](HyperflexApi.md#GetHyperflexClusterReplicationNetworkPolicyDeploymentByMoid) | **Get** /api/v1/hyperflex/ClusterReplicationNetworkPolicyDeployments/{Moid} | Read a &#39;hyperflex.ClusterReplicationNetworkPolicyDeployment&#39; resource.
+[**GetHyperflexClusterReplicationNetworkPolicyDeploymentList**](HyperflexApi.md#GetHyperflexClusterReplicationNetworkPolicyDeploymentList) | **Get** /api/v1/hyperflex/ClusterReplicationNetworkPolicyDeployments | Read a &#39;hyperflex.ClusterReplicationNetworkPolicyDeployment&#39; resource.
+[**GetHyperflexClusterReplicationNetworkPolicyList**](HyperflexApi.md#GetHyperflexClusterReplicationNetworkPolicyList) | **Get** /api/v1/hyperflex/ClusterReplicationNetworkPolicies | Read a &#39;hyperflex.ClusterReplicationNetworkPolicy&#39; resource.
 [**GetHyperflexClusterStoragePolicyByMoid**](HyperflexApi.md#GetHyperflexClusterStoragePolicyByMoid) | **Get** /api/v1/hyperflex/ClusterStoragePolicies/{Moid} | Read a &#39;hyperflex.ClusterStoragePolicy&#39; resource.
 [**GetHyperflexClusterStoragePolicyList**](HyperflexApi.md#GetHyperflexClusterStoragePolicyList) | **Get** /api/v1/hyperflex/ClusterStoragePolicies | Read a &#39;hyperflex.ClusterStoragePolicy&#39; resource.
 [**GetHyperflexConfigResultByMoid**](HyperflexApi.md#GetHyperflexConfigResultByMoid) | **Get** /api/v1/hyperflex/ConfigResults/{Moid} | Read a &#39;hyperflex.ConfigResult&#39; resource.
@@ -137,13 +157,23 @@ Method | HTTP request | Description
 [**GetHyperflexUcsmConfigPolicyList**](HyperflexApi.md#GetHyperflexUcsmConfigPolicyList) | **Get** /api/v1/hyperflex/UcsmConfigPolicies | Read a &#39;hyperflex.UcsmConfigPolicy&#39; resource.
 [**GetHyperflexVcenterConfigPolicyByMoid**](HyperflexApi.md#GetHyperflexVcenterConfigPolicyByMoid) | **Get** /api/v1/hyperflex/VcenterConfigPolicies/{Moid} | Read a &#39;hyperflex.VcenterConfigPolicy&#39; resource.
 [**GetHyperflexVcenterConfigPolicyList**](HyperflexApi.md#GetHyperflexVcenterConfigPolicyList) | **Get** /api/v1/hyperflex/VcenterConfigPolicies | Read a &#39;hyperflex.VcenterConfigPolicy&#39; resource.
+[**GetHyperflexVmBackupInfoByMoid**](HyperflexApi.md#GetHyperflexVmBackupInfoByMoid) | **Get** /api/v1/hyperflex/VmBackupInfos/{Moid} | Read a &#39;hyperflex.VmBackupInfo&#39; resource.
+[**GetHyperflexVmBackupInfoList**](HyperflexApi.md#GetHyperflexVmBackupInfoList) | **Get** /api/v1/hyperflex/VmBackupInfos | Read a &#39;hyperflex.VmBackupInfo&#39; resource.
+[**GetHyperflexVmRestoreOperationByMoid**](HyperflexApi.md#GetHyperflexVmRestoreOperationByMoid) | **Get** /api/v1/hyperflex/VmRestoreOperations/{Moid} | Read a &#39;hyperflex.VmRestoreOperation&#39; resource.
+[**GetHyperflexVmRestoreOperationList**](HyperflexApi.md#GetHyperflexVmRestoreOperationList) | **Get** /api/v1/hyperflex/VmRestoreOperations | Read a &#39;hyperflex.VmRestoreOperation&#39; resource.
+[**GetHyperflexVmSnapshotInfoByMoid**](HyperflexApi.md#GetHyperflexVmSnapshotInfoByMoid) | **Get** /api/v1/hyperflex/VmSnapshotInfos/{Moid} | Read a &#39;hyperflex.VmSnapshotInfo&#39; resource.
+[**GetHyperflexVmSnapshotInfoList**](HyperflexApi.md#GetHyperflexVmSnapshotInfoList) | **Get** /api/v1/hyperflex/VmSnapshotInfos | Read a &#39;hyperflex.VmSnapshotInfo&#39; resource.
 [**PatchHyperflexAppCatalog**](HyperflexApi.md#PatchHyperflexAppCatalog) | **Patch** /api/v1/hyperflex/AppCatalogs/{Moid} | Update a &#39;hyperflex.AppCatalog&#39; resource.
 [**PatchHyperflexAutoSupportPolicy**](HyperflexApi.md#PatchHyperflexAutoSupportPolicy) | **Patch** /api/v1/hyperflex/AutoSupportPolicies/{Moid} | Update a &#39;hyperflex.AutoSupportPolicy&#39; resource.
 [**PatchHyperflexCapabilityInfo**](HyperflexApi.md#PatchHyperflexCapabilityInfo) | **Patch** /api/v1/hyperflex/CapabilityInfos/{Moid} | Update a &#39;hyperflex.CapabilityInfo&#39; resource.
 [**PatchHyperflexCiscoHypervisorManager**](HyperflexApi.md#PatchHyperflexCiscoHypervisorManager) | **Patch** /api/v1/hyperflex/CiscoHypervisorManagers/{Moid} | Update a &#39;hyperflex.CiscoHypervisorManager&#39; resource.
 [**PatchHyperflexCluster**](HyperflexApi.md#PatchHyperflexCluster) | **Patch** /api/v1/hyperflex/Clusters/{Moid} | Update a &#39;hyperflex.Cluster&#39; resource.
+[**PatchHyperflexClusterBackupPolicy**](HyperflexApi.md#PatchHyperflexClusterBackupPolicy) | **Patch** /api/v1/hyperflex/ClusterBackupPolicies/{Moid} | Update a &#39;hyperflex.ClusterBackupPolicy&#39; resource.
+[**PatchHyperflexClusterBackupPolicyDeployment**](HyperflexApi.md#PatchHyperflexClusterBackupPolicyDeployment) | **Patch** /api/v1/hyperflex/ClusterBackupPolicyDeployments/{Moid} | Update a &#39;hyperflex.ClusterBackupPolicyDeployment&#39; resource.
 [**PatchHyperflexClusterNetworkPolicy**](HyperflexApi.md#PatchHyperflexClusterNetworkPolicy) | **Patch** /api/v1/hyperflex/ClusterNetworkPolicies/{Moid} | Update a &#39;hyperflex.ClusterNetworkPolicy&#39; resource.
 [**PatchHyperflexClusterProfile**](HyperflexApi.md#PatchHyperflexClusterProfile) | **Patch** /api/v1/hyperflex/ClusterProfiles/{Moid} | Update a &#39;hyperflex.ClusterProfile&#39; resource.
+[**PatchHyperflexClusterReplicationNetworkPolicy**](HyperflexApi.md#PatchHyperflexClusterReplicationNetworkPolicy) | **Patch** /api/v1/hyperflex/ClusterReplicationNetworkPolicies/{Moid} | Update a &#39;hyperflex.ClusterReplicationNetworkPolicy&#39; resource.
+[**PatchHyperflexClusterReplicationNetworkPolicyDeployment**](HyperflexApi.md#PatchHyperflexClusterReplicationNetworkPolicyDeployment) | **Patch** /api/v1/hyperflex/ClusterReplicationNetworkPolicyDeployments/{Moid} | Update a &#39;hyperflex.ClusterReplicationNetworkPolicyDeployment&#39; resource.
 [**PatchHyperflexClusterStoragePolicy**](HyperflexApi.md#PatchHyperflexClusterStoragePolicy) | **Patch** /api/v1/hyperflex/ClusterStoragePolicies/{Moid} | Update a &#39;hyperflex.ClusterStoragePolicy&#39; resource.
 [**PatchHyperflexExtFcStoragePolicy**](HyperflexApi.md#PatchHyperflexExtFcStoragePolicy) | **Patch** /api/v1/hyperflex/ExtFcStoragePolicies/{Moid} | Update a &#39;hyperflex.ExtFcStoragePolicy&#39; resource.
 [**PatchHyperflexExtIscsiStoragePolicy**](HyperflexApi.md#PatchHyperflexExtIscsiStoragePolicy) | **Patch** /api/v1/hyperflex/ExtIscsiStoragePolicies/{Moid} | Update a &#39;hyperflex.ExtIscsiStoragePolicy&#39; resource.
@@ -174,8 +204,12 @@ Method | HTTP request | Description
 [**UpdateHyperflexCapabilityInfo**](HyperflexApi.md#UpdateHyperflexCapabilityInfo) | **Post** /api/v1/hyperflex/CapabilityInfos/{Moid} | Update a &#39;hyperflex.CapabilityInfo&#39; resource.
 [**UpdateHyperflexCiscoHypervisorManager**](HyperflexApi.md#UpdateHyperflexCiscoHypervisorManager) | **Post** /api/v1/hyperflex/CiscoHypervisorManagers/{Moid} | Update a &#39;hyperflex.CiscoHypervisorManager&#39; resource.
 [**UpdateHyperflexCluster**](HyperflexApi.md#UpdateHyperflexCluster) | **Post** /api/v1/hyperflex/Clusters/{Moid} | Update a &#39;hyperflex.Cluster&#39; resource.
+[**UpdateHyperflexClusterBackupPolicy**](HyperflexApi.md#UpdateHyperflexClusterBackupPolicy) | **Post** /api/v1/hyperflex/ClusterBackupPolicies/{Moid} | Update a &#39;hyperflex.ClusterBackupPolicy&#39; resource.
+[**UpdateHyperflexClusterBackupPolicyDeployment**](HyperflexApi.md#UpdateHyperflexClusterBackupPolicyDeployment) | **Post** /api/v1/hyperflex/ClusterBackupPolicyDeployments/{Moid} | Update a &#39;hyperflex.ClusterBackupPolicyDeployment&#39; resource.
 [**UpdateHyperflexClusterNetworkPolicy**](HyperflexApi.md#UpdateHyperflexClusterNetworkPolicy) | **Post** /api/v1/hyperflex/ClusterNetworkPolicies/{Moid} | Update a &#39;hyperflex.ClusterNetworkPolicy&#39; resource.
 [**UpdateHyperflexClusterProfile**](HyperflexApi.md#UpdateHyperflexClusterProfile) | **Post** /api/v1/hyperflex/ClusterProfiles/{Moid} | Update a &#39;hyperflex.ClusterProfile&#39; resource.
+[**UpdateHyperflexClusterReplicationNetworkPolicy**](HyperflexApi.md#UpdateHyperflexClusterReplicationNetworkPolicy) | **Post** /api/v1/hyperflex/ClusterReplicationNetworkPolicies/{Moid} | Update a &#39;hyperflex.ClusterReplicationNetworkPolicy&#39; resource.
+[**UpdateHyperflexClusterReplicationNetworkPolicyDeployment**](HyperflexApi.md#UpdateHyperflexClusterReplicationNetworkPolicyDeployment) | **Post** /api/v1/hyperflex/ClusterReplicationNetworkPolicyDeployments/{Moid} | Update a &#39;hyperflex.ClusterReplicationNetworkPolicyDeployment&#39; resource.
 [**UpdateHyperflexClusterStoragePolicy**](HyperflexApi.md#UpdateHyperflexClusterStoragePolicy) | **Post** /api/v1/hyperflex/ClusterStoragePolicies/{Moid} | Update a &#39;hyperflex.ClusterStoragePolicy&#39; resource.
 [**UpdateHyperflexExtFcStoragePolicy**](HyperflexApi.md#UpdateHyperflexExtFcStoragePolicy) | **Post** /api/v1/hyperflex/ExtFcStoragePolicies/{Moid} | Update a &#39;hyperflex.ExtFcStoragePolicy&#39; resource.
 [**UpdateHyperflexExtIscsiStoragePolicy**](HyperflexApi.md#UpdateHyperflexExtIscsiStoragePolicy) | **Post** /api/v1/hyperflex/ExtIscsiStoragePolicies/{Moid} | Update a &#39;hyperflex.ExtIscsiStoragePolicy&#39; resource.
@@ -476,6 +510,142 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateHyperflexClusterBackupPolicy
+
+> HyperflexClusterBackupPolicy CreateHyperflexClusterBackupPolicy(ctx).HyperflexClusterBackupPolicy(hyperflexClusterBackupPolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'hyperflex.ClusterBackupPolicy' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    hyperflexClusterBackupPolicy := *openapiclient.NewHyperflexClusterBackupPolicy("ClassId_example", "ObjectType_example") // HyperflexClusterBackupPolicy | The 'hyperflex.ClusterBackupPolicy' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.CreateHyperflexClusterBackupPolicy(context.Background()).HyperflexClusterBackupPolicy(hyperflexClusterBackupPolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexClusterBackupPolicy``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateHyperflexClusterBackupPolicy`: HyperflexClusterBackupPolicy
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.CreateHyperflexClusterBackupPolicy`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateHyperflexClusterBackupPolicyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hyperflexClusterBackupPolicy** | [**HyperflexClusterBackupPolicy**](HyperflexClusterBackupPolicy.md) | The &#39;hyperflex.ClusterBackupPolicy&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**HyperflexClusterBackupPolicy**](hyperflex.ClusterBackupPolicy.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateHyperflexClusterBackupPolicyDeployment
+
+> HyperflexClusterBackupPolicyDeployment CreateHyperflexClusterBackupPolicyDeployment(ctx).HyperflexClusterBackupPolicyDeployment(hyperflexClusterBackupPolicyDeployment).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'hyperflex.ClusterBackupPolicyDeployment' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    hyperflexClusterBackupPolicyDeployment := *openapiclient.NewHyperflexClusterBackupPolicyDeployment("ClassId_example", "ObjectType_example") // HyperflexClusterBackupPolicyDeployment | The 'hyperflex.ClusterBackupPolicyDeployment' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.CreateHyperflexClusterBackupPolicyDeployment(context.Background()).HyperflexClusterBackupPolicyDeployment(hyperflexClusterBackupPolicyDeployment).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexClusterBackupPolicyDeployment``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateHyperflexClusterBackupPolicyDeployment`: HyperflexClusterBackupPolicyDeployment
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.CreateHyperflexClusterBackupPolicyDeployment`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateHyperflexClusterBackupPolicyDeploymentRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hyperflexClusterBackupPolicyDeployment** | [**HyperflexClusterBackupPolicyDeployment**](HyperflexClusterBackupPolicyDeployment.md) | The &#39;hyperflex.ClusterBackupPolicyDeployment&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**HyperflexClusterBackupPolicyDeployment**](hyperflex.ClusterBackupPolicyDeployment.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## CreateHyperflexClusterNetworkPolicy
 
 > HyperflexClusterNetworkPolicy CreateHyperflexClusterNetworkPolicy(ctx).HyperflexClusterNetworkPolicy(hyperflexClusterNetworkPolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
@@ -597,6 +767,142 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**HyperflexClusterProfile**](hyperflex.ClusterProfile.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateHyperflexClusterReplicationNetworkPolicy
+
+> HyperflexClusterReplicationNetworkPolicy CreateHyperflexClusterReplicationNetworkPolicy(ctx).HyperflexClusterReplicationNetworkPolicy(hyperflexClusterReplicationNetworkPolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'hyperflex.ClusterReplicationNetworkPolicy' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    hyperflexClusterReplicationNetworkPolicy := *openapiclient.NewHyperflexClusterReplicationNetworkPolicy("ClassId_example", "ObjectType_example") // HyperflexClusterReplicationNetworkPolicy | The 'hyperflex.ClusterReplicationNetworkPolicy' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.CreateHyperflexClusterReplicationNetworkPolicy(context.Background()).HyperflexClusterReplicationNetworkPolicy(hyperflexClusterReplicationNetworkPolicy).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexClusterReplicationNetworkPolicy``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateHyperflexClusterReplicationNetworkPolicy`: HyperflexClusterReplicationNetworkPolicy
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.CreateHyperflexClusterReplicationNetworkPolicy`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateHyperflexClusterReplicationNetworkPolicyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hyperflexClusterReplicationNetworkPolicy** | [**HyperflexClusterReplicationNetworkPolicy**](HyperflexClusterReplicationNetworkPolicy.md) | The &#39;hyperflex.ClusterReplicationNetworkPolicy&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**HyperflexClusterReplicationNetworkPolicy**](hyperflex.ClusterReplicationNetworkPolicy.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateHyperflexClusterReplicationNetworkPolicyDeployment
+
+> HyperflexClusterReplicationNetworkPolicyDeployment CreateHyperflexClusterReplicationNetworkPolicyDeployment(ctx).HyperflexClusterReplicationNetworkPolicyDeployment(hyperflexClusterReplicationNetworkPolicyDeployment).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'hyperflex.ClusterReplicationNetworkPolicyDeployment' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    hyperflexClusterReplicationNetworkPolicyDeployment := *openapiclient.NewHyperflexClusterReplicationNetworkPolicyDeployment("ClassId_example", "ObjectType_example") // HyperflexClusterReplicationNetworkPolicyDeployment | The 'hyperflex.ClusterReplicationNetworkPolicyDeployment' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.CreateHyperflexClusterReplicationNetworkPolicyDeployment(context.Background()).HyperflexClusterReplicationNetworkPolicyDeployment(hyperflexClusterReplicationNetworkPolicyDeployment).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexClusterReplicationNetworkPolicyDeployment``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateHyperflexClusterReplicationNetworkPolicyDeployment`: HyperflexClusterReplicationNetworkPolicyDeployment
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.CreateHyperflexClusterReplicationNetworkPolicyDeployment`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateHyperflexClusterReplicationNetworkPolicyDeploymentRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hyperflexClusterReplicationNetworkPolicyDeployment** | [**HyperflexClusterReplicationNetworkPolicyDeployment**](HyperflexClusterReplicationNetworkPolicyDeployment.md) | The &#39;hyperflex.ClusterReplicationNetworkPolicyDeployment&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**HyperflexClusterReplicationNetworkPolicyDeployment**](hyperflex.ClusterReplicationNetworkPolicyDeployment.md)
 
 ### Authorization
 
@@ -1972,6 +2278,74 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## CreateHyperflexVmRestoreOperation
+
+> HyperflexVmRestoreOperation CreateHyperflexVmRestoreOperation(ctx).HyperflexVmRestoreOperation(hyperflexVmRestoreOperation).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+
+Create a 'hyperflex.VmRestoreOperation' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    hyperflexVmRestoreOperation := *openapiclient.NewHyperflexVmRestoreOperation("ClassId_example", "ObjectType_example") // HyperflexVmRestoreOperation | The 'hyperflex.VmRestoreOperation' resource to create.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+    ifNoneMatch := "ifNoneMatch_example" // string | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn't happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource's ETag doesn't match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don't have to be identical byte for byte. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.CreateHyperflexVmRestoreOperation(context.Background()).HyperflexVmRestoreOperation(hyperflexVmRestoreOperation).IfMatch(ifMatch).IfNoneMatch(ifNoneMatch).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.CreateHyperflexVmRestoreOperation``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateHyperflexVmRestoreOperation`: HyperflexVmRestoreOperation
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.CreateHyperflexVmRestoreOperation`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateHyperflexVmRestoreOperationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **hyperflexVmRestoreOperation** | [**HyperflexVmRestoreOperation**](HyperflexVmRestoreOperation.md) | The &#39;hyperflex.VmRestoreOperation&#39; resource to create. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+ **ifNoneMatch** | **string** | For methods that apply server-side changes, If-None-Match used with the * value can be used to create a resource not known to exist, guaranteeing that another resource creation didn&#39;t happen before, losing the data of the previous put. The request will be processed only if the eventually existing resource&#39;s ETag doesn&#39;t match any of the values listed. Otherwise, the status code 412 (Precondition Failed) is used. The asterisk is a special value representing any resource. It is only useful when creating a resource, usually with PUT, to check if another resource with the identity has already been created before. The comparison with the stored ETag uses the weak comparison algorithm, meaning two resources are considered identical if the content is equivalent - they don&#39;t have to be identical byte for byte. | 
+
+### Return type
+
+[**HyperflexVmRestoreOperation**](hyperflex.VmRestoreOperation.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## DeleteHyperflexAppCatalog
 
 > DeleteHyperflexAppCatalog(ctx, moid).Execute()
@@ -2170,6 +2544,138 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## DeleteHyperflexClusterBackupPolicy
+
+> DeleteHyperflexClusterBackupPolicy(ctx, moid).Execute()
+
+Delete a 'hyperflex.ClusterBackupPolicy' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.DeleteHyperflexClusterBackupPolicy(context.Background(), moid).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexClusterBackupPolicy``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteHyperflexClusterBackupPolicyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteHyperflexClusterBackupPolicyDeployment
+
+> DeleteHyperflexClusterBackupPolicyDeployment(ctx, moid).Execute()
+
+Delete a 'hyperflex.ClusterBackupPolicyDeployment' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.DeleteHyperflexClusterBackupPolicyDeployment(context.Background(), moid).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexClusterBackupPolicyDeployment``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteHyperflexClusterBackupPolicyDeploymentRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## DeleteHyperflexClusterNetworkPolicy
 
 > DeleteHyperflexClusterNetworkPolicy(ctx, moid).Execute()
@@ -2278,6 +2784,138 @@ Name | Type | Description  | Notes
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteHyperflexClusterProfileRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteHyperflexClusterReplicationNetworkPolicy
+
+> DeleteHyperflexClusterReplicationNetworkPolicy(ctx, moid).Execute()
+
+Delete a 'hyperflex.ClusterReplicationNetworkPolicy' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.DeleteHyperflexClusterReplicationNetworkPolicy(context.Background(), moid).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexClusterReplicationNetworkPolicy``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteHyperflexClusterReplicationNetworkPolicyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteHyperflexClusterReplicationNetworkPolicyDeployment
+
+> DeleteHyperflexClusterReplicationNetworkPolicyDeployment(ctx, moid).Execute()
+
+Delete a 'hyperflex.ClusterReplicationNetworkPolicyDeployment' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.DeleteHyperflexClusterReplicationNetworkPolicyDeployment(context.Background(), moid).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexClusterReplicationNetworkPolicyDeployment``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteHyperflexClusterReplicationNetworkPolicyDeploymentRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -3622,6 +4260,72 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## DeleteHyperflexVmRestoreOperation
+
+> DeleteHyperflexVmRestoreOperation(ctx, moid).Execute()
+
+Delete a 'hyperflex.VmRestoreOperation' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.DeleteHyperflexVmRestoreOperation(context.Background(), moid).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.DeleteHyperflexVmRestoreOperation``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteHyperflexVmRestoreOperationRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetHyperflexAlarmByMoid
 
 > HyperflexAlarm GetHyperflexAlarmByMoid(ctx, moid).Execute()
@@ -4078,6 +4782,158 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetHyperflexBackupClusterByMoid
+
+> HyperflexBackupCluster GetHyperflexBackupClusterByMoid(ctx, moid).Execute()
+
+Read a 'hyperflex.BackupCluster' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexBackupClusterByMoid(context.Background(), moid).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexBackupClusterByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexBackupClusterByMoid`: HyperflexBackupCluster
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexBackupClusterByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexBackupClusterByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HyperflexBackupCluster**](hyperflex.BackupCluster.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexBackupClusterList
+
+> HyperflexBackupClusterResponse GetHyperflexBackupClusterList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'hyperflex.BackupCluster' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexBackupClusterList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexBackupClusterList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexBackupClusterList`: HyperflexBackupClusterResponse
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexBackupClusterList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexBackupClusterListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**HyperflexBackupClusterResponse**](hyperflex.BackupCluster.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetHyperflexCapabilityInfoByMoid
 
 > HyperflexCapabilityInfo GetHyperflexCapabilityInfoByMoid(ctx, moid).Execute()
@@ -4367,6 +5223,310 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**HyperflexCiscoHypervisorManagerResponse**](hyperflex.CiscoHypervisorManager.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexClusterBackupPolicyByMoid
+
+> HyperflexClusterBackupPolicy GetHyperflexClusterBackupPolicyByMoid(ctx, moid).Execute()
+
+Read a 'hyperflex.ClusterBackupPolicy' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexClusterBackupPolicyByMoid(context.Background(), moid).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexClusterBackupPolicyByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexClusterBackupPolicyByMoid`: HyperflexClusterBackupPolicy
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexClusterBackupPolicyByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexClusterBackupPolicyByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HyperflexClusterBackupPolicy**](hyperflex.ClusterBackupPolicy.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexClusterBackupPolicyDeploymentByMoid
+
+> HyperflexClusterBackupPolicyDeployment GetHyperflexClusterBackupPolicyDeploymentByMoid(ctx, moid).Execute()
+
+Read a 'hyperflex.ClusterBackupPolicyDeployment' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexClusterBackupPolicyDeploymentByMoid(context.Background(), moid).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexClusterBackupPolicyDeploymentByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexClusterBackupPolicyDeploymentByMoid`: HyperflexClusterBackupPolicyDeployment
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexClusterBackupPolicyDeploymentByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexClusterBackupPolicyDeploymentByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HyperflexClusterBackupPolicyDeployment**](hyperflex.ClusterBackupPolicyDeployment.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexClusterBackupPolicyDeploymentList
+
+> HyperflexClusterBackupPolicyDeploymentResponse GetHyperflexClusterBackupPolicyDeploymentList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'hyperflex.ClusterBackupPolicyDeployment' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexClusterBackupPolicyDeploymentList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexClusterBackupPolicyDeploymentList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexClusterBackupPolicyDeploymentList`: HyperflexClusterBackupPolicyDeploymentResponse
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexClusterBackupPolicyDeploymentList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexClusterBackupPolicyDeploymentListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**HyperflexClusterBackupPolicyDeploymentResponse**](hyperflex.ClusterBackupPolicyDeployment.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexClusterBackupPolicyList
+
+> HyperflexClusterBackupPolicyResponse GetHyperflexClusterBackupPolicyList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'hyperflex.ClusterBackupPolicy' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexClusterBackupPolicyList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexClusterBackupPolicyList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexClusterBackupPolicyList`: HyperflexClusterBackupPolicyResponse
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexClusterBackupPolicyList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexClusterBackupPolicyListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**HyperflexClusterBackupPolicyResponse**](hyperflex.ClusterBackupPolicy.Response.md)
 
 ### Authorization
 
@@ -4975,6 +6135,310 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**HyperflexClusterProfileResponse**](hyperflex.ClusterProfile.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexClusterReplicationNetworkPolicyByMoid
+
+> HyperflexClusterReplicationNetworkPolicy GetHyperflexClusterReplicationNetworkPolicyByMoid(ctx, moid).Execute()
+
+Read a 'hyperflex.ClusterReplicationNetworkPolicy' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexClusterReplicationNetworkPolicyByMoid(context.Background(), moid).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexClusterReplicationNetworkPolicyByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexClusterReplicationNetworkPolicyByMoid`: HyperflexClusterReplicationNetworkPolicy
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexClusterReplicationNetworkPolicyByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexClusterReplicationNetworkPolicyByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HyperflexClusterReplicationNetworkPolicy**](hyperflex.ClusterReplicationNetworkPolicy.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexClusterReplicationNetworkPolicyDeploymentByMoid
+
+> HyperflexClusterReplicationNetworkPolicyDeployment GetHyperflexClusterReplicationNetworkPolicyDeploymentByMoid(ctx, moid).Execute()
+
+Read a 'hyperflex.ClusterReplicationNetworkPolicyDeployment' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexClusterReplicationNetworkPolicyDeploymentByMoid(context.Background(), moid).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexClusterReplicationNetworkPolicyDeploymentByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexClusterReplicationNetworkPolicyDeploymentByMoid`: HyperflexClusterReplicationNetworkPolicyDeployment
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexClusterReplicationNetworkPolicyDeploymentByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexClusterReplicationNetworkPolicyDeploymentByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HyperflexClusterReplicationNetworkPolicyDeployment**](hyperflex.ClusterReplicationNetworkPolicyDeployment.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexClusterReplicationNetworkPolicyDeploymentList
+
+> HyperflexClusterReplicationNetworkPolicyDeploymentResponse GetHyperflexClusterReplicationNetworkPolicyDeploymentList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'hyperflex.ClusterReplicationNetworkPolicyDeployment' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexClusterReplicationNetworkPolicyDeploymentList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexClusterReplicationNetworkPolicyDeploymentList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexClusterReplicationNetworkPolicyDeploymentList`: HyperflexClusterReplicationNetworkPolicyDeploymentResponse
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexClusterReplicationNetworkPolicyDeploymentList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexClusterReplicationNetworkPolicyDeploymentListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**HyperflexClusterReplicationNetworkPolicyDeploymentResponse**](hyperflex.ClusterReplicationNetworkPolicyDeployment.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexClusterReplicationNetworkPolicyList
+
+> HyperflexClusterReplicationNetworkPolicyResponse GetHyperflexClusterReplicationNetworkPolicyList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'hyperflex.ClusterReplicationNetworkPolicy' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexClusterReplicationNetworkPolicyList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexClusterReplicationNetworkPolicyList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexClusterReplicationNetworkPolicyList`: HyperflexClusterReplicationNetworkPolicyResponse
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexClusterReplicationNetworkPolicyList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexClusterReplicationNetworkPolicyListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**HyperflexClusterReplicationNetworkPolicyResponse**](hyperflex.ClusterReplicationNetworkPolicy.Response.md)
 
 ### Authorization
 
@@ -9854,6 +11318,462 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetHyperflexVmBackupInfoByMoid
+
+> HyperflexVmBackupInfo GetHyperflexVmBackupInfoByMoid(ctx, moid).Execute()
+
+Read a 'hyperflex.VmBackupInfo' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexVmBackupInfoByMoid(context.Background(), moid).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexVmBackupInfoByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexVmBackupInfoByMoid`: HyperflexVmBackupInfo
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexVmBackupInfoByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexVmBackupInfoByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HyperflexVmBackupInfo**](hyperflex.VmBackupInfo.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexVmBackupInfoList
+
+> HyperflexVmBackupInfoResponse GetHyperflexVmBackupInfoList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'hyperflex.VmBackupInfo' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexVmBackupInfoList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexVmBackupInfoList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexVmBackupInfoList`: HyperflexVmBackupInfoResponse
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexVmBackupInfoList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexVmBackupInfoListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**HyperflexVmBackupInfoResponse**](hyperflex.VmBackupInfo.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexVmRestoreOperationByMoid
+
+> HyperflexVmRestoreOperation GetHyperflexVmRestoreOperationByMoid(ctx, moid).Execute()
+
+Read a 'hyperflex.VmRestoreOperation' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexVmRestoreOperationByMoid(context.Background(), moid).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexVmRestoreOperationByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexVmRestoreOperationByMoid`: HyperflexVmRestoreOperation
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexVmRestoreOperationByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexVmRestoreOperationByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HyperflexVmRestoreOperation**](hyperflex.VmRestoreOperation.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexVmRestoreOperationList
+
+> HyperflexVmRestoreOperationResponse GetHyperflexVmRestoreOperationList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'hyperflex.VmRestoreOperation' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexVmRestoreOperationList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexVmRestoreOperationList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexVmRestoreOperationList`: HyperflexVmRestoreOperationResponse
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexVmRestoreOperationList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexVmRestoreOperationListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**HyperflexVmRestoreOperationResponse**](hyperflex.VmRestoreOperation.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexVmSnapshotInfoByMoid
+
+> HyperflexVmSnapshotInfo GetHyperflexVmSnapshotInfoByMoid(ctx, moid).Execute()
+
+Read a 'hyperflex.VmSnapshotInfo' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexVmSnapshotInfoByMoid(context.Background(), moid).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexVmSnapshotInfoByMoid``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexVmSnapshotInfoByMoid`: HyperflexVmSnapshotInfo
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexVmSnapshotInfoByMoid`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexVmSnapshotInfoByMoidRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HyperflexVmSnapshotInfo**](hyperflex.VmSnapshotInfo.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetHyperflexVmSnapshotInfoList
+
+> HyperflexVmSnapshotInfoResponse GetHyperflexVmSnapshotInfoList(ctx).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+
+Read a 'hyperflex.VmSnapshotInfo' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    filter := "$filter=CreateTime gt 2012-08-29T21:58:33Z" // string | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). (optional) (default to "")
+    orderby := "$orderby=CreationTime" // string | Determines what properties are used to sort the collection of resources. (optional)
+    top := int32($top=10) // int32 | Specifies the maximum number of resources to return in the response. (optional) (default to 100)
+    skip := int32($skip=100) // int32 | Specifies the number of resources to skip in the response. (optional) (default to 0)
+    select_ := "$select=CreateTime,ModTime" // string | Specifies a subset of properties to return. (optional) (default to "")
+    expand := "$expand=DisplayNames" // string | Specify additional attributes or related resources to return in addition to the primary resources. (optional)
+    apply := "apply_example" // string | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \"$apply\" query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \"aggregate\" and \"groupby\". The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. (optional)
+    count := false // bool | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. (optional)
+    inlinecount := "$inlinecount=true" // string | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. (optional) (default to "allpages")
+    at := "at=VersionType eq 'Configured'" // string | Similar to \"$filter\", but \"at\" is specifically used to filter versioning information properties for resources to return. A URI with an \"at\" Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. (optional)
+    tags := "tags_example" // string | The 'tags' parameter is used to request a summary of the Tag utilization for this resource. When the 'tags' parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.GetHyperflexVmSnapshotInfoList(context.Background()).Filter(filter).Orderby(orderby).Top(top).Skip(skip).Select_(select_).Expand(expand).Apply(apply).Count(count).Inlinecount(inlinecount).At(at).Tags(tags).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.GetHyperflexVmSnapshotInfoList``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetHyperflexVmSnapshotInfoList`: HyperflexVmSnapshotInfoResponse
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.GetHyperflexVmSnapshotInfoList`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetHyperflexVmSnapshotInfoListRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **filter** | **string** | Filter criteria for the resources to return. A URI with a $filter query option identifies a subset of the entries from the Collection of Entries. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the $filter option. The expression language that is used in $filter queries supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false). | [default to &quot;&quot;]
+ **orderby** | **string** | Determines what properties are used to sort the collection of resources. | 
+ **top** | **int32** | Specifies the maximum number of resources to return in the response. | [default to 100]
+ **skip** | **int32** | Specifies the number of resources to skip in the response. | [default to 0]
+ **select_** | **string** | Specifies a subset of properties to return. | [default to &quot;&quot;]
+ **expand** | **string** | Specify additional attributes or related resources to return in addition to the primary resources. | 
+ **apply** | **string** | Specify one or more transformation operations to perform aggregation on the resources. The transformations are processed in order with the output from a transformation being used as input for the subsequent transformation. The \&quot;$apply\&quot; query takes a sequence of set transformations, separated by forward slashes to express that they are consecutively applied, i.e. the result of each transformation is the input to the next transformation. Supported aggregation methods are \&quot;aggregate\&quot; and \&quot;groupby\&quot;. The **aggregate** transformation takes a comma-separated list of one or more aggregate expressions as parameters and returns a result set with a single instance, representing the aggregated value for all instances in the input set. The **groupby** transformation takes one or two parameters and 1. Splits the initial set into subsets where all instances in a subset have the same values for the grouping properties specified in the first parameter, 2. Applies set transformations to each subset according to the second parameter, resulting in a new set of potentially different structure and cardinality, 3. Ensures that the instances in the result set contain all grouping properties with the correct values for the group, 4. Concatenates the intermediate result sets into one result set. A groupby transformation affects the structure of the result set. | 
+ **count** | **bool** | The $count query specifies the service should return the count of the matching resources, instead of returning the resources. | 
+ **inlinecount** | **string** | The $inlinecount query option allows clients to request an inline count of the matching resources included with the resources in the response. | [default to &quot;allpages&quot;]
+ **at** | **string** | Similar to \&quot;$filter\&quot;, but \&quot;at\&quot; is specifically used to filter versioning information properties for resources to return. A URI with an \&quot;at\&quot; Query Option identifies a subset of the Entries from the Collection of Entries identified by the Resource Path section of the URI. The subset is determined by selecting only the Entries that satisfy the predicate expression specified by the query option. The expression language that is used in at operators supports references to properties and literals. The literal values can be strings enclosed in single quotes, numbers and boolean values (true or false) or any of the additional literal representations shown in the Abstract Type System section. | 
+ **tags** | **string** | The &#39;tags&#39; parameter is used to request a summary of the Tag utilization for this resource. When the &#39;tags&#39; parameter is specified, the response provides a list of tag keys, the number of times the key has been used across all documents, and the tag values that have been assigned to the tag key. | 
+
+### Return type
+
+[**HyperflexVmSnapshotInfoResponse**](hyperflex.VmSnapshotInfo.Response.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json, text/csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PatchHyperflexAppCatalog
 
 > HyperflexAppCatalog PatchHyperflexAppCatalog(ctx, moid).HyperflexAppCatalog(hyperflexAppCatalog).IfMatch(ifMatch).Execute()
@@ -10214,6 +12134,150 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## PatchHyperflexClusterBackupPolicy
+
+> HyperflexClusterBackupPolicy PatchHyperflexClusterBackupPolicy(ctx, moid).HyperflexClusterBackupPolicy(hyperflexClusterBackupPolicy).IfMatch(ifMatch).Execute()
+
+Update a 'hyperflex.ClusterBackupPolicy' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    hyperflexClusterBackupPolicy := *openapiclient.NewHyperflexClusterBackupPolicy("ClassId_example", "ObjectType_example") // HyperflexClusterBackupPolicy | The 'hyperflex.ClusterBackupPolicy' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.PatchHyperflexClusterBackupPolicy(context.Background(), moid).HyperflexClusterBackupPolicy(hyperflexClusterBackupPolicy).IfMatch(ifMatch).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexClusterBackupPolicy``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchHyperflexClusterBackupPolicy`: HyperflexClusterBackupPolicy
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.PatchHyperflexClusterBackupPolicy`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchHyperflexClusterBackupPolicyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **hyperflexClusterBackupPolicy** | [**HyperflexClusterBackupPolicy**](HyperflexClusterBackupPolicy.md) | The &#39;hyperflex.ClusterBackupPolicy&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**HyperflexClusterBackupPolicy**](hyperflex.ClusterBackupPolicy.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchHyperflexClusterBackupPolicyDeployment
+
+> HyperflexClusterBackupPolicyDeployment PatchHyperflexClusterBackupPolicyDeployment(ctx, moid).HyperflexClusterBackupPolicyDeployment(hyperflexClusterBackupPolicyDeployment).IfMatch(ifMatch).Execute()
+
+Update a 'hyperflex.ClusterBackupPolicyDeployment' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    hyperflexClusterBackupPolicyDeployment := *openapiclient.NewHyperflexClusterBackupPolicyDeployment("ClassId_example", "ObjectType_example") // HyperflexClusterBackupPolicyDeployment | The 'hyperflex.ClusterBackupPolicyDeployment' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.PatchHyperflexClusterBackupPolicyDeployment(context.Background(), moid).HyperflexClusterBackupPolicyDeployment(hyperflexClusterBackupPolicyDeployment).IfMatch(ifMatch).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexClusterBackupPolicyDeployment``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchHyperflexClusterBackupPolicyDeployment`: HyperflexClusterBackupPolicyDeployment
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.PatchHyperflexClusterBackupPolicyDeployment`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchHyperflexClusterBackupPolicyDeploymentRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **hyperflexClusterBackupPolicyDeployment** | [**HyperflexClusterBackupPolicyDeployment**](HyperflexClusterBackupPolicyDeployment.md) | The &#39;hyperflex.ClusterBackupPolicyDeployment&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**HyperflexClusterBackupPolicyDeployment**](hyperflex.ClusterBackupPolicyDeployment.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## PatchHyperflexClusterNetworkPolicy
 
 > HyperflexClusterNetworkPolicy PatchHyperflexClusterNetworkPolicy(ctx, moid).HyperflexClusterNetworkPolicy(hyperflexClusterNetworkPolicy).IfMatch(ifMatch).Execute()
@@ -10343,6 +12407,150 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**HyperflexClusterProfile**](hyperflex.ClusterProfile.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchHyperflexClusterReplicationNetworkPolicy
+
+> HyperflexClusterReplicationNetworkPolicy PatchHyperflexClusterReplicationNetworkPolicy(ctx, moid).HyperflexClusterReplicationNetworkPolicy(hyperflexClusterReplicationNetworkPolicy).IfMatch(ifMatch).Execute()
+
+Update a 'hyperflex.ClusterReplicationNetworkPolicy' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    hyperflexClusterReplicationNetworkPolicy := *openapiclient.NewHyperflexClusterReplicationNetworkPolicy("ClassId_example", "ObjectType_example") // HyperflexClusterReplicationNetworkPolicy | The 'hyperflex.ClusterReplicationNetworkPolicy' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.PatchHyperflexClusterReplicationNetworkPolicy(context.Background(), moid).HyperflexClusterReplicationNetworkPolicy(hyperflexClusterReplicationNetworkPolicy).IfMatch(ifMatch).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexClusterReplicationNetworkPolicy``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchHyperflexClusterReplicationNetworkPolicy`: HyperflexClusterReplicationNetworkPolicy
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.PatchHyperflexClusterReplicationNetworkPolicy`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchHyperflexClusterReplicationNetworkPolicyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **hyperflexClusterReplicationNetworkPolicy** | [**HyperflexClusterReplicationNetworkPolicy**](HyperflexClusterReplicationNetworkPolicy.md) | The &#39;hyperflex.ClusterReplicationNetworkPolicy&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**HyperflexClusterReplicationNetworkPolicy**](hyperflex.ClusterReplicationNetworkPolicy.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## PatchHyperflexClusterReplicationNetworkPolicyDeployment
+
+> HyperflexClusterReplicationNetworkPolicyDeployment PatchHyperflexClusterReplicationNetworkPolicyDeployment(ctx, moid).HyperflexClusterReplicationNetworkPolicyDeployment(hyperflexClusterReplicationNetworkPolicyDeployment).IfMatch(ifMatch).Execute()
+
+Update a 'hyperflex.ClusterReplicationNetworkPolicyDeployment' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    hyperflexClusterReplicationNetworkPolicyDeployment := *openapiclient.NewHyperflexClusterReplicationNetworkPolicyDeployment("ClassId_example", "ObjectType_example") // HyperflexClusterReplicationNetworkPolicyDeployment | The 'hyperflex.ClusterReplicationNetworkPolicyDeployment' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.PatchHyperflexClusterReplicationNetworkPolicyDeployment(context.Background(), moid).HyperflexClusterReplicationNetworkPolicyDeployment(hyperflexClusterReplicationNetworkPolicyDeployment).IfMatch(ifMatch).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.PatchHyperflexClusterReplicationNetworkPolicyDeployment``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `PatchHyperflexClusterReplicationNetworkPolicyDeployment`: HyperflexClusterReplicationNetworkPolicyDeployment
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.PatchHyperflexClusterReplicationNetworkPolicyDeployment`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiPatchHyperflexClusterReplicationNetworkPolicyDeploymentRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **hyperflexClusterReplicationNetworkPolicyDeployment** | [**HyperflexClusterReplicationNetworkPolicyDeployment**](HyperflexClusterReplicationNetworkPolicyDeployment.md) | The &#39;hyperflex.ClusterReplicationNetworkPolicyDeployment&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**HyperflexClusterReplicationNetworkPolicyDeployment**](hyperflex.ClusterReplicationNetworkPolicyDeployment.md)
 
 ### Authorization
 
@@ -12518,6 +14726,150 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## UpdateHyperflexClusterBackupPolicy
+
+> HyperflexClusterBackupPolicy UpdateHyperflexClusterBackupPolicy(ctx, moid).HyperflexClusterBackupPolicy(hyperflexClusterBackupPolicy).IfMatch(ifMatch).Execute()
+
+Update a 'hyperflex.ClusterBackupPolicy' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    hyperflexClusterBackupPolicy := *openapiclient.NewHyperflexClusterBackupPolicy("ClassId_example", "ObjectType_example") // HyperflexClusterBackupPolicy | The 'hyperflex.ClusterBackupPolicy' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.UpdateHyperflexClusterBackupPolicy(context.Background(), moid).HyperflexClusterBackupPolicy(hyperflexClusterBackupPolicy).IfMatch(ifMatch).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexClusterBackupPolicy``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateHyperflexClusterBackupPolicy`: HyperflexClusterBackupPolicy
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.UpdateHyperflexClusterBackupPolicy`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateHyperflexClusterBackupPolicyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **hyperflexClusterBackupPolicy** | [**HyperflexClusterBackupPolicy**](HyperflexClusterBackupPolicy.md) | The &#39;hyperflex.ClusterBackupPolicy&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**HyperflexClusterBackupPolicy**](hyperflex.ClusterBackupPolicy.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateHyperflexClusterBackupPolicyDeployment
+
+> HyperflexClusterBackupPolicyDeployment UpdateHyperflexClusterBackupPolicyDeployment(ctx, moid).HyperflexClusterBackupPolicyDeployment(hyperflexClusterBackupPolicyDeployment).IfMatch(ifMatch).Execute()
+
+Update a 'hyperflex.ClusterBackupPolicyDeployment' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    hyperflexClusterBackupPolicyDeployment := *openapiclient.NewHyperflexClusterBackupPolicyDeployment("ClassId_example", "ObjectType_example") // HyperflexClusterBackupPolicyDeployment | The 'hyperflex.ClusterBackupPolicyDeployment' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.UpdateHyperflexClusterBackupPolicyDeployment(context.Background(), moid).HyperflexClusterBackupPolicyDeployment(hyperflexClusterBackupPolicyDeployment).IfMatch(ifMatch).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexClusterBackupPolicyDeployment``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateHyperflexClusterBackupPolicyDeployment`: HyperflexClusterBackupPolicyDeployment
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.UpdateHyperflexClusterBackupPolicyDeployment`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateHyperflexClusterBackupPolicyDeploymentRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **hyperflexClusterBackupPolicyDeployment** | [**HyperflexClusterBackupPolicyDeployment**](HyperflexClusterBackupPolicyDeployment.md) | The &#39;hyperflex.ClusterBackupPolicyDeployment&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**HyperflexClusterBackupPolicyDeployment**](hyperflex.ClusterBackupPolicyDeployment.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateHyperflexClusterNetworkPolicy
 
 > HyperflexClusterNetworkPolicy UpdateHyperflexClusterNetworkPolicy(ctx, moid).HyperflexClusterNetworkPolicy(hyperflexClusterNetworkPolicy).IfMatch(ifMatch).Execute()
@@ -12647,6 +14999,150 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**HyperflexClusterProfile**](hyperflex.ClusterProfile.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateHyperflexClusterReplicationNetworkPolicy
+
+> HyperflexClusterReplicationNetworkPolicy UpdateHyperflexClusterReplicationNetworkPolicy(ctx, moid).HyperflexClusterReplicationNetworkPolicy(hyperflexClusterReplicationNetworkPolicy).IfMatch(ifMatch).Execute()
+
+Update a 'hyperflex.ClusterReplicationNetworkPolicy' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    hyperflexClusterReplicationNetworkPolicy := *openapiclient.NewHyperflexClusterReplicationNetworkPolicy("ClassId_example", "ObjectType_example") // HyperflexClusterReplicationNetworkPolicy | The 'hyperflex.ClusterReplicationNetworkPolicy' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.UpdateHyperflexClusterReplicationNetworkPolicy(context.Background(), moid).HyperflexClusterReplicationNetworkPolicy(hyperflexClusterReplicationNetworkPolicy).IfMatch(ifMatch).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexClusterReplicationNetworkPolicy``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateHyperflexClusterReplicationNetworkPolicy`: HyperflexClusterReplicationNetworkPolicy
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.UpdateHyperflexClusterReplicationNetworkPolicy`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateHyperflexClusterReplicationNetworkPolicyRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **hyperflexClusterReplicationNetworkPolicy** | [**HyperflexClusterReplicationNetworkPolicy**](HyperflexClusterReplicationNetworkPolicy.md) | The &#39;hyperflex.ClusterReplicationNetworkPolicy&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**HyperflexClusterReplicationNetworkPolicy**](hyperflex.ClusterReplicationNetworkPolicy.md)
+
+### Authorization
+
+[cookieAuth](../README.md#cookieAuth), [http_signature](../README.md#http_signature), [oAuth2](../README.md#oAuth2), [oAuth2](../README.md#oAuth2)
+
+### HTTP request headers
+
+- **Content-Type**: application/json, application/json-patch+json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateHyperflexClusterReplicationNetworkPolicyDeployment
+
+> HyperflexClusterReplicationNetworkPolicyDeployment UpdateHyperflexClusterReplicationNetworkPolicyDeployment(ctx, moid).HyperflexClusterReplicationNetworkPolicyDeployment(hyperflexClusterReplicationNetworkPolicyDeployment).IfMatch(ifMatch).Execute()
+
+Update a 'hyperflex.ClusterReplicationNetworkPolicyDeployment' resource.
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    moid := "moid_example" // string | The unique Moid identifier of a resource instance.
+    hyperflexClusterReplicationNetworkPolicyDeployment := *openapiclient.NewHyperflexClusterReplicationNetworkPolicyDeployment("ClassId_example", "ObjectType_example") // HyperflexClusterReplicationNetworkPolicyDeployment | The 'hyperflex.ClusterReplicationNetworkPolicyDeployment' resource to update.
+    ifMatch := "ifMatch_example" // string | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.HyperflexApi.UpdateHyperflexClusterReplicationNetworkPolicyDeployment(context.Background(), moid).HyperflexClusterReplicationNetworkPolicyDeployment(hyperflexClusterReplicationNetworkPolicyDeployment).IfMatch(ifMatch).Execute()
+    if err.Error() != "" {
+        fmt.Fprintf(os.Stderr, "Error when calling `HyperflexApi.UpdateHyperflexClusterReplicationNetworkPolicyDeployment``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateHyperflexClusterReplicationNetworkPolicyDeployment`: HyperflexClusterReplicationNetworkPolicyDeployment
+    fmt.Fprintf(os.Stdout, "Response from `HyperflexApi.UpdateHyperflexClusterReplicationNetworkPolicyDeployment`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**moid** | **string** | The unique Moid identifier of a resource instance. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateHyperflexClusterReplicationNetworkPolicyDeploymentRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **hyperflexClusterReplicationNetworkPolicyDeployment** | [**HyperflexClusterReplicationNetworkPolicyDeployment**](HyperflexClusterReplicationNetworkPolicyDeployment.md) | The &#39;hyperflex.ClusterReplicationNetworkPolicyDeployment&#39; resource to update. | 
+ **ifMatch** | **string** | For methods that apply server-side changes, and in particular for PUT, If-Match can be used to prevent the lost update problem. It can check if the modification of a resource that the user wants to upload will not override another change that has been done since the original resource was fetched. If the request cannot be fulfilled, the 412 (Precondition Failed) response is returned. When modifying a resource using POST or PUT, the If-Match header must be set to the value of the resource ModTime property after which no lost update problem should occur. For example, a client send a GET request to obtain a resource, which includes the ModTime property. The ModTime indicates the last time the resource was created or modified. The client then sends a POST or PUT request with the If-Match header set to the ModTime property of the resource as obtained in the GET request. | 
+
+### Return type
+
+[**HyperflexClusterReplicationNetworkPolicyDeployment**](hyperflex.ClusterReplicationNetworkPolicyDeployment.md)
 
 ### Authorization
 

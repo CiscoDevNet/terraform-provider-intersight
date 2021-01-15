@@ -80,7 +80,7 @@ This complex property has following sub-properties:
     + `remote_file`:(string)(Computed) Filename of the image in the remote share location. Example:ucs-c220m5-huu-3.1.2c.iso. 
     + `remote_ip`:(string)(Computed) CIFS Server Hostname or IP Address. For example:CIFS-server-hostname or 10.10.8.7. The remote share server should have network connectivity with the CIMC of the selected devices for a successful upgrade. 
     + `remote_share`:(string)(Computed) Directory where the image is stored. Example:share/subfolder. 
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
+  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `http_server`:(Array with Maximum of one item) - HTTP (for WWW) file server option for network share upgrade. 
 This complex property has following sub-properties:
     + `additional_properties`:
@@ -98,7 +98,7 @@ This complex property has following sub-properties:
     + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
     + `file_location`:(string) The location to the image file. The accepted format is IP-or-hostname/folder1/folder2/.../imageFile. 
     + `mount_options`:(string) Mount option as configured on the NFS Server. For example:nolock. 
-    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
     + `remote_file`:(string)(Computed) Filename of the image in the remote share location. For example:ucs-c220m5-huu-3.1.2c.iso. 
     + `remote_ip`:(string)(Computed) NFS Server Hostname or IP Address. For example:NFS-server-hostname or 10.10.8.7. The remote share server should have network connectivity with the CIMC of the selected devices for a successful upgrade. 
     + `remote_share`:(string)(Computed) Directory where the image is stored. For example:/share/subfolder. 
@@ -106,7 +106,7 @@ This complex property has following sub-properties:
   + `password`:(string) Password as configured on the file server. 
   + `upgradeoption`:(string) Option to control the upgrade operation. Some examples, 1) nw_upgrade_mount_only - mount the image from a file server and run the upgrade on the next server boot and 2) nw_upgrade_full - mount the image and immediately run the upgrade.* `nw_upgrade_full` - Network upgrade option for full upgrade.* `nw_upgrade_mount_only` - Network upgrade mount only. 
   + `username`:(string) Username as configured on the file server. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `release`:(Array with Maximum of one item) - A reference to a softwarerepositoryRelease resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `additional_properties`:

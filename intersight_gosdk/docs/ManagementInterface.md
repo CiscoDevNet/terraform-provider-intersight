@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **SwitchId** | Pointer to **string** | Switch Id connected to the interface. | [optional] 
 **UemConnStatus** | Pointer to **string** | The event channel connection status for the interface. | [optional] 
 **VirtualHostName** | Pointer to **string** | Virtual hostname configured for the interface in case of clustered environment. | [optional] 
+**VlanId** | Pointer to **int64** | VlanId configured for the interface. | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
 **ManagementController** | Pointer to [**ManagementControllerRelationship**](management.Controller.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
@@ -432,6 +433,31 @@ SetVirtualHostName sets VirtualHostName field to given value.
 `func (o *ManagementInterface) HasVirtualHostName() bool`
 
 HasVirtualHostName returns a boolean if a field has been set.
+
+### GetVlanId
+
+`func (o *ManagementInterface) GetVlanId() int64`
+
+GetVlanId returns the VlanId field if non-nil, zero value otherwise.
+
+### GetVlanIdOk
+
+`func (o *ManagementInterface) GetVlanIdOk() (*int64, bool)`
+
+GetVlanIdOk returns a tuple with the VlanId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVlanId
+
+`func (o *ManagementInterface) SetVlanId(v int64)`
+
+SetVlanId sets VlanId field to given value.
+
+### HasVlanId
+
+`func (o *ManagementInterface) HasVlanId() bool`
+
+HasVlanId returns a boolean if a field has been set.
 
 ### GetInventoryDeviceInfo
 

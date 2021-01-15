@@ -36,7 +36,7 @@ This complex property has following sub-properties:
 * `description`:(string) A detailed description about the error response handler. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name for the error response handler. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `parameters`:(Array)
 This complex property has following sub-properties:
   + `accept_single_value`:(bool) The flag that allows single values in content to be extracted as asingle element collection in case the parameter is of Collection type.This flag is applicable for parameters of type Collection only. 

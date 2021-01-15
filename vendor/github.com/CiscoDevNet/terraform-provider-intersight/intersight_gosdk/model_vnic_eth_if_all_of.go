@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-04T05:15:49Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-06T06:42:37Z.
  *
- * API version: 1.0.9-3144
+ * API version: 1.0.9-3181
  * Contact: intersight@cisco.com
  */
 
@@ -26,14 +26,18 @@ type VnicEthIfAllOf struct {
 	FailoverEnabled *bool `json:"FailoverEnabled,omitempty"`
 	// The MAC address that is assigned to the vNIC based on the MAC pool that has been assigned to the LAN Connectivity Policy.
 	MacAddress *string `json:"MacAddress,omitempty"`
+	// Type of allocation selected to assign a MAC address for the vnic. * `POOL` - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface. * `STATIC` - The user assigns a static mac/wwn address for the Virtual Interface.
+	MacAddressType *string `json:"MacAddressType,omitempty"`
 	// Name of the virtual ethernet interface.
 	Name *string `json:"Name,omitempty"`
 	// The order in which the virtual interface is brought up. The order assigned to an interface should be unique for all the Ethernet and Fibre-Channel interfaces on each PCI link on a VIC adapter. The maximum value of PCI order is limited by the number of virtual interfaces (Ethernet and Fibre-Channel) on each PCI link on a VIC adapter. All VIC adapters have a single PCI link except VIC 1385 which has two.
 	Order     *int64                        `json:"Order,omitempty"`
 	Placement NullableVnicPlacementSettings `json:"Placement,omitempty"`
 	// The Standby VIF Id is applicable for failover enabled vNICS. It should be the same as the channel number of the standby vethernet created on switch in order to set up the standby data path.
-	StandbyVifId  *int64                    `json:"StandbyVifId,omitempty"`
-	UsnicSettings NullableVnicUsnicSettings `json:"UsnicSettings,omitempty"`
+	StandbyVifId *int64 `json:"StandbyVifId,omitempty"`
+	// The MAC address must be in hexadecimal format xx:xx:xx:xx:xx:xx. To ensure uniqueness of MACs in the LAN fabric, you are strongly encouraged to use the following MAC prefix 00:25:B5:xx:xx:xx.
+	StaticMacAddress *string                   `json:"StaticMacAddress,omitempty"`
+	UsnicSettings    NullableVnicUsnicSettings `json:"UsnicSettings,omitempty"`
 	// The Vif Id should be same as the channel number of the vethernet created on switch in order to set up the data path. The property is applicable only for FI attached servers where a vethernet is created on the switch for every vNIC.
 	VifId                         *int64                                     `json:"VifId,omitempty"`
 	VmqSettings                   NullableVnicVmqSettings                    `json:"VmqSettings,omitempty"`
@@ -65,6 +69,8 @@ func NewVnicEthIfAllOf(classId string, objectType string) *VnicEthIfAllOf {
 	this.ObjectType = objectType
 	var failoverEnabled bool = false
 	this.FailoverEnabled = &failoverEnabled
+	var macAddressType string = "POOL"
+	this.MacAddressType = &macAddressType
 	return &this
 }
 
@@ -79,6 +85,8 @@ func NewVnicEthIfAllOfWithDefaults() *VnicEthIfAllOf {
 	this.ObjectType = objectType
 	var failoverEnabled bool = false
 	this.FailoverEnabled = &failoverEnabled
+	var macAddressType string = "POOL"
+	this.MacAddressType = &macAddressType
 	return &this
 }
 
@@ -237,6 +245,38 @@ func (o *VnicEthIfAllOf) SetMacAddress(v string) {
 	o.MacAddress = &v
 }
 
+// GetMacAddressType returns the MacAddressType field value if set, zero value otherwise.
+func (o *VnicEthIfAllOf) GetMacAddressType() string {
+	if o == nil || o.MacAddressType == nil {
+		var ret string
+		return ret
+	}
+	return *o.MacAddressType
+}
+
+// GetMacAddressTypeOk returns a tuple with the MacAddressType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicEthIfAllOf) GetMacAddressTypeOk() (*string, bool) {
+	if o == nil || o.MacAddressType == nil {
+		return nil, false
+	}
+	return o.MacAddressType, true
+}
+
+// HasMacAddressType returns a boolean if a field has been set.
+func (o *VnicEthIfAllOf) HasMacAddressType() bool {
+	if o != nil && o.MacAddressType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMacAddressType gets a reference to the given string and assigns it to the MacAddressType field.
+func (o *VnicEthIfAllOf) SetMacAddressType(v string) {
+	o.MacAddressType = &v
+}
+
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *VnicEthIfAllOf) GetName() string {
 	if o == nil || o.Name == nil {
@@ -374,6 +414,38 @@ func (o *VnicEthIfAllOf) HasStandbyVifId() bool {
 // SetStandbyVifId gets a reference to the given int64 and assigns it to the StandbyVifId field.
 func (o *VnicEthIfAllOf) SetStandbyVifId(v int64) {
 	o.StandbyVifId = &v
+}
+
+// GetStaticMacAddress returns the StaticMacAddress field value if set, zero value otherwise.
+func (o *VnicEthIfAllOf) GetStaticMacAddress() string {
+	if o == nil || o.StaticMacAddress == nil {
+		var ret string
+		return ret
+	}
+	return *o.StaticMacAddress
+}
+
+// GetStaticMacAddressOk returns a tuple with the StaticMacAddress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicEthIfAllOf) GetStaticMacAddressOk() (*string, bool) {
+	if o == nil || o.StaticMacAddress == nil {
+		return nil, false
+	}
+	return o.StaticMacAddress, true
+}
+
+// HasStaticMacAddress returns a boolean if a field has been set.
+func (o *VnicEthIfAllOf) HasStaticMacAddress() bool {
+	if o != nil && o.StaticMacAddress != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStaticMacAddress gets a reference to the given string and assigns it to the StaticMacAddress field.
+func (o *VnicEthIfAllOf) SetStaticMacAddress(v string) {
+	o.StaticMacAddress = &v
 }
 
 // GetUsnicSettings returns the UsnicSettings field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -865,6 +937,9 @@ func (o VnicEthIfAllOf) MarshalJSON() ([]byte, error) {
 	if o.MacAddress != nil {
 		toSerialize["MacAddress"] = o.MacAddress
 	}
+	if o.MacAddressType != nil {
+		toSerialize["MacAddressType"] = o.MacAddressType
+	}
 	if o.Name != nil {
 		toSerialize["Name"] = o.Name
 	}
@@ -876,6 +951,9 @@ func (o VnicEthIfAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.StandbyVifId != nil {
 		toSerialize["StandbyVifId"] = o.StandbyVifId
+	}
+	if o.StaticMacAddress != nil {
+		toSerialize["StaticMacAddress"] = o.StaticMacAddress
 	}
 	if o.UsnicSettings.IsSet() {
 		toSerialize["UsnicSettings"] = o.UsnicSettings.Get()
@@ -942,10 +1020,12 @@ func (o *VnicEthIfAllOf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Cdn")
 		delete(additionalProperties, "FailoverEnabled")
 		delete(additionalProperties, "MacAddress")
+		delete(additionalProperties, "MacAddressType")
 		delete(additionalProperties, "Name")
 		delete(additionalProperties, "Order")
 		delete(additionalProperties, "Placement")
 		delete(additionalProperties, "StandbyVifId")
+		delete(additionalProperties, "StaticMacAddress")
 		delete(additionalProperties, "UsnicSettings")
 		delete(additionalProperties, "VifId")
 		delete(additionalProperties, "VmqSettings")

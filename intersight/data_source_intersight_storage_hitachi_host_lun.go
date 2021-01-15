@@ -60,7 +60,7 @@ func dataSourceStorageHitachiHostLun() *schema.Resource {
 				},
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -298,8 +298,12 @@ func dataSourceStorageHitachiHostLunRead(c context.Context, d *schema.ResourceDa
 		return diag.Errorf("error occurred while unmarshalling response to StorageHitachiHostLun list: %s", err.Error())
 	}
 	result := s.GetResults()
-	if result == nil {
-		return diag.Errorf("your query for StorageHitachiHostLun did not return results. Please change your search criteria and try again")
+	length := len(result)
+	if length == 0 {
+		return diag.Errorf("your query for StorageHitachiHostLun data source did not return results. Please change your search criteria and try again")
+	}
+	if length > 1 {
+		return diag.Errorf("your query for StorageHitachiHostLun data source returned more than one result. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:

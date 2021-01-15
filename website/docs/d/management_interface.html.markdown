@@ -28,3 +28,4 @@ The following arguments can be used to get data of already created objects in In
 * `switch_id`:(string) Switch Id connected to the interface. 
 * `uem_conn_status`:(string) The event channel connection status for the interface. 
 * `virtual_host_name`:(string) Virtual hostname configured for the interface in case of clustered environment. 
+* `vlan_id`:(int) VlanId configured for the interface. 

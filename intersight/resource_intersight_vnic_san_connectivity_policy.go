@@ -88,7 +88,7 @@ func resourceVnicSanConnectivityPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -181,6 +181,11 @@ func resourceVnicSanConnectivityPolicy() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 			},
+			"static_wwnn_address": {
+				Description: "The WWNN address for the server node must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx.\nAllowed ranges are 20:00:00:00:00:00:00:00 to 20:FF:FF:FF:FF:FF:FF:FF or from 50:00:00:00:00:00:00:00 to 5F:FF:FF:FF:FF:FF:FF:FF.\nTo ensure uniqueness of WWN's in the SAN fabric, you are strongly encouraged to use the WWN prefix - 20:00:00:25:B5:xx:xx:xx.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"tags": {
 				Type:     schema.TypeList,
 				Optional: true,
@@ -209,6 +214,12 @@ func resourceVnicSanConnectivityPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Default:     "Standalone",
+			},
+			"wwnn_address_type": {
+				Description: "Type of allocation selected to assign a WWNN address for the server node.\n* `POOL` - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface.\n* `STATIC` - The user assigns a static mac/wwn address for the Virtual Interface.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "POOL",
 			},
 			"wwnn_pool": {
 				Description: "A reference to a fcpoolPool resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -420,6 +431,11 @@ func resourceVnicSanConnectivityPolicyCreate(c context.Context, d *schema.Resour
 		}
 	}
 
+	if v, ok := d.GetOk("static_wwnn_address"); ok {
+		x := (v.(string))
+		o.SetStaticWwnnAddress(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -458,6 +474,11 @@ func resourceVnicSanConnectivityPolicyCreate(c context.Context, d *schema.Resour
 	if v, ok := d.GetOk("target_platform"); ok {
 		x := (v.(string))
 		o.SetTargetPlatform(x)
+	}
+
+	if v, ok := d.GetOk("wwnn_address_type"); ok {
+		x := (v.(string))
+		o.SetWwnnAddressType(x)
 	}
 
 	if v, ok := d.GetOk("wwnn_pool"); ok {
@@ -586,12 +607,20 @@ func resourceVnicSanConnectivityPolicyRead(c context.Context, d *schema.Resource
 		return diag.Errorf("error occurred while setting property Profiles in VnicSanConnectivityPolicy object: %s", err.Error())
 	}
 
+	if err := d.Set("static_wwnn_address", (s.GetStaticWwnnAddress())); err != nil {
+		return diag.Errorf("error occurred while setting property StaticWwnnAddress in VnicSanConnectivityPolicy object: %s", err.Error())
+	}
+
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in VnicSanConnectivityPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("target_platform", (s.GetTargetPlatform())); err != nil {
 		return diag.Errorf("error occurred while setting property TargetPlatform in VnicSanConnectivityPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("wwnn_address_type", (s.GetWwnnAddressType())); err != nil {
+		return diag.Errorf("error occurred while setting property WwnnAddressType in VnicSanConnectivityPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("wwnn_pool", flattenMapFcpoolPoolRelationship(s.GetWwnnPool(), d)); err != nil {
@@ -776,6 +805,12 @@ func resourceVnicSanConnectivityPolicyUpdate(c context.Context, d *schema.Resour
 		}
 	}
 
+	if d.HasChange("static_wwnn_address") {
+		v := d.Get("static_wwnn_address")
+		x := (v.(string))
+		o.SetStaticWwnnAddress(x)
+	}
+
 	if d.HasChange("tags") {
 		v := d.Get("tags")
 		x := make([]models.MoTag, 0)
@@ -816,6 +851,12 @@ func resourceVnicSanConnectivityPolicyUpdate(c context.Context, d *schema.Resour
 		v := d.Get("target_platform")
 		x := (v.(string))
 		o.SetTargetPlatform(x)
+	}
+
+	if d.HasChange("wwnn_address_type") {
+		v := d.Get("wwnn_address_type")
+		x := (v.(string))
+		o.SetWwnnAddressType(x)
 	}
 
 	if d.HasChange("wwnn_pool") {
