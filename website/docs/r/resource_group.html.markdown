@@ -23,7 +23,7 @@ This complex property has following sub-properties:
 * `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) The name of this resource group. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `organizations`:(Array) An array of relationships to organizationOrganization resources. 
 This complex property has following sub-properties:
   + `additional_properties`:

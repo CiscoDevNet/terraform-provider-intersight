@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-04T05:15:49Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-06T06:42:37Z.
  *
- * API version: 1.0.9-3144
+ * API version: 1.0.9-3181
  * Contact: intersight@cisco.com
  */
 
@@ -31,12 +31,16 @@ type VnicFcIf struct {
 	// Enables retention of LUN ID associations in memory until they are manually cleared.
 	PersistentBindings *bool                         `json:"PersistentBindings,omitempty"`
 	Placement          NullableVnicPlacementSettings `json:"Placement,omitempty"`
+	// The WWPN address must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx. Allowed ranges are 20:00:00:00:00:00:00:00 to 20:FF:FF:FF:FF:FF:FF:FF or from 50:00:00:00:00:00:00:00 to 5F:FF:FF:FF:FF:FF:FF:FF. To ensure uniqueness of WWN's in the SAN fabric, you are strongly encouraged to use the WWN prefix - 20:00:00:25:B5:xx:xx:xx.
+	StaticWwpnAddress *string `json:"StaticWwpnAddress,omitempty"`
 	// VHBA Type configuration for SAN Connectivity Policy. This configuration is supported only on Cisco VIC 14XX series and higher series of adapters. * `fc-initiator` - The default value set for vHBA Type Configuration. Fc-initiator specifies vHBA as a consumer of storage. Enables SCSI commands to transfer data and status information between host and target storage systems. * `fc-nvme-initiator` - Fc-nvme-initiator specifies vHBA as a consumer of storage. Enables NVMe-based message commands to transfer data and status information between host and target storage systems. * `fc-nvme-target` - Fc-nvme-target specifies vHBA as a provider of storage volumes to initiators. Enables NVMe-based message commands to transfer data and status information between host and target storage systems. Currently tech-preview, only enabled with an asynchronous driver. * `fc-target` - Fc-target specifies vHBA as a provider of storage volumes to initiators. Enables SCSI commands to transfer data and status information between host and target storage systems. fc-target is enabled only with an asynchronous driver.
 	Type *string `json:"Type,omitempty"`
 	// This should be the same as the channel number of the vfc created on switch in order to set up the data path. The property is applicable only for FI attached servers where a vfc is created on the switch for every vHBA.
 	VifId *int64 `json:"VifId,omitempty"`
 	// The WWPN address that is assigned to the vHBA based on the wwn pool that has been assigned to the SAN Connectivity Policy.
-	Wwpn                  *string                                  `json:"Wwpn,omitempty"`
+	Wwpn *string `json:"Wwpn,omitempty"`
+	// Type of allocation selected to assign a WWPN address to the vhba. * `POOL` - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface. * `STATIC` - The user assigns a static mac/wwn address for the Virtual Interface.
+	WwpnAddressType       *string                                  `json:"WwpnAddressType,omitempty"`
 	FcAdapterPolicy       *VnicFcAdapterPolicyRelationship         `json:"FcAdapterPolicy,omitempty"`
 	FcNetworkPolicy       *VnicFcNetworkPolicyRelationship         `json:"FcNetworkPolicy,omitempty"`
 	FcQosPolicy           *VnicFcQosPolicyRelationship             `json:"FcQosPolicy,omitempty"`
@@ -62,6 +66,8 @@ func NewVnicFcIf(classId string, objectType string) *VnicFcIf {
 	this.ObjectType = objectType
 	var type_ string = "fc-initiator"
 	this.Type = &type_
+	var wwpnAddressType string = "POOL"
+	this.WwpnAddressType = &wwpnAddressType
 	return &this
 }
 
@@ -76,6 +82,8 @@ func NewVnicFcIfWithDefaults() *VnicFcIf {
 	this.ObjectType = objectType
 	var type_ string = "fc-initiator"
 	this.Type = &type_
+	var wwpnAddressType string = "POOL"
+	this.WwpnAddressType = &wwpnAddressType
 	return &this
 }
 
@@ -266,6 +274,38 @@ func (o *VnicFcIf) UnsetPlacement() {
 	o.Placement.Unset()
 }
 
+// GetStaticWwpnAddress returns the StaticWwpnAddress field value if set, zero value otherwise.
+func (o *VnicFcIf) GetStaticWwpnAddress() string {
+	if o == nil || o.StaticWwpnAddress == nil {
+		var ret string
+		return ret
+	}
+	return *o.StaticWwpnAddress
+}
+
+// GetStaticWwpnAddressOk returns a tuple with the StaticWwpnAddress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicFcIf) GetStaticWwpnAddressOk() (*string, bool) {
+	if o == nil || o.StaticWwpnAddress == nil {
+		return nil, false
+	}
+	return o.StaticWwpnAddress, true
+}
+
+// HasStaticWwpnAddress returns a boolean if a field has been set.
+func (o *VnicFcIf) HasStaticWwpnAddress() bool {
+	if o != nil && o.StaticWwpnAddress != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStaticWwpnAddress gets a reference to the given string and assigns it to the StaticWwpnAddress field.
+func (o *VnicFcIf) SetStaticWwpnAddress(v string) {
+	o.StaticWwpnAddress = &v
+}
+
 // GetType returns the Type field value if set, zero value otherwise.
 func (o *VnicFcIf) GetType() string {
 	if o == nil || o.Type == nil {
@@ -360,6 +400,38 @@ func (o *VnicFcIf) HasWwpn() bool {
 // SetWwpn gets a reference to the given string and assigns it to the Wwpn field.
 func (o *VnicFcIf) SetWwpn(v string) {
 	o.Wwpn = &v
+}
+
+// GetWwpnAddressType returns the WwpnAddressType field value if set, zero value otherwise.
+func (o *VnicFcIf) GetWwpnAddressType() string {
+	if o == nil || o.WwpnAddressType == nil {
+		var ret string
+		return ret
+	}
+	return *o.WwpnAddressType
+}
+
+// GetWwpnAddressTypeOk returns a tuple with the WwpnAddressType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VnicFcIf) GetWwpnAddressTypeOk() (*string, bool) {
+	if o == nil || o.WwpnAddressType == nil {
+		return nil, false
+	}
+	return o.WwpnAddressType, true
+}
+
+// HasWwpnAddressType returns a boolean if a field has been set.
+func (o *VnicFcIf) HasWwpnAddressType() bool {
+	if o != nil && o.WwpnAddressType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetWwpnAddressType gets a reference to the given string and assigns it to the WwpnAddressType field.
+func (o *VnicFcIf) SetWwpnAddressType(v string) {
+	o.WwpnAddressType = &v
 }
 
 // GetFcAdapterPolicy returns the FcAdapterPolicy field value if set, zero value otherwise.
@@ -679,6 +751,9 @@ func (o VnicFcIf) MarshalJSON() ([]byte, error) {
 	if o.Placement.IsSet() {
 		toSerialize["Placement"] = o.Placement.Get()
 	}
+	if o.StaticWwpnAddress != nil {
+		toSerialize["StaticWwpnAddress"] = o.StaticWwpnAddress
+	}
 	if o.Type != nil {
 		toSerialize["Type"] = o.Type
 	}
@@ -687,6 +762,9 @@ func (o VnicFcIf) MarshalJSON() ([]byte, error) {
 	}
 	if o.Wwpn != nil {
 		toSerialize["Wwpn"] = o.Wwpn
+	}
+	if o.WwpnAddressType != nil {
+		toSerialize["WwpnAddressType"] = o.WwpnAddressType
 	}
 	if o.FcAdapterPolicy != nil {
 		toSerialize["FcAdapterPolicy"] = o.FcAdapterPolicy
@@ -736,12 +814,16 @@ func (o *VnicFcIf) UnmarshalJSON(bytes []byte) (err error) {
 		// Enables retention of LUN ID associations in memory until they are manually cleared.
 		PersistentBindings *bool                         `json:"PersistentBindings,omitempty"`
 		Placement          NullableVnicPlacementSettings `json:"Placement,omitempty"`
+		// The WWPN address must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx. Allowed ranges are 20:00:00:00:00:00:00:00 to 20:FF:FF:FF:FF:FF:FF:FF or from 50:00:00:00:00:00:00:00 to 5F:FF:FF:FF:FF:FF:FF:FF. To ensure uniqueness of WWN's in the SAN fabric, you are strongly encouraged to use the WWN prefix - 20:00:00:25:B5:xx:xx:xx.
+		StaticWwpnAddress *string `json:"StaticWwpnAddress,omitempty"`
 		// VHBA Type configuration for SAN Connectivity Policy. This configuration is supported only on Cisco VIC 14XX series and higher series of adapters. * `fc-initiator` - The default value set for vHBA Type Configuration. Fc-initiator specifies vHBA as a consumer of storage. Enables SCSI commands to transfer data and status information between host and target storage systems. * `fc-nvme-initiator` - Fc-nvme-initiator specifies vHBA as a consumer of storage. Enables NVMe-based message commands to transfer data and status information between host and target storage systems. * `fc-nvme-target` - Fc-nvme-target specifies vHBA as a provider of storage volumes to initiators. Enables NVMe-based message commands to transfer data and status information between host and target storage systems. Currently tech-preview, only enabled with an asynchronous driver. * `fc-target` - Fc-target specifies vHBA as a provider of storage volumes to initiators. Enables SCSI commands to transfer data and status information between host and target storage systems. fc-target is enabled only with an asynchronous driver.
 		Type *string `json:"Type,omitempty"`
 		// This should be the same as the channel number of the vfc created on switch in order to set up the data path. The property is applicable only for FI attached servers where a vfc is created on the switch for every vHBA.
 		VifId *int64 `json:"VifId,omitempty"`
 		// The WWPN address that is assigned to the vHBA based on the wwn pool that has been assigned to the SAN Connectivity Policy.
-		Wwpn                  *string                                  `json:"Wwpn,omitempty"`
+		Wwpn *string `json:"Wwpn,omitempty"`
+		// Type of allocation selected to assign a WWPN address to the vhba. * `POOL` - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface. * `STATIC` - The user assigns a static mac/wwn address for the Virtual Interface.
+		WwpnAddressType       *string                                  `json:"WwpnAddressType,omitempty"`
 		FcAdapterPolicy       *VnicFcAdapterPolicyRelationship         `json:"FcAdapterPolicy,omitempty"`
 		FcNetworkPolicy       *VnicFcNetworkPolicyRelationship         `json:"FcNetworkPolicy,omitempty"`
 		FcQosPolicy           *VnicFcQosPolicyRelationship             `json:"FcQosPolicy,omitempty"`
@@ -765,9 +847,11 @@ func (o *VnicFcIf) UnmarshalJSON(bytes []byte) (err error) {
 		varVnicFcIf.Order = varVnicFcIfWithoutEmbeddedStruct.Order
 		varVnicFcIf.PersistentBindings = varVnicFcIfWithoutEmbeddedStruct.PersistentBindings
 		varVnicFcIf.Placement = varVnicFcIfWithoutEmbeddedStruct.Placement
+		varVnicFcIf.StaticWwpnAddress = varVnicFcIfWithoutEmbeddedStruct.StaticWwpnAddress
 		varVnicFcIf.Type = varVnicFcIfWithoutEmbeddedStruct.Type
 		varVnicFcIf.VifId = varVnicFcIfWithoutEmbeddedStruct.VifId
 		varVnicFcIf.Wwpn = varVnicFcIfWithoutEmbeddedStruct.Wwpn
+		varVnicFcIf.WwpnAddressType = varVnicFcIfWithoutEmbeddedStruct.WwpnAddressType
 		varVnicFcIf.FcAdapterPolicy = varVnicFcIfWithoutEmbeddedStruct.FcAdapterPolicy
 		varVnicFcIf.FcNetworkPolicy = varVnicFcIfWithoutEmbeddedStruct.FcNetworkPolicy
 		varVnicFcIf.FcQosPolicy = varVnicFcIfWithoutEmbeddedStruct.FcQosPolicy
@@ -800,9 +884,11 @@ func (o *VnicFcIf) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Order")
 		delete(additionalProperties, "PersistentBindings")
 		delete(additionalProperties, "Placement")
+		delete(additionalProperties, "StaticWwpnAddress")
 		delete(additionalProperties, "Type")
 		delete(additionalProperties, "VifId")
 		delete(additionalProperties, "Wwpn")
+		delete(additionalProperties, "WwpnAddressType")
 		delete(additionalProperties, "FcAdapterPolicy")
 		delete(additionalProperties, "FcNetworkPolicy")
 		delete(additionalProperties, "FcQosPolicy")

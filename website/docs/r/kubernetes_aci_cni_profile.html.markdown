@@ -13,7 +13,7 @@ The following arguments are supported:
 * `aaep_name`:(string) Name of ACI AAEP (Attachable Access Entity Profile) to be used for all Kubernetes clusters using this policy. 
 * `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `cluster_aci_allocations`:(Array)(Computed) An array of relationships to kubernetesAciCniTenantClusterAllocation resources. 
 This complex property has following sub-properties:
   + `additional_properties`:
@@ -44,7 +44,7 @@ This complex property has following sub-properties:
 * `node_vlan_range_end`:(int) Ending value of VLAN range used to assign Node VLAN Ids for each Kubernetes cluster using this policy. 
 * `node_vlan_range_start`:(int) Starting value of VLAN range used to assign Node VLAN Ids for each Kubernetes cluster using this policy. 
 * `number_of_kubernetes_clusters`:(int)(Computed) Number of k8s clusters currently using this ACI CNI profile. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `opflex_multicast_address_range`:(string) Range of IP Multicast addresses to be used by the Opflex protocol for Kubernetes clusters using this policy. 
 * `organization`:(Array with Maximum of one item) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:

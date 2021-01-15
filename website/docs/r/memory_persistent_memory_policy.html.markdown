@@ -12,7 +12,7 @@ The Persistent Memory policy defines the reusable Persistent Memory related conf
 The following arguments are supported:
 * `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `description`:(string) Description of the policy. 
 * `goals`:(Array)
 This complex property has following sub-properties:
@@ -40,13 +40,13 @@ This complex property has following sub-properties:
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `mode`:(string) Mode of this Namespace that is created or modified.* `raw` - The raw mode of Persistent Memory Namespace.* `block` - The block mode of Persistent Memory Namespace. 
   + `name`:(string) Name of this Namespace to be created on the server. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `socket_id`:(int) Socket ID of the region on which this Namespace has to be created or modified.* `1` - The first CPU socket in a server.* `2` - The second CPU socket in a server.* `3` - The third CPU socket in a server.* `4` - The fourth CPU socket in a server. 
   + `socket_memory_id`:(string) Socket Memory ID of the region on which this Namespace has to be created or modified.* `Not Applicable` - The socket memory ID is not applicable if app-direct persistent memory type is selected in the goal.* `2` - The second socket memory ID within a socket in a server.* `4` - The fourth socket memory ID within a socket in a server.* `6` - The sixth socket memory ID within a socket in a server.* `8` - The eighth socket memory ID within a socket in a server.* `10` - The tenth socket memory ID within a socket in a server.* `12` - The twelfth socket memory ID within a socket in a server. 
 * `management_mode`:(string) Management Mode of the policy. This can be either Configured from Intersight or Configured from Operating System.* `configured-from-intersight` - The Persistent Memory Modules are configured from Intersight thorugh Persistent Memory policy.* `configured-from-operating-system` - The Persistent Memory Modules are configured from operating system thorugh OS tools. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the concrete policy. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `organization`:(Array with Maximum of one item) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `additional_properties`:

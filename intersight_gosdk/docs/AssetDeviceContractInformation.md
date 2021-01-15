@@ -7,7 +7,8 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "asset.DeviceContractInformation"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "asset.DeviceContractInformation"]
 **Contract** | Pointer to [**NullableAssetContractInformation**](asset.ContractInformation.md) |  | [optional] 
-**ContractStatus** | Pointer to **string** | Calculated contract status that is derived based on the service line status and contract end date. It is different from serviceLineStatus property. serviceLineStatus gives us ACTIVE, OVERDUE, EXPIRED. These are transformed into Active, Expiring Soon and Not Covered. * &#x60;Not Covered&#x60; - The Cisco device does not have a valid support contract. * &#x60;Active&#x60; - The Cisco device is covered under a active support contract. * &#x60;Expiring Soon&#x60; - The contract for this Cisco device is going to expire in the next 30 days. | [optional] [readonly] [default to "Not Covered"]
+**ContractStatus** | Pointer to **string** | Calculated contract status that is derived based on the service line status and contract end date. It is different from serviceLineStatus property. serviceLineStatus gives us ACTIVE, OVERDUE, EXPIRED. These are transformed into Active, Expiring Soon and Not Covered. * &#x60;Unknown&#x60; - The device&#39;s contract status cannot be determined. * &#x60;Not Covered&#x60; - The Cisco device does not have a valid support contract. * &#x60;Active&#x60; - The Cisco device is covered under a active support contract. * &#x60;Expiring Soon&#x60; - The contract for this Cisco device is going to expire in the next 30 days. | [optional] [readonly] [default to "Unknown"]
+**ContractUpdatedTime** | Pointer to **time.Time** | Date and time indicating when the contract data is last fetched from Cisco&#39;s Contract API successfully. | [optional] [readonly] 
 **CoveredProductLineEndDate** | Pointer to **string** | End date of the covered product line. The coverage end date is fetched from Cisco SN2INFO API. | [optional] [readonly] 
 **DeviceId** | Pointer to **string** | Unique identifier of the Cisco device. This information is used to query Cisco APIx SN2INFO and CCWR databases. | [optional] [readonly] 
 **DeviceType** | Pointer to **string** | Type used to classify the device in Cisco Intersight. Currently supported values are Server and FabricInterconnect. This will be expanded to support more types in future. * &#x60;None&#x60; - A default value to catch cases where device type is not correctly detected. * &#x60;CiscoUcsServer&#x60; - A device of type server. It includes Cisco IMC and UCS Managed servers. * &#x60;CiscoUcsFI&#x60; - A device of type Fabric Interconnect. It includes the various types of Cisco Fabric Interconnects supported by Cisco Intersight. * &#x60;CiscoUcsChassis&#x60; - A device of type Chassis. It includes various UCS chassis supported by Cisco Intersight. * &#x60;CiscoNexusSwitch&#x60; - A device of type Nexus switch. It includes various Nexus switches supported by Cisco Intersight. | [optional] [readonly] [default to "None"]
@@ -150,6 +151,31 @@ SetContractStatus sets ContractStatus field to given value.
 `func (o *AssetDeviceContractInformation) HasContractStatus() bool`
 
 HasContractStatus returns a boolean if a field has been set.
+
+### GetContractUpdatedTime
+
+`func (o *AssetDeviceContractInformation) GetContractUpdatedTime() time.Time`
+
+GetContractUpdatedTime returns the ContractUpdatedTime field if non-nil, zero value otherwise.
+
+### GetContractUpdatedTimeOk
+
+`func (o *AssetDeviceContractInformation) GetContractUpdatedTimeOk() (*time.Time, bool)`
+
+GetContractUpdatedTimeOk returns a tuple with the ContractUpdatedTime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContractUpdatedTime
+
+`func (o *AssetDeviceContractInformation) SetContractUpdatedTime(v time.Time)`
+
+SetContractUpdatedTime sets ContractUpdatedTime field to given value.
+
+### HasContractUpdatedTime
+
+`func (o *AssetDeviceContractInformation) HasContractUpdatedTime() bool`
+
+HasContractUpdatedTime returns a boolean if a field has been set.
 
 ### GetCoveredProductLineEndDate
 

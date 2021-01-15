@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **Serial** | Pointer to **string** | The serial number for the Network Element. | [optional] [readonly] 
 **SourceObjectType** | Pointer to **string** | The source object type of this view MO. | [optional] [readonly] 
 **EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](equipment.Chassis.Relationship.md) |  | [optional] 
-**EquipmentFex** | Pointer to [**EquipmentFexRelationship**](equipment.Fex.Relationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
@@ -198,31 +197,6 @@ SetEquipmentChassis sets EquipmentChassis field to given value.
 `func (o *EquipmentDeviceSummary) HasEquipmentChassis() bool`
 
 HasEquipmentChassis returns a boolean if a field has been set.
-
-### GetEquipmentFex
-
-`func (o *EquipmentDeviceSummary) GetEquipmentFex() EquipmentFexRelationship`
-
-GetEquipmentFex returns the EquipmentFex field if non-nil, zero value otherwise.
-
-### GetEquipmentFexOk
-
-`func (o *EquipmentDeviceSummary) GetEquipmentFexOk() (*EquipmentFexRelationship, bool)`
-
-GetEquipmentFexOk returns a tuple with the EquipmentFex field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEquipmentFex
-
-`func (o *EquipmentDeviceSummary) SetEquipmentFex(v EquipmentFexRelationship)`
-
-SetEquipmentFex sets EquipmentFex field to given value.
-
-### HasEquipmentFex
-
-`func (o *EquipmentDeviceSummary) HasEquipmentFex() bool`
-
-HasEquipmentFex returns a boolean if a field has been set.
 
 ### GetInventoryDeviceInfo
 

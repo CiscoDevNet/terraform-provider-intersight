@@ -93,7 +93,7 @@ func dataSourceStorageFlexUtilVirtualDrive() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -312,8 +312,12 @@ func dataSourceStorageFlexUtilVirtualDriveRead(c context.Context, d *schema.Reso
 		return diag.Errorf("error occurred while unmarshalling response to StorageFlexUtilVirtualDrive list: %s", err.Error())
 	}
 	result := s.GetResults()
-	if result == nil {
-		return diag.Errorf("your query for StorageFlexUtilVirtualDrive did not return results. Please change your search criteria and try again")
+	length := len(result)
+	if length == 0 {
+		return diag.Errorf("your query for StorageFlexUtilVirtualDrive data source did not return results. Please change your search criteria and try again")
+	}
+	if length > 1 {
+		return diag.Errorf("your query for StorageFlexUtilVirtualDrive data source returned more than one result. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:

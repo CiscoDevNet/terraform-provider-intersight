@@ -44,7 +44,7 @@ This complex property has following sub-properties:
   + `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `base_task_type`:(string)(Computed) This field will hold the base task type like HttpBaseTask or RemoteAnsibleBaseTask. 
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
+  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `constraints`:(Array with Maximum of one item) -(Computed) This field will hold any constraints a concrete task definition will specify in order to limit the environment where the task can execute. 
 This complex property has following sub-properties:
     + `additional_properties`:

@@ -205,7 +205,7 @@ func resourceVnicFcIf() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -395,6 +395,11 @@ func resourceVnicFcIf() *schema.Resource {
 				ConfigMode: schema.SchemaConfigModeAttr,
 				Computed:   true,
 			},
+			"static_wwpn_address": {
+				Description: "The WWPN address must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx.\nAllowed ranges are 20:00:00:00:00:00:00:00 to 20:FF:FF:FF:FF:FF:FF:FF or from 50:00:00:00:00:00:00:00 to 5F:FF:FF:FF:FF:FF:FF:FF.\nTo ensure uniqueness of WWN's in the SAN fabric, you are strongly encouraged to use the WWN prefix - 20:00:00:25:B5:xx:xx:xx.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"tags": {
 				Type:     schema.TypeList,
 				Optional: true,
@@ -435,6 +440,12 @@ func resourceVnicFcIf() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
+			},
+			"wwpn_address_type": {
+				Description: "Type of allocation selected to assign a WWPN address to the vhba.\n* `POOL` - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface.\n* `STATIC` - The user assigns a static mac/wwn address for the Virtual Interface.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Default:     "POOL",
 			},
 			"wwpn_lease": {
 				Description: "A reference to a fcpoolLease resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -915,6 +926,11 @@ func resourceVnicFcIfCreate(c context.Context, d *schema.ResourceData, meta inte
 		}
 	}
 
+	if v, ok := d.GetOk("static_wwpn_address"); ok {
+		x := (v.(string))
+		o.SetStaticWwpnAddress(x)
+	}
+
 	if v, ok := d.GetOk("tags"); ok {
 		x := make([]models.MoTag, 0)
 		s := v.([]interface{})
@@ -963,6 +979,11 @@ func resourceVnicFcIfCreate(c context.Context, d *schema.ResourceData, meta inte
 	if v, ok := d.GetOk("wwpn"); ok {
 		x := (v.(string))
 		o.SetWwpn(x)
+	}
+
+	if v, ok := d.GetOk("wwpn_address_type"); ok {
+		x := (v.(string))
+		o.SetWwpnAddressType(x)
 	}
 
 	if v, ok := d.GetOk("wwpn_lease"); ok {
@@ -1154,6 +1175,10 @@ func resourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta interf
 		return diag.Errorf("error occurred while setting property SpVhbas in VnicFcIf object: %s", err.Error())
 	}
 
+	if err := d.Set("static_wwpn_address", (s.GetStaticWwpnAddress())); err != nil {
+		return diag.Errorf("error occurred while setting property StaticWwpnAddress in VnicFcIf object: %s", err.Error())
+	}
+
 	if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 		return diag.Errorf("error occurred while setting property Tags in VnicFcIf object: %s", err.Error())
 	}
@@ -1168,6 +1193,10 @@ func resourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta interf
 
 	if err := d.Set("wwpn", (s.GetWwpn())); err != nil {
 		return diag.Errorf("error occurred while setting property Wwpn in VnicFcIf object: %s", err.Error())
+	}
+
+	if err := d.Set("wwpn_address_type", (s.GetWwpnAddressType())); err != nil {
+		return diag.Errorf("error occurred while setting property WwpnAddressType in VnicFcIf object: %s", err.Error())
 	}
 
 	if err := d.Set("wwpn_lease", flattenMapFcpoolLeaseRelationship(s.GetWwpnLease(), d)); err != nil {
@@ -1589,6 +1618,12 @@ func resourceVnicFcIfUpdate(c context.Context, d *schema.ResourceData, meta inte
 		}
 	}
 
+	if d.HasChange("static_wwpn_address") {
+		v := d.Get("static_wwpn_address")
+		x := (v.(string))
+		o.SetStaticWwpnAddress(x)
+	}
+
 	if d.HasChange("tags") {
 		v := d.Get("tags")
 		x := make([]models.MoTag, 0)
@@ -1641,6 +1676,12 @@ func resourceVnicFcIfUpdate(c context.Context, d *schema.ResourceData, meta inte
 		v := d.Get("wwpn")
 		x := (v.(string))
 		o.SetWwpn(x)
+	}
+
+	if d.HasChange("wwpn_address_type") {
+		v := d.Get("wwpn_address_type")
+		x := (v.(string))
+		o.SetWwpnAddressType(x)
 	}
 
 	if d.HasChange("wwpn_lease") {

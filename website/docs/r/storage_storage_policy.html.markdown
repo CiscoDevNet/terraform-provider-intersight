@@ -62,7 +62,7 @@ This complex property has following sub-properties:
   + `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `boot_drive`:(bool) The flag enables the use of this virtual drive as a boot drive. 
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `disk_group_name`:(string)(Computed) Disk group policy that has the disk group in which this virtual drive needs to be created. 
   + `disk_group_policy`:(string) Disk group policy that has the disk group in which this virtual drive needs to be created. 
   + `drive_cache`:(string) Drive Cache property expect disk cache policy.* `Default` - Use platform default drive cache mode.* `NoChange` - Drive cache policy is unchanged.* `Enable` - Enables IO caching on the drive.* `Disable` - Disables IO caching on the drive. 

@@ -272,6 +272,11 @@ func dataSourceManagementInterface() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"vlan_id": {
+				Description: "VlanId configured for the interface.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
 		},
 	}
 }
@@ -362,6 +367,10 @@ func dataSourceManagementInterfaceRead(c context.Context, d *schema.ResourceData
 		x := (v.(string))
 		o.SetVirtualHostName(x)
 	}
+	if v, ok := d.GetOk("vlan_id"); ok {
+		x := int64(v.(int))
+		o.SetVlanId(x)
+	}
 
 	data, err := o.MarshalJSON()
 	if err != nil {
@@ -382,8 +391,12 @@ func dataSourceManagementInterfaceRead(c context.Context, d *schema.ResourceData
 		return diag.Errorf("error occurred while unmarshalling response to ManagementInterface list: %s", err.Error())
 	}
 	result := s.GetResults()
-	if result == nil {
-		return diag.Errorf("your query for ManagementInterface did not return results. Please change your search criteria and try again")
+	length := len(result)
+	if length == 0 {
+		return diag.Errorf("your query for ManagementInterface data source did not return results. Please change your search criteria and try again")
+	}
+	if length > 1 {
+		return diag.Errorf("your query for ManagementInterface data source returned more than one result. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -472,6 +485,9 @@ func dataSourceManagementInterfaceRead(c context.Context, d *schema.ResourceData
 			}
 			if err := d.Set("virtual_host_name", (s.GetVirtualHostName())); err != nil {
 				return diag.Errorf("error occurred while setting property VirtualHostName: %s", err.Error())
+			}
+			if err := d.Set("vlan_id", (s.GetVlanId())); err != nil {
+				return diag.Errorf("error occurred while setting property VlanId: %s", err.Error())
 			}
 			d.SetId(s.GetMoid())
 		}

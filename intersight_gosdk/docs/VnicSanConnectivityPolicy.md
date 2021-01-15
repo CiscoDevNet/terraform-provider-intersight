@@ -7,7 +7,9 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.SanConnectivityPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.SanConnectivityPolicy"]
 **PlacementMode** | Pointer to **string** | The mode used for placement of vNICs on network adapters. It can either be Auto or Custom. * &#x60;custom&#x60; - The placement of the vNICs / vHBAs on network adapters is manually chosen by the user. * &#x60;auto&#x60; - The placement of the vNICs / vHBAs on network adapters is automatically determined by the system. | [optional] [default to "custom"]
+**StaticWwnnAddress** | Pointer to **string** | The WWNN address for the server node must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx. Allowed ranges are 20:00:00:00:00:00:00:00 to 20:FF:FF:FF:FF:FF:FF:FF or from 50:00:00:00:00:00:00:00 to 5F:FF:FF:FF:FF:FF:FF:FF. To ensure uniqueness of WWN&#39;s in the SAN fabric, you are strongly encouraged to use the WWN prefix - 20:00:00:25:B5:xx:xx:xx. | [optional] 
 **TargetPlatform** | Pointer to **string** | The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight. * &#x60;Standalone&#x60; - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected. * &#x60;FIAttached&#x60; - Servers which are connected to a Fabric Interconnect that is managed by Intersight. | [optional] [default to "Standalone"]
+**WwnnAddressType** | Pointer to **string** | Type of allocation selected to assign a WWNN address for the server node. * &#x60;POOL&#x60; - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface. * &#x60;STATIC&#x60; - The user assigns a static mac/wwn address for the Virtual Interface. | [optional] [default to "POOL"]
 **FcIfs** | Pointer to [**[]VnicFcIfRelationship**](VnicFcIfRelationship.md) | An array of relationships to vnicFcIf resources. | [optional] 
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]PolicyAbstractConfigProfileRelationship**](PolicyAbstractConfigProfileRelationship.md) | An array of relationships to policyAbstractConfigProfile resources. | [optional] 
@@ -97,6 +99,31 @@ SetPlacementMode sets PlacementMode field to given value.
 
 HasPlacementMode returns a boolean if a field has been set.
 
+### GetStaticWwnnAddress
+
+`func (o *VnicSanConnectivityPolicy) GetStaticWwnnAddress() string`
+
+GetStaticWwnnAddress returns the StaticWwnnAddress field if non-nil, zero value otherwise.
+
+### GetStaticWwnnAddressOk
+
+`func (o *VnicSanConnectivityPolicy) GetStaticWwnnAddressOk() (*string, bool)`
+
+GetStaticWwnnAddressOk returns a tuple with the StaticWwnnAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStaticWwnnAddress
+
+`func (o *VnicSanConnectivityPolicy) SetStaticWwnnAddress(v string)`
+
+SetStaticWwnnAddress sets StaticWwnnAddress field to given value.
+
+### HasStaticWwnnAddress
+
+`func (o *VnicSanConnectivityPolicy) HasStaticWwnnAddress() bool`
+
+HasStaticWwnnAddress returns a boolean if a field has been set.
+
 ### GetTargetPlatform
 
 `func (o *VnicSanConnectivityPolicy) GetTargetPlatform() string`
@@ -121,6 +148,31 @@ SetTargetPlatform sets TargetPlatform field to given value.
 `func (o *VnicSanConnectivityPolicy) HasTargetPlatform() bool`
 
 HasTargetPlatform returns a boolean if a field has been set.
+
+### GetWwnnAddressType
+
+`func (o *VnicSanConnectivityPolicy) GetWwnnAddressType() string`
+
+GetWwnnAddressType returns the WwnnAddressType field if non-nil, zero value otherwise.
+
+### GetWwnnAddressTypeOk
+
+`func (o *VnicSanConnectivityPolicy) GetWwnnAddressTypeOk() (*string, bool)`
+
+GetWwnnAddressTypeOk returns a tuple with the WwnnAddressType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWwnnAddressType
+
+`func (o *VnicSanConnectivityPolicy) SetWwnnAddressType(v string)`
+
+SetWwnnAddressType sets WwnnAddressType field to given value.
+
+### HasWwnnAddressType
+
+`func (o *VnicSanConnectivityPolicy) HasWwnnAddressType() bool`
+
+HasWwnnAddressType returns a boolean if a field has been set.
 
 ### GetFcIfs
 

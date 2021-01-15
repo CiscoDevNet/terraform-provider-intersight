@@ -12,7 +12,7 @@ Enables creation of local users on endpoints.
 The following arguments are supported:
 * `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `description`:(string) Description of the policy. 
 * `end_point_user_roles`:(Array) An array of relationships to iamEndPointUserRole resources. 
 This complex property has following sub-properties:
@@ -43,7 +43,7 @@ This complex property has following sub-properties:
   + `force_send_password`:(bool) User password will always be sent to endpoint device. If the option is not selected, then user password will be sent to endpoint device for new users and if user password is changed for existing users. 
   + `grace_period`:(int) Time period until when you can use the existing password, after it expires. 
   + `notification_period`:(int) The duration after which the password will expire. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
   + `password_expiry_duration`:(int) Set time period for password expiration. Value should be greater than notification period and grace period. 
   + `password_history`:(int) Tracks password change history. Specifies in number of instances, that the new password was already used. 
 * `profiles`:(Array) An array of relationships to policyAbstractConfigProfile resources. 

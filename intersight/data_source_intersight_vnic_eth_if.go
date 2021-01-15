@@ -58,7 +58,7 @@ func dataSourceVnicEthIf() *schema.Resource {
 				Computed: true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -345,6 +345,11 @@ func dataSourceVnicEthIf() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"mac_address_type": {
+				Description: "Type of allocation selected to assign a MAC address for the vnic.\n* `POOL` - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface.\n* `STATIC` - The user assigns a static mac/wwn address for the Virtual Interface.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"mac_lease": {
 				Description: "A reference to a macpoolLease resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -435,7 +440,7 @@ func dataSourceVnicEthIf() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -468,7 +473,7 @@ func dataSourceVnicEthIf() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -574,6 +579,11 @@ func dataSourceVnicEthIf() *schema.Resource {
 				Type:        schema.TypeInt,
 				Optional:    true,
 				Computed:    true,
+			},
+			"static_mac_address": {
+				Description: "The MAC address must be in hexadecimal format xx:xx:xx:xx:xx:xx.\nTo ensure uniqueness of MACs in the LAN fabric, you are strongly encouraged to use the\nfollowing MAC prefix 00:25:B5:xx:xx:xx.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"tags": {
 				Type:     schema.TypeList,
@@ -689,7 +699,7 @@ func dataSourceVnicEthIf() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -725,6 +735,10 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 		x := (v.(string))
 		o.SetMacAddress(x)
 	}
+	if v, ok := d.GetOk("mac_address_type"); ok {
+		x := (v.(string))
+		o.SetMacAddressType(x)
+	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -744,6 +758,10 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 	if v, ok := d.GetOk("standby_vif_id"); ok {
 		x := int64(v.(int))
 		o.SetStandbyVifId(x)
+	}
+	if v, ok := d.GetOk("static_mac_address"); ok {
+		x := (v.(string))
+		o.SetStaticMacAddress(x)
 	}
 	if v, ok := d.GetOk("vif_id"); ok {
 		x := int64(v.(int))
@@ -769,8 +787,12 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 		return diag.Errorf("error occurred while unmarshalling response to VnicEthIf list: %s", err.Error())
 	}
 	result := s.GetResults()
-	if result == nil {
-		return diag.Errorf("your query for VnicEthIf did not return results. Please change your search criteria and try again")
+	length := len(result)
+	if length == 0 {
+		return diag.Errorf("your query for VnicEthIf data source did not return results. Please change your search criteria and try again")
+	}
+	if length > 1 {
+		return diag.Errorf("your query for VnicEthIf data source returned more than one result. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -825,6 +847,9 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 			if err := d.Set("mac_address", (s.GetMacAddress())); err != nil {
 				return diag.Errorf("error occurred while setting property MacAddress: %s", err.Error())
 			}
+			if err := d.Set("mac_address_type", (s.GetMacAddressType())); err != nil {
+				return diag.Errorf("error occurred while setting property MacAddressType: %s", err.Error())
+			}
 
 			if err := d.Set("mac_lease", flattenMapMacpoolLeaseRelationship(s.GetMacLease(), d)); err != nil {
 				return diag.Errorf("error occurred while setting property MacLease: %s", err.Error())
@@ -859,6 +884,9 @@ func dataSourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta int
 			}
 			if err := d.Set("standby_vif_id", (s.GetStandbyVifId())); err != nil {
 				return diag.Errorf("error occurred while setting property StandbyVifId: %s", err.Error())
+			}
+			if err := d.Set("static_mac_address", (s.GetStaticMacAddress())); err != nil {
+				return diag.Errorf("error occurred while setting property StaticMacAddress: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {

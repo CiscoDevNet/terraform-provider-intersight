@@ -335,8 +335,12 @@ func dataSourcePortSubGroupRead(c context.Context, d *schema.ResourceData, meta 
 		return diag.Errorf("error occurred while unmarshalling response to PortSubGroup list: %s", err.Error())
 	}
 	result := s.GetResults()
-	if result == nil {
-		return diag.Errorf("your query for PortSubGroup did not return results. Please change your search criteria and try again")
+	length := len(result)
+	if length == 0 {
+		return diag.Errorf("your query for PortSubGroup data source did not return results. Please change your search criteria and try again")
+	}
+	if length > 1 {
+		return diag.Errorf("your query for PortSubGroup data source returned more than one result. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:

@@ -245,8 +245,12 @@ func dataSourceApplianceDeviceClaimRead(c context.Context, d *schema.ResourceDat
 		return diag.Errorf("error occurred while unmarshalling response to ApplianceDeviceClaim list: %s", err.Error())
 	}
 	result := s.GetResults()
-	if result == nil {
-		return diag.Errorf("your query for ApplianceDeviceClaim did not return results. Please change your search criteria and try again")
+	length := len(result)
+	if length == 0 {
+		return diag.Errorf("your query for ApplianceDeviceClaim data source did not return results. Please change your search criteria and try again")
+	}
+	if length > 1 {
+		return diag.Errorf("your query for ApplianceDeviceClaim data source returned more than one result. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:

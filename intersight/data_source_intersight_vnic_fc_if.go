@@ -192,7 +192,7 @@ func dataSourceVnicFcIf() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -371,6 +371,11 @@ func dataSourceVnicFcIf() *schema.Resource {
 				},
 				Computed: true,
 			},
+			"static_wwpn_address": {
+				Description: "The WWPN address must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx.\nAllowed ranges are 20:00:00:00:00:00:00:00 to 20:FF:FF:FF:FF:FF:FF:FF or from 50:00:00:00:00:00:00:00 to 5F:FF:FF:FF:FF:FF:FF:FF.\nTo ensure uniqueness of WWN's in the SAN fabric, you are strongly encouraged to use the WWN prefix - 20:00:00:25:B5:xx:xx:xx.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"tags": {
 				Type:     schema.TypeList,
 				Optional: true,
@@ -410,6 +415,11 @@ func dataSourceVnicFcIf() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
+			},
+			"wwpn_address_type": {
+				Description: "Type of allocation selected to assign a WWPN address to the vhba.\n* `POOL` - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface.\n* `STATIC` - The user assigns a static mac/wwn address for the Virtual Interface.",
+				Type:        schema.TypeString,
+				Optional:    true,
 			},
 			"wwpn_lease": {
 				Description: "A reference to a fcpoolLease resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -523,6 +533,10 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 		x := (v.(bool))
 		o.SetPersistentBindings(x)
 	}
+	if v, ok := d.GetOk("static_wwpn_address"); ok {
+		x := (v.(string))
+		o.SetStaticWwpnAddress(x)
+	}
 	if v, ok := d.GetOk("type"); ok {
 		x := (v.(string))
 		o.SetType(x)
@@ -534,6 +548,10 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 	if v, ok := d.GetOk("wwpn"); ok {
 		x := (v.(string))
 		o.SetWwpn(x)
+	}
+	if v, ok := d.GetOk("wwpn_address_type"); ok {
+		x := (v.(string))
+		o.SetWwpnAddressType(x)
 	}
 
 	data, err := o.MarshalJSON()
@@ -555,8 +573,12 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 		return diag.Errorf("error occurred while unmarshalling response to VnicFcIf list: %s", err.Error())
 	}
 	result := s.GetResults()
-	if result == nil {
-		return diag.Errorf("your query for VnicFcIf did not return results. Please change your search criteria and try again")
+	length := len(result)
+	if length == 0 {
+		return diag.Errorf("your query for VnicFcIf data source did not return results. Please change your search criteria and try again")
+	}
+	if length > 1 {
+		return diag.Errorf("your query for VnicFcIf data source returned more than one result. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -620,6 +642,9 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 			if err := d.Set("sp_vhbas", flattenListVnicFcIfRelationship(s.GetSpVhbas(), d)); err != nil {
 				return diag.Errorf("error occurred while setting property SpVhbas: %s", err.Error())
 			}
+			if err := d.Set("static_wwpn_address", (s.GetStaticWwpnAddress())); err != nil {
+				return diag.Errorf("error occurred while setting property StaticWwpnAddress: %s", err.Error())
+			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
@@ -632,6 +657,9 @@ func dataSourceVnicFcIfRead(c context.Context, d *schema.ResourceData, meta inte
 			}
 			if err := d.Set("wwpn", (s.GetWwpn())); err != nil {
 				return diag.Errorf("error occurred while setting property Wwpn: %s", err.Error())
+			}
+			if err := d.Set("wwpn_address_type", (s.GetWwpnAddressType())); err != nil {
+				return diag.Errorf("error occurred while setting property WwpnAddressType: %s", err.Error())
 			}
 
 			if err := d.Set("wwpn_lease", flattenMapFcpoolLeaseRelationship(s.GetWwpnLease(), d)); err != nil {

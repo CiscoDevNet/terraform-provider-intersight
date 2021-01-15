@@ -20,6 +20,11 @@ func dataSourceMacpoolLease() *schema.Resource {
 				Optional:         true,
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
+			"allocation_type": {
+				Description: "Type of the lease allocation either static or dynamic (i.e via pool).\n* `dynamic` - Identifiers to be allocated by system.\n* `static` - Identifiers are assigned by the user.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"assigned_to_entity": {
 				Description: "A reference to a moBaseMo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -76,7 +81,7 @@ func dataSourceMacpoolLease() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -231,6 +236,10 @@ func dataSourceMacpoolLeaseRead(c context.Context, d *schema.ResourceData, meta 
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.MacpoolLease{}
+	if v, ok := d.GetOk("allocation_type"); ok {
+		x := (v.(string))
+		o.SetAllocationType(x)
+	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -267,8 +276,12 @@ func dataSourceMacpoolLeaseRead(c context.Context, d *schema.ResourceData, meta 
 		return diag.Errorf("error occurred while unmarshalling response to MacpoolLease list: %s", err.Error())
 	}
 	result := s.GetResults()
-	if result == nil {
-		return diag.Errorf("your query for MacpoolLease did not return results. Please change your search criteria and try again")
+	length := len(result)
+	if length == 0 {
+		return diag.Errorf("your query for MacpoolLease data source did not return results. Please change your search criteria and try again")
+	}
+	if length > 1 {
+		return diag.Errorf("your query for MacpoolLease data source returned more than one result. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -281,6 +294,9 @@ func dataSourceMacpoolLeaseRead(c context.Context, d *schema.ResourceData, meta 
 			}
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
 				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
+			}
+			if err := d.Set("allocation_type", (s.GetAllocationType())); err != nil {
+				return diag.Errorf("error occurred while setting property AllocationType: %s", err.Error())
 			}
 
 			if err := d.Set("assigned_to_entity", flattenMapMoBaseMoRelationship(s.GetAssignedToEntity(), d)); err != nil {

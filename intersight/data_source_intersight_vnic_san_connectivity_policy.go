@@ -80,7 +80,7 @@ func dataSourceVnicSanConnectivityPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -167,6 +167,11 @@ func dataSourceVnicSanConnectivityPolicy() *schema.Resource {
 				},
 				Computed: true,
 			},
+			"static_wwnn_address": {
+				Description: "The WWNN address for the server node must be in hexadecimal format xx:xx:xx:xx:xx:xx:xx:xx.\nAllowed ranges are 20:00:00:00:00:00:00:00 to 20:FF:FF:FF:FF:FF:FF:FF or from 50:00:00:00:00:00:00:00 to 5F:FF:FF:FF:FF:FF:FF:FF.\nTo ensure uniqueness of WWN's in the SAN fabric, you are strongly encouraged to use the WWN prefix - 20:00:00:25:B5:xx:xx:xx.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"tags": {
 				Type:     schema.TypeList,
 				Optional: true,
@@ -192,6 +197,11 @@ func dataSourceVnicSanConnectivityPolicy() *schema.Resource {
 			},
 			"target_platform": {
 				Description: "The platform for which the server profile is applicable. It can either be a server that is operating in standalone mode or which is attached to a Fabric Interconnect managed by Intersight.\n* `Standalone` - Servers which are operating in standalone mode i.e. not connected to a Fabric Interconnected.\n* `FIAttached` - Servers which are connected to a Fabric Interconnect that is managed by Intersight.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"wwnn_address_type": {
+				Description: "Type of allocation selected to assign a WWNN address for the server node.\n* `POOL` - The user selects a pool from which the mac/wwn address will be leased for the Virtual Interface.\n* `STATIC` - The user assigns a static mac/wwn address for the Virtual Interface.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -268,9 +278,17 @@ func dataSourceVnicSanConnectivityPolicyRead(c context.Context, d *schema.Resour
 		x := (v.(string))
 		o.SetPlacementMode(x)
 	}
+	if v, ok := d.GetOk("static_wwnn_address"); ok {
+		x := (v.(string))
+		o.SetStaticWwnnAddress(x)
+	}
 	if v, ok := d.GetOk("target_platform"); ok {
 		x := (v.(string))
 		o.SetTargetPlatform(x)
+	}
+	if v, ok := d.GetOk("wwnn_address_type"); ok {
+		x := (v.(string))
+		o.SetWwnnAddressType(x)
 	}
 
 	data, err := o.MarshalJSON()
@@ -292,8 +310,12 @@ func dataSourceVnicSanConnectivityPolicyRead(c context.Context, d *schema.Resour
 		return diag.Errorf("error occurred while unmarshalling response to VnicSanConnectivityPolicy list: %s", err.Error())
 	}
 	result := s.GetResults()
-	if result == nil {
-		return diag.Errorf("your query for VnicSanConnectivityPolicy did not return results. Please change your search criteria and try again")
+	length := len(result)
+	if length == 0 {
+		return diag.Errorf("your query for VnicSanConnectivityPolicy data source did not return results. Please change your search criteria and try again")
+	}
+	if length > 1 {
+		return diag.Errorf("your query for VnicSanConnectivityPolicy data source returned more than one result. Please change your search criteria and try again")
 	}
 	switch reflect.TypeOf(result).Kind() {
 	case reflect.Slice:
@@ -337,12 +359,18 @@ func dataSourceVnicSanConnectivityPolicyRead(c context.Context, d *schema.Resour
 			if err := d.Set("profiles", flattenListPolicyAbstractConfigProfileRelationship(s.GetProfiles(), d)); err != nil {
 				return diag.Errorf("error occurred while setting property Profiles: %s", err.Error())
 			}
+			if err := d.Set("static_wwnn_address", (s.GetStaticWwnnAddress())); err != nil {
+				return diag.Errorf("error occurred while setting property StaticWwnnAddress: %s", err.Error())
+			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
 			}
 			if err := d.Set("target_platform", (s.GetTargetPlatform())); err != nil {
 				return diag.Errorf("error occurred while setting property TargetPlatform: %s", err.Error())
+			}
+			if err := d.Set("wwnn_address_type", (s.GetWwnnAddressType())); err != nil {
+				return diag.Errorf("error occurred while setting property WwnnAddressType: %s", err.Error())
 			}
 
 			if err := d.Set("wwnn_pool", flattenMapFcpoolPoolRelationship(s.GetWwnnPool(), d)); err != nil {

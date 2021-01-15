@@ -56,7 +56,7 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `auth_password`:(string) Authorization password for the user. 
   + `auth_type`:(string) Authorization protocol for authenticating the user.* `NA` - Authentication protocol is not applicable.* `MD5` - MD5 protocol is used to authenticate SNMP user.* `SHA` - SHA protocol is used to authenticate SNMP user. 
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `is_auth_password_set`:(bool)(Computed) Indicates whether the value of the 'authPassword' property has been set. 
   + `is_privacy_password_set`:(bool)(Computed) Indicates whether the value of the 'privacyPassword' property has been set. 
   + `name`:(string) SNMP username. Must have a minimum of 1 and and a maximum of 31 characters. 

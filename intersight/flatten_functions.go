@@ -1427,6 +1427,728 @@ func flattenListHyperflexHxdpVersionRelationship(p []models.HyperflexHxdpVersion
 	}
 	return hyperflexhxdpversionrelationships
 }
+func flattenListHyperflexIpAddrRange(p []models.HyperflexIpAddrRange, d *schema.ResourceData) []map[string]interface{} {
+	var hyperflexipaddrranges []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		hyperflexipaddrrange := make(map[string]interface{})
+		hyperflexipaddrrange["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		hyperflexipaddrrange["class_id"] = item.ClassId
+		hyperflexipaddrrange["end_addr"] = item.EndAddr
+		hyperflexipaddrrange["gateway"] = item.Gateway
+		hyperflexipaddrrange["netmask"] = item.Netmask
+		hyperflexipaddrrange["object_type"] = item.ObjectType
+		hyperflexipaddrrange["start_addr"] = item.StartAddr
+		hyperflexipaddrranges = append(hyperflexipaddrranges, hyperflexipaddrrange)
+	}
+	return hyperflexipaddrranges
+}
+func flattenListHyperflexMapClusterIdToProtectionInfo(p []models.HyperflexMapClusterIdToProtectionInfo, d *schema.ResourceData) []map[string]interface{} {
+	var hyperflexmapclusteridtoprotectioninfos []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		hyperflexmapclusteridtoprotectioninfo := make(map[string]interface{})
+		hyperflexmapclusteridtoprotectioninfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		hyperflexmapclusteridtoprotectioninfo["class_id"] = item.ClassId
+		hyperflexmapclusteridtoprotectioninfo["cluster_id"] = item.ClusterId
+		hyperflexmapclusteridtoprotectioninfo["object_type"] = item.ObjectType
+		hyperflexmapclusteridtoprotectioninfo["protection_info"] = (func(p models.HyperflexProtectionInfo, d *schema.ResourceData) []map[string]interface{} {
+			var hyperflexprotectioninfos []map[string]interface{}
+			var ret models.HyperflexProtectionInfo
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			hyperflexprotectioninfo := make(map[string]interface{})
+			hyperflexprotectioninfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			hyperflexprotectioninfo["class_id"] = item.ClassId
+			hyperflexprotectioninfo["object_type"] = item.ObjectType
+			hyperflexprotectioninfo["vm_current_protection_info"] = (func(p models.HyperflexSnapshotInfoBrief, d *schema.ResourceData) []map[string]interface{} {
+				var hyperflexsnapshotinfobriefs []map[string]interface{}
+				var ret models.HyperflexSnapshotInfoBrief
+				if reflect.DeepEqual(ret, p) {
+					return nil
+				}
+				item := p
+				hyperflexsnapshotinfobrief := make(map[string]interface{})
+				hyperflexsnapshotinfobrief["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				hyperflexsnapshotinfobrief["class_id"] = item.ClassId
+				hyperflexsnapshotinfobrief["object_type"] = item.ObjectType
+				hyperflexsnapshotinfobrief["replication_status"] = (func(p models.HyperflexReplicationStatus, d *schema.ResourceData) []map[string]interface{} {
+					var hyperflexreplicationstatuss []map[string]interface{}
+					var ret models.HyperflexReplicationStatus
+					if reflect.DeepEqual(ret, p) {
+						return nil
+					}
+					item := p
+					hyperflexreplicationstatus := make(map[string]interface{})
+					hyperflexreplicationstatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+					hyperflexreplicationstatus["bytes_replicated"] = item.BytesReplicated
+					hyperflexreplicationstatus["class_id"] = item.ClassId
+					hyperflexreplicationstatus["end_time"] = item.EndTime
+					hyperflexreplicationstatus["error"] = (func(p models.HyperflexErrorStack, d *schema.ResourceData) []map[string]interface{} {
+						var hyperflexerrorstacks []map[string]interface{}
+						var ret models.HyperflexErrorStack
+						if reflect.DeepEqual(ret, p) {
+							return nil
+						}
+						item := p
+						hyperflexerrorstack := make(map[string]interface{})
+						hyperflexerrorstack["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+						hyperflexerrorstack["class_id"] = item.ClassId
+						hyperflexerrorstack["message"] = item.Message
+						hyperflexerrorstack["message_id"] = item.MessageId
+						hyperflexerrorstack["object_type"] = item.ObjectType
+
+						hyperflexerrorstacks = append(hyperflexerrorstacks, hyperflexerrorstack)
+						return hyperflexerrorstacks
+					})(item.GetError(), d)
+					hyperflexreplicationstatus["object_type"] = item.ObjectType
+					hyperflexreplicationstatus["pack_entity_reference"] = (func(p models.HyperflexEntityReference, d *schema.ResourceData) []map[string]interface{} {
+						var hyperflexentityreferences []map[string]interface{}
+						var ret models.HyperflexEntityReference
+						if reflect.DeepEqual(ret, p) {
+							return nil
+						}
+						item := p
+						hyperflexentityreference := make(map[string]interface{})
+						hyperflexentityreference["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+						hyperflexentityreference["class_id"] = item.ClassId
+						hyperflexentityreference["confignum"] = item.Confignum
+						hyperflexentityreference["id"] = item.Id
+						hyperflexentityreference["idtype"] = item.Idtype
+						hyperflexentityreference["name"] = item.Name
+						hyperflexentityreference["object_type"] = item.ObjectType
+						hyperflexentityreference["type"] = item.Type
+
+						hyperflexentityreferences = append(hyperflexentityreferences, hyperflexentityreference)
+						return hyperflexentityreferences
+					})(item.GetPackEntityReference(), d)
+					hyperflexreplicationstatus["pct_complete"] = item.PctComplete
+					hyperflexreplicationstatus["rpo_status"] = (func(p models.HyperflexRpoStatus, d *schema.ResourceData) []map[string]interface{} {
+						var hyperflexrpostatuss []map[string]interface{}
+						var ret models.HyperflexRpoStatus
+						if reflect.DeepEqual(ret, p) {
+							return nil
+						}
+						item := p
+						hyperflexrpostatus := make(map[string]interface{})
+						hyperflexrpostatus["actual"] = item.Actual
+						hyperflexrpostatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+						hyperflexrpostatus["class_id"] = item.ClassId
+						hyperflexrpostatus["expected"] = item.Expected
+						hyperflexrpostatus["object_type"] = item.ObjectType
+						hyperflexrpostatus["rpo_exceeded"] = item.RpoExceeded
+
+						hyperflexrpostatuss = append(hyperflexrpostatuss, hyperflexrpostatus)
+						return hyperflexrpostatuss
+					})(item.GetRpoStatus(), d)
+					hyperflexreplicationstatus["start_time"] = item.StartTime
+					hyperflexreplicationstatus["status"] = item.Status
+
+					hyperflexreplicationstatuss = append(hyperflexreplicationstatuss, hyperflexreplicationstatus)
+					return hyperflexreplicationstatuss
+				})(item.GetReplicationStatus(), d)
+				hyperflexsnapshotinfobrief["site"] = item.Site
+				hyperflexsnapshotinfobrief["snapshot_status"] = (func(p models.HyperflexSnapshotStatus, d *schema.ResourceData) []map[string]interface{} {
+					var hyperflexsnapshotstatuss []map[string]interface{}
+					var ret models.HyperflexSnapshotStatus
+					if reflect.DeepEqual(ret, p) {
+						return nil
+					}
+					item := p
+					hyperflexsnapshotstatus := make(map[string]interface{})
+					hyperflexsnapshotstatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+					hyperflexsnapshotstatus["class_id"] = item.ClassId
+					hyperflexsnapshotstatus["description"] = item.Description
+					hyperflexsnapshotstatus["error"] = (func(p models.HyperflexErrorStack, d *schema.ResourceData) []map[string]interface{} {
+						var hyperflexerrorstacks []map[string]interface{}
+						var ret models.HyperflexErrorStack
+						if reflect.DeepEqual(ret, p) {
+							return nil
+						}
+						item := p
+						hyperflexerrorstack := make(map[string]interface{})
+						hyperflexerrorstack["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+						hyperflexerrorstack["class_id"] = item.ClassId
+						hyperflexerrorstack["message"] = item.Message
+						hyperflexerrorstack["message_id"] = item.MessageId
+						hyperflexerrorstack["object_type"] = item.ObjectType
+
+						hyperflexerrorstacks = append(hyperflexerrorstacks, hyperflexerrorstack)
+						return hyperflexerrorstacks
+					})(item.GetError(), d)
+					hyperflexsnapshotstatus["object_type"] = item.ObjectType
+					hyperflexsnapshotstatus["pct_complete"] = item.PctComplete
+					hyperflexsnapshotstatus["status"] = item.Status
+					hyperflexsnapshotstatus["timestamp"] = item.Timestamp
+					hyperflexsnapshotstatus["used_space"] = item.UsedSpace
+
+					hyperflexsnapshotstatuss = append(hyperflexsnapshotstatuss, hyperflexsnapshotstatus)
+					return hyperflexsnapshotstatuss
+				})(item.GetSnapshotStatus(), d)
+				hyperflexsnapshotinfobrief["vm_snapshot_entity_reference"] = (func(p models.HyperflexEntityReference, d *schema.ResourceData) []map[string]interface{} {
+					var hyperflexentityreferences []map[string]interface{}
+					var ret models.HyperflexEntityReference
+					if reflect.DeepEqual(ret, p) {
+						return nil
+					}
+					item := p
+					hyperflexentityreference := make(map[string]interface{})
+					hyperflexentityreference["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+					hyperflexentityreference["class_id"] = item.ClassId
+					hyperflexentityreference["confignum"] = item.Confignum
+					hyperflexentityreference["id"] = item.Id
+					hyperflexentityreference["idtype"] = item.Idtype
+					hyperflexentityreference["name"] = item.Name
+					hyperflexentityreference["object_type"] = item.ObjectType
+					hyperflexentityreference["type"] = item.Type
+
+					hyperflexentityreferences = append(hyperflexentityreferences, hyperflexentityreference)
+					return hyperflexentityreferences
+				})(item.GetVmSnapshotEntityReference(), d)
+
+				hyperflexsnapshotinfobriefs = append(hyperflexsnapshotinfobriefs, hyperflexsnapshotinfobrief)
+				return hyperflexsnapshotinfobriefs
+			})(item.GetVmCurrentProtectionInfo(), d)
+			hyperflexprotectioninfo["vm_last_successful_protection_info"] = (func(p models.HyperflexSnapshotInfoBrief, d *schema.ResourceData) []map[string]interface{} {
+				var hyperflexsnapshotinfobriefs []map[string]interface{}
+				var ret models.HyperflexSnapshotInfoBrief
+				if reflect.DeepEqual(ret, p) {
+					return nil
+				}
+				item := p
+				hyperflexsnapshotinfobrief := make(map[string]interface{})
+				hyperflexsnapshotinfobrief["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				hyperflexsnapshotinfobrief["class_id"] = item.ClassId
+				hyperflexsnapshotinfobrief["object_type"] = item.ObjectType
+				hyperflexsnapshotinfobrief["replication_status"] = (func(p models.HyperflexReplicationStatus, d *schema.ResourceData) []map[string]interface{} {
+					var hyperflexreplicationstatuss []map[string]interface{}
+					var ret models.HyperflexReplicationStatus
+					if reflect.DeepEqual(ret, p) {
+						return nil
+					}
+					item := p
+					hyperflexreplicationstatus := make(map[string]interface{})
+					hyperflexreplicationstatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+					hyperflexreplicationstatus["bytes_replicated"] = item.BytesReplicated
+					hyperflexreplicationstatus["class_id"] = item.ClassId
+					hyperflexreplicationstatus["end_time"] = item.EndTime
+					hyperflexreplicationstatus["error"] = (func(p models.HyperflexErrorStack, d *schema.ResourceData) []map[string]interface{} {
+						var hyperflexerrorstacks []map[string]interface{}
+						var ret models.HyperflexErrorStack
+						if reflect.DeepEqual(ret, p) {
+							return nil
+						}
+						item := p
+						hyperflexerrorstack := make(map[string]interface{})
+						hyperflexerrorstack["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+						hyperflexerrorstack["class_id"] = item.ClassId
+						hyperflexerrorstack["message"] = item.Message
+						hyperflexerrorstack["message_id"] = item.MessageId
+						hyperflexerrorstack["object_type"] = item.ObjectType
+
+						hyperflexerrorstacks = append(hyperflexerrorstacks, hyperflexerrorstack)
+						return hyperflexerrorstacks
+					})(item.GetError(), d)
+					hyperflexreplicationstatus["object_type"] = item.ObjectType
+					hyperflexreplicationstatus["pack_entity_reference"] = (func(p models.HyperflexEntityReference, d *schema.ResourceData) []map[string]interface{} {
+						var hyperflexentityreferences []map[string]interface{}
+						var ret models.HyperflexEntityReference
+						if reflect.DeepEqual(ret, p) {
+							return nil
+						}
+						item := p
+						hyperflexentityreference := make(map[string]interface{})
+						hyperflexentityreference["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+						hyperflexentityreference["class_id"] = item.ClassId
+						hyperflexentityreference["confignum"] = item.Confignum
+						hyperflexentityreference["id"] = item.Id
+						hyperflexentityreference["idtype"] = item.Idtype
+						hyperflexentityreference["name"] = item.Name
+						hyperflexentityreference["object_type"] = item.ObjectType
+						hyperflexentityreference["type"] = item.Type
+
+						hyperflexentityreferences = append(hyperflexentityreferences, hyperflexentityreference)
+						return hyperflexentityreferences
+					})(item.GetPackEntityReference(), d)
+					hyperflexreplicationstatus["pct_complete"] = item.PctComplete
+					hyperflexreplicationstatus["rpo_status"] = (func(p models.HyperflexRpoStatus, d *schema.ResourceData) []map[string]interface{} {
+						var hyperflexrpostatuss []map[string]interface{}
+						var ret models.HyperflexRpoStatus
+						if reflect.DeepEqual(ret, p) {
+							return nil
+						}
+						item := p
+						hyperflexrpostatus := make(map[string]interface{})
+						hyperflexrpostatus["actual"] = item.Actual
+						hyperflexrpostatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+						hyperflexrpostatus["class_id"] = item.ClassId
+						hyperflexrpostatus["expected"] = item.Expected
+						hyperflexrpostatus["object_type"] = item.ObjectType
+						hyperflexrpostatus["rpo_exceeded"] = item.RpoExceeded
+
+						hyperflexrpostatuss = append(hyperflexrpostatuss, hyperflexrpostatus)
+						return hyperflexrpostatuss
+					})(item.GetRpoStatus(), d)
+					hyperflexreplicationstatus["start_time"] = item.StartTime
+					hyperflexreplicationstatus["status"] = item.Status
+
+					hyperflexreplicationstatuss = append(hyperflexreplicationstatuss, hyperflexreplicationstatus)
+					return hyperflexreplicationstatuss
+				})(item.GetReplicationStatus(), d)
+				hyperflexsnapshotinfobrief["site"] = item.Site
+				hyperflexsnapshotinfobrief["snapshot_status"] = (func(p models.HyperflexSnapshotStatus, d *schema.ResourceData) []map[string]interface{} {
+					var hyperflexsnapshotstatuss []map[string]interface{}
+					var ret models.HyperflexSnapshotStatus
+					if reflect.DeepEqual(ret, p) {
+						return nil
+					}
+					item := p
+					hyperflexsnapshotstatus := make(map[string]interface{})
+					hyperflexsnapshotstatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+					hyperflexsnapshotstatus["class_id"] = item.ClassId
+					hyperflexsnapshotstatus["description"] = item.Description
+					hyperflexsnapshotstatus["error"] = (func(p models.HyperflexErrorStack, d *schema.ResourceData) []map[string]interface{} {
+						var hyperflexerrorstacks []map[string]interface{}
+						var ret models.HyperflexErrorStack
+						if reflect.DeepEqual(ret, p) {
+							return nil
+						}
+						item := p
+						hyperflexerrorstack := make(map[string]interface{})
+						hyperflexerrorstack["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+						hyperflexerrorstack["class_id"] = item.ClassId
+						hyperflexerrorstack["message"] = item.Message
+						hyperflexerrorstack["message_id"] = item.MessageId
+						hyperflexerrorstack["object_type"] = item.ObjectType
+
+						hyperflexerrorstacks = append(hyperflexerrorstacks, hyperflexerrorstack)
+						return hyperflexerrorstacks
+					})(item.GetError(), d)
+					hyperflexsnapshotstatus["object_type"] = item.ObjectType
+					hyperflexsnapshotstatus["pct_complete"] = item.PctComplete
+					hyperflexsnapshotstatus["status"] = item.Status
+					hyperflexsnapshotstatus["timestamp"] = item.Timestamp
+					hyperflexsnapshotstatus["used_space"] = item.UsedSpace
+
+					hyperflexsnapshotstatuss = append(hyperflexsnapshotstatuss, hyperflexsnapshotstatus)
+					return hyperflexsnapshotstatuss
+				})(item.GetSnapshotStatus(), d)
+				hyperflexsnapshotinfobrief["vm_snapshot_entity_reference"] = (func(p models.HyperflexEntityReference, d *schema.ResourceData) []map[string]interface{} {
+					var hyperflexentityreferences []map[string]interface{}
+					var ret models.HyperflexEntityReference
+					if reflect.DeepEqual(ret, p) {
+						return nil
+					}
+					item := p
+					hyperflexentityreference := make(map[string]interface{})
+					hyperflexentityreference["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+					hyperflexentityreference["class_id"] = item.ClassId
+					hyperflexentityreference["confignum"] = item.Confignum
+					hyperflexentityreference["id"] = item.Id
+					hyperflexentityreference["idtype"] = item.Idtype
+					hyperflexentityreference["name"] = item.Name
+					hyperflexentityreference["object_type"] = item.ObjectType
+					hyperflexentityreference["type"] = item.Type
+
+					hyperflexentityreferences = append(hyperflexentityreferences, hyperflexentityreference)
+					return hyperflexentityreferences
+				})(item.GetVmSnapshotEntityReference(), d)
+
+				hyperflexsnapshotinfobriefs = append(hyperflexsnapshotinfobriefs, hyperflexsnapshotinfobrief)
+				return hyperflexsnapshotinfobriefs
+			})(item.GetVmLastSuccessfulProtectionInfo(), d)
+			hyperflexprotectioninfo["vm_space_usage"] = (func(p models.HyperflexVmProtectionSpaceUsage, d *schema.ResourceData) []map[string]interface{} {
+				var hyperflexvmprotectionspaceusages []map[string]interface{}
+				var ret models.HyperflexVmProtectionSpaceUsage
+				if reflect.DeepEqual(ret, p) {
+					return nil
+				}
+				item := p
+				hyperflexvmprotectionspaceusage := make(map[string]interface{})
+				hyperflexvmprotectionspaceusage["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				hyperflexvmprotectionspaceusage["class_id"] = item.ClassId
+				hyperflexvmprotectionspaceusage["object_type"] = item.ObjectType
+				hyperflexvmprotectionspaceusage["space_usage"] = item.SpaceUsage
+
+				hyperflexvmprotectionspaceusages = append(hyperflexvmprotectionspaceusages, hyperflexvmprotectionspaceusage)
+				return hyperflexvmprotectionspaceusages
+			})(item.GetVmSpaceUsage(), d)
+
+			hyperflexprotectioninfos = append(hyperflexprotectioninfos, hyperflexprotectioninfo)
+			return hyperflexprotectioninfos
+		})(item.GetProtectionInfo(), d)
+		hyperflexmapclusteridtoprotectioninfos = append(hyperflexmapclusteridtoprotectioninfos, hyperflexmapclusteridtoprotectioninfo)
+	}
+	return hyperflexmapclusteridtoprotectioninfos
+}
+func flattenListHyperflexMapClusterIdToStSnapshotPoint(p []models.HyperflexMapClusterIdToStSnapshotPoint, d *schema.ResourceData) []map[string]interface{} {
+	var hyperflexmapclusteridtostsnapshotpoints []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		hyperflexmapclusteridtostsnapshotpoint := make(map[string]interface{})
+		hyperflexmapclusteridtostsnapshotpoint["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		hyperflexmapclusteridtostsnapshotpoint["class_id"] = item.ClassId
+		hyperflexmapclusteridtostsnapshotpoint["cluster_id"] = item.ClusterId
+		hyperflexmapclusteridtostsnapshotpoint["object_type"] = item.ObjectType
+		hyperflexmapclusteridtostsnapshotpoint["snapshot_point"] = (func(p models.HyperflexSnapshotPoint, d *schema.ResourceData) []map[string]interface{} {
+			var hyperflexsnapshotpoints []map[string]interface{}
+			var ret models.HyperflexSnapshotPoint
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			hyperflexsnapshotpoint := make(map[string]interface{})
+			hyperflexsnapshotpoint["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			hyperflexsnapshotpoint["class_id"] = item.ClassId
+			hyperflexsnapshotpoint["cluster_entity_reference"] = (func(p models.HyperflexEntityReference, d *schema.ResourceData) []map[string]interface{} {
+				var hyperflexentityreferences []map[string]interface{}
+				var ret models.HyperflexEntityReference
+				if reflect.DeepEqual(ret, p) {
+					return nil
+				}
+				item := p
+				hyperflexentityreference := make(map[string]interface{})
+				hyperflexentityreference["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				hyperflexentityreference["class_id"] = item.ClassId
+				hyperflexentityreference["confignum"] = item.Confignum
+				hyperflexentityreference["id"] = item.Id
+				hyperflexentityreference["idtype"] = item.Idtype
+				hyperflexentityreference["name"] = item.Name
+				hyperflexentityreference["object_type"] = item.ObjectType
+				hyperflexentityreference["type"] = item.Type
+
+				hyperflexentityreferences = append(hyperflexentityreferences, hyperflexentityreference)
+				return hyperflexentityreferences
+			})(item.GetClusterEntityReference(), d)
+			hyperflexsnapshotpoint["object_type"] = item.ObjectType
+			hyperflexsnapshotpoint["replication_status"] = (func(p models.HyperflexReplicationStatus, d *schema.ResourceData) []map[string]interface{} {
+				var hyperflexreplicationstatuss []map[string]interface{}
+				var ret models.HyperflexReplicationStatus
+				if reflect.DeepEqual(ret, p) {
+					return nil
+				}
+				item := p
+				hyperflexreplicationstatus := make(map[string]interface{})
+				hyperflexreplicationstatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				hyperflexreplicationstatus["bytes_replicated"] = item.BytesReplicated
+				hyperflexreplicationstatus["class_id"] = item.ClassId
+				hyperflexreplicationstatus["end_time"] = item.EndTime
+				hyperflexreplicationstatus["error"] = (func(p models.HyperflexErrorStack, d *schema.ResourceData) []map[string]interface{} {
+					var hyperflexerrorstacks []map[string]interface{}
+					var ret models.HyperflexErrorStack
+					if reflect.DeepEqual(ret, p) {
+						return nil
+					}
+					item := p
+					hyperflexerrorstack := make(map[string]interface{})
+					hyperflexerrorstack["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+					hyperflexerrorstack["class_id"] = item.ClassId
+					hyperflexerrorstack["message"] = item.Message
+					hyperflexerrorstack["message_id"] = item.MessageId
+					hyperflexerrorstack["object_type"] = item.ObjectType
+
+					hyperflexerrorstacks = append(hyperflexerrorstacks, hyperflexerrorstack)
+					return hyperflexerrorstacks
+				})(item.GetError(), d)
+				hyperflexreplicationstatus["object_type"] = item.ObjectType
+				hyperflexreplicationstatus["pack_entity_reference"] = (func(p models.HyperflexEntityReference, d *schema.ResourceData) []map[string]interface{} {
+					var hyperflexentityreferences []map[string]interface{}
+					var ret models.HyperflexEntityReference
+					if reflect.DeepEqual(ret, p) {
+						return nil
+					}
+					item := p
+					hyperflexentityreference := make(map[string]interface{})
+					hyperflexentityreference["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+					hyperflexentityreference["class_id"] = item.ClassId
+					hyperflexentityreference["confignum"] = item.Confignum
+					hyperflexentityreference["id"] = item.Id
+					hyperflexentityreference["idtype"] = item.Idtype
+					hyperflexentityreference["name"] = item.Name
+					hyperflexentityreference["object_type"] = item.ObjectType
+					hyperflexentityreference["type"] = item.Type
+
+					hyperflexentityreferences = append(hyperflexentityreferences, hyperflexentityreference)
+					return hyperflexentityreferences
+				})(item.GetPackEntityReference(), d)
+				hyperflexreplicationstatus["pct_complete"] = item.PctComplete
+				hyperflexreplicationstatus["rpo_status"] = (func(p models.HyperflexRpoStatus, d *schema.ResourceData) []map[string]interface{} {
+					var hyperflexrpostatuss []map[string]interface{}
+					var ret models.HyperflexRpoStatus
+					if reflect.DeepEqual(ret, p) {
+						return nil
+					}
+					item := p
+					hyperflexrpostatus := make(map[string]interface{})
+					hyperflexrpostatus["actual"] = item.Actual
+					hyperflexrpostatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+					hyperflexrpostatus["class_id"] = item.ClassId
+					hyperflexrpostatus["expected"] = item.Expected
+					hyperflexrpostatus["object_type"] = item.ObjectType
+					hyperflexrpostatus["rpo_exceeded"] = item.RpoExceeded
+
+					hyperflexrpostatuss = append(hyperflexrpostatuss, hyperflexrpostatus)
+					return hyperflexrpostatuss
+				})(item.GetRpoStatus(), d)
+				hyperflexreplicationstatus["start_time"] = item.StartTime
+				hyperflexreplicationstatus["status"] = item.Status
+
+				hyperflexreplicationstatuss = append(hyperflexreplicationstatuss, hyperflexreplicationstatus)
+				return hyperflexreplicationstatuss
+			})(item.GetReplicationStatus(), d)
+			hyperflexsnapshotpoint["snapshot_files"] = (func(p models.HyperflexSnapshotFiles, d *schema.ResourceData) []map[string]interface{} {
+				var hyperflexsnapshotfiless []map[string]interface{}
+				var ret models.HyperflexSnapshotFiles
+				if reflect.DeepEqual(ret, p) {
+					return nil
+				}
+				item := p
+				hyperflexsnapshotfiles := make(map[string]interface{})
+				hyperflexsnapshotfiles["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				hyperflexsnapshotfiles["class_id"] = item.ClassId
+				hyperflexsnapshotfiles["name_tracked_files"] = (func(p []models.HyperflexFilePath, d *schema.ResourceData) []map[string]interface{} {
+					var hyperflexfilepaths []map[string]interface{}
+					if len(p) == 0 {
+						return nil
+					}
+					for _, item := range p {
+						hyperflexfilepath := make(map[string]interface{})
+						hyperflexfilepath["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+						hyperflexfilepath["class_id"] = item.ClassId
+						hyperflexfilepath["ds_info"] = (func(p models.HyperflexDatastoreInfo, d *schema.ResourceData) []map[string]interface{} {
+							var hyperflexdatastoreinfos []map[string]interface{}
+							var ret models.HyperflexDatastoreInfo
+							if reflect.DeepEqual(ret, p) {
+								return nil
+							}
+							item := p
+							hyperflexdatastoreinfo := make(map[string]interface{})
+							hyperflexdatastoreinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+							hyperflexdatastoreinfo["class_id"] = item.ClassId
+							hyperflexdatastoreinfo["ds_backend_id"] = item.DsBackendId
+							hyperflexdatastoreinfo["ds_frontend_id"] = item.DsFrontendId
+							hyperflexdatastoreinfo["object_type"] = item.ObjectType
+
+							hyperflexdatastoreinfos = append(hyperflexdatastoreinfos, hyperflexdatastoreinfo)
+							return hyperflexdatastoreinfos
+						})(item.GetDsInfo(), d)
+						hyperflexfilepath["object_type"] = item.ObjectType
+						hyperflexfilepath["relative_file_path"] = item.RelativeFilePath
+						hyperflexfilepaths = append(hyperflexfilepaths, hyperflexfilepath)
+					}
+					return hyperflexfilepaths
+				})(item.GetNameTrackedFiles(), d)
+				hyperflexsnapshotfiles["object_type"] = item.ObjectType
+				hyperflexsnapshotfiles["uuid_tracked_disks_map"] = (func(p []models.HyperflexMapUuidToTrackedDisk, d *schema.ResourceData) []map[string]interface{} {
+					var hyperflexmapuuidtotrackeddisks []map[string]interface{}
+					if len(p) == 0 {
+						return nil
+					}
+					for _, item := range p {
+						hyperflexmapuuidtotrackeddisk := make(map[string]interface{})
+						hyperflexmapuuidtotrackeddisk["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+						hyperflexmapuuidtotrackeddisk["class_id"] = item.ClassId
+						hyperflexmapuuidtotrackeddisk["object_type"] = item.ObjectType
+						hyperflexmapuuidtotrackeddisk["tracked_disk"] = (func(p models.HyperflexTrackedDisk, d *schema.ResourceData) []map[string]interface{} {
+							var hyperflextrackeddisks []map[string]interface{}
+							var ret models.HyperflexTrackedDisk
+							if reflect.DeepEqual(ret, p) {
+								return nil
+							}
+							item := p
+							hyperflextrackeddisk := make(map[string]interface{})
+							hyperflextrackeddisk["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+							hyperflextrackeddisk["class_id"] = item.ClassId
+							hyperflextrackeddisk["disk_files"] = (func(p []models.HyperflexTrackedFile, d *schema.ResourceData) []map[string]interface{} {
+								var hyperflextrackedfiles []map[string]interface{}
+								if len(p) == 0 {
+									return nil
+								}
+								for _, item := range p {
+									hyperflextrackedfile := make(map[string]interface{})
+									hyperflextrackedfile["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+									hyperflextrackedfile["class_id"] = item.ClassId
+									hyperflextrackedfile["file_path"] = (func(p models.HyperflexFilePath, d *schema.ResourceData) []map[string]interface{} {
+										var hyperflexfilepaths []map[string]interface{}
+										var ret models.HyperflexFilePath
+										if reflect.DeepEqual(ret, p) {
+											return nil
+										}
+										item := p
+										hyperflexfilepath := make(map[string]interface{})
+										hyperflexfilepath["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+										hyperflexfilepath["class_id"] = item.ClassId
+										hyperflexfilepath["ds_info"] = (func(p models.HyperflexDatastoreInfo, d *schema.ResourceData) []map[string]interface{} {
+											var hyperflexdatastoreinfos []map[string]interface{}
+											var ret models.HyperflexDatastoreInfo
+											if reflect.DeepEqual(ret, p) {
+												return nil
+											}
+											item := p
+											hyperflexdatastoreinfo := make(map[string]interface{})
+											hyperflexdatastoreinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+											hyperflexdatastoreinfo["class_id"] = item.ClassId
+											hyperflexdatastoreinfo["ds_backend_id"] = item.DsBackendId
+											hyperflexdatastoreinfo["ds_frontend_id"] = item.DsFrontendId
+											hyperflexdatastoreinfo["object_type"] = item.ObjectType
+
+											hyperflexdatastoreinfos = append(hyperflexdatastoreinfos, hyperflexdatastoreinfo)
+											return hyperflexdatastoreinfos
+										})(item.GetDsInfo(), d)
+										hyperflexfilepath["object_type"] = item.ObjectType
+										hyperflexfilepath["relative_file_path"] = item.RelativeFilePath
+
+										hyperflexfilepaths = append(hyperflexfilepaths, hyperflexfilepath)
+										return hyperflexfilepaths
+									})(item.GetFilePath(), d)
+									hyperflextrackedfile["file_type"] = item.FileType
+									hyperflextrackedfile["object_type"] = item.ObjectType
+									hyperflextrackedfiles = append(hyperflextrackedfiles, hyperflextrackedfile)
+								}
+								return hyperflextrackedfiles
+							})(item.GetDiskFiles(), d)
+							hyperflextrackeddisk["disk_type"] = item.DiskType
+							hyperflextrackeddisk["object_type"] = item.ObjectType
+
+							hyperflextrackeddisks = append(hyperflextrackeddisks, hyperflextrackeddisk)
+							return hyperflextrackeddisks
+						})(item.GetTrackedDisk(), d)
+						hyperflexmapuuidtotrackeddisk["uuid"] = item.Uuid
+						hyperflexmapuuidtotrackeddisks = append(hyperflexmapuuidtotrackeddisks, hyperflexmapuuidtotrackeddisk)
+					}
+					return hyperflexmapuuidtotrackeddisks
+				})(item.GetUuidTrackedDisksMap(), d)
+
+				hyperflexsnapshotfiless = append(hyperflexsnapshotfiless, hyperflexsnapshotfiles)
+				return hyperflexsnapshotfiless
+			})(item.GetSnapshotFiles(), d)
+			hyperflexsnapshotpoint["snapshot_point_entity_reference"] = (func(p models.HyperflexEntityReference, d *schema.ResourceData) []map[string]interface{} {
+				var hyperflexentityreferences []map[string]interface{}
+				var ret models.HyperflexEntityReference
+				if reflect.DeepEqual(ret, p) {
+					return nil
+				}
+				item := p
+				hyperflexentityreference := make(map[string]interface{})
+				hyperflexentityreference["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				hyperflexentityreference["class_id"] = item.ClassId
+				hyperflexentityreference["confignum"] = item.Confignum
+				hyperflexentityreference["id"] = item.Id
+				hyperflexentityreference["idtype"] = item.Idtype
+				hyperflexentityreference["name"] = item.Name
+				hyperflexentityreference["object_type"] = item.ObjectType
+				hyperflexentityreference["type"] = item.Type
+
+				hyperflexentityreferences = append(hyperflexentityreferences, hyperflexentityreference)
+				return hyperflexentityreferences
+			})(item.GetSnapshotPointEntityReference(), d)
+			hyperflexsnapshotpoint["snapshot_status"] = (func(p models.HyperflexSnapshotStatus, d *schema.ResourceData) []map[string]interface{} {
+				var hyperflexsnapshotstatuss []map[string]interface{}
+				var ret models.HyperflexSnapshotStatus
+				if reflect.DeepEqual(ret, p) {
+					return nil
+				}
+				item := p
+				hyperflexsnapshotstatus := make(map[string]interface{})
+				hyperflexsnapshotstatus["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				hyperflexsnapshotstatus["class_id"] = item.ClassId
+				hyperflexsnapshotstatus["description"] = item.Description
+				hyperflexsnapshotstatus["error"] = (func(p models.HyperflexErrorStack, d *schema.ResourceData) []map[string]interface{} {
+					var hyperflexerrorstacks []map[string]interface{}
+					var ret models.HyperflexErrorStack
+					if reflect.DeepEqual(ret, p) {
+						return nil
+					}
+					item := p
+					hyperflexerrorstack := make(map[string]interface{})
+					hyperflexerrorstack["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+					hyperflexerrorstack["class_id"] = item.ClassId
+					hyperflexerrorstack["message"] = item.Message
+					hyperflexerrorstack["message_id"] = item.MessageId
+					hyperflexerrorstack["object_type"] = item.ObjectType
+
+					hyperflexerrorstacks = append(hyperflexerrorstacks, hyperflexerrorstack)
+					return hyperflexerrorstacks
+				})(item.GetError(), d)
+				hyperflexsnapshotstatus["object_type"] = item.ObjectType
+				hyperflexsnapshotstatus["pct_complete"] = item.PctComplete
+				hyperflexsnapshotstatus["status"] = item.Status
+				hyperflexsnapshotstatus["timestamp"] = item.Timestamp
+				hyperflexsnapshotstatus["used_space"] = item.UsedSpace
+
+				hyperflexsnapshotstatuss = append(hyperflexsnapshotstatuss, hyperflexsnapshotstatus)
+				return hyperflexsnapshotstatuss
+			})(item.GetSnapshotStatus(), d)
+			hyperflexsnapshotpoint["vm_runtime_info"] = (func(p models.HyperflexVirtualMachine, d *schema.ResourceData) []map[string]interface{} {
+				var hyperflexvirtualmachines []map[string]interface{}
+				var ret models.HyperflexVirtualMachine
+				if reflect.DeepEqual(ret, p) {
+					return nil
+				}
+				item := p
+				hyperflexvirtualmachine := make(map[string]interface{})
+				hyperflexvirtualmachine["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+				hyperflexvirtualmachine["class_id"] = item.ClassId
+				hyperflexvirtualmachine["object_type"] = item.ObjectType
+				hyperflexvirtualmachine["run_time_info"] = (func(p models.HyperflexVirtualMachineRuntimeInfo, d *schema.ResourceData) []map[string]interface{} {
+					var hyperflexvirtualmachineruntimeinfos []map[string]interface{}
+					var ret models.HyperflexVirtualMachineRuntimeInfo
+					if reflect.DeepEqual(ret, p) {
+						return nil
+					}
+					item := p
+					hyperflexvirtualmachineruntimeinfo := make(map[string]interface{})
+					hyperflexvirtualmachineruntimeinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+					hyperflexvirtualmachineruntimeinfo["bios_uuid"] = item.BiosUuid
+					hyperflexvirtualmachineruntimeinfo["class_id"] = item.ClassId
+					hyperflexvirtualmachineruntimeinfo["connection_state"] = item.ConnectionState
+					hyperflexvirtualmachineruntimeinfo["cpu_usage"] = item.CpuUsage
+					hyperflexvirtualmachineruntimeinfo["folder"] = item.Folder
+					hyperflexvirtualmachineruntimeinfo["guest_family"] = item.GuestFamily
+					hyperflexvirtualmachineruntimeinfo["guest_full_name"] = item.GuestFullName
+					hyperflexvirtualmachineruntimeinfo["guest_id"] = item.GuestId
+					hyperflexvirtualmachineruntimeinfo["guest_state"] = item.GuestState
+					hyperflexvirtualmachineruntimeinfo["host_name"] = item.HostName
+					hyperflexvirtualmachineruntimeinfo["instance_uuid"] = item.InstanceUuid
+					hyperflexvirtualmachineruntimeinfo["memory_mb"] = item.MemoryMb
+					hyperflexvirtualmachineruntimeinfo["memory_usage"] = item.MemoryUsage
+					hyperflexvirtualmachineruntimeinfo["moid"] = item.Moid
+					hyperflexvirtualmachineruntimeinfo["name"] = item.Name
+					hyperflexvirtualmachineruntimeinfo["networks"] = item.Networks
+					hyperflexvirtualmachineruntimeinfo["num_cpu"] = item.NumCpu
+					hyperflexvirtualmachineruntimeinfo["object_type"] = item.ObjectType
+					hyperflexvirtualmachineruntimeinfo["power_state"] = item.PowerState
+					hyperflexvirtualmachineruntimeinfo["provisioned_size"] = item.ProvisionedSize
+					hyperflexvirtualmachineruntimeinfo["resource_pool"] = item.ResourcePool
+					hyperflexvirtualmachineruntimeinfo["used_size"] = item.UsedSize
+					hyperflexvirtualmachineruntimeinfo["nr_version"] = item.Version
+					hyperflexvirtualmachineruntimeinfo["vmx_path"] = item.VmxPath
+
+					hyperflexvirtualmachineruntimeinfos = append(hyperflexvirtualmachineruntimeinfos, hyperflexvirtualmachineruntimeinfo)
+					return hyperflexvirtualmachineruntimeinfos
+				})(item.GetRunTimeInfo(), d)
+				hyperflexvirtualmachine["status_code"] = item.StatusCode
+				hyperflexvirtualmachine["uuid"] = item.Uuid
+
+				hyperflexvirtualmachines = append(hyperflexvirtualmachines, hyperflexvirtualmachine)
+				return hyperflexvirtualmachines
+			})(item.GetVmRuntimeInfo(), d)
+
+			hyperflexsnapshotpoints = append(hyperflexsnapshotpoints, hyperflexsnapshotpoint)
+			return hyperflexsnapshotpoints
+		})(item.GetSnapshotPoint(), d)
+		hyperflexmapclusteridtostsnapshotpoints = append(hyperflexmapclusteridtostsnapshotpoints, hyperflexmapclusteridtostsnapshotpoint)
+	}
+	return hyperflexmapclusteridtostsnapshotpoints
+}
 func flattenListHyperflexNamedVlan(p []models.HyperflexNamedVlan, d *schema.ResourceData) []map[string]interface{} {
 	var hyperflexnamedvlans []map[string]interface{}
 	if len(p) == 0 {
@@ -1466,6 +2188,56 @@ func flattenListHyperflexNodeProfileRelationship(p []models.HyperflexNodeProfile
 		hyperflexnodeprofilerelationships = append(hyperflexnodeprofilerelationships, hyperflexnodeprofilerelationship)
 	}
 	return hyperflexnodeprofilerelationships
+}
+func flattenListHyperflexReplicationClusterReferenceToSchedule(p []models.HyperflexReplicationClusterReferenceToSchedule, d *schema.ResourceData) []map[string]interface{} {
+	var hyperflexreplicationclusterreferencetoschedules []map[string]interface{}
+	if len(p) == 0 {
+		return nil
+	}
+	for _, item := range p {
+		hyperflexreplicationclusterreferencetoschedule := make(map[string]interface{})
+		hyperflexreplicationclusterreferencetoschedule["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		hyperflexreplicationclusterreferencetoschedule["class_id"] = item.ClassId
+		hyperflexreplicationclusterreferencetoschedule["object_type"] = item.ObjectType
+		hyperflexreplicationclusterreferencetoschedule["schedule"] = (func(p models.HyperflexReplicationSchedule, d *schema.ResourceData) []map[string]interface{} {
+			var hyperflexreplicationschedules []map[string]interface{}
+			var ret models.HyperflexReplicationSchedule
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			hyperflexreplicationschedule := make(map[string]interface{})
+			hyperflexreplicationschedule["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			hyperflexreplicationschedule["backup_interval"] = item.BackupInterval
+			hyperflexreplicationschedule["class_id"] = item.ClassId
+			hyperflexreplicationschedule["object_type"] = item.ObjectType
+
+			hyperflexreplicationschedules = append(hyperflexreplicationschedules, hyperflexreplicationschedule)
+			return hyperflexreplicationschedules
+		})(item.GetSchedule(), d)
+		hyperflexreplicationclusterreferencetoschedule["target_cluster_entity_reference"] = (func(p models.HyperflexEntityReference, d *schema.ResourceData) []map[string]interface{} {
+			var hyperflexentityreferences []map[string]interface{}
+			var ret models.HyperflexEntityReference
+			if reflect.DeepEqual(ret, p) {
+				return nil
+			}
+			item := p
+			hyperflexentityreference := make(map[string]interface{})
+			hyperflexentityreference["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+			hyperflexentityreference["class_id"] = item.ClassId
+			hyperflexentityreference["confignum"] = item.Confignum
+			hyperflexentityreference["id"] = item.Id
+			hyperflexentityreference["idtype"] = item.Idtype
+			hyperflexentityreference["name"] = item.Name
+			hyperflexentityreference["object_type"] = item.ObjectType
+			hyperflexentityreference["type"] = item.Type
+
+			hyperflexentityreferences = append(hyperflexentityreferences, hyperflexentityreference)
+			return hyperflexentityreferences
+		})(item.GetTargetClusterEntityReference(), d)
+		hyperflexreplicationclusterreferencetoschedules = append(hyperflexreplicationclusterreferencetoschedules, hyperflexreplicationclusterreferencetoschedule)
+	}
+	return hyperflexreplicationclusterreferencetoschedules
 }
 func flattenListHyperflexServerFirmwareVersionEntryRelationship(p []models.HyperflexServerFirmwareVersionEntryRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var hyperflexserverfirmwareversionentryrelationships []map[string]interface{}
@@ -6661,6 +7433,24 @@ func flattenMapHyperflexAutoSupportPolicyRelationship(p models.HyperflexAutoSupp
 	hyperflexautosupportpolicyrelationships = append(hyperflexautosupportpolicyrelationships, hyperflexautosupportpolicyrelationship)
 	return hyperflexautosupportpolicyrelationships
 }
+func flattenMapHyperflexBackupClusterRelationship(p models.HyperflexBackupClusterRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var hyperflexbackupclusterrelationships []map[string]interface{}
+	var ret models.HyperflexBackupClusterRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	hyperflexbackupclusterrelationship := make(map[string]interface{})
+	hyperflexbackupclusterrelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	hyperflexbackupclusterrelationship["class_id"] = item.ClassId
+	hyperflexbackupclusterrelationship["moid"] = item.Moid
+	hyperflexbackupclusterrelationship["object_type"] = item.ObjectType
+	hyperflexbackupclusterrelationship["selector"] = item.Selector
+
+	hyperflexbackupclusterrelationships = append(hyperflexbackupclusterrelationships, hyperflexbackupclusterrelationship)
+	return hyperflexbackupclusterrelationships
+}
 func flattenMapHyperflexCiscoHypervisorManagerRelationship(p models.HyperflexCiscoHypervisorManagerRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var hyperflexciscohypervisormanagerrelationships []map[string]interface{}
 	var ret models.HyperflexCiscoHypervisorManagerRelationship
@@ -6786,6 +7576,43 @@ func flattenMapHyperflexDiskStatus(p models.HyperflexDiskStatus, d *schema.Resou
 
 	hyperflexdiskstatuss = append(hyperflexdiskstatuss, hyperflexdiskstatus)
 	return hyperflexdiskstatuss
+}
+func flattenMapHyperflexEntityReference(p models.HyperflexEntityReference, d *schema.ResourceData) []map[string]interface{} {
+	var hyperflexentityreferences []map[string]interface{}
+	var ret models.HyperflexEntityReference
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	hyperflexentityreference := make(map[string]interface{})
+	hyperflexentityreference["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	hyperflexentityreference["class_id"] = item.ClassId
+	hyperflexentityreference["confignum"] = item.Confignum
+	hyperflexentityreference["id"] = item.Id
+	hyperflexentityreference["idtype"] = item.Idtype
+	hyperflexentityreference["name"] = item.Name
+	hyperflexentityreference["object_type"] = item.ObjectType
+	hyperflexentityreference["type"] = item.Type
+
+	hyperflexentityreferences = append(hyperflexentityreferences, hyperflexentityreference)
+	return hyperflexentityreferences
+}
+func flattenMapHyperflexErrorStack(p models.HyperflexErrorStack, d *schema.ResourceData) []map[string]interface{} {
+	var hyperflexerrorstacks []map[string]interface{}
+	var ret models.HyperflexErrorStack
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	hyperflexerrorstack := make(map[string]interface{})
+	hyperflexerrorstack["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	hyperflexerrorstack["class_id"] = item.ClassId
+	hyperflexerrorstack["message"] = item.Message
+	hyperflexerrorstack["message_id"] = item.MessageId
+	hyperflexerrorstack["object_type"] = item.ObjectType
+
+	hyperflexerrorstacks = append(hyperflexerrorstacks, hyperflexerrorstack)
+	return hyperflexerrorstacks
 }
 func flattenMapHyperflexExtFcStoragePolicyRelationship(p models.HyperflexExtFcStoragePolicyRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var hyperflexextfcstoragepolicyrelationships []map[string]interface{}
@@ -7183,6 +8010,22 @@ func flattenMapHyperflexProxySettingPolicyRelationship(p models.HyperflexProxySe
 	hyperflexproxysettingpolicyrelationships = append(hyperflexproxysettingpolicyrelationships, hyperflexproxysettingpolicyrelationship)
 	return hyperflexproxysettingpolicyrelationships
 }
+func flattenMapHyperflexReplicationSchedule(p models.HyperflexReplicationSchedule, d *schema.ResourceData) []map[string]interface{} {
+	var hyperflexreplicationschedules []map[string]interface{}
+	var ret models.HyperflexReplicationSchedule
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	hyperflexreplicationschedule := make(map[string]interface{})
+	hyperflexreplicationschedule["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	hyperflexreplicationschedule["backup_interval"] = item.BackupInterval
+	hyperflexreplicationschedule["class_id"] = item.ClassId
+	hyperflexreplicationschedule["object_type"] = item.ObjectType
+
+	hyperflexreplicationschedules = append(hyperflexreplicationschedules, hyperflexreplicationschedule)
+	return hyperflexreplicationschedules
+}
 func flattenMapHyperflexServerFirmwareVersionRelationship(p models.HyperflexServerFirmwareVersionRelationship, d *schema.ResourceData) []map[string]interface{} {
 	var hyperflexserverfirmwareversionrelationships []map[string]interface{}
 	var ret models.HyperflexServerFirmwareVersionRelationship
@@ -7367,6 +8210,96 @@ func flattenMapHyperflexVcenterConfigPolicyRelationship(p models.HyperflexVcente
 
 	hyperflexvcenterconfigpolicyrelationships = append(hyperflexvcenterconfigpolicyrelationships, hyperflexvcenterconfigpolicyrelationship)
 	return hyperflexvcenterconfigpolicyrelationships
+}
+func flattenMapHyperflexVirtualMachine(p models.HyperflexVirtualMachine, d *schema.ResourceData) []map[string]interface{} {
+	var hyperflexvirtualmachines []map[string]interface{}
+	var ret models.HyperflexVirtualMachine
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	item := p
+	hyperflexvirtualmachine := make(map[string]interface{})
+	hyperflexvirtualmachine["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	hyperflexvirtualmachine["class_id"] = item.ClassId
+	hyperflexvirtualmachine["object_type"] = item.ObjectType
+	hyperflexvirtualmachine["run_time_info"] = (func(p models.HyperflexVirtualMachineRuntimeInfo, d *schema.ResourceData) []map[string]interface{} {
+		var hyperflexvirtualmachineruntimeinfos []map[string]interface{}
+		var ret models.HyperflexVirtualMachineRuntimeInfo
+		if reflect.DeepEqual(ret, p) {
+			return nil
+		}
+		item := p
+		hyperflexvirtualmachineruntimeinfo := make(map[string]interface{})
+		hyperflexvirtualmachineruntimeinfo["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+		hyperflexvirtualmachineruntimeinfo["bios_uuid"] = item.BiosUuid
+		hyperflexvirtualmachineruntimeinfo["class_id"] = item.ClassId
+		hyperflexvirtualmachineruntimeinfo["connection_state"] = item.ConnectionState
+		hyperflexvirtualmachineruntimeinfo["cpu_usage"] = item.CpuUsage
+		hyperflexvirtualmachineruntimeinfo["folder"] = item.Folder
+		hyperflexvirtualmachineruntimeinfo["guest_family"] = item.GuestFamily
+		hyperflexvirtualmachineruntimeinfo["guest_full_name"] = item.GuestFullName
+		hyperflexvirtualmachineruntimeinfo["guest_id"] = item.GuestId
+		hyperflexvirtualmachineruntimeinfo["guest_state"] = item.GuestState
+		hyperflexvirtualmachineruntimeinfo["host_name"] = item.HostName
+		hyperflexvirtualmachineruntimeinfo["instance_uuid"] = item.InstanceUuid
+		hyperflexvirtualmachineruntimeinfo["memory_mb"] = item.MemoryMb
+		hyperflexvirtualmachineruntimeinfo["memory_usage"] = item.MemoryUsage
+		hyperflexvirtualmachineruntimeinfo["moid"] = item.Moid
+		hyperflexvirtualmachineruntimeinfo["name"] = item.Name
+		hyperflexvirtualmachineruntimeinfo["networks"] = item.Networks
+		hyperflexvirtualmachineruntimeinfo["num_cpu"] = item.NumCpu
+		hyperflexvirtualmachineruntimeinfo["object_type"] = item.ObjectType
+		hyperflexvirtualmachineruntimeinfo["power_state"] = item.PowerState
+		hyperflexvirtualmachineruntimeinfo["provisioned_size"] = item.ProvisionedSize
+		hyperflexvirtualmachineruntimeinfo["resource_pool"] = item.ResourcePool
+		hyperflexvirtualmachineruntimeinfo["used_size"] = item.UsedSize
+		hyperflexvirtualmachineruntimeinfo["nr_version"] = item.Version
+		hyperflexvirtualmachineruntimeinfo["vmx_path"] = item.VmxPath
+
+		hyperflexvirtualmachineruntimeinfos = append(hyperflexvirtualmachineruntimeinfos, hyperflexvirtualmachineruntimeinfo)
+		return hyperflexvirtualmachineruntimeinfos
+	})(item.GetRunTimeInfo(), d)
+	hyperflexvirtualmachine["status_code"] = item.StatusCode
+	hyperflexvirtualmachine["uuid"] = item.Uuid
+
+	hyperflexvirtualmachines = append(hyperflexvirtualmachines, hyperflexvirtualmachine)
+	return hyperflexvirtualmachines
+}
+func flattenMapHyperflexVmBackupInfoRelationship(p models.HyperflexVmBackupInfoRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var hyperflexvmbackupinforelationships []map[string]interface{}
+	var ret models.HyperflexVmBackupInfoRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	hyperflexvmbackupinforelationship := make(map[string]interface{})
+	hyperflexvmbackupinforelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	hyperflexvmbackupinforelationship["class_id"] = item.ClassId
+	hyperflexvmbackupinforelationship["moid"] = item.Moid
+	hyperflexvmbackupinforelationship["object_type"] = item.ObjectType
+	hyperflexvmbackupinforelationship["selector"] = item.Selector
+
+	hyperflexvmbackupinforelationships = append(hyperflexvmbackupinforelationships, hyperflexvmbackupinforelationship)
+	return hyperflexvmbackupinforelationships
+}
+func flattenMapHyperflexVmSnapshotInfoRelationship(p models.HyperflexVmSnapshotInfoRelationship, d *schema.ResourceData) []map[string]interface{} {
+	var hyperflexvmsnapshotinforelationships []map[string]interface{}
+	var ret models.HyperflexVmSnapshotInfoRelationship
+	if reflect.DeepEqual(ret, p) {
+		return nil
+	}
+	x := p
+	item := x.MoMoRef
+	hyperflexvmsnapshotinforelationship := make(map[string]interface{})
+	hyperflexvmsnapshotinforelationship["additional_properties"] = flattenAdditionalProperties(item.AdditionalProperties)
+	hyperflexvmsnapshotinforelationship["class_id"] = item.ClassId
+	hyperflexvmsnapshotinforelationship["moid"] = item.Moid
+	hyperflexvmsnapshotinforelationship["object_type"] = item.ObjectType
+	hyperflexvmsnapshotinforelationship["selector"] = item.Selector
+
+	hyperflexvmsnapshotinforelationships = append(hyperflexvmsnapshotinforelationships, hyperflexvmsnapshotinforelationship)
+	return hyperflexvmsnapshotinforelationships
 }
 func flattenMapHyperflexWwxnPrefixRange(p models.HyperflexWwxnPrefixRange, d *schema.ResourceData) []map[string]interface{} {
 	var hyperflexwwxnprefixranges []map[string]interface{}

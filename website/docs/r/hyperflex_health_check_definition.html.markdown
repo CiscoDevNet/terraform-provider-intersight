@@ -13,7 +13,7 @@ The following arguments are supported:
 * `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
 * `category`:(string) Category that the health check belongs to. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `common_causes`:(string) Static information detailing the common causes for the health check failure. 
 * `configuration`:(string) Execution configuration fo the health check script. 
 * `default_health_check_script_info`:(Array with Maximum of one item) -(Computed) Default version Script info. 
