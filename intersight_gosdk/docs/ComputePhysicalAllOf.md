@@ -45,6 +45,7 @@ Name | Type | Description | Notes
 **BootUsbDevices** | Pointer to [**[]BootUsbDeviceRelationship**](BootUsbDeviceRelationship.md) | An array of relationships to bootUsbDevice resources. | [optional] 
 **BootVmediaDevices** | Pointer to [**[]BootVmediaDeviceRelationship**](BootVmediaDeviceRelationship.md) | An array of relationships to bootVmediaDevice resources. | [optional] 
 **MgmtIdentity** | Pointer to [**EquipmentPhysicalIdentityRelationship**](equipment.PhysicalIdentity.Relationship.md) |  | [optional] 
+**Vmedia** | Pointer to [**ComputeVmediaRelationship**](compute.Vmedia.Relationship.md) |  | [optional] 
 
 ## Methods
 
@@ -1209,6 +1210,31 @@ SetMgmtIdentity sets MgmtIdentity field to given value.
 `func (o *ComputePhysicalAllOf) HasMgmtIdentity() bool`
 
 HasMgmtIdentity returns a boolean if a field has been set.
+
+### GetVmedia
+
+`func (o *ComputePhysicalAllOf) GetVmedia() ComputeVmediaRelationship`
+
+GetVmedia returns the Vmedia field if non-nil, zero value otherwise.
+
+### GetVmediaOk
+
+`func (o *ComputePhysicalAllOf) GetVmediaOk() (*ComputeVmediaRelationship, bool)`
+
+GetVmediaOk returns a tuple with the Vmedia field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVmedia
+
+`func (o *ComputePhysicalAllOf) SetVmedia(v ComputeVmediaRelationship)`
+
+SetVmedia sets Vmedia field to given value.
+
+### HasVmedia
+
+`func (o *ComputePhysicalAllOf) HasVmedia() bool`
+
+HasVmedia returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

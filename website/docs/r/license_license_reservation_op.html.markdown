@@ -22,7 +22,7 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
 * `auth_code`:(string) Revervation code used to install the license. 
 * `auth_code_installed`:(bool)(Computed) Flag to indicate whether authorization code is installed. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `confirm_code`:(string)(Computed) Confirm code used to complete the license update on smart license account. 
 * `generate_request_code`:(bool) Trigger the generation of request code for specific license reservation. 
 * `generate_return_code`:(bool) Trigger the generation of return code for specific license reservation. 

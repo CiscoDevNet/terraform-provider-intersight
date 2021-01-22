@@ -12,7 +12,7 @@ Type to represent additional switch specific capabilities.
 The following arguments are supported:
 * `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `first_index`:(float) First Index information for a Switch/Fabric-Interconnect hardware. 
 * `height`:(float) Height information for a Switch/Fabric-Interconnect hardware. 
 * `horizontal_start_offset`:(float) Horizontal Start Offset information for a Switch/Fabric-Interconnect hardware. 
@@ -23,7 +23,7 @@ The following arguments are supported:
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) An unique identifer for a capability descriptor. 
 * `number_of_slots`:(int) Number of Slots information for a Switch/Fabric-Interconnect hardware. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `orientation`:(string) Orientation information for a Switch/Fabric-Interconnect hardware. 
 * `pid`:(string) Product Identifier for a Switch/Fabric-Interconnect.* `UCS-FI-6454` - The standard 4th generation UCS Fabric Interconnect with 54 ports.* `UCS-FI-64108` - The expanded 4th generation UCS Fabric Interconnect with 108 ports.* `unknown` - Unknown device type, usage is TBD. 
 * `selector`:(string) Selector information for a Switch/Fabric-Interconnect hardware. 

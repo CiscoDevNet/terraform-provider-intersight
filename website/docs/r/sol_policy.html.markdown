@@ -13,7 +13,7 @@ The following arguments are supported:
 * `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
 * `baud_rate`:(int) Baud Rate used for Serial Over LAN communication.* `9600` - Use baud rate 9600 for communication.* `19200` - Use baud rate 19200 for communication.* `38400` - Use baud rate 38400 for communication.* `57600` - Use baud rate 57600 for communication.* `115200` - Use baud rate 115200 for communication. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `com_port`:(string) Serial port through which the system routes Serial Over LAN communication. This field is available only on some Cisco UCS C-Series servers. If it is unavailable, the server uses COM port 0 by default.* `com0` - Use serial port com0 for communication.* `com1` - Use serial port com1 for communication. 
 * `description`:(string) Description of the policy. 
 * `enabled`:(bool) State of Serial Over LAN service on the endpoint. 

@@ -38,7 +38,7 @@ This complex property has following sub-properties:
   + `name`:(string)(Computed) Name of the meta property which identifies a specific resource. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `value`:(string)(Computed) Value of the meta property which identifies a specific resource. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `cloud_init_config`:(Array with Maximum of one item) - Cloud init configuration data for virtual machine. 
 This complex property has following sub-properties:
   + `additional_properties`:
@@ -79,7 +79,7 @@ This complex property has following sub-properties:
     + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
     + `mode`:(string) File mode of the disk, example - Filesystem, Block.* `Block` - It is a Block virtual disk.* `Filesystem` - It is a File system virtual disk. 
     + `name`:(string) Name of the virtual disk. 
-    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `source_certs`:(string) Base64 encoded CA certificates of the https source to check against. 
     + `source_disk_to_clone`:(string) Source disk name from where the clone is done. 
     + `source_file_path`:(string) Disk image source for the virtual machine. 

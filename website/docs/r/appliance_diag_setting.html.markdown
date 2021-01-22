@@ -34,7 +34,7 @@ This complex property has following sub-properties:
 * `is_password_set`:(bool)(Computed) Indicates whether the value of the 'password' property has been set. 
 * `message`:(string) Status message of the password change operation. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `password`:(string) Password of the Intersight Appliance's OS diagnostic user account. 
 * `tags`:(Array)
 This complex property has following sub-properties:

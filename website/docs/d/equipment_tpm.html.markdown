@@ -14,6 +14,7 @@ The following arguments can be used to get data of already created objects in In
 * `admin_state`:(string) Identifies the admin configured state of the TPM. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
+* `firmware_version`:(string) Firmware Version of the Trusted Platform Module. 
 * `model`:(string) This field identifies the model of the given component. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `ownership`:(string) Identifies the ownership information of the TPM. 
@@ -23,4 +24,4 @@ The following arguments can be used to get data of already created objects in In
 * `serial`:(string) This field identifies the serial of the given component. 
 * `tpm_id`:(int) Enter  the ID of the trusted platform module. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
-* `nr_version`:(string) Identifies the revision of the Trusted Platform Module. 
+* `nr_version`:(string) Identifies the version of the Trusted Platform Module. 

@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-06T06:42:37Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
  *
- * API version: 1.0.9-3181
+ * API version: 1.0.9-3252
  * Contact: intersight@cisco.com
  */
 
@@ -28,6 +28,8 @@ type VmediaMapping struct {
 	AuthenticationProtocol *string `json:"AuthenticationProtocol,omitempty"`
 	// Type of remote Virtual Media device. * `cdd` - Uses compact disc drive as the virtual media mount device. * `hdd` - Uses hard disk drive as the virtual media mount device.
 	DeviceType *string `json:"DeviceType,omitempty"`
+	// Remote location of image. Preferred format is 'hostname/filePath/fileName'.
+	FileLocation *string `json:"FileLocation,omitempty"`
 	// IP address or hostname of the remote server.
 	HostName *string `json:"HostName,omitempty"`
 	// Indicates whether the value of the 'password' property has been set.
@@ -42,6 +44,8 @@ type VmediaMapping struct {
 	RemoteFile *string `json:"RemoteFile,omitempty"`
 	// URL path to the location of the image on the remote server. The preferred format is '/path'.
 	RemotePath *string `json:"RemotePath,omitempty"`
+	// File Location in standard format 'hostname/filePath/fileName'. This field should be used to calculate config drift. User input format may vary while inventory will return data in format in compliance with mount option for the mount. Both will be converged to this standard format for comparison.
+	SanitizedFileLocation *string `json:"SanitizedFileLocation,omitempty"`
 	// Username to log in to the remote server.
 	Username *string `json:"Username,omitempty"`
 	// Identity of the image for Virtual Media mapping.
@@ -200,6 +204,38 @@ func (o *VmediaMapping) HasDeviceType() bool {
 // SetDeviceType gets a reference to the given string and assigns it to the DeviceType field.
 func (o *VmediaMapping) SetDeviceType(v string) {
 	o.DeviceType = &v
+}
+
+// GetFileLocation returns the FileLocation field value if set, zero value otherwise.
+func (o *VmediaMapping) GetFileLocation() string {
+	if o == nil || o.FileLocation == nil {
+		var ret string
+		return ret
+	}
+	return *o.FileLocation
+}
+
+// GetFileLocationOk returns a tuple with the FileLocation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VmediaMapping) GetFileLocationOk() (*string, bool) {
+	if o == nil || o.FileLocation == nil {
+		return nil, false
+	}
+	return o.FileLocation, true
+}
+
+// HasFileLocation returns a boolean if a field has been set.
+func (o *VmediaMapping) HasFileLocation() bool {
+	if o != nil && o.FileLocation != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFileLocation gets a reference to the given string and assigns it to the FileLocation field.
+func (o *VmediaMapping) SetFileLocation(v string) {
+	o.FileLocation = &v
 }
 
 // GetHostName returns the HostName field value if set, zero value otherwise.
@@ -426,6 +462,38 @@ func (o *VmediaMapping) SetRemotePath(v string) {
 	o.RemotePath = &v
 }
 
+// GetSanitizedFileLocation returns the SanitizedFileLocation field value if set, zero value otherwise.
+func (o *VmediaMapping) GetSanitizedFileLocation() string {
+	if o == nil || o.SanitizedFileLocation == nil {
+		var ret string
+		return ret
+	}
+	return *o.SanitizedFileLocation
+}
+
+// GetSanitizedFileLocationOk returns a tuple with the SanitizedFileLocation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *VmediaMapping) GetSanitizedFileLocationOk() (*string, bool) {
+	if o == nil || o.SanitizedFileLocation == nil {
+		return nil, false
+	}
+	return o.SanitizedFileLocation, true
+}
+
+// HasSanitizedFileLocation returns a boolean if a field has been set.
+func (o *VmediaMapping) HasSanitizedFileLocation() bool {
+	if o != nil && o.SanitizedFileLocation != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSanitizedFileLocation gets a reference to the given string and assigns it to the SanitizedFileLocation field.
+func (o *VmediaMapping) SetSanitizedFileLocation(v string) {
+	o.SanitizedFileLocation = &v
+}
+
 // GetUsername returns the Username field value if set, zero value otherwise.
 func (o *VmediaMapping) GetUsername() string {
 	if o == nil || o.Username == nil {
@@ -512,6 +580,9 @@ func (o VmediaMapping) MarshalJSON() ([]byte, error) {
 	if o.DeviceType != nil {
 		toSerialize["DeviceType"] = o.DeviceType
 	}
+	if o.FileLocation != nil {
+		toSerialize["FileLocation"] = o.FileLocation
+	}
 	if o.HostName != nil {
 		toSerialize["HostName"] = o.HostName
 	}
@@ -532,6 +603,9 @@ func (o VmediaMapping) MarshalJSON() ([]byte, error) {
 	}
 	if o.RemotePath != nil {
 		toSerialize["RemotePath"] = o.RemotePath
+	}
+	if o.SanitizedFileLocation != nil {
+		toSerialize["SanitizedFileLocation"] = o.SanitizedFileLocation
 	}
 	if o.Username != nil {
 		toSerialize["Username"] = o.Username
@@ -557,6 +631,8 @@ func (o *VmediaMapping) UnmarshalJSON(bytes []byte) (err error) {
 		AuthenticationProtocol *string `json:"AuthenticationProtocol,omitempty"`
 		// Type of remote Virtual Media device. * `cdd` - Uses compact disc drive as the virtual media mount device. * `hdd` - Uses hard disk drive as the virtual media mount device.
 		DeviceType *string `json:"DeviceType,omitempty"`
+		// Remote location of image. Preferred format is 'hostname/filePath/fileName'.
+		FileLocation *string `json:"FileLocation,omitempty"`
 		// IP address or hostname of the remote server.
 		HostName *string `json:"HostName,omitempty"`
 		// Indicates whether the value of the 'password' property has been set.
@@ -571,6 +647,8 @@ func (o *VmediaMapping) UnmarshalJSON(bytes []byte) (err error) {
 		RemoteFile *string `json:"RemoteFile,omitempty"`
 		// URL path to the location of the image on the remote server. The preferred format is '/path'.
 		RemotePath *string `json:"RemotePath,omitempty"`
+		// File Location in standard format 'hostname/filePath/fileName'. This field should be used to calculate config drift. User input format may vary while inventory will return data in format in compliance with mount option for the mount. Both will be converged to this standard format for comparison.
+		SanitizedFileLocation *string `json:"SanitizedFileLocation,omitempty"`
 		// Username to log in to the remote server.
 		Username *string `json:"Username,omitempty"`
 		// Identity of the image for Virtual Media mapping.
@@ -586,6 +664,7 @@ func (o *VmediaMapping) UnmarshalJSON(bytes []byte) (err error) {
 		varVmediaMapping.ObjectType = varVmediaMappingWithoutEmbeddedStruct.ObjectType
 		varVmediaMapping.AuthenticationProtocol = varVmediaMappingWithoutEmbeddedStruct.AuthenticationProtocol
 		varVmediaMapping.DeviceType = varVmediaMappingWithoutEmbeddedStruct.DeviceType
+		varVmediaMapping.FileLocation = varVmediaMappingWithoutEmbeddedStruct.FileLocation
 		varVmediaMapping.HostName = varVmediaMappingWithoutEmbeddedStruct.HostName
 		varVmediaMapping.IsPasswordSet = varVmediaMappingWithoutEmbeddedStruct.IsPasswordSet
 		varVmediaMapping.MountOptions = varVmediaMappingWithoutEmbeddedStruct.MountOptions
@@ -593,6 +672,7 @@ func (o *VmediaMapping) UnmarshalJSON(bytes []byte) (err error) {
 		varVmediaMapping.Password = varVmediaMappingWithoutEmbeddedStruct.Password
 		varVmediaMapping.RemoteFile = varVmediaMappingWithoutEmbeddedStruct.RemoteFile
 		varVmediaMapping.RemotePath = varVmediaMappingWithoutEmbeddedStruct.RemotePath
+		varVmediaMapping.SanitizedFileLocation = varVmediaMappingWithoutEmbeddedStruct.SanitizedFileLocation
 		varVmediaMapping.Username = varVmediaMappingWithoutEmbeddedStruct.Username
 		varVmediaMapping.VolumeName = varVmediaMappingWithoutEmbeddedStruct.VolumeName
 		*o = VmediaMapping(varVmediaMapping)
@@ -616,6 +696,7 @@ func (o *VmediaMapping) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "ObjectType")
 		delete(additionalProperties, "AuthenticationProtocol")
 		delete(additionalProperties, "DeviceType")
+		delete(additionalProperties, "FileLocation")
 		delete(additionalProperties, "HostName")
 		delete(additionalProperties, "IsPasswordSet")
 		delete(additionalProperties, "MountOptions")
@@ -623,6 +704,7 @@ func (o *VmediaMapping) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Password")
 		delete(additionalProperties, "RemoteFile")
 		delete(additionalProperties, "RemotePath")
+		delete(additionalProperties, "SanitizedFileLocation")
 		delete(additionalProperties, "Username")
 		delete(additionalProperties, "VolumeName")
 
