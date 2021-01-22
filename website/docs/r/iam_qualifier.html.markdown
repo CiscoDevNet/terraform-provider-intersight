@@ -15,7 +15,7 @@ The following arguments are supported:
 * `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string)(Computed) The name of the SAML attribute used to qualify a user to user group. By default this is memberOf attribute in SAML assertion. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `tags`:(Array)
 This complex property has following sub-properties:
   + `additional_properties`:

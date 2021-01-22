@@ -20,7 +20,7 @@ This complex property has following sub-properties:
   + `enable_ip_v4`:(bool) This flag enables the use of IPv4 address for end-point access. 
   + `enable_ip_v6`:(bool) This flag enables the use of IPv6 address for end-point access. 
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `description`:(string) Description of the policy. 
 * `inband_ip_pool`:(Array with Maximum of one item) - A reference to a ippoolPool resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:

@@ -50,7 +50,7 @@ This complex property has following sub-properties:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `gateway`:(string)(Computed) IP address of the default IPv6 gateway. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `prefix`:(int)(Computed) A prefix length which masks the  IP address and divides the IP address into network address and host address. 
   + `primary_dns`:(string)(Computed) IP Address of the primary Domain Name System (DNS) server. 
   + `secondary_dns`:(string)(Computed) IP Address of the secondary Domain Name System (DNS) server. 

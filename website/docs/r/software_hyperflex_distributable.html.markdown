@@ -34,7 +34,7 @@ This complex property has following sub-properties:
   + `image_path`:(string) This shows the path of component image within the distributable. 
   + `is_oob_supported`:(bool) If set, the component can be updated through out-of-band management, else, is updated through host service utility boot. 
   + `model`:(string) The model of the component image in the distributable. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `oob_manageability`:
                 (Array of schema.TypeString) -
   + `packed_version`:(string) The image version of components packaged in the distributable. 

@@ -68,11 +68,11 @@ This complex property has following sub-properties:
     + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
     + `file_location`:(string) The location to the image file. The accepted format is IP-or-hostname/folder1/folder2/.../imageFile. 
     + `mount_options`:(string) Mount option (Authentication Protocol) as configured on the CIFS Server. Example:ntlmv2.* `none` - The default authentication protocol is decided by the endpoint.* `ntlm` - The external CIFS server is configured with ntlm as the authentication protocol.* `ntlmi` - Mount options of CIFS file server is ntlmi.* `ntlmv2` - Mount options of CIFS file server is ntlmv2.* `ntlmv2i` - Mount options of CIFS file server is ntlmv2i.* `ntlmssp` - Mount options of CIFS file server is ntlmssp.* `ntlmsspi` - Mount options of CIFS file server is ntlmsspi. 
-    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+    + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
     + `remote_file`:(string)(Computed) Filename of the image in the remote share location. Example:ucs-c220m5-huu-3.1.2c.iso. 
     + `remote_ip`:(string)(Computed) CIFS Server Hostname or IP Address. For example:CIFS-server-hostname or 10.10.8.7. The remote share server should have network connectivity with the CIMC of the selected devices for a successful upgrade. 
     + `remote_share`:(string)(Computed) Directory where the image is stored. Example:share/subfolder. 
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `http_server`:(Array with Maximum of one item) - HTTP (for WWW) file server option for network share upgrade. 
 This complex property has following sub-properties:
     + `additional_properties`:

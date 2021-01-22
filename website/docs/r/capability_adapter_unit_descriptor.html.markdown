@@ -28,7 +28,7 @@ This complex property has following sub-properties:
 * `model`:(string) The model of the endpoint, for which this capability information is applicable. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `num_dce_ports`:(int) Number of Dce Ports for the adaptor. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `prom_card_type`:(string) Prom card type for the adaptor. 
 * `tags`:(Array)
 This complex property has following sub-properties:

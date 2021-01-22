@@ -50,6 +50,7 @@ Name | Type | Description | Notes
 **UserLabel** | Pointer to **string** | The user defined label assigned to the server. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | The universally unique identity of the server. | [optional] [readonly] 
 **Vendor** | Pointer to **string** | This field identifies the vendor of the given component. | [optional] [readonly] 
+**EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](equipment.Chassis.Relationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
@@ -1231,6 +1232,31 @@ SetVendor sets Vendor field to given value.
 `func (o *ComputePhysicalSummary) HasVendor() bool`
 
 HasVendor returns a boolean if a field has been set.
+
+### GetEquipmentChassis
+
+`func (o *ComputePhysicalSummary) GetEquipmentChassis() EquipmentChassisRelationship`
+
+GetEquipmentChassis returns the EquipmentChassis field if non-nil, zero value otherwise.
+
+### GetEquipmentChassisOk
+
+`func (o *ComputePhysicalSummary) GetEquipmentChassisOk() (*EquipmentChassisRelationship, bool)`
+
+GetEquipmentChassisOk returns a tuple with the EquipmentChassis field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEquipmentChassis
+
+`func (o *ComputePhysicalSummary) SetEquipmentChassis(v EquipmentChassisRelationship)`
+
+SetEquipmentChassis sets EquipmentChassis field to given value.
+
+### HasEquipmentChassis
+
+`func (o *ComputePhysicalSummary) HasEquipmentChassis() bool`
+
+HasEquipmentChassis returns a boolean if a field has been set.
 
 ### GetInventoryDeviceInfo
 

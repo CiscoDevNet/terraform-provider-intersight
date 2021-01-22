@@ -31,7 +31,7 @@ This complex property has following sub-properties:
   + `slot_number`:(int) The slot number of the disk to be referenced. As this is a policy, this slot number may or may not be valid depending on the number of disks in the associated server. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `name`:(string) Name of the concrete policy. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
 * `organization`:(Array with Maximum of one item) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
   + `additional_properties`:
@@ -69,7 +69,7 @@ This complex property has following sub-properties:
   + `expand_to_available`:(bool) The flag enables this virtual drive to use all the available space in the disk group. When this flag is configured, the size property is ignored. 
   + `io_policy`:(string) Desired IO mode - direct IO or cached IO.* `Default` - Use platform default IO mode.* `Direct` - Use direct IO for writing directly into the disk.* `Cached` - Use cached IO for writing into cache and then to disk. 
   + `name`:(string) The name of the virtual drive. The name can be between 1 and 15 alphanumeric characters. Spaces or any special characters other than - (hyphen), _ (underscore), : (colon), and . (period) are not allowed. 
-  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
+  + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
   + `read_policy`:(string) Read ahead mode to be used to read data from this virtual drive.* `Default` - Use platform default read ahead mode.* `ReadAhead` - Use read ahead mode for the policy.* `NoReadAhead` - Do not use read ahead mode for the policy. 
   + `size`:(int) Virtual drive size in MB. Size is mandatory field unless the 'Expand to Available' option is enabled. 
   + `strip_size`:(string) The strip size is the portion of a stripe that resides on a single drive in the drive group. The stripe consists of the data segments that the RAID controller writes across multiple drives, not including parity drives.* `Default` - Use platform default strip size for a virtual drive.* `32k` - Enables a strip size of 32k for a virtual drive.* `64k` - Enables a strip size of 64k for a virtual drive.* `128k` - Enables a strip size of 128k for a virtual drive.* `256k` - Enables a strip size of 256k for a virtual drive.* `512k` - Enables a strip size of 512k for a virtual drive.* `1024k` - Enables a strip size of 1024k for a virtual drive. 

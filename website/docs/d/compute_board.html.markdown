@@ -10,7 +10,7 @@ description: |-
 Mother board of a server.
 ## Argument Reference
 The following arguments can be used to get data of already created objects in Intersight appliance:
-* `board_id`:(int) The identity of the motherboard. 
+* `board_id`:(int) Unique identifier of the mother board present in the server. 
 * `cpu_type_controller`:(string) The type of central processing unit on the mother board. 
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 

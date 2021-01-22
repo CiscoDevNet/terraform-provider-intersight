@@ -21,7 +21,7 @@ func dataSourceVmediaPolicy() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -61,12 +61,17 @@ func dataSourceVmediaPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
 						"device_type": {
 							Description: "Type of remote Virtual Media device.\n* `cdd` - Uses compact disc drive as the virtual media mount device.\n* `hdd` - Uses hard disk drive as the virtual media mount device.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"file_location": {
+							Description: "Remote location of image. Preferred format is 'hostname/filePath/fileName'.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -92,7 +97,7 @@ func dataSourceVmediaPolicy() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -111,6 +116,12 @@ func dataSourceVmediaPolicy() *schema.Resource {
 							Description: "URL path to the location of the image on the remote server. The preferred format is '/path'.",
 							Type:        schema.TypeString,
 							Optional:    true,
+						},
+						"sanitized_file_location": {
+							Description: "File Location in standard format 'hostname/filePath/fileName'. This field should be used to calculate config drift. User input format may vary while inventory will return data in format in compliance with mount option for the mount. Both will be converged to this standard format for comparison.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
 						},
 						"username": {
 							Description: "Username to log in to the remote server.",

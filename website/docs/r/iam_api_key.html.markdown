@@ -22,7 +22,7 @@ All published Intersight SDKs support API keys.
 The following arguments are supported:
 * `additional_properties`:
 (Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `hash_algorithm`:(string) The cryptographic hash algorithm to calculate the message digest.* `SHA256` - The SHA-256 cryptographic hash, as defined by NIST in FIPS 180-4.* `SHA384` - The SHA-384 cryptographic hash, as defined by NIST in FIPS 180-4.* `SHA512` - The SHA-512 cryptographic hash, as defined by NIST in FIPS 180-4.* `SHA512_224` - The SHA-512/224 cryptographic hash, as defined by NIST in FIPS 180-4.* `SHA512_256` - The SHA-512/256 cryptographic hash, as defined by NIST in FIPS 180-4. 
 * `key_spec`:(Array with Maximum of one item) - The key generation specification provides the algorithm and the parameters required for this algorithm to generate a private key, public key pair. Supported key generation schemes include RSA, ECDSA and Edwards-Curve Digital Signature Algorithm (EdDSA). 
 This complex property has following sub-properties:

@@ -8,10 +8,11 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.Tpm"]
 **ActivationStatus** | Pointer to **string** | Identifies the activation status of the TPM. | [optional] [readonly] 
 **AdminState** | Pointer to **string** | Identifies the admin configured state of the TPM. | [optional] [readonly] 
+**FirmwareVersion** | Pointer to **string** | Firmware Version of the Trusted Platform Module. | [optional] 
 **Ownership** | Pointer to **string** | Identifies the ownership information of the TPM. | [optional] [readonly] 
 **Presence** | Pointer to **string** | Identifies the presence of the trusted platform module. | [optional] [readonly] 
 **TpmId** | Pointer to **int64** | Enter  the ID of the trusted platform module. | [optional] [readonly] 
-**Version** | Pointer to **string** | Identifies the revision of the Trusted Platform Module. | [optional] [readonly] 
+**Version** | Pointer to **string** | Identifies the version of the Trusted Platform Module. | [optional] [readonly] 
 **ComputeBoard** | Pointer to [**ComputeBoardRelationship**](compute.Board.Relationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
@@ -124,6 +125,31 @@ SetAdminState sets AdminState field to given value.
 `func (o *EquipmentTpmAllOf) HasAdminState() bool`
 
 HasAdminState returns a boolean if a field has been set.
+
+### GetFirmwareVersion
+
+`func (o *EquipmentTpmAllOf) GetFirmwareVersion() string`
+
+GetFirmwareVersion returns the FirmwareVersion field if non-nil, zero value otherwise.
+
+### GetFirmwareVersionOk
+
+`func (o *EquipmentTpmAllOf) GetFirmwareVersionOk() (*string, bool)`
+
+GetFirmwareVersionOk returns a tuple with the FirmwareVersion field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFirmwareVersion
+
+`func (o *EquipmentTpmAllOf) SetFirmwareVersion(v string)`
+
+SetFirmwareVersion sets FirmwareVersion field to given value.
+
+### HasFirmwareVersion
+
+`func (o *EquipmentTpmAllOf) HasFirmwareVersion() bool`
+
+HasFirmwareVersion returns a boolean if a field has been set.
 
 ### GetOwnership
 

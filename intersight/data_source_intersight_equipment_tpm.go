@@ -33,7 +33,7 @@ func dataSourceEquipmentTpm() *schema.Resource {
 				Computed:    true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -88,6 +88,11 @@ func dataSourceEquipmentTpm() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"firmware_version": {
+				Description: "Firmware Version of the Trusted Platform Module.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"inventory_device_info": {
 				Description: "A reference to a inventoryDeviceInfo resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -140,7 +145,7 @@ func dataSourceEquipmentTpm() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -250,7 +255,7 @@ func dataSourceEquipmentTpm() *schema.Resource {
 				Computed:    true,
 			},
 			"nr_version": {
-				Description: "Identifies the revision of the Trusted Platform Module.",
+				Description: "Identifies the version of the Trusted Platform Module.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -284,6 +289,10 @@ func dataSourceEquipmentTpmRead(c context.Context, d *schema.ResourceData, meta 
 	if v, ok := d.GetOk("dn"); ok {
 		x := (v.(string))
 		o.SetDn(x)
+	}
+	if v, ok := d.GetOk("firmware_version"); ok {
+		x := (v.(string))
+		o.SetFirmwareVersion(x)
 	}
 	if v, ok := d.GetOk("model"); ok {
 		x := (v.(string))
@@ -386,6 +395,9 @@ func dataSourceEquipmentTpmRead(c context.Context, d *schema.ResourceData, meta 
 			}
 			if err := d.Set("dn", (s.GetDn())); err != nil {
 				return diag.Errorf("error occurred while setting property Dn: %s", err.Error())
+			}
+			if err := d.Set("firmware_version", (s.GetFirmwareVersion())); err != nil {
+				return diag.Errorf("error occurred while setting property FirmwareVersion: %s", err.Error())
 			}
 
 			if err := d.Set("inventory_device_info", flattenMapInventoryDeviceInfoRelationship(s.GetInventoryDeviceInfo(), d)); err != nil {
