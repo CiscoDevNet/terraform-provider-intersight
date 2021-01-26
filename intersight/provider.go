@@ -20,7 +20,7 @@ func Provider() *schema.Provider {
 			},
 			"secretkey": {
 				Type:        schema.TypeString,
-				Optional:    true,
+				Required:    true,
 				DefaultFunc: schema.EnvDefaultFunc("INTERSIGHT_SECRET_KEY", nil),
 				Description: "Secret Key File Path or Contents",
 			},
