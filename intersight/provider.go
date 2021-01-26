@@ -20,9 +20,15 @@ func Provider() *schema.Provider {
 			},
 			"secretkeyfile": {
 				Type:        schema.TypeString,
-				Required:    true,
+				Optional:    true,
 				DefaultFunc: schema.EnvDefaultFunc("INTERSIGHT_SECRET_KEY_FILE_PATH", nil),
 				Description: "Secret Key File Path",
+			},
+			"secretkeystring": {
+				Type:        schema.TypeString,
+				Optional:    true,
+				DefaultFunc: schema.EnvDefaultFunc("INTERSIGHT_SECRET_KEY_STRING", nil),
+				Description: "Secret Key String",
 			},
 			"endpoint": {
 				Type:        schema.TypeString,
@@ -46,13 +52,14 @@ func configureProvider(c context.Context, d *schema.ResourceData) (interface{}, 
 		endpoint = strings.TrimPrefix(endpoint, "http://")
 	}
 	config := Config{
-		ApiKey:        d.Get("apikey").(string),
-		SecretKeyFile: d.Get("secretkeyfile").(string),
-		Endpoint:      endpoint,
+		ApiKey:          d.Get("apikey").(string),
+		SecretKeyFile:   d.Get("secretkeyfile").(string),
+		SecretKeyString: d.Get("secretkeystring").(string),
+		Endpoint:        endpoint,
 	}
 
 	client := Client{}
-	config.ctx, err = client.SetInputs(config.ApiKey, config.SecretKeyFile, config.Endpoint, true)
+	config.ctx, err = client.SetInputs(config.ApiKey, config.SecretKeyFile, config.SecretKeyString, config.Endpoint, true)
 	if err != nil {
 		return nil, diag.Errorf(err.Error())
 	}
