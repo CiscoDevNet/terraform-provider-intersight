@@ -109,11 +109,10 @@ var supportedSigningSchemes = map[string]bool{
 // 2. Set the 'Digest' header in the request body.
 // 3. Include the 'Digest' header and value in the HTTP signature.
 type HttpSignatureAuth struct {
-	KeyId            string // A key identifier.
-	PrivateKeyPath   string // The path to the private key.
-	PrivateKeyString string // The private key string used in place of a file path.
-	Passphrase       string // The passphrase to decrypt the private key, if the key is encrypted.
-	SigningScheme    string // The signature scheme, when signing HTTP requests. Supported value is 'hs2019'.
+	KeyId         string // A key identifier.
+	SecretKey     string // The path to the private key.
+	Passphrase    string // The passphrase to decrypt the private key, if the key is encrypted.
+	SigningScheme string // The signature scheme, when signing HTTP requests. Supported value is 'hs2019'.
 	// The signature algorithm, when signing HTTP requests.
 	// Supported values are RSASSA-PKCS1-v1_5, RSASSA-PSS.
 	SigningAlgorithm string
@@ -133,11 +132,8 @@ func (h *HttpSignatureAuth) ContextWithValue(ctx context.Context) (context.Conte
 	if h.KeyId == "" {
 		return nil, fmt.Errorf("Key ID must be specified")
 	}
-	if h.PrivateKeyPath == "" && h.PrivateKeyString == "" {
-		return nil, fmt.Errorf("Either `PrivateKeyPath` or `PrivateKeyString` must be set")
-	}
-	if h.PrivateKeyPath != "" && h.PrivateKeyString != "" {
-		return nil, fmt.Errorf("Only one of `PrivateKeyPath` or `PrivateKeyString` must be configured but a value was found for both")
+	if h.SecretKey == "" {
+		return nil, fmt.Errorf("A value for `SecretKey` must be set")
 	}
 	if _, ok := supportedSigningSchemes[h.SigningScheme]; !ok {
 		return nil, fmt.Errorf("Invalid signing scheme: '%v'", h.SigningScheme)
@@ -183,13 +179,13 @@ func (h *HttpSignatureAuth) GetPublicKey() (crypto.PublicKey, error) {
 // loadPrivateKey reads the private key from the file specified in the HttpSignatureAuth.
 func (h *HttpSignatureAuth) loadPrivateKey() (err error) {
 	var pemBlock *pem.Block
-	if h.PrivateKeyString != "" {
-		pemBlock, _ = pem.Decode([]byte(h.PrivateKeyString))
-	} else {
+
+	pemBlock, _ = pem.Decode([]byte(h.SecretKey))
+	if pemBlock == nil {
 		var file *os.File
-		file, err = os.Open(h.PrivateKeyPath)
+		file, err = os.Open(h.SecretKey)
 		if err != nil {
-			return fmt.Errorf("Cannot load private key '%s'. Error: %v", h.PrivateKeyPath, err)
+			return fmt.Errorf("Cannot load private key '%s'. Error: %v", h.SecretKey, err)
 		}
 		defer func() {
 			err = file.Close()
@@ -203,11 +199,7 @@ func (h *HttpSignatureAuth) loadPrivateKey() (err error) {
 	}
 	if pemBlock == nil {
 		// No PEM data has been found.
-		if h.PrivateKeyString != "" {
-			return fmt.Errorf("Secret '%s' does not contain PEM data", h.PrivateKeyString)
-		} else {
-			return fmt.Errorf("File '%s' does not contain PEM data", h.PrivateKeyPath)
-		}
+		return fmt.Errorf("Secret '%s' does not contain a file path to a valid PEM file or contain a properly formatted PEM data string", h.SecretKey)
 	}
 	var privKey []byte
 	if x509.IsEncryptedPEMBlock(pemBlock) {

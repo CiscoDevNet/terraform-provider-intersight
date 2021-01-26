@@ -20,12 +20,11 @@ import (
 )
 
 type Config struct {
-	ApiKey          string
-	SecretKeyFile   string
-	SecretKeyString string
-	Endpoint        string
-	ApiClient       *gosdk.APIClient
-	ctx             context.Context
+	ApiKey    string
+	SecretKey string
+	Endpoint  string
+	ApiClient *gosdk.APIClient
+	ctx       context.Context
 }
 
 type AuthCodePKCEKeys struct {
@@ -38,14 +37,14 @@ type Client struct {
 	skipTlsVerification bool
 }
 
-func (c *Client) SetInputs(apiKeyId string, apiKeyFile string, apiKeyString string, hostName string, ignoreTls bool) (context.Context, error) {
+func (c *Client) SetInputs(apiKeyId string, apiSecretKey string, hostName string, ignoreTls bool) (context.Context, error) {
 	c.hostname = hostName
 	c.skipTlsVerification = ignoreTls
 
 	var err error
 	ctx := context.Background()
 	if apiKeyId != "" {
-		ctx, err = c.getHttpSignatureContext(ctx, apiKeyId, apiKeyFile, apiKeyString)
+		ctx, err = c.getHttpSignatureContext(ctx, apiKeyId, apiSecretKey)
 		if err != nil {
 			return nil, fmt.Errorf("failed to get signature context: %v", err.Error())
 		}
@@ -59,17 +58,14 @@ func newTransport(t http.RoundTripper) *transport {
 	return &transport{t: t}
 }
 
-func (c *Client) getHttpSignatureContext(ctx context.Context, flagKeyId string, flagKeyFileName string, flagKeyString string) (context.Context, error) {
+func (c *Client) getHttpSignatureContext(ctx context.Context, flagKeyId string, flagSecretKey string) (context.Context, error) {
 	// Example keyId: 596cc79e5d91b400010d15ad/59b856cb16267c0001286496/5dbb09b27564612d30b68668
 	// Create Authentication context.
 	if flagKeyId == "" {
 		return nil, errors.New("KeyId must be set")
 	}
-	if flagKeyFileName == "" && flagKeyString == "" {
-		return nil, errors.New("Either `secretkeyfile` or `secretkeystring` must be set")
-	}
-	if flagKeyFileName != "" && flagKeyString != "" {
-		return nil, errors.New("Only one of `secretkeyfile` or `secretkeystring` must be configured but a value was found for both")
+	if flagSecretKey == "" {
+		return nil, errors.New("A value for `secretkey` is required.  Either file path or certifcate string are supported.")
 	}
 	// The following headers are required by Intersight:
 	//   (request-target)
@@ -83,8 +79,7 @@ func (c *Client) getHttpSignatureContext(ctx context.Context, flagKeyId string, 
 	//SigningAlgorithm: intersight.HttpSigningAlgorithmRsaPSS,
 	authCfg := gosdk.HttpSignatureAuth{
 		KeyId:            flagKeyId,
-		PrivateKeyPath:   flagKeyFileName,
-		PrivateKeyString: flagKeyString,
+		SecretKey:        flagSecretKey,
 		Passphrase:       "",
 		SigningScheme:    gosdk.HttpSigningSchemeRsaSha256,
 		SigningAlgorithm: gosdk.HttpSigningAlgorithmRsaPKCS1v15,
