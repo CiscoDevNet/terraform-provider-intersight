@@ -12,4 +12,5 @@ terraform.tfvars
 
 .terraform.lock.hcl
 .terraform.tfstate.lock.info
-terraform.d/
+terraform.d
+.terraform.d
