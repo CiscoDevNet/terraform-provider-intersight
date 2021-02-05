@@ -68,7 +68,7 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 				ForceNew:   true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -118,7 +118,7 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 										Computed:    true,
 									},
 									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
@@ -170,7 +170,7 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 										Default:     true,
 									},
 									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
@@ -230,7 +230,7 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -257,7 +257,7 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -309,7 +309,7 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 				ForceNew:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -349,7 +349,7 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 										Computed:    true,
 									},
 									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
@@ -401,7 +401,7 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 										Default:     true,
 									},
 									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
@@ -470,7 +470,7 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -581,7 +581,7 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -639,7 +639,7 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -661,7 +661,7 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 										DiffSuppressFunc: SuppressDiffAdditionProps,
 									},
 									"class_id": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
@@ -679,7 +679,7 @@ func resourceWorkflowWorkflowDefinition() *schema.Resource {
 										Computed:    true,
 									},
 									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
@@ -1558,7 +1558,8 @@ func resourceWorkflowWorkflowDefinitionCreate(c context.Context, d *schema.Resou
 
 	r := conn.ApiClient.WorkflowApi.CreateWorkflowWorkflowDefinition(conn.ctx).WorkflowWorkflowDefinition(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating WorkflowWorkflowDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -1573,7 +1574,8 @@ func resourceWorkflowWorkflowDefinitionRead(c context.Context, d *schema.Resourc
 	var de diag.Diagnostics
 	r := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowDefinitionByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "WorkflowWorkflowDefinition object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -2506,7 +2508,8 @@ func resourceWorkflowWorkflowDefinitionUpdate(c context.Context, d *schema.Resou
 
 	r := conn.ApiClient.WorkflowApi.UpdateWorkflowWorkflowDefinition(conn.ctx, d.Id()).WorkflowWorkflowDefinition(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating WorkflowWorkflowDefinition: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -2521,7 +2524,8 @@ func resourceWorkflowWorkflowDefinitionDelete(c context.Context, d *schema.Resou
 	conn := meta.(*Config)
 	p := conn.ApiClient.WorkflowApi.DeleteWorkflowWorkflowDefinition(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting WorkflowWorkflowDefinition object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

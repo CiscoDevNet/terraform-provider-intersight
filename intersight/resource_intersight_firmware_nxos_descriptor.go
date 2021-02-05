@@ -282,7 +282,8 @@ func resourceFirmwareNxosDescriptorCreate(c context.Context, d *schema.ResourceD
 
 	r := conn.ApiClient.FirmwareApi.CreateFirmwareNxosDescriptor(conn.ctx).FirmwareNxosDescriptor(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating FirmwareNxosDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -297,7 +298,8 @@ func resourceFirmwareNxosDescriptorRead(c context.Context, d *schema.ResourceDat
 	var de diag.Diagnostics
 	r := conn.ApiClient.FirmwareApi.GetFirmwareNxosDescriptorByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "FirmwareNxosDescriptor object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -511,7 +513,8 @@ func resourceFirmwareNxosDescriptorUpdate(c context.Context, d *schema.ResourceD
 
 	r := conn.ApiClient.FirmwareApi.UpdateFirmwareNxosDescriptor(conn.ctx, d.Id()).FirmwareNxosDescriptor(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating FirmwareNxosDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -526,7 +529,8 @@ func resourceFirmwareNxosDescriptorDelete(c context.Context, d *schema.ResourceD
 	conn := meta.(*Config)
 	p := conn.ApiClient.FirmwareApi.DeleteFirmwareNxosDescriptor(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting FirmwareNxosDescriptor object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

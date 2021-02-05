@@ -311,7 +311,8 @@ func dataSourceBootSanDeviceRead(c context.Context, d *schema.ResourceData, meta
 		return diag.Errorf("json marshal of BootSanDevice object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.BootApi.GetBootSanDeviceList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching BootSanDevice: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 

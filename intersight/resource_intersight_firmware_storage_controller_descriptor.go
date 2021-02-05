@@ -282,7 +282,8 @@ func resourceFirmwareStorageControllerDescriptorCreate(c context.Context, d *sch
 
 	r := conn.ApiClient.FirmwareApi.CreateFirmwareStorageControllerDescriptor(conn.ctx).FirmwareStorageControllerDescriptor(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating FirmwareStorageControllerDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -297,7 +298,8 @@ func resourceFirmwareStorageControllerDescriptorRead(c context.Context, d *schem
 	var de diag.Diagnostics
 	r := conn.ApiClient.FirmwareApi.GetFirmwareStorageControllerDescriptorByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "FirmwareStorageControllerDescriptor object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -511,7 +513,8 @@ func resourceFirmwareStorageControllerDescriptorUpdate(c context.Context, d *sch
 
 	r := conn.ApiClient.FirmwareApi.UpdateFirmwareStorageControllerDescriptor(conn.ctx, d.Id()).FirmwareStorageControllerDescriptor(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating FirmwareStorageControllerDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -526,7 +529,8 @@ func resourceFirmwareStorageControllerDescriptorDelete(c context.Context, d *sch
 	conn := meta.(*Config)
 	p := conn.ApiClient.FirmwareApi.DeleteFirmwareStorageControllerDescriptor(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting FirmwareStorageControllerDescriptor object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

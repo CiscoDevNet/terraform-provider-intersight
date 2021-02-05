@@ -182,7 +182,8 @@ func dataSourceIaasConnectorPackRead(c context.Context, d *schema.ResourceData, 
 		return diag.Errorf("json marshal of IaasConnectorPack object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.IaasApi.GetIaasConnectorPackList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching IaasConnectorPack: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 

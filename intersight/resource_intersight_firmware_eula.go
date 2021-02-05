@@ -79,7 +79,7 @@ func resourceFirmwareEula() *schema.Resource {
 				ForceNew:         true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -250,7 +250,8 @@ func resourceFirmwareEulaCreate(c context.Context, d *schema.ResourceData, meta 
 
 	r := conn.ApiClient.FirmwareApi.CreateFirmwareEula(conn.ctx).FirmwareEula(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating FirmwareEula: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -265,7 +266,8 @@ func resourceFirmwareEulaRead(c context.Context, d *schema.ResourceData, meta in
 	var de diag.Diagnostics
 	r := conn.ApiClient.FirmwareApi.GetFirmwareEulaByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "FirmwareEula object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -319,7 +321,8 @@ func resourceFirmwareEulaDelete(c context.Context, d *schema.ResourceData, meta 
 	x := d.Get("workflow_info").([]interface{})[0].(map[string]interface{})
 	moid := x["moid"].(string)
 	getWorkflow, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowInfoByMoid(conn.ctx, moid).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching workflow info for FirmwareEula: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	if getWorkflow.GetStatus() == "RUNNING" {
@@ -328,12 +331,14 @@ func resourceFirmwareEulaDelete(c context.Context, d *schema.ResourceData, meta 
 		o.SetClassId("workflow.WorkflowInfo")
 		o.SetObjectType("workflow.WorkflowInfo")
 		_, _, responseErr = conn.ApiClient.WorkflowApi.UpdateWorkflowWorkflowInfo(conn.ctx, moid).WorkflowWorkflowInfo(*o).Execute()
-		if responseErr.Error() != "" {
+		if responseErr != nil {
+			responseErr := responseErr.(models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while cancelling workflow triggered by FirmwareEula: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		p := conn.ApiClient.WorkflowApi.DeleteWorkflowWorkflowInfo(conn.ctx, moid)
 		_, responseErr = p.Execute()
-		if responseErr.Error() != "" {
+		if responseErr != nil {
+			responseErr := responseErr.(models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting workflow triggered by FirmwareEula: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 	}

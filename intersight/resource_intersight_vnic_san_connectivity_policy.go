@@ -25,7 +25,7 @@ func resourceVnicSanConnectivityPolicy() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -526,7 +526,8 @@ func resourceVnicSanConnectivityPolicyCreate(c context.Context, d *schema.Resour
 
 	r := conn.ApiClient.VnicApi.CreateVnicSanConnectivityPolicy(conn.ctx).VnicSanConnectivityPolicy(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating VnicSanConnectivityPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -545,7 +546,8 @@ func detachVnicSanConnectivityPolicyProfiles(d *schema.ResourceData, meta interf
 
 	r := conn.ApiClient.VnicApi.UpdateVnicSanConnectivityPolicy(conn.ctx, d.Id()).VnicSanConnectivityPolicy(*o)
 	_, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	return de
@@ -558,7 +560,8 @@ func resourceVnicSanConnectivityPolicyRead(c context.Context, d *schema.Resource
 	var de diag.Diagnostics
 	r := conn.ApiClient.VnicApi.GetVnicSanConnectivityPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "VnicSanConnectivityPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -905,7 +908,8 @@ func resourceVnicSanConnectivityPolicyUpdate(c context.Context, d *schema.Resour
 
 	r := conn.ApiClient.VnicApi.UpdateVnicSanConnectivityPolicy(conn.ctx, d.Id()).VnicSanConnectivityPolicy(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating VnicSanConnectivityPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -928,7 +932,8 @@ func resourceVnicSanConnectivityPolicyDelete(c context.Context, d *schema.Resour
 	}
 	p := conn.ApiClient.VnicApi.DeleteVnicSanConnectivityPolicy(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting VnicSanConnectivityPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

@@ -25,7 +25,7 @@ func resourceKubernetesVirtualMachineNodeProfile() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -291,6 +291,47 @@ func resourceKubernetesVirtualMachineNodeProfile() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 				Default:     "instance",
+			},
+			"nr_version": {
+				Description: "A reference to a kubernetesVersion resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
 			},
 			"virtual_machine": {
 				Description: "A reference to a virtualizationVirtualMachine resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
@@ -629,6 +670,49 @@ func resourceKubernetesVirtualMachineNodeProfileCreate(c context.Context, d *sch
 		o.SetType(x)
 	}
 
+	if v, ok := d.GetOk("nr_version"); ok {
+		p := make([]models.KubernetesVersionRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoMoRefWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsKubernetesVersionRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetVersion(x)
+		}
+	}
+
 	if v, ok := d.GetOk("virtual_machine"); ok {
 		p := make([]models.VirtualizationVirtualMachineRelationship, 0, 1)
 		s := v.([]interface{})
@@ -674,7 +758,8 @@ func resourceKubernetesVirtualMachineNodeProfileCreate(c context.Context, d *sch
 
 	r := conn.ApiClient.KubernetesApi.CreateKubernetesVirtualMachineNodeProfile(conn.ctx).KubernetesVirtualMachineNodeProfile(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating KubernetesVirtualMachineNodeProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -689,7 +774,8 @@ func resourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *schem
 	var de diag.Diagnostics
 	r := conn.ApiClient.KubernetesApi.GetKubernetesVirtualMachineNodeProfileByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "KubernetesVirtualMachineNodeProfile object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -752,6 +838,10 @@ func resourceKubernetesVirtualMachineNodeProfileRead(c context.Context, d *schem
 
 	if err := d.Set("type", (s.GetType())); err != nil {
 		return diag.Errorf("error occurred while setting property Type in KubernetesVirtualMachineNodeProfile object: %s", err.Error())
+	}
+
+	if err := d.Set("nr_version", flattenMapKubernetesVersionRelationship(s.GetVersion(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property Version in KubernetesVirtualMachineNodeProfile object: %s", err.Error())
 	}
 
 	if err := d.Set("virtual_machine", flattenMapVirtualizationVirtualMachineRelationship(s.GetVirtualMachine(), d)); err != nil {
@@ -1067,6 +1157,50 @@ func resourceKubernetesVirtualMachineNodeProfileUpdate(c context.Context, d *sch
 		o.SetType(x)
 	}
 
+	if d.HasChange("nr_version") {
+		v := d.Get("nr_version")
+		p := make([]models.KubernetesVersionRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsKubernetesVersionRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetVersion(x)
+		}
+	}
+
 	if d.HasChange("virtual_machine") {
 		v := d.Get("virtual_machine")
 		p := make([]models.VirtualizationVirtualMachineRelationship, 0, 1)
@@ -1113,7 +1247,8 @@ func resourceKubernetesVirtualMachineNodeProfileUpdate(c context.Context, d *sch
 
 	r := conn.ApiClient.KubernetesApi.UpdateKubernetesVirtualMachineNodeProfile(conn.ctx, d.Id()).KubernetesVirtualMachineNodeProfile(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating KubernetesVirtualMachineNodeProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -1128,7 +1263,8 @@ func resourceKubernetesVirtualMachineNodeProfileDelete(c context.Context, d *sch
 	conn := meta.(*Config)
 	p := conn.ApiClient.KubernetesApi.DeleteKubernetesVirtualMachineNodeProfile(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting KubernetesVirtualMachineNodeProfile object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

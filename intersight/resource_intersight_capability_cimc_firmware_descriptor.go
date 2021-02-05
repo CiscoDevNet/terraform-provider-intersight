@@ -65,7 +65,7 @@ func resourceCapabilityCimcFirmwareDescriptor() *schema.Resource {
 				Computed:   true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -88,7 +88,7 @@ func resourceCapabilityCimcFirmwareDescriptor() *schema.Resource {
 				ForceNew:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -262,7 +262,8 @@ func resourceCapabilityCimcFirmwareDescriptorCreate(c context.Context, d *schema
 
 	r := conn.ApiClient.CapabilityApi.CreateCapabilityCimcFirmwareDescriptor(conn.ctx).CapabilityCimcFirmwareDescriptor(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating CapabilityCimcFirmwareDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -277,7 +278,8 @@ func resourceCapabilityCimcFirmwareDescriptorRead(c context.Context, d *schema.R
 	var de diag.Diagnostics
 	r := conn.ApiClient.CapabilityApi.GetCapabilityCimcFirmwareDescriptorByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "CapabilityCimcFirmwareDescriptor object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -471,7 +473,8 @@ func resourceCapabilityCimcFirmwareDescriptorUpdate(c context.Context, d *schema
 
 	r := conn.ApiClient.CapabilityApi.UpdateCapabilityCimcFirmwareDescriptor(conn.ctx, d.Id()).CapabilityCimcFirmwareDescriptor(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating CapabilityCimcFirmwareDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -486,7 +489,8 @@ func resourceCapabilityCimcFirmwareDescriptorDelete(c context.Context, d *schema
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilityCimcFirmwareDescriptor(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting CapabilityCimcFirmwareDescriptor object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

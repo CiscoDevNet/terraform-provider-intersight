@@ -43,7 +43,7 @@ func resourceVnicEthIf() *schema.Resource {
 							Computed:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -280,6 +280,149 @@ func resourceVnicEthIf() *schema.Resource {
 				Optional:    true,
 				Default:     false,
 			},
+			"ip_lease": {
+				Description: "A reference to a ippoolIpLease resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+			},
+			"iscsi_boot_policy": {
+				Description: "A reference to a vnicIscsiBootPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				ConfigMode: schema.SchemaConfigModeAttr,
+				Computed:   true,
+			},
+			"iscsi_ip_v4_address_allocation_type": {
+				Description: "Static/Dynamic Type of IP address allocated to the vNIC. It is derived from iSCSI boot policy IP Address type.\n* `None` - Type defines that property is not applicable for an interface.\n* `Auto` - The system selects an interface automatically - DHCP.\n* `Static` - Type represents that static information or properties are associated to an interface.\n* `Pool` - Type defines that property value will be fetched from an associated pool.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
+			"iscsi_ip_v4_config": {
+				Description: "IPV4 configurations such as Netmask, Gateway and DNS for iSCSI vNIC.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"gateway": {
+							Description: "IP address of the default IPv4 gateway.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"netmask": {
+							Description: "A subnet mask is a 32-bit number that masks an IP address and divides the IP address into network address and host address.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"primary_dns": {
+							Description: "IP Address of the primary Domain Name System (DNS) server.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"secondary_dns": {
+							Description: "IP Address of the secondary Domain Name System (DNS) server.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+					},
+				},
+				ConfigMode: schema.SchemaConfigModeAttr,
+			},
+			"iscsi_ipv4_address": {
+				Description: "IP address associated to the vNIC.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"lan_connectivity_policy": {
 				Description: "A reference to a vnicLanConnectivityPolicy resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -326,6 +469,7 @@ func resourceVnicEthIf() *schema.Resource {
 				Type:        schema.TypeList,
 				MaxItems:    1,
 				Optional:    true,
+				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -360,7 +504,6 @@ func resourceVnicEthIf() *schema.Resource {
 					},
 				},
 				ConfigMode: schema.SchemaConfigModeAttr,
-				Computed:   true,
 			},
 			"mac_address": {
 				Description: "The MAC address that is assigned to the vNIC based on the MAC pool that has been assigned to the LAN Connectivity Policy.",
@@ -492,7 +635,7 @@ func resourceVnicEthIf() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -503,7 +646,7 @@ func resourceVnicEthIf() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -575,6 +718,7 @@ func resourceVnicEthIf() *schema.Resource {
 				Description: "An array of relationships to vnicEthIf resources.",
 				Type:        schema.TypeList,
 				Optional:    true,
+				Computed:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"additional_properties": {
@@ -609,7 +753,6 @@ func resourceVnicEthIf() *schema.Resource {
 					},
 				},
 				ConfigMode: schema.SchemaConfigModeAttr,
-				Computed:   true,
 			},
 			"standby_vif_id": {
 				Description: "The Standby VIF Id is applicable for failover enabled vNICS. It should be the same as the channel number of the standby vethernet created on switch in order to set up the standby data path.",
@@ -658,7 +801,7 @@ func resourceVnicEthIf() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -709,7 +852,7 @@ func resourceVnicEthIf() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -745,7 +888,7 @@ func resourceVnicEthIf() *schema.Resource {
 							Default:     4,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -1040,6 +1183,157 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 	if v, ok := d.GetOkExists("failover_enabled"); ok {
 		x := v.(bool)
 		o.SetFailoverEnabled(x)
+	}
+
+	if v, ok := d.GetOk("ip_lease"); ok {
+		p := make([]models.IppoolIpLeaseRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoMoRefWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsIppoolIpLeaseRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetIpLease(x)
+		}
+	}
+
+	if v, ok := d.GetOk("iscsi_boot_policy"); ok {
+		p := make([]models.VnicIscsiBootPolicyRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewMoMoRefWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsVnicIscsiBootPolicyRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetIscsiBootPolicy(x)
+		}
+	}
+
+	if v, ok := d.GetOk("iscsi_ip_v4_address_allocation_type"); ok {
+		x := (v.(string))
+		o.SetIscsiIpV4AddressAllocationType(x)
+	}
+
+	if v, ok := d.GetOk("iscsi_ip_v4_config"); ok {
+		p := make([]models.IppoolIpV4Config, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := models.NewIppoolIpV4ConfigWithDefaults()
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("ippool.IpV4Config")
+			if v, ok := l["gateway"]; ok {
+				{
+					x := (v.(string))
+					o.SetGateway(x)
+				}
+			}
+			if v, ok := l["netmask"]; ok {
+				{
+					x := (v.(string))
+					o.SetNetmask(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["primary_dns"]; ok {
+				{
+					x := (v.(string))
+					o.SetPrimaryDns(x)
+				}
+			}
+			if v, ok := l["secondary_dns"]; ok {
+				{
+					x := (v.(string))
+					o.SetSecondaryDns(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetIscsiIpV4Config(x)
+		}
+	}
+
+	if v, ok := d.GetOk("iscsi_ipv4_address"); ok {
+		x := (v.(string))
+		o.SetIscsiIpv4Address(x)
 	}
 
 	if v, ok := d.GetOk("lan_connectivity_policy"); ok {
@@ -1549,7 +1843,8 @@ func resourceVnicEthIfCreate(c context.Context, d *schema.ResourceData, meta int
 
 	r := conn.ApiClient.VnicApi.CreateVnicEthIf(conn.ctx).VnicEthIf(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating VnicEthIf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -1568,7 +1863,8 @@ func detachVnicEthIfProfiles(d *schema.ResourceData, meta interface{}) diag.Diag
 
 	r := conn.ApiClient.VnicApi.UpdateVnicEthIf(conn.ctx, d.Id()).VnicEthIf(*o)
 	_, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	return de
@@ -1581,7 +1877,8 @@ func resourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta inter
 	var de diag.Diagnostics
 	r := conn.ApiClient.VnicApi.GetVnicEthIfByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "VnicEthIf object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -1624,6 +1921,26 @@ func resourceVnicEthIfRead(c context.Context, d *schema.ResourceData, meta inter
 
 	if err := d.Set("failover_enabled", (s.GetFailoverEnabled())); err != nil {
 		return diag.Errorf("error occurred while setting property FailoverEnabled in VnicEthIf object: %s", err.Error())
+	}
+
+	if err := d.Set("ip_lease", flattenMapIppoolIpLeaseRelationship(s.GetIpLease(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property IpLease in VnicEthIf object: %s", err.Error())
+	}
+
+	if err := d.Set("iscsi_boot_policy", flattenMapVnicIscsiBootPolicyRelationship(s.GetIscsiBootPolicy(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property IscsiBootPolicy in VnicEthIf object: %s", err.Error())
+	}
+
+	if err := d.Set("iscsi_ip_v4_address_allocation_type", (s.GetIscsiIpV4AddressAllocationType())); err != nil {
+		return diag.Errorf("error occurred while setting property IscsiIpV4AddressAllocationType in VnicEthIf object: %s", err.Error())
+	}
+
+	if err := d.Set("iscsi_ip_v4_config", flattenMapIppoolIpV4Config(s.GetIscsiIpV4Config(), d)); err != nil {
+		return diag.Errorf("error occurred while setting property IscsiIpV4Config in VnicEthIf object: %s", err.Error())
+	}
+
+	if err := d.Set("iscsi_ipv4_address", (s.GetIscsiIpv4Address())); err != nil {
+		return diag.Errorf("error occurred while setting property IscsiIpv4Address in VnicEthIf object: %s", err.Error())
 	}
 
 	if err := d.Set("lan_connectivity_policy", flattenMapVnicLanConnectivityPolicyRelationship(s.GetLanConnectivityPolicy(), d)); err != nil {
@@ -1991,6 +2308,162 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 		v := d.Get("failover_enabled")
 		x := (v.(bool))
 		o.SetFailoverEnabled(x)
+	}
+
+	if d.HasChange("ip_lease") {
+		v := d.Get("ip_lease")
+		p := make([]models.IppoolIpLeaseRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsIppoolIpLeaseRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetIpLease(x)
+		}
+	}
+
+	if d.HasChange("iscsi_boot_policy") {
+		v := d.Get("iscsi_boot_policy")
+		p := make([]models.VnicIscsiBootPolicyRelationship, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.MoMoRef{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("mo.MoRef")
+			if v, ok := l["moid"]; ok {
+				{
+					x := (v.(string))
+					o.SetMoid(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["selector"]; ok {
+				{
+					x := (v.(string))
+					o.SetSelector(x)
+				}
+			}
+			p = append(p, models.MoMoRefAsVnicIscsiBootPolicyRelationship(o))
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetIscsiBootPolicy(x)
+		}
+	}
+
+	if d.HasChange("iscsi_ip_v4_address_allocation_type") {
+		v := d.Get("iscsi_ip_v4_address_allocation_type")
+		x := (v.(string))
+		o.SetIscsiIpV4AddressAllocationType(x)
+	}
+
+	if d.HasChange("iscsi_ip_v4_config") {
+		v := d.Get("iscsi_ip_v4_config")
+		p := make([]models.IppoolIpV4Config, 0, 1)
+		s := v.([]interface{})
+		for i := 0; i < len(s); i++ {
+			l := s[i].(map[string]interface{})
+			o := &models.IppoolIpV4Config{}
+			if v, ok := l["additional_properties"]; ok {
+				{
+					x := []byte(v.(string))
+					var x1 interface{}
+					err := json.Unmarshal(x, &x1)
+					if err == nil && x1 != nil {
+						o.AdditionalProperties = x1.(map[string]interface{})
+					}
+				}
+			}
+			o.SetClassId("ippool.IpV4Config")
+			if v, ok := l["gateway"]; ok {
+				{
+					x := (v.(string))
+					o.SetGateway(x)
+				}
+			}
+			if v, ok := l["netmask"]; ok {
+				{
+					x := (v.(string))
+					o.SetNetmask(x)
+				}
+			}
+			if v, ok := l["object_type"]; ok {
+				{
+					x := (v.(string))
+					o.SetObjectType(x)
+				}
+			}
+			if v, ok := l["primary_dns"]; ok {
+				{
+					x := (v.(string))
+					o.SetPrimaryDns(x)
+				}
+			}
+			if v, ok := l["secondary_dns"]; ok {
+				{
+					x := (v.(string))
+					o.SetSecondaryDns(x)
+				}
+			}
+			p = append(p, *o)
+		}
+		if len(p) > 0 {
+			x := p[0]
+			o.SetIscsiIpV4Config(x)
+		}
+	}
+
+	if d.HasChange("iscsi_ipv4_address") {
+		v := d.Get("iscsi_ipv4_address")
+		x := (v.(string))
+		o.SetIscsiIpv4Address(x)
 	}
 
 	if d.HasChange("lan_connectivity_policy") {
@@ -2518,7 +2991,8 @@ func resourceVnicEthIfUpdate(c context.Context, d *schema.ResourceData, meta int
 
 	r := conn.ApiClient.VnicApi.UpdateVnicEthIf(conn.ctx, d.Id()).VnicEthIf(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating VnicEthIf: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -2541,7 +3015,8 @@ func resourceVnicEthIfDelete(c context.Context, d *schema.ResourceData, meta int
 	}
 	p := conn.ApiClient.VnicApi.DeleteVnicEthIf(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting VnicEthIf object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

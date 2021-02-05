@@ -293,7 +293,7 @@ func dataSourceComputeBoard() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -304,6 +304,11 @@ func dataSourceComputeBoard() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"oper_reason": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString}},
 			"pci_coprocessor_cards": {
 				Description: "An array of relationships to pciCoprocessorCard resources.",
 				Type:        schema.TypeList,
@@ -773,7 +778,8 @@ func dataSourceComputeBoardRead(c context.Context, d *schema.ResourceData, meta 
 		return diag.Errorf("json marshal of ComputeBoard object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.ComputeApi.GetComputeBoardList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching ComputeBoard: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
@@ -856,6 +862,9 @@ func dataSourceComputeBoardRead(c context.Context, d *schema.ResourceData, meta 
 			}
 			if err := d.Set("oper_power_state", (s.GetOperPowerState())); err != nil {
 				return diag.Errorf("error occurred while setting property OperPowerState: %s", err.Error())
+			}
+			if err := d.Set("oper_reason", (s.GetOperReason())); err != nil {
+				return diag.Errorf("error occurred while setting property OperReason: %s", err.Error())
 			}
 
 			if err := d.Set("pci_coprocessor_cards", flattenListPciCoprocessorCardRelationship(s.GetPciCoprocessorCards(), d)); err != nil {

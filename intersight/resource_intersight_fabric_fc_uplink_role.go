@@ -276,7 +276,8 @@ func resourceFabricFcUplinkRoleCreate(c context.Context, d *schema.ResourceData,
 
 	r := conn.ApiClient.FabricApi.CreateFabricFcUplinkRole(conn.ctx).FabricFcUplinkRole(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating FabricFcUplinkRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -291,7 +292,8 @@ func resourceFabricFcUplinkRoleRead(c context.Context, d *schema.ResourceData, m
 	var de diag.Diagnostics
 	r := conn.ApiClient.FabricApi.GetFabricFcUplinkRoleByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "FabricFcUplinkRole object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -496,7 +498,8 @@ func resourceFabricFcUplinkRoleUpdate(c context.Context, d *schema.ResourceData,
 
 	r := conn.ApiClient.FabricApi.UpdateFabricFcUplinkRole(conn.ctx, d.Id()).FabricFcUplinkRole(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating FabricFcUplinkRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -511,7 +514,8 @@ func resourceFabricFcUplinkRoleDelete(c context.Context, d *schema.ResourceData,
 	conn := meta.(*Config)
 	p := conn.ApiClient.FabricApi.DeleteFabricFcUplinkRole(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting FabricFcUplinkRole object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

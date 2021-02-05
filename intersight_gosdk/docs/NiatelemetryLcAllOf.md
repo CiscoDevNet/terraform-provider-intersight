@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **RecordType** | Pointer to **string** | Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. | [optional] 
 **RecordVersion** | Pointer to **string** | Version of record being pushed. This determines what was the API version for data available from the device. | [optional] 
 **RedundancyState** | Pointer to **string** | Redundancy state of the line cards present. | [optional] 
+**SerialNumber** | Pointer to **string** | Serial number of the line card present. | [optional] 
 **SiteName** | Pointer to **string** | The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters / sites. | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
@@ -301,6 +302,31 @@ SetRedundancyState sets RedundancyState field to given value.
 `func (o *NiatelemetryLcAllOf) HasRedundancyState() bool`
 
 HasRedundancyState returns a boolean if a field has been set.
+
+### GetSerialNumber
+
+`func (o *NiatelemetryLcAllOf) GetSerialNumber() string`
+
+GetSerialNumber returns the SerialNumber field if non-nil, zero value otherwise.
+
+### GetSerialNumberOk
+
+`func (o *NiatelemetryLcAllOf) GetSerialNumberOk() (*string, bool)`
+
+GetSerialNumberOk returns a tuple with the SerialNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSerialNumber
+
+`func (o *NiatelemetryLcAllOf) SetSerialNumber(v string)`
+
+SetSerialNumber sets SerialNumber field to given value.
+
+### HasSerialNumber
+
+`func (o *NiatelemetryLcAllOf) HasSerialNumber() bool`
+
+HasSerialNumber returns a boolean if a field has been set.
 
 ### GetSiteName
 

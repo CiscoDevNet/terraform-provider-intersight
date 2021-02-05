@@ -234,7 +234,8 @@ func resourceIamIpAddressCreate(c context.Context, d *schema.ResourceData, meta 
 
 	r := conn.ApiClient.IamApi.CreateIamIpAddress(conn.ctx).IamIpAddress(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating IamIpAddress: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -249,7 +250,8 @@ func resourceIamIpAddressRead(c context.Context, d *schema.ResourceData, meta in
 	var de diag.Diagnostics
 	r := conn.ApiClient.IamApi.GetIamIpAddressByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "IamIpAddress object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -414,7 +416,8 @@ func resourceIamIpAddressUpdate(c context.Context, d *schema.ResourceData, meta 
 
 	r := conn.ApiClient.IamApi.UpdateIamIpAddress(conn.ctx, d.Id()).IamIpAddress(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating IamIpAddress: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -429,7 +432,8 @@ func resourceIamIpAddressDelete(c context.Context, d *schema.ResourceData, meta 
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamIpAddress(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting IamIpAddress object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

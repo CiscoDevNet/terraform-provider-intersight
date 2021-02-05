@@ -66,7 +66,7 @@ func resourceHyperflexNodeProfile() *schema.Resource {
 				Computed:   true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -155,7 +155,7 @@ func resourceHyperflexNodeProfile() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -463,7 +463,8 @@ func resourceHyperflexNodeProfileCreate(c context.Context, d *schema.ResourceDat
 
 	r := conn.ApiClient.HyperflexApi.CreateHyperflexNodeProfile(conn.ctx).HyperflexNodeProfile(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating HyperflexNodeProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -478,7 +479,8 @@ func resourceHyperflexNodeProfileRead(c context.Context, d *schema.ResourceData,
 	var de diag.Diagnostics
 	r := conn.ApiClient.HyperflexApi.GetHyperflexNodeProfileByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "HyperflexNodeProfile object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -799,7 +801,8 @@ func resourceHyperflexNodeProfileUpdate(c context.Context, d *schema.ResourceDat
 
 	r := conn.ApiClient.HyperflexApi.UpdateHyperflexNodeProfile(conn.ctx, d.Id()).HyperflexNodeProfile(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating HyperflexNodeProfile: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -814,7 +817,8 @@ func resourceHyperflexNodeProfileDelete(c context.Context, d *schema.ResourceDat
 	conn := meta.(*Config)
 	p := conn.ApiClient.HyperflexApi.DeleteHyperflexNodeProfile(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting HyperflexNodeProfile object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

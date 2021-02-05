@@ -35,6 +35,7 @@ The following arguments can be used to get data of already created objects in In
 * `igmp_access_list_count`:(int) IGMP Access List feature usage. This determines the total number of IGMP access lists configured across the fabric. 
 * `igmp_snoop`:(string) IGMP Snooping feature usage. This determines if this feature is enabled or disabled. 
 * `ip_epg_count`:(int) Number of IP based End Point Groups. This determines the total number of IP End Point Groups across the fabric. 
+* `is_tech_support_collected`:(string) Status of techsupport collection. 
 * `isis_count`:(int) Isis feature usage. This determines the total number of ISIS sessions across the fabric. 
 * `l2_multicast`:(string) L2Multicast feature usage. This determines if this Layer 2 Multicast feature is being enabled / disabled on the fabric. 
 * `leaf_count`:(int) Number of Leafs. This determines the total number of Leaf switches in the fabric. 
@@ -59,6 +60,7 @@ The following arguments can be used to get data of already created objects in In
 * `shared_l3_out_count`:(int) SharedL3Out feature usage. This determines the total number of Shared L3 out configured across the fabric. 
 * `site_name`:(string) The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters / sites. There will be a feature usage object per site in Multi site scenario. In multi-site scenario the site name is available in all the requests being made. 
 * `smart_call_home`:(string) Smart callhome feature usage. This determines if this feature is being enabled or disabled. 
+* `snapshot_count`:(int) Returns count of snapshots. 
 * `snmp`:(string) SNMP feature usage. This determines if this feature is enabled or disabled. 
 * `snmp_group_count`:(int) Number of SNMP monitoring policies on the fabric. 
 * `span_count`:(int) Number of Span Sources and Destinations. 

@@ -385,6 +385,11 @@ func dataSourceEquipmentFex() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"oper_reason": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString}},
 			"oper_state": {
 				Description: "Operational state of IO card or fabric extender.",
 				Type:        schema.TypeString,
@@ -661,7 +666,8 @@ func dataSourceEquipmentFexRead(c context.Context, d *schema.ResourceData, meta 
 		return diag.Errorf("json marshal of EquipmentFex object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.EquipmentApi.GetEquipmentFexList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching EquipmentFex: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
@@ -755,6 +761,9 @@ func dataSourceEquipmentFexRead(c context.Context, d *schema.ResourceData, meta 
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
 				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
+			}
+			if err := d.Set("oper_reason", (s.GetOperReason())); err != nil {
+				return diag.Errorf("error occurred while setting property OperReason: %s", err.Error())
 			}
 			if err := d.Set("oper_state", (s.GetOperState())); err != nil {
 				return diag.Errorf("error occurred while setting property OperState: %s", err.Error())

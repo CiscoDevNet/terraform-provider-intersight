@@ -44,7 +44,7 @@ func resourceFabricPortMode() *schema.Resource {
 				ForceNew:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -255,7 +255,8 @@ func resourceFabricPortModeCreate(c context.Context, d *schema.ResourceData, met
 
 	r := conn.ApiClient.FabricApi.CreateFabricPortMode(conn.ctx).FabricPortMode(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating FabricPortMode: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -270,7 +271,8 @@ func resourceFabricPortModeRead(c context.Context, d *schema.ResourceData, meta 
 	var de diag.Diagnostics
 	r := conn.ApiClient.FabricApi.GetFabricPortModeByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "FabricPortMode object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -455,7 +457,8 @@ func resourceFabricPortModeUpdate(c context.Context, d *schema.ResourceData, met
 
 	r := conn.ApiClient.FabricApi.UpdateFabricPortMode(conn.ctx, d.Id()).FabricPortMode(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating FabricPortMode: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -470,7 +473,8 @@ func resourceFabricPortModeDelete(c context.Context, d *schema.ResourceData, met
 	conn := meta.(*Config)
 	p := conn.ApiClient.FabricApi.DeleteFabricPortMode(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting FabricPortMode object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

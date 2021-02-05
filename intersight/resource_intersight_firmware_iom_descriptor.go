@@ -282,7 +282,8 @@ func resourceFirmwareIomDescriptorCreate(c context.Context, d *schema.ResourceDa
 
 	r := conn.ApiClient.FirmwareApi.CreateFirmwareIomDescriptor(conn.ctx).FirmwareIomDescriptor(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating FirmwareIomDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -297,7 +298,8 @@ func resourceFirmwareIomDescriptorRead(c context.Context, d *schema.ResourceData
 	var de diag.Diagnostics
 	r := conn.ApiClient.FirmwareApi.GetFirmwareIomDescriptorByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "FirmwareIomDescriptor object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -511,7 +513,8 @@ func resourceFirmwareIomDescriptorUpdate(c context.Context, d *schema.ResourceDa
 
 	r := conn.ApiClient.FirmwareApi.UpdateFirmwareIomDescriptor(conn.ctx, d.Id()).FirmwareIomDescriptor(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating FirmwareIomDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -526,7 +529,8 @@ func resourceFirmwareIomDescriptorDelete(c context.Context, d *schema.ResourceDa
 	conn := meta.(*Config)
 	p := conn.ApiClient.FirmwareApi.DeleteFirmwareIomDescriptor(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting FirmwareIomDescriptor object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

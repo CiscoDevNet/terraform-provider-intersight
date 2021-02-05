@@ -243,7 +243,7 @@ func resourceIamAccount() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -1141,7 +1141,8 @@ func resourceIamAccountCreate(c context.Context, d *schema.ResourceData, meta in
 
 	r := conn.ApiClient.IamApi.CreateIamAccount(conn.ctx).IamAccount(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating IamAccount: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -1156,7 +1157,8 @@ func resourceIamAccountRead(c context.Context, d *schema.ResourceData, meta inte
 	var de diag.Diagnostics
 	r := conn.ApiClient.IamApi.GetIamAccountByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "IamAccount object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -1840,7 +1842,8 @@ func resourceIamAccountUpdate(c context.Context, d *schema.ResourceData, meta in
 
 	r := conn.ApiClient.IamApi.UpdateIamAccount(conn.ctx, d.Id()).IamAccount(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating IamAccount: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -1855,7 +1858,8 @@ func resourceIamAccountDelete(c context.Context, d *schema.ResourceData, meta in
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamAccount(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting IamAccount object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

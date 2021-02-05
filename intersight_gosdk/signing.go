@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -125,6 +125,11 @@ type HttpSignatureAuth struct {
 	privateKey           crypto.PrivateKey // The private key used to sign HTTP requests.
 }
 
+// SetPrivateKey accepts a private key string and sets it.
+func (h *HttpSignatureAuth) SetPrivateKey(privateKey string) error {
+	return h.parsePrivateKey([]byte(privateKey))
+}
+
 // ContextWithValue validates the HttpSignatureAuth configuration parameters and returns a context
 // suitable for HTTP signature. An error is returned if the HttpSignatureAuth configuration parameters
 // are invalid.
@@ -132,7 +137,7 @@ func (h *HttpSignatureAuth) ContextWithValue(ctx context.Context) (context.Conte
 	if h.KeyId == "" {
 		return nil, fmt.Errorf("Key ID must be specified")
 	}
-	if h.PrivateKeyPath == "" {
+	if h.PrivateKeyPath == "" && h.privateKey == nil {
 		return nil, fmt.Errorf("Private key path must be specified")
 	}
 	if _, ok := supportedSigningSchemes[h.SigningScheme]; !ok {
@@ -177,7 +182,11 @@ func (h *HttpSignatureAuth) GetPublicKey() (crypto.PublicKey, error) {
 }
 
 // loadPrivateKey reads the private key from the file specified in the HttpSignatureAuth.
+// The key is loaded only when privateKey is not already set.
 func (h *HttpSignatureAuth) loadPrivateKey() (err error) {
+	if h.privateKey != nil {
+		return nil
+	}
 	var file *os.File
 	file, err = os.Open(h.PrivateKeyPath)
 	if err != nil {
@@ -191,12 +200,18 @@ func (h *HttpSignatureAuth) loadPrivateKey() (err error) {
 	if err != nil {
 		return err
 	}
+	return h.parsePrivateKey(priv)
+}
+
+// parsePrivateKey decodes privateKey byte array to crypto.PrivateKey type.
+func (h *HttpSignatureAuth) parsePrivateKey(priv []byte) error {
 	pemBlock, _ := pem.Decode(priv)
 	if pemBlock == nil {
 		// No PEM data has been found.
 		return fmt.Errorf("File '%s' does not contain PEM data", h.PrivateKeyPath)
 	}
 	var privKey []byte
+	var err error
 	if x509.IsEncryptedPEMBlock(pemBlock) {
 		// The PEM data is encrypted.
 		privKey, err = x509.DecryptPEMBlock(pemBlock, []byte(h.Passphrase))

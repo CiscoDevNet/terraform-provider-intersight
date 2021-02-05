@@ -244,7 +244,8 @@ func resourceFabricServerRoleCreate(c context.Context, d *schema.ResourceData, m
 
 	r := conn.ApiClient.FabricApi.CreateFabricServerRole(conn.ctx).FabricServerRole(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating FabricServerRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -259,7 +260,8 @@ func resourceFabricServerRoleRead(c context.Context, d *schema.ResourceData, met
 	var de diag.Diagnostics
 	r := conn.ApiClient.FabricApi.GetFabricServerRoleByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "FabricServerRole object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -434,7 +436,8 @@ func resourceFabricServerRoleUpdate(c context.Context, d *schema.ResourceData, m
 
 	r := conn.ApiClient.FabricApi.UpdateFabricServerRole(conn.ctx, d.Id()).FabricServerRole(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating FabricServerRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -449,7 +452,8 @@ func resourceFabricServerRoleDelete(c context.Context, d *schema.ResourceData, m
 	conn := meta.(*Config)
 	p := conn.ApiClient.FabricApi.DeleteFabricServerRole(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting FabricServerRole object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

@@ -262,7 +262,8 @@ func resourceSoftwarerepositoryReleaseCreate(c context.Context, d *schema.Resour
 
 	r := conn.ApiClient.SoftwarerepositoryApi.CreateSoftwarerepositoryRelease(conn.ctx).SoftwarerepositoryRelease(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating SoftwarerepositoryRelease: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -277,7 +278,8 @@ func resourceSoftwarerepositoryReleaseRead(c context.Context, d *schema.Resource
 	var de diag.Diagnostics
 	r := conn.ApiClient.SoftwarerepositoryApi.GetSoftwarerepositoryReleaseByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "SoftwarerepositoryRelease object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -468,7 +470,8 @@ func resourceSoftwarerepositoryReleaseUpdate(c context.Context, d *schema.Resour
 
 	r := conn.ApiClient.SoftwarerepositoryApi.UpdateSoftwarerepositoryRelease(conn.ctx, d.Id()).SoftwarerepositoryRelease(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating SoftwarerepositoryRelease: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -483,7 +486,8 @@ func resourceSoftwarerepositoryReleaseDelete(c context.Context, d *schema.Resour
 	conn := meta.(*Config)
 	p := conn.ApiClient.SoftwarerepositoryApi.DeleteSoftwarerepositoryRelease(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting SoftwarerepositoryRelease object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

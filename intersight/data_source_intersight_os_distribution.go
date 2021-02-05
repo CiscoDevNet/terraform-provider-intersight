@@ -180,7 +180,8 @@ func dataSourceOsDistributionRead(c context.Context, d *schema.ResourceData, met
 		return diag.Errorf("json marshal of OsDistribution object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.OsApi.GetOsDistributionList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching OsDistribution: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 

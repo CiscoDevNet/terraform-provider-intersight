@@ -690,7 +690,8 @@ func resourceIamIdpCreate(c context.Context, d *schema.ResourceData, meta interf
 
 	r := conn.ApiClient.IamApi.CreateIamIdp(conn.ctx).IamIdp(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating IamIdp: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -705,7 +706,8 @@ func resourceIamIdpRead(c context.Context, d *schema.ResourceData, meta interfac
 	var de diag.Diagnostics
 	r := conn.ApiClient.IamApi.GetIamIdpByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "IamIdp object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -1147,7 +1149,8 @@ func resourceIamIdpUpdate(c context.Context, d *schema.ResourceData, meta interf
 
 	r := conn.ApiClient.IamApi.UpdateIamIdp(conn.ctx, d.Id()).IamIdp(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating IamIdp: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -1162,7 +1165,8 @@ func resourceIamIdpDelete(c context.Context, d *schema.ResourceData, meta interf
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamIdp(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting IamIdp object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

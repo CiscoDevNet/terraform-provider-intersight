@@ -197,7 +197,8 @@ func resourceSoftwarerepositoryCategoryMapperModelCreate(c context.Context, d *s
 
 	r := conn.ApiClient.SoftwarerepositoryApi.CreateSoftwarerepositoryCategoryMapperModel(conn.ctx).SoftwarerepositoryCategoryMapperModel(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating SoftwarerepositoryCategoryMapperModel: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -212,7 +213,8 @@ func resourceSoftwarerepositoryCategoryMapperModelRead(c context.Context, d *sch
 	var de diag.Diagnostics
 	r := conn.ApiClient.SoftwarerepositoryApi.GetSoftwarerepositoryCategoryMapperModelByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "SoftwarerepositoryCategoryMapperModel object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -375,7 +377,8 @@ func resourceSoftwarerepositoryCategoryMapperModelUpdate(c context.Context, d *s
 
 	r := conn.ApiClient.SoftwarerepositoryApi.UpdateSoftwarerepositoryCategoryMapperModel(conn.ctx, d.Id()).SoftwarerepositoryCategoryMapperModel(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating SoftwarerepositoryCategoryMapperModel: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -390,7 +393,8 @@ func resourceSoftwarerepositoryCategoryMapperModelDelete(c context.Context, d *s
 	conn := meta.(*Config)
 	p := conn.ApiClient.SoftwarerepositoryApi.DeleteSoftwarerepositoryCategoryMapperModel(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting SoftwarerepositoryCategoryMapperModel object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

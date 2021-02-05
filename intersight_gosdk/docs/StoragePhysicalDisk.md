@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **LinkState** | Pointer to **string** | The current link state of the physical disk. | [optional] [readonly] 
 **NumBlocks** | Pointer to **string** | The number of blocks present on the physical disk. | [optional] [readonly] 
 **OperPowerState** | Pointer to **string** | Operational power of the physical disk. | [optional] [readonly] 
-**OperQualifierReason** | Pointer to **string** | This reason for the operational status of the disk. | [optional] [readonly] 
+**OperQualifierReason** | Pointer to **string** | For certain states, indicates the reason why the operState is in that state. | [optional] [readonly] 
 **Operability** | Pointer to **string** | This field identifies the disk operability of the disk. | [optional] [readonly] 
 **PhysicalBlockSize** | Pointer to **string** | The block size of the installed physical disk. | [optional] [readonly] 
 **Pid** | Pointer to **string** | This field identifies the Product ID for physicalDisk. | [optional] [readonly] 

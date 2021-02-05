@@ -282,7 +282,8 @@ func resourceFirmwareDriveDescriptorCreate(c context.Context, d *schema.Resource
 
 	r := conn.ApiClient.FirmwareApi.CreateFirmwareDriveDescriptor(conn.ctx).FirmwareDriveDescriptor(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating FirmwareDriveDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -297,7 +298,8 @@ func resourceFirmwareDriveDescriptorRead(c context.Context, d *schema.ResourceDa
 	var de diag.Diagnostics
 	r := conn.ApiClient.FirmwareApi.GetFirmwareDriveDescriptorByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "FirmwareDriveDescriptor object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -511,7 +513,8 @@ func resourceFirmwareDriveDescriptorUpdate(c context.Context, d *schema.Resource
 
 	r := conn.ApiClient.FirmwareApi.UpdateFirmwareDriveDescriptor(conn.ctx, d.Id()).FirmwareDriveDescriptor(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating FirmwareDriveDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -526,7 +529,8 @@ func resourceFirmwareDriveDescriptorDelete(c context.Context, d *schema.Resource
 	conn := meta.(*Config)
 	p := conn.ApiClient.FirmwareApi.DeleteFirmwareDriveDescriptor(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting FirmwareDriveDescriptor object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **LoadBalancers** | Pointer to **[]string** |  | [optional] 
 **MasterVip** | Pointer to **string** | VIP for the cluster Kubernetes API server. If this is empty and a cluster IP pool is specified, it will be allocated from the IP pool. | [optional] 
 **SshKeys** | Pointer to **[]string** |  | [optional] 
-**SshUser** | Pointer to **string** | Name of the user to SSH to nodes in a cluster. | [optional] 
+**SshUser** | Pointer to **string** | Name of the user to SSH to nodes in a cluster. | [optional] [readonly] [default to "iksadmin"]
 
 ## Methods
 

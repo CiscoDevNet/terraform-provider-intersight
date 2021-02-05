@@ -15,5 +15,6 @@ The following arguments can be used to get data of already created objects in In
 * `moid`:(string) The unique identifier of this Managed Object instance. 
 * `num_hif_ports`:(int) Number of hif ports per blade for the iocard module. 
 * `revision`:(string) Revision for the iocard module. 
+* `uif_connectivity`:(string) Connectivity information between UIF Uplink ports and IOM ports.* `inline` - UIF uplink ports and IOM ports are connected inline.* `cross-connected` - UIF uplink ports and IOM ports are cross-connected, a case in washington chassis. 
 * `vendor`:(string) The vendor of the endpoint, for which this capability information is applicable. 
 * `nr_version`:(string) The firmware or software version of the endpoint, for which this capability information is applicable. 

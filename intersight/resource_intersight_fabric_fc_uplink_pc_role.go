@@ -50,7 +50,7 @@ func resourceFabricFcUplinkPcRole() *schema.Resource {
 				ForceNew:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -117,7 +117,7 @@ func resourceFabricFcUplinkPcRole() *schema.Resource {
 							Optional:    true,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -346,7 +346,8 @@ func resourceFabricFcUplinkPcRoleCreate(c context.Context, d *schema.ResourceDat
 
 	r := conn.ApiClient.FabricApi.CreateFabricFcUplinkPcRole(conn.ctx).FabricFcUplinkPcRole(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating FabricFcUplinkPcRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -361,7 +362,8 @@ func resourceFabricFcUplinkPcRoleRead(c context.Context, d *schema.ResourceData,
 	var de diag.Diagnostics
 	r := conn.ApiClient.FabricApi.GetFabricFcUplinkPcRoleByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "FabricFcUplinkPcRole object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -599,7 +601,8 @@ func resourceFabricFcUplinkPcRoleUpdate(c context.Context, d *schema.ResourceDat
 
 	r := conn.ApiClient.FabricApi.UpdateFabricFcUplinkPcRole(conn.ctx, d.Id()).FabricFcUplinkPcRole(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating FabricFcUplinkPcRole: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -614,7 +617,8 @@ func resourceFabricFcUplinkPcRoleDelete(c context.Context, d *schema.ResourceDat
 	conn := meta.(*Config)
 	p := conn.ApiClient.FabricApi.DeleteFabricFcUplinkPcRole(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting FabricFcUplinkPcRole object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

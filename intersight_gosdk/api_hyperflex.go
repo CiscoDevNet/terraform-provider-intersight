@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -49,7 +49,7 @@ func (r ApiCreateHyperflexAppCatalogRequest) IfNoneMatch(ifNoneMatch string) Api
 	return r
 }
 
-func (r ApiCreateHyperflexAppCatalogRequest) Execute() (HyperflexAppCatalog, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexAppCatalogRequest) Execute() (HyperflexAppCatalog, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexAppCatalogExecute(r)
 }
 
@@ -69,21 +69,19 @@ func (a *HyperflexApiService) CreateHyperflexAppCatalog(ctx _context.Context) Ap
  * Execute executes the request
  * @return HyperflexAppCatalog
  */
-func (a *HyperflexApiService) CreateHyperflexAppCatalogExecute(r ApiCreateHyperflexAppCatalogRequest) (HyperflexAppCatalog, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexAppCatalogExecute(r ApiCreateHyperflexAppCatalogRequest) (HyperflexAppCatalog, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexAppCatalog
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexAppCatalog")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/AppCatalogs"
@@ -92,8 +90,7 @@ func (a *HyperflexApiService) CreateHyperflexAppCatalogExecute(r ApiCreateHyperf
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexAppCatalog == nil {
-		executionError.error = "hyperflexAppCatalog is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexAppCatalog is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -123,22 +120,19 @@ func (a *HyperflexApiService) CreateHyperflexAppCatalogExecute(r ApiCreateHyperf
 	localVarPostBody = r.hyperflexAppCatalog
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -205,7 +199,7 @@ func (a *HyperflexApiService) CreateHyperflexAppCatalogExecute(r ApiCreateHyperf
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexAutoSupportPolicyRequest struct {
@@ -229,7 +223,7 @@ func (r ApiCreateHyperflexAutoSupportPolicyRequest) IfNoneMatch(ifNoneMatch stri
 	return r
 }
 
-func (r ApiCreateHyperflexAutoSupportPolicyRequest) Execute() (HyperflexAutoSupportPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexAutoSupportPolicyRequest) Execute() (HyperflexAutoSupportPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexAutoSupportPolicyExecute(r)
 }
 
@@ -249,21 +243,19 @@ func (a *HyperflexApiService) CreateHyperflexAutoSupportPolicy(ctx _context.Cont
  * Execute executes the request
  * @return HyperflexAutoSupportPolicy
  */
-func (a *HyperflexApiService) CreateHyperflexAutoSupportPolicyExecute(r ApiCreateHyperflexAutoSupportPolicyRequest) (HyperflexAutoSupportPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexAutoSupportPolicyExecute(r ApiCreateHyperflexAutoSupportPolicyRequest) (HyperflexAutoSupportPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexAutoSupportPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexAutoSupportPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/AutoSupportPolicies"
@@ -272,8 +264,7 @@ func (a *HyperflexApiService) CreateHyperflexAutoSupportPolicyExecute(r ApiCreat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexAutoSupportPolicy == nil {
-		executionError.error = "hyperflexAutoSupportPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexAutoSupportPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -303,22 +294,19 @@ func (a *HyperflexApiService) CreateHyperflexAutoSupportPolicyExecute(r ApiCreat
 	localVarPostBody = r.hyperflexAutoSupportPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -385,7 +373,7 @@ func (a *HyperflexApiService) CreateHyperflexAutoSupportPolicyExecute(r ApiCreat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexCapabilityInfoRequest struct {
@@ -409,7 +397,7 @@ func (r ApiCreateHyperflexCapabilityInfoRequest) IfNoneMatch(ifNoneMatch string)
 	return r
 }
 
-func (r ApiCreateHyperflexCapabilityInfoRequest) Execute() (HyperflexCapabilityInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexCapabilityInfoRequest) Execute() (HyperflexCapabilityInfo, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexCapabilityInfoExecute(r)
 }
 
@@ -429,21 +417,19 @@ func (a *HyperflexApiService) CreateHyperflexCapabilityInfo(ctx _context.Context
  * Execute executes the request
  * @return HyperflexCapabilityInfo
  */
-func (a *HyperflexApiService) CreateHyperflexCapabilityInfoExecute(r ApiCreateHyperflexCapabilityInfoRequest) (HyperflexCapabilityInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexCapabilityInfoExecute(r ApiCreateHyperflexCapabilityInfoRequest) (HyperflexCapabilityInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexCapabilityInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexCapabilityInfo")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/CapabilityInfos"
@@ -452,8 +438,7 @@ func (a *HyperflexApiService) CreateHyperflexCapabilityInfoExecute(r ApiCreateHy
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexCapabilityInfo == nil {
-		executionError.error = "hyperflexCapabilityInfo is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexCapabilityInfo is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -483,22 +468,19 @@ func (a *HyperflexApiService) CreateHyperflexCapabilityInfoExecute(r ApiCreateHy
 	localVarPostBody = r.hyperflexCapabilityInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -565,7 +547,7 @@ func (a *HyperflexApiService) CreateHyperflexCapabilityInfoExecute(r ApiCreateHy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexCiscoHypervisorManagerRequest struct {
@@ -589,7 +571,7 @@ func (r ApiCreateHyperflexCiscoHypervisorManagerRequest) IfNoneMatch(ifNoneMatch
 	return r
 }
 
-func (r ApiCreateHyperflexCiscoHypervisorManagerRequest) Execute() (HyperflexCiscoHypervisorManager, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexCiscoHypervisorManagerRequest) Execute() (HyperflexCiscoHypervisorManager, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexCiscoHypervisorManagerExecute(r)
 }
 
@@ -609,21 +591,19 @@ func (a *HyperflexApiService) CreateHyperflexCiscoHypervisorManager(ctx _context
  * Execute executes the request
  * @return HyperflexCiscoHypervisorManager
  */
-func (a *HyperflexApiService) CreateHyperflexCiscoHypervisorManagerExecute(r ApiCreateHyperflexCiscoHypervisorManagerRequest) (HyperflexCiscoHypervisorManager, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexCiscoHypervisorManagerExecute(r ApiCreateHyperflexCiscoHypervisorManagerRequest) (HyperflexCiscoHypervisorManager, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexCiscoHypervisorManager
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexCiscoHypervisorManager")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/CiscoHypervisorManagers"
@@ -632,8 +612,7 @@ func (a *HyperflexApiService) CreateHyperflexCiscoHypervisorManagerExecute(r Api
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexCiscoHypervisorManager == nil {
-		executionError.error = "hyperflexCiscoHypervisorManager is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexCiscoHypervisorManager is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -663,22 +642,19 @@ func (a *HyperflexApiService) CreateHyperflexCiscoHypervisorManagerExecute(r Api
 	localVarPostBody = r.hyperflexCiscoHypervisorManager
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -745,7 +721,7 @@ func (a *HyperflexApiService) CreateHyperflexCiscoHypervisorManagerExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexClusterBackupPolicyRequest struct {
@@ -769,7 +745,7 @@ func (r ApiCreateHyperflexClusterBackupPolicyRequest) IfNoneMatch(ifNoneMatch st
 	return r
 }
 
-func (r ApiCreateHyperflexClusterBackupPolicyRequest) Execute() (HyperflexClusterBackupPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexClusterBackupPolicyRequest) Execute() (HyperflexClusterBackupPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexClusterBackupPolicyExecute(r)
 }
 
@@ -789,21 +765,19 @@ func (a *HyperflexApiService) CreateHyperflexClusterBackupPolicy(ctx _context.Co
  * Execute executes the request
  * @return HyperflexClusterBackupPolicy
  */
-func (a *HyperflexApiService) CreateHyperflexClusterBackupPolicyExecute(r ApiCreateHyperflexClusterBackupPolicyRequest) (HyperflexClusterBackupPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexClusterBackupPolicyExecute(r ApiCreateHyperflexClusterBackupPolicyRequest) (HyperflexClusterBackupPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterBackupPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexClusterBackupPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterBackupPolicies"
@@ -812,8 +786,7 @@ func (a *HyperflexApiService) CreateHyperflexClusterBackupPolicyExecute(r ApiCre
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexClusterBackupPolicy == nil {
-		executionError.error = "hyperflexClusterBackupPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexClusterBackupPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -843,22 +816,19 @@ func (a *HyperflexApiService) CreateHyperflexClusterBackupPolicyExecute(r ApiCre
 	localVarPostBody = r.hyperflexClusterBackupPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -925,7 +895,7 @@ func (a *HyperflexApiService) CreateHyperflexClusterBackupPolicyExecute(r ApiCre
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexClusterBackupPolicyDeploymentRequest struct {
@@ -949,7 +919,7 @@ func (r ApiCreateHyperflexClusterBackupPolicyDeploymentRequest) IfNoneMatch(ifNo
 	return r
 }
 
-func (r ApiCreateHyperflexClusterBackupPolicyDeploymentRequest) Execute() (HyperflexClusterBackupPolicyDeployment, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexClusterBackupPolicyDeploymentRequest) Execute() (HyperflexClusterBackupPolicyDeployment, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexClusterBackupPolicyDeploymentExecute(r)
 }
 
@@ -969,21 +939,19 @@ func (a *HyperflexApiService) CreateHyperflexClusterBackupPolicyDeployment(ctx _
  * Execute executes the request
  * @return HyperflexClusterBackupPolicyDeployment
  */
-func (a *HyperflexApiService) CreateHyperflexClusterBackupPolicyDeploymentExecute(r ApiCreateHyperflexClusterBackupPolicyDeploymentRequest) (HyperflexClusterBackupPolicyDeployment, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexClusterBackupPolicyDeploymentExecute(r ApiCreateHyperflexClusterBackupPolicyDeploymentRequest) (HyperflexClusterBackupPolicyDeployment, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterBackupPolicyDeployment
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexClusterBackupPolicyDeployment")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterBackupPolicyDeployments"
@@ -992,8 +960,7 @@ func (a *HyperflexApiService) CreateHyperflexClusterBackupPolicyDeploymentExecut
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexClusterBackupPolicyDeployment == nil {
-		executionError.error = "hyperflexClusterBackupPolicyDeployment is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexClusterBackupPolicyDeployment is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1023,22 +990,19 @@ func (a *HyperflexApiService) CreateHyperflexClusterBackupPolicyDeploymentExecut
 	localVarPostBody = r.hyperflexClusterBackupPolicyDeployment
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1105,7 +1069,7 @@ func (a *HyperflexApiService) CreateHyperflexClusterBackupPolicyDeploymentExecut
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexClusterNetworkPolicyRequest struct {
@@ -1129,7 +1093,7 @@ func (r ApiCreateHyperflexClusterNetworkPolicyRequest) IfNoneMatch(ifNoneMatch s
 	return r
 }
 
-func (r ApiCreateHyperflexClusterNetworkPolicyRequest) Execute() (HyperflexClusterNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexClusterNetworkPolicyRequest) Execute() (HyperflexClusterNetworkPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexClusterNetworkPolicyExecute(r)
 }
 
@@ -1149,21 +1113,19 @@ func (a *HyperflexApiService) CreateHyperflexClusterNetworkPolicy(ctx _context.C
  * Execute executes the request
  * @return HyperflexClusterNetworkPolicy
  */
-func (a *HyperflexApiService) CreateHyperflexClusterNetworkPolicyExecute(r ApiCreateHyperflexClusterNetworkPolicyRequest) (HyperflexClusterNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexClusterNetworkPolicyExecute(r ApiCreateHyperflexClusterNetworkPolicyRequest) (HyperflexClusterNetworkPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexClusterNetworkPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterNetworkPolicies"
@@ -1172,8 +1134,7 @@ func (a *HyperflexApiService) CreateHyperflexClusterNetworkPolicyExecute(r ApiCr
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexClusterNetworkPolicy == nil {
-		executionError.error = "hyperflexClusterNetworkPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexClusterNetworkPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1203,22 +1164,19 @@ func (a *HyperflexApiService) CreateHyperflexClusterNetworkPolicyExecute(r ApiCr
 	localVarPostBody = r.hyperflexClusterNetworkPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1285,7 +1243,7 @@ func (a *HyperflexApiService) CreateHyperflexClusterNetworkPolicyExecute(r ApiCr
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexClusterProfileRequest struct {
@@ -1309,7 +1267,7 @@ func (r ApiCreateHyperflexClusterProfileRequest) IfNoneMatch(ifNoneMatch string)
 	return r
 }
 
-func (r ApiCreateHyperflexClusterProfileRequest) Execute() (HyperflexClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexClusterProfileRequest) Execute() (HyperflexClusterProfile, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexClusterProfileExecute(r)
 }
 
@@ -1329,21 +1287,19 @@ func (a *HyperflexApiService) CreateHyperflexClusterProfile(ctx _context.Context
  * Execute executes the request
  * @return HyperflexClusterProfile
  */
-func (a *HyperflexApiService) CreateHyperflexClusterProfileExecute(r ApiCreateHyperflexClusterProfileRequest) (HyperflexClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexClusterProfileExecute(r ApiCreateHyperflexClusterProfileRequest) (HyperflexClusterProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexClusterProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterProfiles"
@@ -1352,8 +1308,7 @@ func (a *HyperflexApiService) CreateHyperflexClusterProfileExecute(r ApiCreateHy
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexClusterProfile == nil {
-		executionError.error = "hyperflexClusterProfile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexClusterProfile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1383,22 +1338,19 @@ func (a *HyperflexApiService) CreateHyperflexClusterProfileExecute(r ApiCreateHy
 	localVarPostBody = r.hyperflexClusterProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1465,7 +1417,7 @@ func (a *HyperflexApiService) CreateHyperflexClusterProfileExecute(r ApiCreateHy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexClusterReplicationNetworkPolicyRequest struct {
@@ -1489,7 +1441,7 @@ func (r ApiCreateHyperflexClusterReplicationNetworkPolicyRequest) IfNoneMatch(if
 	return r
 }
 
-func (r ApiCreateHyperflexClusterReplicationNetworkPolicyRequest) Execute() (HyperflexClusterReplicationNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexClusterReplicationNetworkPolicyRequest) Execute() (HyperflexClusterReplicationNetworkPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexClusterReplicationNetworkPolicyExecute(r)
 }
 
@@ -1509,21 +1461,19 @@ func (a *HyperflexApiService) CreateHyperflexClusterReplicationNetworkPolicy(ctx
  * Execute executes the request
  * @return HyperflexClusterReplicationNetworkPolicy
  */
-func (a *HyperflexApiService) CreateHyperflexClusterReplicationNetworkPolicyExecute(r ApiCreateHyperflexClusterReplicationNetworkPolicyRequest) (HyperflexClusterReplicationNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexClusterReplicationNetworkPolicyExecute(r ApiCreateHyperflexClusterReplicationNetworkPolicyRequest) (HyperflexClusterReplicationNetworkPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterReplicationNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexClusterReplicationNetworkPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterReplicationNetworkPolicies"
@@ -1532,8 +1482,7 @@ func (a *HyperflexApiService) CreateHyperflexClusterReplicationNetworkPolicyExec
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexClusterReplicationNetworkPolicy == nil {
-		executionError.error = "hyperflexClusterReplicationNetworkPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexClusterReplicationNetworkPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1563,22 +1512,19 @@ func (a *HyperflexApiService) CreateHyperflexClusterReplicationNetworkPolicyExec
 	localVarPostBody = r.hyperflexClusterReplicationNetworkPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1645,7 +1591,7 @@ func (a *HyperflexApiService) CreateHyperflexClusterReplicationNetworkPolicyExec
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexClusterReplicationNetworkPolicyDeploymentRequest struct {
@@ -1669,7 +1615,7 @@ func (r ApiCreateHyperflexClusterReplicationNetworkPolicyDeploymentRequest) IfNo
 	return r
 }
 
-func (r ApiCreateHyperflexClusterReplicationNetworkPolicyDeploymentRequest) Execute() (HyperflexClusterReplicationNetworkPolicyDeployment, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexClusterReplicationNetworkPolicyDeploymentRequest) Execute() (HyperflexClusterReplicationNetworkPolicyDeployment, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexClusterReplicationNetworkPolicyDeploymentExecute(r)
 }
 
@@ -1689,21 +1635,19 @@ func (a *HyperflexApiService) CreateHyperflexClusterReplicationNetworkPolicyDepl
  * Execute executes the request
  * @return HyperflexClusterReplicationNetworkPolicyDeployment
  */
-func (a *HyperflexApiService) CreateHyperflexClusterReplicationNetworkPolicyDeploymentExecute(r ApiCreateHyperflexClusterReplicationNetworkPolicyDeploymentRequest) (HyperflexClusterReplicationNetworkPolicyDeployment, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexClusterReplicationNetworkPolicyDeploymentExecute(r ApiCreateHyperflexClusterReplicationNetworkPolicyDeploymentRequest) (HyperflexClusterReplicationNetworkPolicyDeployment, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterReplicationNetworkPolicyDeployment
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexClusterReplicationNetworkPolicyDeployment")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterReplicationNetworkPolicyDeployments"
@@ -1712,8 +1656,7 @@ func (a *HyperflexApiService) CreateHyperflexClusterReplicationNetworkPolicyDepl
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexClusterReplicationNetworkPolicyDeployment == nil {
-		executionError.error = "hyperflexClusterReplicationNetworkPolicyDeployment is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexClusterReplicationNetworkPolicyDeployment is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1743,22 +1686,19 @@ func (a *HyperflexApiService) CreateHyperflexClusterReplicationNetworkPolicyDepl
 	localVarPostBody = r.hyperflexClusterReplicationNetworkPolicyDeployment
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1825,7 +1765,7 @@ func (a *HyperflexApiService) CreateHyperflexClusterReplicationNetworkPolicyDepl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexClusterStoragePolicyRequest struct {
@@ -1849,7 +1789,7 @@ func (r ApiCreateHyperflexClusterStoragePolicyRequest) IfNoneMatch(ifNoneMatch s
 	return r
 }
 
-func (r ApiCreateHyperflexClusterStoragePolicyRequest) Execute() (HyperflexClusterStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexClusterStoragePolicyRequest) Execute() (HyperflexClusterStoragePolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexClusterStoragePolicyExecute(r)
 }
 
@@ -1869,21 +1809,19 @@ func (a *HyperflexApiService) CreateHyperflexClusterStoragePolicy(ctx _context.C
  * Execute executes the request
  * @return HyperflexClusterStoragePolicy
  */
-func (a *HyperflexApiService) CreateHyperflexClusterStoragePolicyExecute(r ApiCreateHyperflexClusterStoragePolicyRequest) (HyperflexClusterStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexClusterStoragePolicyExecute(r ApiCreateHyperflexClusterStoragePolicyRequest) (HyperflexClusterStoragePolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterStoragePolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexClusterStoragePolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterStoragePolicies"
@@ -1892,8 +1830,7 @@ func (a *HyperflexApiService) CreateHyperflexClusterStoragePolicyExecute(r ApiCr
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexClusterStoragePolicy == nil {
-		executionError.error = "hyperflexClusterStoragePolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexClusterStoragePolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1923,22 +1860,19 @@ func (a *HyperflexApiService) CreateHyperflexClusterStoragePolicyExecute(r ApiCr
 	localVarPostBody = r.hyperflexClusterStoragePolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2005,7 +1939,7 @@ func (a *HyperflexApiService) CreateHyperflexClusterStoragePolicyExecute(r ApiCr
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexExtFcStoragePolicyRequest struct {
@@ -2029,7 +1963,7 @@ func (r ApiCreateHyperflexExtFcStoragePolicyRequest) IfNoneMatch(ifNoneMatch str
 	return r
 }
 
-func (r ApiCreateHyperflexExtFcStoragePolicyRequest) Execute() (HyperflexExtFcStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexExtFcStoragePolicyRequest) Execute() (HyperflexExtFcStoragePolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexExtFcStoragePolicyExecute(r)
 }
 
@@ -2049,21 +1983,19 @@ func (a *HyperflexApiService) CreateHyperflexExtFcStoragePolicy(ctx _context.Con
  * Execute executes the request
  * @return HyperflexExtFcStoragePolicy
  */
-func (a *HyperflexApiService) CreateHyperflexExtFcStoragePolicyExecute(r ApiCreateHyperflexExtFcStoragePolicyRequest) (HyperflexExtFcStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexExtFcStoragePolicyExecute(r ApiCreateHyperflexExtFcStoragePolicyRequest) (HyperflexExtFcStoragePolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexExtFcStoragePolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexExtFcStoragePolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ExtFcStoragePolicies"
@@ -2072,8 +2004,7 @@ func (a *HyperflexApiService) CreateHyperflexExtFcStoragePolicyExecute(r ApiCrea
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexExtFcStoragePolicy == nil {
-		executionError.error = "hyperflexExtFcStoragePolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexExtFcStoragePolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2103,22 +2034,19 @@ func (a *HyperflexApiService) CreateHyperflexExtFcStoragePolicyExecute(r ApiCrea
 	localVarPostBody = r.hyperflexExtFcStoragePolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2185,7 +2113,7 @@ func (a *HyperflexApiService) CreateHyperflexExtFcStoragePolicyExecute(r ApiCrea
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexExtIscsiStoragePolicyRequest struct {
@@ -2209,7 +2137,7 @@ func (r ApiCreateHyperflexExtIscsiStoragePolicyRequest) IfNoneMatch(ifNoneMatch 
 	return r
 }
 
-func (r ApiCreateHyperflexExtIscsiStoragePolicyRequest) Execute() (HyperflexExtIscsiStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexExtIscsiStoragePolicyRequest) Execute() (HyperflexExtIscsiStoragePolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexExtIscsiStoragePolicyExecute(r)
 }
 
@@ -2229,21 +2157,19 @@ func (a *HyperflexApiService) CreateHyperflexExtIscsiStoragePolicy(ctx _context.
  * Execute executes the request
  * @return HyperflexExtIscsiStoragePolicy
  */
-func (a *HyperflexApiService) CreateHyperflexExtIscsiStoragePolicyExecute(r ApiCreateHyperflexExtIscsiStoragePolicyRequest) (HyperflexExtIscsiStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexExtIscsiStoragePolicyExecute(r ApiCreateHyperflexExtIscsiStoragePolicyRequest) (HyperflexExtIscsiStoragePolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexExtIscsiStoragePolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexExtIscsiStoragePolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ExtIscsiStoragePolicies"
@@ -2252,8 +2178,7 @@ func (a *HyperflexApiService) CreateHyperflexExtIscsiStoragePolicyExecute(r ApiC
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexExtIscsiStoragePolicy == nil {
-		executionError.error = "hyperflexExtIscsiStoragePolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexExtIscsiStoragePolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2283,22 +2208,19 @@ func (a *HyperflexApiService) CreateHyperflexExtIscsiStoragePolicyExecute(r ApiC
 	localVarPostBody = r.hyperflexExtIscsiStoragePolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2365,7 +2287,7 @@ func (a *HyperflexApiService) CreateHyperflexExtIscsiStoragePolicyExecute(r ApiC
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexFeatureLimitExternalRequest struct {
@@ -2389,7 +2311,7 @@ func (r ApiCreateHyperflexFeatureLimitExternalRequest) IfNoneMatch(ifNoneMatch s
 	return r
 }
 
-func (r ApiCreateHyperflexFeatureLimitExternalRequest) Execute() (HyperflexFeatureLimitExternal, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexFeatureLimitExternalRequest) Execute() (HyperflexFeatureLimitExternal, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexFeatureLimitExternalExecute(r)
 }
 
@@ -2409,21 +2331,19 @@ func (a *HyperflexApiService) CreateHyperflexFeatureLimitExternal(ctx _context.C
  * Execute executes the request
  * @return HyperflexFeatureLimitExternal
  */
-func (a *HyperflexApiService) CreateHyperflexFeatureLimitExternalExecute(r ApiCreateHyperflexFeatureLimitExternalRequest) (HyperflexFeatureLimitExternal, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexFeatureLimitExternalExecute(r ApiCreateHyperflexFeatureLimitExternalRequest) (HyperflexFeatureLimitExternal, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexFeatureLimitExternal
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexFeatureLimitExternal")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/FeatureLimitExternals"
@@ -2432,8 +2352,7 @@ func (a *HyperflexApiService) CreateHyperflexFeatureLimitExternalExecute(r ApiCr
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexFeatureLimitExternal == nil {
-		executionError.error = "hyperflexFeatureLimitExternal is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexFeatureLimitExternal is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2463,22 +2382,19 @@ func (a *HyperflexApiService) CreateHyperflexFeatureLimitExternalExecute(r ApiCr
 	localVarPostBody = r.hyperflexFeatureLimitExternal
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2545,7 +2461,7 @@ func (a *HyperflexApiService) CreateHyperflexFeatureLimitExternalExecute(r ApiCr
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexFeatureLimitInternalRequest struct {
@@ -2569,7 +2485,7 @@ func (r ApiCreateHyperflexFeatureLimitInternalRequest) IfNoneMatch(ifNoneMatch s
 	return r
 }
 
-func (r ApiCreateHyperflexFeatureLimitInternalRequest) Execute() (HyperflexFeatureLimitInternal, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexFeatureLimitInternalRequest) Execute() (HyperflexFeatureLimitInternal, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexFeatureLimitInternalExecute(r)
 }
 
@@ -2589,21 +2505,19 @@ func (a *HyperflexApiService) CreateHyperflexFeatureLimitInternal(ctx _context.C
  * Execute executes the request
  * @return HyperflexFeatureLimitInternal
  */
-func (a *HyperflexApiService) CreateHyperflexFeatureLimitInternalExecute(r ApiCreateHyperflexFeatureLimitInternalRequest) (HyperflexFeatureLimitInternal, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexFeatureLimitInternalExecute(r ApiCreateHyperflexFeatureLimitInternalRequest) (HyperflexFeatureLimitInternal, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexFeatureLimitInternal
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexFeatureLimitInternal")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/FeatureLimitInternals"
@@ -2612,8 +2526,7 @@ func (a *HyperflexApiService) CreateHyperflexFeatureLimitInternalExecute(r ApiCr
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexFeatureLimitInternal == nil {
-		executionError.error = "hyperflexFeatureLimitInternal is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexFeatureLimitInternal is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2643,22 +2556,19 @@ func (a *HyperflexApiService) CreateHyperflexFeatureLimitInternalExecute(r ApiCr
 	localVarPostBody = r.hyperflexFeatureLimitInternal
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2725,7 +2635,7 @@ func (a *HyperflexApiService) CreateHyperflexFeatureLimitInternalExecute(r ApiCr
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexHealthCheckDefinitionRequest struct {
@@ -2749,7 +2659,7 @@ func (r ApiCreateHyperflexHealthCheckDefinitionRequest) IfNoneMatch(ifNoneMatch 
 	return r
 }
 
-func (r ApiCreateHyperflexHealthCheckDefinitionRequest) Execute() (HyperflexHealthCheckDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexHealthCheckDefinitionRequest) Execute() (HyperflexHealthCheckDefinition, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexHealthCheckDefinitionExecute(r)
 }
 
@@ -2769,21 +2679,19 @@ func (a *HyperflexApiService) CreateHyperflexHealthCheckDefinition(ctx _context.
  * Execute executes the request
  * @return HyperflexHealthCheckDefinition
  */
-func (a *HyperflexApiService) CreateHyperflexHealthCheckDefinitionExecute(r ApiCreateHyperflexHealthCheckDefinitionRequest) (HyperflexHealthCheckDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexHealthCheckDefinitionExecute(r ApiCreateHyperflexHealthCheckDefinitionRequest) (HyperflexHealthCheckDefinition, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHealthCheckDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexHealthCheckDefinition")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HealthCheckDefinitions"
@@ -2792,8 +2700,7 @@ func (a *HyperflexApiService) CreateHyperflexHealthCheckDefinitionExecute(r ApiC
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexHealthCheckDefinition == nil {
-		executionError.error = "hyperflexHealthCheckDefinition is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexHealthCheckDefinition is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -2823,22 +2730,19 @@ func (a *HyperflexApiService) CreateHyperflexHealthCheckDefinitionExecute(r ApiC
 	localVarPostBody = r.hyperflexHealthCheckDefinition
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2905,7 +2809,7 @@ func (a *HyperflexApiService) CreateHyperflexHealthCheckDefinitionExecute(r ApiC
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexHealthCheckPackageChecksumRequest struct {
@@ -2929,7 +2833,7 @@ func (r ApiCreateHyperflexHealthCheckPackageChecksumRequest) IfNoneMatch(ifNoneM
 	return r
 }
 
-func (r ApiCreateHyperflexHealthCheckPackageChecksumRequest) Execute() (HyperflexHealthCheckPackageChecksum, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexHealthCheckPackageChecksumRequest) Execute() (HyperflexHealthCheckPackageChecksum, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexHealthCheckPackageChecksumExecute(r)
 }
 
@@ -2949,21 +2853,19 @@ func (a *HyperflexApiService) CreateHyperflexHealthCheckPackageChecksum(ctx _con
  * Execute executes the request
  * @return HyperflexHealthCheckPackageChecksum
  */
-func (a *HyperflexApiService) CreateHyperflexHealthCheckPackageChecksumExecute(r ApiCreateHyperflexHealthCheckPackageChecksumRequest) (HyperflexHealthCheckPackageChecksum, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexHealthCheckPackageChecksumExecute(r ApiCreateHyperflexHealthCheckPackageChecksumRequest) (HyperflexHealthCheckPackageChecksum, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHealthCheckPackageChecksum
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexHealthCheckPackageChecksum")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HealthCheckPackageChecksums"
@@ -2972,8 +2874,7 @@ func (a *HyperflexApiService) CreateHyperflexHealthCheckPackageChecksumExecute(r
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexHealthCheckPackageChecksum == nil {
-		executionError.error = "hyperflexHealthCheckPackageChecksum is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexHealthCheckPackageChecksum is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3003,22 +2904,19 @@ func (a *HyperflexApiService) CreateHyperflexHealthCheckPackageChecksumExecute(r
 	localVarPostBody = r.hyperflexHealthCheckPackageChecksum
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3085,7 +2983,7 @@ func (a *HyperflexApiService) CreateHyperflexHealthCheckPackageChecksumExecute(r
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexHxapDatacenterRequest struct {
@@ -3109,7 +3007,7 @@ func (r ApiCreateHyperflexHxapDatacenterRequest) IfNoneMatch(ifNoneMatch string)
 	return r
 }
 
-func (r ApiCreateHyperflexHxapDatacenterRequest) Execute() (HyperflexHxapDatacenter, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexHxapDatacenterRequest) Execute() (HyperflexHxapDatacenter, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexHxapDatacenterExecute(r)
 }
 
@@ -3129,21 +3027,19 @@ func (a *HyperflexApiService) CreateHyperflexHxapDatacenter(ctx _context.Context
  * Execute executes the request
  * @return HyperflexHxapDatacenter
  */
-func (a *HyperflexApiService) CreateHyperflexHxapDatacenterExecute(r ApiCreateHyperflexHxapDatacenterRequest) (HyperflexHxapDatacenter, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexHxapDatacenterExecute(r ApiCreateHyperflexHxapDatacenterRequest) (HyperflexHxapDatacenter, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapDatacenter
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexHxapDatacenter")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapDatacenters"
@@ -3152,8 +3048,7 @@ func (a *HyperflexApiService) CreateHyperflexHxapDatacenterExecute(r ApiCreateHy
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexHxapDatacenter == nil {
-		executionError.error = "hyperflexHxapDatacenter is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexHxapDatacenter is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3183,22 +3078,19 @@ func (a *HyperflexApiService) CreateHyperflexHxapDatacenterExecute(r ApiCreateHy
 	localVarPostBody = r.hyperflexHxapDatacenter
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3265,7 +3157,7 @@ func (a *HyperflexApiService) CreateHyperflexHxapDatacenterExecute(r ApiCreateHy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexHxdpVersionRequest struct {
@@ -3289,7 +3181,7 @@ func (r ApiCreateHyperflexHxdpVersionRequest) IfNoneMatch(ifNoneMatch string) Ap
 	return r
 }
 
-func (r ApiCreateHyperflexHxdpVersionRequest) Execute() (HyperflexHxdpVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexHxdpVersionRequest) Execute() (HyperflexHxdpVersion, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexHxdpVersionExecute(r)
 }
 
@@ -3309,21 +3201,19 @@ func (a *HyperflexApiService) CreateHyperflexHxdpVersion(ctx _context.Context) A
  * Execute executes the request
  * @return HyperflexHxdpVersion
  */
-func (a *HyperflexApiService) CreateHyperflexHxdpVersionExecute(r ApiCreateHyperflexHxdpVersionRequest) (HyperflexHxdpVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexHxdpVersionExecute(r ApiCreateHyperflexHxdpVersionRequest) (HyperflexHxdpVersion, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxdpVersion
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexHxdpVersion")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxdpVersions"
@@ -3332,8 +3222,7 @@ func (a *HyperflexApiService) CreateHyperflexHxdpVersionExecute(r ApiCreateHyper
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexHxdpVersion == nil {
-		executionError.error = "hyperflexHxdpVersion is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexHxdpVersion is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3363,22 +3252,19 @@ func (a *HyperflexApiService) CreateHyperflexHxdpVersionExecute(r ApiCreateHyper
 	localVarPostBody = r.hyperflexHxdpVersion
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3445,7 +3331,7 @@ func (a *HyperflexApiService) CreateHyperflexHxdpVersionExecute(r ApiCreateHyper
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexLocalCredentialPolicyRequest struct {
@@ -3469,7 +3355,7 @@ func (r ApiCreateHyperflexLocalCredentialPolicyRequest) IfNoneMatch(ifNoneMatch 
 	return r
 }
 
-func (r ApiCreateHyperflexLocalCredentialPolicyRequest) Execute() (HyperflexLocalCredentialPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexLocalCredentialPolicyRequest) Execute() (HyperflexLocalCredentialPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexLocalCredentialPolicyExecute(r)
 }
 
@@ -3489,21 +3375,19 @@ func (a *HyperflexApiService) CreateHyperflexLocalCredentialPolicy(ctx _context.
  * Execute executes the request
  * @return HyperflexLocalCredentialPolicy
  */
-func (a *HyperflexApiService) CreateHyperflexLocalCredentialPolicyExecute(r ApiCreateHyperflexLocalCredentialPolicyRequest) (HyperflexLocalCredentialPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexLocalCredentialPolicyExecute(r ApiCreateHyperflexLocalCredentialPolicyRequest) (HyperflexLocalCredentialPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexLocalCredentialPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexLocalCredentialPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/LocalCredentialPolicies"
@@ -3512,8 +3396,7 @@ func (a *HyperflexApiService) CreateHyperflexLocalCredentialPolicyExecute(r ApiC
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexLocalCredentialPolicy == nil {
-		executionError.error = "hyperflexLocalCredentialPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexLocalCredentialPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3543,22 +3426,19 @@ func (a *HyperflexApiService) CreateHyperflexLocalCredentialPolicyExecute(r ApiC
 	localVarPostBody = r.hyperflexLocalCredentialPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3625,7 +3505,7 @@ func (a *HyperflexApiService) CreateHyperflexLocalCredentialPolicyExecute(r ApiC
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexNodeConfigPolicyRequest struct {
@@ -3649,7 +3529,7 @@ func (r ApiCreateHyperflexNodeConfigPolicyRequest) IfNoneMatch(ifNoneMatch strin
 	return r
 }
 
-func (r ApiCreateHyperflexNodeConfigPolicyRequest) Execute() (HyperflexNodeConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexNodeConfigPolicyRequest) Execute() (HyperflexNodeConfigPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexNodeConfigPolicyExecute(r)
 }
 
@@ -3669,21 +3549,19 @@ func (a *HyperflexApiService) CreateHyperflexNodeConfigPolicy(ctx _context.Conte
  * Execute executes the request
  * @return HyperflexNodeConfigPolicy
  */
-func (a *HyperflexApiService) CreateHyperflexNodeConfigPolicyExecute(r ApiCreateHyperflexNodeConfigPolicyRequest) (HyperflexNodeConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexNodeConfigPolicyExecute(r ApiCreateHyperflexNodeConfigPolicyRequest) (HyperflexNodeConfigPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexNodeConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexNodeConfigPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/NodeConfigPolicies"
@@ -3692,8 +3570,7 @@ func (a *HyperflexApiService) CreateHyperflexNodeConfigPolicyExecute(r ApiCreate
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexNodeConfigPolicy == nil {
-		executionError.error = "hyperflexNodeConfigPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexNodeConfigPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3723,22 +3600,19 @@ func (a *HyperflexApiService) CreateHyperflexNodeConfigPolicyExecute(r ApiCreate
 	localVarPostBody = r.hyperflexNodeConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3805,7 +3679,7 @@ func (a *HyperflexApiService) CreateHyperflexNodeConfigPolicyExecute(r ApiCreate
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexNodeProfileRequest struct {
@@ -3829,7 +3703,7 @@ func (r ApiCreateHyperflexNodeProfileRequest) IfNoneMatch(ifNoneMatch string) Ap
 	return r
 }
 
-func (r ApiCreateHyperflexNodeProfileRequest) Execute() (HyperflexNodeProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexNodeProfileRequest) Execute() (HyperflexNodeProfile, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexNodeProfileExecute(r)
 }
 
@@ -3849,21 +3723,19 @@ func (a *HyperflexApiService) CreateHyperflexNodeProfile(ctx _context.Context) A
  * Execute executes the request
  * @return HyperflexNodeProfile
  */
-func (a *HyperflexApiService) CreateHyperflexNodeProfileExecute(r ApiCreateHyperflexNodeProfileRequest) (HyperflexNodeProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexNodeProfileExecute(r ApiCreateHyperflexNodeProfileRequest) (HyperflexNodeProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexNodeProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexNodeProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/NodeProfiles"
@@ -3872,8 +3744,7 @@ func (a *HyperflexApiService) CreateHyperflexNodeProfileExecute(r ApiCreateHyper
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexNodeProfile == nil {
-		executionError.error = "hyperflexNodeProfile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexNodeProfile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -3903,22 +3774,19 @@ func (a *HyperflexApiService) CreateHyperflexNodeProfileExecute(r ApiCreateHyper
 	localVarPostBody = r.hyperflexNodeProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3985,7 +3853,7 @@ func (a *HyperflexApiService) CreateHyperflexNodeProfileExecute(r ApiCreateHyper
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexProxySettingPolicyRequest struct {
@@ -4009,7 +3877,7 @@ func (r ApiCreateHyperflexProxySettingPolicyRequest) IfNoneMatch(ifNoneMatch str
 	return r
 }
 
-func (r ApiCreateHyperflexProxySettingPolicyRequest) Execute() (HyperflexProxySettingPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexProxySettingPolicyRequest) Execute() (HyperflexProxySettingPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexProxySettingPolicyExecute(r)
 }
 
@@ -4029,21 +3897,19 @@ func (a *HyperflexApiService) CreateHyperflexProxySettingPolicy(ctx _context.Con
  * Execute executes the request
  * @return HyperflexProxySettingPolicy
  */
-func (a *HyperflexApiService) CreateHyperflexProxySettingPolicyExecute(r ApiCreateHyperflexProxySettingPolicyRequest) (HyperflexProxySettingPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexProxySettingPolicyExecute(r ApiCreateHyperflexProxySettingPolicyRequest) (HyperflexProxySettingPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexProxySettingPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexProxySettingPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ProxySettingPolicies"
@@ -4052,8 +3918,7 @@ func (a *HyperflexApiService) CreateHyperflexProxySettingPolicyExecute(r ApiCrea
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexProxySettingPolicy == nil {
-		executionError.error = "hyperflexProxySettingPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexProxySettingPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -4083,22 +3948,19 @@ func (a *HyperflexApiService) CreateHyperflexProxySettingPolicyExecute(r ApiCrea
 	localVarPostBody = r.hyperflexProxySettingPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4165,7 +4027,7 @@ func (a *HyperflexApiService) CreateHyperflexProxySettingPolicyExecute(r ApiCrea
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexServerFirmwareVersionRequest struct {
@@ -4189,7 +4051,7 @@ func (r ApiCreateHyperflexServerFirmwareVersionRequest) IfNoneMatch(ifNoneMatch 
 	return r
 }
 
-func (r ApiCreateHyperflexServerFirmwareVersionRequest) Execute() (HyperflexServerFirmwareVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexServerFirmwareVersionRequest) Execute() (HyperflexServerFirmwareVersion, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexServerFirmwareVersionExecute(r)
 }
 
@@ -4209,21 +4071,19 @@ func (a *HyperflexApiService) CreateHyperflexServerFirmwareVersion(ctx _context.
  * Execute executes the request
  * @return HyperflexServerFirmwareVersion
  */
-func (a *HyperflexApiService) CreateHyperflexServerFirmwareVersionExecute(r ApiCreateHyperflexServerFirmwareVersionRequest) (HyperflexServerFirmwareVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexServerFirmwareVersionExecute(r ApiCreateHyperflexServerFirmwareVersionRequest) (HyperflexServerFirmwareVersion, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexServerFirmwareVersion
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexServerFirmwareVersion")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ServerFirmwareVersions"
@@ -4232,8 +4092,7 @@ func (a *HyperflexApiService) CreateHyperflexServerFirmwareVersionExecute(r ApiC
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexServerFirmwareVersion == nil {
-		executionError.error = "hyperflexServerFirmwareVersion is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexServerFirmwareVersion is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -4263,22 +4122,19 @@ func (a *HyperflexApiService) CreateHyperflexServerFirmwareVersionExecute(r ApiC
 	localVarPostBody = r.hyperflexServerFirmwareVersion
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4345,7 +4201,7 @@ func (a *HyperflexApiService) CreateHyperflexServerFirmwareVersionExecute(r ApiC
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexServerFirmwareVersionEntryRequest struct {
@@ -4369,7 +4225,7 @@ func (r ApiCreateHyperflexServerFirmwareVersionEntryRequest) IfNoneMatch(ifNoneM
 	return r
 }
 
-func (r ApiCreateHyperflexServerFirmwareVersionEntryRequest) Execute() (HyperflexServerFirmwareVersionEntry, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexServerFirmwareVersionEntryRequest) Execute() (HyperflexServerFirmwareVersionEntry, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexServerFirmwareVersionEntryExecute(r)
 }
 
@@ -4389,21 +4245,19 @@ func (a *HyperflexApiService) CreateHyperflexServerFirmwareVersionEntry(ctx _con
  * Execute executes the request
  * @return HyperflexServerFirmwareVersionEntry
  */
-func (a *HyperflexApiService) CreateHyperflexServerFirmwareVersionEntryExecute(r ApiCreateHyperflexServerFirmwareVersionEntryRequest) (HyperflexServerFirmwareVersionEntry, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexServerFirmwareVersionEntryExecute(r ApiCreateHyperflexServerFirmwareVersionEntryRequest) (HyperflexServerFirmwareVersionEntry, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexServerFirmwareVersionEntry
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexServerFirmwareVersionEntry")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ServerFirmwareVersionEntries"
@@ -4412,8 +4266,7 @@ func (a *HyperflexApiService) CreateHyperflexServerFirmwareVersionEntryExecute(r
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexServerFirmwareVersionEntry == nil {
-		executionError.error = "hyperflexServerFirmwareVersionEntry is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexServerFirmwareVersionEntry is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -4443,22 +4296,19 @@ func (a *HyperflexApiService) CreateHyperflexServerFirmwareVersionEntryExecute(r
 	localVarPostBody = r.hyperflexServerFirmwareVersionEntry
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4525,7 +4375,7 @@ func (a *HyperflexApiService) CreateHyperflexServerFirmwareVersionEntryExecute(r
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexServerModelRequest struct {
@@ -4549,7 +4399,7 @@ func (r ApiCreateHyperflexServerModelRequest) IfNoneMatch(ifNoneMatch string) Ap
 	return r
 }
 
-func (r ApiCreateHyperflexServerModelRequest) Execute() (HyperflexServerModel, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexServerModelRequest) Execute() (HyperflexServerModel, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexServerModelExecute(r)
 }
 
@@ -4569,21 +4419,19 @@ func (a *HyperflexApiService) CreateHyperflexServerModel(ctx _context.Context) A
  * Execute executes the request
  * @return HyperflexServerModel
  */
-func (a *HyperflexApiService) CreateHyperflexServerModelExecute(r ApiCreateHyperflexServerModelRequest) (HyperflexServerModel, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexServerModelExecute(r ApiCreateHyperflexServerModelRequest) (HyperflexServerModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexServerModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexServerModel")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ServerModels"
@@ -4592,8 +4440,7 @@ func (a *HyperflexApiService) CreateHyperflexServerModelExecute(r ApiCreateHyper
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexServerModel == nil {
-		executionError.error = "hyperflexServerModel is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexServerModel is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -4623,22 +4470,19 @@ func (a *HyperflexApiService) CreateHyperflexServerModelExecute(r ApiCreateHyper
 	localVarPostBody = r.hyperflexServerModel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4705,7 +4549,7 @@ func (a *HyperflexApiService) CreateHyperflexServerModelExecute(r ApiCreateHyper
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexSoftwareVersionPolicyRequest struct {
@@ -4729,7 +4573,7 @@ func (r ApiCreateHyperflexSoftwareVersionPolicyRequest) IfNoneMatch(ifNoneMatch 
 	return r
 }
 
-func (r ApiCreateHyperflexSoftwareVersionPolicyRequest) Execute() (HyperflexSoftwareVersionPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexSoftwareVersionPolicyRequest) Execute() (HyperflexSoftwareVersionPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexSoftwareVersionPolicyExecute(r)
 }
 
@@ -4749,21 +4593,19 @@ func (a *HyperflexApiService) CreateHyperflexSoftwareVersionPolicy(ctx _context.
  * Execute executes the request
  * @return HyperflexSoftwareVersionPolicy
  */
-func (a *HyperflexApiService) CreateHyperflexSoftwareVersionPolicyExecute(r ApiCreateHyperflexSoftwareVersionPolicyRequest) (HyperflexSoftwareVersionPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexSoftwareVersionPolicyExecute(r ApiCreateHyperflexSoftwareVersionPolicyRequest) (HyperflexSoftwareVersionPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexSoftwareVersionPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexSoftwareVersionPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/SoftwareVersionPolicies"
@@ -4772,8 +4614,7 @@ func (a *HyperflexApiService) CreateHyperflexSoftwareVersionPolicyExecute(r ApiC
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexSoftwareVersionPolicy == nil {
-		executionError.error = "hyperflexSoftwareVersionPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexSoftwareVersionPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -4803,22 +4644,19 @@ func (a *HyperflexApiService) CreateHyperflexSoftwareVersionPolicyExecute(r ApiC
 	localVarPostBody = r.hyperflexSoftwareVersionPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4885,7 +4723,7 @@ func (a *HyperflexApiService) CreateHyperflexSoftwareVersionPolicyExecute(r ApiC
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexSysConfigPolicyRequest struct {
@@ -4909,7 +4747,7 @@ func (r ApiCreateHyperflexSysConfigPolicyRequest) IfNoneMatch(ifNoneMatch string
 	return r
 }
 
-func (r ApiCreateHyperflexSysConfigPolicyRequest) Execute() (HyperflexSysConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexSysConfigPolicyRequest) Execute() (HyperflexSysConfigPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexSysConfigPolicyExecute(r)
 }
 
@@ -4929,21 +4767,19 @@ func (a *HyperflexApiService) CreateHyperflexSysConfigPolicy(ctx _context.Contex
  * Execute executes the request
  * @return HyperflexSysConfigPolicy
  */
-func (a *HyperflexApiService) CreateHyperflexSysConfigPolicyExecute(r ApiCreateHyperflexSysConfigPolicyRequest) (HyperflexSysConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexSysConfigPolicyExecute(r ApiCreateHyperflexSysConfigPolicyRequest) (HyperflexSysConfigPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexSysConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexSysConfigPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/SysConfigPolicies"
@@ -4952,8 +4788,7 @@ func (a *HyperflexApiService) CreateHyperflexSysConfigPolicyExecute(r ApiCreateH
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexSysConfigPolicy == nil {
-		executionError.error = "hyperflexSysConfigPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexSysConfigPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -4983,22 +4818,19 @@ func (a *HyperflexApiService) CreateHyperflexSysConfigPolicyExecute(r ApiCreateH
 	localVarPostBody = r.hyperflexSysConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5065,7 +4897,7 @@ func (a *HyperflexApiService) CreateHyperflexSysConfigPolicyExecute(r ApiCreateH
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexUcsmConfigPolicyRequest struct {
@@ -5089,7 +4921,7 @@ func (r ApiCreateHyperflexUcsmConfigPolicyRequest) IfNoneMatch(ifNoneMatch strin
 	return r
 }
 
-func (r ApiCreateHyperflexUcsmConfigPolicyRequest) Execute() (HyperflexUcsmConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexUcsmConfigPolicyRequest) Execute() (HyperflexUcsmConfigPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexUcsmConfigPolicyExecute(r)
 }
 
@@ -5109,21 +4941,19 @@ func (a *HyperflexApiService) CreateHyperflexUcsmConfigPolicy(ctx _context.Conte
  * Execute executes the request
  * @return HyperflexUcsmConfigPolicy
  */
-func (a *HyperflexApiService) CreateHyperflexUcsmConfigPolicyExecute(r ApiCreateHyperflexUcsmConfigPolicyRequest) (HyperflexUcsmConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexUcsmConfigPolicyExecute(r ApiCreateHyperflexUcsmConfigPolicyRequest) (HyperflexUcsmConfigPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexUcsmConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexUcsmConfigPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/UcsmConfigPolicies"
@@ -5132,8 +4962,7 @@ func (a *HyperflexApiService) CreateHyperflexUcsmConfigPolicyExecute(r ApiCreate
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexUcsmConfigPolicy == nil {
-		executionError.error = "hyperflexUcsmConfigPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexUcsmConfigPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -5163,22 +4992,19 @@ func (a *HyperflexApiService) CreateHyperflexUcsmConfigPolicyExecute(r ApiCreate
 	localVarPostBody = r.hyperflexUcsmConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5245,7 +5071,7 @@ func (a *HyperflexApiService) CreateHyperflexUcsmConfigPolicyExecute(r ApiCreate
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexVcenterConfigPolicyRequest struct {
@@ -5269,7 +5095,7 @@ func (r ApiCreateHyperflexVcenterConfigPolicyRequest) IfNoneMatch(ifNoneMatch st
 	return r
 }
 
-func (r ApiCreateHyperflexVcenterConfigPolicyRequest) Execute() (HyperflexVcenterConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexVcenterConfigPolicyRequest) Execute() (HyperflexVcenterConfigPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexVcenterConfigPolicyExecute(r)
 }
 
@@ -5289,21 +5115,19 @@ func (a *HyperflexApiService) CreateHyperflexVcenterConfigPolicy(ctx _context.Co
  * Execute executes the request
  * @return HyperflexVcenterConfigPolicy
  */
-func (a *HyperflexApiService) CreateHyperflexVcenterConfigPolicyExecute(r ApiCreateHyperflexVcenterConfigPolicyRequest) (HyperflexVcenterConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexVcenterConfigPolicyExecute(r ApiCreateHyperflexVcenterConfigPolicyRequest) (HyperflexVcenterConfigPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexVcenterConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexVcenterConfigPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/VcenterConfigPolicies"
@@ -5312,8 +5136,7 @@ func (a *HyperflexApiService) CreateHyperflexVcenterConfigPolicyExecute(r ApiCre
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexVcenterConfigPolicy == nil {
-		executionError.error = "hyperflexVcenterConfigPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexVcenterConfigPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -5343,22 +5166,19 @@ func (a *HyperflexApiService) CreateHyperflexVcenterConfigPolicyExecute(r ApiCre
 	localVarPostBody = r.hyperflexVcenterConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5425,7 +5245,7 @@ func (a *HyperflexApiService) CreateHyperflexVcenterConfigPolicyExecute(r ApiCre
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateHyperflexVmRestoreOperationRequest struct {
@@ -5449,7 +5269,7 @@ func (r ApiCreateHyperflexVmRestoreOperationRequest) IfNoneMatch(ifNoneMatch str
 	return r
 }
 
-func (r ApiCreateHyperflexVmRestoreOperationRequest) Execute() (HyperflexVmRestoreOperation, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateHyperflexVmRestoreOperationRequest) Execute() (HyperflexVmRestoreOperation, *_nethttp.Response, error) {
 	return r.ApiService.CreateHyperflexVmRestoreOperationExecute(r)
 }
 
@@ -5469,21 +5289,19 @@ func (a *HyperflexApiService) CreateHyperflexVmRestoreOperation(ctx _context.Con
  * Execute executes the request
  * @return HyperflexVmRestoreOperation
  */
-func (a *HyperflexApiService) CreateHyperflexVmRestoreOperationExecute(r ApiCreateHyperflexVmRestoreOperationRequest) (HyperflexVmRestoreOperation, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) CreateHyperflexVmRestoreOperationExecute(r ApiCreateHyperflexVmRestoreOperationRequest) (HyperflexVmRestoreOperation, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexVmRestoreOperation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.CreateHyperflexVmRestoreOperation")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/VmRestoreOperations"
@@ -5492,8 +5310,7 @@ func (a *HyperflexApiService) CreateHyperflexVmRestoreOperationExecute(r ApiCrea
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexVmRestoreOperation == nil {
-		executionError.error = "hyperflexVmRestoreOperation is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexVmRestoreOperation is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -5523,22 +5340,19 @@ func (a *HyperflexApiService) CreateHyperflexVmRestoreOperationExecute(r ApiCrea
 	localVarPostBody = r.hyperflexVmRestoreOperation
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5605,7 +5419,7 @@ func (a *HyperflexApiService) CreateHyperflexVmRestoreOperationExecute(r ApiCrea
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexAppCatalogRequest struct {
@@ -5614,7 +5428,7 @@ type ApiDeleteHyperflexAppCatalogRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexAppCatalogRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexAppCatalogRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexAppCatalogExecute(r)
 }
 
@@ -5635,20 +5449,18 @@ func (a *HyperflexApiService) DeleteHyperflexAppCatalog(ctx _context.Context, mo
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexAppCatalogExecute(r ApiDeleteHyperflexAppCatalogRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexAppCatalogExecute(r ApiDeleteHyperflexAppCatalogRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexAppCatalog")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/AppCatalogs/{Moid}"
@@ -5677,22 +5489,19 @@ func (a *HyperflexApiService) DeleteHyperflexAppCatalogExecute(r ApiDeleteHyperf
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5750,7 +5559,7 @@ func (a *HyperflexApiService) DeleteHyperflexAppCatalogExecute(r ApiDeleteHyperf
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexAutoSupportPolicyRequest struct {
@@ -5759,7 +5568,7 @@ type ApiDeleteHyperflexAutoSupportPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexAutoSupportPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexAutoSupportPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexAutoSupportPolicyExecute(r)
 }
 
@@ -5780,20 +5589,18 @@ func (a *HyperflexApiService) DeleteHyperflexAutoSupportPolicy(ctx _context.Cont
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexAutoSupportPolicyExecute(r ApiDeleteHyperflexAutoSupportPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexAutoSupportPolicyExecute(r ApiDeleteHyperflexAutoSupportPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexAutoSupportPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/AutoSupportPolicies/{Moid}"
@@ -5822,22 +5629,19 @@ func (a *HyperflexApiService) DeleteHyperflexAutoSupportPolicyExecute(r ApiDelet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5895,7 +5699,7 @@ func (a *HyperflexApiService) DeleteHyperflexAutoSupportPolicyExecute(r ApiDelet
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexCapabilityInfoRequest struct {
@@ -5904,7 +5708,7 @@ type ApiDeleteHyperflexCapabilityInfoRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexCapabilityInfoRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexCapabilityInfoRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexCapabilityInfoExecute(r)
 }
 
@@ -5925,20 +5729,18 @@ func (a *HyperflexApiService) DeleteHyperflexCapabilityInfo(ctx _context.Context
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexCapabilityInfoExecute(r ApiDeleteHyperflexCapabilityInfoRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexCapabilityInfoExecute(r ApiDeleteHyperflexCapabilityInfoRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexCapabilityInfo")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/CapabilityInfos/{Moid}"
@@ -5967,22 +5769,19 @@ func (a *HyperflexApiService) DeleteHyperflexCapabilityInfoExecute(r ApiDeleteHy
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6040,7 +5839,7 @@ func (a *HyperflexApiService) DeleteHyperflexCapabilityInfoExecute(r ApiDeleteHy
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexClusterBackupPolicyRequest struct {
@@ -6049,7 +5848,7 @@ type ApiDeleteHyperflexClusterBackupPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexClusterBackupPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexClusterBackupPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexClusterBackupPolicyExecute(r)
 }
 
@@ -6070,20 +5869,18 @@ func (a *HyperflexApiService) DeleteHyperflexClusterBackupPolicy(ctx _context.Co
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexClusterBackupPolicyExecute(r ApiDeleteHyperflexClusterBackupPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexClusterBackupPolicyExecute(r ApiDeleteHyperflexClusterBackupPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexClusterBackupPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterBackupPolicies/{Moid}"
@@ -6112,22 +5909,19 @@ func (a *HyperflexApiService) DeleteHyperflexClusterBackupPolicyExecute(r ApiDel
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6185,7 +5979,7 @@ func (a *HyperflexApiService) DeleteHyperflexClusterBackupPolicyExecute(r ApiDel
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexClusterBackupPolicyDeploymentRequest struct {
@@ -6194,7 +5988,7 @@ type ApiDeleteHyperflexClusterBackupPolicyDeploymentRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexClusterBackupPolicyDeploymentRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexClusterBackupPolicyDeploymentRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexClusterBackupPolicyDeploymentExecute(r)
 }
 
@@ -6215,20 +6009,18 @@ func (a *HyperflexApiService) DeleteHyperflexClusterBackupPolicyDeployment(ctx _
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexClusterBackupPolicyDeploymentExecute(r ApiDeleteHyperflexClusterBackupPolicyDeploymentRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexClusterBackupPolicyDeploymentExecute(r ApiDeleteHyperflexClusterBackupPolicyDeploymentRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexClusterBackupPolicyDeployment")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterBackupPolicyDeployments/{Moid}"
@@ -6257,22 +6049,19 @@ func (a *HyperflexApiService) DeleteHyperflexClusterBackupPolicyDeploymentExecut
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6330,7 +6119,7 @@ func (a *HyperflexApiService) DeleteHyperflexClusterBackupPolicyDeploymentExecut
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexClusterNetworkPolicyRequest struct {
@@ -6339,7 +6128,7 @@ type ApiDeleteHyperflexClusterNetworkPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexClusterNetworkPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexClusterNetworkPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexClusterNetworkPolicyExecute(r)
 }
 
@@ -6360,20 +6149,18 @@ func (a *HyperflexApiService) DeleteHyperflexClusterNetworkPolicy(ctx _context.C
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexClusterNetworkPolicyExecute(r ApiDeleteHyperflexClusterNetworkPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexClusterNetworkPolicyExecute(r ApiDeleteHyperflexClusterNetworkPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexClusterNetworkPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterNetworkPolicies/{Moid}"
@@ -6402,22 +6189,19 @@ func (a *HyperflexApiService) DeleteHyperflexClusterNetworkPolicyExecute(r ApiDe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6475,7 +6259,7 @@ func (a *HyperflexApiService) DeleteHyperflexClusterNetworkPolicyExecute(r ApiDe
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexClusterProfileRequest struct {
@@ -6484,7 +6268,7 @@ type ApiDeleteHyperflexClusterProfileRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexClusterProfileRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexClusterProfileRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexClusterProfileExecute(r)
 }
 
@@ -6505,20 +6289,18 @@ func (a *HyperflexApiService) DeleteHyperflexClusterProfile(ctx _context.Context
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexClusterProfileExecute(r ApiDeleteHyperflexClusterProfileRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexClusterProfileExecute(r ApiDeleteHyperflexClusterProfileRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexClusterProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterProfiles/{Moid}"
@@ -6547,22 +6329,19 @@ func (a *HyperflexApiService) DeleteHyperflexClusterProfileExecute(r ApiDeleteHy
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6620,7 +6399,7 @@ func (a *HyperflexApiService) DeleteHyperflexClusterProfileExecute(r ApiDeleteHy
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexClusterReplicationNetworkPolicyRequest struct {
@@ -6629,7 +6408,7 @@ type ApiDeleteHyperflexClusterReplicationNetworkPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexClusterReplicationNetworkPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexClusterReplicationNetworkPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexClusterReplicationNetworkPolicyExecute(r)
 }
 
@@ -6650,20 +6429,18 @@ func (a *HyperflexApiService) DeleteHyperflexClusterReplicationNetworkPolicy(ctx
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexClusterReplicationNetworkPolicyExecute(r ApiDeleteHyperflexClusterReplicationNetworkPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexClusterReplicationNetworkPolicyExecute(r ApiDeleteHyperflexClusterReplicationNetworkPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexClusterReplicationNetworkPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterReplicationNetworkPolicies/{Moid}"
@@ -6692,22 +6469,19 @@ func (a *HyperflexApiService) DeleteHyperflexClusterReplicationNetworkPolicyExec
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6765,7 +6539,7 @@ func (a *HyperflexApiService) DeleteHyperflexClusterReplicationNetworkPolicyExec
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexClusterReplicationNetworkPolicyDeploymentRequest struct {
@@ -6774,7 +6548,7 @@ type ApiDeleteHyperflexClusterReplicationNetworkPolicyDeploymentRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexClusterReplicationNetworkPolicyDeploymentRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexClusterReplicationNetworkPolicyDeploymentRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexClusterReplicationNetworkPolicyDeploymentExecute(r)
 }
 
@@ -6795,20 +6569,18 @@ func (a *HyperflexApiService) DeleteHyperflexClusterReplicationNetworkPolicyDepl
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexClusterReplicationNetworkPolicyDeploymentExecute(r ApiDeleteHyperflexClusterReplicationNetworkPolicyDeploymentRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexClusterReplicationNetworkPolicyDeploymentExecute(r ApiDeleteHyperflexClusterReplicationNetworkPolicyDeploymentRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexClusterReplicationNetworkPolicyDeployment")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterReplicationNetworkPolicyDeployments/{Moid}"
@@ -6837,22 +6609,19 @@ func (a *HyperflexApiService) DeleteHyperflexClusterReplicationNetworkPolicyDepl
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6910,7 +6679,7 @@ func (a *HyperflexApiService) DeleteHyperflexClusterReplicationNetworkPolicyDepl
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexClusterStoragePolicyRequest struct {
@@ -6919,7 +6688,7 @@ type ApiDeleteHyperflexClusterStoragePolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexClusterStoragePolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexClusterStoragePolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexClusterStoragePolicyExecute(r)
 }
 
@@ -6940,20 +6709,18 @@ func (a *HyperflexApiService) DeleteHyperflexClusterStoragePolicy(ctx _context.C
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexClusterStoragePolicyExecute(r ApiDeleteHyperflexClusterStoragePolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexClusterStoragePolicyExecute(r ApiDeleteHyperflexClusterStoragePolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexClusterStoragePolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterStoragePolicies/{Moid}"
@@ -6982,22 +6749,19 @@ func (a *HyperflexApiService) DeleteHyperflexClusterStoragePolicyExecute(r ApiDe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7055,7 +6819,7 @@ func (a *HyperflexApiService) DeleteHyperflexClusterStoragePolicyExecute(r ApiDe
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexExtFcStoragePolicyRequest struct {
@@ -7064,7 +6828,7 @@ type ApiDeleteHyperflexExtFcStoragePolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexExtFcStoragePolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexExtFcStoragePolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexExtFcStoragePolicyExecute(r)
 }
 
@@ -7085,20 +6849,18 @@ func (a *HyperflexApiService) DeleteHyperflexExtFcStoragePolicy(ctx _context.Con
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexExtFcStoragePolicyExecute(r ApiDeleteHyperflexExtFcStoragePolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexExtFcStoragePolicyExecute(r ApiDeleteHyperflexExtFcStoragePolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexExtFcStoragePolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ExtFcStoragePolicies/{Moid}"
@@ -7127,22 +6889,19 @@ func (a *HyperflexApiService) DeleteHyperflexExtFcStoragePolicyExecute(r ApiDele
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7200,7 +6959,7 @@ func (a *HyperflexApiService) DeleteHyperflexExtFcStoragePolicyExecute(r ApiDele
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexExtIscsiStoragePolicyRequest struct {
@@ -7209,7 +6968,7 @@ type ApiDeleteHyperflexExtIscsiStoragePolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexExtIscsiStoragePolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexExtIscsiStoragePolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexExtIscsiStoragePolicyExecute(r)
 }
 
@@ -7230,20 +6989,18 @@ func (a *HyperflexApiService) DeleteHyperflexExtIscsiStoragePolicy(ctx _context.
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexExtIscsiStoragePolicyExecute(r ApiDeleteHyperflexExtIscsiStoragePolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexExtIscsiStoragePolicyExecute(r ApiDeleteHyperflexExtIscsiStoragePolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexExtIscsiStoragePolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ExtIscsiStoragePolicies/{Moid}"
@@ -7272,22 +7029,19 @@ func (a *HyperflexApiService) DeleteHyperflexExtIscsiStoragePolicyExecute(r ApiD
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7345,7 +7099,7 @@ func (a *HyperflexApiService) DeleteHyperflexExtIscsiStoragePolicyExecute(r ApiD
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexFeatureLimitExternalRequest struct {
@@ -7354,7 +7108,7 @@ type ApiDeleteHyperflexFeatureLimitExternalRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexFeatureLimitExternalRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexFeatureLimitExternalRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexFeatureLimitExternalExecute(r)
 }
 
@@ -7375,20 +7129,18 @@ func (a *HyperflexApiService) DeleteHyperflexFeatureLimitExternal(ctx _context.C
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexFeatureLimitExternalExecute(r ApiDeleteHyperflexFeatureLimitExternalRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexFeatureLimitExternalExecute(r ApiDeleteHyperflexFeatureLimitExternalRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexFeatureLimitExternal")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/FeatureLimitExternals/{Moid}"
@@ -7417,22 +7169,19 @@ func (a *HyperflexApiService) DeleteHyperflexFeatureLimitExternalExecute(r ApiDe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7490,7 +7239,7 @@ func (a *HyperflexApiService) DeleteHyperflexFeatureLimitExternalExecute(r ApiDe
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexFeatureLimitInternalRequest struct {
@@ -7499,7 +7248,7 @@ type ApiDeleteHyperflexFeatureLimitInternalRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexFeatureLimitInternalRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexFeatureLimitInternalRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexFeatureLimitInternalExecute(r)
 }
 
@@ -7520,20 +7269,18 @@ func (a *HyperflexApiService) DeleteHyperflexFeatureLimitInternal(ctx _context.C
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexFeatureLimitInternalExecute(r ApiDeleteHyperflexFeatureLimitInternalRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexFeatureLimitInternalExecute(r ApiDeleteHyperflexFeatureLimitInternalRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexFeatureLimitInternal")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/FeatureLimitInternals/{Moid}"
@@ -7562,22 +7309,19 @@ func (a *HyperflexApiService) DeleteHyperflexFeatureLimitInternalExecute(r ApiDe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7635,7 +7379,7 @@ func (a *HyperflexApiService) DeleteHyperflexFeatureLimitInternalExecute(r ApiDe
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexHealthCheckDefinitionRequest struct {
@@ -7644,7 +7388,7 @@ type ApiDeleteHyperflexHealthCheckDefinitionRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexHealthCheckDefinitionRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexHealthCheckDefinitionRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexHealthCheckDefinitionExecute(r)
 }
 
@@ -7665,20 +7409,18 @@ func (a *HyperflexApiService) DeleteHyperflexHealthCheckDefinition(ctx _context.
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexHealthCheckDefinitionExecute(r ApiDeleteHyperflexHealthCheckDefinitionRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexHealthCheckDefinitionExecute(r ApiDeleteHyperflexHealthCheckDefinitionRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexHealthCheckDefinition")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HealthCheckDefinitions/{Moid}"
@@ -7707,22 +7449,19 @@ func (a *HyperflexApiService) DeleteHyperflexHealthCheckDefinitionExecute(r ApiD
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7780,7 +7519,7 @@ func (a *HyperflexApiService) DeleteHyperflexHealthCheckDefinitionExecute(r ApiD
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexHealthCheckPackageChecksumRequest struct {
@@ -7789,7 +7528,7 @@ type ApiDeleteHyperflexHealthCheckPackageChecksumRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexHealthCheckPackageChecksumRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexHealthCheckPackageChecksumRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexHealthCheckPackageChecksumExecute(r)
 }
 
@@ -7810,20 +7549,18 @@ func (a *HyperflexApiService) DeleteHyperflexHealthCheckPackageChecksum(ctx _con
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexHealthCheckPackageChecksumExecute(r ApiDeleteHyperflexHealthCheckPackageChecksumRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexHealthCheckPackageChecksumExecute(r ApiDeleteHyperflexHealthCheckPackageChecksumRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexHealthCheckPackageChecksum")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HealthCheckPackageChecksums/{Moid}"
@@ -7852,22 +7589,19 @@ func (a *HyperflexApiService) DeleteHyperflexHealthCheckPackageChecksumExecute(r
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7925,7 +7659,7 @@ func (a *HyperflexApiService) DeleteHyperflexHealthCheckPackageChecksumExecute(r
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexHxapDatacenterRequest struct {
@@ -7934,7 +7668,7 @@ type ApiDeleteHyperflexHxapDatacenterRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexHxapDatacenterRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexHxapDatacenterRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexHxapDatacenterExecute(r)
 }
 
@@ -7955,20 +7689,18 @@ func (a *HyperflexApiService) DeleteHyperflexHxapDatacenter(ctx _context.Context
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexHxapDatacenterExecute(r ApiDeleteHyperflexHxapDatacenterRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexHxapDatacenterExecute(r ApiDeleteHyperflexHxapDatacenterRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexHxapDatacenter")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapDatacenters/{Moid}"
@@ -7997,22 +7729,19 @@ func (a *HyperflexApiService) DeleteHyperflexHxapDatacenterExecute(r ApiDeleteHy
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8070,7 +7799,7 @@ func (a *HyperflexApiService) DeleteHyperflexHxapDatacenterExecute(r ApiDeleteHy
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexHxdpVersionRequest struct {
@@ -8079,7 +7808,7 @@ type ApiDeleteHyperflexHxdpVersionRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexHxdpVersionRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexHxdpVersionRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexHxdpVersionExecute(r)
 }
 
@@ -8100,20 +7829,18 @@ func (a *HyperflexApiService) DeleteHyperflexHxdpVersion(ctx _context.Context, m
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexHxdpVersionExecute(r ApiDeleteHyperflexHxdpVersionRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexHxdpVersionExecute(r ApiDeleteHyperflexHxdpVersionRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexHxdpVersion")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxdpVersions/{Moid}"
@@ -8142,22 +7869,19 @@ func (a *HyperflexApiService) DeleteHyperflexHxdpVersionExecute(r ApiDeleteHyper
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8215,7 +7939,7 @@ func (a *HyperflexApiService) DeleteHyperflexHxdpVersionExecute(r ApiDeleteHyper
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexLocalCredentialPolicyRequest struct {
@@ -8224,7 +7948,7 @@ type ApiDeleteHyperflexLocalCredentialPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexLocalCredentialPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexLocalCredentialPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexLocalCredentialPolicyExecute(r)
 }
 
@@ -8245,20 +7969,18 @@ func (a *HyperflexApiService) DeleteHyperflexLocalCredentialPolicy(ctx _context.
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexLocalCredentialPolicyExecute(r ApiDeleteHyperflexLocalCredentialPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexLocalCredentialPolicyExecute(r ApiDeleteHyperflexLocalCredentialPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexLocalCredentialPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/LocalCredentialPolicies/{Moid}"
@@ -8287,22 +8009,19 @@ func (a *HyperflexApiService) DeleteHyperflexLocalCredentialPolicyExecute(r ApiD
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8360,7 +8079,7 @@ func (a *HyperflexApiService) DeleteHyperflexLocalCredentialPolicyExecute(r ApiD
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexNodeConfigPolicyRequest struct {
@@ -8369,7 +8088,7 @@ type ApiDeleteHyperflexNodeConfigPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexNodeConfigPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexNodeConfigPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexNodeConfigPolicyExecute(r)
 }
 
@@ -8390,20 +8109,18 @@ func (a *HyperflexApiService) DeleteHyperflexNodeConfigPolicy(ctx _context.Conte
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexNodeConfigPolicyExecute(r ApiDeleteHyperflexNodeConfigPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexNodeConfigPolicyExecute(r ApiDeleteHyperflexNodeConfigPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexNodeConfigPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/NodeConfigPolicies/{Moid}"
@@ -8432,22 +8149,19 @@ func (a *HyperflexApiService) DeleteHyperflexNodeConfigPolicyExecute(r ApiDelete
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8505,7 +8219,7 @@ func (a *HyperflexApiService) DeleteHyperflexNodeConfigPolicyExecute(r ApiDelete
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexNodeProfileRequest struct {
@@ -8514,7 +8228,7 @@ type ApiDeleteHyperflexNodeProfileRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexNodeProfileRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexNodeProfileRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexNodeProfileExecute(r)
 }
 
@@ -8535,20 +8249,18 @@ func (a *HyperflexApiService) DeleteHyperflexNodeProfile(ctx _context.Context, m
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexNodeProfileExecute(r ApiDeleteHyperflexNodeProfileRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexNodeProfileExecute(r ApiDeleteHyperflexNodeProfileRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexNodeProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/NodeProfiles/{Moid}"
@@ -8577,22 +8289,19 @@ func (a *HyperflexApiService) DeleteHyperflexNodeProfileExecute(r ApiDeleteHyper
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8650,7 +8359,7 @@ func (a *HyperflexApiService) DeleteHyperflexNodeProfileExecute(r ApiDeleteHyper
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexProxySettingPolicyRequest struct {
@@ -8659,7 +8368,7 @@ type ApiDeleteHyperflexProxySettingPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexProxySettingPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexProxySettingPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexProxySettingPolicyExecute(r)
 }
 
@@ -8680,20 +8389,18 @@ func (a *HyperflexApiService) DeleteHyperflexProxySettingPolicy(ctx _context.Con
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexProxySettingPolicyExecute(r ApiDeleteHyperflexProxySettingPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexProxySettingPolicyExecute(r ApiDeleteHyperflexProxySettingPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexProxySettingPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ProxySettingPolicies/{Moid}"
@@ -8722,22 +8429,19 @@ func (a *HyperflexApiService) DeleteHyperflexProxySettingPolicyExecute(r ApiDele
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8795,7 +8499,7 @@ func (a *HyperflexApiService) DeleteHyperflexProxySettingPolicyExecute(r ApiDele
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexServerFirmwareVersionRequest struct {
@@ -8804,7 +8508,7 @@ type ApiDeleteHyperflexServerFirmwareVersionRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexServerFirmwareVersionRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexServerFirmwareVersionRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexServerFirmwareVersionExecute(r)
 }
 
@@ -8825,20 +8529,18 @@ func (a *HyperflexApiService) DeleteHyperflexServerFirmwareVersion(ctx _context.
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexServerFirmwareVersionExecute(r ApiDeleteHyperflexServerFirmwareVersionRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexServerFirmwareVersionExecute(r ApiDeleteHyperflexServerFirmwareVersionRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexServerFirmwareVersion")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ServerFirmwareVersions/{Moid}"
@@ -8867,22 +8569,19 @@ func (a *HyperflexApiService) DeleteHyperflexServerFirmwareVersionExecute(r ApiD
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8940,7 +8639,7 @@ func (a *HyperflexApiService) DeleteHyperflexServerFirmwareVersionExecute(r ApiD
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexServerFirmwareVersionEntryRequest struct {
@@ -8949,7 +8648,7 @@ type ApiDeleteHyperflexServerFirmwareVersionEntryRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexServerFirmwareVersionEntryRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexServerFirmwareVersionEntryRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexServerFirmwareVersionEntryExecute(r)
 }
 
@@ -8970,20 +8669,18 @@ func (a *HyperflexApiService) DeleteHyperflexServerFirmwareVersionEntry(ctx _con
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexServerFirmwareVersionEntryExecute(r ApiDeleteHyperflexServerFirmwareVersionEntryRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexServerFirmwareVersionEntryExecute(r ApiDeleteHyperflexServerFirmwareVersionEntryRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexServerFirmwareVersionEntry")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ServerFirmwareVersionEntries/{Moid}"
@@ -9012,22 +8709,19 @@ func (a *HyperflexApiService) DeleteHyperflexServerFirmwareVersionEntryExecute(r
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9085,7 +8779,7 @@ func (a *HyperflexApiService) DeleteHyperflexServerFirmwareVersionEntryExecute(r
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexServerModelRequest struct {
@@ -9094,7 +8788,7 @@ type ApiDeleteHyperflexServerModelRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexServerModelRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexServerModelRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexServerModelExecute(r)
 }
 
@@ -9115,20 +8809,18 @@ func (a *HyperflexApiService) DeleteHyperflexServerModel(ctx _context.Context, m
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexServerModelExecute(r ApiDeleteHyperflexServerModelRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexServerModelExecute(r ApiDeleteHyperflexServerModelRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexServerModel")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ServerModels/{Moid}"
@@ -9157,22 +8849,19 @@ func (a *HyperflexApiService) DeleteHyperflexServerModelExecute(r ApiDeleteHyper
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9230,7 +8919,7 @@ func (a *HyperflexApiService) DeleteHyperflexServerModelExecute(r ApiDeleteHyper
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexSoftwareVersionPolicyRequest struct {
@@ -9239,7 +8928,7 @@ type ApiDeleteHyperflexSoftwareVersionPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexSoftwareVersionPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexSoftwareVersionPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexSoftwareVersionPolicyExecute(r)
 }
 
@@ -9260,20 +8949,18 @@ func (a *HyperflexApiService) DeleteHyperflexSoftwareVersionPolicy(ctx _context.
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexSoftwareVersionPolicyExecute(r ApiDeleteHyperflexSoftwareVersionPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexSoftwareVersionPolicyExecute(r ApiDeleteHyperflexSoftwareVersionPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexSoftwareVersionPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/SoftwareVersionPolicies/{Moid}"
@@ -9302,22 +8989,19 @@ func (a *HyperflexApiService) DeleteHyperflexSoftwareVersionPolicyExecute(r ApiD
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9375,7 +9059,7 @@ func (a *HyperflexApiService) DeleteHyperflexSoftwareVersionPolicyExecute(r ApiD
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexSysConfigPolicyRequest struct {
@@ -9384,7 +9068,7 @@ type ApiDeleteHyperflexSysConfigPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexSysConfigPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexSysConfigPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexSysConfigPolicyExecute(r)
 }
 
@@ -9405,20 +9089,18 @@ func (a *HyperflexApiService) DeleteHyperflexSysConfigPolicy(ctx _context.Contex
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexSysConfigPolicyExecute(r ApiDeleteHyperflexSysConfigPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexSysConfigPolicyExecute(r ApiDeleteHyperflexSysConfigPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexSysConfigPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/SysConfigPolicies/{Moid}"
@@ -9447,22 +9129,19 @@ func (a *HyperflexApiService) DeleteHyperflexSysConfigPolicyExecute(r ApiDeleteH
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9520,7 +9199,7 @@ func (a *HyperflexApiService) DeleteHyperflexSysConfigPolicyExecute(r ApiDeleteH
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexUcsmConfigPolicyRequest struct {
@@ -9529,7 +9208,7 @@ type ApiDeleteHyperflexUcsmConfigPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexUcsmConfigPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexUcsmConfigPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexUcsmConfigPolicyExecute(r)
 }
 
@@ -9550,20 +9229,18 @@ func (a *HyperflexApiService) DeleteHyperflexUcsmConfigPolicy(ctx _context.Conte
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexUcsmConfigPolicyExecute(r ApiDeleteHyperflexUcsmConfigPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexUcsmConfigPolicyExecute(r ApiDeleteHyperflexUcsmConfigPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexUcsmConfigPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/UcsmConfigPolicies/{Moid}"
@@ -9592,22 +9269,19 @@ func (a *HyperflexApiService) DeleteHyperflexUcsmConfigPolicyExecute(r ApiDelete
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9665,7 +9339,7 @@ func (a *HyperflexApiService) DeleteHyperflexUcsmConfigPolicyExecute(r ApiDelete
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexVcenterConfigPolicyRequest struct {
@@ -9674,7 +9348,7 @@ type ApiDeleteHyperflexVcenterConfigPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexVcenterConfigPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexVcenterConfigPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexVcenterConfigPolicyExecute(r)
 }
 
@@ -9695,20 +9369,18 @@ func (a *HyperflexApiService) DeleteHyperflexVcenterConfigPolicy(ctx _context.Co
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexVcenterConfigPolicyExecute(r ApiDeleteHyperflexVcenterConfigPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexVcenterConfigPolicyExecute(r ApiDeleteHyperflexVcenterConfigPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexVcenterConfigPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/VcenterConfigPolicies/{Moid}"
@@ -9737,22 +9409,19 @@ func (a *HyperflexApiService) DeleteHyperflexVcenterConfigPolicyExecute(r ApiDel
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9810,7 +9479,7 @@ func (a *HyperflexApiService) DeleteHyperflexVcenterConfigPolicyExecute(r ApiDel
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteHyperflexVmRestoreOperationRequest struct {
@@ -9819,7 +9488,7 @@ type ApiDeleteHyperflexVmRestoreOperationRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteHyperflexVmRestoreOperationRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteHyperflexVmRestoreOperationRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteHyperflexVmRestoreOperationExecute(r)
 }
 
@@ -9840,20 +9509,18 @@ func (a *HyperflexApiService) DeleteHyperflexVmRestoreOperation(ctx _context.Con
 /*
  * Execute executes the request
  */
-func (a *HyperflexApiService) DeleteHyperflexVmRestoreOperationExecute(r ApiDeleteHyperflexVmRestoreOperationRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) DeleteHyperflexVmRestoreOperationExecute(r ApiDeleteHyperflexVmRestoreOperationRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.DeleteHyperflexVmRestoreOperation")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/VmRestoreOperations/{Moid}"
@@ -9882,22 +9549,19 @@ func (a *HyperflexApiService) DeleteHyperflexVmRestoreOperationExecute(r ApiDele
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9955,7 +9619,7 @@ func (a *HyperflexApiService) DeleteHyperflexVmRestoreOperationExecute(r ApiDele
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexAlarmByMoidRequest struct {
@@ -9964,7 +9628,7 @@ type ApiGetHyperflexAlarmByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexAlarmByMoidRequest) Execute() (HyperflexAlarm, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexAlarmByMoidRequest) Execute() (HyperflexAlarm, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexAlarmByMoidExecute(r)
 }
 
@@ -9986,21 +9650,19 @@ func (a *HyperflexApiService) GetHyperflexAlarmByMoid(ctx _context.Context, moid
  * Execute executes the request
  * @return HyperflexAlarm
  */
-func (a *HyperflexApiService) GetHyperflexAlarmByMoidExecute(r ApiGetHyperflexAlarmByMoidRequest) (HyperflexAlarm, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexAlarmByMoidExecute(r ApiGetHyperflexAlarmByMoidRequest) (HyperflexAlarm, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexAlarm
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexAlarmByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/Alarms/{Moid}"
@@ -10029,22 +9691,19 @@ func (a *HyperflexApiService) GetHyperflexAlarmByMoidExecute(r ApiGetHyperflexAl
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10111,7 +9770,7 @@ func (a *HyperflexApiService) GetHyperflexAlarmByMoidExecute(r ApiGetHyperflexAl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexAlarmListRequest struct {
@@ -10175,7 +9834,7 @@ func (r ApiGetHyperflexAlarmListRequest) Tags(tags string) ApiGetHyperflexAlarmL
 	return r
 }
 
-func (r ApiGetHyperflexAlarmListRequest) Execute() (HyperflexAlarmResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexAlarmListRequest) Execute() (HyperflexAlarmResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexAlarmListExecute(r)
 }
 
@@ -10195,21 +9854,19 @@ func (a *HyperflexApiService) GetHyperflexAlarmList(ctx _context.Context) ApiGet
  * Execute executes the request
  * @return HyperflexAlarmResponse
  */
-func (a *HyperflexApiService) GetHyperflexAlarmListExecute(r ApiGetHyperflexAlarmListRequest) (HyperflexAlarmResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexAlarmListExecute(r ApiGetHyperflexAlarmListRequest) (HyperflexAlarmResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexAlarmResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexAlarmList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/Alarms"
@@ -10270,22 +9927,19 @@ func (a *HyperflexApiService) GetHyperflexAlarmListExecute(r ApiGetHyperflexAlar
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10352,7 +10006,7 @@ func (a *HyperflexApiService) GetHyperflexAlarmListExecute(r ApiGetHyperflexAlar
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexAppCatalogByMoidRequest struct {
@@ -10361,7 +10015,7 @@ type ApiGetHyperflexAppCatalogByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexAppCatalogByMoidRequest) Execute() (HyperflexAppCatalog, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexAppCatalogByMoidRequest) Execute() (HyperflexAppCatalog, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexAppCatalogByMoidExecute(r)
 }
 
@@ -10383,21 +10037,19 @@ func (a *HyperflexApiService) GetHyperflexAppCatalogByMoid(ctx _context.Context,
  * Execute executes the request
  * @return HyperflexAppCatalog
  */
-func (a *HyperflexApiService) GetHyperflexAppCatalogByMoidExecute(r ApiGetHyperflexAppCatalogByMoidRequest) (HyperflexAppCatalog, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexAppCatalogByMoidExecute(r ApiGetHyperflexAppCatalogByMoidRequest) (HyperflexAppCatalog, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexAppCatalog
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexAppCatalogByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/AppCatalogs/{Moid}"
@@ -10426,22 +10078,19 @@ func (a *HyperflexApiService) GetHyperflexAppCatalogByMoidExecute(r ApiGetHyperf
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10508,7 +10157,7 @@ func (a *HyperflexApiService) GetHyperflexAppCatalogByMoidExecute(r ApiGetHyperf
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexAppCatalogListRequest struct {
@@ -10572,7 +10221,7 @@ func (r ApiGetHyperflexAppCatalogListRequest) Tags(tags string) ApiGetHyperflexA
 	return r
 }
 
-func (r ApiGetHyperflexAppCatalogListRequest) Execute() (HyperflexAppCatalogResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexAppCatalogListRequest) Execute() (HyperflexAppCatalogResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexAppCatalogListExecute(r)
 }
 
@@ -10592,21 +10241,19 @@ func (a *HyperflexApiService) GetHyperflexAppCatalogList(ctx _context.Context) A
  * Execute executes the request
  * @return HyperflexAppCatalogResponse
  */
-func (a *HyperflexApiService) GetHyperflexAppCatalogListExecute(r ApiGetHyperflexAppCatalogListRequest) (HyperflexAppCatalogResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexAppCatalogListExecute(r ApiGetHyperflexAppCatalogListRequest) (HyperflexAppCatalogResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexAppCatalogResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexAppCatalogList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/AppCatalogs"
@@ -10667,22 +10314,19 @@ func (a *HyperflexApiService) GetHyperflexAppCatalogListExecute(r ApiGetHyperfle
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10749,7 +10393,7 @@ func (a *HyperflexApiService) GetHyperflexAppCatalogListExecute(r ApiGetHyperfle
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexAutoSupportPolicyByMoidRequest struct {
@@ -10758,7 +10402,7 @@ type ApiGetHyperflexAutoSupportPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexAutoSupportPolicyByMoidRequest) Execute() (HyperflexAutoSupportPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexAutoSupportPolicyByMoidRequest) Execute() (HyperflexAutoSupportPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexAutoSupportPolicyByMoidExecute(r)
 }
 
@@ -10780,21 +10424,19 @@ func (a *HyperflexApiService) GetHyperflexAutoSupportPolicyByMoid(ctx _context.C
  * Execute executes the request
  * @return HyperflexAutoSupportPolicy
  */
-func (a *HyperflexApiService) GetHyperflexAutoSupportPolicyByMoidExecute(r ApiGetHyperflexAutoSupportPolicyByMoidRequest) (HyperflexAutoSupportPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexAutoSupportPolicyByMoidExecute(r ApiGetHyperflexAutoSupportPolicyByMoidRequest) (HyperflexAutoSupportPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexAutoSupportPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexAutoSupportPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/AutoSupportPolicies/{Moid}"
@@ -10823,22 +10465,19 @@ func (a *HyperflexApiService) GetHyperflexAutoSupportPolicyByMoidExecute(r ApiGe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10905,7 +10544,7 @@ func (a *HyperflexApiService) GetHyperflexAutoSupportPolicyByMoidExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexAutoSupportPolicyListRequest struct {
@@ -10969,7 +10608,7 @@ func (r ApiGetHyperflexAutoSupportPolicyListRequest) Tags(tags string) ApiGetHyp
 	return r
 }
 
-func (r ApiGetHyperflexAutoSupportPolicyListRequest) Execute() (HyperflexAutoSupportPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexAutoSupportPolicyListRequest) Execute() (HyperflexAutoSupportPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexAutoSupportPolicyListExecute(r)
 }
 
@@ -10989,21 +10628,19 @@ func (a *HyperflexApiService) GetHyperflexAutoSupportPolicyList(ctx _context.Con
  * Execute executes the request
  * @return HyperflexAutoSupportPolicyResponse
  */
-func (a *HyperflexApiService) GetHyperflexAutoSupportPolicyListExecute(r ApiGetHyperflexAutoSupportPolicyListRequest) (HyperflexAutoSupportPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexAutoSupportPolicyListExecute(r ApiGetHyperflexAutoSupportPolicyListRequest) (HyperflexAutoSupportPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexAutoSupportPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexAutoSupportPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/AutoSupportPolicies"
@@ -11064,22 +10701,19 @@ func (a *HyperflexApiService) GetHyperflexAutoSupportPolicyListExecute(r ApiGetH
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11146,7 +10780,7 @@ func (a *HyperflexApiService) GetHyperflexAutoSupportPolicyListExecute(r ApiGetH
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexBackupClusterByMoidRequest struct {
@@ -11155,7 +10789,7 @@ type ApiGetHyperflexBackupClusterByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexBackupClusterByMoidRequest) Execute() (HyperflexBackupCluster, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexBackupClusterByMoidRequest) Execute() (HyperflexBackupCluster, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexBackupClusterByMoidExecute(r)
 }
 
@@ -11177,21 +10811,19 @@ func (a *HyperflexApiService) GetHyperflexBackupClusterByMoid(ctx _context.Conte
  * Execute executes the request
  * @return HyperflexBackupCluster
  */
-func (a *HyperflexApiService) GetHyperflexBackupClusterByMoidExecute(r ApiGetHyperflexBackupClusterByMoidRequest) (HyperflexBackupCluster, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexBackupClusterByMoidExecute(r ApiGetHyperflexBackupClusterByMoidRequest) (HyperflexBackupCluster, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexBackupCluster
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexBackupClusterByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/BackupClusters/{Moid}"
@@ -11220,22 +10852,19 @@ func (a *HyperflexApiService) GetHyperflexBackupClusterByMoidExecute(r ApiGetHyp
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11302,7 +10931,7 @@ func (a *HyperflexApiService) GetHyperflexBackupClusterByMoidExecute(r ApiGetHyp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexBackupClusterListRequest struct {
@@ -11366,7 +10995,7 @@ func (r ApiGetHyperflexBackupClusterListRequest) Tags(tags string) ApiGetHyperfl
 	return r
 }
 
-func (r ApiGetHyperflexBackupClusterListRequest) Execute() (HyperflexBackupClusterResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexBackupClusterListRequest) Execute() (HyperflexBackupClusterResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexBackupClusterListExecute(r)
 }
 
@@ -11386,21 +11015,19 @@ func (a *HyperflexApiService) GetHyperflexBackupClusterList(ctx _context.Context
  * Execute executes the request
  * @return HyperflexBackupClusterResponse
  */
-func (a *HyperflexApiService) GetHyperflexBackupClusterListExecute(r ApiGetHyperflexBackupClusterListRequest) (HyperflexBackupClusterResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexBackupClusterListExecute(r ApiGetHyperflexBackupClusterListRequest) (HyperflexBackupClusterResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexBackupClusterResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexBackupClusterList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/BackupClusters"
@@ -11461,22 +11088,19 @@ func (a *HyperflexApiService) GetHyperflexBackupClusterListExecute(r ApiGetHyper
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11543,7 +11167,7 @@ func (a *HyperflexApiService) GetHyperflexBackupClusterListExecute(r ApiGetHyper
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexCapabilityInfoByMoidRequest struct {
@@ -11552,7 +11176,7 @@ type ApiGetHyperflexCapabilityInfoByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexCapabilityInfoByMoidRequest) Execute() (HyperflexCapabilityInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexCapabilityInfoByMoidRequest) Execute() (HyperflexCapabilityInfo, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexCapabilityInfoByMoidExecute(r)
 }
 
@@ -11574,21 +11198,19 @@ func (a *HyperflexApiService) GetHyperflexCapabilityInfoByMoid(ctx _context.Cont
  * Execute executes the request
  * @return HyperflexCapabilityInfo
  */
-func (a *HyperflexApiService) GetHyperflexCapabilityInfoByMoidExecute(r ApiGetHyperflexCapabilityInfoByMoidRequest) (HyperflexCapabilityInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexCapabilityInfoByMoidExecute(r ApiGetHyperflexCapabilityInfoByMoidRequest) (HyperflexCapabilityInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexCapabilityInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexCapabilityInfoByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/CapabilityInfos/{Moid}"
@@ -11617,22 +11239,19 @@ func (a *HyperflexApiService) GetHyperflexCapabilityInfoByMoidExecute(r ApiGetHy
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11699,7 +11318,7 @@ func (a *HyperflexApiService) GetHyperflexCapabilityInfoByMoidExecute(r ApiGetHy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexCapabilityInfoListRequest struct {
@@ -11763,7 +11382,7 @@ func (r ApiGetHyperflexCapabilityInfoListRequest) Tags(tags string) ApiGetHyperf
 	return r
 }
 
-func (r ApiGetHyperflexCapabilityInfoListRequest) Execute() (HyperflexCapabilityInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexCapabilityInfoListRequest) Execute() (HyperflexCapabilityInfoResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexCapabilityInfoListExecute(r)
 }
 
@@ -11783,21 +11402,19 @@ func (a *HyperflexApiService) GetHyperflexCapabilityInfoList(ctx _context.Contex
  * Execute executes the request
  * @return HyperflexCapabilityInfoResponse
  */
-func (a *HyperflexApiService) GetHyperflexCapabilityInfoListExecute(r ApiGetHyperflexCapabilityInfoListRequest) (HyperflexCapabilityInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexCapabilityInfoListExecute(r ApiGetHyperflexCapabilityInfoListRequest) (HyperflexCapabilityInfoResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexCapabilityInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexCapabilityInfoList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/CapabilityInfos"
@@ -11858,22 +11475,19 @@ func (a *HyperflexApiService) GetHyperflexCapabilityInfoListExecute(r ApiGetHype
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11940,7 +11554,7 @@ func (a *HyperflexApiService) GetHyperflexCapabilityInfoListExecute(r ApiGetHype
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexCiscoHypervisorManagerByMoidRequest struct {
@@ -11949,7 +11563,7 @@ type ApiGetHyperflexCiscoHypervisorManagerByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexCiscoHypervisorManagerByMoidRequest) Execute() (HyperflexCiscoHypervisorManager, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexCiscoHypervisorManagerByMoidRequest) Execute() (HyperflexCiscoHypervisorManager, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexCiscoHypervisorManagerByMoidExecute(r)
 }
 
@@ -11971,21 +11585,19 @@ func (a *HyperflexApiService) GetHyperflexCiscoHypervisorManagerByMoid(ctx _cont
  * Execute executes the request
  * @return HyperflexCiscoHypervisorManager
  */
-func (a *HyperflexApiService) GetHyperflexCiscoHypervisorManagerByMoidExecute(r ApiGetHyperflexCiscoHypervisorManagerByMoidRequest) (HyperflexCiscoHypervisorManager, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexCiscoHypervisorManagerByMoidExecute(r ApiGetHyperflexCiscoHypervisorManagerByMoidRequest) (HyperflexCiscoHypervisorManager, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexCiscoHypervisorManager
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexCiscoHypervisorManagerByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/CiscoHypervisorManagers/{Moid}"
@@ -12014,22 +11626,19 @@ func (a *HyperflexApiService) GetHyperflexCiscoHypervisorManagerByMoidExecute(r 
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12096,7 +11705,7 @@ func (a *HyperflexApiService) GetHyperflexCiscoHypervisorManagerByMoidExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexCiscoHypervisorManagerListRequest struct {
@@ -12160,7 +11769,7 @@ func (r ApiGetHyperflexCiscoHypervisorManagerListRequest) Tags(tags string) ApiG
 	return r
 }
 
-func (r ApiGetHyperflexCiscoHypervisorManagerListRequest) Execute() (HyperflexCiscoHypervisorManagerResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexCiscoHypervisorManagerListRequest) Execute() (HyperflexCiscoHypervisorManagerResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexCiscoHypervisorManagerListExecute(r)
 }
 
@@ -12180,21 +11789,19 @@ func (a *HyperflexApiService) GetHyperflexCiscoHypervisorManagerList(ctx _contex
  * Execute executes the request
  * @return HyperflexCiscoHypervisorManagerResponse
  */
-func (a *HyperflexApiService) GetHyperflexCiscoHypervisorManagerListExecute(r ApiGetHyperflexCiscoHypervisorManagerListRequest) (HyperflexCiscoHypervisorManagerResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexCiscoHypervisorManagerListExecute(r ApiGetHyperflexCiscoHypervisorManagerListRequest) (HyperflexCiscoHypervisorManagerResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexCiscoHypervisorManagerResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexCiscoHypervisorManagerList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/CiscoHypervisorManagers"
@@ -12255,22 +11862,19 @@ func (a *HyperflexApiService) GetHyperflexCiscoHypervisorManagerListExecute(r Ap
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12337,7 +11941,7 @@ func (a *HyperflexApiService) GetHyperflexCiscoHypervisorManagerListExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexClusterBackupPolicyByMoidRequest struct {
@@ -12346,7 +11950,7 @@ type ApiGetHyperflexClusterBackupPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexClusterBackupPolicyByMoidRequest) Execute() (HyperflexClusterBackupPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexClusterBackupPolicyByMoidRequest) Execute() (HyperflexClusterBackupPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexClusterBackupPolicyByMoidExecute(r)
 }
 
@@ -12368,21 +11972,19 @@ func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyByMoid(ctx _context
  * Execute executes the request
  * @return HyperflexClusterBackupPolicy
  */
-func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyByMoidExecute(r ApiGetHyperflexClusterBackupPolicyByMoidRequest) (HyperflexClusterBackupPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyByMoidExecute(r ApiGetHyperflexClusterBackupPolicyByMoidRequest) (HyperflexClusterBackupPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterBackupPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexClusterBackupPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterBackupPolicies/{Moid}"
@@ -12411,22 +12013,19 @@ func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyByMoidExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12493,7 +12092,7 @@ func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyByMoidExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexClusterBackupPolicyDeploymentByMoidRequest struct {
@@ -12502,7 +12101,7 @@ type ApiGetHyperflexClusterBackupPolicyDeploymentByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexClusterBackupPolicyDeploymentByMoidRequest) Execute() (HyperflexClusterBackupPolicyDeployment, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexClusterBackupPolicyDeploymentByMoidRequest) Execute() (HyperflexClusterBackupPolicyDeployment, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexClusterBackupPolicyDeploymentByMoidExecute(r)
 }
 
@@ -12524,21 +12123,19 @@ func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyDeploymentByMoid(ct
  * Execute executes the request
  * @return HyperflexClusterBackupPolicyDeployment
  */
-func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyDeploymentByMoidExecute(r ApiGetHyperflexClusterBackupPolicyDeploymentByMoidRequest) (HyperflexClusterBackupPolicyDeployment, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyDeploymentByMoidExecute(r ApiGetHyperflexClusterBackupPolicyDeploymentByMoidRequest) (HyperflexClusterBackupPolicyDeployment, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterBackupPolicyDeployment
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexClusterBackupPolicyDeploymentByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterBackupPolicyDeployments/{Moid}"
@@ -12567,22 +12164,19 @@ func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyDeploymentByMoidExe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12649,7 +12243,7 @@ func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyDeploymentByMoidExe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexClusterBackupPolicyDeploymentListRequest struct {
@@ -12713,7 +12307,7 @@ func (r ApiGetHyperflexClusterBackupPolicyDeploymentListRequest) Tags(tags strin
 	return r
 }
 
-func (r ApiGetHyperflexClusterBackupPolicyDeploymentListRequest) Execute() (HyperflexClusterBackupPolicyDeploymentResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexClusterBackupPolicyDeploymentListRequest) Execute() (HyperflexClusterBackupPolicyDeploymentResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexClusterBackupPolicyDeploymentListExecute(r)
 }
 
@@ -12733,21 +12327,19 @@ func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyDeploymentList(ctx 
  * Execute executes the request
  * @return HyperflexClusterBackupPolicyDeploymentResponse
  */
-func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyDeploymentListExecute(r ApiGetHyperflexClusterBackupPolicyDeploymentListRequest) (HyperflexClusterBackupPolicyDeploymentResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyDeploymentListExecute(r ApiGetHyperflexClusterBackupPolicyDeploymentListRequest) (HyperflexClusterBackupPolicyDeploymentResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterBackupPolicyDeploymentResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexClusterBackupPolicyDeploymentList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterBackupPolicyDeployments"
@@ -12808,22 +12400,19 @@ func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyDeploymentListExecu
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -12890,7 +12479,7 @@ func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyDeploymentListExecu
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexClusterBackupPolicyListRequest struct {
@@ -12954,7 +12543,7 @@ func (r ApiGetHyperflexClusterBackupPolicyListRequest) Tags(tags string) ApiGetH
 	return r
 }
 
-func (r ApiGetHyperflexClusterBackupPolicyListRequest) Execute() (HyperflexClusterBackupPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexClusterBackupPolicyListRequest) Execute() (HyperflexClusterBackupPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexClusterBackupPolicyListExecute(r)
 }
 
@@ -12974,21 +12563,19 @@ func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyList(ctx _context.C
  * Execute executes the request
  * @return HyperflexClusterBackupPolicyResponse
  */
-func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyListExecute(r ApiGetHyperflexClusterBackupPolicyListRequest) (HyperflexClusterBackupPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyListExecute(r ApiGetHyperflexClusterBackupPolicyListRequest) (HyperflexClusterBackupPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterBackupPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexClusterBackupPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterBackupPolicies"
@@ -13049,22 +12636,19 @@ func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyListExecute(r ApiGe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13131,7 +12715,7 @@ func (a *HyperflexApiService) GetHyperflexClusterBackupPolicyListExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexClusterByMoidRequest struct {
@@ -13140,7 +12724,7 @@ type ApiGetHyperflexClusterByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexClusterByMoidRequest) Execute() (HyperflexCluster, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexClusterByMoidRequest) Execute() (HyperflexCluster, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexClusterByMoidExecute(r)
 }
 
@@ -13162,21 +12746,19 @@ func (a *HyperflexApiService) GetHyperflexClusterByMoid(ctx _context.Context, mo
  * Execute executes the request
  * @return HyperflexCluster
  */
-func (a *HyperflexApiService) GetHyperflexClusterByMoidExecute(r ApiGetHyperflexClusterByMoidRequest) (HyperflexCluster, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexClusterByMoidExecute(r ApiGetHyperflexClusterByMoidRequest) (HyperflexCluster, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexCluster
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexClusterByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/Clusters/{Moid}"
@@ -13205,22 +12787,19 @@ func (a *HyperflexApiService) GetHyperflexClusterByMoidExecute(r ApiGetHyperflex
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13287,7 +12866,7 @@ func (a *HyperflexApiService) GetHyperflexClusterByMoidExecute(r ApiGetHyperflex
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexClusterHealthCheckExecutionSnapshotByMoidRequest struct {
@@ -13296,7 +12875,7 @@ type ApiGetHyperflexClusterHealthCheckExecutionSnapshotByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexClusterHealthCheckExecutionSnapshotByMoidRequest) Execute() (HyperflexClusterHealthCheckExecutionSnapshot, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexClusterHealthCheckExecutionSnapshotByMoidRequest) Execute() (HyperflexClusterHealthCheckExecutionSnapshot, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexClusterHealthCheckExecutionSnapshotByMoidExecute(r)
 }
 
@@ -13318,21 +12897,19 @@ func (a *HyperflexApiService) GetHyperflexClusterHealthCheckExecutionSnapshotByM
  * Execute executes the request
  * @return HyperflexClusterHealthCheckExecutionSnapshot
  */
-func (a *HyperflexApiService) GetHyperflexClusterHealthCheckExecutionSnapshotByMoidExecute(r ApiGetHyperflexClusterHealthCheckExecutionSnapshotByMoidRequest) (HyperflexClusterHealthCheckExecutionSnapshot, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexClusterHealthCheckExecutionSnapshotByMoidExecute(r ApiGetHyperflexClusterHealthCheckExecutionSnapshotByMoidRequest) (HyperflexClusterHealthCheckExecutionSnapshot, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterHealthCheckExecutionSnapshot
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexClusterHealthCheckExecutionSnapshotByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterHealthCheckExecutionSnapshots/{Moid}"
@@ -13361,22 +12938,19 @@ func (a *HyperflexApiService) GetHyperflexClusterHealthCheckExecutionSnapshotByM
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13443,7 +13017,7 @@ func (a *HyperflexApiService) GetHyperflexClusterHealthCheckExecutionSnapshotByM
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexClusterHealthCheckExecutionSnapshotListRequest struct {
@@ -13507,7 +13081,7 @@ func (r ApiGetHyperflexClusterHealthCheckExecutionSnapshotListRequest) Tags(tags
 	return r
 }
 
-func (r ApiGetHyperflexClusterHealthCheckExecutionSnapshotListRequest) Execute() (HyperflexClusterHealthCheckExecutionSnapshotResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexClusterHealthCheckExecutionSnapshotListRequest) Execute() (HyperflexClusterHealthCheckExecutionSnapshotResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexClusterHealthCheckExecutionSnapshotListExecute(r)
 }
 
@@ -13527,21 +13101,19 @@ func (a *HyperflexApiService) GetHyperflexClusterHealthCheckExecutionSnapshotLis
  * Execute executes the request
  * @return HyperflexClusterHealthCheckExecutionSnapshotResponse
  */
-func (a *HyperflexApiService) GetHyperflexClusterHealthCheckExecutionSnapshotListExecute(r ApiGetHyperflexClusterHealthCheckExecutionSnapshotListRequest) (HyperflexClusterHealthCheckExecutionSnapshotResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexClusterHealthCheckExecutionSnapshotListExecute(r ApiGetHyperflexClusterHealthCheckExecutionSnapshotListRequest) (HyperflexClusterHealthCheckExecutionSnapshotResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterHealthCheckExecutionSnapshotResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexClusterHealthCheckExecutionSnapshotList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterHealthCheckExecutionSnapshots"
@@ -13602,22 +13174,19 @@ func (a *HyperflexApiService) GetHyperflexClusterHealthCheckExecutionSnapshotLis
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13684,7 +13253,7 @@ func (a *HyperflexApiService) GetHyperflexClusterHealthCheckExecutionSnapshotLis
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexClusterListRequest struct {
@@ -13748,7 +13317,7 @@ func (r ApiGetHyperflexClusterListRequest) Tags(tags string) ApiGetHyperflexClus
 	return r
 }
 
-func (r ApiGetHyperflexClusterListRequest) Execute() (HyperflexClusterResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexClusterListRequest) Execute() (HyperflexClusterResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexClusterListExecute(r)
 }
 
@@ -13768,21 +13337,19 @@ func (a *HyperflexApiService) GetHyperflexClusterList(ctx _context.Context) ApiG
  * Execute executes the request
  * @return HyperflexClusterResponse
  */
-func (a *HyperflexApiService) GetHyperflexClusterListExecute(r ApiGetHyperflexClusterListRequest) (HyperflexClusterResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexClusterListExecute(r ApiGetHyperflexClusterListRequest) (HyperflexClusterResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexClusterList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/Clusters"
@@ -13843,22 +13410,19 @@ func (a *HyperflexApiService) GetHyperflexClusterListExecute(r ApiGetHyperflexCl
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -13925,7 +13489,7 @@ func (a *HyperflexApiService) GetHyperflexClusterListExecute(r ApiGetHyperflexCl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexClusterNetworkPolicyByMoidRequest struct {
@@ -13934,7 +13498,7 @@ type ApiGetHyperflexClusterNetworkPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexClusterNetworkPolicyByMoidRequest) Execute() (HyperflexClusterNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexClusterNetworkPolicyByMoidRequest) Execute() (HyperflexClusterNetworkPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexClusterNetworkPolicyByMoidExecute(r)
 }
 
@@ -13956,21 +13520,19 @@ func (a *HyperflexApiService) GetHyperflexClusterNetworkPolicyByMoid(ctx _contex
  * Execute executes the request
  * @return HyperflexClusterNetworkPolicy
  */
-func (a *HyperflexApiService) GetHyperflexClusterNetworkPolicyByMoidExecute(r ApiGetHyperflexClusterNetworkPolicyByMoidRequest) (HyperflexClusterNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexClusterNetworkPolicyByMoidExecute(r ApiGetHyperflexClusterNetworkPolicyByMoidRequest) (HyperflexClusterNetworkPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexClusterNetworkPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterNetworkPolicies/{Moid}"
@@ -13999,22 +13561,19 @@ func (a *HyperflexApiService) GetHyperflexClusterNetworkPolicyByMoidExecute(r Ap
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14081,7 +13640,7 @@ func (a *HyperflexApiService) GetHyperflexClusterNetworkPolicyByMoidExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexClusterNetworkPolicyListRequest struct {
@@ -14145,7 +13704,7 @@ func (r ApiGetHyperflexClusterNetworkPolicyListRequest) Tags(tags string) ApiGet
 	return r
 }
 
-func (r ApiGetHyperflexClusterNetworkPolicyListRequest) Execute() (HyperflexClusterNetworkPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexClusterNetworkPolicyListRequest) Execute() (HyperflexClusterNetworkPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexClusterNetworkPolicyListExecute(r)
 }
 
@@ -14165,21 +13724,19 @@ func (a *HyperflexApiService) GetHyperflexClusterNetworkPolicyList(ctx _context.
  * Execute executes the request
  * @return HyperflexClusterNetworkPolicyResponse
  */
-func (a *HyperflexApiService) GetHyperflexClusterNetworkPolicyListExecute(r ApiGetHyperflexClusterNetworkPolicyListRequest) (HyperflexClusterNetworkPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexClusterNetworkPolicyListExecute(r ApiGetHyperflexClusterNetworkPolicyListRequest) (HyperflexClusterNetworkPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterNetworkPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexClusterNetworkPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterNetworkPolicies"
@@ -14240,22 +13797,19 @@ func (a *HyperflexApiService) GetHyperflexClusterNetworkPolicyListExecute(r ApiG
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14322,7 +13876,7 @@ func (a *HyperflexApiService) GetHyperflexClusterNetworkPolicyListExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexClusterProfileByMoidRequest struct {
@@ -14331,7 +13885,7 @@ type ApiGetHyperflexClusterProfileByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexClusterProfileByMoidRequest) Execute() (HyperflexClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexClusterProfileByMoidRequest) Execute() (HyperflexClusterProfile, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexClusterProfileByMoidExecute(r)
 }
 
@@ -14353,21 +13907,19 @@ func (a *HyperflexApiService) GetHyperflexClusterProfileByMoid(ctx _context.Cont
  * Execute executes the request
  * @return HyperflexClusterProfile
  */
-func (a *HyperflexApiService) GetHyperflexClusterProfileByMoidExecute(r ApiGetHyperflexClusterProfileByMoidRequest) (HyperflexClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexClusterProfileByMoidExecute(r ApiGetHyperflexClusterProfileByMoidRequest) (HyperflexClusterProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexClusterProfileByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterProfiles/{Moid}"
@@ -14396,22 +13948,19 @@ func (a *HyperflexApiService) GetHyperflexClusterProfileByMoidExecute(r ApiGetHy
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14478,7 +14027,7 @@ func (a *HyperflexApiService) GetHyperflexClusterProfileByMoidExecute(r ApiGetHy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexClusterProfileListRequest struct {
@@ -14542,7 +14091,7 @@ func (r ApiGetHyperflexClusterProfileListRequest) Tags(tags string) ApiGetHyperf
 	return r
 }
 
-func (r ApiGetHyperflexClusterProfileListRequest) Execute() (HyperflexClusterProfileResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexClusterProfileListRequest) Execute() (HyperflexClusterProfileResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexClusterProfileListExecute(r)
 }
 
@@ -14562,21 +14111,19 @@ func (a *HyperflexApiService) GetHyperflexClusterProfileList(ctx _context.Contex
  * Execute executes the request
  * @return HyperflexClusterProfileResponse
  */
-func (a *HyperflexApiService) GetHyperflexClusterProfileListExecute(r ApiGetHyperflexClusterProfileListRequest) (HyperflexClusterProfileResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexClusterProfileListExecute(r ApiGetHyperflexClusterProfileListRequest) (HyperflexClusterProfileResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterProfileResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexClusterProfileList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterProfiles"
@@ -14637,22 +14184,19 @@ func (a *HyperflexApiService) GetHyperflexClusterProfileListExecute(r ApiGetHype
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14719,7 +14263,7 @@ func (a *HyperflexApiService) GetHyperflexClusterProfileListExecute(r ApiGetHype
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexClusterReplicationNetworkPolicyByMoidRequest struct {
@@ -14728,7 +14272,7 @@ type ApiGetHyperflexClusterReplicationNetworkPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexClusterReplicationNetworkPolicyByMoidRequest) Execute() (HyperflexClusterReplicationNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexClusterReplicationNetworkPolicyByMoidRequest) Execute() (HyperflexClusterReplicationNetworkPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexClusterReplicationNetworkPolicyByMoidExecute(r)
 }
 
@@ -14750,21 +14294,19 @@ func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyByMoid(
  * Execute executes the request
  * @return HyperflexClusterReplicationNetworkPolicy
  */
-func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyByMoidExecute(r ApiGetHyperflexClusterReplicationNetworkPolicyByMoidRequest) (HyperflexClusterReplicationNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyByMoidExecute(r ApiGetHyperflexClusterReplicationNetworkPolicyByMoidRequest) (HyperflexClusterReplicationNetworkPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterReplicationNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexClusterReplicationNetworkPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterReplicationNetworkPolicies/{Moid}"
@@ -14793,22 +14335,19 @@ func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyByMoidE
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -14875,7 +14414,7 @@ func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyByMoidE
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentByMoidRequest struct {
@@ -14884,7 +14423,7 @@ type ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentByMoidRequest struc
 	moid       string
 }
 
-func (r ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentByMoidRequest) Execute() (HyperflexClusterReplicationNetworkPolicyDeployment, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentByMoidRequest) Execute() (HyperflexClusterReplicationNetworkPolicyDeployment, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexClusterReplicationNetworkPolicyDeploymentByMoidExecute(r)
 }
 
@@ -14906,21 +14445,19 @@ func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyDeploym
  * Execute executes the request
  * @return HyperflexClusterReplicationNetworkPolicyDeployment
  */
-func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyDeploymentByMoidExecute(r ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentByMoidRequest) (HyperflexClusterReplicationNetworkPolicyDeployment, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyDeploymentByMoidExecute(r ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentByMoidRequest) (HyperflexClusterReplicationNetworkPolicyDeployment, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterReplicationNetworkPolicyDeployment
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexClusterReplicationNetworkPolicyDeploymentByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterReplicationNetworkPolicyDeployments/{Moid}"
@@ -14949,22 +14486,19 @@ func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyDeploym
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15031,7 +14565,7 @@ func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyDeploym
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentListRequest struct {
@@ -15095,7 +14629,7 @@ func (r ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentListRequest) Tag
 	return r
 }
 
-func (r ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentListRequest) Execute() (HyperflexClusterReplicationNetworkPolicyDeploymentResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentListRequest) Execute() (HyperflexClusterReplicationNetworkPolicyDeploymentResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexClusterReplicationNetworkPolicyDeploymentListExecute(r)
 }
 
@@ -15115,21 +14649,19 @@ func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyDeploym
  * Execute executes the request
  * @return HyperflexClusterReplicationNetworkPolicyDeploymentResponse
  */
-func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyDeploymentListExecute(r ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentListRequest) (HyperflexClusterReplicationNetworkPolicyDeploymentResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyDeploymentListExecute(r ApiGetHyperflexClusterReplicationNetworkPolicyDeploymentListRequest) (HyperflexClusterReplicationNetworkPolicyDeploymentResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterReplicationNetworkPolicyDeploymentResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexClusterReplicationNetworkPolicyDeploymentList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterReplicationNetworkPolicyDeployments"
@@ -15190,22 +14722,19 @@ func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyDeploym
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15272,7 +14801,7 @@ func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyDeploym
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexClusterReplicationNetworkPolicyListRequest struct {
@@ -15336,7 +14865,7 @@ func (r ApiGetHyperflexClusterReplicationNetworkPolicyListRequest) Tags(tags str
 	return r
 }
 
-func (r ApiGetHyperflexClusterReplicationNetworkPolicyListRequest) Execute() (HyperflexClusterReplicationNetworkPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexClusterReplicationNetworkPolicyListRequest) Execute() (HyperflexClusterReplicationNetworkPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexClusterReplicationNetworkPolicyListExecute(r)
 }
 
@@ -15356,21 +14885,19 @@ func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyList(ct
  * Execute executes the request
  * @return HyperflexClusterReplicationNetworkPolicyResponse
  */
-func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyListExecute(r ApiGetHyperflexClusterReplicationNetworkPolicyListRequest) (HyperflexClusterReplicationNetworkPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyListExecute(r ApiGetHyperflexClusterReplicationNetworkPolicyListRequest) (HyperflexClusterReplicationNetworkPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterReplicationNetworkPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexClusterReplicationNetworkPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterReplicationNetworkPolicies"
@@ -15431,22 +14958,19 @@ func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyListExe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15513,7 +15037,7 @@ func (a *HyperflexApiService) GetHyperflexClusterReplicationNetworkPolicyListExe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexClusterStoragePolicyByMoidRequest struct {
@@ -15522,7 +15046,7 @@ type ApiGetHyperflexClusterStoragePolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexClusterStoragePolicyByMoidRequest) Execute() (HyperflexClusterStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexClusterStoragePolicyByMoidRequest) Execute() (HyperflexClusterStoragePolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexClusterStoragePolicyByMoidExecute(r)
 }
 
@@ -15544,21 +15068,19 @@ func (a *HyperflexApiService) GetHyperflexClusterStoragePolicyByMoid(ctx _contex
  * Execute executes the request
  * @return HyperflexClusterStoragePolicy
  */
-func (a *HyperflexApiService) GetHyperflexClusterStoragePolicyByMoidExecute(r ApiGetHyperflexClusterStoragePolicyByMoidRequest) (HyperflexClusterStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexClusterStoragePolicyByMoidExecute(r ApiGetHyperflexClusterStoragePolicyByMoidRequest) (HyperflexClusterStoragePolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterStoragePolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexClusterStoragePolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterStoragePolicies/{Moid}"
@@ -15587,22 +15109,19 @@ func (a *HyperflexApiService) GetHyperflexClusterStoragePolicyByMoidExecute(r Ap
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15669,7 +15188,7 @@ func (a *HyperflexApiService) GetHyperflexClusterStoragePolicyByMoidExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexClusterStoragePolicyListRequest struct {
@@ -15733,7 +15252,7 @@ func (r ApiGetHyperflexClusterStoragePolicyListRequest) Tags(tags string) ApiGet
 	return r
 }
 
-func (r ApiGetHyperflexClusterStoragePolicyListRequest) Execute() (HyperflexClusterStoragePolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexClusterStoragePolicyListRequest) Execute() (HyperflexClusterStoragePolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexClusterStoragePolicyListExecute(r)
 }
 
@@ -15753,21 +15272,19 @@ func (a *HyperflexApiService) GetHyperflexClusterStoragePolicyList(ctx _context.
  * Execute executes the request
  * @return HyperflexClusterStoragePolicyResponse
  */
-func (a *HyperflexApiService) GetHyperflexClusterStoragePolicyListExecute(r ApiGetHyperflexClusterStoragePolicyListRequest) (HyperflexClusterStoragePolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexClusterStoragePolicyListExecute(r ApiGetHyperflexClusterStoragePolicyListRequest) (HyperflexClusterStoragePolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterStoragePolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexClusterStoragePolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterStoragePolicies"
@@ -15828,22 +15345,19 @@ func (a *HyperflexApiService) GetHyperflexClusterStoragePolicyListExecute(r ApiG
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -15910,7 +15424,7 @@ func (a *HyperflexApiService) GetHyperflexClusterStoragePolicyListExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexConfigResultByMoidRequest struct {
@@ -15919,7 +15433,7 @@ type ApiGetHyperflexConfigResultByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexConfigResultByMoidRequest) Execute() (HyperflexConfigResult, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexConfigResultByMoidRequest) Execute() (HyperflexConfigResult, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexConfigResultByMoidExecute(r)
 }
 
@@ -15941,21 +15455,19 @@ func (a *HyperflexApiService) GetHyperflexConfigResultByMoid(ctx _context.Contex
  * Execute executes the request
  * @return HyperflexConfigResult
  */
-func (a *HyperflexApiService) GetHyperflexConfigResultByMoidExecute(r ApiGetHyperflexConfigResultByMoidRequest) (HyperflexConfigResult, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexConfigResultByMoidExecute(r ApiGetHyperflexConfigResultByMoidRequest) (HyperflexConfigResult, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexConfigResult
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexConfigResultByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ConfigResults/{Moid}"
@@ -15984,22 +15496,19 @@ func (a *HyperflexApiService) GetHyperflexConfigResultByMoidExecute(r ApiGetHype
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16066,7 +15575,7 @@ func (a *HyperflexApiService) GetHyperflexConfigResultByMoidExecute(r ApiGetHype
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexConfigResultEntryByMoidRequest struct {
@@ -16075,7 +15584,7 @@ type ApiGetHyperflexConfigResultEntryByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexConfigResultEntryByMoidRequest) Execute() (HyperflexConfigResultEntry, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexConfigResultEntryByMoidRequest) Execute() (HyperflexConfigResultEntry, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexConfigResultEntryByMoidExecute(r)
 }
 
@@ -16097,21 +15606,19 @@ func (a *HyperflexApiService) GetHyperflexConfigResultEntryByMoid(ctx _context.C
  * Execute executes the request
  * @return HyperflexConfigResultEntry
  */
-func (a *HyperflexApiService) GetHyperflexConfigResultEntryByMoidExecute(r ApiGetHyperflexConfigResultEntryByMoidRequest) (HyperflexConfigResultEntry, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexConfigResultEntryByMoidExecute(r ApiGetHyperflexConfigResultEntryByMoidRequest) (HyperflexConfigResultEntry, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexConfigResultEntry
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexConfigResultEntryByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ConfigResultEntries/{Moid}"
@@ -16140,22 +15647,19 @@ func (a *HyperflexApiService) GetHyperflexConfigResultEntryByMoidExecute(r ApiGe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16222,7 +15726,7 @@ func (a *HyperflexApiService) GetHyperflexConfigResultEntryByMoidExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexConfigResultEntryListRequest struct {
@@ -16286,7 +15790,7 @@ func (r ApiGetHyperflexConfigResultEntryListRequest) Tags(tags string) ApiGetHyp
 	return r
 }
 
-func (r ApiGetHyperflexConfigResultEntryListRequest) Execute() (HyperflexConfigResultEntryResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexConfigResultEntryListRequest) Execute() (HyperflexConfigResultEntryResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexConfigResultEntryListExecute(r)
 }
 
@@ -16306,21 +15810,19 @@ func (a *HyperflexApiService) GetHyperflexConfigResultEntryList(ctx _context.Con
  * Execute executes the request
  * @return HyperflexConfigResultEntryResponse
  */
-func (a *HyperflexApiService) GetHyperflexConfigResultEntryListExecute(r ApiGetHyperflexConfigResultEntryListRequest) (HyperflexConfigResultEntryResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexConfigResultEntryListExecute(r ApiGetHyperflexConfigResultEntryListRequest) (HyperflexConfigResultEntryResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexConfigResultEntryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexConfigResultEntryList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ConfigResultEntries"
@@ -16381,22 +15883,19 @@ func (a *HyperflexApiService) GetHyperflexConfigResultEntryListExecute(r ApiGetH
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16463,7 +15962,7 @@ func (a *HyperflexApiService) GetHyperflexConfigResultEntryListExecute(r ApiGetH
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexConfigResultListRequest struct {
@@ -16527,7 +16026,7 @@ func (r ApiGetHyperflexConfigResultListRequest) Tags(tags string) ApiGetHyperfle
 	return r
 }
 
-func (r ApiGetHyperflexConfigResultListRequest) Execute() (HyperflexConfigResultResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexConfigResultListRequest) Execute() (HyperflexConfigResultResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexConfigResultListExecute(r)
 }
 
@@ -16547,21 +16046,19 @@ func (a *HyperflexApiService) GetHyperflexConfigResultList(ctx _context.Context)
  * Execute executes the request
  * @return HyperflexConfigResultResponse
  */
-func (a *HyperflexApiService) GetHyperflexConfigResultListExecute(r ApiGetHyperflexConfigResultListRequest) (HyperflexConfigResultResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexConfigResultListExecute(r ApiGetHyperflexConfigResultListRequest) (HyperflexConfigResultResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexConfigResultResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexConfigResultList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ConfigResults"
@@ -16622,22 +16119,19 @@ func (a *HyperflexApiService) GetHyperflexConfigResultListExecute(r ApiGetHyperf
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16704,7 +16198,7 @@ func (a *HyperflexApiService) GetHyperflexConfigResultListExecute(r ApiGetHyperf
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexDevicePackageDownloadStateByMoidRequest struct {
@@ -16713,7 +16207,7 @@ type ApiGetHyperflexDevicePackageDownloadStateByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexDevicePackageDownloadStateByMoidRequest) Execute() (HyperflexDevicePackageDownloadState, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexDevicePackageDownloadStateByMoidRequest) Execute() (HyperflexDevicePackageDownloadState, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexDevicePackageDownloadStateByMoidExecute(r)
 }
 
@@ -16735,21 +16229,19 @@ func (a *HyperflexApiService) GetHyperflexDevicePackageDownloadStateByMoid(ctx _
  * Execute executes the request
  * @return HyperflexDevicePackageDownloadState
  */
-func (a *HyperflexApiService) GetHyperflexDevicePackageDownloadStateByMoidExecute(r ApiGetHyperflexDevicePackageDownloadStateByMoidRequest) (HyperflexDevicePackageDownloadState, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexDevicePackageDownloadStateByMoidExecute(r ApiGetHyperflexDevicePackageDownloadStateByMoidRequest) (HyperflexDevicePackageDownloadState, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexDevicePackageDownloadState
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexDevicePackageDownloadStateByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/DevicePackageDownloadStates/{Moid}"
@@ -16778,22 +16270,19 @@ func (a *HyperflexApiService) GetHyperflexDevicePackageDownloadStateByMoidExecut
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -16860,7 +16349,7 @@ func (a *HyperflexApiService) GetHyperflexDevicePackageDownloadStateByMoidExecut
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexDevicePackageDownloadStateListRequest struct {
@@ -16924,7 +16413,7 @@ func (r ApiGetHyperflexDevicePackageDownloadStateListRequest) Tags(tags string) 
 	return r
 }
 
-func (r ApiGetHyperflexDevicePackageDownloadStateListRequest) Execute() (HyperflexDevicePackageDownloadStateResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexDevicePackageDownloadStateListRequest) Execute() (HyperflexDevicePackageDownloadStateResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexDevicePackageDownloadStateListExecute(r)
 }
 
@@ -16944,21 +16433,19 @@ func (a *HyperflexApiService) GetHyperflexDevicePackageDownloadStateList(ctx _co
  * Execute executes the request
  * @return HyperflexDevicePackageDownloadStateResponse
  */
-func (a *HyperflexApiService) GetHyperflexDevicePackageDownloadStateListExecute(r ApiGetHyperflexDevicePackageDownloadStateListRequest) (HyperflexDevicePackageDownloadStateResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexDevicePackageDownloadStateListExecute(r ApiGetHyperflexDevicePackageDownloadStateListRequest) (HyperflexDevicePackageDownloadStateResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexDevicePackageDownloadStateResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexDevicePackageDownloadStateList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/DevicePackageDownloadStates"
@@ -17019,22 +16506,19 @@ func (a *HyperflexApiService) GetHyperflexDevicePackageDownloadStateListExecute(
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17101,7 +16585,7 @@ func (a *HyperflexApiService) GetHyperflexDevicePackageDownloadStateListExecute(
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexExtFcStoragePolicyByMoidRequest struct {
@@ -17110,7 +16594,7 @@ type ApiGetHyperflexExtFcStoragePolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexExtFcStoragePolicyByMoidRequest) Execute() (HyperflexExtFcStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexExtFcStoragePolicyByMoidRequest) Execute() (HyperflexExtFcStoragePolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexExtFcStoragePolicyByMoidExecute(r)
 }
 
@@ -17132,21 +16616,19 @@ func (a *HyperflexApiService) GetHyperflexExtFcStoragePolicyByMoid(ctx _context.
  * Execute executes the request
  * @return HyperflexExtFcStoragePolicy
  */
-func (a *HyperflexApiService) GetHyperflexExtFcStoragePolicyByMoidExecute(r ApiGetHyperflexExtFcStoragePolicyByMoidRequest) (HyperflexExtFcStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexExtFcStoragePolicyByMoidExecute(r ApiGetHyperflexExtFcStoragePolicyByMoidRequest) (HyperflexExtFcStoragePolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexExtFcStoragePolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexExtFcStoragePolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ExtFcStoragePolicies/{Moid}"
@@ -17175,22 +16657,19 @@ func (a *HyperflexApiService) GetHyperflexExtFcStoragePolicyByMoidExecute(r ApiG
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17257,7 +16736,7 @@ func (a *HyperflexApiService) GetHyperflexExtFcStoragePolicyByMoidExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexExtFcStoragePolicyListRequest struct {
@@ -17321,7 +16800,7 @@ func (r ApiGetHyperflexExtFcStoragePolicyListRequest) Tags(tags string) ApiGetHy
 	return r
 }
 
-func (r ApiGetHyperflexExtFcStoragePolicyListRequest) Execute() (HyperflexExtFcStoragePolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexExtFcStoragePolicyListRequest) Execute() (HyperflexExtFcStoragePolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexExtFcStoragePolicyListExecute(r)
 }
 
@@ -17341,21 +16820,19 @@ func (a *HyperflexApiService) GetHyperflexExtFcStoragePolicyList(ctx _context.Co
  * Execute executes the request
  * @return HyperflexExtFcStoragePolicyResponse
  */
-func (a *HyperflexApiService) GetHyperflexExtFcStoragePolicyListExecute(r ApiGetHyperflexExtFcStoragePolicyListRequest) (HyperflexExtFcStoragePolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexExtFcStoragePolicyListExecute(r ApiGetHyperflexExtFcStoragePolicyListRequest) (HyperflexExtFcStoragePolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexExtFcStoragePolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexExtFcStoragePolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ExtFcStoragePolicies"
@@ -17416,22 +16893,19 @@ func (a *HyperflexApiService) GetHyperflexExtFcStoragePolicyListExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17498,7 +16972,7 @@ func (a *HyperflexApiService) GetHyperflexExtFcStoragePolicyListExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexExtIscsiStoragePolicyByMoidRequest struct {
@@ -17507,7 +16981,7 @@ type ApiGetHyperflexExtIscsiStoragePolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexExtIscsiStoragePolicyByMoidRequest) Execute() (HyperflexExtIscsiStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexExtIscsiStoragePolicyByMoidRequest) Execute() (HyperflexExtIscsiStoragePolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexExtIscsiStoragePolicyByMoidExecute(r)
 }
 
@@ -17529,21 +17003,19 @@ func (a *HyperflexApiService) GetHyperflexExtIscsiStoragePolicyByMoid(ctx _conte
  * Execute executes the request
  * @return HyperflexExtIscsiStoragePolicy
  */
-func (a *HyperflexApiService) GetHyperflexExtIscsiStoragePolicyByMoidExecute(r ApiGetHyperflexExtIscsiStoragePolicyByMoidRequest) (HyperflexExtIscsiStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexExtIscsiStoragePolicyByMoidExecute(r ApiGetHyperflexExtIscsiStoragePolicyByMoidRequest) (HyperflexExtIscsiStoragePolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexExtIscsiStoragePolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexExtIscsiStoragePolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ExtIscsiStoragePolicies/{Moid}"
@@ -17572,22 +17044,19 @@ func (a *HyperflexApiService) GetHyperflexExtIscsiStoragePolicyByMoidExecute(r A
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17654,7 +17123,7 @@ func (a *HyperflexApiService) GetHyperflexExtIscsiStoragePolicyByMoidExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexExtIscsiStoragePolicyListRequest struct {
@@ -17718,7 +17187,7 @@ func (r ApiGetHyperflexExtIscsiStoragePolicyListRequest) Tags(tags string) ApiGe
 	return r
 }
 
-func (r ApiGetHyperflexExtIscsiStoragePolicyListRequest) Execute() (HyperflexExtIscsiStoragePolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexExtIscsiStoragePolicyListRequest) Execute() (HyperflexExtIscsiStoragePolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexExtIscsiStoragePolicyListExecute(r)
 }
 
@@ -17738,21 +17207,19 @@ func (a *HyperflexApiService) GetHyperflexExtIscsiStoragePolicyList(ctx _context
  * Execute executes the request
  * @return HyperflexExtIscsiStoragePolicyResponse
  */
-func (a *HyperflexApiService) GetHyperflexExtIscsiStoragePolicyListExecute(r ApiGetHyperflexExtIscsiStoragePolicyListRequest) (HyperflexExtIscsiStoragePolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexExtIscsiStoragePolicyListExecute(r ApiGetHyperflexExtIscsiStoragePolicyListRequest) (HyperflexExtIscsiStoragePolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexExtIscsiStoragePolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexExtIscsiStoragePolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ExtIscsiStoragePolicies"
@@ -17813,22 +17280,19 @@ func (a *HyperflexApiService) GetHyperflexExtIscsiStoragePolicyListExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -17895,7 +17359,7 @@ func (a *HyperflexApiService) GetHyperflexExtIscsiStoragePolicyListExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexFeatureLimitExternalByMoidRequest struct {
@@ -17904,7 +17368,7 @@ type ApiGetHyperflexFeatureLimitExternalByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexFeatureLimitExternalByMoidRequest) Execute() (HyperflexFeatureLimitExternal, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexFeatureLimitExternalByMoidRequest) Execute() (HyperflexFeatureLimitExternal, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexFeatureLimitExternalByMoidExecute(r)
 }
 
@@ -17926,21 +17390,19 @@ func (a *HyperflexApiService) GetHyperflexFeatureLimitExternalByMoid(ctx _contex
  * Execute executes the request
  * @return HyperflexFeatureLimitExternal
  */
-func (a *HyperflexApiService) GetHyperflexFeatureLimitExternalByMoidExecute(r ApiGetHyperflexFeatureLimitExternalByMoidRequest) (HyperflexFeatureLimitExternal, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexFeatureLimitExternalByMoidExecute(r ApiGetHyperflexFeatureLimitExternalByMoidRequest) (HyperflexFeatureLimitExternal, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexFeatureLimitExternal
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexFeatureLimitExternalByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/FeatureLimitExternals/{Moid}"
@@ -17969,22 +17431,19 @@ func (a *HyperflexApiService) GetHyperflexFeatureLimitExternalByMoidExecute(r Ap
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18051,7 +17510,7 @@ func (a *HyperflexApiService) GetHyperflexFeatureLimitExternalByMoidExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexFeatureLimitExternalListRequest struct {
@@ -18115,7 +17574,7 @@ func (r ApiGetHyperflexFeatureLimitExternalListRequest) Tags(tags string) ApiGet
 	return r
 }
 
-func (r ApiGetHyperflexFeatureLimitExternalListRequest) Execute() (HyperflexFeatureLimitExternalResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexFeatureLimitExternalListRequest) Execute() (HyperflexFeatureLimitExternalResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexFeatureLimitExternalListExecute(r)
 }
 
@@ -18135,21 +17594,19 @@ func (a *HyperflexApiService) GetHyperflexFeatureLimitExternalList(ctx _context.
  * Execute executes the request
  * @return HyperflexFeatureLimitExternalResponse
  */
-func (a *HyperflexApiService) GetHyperflexFeatureLimitExternalListExecute(r ApiGetHyperflexFeatureLimitExternalListRequest) (HyperflexFeatureLimitExternalResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexFeatureLimitExternalListExecute(r ApiGetHyperflexFeatureLimitExternalListRequest) (HyperflexFeatureLimitExternalResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexFeatureLimitExternalResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexFeatureLimitExternalList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/FeatureLimitExternals"
@@ -18210,22 +17667,19 @@ func (a *HyperflexApiService) GetHyperflexFeatureLimitExternalListExecute(r ApiG
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18292,7 +17746,7 @@ func (a *HyperflexApiService) GetHyperflexFeatureLimitExternalListExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexFeatureLimitInternalByMoidRequest struct {
@@ -18301,7 +17755,7 @@ type ApiGetHyperflexFeatureLimitInternalByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexFeatureLimitInternalByMoidRequest) Execute() (HyperflexFeatureLimitInternal, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexFeatureLimitInternalByMoidRequest) Execute() (HyperflexFeatureLimitInternal, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexFeatureLimitInternalByMoidExecute(r)
 }
 
@@ -18323,21 +17777,19 @@ func (a *HyperflexApiService) GetHyperflexFeatureLimitInternalByMoid(ctx _contex
  * Execute executes the request
  * @return HyperflexFeatureLimitInternal
  */
-func (a *HyperflexApiService) GetHyperflexFeatureLimitInternalByMoidExecute(r ApiGetHyperflexFeatureLimitInternalByMoidRequest) (HyperflexFeatureLimitInternal, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexFeatureLimitInternalByMoidExecute(r ApiGetHyperflexFeatureLimitInternalByMoidRequest) (HyperflexFeatureLimitInternal, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexFeatureLimitInternal
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexFeatureLimitInternalByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/FeatureLimitInternals/{Moid}"
@@ -18366,22 +17818,19 @@ func (a *HyperflexApiService) GetHyperflexFeatureLimitInternalByMoidExecute(r Ap
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18448,7 +17897,7 @@ func (a *HyperflexApiService) GetHyperflexFeatureLimitInternalByMoidExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexFeatureLimitInternalListRequest struct {
@@ -18512,7 +17961,7 @@ func (r ApiGetHyperflexFeatureLimitInternalListRequest) Tags(tags string) ApiGet
 	return r
 }
 
-func (r ApiGetHyperflexFeatureLimitInternalListRequest) Execute() (HyperflexFeatureLimitInternalResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexFeatureLimitInternalListRequest) Execute() (HyperflexFeatureLimitInternalResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexFeatureLimitInternalListExecute(r)
 }
 
@@ -18532,21 +17981,19 @@ func (a *HyperflexApiService) GetHyperflexFeatureLimitInternalList(ctx _context.
  * Execute executes the request
  * @return HyperflexFeatureLimitInternalResponse
  */
-func (a *HyperflexApiService) GetHyperflexFeatureLimitInternalListExecute(r ApiGetHyperflexFeatureLimitInternalListRequest) (HyperflexFeatureLimitInternalResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexFeatureLimitInternalListExecute(r ApiGetHyperflexFeatureLimitInternalListRequest) (HyperflexFeatureLimitInternalResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexFeatureLimitInternalResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexFeatureLimitInternalList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/FeatureLimitInternals"
@@ -18607,22 +18054,19 @@ func (a *HyperflexApiService) GetHyperflexFeatureLimitInternalListExecute(r ApiG
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18689,7 +18133,7 @@ func (a *HyperflexApiService) GetHyperflexFeatureLimitInternalListExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHealthByMoidRequest struct {
@@ -18698,7 +18142,7 @@ type ApiGetHyperflexHealthByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexHealthByMoidRequest) Execute() (HyperflexHealth, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHealthByMoidRequest) Execute() (HyperflexHealth, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHealthByMoidExecute(r)
 }
 
@@ -18720,21 +18164,19 @@ func (a *HyperflexApiService) GetHyperflexHealthByMoid(ctx _context.Context, moi
  * Execute executes the request
  * @return HyperflexHealth
  */
-func (a *HyperflexApiService) GetHyperflexHealthByMoidExecute(r ApiGetHyperflexHealthByMoidRequest) (HyperflexHealth, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHealthByMoidExecute(r ApiGetHyperflexHealthByMoidRequest) (HyperflexHealth, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHealth
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHealthByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/Healths/{Moid}"
@@ -18763,22 +18205,19 @@ func (a *HyperflexApiService) GetHyperflexHealthByMoidExecute(r ApiGetHyperflexH
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -18845,7 +18284,7 @@ func (a *HyperflexApiService) GetHyperflexHealthByMoidExecute(r ApiGetHyperflexH
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHealthCheckDefinitionByMoidRequest struct {
@@ -18854,7 +18293,7 @@ type ApiGetHyperflexHealthCheckDefinitionByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexHealthCheckDefinitionByMoidRequest) Execute() (HyperflexHealthCheckDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHealthCheckDefinitionByMoidRequest) Execute() (HyperflexHealthCheckDefinition, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHealthCheckDefinitionByMoidExecute(r)
 }
 
@@ -18876,21 +18315,19 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckDefinitionByMoid(ctx _conte
  * Execute executes the request
  * @return HyperflexHealthCheckDefinition
  */
-func (a *HyperflexApiService) GetHyperflexHealthCheckDefinitionByMoidExecute(r ApiGetHyperflexHealthCheckDefinitionByMoidRequest) (HyperflexHealthCheckDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHealthCheckDefinitionByMoidExecute(r ApiGetHyperflexHealthCheckDefinitionByMoidRequest) (HyperflexHealthCheckDefinition, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHealthCheckDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHealthCheckDefinitionByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HealthCheckDefinitions/{Moid}"
@@ -18919,22 +18356,19 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckDefinitionByMoidExecute(r A
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19001,7 +18435,7 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckDefinitionByMoidExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHealthCheckDefinitionListRequest struct {
@@ -19065,7 +18499,7 @@ func (r ApiGetHyperflexHealthCheckDefinitionListRequest) Tags(tags string) ApiGe
 	return r
 }
 
-func (r ApiGetHyperflexHealthCheckDefinitionListRequest) Execute() (HyperflexHealthCheckDefinitionResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHealthCheckDefinitionListRequest) Execute() (HyperflexHealthCheckDefinitionResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHealthCheckDefinitionListExecute(r)
 }
 
@@ -19085,21 +18519,19 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckDefinitionList(ctx _context
  * Execute executes the request
  * @return HyperflexHealthCheckDefinitionResponse
  */
-func (a *HyperflexApiService) GetHyperflexHealthCheckDefinitionListExecute(r ApiGetHyperflexHealthCheckDefinitionListRequest) (HyperflexHealthCheckDefinitionResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHealthCheckDefinitionListExecute(r ApiGetHyperflexHealthCheckDefinitionListRequest) (HyperflexHealthCheckDefinitionResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHealthCheckDefinitionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHealthCheckDefinitionList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HealthCheckDefinitions"
@@ -19160,22 +18592,19 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckDefinitionListExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19242,7 +18671,7 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckDefinitionListExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHealthCheckExecutionByMoidRequest struct {
@@ -19251,7 +18680,7 @@ type ApiGetHyperflexHealthCheckExecutionByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexHealthCheckExecutionByMoidRequest) Execute() (HyperflexHealthCheckExecution, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHealthCheckExecutionByMoidRequest) Execute() (HyperflexHealthCheckExecution, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHealthCheckExecutionByMoidExecute(r)
 }
 
@@ -19273,21 +18702,19 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionByMoid(ctx _contex
  * Execute executes the request
  * @return HyperflexHealthCheckExecution
  */
-func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionByMoidExecute(r ApiGetHyperflexHealthCheckExecutionByMoidRequest) (HyperflexHealthCheckExecution, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionByMoidExecute(r ApiGetHyperflexHealthCheckExecutionByMoidRequest) (HyperflexHealthCheckExecution, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHealthCheckExecution
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHealthCheckExecutionByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HealthCheckExecutions/{Moid}"
@@ -19316,22 +18743,19 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionByMoidExecute(r Ap
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19398,7 +18822,7 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionByMoidExecute(r Ap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHealthCheckExecutionListRequest struct {
@@ -19462,7 +18886,7 @@ func (r ApiGetHyperflexHealthCheckExecutionListRequest) Tags(tags string) ApiGet
 	return r
 }
 
-func (r ApiGetHyperflexHealthCheckExecutionListRequest) Execute() (HyperflexHealthCheckExecutionResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHealthCheckExecutionListRequest) Execute() (HyperflexHealthCheckExecutionResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHealthCheckExecutionListExecute(r)
 }
 
@@ -19482,21 +18906,19 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionList(ctx _context.
  * Execute executes the request
  * @return HyperflexHealthCheckExecutionResponse
  */
-func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionListExecute(r ApiGetHyperflexHealthCheckExecutionListRequest) (HyperflexHealthCheckExecutionResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionListExecute(r ApiGetHyperflexHealthCheckExecutionListRequest) (HyperflexHealthCheckExecutionResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHealthCheckExecutionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHealthCheckExecutionList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HealthCheckExecutions"
@@ -19557,22 +18979,19 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionListExecute(r ApiG
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19639,7 +19058,7 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionListExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHealthCheckExecutionSnapshotByMoidRequest struct {
@@ -19648,7 +19067,7 @@ type ApiGetHyperflexHealthCheckExecutionSnapshotByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexHealthCheckExecutionSnapshotByMoidRequest) Execute() (HyperflexHealthCheckExecutionSnapshot, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHealthCheckExecutionSnapshotByMoidRequest) Execute() (HyperflexHealthCheckExecutionSnapshot, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHealthCheckExecutionSnapshotByMoidExecute(r)
 }
 
@@ -19670,21 +19089,19 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionSnapshotByMoid(ctx
  * Execute executes the request
  * @return HyperflexHealthCheckExecutionSnapshot
  */
-func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionSnapshotByMoidExecute(r ApiGetHyperflexHealthCheckExecutionSnapshotByMoidRequest) (HyperflexHealthCheckExecutionSnapshot, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionSnapshotByMoidExecute(r ApiGetHyperflexHealthCheckExecutionSnapshotByMoidRequest) (HyperflexHealthCheckExecutionSnapshot, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHealthCheckExecutionSnapshot
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHealthCheckExecutionSnapshotByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HealthCheckExecutionSnapshots/{Moid}"
@@ -19713,22 +19130,19 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionSnapshotByMoidExec
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -19795,7 +19209,7 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionSnapshotByMoidExec
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHealthCheckExecutionSnapshotListRequest struct {
@@ -19859,7 +19273,7 @@ func (r ApiGetHyperflexHealthCheckExecutionSnapshotListRequest) Tags(tags string
 	return r
 }
 
-func (r ApiGetHyperflexHealthCheckExecutionSnapshotListRequest) Execute() (HyperflexHealthCheckExecutionSnapshotResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHealthCheckExecutionSnapshotListRequest) Execute() (HyperflexHealthCheckExecutionSnapshotResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHealthCheckExecutionSnapshotListExecute(r)
 }
 
@@ -19879,21 +19293,19 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionSnapshotList(ctx _
  * Execute executes the request
  * @return HyperflexHealthCheckExecutionSnapshotResponse
  */
-func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionSnapshotListExecute(r ApiGetHyperflexHealthCheckExecutionSnapshotListRequest) (HyperflexHealthCheckExecutionSnapshotResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionSnapshotListExecute(r ApiGetHyperflexHealthCheckExecutionSnapshotListRequest) (HyperflexHealthCheckExecutionSnapshotResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHealthCheckExecutionSnapshotResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHealthCheckExecutionSnapshotList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HealthCheckExecutionSnapshots"
@@ -19954,22 +19366,19 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionSnapshotListExecut
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20036,7 +19445,7 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckExecutionSnapshotListExecut
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHealthCheckPackageChecksumByMoidRequest struct {
@@ -20045,7 +19454,7 @@ type ApiGetHyperflexHealthCheckPackageChecksumByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexHealthCheckPackageChecksumByMoidRequest) Execute() (HyperflexHealthCheckPackageChecksum, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHealthCheckPackageChecksumByMoidRequest) Execute() (HyperflexHealthCheckPackageChecksum, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHealthCheckPackageChecksumByMoidExecute(r)
 }
 
@@ -20067,21 +19476,19 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckPackageChecksumByMoid(ctx _
  * Execute executes the request
  * @return HyperflexHealthCheckPackageChecksum
  */
-func (a *HyperflexApiService) GetHyperflexHealthCheckPackageChecksumByMoidExecute(r ApiGetHyperflexHealthCheckPackageChecksumByMoidRequest) (HyperflexHealthCheckPackageChecksum, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHealthCheckPackageChecksumByMoidExecute(r ApiGetHyperflexHealthCheckPackageChecksumByMoidRequest) (HyperflexHealthCheckPackageChecksum, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHealthCheckPackageChecksum
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHealthCheckPackageChecksumByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HealthCheckPackageChecksums/{Moid}"
@@ -20110,22 +19517,19 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckPackageChecksumByMoidExecut
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20192,7 +19596,7 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckPackageChecksumByMoidExecut
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHealthCheckPackageChecksumListRequest struct {
@@ -20256,7 +19660,7 @@ func (r ApiGetHyperflexHealthCheckPackageChecksumListRequest) Tags(tags string) 
 	return r
 }
 
-func (r ApiGetHyperflexHealthCheckPackageChecksumListRequest) Execute() (HyperflexHealthCheckPackageChecksumResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHealthCheckPackageChecksumListRequest) Execute() (HyperflexHealthCheckPackageChecksumResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHealthCheckPackageChecksumListExecute(r)
 }
 
@@ -20276,21 +19680,19 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckPackageChecksumList(ctx _co
  * Execute executes the request
  * @return HyperflexHealthCheckPackageChecksumResponse
  */
-func (a *HyperflexApiService) GetHyperflexHealthCheckPackageChecksumListExecute(r ApiGetHyperflexHealthCheckPackageChecksumListRequest) (HyperflexHealthCheckPackageChecksumResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHealthCheckPackageChecksumListExecute(r ApiGetHyperflexHealthCheckPackageChecksumListRequest) (HyperflexHealthCheckPackageChecksumResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHealthCheckPackageChecksumResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHealthCheckPackageChecksumList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HealthCheckPackageChecksums"
@@ -20351,22 +19753,19 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckPackageChecksumListExecute(
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20433,7 +19832,7 @@ func (a *HyperflexApiService) GetHyperflexHealthCheckPackageChecksumListExecute(
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHealthListRequest struct {
@@ -20497,7 +19896,7 @@ func (r ApiGetHyperflexHealthListRequest) Tags(tags string) ApiGetHyperflexHealt
 	return r
 }
 
-func (r ApiGetHyperflexHealthListRequest) Execute() (HyperflexHealthResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHealthListRequest) Execute() (HyperflexHealthResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHealthListExecute(r)
 }
 
@@ -20517,21 +19916,19 @@ func (a *HyperflexApiService) GetHyperflexHealthList(ctx _context.Context) ApiGe
  * Execute executes the request
  * @return HyperflexHealthResponse
  */
-func (a *HyperflexApiService) GetHyperflexHealthListExecute(r ApiGetHyperflexHealthListRequest) (HyperflexHealthResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHealthListExecute(r ApiGetHyperflexHealthListRequest) (HyperflexHealthResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHealthResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHealthList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/Healths"
@@ -20592,22 +19989,19 @@ func (a *HyperflexApiService) GetHyperflexHealthListExecute(r ApiGetHyperflexHea
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20674,7 +20068,7 @@ func (a *HyperflexApiService) GetHyperflexHealthListExecute(r ApiGetHyperflexHea
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHxapClusterByMoidRequest struct {
@@ -20683,7 +20077,7 @@ type ApiGetHyperflexHxapClusterByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexHxapClusterByMoidRequest) Execute() (HyperflexHxapCluster, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHxapClusterByMoidRequest) Execute() (HyperflexHxapCluster, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHxapClusterByMoidExecute(r)
 }
 
@@ -20705,21 +20099,19 @@ func (a *HyperflexApiService) GetHyperflexHxapClusterByMoid(ctx _context.Context
  * Execute executes the request
  * @return HyperflexHxapCluster
  */
-func (a *HyperflexApiService) GetHyperflexHxapClusterByMoidExecute(r ApiGetHyperflexHxapClusterByMoidRequest) (HyperflexHxapCluster, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHxapClusterByMoidExecute(r ApiGetHyperflexHxapClusterByMoidRequest) (HyperflexHxapCluster, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapCluster
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHxapClusterByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapClusters/{Moid}"
@@ -20748,22 +20140,19 @@ func (a *HyperflexApiService) GetHyperflexHxapClusterByMoidExecute(r ApiGetHyper
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -20830,7 +20219,7 @@ func (a *HyperflexApiService) GetHyperflexHxapClusterByMoidExecute(r ApiGetHyper
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHxapClusterListRequest struct {
@@ -20894,7 +20283,7 @@ func (r ApiGetHyperflexHxapClusterListRequest) Tags(tags string) ApiGetHyperflex
 	return r
 }
 
-func (r ApiGetHyperflexHxapClusterListRequest) Execute() (HyperflexHxapClusterResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHxapClusterListRequest) Execute() (HyperflexHxapClusterResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHxapClusterListExecute(r)
 }
 
@@ -20914,21 +20303,19 @@ func (a *HyperflexApiService) GetHyperflexHxapClusterList(ctx _context.Context) 
  * Execute executes the request
  * @return HyperflexHxapClusterResponse
  */
-func (a *HyperflexApiService) GetHyperflexHxapClusterListExecute(r ApiGetHyperflexHxapClusterListRequest) (HyperflexHxapClusterResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHxapClusterListExecute(r ApiGetHyperflexHxapClusterListRequest) (HyperflexHxapClusterResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapClusterResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHxapClusterList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapClusters"
@@ -20989,22 +20376,19 @@ func (a *HyperflexApiService) GetHyperflexHxapClusterListExecute(r ApiGetHyperfl
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21071,7 +20455,7 @@ func (a *HyperflexApiService) GetHyperflexHxapClusterListExecute(r ApiGetHyperfl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHxapDatacenterByMoidRequest struct {
@@ -21080,7 +20464,7 @@ type ApiGetHyperflexHxapDatacenterByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexHxapDatacenterByMoidRequest) Execute() (HyperflexHxapDatacenter, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHxapDatacenterByMoidRequest) Execute() (HyperflexHxapDatacenter, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHxapDatacenterByMoidExecute(r)
 }
 
@@ -21102,21 +20486,19 @@ func (a *HyperflexApiService) GetHyperflexHxapDatacenterByMoid(ctx _context.Cont
  * Execute executes the request
  * @return HyperflexHxapDatacenter
  */
-func (a *HyperflexApiService) GetHyperflexHxapDatacenterByMoidExecute(r ApiGetHyperflexHxapDatacenterByMoidRequest) (HyperflexHxapDatacenter, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHxapDatacenterByMoidExecute(r ApiGetHyperflexHxapDatacenterByMoidRequest) (HyperflexHxapDatacenter, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapDatacenter
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHxapDatacenterByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapDatacenters/{Moid}"
@@ -21145,22 +20527,19 @@ func (a *HyperflexApiService) GetHyperflexHxapDatacenterByMoidExecute(r ApiGetHy
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21227,7 +20606,7 @@ func (a *HyperflexApiService) GetHyperflexHxapDatacenterByMoidExecute(r ApiGetHy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHxapDatacenterListRequest struct {
@@ -21291,7 +20670,7 @@ func (r ApiGetHyperflexHxapDatacenterListRequest) Tags(tags string) ApiGetHyperf
 	return r
 }
 
-func (r ApiGetHyperflexHxapDatacenterListRequest) Execute() (HyperflexHxapDatacenterResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHxapDatacenterListRequest) Execute() (HyperflexHxapDatacenterResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHxapDatacenterListExecute(r)
 }
 
@@ -21311,21 +20690,19 @@ func (a *HyperflexApiService) GetHyperflexHxapDatacenterList(ctx _context.Contex
  * Execute executes the request
  * @return HyperflexHxapDatacenterResponse
  */
-func (a *HyperflexApiService) GetHyperflexHxapDatacenterListExecute(r ApiGetHyperflexHxapDatacenterListRequest) (HyperflexHxapDatacenterResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHxapDatacenterListExecute(r ApiGetHyperflexHxapDatacenterListRequest) (HyperflexHxapDatacenterResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapDatacenterResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHxapDatacenterList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapDatacenters"
@@ -21386,22 +20763,19 @@ func (a *HyperflexApiService) GetHyperflexHxapDatacenterListExecute(r ApiGetHype
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21468,7 +20842,7 @@ func (a *HyperflexApiService) GetHyperflexHxapDatacenterListExecute(r ApiGetHype
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHxapEventByMoidRequest struct {
@@ -21477,7 +20851,7 @@ type ApiGetHyperflexHxapEventByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexHxapEventByMoidRequest) Execute() (HyperflexHxapEvent, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHxapEventByMoidRequest) Execute() (HyperflexHxapEvent, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHxapEventByMoidExecute(r)
 }
 
@@ -21499,21 +20873,19 @@ func (a *HyperflexApiService) GetHyperflexHxapEventByMoid(ctx _context.Context, 
  * Execute executes the request
  * @return HyperflexHxapEvent
  */
-func (a *HyperflexApiService) GetHyperflexHxapEventByMoidExecute(r ApiGetHyperflexHxapEventByMoidRequest) (HyperflexHxapEvent, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHxapEventByMoidExecute(r ApiGetHyperflexHxapEventByMoidRequest) (HyperflexHxapEvent, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapEvent
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHxapEventByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapEvents/{Moid}"
@@ -21542,22 +20914,19 @@ func (a *HyperflexApiService) GetHyperflexHxapEventByMoidExecute(r ApiGetHyperfl
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21624,7 +20993,7 @@ func (a *HyperflexApiService) GetHyperflexHxapEventByMoidExecute(r ApiGetHyperfl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHxapEventListRequest struct {
@@ -21688,7 +21057,7 @@ func (r ApiGetHyperflexHxapEventListRequest) Tags(tags string) ApiGetHyperflexHx
 	return r
 }
 
-func (r ApiGetHyperflexHxapEventListRequest) Execute() (HyperflexHxapEventResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHxapEventListRequest) Execute() (HyperflexHxapEventResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHxapEventListExecute(r)
 }
 
@@ -21708,21 +21077,19 @@ func (a *HyperflexApiService) GetHyperflexHxapEventList(ctx _context.Context) Ap
  * Execute executes the request
  * @return HyperflexHxapEventResponse
  */
-func (a *HyperflexApiService) GetHyperflexHxapEventListExecute(r ApiGetHyperflexHxapEventListRequest) (HyperflexHxapEventResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHxapEventListExecute(r ApiGetHyperflexHxapEventListRequest) (HyperflexHxapEventResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapEventResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHxapEventList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapEvents"
@@ -21783,22 +21150,19 @@ func (a *HyperflexApiService) GetHyperflexHxapEventListExecute(r ApiGetHyperflex
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -21865,7 +21229,7 @@ func (a *HyperflexApiService) GetHyperflexHxapEventListExecute(r ApiGetHyperflex
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHxapHostByMoidRequest struct {
@@ -21874,7 +21238,7 @@ type ApiGetHyperflexHxapHostByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexHxapHostByMoidRequest) Execute() (HyperflexHxapHost, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHxapHostByMoidRequest) Execute() (HyperflexHxapHost, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHxapHostByMoidExecute(r)
 }
 
@@ -21896,21 +21260,19 @@ func (a *HyperflexApiService) GetHyperflexHxapHostByMoid(ctx _context.Context, m
  * Execute executes the request
  * @return HyperflexHxapHost
  */
-func (a *HyperflexApiService) GetHyperflexHxapHostByMoidExecute(r ApiGetHyperflexHxapHostByMoidRequest) (HyperflexHxapHost, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHxapHostByMoidExecute(r ApiGetHyperflexHxapHostByMoidRequest) (HyperflexHxapHost, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapHost
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHxapHostByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapHosts/{Moid}"
@@ -21939,22 +21301,19 @@ func (a *HyperflexApiService) GetHyperflexHxapHostByMoidExecute(r ApiGetHyperfle
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22021,7 +21380,7 @@ func (a *HyperflexApiService) GetHyperflexHxapHostByMoidExecute(r ApiGetHyperfle
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHxapHostListRequest struct {
@@ -22085,7 +21444,7 @@ func (r ApiGetHyperflexHxapHostListRequest) Tags(tags string) ApiGetHyperflexHxa
 	return r
 }
 
-func (r ApiGetHyperflexHxapHostListRequest) Execute() (HyperflexHxapHostResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHxapHostListRequest) Execute() (HyperflexHxapHostResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHxapHostListExecute(r)
 }
 
@@ -22105,21 +21464,19 @@ func (a *HyperflexApiService) GetHyperflexHxapHostList(ctx _context.Context) Api
  * Execute executes the request
  * @return HyperflexHxapHostResponse
  */
-func (a *HyperflexApiService) GetHyperflexHxapHostListExecute(r ApiGetHyperflexHxapHostListRequest) (HyperflexHxapHostResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHxapHostListExecute(r ApiGetHyperflexHxapHostListRequest) (HyperflexHxapHostResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapHostResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHxapHostList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapHosts"
@@ -22180,22 +21537,19 @@ func (a *HyperflexApiService) GetHyperflexHxapHostListExecute(r ApiGetHyperflexH
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22262,7 +21616,7 @@ func (a *HyperflexApiService) GetHyperflexHxapHostListExecute(r ApiGetHyperflexH
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHxapVirtualDiskByMoidRequest struct {
@@ -22271,7 +21625,7 @@ type ApiGetHyperflexHxapVirtualDiskByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexHxapVirtualDiskByMoidRequest) Execute() (HyperflexHxapVirtualDisk, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHxapVirtualDiskByMoidRequest) Execute() (HyperflexHxapVirtualDisk, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHxapVirtualDiskByMoidExecute(r)
 }
 
@@ -22293,21 +21647,19 @@ func (a *HyperflexApiService) GetHyperflexHxapVirtualDiskByMoid(ctx _context.Con
  * Execute executes the request
  * @return HyperflexHxapVirtualDisk
  */
-func (a *HyperflexApiService) GetHyperflexHxapVirtualDiskByMoidExecute(r ApiGetHyperflexHxapVirtualDiskByMoidRequest) (HyperflexHxapVirtualDisk, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHxapVirtualDiskByMoidExecute(r ApiGetHyperflexHxapVirtualDiskByMoidRequest) (HyperflexHxapVirtualDisk, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapVirtualDisk
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHxapVirtualDiskByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapVirtualDisks/{Moid}"
@@ -22336,22 +21688,19 @@ func (a *HyperflexApiService) GetHyperflexHxapVirtualDiskByMoidExecute(r ApiGetH
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22418,7 +21767,7 @@ func (a *HyperflexApiService) GetHyperflexHxapVirtualDiskByMoidExecute(r ApiGetH
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHxapVirtualDiskListRequest struct {
@@ -22482,7 +21831,7 @@ func (r ApiGetHyperflexHxapVirtualDiskListRequest) Tags(tags string) ApiGetHyper
 	return r
 }
 
-func (r ApiGetHyperflexHxapVirtualDiskListRequest) Execute() (HyperflexHxapVirtualDiskResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHxapVirtualDiskListRequest) Execute() (HyperflexHxapVirtualDiskResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHxapVirtualDiskListExecute(r)
 }
 
@@ -22502,21 +21851,19 @@ func (a *HyperflexApiService) GetHyperflexHxapVirtualDiskList(ctx _context.Conte
  * Execute executes the request
  * @return HyperflexHxapVirtualDiskResponse
  */
-func (a *HyperflexApiService) GetHyperflexHxapVirtualDiskListExecute(r ApiGetHyperflexHxapVirtualDiskListRequest) (HyperflexHxapVirtualDiskResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHxapVirtualDiskListExecute(r ApiGetHyperflexHxapVirtualDiskListRequest) (HyperflexHxapVirtualDiskResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapVirtualDiskResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHxapVirtualDiskList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapVirtualDisks"
@@ -22577,22 +21924,19 @@ func (a *HyperflexApiService) GetHyperflexHxapVirtualDiskListExecute(r ApiGetHyp
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22659,7 +22003,7 @@ func (a *HyperflexApiService) GetHyperflexHxapVirtualDiskListExecute(r ApiGetHyp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHxapVirtualMachineByMoidRequest struct {
@@ -22668,7 +22012,7 @@ type ApiGetHyperflexHxapVirtualMachineByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexHxapVirtualMachineByMoidRequest) Execute() (HyperflexHxapVirtualMachine, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHxapVirtualMachineByMoidRequest) Execute() (HyperflexHxapVirtualMachine, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHxapVirtualMachineByMoidExecute(r)
 }
 
@@ -22690,21 +22034,19 @@ func (a *HyperflexApiService) GetHyperflexHxapVirtualMachineByMoid(ctx _context.
  * Execute executes the request
  * @return HyperflexHxapVirtualMachine
  */
-func (a *HyperflexApiService) GetHyperflexHxapVirtualMachineByMoidExecute(r ApiGetHyperflexHxapVirtualMachineByMoidRequest) (HyperflexHxapVirtualMachine, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHxapVirtualMachineByMoidExecute(r ApiGetHyperflexHxapVirtualMachineByMoidRequest) (HyperflexHxapVirtualMachine, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapVirtualMachine
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHxapVirtualMachineByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapVirtualMachines/{Moid}"
@@ -22733,22 +22075,19 @@ func (a *HyperflexApiService) GetHyperflexHxapVirtualMachineByMoidExecute(r ApiG
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -22815,7 +22154,7 @@ func (a *HyperflexApiService) GetHyperflexHxapVirtualMachineByMoidExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHxapVirtualMachineListRequest struct {
@@ -22879,7 +22218,7 @@ func (r ApiGetHyperflexHxapVirtualMachineListRequest) Tags(tags string) ApiGetHy
 	return r
 }
 
-func (r ApiGetHyperflexHxapVirtualMachineListRequest) Execute() (HyperflexHxapVirtualMachineResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHxapVirtualMachineListRequest) Execute() (HyperflexHxapVirtualMachineResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHxapVirtualMachineListExecute(r)
 }
 
@@ -22899,21 +22238,19 @@ func (a *HyperflexApiService) GetHyperflexHxapVirtualMachineList(ctx _context.Co
  * Execute executes the request
  * @return HyperflexHxapVirtualMachineResponse
  */
-func (a *HyperflexApiService) GetHyperflexHxapVirtualMachineListExecute(r ApiGetHyperflexHxapVirtualMachineListRequest) (HyperflexHxapVirtualMachineResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHxapVirtualMachineListExecute(r ApiGetHyperflexHxapVirtualMachineListRequest) (HyperflexHxapVirtualMachineResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapVirtualMachineResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHxapVirtualMachineList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapVirtualMachines"
@@ -22974,22 +22311,19 @@ func (a *HyperflexApiService) GetHyperflexHxapVirtualMachineListExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23056,7 +22390,7 @@ func (a *HyperflexApiService) GetHyperflexHxapVirtualMachineListExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHxdpVersionByMoidRequest struct {
@@ -23065,7 +22399,7 @@ type ApiGetHyperflexHxdpVersionByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexHxdpVersionByMoidRequest) Execute() (HyperflexHxdpVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHxdpVersionByMoidRequest) Execute() (HyperflexHxdpVersion, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHxdpVersionByMoidExecute(r)
 }
 
@@ -23087,21 +22421,19 @@ func (a *HyperflexApiService) GetHyperflexHxdpVersionByMoid(ctx _context.Context
  * Execute executes the request
  * @return HyperflexHxdpVersion
  */
-func (a *HyperflexApiService) GetHyperflexHxdpVersionByMoidExecute(r ApiGetHyperflexHxdpVersionByMoidRequest) (HyperflexHxdpVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHxdpVersionByMoidExecute(r ApiGetHyperflexHxdpVersionByMoidRequest) (HyperflexHxdpVersion, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxdpVersion
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHxdpVersionByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxdpVersions/{Moid}"
@@ -23130,22 +22462,19 @@ func (a *HyperflexApiService) GetHyperflexHxdpVersionByMoidExecute(r ApiGetHyper
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23212,7 +22541,7 @@ func (a *HyperflexApiService) GetHyperflexHxdpVersionByMoidExecute(r ApiGetHyper
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexHxdpVersionListRequest struct {
@@ -23276,7 +22605,7 @@ func (r ApiGetHyperflexHxdpVersionListRequest) Tags(tags string) ApiGetHyperflex
 	return r
 }
 
-func (r ApiGetHyperflexHxdpVersionListRequest) Execute() (HyperflexHxdpVersionResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexHxdpVersionListRequest) Execute() (HyperflexHxdpVersionResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexHxdpVersionListExecute(r)
 }
 
@@ -23296,21 +22625,19 @@ func (a *HyperflexApiService) GetHyperflexHxdpVersionList(ctx _context.Context) 
  * Execute executes the request
  * @return HyperflexHxdpVersionResponse
  */
-func (a *HyperflexApiService) GetHyperflexHxdpVersionListExecute(r ApiGetHyperflexHxdpVersionListRequest) (HyperflexHxdpVersionResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexHxdpVersionListExecute(r ApiGetHyperflexHxdpVersionListRequest) (HyperflexHxdpVersionResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxdpVersionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexHxdpVersionList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxdpVersions"
@@ -23371,22 +22698,19 @@ func (a *HyperflexApiService) GetHyperflexHxdpVersionListExecute(r ApiGetHyperfl
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23453,7 +22777,7 @@ func (a *HyperflexApiService) GetHyperflexHxdpVersionListExecute(r ApiGetHyperfl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexLocalCredentialPolicyByMoidRequest struct {
@@ -23462,7 +22786,7 @@ type ApiGetHyperflexLocalCredentialPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexLocalCredentialPolicyByMoidRequest) Execute() (HyperflexLocalCredentialPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexLocalCredentialPolicyByMoidRequest) Execute() (HyperflexLocalCredentialPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexLocalCredentialPolicyByMoidExecute(r)
 }
 
@@ -23484,21 +22808,19 @@ func (a *HyperflexApiService) GetHyperflexLocalCredentialPolicyByMoid(ctx _conte
  * Execute executes the request
  * @return HyperflexLocalCredentialPolicy
  */
-func (a *HyperflexApiService) GetHyperflexLocalCredentialPolicyByMoidExecute(r ApiGetHyperflexLocalCredentialPolicyByMoidRequest) (HyperflexLocalCredentialPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexLocalCredentialPolicyByMoidExecute(r ApiGetHyperflexLocalCredentialPolicyByMoidRequest) (HyperflexLocalCredentialPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexLocalCredentialPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexLocalCredentialPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/LocalCredentialPolicies/{Moid}"
@@ -23527,22 +22849,19 @@ func (a *HyperflexApiService) GetHyperflexLocalCredentialPolicyByMoidExecute(r A
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23609,7 +22928,7 @@ func (a *HyperflexApiService) GetHyperflexLocalCredentialPolicyByMoidExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexLocalCredentialPolicyListRequest struct {
@@ -23673,7 +22992,7 @@ func (r ApiGetHyperflexLocalCredentialPolicyListRequest) Tags(tags string) ApiGe
 	return r
 }
 
-func (r ApiGetHyperflexLocalCredentialPolicyListRequest) Execute() (HyperflexLocalCredentialPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexLocalCredentialPolicyListRequest) Execute() (HyperflexLocalCredentialPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexLocalCredentialPolicyListExecute(r)
 }
 
@@ -23693,21 +23012,19 @@ func (a *HyperflexApiService) GetHyperflexLocalCredentialPolicyList(ctx _context
  * Execute executes the request
  * @return HyperflexLocalCredentialPolicyResponse
  */
-func (a *HyperflexApiService) GetHyperflexLocalCredentialPolicyListExecute(r ApiGetHyperflexLocalCredentialPolicyListRequest) (HyperflexLocalCredentialPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexLocalCredentialPolicyListExecute(r ApiGetHyperflexLocalCredentialPolicyListRequest) (HyperflexLocalCredentialPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexLocalCredentialPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexLocalCredentialPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/LocalCredentialPolicies"
@@ -23768,22 +23085,19 @@ func (a *HyperflexApiService) GetHyperflexLocalCredentialPolicyListExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -23850,7 +23164,7 @@ func (a *HyperflexApiService) GetHyperflexLocalCredentialPolicyListExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexNodeByMoidRequest struct {
@@ -23859,7 +23173,7 @@ type ApiGetHyperflexNodeByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexNodeByMoidRequest) Execute() (HyperflexNode, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexNodeByMoidRequest) Execute() (HyperflexNode, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexNodeByMoidExecute(r)
 }
 
@@ -23881,21 +23195,19 @@ func (a *HyperflexApiService) GetHyperflexNodeByMoid(ctx _context.Context, moid 
  * Execute executes the request
  * @return HyperflexNode
  */
-func (a *HyperflexApiService) GetHyperflexNodeByMoidExecute(r ApiGetHyperflexNodeByMoidRequest) (HyperflexNode, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexNodeByMoidExecute(r ApiGetHyperflexNodeByMoidRequest) (HyperflexNode, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexNode
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexNodeByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/Nodes/{Moid}"
@@ -23924,22 +23236,19 @@ func (a *HyperflexApiService) GetHyperflexNodeByMoidExecute(r ApiGetHyperflexNod
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -24006,7 +23315,7 @@ func (a *HyperflexApiService) GetHyperflexNodeByMoidExecute(r ApiGetHyperflexNod
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexNodeConfigPolicyByMoidRequest struct {
@@ -24015,7 +23324,7 @@ type ApiGetHyperflexNodeConfigPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexNodeConfigPolicyByMoidRequest) Execute() (HyperflexNodeConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexNodeConfigPolicyByMoidRequest) Execute() (HyperflexNodeConfigPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexNodeConfigPolicyByMoidExecute(r)
 }
 
@@ -24037,21 +23346,19 @@ func (a *HyperflexApiService) GetHyperflexNodeConfigPolicyByMoid(ctx _context.Co
  * Execute executes the request
  * @return HyperflexNodeConfigPolicy
  */
-func (a *HyperflexApiService) GetHyperflexNodeConfigPolicyByMoidExecute(r ApiGetHyperflexNodeConfigPolicyByMoidRequest) (HyperflexNodeConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexNodeConfigPolicyByMoidExecute(r ApiGetHyperflexNodeConfigPolicyByMoidRequest) (HyperflexNodeConfigPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexNodeConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexNodeConfigPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/NodeConfigPolicies/{Moid}"
@@ -24080,22 +23387,19 @@ func (a *HyperflexApiService) GetHyperflexNodeConfigPolicyByMoidExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -24162,7 +23466,7 @@ func (a *HyperflexApiService) GetHyperflexNodeConfigPolicyByMoidExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexNodeConfigPolicyListRequest struct {
@@ -24226,7 +23530,7 @@ func (r ApiGetHyperflexNodeConfigPolicyListRequest) Tags(tags string) ApiGetHype
 	return r
 }
 
-func (r ApiGetHyperflexNodeConfigPolicyListRequest) Execute() (HyperflexNodeConfigPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexNodeConfigPolicyListRequest) Execute() (HyperflexNodeConfigPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexNodeConfigPolicyListExecute(r)
 }
 
@@ -24246,21 +23550,19 @@ func (a *HyperflexApiService) GetHyperflexNodeConfigPolicyList(ctx _context.Cont
  * Execute executes the request
  * @return HyperflexNodeConfigPolicyResponse
  */
-func (a *HyperflexApiService) GetHyperflexNodeConfigPolicyListExecute(r ApiGetHyperflexNodeConfigPolicyListRequest) (HyperflexNodeConfigPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexNodeConfigPolicyListExecute(r ApiGetHyperflexNodeConfigPolicyListRequest) (HyperflexNodeConfigPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexNodeConfigPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexNodeConfigPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/NodeConfigPolicies"
@@ -24321,22 +23623,19 @@ func (a *HyperflexApiService) GetHyperflexNodeConfigPolicyListExecute(r ApiGetHy
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -24403,7 +23702,7 @@ func (a *HyperflexApiService) GetHyperflexNodeConfigPolicyListExecute(r ApiGetHy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexNodeListRequest struct {
@@ -24467,7 +23766,7 @@ func (r ApiGetHyperflexNodeListRequest) Tags(tags string) ApiGetHyperflexNodeLis
 	return r
 }
 
-func (r ApiGetHyperflexNodeListRequest) Execute() (HyperflexNodeResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexNodeListRequest) Execute() (HyperflexNodeResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexNodeListExecute(r)
 }
 
@@ -24487,21 +23786,19 @@ func (a *HyperflexApiService) GetHyperflexNodeList(ctx _context.Context) ApiGetH
  * Execute executes the request
  * @return HyperflexNodeResponse
  */
-func (a *HyperflexApiService) GetHyperflexNodeListExecute(r ApiGetHyperflexNodeListRequest) (HyperflexNodeResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexNodeListExecute(r ApiGetHyperflexNodeListRequest) (HyperflexNodeResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexNodeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexNodeList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/Nodes"
@@ -24562,22 +23859,19 @@ func (a *HyperflexApiService) GetHyperflexNodeListExecute(r ApiGetHyperflexNodeL
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -24644,7 +23938,7 @@ func (a *HyperflexApiService) GetHyperflexNodeListExecute(r ApiGetHyperflexNodeL
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexNodeProfileByMoidRequest struct {
@@ -24653,7 +23947,7 @@ type ApiGetHyperflexNodeProfileByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexNodeProfileByMoidRequest) Execute() (HyperflexNodeProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexNodeProfileByMoidRequest) Execute() (HyperflexNodeProfile, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexNodeProfileByMoidExecute(r)
 }
 
@@ -24675,21 +23969,19 @@ func (a *HyperflexApiService) GetHyperflexNodeProfileByMoid(ctx _context.Context
  * Execute executes the request
  * @return HyperflexNodeProfile
  */
-func (a *HyperflexApiService) GetHyperflexNodeProfileByMoidExecute(r ApiGetHyperflexNodeProfileByMoidRequest) (HyperflexNodeProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexNodeProfileByMoidExecute(r ApiGetHyperflexNodeProfileByMoidRequest) (HyperflexNodeProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexNodeProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexNodeProfileByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/NodeProfiles/{Moid}"
@@ -24718,22 +24010,19 @@ func (a *HyperflexApiService) GetHyperflexNodeProfileByMoidExecute(r ApiGetHyper
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -24800,7 +24089,7 @@ func (a *HyperflexApiService) GetHyperflexNodeProfileByMoidExecute(r ApiGetHyper
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexNodeProfileListRequest struct {
@@ -24864,7 +24153,7 @@ func (r ApiGetHyperflexNodeProfileListRequest) Tags(tags string) ApiGetHyperflex
 	return r
 }
 
-func (r ApiGetHyperflexNodeProfileListRequest) Execute() (HyperflexNodeProfileResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexNodeProfileListRequest) Execute() (HyperflexNodeProfileResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexNodeProfileListExecute(r)
 }
 
@@ -24884,21 +24173,19 @@ func (a *HyperflexApiService) GetHyperflexNodeProfileList(ctx _context.Context) 
  * Execute executes the request
  * @return HyperflexNodeProfileResponse
  */
-func (a *HyperflexApiService) GetHyperflexNodeProfileListExecute(r ApiGetHyperflexNodeProfileListRequest) (HyperflexNodeProfileResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexNodeProfileListExecute(r ApiGetHyperflexNodeProfileListRequest) (HyperflexNodeProfileResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexNodeProfileResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexNodeProfileList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/NodeProfiles"
@@ -24959,22 +24246,19 @@ func (a *HyperflexApiService) GetHyperflexNodeProfileListExecute(r ApiGetHyperfl
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -25041,7 +24325,7 @@ func (a *HyperflexApiService) GetHyperflexNodeProfileListExecute(r ApiGetHyperfl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexProxySettingPolicyByMoidRequest struct {
@@ -25050,7 +24334,7 @@ type ApiGetHyperflexProxySettingPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexProxySettingPolicyByMoidRequest) Execute() (HyperflexProxySettingPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexProxySettingPolicyByMoidRequest) Execute() (HyperflexProxySettingPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexProxySettingPolicyByMoidExecute(r)
 }
 
@@ -25072,21 +24356,19 @@ func (a *HyperflexApiService) GetHyperflexProxySettingPolicyByMoid(ctx _context.
  * Execute executes the request
  * @return HyperflexProxySettingPolicy
  */
-func (a *HyperflexApiService) GetHyperflexProxySettingPolicyByMoidExecute(r ApiGetHyperflexProxySettingPolicyByMoidRequest) (HyperflexProxySettingPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexProxySettingPolicyByMoidExecute(r ApiGetHyperflexProxySettingPolicyByMoidRequest) (HyperflexProxySettingPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexProxySettingPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexProxySettingPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ProxySettingPolicies/{Moid}"
@@ -25115,22 +24397,19 @@ func (a *HyperflexApiService) GetHyperflexProxySettingPolicyByMoidExecute(r ApiG
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -25197,7 +24476,7 @@ func (a *HyperflexApiService) GetHyperflexProxySettingPolicyByMoidExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexProxySettingPolicyListRequest struct {
@@ -25261,7 +24540,7 @@ func (r ApiGetHyperflexProxySettingPolicyListRequest) Tags(tags string) ApiGetHy
 	return r
 }
 
-func (r ApiGetHyperflexProxySettingPolicyListRequest) Execute() (HyperflexProxySettingPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexProxySettingPolicyListRequest) Execute() (HyperflexProxySettingPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexProxySettingPolicyListExecute(r)
 }
 
@@ -25281,21 +24560,19 @@ func (a *HyperflexApiService) GetHyperflexProxySettingPolicyList(ctx _context.Co
  * Execute executes the request
  * @return HyperflexProxySettingPolicyResponse
  */
-func (a *HyperflexApiService) GetHyperflexProxySettingPolicyListExecute(r ApiGetHyperflexProxySettingPolicyListRequest) (HyperflexProxySettingPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexProxySettingPolicyListExecute(r ApiGetHyperflexProxySettingPolicyListRequest) (HyperflexProxySettingPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexProxySettingPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexProxySettingPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ProxySettingPolicies"
@@ -25356,22 +24633,19 @@ func (a *HyperflexApiService) GetHyperflexProxySettingPolicyListExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -25438,7 +24712,7 @@ func (a *HyperflexApiService) GetHyperflexProxySettingPolicyListExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexServerFirmwareVersionByMoidRequest struct {
@@ -25447,7 +24721,7 @@ type ApiGetHyperflexServerFirmwareVersionByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexServerFirmwareVersionByMoidRequest) Execute() (HyperflexServerFirmwareVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexServerFirmwareVersionByMoidRequest) Execute() (HyperflexServerFirmwareVersion, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexServerFirmwareVersionByMoidExecute(r)
 }
 
@@ -25469,21 +24743,19 @@ func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionByMoid(ctx _conte
  * Execute executes the request
  * @return HyperflexServerFirmwareVersion
  */
-func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionByMoidExecute(r ApiGetHyperflexServerFirmwareVersionByMoidRequest) (HyperflexServerFirmwareVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionByMoidExecute(r ApiGetHyperflexServerFirmwareVersionByMoidRequest) (HyperflexServerFirmwareVersion, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexServerFirmwareVersion
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexServerFirmwareVersionByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ServerFirmwareVersions/{Moid}"
@@ -25512,22 +24784,19 @@ func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionByMoidExecute(r A
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -25594,7 +24863,7 @@ func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionByMoidExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexServerFirmwareVersionEntryByMoidRequest struct {
@@ -25603,7 +24872,7 @@ type ApiGetHyperflexServerFirmwareVersionEntryByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexServerFirmwareVersionEntryByMoidRequest) Execute() (HyperflexServerFirmwareVersionEntry, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexServerFirmwareVersionEntryByMoidRequest) Execute() (HyperflexServerFirmwareVersionEntry, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexServerFirmwareVersionEntryByMoidExecute(r)
 }
 
@@ -25625,21 +24894,19 @@ func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionEntryByMoid(ctx _
  * Execute executes the request
  * @return HyperflexServerFirmwareVersionEntry
  */
-func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionEntryByMoidExecute(r ApiGetHyperflexServerFirmwareVersionEntryByMoidRequest) (HyperflexServerFirmwareVersionEntry, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionEntryByMoidExecute(r ApiGetHyperflexServerFirmwareVersionEntryByMoidRequest) (HyperflexServerFirmwareVersionEntry, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexServerFirmwareVersionEntry
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexServerFirmwareVersionEntryByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ServerFirmwareVersionEntries/{Moid}"
@@ -25668,22 +24935,19 @@ func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionEntryByMoidExecut
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -25750,7 +25014,7 @@ func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionEntryByMoidExecut
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexServerFirmwareVersionEntryListRequest struct {
@@ -25814,7 +25078,7 @@ func (r ApiGetHyperflexServerFirmwareVersionEntryListRequest) Tags(tags string) 
 	return r
 }
 
-func (r ApiGetHyperflexServerFirmwareVersionEntryListRequest) Execute() (HyperflexServerFirmwareVersionEntryResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexServerFirmwareVersionEntryListRequest) Execute() (HyperflexServerFirmwareVersionEntryResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexServerFirmwareVersionEntryListExecute(r)
 }
 
@@ -25834,21 +25098,19 @@ func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionEntryList(ctx _co
  * Execute executes the request
  * @return HyperflexServerFirmwareVersionEntryResponse
  */
-func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionEntryListExecute(r ApiGetHyperflexServerFirmwareVersionEntryListRequest) (HyperflexServerFirmwareVersionEntryResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionEntryListExecute(r ApiGetHyperflexServerFirmwareVersionEntryListRequest) (HyperflexServerFirmwareVersionEntryResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexServerFirmwareVersionEntryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexServerFirmwareVersionEntryList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ServerFirmwareVersionEntries"
@@ -25909,22 +25171,19 @@ func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionEntryListExecute(
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -25991,7 +25250,7 @@ func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionEntryListExecute(
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexServerFirmwareVersionListRequest struct {
@@ -26055,7 +25314,7 @@ func (r ApiGetHyperflexServerFirmwareVersionListRequest) Tags(tags string) ApiGe
 	return r
 }
 
-func (r ApiGetHyperflexServerFirmwareVersionListRequest) Execute() (HyperflexServerFirmwareVersionResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexServerFirmwareVersionListRequest) Execute() (HyperflexServerFirmwareVersionResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexServerFirmwareVersionListExecute(r)
 }
 
@@ -26075,21 +25334,19 @@ func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionList(ctx _context
  * Execute executes the request
  * @return HyperflexServerFirmwareVersionResponse
  */
-func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionListExecute(r ApiGetHyperflexServerFirmwareVersionListRequest) (HyperflexServerFirmwareVersionResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionListExecute(r ApiGetHyperflexServerFirmwareVersionListRequest) (HyperflexServerFirmwareVersionResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexServerFirmwareVersionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexServerFirmwareVersionList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ServerFirmwareVersions"
@@ -26150,22 +25407,19 @@ func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionListExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -26232,7 +25486,7 @@ func (a *HyperflexApiService) GetHyperflexServerFirmwareVersionListExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexServerModelByMoidRequest struct {
@@ -26241,7 +25495,7 @@ type ApiGetHyperflexServerModelByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexServerModelByMoidRequest) Execute() (HyperflexServerModel, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexServerModelByMoidRequest) Execute() (HyperflexServerModel, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexServerModelByMoidExecute(r)
 }
 
@@ -26263,21 +25517,19 @@ func (a *HyperflexApiService) GetHyperflexServerModelByMoid(ctx _context.Context
  * Execute executes the request
  * @return HyperflexServerModel
  */
-func (a *HyperflexApiService) GetHyperflexServerModelByMoidExecute(r ApiGetHyperflexServerModelByMoidRequest) (HyperflexServerModel, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexServerModelByMoidExecute(r ApiGetHyperflexServerModelByMoidRequest) (HyperflexServerModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexServerModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexServerModelByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ServerModels/{Moid}"
@@ -26306,22 +25558,19 @@ func (a *HyperflexApiService) GetHyperflexServerModelByMoidExecute(r ApiGetHyper
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -26388,7 +25637,7 @@ func (a *HyperflexApiService) GetHyperflexServerModelByMoidExecute(r ApiGetHyper
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexServerModelListRequest struct {
@@ -26452,7 +25701,7 @@ func (r ApiGetHyperflexServerModelListRequest) Tags(tags string) ApiGetHyperflex
 	return r
 }
 
-func (r ApiGetHyperflexServerModelListRequest) Execute() (HyperflexServerModelResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexServerModelListRequest) Execute() (HyperflexServerModelResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexServerModelListExecute(r)
 }
 
@@ -26472,21 +25721,19 @@ func (a *HyperflexApiService) GetHyperflexServerModelList(ctx _context.Context) 
  * Execute executes the request
  * @return HyperflexServerModelResponse
  */
-func (a *HyperflexApiService) GetHyperflexServerModelListExecute(r ApiGetHyperflexServerModelListRequest) (HyperflexServerModelResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexServerModelListExecute(r ApiGetHyperflexServerModelListRequest) (HyperflexServerModelResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexServerModelResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexServerModelList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ServerModels"
@@ -26547,22 +25794,19 @@ func (a *HyperflexApiService) GetHyperflexServerModelListExecute(r ApiGetHyperfl
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -26629,7 +25873,7 @@ func (a *HyperflexApiService) GetHyperflexServerModelListExecute(r ApiGetHyperfl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexSoftwareVersionPolicyByMoidRequest struct {
@@ -26638,7 +25882,7 @@ type ApiGetHyperflexSoftwareVersionPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexSoftwareVersionPolicyByMoidRequest) Execute() (HyperflexSoftwareVersionPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexSoftwareVersionPolicyByMoidRequest) Execute() (HyperflexSoftwareVersionPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexSoftwareVersionPolicyByMoidExecute(r)
 }
 
@@ -26660,21 +25904,19 @@ func (a *HyperflexApiService) GetHyperflexSoftwareVersionPolicyByMoid(ctx _conte
  * Execute executes the request
  * @return HyperflexSoftwareVersionPolicy
  */
-func (a *HyperflexApiService) GetHyperflexSoftwareVersionPolicyByMoidExecute(r ApiGetHyperflexSoftwareVersionPolicyByMoidRequest) (HyperflexSoftwareVersionPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexSoftwareVersionPolicyByMoidExecute(r ApiGetHyperflexSoftwareVersionPolicyByMoidRequest) (HyperflexSoftwareVersionPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexSoftwareVersionPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexSoftwareVersionPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/SoftwareVersionPolicies/{Moid}"
@@ -26703,22 +25945,19 @@ func (a *HyperflexApiService) GetHyperflexSoftwareVersionPolicyByMoidExecute(r A
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -26785,7 +26024,7 @@ func (a *HyperflexApiService) GetHyperflexSoftwareVersionPolicyByMoidExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexSoftwareVersionPolicyListRequest struct {
@@ -26849,7 +26088,7 @@ func (r ApiGetHyperflexSoftwareVersionPolicyListRequest) Tags(tags string) ApiGe
 	return r
 }
 
-func (r ApiGetHyperflexSoftwareVersionPolicyListRequest) Execute() (HyperflexSoftwareVersionPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexSoftwareVersionPolicyListRequest) Execute() (HyperflexSoftwareVersionPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexSoftwareVersionPolicyListExecute(r)
 }
 
@@ -26869,21 +26108,19 @@ func (a *HyperflexApiService) GetHyperflexSoftwareVersionPolicyList(ctx _context
  * Execute executes the request
  * @return HyperflexSoftwareVersionPolicyResponse
  */
-func (a *HyperflexApiService) GetHyperflexSoftwareVersionPolicyListExecute(r ApiGetHyperflexSoftwareVersionPolicyListRequest) (HyperflexSoftwareVersionPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexSoftwareVersionPolicyListExecute(r ApiGetHyperflexSoftwareVersionPolicyListRequest) (HyperflexSoftwareVersionPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexSoftwareVersionPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexSoftwareVersionPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/SoftwareVersionPolicies"
@@ -26944,22 +26181,19 @@ func (a *HyperflexApiService) GetHyperflexSoftwareVersionPolicyListExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -27026,7 +26260,7 @@ func (a *HyperflexApiService) GetHyperflexSoftwareVersionPolicyListExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexSysConfigPolicyByMoidRequest struct {
@@ -27035,7 +26269,7 @@ type ApiGetHyperflexSysConfigPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexSysConfigPolicyByMoidRequest) Execute() (HyperflexSysConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexSysConfigPolicyByMoidRequest) Execute() (HyperflexSysConfigPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexSysConfigPolicyByMoidExecute(r)
 }
 
@@ -27057,21 +26291,19 @@ func (a *HyperflexApiService) GetHyperflexSysConfigPolicyByMoid(ctx _context.Con
  * Execute executes the request
  * @return HyperflexSysConfigPolicy
  */
-func (a *HyperflexApiService) GetHyperflexSysConfigPolicyByMoidExecute(r ApiGetHyperflexSysConfigPolicyByMoidRequest) (HyperflexSysConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexSysConfigPolicyByMoidExecute(r ApiGetHyperflexSysConfigPolicyByMoidRequest) (HyperflexSysConfigPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexSysConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexSysConfigPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/SysConfigPolicies/{Moid}"
@@ -27100,22 +26332,19 @@ func (a *HyperflexApiService) GetHyperflexSysConfigPolicyByMoidExecute(r ApiGetH
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -27182,7 +26411,7 @@ func (a *HyperflexApiService) GetHyperflexSysConfigPolicyByMoidExecute(r ApiGetH
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexSysConfigPolicyListRequest struct {
@@ -27246,7 +26475,7 @@ func (r ApiGetHyperflexSysConfigPolicyListRequest) Tags(tags string) ApiGetHyper
 	return r
 }
 
-func (r ApiGetHyperflexSysConfigPolicyListRequest) Execute() (HyperflexSysConfigPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexSysConfigPolicyListRequest) Execute() (HyperflexSysConfigPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexSysConfigPolicyListExecute(r)
 }
 
@@ -27266,21 +26495,19 @@ func (a *HyperflexApiService) GetHyperflexSysConfigPolicyList(ctx _context.Conte
  * Execute executes the request
  * @return HyperflexSysConfigPolicyResponse
  */
-func (a *HyperflexApiService) GetHyperflexSysConfigPolicyListExecute(r ApiGetHyperflexSysConfigPolicyListRequest) (HyperflexSysConfigPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexSysConfigPolicyListExecute(r ApiGetHyperflexSysConfigPolicyListRequest) (HyperflexSysConfigPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexSysConfigPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexSysConfigPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/SysConfigPolicies"
@@ -27341,22 +26568,19 @@ func (a *HyperflexApiService) GetHyperflexSysConfigPolicyListExecute(r ApiGetHyp
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -27423,7 +26647,7 @@ func (a *HyperflexApiService) GetHyperflexSysConfigPolicyListExecute(r ApiGetHyp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexUcsmConfigPolicyByMoidRequest struct {
@@ -27432,7 +26656,7 @@ type ApiGetHyperflexUcsmConfigPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexUcsmConfigPolicyByMoidRequest) Execute() (HyperflexUcsmConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexUcsmConfigPolicyByMoidRequest) Execute() (HyperflexUcsmConfigPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexUcsmConfigPolicyByMoidExecute(r)
 }
 
@@ -27454,21 +26678,19 @@ func (a *HyperflexApiService) GetHyperflexUcsmConfigPolicyByMoid(ctx _context.Co
  * Execute executes the request
  * @return HyperflexUcsmConfigPolicy
  */
-func (a *HyperflexApiService) GetHyperflexUcsmConfigPolicyByMoidExecute(r ApiGetHyperflexUcsmConfigPolicyByMoidRequest) (HyperflexUcsmConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexUcsmConfigPolicyByMoidExecute(r ApiGetHyperflexUcsmConfigPolicyByMoidRequest) (HyperflexUcsmConfigPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexUcsmConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexUcsmConfigPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/UcsmConfigPolicies/{Moid}"
@@ -27497,22 +26719,19 @@ func (a *HyperflexApiService) GetHyperflexUcsmConfigPolicyByMoidExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -27579,7 +26798,7 @@ func (a *HyperflexApiService) GetHyperflexUcsmConfigPolicyByMoidExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexUcsmConfigPolicyListRequest struct {
@@ -27643,7 +26862,7 @@ func (r ApiGetHyperflexUcsmConfigPolicyListRequest) Tags(tags string) ApiGetHype
 	return r
 }
 
-func (r ApiGetHyperflexUcsmConfigPolicyListRequest) Execute() (HyperflexUcsmConfigPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexUcsmConfigPolicyListRequest) Execute() (HyperflexUcsmConfigPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexUcsmConfigPolicyListExecute(r)
 }
 
@@ -27663,21 +26882,19 @@ func (a *HyperflexApiService) GetHyperflexUcsmConfigPolicyList(ctx _context.Cont
  * Execute executes the request
  * @return HyperflexUcsmConfigPolicyResponse
  */
-func (a *HyperflexApiService) GetHyperflexUcsmConfigPolicyListExecute(r ApiGetHyperflexUcsmConfigPolicyListRequest) (HyperflexUcsmConfigPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexUcsmConfigPolicyListExecute(r ApiGetHyperflexUcsmConfigPolicyListRequest) (HyperflexUcsmConfigPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexUcsmConfigPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexUcsmConfigPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/UcsmConfigPolicies"
@@ -27738,22 +26955,19 @@ func (a *HyperflexApiService) GetHyperflexUcsmConfigPolicyListExecute(r ApiGetHy
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -27820,7 +27034,7 @@ func (a *HyperflexApiService) GetHyperflexUcsmConfigPolicyListExecute(r ApiGetHy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexVcenterConfigPolicyByMoidRequest struct {
@@ -27829,7 +27043,7 @@ type ApiGetHyperflexVcenterConfigPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexVcenterConfigPolicyByMoidRequest) Execute() (HyperflexVcenterConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexVcenterConfigPolicyByMoidRequest) Execute() (HyperflexVcenterConfigPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexVcenterConfigPolicyByMoidExecute(r)
 }
 
@@ -27851,21 +27065,19 @@ func (a *HyperflexApiService) GetHyperflexVcenterConfigPolicyByMoid(ctx _context
  * Execute executes the request
  * @return HyperflexVcenterConfigPolicy
  */
-func (a *HyperflexApiService) GetHyperflexVcenterConfigPolicyByMoidExecute(r ApiGetHyperflexVcenterConfigPolicyByMoidRequest) (HyperflexVcenterConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexVcenterConfigPolicyByMoidExecute(r ApiGetHyperflexVcenterConfigPolicyByMoidRequest) (HyperflexVcenterConfigPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexVcenterConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexVcenterConfigPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/VcenterConfigPolicies/{Moid}"
@@ -27894,22 +27106,19 @@ func (a *HyperflexApiService) GetHyperflexVcenterConfigPolicyByMoidExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -27976,7 +27185,7 @@ func (a *HyperflexApiService) GetHyperflexVcenterConfigPolicyByMoidExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexVcenterConfigPolicyListRequest struct {
@@ -28040,7 +27249,7 @@ func (r ApiGetHyperflexVcenterConfigPolicyListRequest) Tags(tags string) ApiGetH
 	return r
 }
 
-func (r ApiGetHyperflexVcenterConfigPolicyListRequest) Execute() (HyperflexVcenterConfigPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexVcenterConfigPolicyListRequest) Execute() (HyperflexVcenterConfigPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexVcenterConfigPolicyListExecute(r)
 }
 
@@ -28060,21 +27269,19 @@ func (a *HyperflexApiService) GetHyperflexVcenterConfigPolicyList(ctx _context.C
  * Execute executes the request
  * @return HyperflexVcenterConfigPolicyResponse
  */
-func (a *HyperflexApiService) GetHyperflexVcenterConfigPolicyListExecute(r ApiGetHyperflexVcenterConfigPolicyListRequest) (HyperflexVcenterConfigPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexVcenterConfigPolicyListExecute(r ApiGetHyperflexVcenterConfigPolicyListRequest) (HyperflexVcenterConfigPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexVcenterConfigPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexVcenterConfigPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/VcenterConfigPolicies"
@@ -28135,22 +27342,19 @@ func (a *HyperflexApiService) GetHyperflexVcenterConfigPolicyListExecute(r ApiGe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -28217,7 +27421,7 @@ func (a *HyperflexApiService) GetHyperflexVcenterConfigPolicyListExecute(r ApiGe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexVmBackupInfoByMoidRequest struct {
@@ -28226,7 +27430,7 @@ type ApiGetHyperflexVmBackupInfoByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexVmBackupInfoByMoidRequest) Execute() (HyperflexVmBackupInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexVmBackupInfoByMoidRequest) Execute() (HyperflexVmBackupInfo, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexVmBackupInfoByMoidExecute(r)
 }
 
@@ -28248,21 +27452,19 @@ func (a *HyperflexApiService) GetHyperflexVmBackupInfoByMoid(ctx _context.Contex
  * Execute executes the request
  * @return HyperflexVmBackupInfo
  */
-func (a *HyperflexApiService) GetHyperflexVmBackupInfoByMoidExecute(r ApiGetHyperflexVmBackupInfoByMoidRequest) (HyperflexVmBackupInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexVmBackupInfoByMoidExecute(r ApiGetHyperflexVmBackupInfoByMoidRequest) (HyperflexVmBackupInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexVmBackupInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexVmBackupInfoByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/VmBackupInfos/{Moid}"
@@ -28291,22 +27493,19 @@ func (a *HyperflexApiService) GetHyperflexVmBackupInfoByMoidExecute(r ApiGetHype
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -28373,7 +27572,7 @@ func (a *HyperflexApiService) GetHyperflexVmBackupInfoByMoidExecute(r ApiGetHype
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexVmBackupInfoListRequest struct {
@@ -28437,7 +27636,7 @@ func (r ApiGetHyperflexVmBackupInfoListRequest) Tags(tags string) ApiGetHyperfle
 	return r
 }
 
-func (r ApiGetHyperflexVmBackupInfoListRequest) Execute() (HyperflexVmBackupInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexVmBackupInfoListRequest) Execute() (HyperflexVmBackupInfoResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexVmBackupInfoListExecute(r)
 }
 
@@ -28457,21 +27656,19 @@ func (a *HyperflexApiService) GetHyperflexVmBackupInfoList(ctx _context.Context)
  * Execute executes the request
  * @return HyperflexVmBackupInfoResponse
  */
-func (a *HyperflexApiService) GetHyperflexVmBackupInfoListExecute(r ApiGetHyperflexVmBackupInfoListRequest) (HyperflexVmBackupInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexVmBackupInfoListExecute(r ApiGetHyperflexVmBackupInfoListRequest) (HyperflexVmBackupInfoResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexVmBackupInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexVmBackupInfoList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/VmBackupInfos"
@@ -28532,22 +27729,19 @@ func (a *HyperflexApiService) GetHyperflexVmBackupInfoListExecute(r ApiGetHyperf
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -28614,7 +27808,7 @@ func (a *HyperflexApiService) GetHyperflexVmBackupInfoListExecute(r ApiGetHyperf
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexVmRestoreOperationByMoidRequest struct {
@@ -28623,7 +27817,7 @@ type ApiGetHyperflexVmRestoreOperationByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexVmRestoreOperationByMoidRequest) Execute() (HyperflexVmRestoreOperation, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexVmRestoreOperationByMoidRequest) Execute() (HyperflexVmRestoreOperation, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexVmRestoreOperationByMoidExecute(r)
 }
 
@@ -28645,21 +27839,19 @@ func (a *HyperflexApiService) GetHyperflexVmRestoreOperationByMoid(ctx _context.
  * Execute executes the request
  * @return HyperflexVmRestoreOperation
  */
-func (a *HyperflexApiService) GetHyperflexVmRestoreOperationByMoidExecute(r ApiGetHyperflexVmRestoreOperationByMoidRequest) (HyperflexVmRestoreOperation, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexVmRestoreOperationByMoidExecute(r ApiGetHyperflexVmRestoreOperationByMoidRequest) (HyperflexVmRestoreOperation, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexVmRestoreOperation
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexVmRestoreOperationByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/VmRestoreOperations/{Moid}"
@@ -28688,22 +27880,19 @@ func (a *HyperflexApiService) GetHyperflexVmRestoreOperationByMoidExecute(r ApiG
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -28770,7 +27959,7 @@ func (a *HyperflexApiService) GetHyperflexVmRestoreOperationByMoidExecute(r ApiG
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexVmRestoreOperationListRequest struct {
@@ -28834,7 +28023,7 @@ func (r ApiGetHyperflexVmRestoreOperationListRequest) Tags(tags string) ApiGetHy
 	return r
 }
 
-func (r ApiGetHyperflexVmRestoreOperationListRequest) Execute() (HyperflexVmRestoreOperationResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexVmRestoreOperationListRequest) Execute() (HyperflexVmRestoreOperationResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexVmRestoreOperationListExecute(r)
 }
 
@@ -28854,21 +28043,19 @@ func (a *HyperflexApiService) GetHyperflexVmRestoreOperationList(ctx _context.Co
  * Execute executes the request
  * @return HyperflexVmRestoreOperationResponse
  */
-func (a *HyperflexApiService) GetHyperflexVmRestoreOperationListExecute(r ApiGetHyperflexVmRestoreOperationListRequest) (HyperflexVmRestoreOperationResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexVmRestoreOperationListExecute(r ApiGetHyperflexVmRestoreOperationListRequest) (HyperflexVmRestoreOperationResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexVmRestoreOperationResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexVmRestoreOperationList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/VmRestoreOperations"
@@ -28929,22 +28116,19 @@ func (a *HyperflexApiService) GetHyperflexVmRestoreOperationListExecute(r ApiGet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -29011,7 +28195,7 @@ func (a *HyperflexApiService) GetHyperflexVmRestoreOperationListExecute(r ApiGet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexVmSnapshotInfoByMoidRequest struct {
@@ -29020,7 +28204,7 @@ type ApiGetHyperflexVmSnapshotInfoByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetHyperflexVmSnapshotInfoByMoidRequest) Execute() (HyperflexVmSnapshotInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexVmSnapshotInfoByMoidRequest) Execute() (HyperflexVmSnapshotInfo, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexVmSnapshotInfoByMoidExecute(r)
 }
 
@@ -29042,21 +28226,19 @@ func (a *HyperflexApiService) GetHyperflexVmSnapshotInfoByMoid(ctx _context.Cont
  * Execute executes the request
  * @return HyperflexVmSnapshotInfo
  */
-func (a *HyperflexApiService) GetHyperflexVmSnapshotInfoByMoidExecute(r ApiGetHyperflexVmSnapshotInfoByMoidRequest) (HyperflexVmSnapshotInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexVmSnapshotInfoByMoidExecute(r ApiGetHyperflexVmSnapshotInfoByMoidRequest) (HyperflexVmSnapshotInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexVmSnapshotInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexVmSnapshotInfoByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/VmSnapshotInfos/{Moid}"
@@ -29085,22 +28267,19 @@ func (a *HyperflexApiService) GetHyperflexVmSnapshotInfoByMoidExecute(r ApiGetHy
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -29167,7 +28346,7 @@ func (a *HyperflexApiService) GetHyperflexVmSnapshotInfoByMoidExecute(r ApiGetHy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetHyperflexVmSnapshotInfoListRequest struct {
@@ -29231,7 +28410,7 @@ func (r ApiGetHyperflexVmSnapshotInfoListRequest) Tags(tags string) ApiGetHyperf
 	return r
 }
 
-func (r ApiGetHyperflexVmSnapshotInfoListRequest) Execute() (HyperflexVmSnapshotInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetHyperflexVmSnapshotInfoListRequest) Execute() (HyperflexVmSnapshotInfoResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetHyperflexVmSnapshotInfoListExecute(r)
 }
 
@@ -29251,21 +28430,19 @@ func (a *HyperflexApiService) GetHyperflexVmSnapshotInfoList(ctx _context.Contex
  * Execute executes the request
  * @return HyperflexVmSnapshotInfoResponse
  */
-func (a *HyperflexApiService) GetHyperflexVmSnapshotInfoListExecute(r ApiGetHyperflexVmSnapshotInfoListRequest) (HyperflexVmSnapshotInfoResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) GetHyperflexVmSnapshotInfoListExecute(r ApiGetHyperflexVmSnapshotInfoListRequest) (HyperflexVmSnapshotInfoResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexVmSnapshotInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.GetHyperflexVmSnapshotInfoList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/VmSnapshotInfos"
@@ -29326,22 +28503,19 @@ func (a *HyperflexApiService) GetHyperflexVmSnapshotInfoListExecute(r ApiGetHype
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -29408,7 +28582,7 @@ func (a *HyperflexApiService) GetHyperflexVmSnapshotInfoListExecute(r ApiGetHype
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexAppCatalogRequest struct {
@@ -29428,7 +28602,7 @@ func (r ApiPatchHyperflexAppCatalogRequest) IfMatch(ifMatch string) ApiPatchHype
 	return r
 }
 
-func (r ApiPatchHyperflexAppCatalogRequest) Execute() (HyperflexAppCatalog, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexAppCatalogRequest) Execute() (HyperflexAppCatalog, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexAppCatalogExecute(r)
 }
 
@@ -29450,21 +28624,19 @@ func (a *HyperflexApiService) PatchHyperflexAppCatalog(ctx _context.Context, moi
  * Execute executes the request
  * @return HyperflexAppCatalog
  */
-func (a *HyperflexApiService) PatchHyperflexAppCatalogExecute(r ApiPatchHyperflexAppCatalogRequest) (HyperflexAppCatalog, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexAppCatalogExecute(r ApiPatchHyperflexAppCatalogRequest) (HyperflexAppCatalog, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexAppCatalog
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexAppCatalog")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/AppCatalogs/{Moid}"
@@ -29474,8 +28646,7 @@ func (a *HyperflexApiService) PatchHyperflexAppCatalogExecute(r ApiPatchHyperfle
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexAppCatalog == nil {
-		executionError.error = "hyperflexAppCatalog is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexAppCatalog is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -29502,22 +28673,19 @@ func (a *HyperflexApiService) PatchHyperflexAppCatalogExecute(r ApiPatchHyperfle
 	localVarPostBody = r.hyperflexAppCatalog
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -29584,7 +28752,7 @@ func (a *HyperflexApiService) PatchHyperflexAppCatalogExecute(r ApiPatchHyperfle
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexAutoSupportPolicyRequest struct {
@@ -29604,7 +28772,7 @@ func (r ApiPatchHyperflexAutoSupportPolicyRequest) IfMatch(ifMatch string) ApiPa
 	return r
 }
 
-func (r ApiPatchHyperflexAutoSupportPolicyRequest) Execute() (HyperflexAutoSupportPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexAutoSupportPolicyRequest) Execute() (HyperflexAutoSupportPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexAutoSupportPolicyExecute(r)
 }
 
@@ -29626,21 +28794,19 @@ func (a *HyperflexApiService) PatchHyperflexAutoSupportPolicy(ctx _context.Conte
  * Execute executes the request
  * @return HyperflexAutoSupportPolicy
  */
-func (a *HyperflexApiService) PatchHyperflexAutoSupportPolicyExecute(r ApiPatchHyperflexAutoSupportPolicyRequest) (HyperflexAutoSupportPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexAutoSupportPolicyExecute(r ApiPatchHyperflexAutoSupportPolicyRequest) (HyperflexAutoSupportPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexAutoSupportPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexAutoSupportPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/AutoSupportPolicies/{Moid}"
@@ -29650,8 +28816,7 @@ func (a *HyperflexApiService) PatchHyperflexAutoSupportPolicyExecute(r ApiPatchH
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexAutoSupportPolicy == nil {
-		executionError.error = "hyperflexAutoSupportPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexAutoSupportPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -29678,22 +28843,19 @@ func (a *HyperflexApiService) PatchHyperflexAutoSupportPolicyExecute(r ApiPatchH
 	localVarPostBody = r.hyperflexAutoSupportPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -29760,7 +28922,7 @@ func (a *HyperflexApiService) PatchHyperflexAutoSupportPolicyExecute(r ApiPatchH
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexCapabilityInfoRequest struct {
@@ -29780,7 +28942,7 @@ func (r ApiPatchHyperflexCapabilityInfoRequest) IfMatch(ifMatch string) ApiPatch
 	return r
 }
 
-func (r ApiPatchHyperflexCapabilityInfoRequest) Execute() (HyperflexCapabilityInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexCapabilityInfoRequest) Execute() (HyperflexCapabilityInfo, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexCapabilityInfoExecute(r)
 }
 
@@ -29802,21 +28964,19 @@ func (a *HyperflexApiService) PatchHyperflexCapabilityInfo(ctx _context.Context,
  * Execute executes the request
  * @return HyperflexCapabilityInfo
  */
-func (a *HyperflexApiService) PatchHyperflexCapabilityInfoExecute(r ApiPatchHyperflexCapabilityInfoRequest) (HyperflexCapabilityInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexCapabilityInfoExecute(r ApiPatchHyperflexCapabilityInfoRequest) (HyperflexCapabilityInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexCapabilityInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexCapabilityInfo")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/CapabilityInfos/{Moid}"
@@ -29826,8 +28986,7 @@ func (a *HyperflexApiService) PatchHyperflexCapabilityInfoExecute(r ApiPatchHype
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexCapabilityInfo == nil {
-		executionError.error = "hyperflexCapabilityInfo is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexCapabilityInfo is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -29854,22 +29013,19 @@ func (a *HyperflexApiService) PatchHyperflexCapabilityInfoExecute(r ApiPatchHype
 	localVarPostBody = r.hyperflexCapabilityInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -29936,7 +29092,7 @@ func (a *HyperflexApiService) PatchHyperflexCapabilityInfoExecute(r ApiPatchHype
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexCiscoHypervisorManagerRequest struct {
@@ -29956,7 +29112,7 @@ func (r ApiPatchHyperflexCiscoHypervisorManagerRequest) IfMatch(ifMatch string) 
 	return r
 }
 
-func (r ApiPatchHyperflexCiscoHypervisorManagerRequest) Execute() (HyperflexCiscoHypervisorManager, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexCiscoHypervisorManagerRequest) Execute() (HyperflexCiscoHypervisorManager, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexCiscoHypervisorManagerExecute(r)
 }
 
@@ -29978,21 +29134,19 @@ func (a *HyperflexApiService) PatchHyperflexCiscoHypervisorManager(ctx _context.
  * Execute executes the request
  * @return HyperflexCiscoHypervisorManager
  */
-func (a *HyperflexApiService) PatchHyperflexCiscoHypervisorManagerExecute(r ApiPatchHyperflexCiscoHypervisorManagerRequest) (HyperflexCiscoHypervisorManager, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexCiscoHypervisorManagerExecute(r ApiPatchHyperflexCiscoHypervisorManagerRequest) (HyperflexCiscoHypervisorManager, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexCiscoHypervisorManager
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexCiscoHypervisorManager")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/CiscoHypervisorManagers/{Moid}"
@@ -30002,8 +29156,7 @@ func (a *HyperflexApiService) PatchHyperflexCiscoHypervisorManagerExecute(r ApiP
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexCiscoHypervisorManager == nil {
-		executionError.error = "hyperflexCiscoHypervisorManager is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexCiscoHypervisorManager is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -30030,22 +29183,19 @@ func (a *HyperflexApiService) PatchHyperflexCiscoHypervisorManagerExecute(r ApiP
 	localVarPostBody = r.hyperflexCiscoHypervisorManager
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -30112,7 +29262,7 @@ func (a *HyperflexApiService) PatchHyperflexCiscoHypervisorManagerExecute(r ApiP
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexClusterRequest struct {
@@ -30132,7 +29282,7 @@ func (r ApiPatchHyperflexClusterRequest) IfMatch(ifMatch string) ApiPatchHyperfl
 	return r
 }
 
-func (r ApiPatchHyperflexClusterRequest) Execute() (HyperflexCluster, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexClusterRequest) Execute() (HyperflexCluster, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexClusterExecute(r)
 }
 
@@ -30154,21 +29304,19 @@ func (a *HyperflexApiService) PatchHyperflexCluster(ctx _context.Context, moid s
  * Execute executes the request
  * @return HyperflexCluster
  */
-func (a *HyperflexApiService) PatchHyperflexClusterExecute(r ApiPatchHyperflexClusterRequest) (HyperflexCluster, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexClusterExecute(r ApiPatchHyperflexClusterRequest) (HyperflexCluster, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexCluster
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexCluster")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/Clusters/{Moid}"
@@ -30178,8 +29326,7 @@ func (a *HyperflexApiService) PatchHyperflexClusterExecute(r ApiPatchHyperflexCl
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexCluster == nil {
-		executionError.error = "hyperflexCluster is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexCluster is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -30206,22 +29353,19 @@ func (a *HyperflexApiService) PatchHyperflexClusterExecute(r ApiPatchHyperflexCl
 	localVarPostBody = r.hyperflexCluster
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -30288,7 +29432,7 @@ func (a *HyperflexApiService) PatchHyperflexClusterExecute(r ApiPatchHyperflexCl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexClusterBackupPolicyRequest struct {
@@ -30308,7 +29452,7 @@ func (r ApiPatchHyperflexClusterBackupPolicyRequest) IfMatch(ifMatch string) Api
 	return r
 }
 
-func (r ApiPatchHyperflexClusterBackupPolicyRequest) Execute() (HyperflexClusterBackupPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexClusterBackupPolicyRequest) Execute() (HyperflexClusterBackupPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexClusterBackupPolicyExecute(r)
 }
 
@@ -30330,21 +29474,19 @@ func (a *HyperflexApiService) PatchHyperflexClusterBackupPolicy(ctx _context.Con
  * Execute executes the request
  * @return HyperflexClusterBackupPolicy
  */
-func (a *HyperflexApiService) PatchHyperflexClusterBackupPolicyExecute(r ApiPatchHyperflexClusterBackupPolicyRequest) (HyperflexClusterBackupPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexClusterBackupPolicyExecute(r ApiPatchHyperflexClusterBackupPolicyRequest) (HyperflexClusterBackupPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterBackupPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexClusterBackupPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterBackupPolicies/{Moid}"
@@ -30354,8 +29496,7 @@ func (a *HyperflexApiService) PatchHyperflexClusterBackupPolicyExecute(r ApiPatc
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexClusterBackupPolicy == nil {
-		executionError.error = "hyperflexClusterBackupPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexClusterBackupPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -30382,22 +29523,19 @@ func (a *HyperflexApiService) PatchHyperflexClusterBackupPolicyExecute(r ApiPatc
 	localVarPostBody = r.hyperflexClusterBackupPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -30464,7 +29602,7 @@ func (a *HyperflexApiService) PatchHyperflexClusterBackupPolicyExecute(r ApiPatc
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexClusterBackupPolicyDeploymentRequest struct {
@@ -30484,7 +29622,7 @@ func (r ApiPatchHyperflexClusterBackupPolicyDeploymentRequest) IfMatch(ifMatch s
 	return r
 }
 
-func (r ApiPatchHyperflexClusterBackupPolicyDeploymentRequest) Execute() (HyperflexClusterBackupPolicyDeployment, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexClusterBackupPolicyDeploymentRequest) Execute() (HyperflexClusterBackupPolicyDeployment, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexClusterBackupPolicyDeploymentExecute(r)
 }
 
@@ -30506,21 +29644,19 @@ func (a *HyperflexApiService) PatchHyperflexClusterBackupPolicyDeployment(ctx _c
  * Execute executes the request
  * @return HyperflexClusterBackupPolicyDeployment
  */
-func (a *HyperflexApiService) PatchHyperflexClusterBackupPolicyDeploymentExecute(r ApiPatchHyperflexClusterBackupPolicyDeploymentRequest) (HyperflexClusterBackupPolicyDeployment, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexClusterBackupPolicyDeploymentExecute(r ApiPatchHyperflexClusterBackupPolicyDeploymentRequest) (HyperflexClusterBackupPolicyDeployment, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterBackupPolicyDeployment
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexClusterBackupPolicyDeployment")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterBackupPolicyDeployments/{Moid}"
@@ -30530,8 +29666,7 @@ func (a *HyperflexApiService) PatchHyperflexClusterBackupPolicyDeploymentExecute
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexClusterBackupPolicyDeployment == nil {
-		executionError.error = "hyperflexClusterBackupPolicyDeployment is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexClusterBackupPolicyDeployment is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -30558,22 +29693,19 @@ func (a *HyperflexApiService) PatchHyperflexClusterBackupPolicyDeploymentExecute
 	localVarPostBody = r.hyperflexClusterBackupPolicyDeployment
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -30640,7 +29772,7 @@ func (a *HyperflexApiService) PatchHyperflexClusterBackupPolicyDeploymentExecute
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexClusterNetworkPolicyRequest struct {
@@ -30660,7 +29792,7 @@ func (r ApiPatchHyperflexClusterNetworkPolicyRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiPatchHyperflexClusterNetworkPolicyRequest) Execute() (HyperflexClusterNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexClusterNetworkPolicyRequest) Execute() (HyperflexClusterNetworkPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexClusterNetworkPolicyExecute(r)
 }
 
@@ -30682,21 +29814,19 @@ func (a *HyperflexApiService) PatchHyperflexClusterNetworkPolicy(ctx _context.Co
  * Execute executes the request
  * @return HyperflexClusterNetworkPolicy
  */
-func (a *HyperflexApiService) PatchHyperflexClusterNetworkPolicyExecute(r ApiPatchHyperflexClusterNetworkPolicyRequest) (HyperflexClusterNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexClusterNetworkPolicyExecute(r ApiPatchHyperflexClusterNetworkPolicyRequest) (HyperflexClusterNetworkPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexClusterNetworkPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterNetworkPolicies/{Moid}"
@@ -30706,8 +29836,7 @@ func (a *HyperflexApiService) PatchHyperflexClusterNetworkPolicyExecute(r ApiPat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexClusterNetworkPolicy == nil {
-		executionError.error = "hyperflexClusterNetworkPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexClusterNetworkPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -30734,22 +29863,19 @@ func (a *HyperflexApiService) PatchHyperflexClusterNetworkPolicyExecute(r ApiPat
 	localVarPostBody = r.hyperflexClusterNetworkPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -30816,7 +29942,7 @@ func (a *HyperflexApiService) PatchHyperflexClusterNetworkPolicyExecute(r ApiPat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexClusterProfileRequest struct {
@@ -30836,7 +29962,7 @@ func (r ApiPatchHyperflexClusterProfileRequest) IfMatch(ifMatch string) ApiPatch
 	return r
 }
 
-func (r ApiPatchHyperflexClusterProfileRequest) Execute() (HyperflexClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexClusterProfileRequest) Execute() (HyperflexClusterProfile, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexClusterProfileExecute(r)
 }
 
@@ -30858,21 +29984,19 @@ func (a *HyperflexApiService) PatchHyperflexClusterProfile(ctx _context.Context,
  * Execute executes the request
  * @return HyperflexClusterProfile
  */
-func (a *HyperflexApiService) PatchHyperflexClusterProfileExecute(r ApiPatchHyperflexClusterProfileRequest) (HyperflexClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexClusterProfileExecute(r ApiPatchHyperflexClusterProfileRequest) (HyperflexClusterProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexClusterProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterProfiles/{Moid}"
@@ -30882,8 +30006,7 @@ func (a *HyperflexApiService) PatchHyperflexClusterProfileExecute(r ApiPatchHype
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexClusterProfile == nil {
-		executionError.error = "hyperflexClusterProfile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexClusterProfile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -30910,22 +30033,19 @@ func (a *HyperflexApiService) PatchHyperflexClusterProfileExecute(r ApiPatchHype
 	localVarPostBody = r.hyperflexClusterProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -30992,7 +30112,7 @@ func (a *HyperflexApiService) PatchHyperflexClusterProfileExecute(r ApiPatchHype
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexClusterReplicationNetworkPolicyRequest struct {
@@ -31012,7 +30132,7 @@ func (r ApiPatchHyperflexClusterReplicationNetworkPolicyRequest) IfMatch(ifMatch
 	return r
 }
 
-func (r ApiPatchHyperflexClusterReplicationNetworkPolicyRequest) Execute() (HyperflexClusterReplicationNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexClusterReplicationNetworkPolicyRequest) Execute() (HyperflexClusterReplicationNetworkPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexClusterReplicationNetworkPolicyExecute(r)
 }
 
@@ -31034,21 +30154,19 @@ func (a *HyperflexApiService) PatchHyperflexClusterReplicationNetworkPolicy(ctx 
  * Execute executes the request
  * @return HyperflexClusterReplicationNetworkPolicy
  */
-func (a *HyperflexApiService) PatchHyperflexClusterReplicationNetworkPolicyExecute(r ApiPatchHyperflexClusterReplicationNetworkPolicyRequest) (HyperflexClusterReplicationNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexClusterReplicationNetworkPolicyExecute(r ApiPatchHyperflexClusterReplicationNetworkPolicyRequest) (HyperflexClusterReplicationNetworkPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterReplicationNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexClusterReplicationNetworkPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterReplicationNetworkPolicies/{Moid}"
@@ -31058,8 +30176,7 @@ func (a *HyperflexApiService) PatchHyperflexClusterReplicationNetworkPolicyExecu
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexClusterReplicationNetworkPolicy == nil {
-		executionError.error = "hyperflexClusterReplicationNetworkPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexClusterReplicationNetworkPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -31086,22 +30203,19 @@ func (a *HyperflexApiService) PatchHyperflexClusterReplicationNetworkPolicyExecu
 	localVarPostBody = r.hyperflexClusterReplicationNetworkPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -31168,7 +30282,7 @@ func (a *HyperflexApiService) PatchHyperflexClusterReplicationNetworkPolicyExecu
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexClusterReplicationNetworkPolicyDeploymentRequest struct {
@@ -31188,7 +30302,7 @@ func (r ApiPatchHyperflexClusterReplicationNetworkPolicyDeploymentRequest) IfMat
 	return r
 }
 
-func (r ApiPatchHyperflexClusterReplicationNetworkPolicyDeploymentRequest) Execute() (HyperflexClusterReplicationNetworkPolicyDeployment, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexClusterReplicationNetworkPolicyDeploymentRequest) Execute() (HyperflexClusterReplicationNetworkPolicyDeployment, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexClusterReplicationNetworkPolicyDeploymentExecute(r)
 }
 
@@ -31210,21 +30324,19 @@ func (a *HyperflexApiService) PatchHyperflexClusterReplicationNetworkPolicyDeplo
  * Execute executes the request
  * @return HyperflexClusterReplicationNetworkPolicyDeployment
  */
-func (a *HyperflexApiService) PatchHyperflexClusterReplicationNetworkPolicyDeploymentExecute(r ApiPatchHyperflexClusterReplicationNetworkPolicyDeploymentRequest) (HyperflexClusterReplicationNetworkPolicyDeployment, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexClusterReplicationNetworkPolicyDeploymentExecute(r ApiPatchHyperflexClusterReplicationNetworkPolicyDeploymentRequest) (HyperflexClusterReplicationNetworkPolicyDeployment, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterReplicationNetworkPolicyDeployment
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexClusterReplicationNetworkPolicyDeployment")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterReplicationNetworkPolicyDeployments/{Moid}"
@@ -31234,8 +30346,7 @@ func (a *HyperflexApiService) PatchHyperflexClusterReplicationNetworkPolicyDeplo
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexClusterReplicationNetworkPolicyDeployment == nil {
-		executionError.error = "hyperflexClusterReplicationNetworkPolicyDeployment is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexClusterReplicationNetworkPolicyDeployment is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -31262,22 +30373,19 @@ func (a *HyperflexApiService) PatchHyperflexClusterReplicationNetworkPolicyDeplo
 	localVarPostBody = r.hyperflexClusterReplicationNetworkPolicyDeployment
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -31344,7 +30452,7 @@ func (a *HyperflexApiService) PatchHyperflexClusterReplicationNetworkPolicyDeplo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexClusterStoragePolicyRequest struct {
@@ -31364,7 +30472,7 @@ func (r ApiPatchHyperflexClusterStoragePolicyRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiPatchHyperflexClusterStoragePolicyRequest) Execute() (HyperflexClusterStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexClusterStoragePolicyRequest) Execute() (HyperflexClusterStoragePolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexClusterStoragePolicyExecute(r)
 }
 
@@ -31386,21 +30494,19 @@ func (a *HyperflexApiService) PatchHyperflexClusterStoragePolicy(ctx _context.Co
  * Execute executes the request
  * @return HyperflexClusterStoragePolicy
  */
-func (a *HyperflexApiService) PatchHyperflexClusterStoragePolicyExecute(r ApiPatchHyperflexClusterStoragePolicyRequest) (HyperflexClusterStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexClusterStoragePolicyExecute(r ApiPatchHyperflexClusterStoragePolicyRequest) (HyperflexClusterStoragePolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterStoragePolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexClusterStoragePolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterStoragePolicies/{Moid}"
@@ -31410,8 +30516,7 @@ func (a *HyperflexApiService) PatchHyperflexClusterStoragePolicyExecute(r ApiPat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexClusterStoragePolicy == nil {
-		executionError.error = "hyperflexClusterStoragePolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexClusterStoragePolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -31438,22 +30543,19 @@ func (a *HyperflexApiService) PatchHyperflexClusterStoragePolicyExecute(r ApiPat
 	localVarPostBody = r.hyperflexClusterStoragePolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -31520,7 +30622,7 @@ func (a *HyperflexApiService) PatchHyperflexClusterStoragePolicyExecute(r ApiPat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexExtFcStoragePolicyRequest struct {
@@ -31540,7 +30642,7 @@ func (r ApiPatchHyperflexExtFcStoragePolicyRequest) IfMatch(ifMatch string) ApiP
 	return r
 }
 
-func (r ApiPatchHyperflexExtFcStoragePolicyRequest) Execute() (HyperflexExtFcStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexExtFcStoragePolicyRequest) Execute() (HyperflexExtFcStoragePolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexExtFcStoragePolicyExecute(r)
 }
 
@@ -31562,21 +30664,19 @@ func (a *HyperflexApiService) PatchHyperflexExtFcStoragePolicy(ctx _context.Cont
  * Execute executes the request
  * @return HyperflexExtFcStoragePolicy
  */
-func (a *HyperflexApiService) PatchHyperflexExtFcStoragePolicyExecute(r ApiPatchHyperflexExtFcStoragePolicyRequest) (HyperflexExtFcStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexExtFcStoragePolicyExecute(r ApiPatchHyperflexExtFcStoragePolicyRequest) (HyperflexExtFcStoragePolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexExtFcStoragePolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexExtFcStoragePolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ExtFcStoragePolicies/{Moid}"
@@ -31586,8 +30686,7 @@ func (a *HyperflexApiService) PatchHyperflexExtFcStoragePolicyExecute(r ApiPatch
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexExtFcStoragePolicy == nil {
-		executionError.error = "hyperflexExtFcStoragePolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexExtFcStoragePolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -31614,22 +30713,19 @@ func (a *HyperflexApiService) PatchHyperflexExtFcStoragePolicyExecute(r ApiPatch
 	localVarPostBody = r.hyperflexExtFcStoragePolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -31696,7 +30792,7 @@ func (a *HyperflexApiService) PatchHyperflexExtFcStoragePolicyExecute(r ApiPatch
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexExtIscsiStoragePolicyRequest struct {
@@ -31716,7 +30812,7 @@ func (r ApiPatchHyperflexExtIscsiStoragePolicyRequest) IfMatch(ifMatch string) A
 	return r
 }
 
-func (r ApiPatchHyperflexExtIscsiStoragePolicyRequest) Execute() (HyperflexExtIscsiStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexExtIscsiStoragePolicyRequest) Execute() (HyperflexExtIscsiStoragePolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexExtIscsiStoragePolicyExecute(r)
 }
 
@@ -31738,21 +30834,19 @@ func (a *HyperflexApiService) PatchHyperflexExtIscsiStoragePolicy(ctx _context.C
  * Execute executes the request
  * @return HyperflexExtIscsiStoragePolicy
  */
-func (a *HyperflexApiService) PatchHyperflexExtIscsiStoragePolicyExecute(r ApiPatchHyperflexExtIscsiStoragePolicyRequest) (HyperflexExtIscsiStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexExtIscsiStoragePolicyExecute(r ApiPatchHyperflexExtIscsiStoragePolicyRequest) (HyperflexExtIscsiStoragePolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexExtIscsiStoragePolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexExtIscsiStoragePolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ExtIscsiStoragePolicies/{Moid}"
@@ -31762,8 +30856,7 @@ func (a *HyperflexApiService) PatchHyperflexExtIscsiStoragePolicyExecute(r ApiPa
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexExtIscsiStoragePolicy == nil {
-		executionError.error = "hyperflexExtIscsiStoragePolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexExtIscsiStoragePolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -31790,22 +30883,19 @@ func (a *HyperflexApiService) PatchHyperflexExtIscsiStoragePolicyExecute(r ApiPa
 	localVarPostBody = r.hyperflexExtIscsiStoragePolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -31872,7 +30962,7 @@ func (a *HyperflexApiService) PatchHyperflexExtIscsiStoragePolicyExecute(r ApiPa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexFeatureLimitExternalRequest struct {
@@ -31892,7 +30982,7 @@ func (r ApiPatchHyperflexFeatureLimitExternalRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiPatchHyperflexFeatureLimitExternalRequest) Execute() (HyperflexFeatureLimitExternal, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexFeatureLimitExternalRequest) Execute() (HyperflexFeatureLimitExternal, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexFeatureLimitExternalExecute(r)
 }
 
@@ -31914,21 +31004,19 @@ func (a *HyperflexApiService) PatchHyperflexFeatureLimitExternal(ctx _context.Co
  * Execute executes the request
  * @return HyperflexFeatureLimitExternal
  */
-func (a *HyperflexApiService) PatchHyperflexFeatureLimitExternalExecute(r ApiPatchHyperflexFeatureLimitExternalRequest) (HyperflexFeatureLimitExternal, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexFeatureLimitExternalExecute(r ApiPatchHyperflexFeatureLimitExternalRequest) (HyperflexFeatureLimitExternal, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexFeatureLimitExternal
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexFeatureLimitExternal")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/FeatureLimitExternals/{Moid}"
@@ -31938,8 +31026,7 @@ func (a *HyperflexApiService) PatchHyperflexFeatureLimitExternalExecute(r ApiPat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexFeatureLimitExternal == nil {
-		executionError.error = "hyperflexFeatureLimitExternal is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexFeatureLimitExternal is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -31966,22 +31053,19 @@ func (a *HyperflexApiService) PatchHyperflexFeatureLimitExternalExecute(r ApiPat
 	localVarPostBody = r.hyperflexFeatureLimitExternal
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -32048,7 +31132,7 @@ func (a *HyperflexApiService) PatchHyperflexFeatureLimitExternalExecute(r ApiPat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexFeatureLimitInternalRequest struct {
@@ -32068,7 +31152,7 @@ func (r ApiPatchHyperflexFeatureLimitInternalRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiPatchHyperflexFeatureLimitInternalRequest) Execute() (HyperflexFeatureLimitInternal, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexFeatureLimitInternalRequest) Execute() (HyperflexFeatureLimitInternal, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexFeatureLimitInternalExecute(r)
 }
 
@@ -32090,21 +31174,19 @@ func (a *HyperflexApiService) PatchHyperflexFeatureLimitInternal(ctx _context.Co
  * Execute executes the request
  * @return HyperflexFeatureLimitInternal
  */
-func (a *HyperflexApiService) PatchHyperflexFeatureLimitInternalExecute(r ApiPatchHyperflexFeatureLimitInternalRequest) (HyperflexFeatureLimitInternal, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexFeatureLimitInternalExecute(r ApiPatchHyperflexFeatureLimitInternalRequest) (HyperflexFeatureLimitInternal, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexFeatureLimitInternal
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexFeatureLimitInternal")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/FeatureLimitInternals/{Moid}"
@@ -32114,8 +31196,7 @@ func (a *HyperflexApiService) PatchHyperflexFeatureLimitInternalExecute(r ApiPat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexFeatureLimitInternal == nil {
-		executionError.error = "hyperflexFeatureLimitInternal is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexFeatureLimitInternal is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -32142,22 +31223,19 @@ func (a *HyperflexApiService) PatchHyperflexFeatureLimitInternalExecute(r ApiPat
 	localVarPostBody = r.hyperflexFeatureLimitInternal
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -32224,7 +31302,7 @@ func (a *HyperflexApiService) PatchHyperflexFeatureLimitInternalExecute(r ApiPat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexHealthCheckDefinitionRequest struct {
@@ -32244,7 +31322,7 @@ func (r ApiPatchHyperflexHealthCheckDefinitionRequest) IfMatch(ifMatch string) A
 	return r
 }
 
-func (r ApiPatchHyperflexHealthCheckDefinitionRequest) Execute() (HyperflexHealthCheckDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexHealthCheckDefinitionRequest) Execute() (HyperflexHealthCheckDefinition, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexHealthCheckDefinitionExecute(r)
 }
 
@@ -32266,21 +31344,19 @@ func (a *HyperflexApiService) PatchHyperflexHealthCheckDefinition(ctx _context.C
  * Execute executes the request
  * @return HyperflexHealthCheckDefinition
  */
-func (a *HyperflexApiService) PatchHyperflexHealthCheckDefinitionExecute(r ApiPatchHyperflexHealthCheckDefinitionRequest) (HyperflexHealthCheckDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexHealthCheckDefinitionExecute(r ApiPatchHyperflexHealthCheckDefinitionRequest) (HyperflexHealthCheckDefinition, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHealthCheckDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexHealthCheckDefinition")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HealthCheckDefinitions/{Moid}"
@@ -32290,8 +31366,7 @@ func (a *HyperflexApiService) PatchHyperflexHealthCheckDefinitionExecute(r ApiPa
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexHealthCheckDefinition == nil {
-		executionError.error = "hyperflexHealthCheckDefinition is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexHealthCheckDefinition is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -32318,22 +31393,19 @@ func (a *HyperflexApiService) PatchHyperflexHealthCheckDefinitionExecute(r ApiPa
 	localVarPostBody = r.hyperflexHealthCheckDefinition
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -32400,7 +31472,7 @@ func (a *HyperflexApiService) PatchHyperflexHealthCheckDefinitionExecute(r ApiPa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexHealthCheckPackageChecksumRequest struct {
@@ -32420,7 +31492,7 @@ func (r ApiPatchHyperflexHealthCheckPackageChecksumRequest) IfMatch(ifMatch stri
 	return r
 }
 
-func (r ApiPatchHyperflexHealthCheckPackageChecksumRequest) Execute() (HyperflexHealthCheckPackageChecksum, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexHealthCheckPackageChecksumRequest) Execute() (HyperflexHealthCheckPackageChecksum, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexHealthCheckPackageChecksumExecute(r)
 }
 
@@ -32442,21 +31514,19 @@ func (a *HyperflexApiService) PatchHyperflexHealthCheckPackageChecksum(ctx _cont
  * Execute executes the request
  * @return HyperflexHealthCheckPackageChecksum
  */
-func (a *HyperflexApiService) PatchHyperflexHealthCheckPackageChecksumExecute(r ApiPatchHyperflexHealthCheckPackageChecksumRequest) (HyperflexHealthCheckPackageChecksum, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexHealthCheckPackageChecksumExecute(r ApiPatchHyperflexHealthCheckPackageChecksumRequest) (HyperflexHealthCheckPackageChecksum, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHealthCheckPackageChecksum
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexHealthCheckPackageChecksum")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HealthCheckPackageChecksums/{Moid}"
@@ -32466,8 +31536,7 @@ func (a *HyperflexApiService) PatchHyperflexHealthCheckPackageChecksumExecute(r 
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexHealthCheckPackageChecksum == nil {
-		executionError.error = "hyperflexHealthCheckPackageChecksum is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexHealthCheckPackageChecksum is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -32494,22 +31563,19 @@ func (a *HyperflexApiService) PatchHyperflexHealthCheckPackageChecksumExecute(r 
 	localVarPostBody = r.hyperflexHealthCheckPackageChecksum
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -32576,7 +31642,7 @@ func (a *HyperflexApiService) PatchHyperflexHealthCheckPackageChecksumExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexHxapClusterRequest struct {
@@ -32596,7 +31662,7 @@ func (r ApiPatchHyperflexHxapClusterRequest) IfMatch(ifMatch string) ApiPatchHyp
 	return r
 }
 
-func (r ApiPatchHyperflexHxapClusterRequest) Execute() (HyperflexHxapCluster, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexHxapClusterRequest) Execute() (HyperflexHxapCluster, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexHxapClusterExecute(r)
 }
 
@@ -32618,21 +31684,19 @@ func (a *HyperflexApiService) PatchHyperflexHxapCluster(ctx _context.Context, mo
  * Execute executes the request
  * @return HyperflexHxapCluster
  */
-func (a *HyperflexApiService) PatchHyperflexHxapClusterExecute(r ApiPatchHyperflexHxapClusterRequest) (HyperflexHxapCluster, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexHxapClusterExecute(r ApiPatchHyperflexHxapClusterRequest) (HyperflexHxapCluster, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapCluster
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexHxapCluster")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapClusters/{Moid}"
@@ -32642,8 +31706,7 @@ func (a *HyperflexApiService) PatchHyperflexHxapClusterExecute(r ApiPatchHyperfl
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexHxapCluster == nil {
-		executionError.error = "hyperflexHxapCluster is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexHxapCluster is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -32670,22 +31733,19 @@ func (a *HyperflexApiService) PatchHyperflexHxapClusterExecute(r ApiPatchHyperfl
 	localVarPostBody = r.hyperflexHxapCluster
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -32752,7 +31812,7 @@ func (a *HyperflexApiService) PatchHyperflexHxapClusterExecute(r ApiPatchHyperfl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexHxapDatacenterRequest struct {
@@ -32772,7 +31832,7 @@ func (r ApiPatchHyperflexHxapDatacenterRequest) IfMatch(ifMatch string) ApiPatch
 	return r
 }
 
-func (r ApiPatchHyperflexHxapDatacenterRequest) Execute() (HyperflexHxapDatacenter, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexHxapDatacenterRequest) Execute() (HyperflexHxapDatacenter, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexHxapDatacenterExecute(r)
 }
 
@@ -32794,21 +31854,19 @@ func (a *HyperflexApiService) PatchHyperflexHxapDatacenter(ctx _context.Context,
  * Execute executes the request
  * @return HyperflexHxapDatacenter
  */
-func (a *HyperflexApiService) PatchHyperflexHxapDatacenterExecute(r ApiPatchHyperflexHxapDatacenterRequest) (HyperflexHxapDatacenter, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexHxapDatacenterExecute(r ApiPatchHyperflexHxapDatacenterRequest) (HyperflexHxapDatacenter, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapDatacenter
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexHxapDatacenter")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapDatacenters/{Moid}"
@@ -32818,8 +31876,7 @@ func (a *HyperflexApiService) PatchHyperflexHxapDatacenterExecute(r ApiPatchHype
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexHxapDatacenter == nil {
-		executionError.error = "hyperflexHxapDatacenter is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexHxapDatacenter is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -32846,22 +31903,19 @@ func (a *HyperflexApiService) PatchHyperflexHxapDatacenterExecute(r ApiPatchHype
 	localVarPostBody = r.hyperflexHxapDatacenter
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -32928,7 +31982,7 @@ func (a *HyperflexApiService) PatchHyperflexHxapDatacenterExecute(r ApiPatchHype
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexHxapEventRequest struct {
@@ -32948,7 +32002,7 @@ func (r ApiPatchHyperflexHxapEventRequest) IfMatch(ifMatch string) ApiPatchHyper
 	return r
 }
 
-func (r ApiPatchHyperflexHxapEventRequest) Execute() (HyperflexHxapEvent, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexHxapEventRequest) Execute() (HyperflexHxapEvent, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexHxapEventExecute(r)
 }
 
@@ -32970,21 +32024,19 @@ func (a *HyperflexApiService) PatchHyperflexHxapEvent(ctx _context.Context, moid
  * Execute executes the request
  * @return HyperflexHxapEvent
  */
-func (a *HyperflexApiService) PatchHyperflexHxapEventExecute(r ApiPatchHyperflexHxapEventRequest) (HyperflexHxapEvent, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexHxapEventExecute(r ApiPatchHyperflexHxapEventRequest) (HyperflexHxapEvent, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapEvent
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexHxapEvent")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapEvents/{Moid}"
@@ -32994,8 +32046,7 @@ func (a *HyperflexApiService) PatchHyperflexHxapEventExecute(r ApiPatchHyperflex
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexHxapEvent == nil {
-		executionError.error = "hyperflexHxapEvent is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexHxapEvent is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -33022,22 +32073,19 @@ func (a *HyperflexApiService) PatchHyperflexHxapEventExecute(r ApiPatchHyperflex
 	localVarPostBody = r.hyperflexHxapEvent
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -33104,7 +32152,7 @@ func (a *HyperflexApiService) PatchHyperflexHxapEventExecute(r ApiPatchHyperflex
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexHxapHostRequest struct {
@@ -33124,7 +32172,7 @@ func (r ApiPatchHyperflexHxapHostRequest) IfMatch(ifMatch string) ApiPatchHyperf
 	return r
 }
 
-func (r ApiPatchHyperflexHxapHostRequest) Execute() (HyperflexHxapHost, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexHxapHostRequest) Execute() (HyperflexHxapHost, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexHxapHostExecute(r)
 }
 
@@ -33146,21 +32194,19 @@ func (a *HyperflexApiService) PatchHyperflexHxapHost(ctx _context.Context, moid 
  * Execute executes the request
  * @return HyperflexHxapHost
  */
-func (a *HyperflexApiService) PatchHyperflexHxapHostExecute(r ApiPatchHyperflexHxapHostRequest) (HyperflexHxapHost, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexHxapHostExecute(r ApiPatchHyperflexHxapHostRequest) (HyperflexHxapHost, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapHost
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexHxapHost")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapHosts/{Moid}"
@@ -33170,8 +32216,7 @@ func (a *HyperflexApiService) PatchHyperflexHxapHostExecute(r ApiPatchHyperflexH
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexHxapHost == nil {
-		executionError.error = "hyperflexHxapHost is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexHxapHost is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -33198,22 +32243,19 @@ func (a *HyperflexApiService) PatchHyperflexHxapHostExecute(r ApiPatchHyperflexH
 	localVarPostBody = r.hyperflexHxapHost
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -33280,7 +32322,7 @@ func (a *HyperflexApiService) PatchHyperflexHxapHostExecute(r ApiPatchHyperflexH
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexHxapVirtualDiskRequest struct {
@@ -33300,7 +32342,7 @@ func (r ApiPatchHyperflexHxapVirtualDiskRequest) IfMatch(ifMatch string) ApiPatc
 	return r
 }
 
-func (r ApiPatchHyperflexHxapVirtualDiskRequest) Execute() (HyperflexHxapVirtualDisk, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexHxapVirtualDiskRequest) Execute() (HyperflexHxapVirtualDisk, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexHxapVirtualDiskExecute(r)
 }
 
@@ -33322,21 +32364,19 @@ func (a *HyperflexApiService) PatchHyperflexHxapVirtualDisk(ctx _context.Context
  * Execute executes the request
  * @return HyperflexHxapVirtualDisk
  */
-func (a *HyperflexApiService) PatchHyperflexHxapVirtualDiskExecute(r ApiPatchHyperflexHxapVirtualDiskRequest) (HyperflexHxapVirtualDisk, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexHxapVirtualDiskExecute(r ApiPatchHyperflexHxapVirtualDiskRequest) (HyperflexHxapVirtualDisk, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapVirtualDisk
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexHxapVirtualDisk")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapVirtualDisks/{Moid}"
@@ -33346,8 +32386,7 @@ func (a *HyperflexApiService) PatchHyperflexHxapVirtualDiskExecute(r ApiPatchHyp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexHxapVirtualDisk == nil {
-		executionError.error = "hyperflexHxapVirtualDisk is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexHxapVirtualDisk is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -33374,22 +32413,19 @@ func (a *HyperflexApiService) PatchHyperflexHxapVirtualDiskExecute(r ApiPatchHyp
 	localVarPostBody = r.hyperflexHxapVirtualDisk
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -33456,7 +32492,7 @@ func (a *HyperflexApiService) PatchHyperflexHxapVirtualDiskExecute(r ApiPatchHyp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexHxapVirtualMachineRequest struct {
@@ -33476,7 +32512,7 @@ func (r ApiPatchHyperflexHxapVirtualMachineRequest) IfMatch(ifMatch string) ApiP
 	return r
 }
 
-func (r ApiPatchHyperflexHxapVirtualMachineRequest) Execute() (HyperflexHxapVirtualMachine, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexHxapVirtualMachineRequest) Execute() (HyperflexHxapVirtualMachine, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexHxapVirtualMachineExecute(r)
 }
 
@@ -33498,21 +32534,19 @@ func (a *HyperflexApiService) PatchHyperflexHxapVirtualMachine(ctx _context.Cont
  * Execute executes the request
  * @return HyperflexHxapVirtualMachine
  */
-func (a *HyperflexApiService) PatchHyperflexHxapVirtualMachineExecute(r ApiPatchHyperflexHxapVirtualMachineRequest) (HyperflexHxapVirtualMachine, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexHxapVirtualMachineExecute(r ApiPatchHyperflexHxapVirtualMachineRequest) (HyperflexHxapVirtualMachine, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapVirtualMachine
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexHxapVirtualMachine")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapVirtualMachines/{Moid}"
@@ -33522,8 +32556,7 @@ func (a *HyperflexApiService) PatchHyperflexHxapVirtualMachineExecute(r ApiPatch
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexHxapVirtualMachine == nil {
-		executionError.error = "hyperflexHxapVirtualMachine is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexHxapVirtualMachine is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -33550,22 +32583,19 @@ func (a *HyperflexApiService) PatchHyperflexHxapVirtualMachineExecute(r ApiPatch
 	localVarPostBody = r.hyperflexHxapVirtualMachine
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -33632,7 +32662,7 @@ func (a *HyperflexApiService) PatchHyperflexHxapVirtualMachineExecute(r ApiPatch
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexHxdpVersionRequest struct {
@@ -33652,7 +32682,7 @@ func (r ApiPatchHyperflexHxdpVersionRequest) IfMatch(ifMatch string) ApiPatchHyp
 	return r
 }
 
-func (r ApiPatchHyperflexHxdpVersionRequest) Execute() (HyperflexHxdpVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexHxdpVersionRequest) Execute() (HyperflexHxdpVersion, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexHxdpVersionExecute(r)
 }
 
@@ -33674,21 +32704,19 @@ func (a *HyperflexApiService) PatchHyperflexHxdpVersion(ctx _context.Context, mo
  * Execute executes the request
  * @return HyperflexHxdpVersion
  */
-func (a *HyperflexApiService) PatchHyperflexHxdpVersionExecute(r ApiPatchHyperflexHxdpVersionRequest) (HyperflexHxdpVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexHxdpVersionExecute(r ApiPatchHyperflexHxdpVersionRequest) (HyperflexHxdpVersion, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxdpVersion
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexHxdpVersion")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxdpVersions/{Moid}"
@@ -33698,8 +32726,7 @@ func (a *HyperflexApiService) PatchHyperflexHxdpVersionExecute(r ApiPatchHyperfl
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexHxdpVersion == nil {
-		executionError.error = "hyperflexHxdpVersion is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexHxdpVersion is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -33726,22 +32753,19 @@ func (a *HyperflexApiService) PatchHyperflexHxdpVersionExecute(r ApiPatchHyperfl
 	localVarPostBody = r.hyperflexHxdpVersion
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -33808,7 +32832,7 @@ func (a *HyperflexApiService) PatchHyperflexHxdpVersionExecute(r ApiPatchHyperfl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexLocalCredentialPolicyRequest struct {
@@ -33828,7 +32852,7 @@ func (r ApiPatchHyperflexLocalCredentialPolicyRequest) IfMatch(ifMatch string) A
 	return r
 }
 
-func (r ApiPatchHyperflexLocalCredentialPolicyRequest) Execute() (HyperflexLocalCredentialPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexLocalCredentialPolicyRequest) Execute() (HyperflexLocalCredentialPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexLocalCredentialPolicyExecute(r)
 }
 
@@ -33850,21 +32874,19 @@ func (a *HyperflexApiService) PatchHyperflexLocalCredentialPolicy(ctx _context.C
  * Execute executes the request
  * @return HyperflexLocalCredentialPolicy
  */
-func (a *HyperflexApiService) PatchHyperflexLocalCredentialPolicyExecute(r ApiPatchHyperflexLocalCredentialPolicyRequest) (HyperflexLocalCredentialPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexLocalCredentialPolicyExecute(r ApiPatchHyperflexLocalCredentialPolicyRequest) (HyperflexLocalCredentialPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexLocalCredentialPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexLocalCredentialPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/LocalCredentialPolicies/{Moid}"
@@ -33874,8 +32896,7 @@ func (a *HyperflexApiService) PatchHyperflexLocalCredentialPolicyExecute(r ApiPa
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexLocalCredentialPolicy == nil {
-		executionError.error = "hyperflexLocalCredentialPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexLocalCredentialPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -33902,22 +32923,19 @@ func (a *HyperflexApiService) PatchHyperflexLocalCredentialPolicyExecute(r ApiPa
 	localVarPostBody = r.hyperflexLocalCredentialPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -33984,7 +33002,7 @@ func (a *HyperflexApiService) PatchHyperflexLocalCredentialPolicyExecute(r ApiPa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexNodeConfigPolicyRequest struct {
@@ -34004,7 +33022,7 @@ func (r ApiPatchHyperflexNodeConfigPolicyRequest) IfMatch(ifMatch string) ApiPat
 	return r
 }
 
-func (r ApiPatchHyperflexNodeConfigPolicyRequest) Execute() (HyperflexNodeConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexNodeConfigPolicyRequest) Execute() (HyperflexNodeConfigPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexNodeConfigPolicyExecute(r)
 }
 
@@ -34026,21 +33044,19 @@ func (a *HyperflexApiService) PatchHyperflexNodeConfigPolicy(ctx _context.Contex
  * Execute executes the request
  * @return HyperflexNodeConfigPolicy
  */
-func (a *HyperflexApiService) PatchHyperflexNodeConfigPolicyExecute(r ApiPatchHyperflexNodeConfigPolicyRequest) (HyperflexNodeConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexNodeConfigPolicyExecute(r ApiPatchHyperflexNodeConfigPolicyRequest) (HyperflexNodeConfigPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexNodeConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexNodeConfigPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/NodeConfigPolicies/{Moid}"
@@ -34050,8 +33066,7 @@ func (a *HyperflexApiService) PatchHyperflexNodeConfigPolicyExecute(r ApiPatchHy
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexNodeConfigPolicy == nil {
-		executionError.error = "hyperflexNodeConfigPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexNodeConfigPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -34078,22 +33093,19 @@ func (a *HyperflexApiService) PatchHyperflexNodeConfigPolicyExecute(r ApiPatchHy
 	localVarPostBody = r.hyperflexNodeConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -34160,7 +33172,7 @@ func (a *HyperflexApiService) PatchHyperflexNodeConfigPolicyExecute(r ApiPatchHy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexNodeProfileRequest struct {
@@ -34180,7 +33192,7 @@ func (r ApiPatchHyperflexNodeProfileRequest) IfMatch(ifMatch string) ApiPatchHyp
 	return r
 }
 
-func (r ApiPatchHyperflexNodeProfileRequest) Execute() (HyperflexNodeProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexNodeProfileRequest) Execute() (HyperflexNodeProfile, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexNodeProfileExecute(r)
 }
 
@@ -34202,21 +33214,19 @@ func (a *HyperflexApiService) PatchHyperflexNodeProfile(ctx _context.Context, mo
  * Execute executes the request
  * @return HyperflexNodeProfile
  */
-func (a *HyperflexApiService) PatchHyperflexNodeProfileExecute(r ApiPatchHyperflexNodeProfileRequest) (HyperflexNodeProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexNodeProfileExecute(r ApiPatchHyperflexNodeProfileRequest) (HyperflexNodeProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexNodeProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexNodeProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/NodeProfiles/{Moid}"
@@ -34226,8 +33236,7 @@ func (a *HyperflexApiService) PatchHyperflexNodeProfileExecute(r ApiPatchHyperfl
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexNodeProfile == nil {
-		executionError.error = "hyperflexNodeProfile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexNodeProfile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -34254,22 +33263,19 @@ func (a *HyperflexApiService) PatchHyperflexNodeProfileExecute(r ApiPatchHyperfl
 	localVarPostBody = r.hyperflexNodeProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -34336,7 +33342,7 @@ func (a *HyperflexApiService) PatchHyperflexNodeProfileExecute(r ApiPatchHyperfl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexProxySettingPolicyRequest struct {
@@ -34356,7 +33362,7 @@ func (r ApiPatchHyperflexProxySettingPolicyRequest) IfMatch(ifMatch string) ApiP
 	return r
 }
 
-func (r ApiPatchHyperflexProxySettingPolicyRequest) Execute() (HyperflexProxySettingPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexProxySettingPolicyRequest) Execute() (HyperflexProxySettingPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexProxySettingPolicyExecute(r)
 }
 
@@ -34378,21 +33384,19 @@ func (a *HyperflexApiService) PatchHyperflexProxySettingPolicy(ctx _context.Cont
  * Execute executes the request
  * @return HyperflexProxySettingPolicy
  */
-func (a *HyperflexApiService) PatchHyperflexProxySettingPolicyExecute(r ApiPatchHyperflexProxySettingPolicyRequest) (HyperflexProxySettingPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexProxySettingPolicyExecute(r ApiPatchHyperflexProxySettingPolicyRequest) (HyperflexProxySettingPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexProxySettingPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexProxySettingPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ProxySettingPolicies/{Moid}"
@@ -34402,8 +33406,7 @@ func (a *HyperflexApiService) PatchHyperflexProxySettingPolicyExecute(r ApiPatch
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexProxySettingPolicy == nil {
-		executionError.error = "hyperflexProxySettingPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexProxySettingPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -34430,22 +33433,19 @@ func (a *HyperflexApiService) PatchHyperflexProxySettingPolicyExecute(r ApiPatch
 	localVarPostBody = r.hyperflexProxySettingPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -34512,7 +33512,7 @@ func (a *HyperflexApiService) PatchHyperflexProxySettingPolicyExecute(r ApiPatch
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexServerFirmwareVersionRequest struct {
@@ -34532,7 +33532,7 @@ func (r ApiPatchHyperflexServerFirmwareVersionRequest) IfMatch(ifMatch string) A
 	return r
 }
 
-func (r ApiPatchHyperflexServerFirmwareVersionRequest) Execute() (HyperflexServerFirmwareVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexServerFirmwareVersionRequest) Execute() (HyperflexServerFirmwareVersion, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexServerFirmwareVersionExecute(r)
 }
 
@@ -34554,21 +33554,19 @@ func (a *HyperflexApiService) PatchHyperflexServerFirmwareVersion(ctx _context.C
  * Execute executes the request
  * @return HyperflexServerFirmwareVersion
  */
-func (a *HyperflexApiService) PatchHyperflexServerFirmwareVersionExecute(r ApiPatchHyperflexServerFirmwareVersionRequest) (HyperflexServerFirmwareVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexServerFirmwareVersionExecute(r ApiPatchHyperflexServerFirmwareVersionRequest) (HyperflexServerFirmwareVersion, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexServerFirmwareVersion
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexServerFirmwareVersion")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ServerFirmwareVersions/{Moid}"
@@ -34578,8 +33576,7 @@ func (a *HyperflexApiService) PatchHyperflexServerFirmwareVersionExecute(r ApiPa
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexServerFirmwareVersion == nil {
-		executionError.error = "hyperflexServerFirmwareVersion is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexServerFirmwareVersion is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -34606,22 +33603,19 @@ func (a *HyperflexApiService) PatchHyperflexServerFirmwareVersionExecute(r ApiPa
 	localVarPostBody = r.hyperflexServerFirmwareVersion
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -34688,7 +33682,7 @@ func (a *HyperflexApiService) PatchHyperflexServerFirmwareVersionExecute(r ApiPa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexServerFirmwareVersionEntryRequest struct {
@@ -34708,7 +33702,7 @@ func (r ApiPatchHyperflexServerFirmwareVersionEntryRequest) IfMatch(ifMatch stri
 	return r
 }
 
-func (r ApiPatchHyperflexServerFirmwareVersionEntryRequest) Execute() (HyperflexServerFirmwareVersionEntry, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexServerFirmwareVersionEntryRequest) Execute() (HyperflexServerFirmwareVersionEntry, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexServerFirmwareVersionEntryExecute(r)
 }
 
@@ -34730,21 +33724,19 @@ func (a *HyperflexApiService) PatchHyperflexServerFirmwareVersionEntry(ctx _cont
  * Execute executes the request
  * @return HyperflexServerFirmwareVersionEntry
  */
-func (a *HyperflexApiService) PatchHyperflexServerFirmwareVersionEntryExecute(r ApiPatchHyperflexServerFirmwareVersionEntryRequest) (HyperflexServerFirmwareVersionEntry, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexServerFirmwareVersionEntryExecute(r ApiPatchHyperflexServerFirmwareVersionEntryRequest) (HyperflexServerFirmwareVersionEntry, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexServerFirmwareVersionEntry
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexServerFirmwareVersionEntry")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ServerFirmwareVersionEntries/{Moid}"
@@ -34754,8 +33746,7 @@ func (a *HyperflexApiService) PatchHyperflexServerFirmwareVersionEntryExecute(r 
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexServerFirmwareVersionEntry == nil {
-		executionError.error = "hyperflexServerFirmwareVersionEntry is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexServerFirmwareVersionEntry is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -34782,22 +33773,19 @@ func (a *HyperflexApiService) PatchHyperflexServerFirmwareVersionEntryExecute(r 
 	localVarPostBody = r.hyperflexServerFirmwareVersionEntry
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -34864,7 +33852,7 @@ func (a *HyperflexApiService) PatchHyperflexServerFirmwareVersionEntryExecute(r 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexServerModelRequest struct {
@@ -34884,7 +33872,7 @@ func (r ApiPatchHyperflexServerModelRequest) IfMatch(ifMatch string) ApiPatchHyp
 	return r
 }
 
-func (r ApiPatchHyperflexServerModelRequest) Execute() (HyperflexServerModel, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexServerModelRequest) Execute() (HyperflexServerModel, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexServerModelExecute(r)
 }
 
@@ -34906,21 +33894,19 @@ func (a *HyperflexApiService) PatchHyperflexServerModel(ctx _context.Context, mo
  * Execute executes the request
  * @return HyperflexServerModel
  */
-func (a *HyperflexApiService) PatchHyperflexServerModelExecute(r ApiPatchHyperflexServerModelRequest) (HyperflexServerModel, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexServerModelExecute(r ApiPatchHyperflexServerModelRequest) (HyperflexServerModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexServerModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexServerModel")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ServerModels/{Moid}"
@@ -34930,8 +33916,7 @@ func (a *HyperflexApiService) PatchHyperflexServerModelExecute(r ApiPatchHyperfl
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexServerModel == nil {
-		executionError.error = "hyperflexServerModel is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexServerModel is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -34958,22 +33943,19 @@ func (a *HyperflexApiService) PatchHyperflexServerModelExecute(r ApiPatchHyperfl
 	localVarPostBody = r.hyperflexServerModel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -35040,7 +34022,7 @@ func (a *HyperflexApiService) PatchHyperflexServerModelExecute(r ApiPatchHyperfl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexSoftwareVersionPolicyRequest struct {
@@ -35060,7 +34042,7 @@ func (r ApiPatchHyperflexSoftwareVersionPolicyRequest) IfMatch(ifMatch string) A
 	return r
 }
 
-func (r ApiPatchHyperflexSoftwareVersionPolicyRequest) Execute() (HyperflexSoftwareVersionPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexSoftwareVersionPolicyRequest) Execute() (HyperflexSoftwareVersionPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexSoftwareVersionPolicyExecute(r)
 }
 
@@ -35082,21 +34064,19 @@ func (a *HyperflexApiService) PatchHyperflexSoftwareVersionPolicy(ctx _context.C
  * Execute executes the request
  * @return HyperflexSoftwareVersionPolicy
  */
-func (a *HyperflexApiService) PatchHyperflexSoftwareVersionPolicyExecute(r ApiPatchHyperflexSoftwareVersionPolicyRequest) (HyperflexSoftwareVersionPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexSoftwareVersionPolicyExecute(r ApiPatchHyperflexSoftwareVersionPolicyRequest) (HyperflexSoftwareVersionPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexSoftwareVersionPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexSoftwareVersionPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/SoftwareVersionPolicies/{Moid}"
@@ -35106,8 +34086,7 @@ func (a *HyperflexApiService) PatchHyperflexSoftwareVersionPolicyExecute(r ApiPa
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexSoftwareVersionPolicy == nil {
-		executionError.error = "hyperflexSoftwareVersionPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexSoftwareVersionPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -35134,22 +34113,19 @@ func (a *HyperflexApiService) PatchHyperflexSoftwareVersionPolicyExecute(r ApiPa
 	localVarPostBody = r.hyperflexSoftwareVersionPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -35216,7 +34192,7 @@ func (a *HyperflexApiService) PatchHyperflexSoftwareVersionPolicyExecute(r ApiPa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexSysConfigPolicyRequest struct {
@@ -35236,7 +34212,7 @@ func (r ApiPatchHyperflexSysConfigPolicyRequest) IfMatch(ifMatch string) ApiPatc
 	return r
 }
 
-func (r ApiPatchHyperflexSysConfigPolicyRequest) Execute() (HyperflexSysConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexSysConfigPolicyRequest) Execute() (HyperflexSysConfigPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexSysConfigPolicyExecute(r)
 }
 
@@ -35258,21 +34234,19 @@ func (a *HyperflexApiService) PatchHyperflexSysConfigPolicy(ctx _context.Context
  * Execute executes the request
  * @return HyperflexSysConfigPolicy
  */
-func (a *HyperflexApiService) PatchHyperflexSysConfigPolicyExecute(r ApiPatchHyperflexSysConfigPolicyRequest) (HyperflexSysConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexSysConfigPolicyExecute(r ApiPatchHyperflexSysConfigPolicyRequest) (HyperflexSysConfigPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexSysConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexSysConfigPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/SysConfigPolicies/{Moid}"
@@ -35282,8 +34256,7 @@ func (a *HyperflexApiService) PatchHyperflexSysConfigPolicyExecute(r ApiPatchHyp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexSysConfigPolicy == nil {
-		executionError.error = "hyperflexSysConfigPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexSysConfigPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -35310,22 +34283,19 @@ func (a *HyperflexApiService) PatchHyperflexSysConfigPolicyExecute(r ApiPatchHyp
 	localVarPostBody = r.hyperflexSysConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -35392,7 +34362,7 @@ func (a *HyperflexApiService) PatchHyperflexSysConfigPolicyExecute(r ApiPatchHyp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexUcsmConfigPolicyRequest struct {
@@ -35412,7 +34382,7 @@ func (r ApiPatchHyperflexUcsmConfigPolicyRequest) IfMatch(ifMatch string) ApiPat
 	return r
 }
 
-func (r ApiPatchHyperflexUcsmConfigPolicyRequest) Execute() (HyperflexUcsmConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexUcsmConfigPolicyRequest) Execute() (HyperflexUcsmConfigPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexUcsmConfigPolicyExecute(r)
 }
 
@@ -35434,21 +34404,19 @@ func (a *HyperflexApiService) PatchHyperflexUcsmConfigPolicy(ctx _context.Contex
  * Execute executes the request
  * @return HyperflexUcsmConfigPolicy
  */
-func (a *HyperflexApiService) PatchHyperflexUcsmConfigPolicyExecute(r ApiPatchHyperflexUcsmConfigPolicyRequest) (HyperflexUcsmConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexUcsmConfigPolicyExecute(r ApiPatchHyperflexUcsmConfigPolicyRequest) (HyperflexUcsmConfigPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexUcsmConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexUcsmConfigPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/UcsmConfigPolicies/{Moid}"
@@ -35458,8 +34426,7 @@ func (a *HyperflexApiService) PatchHyperflexUcsmConfigPolicyExecute(r ApiPatchHy
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexUcsmConfigPolicy == nil {
-		executionError.error = "hyperflexUcsmConfigPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexUcsmConfigPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -35486,22 +34453,19 @@ func (a *HyperflexApiService) PatchHyperflexUcsmConfigPolicyExecute(r ApiPatchHy
 	localVarPostBody = r.hyperflexUcsmConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -35568,7 +34532,7 @@ func (a *HyperflexApiService) PatchHyperflexUcsmConfigPolicyExecute(r ApiPatchHy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchHyperflexVcenterConfigPolicyRequest struct {
@@ -35588,7 +34552,7 @@ func (r ApiPatchHyperflexVcenterConfigPolicyRequest) IfMatch(ifMatch string) Api
 	return r
 }
 
-func (r ApiPatchHyperflexVcenterConfigPolicyRequest) Execute() (HyperflexVcenterConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchHyperflexVcenterConfigPolicyRequest) Execute() (HyperflexVcenterConfigPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchHyperflexVcenterConfigPolicyExecute(r)
 }
 
@@ -35610,21 +34574,19 @@ func (a *HyperflexApiService) PatchHyperflexVcenterConfigPolicy(ctx _context.Con
  * Execute executes the request
  * @return HyperflexVcenterConfigPolicy
  */
-func (a *HyperflexApiService) PatchHyperflexVcenterConfigPolicyExecute(r ApiPatchHyperflexVcenterConfigPolicyRequest) (HyperflexVcenterConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) PatchHyperflexVcenterConfigPolicyExecute(r ApiPatchHyperflexVcenterConfigPolicyRequest) (HyperflexVcenterConfigPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexVcenterConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.PatchHyperflexVcenterConfigPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/VcenterConfigPolicies/{Moid}"
@@ -35634,8 +34596,7 @@ func (a *HyperflexApiService) PatchHyperflexVcenterConfigPolicyExecute(r ApiPatc
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexVcenterConfigPolicy == nil {
-		executionError.error = "hyperflexVcenterConfigPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexVcenterConfigPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -35662,22 +34623,19 @@ func (a *HyperflexApiService) PatchHyperflexVcenterConfigPolicyExecute(r ApiPatc
 	localVarPostBody = r.hyperflexVcenterConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -35744,7 +34702,7 @@ func (a *HyperflexApiService) PatchHyperflexVcenterConfigPolicyExecute(r ApiPatc
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexAppCatalogRequest struct {
@@ -35764,7 +34722,7 @@ func (r ApiUpdateHyperflexAppCatalogRequest) IfMatch(ifMatch string) ApiUpdateHy
 	return r
 }
 
-func (r ApiUpdateHyperflexAppCatalogRequest) Execute() (HyperflexAppCatalog, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexAppCatalogRequest) Execute() (HyperflexAppCatalog, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexAppCatalogExecute(r)
 }
 
@@ -35786,21 +34744,19 @@ func (a *HyperflexApiService) UpdateHyperflexAppCatalog(ctx _context.Context, mo
  * Execute executes the request
  * @return HyperflexAppCatalog
  */
-func (a *HyperflexApiService) UpdateHyperflexAppCatalogExecute(r ApiUpdateHyperflexAppCatalogRequest) (HyperflexAppCatalog, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexAppCatalogExecute(r ApiUpdateHyperflexAppCatalogRequest) (HyperflexAppCatalog, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexAppCatalog
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexAppCatalog")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/AppCatalogs/{Moid}"
@@ -35810,8 +34766,7 @@ func (a *HyperflexApiService) UpdateHyperflexAppCatalogExecute(r ApiUpdateHyperf
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexAppCatalog == nil {
-		executionError.error = "hyperflexAppCatalog is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexAppCatalog is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -35838,22 +34793,19 @@ func (a *HyperflexApiService) UpdateHyperflexAppCatalogExecute(r ApiUpdateHyperf
 	localVarPostBody = r.hyperflexAppCatalog
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -35920,7 +34872,7 @@ func (a *HyperflexApiService) UpdateHyperflexAppCatalogExecute(r ApiUpdateHyperf
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexAutoSupportPolicyRequest struct {
@@ -35940,7 +34892,7 @@ func (r ApiUpdateHyperflexAutoSupportPolicyRequest) IfMatch(ifMatch string) ApiU
 	return r
 }
 
-func (r ApiUpdateHyperflexAutoSupportPolicyRequest) Execute() (HyperflexAutoSupportPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexAutoSupportPolicyRequest) Execute() (HyperflexAutoSupportPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexAutoSupportPolicyExecute(r)
 }
 
@@ -35962,21 +34914,19 @@ func (a *HyperflexApiService) UpdateHyperflexAutoSupportPolicy(ctx _context.Cont
  * Execute executes the request
  * @return HyperflexAutoSupportPolicy
  */
-func (a *HyperflexApiService) UpdateHyperflexAutoSupportPolicyExecute(r ApiUpdateHyperflexAutoSupportPolicyRequest) (HyperflexAutoSupportPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexAutoSupportPolicyExecute(r ApiUpdateHyperflexAutoSupportPolicyRequest) (HyperflexAutoSupportPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexAutoSupportPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexAutoSupportPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/AutoSupportPolicies/{Moid}"
@@ -35986,8 +34936,7 @@ func (a *HyperflexApiService) UpdateHyperflexAutoSupportPolicyExecute(r ApiUpdat
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexAutoSupportPolicy == nil {
-		executionError.error = "hyperflexAutoSupportPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexAutoSupportPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -36014,22 +34963,19 @@ func (a *HyperflexApiService) UpdateHyperflexAutoSupportPolicyExecute(r ApiUpdat
 	localVarPostBody = r.hyperflexAutoSupportPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -36096,7 +35042,7 @@ func (a *HyperflexApiService) UpdateHyperflexAutoSupportPolicyExecute(r ApiUpdat
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexCapabilityInfoRequest struct {
@@ -36116,7 +35062,7 @@ func (r ApiUpdateHyperflexCapabilityInfoRequest) IfMatch(ifMatch string) ApiUpda
 	return r
 }
 
-func (r ApiUpdateHyperflexCapabilityInfoRequest) Execute() (HyperflexCapabilityInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexCapabilityInfoRequest) Execute() (HyperflexCapabilityInfo, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexCapabilityInfoExecute(r)
 }
 
@@ -36138,21 +35084,19 @@ func (a *HyperflexApiService) UpdateHyperflexCapabilityInfo(ctx _context.Context
  * Execute executes the request
  * @return HyperflexCapabilityInfo
  */
-func (a *HyperflexApiService) UpdateHyperflexCapabilityInfoExecute(r ApiUpdateHyperflexCapabilityInfoRequest) (HyperflexCapabilityInfo, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexCapabilityInfoExecute(r ApiUpdateHyperflexCapabilityInfoRequest) (HyperflexCapabilityInfo, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexCapabilityInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexCapabilityInfo")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/CapabilityInfos/{Moid}"
@@ -36162,8 +35106,7 @@ func (a *HyperflexApiService) UpdateHyperflexCapabilityInfoExecute(r ApiUpdateHy
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexCapabilityInfo == nil {
-		executionError.error = "hyperflexCapabilityInfo is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexCapabilityInfo is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -36190,22 +35133,19 @@ func (a *HyperflexApiService) UpdateHyperflexCapabilityInfoExecute(r ApiUpdateHy
 	localVarPostBody = r.hyperflexCapabilityInfo
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -36272,7 +35212,7 @@ func (a *HyperflexApiService) UpdateHyperflexCapabilityInfoExecute(r ApiUpdateHy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexCiscoHypervisorManagerRequest struct {
@@ -36292,7 +35232,7 @@ func (r ApiUpdateHyperflexCiscoHypervisorManagerRequest) IfMatch(ifMatch string)
 	return r
 }
 
-func (r ApiUpdateHyperflexCiscoHypervisorManagerRequest) Execute() (HyperflexCiscoHypervisorManager, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexCiscoHypervisorManagerRequest) Execute() (HyperflexCiscoHypervisorManager, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexCiscoHypervisorManagerExecute(r)
 }
 
@@ -36314,21 +35254,19 @@ func (a *HyperflexApiService) UpdateHyperflexCiscoHypervisorManager(ctx _context
  * Execute executes the request
  * @return HyperflexCiscoHypervisorManager
  */
-func (a *HyperflexApiService) UpdateHyperflexCiscoHypervisorManagerExecute(r ApiUpdateHyperflexCiscoHypervisorManagerRequest) (HyperflexCiscoHypervisorManager, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexCiscoHypervisorManagerExecute(r ApiUpdateHyperflexCiscoHypervisorManagerRequest) (HyperflexCiscoHypervisorManager, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexCiscoHypervisorManager
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexCiscoHypervisorManager")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/CiscoHypervisorManagers/{Moid}"
@@ -36338,8 +35276,7 @@ func (a *HyperflexApiService) UpdateHyperflexCiscoHypervisorManagerExecute(r Api
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexCiscoHypervisorManager == nil {
-		executionError.error = "hyperflexCiscoHypervisorManager is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexCiscoHypervisorManager is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -36366,22 +35303,19 @@ func (a *HyperflexApiService) UpdateHyperflexCiscoHypervisorManagerExecute(r Api
 	localVarPostBody = r.hyperflexCiscoHypervisorManager
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -36448,7 +35382,7 @@ func (a *HyperflexApiService) UpdateHyperflexCiscoHypervisorManagerExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexClusterRequest struct {
@@ -36468,7 +35402,7 @@ func (r ApiUpdateHyperflexClusterRequest) IfMatch(ifMatch string) ApiUpdateHyper
 	return r
 }
 
-func (r ApiUpdateHyperflexClusterRequest) Execute() (HyperflexCluster, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexClusterRequest) Execute() (HyperflexCluster, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexClusterExecute(r)
 }
 
@@ -36490,21 +35424,19 @@ func (a *HyperflexApiService) UpdateHyperflexCluster(ctx _context.Context, moid 
  * Execute executes the request
  * @return HyperflexCluster
  */
-func (a *HyperflexApiService) UpdateHyperflexClusterExecute(r ApiUpdateHyperflexClusterRequest) (HyperflexCluster, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexClusterExecute(r ApiUpdateHyperflexClusterRequest) (HyperflexCluster, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexCluster
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexCluster")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/Clusters/{Moid}"
@@ -36514,8 +35446,7 @@ func (a *HyperflexApiService) UpdateHyperflexClusterExecute(r ApiUpdateHyperflex
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexCluster == nil {
-		executionError.error = "hyperflexCluster is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexCluster is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -36542,22 +35473,19 @@ func (a *HyperflexApiService) UpdateHyperflexClusterExecute(r ApiUpdateHyperflex
 	localVarPostBody = r.hyperflexCluster
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -36624,7 +35552,7 @@ func (a *HyperflexApiService) UpdateHyperflexClusterExecute(r ApiUpdateHyperflex
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexClusterBackupPolicyRequest struct {
@@ -36644,7 +35572,7 @@ func (r ApiUpdateHyperflexClusterBackupPolicyRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiUpdateHyperflexClusterBackupPolicyRequest) Execute() (HyperflexClusterBackupPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexClusterBackupPolicyRequest) Execute() (HyperflexClusterBackupPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexClusterBackupPolicyExecute(r)
 }
 
@@ -36666,21 +35594,19 @@ func (a *HyperflexApiService) UpdateHyperflexClusterBackupPolicy(ctx _context.Co
  * Execute executes the request
  * @return HyperflexClusterBackupPolicy
  */
-func (a *HyperflexApiService) UpdateHyperflexClusterBackupPolicyExecute(r ApiUpdateHyperflexClusterBackupPolicyRequest) (HyperflexClusterBackupPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexClusterBackupPolicyExecute(r ApiUpdateHyperflexClusterBackupPolicyRequest) (HyperflexClusterBackupPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterBackupPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexClusterBackupPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterBackupPolicies/{Moid}"
@@ -36690,8 +35616,7 @@ func (a *HyperflexApiService) UpdateHyperflexClusterBackupPolicyExecute(r ApiUpd
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexClusterBackupPolicy == nil {
-		executionError.error = "hyperflexClusterBackupPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexClusterBackupPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -36718,22 +35643,19 @@ func (a *HyperflexApiService) UpdateHyperflexClusterBackupPolicyExecute(r ApiUpd
 	localVarPostBody = r.hyperflexClusterBackupPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -36800,7 +35722,7 @@ func (a *HyperflexApiService) UpdateHyperflexClusterBackupPolicyExecute(r ApiUpd
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexClusterBackupPolicyDeploymentRequest struct {
@@ -36820,7 +35742,7 @@ func (r ApiUpdateHyperflexClusterBackupPolicyDeploymentRequest) IfMatch(ifMatch 
 	return r
 }
 
-func (r ApiUpdateHyperflexClusterBackupPolicyDeploymentRequest) Execute() (HyperflexClusterBackupPolicyDeployment, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexClusterBackupPolicyDeploymentRequest) Execute() (HyperflexClusterBackupPolicyDeployment, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexClusterBackupPolicyDeploymentExecute(r)
 }
 
@@ -36842,21 +35764,19 @@ func (a *HyperflexApiService) UpdateHyperflexClusterBackupPolicyDeployment(ctx _
  * Execute executes the request
  * @return HyperflexClusterBackupPolicyDeployment
  */
-func (a *HyperflexApiService) UpdateHyperflexClusterBackupPolicyDeploymentExecute(r ApiUpdateHyperflexClusterBackupPolicyDeploymentRequest) (HyperflexClusterBackupPolicyDeployment, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexClusterBackupPolicyDeploymentExecute(r ApiUpdateHyperflexClusterBackupPolicyDeploymentRequest) (HyperflexClusterBackupPolicyDeployment, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterBackupPolicyDeployment
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexClusterBackupPolicyDeployment")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterBackupPolicyDeployments/{Moid}"
@@ -36866,8 +35786,7 @@ func (a *HyperflexApiService) UpdateHyperflexClusterBackupPolicyDeploymentExecut
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexClusterBackupPolicyDeployment == nil {
-		executionError.error = "hyperflexClusterBackupPolicyDeployment is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexClusterBackupPolicyDeployment is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -36894,22 +35813,19 @@ func (a *HyperflexApiService) UpdateHyperflexClusterBackupPolicyDeploymentExecut
 	localVarPostBody = r.hyperflexClusterBackupPolicyDeployment
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -36976,7 +35892,7 @@ func (a *HyperflexApiService) UpdateHyperflexClusterBackupPolicyDeploymentExecut
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexClusterNetworkPolicyRequest struct {
@@ -36996,7 +35912,7 @@ func (r ApiUpdateHyperflexClusterNetworkPolicyRequest) IfMatch(ifMatch string) A
 	return r
 }
 
-func (r ApiUpdateHyperflexClusterNetworkPolicyRequest) Execute() (HyperflexClusterNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexClusterNetworkPolicyRequest) Execute() (HyperflexClusterNetworkPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexClusterNetworkPolicyExecute(r)
 }
 
@@ -37018,21 +35934,19 @@ func (a *HyperflexApiService) UpdateHyperflexClusterNetworkPolicy(ctx _context.C
  * Execute executes the request
  * @return HyperflexClusterNetworkPolicy
  */
-func (a *HyperflexApiService) UpdateHyperflexClusterNetworkPolicyExecute(r ApiUpdateHyperflexClusterNetworkPolicyRequest) (HyperflexClusterNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexClusterNetworkPolicyExecute(r ApiUpdateHyperflexClusterNetworkPolicyRequest) (HyperflexClusterNetworkPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexClusterNetworkPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterNetworkPolicies/{Moid}"
@@ -37042,8 +35956,7 @@ func (a *HyperflexApiService) UpdateHyperflexClusterNetworkPolicyExecute(r ApiUp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexClusterNetworkPolicy == nil {
-		executionError.error = "hyperflexClusterNetworkPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexClusterNetworkPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -37070,22 +35983,19 @@ func (a *HyperflexApiService) UpdateHyperflexClusterNetworkPolicyExecute(r ApiUp
 	localVarPostBody = r.hyperflexClusterNetworkPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -37152,7 +36062,7 @@ func (a *HyperflexApiService) UpdateHyperflexClusterNetworkPolicyExecute(r ApiUp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexClusterProfileRequest struct {
@@ -37172,7 +36082,7 @@ func (r ApiUpdateHyperflexClusterProfileRequest) IfMatch(ifMatch string) ApiUpda
 	return r
 }
 
-func (r ApiUpdateHyperflexClusterProfileRequest) Execute() (HyperflexClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexClusterProfileRequest) Execute() (HyperflexClusterProfile, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexClusterProfileExecute(r)
 }
 
@@ -37194,21 +36104,19 @@ func (a *HyperflexApiService) UpdateHyperflexClusterProfile(ctx _context.Context
  * Execute executes the request
  * @return HyperflexClusterProfile
  */
-func (a *HyperflexApiService) UpdateHyperflexClusterProfileExecute(r ApiUpdateHyperflexClusterProfileRequest) (HyperflexClusterProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexClusterProfileExecute(r ApiUpdateHyperflexClusterProfileRequest) (HyperflexClusterProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexClusterProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterProfiles/{Moid}"
@@ -37218,8 +36126,7 @@ func (a *HyperflexApiService) UpdateHyperflexClusterProfileExecute(r ApiUpdateHy
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexClusterProfile == nil {
-		executionError.error = "hyperflexClusterProfile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexClusterProfile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -37246,22 +36153,19 @@ func (a *HyperflexApiService) UpdateHyperflexClusterProfileExecute(r ApiUpdateHy
 	localVarPostBody = r.hyperflexClusterProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -37328,7 +36232,7 @@ func (a *HyperflexApiService) UpdateHyperflexClusterProfileExecute(r ApiUpdateHy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexClusterReplicationNetworkPolicyRequest struct {
@@ -37348,7 +36252,7 @@ func (r ApiUpdateHyperflexClusterReplicationNetworkPolicyRequest) IfMatch(ifMatc
 	return r
 }
 
-func (r ApiUpdateHyperflexClusterReplicationNetworkPolicyRequest) Execute() (HyperflexClusterReplicationNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexClusterReplicationNetworkPolicyRequest) Execute() (HyperflexClusterReplicationNetworkPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexClusterReplicationNetworkPolicyExecute(r)
 }
 
@@ -37370,21 +36274,19 @@ func (a *HyperflexApiService) UpdateHyperflexClusterReplicationNetworkPolicy(ctx
  * Execute executes the request
  * @return HyperflexClusterReplicationNetworkPolicy
  */
-func (a *HyperflexApiService) UpdateHyperflexClusterReplicationNetworkPolicyExecute(r ApiUpdateHyperflexClusterReplicationNetworkPolicyRequest) (HyperflexClusterReplicationNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexClusterReplicationNetworkPolicyExecute(r ApiUpdateHyperflexClusterReplicationNetworkPolicyRequest) (HyperflexClusterReplicationNetworkPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterReplicationNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexClusterReplicationNetworkPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterReplicationNetworkPolicies/{Moid}"
@@ -37394,8 +36296,7 @@ func (a *HyperflexApiService) UpdateHyperflexClusterReplicationNetworkPolicyExec
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexClusterReplicationNetworkPolicy == nil {
-		executionError.error = "hyperflexClusterReplicationNetworkPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexClusterReplicationNetworkPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -37422,22 +36323,19 @@ func (a *HyperflexApiService) UpdateHyperflexClusterReplicationNetworkPolicyExec
 	localVarPostBody = r.hyperflexClusterReplicationNetworkPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -37504,7 +36402,7 @@ func (a *HyperflexApiService) UpdateHyperflexClusterReplicationNetworkPolicyExec
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexClusterReplicationNetworkPolicyDeploymentRequest struct {
@@ -37524,7 +36422,7 @@ func (r ApiUpdateHyperflexClusterReplicationNetworkPolicyDeploymentRequest) IfMa
 	return r
 }
 
-func (r ApiUpdateHyperflexClusterReplicationNetworkPolicyDeploymentRequest) Execute() (HyperflexClusterReplicationNetworkPolicyDeployment, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexClusterReplicationNetworkPolicyDeploymentRequest) Execute() (HyperflexClusterReplicationNetworkPolicyDeployment, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexClusterReplicationNetworkPolicyDeploymentExecute(r)
 }
 
@@ -37546,21 +36444,19 @@ func (a *HyperflexApiService) UpdateHyperflexClusterReplicationNetworkPolicyDepl
  * Execute executes the request
  * @return HyperflexClusterReplicationNetworkPolicyDeployment
  */
-func (a *HyperflexApiService) UpdateHyperflexClusterReplicationNetworkPolicyDeploymentExecute(r ApiUpdateHyperflexClusterReplicationNetworkPolicyDeploymentRequest) (HyperflexClusterReplicationNetworkPolicyDeployment, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexClusterReplicationNetworkPolicyDeploymentExecute(r ApiUpdateHyperflexClusterReplicationNetworkPolicyDeploymentRequest) (HyperflexClusterReplicationNetworkPolicyDeployment, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterReplicationNetworkPolicyDeployment
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexClusterReplicationNetworkPolicyDeployment")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterReplicationNetworkPolicyDeployments/{Moid}"
@@ -37570,8 +36466,7 @@ func (a *HyperflexApiService) UpdateHyperflexClusterReplicationNetworkPolicyDepl
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexClusterReplicationNetworkPolicyDeployment == nil {
-		executionError.error = "hyperflexClusterReplicationNetworkPolicyDeployment is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexClusterReplicationNetworkPolicyDeployment is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -37598,22 +36493,19 @@ func (a *HyperflexApiService) UpdateHyperflexClusterReplicationNetworkPolicyDepl
 	localVarPostBody = r.hyperflexClusterReplicationNetworkPolicyDeployment
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -37680,7 +36572,7 @@ func (a *HyperflexApiService) UpdateHyperflexClusterReplicationNetworkPolicyDepl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexClusterStoragePolicyRequest struct {
@@ -37700,7 +36592,7 @@ func (r ApiUpdateHyperflexClusterStoragePolicyRequest) IfMatch(ifMatch string) A
 	return r
 }
 
-func (r ApiUpdateHyperflexClusterStoragePolicyRequest) Execute() (HyperflexClusterStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexClusterStoragePolicyRequest) Execute() (HyperflexClusterStoragePolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexClusterStoragePolicyExecute(r)
 }
 
@@ -37722,21 +36614,19 @@ func (a *HyperflexApiService) UpdateHyperflexClusterStoragePolicy(ctx _context.C
  * Execute executes the request
  * @return HyperflexClusterStoragePolicy
  */
-func (a *HyperflexApiService) UpdateHyperflexClusterStoragePolicyExecute(r ApiUpdateHyperflexClusterStoragePolicyRequest) (HyperflexClusterStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexClusterStoragePolicyExecute(r ApiUpdateHyperflexClusterStoragePolicyRequest) (HyperflexClusterStoragePolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexClusterStoragePolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexClusterStoragePolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ClusterStoragePolicies/{Moid}"
@@ -37746,8 +36636,7 @@ func (a *HyperflexApiService) UpdateHyperflexClusterStoragePolicyExecute(r ApiUp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexClusterStoragePolicy == nil {
-		executionError.error = "hyperflexClusterStoragePolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexClusterStoragePolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -37774,22 +36663,19 @@ func (a *HyperflexApiService) UpdateHyperflexClusterStoragePolicyExecute(r ApiUp
 	localVarPostBody = r.hyperflexClusterStoragePolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -37856,7 +36742,7 @@ func (a *HyperflexApiService) UpdateHyperflexClusterStoragePolicyExecute(r ApiUp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexExtFcStoragePolicyRequest struct {
@@ -37876,7 +36762,7 @@ func (r ApiUpdateHyperflexExtFcStoragePolicyRequest) IfMatch(ifMatch string) Api
 	return r
 }
 
-func (r ApiUpdateHyperflexExtFcStoragePolicyRequest) Execute() (HyperflexExtFcStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexExtFcStoragePolicyRequest) Execute() (HyperflexExtFcStoragePolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexExtFcStoragePolicyExecute(r)
 }
 
@@ -37898,21 +36784,19 @@ func (a *HyperflexApiService) UpdateHyperflexExtFcStoragePolicy(ctx _context.Con
  * Execute executes the request
  * @return HyperflexExtFcStoragePolicy
  */
-func (a *HyperflexApiService) UpdateHyperflexExtFcStoragePolicyExecute(r ApiUpdateHyperflexExtFcStoragePolicyRequest) (HyperflexExtFcStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexExtFcStoragePolicyExecute(r ApiUpdateHyperflexExtFcStoragePolicyRequest) (HyperflexExtFcStoragePolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexExtFcStoragePolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexExtFcStoragePolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ExtFcStoragePolicies/{Moid}"
@@ -37922,8 +36806,7 @@ func (a *HyperflexApiService) UpdateHyperflexExtFcStoragePolicyExecute(r ApiUpda
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexExtFcStoragePolicy == nil {
-		executionError.error = "hyperflexExtFcStoragePolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexExtFcStoragePolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -37950,22 +36833,19 @@ func (a *HyperflexApiService) UpdateHyperflexExtFcStoragePolicyExecute(r ApiUpda
 	localVarPostBody = r.hyperflexExtFcStoragePolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -38032,7 +36912,7 @@ func (a *HyperflexApiService) UpdateHyperflexExtFcStoragePolicyExecute(r ApiUpda
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexExtIscsiStoragePolicyRequest struct {
@@ -38052,7 +36932,7 @@ func (r ApiUpdateHyperflexExtIscsiStoragePolicyRequest) IfMatch(ifMatch string) 
 	return r
 }
 
-func (r ApiUpdateHyperflexExtIscsiStoragePolicyRequest) Execute() (HyperflexExtIscsiStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexExtIscsiStoragePolicyRequest) Execute() (HyperflexExtIscsiStoragePolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexExtIscsiStoragePolicyExecute(r)
 }
 
@@ -38074,21 +36954,19 @@ func (a *HyperflexApiService) UpdateHyperflexExtIscsiStoragePolicy(ctx _context.
  * Execute executes the request
  * @return HyperflexExtIscsiStoragePolicy
  */
-func (a *HyperflexApiService) UpdateHyperflexExtIscsiStoragePolicyExecute(r ApiUpdateHyperflexExtIscsiStoragePolicyRequest) (HyperflexExtIscsiStoragePolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexExtIscsiStoragePolicyExecute(r ApiUpdateHyperflexExtIscsiStoragePolicyRequest) (HyperflexExtIscsiStoragePolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexExtIscsiStoragePolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexExtIscsiStoragePolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ExtIscsiStoragePolicies/{Moid}"
@@ -38098,8 +36976,7 @@ func (a *HyperflexApiService) UpdateHyperflexExtIscsiStoragePolicyExecute(r ApiU
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexExtIscsiStoragePolicy == nil {
-		executionError.error = "hyperflexExtIscsiStoragePolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexExtIscsiStoragePolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -38126,22 +37003,19 @@ func (a *HyperflexApiService) UpdateHyperflexExtIscsiStoragePolicyExecute(r ApiU
 	localVarPostBody = r.hyperflexExtIscsiStoragePolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -38208,7 +37082,7 @@ func (a *HyperflexApiService) UpdateHyperflexExtIscsiStoragePolicyExecute(r ApiU
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexFeatureLimitExternalRequest struct {
@@ -38228,7 +37102,7 @@ func (r ApiUpdateHyperflexFeatureLimitExternalRequest) IfMatch(ifMatch string) A
 	return r
 }
 
-func (r ApiUpdateHyperflexFeatureLimitExternalRequest) Execute() (HyperflexFeatureLimitExternal, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexFeatureLimitExternalRequest) Execute() (HyperflexFeatureLimitExternal, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexFeatureLimitExternalExecute(r)
 }
 
@@ -38250,21 +37124,19 @@ func (a *HyperflexApiService) UpdateHyperflexFeatureLimitExternal(ctx _context.C
  * Execute executes the request
  * @return HyperflexFeatureLimitExternal
  */
-func (a *HyperflexApiService) UpdateHyperflexFeatureLimitExternalExecute(r ApiUpdateHyperflexFeatureLimitExternalRequest) (HyperflexFeatureLimitExternal, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexFeatureLimitExternalExecute(r ApiUpdateHyperflexFeatureLimitExternalRequest) (HyperflexFeatureLimitExternal, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexFeatureLimitExternal
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexFeatureLimitExternal")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/FeatureLimitExternals/{Moid}"
@@ -38274,8 +37146,7 @@ func (a *HyperflexApiService) UpdateHyperflexFeatureLimitExternalExecute(r ApiUp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexFeatureLimitExternal == nil {
-		executionError.error = "hyperflexFeatureLimitExternal is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexFeatureLimitExternal is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -38302,22 +37173,19 @@ func (a *HyperflexApiService) UpdateHyperflexFeatureLimitExternalExecute(r ApiUp
 	localVarPostBody = r.hyperflexFeatureLimitExternal
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -38384,7 +37252,7 @@ func (a *HyperflexApiService) UpdateHyperflexFeatureLimitExternalExecute(r ApiUp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexFeatureLimitInternalRequest struct {
@@ -38404,7 +37272,7 @@ func (r ApiUpdateHyperflexFeatureLimitInternalRequest) IfMatch(ifMatch string) A
 	return r
 }
 
-func (r ApiUpdateHyperflexFeatureLimitInternalRequest) Execute() (HyperflexFeatureLimitInternal, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexFeatureLimitInternalRequest) Execute() (HyperflexFeatureLimitInternal, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexFeatureLimitInternalExecute(r)
 }
 
@@ -38426,21 +37294,19 @@ func (a *HyperflexApiService) UpdateHyperflexFeatureLimitInternal(ctx _context.C
  * Execute executes the request
  * @return HyperflexFeatureLimitInternal
  */
-func (a *HyperflexApiService) UpdateHyperflexFeatureLimitInternalExecute(r ApiUpdateHyperflexFeatureLimitInternalRequest) (HyperflexFeatureLimitInternal, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexFeatureLimitInternalExecute(r ApiUpdateHyperflexFeatureLimitInternalRequest) (HyperflexFeatureLimitInternal, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexFeatureLimitInternal
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexFeatureLimitInternal")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/FeatureLimitInternals/{Moid}"
@@ -38450,8 +37316,7 @@ func (a *HyperflexApiService) UpdateHyperflexFeatureLimitInternalExecute(r ApiUp
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexFeatureLimitInternal == nil {
-		executionError.error = "hyperflexFeatureLimitInternal is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexFeatureLimitInternal is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -38478,22 +37343,19 @@ func (a *HyperflexApiService) UpdateHyperflexFeatureLimitInternalExecute(r ApiUp
 	localVarPostBody = r.hyperflexFeatureLimitInternal
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -38560,7 +37422,7 @@ func (a *HyperflexApiService) UpdateHyperflexFeatureLimitInternalExecute(r ApiUp
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexHealthCheckDefinitionRequest struct {
@@ -38580,7 +37442,7 @@ func (r ApiUpdateHyperflexHealthCheckDefinitionRequest) IfMatch(ifMatch string) 
 	return r
 }
 
-func (r ApiUpdateHyperflexHealthCheckDefinitionRequest) Execute() (HyperflexHealthCheckDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexHealthCheckDefinitionRequest) Execute() (HyperflexHealthCheckDefinition, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexHealthCheckDefinitionExecute(r)
 }
 
@@ -38602,21 +37464,19 @@ func (a *HyperflexApiService) UpdateHyperflexHealthCheckDefinition(ctx _context.
  * Execute executes the request
  * @return HyperflexHealthCheckDefinition
  */
-func (a *HyperflexApiService) UpdateHyperflexHealthCheckDefinitionExecute(r ApiUpdateHyperflexHealthCheckDefinitionRequest) (HyperflexHealthCheckDefinition, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexHealthCheckDefinitionExecute(r ApiUpdateHyperflexHealthCheckDefinitionRequest) (HyperflexHealthCheckDefinition, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHealthCheckDefinition
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexHealthCheckDefinition")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HealthCheckDefinitions/{Moid}"
@@ -38626,8 +37486,7 @@ func (a *HyperflexApiService) UpdateHyperflexHealthCheckDefinitionExecute(r ApiU
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexHealthCheckDefinition == nil {
-		executionError.error = "hyperflexHealthCheckDefinition is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexHealthCheckDefinition is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -38654,22 +37513,19 @@ func (a *HyperflexApiService) UpdateHyperflexHealthCheckDefinitionExecute(r ApiU
 	localVarPostBody = r.hyperflexHealthCheckDefinition
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -38736,7 +37592,7 @@ func (a *HyperflexApiService) UpdateHyperflexHealthCheckDefinitionExecute(r ApiU
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexHealthCheckPackageChecksumRequest struct {
@@ -38756,7 +37612,7 @@ func (r ApiUpdateHyperflexHealthCheckPackageChecksumRequest) IfMatch(ifMatch str
 	return r
 }
 
-func (r ApiUpdateHyperflexHealthCheckPackageChecksumRequest) Execute() (HyperflexHealthCheckPackageChecksum, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexHealthCheckPackageChecksumRequest) Execute() (HyperflexHealthCheckPackageChecksum, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexHealthCheckPackageChecksumExecute(r)
 }
 
@@ -38778,21 +37634,19 @@ func (a *HyperflexApiService) UpdateHyperflexHealthCheckPackageChecksum(ctx _con
  * Execute executes the request
  * @return HyperflexHealthCheckPackageChecksum
  */
-func (a *HyperflexApiService) UpdateHyperflexHealthCheckPackageChecksumExecute(r ApiUpdateHyperflexHealthCheckPackageChecksumRequest) (HyperflexHealthCheckPackageChecksum, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexHealthCheckPackageChecksumExecute(r ApiUpdateHyperflexHealthCheckPackageChecksumRequest) (HyperflexHealthCheckPackageChecksum, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHealthCheckPackageChecksum
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexHealthCheckPackageChecksum")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HealthCheckPackageChecksums/{Moid}"
@@ -38802,8 +37656,7 @@ func (a *HyperflexApiService) UpdateHyperflexHealthCheckPackageChecksumExecute(r
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexHealthCheckPackageChecksum == nil {
-		executionError.error = "hyperflexHealthCheckPackageChecksum is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexHealthCheckPackageChecksum is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -38830,22 +37683,19 @@ func (a *HyperflexApiService) UpdateHyperflexHealthCheckPackageChecksumExecute(r
 	localVarPostBody = r.hyperflexHealthCheckPackageChecksum
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -38912,7 +37762,7 @@ func (a *HyperflexApiService) UpdateHyperflexHealthCheckPackageChecksumExecute(r
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexHxapClusterRequest struct {
@@ -38932,7 +37782,7 @@ func (r ApiUpdateHyperflexHxapClusterRequest) IfMatch(ifMatch string) ApiUpdateH
 	return r
 }
 
-func (r ApiUpdateHyperflexHxapClusterRequest) Execute() (HyperflexHxapCluster, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexHxapClusterRequest) Execute() (HyperflexHxapCluster, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexHxapClusterExecute(r)
 }
 
@@ -38954,21 +37804,19 @@ func (a *HyperflexApiService) UpdateHyperflexHxapCluster(ctx _context.Context, m
  * Execute executes the request
  * @return HyperflexHxapCluster
  */
-func (a *HyperflexApiService) UpdateHyperflexHxapClusterExecute(r ApiUpdateHyperflexHxapClusterRequest) (HyperflexHxapCluster, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexHxapClusterExecute(r ApiUpdateHyperflexHxapClusterRequest) (HyperflexHxapCluster, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapCluster
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexHxapCluster")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapClusters/{Moid}"
@@ -38978,8 +37826,7 @@ func (a *HyperflexApiService) UpdateHyperflexHxapClusterExecute(r ApiUpdateHyper
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexHxapCluster == nil {
-		executionError.error = "hyperflexHxapCluster is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexHxapCluster is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -39006,22 +37853,19 @@ func (a *HyperflexApiService) UpdateHyperflexHxapClusterExecute(r ApiUpdateHyper
 	localVarPostBody = r.hyperflexHxapCluster
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -39088,7 +37932,7 @@ func (a *HyperflexApiService) UpdateHyperflexHxapClusterExecute(r ApiUpdateHyper
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexHxapDatacenterRequest struct {
@@ -39108,7 +37952,7 @@ func (r ApiUpdateHyperflexHxapDatacenterRequest) IfMatch(ifMatch string) ApiUpda
 	return r
 }
 
-func (r ApiUpdateHyperflexHxapDatacenterRequest) Execute() (HyperflexHxapDatacenter, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexHxapDatacenterRequest) Execute() (HyperflexHxapDatacenter, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexHxapDatacenterExecute(r)
 }
 
@@ -39130,21 +37974,19 @@ func (a *HyperflexApiService) UpdateHyperflexHxapDatacenter(ctx _context.Context
  * Execute executes the request
  * @return HyperflexHxapDatacenter
  */
-func (a *HyperflexApiService) UpdateHyperflexHxapDatacenterExecute(r ApiUpdateHyperflexHxapDatacenterRequest) (HyperflexHxapDatacenter, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexHxapDatacenterExecute(r ApiUpdateHyperflexHxapDatacenterRequest) (HyperflexHxapDatacenter, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapDatacenter
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexHxapDatacenter")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapDatacenters/{Moid}"
@@ -39154,8 +37996,7 @@ func (a *HyperflexApiService) UpdateHyperflexHxapDatacenterExecute(r ApiUpdateHy
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexHxapDatacenter == nil {
-		executionError.error = "hyperflexHxapDatacenter is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexHxapDatacenter is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -39182,22 +38023,19 @@ func (a *HyperflexApiService) UpdateHyperflexHxapDatacenterExecute(r ApiUpdateHy
 	localVarPostBody = r.hyperflexHxapDatacenter
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -39264,7 +38102,7 @@ func (a *HyperflexApiService) UpdateHyperflexHxapDatacenterExecute(r ApiUpdateHy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexHxapEventRequest struct {
@@ -39284,7 +38122,7 @@ func (r ApiUpdateHyperflexHxapEventRequest) IfMatch(ifMatch string) ApiUpdateHyp
 	return r
 }
 
-func (r ApiUpdateHyperflexHxapEventRequest) Execute() (HyperflexHxapEvent, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexHxapEventRequest) Execute() (HyperflexHxapEvent, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexHxapEventExecute(r)
 }
 
@@ -39306,21 +38144,19 @@ func (a *HyperflexApiService) UpdateHyperflexHxapEvent(ctx _context.Context, moi
  * Execute executes the request
  * @return HyperflexHxapEvent
  */
-func (a *HyperflexApiService) UpdateHyperflexHxapEventExecute(r ApiUpdateHyperflexHxapEventRequest) (HyperflexHxapEvent, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexHxapEventExecute(r ApiUpdateHyperflexHxapEventRequest) (HyperflexHxapEvent, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapEvent
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexHxapEvent")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapEvents/{Moid}"
@@ -39330,8 +38166,7 @@ func (a *HyperflexApiService) UpdateHyperflexHxapEventExecute(r ApiUpdateHyperfl
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexHxapEvent == nil {
-		executionError.error = "hyperflexHxapEvent is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexHxapEvent is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -39358,22 +38193,19 @@ func (a *HyperflexApiService) UpdateHyperflexHxapEventExecute(r ApiUpdateHyperfl
 	localVarPostBody = r.hyperflexHxapEvent
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -39440,7 +38272,7 @@ func (a *HyperflexApiService) UpdateHyperflexHxapEventExecute(r ApiUpdateHyperfl
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexHxapHostRequest struct {
@@ -39460,7 +38292,7 @@ func (r ApiUpdateHyperflexHxapHostRequest) IfMatch(ifMatch string) ApiUpdateHype
 	return r
 }
 
-func (r ApiUpdateHyperflexHxapHostRequest) Execute() (HyperflexHxapHost, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexHxapHostRequest) Execute() (HyperflexHxapHost, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexHxapHostExecute(r)
 }
 
@@ -39482,21 +38314,19 @@ func (a *HyperflexApiService) UpdateHyperflexHxapHost(ctx _context.Context, moid
  * Execute executes the request
  * @return HyperflexHxapHost
  */
-func (a *HyperflexApiService) UpdateHyperflexHxapHostExecute(r ApiUpdateHyperflexHxapHostRequest) (HyperflexHxapHost, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexHxapHostExecute(r ApiUpdateHyperflexHxapHostRequest) (HyperflexHxapHost, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapHost
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexHxapHost")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapHosts/{Moid}"
@@ -39506,8 +38336,7 @@ func (a *HyperflexApiService) UpdateHyperflexHxapHostExecute(r ApiUpdateHyperfle
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexHxapHost == nil {
-		executionError.error = "hyperflexHxapHost is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexHxapHost is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -39534,22 +38363,19 @@ func (a *HyperflexApiService) UpdateHyperflexHxapHostExecute(r ApiUpdateHyperfle
 	localVarPostBody = r.hyperflexHxapHost
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -39616,7 +38442,7 @@ func (a *HyperflexApiService) UpdateHyperflexHxapHostExecute(r ApiUpdateHyperfle
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexHxapVirtualDiskRequest struct {
@@ -39636,7 +38462,7 @@ func (r ApiUpdateHyperflexHxapVirtualDiskRequest) IfMatch(ifMatch string) ApiUpd
 	return r
 }
 
-func (r ApiUpdateHyperflexHxapVirtualDiskRequest) Execute() (HyperflexHxapVirtualDisk, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexHxapVirtualDiskRequest) Execute() (HyperflexHxapVirtualDisk, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexHxapVirtualDiskExecute(r)
 }
 
@@ -39658,21 +38484,19 @@ func (a *HyperflexApiService) UpdateHyperflexHxapVirtualDisk(ctx _context.Contex
  * Execute executes the request
  * @return HyperflexHxapVirtualDisk
  */
-func (a *HyperflexApiService) UpdateHyperflexHxapVirtualDiskExecute(r ApiUpdateHyperflexHxapVirtualDiskRequest) (HyperflexHxapVirtualDisk, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexHxapVirtualDiskExecute(r ApiUpdateHyperflexHxapVirtualDiskRequest) (HyperflexHxapVirtualDisk, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapVirtualDisk
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexHxapVirtualDisk")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapVirtualDisks/{Moid}"
@@ -39682,8 +38506,7 @@ func (a *HyperflexApiService) UpdateHyperflexHxapVirtualDiskExecute(r ApiUpdateH
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexHxapVirtualDisk == nil {
-		executionError.error = "hyperflexHxapVirtualDisk is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexHxapVirtualDisk is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -39710,22 +38533,19 @@ func (a *HyperflexApiService) UpdateHyperflexHxapVirtualDiskExecute(r ApiUpdateH
 	localVarPostBody = r.hyperflexHxapVirtualDisk
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -39792,7 +38612,7 @@ func (a *HyperflexApiService) UpdateHyperflexHxapVirtualDiskExecute(r ApiUpdateH
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexHxapVirtualMachineRequest struct {
@@ -39812,7 +38632,7 @@ func (r ApiUpdateHyperflexHxapVirtualMachineRequest) IfMatch(ifMatch string) Api
 	return r
 }
 
-func (r ApiUpdateHyperflexHxapVirtualMachineRequest) Execute() (HyperflexHxapVirtualMachine, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexHxapVirtualMachineRequest) Execute() (HyperflexHxapVirtualMachine, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexHxapVirtualMachineExecute(r)
 }
 
@@ -39834,21 +38654,19 @@ func (a *HyperflexApiService) UpdateHyperflexHxapVirtualMachine(ctx _context.Con
  * Execute executes the request
  * @return HyperflexHxapVirtualMachine
  */
-func (a *HyperflexApiService) UpdateHyperflexHxapVirtualMachineExecute(r ApiUpdateHyperflexHxapVirtualMachineRequest) (HyperflexHxapVirtualMachine, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexHxapVirtualMachineExecute(r ApiUpdateHyperflexHxapVirtualMachineRequest) (HyperflexHxapVirtualMachine, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxapVirtualMachine
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexHxapVirtualMachine")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxapVirtualMachines/{Moid}"
@@ -39858,8 +38676,7 @@ func (a *HyperflexApiService) UpdateHyperflexHxapVirtualMachineExecute(r ApiUpda
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexHxapVirtualMachine == nil {
-		executionError.error = "hyperflexHxapVirtualMachine is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexHxapVirtualMachine is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -39886,22 +38703,19 @@ func (a *HyperflexApiService) UpdateHyperflexHxapVirtualMachineExecute(r ApiUpda
 	localVarPostBody = r.hyperflexHxapVirtualMachine
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -39968,7 +38782,7 @@ func (a *HyperflexApiService) UpdateHyperflexHxapVirtualMachineExecute(r ApiUpda
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexHxdpVersionRequest struct {
@@ -39988,7 +38802,7 @@ func (r ApiUpdateHyperflexHxdpVersionRequest) IfMatch(ifMatch string) ApiUpdateH
 	return r
 }
 
-func (r ApiUpdateHyperflexHxdpVersionRequest) Execute() (HyperflexHxdpVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexHxdpVersionRequest) Execute() (HyperflexHxdpVersion, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexHxdpVersionExecute(r)
 }
 
@@ -40010,21 +38824,19 @@ func (a *HyperflexApiService) UpdateHyperflexHxdpVersion(ctx _context.Context, m
  * Execute executes the request
  * @return HyperflexHxdpVersion
  */
-func (a *HyperflexApiService) UpdateHyperflexHxdpVersionExecute(r ApiUpdateHyperflexHxdpVersionRequest) (HyperflexHxdpVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexHxdpVersionExecute(r ApiUpdateHyperflexHxdpVersionRequest) (HyperflexHxdpVersion, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexHxdpVersion
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexHxdpVersion")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/HxdpVersions/{Moid}"
@@ -40034,8 +38846,7 @@ func (a *HyperflexApiService) UpdateHyperflexHxdpVersionExecute(r ApiUpdateHyper
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexHxdpVersion == nil {
-		executionError.error = "hyperflexHxdpVersion is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexHxdpVersion is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -40062,22 +38873,19 @@ func (a *HyperflexApiService) UpdateHyperflexHxdpVersionExecute(r ApiUpdateHyper
 	localVarPostBody = r.hyperflexHxdpVersion
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -40144,7 +38952,7 @@ func (a *HyperflexApiService) UpdateHyperflexHxdpVersionExecute(r ApiUpdateHyper
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexLocalCredentialPolicyRequest struct {
@@ -40164,7 +38972,7 @@ func (r ApiUpdateHyperflexLocalCredentialPolicyRequest) IfMatch(ifMatch string) 
 	return r
 }
 
-func (r ApiUpdateHyperflexLocalCredentialPolicyRequest) Execute() (HyperflexLocalCredentialPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexLocalCredentialPolicyRequest) Execute() (HyperflexLocalCredentialPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexLocalCredentialPolicyExecute(r)
 }
 
@@ -40186,21 +38994,19 @@ func (a *HyperflexApiService) UpdateHyperflexLocalCredentialPolicy(ctx _context.
  * Execute executes the request
  * @return HyperflexLocalCredentialPolicy
  */
-func (a *HyperflexApiService) UpdateHyperflexLocalCredentialPolicyExecute(r ApiUpdateHyperflexLocalCredentialPolicyRequest) (HyperflexLocalCredentialPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexLocalCredentialPolicyExecute(r ApiUpdateHyperflexLocalCredentialPolicyRequest) (HyperflexLocalCredentialPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexLocalCredentialPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexLocalCredentialPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/LocalCredentialPolicies/{Moid}"
@@ -40210,8 +39016,7 @@ func (a *HyperflexApiService) UpdateHyperflexLocalCredentialPolicyExecute(r ApiU
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexLocalCredentialPolicy == nil {
-		executionError.error = "hyperflexLocalCredentialPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexLocalCredentialPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -40238,22 +39043,19 @@ func (a *HyperflexApiService) UpdateHyperflexLocalCredentialPolicyExecute(r ApiU
 	localVarPostBody = r.hyperflexLocalCredentialPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -40320,7 +39122,7 @@ func (a *HyperflexApiService) UpdateHyperflexLocalCredentialPolicyExecute(r ApiU
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexNodeConfigPolicyRequest struct {
@@ -40340,7 +39142,7 @@ func (r ApiUpdateHyperflexNodeConfigPolicyRequest) IfMatch(ifMatch string) ApiUp
 	return r
 }
 
-func (r ApiUpdateHyperflexNodeConfigPolicyRequest) Execute() (HyperflexNodeConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexNodeConfigPolicyRequest) Execute() (HyperflexNodeConfigPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexNodeConfigPolicyExecute(r)
 }
 
@@ -40362,21 +39164,19 @@ func (a *HyperflexApiService) UpdateHyperflexNodeConfigPolicy(ctx _context.Conte
  * Execute executes the request
  * @return HyperflexNodeConfigPolicy
  */
-func (a *HyperflexApiService) UpdateHyperflexNodeConfigPolicyExecute(r ApiUpdateHyperflexNodeConfigPolicyRequest) (HyperflexNodeConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexNodeConfigPolicyExecute(r ApiUpdateHyperflexNodeConfigPolicyRequest) (HyperflexNodeConfigPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexNodeConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexNodeConfigPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/NodeConfigPolicies/{Moid}"
@@ -40386,8 +39186,7 @@ func (a *HyperflexApiService) UpdateHyperflexNodeConfigPolicyExecute(r ApiUpdate
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexNodeConfigPolicy == nil {
-		executionError.error = "hyperflexNodeConfigPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexNodeConfigPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -40414,22 +39213,19 @@ func (a *HyperflexApiService) UpdateHyperflexNodeConfigPolicyExecute(r ApiUpdate
 	localVarPostBody = r.hyperflexNodeConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -40496,7 +39292,7 @@ func (a *HyperflexApiService) UpdateHyperflexNodeConfigPolicyExecute(r ApiUpdate
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexNodeProfileRequest struct {
@@ -40516,7 +39312,7 @@ func (r ApiUpdateHyperflexNodeProfileRequest) IfMatch(ifMatch string) ApiUpdateH
 	return r
 }
 
-func (r ApiUpdateHyperflexNodeProfileRequest) Execute() (HyperflexNodeProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexNodeProfileRequest) Execute() (HyperflexNodeProfile, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexNodeProfileExecute(r)
 }
 
@@ -40538,21 +39334,19 @@ func (a *HyperflexApiService) UpdateHyperflexNodeProfile(ctx _context.Context, m
  * Execute executes the request
  * @return HyperflexNodeProfile
  */
-func (a *HyperflexApiService) UpdateHyperflexNodeProfileExecute(r ApiUpdateHyperflexNodeProfileRequest) (HyperflexNodeProfile, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexNodeProfileExecute(r ApiUpdateHyperflexNodeProfileRequest) (HyperflexNodeProfile, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexNodeProfile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexNodeProfile")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/NodeProfiles/{Moid}"
@@ -40562,8 +39356,7 @@ func (a *HyperflexApiService) UpdateHyperflexNodeProfileExecute(r ApiUpdateHyper
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexNodeProfile == nil {
-		executionError.error = "hyperflexNodeProfile is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexNodeProfile is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -40590,22 +39383,19 @@ func (a *HyperflexApiService) UpdateHyperflexNodeProfileExecute(r ApiUpdateHyper
 	localVarPostBody = r.hyperflexNodeProfile
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -40672,7 +39462,7 @@ func (a *HyperflexApiService) UpdateHyperflexNodeProfileExecute(r ApiUpdateHyper
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexProxySettingPolicyRequest struct {
@@ -40692,7 +39482,7 @@ func (r ApiUpdateHyperflexProxySettingPolicyRequest) IfMatch(ifMatch string) Api
 	return r
 }
 
-func (r ApiUpdateHyperflexProxySettingPolicyRequest) Execute() (HyperflexProxySettingPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexProxySettingPolicyRequest) Execute() (HyperflexProxySettingPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexProxySettingPolicyExecute(r)
 }
 
@@ -40714,21 +39504,19 @@ func (a *HyperflexApiService) UpdateHyperflexProxySettingPolicy(ctx _context.Con
  * Execute executes the request
  * @return HyperflexProxySettingPolicy
  */
-func (a *HyperflexApiService) UpdateHyperflexProxySettingPolicyExecute(r ApiUpdateHyperflexProxySettingPolicyRequest) (HyperflexProxySettingPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexProxySettingPolicyExecute(r ApiUpdateHyperflexProxySettingPolicyRequest) (HyperflexProxySettingPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexProxySettingPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexProxySettingPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ProxySettingPolicies/{Moid}"
@@ -40738,8 +39526,7 @@ func (a *HyperflexApiService) UpdateHyperflexProxySettingPolicyExecute(r ApiUpda
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexProxySettingPolicy == nil {
-		executionError.error = "hyperflexProxySettingPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexProxySettingPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -40766,22 +39553,19 @@ func (a *HyperflexApiService) UpdateHyperflexProxySettingPolicyExecute(r ApiUpda
 	localVarPostBody = r.hyperflexProxySettingPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -40848,7 +39632,7 @@ func (a *HyperflexApiService) UpdateHyperflexProxySettingPolicyExecute(r ApiUpda
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexServerFirmwareVersionRequest struct {
@@ -40868,7 +39652,7 @@ func (r ApiUpdateHyperflexServerFirmwareVersionRequest) IfMatch(ifMatch string) 
 	return r
 }
 
-func (r ApiUpdateHyperflexServerFirmwareVersionRequest) Execute() (HyperflexServerFirmwareVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexServerFirmwareVersionRequest) Execute() (HyperflexServerFirmwareVersion, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexServerFirmwareVersionExecute(r)
 }
 
@@ -40890,21 +39674,19 @@ func (a *HyperflexApiService) UpdateHyperflexServerFirmwareVersion(ctx _context.
  * Execute executes the request
  * @return HyperflexServerFirmwareVersion
  */
-func (a *HyperflexApiService) UpdateHyperflexServerFirmwareVersionExecute(r ApiUpdateHyperflexServerFirmwareVersionRequest) (HyperflexServerFirmwareVersion, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexServerFirmwareVersionExecute(r ApiUpdateHyperflexServerFirmwareVersionRequest) (HyperflexServerFirmwareVersion, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexServerFirmwareVersion
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexServerFirmwareVersion")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ServerFirmwareVersions/{Moid}"
@@ -40914,8 +39696,7 @@ func (a *HyperflexApiService) UpdateHyperflexServerFirmwareVersionExecute(r ApiU
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexServerFirmwareVersion == nil {
-		executionError.error = "hyperflexServerFirmwareVersion is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexServerFirmwareVersion is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -40942,22 +39723,19 @@ func (a *HyperflexApiService) UpdateHyperflexServerFirmwareVersionExecute(r ApiU
 	localVarPostBody = r.hyperflexServerFirmwareVersion
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -41024,7 +39802,7 @@ func (a *HyperflexApiService) UpdateHyperflexServerFirmwareVersionExecute(r ApiU
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexServerFirmwareVersionEntryRequest struct {
@@ -41044,7 +39822,7 @@ func (r ApiUpdateHyperflexServerFirmwareVersionEntryRequest) IfMatch(ifMatch str
 	return r
 }
 
-func (r ApiUpdateHyperflexServerFirmwareVersionEntryRequest) Execute() (HyperflexServerFirmwareVersionEntry, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexServerFirmwareVersionEntryRequest) Execute() (HyperflexServerFirmwareVersionEntry, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexServerFirmwareVersionEntryExecute(r)
 }
 
@@ -41066,21 +39844,19 @@ func (a *HyperflexApiService) UpdateHyperflexServerFirmwareVersionEntry(ctx _con
  * Execute executes the request
  * @return HyperflexServerFirmwareVersionEntry
  */
-func (a *HyperflexApiService) UpdateHyperflexServerFirmwareVersionEntryExecute(r ApiUpdateHyperflexServerFirmwareVersionEntryRequest) (HyperflexServerFirmwareVersionEntry, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexServerFirmwareVersionEntryExecute(r ApiUpdateHyperflexServerFirmwareVersionEntryRequest) (HyperflexServerFirmwareVersionEntry, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexServerFirmwareVersionEntry
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexServerFirmwareVersionEntry")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ServerFirmwareVersionEntries/{Moid}"
@@ -41090,8 +39866,7 @@ func (a *HyperflexApiService) UpdateHyperflexServerFirmwareVersionEntryExecute(r
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexServerFirmwareVersionEntry == nil {
-		executionError.error = "hyperflexServerFirmwareVersionEntry is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexServerFirmwareVersionEntry is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -41118,22 +39893,19 @@ func (a *HyperflexApiService) UpdateHyperflexServerFirmwareVersionEntryExecute(r
 	localVarPostBody = r.hyperflexServerFirmwareVersionEntry
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -41200,7 +39972,7 @@ func (a *HyperflexApiService) UpdateHyperflexServerFirmwareVersionEntryExecute(r
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexServerModelRequest struct {
@@ -41220,7 +39992,7 @@ func (r ApiUpdateHyperflexServerModelRequest) IfMatch(ifMatch string) ApiUpdateH
 	return r
 }
 
-func (r ApiUpdateHyperflexServerModelRequest) Execute() (HyperflexServerModel, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexServerModelRequest) Execute() (HyperflexServerModel, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexServerModelExecute(r)
 }
 
@@ -41242,21 +40014,19 @@ func (a *HyperflexApiService) UpdateHyperflexServerModel(ctx _context.Context, m
  * Execute executes the request
  * @return HyperflexServerModel
  */
-func (a *HyperflexApiService) UpdateHyperflexServerModelExecute(r ApiUpdateHyperflexServerModelRequest) (HyperflexServerModel, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexServerModelExecute(r ApiUpdateHyperflexServerModelRequest) (HyperflexServerModel, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexServerModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexServerModel")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/ServerModels/{Moid}"
@@ -41266,8 +40036,7 @@ func (a *HyperflexApiService) UpdateHyperflexServerModelExecute(r ApiUpdateHyper
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexServerModel == nil {
-		executionError.error = "hyperflexServerModel is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexServerModel is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -41294,22 +40063,19 @@ func (a *HyperflexApiService) UpdateHyperflexServerModelExecute(r ApiUpdateHyper
 	localVarPostBody = r.hyperflexServerModel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -41376,7 +40142,7 @@ func (a *HyperflexApiService) UpdateHyperflexServerModelExecute(r ApiUpdateHyper
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexSoftwareVersionPolicyRequest struct {
@@ -41396,7 +40162,7 @@ func (r ApiUpdateHyperflexSoftwareVersionPolicyRequest) IfMatch(ifMatch string) 
 	return r
 }
 
-func (r ApiUpdateHyperflexSoftwareVersionPolicyRequest) Execute() (HyperflexSoftwareVersionPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexSoftwareVersionPolicyRequest) Execute() (HyperflexSoftwareVersionPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexSoftwareVersionPolicyExecute(r)
 }
 
@@ -41418,21 +40184,19 @@ func (a *HyperflexApiService) UpdateHyperflexSoftwareVersionPolicy(ctx _context.
  * Execute executes the request
  * @return HyperflexSoftwareVersionPolicy
  */
-func (a *HyperflexApiService) UpdateHyperflexSoftwareVersionPolicyExecute(r ApiUpdateHyperflexSoftwareVersionPolicyRequest) (HyperflexSoftwareVersionPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexSoftwareVersionPolicyExecute(r ApiUpdateHyperflexSoftwareVersionPolicyRequest) (HyperflexSoftwareVersionPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexSoftwareVersionPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexSoftwareVersionPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/SoftwareVersionPolicies/{Moid}"
@@ -41442,8 +40206,7 @@ func (a *HyperflexApiService) UpdateHyperflexSoftwareVersionPolicyExecute(r ApiU
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexSoftwareVersionPolicy == nil {
-		executionError.error = "hyperflexSoftwareVersionPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexSoftwareVersionPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -41470,22 +40233,19 @@ func (a *HyperflexApiService) UpdateHyperflexSoftwareVersionPolicyExecute(r ApiU
 	localVarPostBody = r.hyperflexSoftwareVersionPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -41552,7 +40312,7 @@ func (a *HyperflexApiService) UpdateHyperflexSoftwareVersionPolicyExecute(r ApiU
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexSysConfigPolicyRequest struct {
@@ -41572,7 +40332,7 @@ func (r ApiUpdateHyperflexSysConfigPolicyRequest) IfMatch(ifMatch string) ApiUpd
 	return r
 }
 
-func (r ApiUpdateHyperflexSysConfigPolicyRequest) Execute() (HyperflexSysConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexSysConfigPolicyRequest) Execute() (HyperflexSysConfigPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexSysConfigPolicyExecute(r)
 }
 
@@ -41594,21 +40354,19 @@ func (a *HyperflexApiService) UpdateHyperflexSysConfigPolicy(ctx _context.Contex
  * Execute executes the request
  * @return HyperflexSysConfigPolicy
  */
-func (a *HyperflexApiService) UpdateHyperflexSysConfigPolicyExecute(r ApiUpdateHyperflexSysConfigPolicyRequest) (HyperflexSysConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexSysConfigPolicyExecute(r ApiUpdateHyperflexSysConfigPolicyRequest) (HyperflexSysConfigPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexSysConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexSysConfigPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/SysConfigPolicies/{Moid}"
@@ -41618,8 +40376,7 @@ func (a *HyperflexApiService) UpdateHyperflexSysConfigPolicyExecute(r ApiUpdateH
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexSysConfigPolicy == nil {
-		executionError.error = "hyperflexSysConfigPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexSysConfigPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -41646,22 +40403,19 @@ func (a *HyperflexApiService) UpdateHyperflexSysConfigPolicyExecute(r ApiUpdateH
 	localVarPostBody = r.hyperflexSysConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -41728,7 +40482,7 @@ func (a *HyperflexApiService) UpdateHyperflexSysConfigPolicyExecute(r ApiUpdateH
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexUcsmConfigPolicyRequest struct {
@@ -41748,7 +40502,7 @@ func (r ApiUpdateHyperflexUcsmConfigPolicyRequest) IfMatch(ifMatch string) ApiUp
 	return r
 }
 
-func (r ApiUpdateHyperflexUcsmConfigPolicyRequest) Execute() (HyperflexUcsmConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexUcsmConfigPolicyRequest) Execute() (HyperflexUcsmConfigPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexUcsmConfigPolicyExecute(r)
 }
 
@@ -41770,21 +40524,19 @@ func (a *HyperflexApiService) UpdateHyperflexUcsmConfigPolicy(ctx _context.Conte
  * Execute executes the request
  * @return HyperflexUcsmConfigPolicy
  */
-func (a *HyperflexApiService) UpdateHyperflexUcsmConfigPolicyExecute(r ApiUpdateHyperflexUcsmConfigPolicyRequest) (HyperflexUcsmConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexUcsmConfigPolicyExecute(r ApiUpdateHyperflexUcsmConfigPolicyRequest) (HyperflexUcsmConfigPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexUcsmConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexUcsmConfigPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/UcsmConfigPolicies/{Moid}"
@@ -41794,8 +40546,7 @@ func (a *HyperflexApiService) UpdateHyperflexUcsmConfigPolicyExecute(r ApiUpdate
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexUcsmConfigPolicy == nil {
-		executionError.error = "hyperflexUcsmConfigPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexUcsmConfigPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -41822,22 +40573,19 @@ func (a *HyperflexApiService) UpdateHyperflexUcsmConfigPolicyExecute(r ApiUpdate
 	localVarPostBody = r.hyperflexUcsmConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -41904,7 +40652,7 @@ func (a *HyperflexApiService) UpdateHyperflexUcsmConfigPolicyExecute(r ApiUpdate
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateHyperflexVcenterConfigPolicyRequest struct {
@@ -41924,7 +40672,7 @@ func (r ApiUpdateHyperflexVcenterConfigPolicyRequest) IfMatch(ifMatch string) Ap
 	return r
 }
 
-func (r ApiUpdateHyperflexVcenterConfigPolicyRequest) Execute() (HyperflexVcenterConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateHyperflexVcenterConfigPolicyRequest) Execute() (HyperflexVcenterConfigPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateHyperflexVcenterConfigPolicyExecute(r)
 }
 
@@ -41946,21 +40694,19 @@ func (a *HyperflexApiService) UpdateHyperflexVcenterConfigPolicy(ctx _context.Co
  * Execute executes the request
  * @return HyperflexVcenterConfigPolicy
  */
-func (a *HyperflexApiService) UpdateHyperflexVcenterConfigPolicyExecute(r ApiUpdateHyperflexVcenterConfigPolicyRequest) (HyperflexVcenterConfigPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *HyperflexApiService) UpdateHyperflexVcenterConfigPolicyExecute(r ApiUpdateHyperflexVcenterConfigPolicyRequest) (HyperflexVcenterConfigPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  HyperflexVcenterConfigPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "HyperflexApiService.UpdateHyperflexVcenterConfigPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/hyperflex/VcenterConfigPolicies/{Moid}"
@@ -41970,8 +40716,7 @@ func (a *HyperflexApiService) UpdateHyperflexVcenterConfigPolicyExecute(r ApiUpd
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.hyperflexVcenterConfigPolicy == nil {
-		executionError.error = "hyperflexVcenterConfigPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("hyperflexVcenterConfigPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -41998,22 +40743,19 @@ func (a *HyperflexApiService) UpdateHyperflexVcenterConfigPolicyExecute(r ApiUpd
 	localVarPostBody = r.hyperflexVcenterConfigPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -42080,5 +40822,5 @@ func (a *HyperflexApiService) UpdateHyperflexVcenterConfigPolicyExecute(r ApiUpd
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

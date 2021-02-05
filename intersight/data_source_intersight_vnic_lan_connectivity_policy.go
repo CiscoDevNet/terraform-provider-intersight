@@ -21,7 +21,7 @@ func dataSourceVnicLanConnectivityPolicy() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -33,6 +33,50 @@ func dataSourceVnicLanConnectivityPolicy() *schema.Resource {
 			"eth_ifs": {
 				Description: "An array of relationships to vnicEthIf resources.",
 				Type:        schema.TypeList,
+				Optional:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				Computed: true,
+			},
+			"iqn_allocation_type": {
+				Description: "Allocation Type of iSCSI Qualified Name - Static/Dynamic/None.\n* `None` - Type defines that property is not applicable for an interface.\n* `Auto` - The system selects an interface automatically - DHCP.\n* `Static` - Type represents that static information or properties are associated to an interface.\n* `Pool` - Type defines that property value will be fetched from an associated pool.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"iqn_pool": {
+				Description: "A reference to a iqnpoolPool resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
 				Optional:    true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
@@ -80,7 +124,7 @@ func dataSourceVnicLanConnectivityPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -167,6 +211,11 @@ func dataSourceVnicLanConnectivityPolicy() *schema.Resource {
 				},
 				Computed: true,
 			},
+			"static_iqn_name": {
+				Description: "User provided static iSCSI Qualified Name (IQN) for use as initiator identifiers by iSCSI vNICs in a Fabric Interconnect domain.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"tags": {
 				Type:     schema.TypeList,
 				Optional: true,
@@ -213,6 +262,10 @@ func dataSourceVnicLanConnectivityPolicyRead(c context.Context, d *schema.Resour
 		x := (v.(string))
 		o.SetDescription(x)
 	}
+	if v, ok := d.GetOk("iqn_allocation_type"); ok {
+		x := (v.(string))
+		o.SetIqnAllocationType(x)
+	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -229,6 +282,10 @@ func dataSourceVnicLanConnectivityPolicyRead(c context.Context, d *schema.Resour
 		x := (v.(string))
 		o.SetPlacementMode(x)
 	}
+	if v, ok := d.GetOk("static_iqn_name"); ok {
+		x := (v.(string))
+		o.SetStaticIqnName(x)
+	}
 	if v, ok := d.GetOk("target_platform"); ok {
 		x := (v.(string))
 		o.SetTargetPlatform(x)
@@ -239,7 +296,8 @@ func dataSourceVnicLanConnectivityPolicyRead(c context.Context, d *schema.Resour
 		return diag.Errorf("json marshal of VnicLanConnectivityPolicy object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.VnicApi.GetVnicLanConnectivityPolicyList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching VnicLanConnectivityPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
@@ -282,6 +340,13 @@ func dataSourceVnicLanConnectivityPolicyRead(c context.Context, d *schema.Resour
 			if err := d.Set("eth_ifs", flattenListVnicEthIfRelationship(s.GetEthIfs(), d)); err != nil {
 				return diag.Errorf("error occurred while setting property EthIfs: %s", err.Error())
 			}
+			if err := d.Set("iqn_allocation_type", (s.GetIqnAllocationType())); err != nil {
+				return diag.Errorf("error occurred while setting property IqnAllocationType: %s", err.Error())
+			}
+
+			if err := d.Set("iqn_pool", flattenMapIqnpoolPoolRelationship(s.GetIqnPool(), d)); err != nil {
+				return diag.Errorf("error occurred while setting property IqnPool: %s", err.Error())
+			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
 				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
 			}
@@ -301,6 +366,9 @@ func dataSourceVnicLanConnectivityPolicyRead(c context.Context, d *schema.Resour
 
 			if err := d.Set("profiles", flattenListPolicyAbstractConfigProfileRelationship(s.GetProfiles(), d)); err != nil {
 				return diag.Errorf("error occurred while setting property Profiles: %s", err.Error())
+			}
+			if err := d.Set("static_iqn_name", (s.GetStaticIqnName())); err != nil {
+				return diag.Errorf("error occurred while setting property StaticIqnName: %s", err.Error())
 			}
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {

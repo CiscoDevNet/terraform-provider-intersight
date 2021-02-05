@@ -224,7 +224,8 @@ func resourceTamAdvisoryCountCreate(c context.Context, d *schema.ResourceData, m
 
 	r := conn.ApiClient.TamApi.CreateTamAdvisoryCount(conn.ctx).TamAdvisoryCount(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating TamAdvisoryCount: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -239,7 +240,8 @@ func resourceTamAdvisoryCountRead(c context.Context, d *schema.ResourceData, met
 	var de diag.Diagnostics
 	r := conn.ApiClient.TamApi.GetTamAdvisoryCountByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "TamAdvisoryCount object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -394,7 +396,8 @@ func resourceTamAdvisoryCountUpdate(c context.Context, d *schema.ResourceData, m
 
 	r := conn.ApiClient.TamApi.UpdateTamAdvisoryCount(conn.ctx, d.Id()).TamAdvisoryCount(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating TamAdvisoryCount: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -409,7 +412,8 @@ func resourceTamAdvisoryCountDelete(c context.Context, d *schema.ResourceData, m
 	conn := meta.(*Config)
 	p := conn.ApiClient.TamApi.DeleteTamAdvisoryCount(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting TamAdvisoryCount object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

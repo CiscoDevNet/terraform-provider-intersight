@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **FanId** | Pointer to **int64** | This field acts as the identifier for this particular Fan, within the Fabric Interconnect. | [optional] [readonly] 
 **FanModuleId** | Pointer to **int64** | This field is used to identify the Fan Module to which this Fan belongs. | [optional] [readonly] 
 **ModuleId** | Pointer to **int64** | Fan module Identifier for the fan. | [optional] [readonly] 
+**OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | This field is used to indicate this fan unit&#39;s operational state. | [optional] [readonly] 
 **PartNumber** | Pointer to **string** | This field identifies the Part Number for this Fan Unit. | [optional] [readonly] 
 **Pid** | Pointer to **string** | This field identifies the Product ID for the fans. | [optional] [readonly] 
@@ -181,6 +182,41 @@ SetModuleId sets ModuleId field to given value.
 
 HasModuleId returns a boolean if a field has been set.
 
+### GetOperReason
+
+`func (o *EquipmentFanAllOf) GetOperReason() []string`
+
+GetOperReason returns the OperReason field if non-nil, zero value otherwise.
+
+### GetOperReasonOk
+
+`func (o *EquipmentFanAllOf) GetOperReasonOk() (*[]string, bool)`
+
+GetOperReasonOk returns a tuple with the OperReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperReason
+
+`func (o *EquipmentFanAllOf) SetOperReason(v []string)`
+
+SetOperReason sets OperReason field to given value.
+
+### HasOperReason
+
+`func (o *EquipmentFanAllOf) HasOperReason() bool`
+
+HasOperReason returns a boolean if a field has been set.
+
+### SetOperReasonNil
+
+`func (o *EquipmentFanAllOf) SetOperReasonNil(b bool)`
+
+ SetOperReasonNil sets the value for OperReason to be an explicit nil
+
+### UnsetOperReason
+`func (o *EquipmentFanAllOf) UnsetOperReason()`
+
+UnsetOperReason ensures that no value is present for OperReason, not even an explicit nil
 ### GetOperState
 
 `func (o *EquipmentFanAllOf) GetOperState() string`

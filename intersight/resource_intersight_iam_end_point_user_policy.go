@@ -184,7 +184,7 @@ func resourceIamEndPointUserPolicy() *schema.Resource {
 							Default:     15,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -543,7 +543,8 @@ func resourceIamEndPointUserPolicyCreate(c context.Context, d *schema.ResourceDa
 
 	r := conn.ApiClient.IamApi.CreateIamEndPointUserPolicy(conn.ctx).IamEndPointUserPolicy(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating IamEndPointUserPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -562,7 +563,8 @@ func detachIamEndPointUserPolicyProfiles(d *schema.ResourceData, meta interface{
 
 	r := conn.ApiClient.IamApi.UpdateIamEndPointUserPolicy(conn.ctx, d.Id()).IamEndPointUserPolicy(*o)
 	_, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	return de
@@ -575,7 +577,8 @@ func resourceIamEndPointUserPolicyRead(c context.Context, d *schema.ResourceData
 	var de diag.Diagnostics
 	r := conn.ApiClient.IamApi.GetIamEndPointUserPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "IamEndPointUserPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -912,7 +915,8 @@ func resourceIamEndPointUserPolicyUpdate(c context.Context, d *schema.ResourceDa
 
 	r := conn.ApiClient.IamApi.UpdateIamEndPointUserPolicy(conn.ctx, d.Id()).IamEndPointUserPolicy(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating IamEndPointUserPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -935,7 +939,8 @@ func resourceIamEndPointUserPolicyDelete(c context.Context, d *schema.ResourceDa
 	}
 	p := conn.ApiClient.IamApi.DeleteIamEndPointUserPolicy(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting IamEndPointUserPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

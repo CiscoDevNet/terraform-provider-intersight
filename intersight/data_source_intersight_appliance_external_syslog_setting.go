@@ -60,12 +60,17 @@ func dataSourceApplianceExternalSyslogSetting() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"enabled": {
 				Description: "Enable or disable External Syslog Server.",
+				Type:        schema.TypeBool,
+				Optional:    true,
+			},
+			"export_nginx": {
+				Description: "Enable or disable exporting of Web Server access logs.",
 				Type:        schema.TypeBool,
 				Optional:    true,
 			},
@@ -76,7 +81,7 @@ func dataSourceApplianceExternalSyslogSetting() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -132,6 +137,10 @@ func dataSourceApplianceExternalSyslogSettingRead(c context.Context, d *schema.R
 		x := (v.(bool))
 		o.SetEnabled(x)
 	}
+	if v, ok := d.GetOk("export_nginx"); ok {
+		x := (v.(bool))
+		o.SetExportNginx(x)
+	}
 	if v, ok := d.GetOk("moid"); ok {
 		x := (v.(string))
 		o.SetMoid(x)
@@ -154,7 +163,8 @@ func dataSourceApplianceExternalSyslogSettingRead(c context.Context, d *schema.R
 		return diag.Errorf("json marshal of ApplianceExternalSyslogSetting object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.ApplianceApi.GetApplianceExternalSyslogSettingList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching ApplianceExternalSyslogSetting: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
@@ -196,6 +206,9 @@ func dataSourceApplianceExternalSyslogSettingRead(c context.Context, d *schema.R
 			}
 			if err := d.Set("enabled", (s.GetEnabled())); err != nil {
 				return diag.Errorf("error occurred while setting property Enabled: %s", err.Error())
+			}
+			if err := d.Set("export_nginx", (s.GetExportNginx())); err != nil {
+				return diag.Errorf("error occurred while setting property ExportNginx: %s", err.Error())
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
 				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())

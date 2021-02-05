@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "appliance.ExternalSyslogSetting"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "appliance.ExternalSyslogSetting"]
 **Enabled** | Pointer to **bool** | Enable or disable External Syslog Server. | [optional] [default to false]
+**ExportNginx** | Pointer to **bool** | Enable or disable exporting of Web Server access logs. | [optional] [default to false]
 **Port** | Pointer to **int64** | External Syslog Server Port for connection establishment. | [optional] [default to 10514]
 **Server** | Pointer to **string** | External Syslog Server Address, can be IP address or hostname. | [optional] 
 **Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
@@ -94,6 +95,31 @@ SetEnabled sets Enabled field to given value.
 `func (o *ApplianceExternalSyslogSettingAllOf) HasEnabled() bool`
 
 HasEnabled returns a boolean if a field has been set.
+
+### GetExportNginx
+
+`func (o *ApplianceExternalSyslogSettingAllOf) GetExportNginx() bool`
+
+GetExportNginx returns the ExportNginx field if non-nil, zero value otherwise.
+
+### GetExportNginxOk
+
+`func (o *ApplianceExternalSyslogSettingAllOf) GetExportNginxOk() (*bool, bool)`
+
+GetExportNginxOk returns a tuple with the ExportNginx field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExportNginx
+
+`func (o *ApplianceExternalSyslogSettingAllOf) SetExportNginx(v bool)`
+
+SetExportNginx sets ExportNginx field to given value.
+
+### HasExportNginx
+
+`func (o *ApplianceExternalSyslogSettingAllOf) HasExportNginx() bool`
+
+HasExportNginx returns a boolean if a field has been set.
 
 ### GetPort
 

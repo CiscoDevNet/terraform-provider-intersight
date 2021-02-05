@@ -11,22 +11,13 @@ Configuration for an ACI CNI profile.
 ## Argument Reference
 The following arguments are supported:
 * `aaep_name`:(string) Name of ACI AAEP (Attachable Access Entity Profile) to be used for all Kubernetes clusters using this policy. 
-* `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
 * `cluster_aci_allocations`:(Array)(Computed) An array of relationships to kubernetesAciCniTenantClusterAllocation resources. 
 This complex property has following sub-properties:
-  + `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `cluster_profiles`:(Array)(Computed) An array of relationships to kubernetesClusterProfile resources. 
 This complex property has following sub-properties:
-  + `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
@@ -44,38 +35,26 @@ This complex property has following sub-properties:
 * `node_vlan_range_end`:(int) Ending value of VLAN range used to assign Node VLAN Ids for each Kubernetes cluster using this policy. 
 * `node_vlan_range_start`:(int) Starting value of VLAN range used to assign Node VLAN Ids for each Kubernetes cluster using this policy. 
 * `number_of_kubernetes_clusters`:(int)(Computed) Number of k8s clusters currently using this ACI CNI profile. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `opflex_multicast_address_range`:(string) Range of IP Multicast addresses to be used by the Opflex protocol for Kubernetes clusters using this policy. 
-* `organization`:(Array with Maximum of one item) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+* `organization`:(HashMap) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
-  + `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `pod_subnet_start`:(string) Start of range of Kubernetes pod IP subnets to use by Kubernetes clusters using this ACI CNI policy This should be a /8 IP subnet so that multiple /16 subnets can be assigned for pod subnets of Kubernetes clusters using this profile. 
-* `registered_device`:(Array with Maximum of one item) - A reference to a assetDeviceRegistration resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+* `registered_device`:(HashMap) - A reference to a assetDeviceRegistration resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
-  + `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `src_template`:(Array with Maximum of one item) - A reference to a policyAbstractProfile resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+* `src_template`:(HashMap) - A reference to a policyAbstractProfile resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
-  + `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `svc_subnet_start`:(string)(Computed) Start of range of Kubernetes Service IP subnets to use by Kubernetes clusters using this ACI CNI policy Currently this is fixed internally and read-only. 
 * `tags`:(Array)
 This complex property has following sub-properties:
-  + `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
 * `type`:(string) Defines the type of the profile. Accepted value is instance.* `instance` - The profile defines the configuration for a specific instance of a target. 
@@ -86,4 +65,4 @@ This complex property has following sub-properties:
 `intersight_kubernetes_aci_cni_profile` can be imported using the Moid of the object, e.g.
 ```
 $ terraform import intersight_kubernetes_aci_cni_profile.example 1234567890987654321abcde
-```
+``` 

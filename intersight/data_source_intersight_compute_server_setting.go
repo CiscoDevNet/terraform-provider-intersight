@@ -31,7 +31,7 @@ func dataSourceComputeServerSetting() *schema.Resource {
 				Optional:    true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -98,6 +98,12 @@ func dataSourceComputeServerSetting() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"name": {
+				Description: "The property used to identify the name of the server it is associated with.",
+				Type:        schema.TypeString,
+				Optional:    true,
+				Computed:    true,
+			},
 			"object_type": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
@@ -127,7 +133,7 @@ func dataSourceComputeServerSetting() *schema.Resource {
 							Optional:    true,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -153,7 +159,7 @@ func dataSourceComputeServerSetting() *schema.Resource {
 										Optional:    true,
 									},
 									"object_type": {
-										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+										Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 										Type:        schema.TypeString,
 										Optional:    true,
 										Computed:    true,
@@ -173,7 +179,7 @@ func dataSourceComputeServerSetting() *schema.Resource {
 							Computed: true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -333,7 +339,7 @@ func dataSourceComputeServerSetting() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -408,6 +414,10 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 		x := (v.(string))
 		o.SetMoid(x)
 	}
+	if v, ok := d.GetOk("name"); ok {
+		x := (v.(string))
+		o.SetName(x)
+	}
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
 		o.SetObjectType(x)
@@ -426,7 +436,8 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 		return diag.Errorf("json marshal of ComputeServerSetting object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.ComputeApi.GetComputeServerSettingList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching ComputeServerSetting: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
@@ -483,6 +494,9 @@ func dataSourceComputeServerSettingRead(c context.Context, d *schema.ResourceDat
 			}
 			if err := d.Set("moid", (s.GetMoid())); err != nil {
 				return diag.Errorf("error occurred while setting property Moid: %s", err.Error())
+			}
+			if err := d.Set("name", (s.GetName())); err != nil {
+				return diag.Errorf("error occurred while setting property Name: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
 				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())

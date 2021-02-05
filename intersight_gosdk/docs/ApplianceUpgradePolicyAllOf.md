@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **BlackoutDatesEnabled** | Pointer to **bool** | If enabled, allows the user to define a blackout period during which the appliance will not be upgraded. | [optional] 
 **BlackoutEndDate** | Pointer to **time.Time** | End date of the black out period. | [optional] 
 **BlackoutStartDate** | Pointer to **time.Time** | Start date of the black out period. The appliance will not be upgraded during this period. | [optional] 
+**EnableMetaDataSync** | Pointer to **bool** | Indicates if the updated metadata files should be synced immediately or at the next upgrade. | [optional] [default to true]
 **Schedule** | Pointer to [**NullableOnpremSchedule**](onprem.Schedule.md) |  | [optional] 
 **Account** | Pointer to [**IamAccountRelationship**](iam.Account.Relationship.md) |  | [optional] 
 
@@ -171,6 +172,31 @@ SetBlackoutStartDate sets BlackoutStartDate field to given value.
 `func (o *ApplianceUpgradePolicyAllOf) HasBlackoutStartDate() bool`
 
 HasBlackoutStartDate returns a boolean if a field has been set.
+
+### GetEnableMetaDataSync
+
+`func (o *ApplianceUpgradePolicyAllOf) GetEnableMetaDataSync() bool`
+
+GetEnableMetaDataSync returns the EnableMetaDataSync field if non-nil, zero value otherwise.
+
+### GetEnableMetaDataSyncOk
+
+`func (o *ApplianceUpgradePolicyAllOf) GetEnableMetaDataSyncOk() (*bool, bool)`
+
+GetEnableMetaDataSyncOk returns a tuple with the EnableMetaDataSync field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnableMetaDataSync
+
+`func (o *ApplianceUpgradePolicyAllOf) SetEnableMetaDataSync(v bool)`
+
+SetEnableMetaDataSync sets EnableMetaDataSync field to given value.
+
+### HasEnableMetaDataSync
+
+`func (o *ApplianceUpgradePolicyAllOf) HasEnableMetaDataSync() bool`
+
+HasEnableMetaDataSync returns a boolean if a field has been set.
 
 ### GetSchedule
 

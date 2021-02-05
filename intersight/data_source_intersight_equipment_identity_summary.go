@@ -45,54 +45,15 @@ func dataSourceEquipmentIdentitySummary() *schema.Resource {
 				Computed:    true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
-			"device_mo_id": {
-				Description: "FI Device registration Mo ID.",
+			"firmware_supportability": {
+				Description: "Describes whether the running CIMC version supports Intersight managed mode.\n* `Unknown` - The running firmware version is unknown.\n* `Supported` - The running firmware version is known and supports IMM mode.\n* `NotSupported` - The running firmware version is known and does not support IMM mode.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
-			},
-			"device_registration": {
-				Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
-				Type:        schema.TypeList,
-				MaxItems:    1,
-				Optional:    true,
-				Computed:    true,
-				Elem: &schema.Resource{
-					Schema: map[string]*schema.Schema{
-						"additional_properties": {
-							Type:             schema.TypeString,
-							Optional:         true,
-							DiffSuppressFunc: SuppressDiffAdditionProps,
-						},
-						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
-							Type:        schema.TypeString,
-							Optional:    true,
-						},
-						"moid": {
-							Description: "The Moid of the referenced REST resource.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"object_type": {
-							Description: "The fully-qualified name of the remote type referred by this relationship.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-						"selector": {
-							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
-							Type:        schema.TypeString,
-							Optional:    true,
-							Computed:    true,
-						},
-					},
-				},
 			},
 			"identifier": {
 				Description: "Numeric Identifier assigned by the management system to the equipment.",
@@ -111,7 +72,7 @@ func dataSourceEquipmentIdentitySummary() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -169,11 +130,50 @@ func dataSourceEquipmentIdentitySummary() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
-			"pending_discovery": {
-				Description: "Value to indicate if discovery needs to be triggered after some event (ex. device connector reconnect).",
+			"presence": {
+				Description: "The presence state of the blade server.\n* `Unknown` - The default presence state.\n* `Equipped` - The server is equipped in the slot.\n* `EquippedMismatch` - The slot is equipped, but there is another server currently inventoried in the slot.\n* `Missing` - The server is not present in the given slot.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
+			},
+			"registered_device": {
+				Description: "A reference to a assetDeviceRegistration resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Computed:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"moid": {
+							Description: "The Moid of the referenced REST resource.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the remote type referred by this relationship.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+						"selector": {
+							Description: "An OData $filter expression which describes the REST resource to be referenced. This field may\nbe set instead of 'moid' by clients.\n1. If 'moid' is set this field is ignored.\n1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of the\nresource matching the filter expression and populates it in the MoRef that is part of the object\ninstance being inserted/updated to fulfill the REST request.\nAn error is returned if the filter matches zero or more than one REST resource.\nAn example filter string is: Serial eq '3AA8B7T11'.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
 			},
 			"serial": {
 				Description: "The serial number of the equipment.",
@@ -258,9 +258,9 @@ func dataSourceEquipmentIdentitySummaryRead(c context.Context, d *schema.Resourc
 		x := (v.(string))
 		o.SetClassId(x)
 	}
-	if v, ok := d.GetOk("device_mo_id"); ok {
+	if v, ok := d.GetOk("firmware_supportability"); ok {
 		x := (v.(string))
-		o.SetDeviceMoId(x)
+		o.SetFirmwareSupportability(x)
 	}
 	if v, ok := d.GetOk("identifier"); ok {
 		x := int64(v.(int))
@@ -282,9 +282,9 @@ func dataSourceEquipmentIdentitySummaryRead(c context.Context, d *schema.Resourc
 		x := (v.(string))
 		o.SetObjectType(x)
 	}
-	if v, ok := d.GetOk("pending_discovery"); ok {
+	if v, ok := d.GetOk("presence"); ok {
 		x := (v.(string))
-		o.SetPendingDiscovery(x)
+		o.SetPresence(x)
 	}
 	if v, ok := d.GetOk("serial"); ok {
 		x := (v.(string))
@@ -312,7 +312,8 @@ func dataSourceEquipmentIdentitySummaryRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("json marshal of EquipmentIdentitySummary object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.EquipmentApi.GetEquipmentIdentitySummaryList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching EquipmentIdentitySummary: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
@@ -360,12 +361,8 @@ func dataSourceEquipmentIdentitySummaryRead(c context.Context, d *schema.Resourc
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
 				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
-			if err := d.Set("device_mo_id", (s.GetDeviceMoId())); err != nil {
-				return diag.Errorf("error occurred while setting property DeviceMoId: %s", err.Error())
-			}
-
-			if err := d.Set("device_registration", flattenMapAssetDeviceRegistrationRelationship(s.GetDeviceRegistration(), d)); err != nil {
-				return diag.Errorf("error occurred while setting property DeviceRegistration: %s", err.Error())
+			if err := d.Set("firmware_supportability", (s.GetFirmwareSupportability())); err != nil {
+				return diag.Errorf("error occurred while setting property FirmwareSupportability: %s", err.Error())
 			}
 			if err := d.Set("identifier", (s.GetIdentifier())); err != nil {
 				return diag.Errorf("error occurred while setting property Identifier: %s", err.Error())
@@ -386,8 +383,12 @@ func dataSourceEquipmentIdentitySummaryRead(c context.Context, d *schema.Resourc
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
 				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())
 			}
-			if err := d.Set("pending_discovery", (s.GetPendingDiscovery())); err != nil {
-				return diag.Errorf("error occurred while setting property PendingDiscovery: %s", err.Error())
+			if err := d.Set("presence", (s.GetPresence())); err != nil {
+				return diag.Errorf("error occurred while setting property Presence: %s", err.Error())
+			}
+
+			if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
+				return diag.Errorf("error occurred while setting property RegisteredDevice: %s", err.Error())
 			}
 			if err := d.Set("serial", (s.GetSerial())); err != nil {
 				return diag.Errorf("error occurred while setting property Serial: %s", err.Error())

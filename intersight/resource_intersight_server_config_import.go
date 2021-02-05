@@ -46,7 +46,7 @@ func resourceServerConfigImport() *schema.Resource {
 				ForceNew:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -457,7 +457,8 @@ func resourceServerConfigImportCreate(c context.Context, d *schema.ResourceData,
 
 	r := conn.ApiClient.ServerApi.CreateServerConfigImport(conn.ctx).ServerConfigImport(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating ServerConfigImport: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -472,7 +473,8 @@ func resourceServerConfigImportRead(c context.Context, d *schema.ResourceData, m
 	var de diag.Diagnostics
 	r := conn.ApiClient.ServerApi.GetServerConfigImportByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "ServerConfigImport object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -542,7 +544,8 @@ func resourceServerConfigImportDelete(c context.Context, d *schema.ResourceData,
 	x := d.Get("workflow_info").([]interface{})[0].(map[string]interface{})
 	moid := x["moid"].(string)
 	getWorkflow, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowWorkflowInfoByMoid(conn.ctx, moid).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching workflow info for ServerConfigImport: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	if getWorkflow.GetStatus() == "RUNNING" {
@@ -551,12 +554,14 @@ func resourceServerConfigImportDelete(c context.Context, d *schema.ResourceData,
 		o.SetClassId("workflow.WorkflowInfo")
 		o.SetObjectType("workflow.WorkflowInfo")
 		_, _, responseErr = conn.ApiClient.WorkflowApi.UpdateWorkflowWorkflowInfo(conn.ctx, moid).WorkflowWorkflowInfo(*o).Execute()
-		if responseErr.Error() != "" {
+		if responseErr != nil {
+			responseErr := responseErr.(models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while cancelling workflow triggered by ServerConfigImport: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 		p := conn.ApiClient.WorkflowApi.DeleteWorkflowWorkflowInfo(conn.ctx, moid)
 		_, responseErr = p.Execute()
-		if responseErr.Error() != "" {
+		if responseErr != nil {
+			responseErr := responseErr.(models.GenericOpenAPIError)
 			return diag.Errorf("error occurred while deleting workflow triggered by ServerConfigImport: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 		}
 	}

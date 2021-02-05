@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -21,17 +21,25 @@ type NiatelemetryNiaInventoryAllOf struct {
 	ClassId string `json:"ClassId"`
 	// The fully-qualified name of the instantiated, concrete type. The value should be the same as the 'ClassId' property.
 	ObjectType string `json:"ObjectType"`
-	// Number of BGP peers on a node.
-	BgpPeerCount *int64 `json:"BgpPeerCount,omitempty"`
 	// CPU usage of device being inventoried. This determines the percentage of CPU resources used.
 	Cpu *float32 `json:"Cpu,omitempty"`
 	// Last crash reset reason of device being inventoried. This determines the last reason for a device's restart due to crash of the system.
 	CrashResetLogs *string `json:"CrashResetLogs,omitempty"`
+	// Returns the value of the customerDeviceConnector field.
+	CustomerDeviceConnector *string `json:"CustomerDeviceConnector,omitempty"`
+	// Returns the value of the deviceDiscovery field.
+	DeviceDiscovery *string `json:"DeviceDiscovery,omitempty"`
+	// Returns the device health.
+	DeviceHealth *int64 `json:"DeviceHealth,omitempty"`
+	// Returns the value of the deviceId field.
+	DeviceId *string `json:"DeviceId,omitempty"`
 	// Name of device being inventoried. The name the user assigns to the device is inventoried here.
 	DeviceName *string `json:"DeviceName,omitempty"`
 	// Type of device being inventoried. This determines whether the device is a controller, leaf or spine.
-	DeviceType *string                      `json:"DeviceType,omitempty"`
-	Disk       NullableNiatelemetryDiskinfo `json:"Disk,omitempty"`
+	DeviceType *string `json:"DeviceType,omitempty"`
+	// Returns the device up time.
+	DeviceUpTime *int64                       `json:"DeviceUpTime,omitempty"`
+	Disk         NullableNiatelemetryDiskinfo `json:"Disk,omitempty"`
 	// Dn for the inventories present.
 	Dn *string `json:"Dn,omitempty"`
 	// Number of fabric extendors utilized.
@@ -40,6 +48,8 @@ type NiatelemetryNiaInventoryAllOf struct {
 	InfraWiNodeCount *int64 `json:"InfraWiNodeCount,omitempty"`
 	// The IP address of the device being inventoried.
 	IpAddress *string `json:"IpAddress,omitempty"`
+	// Flag to specify if the node is virtual.
+	IsVirtualNode *string `json:"IsVirtualNode,omitempty"`
 	// Last log in time device being inventoried. This determines the last login time on the device.
 	LogInTime *string `json:"LogInTime,omitempty"`
 	// Last log out time of device being inventoried. This determines the last logout time on the device.
@@ -54,6 +64,11 @@ type NiatelemetryNiaInventoryAllOf struct {
 	Memory *int64 `json:"Memory,omitempty"`
 	// The ID of the device being inventoried.
 	NodeId *string `json:"NodeId,omitempty"`
+	// Returns the total number of evpn mac routes.
+	NxosEvpnMacRoutes  *int64                        `json:"NxosEvpnMacRoutes,omitempty"`
+	NxosInterfaceBrief NullableNiatelemetryInterface `json:"NxosInterfaceBrief,omitempty"`
+	// Returns the value of the nxosTelnet field.
+	NxosTelnet *string `json:"NxosTelnet,omitempty"`
 	// Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected.
 	RecordType *string `json:"RecordType,omitempty"`
 	// Version of record being pushed. This determines what was the API version for data available from the device.
@@ -150,38 +165,6 @@ func (o *NiatelemetryNiaInventoryAllOf) SetObjectType(v string) {
 	o.ObjectType = v
 }
 
-// GetBgpPeerCount returns the BgpPeerCount field value if set, zero value otherwise.
-func (o *NiatelemetryNiaInventoryAllOf) GetBgpPeerCount() int64 {
-	if o == nil || o.BgpPeerCount == nil {
-		var ret int64
-		return ret
-	}
-	return *o.BgpPeerCount
-}
-
-// GetBgpPeerCountOk returns a tuple with the BgpPeerCount field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *NiatelemetryNiaInventoryAllOf) GetBgpPeerCountOk() (*int64, bool) {
-	if o == nil || o.BgpPeerCount == nil {
-		return nil, false
-	}
-	return o.BgpPeerCount, true
-}
-
-// HasBgpPeerCount returns a boolean if a field has been set.
-func (o *NiatelemetryNiaInventoryAllOf) HasBgpPeerCount() bool {
-	if o != nil && o.BgpPeerCount != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetBgpPeerCount gets a reference to the given int64 and assigns it to the BgpPeerCount field.
-func (o *NiatelemetryNiaInventoryAllOf) SetBgpPeerCount(v int64) {
-	o.BgpPeerCount = &v
-}
-
 // GetCpu returns the Cpu field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryAllOf) GetCpu() float32 {
 	if o == nil || o.Cpu == nil {
@@ -246,6 +229,134 @@ func (o *NiatelemetryNiaInventoryAllOf) SetCrashResetLogs(v string) {
 	o.CrashResetLogs = &v
 }
 
+// GetCustomerDeviceConnector returns the CustomerDeviceConnector field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryAllOf) GetCustomerDeviceConnector() string {
+	if o == nil || o.CustomerDeviceConnector == nil {
+		var ret string
+		return ret
+	}
+	return *o.CustomerDeviceConnector
+}
+
+// GetCustomerDeviceConnectorOk returns a tuple with the CustomerDeviceConnector field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryAllOf) GetCustomerDeviceConnectorOk() (*string, bool) {
+	if o == nil || o.CustomerDeviceConnector == nil {
+		return nil, false
+	}
+	return o.CustomerDeviceConnector, true
+}
+
+// HasCustomerDeviceConnector returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryAllOf) HasCustomerDeviceConnector() bool {
+	if o != nil && o.CustomerDeviceConnector != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomerDeviceConnector gets a reference to the given string and assigns it to the CustomerDeviceConnector field.
+func (o *NiatelemetryNiaInventoryAllOf) SetCustomerDeviceConnector(v string) {
+	o.CustomerDeviceConnector = &v
+}
+
+// GetDeviceDiscovery returns the DeviceDiscovery field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryAllOf) GetDeviceDiscovery() string {
+	if o == nil || o.DeviceDiscovery == nil {
+		var ret string
+		return ret
+	}
+	return *o.DeviceDiscovery
+}
+
+// GetDeviceDiscoveryOk returns a tuple with the DeviceDiscovery field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryAllOf) GetDeviceDiscoveryOk() (*string, bool) {
+	if o == nil || o.DeviceDiscovery == nil {
+		return nil, false
+	}
+	return o.DeviceDiscovery, true
+}
+
+// HasDeviceDiscovery returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryAllOf) HasDeviceDiscovery() bool {
+	if o != nil && o.DeviceDiscovery != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDeviceDiscovery gets a reference to the given string and assigns it to the DeviceDiscovery field.
+func (o *NiatelemetryNiaInventoryAllOf) SetDeviceDiscovery(v string) {
+	o.DeviceDiscovery = &v
+}
+
+// GetDeviceHealth returns the DeviceHealth field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryAllOf) GetDeviceHealth() int64 {
+	if o == nil || o.DeviceHealth == nil {
+		var ret int64
+		return ret
+	}
+	return *o.DeviceHealth
+}
+
+// GetDeviceHealthOk returns a tuple with the DeviceHealth field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryAllOf) GetDeviceHealthOk() (*int64, bool) {
+	if o == nil || o.DeviceHealth == nil {
+		return nil, false
+	}
+	return o.DeviceHealth, true
+}
+
+// HasDeviceHealth returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryAllOf) HasDeviceHealth() bool {
+	if o != nil && o.DeviceHealth != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDeviceHealth gets a reference to the given int64 and assigns it to the DeviceHealth field.
+func (o *NiatelemetryNiaInventoryAllOf) SetDeviceHealth(v int64) {
+	o.DeviceHealth = &v
+}
+
+// GetDeviceId returns the DeviceId field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryAllOf) GetDeviceId() string {
+	if o == nil || o.DeviceId == nil {
+		var ret string
+		return ret
+	}
+	return *o.DeviceId
+}
+
+// GetDeviceIdOk returns a tuple with the DeviceId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryAllOf) GetDeviceIdOk() (*string, bool) {
+	if o == nil || o.DeviceId == nil {
+		return nil, false
+	}
+	return o.DeviceId, true
+}
+
+// HasDeviceId returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryAllOf) HasDeviceId() bool {
+	if o != nil && o.DeviceId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDeviceId gets a reference to the given string and assigns it to the DeviceId field.
+func (o *NiatelemetryNiaInventoryAllOf) SetDeviceId(v string) {
+	o.DeviceId = &v
+}
+
 // GetDeviceName returns the DeviceName field value if set, zero value otherwise.
 func (o *NiatelemetryNiaInventoryAllOf) GetDeviceName() string {
 	if o == nil || o.DeviceName == nil {
@@ -308,6 +419,38 @@ func (o *NiatelemetryNiaInventoryAllOf) HasDeviceType() bool {
 // SetDeviceType gets a reference to the given string and assigns it to the DeviceType field.
 func (o *NiatelemetryNiaInventoryAllOf) SetDeviceType(v string) {
 	o.DeviceType = &v
+}
+
+// GetDeviceUpTime returns the DeviceUpTime field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryAllOf) GetDeviceUpTime() int64 {
+	if o == nil || o.DeviceUpTime == nil {
+		var ret int64
+		return ret
+	}
+	return *o.DeviceUpTime
+}
+
+// GetDeviceUpTimeOk returns a tuple with the DeviceUpTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryAllOf) GetDeviceUpTimeOk() (*int64, bool) {
+	if o == nil || o.DeviceUpTime == nil {
+		return nil, false
+	}
+	return o.DeviceUpTime, true
+}
+
+// HasDeviceUpTime returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryAllOf) HasDeviceUpTime() bool {
+	if o != nil && o.DeviceUpTime != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDeviceUpTime gets a reference to the given int64 and assigns it to the DeviceUpTime field.
+func (o *NiatelemetryNiaInventoryAllOf) SetDeviceUpTime(v int64) {
+	o.DeviceUpTime = &v
 }
 
 // GetDisk returns the Disk field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -479,6 +622,38 @@ func (o *NiatelemetryNiaInventoryAllOf) HasIpAddress() bool {
 // SetIpAddress gets a reference to the given string and assigns it to the IpAddress field.
 func (o *NiatelemetryNiaInventoryAllOf) SetIpAddress(v string) {
 	o.IpAddress = &v
+}
+
+// GetIsVirtualNode returns the IsVirtualNode field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryAllOf) GetIsVirtualNode() string {
+	if o == nil || o.IsVirtualNode == nil {
+		var ret string
+		return ret
+	}
+	return *o.IsVirtualNode
+}
+
+// GetIsVirtualNodeOk returns a tuple with the IsVirtualNode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryAllOf) GetIsVirtualNodeOk() (*string, bool) {
+	if o == nil || o.IsVirtualNode == nil {
+		return nil, false
+	}
+	return o.IsVirtualNode, true
+}
+
+// HasIsVirtualNode returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryAllOf) HasIsVirtualNode() bool {
+	if o != nil && o.IsVirtualNode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsVirtualNode gets a reference to the given string and assigns it to the IsVirtualNode field.
+func (o *NiatelemetryNiaInventoryAllOf) SetIsVirtualNode(v string) {
+	o.IsVirtualNode = &v
 }
 
 // GetLogInTime returns the LogInTime field value if set, zero value otherwise.
@@ -703,6 +878,113 @@ func (o *NiatelemetryNiaInventoryAllOf) HasNodeId() bool {
 // SetNodeId gets a reference to the given string and assigns it to the NodeId field.
 func (o *NiatelemetryNiaInventoryAllOf) SetNodeId(v string) {
 	o.NodeId = &v
+}
+
+// GetNxosEvpnMacRoutes returns the NxosEvpnMacRoutes field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryAllOf) GetNxosEvpnMacRoutes() int64 {
+	if o == nil || o.NxosEvpnMacRoutes == nil {
+		var ret int64
+		return ret
+	}
+	return *o.NxosEvpnMacRoutes
+}
+
+// GetNxosEvpnMacRoutesOk returns a tuple with the NxosEvpnMacRoutes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryAllOf) GetNxosEvpnMacRoutesOk() (*int64, bool) {
+	if o == nil || o.NxosEvpnMacRoutes == nil {
+		return nil, false
+	}
+	return o.NxosEvpnMacRoutes, true
+}
+
+// HasNxosEvpnMacRoutes returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryAllOf) HasNxosEvpnMacRoutes() bool {
+	if o != nil && o.NxosEvpnMacRoutes != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNxosEvpnMacRoutes gets a reference to the given int64 and assigns it to the NxosEvpnMacRoutes field.
+func (o *NiatelemetryNiaInventoryAllOf) SetNxosEvpnMacRoutes(v int64) {
+	o.NxosEvpnMacRoutes = &v
+}
+
+// GetNxosInterfaceBrief returns the NxosInterfaceBrief field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *NiatelemetryNiaInventoryAllOf) GetNxosInterfaceBrief() NiatelemetryInterface {
+	if o == nil || o.NxosInterfaceBrief.Get() == nil {
+		var ret NiatelemetryInterface
+		return ret
+	}
+	return *o.NxosInterfaceBrief.Get()
+}
+
+// GetNxosInterfaceBriefOk returns a tuple with the NxosInterfaceBrief field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *NiatelemetryNiaInventoryAllOf) GetNxosInterfaceBriefOk() (*NiatelemetryInterface, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.NxosInterfaceBrief.Get(), o.NxosInterfaceBrief.IsSet()
+}
+
+// HasNxosInterfaceBrief returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryAllOf) HasNxosInterfaceBrief() bool {
+	if o != nil && o.NxosInterfaceBrief.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetNxosInterfaceBrief gets a reference to the given NullableNiatelemetryInterface and assigns it to the NxosInterfaceBrief field.
+func (o *NiatelemetryNiaInventoryAllOf) SetNxosInterfaceBrief(v NiatelemetryInterface) {
+	o.NxosInterfaceBrief.Set(&v)
+}
+
+// SetNxosInterfaceBriefNil sets the value for NxosInterfaceBrief to be an explicit nil
+func (o *NiatelemetryNiaInventoryAllOf) SetNxosInterfaceBriefNil() {
+	o.NxosInterfaceBrief.Set(nil)
+}
+
+// UnsetNxosInterfaceBrief ensures that no value is present for NxosInterfaceBrief, not even an explicit nil
+func (o *NiatelemetryNiaInventoryAllOf) UnsetNxosInterfaceBrief() {
+	o.NxosInterfaceBrief.Unset()
+}
+
+// GetNxosTelnet returns the NxosTelnet field value if set, zero value otherwise.
+func (o *NiatelemetryNiaInventoryAllOf) GetNxosTelnet() string {
+	if o == nil || o.NxosTelnet == nil {
+		var ret string
+		return ret
+	}
+	return *o.NxosTelnet
+}
+
+// GetNxosTelnetOk returns a tuple with the NxosTelnet field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NiatelemetryNiaInventoryAllOf) GetNxosTelnetOk() (*string, bool) {
+	if o == nil || o.NxosTelnet == nil {
+		return nil, false
+	}
+	return o.NxosTelnet, true
+}
+
+// HasNxosTelnet returns a boolean if a field has been set.
+func (o *NiatelemetryNiaInventoryAllOf) HasNxosTelnet() bool {
+	if o != nil && o.NxosTelnet != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNxosTelnet gets a reference to the given string and assigns it to the NxosTelnet field.
+func (o *NiatelemetryNiaInventoryAllOf) SetNxosTelnet(v string) {
+	o.NxosTelnet = &v
 }
 
 // GetRecordType returns the RecordType field value if set, zero value otherwise.
@@ -1065,20 +1347,32 @@ func (o NiatelemetryNiaInventoryAllOf) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["ObjectType"] = o.ObjectType
 	}
-	if o.BgpPeerCount != nil {
-		toSerialize["BgpPeerCount"] = o.BgpPeerCount
-	}
 	if o.Cpu != nil {
 		toSerialize["Cpu"] = o.Cpu
 	}
 	if o.CrashResetLogs != nil {
 		toSerialize["CrashResetLogs"] = o.CrashResetLogs
 	}
+	if o.CustomerDeviceConnector != nil {
+		toSerialize["CustomerDeviceConnector"] = o.CustomerDeviceConnector
+	}
+	if o.DeviceDiscovery != nil {
+		toSerialize["DeviceDiscovery"] = o.DeviceDiscovery
+	}
+	if o.DeviceHealth != nil {
+		toSerialize["DeviceHealth"] = o.DeviceHealth
+	}
+	if o.DeviceId != nil {
+		toSerialize["DeviceId"] = o.DeviceId
+	}
 	if o.DeviceName != nil {
 		toSerialize["DeviceName"] = o.DeviceName
 	}
 	if o.DeviceType != nil {
 		toSerialize["DeviceType"] = o.DeviceType
+	}
+	if o.DeviceUpTime != nil {
+		toSerialize["DeviceUpTime"] = o.DeviceUpTime
 	}
 	if o.Disk.IsSet() {
 		toSerialize["Disk"] = o.Disk.Get()
@@ -1094,6 +1388,9 @@ func (o NiatelemetryNiaInventoryAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.IpAddress != nil {
 		toSerialize["IpAddress"] = o.IpAddress
+	}
+	if o.IsVirtualNode != nil {
+		toSerialize["IsVirtualNode"] = o.IsVirtualNode
 	}
 	if o.LogInTime != nil {
 		toSerialize["LogInTime"] = o.LogInTime
@@ -1115,6 +1412,15 @@ func (o NiatelemetryNiaInventoryAllOf) MarshalJSON() ([]byte, error) {
 	}
 	if o.NodeId != nil {
 		toSerialize["NodeId"] = o.NodeId
+	}
+	if o.NxosEvpnMacRoutes != nil {
+		toSerialize["NxosEvpnMacRoutes"] = o.NxosEvpnMacRoutes
+	}
+	if o.NxosInterfaceBrief.IsSet() {
+		toSerialize["NxosInterfaceBrief"] = o.NxosInterfaceBrief.Get()
+	}
+	if o.NxosTelnet != nil {
+		toSerialize["NxosTelnet"] = o.NxosTelnet
 	}
 	if o.RecordType != nil {
 		toSerialize["RecordType"] = o.RecordType
@@ -1169,16 +1475,21 @@ func (o *NiatelemetryNiaInventoryAllOf) UnmarshalJSON(bytes []byte) (err error) 
 	if err = json.Unmarshal(bytes, &additionalProperties); err == nil {
 		delete(additionalProperties, "ClassId")
 		delete(additionalProperties, "ObjectType")
-		delete(additionalProperties, "BgpPeerCount")
 		delete(additionalProperties, "Cpu")
 		delete(additionalProperties, "CrashResetLogs")
+		delete(additionalProperties, "CustomerDeviceConnector")
+		delete(additionalProperties, "DeviceDiscovery")
+		delete(additionalProperties, "DeviceHealth")
+		delete(additionalProperties, "DeviceId")
 		delete(additionalProperties, "DeviceName")
 		delete(additionalProperties, "DeviceType")
+		delete(additionalProperties, "DeviceUpTime")
 		delete(additionalProperties, "Disk")
 		delete(additionalProperties, "Dn")
 		delete(additionalProperties, "FexCount")
 		delete(additionalProperties, "InfraWiNodeCount")
 		delete(additionalProperties, "IpAddress")
+		delete(additionalProperties, "IsVirtualNode")
 		delete(additionalProperties, "LogInTime")
 		delete(additionalProperties, "LogOutTime")
 		delete(additionalProperties, "MacSecCount")
@@ -1186,6 +1497,9 @@ func (o *NiatelemetryNiaInventoryAllOf) UnmarshalJSON(bytes []byte) (err error) 
 		delete(additionalProperties, "MacsecTotalCount")
 		delete(additionalProperties, "Memory")
 		delete(additionalProperties, "NodeId")
+		delete(additionalProperties, "NxosEvpnMacRoutes")
+		delete(additionalProperties, "NxosInterfaceBrief")
+		delete(additionalProperties, "NxosTelnet")
 		delete(additionalProperties, "RecordType")
 		delete(additionalProperties, "RecordVersion")
 		delete(additionalProperties, "RoutePrefixCount")

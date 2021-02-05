@@ -42,7 +42,7 @@ func dataSourceFabricConfigResult() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -192,7 +192,8 @@ func dataSourceFabricConfigResultRead(c context.Context, d *schema.ResourceData,
 		return diag.Errorf("json marshal of FabricConfigResult object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.FabricApi.GetFabricConfigResultList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching FabricConfigResult: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 

@@ -126,7 +126,7 @@ func resourceIamUserGroup() *schema.Resource {
 				ForceNew:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -557,7 +557,8 @@ func resourceIamUserGroupCreate(c context.Context, d *schema.ResourceData, meta 
 
 	r := conn.ApiClient.IamApi.CreateIamUserGroup(conn.ctx).IamUserGroup(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating IamUserGroup: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -572,7 +573,8 @@ func resourceIamUserGroupRead(c context.Context, d *schema.ResourceData, meta in
 	var de diag.Diagnostics
 	r := conn.ApiClient.IamApi.GetIamUserGroupByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "IamUserGroup object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -917,7 +919,8 @@ func resourceIamUserGroupUpdate(c context.Context, d *schema.ResourceData, meta 
 
 	r := conn.ApiClient.IamApi.UpdateIamUserGroup(conn.ctx, d.Id()).IamUserGroup(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating IamUserGroup: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -932,7 +935,8 @@ func resourceIamUserGroupDelete(c context.Context, d *schema.ResourceData, meta 
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamUserGroup(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting IamUserGroup object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

@@ -415,7 +415,8 @@ func resourceIamApiKeyCreate(c context.Context, d *schema.ResourceData, meta int
 
 	r := conn.ApiClient.IamApi.CreateIamApiKey(conn.ctx).IamApiKey(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating IamApiKey: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -430,7 +431,8 @@ func resourceIamApiKeyRead(c context.Context, d *schema.ResourceData, meta inter
 	var de diag.Diagnostics
 	r := conn.ApiClient.IamApi.GetIamApiKeyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "IamApiKey object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -705,7 +707,8 @@ func resourceIamApiKeyUpdate(c context.Context, d *schema.ResourceData, meta int
 
 	r := conn.ApiClient.IamApi.UpdateIamApiKey(conn.ctx, d.Id()).IamApiKey(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating IamApiKey: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -720,7 +723,8 @@ func resourceIamApiKeyDelete(c context.Context, d *schema.ResourceData, meta int
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamApiKey(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting IamApiKey object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

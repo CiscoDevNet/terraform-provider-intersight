@@ -72,7 +72,7 @@ func resourceKvmPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -372,7 +372,8 @@ func resourceKvmPolicyCreate(c context.Context, d *schema.ResourceData, meta int
 
 	r := conn.ApiClient.KvmApi.CreateKvmPolicy(conn.ctx).KvmPolicy(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating KvmPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -391,7 +392,8 @@ func detachKvmPolicyProfiles(d *schema.ResourceData, meta interface{}) diag.Diag
 
 	r := conn.ApiClient.KvmApi.UpdateKvmPolicy(conn.ctx, d.Id()).KvmPolicy(*o)
 	_, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while detaching profile/profiles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	return de
@@ -404,7 +406,8 @@ func resourceKvmPolicyRead(c context.Context, d *schema.ResourceData, meta inter
 	var de diag.Diagnostics
 	r := conn.ApiClient.KvmApi.GetKvmPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "KvmPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -666,7 +669,8 @@ func resourceKvmPolicyUpdate(c context.Context, d *schema.ResourceData, meta int
 
 	r := conn.ApiClient.KvmApi.UpdateKvmPolicy(conn.ctx, d.Id()).KvmPolicy(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating KvmPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -689,7 +693,8 @@ func resourceKvmPolicyDelete(c context.Context, d *schema.ResourceData, meta int
 	}
 	p := conn.ApiClient.KvmApi.DeleteKvmPolicy(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting KvmPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

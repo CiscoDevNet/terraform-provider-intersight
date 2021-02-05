@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -49,7 +49,7 @@ func (r ApiCreateCommHttpProxyPolicyRequest) IfNoneMatch(ifNoneMatch string) Api
 	return r
 }
 
-func (r ApiCreateCommHttpProxyPolicyRequest) Execute() (CommHttpProxyPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateCommHttpProxyPolicyRequest) Execute() (CommHttpProxyPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateCommHttpProxyPolicyExecute(r)
 }
 
@@ -69,21 +69,19 @@ func (a *CommApiService) CreateCommHttpProxyPolicy(ctx _context.Context) ApiCrea
  * Execute executes the request
  * @return CommHttpProxyPolicy
  */
-func (a *CommApiService) CreateCommHttpProxyPolicyExecute(r ApiCreateCommHttpProxyPolicyRequest) (CommHttpProxyPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CommApiService) CreateCommHttpProxyPolicyExecute(r ApiCreateCommHttpProxyPolicyRequest) (CommHttpProxyPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CommHttpProxyPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CommApiService.CreateCommHttpProxyPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/comm/HttpProxyPolicies"
@@ -92,8 +90,7 @@ func (a *CommApiService) CreateCommHttpProxyPolicyExecute(r ApiCreateCommHttpPro
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.commHttpProxyPolicy == nil {
-		executionError.error = "commHttpProxyPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("commHttpProxyPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -123,22 +120,19 @@ func (a *CommApiService) CreateCommHttpProxyPolicyExecute(r ApiCreateCommHttpPro
 	localVarPostBody = r.commHttpProxyPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -205,7 +199,7 @@ func (a *CommApiService) CreateCommHttpProxyPolicyExecute(r ApiCreateCommHttpPro
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiDeleteCommHttpProxyPolicyRequest struct {
@@ -214,7 +208,7 @@ type ApiDeleteCommHttpProxyPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteCommHttpProxyPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteCommHttpProxyPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteCommHttpProxyPolicyExecute(r)
 }
 
@@ -235,20 +229,18 @@ func (a *CommApiService) DeleteCommHttpProxyPolicy(ctx _context.Context, moid st
 /*
  * Execute executes the request
  */
-func (a *CommApiService) DeleteCommHttpProxyPolicyExecute(r ApiDeleteCommHttpProxyPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *CommApiService) DeleteCommHttpProxyPolicyExecute(r ApiDeleteCommHttpProxyPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CommApiService.DeleteCommHttpProxyPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/comm/HttpProxyPolicies/{Moid}"
@@ -277,22 +269,19 @@ func (a *CommApiService) DeleteCommHttpProxyPolicyExecute(r ApiDeleteCommHttpPro
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -350,7 +339,7 @@ func (a *CommApiService) DeleteCommHttpProxyPolicyExecute(r ApiDeleteCommHttpPro
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiGetCommHttpProxyPolicyByMoidRequest struct {
@@ -359,7 +348,7 @@ type ApiGetCommHttpProxyPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetCommHttpProxyPolicyByMoidRequest) Execute() (CommHttpProxyPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCommHttpProxyPolicyByMoidRequest) Execute() (CommHttpProxyPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetCommHttpProxyPolicyByMoidExecute(r)
 }
 
@@ -381,21 +370,19 @@ func (a *CommApiService) GetCommHttpProxyPolicyByMoid(ctx _context.Context, moid
  * Execute executes the request
  * @return CommHttpProxyPolicy
  */
-func (a *CommApiService) GetCommHttpProxyPolicyByMoidExecute(r ApiGetCommHttpProxyPolicyByMoidRequest) (CommHttpProxyPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CommApiService) GetCommHttpProxyPolicyByMoidExecute(r ApiGetCommHttpProxyPolicyByMoidRequest) (CommHttpProxyPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CommHttpProxyPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CommApiService.GetCommHttpProxyPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/comm/HttpProxyPolicies/{Moid}"
@@ -424,22 +411,19 @@ func (a *CommApiService) GetCommHttpProxyPolicyByMoidExecute(r ApiGetCommHttpPro
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -506,7 +490,7 @@ func (a *CommApiService) GetCommHttpProxyPolicyByMoidExecute(r ApiGetCommHttpPro
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetCommHttpProxyPolicyListRequest struct {
@@ -570,7 +554,7 @@ func (r ApiGetCommHttpProxyPolicyListRequest) Tags(tags string) ApiGetCommHttpPr
 	return r
 }
 
-func (r ApiGetCommHttpProxyPolicyListRequest) Execute() (CommHttpProxyPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetCommHttpProxyPolicyListRequest) Execute() (CommHttpProxyPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetCommHttpProxyPolicyListExecute(r)
 }
 
@@ -590,21 +574,19 @@ func (a *CommApiService) GetCommHttpProxyPolicyList(ctx _context.Context) ApiGet
  * Execute executes the request
  * @return CommHttpProxyPolicyResponse
  */
-func (a *CommApiService) GetCommHttpProxyPolicyListExecute(r ApiGetCommHttpProxyPolicyListRequest) (CommHttpProxyPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CommApiService) GetCommHttpProxyPolicyListExecute(r ApiGetCommHttpProxyPolicyListRequest) (CommHttpProxyPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CommHttpProxyPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CommApiService.GetCommHttpProxyPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/comm/HttpProxyPolicies"
@@ -665,22 +647,19 @@ func (a *CommApiService) GetCommHttpProxyPolicyListExecute(r ApiGetCommHttpProxy
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -747,7 +726,7 @@ func (a *CommApiService) GetCommHttpProxyPolicyListExecute(r ApiGetCommHttpProxy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchCommHttpProxyPolicyRequest struct {
@@ -767,7 +746,7 @@ func (r ApiPatchCommHttpProxyPolicyRequest) IfMatch(ifMatch string) ApiPatchComm
 	return r
 }
 
-func (r ApiPatchCommHttpProxyPolicyRequest) Execute() (CommHttpProxyPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchCommHttpProxyPolicyRequest) Execute() (CommHttpProxyPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchCommHttpProxyPolicyExecute(r)
 }
 
@@ -789,21 +768,19 @@ func (a *CommApiService) PatchCommHttpProxyPolicy(ctx _context.Context, moid str
  * Execute executes the request
  * @return CommHttpProxyPolicy
  */
-func (a *CommApiService) PatchCommHttpProxyPolicyExecute(r ApiPatchCommHttpProxyPolicyRequest) (CommHttpProxyPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CommApiService) PatchCommHttpProxyPolicyExecute(r ApiPatchCommHttpProxyPolicyRequest) (CommHttpProxyPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CommHttpProxyPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CommApiService.PatchCommHttpProxyPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/comm/HttpProxyPolicies/{Moid}"
@@ -813,8 +790,7 @@ func (a *CommApiService) PatchCommHttpProxyPolicyExecute(r ApiPatchCommHttpProxy
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.commHttpProxyPolicy == nil {
-		executionError.error = "commHttpProxyPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("commHttpProxyPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -841,22 +817,19 @@ func (a *CommApiService) PatchCommHttpProxyPolicyExecute(r ApiPatchCommHttpProxy
 	localVarPostBody = r.commHttpProxyPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -923,7 +896,7 @@ func (a *CommApiService) PatchCommHttpProxyPolicyExecute(r ApiPatchCommHttpProxy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateCommHttpProxyPolicyRequest struct {
@@ -943,7 +916,7 @@ func (r ApiUpdateCommHttpProxyPolicyRequest) IfMatch(ifMatch string) ApiUpdateCo
 	return r
 }
 
-func (r ApiUpdateCommHttpProxyPolicyRequest) Execute() (CommHttpProxyPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateCommHttpProxyPolicyRequest) Execute() (CommHttpProxyPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateCommHttpProxyPolicyExecute(r)
 }
 
@@ -965,21 +938,19 @@ func (a *CommApiService) UpdateCommHttpProxyPolicy(ctx _context.Context, moid st
  * Execute executes the request
  * @return CommHttpProxyPolicy
  */
-func (a *CommApiService) UpdateCommHttpProxyPolicyExecute(r ApiUpdateCommHttpProxyPolicyRequest) (CommHttpProxyPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *CommApiService) UpdateCommHttpProxyPolicyExecute(r ApiUpdateCommHttpProxyPolicyRequest) (CommHttpProxyPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  CommHttpProxyPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CommApiService.UpdateCommHttpProxyPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/comm/HttpProxyPolicies/{Moid}"
@@ -989,8 +960,7 @@ func (a *CommApiService) UpdateCommHttpProxyPolicyExecute(r ApiUpdateCommHttpPro
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.commHttpProxyPolicy == nil {
-		executionError.error = "commHttpProxyPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("commHttpProxyPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1017,22 +987,19 @@ func (a *CommApiService) UpdateCommHttpProxyPolicyExecute(r ApiUpdateCommHttpPro
 	localVarPostBody = r.commHttpProxyPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1099,5 +1066,5 @@ func (a *CommApiService) UpdateCommHttpProxyPolicyExecute(r ApiUpdateCommHttpPro
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

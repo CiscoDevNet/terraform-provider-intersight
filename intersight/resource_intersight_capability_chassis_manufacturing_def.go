@@ -58,7 +58,7 @@ func resourceCapabilityChassisManufacturingDef() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -210,7 +210,8 @@ func resourceCapabilityChassisManufacturingDefCreate(c context.Context, d *schem
 
 	r := conn.ApiClient.CapabilityApi.CreateCapabilityChassisManufacturingDef(conn.ctx).CapabilityChassisManufacturingDef(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating CapabilityChassisManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -225,7 +226,8 @@ func resourceCapabilityChassisManufacturingDefRead(c context.Context, d *schema.
 	var de diag.Diagnostics
 	r := conn.ApiClient.CapabilityApi.GetCapabilityChassisManufacturingDefByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "CapabilityChassisManufacturingDef object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -402,7 +404,8 @@ func resourceCapabilityChassisManufacturingDefUpdate(c context.Context, d *schem
 
 	r := conn.ApiClient.CapabilityApi.UpdateCapabilityChassisManufacturingDef(conn.ctx, d.Id()).CapabilityChassisManufacturingDef(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating CapabilityChassisManufacturingDef: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -417,7 +420,8 @@ func resourceCapabilityChassisManufacturingDefDelete(c context.Context, d *schem
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilityChassisManufacturingDef(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting CapabilityChassisManufacturingDef object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

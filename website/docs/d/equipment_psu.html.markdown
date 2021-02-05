@@ -30,4 +30,4 @@ The following arguments can be used to get data of already created objects in In
 * `sku`:(string) This field identifies the Stockkeeping Unit for this Power Supply. 
 * `vendor`:(string) This field identifies the vendor of the given component. 
 * `vid`:(string) This field identifies the Vendor ID for this Power Supply Unit. 
-* `voltage`:(string) This field is used to indicate the Voltage for this Power Supply. 
+* `voltage`:(string) This field is used to indicate the voltage state for this Power Supply. 

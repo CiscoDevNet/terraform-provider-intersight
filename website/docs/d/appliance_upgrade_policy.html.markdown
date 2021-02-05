@@ -28,4 +28,5 @@ The following arguments can be used to get data of already created objects in In
 * `blackout_dates_enabled`:(bool) If enabled, allows the user to define a blackout period during which the appliance will not be upgraded. 
 * `blackout_end_date`:(string) End date of the black out period. 
 * `blackout_start_date`:(string) Start date of the black out period. The appliance will not be upgraded during this period. 
+* `enable_meta_data_sync`:(bool) Indicates if the updated metadata files should be synced immediately or at the next upgrade. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 

@@ -21,7 +21,7 @@ func dataSourceEquipmentPsuControl() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -157,6 +157,11 @@ func dataSourceEquipmentPsuControl() *schema.Resource {
 				Optional:    true,
 				Computed:    true,
 			},
+			"oper_reason": {
+				Type:     schema.TypeList,
+				Optional: true,
+				Elem: &schema.Schema{
+					Type: schema.TypeString}},
 			"oper_state": {
 				Description: "This field identifies the operational state of the psu redundancy.",
 				Type:        schema.TypeString,
@@ -345,7 +350,8 @@ func dataSourceEquipmentPsuControlRead(c context.Context, d *schema.ResourceData
 		return diag.Errorf("json marshal of EquipmentPsuControl object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.EquipmentApi.GetEquipmentPsuControlList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching EquipmentPsuControl: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
@@ -415,6 +421,9 @@ func dataSourceEquipmentPsuControlRead(c context.Context, d *schema.ResourceData
 			}
 			if err := d.Set("oper_qualifier", (s.GetOperQualifier())); err != nil {
 				return diag.Errorf("error occurred while setting property OperQualifier: %s", err.Error())
+			}
+			if err := d.Set("oper_reason", (s.GetOperReason())); err != nil {
+				return diag.Errorf("error occurred while setting property OperReason: %s", err.Error())
 			}
 			if err := d.Set("oper_state", (s.GetOperState())); err != nil {
 				return diag.Errorf("error occurred while setting property OperState: %s", err.Error())

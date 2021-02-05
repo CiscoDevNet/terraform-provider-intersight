@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -34,7 +34,7 @@ type ApiGetNiaapiApicCcoPostByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiApicCcoPostByMoidRequest) Execute() (NiaapiApicCcoPost, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiApicCcoPostByMoidRequest) Execute() (NiaapiApicCcoPost, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiApicCcoPostByMoidExecute(r)
 }
 
@@ -56,21 +56,19 @@ func (a *NiaapiApiService) GetNiaapiApicCcoPostByMoid(ctx _context.Context, moid
  * Execute executes the request
  * @return NiaapiApicCcoPost
  */
-func (a *NiaapiApiService) GetNiaapiApicCcoPostByMoidExecute(r ApiGetNiaapiApicCcoPostByMoidRequest) (NiaapiApicCcoPost, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiApicCcoPostByMoidExecute(r ApiGetNiaapiApicCcoPostByMoidRequest) (NiaapiApicCcoPost, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiApicCcoPost
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiApicCcoPostByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/ApicCcoPosts/{Moid}"
@@ -99,22 +97,19 @@ func (a *NiaapiApiService) GetNiaapiApicCcoPostByMoidExecute(r ApiGetNiaapiApicC
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -181,7 +176,7 @@ func (a *NiaapiApiService) GetNiaapiApicCcoPostByMoidExecute(r ApiGetNiaapiApicC
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiApicCcoPostListRequest struct {
@@ -245,7 +240,7 @@ func (r ApiGetNiaapiApicCcoPostListRequest) Tags(tags string) ApiGetNiaapiApicCc
 	return r
 }
 
-func (r ApiGetNiaapiApicCcoPostListRequest) Execute() (NiaapiApicCcoPostResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiApicCcoPostListRequest) Execute() (NiaapiApicCcoPostResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiApicCcoPostListExecute(r)
 }
 
@@ -265,21 +260,19 @@ func (a *NiaapiApiService) GetNiaapiApicCcoPostList(ctx _context.Context) ApiGet
  * Execute executes the request
  * @return NiaapiApicCcoPostResponse
  */
-func (a *NiaapiApiService) GetNiaapiApicCcoPostListExecute(r ApiGetNiaapiApicCcoPostListRequest) (NiaapiApicCcoPostResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiApicCcoPostListExecute(r ApiGetNiaapiApicCcoPostListRequest) (NiaapiApicCcoPostResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiApicCcoPostResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiApicCcoPostList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/ApicCcoPosts"
@@ -340,22 +333,19 @@ func (a *NiaapiApiService) GetNiaapiApicCcoPostListExecute(r ApiGetNiaapiApicCco
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -422,7 +412,7 @@ func (a *NiaapiApiService) GetNiaapiApicCcoPostListExecute(r ApiGetNiaapiApicCco
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiApicFieldNoticeByMoidRequest struct {
@@ -431,7 +421,7 @@ type ApiGetNiaapiApicFieldNoticeByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiApicFieldNoticeByMoidRequest) Execute() (NiaapiApicFieldNotice, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiApicFieldNoticeByMoidRequest) Execute() (NiaapiApicFieldNotice, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiApicFieldNoticeByMoidExecute(r)
 }
 
@@ -453,21 +443,19 @@ func (a *NiaapiApiService) GetNiaapiApicFieldNoticeByMoid(ctx _context.Context, 
  * Execute executes the request
  * @return NiaapiApicFieldNotice
  */
-func (a *NiaapiApiService) GetNiaapiApicFieldNoticeByMoidExecute(r ApiGetNiaapiApicFieldNoticeByMoidRequest) (NiaapiApicFieldNotice, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiApicFieldNoticeByMoidExecute(r ApiGetNiaapiApicFieldNoticeByMoidRequest) (NiaapiApicFieldNotice, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiApicFieldNotice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiApicFieldNoticeByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/ApicFieldNotices/{Moid}"
@@ -496,22 +484,19 @@ func (a *NiaapiApiService) GetNiaapiApicFieldNoticeByMoidExecute(r ApiGetNiaapiA
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -578,7 +563,7 @@ func (a *NiaapiApiService) GetNiaapiApicFieldNoticeByMoidExecute(r ApiGetNiaapiA
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiApicFieldNoticeListRequest struct {
@@ -642,7 +627,7 @@ func (r ApiGetNiaapiApicFieldNoticeListRequest) Tags(tags string) ApiGetNiaapiAp
 	return r
 }
 
-func (r ApiGetNiaapiApicFieldNoticeListRequest) Execute() (NiaapiApicFieldNoticeResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiApicFieldNoticeListRequest) Execute() (NiaapiApicFieldNoticeResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiApicFieldNoticeListExecute(r)
 }
 
@@ -662,21 +647,19 @@ func (a *NiaapiApiService) GetNiaapiApicFieldNoticeList(ctx _context.Context) Ap
  * Execute executes the request
  * @return NiaapiApicFieldNoticeResponse
  */
-func (a *NiaapiApiService) GetNiaapiApicFieldNoticeListExecute(r ApiGetNiaapiApicFieldNoticeListRequest) (NiaapiApicFieldNoticeResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiApicFieldNoticeListExecute(r ApiGetNiaapiApicFieldNoticeListRequest) (NiaapiApicFieldNoticeResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiApicFieldNoticeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiApicFieldNoticeList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/ApicFieldNotices"
@@ -737,22 +720,19 @@ func (a *NiaapiApiService) GetNiaapiApicFieldNoticeListExecute(r ApiGetNiaapiApi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -819,7 +799,7 @@ func (a *NiaapiApiService) GetNiaapiApicFieldNoticeListExecute(r ApiGetNiaapiApi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiApicHweolByMoidRequest struct {
@@ -828,7 +808,7 @@ type ApiGetNiaapiApicHweolByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiApicHweolByMoidRequest) Execute() (NiaapiApicHweol, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiApicHweolByMoidRequest) Execute() (NiaapiApicHweol, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiApicHweolByMoidExecute(r)
 }
 
@@ -850,21 +830,19 @@ func (a *NiaapiApiService) GetNiaapiApicHweolByMoid(ctx _context.Context, moid s
  * Execute executes the request
  * @return NiaapiApicHweol
  */
-func (a *NiaapiApiService) GetNiaapiApicHweolByMoidExecute(r ApiGetNiaapiApicHweolByMoidRequest) (NiaapiApicHweol, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiApicHweolByMoidExecute(r ApiGetNiaapiApicHweolByMoidRequest) (NiaapiApicHweol, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiApicHweol
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiApicHweolByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/ApicHweols/{Moid}"
@@ -893,22 +871,19 @@ func (a *NiaapiApiService) GetNiaapiApicHweolByMoidExecute(r ApiGetNiaapiApicHwe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -975,7 +950,7 @@ func (a *NiaapiApiService) GetNiaapiApicHweolByMoidExecute(r ApiGetNiaapiApicHwe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiApicHweolListRequest struct {
@@ -1039,7 +1014,7 @@ func (r ApiGetNiaapiApicHweolListRequest) Tags(tags string) ApiGetNiaapiApicHweo
 	return r
 }
 
-func (r ApiGetNiaapiApicHweolListRequest) Execute() (NiaapiApicHweolResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiApicHweolListRequest) Execute() (NiaapiApicHweolResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiApicHweolListExecute(r)
 }
 
@@ -1059,21 +1034,19 @@ func (a *NiaapiApiService) GetNiaapiApicHweolList(ctx _context.Context) ApiGetNi
  * Execute executes the request
  * @return NiaapiApicHweolResponse
  */
-func (a *NiaapiApiService) GetNiaapiApicHweolListExecute(r ApiGetNiaapiApicHweolListRequest) (NiaapiApicHweolResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiApicHweolListExecute(r ApiGetNiaapiApicHweolListRequest) (NiaapiApicHweolResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiApicHweolResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiApicHweolList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/ApicHweols"
@@ -1134,22 +1107,19 @@ func (a *NiaapiApiService) GetNiaapiApicHweolListExecute(r ApiGetNiaapiApicHweol
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1216,7 +1186,7 @@ func (a *NiaapiApiService) GetNiaapiApicHweolListExecute(r ApiGetNiaapiApicHweol
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiApicLatestMaintainedReleaseByMoidRequest struct {
@@ -1225,7 +1195,7 @@ type ApiGetNiaapiApicLatestMaintainedReleaseByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiApicLatestMaintainedReleaseByMoidRequest) Execute() (NiaapiApicLatestMaintainedRelease, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiApicLatestMaintainedReleaseByMoidRequest) Execute() (NiaapiApicLatestMaintainedRelease, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiApicLatestMaintainedReleaseByMoidExecute(r)
 }
 
@@ -1247,21 +1217,19 @@ func (a *NiaapiApiService) GetNiaapiApicLatestMaintainedReleaseByMoid(ctx _conte
  * Execute executes the request
  * @return NiaapiApicLatestMaintainedRelease
  */
-func (a *NiaapiApiService) GetNiaapiApicLatestMaintainedReleaseByMoidExecute(r ApiGetNiaapiApicLatestMaintainedReleaseByMoidRequest) (NiaapiApicLatestMaintainedRelease, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiApicLatestMaintainedReleaseByMoidExecute(r ApiGetNiaapiApicLatestMaintainedReleaseByMoidRequest) (NiaapiApicLatestMaintainedRelease, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiApicLatestMaintainedRelease
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiApicLatestMaintainedReleaseByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/ApicLatestMaintainedReleases/{Moid}"
@@ -1290,22 +1258,19 @@ func (a *NiaapiApiService) GetNiaapiApicLatestMaintainedReleaseByMoidExecute(r A
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1372,7 +1337,7 @@ func (a *NiaapiApiService) GetNiaapiApicLatestMaintainedReleaseByMoidExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiApicLatestMaintainedReleaseListRequest struct {
@@ -1436,7 +1401,7 @@ func (r ApiGetNiaapiApicLatestMaintainedReleaseListRequest) Tags(tags string) Ap
 	return r
 }
 
-func (r ApiGetNiaapiApicLatestMaintainedReleaseListRequest) Execute() (NiaapiApicLatestMaintainedReleaseResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiApicLatestMaintainedReleaseListRequest) Execute() (NiaapiApicLatestMaintainedReleaseResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiApicLatestMaintainedReleaseListExecute(r)
 }
 
@@ -1456,21 +1421,19 @@ func (a *NiaapiApiService) GetNiaapiApicLatestMaintainedReleaseList(ctx _context
  * Execute executes the request
  * @return NiaapiApicLatestMaintainedReleaseResponse
  */
-func (a *NiaapiApiService) GetNiaapiApicLatestMaintainedReleaseListExecute(r ApiGetNiaapiApicLatestMaintainedReleaseListRequest) (NiaapiApicLatestMaintainedReleaseResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiApicLatestMaintainedReleaseListExecute(r ApiGetNiaapiApicLatestMaintainedReleaseListRequest) (NiaapiApicLatestMaintainedReleaseResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiApicLatestMaintainedReleaseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiApicLatestMaintainedReleaseList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/ApicLatestMaintainedReleases"
@@ -1531,22 +1494,19 @@ func (a *NiaapiApiService) GetNiaapiApicLatestMaintainedReleaseListExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1613,7 +1573,7 @@ func (a *NiaapiApiService) GetNiaapiApicLatestMaintainedReleaseListExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiApicReleaseRecommendByMoidRequest struct {
@@ -1622,7 +1582,7 @@ type ApiGetNiaapiApicReleaseRecommendByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiApicReleaseRecommendByMoidRequest) Execute() (NiaapiApicReleaseRecommend, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiApicReleaseRecommendByMoidRequest) Execute() (NiaapiApicReleaseRecommend, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiApicReleaseRecommendByMoidExecute(r)
 }
 
@@ -1644,21 +1604,19 @@ func (a *NiaapiApiService) GetNiaapiApicReleaseRecommendByMoid(ctx _context.Cont
  * Execute executes the request
  * @return NiaapiApicReleaseRecommend
  */
-func (a *NiaapiApiService) GetNiaapiApicReleaseRecommendByMoidExecute(r ApiGetNiaapiApicReleaseRecommendByMoidRequest) (NiaapiApicReleaseRecommend, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiApicReleaseRecommendByMoidExecute(r ApiGetNiaapiApicReleaseRecommendByMoidRequest) (NiaapiApicReleaseRecommend, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiApicReleaseRecommend
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiApicReleaseRecommendByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/ApicReleaseRecommends/{Moid}"
@@ -1687,22 +1645,19 @@ func (a *NiaapiApiService) GetNiaapiApicReleaseRecommendByMoidExecute(r ApiGetNi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1769,7 +1724,7 @@ func (a *NiaapiApiService) GetNiaapiApicReleaseRecommendByMoidExecute(r ApiGetNi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiApicReleaseRecommendListRequest struct {
@@ -1833,7 +1788,7 @@ func (r ApiGetNiaapiApicReleaseRecommendListRequest) Tags(tags string) ApiGetNia
 	return r
 }
 
-func (r ApiGetNiaapiApicReleaseRecommendListRequest) Execute() (NiaapiApicReleaseRecommendResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiApicReleaseRecommendListRequest) Execute() (NiaapiApicReleaseRecommendResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiApicReleaseRecommendListExecute(r)
 }
 
@@ -1853,21 +1808,19 @@ func (a *NiaapiApiService) GetNiaapiApicReleaseRecommendList(ctx _context.Contex
  * Execute executes the request
  * @return NiaapiApicReleaseRecommendResponse
  */
-func (a *NiaapiApiService) GetNiaapiApicReleaseRecommendListExecute(r ApiGetNiaapiApicReleaseRecommendListRequest) (NiaapiApicReleaseRecommendResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiApicReleaseRecommendListExecute(r ApiGetNiaapiApicReleaseRecommendListRequest) (NiaapiApicReleaseRecommendResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiApicReleaseRecommendResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiApicReleaseRecommendList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/ApicReleaseRecommends"
@@ -1928,22 +1881,19 @@ func (a *NiaapiApiService) GetNiaapiApicReleaseRecommendListExecute(r ApiGetNiaa
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2010,7 +1960,7 @@ func (a *NiaapiApiService) GetNiaapiApicReleaseRecommendListExecute(r ApiGetNiaa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiApicSweolByMoidRequest struct {
@@ -2019,7 +1969,7 @@ type ApiGetNiaapiApicSweolByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiApicSweolByMoidRequest) Execute() (NiaapiApicSweol, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiApicSweolByMoidRequest) Execute() (NiaapiApicSweol, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiApicSweolByMoidExecute(r)
 }
 
@@ -2041,21 +1991,19 @@ func (a *NiaapiApiService) GetNiaapiApicSweolByMoid(ctx _context.Context, moid s
  * Execute executes the request
  * @return NiaapiApicSweol
  */
-func (a *NiaapiApiService) GetNiaapiApicSweolByMoidExecute(r ApiGetNiaapiApicSweolByMoidRequest) (NiaapiApicSweol, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiApicSweolByMoidExecute(r ApiGetNiaapiApicSweolByMoidRequest) (NiaapiApicSweol, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiApicSweol
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiApicSweolByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/ApicSweols/{Moid}"
@@ -2084,22 +2032,19 @@ func (a *NiaapiApiService) GetNiaapiApicSweolByMoidExecute(r ApiGetNiaapiApicSwe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2166,7 +2111,7 @@ func (a *NiaapiApiService) GetNiaapiApicSweolByMoidExecute(r ApiGetNiaapiApicSwe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiApicSweolListRequest struct {
@@ -2230,7 +2175,7 @@ func (r ApiGetNiaapiApicSweolListRequest) Tags(tags string) ApiGetNiaapiApicSweo
 	return r
 }
 
-func (r ApiGetNiaapiApicSweolListRequest) Execute() (NiaapiApicSweolResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiApicSweolListRequest) Execute() (NiaapiApicSweolResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiApicSweolListExecute(r)
 }
 
@@ -2250,21 +2195,19 @@ func (a *NiaapiApiService) GetNiaapiApicSweolList(ctx _context.Context) ApiGetNi
  * Execute executes the request
  * @return NiaapiApicSweolResponse
  */
-func (a *NiaapiApiService) GetNiaapiApicSweolListExecute(r ApiGetNiaapiApicSweolListRequest) (NiaapiApicSweolResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiApicSweolListExecute(r ApiGetNiaapiApicSweolListRequest) (NiaapiApicSweolResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiApicSweolResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiApicSweolList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/ApicSweols"
@@ -2325,22 +2268,19 @@ func (a *NiaapiApiService) GetNiaapiApicSweolListExecute(r ApiGetNiaapiApicSweol
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2407,7 +2347,7 @@ func (a *NiaapiApiService) GetNiaapiApicSweolListExecute(r ApiGetNiaapiApicSweol
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiDcnmCcoPostByMoidRequest struct {
@@ -2416,7 +2356,7 @@ type ApiGetNiaapiDcnmCcoPostByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiDcnmCcoPostByMoidRequest) Execute() (NiaapiDcnmCcoPost, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiDcnmCcoPostByMoidRequest) Execute() (NiaapiDcnmCcoPost, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiDcnmCcoPostByMoidExecute(r)
 }
 
@@ -2438,21 +2378,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmCcoPostByMoid(ctx _context.Context, moid
  * Execute executes the request
  * @return NiaapiDcnmCcoPost
  */
-func (a *NiaapiApiService) GetNiaapiDcnmCcoPostByMoidExecute(r ApiGetNiaapiDcnmCcoPostByMoidRequest) (NiaapiDcnmCcoPost, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiDcnmCcoPostByMoidExecute(r ApiGetNiaapiDcnmCcoPostByMoidRequest) (NiaapiDcnmCcoPost, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiDcnmCcoPost
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiDcnmCcoPostByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/DcnmCcoPosts/{Moid}"
@@ -2481,22 +2419,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmCcoPostByMoidExecute(r ApiGetNiaapiDcnmC
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2563,7 +2498,7 @@ func (a *NiaapiApiService) GetNiaapiDcnmCcoPostByMoidExecute(r ApiGetNiaapiDcnmC
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiDcnmCcoPostListRequest struct {
@@ -2627,7 +2562,7 @@ func (r ApiGetNiaapiDcnmCcoPostListRequest) Tags(tags string) ApiGetNiaapiDcnmCc
 	return r
 }
 
-func (r ApiGetNiaapiDcnmCcoPostListRequest) Execute() (NiaapiDcnmCcoPostResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiDcnmCcoPostListRequest) Execute() (NiaapiDcnmCcoPostResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiDcnmCcoPostListExecute(r)
 }
 
@@ -2647,21 +2582,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmCcoPostList(ctx _context.Context) ApiGet
  * Execute executes the request
  * @return NiaapiDcnmCcoPostResponse
  */
-func (a *NiaapiApiService) GetNiaapiDcnmCcoPostListExecute(r ApiGetNiaapiDcnmCcoPostListRequest) (NiaapiDcnmCcoPostResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiDcnmCcoPostListExecute(r ApiGetNiaapiDcnmCcoPostListRequest) (NiaapiDcnmCcoPostResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiDcnmCcoPostResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiDcnmCcoPostList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/DcnmCcoPosts"
@@ -2722,22 +2655,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmCcoPostListExecute(r ApiGetNiaapiDcnmCco
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2804,7 +2734,7 @@ func (a *NiaapiApiService) GetNiaapiDcnmCcoPostListExecute(r ApiGetNiaapiDcnmCco
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiDcnmFieldNoticeByMoidRequest struct {
@@ -2813,7 +2743,7 @@ type ApiGetNiaapiDcnmFieldNoticeByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiDcnmFieldNoticeByMoidRequest) Execute() (NiaapiDcnmFieldNotice, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiDcnmFieldNoticeByMoidRequest) Execute() (NiaapiDcnmFieldNotice, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiDcnmFieldNoticeByMoidExecute(r)
 }
 
@@ -2835,21 +2765,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmFieldNoticeByMoid(ctx _context.Context, 
  * Execute executes the request
  * @return NiaapiDcnmFieldNotice
  */
-func (a *NiaapiApiService) GetNiaapiDcnmFieldNoticeByMoidExecute(r ApiGetNiaapiDcnmFieldNoticeByMoidRequest) (NiaapiDcnmFieldNotice, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiDcnmFieldNoticeByMoidExecute(r ApiGetNiaapiDcnmFieldNoticeByMoidRequest) (NiaapiDcnmFieldNotice, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiDcnmFieldNotice
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiDcnmFieldNoticeByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/DcnmFieldNotices/{Moid}"
@@ -2878,22 +2806,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmFieldNoticeByMoidExecute(r ApiGetNiaapiD
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2960,7 +2885,7 @@ func (a *NiaapiApiService) GetNiaapiDcnmFieldNoticeByMoidExecute(r ApiGetNiaapiD
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiDcnmFieldNoticeListRequest struct {
@@ -3024,7 +2949,7 @@ func (r ApiGetNiaapiDcnmFieldNoticeListRequest) Tags(tags string) ApiGetNiaapiDc
 	return r
 }
 
-func (r ApiGetNiaapiDcnmFieldNoticeListRequest) Execute() (NiaapiDcnmFieldNoticeResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiDcnmFieldNoticeListRequest) Execute() (NiaapiDcnmFieldNoticeResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiDcnmFieldNoticeListExecute(r)
 }
 
@@ -3044,21 +2969,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmFieldNoticeList(ctx _context.Context) Ap
  * Execute executes the request
  * @return NiaapiDcnmFieldNoticeResponse
  */
-func (a *NiaapiApiService) GetNiaapiDcnmFieldNoticeListExecute(r ApiGetNiaapiDcnmFieldNoticeListRequest) (NiaapiDcnmFieldNoticeResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiDcnmFieldNoticeListExecute(r ApiGetNiaapiDcnmFieldNoticeListRequest) (NiaapiDcnmFieldNoticeResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiDcnmFieldNoticeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiDcnmFieldNoticeList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/DcnmFieldNotices"
@@ -3119,22 +3042,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmFieldNoticeListExecute(r ApiGetNiaapiDcn
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3201,7 +3121,7 @@ func (a *NiaapiApiService) GetNiaapiDcnmFieldNoticeListExecute(r ApiGetNiaapiDcn
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiDcnmHweolByMoidRequest struct {
@@ -3210,7 +3130,7 @@ type ApiGetNiaapiDcnmHweolByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiDcnmHweolByMoidRequest) Execute() (NiaapiDcnmHweol, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiDcnmHweolByMoidRequest) Execute() (NiaapiDcnmHweol, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiDcnmHweolByMoidExecute(r)
 }
 
@@ -3232,21 +3152,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmHweolByMoid(ctx _context.Context, moid s
  * Execute executes the request
  * @return NiaapiDcnmHweol
  */
-func (a *NiaapiApiService) GetNiaapiDcnmHweolByMoidExecute(r ApiGetNiaapiDcnmHweolByMoidRequest) (NiaapiDcnmHweol, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiDcnmHweolByMoidExecute(r ApiGetNiaapiDcnmHweolByMoidRequest) (NiaapiDcnmHweol, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiDcnmHweol
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiDcnmHweolByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/DcnmHweols/{Moid}"
@@ -3275,22 +3193,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmHweolByMoidExecute(r ApiGetNiaapiDcnmHwe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3357,7 +3272,7 @@ func (a *NiaapiApiService) GetNiaapiDcnmHweolByMoidExecute(r ApiGetNiaapiDcnmHwe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiDcnmHweolListRequest struct {
@@ -3421,7 +3336,7 @@ func (r ApiGetNiaapiDcnmHweolListRequest) Tags(tags string) ApiGetNiaapiDcnmHweo
 	return r
 }
 
-func (r ApiGetNiaapiDcnmHweolListRequest) Execute() (NiaapiDcnmHweolResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiDcnmHweolListRequest) Execute() (NiaapiDcnmHweolResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiDcnmHweolListExecute(r)
 }
 
@@ -3441,21 +3356,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmHweolList(ctx _context.Context) ApiGetNi
  * Execute executes the request
  * @return NiaapiDcnmHweolResponse
  */
-func (a *NiaapiApiService) GetNiaapiDcnmHweolListExecute(r ApiGetNiaapiDcnmHweolListRequest) (NiaapiDcnmHweolResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiDcnmHweolListExecute(r ApiGetNiaapiDcnmHweolListRequest) (NiaapiDcnmHweolResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiDcnmHweolResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiDcnmHweolList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/DcnmHweols"
@@ -3516,22 +3429,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmHweolListExecute(r ApiGetNiaapiDcnmHweol
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3598,7 +3508,7 @@ func (a *NiaapiApiService) GetNiaapiDcnmHweolListExecute(r ApiGetNiaapiDcnmHweol
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiDcnmLatestMaintainedReleaseByMoidRequest struct {
@@ -3607,7 +3517,7 @@ type ApiGetNiaapiDcnmLatestMaintainedReleaseByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiDcnmLatestMaintainedReleaseByMoidRequest) Execute() (NiaapiDcnmLatestMaintainedRelease, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiDcnmLatestMaintainedReleaseByMoidRequest) Execute() (NiaapiDcnmLatestMaintainedRelease, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiDcnmLatestMaintainedReleaseByMoidExecute(r)
 }
 
@@ -3629,21 +3539,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmLatestMaintainedReleaseByMoid(ctx _conte
  * Execute executes the request
  * @return NiaapiDcnmLatestMaintainedRelease
  */
-func (a *NiaapiApiService) GetNiaapiDcnmLatestMaintainedReleaseByMoidExecute(r ApiGetNiaapiDcnmLatestMaintainedReleaseByMoidRequest) (NiaapiDcnmLatestMaintainedRelease, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiDcnmLatestMaintainedReleaseByMoidExecute(r ApiGetNiaapiDcnmLatestMaintainedReleaseByMoidRequest) (NiaapiDcnmLatestMaintainedRelease, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiDcnmLatestMaintainedRelease
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiDcnmLatestMaintainedReleaseByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/DcnmLatestMaintainedReleases/{Moid}"
@@ -3672,22 +3580,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmLatestMaintainedReleaseByMoidExecute(r A
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3754,7 +3659,7 @@ func (a *NiaapiApiService) GetNiaapiDcnmLatestMaintainedReleaseByMoidExecute(r A
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiDcnmLatestMaintainedReleaseListRequest struct {
@@ -3818,7 +3723,7 @@ func (r ApiGetNiaapiDcnmLatestMaintainedReleaseListRequest) Tags(tags string) Ap
 	return r
 }
 
-func (r ApiGetNiaapiDcnmLatestMaintainedReleaseListRequest) Execute() (NiaapiDcnmLatestMaintainedReleaseResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiDcnmLatestMaintainedReleaseListRequest) Execute() (NiaapiDcnmLatestMaintainedReleaseResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiDcnmLatestMaintainedReleaseListExecute(r)
 }
 
@@ -3838,21 +3743,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmLatestMaintainedReleaseList(ctx _context
  * Execute executes the request
  * @return NiaapiDcnmLatestMaintainedReleaseResponse
  */
-func (a *NiaapiApiService) GetNiaapiDcnmLatestMaintainedReleaseListExecute(r ApiGetNiaapiDcnmLatestMaintainedReleaseListRequest) (NiaapiDcnmLatestMaintainedReleaseResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiDcnmLatestMaintainedReleaseListExecute(r ApiGetNiaapiDcnmLatestMaintainedReleaseListRequest) (NiaapiDcnmLatestMaintainedReleaseResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiDcnmLatestMaintainedReleaseResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiDcnmLatestMaintainedReleaseList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/DcnmLatestMaintainedReleases"
@@ -3913,22 +3816,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmLatestMaintainedReleaseListExecute(r Api
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3995,7 +3895,7 @@ func (a *NiaapiApiService) GetNiaapiDcnmLatestMaintainedReleaseListExecute(r Api
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiDcnmReleaseRecommendByMoidRequest struct {
@@ -4004,7 +3904,7 @@ type ApiGetNiaapiDcnmReleaseRecommendByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiDcnmReleaseRecommendByMoidRequest) Execute() (NiaapiDcnmReleaseRecommend, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiDcnmReleaseRecommendByMoidRequest) Execute() (NiaapiDcnmReleaseRecommend, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiDcnmReleaseRecommendByMoidExecute(r)
 }
 
@@ -4026,21 +3926,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmReleaseRecommendByMoid(ctx _context.Cont
  * Execute executes the request
  * @return NiaapiDcnmReleaseRecommend
  */
-func (a *NiaapiApiService) GetNiaapiDcnmReleaseRecommendByMoidExecute(r ApiGetNiaapiDcnmReleaseRecommendByMoidRequest) (NiaapiDcnmReleaseRecommend, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiDcnmReleaseRecommendByMoidExecute(r ApiGetNiaapiDcnmReleaseRecommendByMoidRequest) (NiaapiDcnmReleaseRecommend, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiDcnmReleaseRecommend
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiDcnmReleaseRecommendByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/DcnmReleaseRecommends/{Moid}"
@@ -4069,22 +3967,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmReleaseRecommendByMoidExecute(r ApiGetNi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4151,7 +4046,7 @@ func (a *NiaapiApiService) GetNiaapiDcnmReleaseRecommendByMoidExecute(r ApiGetNi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiDcnmReleaseRecommendListRequest struct {
@@ -4215,7 +4110,7 @@ func (r ApiGetNiaapiDcnmReleaseRecommendListRequest) Tags(tags string) ApiGetNia
 	return r
 }
 
-func (r ApiGetNiaapiDcnmReleaseRecommendListRequest) Execute() (NiaapiDcnmReleaseRecommendResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiDcnmReleaseRecommendListRequest) Execute() (NiaapiDcnmReleaseRecommendResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiDcnmReleaseRecommendListExecute(r)
 }
 
@@ -4235,21 +4130,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmReleaseRecommendList(ctx _context.Contex
  * Execute executes the request
  * @return NiaapiDcnmReleaseRecommendResponse
  */
-func (a *NiaapiApiService) GetNiaapiDcnmReleaseRecommendListExecute(r ApiGetNiaapiDcnmReleaseRecommendListRequest) (NiaapiDcnmReleaseRecommendResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiDcnmReleaseRecommendListExecute(r ApiGetNiaapiDcnmReleaseRecommendListRequest) (NiaapiDcnmReleaseRecommendResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiDcnmReleaseRecommendResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiDcnmReleaseRecommendList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/DcnmReleaseRecommends"
@@ -4310,22 +4203,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmReleaseRecommendListExecute(r ApiGetNiaa
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4392,7 +4282,7 @@ func (a *NiaapiApiService) GetNiaapiDcnmReleaseRecommendListExecute(r ApiGetNiaa
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiDcnmSweolByMoidRequest struct {
@@ -4401,7 +4291,7 @@ type ApiGetNiaapiDcnmSweolByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiDcnmSweolByMoidRequest) Execute() (NiaapiDcnmSweol, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiDcnmSweolByMoidRequest) Execute() (NiaapiDcnmSweol, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiDcnmSweolByMoidExecute(r)
 }
 
@@ -4423,21 +4313,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmSweolByMoid(ctx _context.Context, moid s
  * Execute executes the request
  * @return NiaapiDcnmSweol
  */
-func (a *NiaapiApiService) GetNiaapiDcnmSweolByMoidExecute(r ApiGetNiaapiDcnmSweolByMoidRequest) (NiaapiDcnmSweol, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiDcnmSweolByMoidExecute(r ApiGetNiaapiDcnmSweolByMoidRequest) (NiaapiDcnmSweol, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiDcnmSweol
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiDcnmSweolByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/DcnmSweols/{Moid}"
@@ -4466,22 +4354,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmSweolByMoidExecute(r ApiGetNiaapiDcnmSwe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4548,7 +4433,7 @@ func (a *NiaapiApiService) GetNiaapiDcnmSweolByMoidExecute(r ApiGetNiaapiDcnmSwe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiDcnmSweolListRequest struct {
@@ -4612,7 +4497,7 @@ func (r ApiGetNiaapiDcnmSweolListRequest) Tags(tags string) ApiGetNiaapiDcnmSweo
 	return r
 }
 
-func (r ApiGetNiaapiDcnmSweolListRequest) Execute() (NiaapiDcnmSweolResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiDcnmSweolListRequest) Execute() (NiaapiDcnmSweolResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiDcnmSweolListExecute(r)
 }
 
@@ -4632,21 +4517,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmSweolList(ctx _context.Context) ApiGetNi
  * Execute executes the request
  * @return NiaapiDcnmSweolResponse
  */
-func (a *NiaapiApiService) GetNiaapiDcnmSweolListExecute(r ApiGetNiaapiDcnmSweolListRequest) (NiaapiDcnmSweolResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiDcnmSweolListExecute(r ApiGetNiaapiDcnmSweolListRequest) (NiaapiDcnmSweolResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiDcnmSweolResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiDcnmSweolList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/DcnmSweols"
@@ -4707,22 +4590,19 @@ func (a *NiaapiApiService) GetNiaapiDcnmSweolListExecute(r ApiGetNiaapiDcnmSweol
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4789,7 +4669,7 @@ func (a *NiaapiApiService) GetNiaapiDcnmSweolListExecute(r ApiGetNiaapiDcnmSweol
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiFileDownloaderByMoidRequest struct {
@@ -4798,7 +4678,7 @@ type ApiGetNiaapiFileDownloaderByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiFileDownloaderByMoidRequest) Execute() (NiaapiFileDownloader, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiFileDownloaderByMoidRequest) Execute() (NiaapiFileDownloader, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiFileDownloaderByMoidExecute(r)
 }
 
@@ -4820,21 +4700,19 @@ func (a *NiaapiApiService) GetNiaapiFileDownloaderByMoid(ctx _context.Context, m
  * Execute executes the request
  * @return NiaapiFileDownloader
  */
-func (a *NiaapiApiService) GetNiaapiFileDownloaderByMoidExecute(r ApiGetNiaapiFileDownloaderByMoidRequest) (NiaapiFileDownloader, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiFileDownloaderByMoidExecute(r ApiGetNiaapiFileDownloaderByMoidRequest) (NiaapiFileDownloader, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiFileDownloader
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiFileDownloaderByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/FileDownloaders/{Moid}"
@@ -4863,22 +4741,19 @@ func (a *NiaapiApiService) GetNiaapiFileDownloaderByMoidExecute(r ApiGetNiaapiFi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4945,7 +4820,7 @@ func (a *NiaapiApiService) GetNiaapiFileDownloaderByMoidExecute(r ApiGetNiaapiFi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiFileDownloaderListRequest struct {
@@ -5009,7 +4884,7 @@ func (r ApiGetNiaapiFileDownloaderListRequest) Tags(tags string) ApiGetNiaapiFil
 	return r
 }
 
-func (r ApiGetNiaapiFileDownloaderListRequest) Execute() (NiaapiFileDownloaderResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiFileDownloaderListRequest) Execute() (NiaapiFileDownloaderResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiFileDownloaderListExecute(r)
 }
 
@@ -5029,21 +4904,19 @@ func (a *NiaapiApiService) GetNiaapiFileDownloaderList(ctx _context.Context) Api
  * Execute executes the request
  * @return NiaapiFileDownloaderResponse
  */
-func (a *NiaapiApiService) GetNiaapiFileDownloaderListExecute(r ApiGetNiaapiFileDownloaderListRequest) (NiaapiFileDownloaderResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiFileDownloaderListExecute(r ApiGetNiaapiFileDownloaderListRequest) (NiaapiFileDownloaderResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiFileDownloaderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiFileDownloaderList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/FileDownloaders"
@@ -5104,22 +4977,19 @@ func (a *NiaapiApiService) GetNiaapiFileDownloaderListExecute(r ApiGetNiaapiFile
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5186,7 +5056,7 @@ func (a *NiaapiApiService) GetNiaapiFileDownloaderListExecute(r ApiGetNiaapiFile
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiNiaMetadataByMoidRequest struct {
@@ -5195,7 +5065,7 @@ type ApiGetNiaapiNiaMetadataByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiNiaMetadataByMoidRequest) Execute() (NiaapiNiaMetadata, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiNiaMetadataByMoidRequest) Execute() (NiaapiNiaMetadata, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiNiaMetadataByMoidExecute(r)
 }
 
@@ -5217,21 +5087,19 @@ func (a *NiaapiApiService) GetNiaapiNiaMetadataByMoid(ctx _context.Context, moid
  * Execute executes the request
  * @return NiaapiNiaMetadata
  */
-func (a *NiaapiApiService) GetNiaapiNiaMetadataByMoidExecute(r ApiGetNiaapiNiaMetadataByMoidRequest) (NiaapiNiaMetadata, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiNiaMetadataByMoidExecute(r ApiGetNiaapiNiaMetadataByMoidRequest) (NiaapiNiaMetadata, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiNiaMetadata
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiNiaMetadataByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/NiaMetadata/{Moid}"
@@ -5260,22 +5128,19 @@ func (a *NiaapiApiService) GetNiaapiNiaMetadataByMoidExecute(r ApiGetNiaapiNiaMe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5342,7 +5207,7 @@ func (a *NiaapiApiService) GetNiaapiNiaMetadataByMoidExecute(r ApiGetNiaapiNiaMe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiNiaMetadataListRequest struct {
@@ -5406,7 +5271,7 @@ func (r ApiGetNiaapiNiaMetadataListRequest) Tags(tags string) ApiGetNiaapiNiaMet
 	return r
 }
 
-func (r ApiGetNiaapiNiaMetadataListRequest) Execute() (NiaapiNiaMetadataResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiNiaMetadataListRequest) Execute() (NiaapiNiaMetadataResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiNiaMetadataListExecute(r)
 }
 
@@ -5426,21 +5291,19 @@ func (a *NiaapiApiService) GetNiaapiNiaMetadataList(ctx _context.Context) ApiGet
  * Execute executes the request
  * @return NiaapiNiaMetadataResponse
  */
-func (a *NiaapiApiService) GetNiaapiNiaMetadataListExecute(r ApiGetNiaapiNiaMetadataListRequest) (NiaapiNiaMetadataResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiNiaMetadataListExecute(r ApiGetNiaapiNiaMetadataListRequest) (NiaapiNiaMetadataResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiNiaMetadataResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiNiaMetadataList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/NiaMetadata"
@@ -5501,22 +5364,19 @@ func (a *NiaapiApiService) GetNiaapiNiaMetadataListExecute(r ApiGetNiaapiNiaMeta
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5583,7 +5443,7 @@ func (a *NiaapiApiService) GetNiaapiNiaMetadataListExecute(r ApiGetNiaapiNiaMeta
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiNibFileDownloaderByMoidRequest struct {
@@ -5592,7 +5452,7 @@ type ApiGetNiaapiNibFileDownloaderByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiNibFileDownloaderByMoidRequest) Execute() (NiaapiNibFileDownloader, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiNibFileDownloaderByMoidRequest) Execute() (NiaapiNibFileDownloader, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiNibFileDownloaderByMoidExecute(r)
 }
 
@@ -5614,21 +5474,19 @@ func (a *NiaapiApiService) GetNiaapiNibFileDownloaderByMoid(ctx _context.Context
  * Execute executes the request
  * @return NiaapiNibFileDownloader
  */
-func (a *NiaapiApiService) GetNiaapiNibFileDownloaderByMoidExecute(r ApiGetNiaapiNibFileDownloaderByMoidRequest) (NiaapiNibFileDownloader, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiNibFileDownloaderByMoidExecute(r ApiGetNiaapiNibFileDownloaderByMoidRequest) (NiaapiNibFileDownloader, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiNibFileDownloader
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiNibFileDownloaderByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/NibFileDownloaders/{Moid}"
@@ -5657,22 +5515,19 @@ func (a *NiaapiApiService) GetNiaapiNibFileDownloaderByMoidExecute(r ApiGetNiaap
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5739,7 +5594,7 @@ func (a *NiaapiApiService) GetNiaapiNibFileDownloaderByMoidExecute(r ApiGetNiaap
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiNibFileDownloaderListRequest struct {
@@ -5803,7 +5658,7 @@ func (r ApiGetNiaapiNibFileDownloaderListRequest) Tags(tags string) ApiGetNiaapi
 	return r
 }
 
-func (r ApiGetNiaapiNibFileDownloaderListRequest) Execute() (NiaapiNibFileDownloaderResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiNibFileDownloaderListRequest) Execute() (NiaapiNibFileDownloaderResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiNibFileDownloaderListExecute(r)
 }
 
@@ -5823,21 +5678,19 @@ func (a *NiaapiApiService) GetNiaapiNibFileDownloaderList(ctx _context.Context) 
  * Execute executes the request
  * @return NiaapiNibFileDownloaderResponse
  */
-func (a *NiaapiApiService) GetNiaapiNibFileDownloaderListExecute(r ApiGetNiaapiNibFileDownloaderListRequest) (NiaapiNibFileDownloaderResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiNibFileDownloaderListExecute(r ApiGetNiaapiNibFileDownloaderListRequest) (NiaapiNibFileDownloaderResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiNibFileDownloaderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiNibFileDownloaderList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/NibFileDownloaders"
@@ -5898,22 +5751,19 @@ func (a *NiaapiApiService) GetNiaapiNibFileDownloaderListExecute(r ApiGetNiaapiN
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5980,7 +5830,7 @@ func (a *NiaapiApiService) GetNiaapiNibFileDownloaderListExecute(r ApiGetNiaapiN
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiNibMetadataByMoidRequest struct {
@@ -5989,7 +5839,7 @@ type ApiGetNiaapiNibMetadataByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiNibMetadataByMoidRequest) Execute() (NiaapiNibMetadata, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiNibMetadataByMoidRequest) Execute() (NiaapiNibMetadata, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiNibMetadataByMoidExecute(r)
 }
 
@@ -6011,21 +5861,19 @@ func (a *NiaapiApiService) GetNiaapiNibMetadataByMoid(ctx _context.Context, moid
  * Execute executes the request
  * @return NiaapiNibMetadata
  */
-func (a *NiaapiApiService) GetNiaapiNibMetadataByMoidExecute(r ApiGetNiaapiNibMetadataByMoidRequest) (NiaapiNibMetadata, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiNibMetadataByMoidExecute(r ApiGetNiaapiNibMetadataByMoidRequest) (NiaapiNibMetadata, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiNibMetadata
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiNibMetadataByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/NibMetadata/{Moid}"
@@ -6054,22 +5902,19 @@ func (a *NiaapiApiService) GetNiaapiNibMetadataByMoidExecute(r ApiGetNiaapiNibMe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6136,7 +5981,7 @@ func (a *NiaapiApiService) GetNiaapiNibMetadataByMoidExecute(r ApiGetNiaapiNibMe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiNibMetadataListRequest struct {
@@ -6200,7 +6045,7 @@ func (r ApiGetNiaapiNibMetadataListRequest) Tags(tags string) ApiGetNiaapiNibMet
 	return r
 }
 
-func (r ApiGetNiaapiNibMetadataListRequest) Execute() (NiaapiNibMetadataResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiNibMetadataListRequest) Execute() (NiaapiNibMetadataResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiNibMetadataListExecute(r)
 }
 
@@ -6220,21 +6065,19 @@ func (a *NiaapiApiService) GetNiaapiNibMetadataList(ctx _context.Context) ApiGet
  * Execute executes the request
  * @return NiaapiNibMetadataResponse
  */
-func (a *NiaapiApiService) GetNiaapiNibMetadataListExecute(r ApiGetNiaapiNibMetadataListRequest) (NiaapiNibMetadataResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiNibMetadataListExecute(r ApiGetNiaapiNibMetadataListRequest) (NiaapiNibMetadataResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiNibMetadataResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiNibMetadataList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/NibMetadata"
@@ -6295,22 +6138,19 @@ func (a *NiaapiApiService) GetNiaapiNibMetadataListExecute(r ApiGetNiaapiNibMeta
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6377,7 +6217,7 @@ func (a *NiaapiApiService) GetNiaapiNibMetadataListExecute(r ApiGetNiaapiNibMeta
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiVersionRegexByMoidRequest struct {
@@ -6386,7 +6226,7 @@ type ApiGetNiaapiVersionRegexByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetNiaapiVersionRegexByMoidRequest) Execute() (NiaapiVersionRegex, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiVersionRegexByMoidRequest) Execute() (NiaapiVersionRegex, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiVersionRegexByMoidExecute(r)
 }
 
@@ -6408,21 +6248,19 @@ func (a *NiaapiApiService) GetNiaapiVersionRegexByMoid(ctx _context.Context, moi
  * Execute executes the request
  * @return NiaapiVersionRegex
  */
-func (a *NiaapiApiService) GetNiaapiVersionRegexByMoidExecute(r ApiGetNiaapiVersionRegexByMoidRequest) (NiaapiVersionRegex, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiVersionRegexByMoidExecute(r ApiGetNiaapiVersionRegexByMoidRequest) (NiaapiVersionRegex, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiVersionRegex
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiVersionRegexByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/VersionRegexes/{Moid}"
@@ -6451,22 +6289,19 @@ func (a *NiaapiApiService) GetNiaapiVersionRegexByMoidExecute(r ApiGetNiaapiVers
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6533,7 +6368,7 @@ func (a *NiaapiApiService) GetNiaapiVersionRegexByMoidExecute(r ApiGetNiaapiVers
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetNiaapiVersionRegexListRequest struct {
@@ -6597,7 +6432,7 @@ func (r ApiGetNiaapiVersionRegexListRequest) Tags(tags string) ApiGetNiaapiVersi
 	return r
 }
 
-func (r ApiGetNiaapiVersionRegexListRequest) Execute() (NiaapiVersionRegexResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetNiaapiVersionRegexListRequest) Execute() (NiaapiVersionRegexResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetNiaapiVersionRegexListExecute(r)
 }
 
@@ -6617,21 +6452,19 @@ func (a *NiaapiApiService) GetNiaapiVersionRegexList(ctx _context.Context) ApiGe
  * Execute executes the request
  * @return NiaapiVersionRegexResponse
  */
-func (a *NiaapiApiService) GetNiaapiVersionRegexListExecute(r ApiGetNiaapiVersionRegexListRequest) (NiaapiVersionRegexResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *NiaapiApiService) GetNiaapiVersionRegexListExecute(r ApiGetNiaapiVersionRegexListRequest) (NiaapiVersionRegexResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  NiaapiVersionRegexResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "NiaapiApiService.GetNiaapiVersionRegexList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/niaapi/VersionRegexes"
@@ -6692,22 +6525,19 @@ func (a *NiaapiApiService) GetNiaapiVersionRegexListExecute(r ApiGetNiaapiVersio
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6774,5 +6604,5 @@ func (a *NiaapiApiService) GetNiaapiVersionRegexListExecute(r ApiGetNiaapiVersio
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

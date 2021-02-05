@@ -54,7 +54,7 @@ func resourceKubernetesCluster() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -328,7 +328,8 @@ func resourceKubernetesClusterCreate(c context.Context, d *schema.ResourceData, 
 
 	r := conn.ApiClient.KubernetesApi.CreateKubernetesCluster(conn.ctx).KubernetesCluster(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating KubernetesCluster: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -343,7 +344,8 @@ func resourceKubernetesClusterRead(c context.Context, d *schema.ResourceData, me
 	var de diag.Diagnostics
 	r := conn.ApiClient.KubernetesApi.GetKubernetesClusterByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "KubernetesCluster object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -565,7 +567,8 @@ func resourceKubernetesClusterUpdate(c context.Context, d *schema.ResourceData, 
 
 	r := conn.ApiClient.KubernetesApi.UpdateKubernetesCluster(conn.ctx, d.Id()).KubernetesCluster(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating KubernetesCluster: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -580,7 +583,8 @@ func resourceKubernetesClusterDelete(c context.Context, d *schema.ResourceData, 
 	conn := meta.(*Config)
 	p := conn.ApiClient.KubernetesApi.DeleteKubernetesCluster(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting KubernetesCluster object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

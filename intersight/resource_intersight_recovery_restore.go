@@ -72,7 +72,7 @@ func resourceRecoveryRestore() *schema.Resource {
 				ForceNew:   true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -560,7 +560,8 @@ func resourceRecoveryRestoreCreate(c context.Context, d *schema.ResourceData, me
 
 	r := conn.ApiClient.RecoveryApi.CreateRecoveryRestore(conn.ctx).RecoveryRestore(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating RecoveryRestore: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -575,7 +576,8 @@ func resourceRecoveryRestoreRead(c context.Context, d *schema.ResourceData, meta
 	var de diag.Diagnostics
 	r := conn.ApiClient.RecoveryApi.GetRecoveryRestoreByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "RecoveryRestore object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -636,7 +638,8 @@ func resourceRecoveryRestoreDelete(c context.Context, d *schema.ResourceData, me
 	conn := meta.(*Config)
 	p := conn.ApiClient.RecoveryApi.DeleteRecoveryRestore(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting RecoveryRestore object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

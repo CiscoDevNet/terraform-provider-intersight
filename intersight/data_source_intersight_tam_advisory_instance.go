@@ -214,7 +214,8 @@ func dataSourceTamAdvisoryInstanceRead(c context.Context, d *schema.ResourceData
 		return diag.Errorf("json marshal of TamAdvisoryInstance object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.TamApi.GetTamAdvisoryInstanceList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching TamAdvisoryInstance: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 

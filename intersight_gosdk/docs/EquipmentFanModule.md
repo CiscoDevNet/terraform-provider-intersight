@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "equipment.FanModule"]
 **Description** | Pointer to **string** | This field is to provide description for the fan module. | [optional] [readonly] 
 **ModuleId** | Pointer to **int64** | This field acts as the identifier for this particular Module, within the Fabric Interconnect. | [optional] [readonly] 
+**OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | This field is used to indicate this fan module&#39;s operational state. | [optional] [readonly] 
 **PartNumber** | Pointer to **string** | This field identifies the Part Number for this Fan Module. | [optional] [readonly] 
 **Pid** | Pointer to **string** | This field identifies the Product ID for the fan module. | [optional] [readonly] 
@@ -132,6 +133,41 @@ SetModuleId sets ModuleId field to given value.
 
 HasModuleId returns a boolean if a field has been set.
 
+### GetOperReason
+
+`func (o *EquipmentFanModule) GetOperReason() []string`
+
+GetOperReason returns the OperReason field if non-nil, zero value otherwise.
+
+### GetOperReasonOk
+
+`func (o *EquipmentFanModule) GetOperReasonOk() (*[]string, bool)`
+
+GetOperReasonOk returns a tuple with the OperReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperReason
+
+`func (o *EquipmentFanModule) SetOperReason(v []string)`
+
+SetOperReason sets OperReason field to given value.
+
+### HasOperReason
+
+`func (o *EquipmentFanModule) HasOperReason() bool`
+
+HasOperReason returns a boolean if a field has been set.
+
+### SetOperReasonNil
+
+`func (o *EquipmentFanModule) SetOperReasonNil(b bool)`
+
+ SetOperReasonNil sets the value for OperReason to be an explicit nil
+
+### UnsetOperReason
+`func (o *EquipmentFanModule) UnsetOperReason()`
+
+UnsetOperReason ensures that no value is present for OperReason, not even an explicit nil
 ### GetOperState
 
 `func (o *EquipmentFanModule) GetOperState() string`

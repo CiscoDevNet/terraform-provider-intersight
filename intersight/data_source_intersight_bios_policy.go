@@ -85,6 +85,11 @@ func dataSourceBiosPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"advanced_mem_test": {
+				Description: "BIOS Token for setting Advanced Memory Test configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"all_usb_devices": {
 				Description: "BIOS Token for setting All USB Devices configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 				Type:        schema.TypeString,
@@ -121,7 +126,7 @@ func dataSourceBiosPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"baud_rate": {
-				Description: "BIOS Token for setting Baud rate configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `115200` - Value - 115200 for configuring BaudRate token.\n* `19200` - Value - 19200 for configuring BaudRate token.\n* `38400` - Value - 38400 for configuring BaudRate token.\n* `57600` - Value - 57600 for configuring BaudRate token.\n* `9600` - Value - 9600 for configuring BaudRate token.",
+				Description: "BIOS Token for setting Baud Rate configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `115200` - Value - 115200 for configuring BaudRate token.\n* `19200` - Value - 19200 for configuring BaudRate token.\n* `38400` - Value - 38400 for configuring BaudRate token.\n* `57600` - Value - 57600 for configuring BaudRate token.\n* `9600` - Value - 9600 for configuring BaudRate token.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -191,7 +196,7 @@ func dataSourceBiosPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"cbs_cmn_mem_map_bank_interleave_ddr4": {
-				Description: "BIOS Token for setting Chipselect Interleaving configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token.\n* `disabled` - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.",
+				Description: "BIOS Token for setting Chipset Interleave configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsCmnMemMapBankInterleaveDdr4 token.\n* `disabled` - Value - disabled for configuring CbsCmnMemMapBankInterleaveDdr4 token.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -201,12 +206,12 @@ func dataSourceBiosPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"cbs_df_cmn_mem_intlv": {
-				Description: "BIOS Token for setting Memory interleaving configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsDfCmnMemIntlv token.\n* `Channel` - Value - Channel for configuring CbsDfCmnMemIntlv token.\n* `Channel NPS2` - Value - Channel NPS2 for configuring CbsDfCmnMemIntlv token.\n* `Channel NPS4` - Value - Channel NPS4 for configuring CbsDfCmnMemIntlv token.\n* `Die` - Value - Die for configuring CbsDfCmnMemIntlv token.\n* `Die NPS1` - Value - Die NPS1 for configuring CbsDfCmnMemIntlv token.\n* `None` - Value - None for configuring CbsDfCmnMemIntlv token.\n* `Socket` - Value - Socket for configuring CbsDfCmnMemIntlv token.\n* `Socket NPS0` - Value - Socket NPS0 for configuring CbsDfCmnMemIntlv token.",
+				Description: "BIOS Token for setting AMD Memory Interleaving configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring CbsDfCmnMemIntlv token.\n* `Channel` - Value - Channel for configuring CbsDfCmnMemIntlv token.\n* `Die` - Value - Die for configuring CbsDfCmnMemIntlv token.\n* `None` - Value - None for configuring CbsDfCmnMemIntlv token.\n* `Socket` - Value - Socket for configuring CbsDfCmnMemIntlv token.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"cbs_df_cmn_mem_intlv_size": {
-				Description: "BIOS Token for setting Memory Interleaving Size configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `1 KB` - Value - 1 KiB for configuring CbsDfCmnMemIntlvSize token.\n* `2 KB` - Value - 2 KiB for configuring CbsDfCmnMemIntlvSize token.\n* `256 Bytes` - Value - 256 Bytes for configuring CbsDfCmnMemIntlvSize token.\n* `512 Bytes` - Value - 512 Bytes for configuring CbsDfCmnMemIntlvSize token.\n* `Auto` - Value - Auto for configuring CbsDfCmnMemIntlvSize token.",
+				Description: "BIOS Token for setting AMD Memory Interleaving Size configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `1 KB` - Value - 1 KiB for configuring CbsDfCmnMemIntlvSize token.\n* `2 KB` - Value - 2 KiB for configuring CbsDfCmnMemIntlvSize token.\n* `256 Bytes` - Value - 256 Bytes for configuring CbsDfCmnMemIntlvSize token.\n* `512 Bytes` - Value - 512 Bytes for configuring CbsDfCmnMemIntlvSize token.\n* `Auto` - Value - Auto for configuring CbsDfCmnMemIntlvSize token.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -271,7 +276,7 @@ func dataSourceBiosPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"console_redirection": {
-				Description: "BIOS Token for setting Console redirection configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `com-0` - Value - com-0 for configuring ConsoleRedirection token.\n* `com-1` - Value - com-1 for configuring ConsoleRedirection token.\n* `disabled` - Value - disabled for configuring ConsoleRedirection token.\n* `enabled` - Value - enabled for configuring ConsoleRedirection token.\n* `serial-port-a` - Value - serial-port-a for configuring ConsoleRedirection token.",
+				Description: "BIOS Token for setting Console Redirection configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `com-0` - Value - com-0 for configuring ConsoleRedirection token.\n* `com-1` - Value - com-1 for configuring ConsoleRedirection token.\n* `disabled` - Value - disabled for configuring ConsoleRedirection token.\n* `enabled` - Value - enabled for configuring ConsoleRedirection token.\n* `serial-port-a` - Value - serial-port-a for configuring ConsoleRedirection token.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -340,6 +345,11 @@ func dataSourceBiosPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"dram_sw_thermal_throttling": {
+				Description: "BIOS Token for setting DRAM SW Thermal Throttling configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `disabled` - Value - disabled for configuring DramSwThermalThrottling token.\n* `enabled` - Value - enabled for configuring DramSwThermalThrottling token.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"enable_clock_spread_spec": {
 				Description: "BIOS Token for setting External SSC Enable configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 				Type:        schema.TypeString,
@@ -357,6 +367,11 @@ func dataSourceBiosPolicy() *schema.Resource {
 			},
 			"enhanced_intel_speed_step_tech": {
 				Description: "BIOS Token for setting Enhanced Intel Speedstep (R) Technology configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"epp_enable": {
+				Description: "BIOS Token for setting Processor EPP Enable configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -436,12 +451,12 @@ func dataSourceBiosPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"intel_vtd_pass_through_dma_support": {
-				Description: "BIOS Token for setting Intel (R) VT-d PassThrough DMA support configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Description: "BIOS Token for setting Intel (R) VT-d PassThrough DMA Support configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"intel_vtdats_support": {
-				Description: "BIOS Token for setting Intel VTD ATS support configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Description: "BIOS Token for setting Intel VTD ATS Support configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -460,8 +475,18 @@ func dataSourceBiosPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"ipv4http": {
+				Description: "BIOS Token for setting IPV4 HTTP Support configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"ipv4pxe": {
 				Description: "BIOS Token for setting IPv4 PXE Support configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"ipv6http": {
+				Description: "BIOS Token for setting IPV6 HTTP Support configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -476,7 +501,7 @@ func dataSourceBiosPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"legacy_os_redirection": {
-				Description: "BIOS Token for setting Legacy OS redirection configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Description: "BIOS Token for setting Legacy OS Redirection configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -526,7 +551,7 @@ func dataSourceBiosPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"memory_inter_leave": {
-				Description: "BIOS Token for setting Memory Interleaving configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `1 Way Node Interleave` - Value - 1 Way Node Interleave for configuring MemoryInterLeave token.\n* `2 Way Node Interleave` - Value - 2 Way Node Interleave for configuring MemoryInterLeave token.\n* `4 Way Node Interleave` - Value - 4 Way Node Interleave for configuring MemoryInterLeave token.\n* `8 Way Node Interleave` - Value - 8 Way Node Interleave for configuring MemoryInterLeave token.\n* `disabled` - Value - disabled for configuring MemoryInterLeave token.\n* `enabled` - Value - enabled for configuring MemoryInterLeave token.",
+				Description: "BIOS Token for setting Intel Memory Interleaving configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `1 Way Node Interleave` - Value - 1 Way Node Interleave for configuring MemoryInterLeave token.\n* `2 Way Node Interleave` - Value - 2 Way Node Interleave for configuring MemoryInterLeave token.\n* `4 Way Node Interleave` - Value - 4 Way Node Interleave for configuring MemoryInterLeave token.\n* `8 Way Node Interleave` - Value - 8 Way Node Interleave for configuring MemoryInterLeave token.\n* `disabled` - Value - disabled for configuring MemoryInterLeave token.\n* `enabled` - Value - enabled for configuring MemoryInterLeave token.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -535,8 +560,18 @@ func dataSourceBiosPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"memory_refresh_rate": {
+				Description: "BIOS Token for setting Memory Refresh Rate configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `1x Refresh` - Value - 1x Refresh for configuring MemoryRefreshRate token.\n* `2x Refresh` - Value - 2x Refresh for configuring MemoryRefreshRate token.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"memory_size_limit": {
 				Description: "BIOS Token for setting Memory Size Limit in GiB configuration (0-65535).",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"memory_thermal_throttling": {
+				Description: "BIOS Token for setting Memory Thermal Throttling Mode configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `CLTT with PECI` - Value - CLTT with PECI for configuring MemoryThermalThrottling token.\n* `Disabled` - Value - Disabled for configuring MemoryThermalThrottling token.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -567,7 +602,7 @@ func dataSourceBiosPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"numa_optimized": {
-				Description: "BIOS Token for setting NUMA optimized configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Description: "BIOS Token for setting NUMA Optimized configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -666,13 +701,18 @@ func dataSourceBiosPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"panic_high_watermark": {
+				Description: "BIOS Token for setting Panic and High Watermark configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `High` - Value - High for configuring PanicHighWatermark token.\n* `Low` - Value - Low for configuring PanicHighWatermark token.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"partial_mirror_mode_config": {
 				Description: "BIOS Token for setting Partial Memory Mirror Mode configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `disabled` - Value - disabled for configuring PartialMirrorModeConfig token.\n* `Percentage` - Value - Percentage for configuring PartialMirrorModeConfig token.\n* `Value in GB` - Value - Value in GiB for configuring PartialMirrorModeConfig token.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"partial_mirror_percent": {
-				Description: "BIOS Token for setting Partial Mirror percentage configuration (0.00-50.00).",
+				Description: "BIOS Token for setting Partial Mirror Percentage configuration (0.00-50.00).",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -875,7 +915,7 @@ func dataSourceBiosPolicy() *schema.Resource {
 				Computed: true,
 			},
 			"psata": {
-				Description: "BIOS Token for setting P-SATA mode configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `AHCI` - Value - AHCI for configuring Psata token.\n* `Disabled` - Value - Disabled for configuring Psata token.\n* `LSI SW RAID` - Value - LSI SW RAID for configuring Psata token.",
+				Description: "BIOS Token for setting P-SATA Mode configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `AHCI` - Value - AHCI for configuring Psata token.\n* `Disabled` - Value - Disabled for configuring Psata token.\n* `LSI SW RAID` - Value - LSI SW RAID for configuring Psata token.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -920,22 +960,27 @@ func dataSourceBiosPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"sata_mode_select": {
-				Description: "BIOS Token for setting SATA mode configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `AHCI` - Value - AHCI for configuring SataModeSelect token.\n* `Disabled` - Value - Disabled for configuring SataModeSelect token.\n* `LSI SW RAID` - Value - LSI SW RAID for configuring SataModeSelect token.",
+				Description: "BIOS Token for setting SATA Mode configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `AHCI` - Value - AHCI for configuring SataModeSelect token.\n* `Disabled` - Value - Disabled for configuring SataModeSelect token.\n* `LSI SW RAID` - Value - LSI SW RAID for configuring SataModeSelect token.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"select_memory_ras_configuration": {
-				Description: "BIOS Token for setting SelectMemory RAS configuration configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `adddc-sparing` - Value - adddc-sparing for configuring SelectMemoryRasConfiguration token.\n* `lockstep` - Value - lockstep for configuring SelectMemoryRasConfiguration token.\n* `maximum-performance` - Value - maximum-performance for configuring SelectMemoryRasConfiguration token.\n* `mirror-mode-1lm` - Value - mirror-mode-1lm for configuring SelectMemoryRasConfiguration token.\n* `mirroring` - Value - mirroring for configuring SelectMemoryRasConfiguration token.\n* `partial-mirror-mode-1lm` - Value - partial-mirror-mode-1lm for configuring SelectMemoryRasConfiguration token.\n* `sparing` - Value - sparing for configuring SelectMemoryRasConfiguration token.",
+				Description: "BIOS Token for setting Memory RAS Configuration configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `adddc-sparing` - Value - adddc-sparing for configuring SelectMemoryRasConfiguration token.\n* `lockstep` - Value - lockstep for configuring SelectMemoryRasConfiguration token.\n* `maximum-performance` - Value - maximum-performance for configuring SelectMemoryRasConfiguration token.\n* `mirror-mode-1lm` - Value - mirror-mode-1lm for configuring SelectMemoryRasConfiguration token.\n* `mirroring` - Value - mirroring for configuring SelectMemoryRasConfiguration token.\n* `partial-mirror-mode-1lm` - Value - partial-mirror-mode-1lm for configuring SelectMemoryRasConfiguration token.\n* `sparing` - Value - sparing for configuring SelectMemoryRasConfiguration token.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"select_ppr_type": {
-				Description: "BIOS Token for setting Select PPR Type configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `disabled` - Value - disabled for configuring SelectPprType token.\n* `Hard PPR` - Value - Hard PPR for configuring SelectPprType token.",
+				Description: "BIOS Token for setting PPR Type configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `disabled` - Value - disabled for configuring SelectPprType token.\n* `Hard PPR` - Value - Hard PPR for configuring SelectPprType token.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
 			"serial_port_aenable": {
 				Description: "BIOS Token for setting Serial A Enable configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"sev": {
+				Description: "BIOS Token for setting Secured Encrypted Virtualization configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `253 ASIDs` - Value - 253 ASIDs for configuring Sev token.\n* `509 ASIDs` - Value - 509 ASIDs for configuring Sev token.\n* `Auto` - Value - Auto for configuring Sev token.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -1502,6 +1547,11 @@ func dataSourceBiosPolicy() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"tsme": {
+				Description: "BIOS Token for setting Transparent Secure Memory Encryption configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `Auto` - Value - Auto for configuring Tsme token.\n* `disabled` - Value - disabled for configuring Tsme token.\n* `enabled` - Value - enabled for configuring Tsme token.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"txt_support": {
 				Description: "BIOS Token for setting Intel Trusted Execution Technology Support configuration.\n* `platform-default` - Default value used by the platform for the BIOS setting.\n* `enabled` - Enables the BIOS setting.\n* `disabled` - Disables the BIOS setting.",
 				Type:        schema.TypeString,
@@ -1638,6 +1688,10 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("adjacent_cache_line_prefetch"); ok {
 		x := (v.(string))
 		o.SetAdjacentCacheLinePrefetch(x)
+	}
+	if v, ok := d.GetOk("advanced_mem_test"); ok {
+		x := (v.(string))
+		o.SetAdvancedMemTest(x)
 	}
 	if v, ok := d.GetOk("all_usb_devices"); ok {
 		x := (v.(string))
@@ -1843,6 +1897,10 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		x := (v.(string))
 		o.SetDramRefreshRate(x)
 	}
+	if v, ok := d.GetOk("dram_sw_thermal_throttling"); ok {
+		x := (v.(string))
+		o.SetDramSwThermalThrottling(x)
+	}
 	if v, ok := d.GetOk("enable_clock_spread_spec"); ok {
 		x := (v.(string))
 		o.SetEnableClockSpreadSpec(x)
@@ -1858,6 +1916,10 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("enhanced_intel_speed_step_tech"); ok {
 		x := (v.(string))
 		o.SetEnhancedIntelSpeedStepTech(x)
+	}
+	if v, ok := d.GetOk("epp_enable"); ok {
+		x := (v.(string))
+		o.SetEppEnable(x)
 	}
 	if v, ok := d.GetOk("epp_profile"); ok {
 		x := (v.(string))
@@ -1939,9 +2001,17 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		x := (v.(string))
 		o.SetIpPrefetch(x)
 	}
+	if v, ok := d.GetOk("ipv4http"); ok {
+		x := (v.(string))
+		o.SetIpv4http(x)
+	}
 	if v, ok := d.GetOk("ipv4pxe"); ok {
 		x := (v.(string))
 		o.SetIpv4pxe(x)
+	}
+	if v, ok := d.GetOk("ipv6http"); ok {
+		x := (v.(string))
+		o.SetIpv6http(x)
 	}
 	if v, ok := d.GetOk("ipv6pxe"); ok {
 		x := (v.(string))
@@ -1999,9 +2069,17 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		x := (v.(string))
 		o.SetMemoryMappedIoAbove4gb(x)
 	}
+	if v, ok := d.GetOk("memory_refresh_rate"); ok {
+		x := (v.(string))
+		o.SetMemoryRefreshRate(x)
+	}
 	if v, ok := d.GetOk("memory_size_limit"); ok {
 		x := (v.(string))
 		o.SetMemorySizeLimit(x)
+	}
+	if v, ok := d.GetOk("memory_thermal_throttling"); ok {
+		x := (v.(string))
+		o.SetMemoryThermalThrottling(x)
 	}
 	if v, ok := d.GetOk("mirroring_mode"); ok {
 		x := (v.(string))
@@ -2070,6 +2148,10 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("package_cstate_limit"); ok {
 		x := (v.(string))
 		o.SetPackageCstateLimit(x)
+	}
+	if v, ok := d.GetOk("panic_high_watermark"); ok {
+		x := (v.(string))
+		o.SetPanicHighWatermark(x)
 	}
 	if v, ok := d.GetOk("partial_mirror_mode_config"); ok {
 		x := (v.(string))
@@ -2258,6 +2340,10 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 	if v, ok := d.GetOk("serial_port_aenable"); ok {
 		x := (v.(string))
 		o.SetSerialPortAenable(x)
+	}
+	if v, ok := d.GetOk("sev"); ok {
+		x := (v.(string))
+		o.SetSev(x)
 	}
 	if v, ok := d.GetOk("single_pctl_enable"); ok {
 		x := (v.(string))
@@ -2691,6 +2777,10 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		x := (v.(string))
 		o.SetTpmSupport(x)
 	}
+	if v, ok := d.GetOk("tsme"); ok {
+		x := (v.(string))
+		o.SetTsme(x)
+	}
 	if v, ok := d.GetOk("txt_support"); ok {
 		x := (v.(string))
 		o.SetTxtSupport(x)
@@ -2757,7 +2847,8 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 		return diag.Errorf("json marshal of BiosPolicy object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.BiosApi.GetBiosPolicyList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching BiosPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
@@ -2828,6 +2919,9 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 			}
 			if err := d.Set("adjacent_cache_line_prefetch", (s.GetAdjacentCacheLinePrefetch())); err != nil {
 				return diag.Errorf("error occurred while setting property AdjacentCacheLinePrefetch: %s", err.Error())
+			}
+			if err := d.Set("advanced_mem_test", (s.GetAdvancedMemTest())); err != nil {
+				return diag.Errorf("error occurred while setting property AdvancedMemTest: %s", err.Error())
 			}
 			if err := d.Set("all_usb_devices", (s.GetAllUsbDevices())); err != nil {
 				return diag.Errorf("error occurred while setting property AllUsbDevices: %s", err.Error())
@@ -2982,6 +3076,9 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 			if err := d.Set("dram_refresh_rate", (s.GetDramRefreshRate())); err != nil {
 				return diag.Errorf("error occurred while setting property DramRefreshRate: %s", err.Error())
 			}
+			if err := d.Set("dram_sw_thermal_throttling", (s.GetDramSwThermalThrottling())); err != nil {
+				return diag.Errorf("error occurred while setting property DramSwThermalThrottling: %s", err.Error())
+			}
 			if err := d.Set("enable_clock_spread_spec", (s.GetEnableClockSpreadSpec())); err != nil {
 				return diag.Errorf("error occurred while setting property EnableClockSpreadSpec: %s", err.Error())
 			}
@@ -2993,6 +3090,9 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 			}
 			if err := d.Set("enhanced_intel_speed_step_tech", (s.GetEnhancedIntelSpeedStepTech())); err != nil {
 				return diag.Errorf("error occurred while setting property EnhancedIntelSpeedStepTech: %s", err.Error())
+			}
+			if err := d.Set("epp_enable", (s.GetEppEnable())); err != nil {
+				return diag.Errorf("error occurred while setting property EppEnable: %s", err.Error())
 			}
 			if err := d.Set("epp_profile", (s.GetEppProfile())); err != nil {
 				return diag.Errorf("error occurred while setting property EppProfile: %s", err.Error())
@@ -3054,8 +3154,14 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 			if err := d.Set("ip_prefetch", (s.GetIpPrefetch())); err != nil {
 				return diag.Errorf("error occurred while setting property IpPrefetch: %s", err.Error())
 			}
+			if err := d.Set("ipv4http", (s.GetIpv4http())); err != nil {
+				return diag.Errorf("error occurred while setting property Ipv4http: %s", err.Error())
+			}
 			if err := d.Set("ipv4pxe", (s.GetIpv4pxe())); err != nil {
 				return diag.Errorf("error occurred while setting property Ipv4pxe: %s", err.Error())
+			}
+			if err := d.Set("ipv6http", (s.GetIpv6http())); err != nil {
+				return diag.Errorf("error occurred while setting property Ipv6http: %s", err.Error())
 			}
 			if err := d.Set("ipv6pxe", (s.GetIpv6pxe())); err != nil {
 				return diag.Errorf("error occurred while setting property Ipv6pxe: %s", err.Error())
@@ -3099,8 +3205,14 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 			if err := d.Set("memory_mapped_io_above4gb", (s.GetMemoryMappedIoAbove4gb())); err != nil {
 				return diag.Errorf("error occurred while setting property MemoryMappedIoAbove4gb: %s", err.Error())
 			}
+			if err := d.Set("memory_refresh_rate", (s.GetMemoryRefreshRate())); err != nil {
+				return diag.Errorf("error occurred while setting property MemoryRefreshRate: %s", err.Error())
+			}
 			if err := d.Set("memory_size_limit", (s.GetMemorySizeLimit())); err != nil {
 				return diag.Errorf("error occurred while setting property MemorySizeLimit: %s", err.Error())
+			}
+			if err := d.Set("memory_thermal_throttling", (s.GetMemoryThermalThrottling())); err != nil {
+				return diag.Errorf("error occurred while setting property MemoryThermalThrottling: %s", err.Error())
 			}
 			if err := d.Set("mirroring_mode", (s.GetMirroringMode())); err != nil {
 				return diag.Errorf("error occurred while setting property MirroringMode: %s", err.Error())
@@ -3156,6 +3268,9 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 			}
 			if err := d.Set("package_cstate_limit", (s.GetPackageCstateLimit())); err != nil {
 				return diag.Errorf("error occurred while setting property PackageCstateLimit: %s", err.Error())
+			}
+			if err := d.Set("panic_high_watermark", (s.GetPanicHighWatermark())); err != nil {
+				return diag.Errorf("error occurred while setting property PanicHighWatermark: %s", err.Error())
 			}
 			if err := d.Set("partial_mirror_mode_config", (s.GetPartialMirrorModeConfig())); err != nil {
 				return diag.Errorf("error occurred while setting property PartialMirrorModeConfig: %s", err.Error())
@@ -3301,6 +3416,9 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 			}
 			if err := d.Set("serial_port_aenable", (s.GetSerialPortAenable())); err != nil {
 				return diag.Errorf("error occurred while setting property SerialPortAenable: %s", err.Error())
+			}
+			if err := d.Set("sev", (s.GetSev())); err != nil {
+				return diag.Errorf("error occurred while setting property Sev: %s", err.Error())
 			}
 			if err := d.Set("single_pctl_enable", (s.GetSinglePctlEnable())); err != nil {
 				return diag.Errorf("error occurred while setting property SinglePctlEnable: %s", err.Error())
@@ -3629,6 +3747,9 @@ func dataSourceBiosPolicyRead(c context.Context, d *schema.ResourceData, meta in
 			}
 			if err := d.Set("tpm_support", (s.GetTpmSupport())); err != nil {
 				return diag.Errorf("error occurred while setting property TpmSupport: %s", err.Error())
+			}
+			if err := d.Set("tsme", (s.GetTsme())); err != nil {
+				return diag.Errorf("error occurred while setting property Tsme: %s", err.Error())
 			}
 			if err := d.Set("txt_support", (s.GetTxtSupport())); err != nil {
 				return diag.Errorf("error occurred while setting property TxtSupport: %s", err.Error())

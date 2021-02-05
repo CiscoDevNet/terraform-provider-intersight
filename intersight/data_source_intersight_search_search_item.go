@@ -88,7 +88,8 @@ func dataSourceSearchSearchItemRead(c context.Context, d *schema.ResourceData, m
 		return diag.Errorf("json marshal of SearchSearchItem object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.SearchApi.GetSearchSearchItemList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching SearchSearchItem: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 

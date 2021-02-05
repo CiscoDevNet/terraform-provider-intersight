@@ -65,7 +65,7 @@ func resourceCapabilityChassisDescriptor() *schema.Resource {
 				Computed:   true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -88,7 +88,7 @@ func resourceCapabilityChassisDescriptor() *schema.Resource {
 				ForceNew:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -262,7 +262,8 @@ func resourceCapabilityChassisDescriptorCreate(c context.Context, d *schema.Reso
 
 	r := conn.ApiClient.CapabilityApi.CreateCapabilityChassisDescriptor(conn.ctx).CapabilityChassisDescriptor(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating CapabilityChassisDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -277,7 +278,8 @@ func resourceCapabilityChassisDescriptorRead(c context.Context, d *schema.Resour
 	var de diag.Diagnostics
 	r := conn.ApiClient.CapabilityApi.GetCapabilityChassisDescriptorByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "CapabilityChassisDescriptor object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -471,7 +473,8 @@ func resourceCapabilityChassisDescriptorUpdate(c context.Context, d *schema.Reso
 
 	r := conn.ApiClient.CapabilityApi.UpdateCapabilityChassisDescriptor(conn.ctx, d.Id()).CapabilityChassisDescriptor(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating CapabilityChassisDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -486,7 +489,8 @@ func resourceCapabilityChassisDescriptorDelete(c context.Context, d *schema.Reso
 	conn := meta.(*Config)
 	p := conn.ApiClient.CapabilityApi.DeleteCapabilityChassisDescriptor(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting CapabilityChassisDescriptor object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

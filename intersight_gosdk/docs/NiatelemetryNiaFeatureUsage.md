@@ -31,6 +31,7 @@ Name | Type | Description | Notes
 **IgmpAccessListCount** | Pointer to **int64** | IGMP Access List feature usage. This determines the total number of IGMP access lists configured across the fabric. | [optional] 
 **IgmpSnoop** | Pointer to **string** | IGMP Snooping feature usage. This determines if this feature is enabled or disabled. | [optional] 
 **IpEpgCount** | Pointer to **int64** | Number of IP based End Point Groups. This determines the total number of IP End Point Groups across the fabric. | [optional] 
+**IsTechSupportCollected** | Pointer to **string** | Status of techsupport collection. | [optional] 
 **IsisCount** | Pointer to **int64** | Isis feature usage. This determines the total number of ISIS sessions across the fabric. | [optional] 
 **L2Multicast** | Pointer to **string** | L2Multicast feature usage. This determines if this Layer 2 Multicast feature is being enabled / disabled on the fabric. | [optional] 
 **LeafCount** | Pointer to **int64** | Number of Leafs. This determines the total number of Leaf switches in the fabric. | [optional] 
@@ -54,6 +55,8 @@ Name | Type | Description | Notes
 **SharedL3OutCount** | Pointer to **int64** | SharedL3Out feature usage. This determines the total number of Shared L3 out configured across the fabric. | [optional] 
 **SiteName** | Pointer to **string** | The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters / sites. There will be a feature usage object per site in Multi site scenario. In multi-site scenario the site name is available in all the requests being made. | [optional] 
 **SmartCallHome** | Pointer to **string** | Smart callhome feature usage. This determines if this feature is being enabled or disabled. | [optional] 
+**SmartLicense** | Pointer to [**NullableNiatelemetrySmartLicense**](niatelemetry.SmartLicense.md) |  | [optional] 
+**SnapshotCount** | Pointer to **int64** | Returns count of snapshots. | [optional] 
 **Snmp** | Pointer to **string** | SNMP feature usage. This determines if this feature is enabled or disabled. | [optional] 
 **SnmpGroupCount** | Pointer to **int64** | Number of SNMP monitoring policies on the fabric. | [optional] 
 **SpanCount** | Pointer to **int64** | Number of Span Sources and Destinations. | [optional] 
@@ -760,6 +763,31 @@ SetIpEpgCount sets IpEpgCount field to given value.
 
 HasIpEpgCount returns a boolean if a field has been set.
 
+### GetIsTechSupportCollected
+
+`func (o *NiatelemetryNiaFeatureUsage) GetIsTechSupportCollected() string`
+
+GetIsTechSupportCollected returns the IsTechSupportCollected field if non-nil, zero value otherwise.
+
+### GetIsTechSupportCollectedOk
+
+`func (o *NiatelemetryNiaFeatureUsage) GetIsTechSupportCollectedOk() (*string, bool)`
+
+GetIsTechSupportCollectedOk returns a tuple with the IsTechSupportCollected field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsTechSupportCollected
+
+`func (o *NiatelemetryNiaFeatureUsage) SetIsTechSupportCollected(v string)`
+
+SetIsTechSupportCollected sets IsTechSupportCollected field to given value.
+
+### HasIsTechSupportCollected
+
+`func (o *NiatelemetryNiaFeatureUsage) HasIsTechSupportCollected() bool`
+
+HasIsTechSupportCollected returns a boolean if a field has been set.
+
 ### GetIsisCount
 
 `func (o *NiatelemetryNiaFeatureUsage) GetIsisCount() int64`
@@ -1334,6 +1362,66 @@ SetSmartCallHome sets SmartCallHome field to given value.
 `func (o *NiatelemetryNiaFeatureUsage) HasSmartCallHome() bool`
 
 HasSmartCallHome returns a boolean if a field has been set.
+
+### GetSmartLicense
+
+`func (o *NiatelemetryNiaFeatureUsage) GetSmartLicense() NiatelemetrySmartLicense`
+
+GetSmartLicense returns the SmartLicense field if non-nil, zero value otherwise.
+
+### GetSmartLicenseOk
+
+`func (o *NiatelemetryNiaFeatureUsage) GetSmartLicenseOk() (*NiatelemetrySmartLicense, bool)`
+
+GetSmartLicenseOk returns a tuple with the SmartLicense field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSmartLicense
+
+`func (o *NiatelemetryNiaFeatureUsage) SetSmartLicense(v NiatelemetrySmartLicense)`
+
+SetSmartLicense sets SmartLicense field to given value.
+
+### HasSmartLicense
+
+`func (o *NiatelemetryNiaFeatureUsage) HasSmartLicense() bool`
+
+HasSmartLicense returns a boolean if a field has been set.
+
+### SetSmartLicenseNil
+
+`func (o *NiatelemetryNiaFeatureUsage) SetSmartLicenseNil(b bool)`
+
+ SetSmartLicenseNil sets the value for SmartLicense to be an explicit nil
+
+### UnsetSmartLicense
+`func (o *NiatelemetryNiaFeatureUsage) UnsetSmartLicense()`
+
+UnsetSmartLicense ensures that no value is present for SmartLicense, not even an explicit nil
+### GetSnapshotCount
+
+`func (o *NiatelemetryNiaFeatureUsage) GetSnapshotCount() int64`
+
+GetSnapshotCount returns the SnapshotCount field if non-nil, zero value otherwise.
+
+### GetSnapshotCountOk
+
+`func (o *NiatelemetryNiaFeatureUsage) GetSnapshotCountOk() (*int64, bool)`
+
+GetSnapshotCountOk returns a tuple with the SnapshotCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSnapshotCount
+
+`func (o *NiatelemetryNiaFeatureUsage) SetSnapshotCount(v int64)`
+
+SetSnapshotCount sets SnapshotCount field to given value.
+
+### HasSnapshotCount
+
+`func (o *NiatelemetryNiaFeatureUsage) HasSnapshotCount() bool`
+
+HasSnapshotCount returns a boolean if a field has been set.
 
 ### GetSnmp
 

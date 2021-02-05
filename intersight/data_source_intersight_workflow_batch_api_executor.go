@@ -47,7 +47,7 @@ func dataSourceWorkflowBatchApiExecutor() *schema.Resource {
 							Optional:    true,
 						},
 						"content_type": {
-							Description: "Intersight Orchestrator, with the support of response parser specification,\ncan extract the values from API responses and map them to task output parameters.\nThe value extraction is supported for response content types XML and JSON.\nThe type of the content that gets passed as payload and response in this\nAPI.",
+							Description: "Intersight Orchestrator, with the support of response parser specification,\ncan extract the values from API responses and map them to task output parameters.\nThe value extraction is supported for response content types XML and JSON.\nThe type of the content that gets passed as payload and response in this\nAPI. The supported values are json, xml, text.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -106,7 +106,7 @@ func dataSourceWorkflowBatchApiExecutor() *schema.Resource {
 				Computed: true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -123,12 +123,12 @@ func dataSourceWorkflowBatchApiExecutor() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -335,7 +335,8 @@ func dataSourceWorkflowBatchApiExecutorRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("json marshal of WorkflowBatchApiExecutor object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.WorkflowApi.GetWorkflowBatchApiExecutorList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching WorkflowBatchApiExecutor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 

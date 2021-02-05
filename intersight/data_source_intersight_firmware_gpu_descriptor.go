@@ -189,7 +189,8 @@ func dataSourceFirmwareGpuDescriptorRead(c context.Context, d *schema.ResourceDa
 		return diag.Errorf("json marshal of FirmwareGpuDescriptor object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.FirmwareApi.GetFirmwareGpuDescriptorList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching FirmwareGpuDescriptor: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 

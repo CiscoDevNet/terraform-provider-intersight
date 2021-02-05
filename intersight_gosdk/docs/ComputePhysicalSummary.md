@@ -33,6 +33,7 @@ Name | Type | Description | Notes
 **NumFcHostInterfaces** | Pointer to **int64** | The total number of vHBAs which are visible to a host on the server. | [optional] [readonly] 
 **NumThreads** | Pointer to **int64** | The total number of threads the server is capable of handling. | [optional] [readonly] 
 **OperPowerState** | Pointer to **string** | The actual power state of the server. | [optional] [readonly] 
+**OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | The operational state of the server. | [optional] [readonly] 
 **Operability** | Pointer to **string** | The operability of the server. | [optional] [readonly] 
 **PlatformType** | Pointer to **string** | The platform type of the registered device - whether managed by UCSM or operating in standalone mode. | [optional] [readonly] 
@@ -50,7 +51,6 @@ Name | Type | Description | Notes
 **UserLabel** | Pointer to **string** | The user defined label assigned to the server. | [optional] [readonly] 
 **Uuid** | Pointer to **string** | The universally unique identity of the server. | [optional] [readonly] 
 **Vendor** | Pointer to **string** | This field identifies the vendor of the given component. | [optional] [readonly] 
-**EquipmentChassis** | Pointer to [**EquipmentChassisRelationship**](equipment.Chassis.Relationship.md) |  | [optional] 
 **InventoryDeviceInfo** | Pointer to [**InventoryDeviceInfoRelationship**](inventory.DeviceInfo.Relationship.md) |  | [optional] 
 **RegisteredDevice** | Pointer to [**AssetDeviceRegistrationRelationship**](asset.DeviceRegistration.Relationship.md) |  | [optional] 
 
@@ -808,6 +808,41 @@ SetOperPowerState sets OperPowerState field to given value.
 
 HasOperPowerState returns a boolean if a field has been set.
 
+### GetOperReason
+
+`func (o *ComputePhysicalSummary) GetOperReason() []string`
+
+GetOperReason returns the OperReason field if non-nil, zero value otherwise.
+
+### GetOperReasonOk
+
+`func (o *ComputePhysicalSummary) GetOperReasonOk() (*[]string, bool)`
+
+GetOperReasonOk returns a tuple with the OperReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperReason
+
+`func (o *ComputePhysicalSummary) SetOperReason(v []string)`
+
+SetOperReason sets OperReason field to given value.
+
+### HasOperReason
+
+`func (o *ComputePhysicalSummary) HasOperReason() bool`
+
+HasOperReason returns a boolean if a field has been set.
+
+### SetOperReasonNil
+
+`func (o *ComputePhysicalSummary) SetOperReasonNil(b bool)`
+
+ SetOperReasonNil sets the value for OperReason to be an explicit nil
+
+### UnsetOperReason
+`func (o *ComputePhysicalSummary) UnsetOperReason()`
+
+UnsetOperReason ensures that no value is present for OperReason, not even an explicit nil
 ### GetOperState
 
 `func (o *ComputePhysicalSummary) GetOperState() string`
@@ -1232,31 +1267,6 @@ SetVendor sets Vendor field to given value.
 `func (o *ComputePhysicalSummary) HasVendor() bool`
 
 HasVendor returns a boolean if a field has been set.
-
-### GetEquipmentChassis
-
-`func (o *ComputePhysicalSummary) GetEquipmentChassis() EquipmentChassisRelationship`
-
-GetEquipmentChassis returns the EquipmentChassis field if non-nil, zero value otherwise.
-
-### GetEquipmentChassisOk
-
-`func (o *ComputePhysicalSummary) GetEquipmentChassisOk() (*EquipmentChassisRelationship, bool)`
-
-GetEquipmentChassisOk returns a tuple with the EquipmentChassis field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEquipmentChassis
-
-`func (o *ComputePhysicalSummary) SetEquipmentChassis(v EquipmentChassisRelationship)`
-
-SetEquipmentChassis sets EquipmentChassis field to given value.
-
-### HasEquipmentChassis
-
-`func (o *ComputePhysicalSummary) HasEquipmentChassis() bool`
-
-HasEquipmentChassis returns a boolean if a field has been set.
 
 ### GetInventoryDeviceInfo
 

@@ -25,7 +25,7 @@ func resourceIamResourceRoles() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -461,7 +461,8 @@ func resourceIamResourceRolesCreate(c context.Context, d *schema.ResourceData, m
 
 	r := conn.ApiClient.IamApi.CreateIamResourceRoles(conn.ctx).IamResourceRoles(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating IamResourceRoles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -476,7 +477,8 @@ func resourceIamResourceRolesRead(c context.Context, d *schema.ResourceData, met
 	var de diag.Diagnostics
 	r := conn.ApiClient.IamApi.GetIamResourceRolesByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "IamResourceRoles object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -762,7 +764,8 @@ func resourceIamResourceRolesUpdate(c context.Context, d *schema.ResourceData, m
 
 	r := conn.ApiClient.IamApi.UpdateIamResourceRoles(conn.ctx, d.Id()).IamResourceRoles(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating IamResourceRoles: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -777,7 +780,8 @@ func resourceIamResourceRolesDelete(c context.Context, d *schema.ResourceData, m
 	conn := meta.(*Config)
 	p := conn.ApiClient.IamApi.DeleteIamResourceRoles(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting IamResourceRoles object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

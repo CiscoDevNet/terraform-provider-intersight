@@ -66,7 +66,7 @@ func resourceApplianceDiagSetting() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -245,7 +245,8 @@ func resourceApplianceDiagSettingCreate(c context.Context, d *schema.ResourceDat
 
 	r := conn.ApiClient.ApplianceApi.CreateApplianceDiagSetting(conn.ctx).ApplianceDiagSetting(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating ApplianceDiagSetting: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -260,7 +261,8 @@ func resourceApplianceDiagSettingRead(c context.Context, d *schema.ResourceData,
 	var de diag.Diagnostics
 	r := conn.ApiClient.ApplianceApi.GetApplianceDiagSettingByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "ApplianceDiagSetting object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -431,7 +433,8 @@ func resourceApplianceDiagSettingUpdate(c context.Context, d *schema.ResourceDat
 
 	r := conn.ApiClient.ApplianceApi.UpdateApplianceDiagSetting(conn.ctx, d.Id()).ApplianceDiagSetting(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating ApplianceDiagSetting: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())

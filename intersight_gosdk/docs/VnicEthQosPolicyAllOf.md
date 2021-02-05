@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "vnic.EthQosPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "vnic.EthQosPolicy"]
+**Burst** | Pointer to **int64** | The burst traffic, in bytes, allowed on the vNIC. | [optional] [default to 1024]
 **Cos** | Pointer to **int64** | Class of Service to be associated to the traffic on the virtual interface. | [optional] [default to 0]
 **Mtu** | Pointer to **int64** | The Maximum Transmission Unit (MTU) or packet size that the virtual interface accepts. | [optional] [default to 1500]
 **Priority** | Pointer to **string** | The priortity matching the System QoS specified in the fabric profile. * &#x60;Best Effort&#x60; - QoS Priority for Best-effort traffic. * &#x60;FC&#x60; - QoS Priority for FC traffic. * &#x60;Platinum&#x60; - QoS Priority for Platinum traffic. * &#x60;Gold&#x60; - QoS Priority for Gold traffic. * &#x60;Silver&#x60; - QoS Priority for Silver traffic. * &#x60;Bronze&#x60; - QoS Priority for Bronze traffic. | [optional] [default to "Best Effort"]
@@ -71,6 +72,31 @@ and a boolean to check if the value has been set.
 
 SetObjectType sets ObjectType field to given value.
 
+
+### GetBurst
+
+`func (o *VnicEthQosPolicyAllOf) GetBurst() int64`
+
+GetBurst returns the Burst field if non-nil, zero value otherwise.
+
+### GetBurstOk
+
+`func (o *VnicEthQosPolicyAllOf) GetBurstOk() (*int64, bool)`
+
+GetBurstOk returns a tuple with the Burst field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBurst
+
+`func (o *VnicEthQosPolicyAllOf) SetBurst(v int64)`
+
+SetBurst sets Burst field to given value.
+
+### HasBurst
+
+`func (o *VnicEthQosPolicyAllOf) HasBurst() bool`
+
+HasBurst returns a boolean if a field has been set.
 
 ### GetCos
 

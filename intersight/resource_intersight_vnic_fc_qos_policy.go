@@ -24,8 +24,14 @@ func resourceVnicFcQosPolicy() *schema.Resource {
 				Optional:         true,
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
+			"burst": {
+				Description: "The burst traffic, in bytes, allowed on the vNIC.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+				Default:     1024,
+			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -60,7 +66,7 @@ func resourceVnicFcQosPolicy() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -158,6 +164,11 @@ func resourceVnicFcQosPolicyCreate(c context.Context, d *schema.ResourceData, me
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
 		}
+	}
+
+	if v, ok := d.GetOk("burst"); ok {
+		x := int64(v.(int))
+		o.SetBurst(x)
 	}
 
 	o.SetClassId("vnic.FcQosPolicy")
@@ -279,7 +290,8 @@ func resourceVnicFcQosPolicyCreate(c context.Context, d *schema.ResourceData, me
 
 	r := conn.ApiClient.VnicApi.CreateVnicFcQosPolicy(conn.ctx).VnicFcQosPolicy(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating VnicFcQosPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -294,7 +306,8 @@ func resourceVnicFcQosPolicyRead(c context.Context, d *schema.ResourceData, meta
 	var de diag.Diagnostics
 	r := conn.ApiClient.VnicApi.GetVnicFcQosPolicyByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "VnicFcQosPolicy object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -305,6 +318,10 @@ func resourceVnicFcQosPolicyRead(c context.Context, d *schema.ResourceData, meta
 
 	if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
 		return diag.Errorf("error occurred while setting property AdditionalProperties in VnicFcQosPolicy object: %s", err.Error())
+	}
+
+	if err := d.Set("burst", (s.GetBurst())); err != nil {
+		return diag.Errorf("error occurred while setting property Burst in VnicFcQosPolicy object: %s", err.Error())
 	}
 
 	if err := d.Set("class_id", (s.GetClassId())); err != nil {
@@ -369,6 +386,12 @@ func resourceVnicFcQosPolicyUpdate(c context.Context, d *schema.ResourceData, me
 		if err == nil && x1 != nil {
 			o.AdditionalProperties = x1.(map[string]interface{})
 		}
+	}
+
+	if d.HasChange("burst") {
+		v := d.Get("burst")
+		x := int64(v.(int))
+		o.SetBurst(x)
 	}
 
 	o.SetClassId("vnic.FcQosPolicy")
@@ -499,7 +522,8 @@ func resourceVnicFcQosPolicyUpdate(c context.Context, d *schema.ResourceData, me
 
 	r := conn.ApiClient.VnicApi.UpdateVnicFcQosPolicy(conn.ctx, d.Id()).VnicFcQosPolicy(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating VnicFcQosPolicy: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -514,7 +538,8 @@ func resourceVnicFcQosPolicyDelete(c context.Context, d *schema.ResourceData, me
 	conn := meta.(*Config)
 	p := conn.ApiClient.VnicApi.DeleteVnicFcQosPolicy(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting VnicFcQosPolicy object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

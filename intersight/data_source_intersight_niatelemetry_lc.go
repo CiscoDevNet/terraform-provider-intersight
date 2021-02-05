@@ -21,7 +21,7 @@ func dataSourceNiatelemetryLc() *schema.Resource {
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -121,6 +121,11 @@ func dataSourceNiatelemetryLc() *schema.Resource {
 					},
 				},
 			},
+			"serial_number": {
+				Description: "Serial number of the line card present.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"site_name": {
 				Description: "The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters / sites.",
 				Type:        schema.TypeString,
@@ -207,6 +212,10 @@ func dataSourceNiatelemetryLcRead(c context.Context, d *schema.ResourceData, met
 		x := (v.(string))
 		o.SetRedundancyState(x)
 	}
+	if v, ok := d.GetOk("serial_number"); ok {
+		x := (v.(string))
+		o.SetSerialNumber(x)
+	}
 	if v, ok := d.GetOk("site_name"); ok {
 		x := (v.(string))
 		o.SetSiteName(x)
@@ -217,7 +226,8 @@ func dataSourceNiatelemetryLcRead(c context.Context, d *schema.ResourceData, met
 		return diag.Errorf("json marshal of NiatelemetryLc object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.NiatelemetryApi.GetNiatelemetryLcList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching NiatelemetryLc: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
@@ -289,6 +299,9 @@ func dataSourceNiatelemetryLcRead(c context.Context, d *schema.ResourceData, met
 
 			if err := d.Set("registered_device", flattenMapAssetDeviceRegistrationRelationship(s.GetRegisteredDevice(), d)); err != nil {
 				return diag.Errorf("error occurred while setting property RegisteredDevice: %s", err.Error())
+			}
+			if err := d.Set("serial_number", (s.GetSerialNumber())); err != nil {
+				return diag.Errorf("error occurred while setting property SerialNumber: %s", err.Error())
 			}
 			if err := d.Set("site_name", (s.GetSiteName())); err != nil {
 				return diag.Errorf("error occurred while setting property SiteName: %s", err.Error())

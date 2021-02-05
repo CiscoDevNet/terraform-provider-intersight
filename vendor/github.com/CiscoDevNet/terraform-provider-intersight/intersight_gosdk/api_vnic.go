@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -49,7 +49,7 @@ func (r ApiCreateVnicEthAdapterPolicyRequest) IfNoneMatch(ifNoneMatch string) Ap
 	return r
 }
 
-func (r ApiCreateVnicEthAdapterPolicyRequest) Execute() (VnicEthAdapterPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateVnicEthAdapterPolicyRequest) Execute() (VnicEthAdapterPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateVnicEthAdapterPolicyExecute(r)
 }
 
@@ -69,21 +69,19 @@ func (a *VnicApiService) CreateVnicEthAdapterPolicy(ctx _context.Context) ApiCre
  * Execute executes the request
  * @return VnicEthAdapterPolicy
  */
-func (a *VnicApiService) CreateVnicEthAdapterPolicyExecute(r ApiCreateVnicEthAdapterPolicyRequest) (VnicEthAdapterPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) CreateVnicEthAdapterPolicyExecute(r ApiCreateVnicEthAdapterPolicyRequest) (VnicEthAdapterPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicEthAdapterPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.CreateVnicEthAdapterPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthAdapterPolicies"
@@ -92,8 +90,7 @@ func (a *VnicApiService) CreateVnicEthAdapterPolicyExecute(r ApiCreateVnicEthAda
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicEthAdapterPolicy == nil {
-		executionError.error = "vnicEthAdapterPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicEthAdapterPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -123,22 +120,19 @@ func (a *VnicApiService) CreateVnicEthAdapterPolicyExecute(r ApiCreateVnicEthAda
 	localVarPostBody = r.vnicEthAdapterPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -205,7 +199,7 @@ func (a *VnicApiService) CreateVnicEthAdapterPolicyExecute(r ApiCreateVnicEthAda
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateVnicEthIfRequest struct {
@@ -229,7 +223,7 @@ func (r ApiCreateVnicEthIfRequest) IfNoneMatch(ifNoneMatch string) ApiCreateVnic
 	return r
 }
 
-func (r ApiCreateVnicEthIfRequest) Execute() (VnicEthIf, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateVnicEthIfRequest) Execute() (VnicEthIf, *_nethttp.Response, error) {
 	return r.ApiService.CreateVnicEthIfExecute(r)
 }
 
@@ -249,21 +243,19 @@ func (a *VnicApiService) CreateVnicEthIf(ctx _context.Context) ApiCreateVnicEthI
  * Execute executes the request
  * @return VnicEthIf
  */
-func (a *VnicApiService) CreateVnicEthIfExecute(r ApiCreateVnicEthIfRequest) (VnicEthIf, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) CreateVnicEthIfExecute(r ApiCreateVnicEthIfRequest) (VnicEthIf, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicEthIf
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.CreateVnicEthIf")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthIfs"
@@ -272,8 +264,7 @@ func (a *VnicApiService) CreateVnicEthIfExecute(r ApiCreateVnicEthIfRequest) (Vn
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicEthIf == nil {
-		executionError.error = "vnicEthIf is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicEthIf is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -303,22 +294,19 @@ func (a *VnicApiService) CreateVnicEthIfExecute(r ApiCreateVnicEthIfRequest) (Vn
 	localVarPostBody = r.vnicEthIf
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -385,7 +373,7 @@ func (a *VnicApiService) CreateVnicEthIfExecute(r ApiCreateVnicEthIfRequest) (Vn
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateVnicEthNetworkPolicyRequest struct {
@@ -409,7 +397,7 @@ func (r ApiCreateVnicEthNetworkPolicyRequest) IfNoneMatch(ifNoneMatch string) Ap
 	return r
 }
 
-func (r ApiCreateVnicEthNetworkPolicyRequest) Execute() (VnicEthNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateVnicEthNetworkPolicyRequest) Execute() (VnicEthNetworkPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateVnicEthNetworkPolicyExecute(r)
 }
 
@@ -429,21 +417,19 @@ func (a *VnicApiService) CreateVnicEthNetworkPolicy(ctx _context.Context) ApiCre
  * Execute executes the request
  * @return VnicEthNetworkPolicy
  */
-func (a *VnicApiService) CreateVnicEthNetworkPolicyExecute(r ApiCreateVnicEthNetworkPolicyRequest) (VnicEthNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) CreateVnicEthNetworkPolicyExecute(r ApiCreateVnicEthNetworkPolicyRequest) (VnicEthNetworkPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicEthNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.CreateVnicEthNetworkPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthNetworkPolicies"
@@ -452,8 +438,7 @@ func (a *VnicApiService) CreateVnicEthNetworkPolicyExecute(r ApiCreateVnicEthNet
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicEthNetworkPolicy == nil {
-		executionError.error = "vnicEthNetworkPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicEthNetworkPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -483,22 +468,19 @@ func (a *VnicApiService) CreateVnicEthNetworkPolicyExecute(r ApiCreateVnicEthNet
 	localVarPostBody = r.vnicEthNetworkPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -565,7 +547,7 @@ func (a *VnicApiService) CreateVnicEthNetworkPolicyExecute(r ApiCreateVnicEthNet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateVnicEthQosPolicyRequest struct {
@@ -589,7 +571,7 @@ func (r ApiCreateVnicEthQosPolicyRequest) IfNoneMatch(ifNoneMatch string) ApiCre
 	return r
 }
 
-func (r ApiCreateVnicEthQosPolicyRequest) Execute() (VnicEthQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateVnicEthQosPolicyRequest) Execute() (VnicEthQosPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateVnicEthQosPolicyExecute(r)
 }
 
@@ -609,21 +591,19 @@ func (a *VnicApiService) CreateVnicEthQosPolicy(ctx _context.Context) ApiCreateV
  * Execute executes the request
  * @return VnicEthQosPolicy
  */
-func (a *VnicApiService) CreateVnicEthQosPolicyExecute(r ApiCreateVnicEthQosPolicyRequest) (VnicEthQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) CreateVnicEthQosPolicyExecute(r ApiCreateVnicEthQosPolicyRequest) (VnicEthQosPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicEthQosPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.CreateVnicEthQosPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthQosPolicies"
@@ -632,8 +612,7 @@ func (a *VnicApiService) CreateVnicEthQosPolicyExecute(r ApiCreateVnicEthQosPoli
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicEthQosPolicy == nil {
-		executionError.error = "vnicEthQosPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicEthQosPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -663,22 +642,19 @@ func (a *VnicApiService) CreateVnicEthQosPolicyExecute(r ApiCreateVnicEthQosPoli
 	localVarPostBody = r.vnicEthQosPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -745,7 +721,7 @@ func (a *VnicApiService) CreateVnicEthQosPolicyExecute(r ApiCreateVnicEthQosPoli
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateVnicFcAdapterPolicyRequest struct {
@@ -769,7 +745,7 @@ func (r ApiCreateVnicFcAdapterPolicyRequest) IfNoneMatch(ifNoneMatch string) Api
 	return r
 }
 
-func (r ApiCreateVnicFcAdapterPolicyRequest) Execute() (VnicFcAdapterPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateVnicFcAdapterPolicyRequest) Execute() (VnicFcAdapterPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateVnicFcAdapterPolicyExecute(r)
 }
 
@@ -789,21 +765,19 @@ func (a *VnicApiService) CreateVnicFcAdapterPolicy(ctx _context.Context) ApiCrea
  * Execute executes the request
  * @return VnicFcAdapterPolicy
  */
-func (a *VnicApiService) CreateVnicFcAdapterPolicyExecute(r ApiCreateVnicFcAdapterPolicyRequest) (VnicFcAdapterPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) CreateVnicFcAdapterPolicyExecute(r ApiCreateVnicFcAdapterPolicyRequest) (VnicFcAdapterPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicFcAdapterPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.CreateVnicFcAdapterPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcAdapterPolicies"
@@ -812,8 +786,7 @@ func (a *VnicApiService) CreateVnicFcAdapterPolicyExecute(r ApiCreateVnicFcAdapt
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicFcAdapterPolicy == nil {
-		executionError.error = "vnicFcAdapterPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicFcAdapterPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -843,22 +816,19 @@ func (a *VnicApiService) CreateVnicFcAdapterPolicyExecute(r ApiCreateVnicFcAdapt
 	localVarPostBody = r.vnicFcAdapterPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -925,7 +895,7 @@ func (a *VnicApiService) CreateVnicFcAdapterPolicyExecute(r ApiCreateVnicFcAdapt
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateVnicFcIfRequest struct {
@@ -949,7 +919,7 @@ func (r ApiCreateVnicFcIfRequest) IfNoneMatch(ifNoneMatch string) ApiCreateVnicF
 	return r
 }
 
-func (r ApiCreateVnicFcIfRequest) Execute() (VnicFcIf, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateVnicFcIfRequest) Execute() (VnicFcIf, *_nethttp.Response, error) {
 	return r.ApiService.CreateVnicFcIfExecute(r)
 }
 
@@ -969,21 +939,19 @@ func (a *VnicApiService) CreateVnicFcIf(ctx _context.Context) ApiCreateVnicFcIfR
  * Execute executes the request
  * @return VnicFcIf
  */
-func (a *VnicApiService) CreateVnicFcIfExecute(r ApiCreateVnicFcIfRequest) (VnicFcIf, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) CreateVnicFcIfExecute(r ApiCreateVnicFcIfRequest) (VnicFcIf, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicFcIf
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.CreateVnicFcIf")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcIfs"
@@ -992,8 +960,7 @@ func (a *VnicApiService) CreateVnicFcIfExecute(r ApiCreateVnicFcIfRequest) (Vnic
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicFcIf == nil {
-		executionError.error = "vnicFcIf is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicFcIf is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1023,22 +990,19 @@ func (a *VnicApiService) CreateVnicFcIfExecute(r ApiCreateVnicFcIfRequest) (Vnic
 	localVarPostBody = r.vnicFcIf
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1105,7 +1069,7 @@ func (a *VnicApiService) CreateVnicFcIfExecute(r ApiCreateVnicFcIfRequest) (Vnic
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateVnicFcNetworkPolicyRequest struct {
@@ -1129,7 +1093,7 @@ func (r ApiCreateVnicFcNetworkPolicyRequest) IfNoneMatch(ifNoneMatch string) Api
 	return r
 }
 
-func (r ApiCreateVnicFcNetworkPolicyRequest) Execute() (VnicFcNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateVnicFcNetworkPolicyRequest) Execute() (VnicFcNetworkPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateVnicFcNetworkPolicyExecute(r)
 }
 
@@ -1149,21 +1113,19 @@ func (a *VnicApiService) CreateVnicFcNetworkPolicy(ctx _context.Context) ApiCrea
  * Execute executes the request
  * @return VnicFcNetworkPolicy
  */
-func (a *VnicApiService) CreateVnicFcNetworkPolicyExecute(r ApiCreateVnicFcNetworkPolicyRequest) (VnicFcNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) CreateVnicFcNetworkPolicyExecute(r ApiCreateVnicFcNetworkPolicyRequest) (VnicFcNetworkPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicFcNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.CreateVnicFcNetworkPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcNetworkPolicies"
@@ -1172,8 +1134,7 @@ func (a *VnicApiService) CreateVnicFcNetworkPolicyExecute(r ApiCreateVnicFcNetwo
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicFcNetworkPolicy == nil {
-		executionError.error = "vnicFcNetworkPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicFcNetworkPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1203,22 +1164,19 @@ func (a *VnicApiService) CreateVnicFcNetworkPolicyExecute(r ApiCreateVnicFcNetwo
 	localVarPostBody = r.vnicFcNetworkPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1285,7 +1243,7 @@ func (a *VnicApiService) CreateVnicFcNetworkPolicyExecute(r ApiCreateVnicFcNetwo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateVnicFcQosPolicyRequest struct {
@@ -1309,7 +1267,7 @@ func (r ApiCreateVnicFcQosPolicyRequest) IfNoneMatch(ifNoneMatch string) ApiCrea
 	return r
 }
 
-func (r ApiCreateVnicFcQosPolicyRequest) Execute() (VnicFcQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateVnicFcQosPolicyRequest) Execute() (VnicFcQosPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateVnicFcQosPolicyExecute(r)
 }
 
@@ -1329,21 +1287,19 @@ func (a *VnicApiService) CreateVnicFcQosPolicy(ctx _context.Context) ApiCreateVn
  * Execute executes the request
  * @return VnicFcQosPolicy
  */
-func (a *VnicApiService) CreateVnicFcQosPolicyExecute(r ApiCreateVnicFcQosPolicyRequest) (VnicFcQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) CreateVnicFcQosPolicyExecute(r ApiCreateVnicFcQosPolicyRequest) (VnicFcQosPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicFcQosPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.CreateVnicFcQosPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcQosPolicies"
@@ -1352,8 +1308,7 @@ func (a *VnicApiService) CreateVnicFcQosPolicyExecute(r ApiCreateVnicFcQosPolicy
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicFcQosPolicy == nil {
-		executionError.error = "vnicFcQosPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicFcQosPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1383,22 +1338,19 @@ func (a *VnicApiService) CreateVnicFcQosPolicyExecute(r ApiCreateVnicFcQosPolicy
 	localVarPostBody = r.vnicFcQosPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1465,7 +1417,529 @@ func (a *VnicApiService) CreateVnicFcQosPolicyExecute(r ApiCreateVnicFcQosPolicy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateVnicIscsiAdapterPolicyRequest struct {
+	ctx                    _context.Context
+	ApiService             *VnicApiService
+	vnicIscsiAdapterPolicy *VnicIscsiAdapterPolicy
+	ifMatch                *string
+	ifNoneMatch            *string
+}
+
+func (r ApiCreateVnicIscsiAdapterPolicyRequest) VnicIscsiAdapterPolicy(vnicIscsiAdapterPolicy VnicIscsiAdapterPolicy) ApiCreateVnicIscsiAdapterPolicyRequest {
+	r.vnicIscsiAdapterPolicy = &vnicIscsiAdapterPolicy
+	return r
+}
+func (r ApiCreateVnicIscsiAdapterPolicyRequest) IfMatch(ifMatch string) ApiCreateVnicIscsiAdapterPolicyRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+func (r ApiCreateVnicIscsiAdapterPolicyRequest) IfNoneMatch(ifNoneMatch string) ApiCreateVnicIscsiAdapterPolicyRequest {
+	r.ifNoneMatch = &ifNoneMatch
+	return r
+}
+
+func (r ApiCreateVnicIscsiAdapterPolicyRequest) Execute() (VnicIscsiAdapterPolicy, *_nethttp.Response, error) {
+	return r.ApiService.CreateVnicIscsiAdapterPolicyExecute(r)
+}
+
+/*
+ * CreateVnicIscsiAdapterPolicy Create a 'vnic.IscsiAdapterPolicy' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiCreateVnicIscsiAdapterPolicyRequest
+ */
+func (a *VnicApiService) CreateVnicIscsiAdapterPolicy(ctx _context.Context) ApiCreateVnicIscsiAdapterPolicyRequest {
+	return ApiCreateVnicIscsiAdapterPolicyRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VnicIscsiAdapterPolicy
+ */
+func (a *VnicApiService) CreateVnicIscsiAdapterPolicyExecute(r ApiCreateVnicIscsiAdapterPolicyRequest) (VnicIscsiAdapterPolicy, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicIscsiAdapterPolicy
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.CreateVnicIscsiAdapterPolicy")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiAdapterPolicies"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.vnicIscsiAdapterPolicy == nil {
+		return localVarReturnValue, nil, reportError("vnicIscsiAdapterPolicy is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	if r.ifNoneMatch != nil {
+		localVarHeaderParams["If-None-Match"] = parameterToString(*r.ifNoneMatch, "")
+	}
+	// body params
+	localVarPostBody = r.vnicIscsiAdapterPolicy
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateVnicIscsiBootPolicyRequest struct {
+	ctx                 _context.Context
+	ApiService          *VnicApiService
+	vnicIscsiBootPolicy *VnicIscsiBootPolicy
+	ifMatch             *string
+	ifNoneMatch         *string
+}
+
+func (r ApiCreateVnicIscsiBootPolicyRequest) VnicIscsiBootPolicy(vnicIscsiBootPolicy VnicIscsiBootPolicy) ApiCreateVnicIscsiBootPolicyRequest {
+	r.vnicIscsiBootPolicy = &vnicIscsiBootPolicy
+	return r
+}
+func (r ApiCreateVnicIscsiBootPolicyRequest) IfMatch(ifMatch string) ApiCreateVnicIscsiBootPolicyRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+func (r ApiCreateVnicIscsiBootPolicyRequest) IfNoneMatch(ifNoneMatch string) ApiCreateVnicIscsiBootPolicyRequest {
+	r.ifNoneMatch = &ifNoneMatch
+	return r
+}
+
+func (r ApiCreateVnicIscsiBootPolicyRequest) Execute() (VnicIscsiBootPolicy, *_nethttp.Response, error) {
+	return r.ApiService.CreateVnicIscsiBootPolicyExecute(r)
+}
+
+/*
+ * CreateVnicIscsiBootPolicy Create a 'vnic.IscsiBootPolicy' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiCreateVnicIscsiBootPolicyRequest
+ */
+func (a *VnicApiService) CreateVnicIscsiBootPolicy(ctx _context.Context) ApiCreateVnicIscsiBootPolicyRequest {
+	return ApiCreateVnicIscsiBootPolicyRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VnicIscsiBootPolicy
+ */
+func (a *VnicApiService) CreateVnicIscsiBootPolicyExecute(r ApiCreateVnicIscsiBootPolicyRequest) (VnicIscsiBootPolicy, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicIscsiBootPolicy
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.CreateVnicIscsiBootPolicy")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiBootPolicies"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.vnicIscsiBootPolicy == nil {
+		return localVarReturnValue, nil, reportError("vnicIscsiBootPolicy is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	if r.ifNoneMatch != nil {
+		localVarHeaderParams["If-None-Match"] = parameterToString(*r.ifNoneMatch, "")
+	}
+	// body params
+	localVarPostBody = r.vnicIscsiBootPolicy
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiCreateVnicIscsiStaticTargetPolicyRequest struct {
+	ctx                         _context.Context
+	ApiService                  *VnicApiService
+	vnicIscsiStaticTargetPolicy *VnicIscsiStaticTargetPolicy
+	ifMatch                     *string
+	ifNoneMatch                 *string
+}
+
+func (r ApiCreateVnicIscsiStaticTargetPolicyRequest) VnicIscsiStaticTargetPolicy(vnicIscsiStaticTargetPolicy VnicIscsiStaticTargetPolicy) ApiCreateVnicIscsiStaticTargetPolicyRequest {
+	r.vnicIscsiStaticTargetPolicy = &vnicIscsiStaticTargetPolicy
+	return r
+}
+func (r ApiCreateVnicIscsiStaticTargetPolicyRequest) IfMatch(ifMatch string) ApiCreateVnicIscsiStaticTargetPolicyRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+func (r ApiCreateVnicIscsiStaticTargetPolicyRequest) IfNoneMatch(ifNoneMatch string) ApiCreateVnicIscsiStaticTargetPolicyRequest {
+	r.ifNoneMatch = &ifNoneMatch
+	return r
+}
+
+func (r ApiCreateVnicIscsiStaticTargetPolicyRequest) Execute() (VnicIscsiStaticTargetPolicy, *_nethttp.Response, error) {
+	return r.ApiService.CreateVnicIscsiStaticTargetPolicyExecute(r)
+}
+
+/*
+ * CreateVnicIscsiStaticTargetPolicy Create a 'vnic.IscsiStaticTargetPolicy' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiCreateVnicIscsiStaticTargetPolicyRequest
+ */
+func (a *VnicApiService) CreateVnicIscsiStaticTargetPolicy(ctx _context.Context) ApiCreateVnicIscsiStaticTargetPolicyRequest {
+	return ApiCreateVnicIscsiStaticTargetPolicyRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VnicIscsiStaticTargetPolicy
+ */
+func (a *VnicApiService) CreateVnicIscsiStaticTargetPolicyExecute(r ApiCreateVnicIscsiStaticTargetPolicyRequest) (VnicIscsiStaticTargetPolicy, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicIscsiStaticTargetPolicy
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.CreateVnicIscsiStaticTargetPolicy")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiStaticTargetPolicies"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.vnicIscsiStaticTargetPolicy == nil {
+		return localVarReturnValue, nil, reportError("vnicIscsiStaticTargetPolicy is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	if r.ifNoneMatch != nil {
+		localVarHeaderParams["If-None-Match"] = parameterToString(*r.ifNoneMatch, "")
+	}
+	// body params
+	localVarPostBody = r.vnicIscsiStaticTargetPolicy
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateVnicLanConnectivityPolicyRequest struct {
@@ -1489,7 +1963,7 @@ func (r ApiCreateVnicLanConnectivityPolicyRequest) IfNoneMatch(ifNoneMatch strin
 	return r
 }
 
-func (r ApiCreateVnicLanConnectivityPolicyRequest) Execute() (VnicLanConnectivityPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateVnicLanConnectivityPolicyRequest) Execute() (VnicLanConnectivityPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateVnicLanConnectivityPolicyExecute(r)
 }
 
@@ -1509,21 +1983,19 @@ func (a *VnicApiService) CreateVnicLanConnectivityPolicy(ctx _context.Context) A
  * Execute executes the request
  * @return VnicLanConnectivityPolicy
  */
-func (a *VnicApiService) CreateVnicLanConnectivityPolicyExecute(r ApiCreateVnicLanConnectivityPolicyRequest) (VnicLanConnectivityPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) CreateVnicLanConnectivityPolicyExecute(r ApiCreateVnicLanConnectivityPolicyRequest) (VnicLanConnectivityPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicLanConnectivityPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.CreateVnicLanConnectivityPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/LanConnectivityPolicies"
@@ -1532,8 +2004,7 @@ func (a *VnicApiService) CreateVnicLanConnectivityPolicyExecute(r ApiCreateVnicL
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicLanConnectivityPolicy == nil {
-		executionError.error = "vnicLanConnectivityPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicLanConnectivityPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1563,22 +2034,19 @@ func (a *VnicApiService) CreateVnicLanConnectivityPolicyExecute(r ApiCreateVnicL
 	localVarPostBody = r.vnicLanConnectivityPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1645,7 +2113,7 @@ func (a *VnicApiService) CreateVnicLanConnectivityPolicyExecute(r ApiCreateVnicL
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateVnicSanConnectivityPolicyRequest struct {
@@ -1669,7 +2137,7 @@ func (r ApiCreateVnicSanConnectivityPolicyRequest) IfNoneMatch(ifNoneMatch strin
 	return r
 }
 
-func (r ApiCreateVnicSanConnectivityPolicyRequest) Execute() (VnicSanConnectivityPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiCreateVnicSanConnectivityPolicyRequest) Execute() (VnicSanConnectivityPolicy, *_nethttp.Response, error) {
 	return r.ApiService.CreateVnicSanConnectivityPolicyExecute(r)
 }
 
@@ -1689,21 +2157,19 @@ func (a *VnicApiService) CreateVnicSanConnectivityPolicy(ctx _context.Context) A
  * Execute executes the request
  * @return VnicSanConnectivityPolicy
  */
-func (a *VnicApiService) CreateVnicSanConnectivityPolicyExecute(r ApiCreateVnicSanConnectivityPolicyRequest) (VnicSanConnectivityPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) CreateVnicSanConnectivityPolicyExecute(r ApiCreateVnicSanConnectivityPolicyRequest) (VnicSanConnectivityPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicSanConnectivityPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.CreateVnicSanConnectivityPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/SanConnectivityPolicies"
@@ -1712,8 +2178,7 @@ func (a *VnicApiService) CreateVnicSanConnectivityPolicyExecute(r ApiCreateVnicS
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicSanConnectivityPolicy == nil {
-		executionError.error = "vnicSanConnectivityPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicSanConnectivityPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -1743,22 +2208,19 @@ func (a *VnicApiService) CreateVnicSanConnectivityPolicyExecute(r ApiCreateVnicS
 	localVarPostBody = r.vnicSanConnectivityPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1825,7 +2287,7 @@ func (a *VnicApiService) CreateVnicSanConnectivityPolicyExecute(r ApiCreateVnicS
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiDeleteVnicEthAdapterPolicyRequest struct {
@@ -1834,7 +2296,7 @@ type ApiDeleteVnicEthAdapterPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteVnicEthAdapterPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteVnicEthAdapterPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteVnicEthAdapterPolicyExecute(r)
 }
 
@@ -1855,20 +2317,18 @@ func (a *VnicApiService) DeleteVnicEthAdapterPolicy(ctx _context.Context, moid s
 /*
  * Execute executes the request
  */
-func (a *VnicApiService) DeleteVnicEthAdapterPolicyExecute(r ApiDeleteVnicEthAdapterPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) DeleteVnicEthAdapterPolicyExecute(r ApiDeleteVnicEthAdapterPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.DeleteVnicEthAdapterPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthAdapterPolicies/{Moid}"
@@ -1897,22 +2357,19 @@ func (a *VnicApiService) DeleteVnicEthAdapterPolicyExecute(r ApiDeleteVnicEthAda
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -1970,7 +2427,7 @@ func (a *VnicApiService) DeleteVnicEthAdapterPolicyExecute(r ApiDeleteVnicEthAda
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteVnicEthIfRequest struct {
@@ -1979,7 +2436,7 @@ type ApiDeleteVnicEthIfRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteVnicEthIfRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteVnicEthIfRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteVnicEthIfExecute(r)
 }
 
@@ -2000,20 +2457,18 @@ func (a *VnicApiService) DeleteVnicEthIf(ctx _context.Context, moid string) ApiD
 /*
  * Execute executes the request
  */
-func (a *VnicApiService) DeleteVnicEthIfExecute(r ApiDeleteVnicEthIfRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) DeleteVnicEthIfExecute(r ApiDeleteVnicEthIfRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.DeleteVnicEthIf")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthIfs/{Moid}"
@@ -2042,22 +2497,19 @@ func (a *VnicApiService) DeleteVnicEthIfExecute(r ApiDeleteVnicEthIfRequest) (*_
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2115,7 +2567,7 @@ func (a *VnicApiService) DeleteVnicEthIfExecute(r ApiDeleteVnicEthIfRequest) (*_
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteVnicEthNetworkPolicyRequest struct {
@@ -2124,7 +2576,7 @@ type ApiDeleteVnicEthNetworkPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteVnicEthNetworkPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteVnicEthNetworkPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteVnicEthNetworkPolicyExecute(r)
 }
 
@@ -2145,20 +2597,18 @@ func (a *VnicApiService) DeleteVnicEthNetworkPolicy(ctx _context.Context, moid s
 /*
  * Execute executes the request
  */
-func (a *VnicApiService) DeleteVnicEthNetworkPolicyExecute(r ApiDeleteVnicEthNetworkPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) DeleteVnicEthNetworkPolicyExecute(r ApiDeleteVnicEthNetworkPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.DeleteVnicEthNetworkPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthNetworkPolicies/{Moid}"
@@ -2187,22 +2637,19 @@ func (a *VnicApiService) DeleteVnicEthNetworkPolicyExecute(r ApiDeleteVnicEthNet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2260,7 +2707,7 @@ func (a *VnicApiService) DeleteVnicEthNetworkPolicyExecute(r ApiDeleteVnicEthNet
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteVnicEthQosPolicyRequest struct {
@@ -2269,7 +2716,7 @@ type ApiDeleteVnicEthQosPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteVnicEthQosPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteVnicEthQosPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteVnicEthQosPolicyExecute(r)
 }
 
@@ -2290,20 +2737,18 @@ func (a *VnicApiService) DeleteVnicEthQosPolicy(ctx _context.Context, moid strin
 /*
  * Execute executes the request
  */
-func (a *VnicApiService) DeleteVnicEthQosPolicyExecute(r ApiDeleteVnicEthQosPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) DeleteVnicEthQosPolicyExecute(r ApiDeleteVnicEthQosPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.DeleteVnicEthQosPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthQosPolicies/{Moid}"
@@ -2332,22 +2777,19 @@ func (a *VnicApiService) DeleteVnicEthQosPolicyExecute(r ApiDeleteVnicEthQosPoli
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2405,7 +2847,7 @@ func (a *VnicApiService) DeleteVnicEthQosPolicyExecute(r ApiDeleteVnicEthQosPoli
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteVnicFcAdapterPolicyRequest struct {
@@ -2414,7 +2856,7 @@ type ApiDeleteVnicFcAdapterPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteVnicFcAdapterPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteVnicFcAdapterPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteVnicFcAdapterPolicyExecute(r)
 }
 
@@ -2435,20 +2877,18 @@ func (a *VnicApiService) DeleteVnicFcAdapterPolicy(ctx _context.Context, moid st
 /*
  * Execute executes the request
  */
-func (a *VnicApiService) DeleteVnicFcAdapterPolicyExecute(r ApiDeleteVnicFcAdapterPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) DeleteVnicFcAdapterPolicyExecute(r ApiDeleteVnicFcAdapterPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.DeleteVnicFcAdapterPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcAdapterPolicies/{Moid}"
@@ -2477,22 +2917,19 @@ func (a *VnicApiService) DeleteVnicFcAdapterPolicyExecute(r ApiDeleteVnicFcAdapt
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2550,7 +2987,7 @@ func (a *VnicApiService) DeleteVnicFcAdapterPolicyExecute(r ApiDeleteVnicFcAdapt
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteVnicFcIfRequest struct {
@@ -2559,7 +2996,7 @@ type ApiDeleteVnicFcIfRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteVnicFcIfRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteVnicFcIfRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteVnicFcIfExecute(r)
 }
 
@@ -2580,20 +3017,18 @@ func (a *VnicApiService) DeleteVnicFcIf(ctx _context.Context, moid string) ApiDe
 /*
  * Execute executes the request
  */
-func (a *VnicApiService) DeleteVnicFcIfExecute(r ApiDeleteVnicFcIfRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) DeleteVnicFcIfExecute(r ApiDeleteVnicFcIfRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.DeleteVnicFcIf")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcIfs/{Moid}"
@@ -2622,22 +3057,19 @@ func (a *VnicApiService) DeleteVnicFcIfExecute(r ApiDeleteVnicFcIfRequest) (*_ne
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2695,7 +3127,7 @@ func (a *VnicApiService) DeleteVnicFcIfExecute(r ApiDeleteVnicFcIfRequest) (*_ne
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteVnicFcNetworkPolicyRequest struct {
@@ -2704,7 +3136,7 @@ type ApiDeleteVnicFcNetworkPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteVnicFcNetworkPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteVnicFcNetworkPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteVnicFcNetworkPolicyExecute(r)
 }
 
@@ -2725,20 +3157,18 @@ func (a *VnicApiService) DeleteVnicFcNetworkPolicy(ctx _context.Context, moid st
 /*
  * Execute executes the request
  */
-func (a *VnicApiService) DeleteVnicFcNetworkPolicyExecute(r ApiDeleteVnicFcNetworkPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) DeleteVnicFcNetworkPolicyExecute(r ApiDeleteVnicFcNetworkPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.DeleteVnicFcNetworkPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcNetworkPolicies/{Moid}"
@@ -2767,22 +3197,19 @@ func (a *VnicApiService) DeleteVnicFcNetworkPolicyExecute(r ApiDeleteVnicFcNetwo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2840,7 +3267,7 @@ func (a *VnicApiService) DeleteVnicFcNetworkPolicyExecute(r ApiDeleteVnicFcNetwo
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteVnicFcQosPolicyRequest struct {
@@ -2849,7 +3276,7 @@ type ApiDeleteVnicFcQosPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteVnicFcQosPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteVnicFcQosPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteVnicFcQosPolicyExecute(r)
 }
 
@@ -2870,20 +3297,18 @@ func (a *VnicApiService) DeleteVnicFcQosPolicy(ctx _context.Context, moid string
 /*
  * Execute executes the request
  */
-func (a *VnicApiService) DeleteVnicFcQosPolicyExecute(r ApiDeleteVnicFcQosPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) DeleteVnicFcQosPolicyExecute(r ApiDeleteVnicFcQosPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.DeleteVnicFcQosPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcQosPolicies/{Moid}"
@@ -2912,22 +3337,19 @@ func (a *VnicApiService) DeleteVnicFcQosPolicyExecute(r ApiDeleteVnicFcQosPolicy
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -2985,7 +3407,427 @@ func (a *VnicApiService) DeleteVnicFcQosPolicyExecute(r ApiDeleteVnicFcQosPolicy
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
+}
+
+type ApiDeleteVnicIscsiAdapterPolicyRequest struct {
+	ctx        _context.Context
+	ApiService *VnicApiService
+	moid       string
+}
+
+func (r ApiDeleteVnicIscsiAdapterPolicyRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteVnicIscsiAdapterPolicyExecute(r)
+}
+
+/*
+ * DeleteVnicIscsiAdapterPolicy Delete a 'vnic.IscsiAdapterPolicy' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiDeleteVnicIscsiAdapterPolicyRequest
+ */
+func (a *VnicApiService) DeleteVnicIscsiAdapterPolicy(ctx _context.Context, moid string) ApiDeleteVnicIscsiAdapterPolicyRequest {
+	return ApiDeleteVnicIscsiAdapterPolicyRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ */
+func (a *VnicApiService) DeleteVnicIscsiAdapterPolicyExecute(r ApiDeleteVnicIscsiAdapterPolicyRequest) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.DeleteVnicIscsiAdapterPolicy")
+	if err != nil {
+		return nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiAdapterPolicies/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiDeleteVnicIscsiBootPolicyRequest struct {
+	ctx        _context.Context
+	ApiService *VnicApiService
+	moid       string
+}
+
+func (r ApiDeleteVnicIscsiBootPolicyRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteVnicIscsiBootPolicyExecute(r)
+}
+
+/*
+ * DeleteVnicIscsiBootPolicy Delete a 'vnic.IscsiBootPolicy' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiDeleteVnicIscsiBootPolicyRequest
+ */
+func (a *VnicApiService) DeleteVnicIscsiBootPolicy(ctx _context.Context, moid string) ApiDeleteVnicIscsiBootPolicyRequest {
+	return ApiDeleteVnicIscsiBootPolicyRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ */
+func (a *VnicApiService) DeleteVnicIscsiBootPolicyExecute(r ApiDeleteVnicIscsiBootPolicyRequest) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.DeleteVnicIscsiBootPolicy")
+	if err != nil {
+		return nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiBootPolicies/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
+}
+
+type ApiDeleteVnicIscsiStaticTargetPolicyRequest struct {
+	ctx        _context.Context
+	ApiService *VnicApiService
+	moid       string
+}
+
+func (r ApiDeleteVnicIscsiStaticTargetPolicyRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteVnicIscsiStaticTargetPolicyExecute(r)
+}
+
+/*
+ * DeleteVnicIscsiStaticTargetPolicy Delete a 'vnic.IscsiStaticTargetPolicy' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiDeleteVnicIscsiStaticTargetPolicyRequest
+ */
+func (a *VnicApiService) DeleteVnicIscsiStaticTargetPolicy(ctx _context.Context, moid string) ApiDeleteVnicIscsiStaticTargetPolicyRequest {
+	return ApiDeleteVnicIscsiStaticTargetPolicyRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ */
+func (a *VnicApiService) DeleteVnicIscsiStaticTargetPolicyExecute(r ApiDeleteVnicIscsiStaticTargetPolicyRequest) (*_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.DeleteVnicIscsiStaticTargetPolicy")
+	if err != nil {
+		return nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiStaticTargetPolicies/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarHTTPResponse, newErr
+	}
+
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteVnicLanConnectivityPolicyRequest struct {
@@ -2994,7 +3836,7 @@ type ApiDeleteVnicLanConnectivityPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteVnicLanConnectivityPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteVnicLanConnectivityPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteVnicLanConnectivityPolicyExecute(r)
 }
 
@@ -3015,20 +3857,18 @@ func (a *VnicApiService) DeleteVnicLanConnectivityPolicy(ctx _context.Context, m
 /*
  * Execute executes the request
  */
-func (a *VnicApiService) DeleteVnicLanConnectivityPolicyExecute(r ApiDeleteVnicLanConnectivityPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) DeleteVnicLanConnectivityPolicyExecute(r ApiDeleteVnicLanConnectivityPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.DeleteVnicLanConnectivityPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/LanConnectivityPolicies/{Moid}"
@@ -3057,22 +3897,19 @@ func (a *VnicApiService) DeleteVnicLanConnectivityPolicyExecute(r ApiDeleteVnicL
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3130,7 +3967,7 @@ func (a *VnicApiService) DeleteVnicLanConnectivityPolicyExecute(r ApiDeleteVnicL
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiDeleteVnicSanConnectivityPolicyRequest struct {
@@ -3139,7 +3976,7 @@ type ApiDeleteVnicSanConnectivityPolicyRequest struct {
 	moid       string
 }
 
-func (r ApiDeleteVnicSanConnectivityPolicyRequest) Execute() (*_nethttp.Response, GenericOpenAPIError) {
+func (r ApiDeleteVnicSanConnectivityPolicyRequest) Execute() (*_nethttp.Response, error) {
 	return r.ApiService.DeleteVnicSanConnectivityPolicyExecute(r)
 }
 
@@ -3160,20 +3997,18 @@ func (a *VnicApiService) DeleteVnicSanConnectivityPolicy(ctx _context.Context, m
 /*
  * Execute executes the request
  */
-func (a *VnicApiService) DeleteVnicSanConnectivityPolicyExecute(r ApiDeleteVnicSanConnectivityPolicyRequest) (*_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) DeleteVnicSanConnectivityPolicyExecute(r ApiDeleteVnicSanConnectivityPolicyRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.DeleteVnicSanConnectivityPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/SanConnectivityPolicies/{Moid}"
@@ -3202,22 +4037,19 @@ func (a *VnicApiService) DeleteVnicSanConnectivityPolicyExecute(r ApiDeleteVnicS
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return nil, executionError
+		return nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarHTTPResponse, executionError
+		return localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3275,7 +4107,7 @@ func (a *VnicApiService) DeleteVnicSanConnectivityPolicyExecute(r ApiDeleteVnicS
 		return localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, executionError
+	return localVarHTTPResponse, nil
 }
 
 type ApiGetVnicEthAdapterPolicyByMoidRequest struct {
@@ -3284,7 +4116,7 @@ type ApiGetVnicEthAdapterPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetVnicEthAdapterPolicyByMoidRequest) Execute() (VnicEthAdapterPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicEthAdapterPolicyByMoidRequest) Execute() (VnicEthAdapterPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicEthAdapterPolicyByMoidExecute(r)
 }
 
@@ -3306,21 +4138,19 @@ func (a *VnicApiService) GetVnicEthAdapterPolicyByMoid(ctx _context.Context, moi
  * Execute executes the request
  * @return VnicEthAdapterPolicy
  */
-func (a *VnicApiService) GetVnicEthAdapterPolicyByMoidExecute(r ApiGetVnicEthAdapterPolicyByMoidRequest) (VnicEthAdapterPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicEthAdapterPolicyByMoidExecute(r ApiGetVnicEthAdapterPolicyByMoidRequest) (VnicEthAdapterPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicEthAdapterPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicEthAdapterPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthAdapterPolicies/{Moid}"
@@ -3349,22 +4179,19 @@ func (a *VnicApiService) GetVnicEthAdapterPolicyByMoidExecute(r ApiGetVnicEthAda
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3431,7 +4258,7 @@ func (a *VnicApiService) GetVnicEthAdapterPolicyByMoidExecute(r ApiGetVnicEthAda
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetVnicEthAdapterPolicyListRequest struct {
@@ -3495,7 +4322,7 @@ func (r ApiGetVnicEthAdapterPolicyListRequest) Tags(tags string) ApiGetVnicEthAd
 	return r
 }
 
-func (r ApiGetVnicEthAdapterPolicyListRequest) Execute() (VnicEthAdapterPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicEthAdapterPolicyListRequest) Execute() (VnicEthAdapterPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicEthAdapterPolicyListExecute(r)
 }
 
@@ -3515,21 +4342,19 @@ func (a *VnicApiService) GetVnicEthAdapterPolicyList(ctx _context.Context) ApiGe
  * Execute executes the request
  * @return VnicEthAdapterPolicyResponse
  */
-func (a *VnicApiService) GetVnicEthAdapterPolicyListExecute(r ApiGetVnicEthAdapterPolicyListRequest) (VnicEthAdapterPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicEthAdapterPolicyListExecute(r ApiGetVnicEthAdapterPolicyListRequest) (VnicEthAdapterPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicEthAdapterPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicEthAdapterPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthAdapterPolicies"
@@ -3590,22 +4415,19 @@ func (a *VnicApiService) GetVnicEthAdapterPolicyListExecute(r ApiGetVnicEthAdapt
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3672,7 +4494,7 @@ func (a *VnicApiService) GetVnicEthAdapterPolicyListExecute(r ApiGetVnicEthAdapt
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetVnicEthIfByMoidRequest struct {
@@ -3681,7 +4503,7 @@ type ApiGetVnicEthIfByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetVnicEthIfByMoidRequest) Execute() (VnicEthIf, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicEthIfByMoidRequest) Execute() (VnicEthIf, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicEthIfByMoidExecute(r)
 }
 
@@ -3703,21 +4525,19 @@ func (a *VnicApiService) GetVnicEthIfByMoid(ctx _context.Context, moid string) A
  * Execute executes the request
  * @return VnicEthIf
  */
-func (a *VnicApiService) GetVnicEthIfByMoidExecute(r ApiGetVnicEthIfByMoidRequest) (VnicEthIf, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicEthIfByMoidExecute(r ApiGetVnicEthIfByMoidRequest) (VnicEthIf, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicEthIf
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicEthIfByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthIfs/{Moid}"
@@ -3746,22 +4566,19 @@ func (a *VnicApiService) GetVnicEthIfByMoidExecute(r ApiGetVnicEthIfByMoidReques
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -3828,7 +4645,7 @@ func (a *VnicApiService) GetVnicEthIfByMoidExecute(r ApiGetVnicEthIfByMoidReques
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetVnicEthIfListRequest struct {
@@ -3892,7 +4709,7 @@ func (r ApiGetVnicEthIfListRequest) Tags(tags string) ApiGetVnicEthIfListRequest
 	return r
 }
 
-func (r ApiGetVnicEthIfListRequest) Execute() (VnicEthIfResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicEthIfListRequest) Execute() (VnicEthIfResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicEthIfListExecute(r)
 }
 
@@ -3912,21 +4729,19 @@ func (a *VnicApiService) GetVnicEthIfList(ctx _context.Context) ApiGetVnicEthIfL
  * Execute executes the request
  * @return VnicEthIfResponse
  */
-func (a *VnicApiService) GetVnicEthIfListExecute(r ApiGetVnicEthIfListRequest) (VnicEthIfResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicEthIfListExecute(r ApiGetVnicEthIfListRequest) (VnicEthIfResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicEthIfResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicEthIfList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthIfs"
@@ -3987,22 +4802,19 @@ func (a *VnicApiService) GetVnicEthIfListExecute(r ApiGetVnicEthIfListRequest) (
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4069,7 +4881,7 @@ func (a *VnicApiService) GetVnicEthIfListExecute(r ApiGetVnicEthIfListRequest) (
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetVnicEthNetworkPolicyByMoidRequest struct {
@@ -4078,7 +4890,7 @@ type ApiGetVnicEthNetworkPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetVnicEthNetworkPolicyByMoidRequest) Execute() (VnicEthNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicEthNetworkPolicyByMoidRequest) Execute() (VnicEthNetworkPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicEthNetworkPolicyByMoidExecute(r)
 }
 
@@ -4100,21 +4912,19 @@ func (a *VnicApiService) GetVnicEthNetworkPolicyByMoid(ctx _context.Context, moi
  * Execute executes the request
  * @return VnicEthNetworkPolicy
  */
-func (a *VnicApiService) GetVnicEthNetworkPolicyByMoidExecute(r ApiGetVnicEthNetworkPolicyByMoidRequest) (VnicEthNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicEthNetworkPolicyByMoidExecute(r ApiGetVnicEthNetworkPolicyByMoidRequest) (VnicEthNetworkPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicEthNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicEthNetworkPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthNetworkPolicies/{Moid}"
@@ -4143,22 +4953,19 @@ func (a *VnicApiService) GetVnicEthNetworkPolicyByMoidExecute(r ApiGetVnicEthNet
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4225,7 +5032,7 @@ func (a *VnicApiService) GetVnicEthNetworkPolicyByMoidExecute(r ApiGetVnicEthNet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetVnicEthNetworkPolicyListRequest struct {
@@ -4289,7 +5096,7 @@ func (r ApiGetVnicEthNetworkPolicyListRequest) Tags(tags string) ApiGetVnicEthNe
 	return r
 }
 
-func (r ApiGetVnicEthNetworkPolicyListRequest) Execute() (VnicEthNetworkPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicEthNetworkPolicyListRequest) Execute() (VnicEthNetworkPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicEthNetworkPolicyListExecute(r)
 }
 
@@ -4309,21 +5116,19 @@ func (a *VnicApiService) GetVnicEthNetworkPolicyList(ctx _context.Context) ApiGe
  * Execute executes the request
  * @return VnicEthNetworkPolicyResponse
  */
-func (a *VnicApiService) GetVnicEthNetworkPolicyListExecute(r ApiGetVnicEthNetworkPolicyListRequest) (VnicEthNetworkPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicEthNetworkPolicyListExecute(r ApiGetVnicEthNetworkPolicyListRequest) (VnicEthNetworkPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicEthNetworkPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicEthNetworkPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthNetworkPolicies"
@@ -4384,22 +5189,19 @@ func (a *VnicApiService) GetVnicEthNetworkPolicyListExecute(r ApiGetVnicEthNetwo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4466,7 +5268,7 @@ func (a *VnicApiService) GetVnicEthNetworkPolicyListExecute(r ApiGetVnicEthNetwo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetVnicEthQosPolicyByMoidRequest struct {
@@ -4475,7 +5277,7 @@ type ApiGetVnicEthQosPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetVnicEthQosPolicyByMoidRequest) Execute() (VnicEthQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicEthQosPolicyByMoidRequest) Execute() (VnicEthQosPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicEthQosPolicyByMoidExecute(r)
 }
 
@@ -4497,21 +5299,19 @@ func (a *VnicApiService) GetVnicEthQosPolicyByMoid(ctx _context.Context, moid st
  * Execute executes the request
  * @return VnicEthQosPolicy
  */
-func (a *VnicApiService) GetVnicEthQosPolicyByMoidExecute(r ApiGetVnicEthQosPolicyByMoidRequest) (VnicEthQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicEthQosPolicyByMoidExecute(r ApiGetVnicEthQosPolicyByMoidRequest) (VnicEthQosPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicEthQosPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicEthQosPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthQosPolicies/{Moid}"
@@ -4540,22 +5340,19 @@ func (a *VnicApiService) GetVnicEthQosPolicyByMoidExecute(r ApiGetVnicEthQosPoli
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4622,7 +5419,7 @@ func (a *VnicApiService) GetVnicEthQosPolicyByMoidExecute(r ApiGetVnicEthQosPoli
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetVnicEthQosPolicyListRequest struct {
@@ -4686,7 +5483,7 @@ func (r ApiGetVnicEthQosPolicyListRequest) Tags(tags string) ApiGetVnicEthQosPol
 	return r
 }
 
-func (r ApiGetVnicEthQosPolicyListRequest) Execute() (VnicEthQosPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicEthQosPolicyListRequest) Execute() (VnicEthQosPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicEthQosPolicyListExecute(r)
 }
 
@@ -4706,21 +5503,19 @@ func (a *VnicApiService) GetVnicEthQosPolicyList(ctx _context.Context) ApiGetVni
  * Execute executes the request
  * @return VnicEthQosPolicyResponse
  */
-func (a *VnicApiService) GetVnicEthQosPolicyListExecute(r ApiGetVnicEthQosPolicyListRequest) (VnicEthQosPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicEthQosPolicyListExecute(r ApiGetVnicEthQosPolicyListRequest) (VnicEthQosPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicEthQosPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicEthQosPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthQosPolicies"
@@ -4781,22 +5576,19 @@ func (a *VnicApiService) GetVnicEthQosPolicyListExecute(r ApiGetVnicEthQosPolicy
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -4863,7 +5655,7 @@ func (a *VnicApiService) GetVnicEthQosPolicyListExecute(r ApiGetVnicEthQosPolicy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetVnicFcAdapterPolicyByMoidRequest struct {
@@ -4872,7 +5664,7 @@ type ApiGetVnicFcAdapterPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetVnicFcAdapterPolicyByMoidRequest) Execute() (VnicFcAdapterPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicFcAdapterPolicyByMoidRequest) Execute() (VnicFcAdapterPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicFcAdapterPolicyByMoidExecute(r)
 }
 
@@ -4894,21 +5686,19 @@ func (a *VnicApiService) GetVnicFcAdapterPolicyByMoid(ctx _context.Context, moid
  * Execute executes the request
  * @return VnicFcAdapterPolicy
  */
-func (a *VnicApiService) GetVnicFcAdapterPolicyByMoidExecute(r ApiGetVnicFcAdapterPolicyByMoidRequest) (VnicFcAdapterPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicFcAdapterPolicyByMoidExecute(r ApiGetVnicFcAdapterPolicyByMoidRequest) (VnicFcAdapterPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicFcAdapterPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicFcAdapterPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcAdapterPolicies/{Moid}"
@@ -4937,22 +5727,19 @@ func (a *VnicApiService) GetVnicFcAdapterPolicyByMoidExecute(r ApiGetVnicFcAdapt
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5019,7 +5806,7 @@ func (a *VnicApiService) GetVnicFcAdapterPolicyByMoidExecute(r ApiGetVnicFcAdapt
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetVnicFcAdapterPolicyListRequest struct {
@@ -5083,7 +5870,7 @@ func (r ApiGetVnicFcAdapterPolicyListRequest) Tags(tags string) ApiGetVnicFcAdap
 	return r
 }
 
-func (r ApiGetVnicFcAdapterPolicyListRequest) Execute() (VnicFcAdapterPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicFcAdapterPolicyListRequest) Execute() (VnicFcAdapterPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicFcAdapterPolicyListExecute(r)
 }
 
@@ -5103,21 +5890,19 @@ func (a *VnicApiService) GetVnicFcAdapterPolicyList(ctx _context.Context) ApiGet
  * Execute executes the request
  * @return VnicFcAdapterPolicyResponse
  */
-func (a *VnicApiService) GetVnicFcAdapterPolicyListExecute(r ApiGetVnicFcAdapterPolicyListRequest) (VnicFcAdapterPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicFcAdapterPolicyListExecute(r ApiGetVnicFcAdapterPolicyListRequest) (VnicFcAdapterPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicFcAdapterPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicFcAdapterPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcAdapterPolicies"
@@ -5178,22 +5963,19 @@ func (a *VnicApiService) GetVnicFcAdapterPolicyListExecute(r ApiGetVnicFcAdapter
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5260,7 +6042,7 @@ func (a *VnicApiService) GetVnicFcAdapterPolicyListExecute(r ApiGetVnicFcAdapter
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetVnicFcIfByMoidRequest struct {
@@ -5269,7 +6051,7 @@ type ApiGetVnicFcIfByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetVnicFcIfByMoidRequest) Execute() (VnicFcIf, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicFcIfByMoidRequest) Execute() (VnicFcIf, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicFcIfByMoidExecute(r)
 }
 
@@ -5291,21 +6073,19 @@ func (a *VnicApiService) GetVnicFcIfByMoid(ctx _context.Context, moid string) Ap
  * Execute executes the request
  * @return VnicFcIf
  */
-func (a *VnicApiService) GetVnicFcIfByMoidExecute(r ApiGetVnicFcIfByMoidRequest) (VnicFcIf, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicFcIfByMoidExecute(r ApiGetVnicFcIfByMoidRequest) (VnicFcIf, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicFcIf
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicFcIfByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcIfs/{Moid}"
@@ -5334,22 +6114,19 @@ func (a *VnicApiService) GetVnicFcIfByMoidExecute(r ApiGetVnicFcIfByMoidRequest)
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5416,7 +6193,7 @@ func (a *VnicApiService) GetVnicFcIfByMoidExecute(r ApiGetVnicFcIfByMoidRequest)
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetVnicFcIfListRequest struct {
@@ -5480,7 +6257,7 @@ func (r ApiGetVnicFcIfListRequest) Tags(tags string) ApiGetVnicFcIfListRequest {
 	return r
 }
 
-func (r ApiGetVnicFcIfListRequest) Execute() (VnicFcIfResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicFcIfListRequest) Execute() (VnicFcIfResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicFcIfListExecute(r)
 }
 
@@ -5500,21 +6277,19 @@ func (a *VnicApiService) GetVnicFcIfList(ctx _context.Context) ApiGetVnicFcIfLis
  * Execute executes the request
  * @return VnicFcIfResponse
  */
-func (a *VnicApiService) GetVnicFcIfListExecute(r ApiGetVnicFcIfListRequest) (VnicFcIfResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicFcIfListExecute(r ApiGetVnicFcIfListRequest) (VnicFcIfResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicFcIfResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicFcIfList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcIfs"
@@ -5575,22 +6350,19 @@ func (a *VnicApiService) GetVnicFcIfListExecute(r ApiGetVnicFcIfListRequest) (Vn
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5657,7 +6429,7 @@ func (a *VnicApiService) GetVnicFcIfListExecute(r ApiGetVnicFcIfListRequest) (Vn
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetVnicFcNetworkPolicyByMoidRequest struct {
@@ -5666,7 +6438,7 @@ type ApiGetVnicFcNetworkPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetVnicFcNetworkPolicyByMoidRequest) Execute() (VnicFcNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicFcNetworkPolicyByMoidRequest) Execute() (VnicFcNetworkPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicFcNetworkPolicyByMoidExecute(r)
 }
 
@@ -5688,21 +6460,19 @@ func (a *VnicApiService) GetVnicFcNetworkPolicyByMoid(ctx _context.Context, moid
  * Execute executes the request
  * @return VnicFcNetworkPolicy
  */
-func (a *VnicApiService) GetVnicFcNetworkPolicyByMoidExecute(r ApiGetVnicFcNetworkPolicyByMoidRequest) (VnicFcNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicFcNetworkPolicyByMoidExecute(r ApiGetVnicFcNetworkPolicyByMoidRequest) (VnicFcNetworkPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicFcNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicFcNetworkPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcNetworkPolicies/{Moid}"
@@ -5731,22 +6501,19 @@ func (a *VnicApiService) GetVnicFcNetworkPolicyByMoidExecute(r ApiGetVnicFcNetwo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -5813,7 +6580,7 @@ func (a *VnicApiService) GetVnicFcNetworkPolicyByMoidExecute(r ApiGetVnicFcNetwo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetVnicFcNetworkPolicyListRequest struct {
@@ -5877,7 +6644,7 @@ func (r ApiGetVnicFcNetworkPolicyListRequest) Tags(tags string) ApiGetVnicFcNetw
 	return r
 }
 
-func (r ApiGetVnicFcNetworkPolicyListRequest) Execute() (VnicFcNetworkPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicFcNetworkPolicyListRequest) Execute() (VnicFcNetworkPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicFcNetworkPolicyListExecute(r)
 }
 
@@ -5897,21 +6664,19 @@ func (a *VnicApiService) GetVnicFcNetworkPolicyList(ctx _context.Context) ApiGet
  * Execute executes the request
  * @return VnicFcNetworkPolicyResponse
  */
-func (a *VnicApiService) GetVnicFcNetworkPolicyListExecute(r ApiGetVnicFcNetworkPolicyListRequest) (VnicFcNetworkPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicFcNetworkPolicyListExecute(r ApiGetVnicFcNetworkPolicyListRequest) (VnicFcNetworkPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicFcNetworkPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicFcNetworkPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcNetworkPolicies"
@@ -5972,22 +6737,19 @@ func (a *VnicApiService) GetVnicFcNetworkPolicyListExecute(r ApiGetVnicFcNetwork
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6054,7 +6816,7 @@ func (a *VnicApiService) GetVnicFcNetworkPolicyListExecute(r ApiGetVnicFcNetwork
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetVnicFcQosPolicyByMoidRequest struct {
@@ -6063,7 +6825,7 @@ type ApiGetVnicFcQosPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetVnicFcQosPolicyByMoidRequest) Execute() (VnicFcQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicFcQosPolicyByMoidRequest) Execute() (VnicFcQosPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicFcQosPolicyByMoidExecute(r)
 }
 
@@ -6085,21 +6847,19 @@ func (a *VnicApiService) GetVnicFcQosPolicyByMoid(ctx _context.Context, moid str
  * Execute executes the request
  * @return VnicFcQosPolicy
  */
-func (a *VnicApiService) GetVnicFcQosPolicyByMoidExecute(r ApiGetVnicFcQosPolicyByMoidRequest) (VnicFcQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicFcQosPolicyByMoidExecute(r ApiGetVnicFcQosPolicyByMoidRequest) (VnicFcQosPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicFcQosPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicFcQosPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcQosPolicies/{Moid}"
@@ -6128,22 +6888,19 @@ func (a *VnicApiService) GetVnicFcQosPolicyByMoidExecute(r ApiGetVnicFcQosPolicy
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6210,7 +6967,7 @@ func (a *VnicApiService) GetVnicFcQosPolicyByMoidExecute(r ApiGetVnicFcQosPolicy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetVnicFcQosPolicyListRequest struct {
@@ -6274,7 +7031,7 @@ func (r ApiGetVnicFcQosPolicyListRequest) Tags(tags string) ApiGetVnicFcQosPolic
 	return r
 }
 
-func (r ApiGetVnicFcQosPolicyListRequest) Execute() (VnicFcQosPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicFcQosPolicyListRequest) Execute() (VnicFcQosPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicFcQosPolicyListExecute(r)
 }
 
@@ -6294,21 +7051,19 @@ func (a *VnicApiService) GetVnicFcQosPolicyList(ctx _context.Context) ApiGetVnic
  * Execute executes the request
  * @return VnicFcQosPolicyResponse
  */
-func (a *VnicApiService) GetVnicFcQosPolicyListExecute(r ApiGetVnicFcQosPolicyListRequest) (VnicFcQosPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicFcQosPolicyListExecute(r ApiGetVnicFcQosPolicyListRequest) (VnicFcQosPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicFcQosPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicFcQosPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcQosPolicies"
@@ -6369,22 +7124,19 @@ func (a *VnicApiService) GetVnicFcQosPolicyListExecute(r ApiGetVnicFcQosPolicyLi
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6451,7 +7203,1168 @@ func (a *VnicApiService) GetVnicFcQosPolicyListExecute(r ApiGetVnicFcQosPolicyLi
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicIscsiAdapterPolicyByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VnicApiService
+	moid       string
+}
+
+func (r ApiGetVnicIscsiAdapterPolicyByMoidRequest) Execute() (VnicIscsiAdapterPolicy, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicIscsiAdapterPolicyByMoidExecute(r)
+}
+
+/*
+ * GetVnicIscsiAdapterPolicyByMoid Read a 'vnic.IscsiAdapterPolicy' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetVnicIscsiAdapterPolicyByMoidRequest
+ */
+func (a *VnicApiService) GetVnicIscsiAdapterPolicyByMoid(ctx _context.Context, moid string) ApiGetVnicIscsiAdapterPolicyByMoidRequest {
+	return ApiGetVnicIscsiAdapterPolicyByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VnicIscsiAdapterPolicy
+ */
+func (a *VnicApiService) GetVnicIscsiAdapterPolicyByMoidExecute(r ApiGetVnicIscsiAdapterPolicyByMoidRequest) (VnicIscsiAdapterPolicy, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicIscsiAdapterPolicy
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicIscsiAdapterPolicyByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiAdapterPolicies/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicIscsiAdapterPolicyListRequest struct {
+	ctx         _context.Context
+	ApiService  *VnicApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetVnicIscsiAdapterPolicyListRequest) Filter(filter string) ApiGetVnicIscsiAdapterPolicyListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetVnicIscsiAdapterPolicyListRequest) Orderby(orderby string) ApiGetVnicIscsiAdapterPolicyListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetVnicIscsiAdapterPolicyListRequest) Top(top int32) ApiGetVnicIscsiAdapterPolicyListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetVnicIscsiAdapterPolicyListRequest) Skip(skip int32) ApiGetVnicIscsiAdapterPolicyListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetVnicIscsiAdapterPolicyListRequest) Select_(select_ string) ApiGetVnicIscsiAdapterPolicyListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetVnicIscsiAdapterPolicyListRequest) Expand(expand string) ApiGetVnicIscsiAdapterPolicyListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetVnicIscsiAdapterPolicyListRequest) Apply(apply string) ApiGetVnicIscsiAdapterPolicyListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetVnicIscsiAdapterPolicyListRequest) Count(count bool) ApiGetVnicIscsiAdapterPolicyListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetVnicIscsiAdapterPolicyListRequest) Inlinecount(inlinecount string) ApiGetVnicIscsiAdapterPolicyListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetVnicIscsiAdapterPolicyListRequest) At(at string) ApiGetVnicIscsiAdapterPolicyListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetVnicIscsiAdapterPolicyListRequest) Tags(tags string) ApiGetVnicIscsiAdapterPolicyListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVnicIscsiAdapterPolicyListRequest) Execute() (VnicIscsiAdapterPolicyResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicIscsiAdapterPolicyListExecute(r)
+}
+
+/*
+ * GetVnicIscsiAdapterPolicyList Read a 'vnic.IscsiAdapterPolicy' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetVnicIscsiAdapterPolicyListRequest
+ */
+func (a *VnicApiService) GetVnicIscsiAdapterPolicyList(ctx _context.Context) ApiGetVnicIscsiAdapterPolicyListRequest {
+	return ApiGetVnicIscsiAdapterPolicyListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VnicIscsiAdapterPolicyResponse
+ */
+func (a *VnicApiService) GetVnicIscsiAdapterPolicyListExecute(r ApiGetVnicIscsiAdapterPolicyListRequest) (VnicIscsiAdapterPolicyResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicIscsiAdapterPolicyResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicIscsiAdapterPolicyList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiAdapterPolicies"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicIscsiBootPolicyByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VnicApiService
+	moid       string
+}
+
+func (r ApiGetVnicIscsiBootPolicyByMoidRequest) Execute() (VnicIscsiBootPolicy, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicIscsiBootPolicyByMoidExecute(r)
+}
+
+/*
+ * GetVnicIscsiBootPolicyByMoid Read a 'vnic.IscsiBootPolicy' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetVnicIscsiBootPolicyByMoidRequest
+ */
+func (a *VnicApiService) GetVnicIscsiBootPolicyByMoid(ctx _context.Context, moid string) ApiGetVnicIscsiBootPolicyByMoidRequest {
+	return ApiGetVnicIscsiBootPolicyByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VnicIscsiBootPolicy
+ */
+func (a *VnicApiService) GetVnicIscsiBootPolicyByMoidExecute(r ApiGetVnicIscsiBootPolicyByMoidRequest) (VnicIscsiBootPolicy, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicIscsiBootPolicy
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicIscsiBootPolicyByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiBootPolicies/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicIscsiBootPolicyListRequest struct {
+	ctx         _context.Context
+	ApiService  *VnicApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetVnicIscsiBootPolicyListRequest) Filter(filter string) ApiGetVnicIscsiBootPolicyListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetVnicIscsiBootPolicyListRequest) Orderby(orderby string) ApiGetVnicIscsiBootPolicyListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetVnicIscsiBootPolicyListRequest) Top(top int32) ApiGetVnicIscsiBootPolicyListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetVnicIscsiBootPolicyListRequest) Skip(skip int32) ApiGetVnicIscsiBootPolicyListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetVnicIscsiBootPolicyListRequest) Select_(select_ string) ApiGetVnicIscsiBootPolicyListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetVnicIscsiBootPolicyListRequest) Expand(expand string) ApiGetVnicIscsiBootPolicyListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetVnicIscsiBootPolicyListRequest) Apply(apply string) ApiGetVnicIscsiBootPolicyListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetVnicIscsiBootPolicyListRequest) Count(count bool) ApiGetVnicIscsiBootPolicyListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetVnicIscsiBootPolicyListRequest) Inlinecount(inlinecount string) ApiGetVnicIscsiBootPolicyListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetVnicIscsiBootPolicyListRequest) At(at string) ApiGetVnicIscsiBootPolicyListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetVnicIscsiBootPolicyListRequest) Tags(tags string) ApiGetVnicIscsiBootPolicyListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVnicIscsiBootPolicyListRequest) Execute() (VnicIscsiBootPolicyResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicIscsiBootPolicyListExecute(r)
+}
+
+/*
+ * GetVnicIscsiBootPolicyList Read a 'vnic.IscsiBootPolicy' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetVnicIscsiBootPolicyListRequest
+ */
+func (a *VnicApiService) GetVnicIscsiBootPolicyList(ctx _context.Context) ApiGetVnicIscsiBootPolicyListRequest {
+	return ApiGetVnicIscsiBootPolicyListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VnicIscsiBootPolicyResponse
+ */
+func (a *VnicApiService) GetVnicIscsiBootPolicyListExecute(r ApiGetVnicIscsiBootPolicyListRequest) (VnicIscsiBootPolicyResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicIscsiBootPolicyResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicIscsiBootPolicyList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiBootPolicies"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicIscsiStaticTargetPolicyByMoidRequest struct {
+	ctx        _context.Context
+	ApiService *VnicApiService
+	moid       string
+}
+
+func (r ApiGetVnicIscsiStaticTargetPolicyByMoidRequest) Execute() (VnicIscsiStaticTargetPolicy, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicIscsiStaticTargetPolicyByMoidExecute(r)
+}
+
+/*
+ * GetVnicIscsiStaticTargetPolicyByMoid Read a 'vnic.IscsiStaticTargetPolicy' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiGetVnicIscsiStaticTargetPolicyByMoidRequest
+ */
+func (a *VnicApiService) GetVnicIscsiStaticTargetPolicyByMoid(ctx _context.Context, moid string) ApiGetVnicIscsiStaticTargetPolicyByMoidRequest {
+	return ApiGetVnicIscsiStaticTargetPolicyByMoidRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VnicIscsiStaticTargetPolicy
+ */
+func (a *VnicApiService) GetVnicIscsiStaticTargetPolicyByMoidExecute(r ApiGetVnicIscsiStaticTargetPolicyByMoidRequest) (VnicIscsiStaticTargetPolicy, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicIscsiStaticTargetPolicy
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicIscsiStaticTargetPolicyByMoid")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiStaticTargetPolicies/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetVnicIscsiStaticTargetPolicyListRequest struct {
+	ctx         _context.Context
+	ApiService  *VnicApiService
+	filter      *string
+	orderby     *string
+	top         *int32
+	skip        *int32
+	select_     *string
+	expand      *string
+	apply       *string
+	count       *bool
+	inlinecount *string
+	at          *string
+	tags        *string
+}
+
+func (r ApiGetVnicIscsiStaticTargetPolicyListRequest) Filter(filter string) ApiGetVnicIscsiStaticTargetPolicyListRequest {
+	r.filter = &filter
+	return r
+}
+func (r ApiGetVnicIscsiStaticTargetPolicyListRequest) Orderby(orderby string) ApiGetVnicIscsiStaticTargetPolicyListRequest {
+	r.orderby = &orderby
+	return r
+}
+func (r ApiGetVnicIscsiStaticTargetPolicyListRequest) Top(top int32) ApiGetVnicIscsiStaticTargetPolicyListRequest {
+	r.top = &top
+	return r
+}
+func (r ApiGetVnicIscsiStaticTargetPolicyListRequest) Skip(skip int32) ApiGetVnicIscsiStaticTargetPolicyListRequest {
+	r.skip = &skip
+	return r
+}
+func (r ApiGetVnicIscsiStaticTargetPolicyListRequest) Select_(select_ string) ApiGetVnicIscsiStaticTargetPolicyListRequest {
+	r.select_ = &select_
+	return r
+}
+func (r ApiGetVnicIscsiStaticTargetPolicyListRequest) Expand(expand string) ApiGetVnicIscsiStaticTargetPolicyListRequest {
+	r.expand = &expand
+	return r
+}
+func (r ApiGetVnicIscsiStaticTargetPolicyListRequest) Apply(apply string) ApiGetVnicIscsiStaticTargetPolicyListRequest {
+	r.apply = &apply
+	return r
+}
+func (r ApiGetVnicIscsiStaticTargetPolicyListRequest) Count(count bool) ApiGetVnicIscsiStaticTargetPolicyListRequest {
+	r.count = &count
+	return r
+}
+func (r ApiGetVnicIscsiStaticTargetPolicyListRequest) Inlinecount(inlinecount string) ApiGetVnicIscsiStaticTargetPolicyListRequest {
+	r.inlinecount = &inlinecount
+	return r
+}
+func (r ApiGetVnicIscsiStaticTargetPolicyListRequest) At(at string) ApiGetVnicIscsiStaticTargetPolicyListRequest {
+	r.at = &at
+	return r
+}
+func (r ApiGetVnicIscsiStaticTargetPolicyListRequest) Tags(tags string) ApiGetVnicIscsiStaticTargetPolicyListRequest {
+	r.tags = &tags
+	return r
+}
+
+func (r ApiGetVnicIscsiStaticTargetPolicyListRequest) Execute() (VnicIscsiStaticTargetPolicyResponse, *_nethttp.Response, error) {
+	return r.ApiService.GetVnicIscsiStaticTargetPolicyListExecute(r)
+}
+
+/*
+ * GetVnicIscsiStaticTargetPolicyList Read a 'vnic.IscsiStaticTargetPolicy' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiGetVnicIscsiStaticTargetPolicyListRequest
+ */
+func (a *VnicApiService) GetVnicIscsiStaticTargetPolicyList(ctx _context.Context) ApiGetVnicIscsiStaticTargetPolicyListRequest {
+	return ApiGetVnicIscsiStaticTargetPolicyListRequest{
+		ApiService: a,
+		ctx:        ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VnicIscsiStaticTargetPolicyResponse
+ */
+func (a *VnicApiService) GetVnicIscsiStaticTargetPolicyListExecute(r ApiGetVnicIscsiStaticTargetPolicyListRequest) (VnicIscsiStaticTargetPolicyResponse, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicIscsiStaticTargetPolicyResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicIscsiStaticTargetPolicyList")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiStaticTargetPolicies"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	if r.filter != nil {
+		localVarQueryParams.Add("$filter", parameterToString(*r.filter, ""))
+	}
+	if r.orderby != nil {
+		localVarQueryParams.Add("$orderby", parameterToString(*r.orderby, ""))
+	}
+	if r.top != nil {
+		localVarQueryParams.Add("$top", parameterToString(*r.top, ""))
+	}
+	if r.skip != nil {
+		localVarQueryParams.Add("$skip", parameterToString(*r.skip, ""))
+	}
+	if r.select_ != nil {
+		localVarQueryParams.Add("$select", parameterToString(*r.select_, ""))
+	}
+	if r.expand != nil {
+		localVarQueryParams.Add("$expand", parameterToString(*r.expand, ""))
+	}
+	if r.apply != nil {
+		localVarQueryParams.Add("$apply", parameterToString(*r.apply, ""))
+	}
+	if r.count != nil {
+		localVarQueryParams.Add("$count", parameterToString(*r.count, ""))
+	}
+	if r.inlinecount != nil {
+		localVarQueryParams.Add("$inlinecount", parameterToString(*r.inlinecount, ""))
+	}
+	if r.at != nil {
+		localVarQueryParams.Add("at", parameterToString(*r.at, ""))
+	}
+	if r.tags != nil {
+		localVarQueryParams.Add("tags", parameterToString(*r.tags, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetVnicLanConnectivityPolicyByMoidRequest struct {
@@ -6460,7 +8373,7 @@ type ApiGetVnicLanConnectivityPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetVnicLanConnectivityPolicyByMoidRequest) Execute() (VnicLanConnectivityPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicLanConnectivityPolicyByMoidRequest) Execute() (VnicLanConnectivityPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicLanConnectivityPolicyByMoidExecute(r)
 }
 
@@ -6482,21 +8395,19 @@ func (a *VnicApiService) GetVnicLanConnectivityPolicyByMoid(ctx _context.Context
  * Execute executes the request
  * @return VnicLanConnectivityPolicy
  */
-func (a *VnicApiService) GetVnicLanConnectivityPolicyByMoidExecute(r ApiGetVnicLanConnectivityPolicyByMoidRequest) (VnicLanConnectivityPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicLanConnectivityPolicyByMoidExecute(r ApiGetVnicLanConnectivityPolicyByMoidRequest) (VnicLanConnectivityPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicLanConnectivityPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicLanConnectivityPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/LanConnectivityPolicies/{Moid}"
@@ -6525,22 +8436,19 @@ func (a *VnicApiService) GetVnicLanConnectivityPolicyByMoidExecute(r ApiGetVnicL
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6607,7 +8515,7 @@ func (a *VnicApiService) GetVnicLanConnectivityPolicyByMoidExecute(r ApiGetVnicL
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetVnicLanConnectivityPolicyListRequest struct {
@@ -6671,7 +8579,7 @@ func (r ApiGetVnicLanConnectivityPolicyListRequest) Tags(tags string) ApiGetVnic
 	return r
 }
 
-func (r ApiGetVnicLanConnectivityPolicyListRequest) Execute() (VnicLanConnectivityPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicLanConnectivityPolicyListRequest) Execute() (VnicLanConnectivityPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicLanConnectivityPolicyListExecute(r)
 }
 
@@ -6691,21 +8599,19 @@ func (a *VnicApiService) GetVnicLanConnectivityPolicyList(ctx _context.Context) 
  * Execute executes the request
  * @return VnicLanConnectivityPolicyResponse
  */
-func (a *VnicApiService) GetVnicLanConnectivityPolicyListExecute(r ApiGetVnicLanConnectivityPolicyListRequest) (VnicLanConnectivityPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicLanConnectivityPolicyListExecute(r ApiGetVnicLanConnectivityPolicyListRequest) (VnicLanConnectivityPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicLanConnectivityPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicLanConnectivityPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/LanConnectivityPolicies"
@@ -6766,22 +8672,19 @@ func (a *VnicApiService) GetVnicLanConnectivityPolicyListExecute(r ApiGetVnicLan
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -6848,7 +8751,7 @@ func (a *VnicApiService) GetVnicLanConnectivityPolicyListExecute(r ApiGetVnicLan
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetVnicLcpStatusByMoidRequest struct {
@@ -6857,7 +8760,7 @@ type ApiGetVnicLcpStatusByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetVnicLcpStatusByMoidRequest) Execute() (VnicLcpStatus, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicLcpStatusByMoidRequest) Execute() (VnicLcpStatus, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicLcpStatusByMoidExecute(r)
 }
 
@@ -6879,21 +8782,19 @@ func (a *VnicApiService) GetVnicLcpStatusByMoid(ctx _context.Context, moid strin
  * Execute executes the request
  * @return VnicLcpStatus
  */
-func (a *VnicApiService) GetVnicLcpStatusByMoidExecute(r ApiGetVnicLcpStatusByMoidRequest) (VnicLcpStatus, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicLcpStatusByMoidExecute(r ApiGetVnicLcpStatusByMoidRequest) (VnicLcpStatus, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicLcpStatus
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicLcpStatusByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/LcpStatuses/{Moid}"
@@ -6922,22 +8823,19 @@ func (a *VnicApiService) GetVnicLcpStatusByMoidExecute(r ApiGetVnicLcpStatusByMo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7004,7 +8902,7 @@ func (a *VnicApiService) GetVnicLcpStatusByMoidExecute(r ApiGetVnicLcpStatusByMo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetVnicLcpStatusListRequest struct {
@@ -7068,7 +8966,7 @@ func (r ApiGetVnicLcpStatusListRequest) Tags(tags string) ApiGetVnicLcpStatusLis
 	return r
 }
 
-func (r ApiGetVnicLcpStatusListRequest) Execute() (VnicLcpStatusResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicLcpStatusListRequest) Execute() (VnicLcpStatusResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicLcpStatusListExecute(r)
 }
 
@@ -7088,21 +8986,19 @@ func (a *VnicApiService) GetVnicLcpStatusList(ctx _context.Context) ApiGetVnicLc
  * Execute executes the request
  * @return VnicLcpStatusResponse
  */
-func (a *VnicApiService) GetVnicLcpStatusListExecute(r ApiGetVnicLcpStatusListRequest) (VnicLcpStatusResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicLcpStatusListExecute(r ApiGetVnicLcpStatusListRequest) (VnicLcpStatusResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicLcpStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicLcpStatusList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/LcpStatuses"
@@ -7163,22 +9059,19 @@ func (a *VnicApiService) GetVnicLcpStatusListExecute(r ApiGetVnicLcpStatusListRe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7245,7 +9138,7 @@ func (a *VnicApiService) GetVnicLcpStatusListExecute(r ApiGetVnicLcpStatusListRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetVnicSanConnectivityPolicyByMoidRequest struct {
@@ -7254,7 +9147,7 @@ type ApiGetVnicSanConnectivityPolicyByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetVnicSanConnectivityPolicyByMoidRequest) Execute() (VnicSanConnectivityPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicSanConnectivityPolicyByMoidRequest) Execute() (VnicSanConnectivityPolicy, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicSanConnectivityPolicyByMoidExecute(r)
 }
 
@@ -7276,21 +9169,19 @@ func (a *VnicApiService) GetVnicSanConnectivityPolicyByMoid(ctx _context.Context
  * Execute executes the request
  * @return VnicSanConnectivityPolicy
  */
-func (a *VnicApiService) GetVnicSanConnectivityPolicyByMoidExecute(r ApiGetVnicSanConnectivityPolicyByMoidRequest) (VnicSanConnectivityPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicSanConnectivityPolicyByMoidExecute(r ApiGetVnicSanConnectivityPolicyByMoidRequest) (VnicSanConnectivityPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicSanConnectivityPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicSanConnectivityPolicyByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/SanConnectivityPolicies/{Moid}"
@@ -7319,22 +9210,19 @@ func (a *VnicApiService) GetVnicSanConnectivityPolicyByMoidExecute(r ApiGetVnicS
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7401,7 +9289,7 @@ func (a *VnicApiService) GetVnicSanConnectivityPolicyByMoidExecute(r ApiGetVnicS
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetVnicSanConnectivityPolicyListRequest struct {
@@ -7465,7 +9353,7 @@ func (r ApiGetVnicSanConnectivityPolicyListRequest) Tags(tags string) ApiGetVnic
 	return r
 }
 
-func (r ApiGetVnicSanConnectivityPolicyListRequest) Execute() (VnicSanConnectivityPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicSanConnectivityPolicyListRequest) Execute() (VnicSanConnectivityPolicyResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicSanConnectivityPolicyListExecute(r)
 }
 
@@ -7485,21 +9373,19 @@ func (a *VnicApiService) GetVnicSanConnectivityPolicyList(ctx _context.Context) 
  * Execute executes the request
  * @return VnicSanConnectivityPolicyResponse
  */
-func (a *VnicApiService) GetVnicSanConnectivityPolicyListExecute(r ApiGetVnicSanConnectivityPolicyListRequest) (VnicSanConnectivityPolicyResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicSanConnectivityPolicyListExecute(r ApiGetVnicSanConnectivityPolicyListRequest) (VnicSanConnectivityPolicyResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicSanConnectivityPolicyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicSanConnectivityPolicyList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/SanConnectivityPolicies"
@@ -7560,22 +9446,19 @@ func (a *VnicApiService) GetVnicSanConnectivityPolicyListExecute(r ApiGetVnicSan
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7642,7 +9525,7 @@ func (a *VnicApiService) GetVnicSanConnectivityPolicyListExecute(r ApiGetVnicSan
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetVnicScpStatusByMoidRequest struct {
@@ -7651,7 +9534,7 @@ type ApiGetVnicScpStatusByMoidRequest struct {
 	moid       string
 }
 
-func (r ApiGetVnicScpStatusByMoidRequest) Execute() (VnicScpStatus, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicScpStatusByMoidRequest) Execute() (VnicScpStatus, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicScpStatusByMoidExecute(r)
 }
 
@@ -7673,21 +9556,19 @@ func (a *VnicApiService) GetVnicScpStatusByMoid(ctx _context.Context, moid strin
  * Execute executes the request
  * @return VnicScpStatus
  */
-func (a *VnicApiService) GetVnicScpStatusByMoidExecute(r ApiGetVnicScpStatusByMoidRequest) (VnicScpStatus, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicScpStatusByMoidExecute(r ApiGetVnicScpStatusByMoidRequest) (VnicScpStatus, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicScpStatus
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicScpStatusByMoid")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/ScpStatuses/{Moid}"
@@ -7716,22 +9597,19 @@ func (a *VnicApiService) GetVnicScpStatusByMoidExecute(r ApiGetVnicScpStatusByMo
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -7798,7 +9676,7 @@ func (a *VnicApiService) GetVnicScpStatusByMoidExecute(r ApiGetVnicScpStatusByMo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetVnicScpStatusListRequest struct {
@@ -7862,7 +9740,7 @@ func (r ApiGetVnicScpStatusListRequest) Tags(tags string) ApiGetVnicScpStatusLis
 	return r
 }
 
-func (r ApiGetVnicScpStatusListRequest) Execute() (VnicScpStatusResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiGetVnicScpStatusListRequest) Execute() (VnicScpStatusResponse, *_nethttp.Response, error) {
 	return r.ApiService.GetVnicScpStatusListExecute(r)
 }
 
@@ -7882,21 +9760,19 @@ func (a *VnicApiService) GetVnicScpStatusList(ctx _context.Context) ApiGetVnicSc
  * Execute executes the request
  * @return VnicScpStatusResponse
  */
-func (a *VnicApiService) GetVnicScpStatusListExecute(r ApiGetVnicScpStatusListRequest) (VnicScpStatusResponse, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) GetVnicScpStatusListExecute(r ApiGetVnicScpStatusListRequest) (VnicScpStatusResponse, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicScpStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.GetVnicScpStatusList")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/ScpStatuses"
@@ -7957,22 +9833,19 @@ func (a *VnicApiService) GetVnicScpStatusListExecute(r ApiGetVnicScpStatusListRe
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8039,7 +9912,7 @@ func (a *VnicApiService) GetVnicScpStatusListExecute(r ApiGetVnicScpStatusListRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchVnicEthAdapterPolicyRequest struct {
@@ -8059,7 +9932,7 @@ func (r ApiPatchVnicEthAdapterPolicyRequest) IfMatch(ifMatch string) ApiPatchVni
 	return r
 }
 
-func (r ApiPatchVnicEthAdapterPolicyRequest) Execute() (VnicEthAdapterPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchVnicEthAdapterPolicyRequest) Execute() (VnicEthAdapterPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchVnicEthAdapterPolicyExecute(r)
 }
 
@@ -8081,21 +9954,19 @@ func (a *VnicApiService) PatchVnicEthAdapterPolicy(ctx _context.Context, moid st
  * Execute executes the request
  * @return VnicEthAdapterPolicy
  */
-func (a *VnicApiService) PatchVnicEthAdapterPolicyExecute(r ApiPatchVnicEthAdapterPolicyRequest) (VnicEthAdapterPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) PatchVnicEthAdapterPolicyExecute(r ApiPatchVnicEthAdapterPolicyRequest) (VnicEthAdapterPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicEthAdapterPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.PatchVnicEthAdapterPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthAdapterPolicies/{Moid}"
@@ -8105,8 +9976,7 @@ func (a *VnicApiService) PatchVnicEthAdapterPolicyExecute(r ApiPatchVnicEthAdapt
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicEthAdapterPolicy == nil {
-		executionError.error = "vnicEthAdapterPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicEthAdapterPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -8133,22 +10003,19 @@ func (a *VnicApiService) PatchVnicEthAdapterPolicyExecute(r ApiPatchVnicEthAdapt
 	localVarPostBody = r.vnicEthAdapterPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8215,7 +10082,7 @@ func (a *VnicApiService) PatchVnicEthAdapterPolicyExecute(r ApiPatchVnicEthAdapt
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchVnicEthIfRequest struct {
@@ -8235,7 +10102,7 @@ func (r ApiPatchVnicEthIfRequest) IfMatch(ifMatch string) ApiPatchVnicEthIfReque
 	return r
 }
 
-func (r ApiPatchVnicEthIfRequest) Execute() (VnicEthIf, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchVnicEthIfRequest) Execute() (VnicEthIf, *_nethttp.Response, error) {
 	return r.ApiService.PatchVnicEthIfExecute(r)
 }
 
@@ -8257,21 +10124,19 @@ func (a *VnicApiService) PatchVnicEthIf(ctx _context.Context, moid string) ApiPa
  * Execute executes the request
  * @return VnicEthIf
  */
-func (a *VnicApiService) PatchVnicEthIfExecute(r ApiPatchVnicEthIfRequest) (VnicEthIf, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) PatchVnicEthIfExecute(r ApiPatchVnicEthIfRequest) (VnicEthIf, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicEthIf
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.PatchVnicEthIf")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthIfs/{Moid}"
@@ -8281,8 +10146,7 @@ func (a *VnicApiService) PatchVnicEthIfExecute(r ApiPatchVnicEthIfRequest) (Vnic
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicEthIf == nil {
-		executionError.error = "vnicEthIf is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicEthIf is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -8309,22 +10173,19 @@ func (a *VnicApiService) PatchVnicEthIfExecute(r ApiPatchVnicEthIfRequest) (Vnic
 	localVarPostBody = r.vnicEthIf
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8391,7 +10252,7 @@ func (a *VnicApiService) PatchVnicEthIfExecute(r ApiPatchVnicEthIfRequest) (Vnic
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchVnicEthNetworkPolicyRequest struct {
@@ -8411,7 +10272,7 @@ func (r ApiPatchVnicEthNetworkPolicyRequest) IfMatch(ifMatch string) ApiPatchVni
 	return r
 }
 
-func (r ApiPatchVnicEthNetworkPolicyRequest) Execute() (VnicEthNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchVnicEthNetworkPolicyRequest) Execute() (VnicEthNetworkPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchVnicEthNetworkPolicyExecute(r)
 }
 
@@ -8433,21 +10294,19 @@ func (a *VnicApiService) PatchVnicEthNetworkPolicy(ctx _context.Context, moid st
  * Execute executes the request
  * @return VnicEthNetworkPolicy
  */
-func (a *VnicApiService) PatchVnicEthNetworkPolicyExecute(r ApiPatchVnicEthNetworkPolicyRequest) (VnicEthNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) PatchVnicEthNetworkPolicyExecute(r ApiPatchVnicEthNetworkPolicyRequest) (VnicEthNetworkPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicEthNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.PatchVnicEthNetworkPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthNetworkPolicies/{Moid}"
@@ -8457,8 +10316,7 @@ func (a *VnicApiService) PatchVnicEthNetworkPolicyExecute(r ApiPatchVnicEthNetwo
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicEthNetworkPolicy == nil {
-		executionError.error = "vnicEthNetworkPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicEthNetworkPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -8485,22 +10343,19 @@ func (a *VnicApiService) PatchVnicEthNetworkPolicyExecute(r ApiPatchVnicEthNetwo
 	localVarPostBody = r.vnicEthNetworkPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8567,7 +10422,7 @@ func (a *VnicApiService) PatchVnicEthNetworkPolicyExecute(r ApiPatchVnicEthNetwo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchVnicEthQosPolicyRequest struct {
@@ -8587,7 +10442,7 @@ func (r ApiPatchVnicEthQosPolicyRequest) IfMatch(ifMatch string) ApiPatchVnicEth
 	return r
 }
 
-func (r ApiPatchVnicEthQosPolicyRequest) Execute() (VnicEthQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchVnicEthQosPolicyRequest) Execute() (VnicEthQosPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchVnicEthQosPolicyExecute(r)
 }
 
@@ -8609,21 +10464,19 @@ func (a *VnicApiService) PatchVnicEthQosPolicy(ctx _context.Context, moid string
  * Execute executes the request
  * @return VnicEthQosPolicy
  */
-func (a *VnicApiService) PatchVnicEthQosPolicyExecute(r ApiPatchVnicEthQosPolicyRequest) (VnicEthQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) PatchVnicEthQosPolicyExecute(r ApiPatchVnicEthQosPolicyRequest) (VnicEthQosPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicEthQosPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.PatchVnicEthQosPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthQosPolicies/{Moid}"
@@ -8633,8 +10486,7 @@ func (a *VnicApiService) PatchVnicEthQosPolicyExecute(r ApiPatchVnicEthQosPolicy
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicEthQosPolicy == nil {
-		executionError.error = "vnicEthQosPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicEthQosPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -8661,22 +10513,19 @@ func (a *VnicApiService) PatchVnicEthQosPolicyExecute(r ApiPatchVnicEthQosPolicy
 	localVarPostBody = r.vnicEthQosPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8743,7 +10592,7 @@ func (a *VnicApiService) PatchVnicEthQosPolicyExecute(r ApiPatchVnicEthQosPolicy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchVnicFcAdapterPolicyRequest struct {
@@ -8763,7 +10612,7 @@ func (r ApiPatchVnicFcAdapterPolicyRequest) IfMatch(ifMatch string) ApiPatchVnic
 	return r
 }
 
-func (r ApiPatchVnicFcAdapterPolicyRequest) Execute() (VnicFcAdapterPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchVnicFcAdapterPolicyRequest) Execute() (VnicFcAdapterPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchVnicFcAdapterPolicyExecute(r)
 }
 
@@ -8785,21 +10634,19 @@ func (a *VnicApiService) PatchVnicFcAdapterPolicy(ctx _context.Context, moid str
  * Execute executes the request
  * @return VnicFcAdapterPolicy
  */
-func (a *VnicApiService) PatchVnicFcAdapterPolicyExecute(r ApiPatchVnicFcAdapterPolicyRequest) (VnicFcAdapterPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) PatchVnicFcAdapterPolicyExecute(r ApiPatchVnicFcAdapterPolicyRequest) (VnicFcAdapterPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicFcAdapterPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.PatchVnicFcAdapterPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcAdapterPolicies/{Moid}"
@@ -8809,8 +10656,7 @@ func (a *VnicApiService) PatchVnicFcAdapterPolicyExecute(r ApiPatchVnicFcAdapter
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicFcAdapterPolicy == nil {
-		executionError.error = "vnicFcAdapterPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicFcAdapterPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -8837,22 +10683,19 @@ func (a *VnicApiService) PatchVnicFcAdapterPolicyExecute(r ApiPatchVnicFcAdapter
 	localVarPostBody = r.vnicFcAdapterPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -8919,7 +10762,7 @@ func (a *VnicApiService) PatchVnicFcAdapterPolicyExecute(r ApiPatchVnicFcAdapter
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchVnicFcIfRequest struct {
@@ -8939,7 +10782,7 @@ func (r ApiPatchVnicFcIfRequest) IfMatch(ifMatch string) ApiPatchVnicFcIfRequest
 	return r
 }
 
-func (r ApiPatchVnicFcIfRequest) Execute() (VnicFcIf, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchVnicFcIfRequest) Execute() (VnicFcIf, *_nethttp.Response, error) {
 	return r.ApiService.PatchVnicFcIfExecute(r)
 }
 
@@ -8961,21 +10804,19 @@ func (a *VnicApiService) PatchVnicFcIf(ctx _context.Context, moid string) ApiPat
  * Execute executes the request
  * @return VnicFcIf
  */
-func (a *VnicApiService) PatchVnicFcIfExecute(r ApiPatchVnicFcIfRequest) (VnicFcIf, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) PatchVnicFcIfExecute(r ApiPatchVnicFcIfRequest) (VnicFcIf, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicFcIf
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.PatchVnicFcIf")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcIfs/{Moid}"
@@ -8985,8 +10826,7 @@ func (a *VnicApiService) PatchVnicFcIfExecute(r ApiPatchVnicFcIfRequest) (VnicFc
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicFcIf == nil {
-		executionError.error = "vnicFcIf is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicFcIf is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -9013,22 +10853,19 @@ func (a *VnicApiService) PatchVnicFcIfExecute(r ApiPatchVnicFcIfRequest) (VnicFc
 	localVarPostBody = r.vnicFcIf
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9095,7 +10932,7 @@ func (a *VnicApiService) PatchVnicFcIfExecute(r ApiPatchVnicFcIfRequest) (VnicFc
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchVnicFcNetworkPolicyRequest struct {
@@ -9115,7 +10952,7 @@ func (r ApiPatchVnicFcNetworkPolicyRequest) IfMatch(ifMatch string) ApiPatchVnic
 	return r
 }
 
-func (r ApiPatchVnicFcNetworkPolicyRequest) Execute() (VnicFcNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchVnicFcNetworkPolicyRequest) Execute() (VnicFcNetworkPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchVnicFcNetworkPolicyExecute(r)
 }
 
@@ -9137,21 +10974,19 @@ func (a *VnicApiService) PatchVnicFcNetworkPolicy(ctx _context.Context, moid str
  * Execute executes the request
  * @return VnicFcNetworkPolicy
  */
-func (a *VnicApiService) PatchVnicFcNetworkPolicyExecute(r ApiPatchVnicFcNetworkPolicyRequest) (VnicFcNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) PatchVnicFcNetworkPolicyExecute(r ApiPatchVnicFcNetworkPolicyRequest) (VnicFcNetworkPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicFcNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.PatchVnicFcNetworkPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcNetworkPolicies/{Moid}"
@@ -9161,8 +10996,7 @@ func (a *VnicApiService) PatchVnicFcNetworkPolicyExecute(r ApiPatchVnicFcNetwork
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicFcNetworkPolicy == nil {
-		executionError.error = "vnicFcNetworkPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicFcNetworkPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -9189,22 +11023,19 @@ func (a *VnicApiService) PatchVnicFcNetworkPolicyExecute(r ApiPatchVnicFcNetwork
 	localVarPostBody = r.vnicFcNetworkPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9271,7 +11102,7 @@ func (a *VnicApiService) PatchVnicFcNetworkPolicyExecute(r ApiPatchVnicFcNetwork
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchVnicFcQosPolicyRequest struct {
@@ -9291,7 +11122,7 @@ func (r ApiPatchVnicFcQosPolicyRequest) IfMatch(ifMatch string) ApiPatchVnicFcQo
 	return r
 }
 
-func (r ApiPatchVnicFcQosPolicyRequest) Execute() (VnicFcQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchVnicFcQosPolicyRequest) Execute() (VnicFcQosPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchVnicFcQosPolicyExecute(r)
 }
 
@@ -9313,21 +11144,19 @@ func (a *VnicApiService) PatchVnicFcQosPolicy(ctx _context.Context, moid string)
  * Execute executes the request
  * @return VnicFcQosPolicy
  */
-func (a *VnicApiService) PatchVnicFcQosPolicyExecute(r ApiPatchVnicFcQosPolicyRequest) (VnicFcQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) PatchVnicFcQosPolicyExecute(r ApiPatchVnicFcQosPolicyRequest) (VnicFcQosPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicFcQosPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.PatchVnicFcQosPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcQosPolicies/{Moid}"
@@ -9337,8 +11166,7 @@ func (a *VnicApiService) PatchVnicFcQosPolicyExecute(r ApiPatchVnicFcQosPolicyRe
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicFcQosPolicy == nil {
-		executionError.error = "vnicFcQosPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicFcQosPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -9365,22 +11193,19 @@ func (a *VnicApiService) PatchVnicFcQosPolicyExecute(r ApiPatchVnicFcQosPolicyRe
 	localVarPostBody = r.vnicFcQosPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9447,7 +11272,517 @@ func (a *VnicApiService) PatchVnicFcQosPolicyExecute(r ApiPatchVnicFcQosPolicyRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPatchVnicIscsiAdapterPolicyRequest struct {
+	ctx                    _context.Context
+	ApiService             *VnicApiService
+	moid                   string
+	vnicIscsiAdapterPolicy *VnicIscsiAdapterPolicy
+	ifMatch                *string
+}
+
+func (r ApiPatchVnicIscsiAdapterPolicyRequest) VnicIscsiAdapterPolicy(vnicIscsiAdapterPolicy VnicIscsiAdapterPolicy) ApiPatchVnicIscsiAdapterPolicyRequest {
+	r.vnicIscsiAdapterPolicy = &vnicIscsiAdapterPolicy
+	return r
+}
+func (r ApiPatchVnicIscsiAdapterPolicyRequest) IfMatch(ifMatch string) ApiPatchVnicIscsiAdapterPolicyRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchVnicIscsiAdapterPolicyRequest) Execute() (VnicIscsiAdapterPolicy, *_nethttp.Response, error) {
+	return r.ApiService.PatchVnicIscsiAdapterPolicyExecute(r)
+}
+
+/*
+ * PatchVnicIscsiAdapterPolicy Update a 'vnic.IscsiAdapterPolicy' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiPatchVnicIscsiAdapterPolicyRequest
+ */
+func (a *VnicApiService) PatchVnicIscsiAdapterPolicy(ctx _context.Context, moid string) ApiPatchVnicIscsiAdapterPolicyRequest {
+	return ApiPatchVnicIscsiAdapterPolicyRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VnicIscsiAdapterPolicy
+ */
+func (a *VnicApiService) PatchVnicIscsiAdapterPolicyExecute(r ApiPatchVnicIscsiAdapterPolicyRequest) (VnicIscsiAdapterPolicy, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicIscsiAdapterPolicy
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.PatchVnicIscsiAdapterPolicy")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiAdapterPolicies/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.vnicIscsiAdapterPolicy == nil {
+		return localVarReturnValue, nil, reportError("vnicIscsiAdapterPolicy is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.vnicIscsiAdapterPolicy
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPatchVnicIscsiBootPolicyRequest struct {
+	ctx                 _context.Context
+	ApiService          *VnicApiService
+	moid                string
+	vnicIscsiBootPolicy *VnicIscsiBootPolicy
+	ifMatch             *string
+}
+
+func (r ApiPatchVnicIscsiBootPolicyRequest) VnicIscsiBootPolicy(vnicIscsiBootPolicy VnicIscsiBootPolicy) ApiPatchVnicIscsiBootPolicyRequest {
+	r.vnicIscsiBootPolicy = &vnicIscsiBootPolicy
+	return r
+}
+func (r ApiPatchVnicIscsiBootPolicyRequest) IfMatch(ifMatch string) ApiPatchVnicIscsiBootPolicyRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchVnicIscsiBootPolicyRequest) Execute() (VnicIscsiBootPolicy, *_nethttp.Response, error) {
+	return r.ApiService.PatchVnicIscsiBootPolicyExecute(r)
+}
+
+/*
+ * PatchVnicIscsiBootPolicy Update a 'vnic.IscsiBootPolicy' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiPatchVnicIscsiBootPolicyRequest
+ */
+func (a *VnicApiService) PatchVnicIscsiBootPolicy(ctx _context.Context, moid string) ApiPatchVnicIscsiBootPolicyRequest {
+	return ApiPatchVnicIscsiBootPolicyRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VnicIscsiBootPolicy
+ */
+func (a *VnicApiService) PatchVnicIscsiBootPolicyExecute(r ApiPatchVnicIscsiBootPolicyRequest) (VnicIscsiBootPolicy, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicIscsiBootPolicy
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.PatchVnicIscsiBootPolicy")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiBootPolicies/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.vnicIscsiBootPolicy == nil {
+		return localVarReturnValue, nil, reportError("vnicIscsiBootPolicy is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.vnicIscsiBootPolicy
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiPatchVnicIscsiStaticTargetPolicyRequest struct {
+	ctx                         _context.Context
+	ApiService                  *VnicApiService
+	moid                        string
+	vnicIscsiStaticTargetPolicy *VnicIscsiStaticTargetPolicy
+	ifMatch                     *string
+}
+
+func (r ApiPatchVnicIscsiStaticTargetPolicyRequest) VnicIscsiStaticTargetPolicy(vnicIscsiStaticTargetPolicy VnicIscsiStaticTargetPolicy) ApiPatchVnicIscsiStaticTargetPolicyRequest {
+	r.vnicIscsiStaticTargetPolicy = &vnicIscsiStaticTargetPolicy
+	return r
+}
+func (r ApiPatchVnicIscsiStaticTargetPolicyRequest) IfMatch(ifMatch string) ApiPatchVnicIscsiStaticTargetPolicyRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiPatchVnicIscsiStaticTargetPolicyRequest) Execute() (VnicIscsiStaticTargetPolicy, *_nethttp.Response, error) {
+	return r.ApiService.PatchVnicIscsiStaticTargetPolicyExecute(r)
+}
+
+/*
+ * PatchVnicIscsiStaticTargetPolicy Update a 'vnic.IscsiStaticTargetPolicy' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiPatchVnicIscsiStaticTargetPolicyRequest
+ */
+func (a *VnicApiService) PatchVnicIscsiStaticTargetPolicy(ctx _context.Context, moid string) ApiPatchVnicIscsiStaticTargetPolicyRequest {
+	return ApiPatchVnicIscsiStaticTargetPolicyRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VnicIscsiStaticTargetPolicy
+ */
+func (a *VnicApiService) PatchVnicIscsiStaticTargetPolicyExecute(r ApiPatchVnicIscsiStaticTargetPolicyRequest) (VnicIscsiStaticTargetPolicy, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPatch
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicIscsiStaticTargetPolicy
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.PatchVnicIscsiStaticTargetPolicy")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiStaticTargetPolicies/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.vnicIscsiStaticTargetPolicy == nil {
+		return localVarReturnValue, nil, reportError("vnicIscsiStaticTargetPolicy is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.vnicIscsiStaticTargetPolicy
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchVnicLanConnectivityPolicyRequest struct {
@@ -9467,7 +11802,7 @@ func (r ApiPatchVnicLanConnectivityPolicyRequest) IfMatch(ifMatch string) ApiPat
 	return r
 }
 
-func (r ApiPatchVnicLanConnectivityPolicyRequest) Execute() (VnicLanConnectivityPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchVnicLanConnectivityPolicyRequest) Execute() (VnicLanConnectivityPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchVnicLanConnectivityPolicyExecute(r)
 }
 
@@ -9489,21 +11824,19 @@ func (a *VnicApiService) PatchVnicLanConnectivityPolicy(ctx _context.Context, mo
  * Execute executes the request
  * @return VnicLanConnectivityPolicy
  */
-func (a *VnicApiService) PatchVnicLanConnectivityPolicyExecute(r ApiPatchVnicLanConnectivityPolicyRequest) (VnicLanConnectivityPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) PatchVnicLanConnectivityPolicyExecute(r ApiPatchVnicLanConnectivityPolicyRequest) (VnicLanConnectivityPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicLanConnectivityPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.PatchVnicLanConnectivityPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/LanConnectivityPolicies/{Moid}"
@@ -9513,8 +11846,7 @@ func (a *VnicApiService) PatchVnicLanConnectivityPolicyExecute(r ApiPatchVnicLan
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicLanConnectivityPolicy == nil {
-		executionError.error = "vnicLanConnectivityPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicLanConnectivityPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -9541,22 +11873,19 @@ func (a *VnicApiService) PatchVnicLanConnectivityPolicyExecute(r ApiPatchVnicLan
 	localVarPostBody = r.vnicLanConnectivityPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9623,7 +11952,7 @@ func (a *VnicApiService) PatchVnicLanConnectivityPolicyExecute(r ApiPatchVnicLan
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiPatchVnicSanConnectivityPolicyRequest struct {
@@ -9643,7 +11972,7 @@ func (r ApiPatchVnicSanConnectivityPolicyRequest) IfMatch(ifMatch string) ApiPat
 	return r
 }
 
-func (r ApiPatchVnicSanConnectivityPolicyRequest) Execute() (VnicSanConnectivityPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiPatchVnicSanConnectivityPolicyRequest) Execute() (VnicSanConnectivityPolicy, *_nethttp.Response, error) {
 	return r.ApiService.PatchVnicSanConnectivityPolicyExecute(r)
 }
 
@@ -9665,21 +11994,19 @@ func (a *VnicApiService) PatchVnicSanConnectivityPolicy(ctx _context.Context, mo
  * Execute executes the request
  * @return VnicSanConnectivityPolicy
  */
-func (a *VnicApiService) PatchVnicSanConnectivityPolicyExecute(r ApiPatchVnicSanConnectivityPolicyRequest) (VnicSanConnectivityPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) PatchVnicSanConnectivityPolicyExecute(r ApiPatchVnicSanConnectivityPolicyRequest) (VnicSanConnectivityPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPatch
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicSanConnectivityPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.PatchVnicSanConnectivityPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/SanConnectivityPolicies/{Moid}"
@@ -9689,8 +12016,7 @@ func (a *VnicApiService) PatchVnicSanConnectivityPolicyExecute(r ApiPatchVnicSan
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicSanConnectivityPolicy == nil {
-		executionError.error = "vnicSanConnectivityPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicSanConnectivityPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -9717,22 +12043,19 @@ func (a *VnicApiService) PatchVnicSanConnectivityPolicyExecute(r ApiPatchVnicSan
 	localVarPostBody = r.vnicSanConnectivityPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9799,7 +12122,7 @@ func (a *VnicApiService) PatchVnicSanConnectivityPolicyExecute(r ApiPatchVnicSan
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateVnicEthAdapterPolicyRequest struct {
@@ -9819,7 +12142,7 @@ func (r ApiUpdateVnicEthAdapterPolicyRequest) IfMatch(ifMatch string) ApiUpdateV
 	return r
 }
 
-func (r ApiUpdateVnicEthAdapterPolicyRequest) Execute() (VnicEthAdapterPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateVnicEthAdapterPolicyRequest) Execute() (VnicEthAdapterPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateVnicEthAdapterPolicyExecute(r)
 }
 
@@ -9841,21 +12164,19 @@ func (a *VnicApiService) UpdateVnicEthAdapterPolicy(ctx _context.Context, moid s
  * Execute executes the request
  * @return VnicEthAdapterPolicy
  */
-func (a *VnicApiService) UpdateVnicEthAdapterPolicyExecute(r ApiUpdateVnicEthAdapterPolicyRequest) (VnicEthAdapterPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) UpdateVnicEthAdapterPolicyExecute(r ApiUpdateVnicEthAdapterPolicyRequest) (VnicEthAdapterPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicEthAdapterPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.UpdateVnicEthAdapterPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthAdapterPolicies/{Moid}"
@@ -9865,8 +12186,7 @@ func (a *VnicApiService) UpdateVnicEthAdapterPolicyExecute(r ApiUpdateVnicEthAda
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicEthAdapterPolicy == nil {
-		executionError.error = "vnicEthAdapterPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicEthAdapterPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -9893,22 +12213,19 @@ func (a *VnicApiService) UpdateVnicEthAdapterPolicyExecute(r ApiUpdateVnicEthAda
 	localVarPostBody = r.vnicEthAdapterPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -9975,7 +12292,7 @@ func (a *VnicApiService) UpdateVnicEthAdapterPolicyExecute(r ApiUpdateVnicEthAda
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateVnicEthIfRequest struct {
@@ -9995,7 +12312,7 @@ func (r ApiUpdateVnicEthIfRequest) IfMatch(ifMatch string) ApiUpdateVnicEthIfReq
 	return r
 }
 
-func (r ApiUpdateVnicEthIfRequest) Execute() (VnicEthIf, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateVnicEthIfRequest) Execute() (VnicEthIf, *_nethttp.Response, error) {
 	return r.ApiService.UpdateVnicEthIfExecute(r)
 }
 
@@ -10017,21 +12334,19 @@ func (a *VnicApiService) UpdateVnicEthIf(ctx _context.Context, moid string) ApiU
  * Execute executes the request
  * @return VnicEthIf
  */
-func (a *VnicApiService) UpdateVnicEthIfExecute(r ApiUpdateVnicEthIfRequest) (VnicEthIf, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) UpdateVnicEthIfExecute(r ApiUpdateVnicEthIfRequest) (VnicEthIf, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicEthIf
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.UpdateVnicEthIf")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthIfs/{Moid}"
@@ -10041,8 +12356,7 @@ func (a *VnicApiService) UpdateVnicEthIfExecute(r ApiUpdateVnicEthIfRequest) (Vn
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicEthIf == nil {
-		executionError.error = "vnicEthIf is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicEthIf is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -10069,22 +12383,19 @@ func (a *VnicApiService) UpdateVnicEthIfExecute(r ApiUpdateVnicEthIfRequest) (Vn
 	localVarPostBody = r.vnicEthIf
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10151,7 +12462,7 @@ func (a *VnicApiService) UpdateVnicEthIfExecute(r ApiUpdateVnicEthIfRequest) (Vn
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateVnicEthNetworkPolicyRequest struct {
@@ -10171,7 +12482,7 @@ func (r ApiUpdateVnicEthNetworkPolicyRequest) IfMatch(ifMatch string) ApiUpdateV
 	return r
 }
 
-func (r ApiUpdateVnicEthNetworkPolicyRequest) Execute() (VnicEthNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateVnicEthNetworkPolicyRequest) Execute() (VnicEthNetworkPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateVnicEthNetworkPolicyExecute(r)
 }
 
@@ -10193,21 +12504,19 @@ func (a *VnicApiService) UpdateVnicEthNetworkPolicy(ctx _context.Context, moid s
  * Execute executes the request
  * @return VnicEthNetworkPolicy
  */
-func (a *VnicApiService) UpdateVnicEthNetworkPolicyExecute(r ApiUpdateVnicEthNetworkPolicyRequest) (VnicEthNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) UpdateVnicEthNetworkPolicyExecute(r ApiUpdateVnicEthNetworkPolicyRequest) (VnicEthNetworkPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicEthNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.UpdateVnicEthNetworkPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthNetworkPolicies/{Moid}"
@@ -10217,8 +12526,7 @@ func (a *VnicApiService) UpdateVnicEthNetworkPolicyExecute(r ApiUpdateVnicEthNet
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicEthNetworkPolicy == nil {
-		executionError.error = "vnicEthNetworkPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicEthNetworkPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -10245,22 +12553,19 @@ func (a *VnicApiService) UpdateVnicEthNetworkPolicyExecute(r ApiUpdateVnicEthNet
 	localVarPostBody = r.vnicEthNetworkPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10327,7 +12632,7 @@ func (a *VnicApiService) UpdateVnicEthNetworkPolicyExecute(r ApiUpdateVnicEthNet
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateVnicEthQosPolicyRequest struct {
@@ -10347,7 +12652,7 @@ func (r ApiUpdateVnicEthQosPolicyRequest) IfMatch(ifMatch string) ApiUpdateVnicE
 	return r
 }
 
-func (r ApiUpdateVnicEthQosPolicyRequest) Execute() (VnicEthQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateVnicEthQosPolicyRequest) Execute() (VnicEthQosPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateVnicEthQosPolicyExecute(r)
 }
 
@@ -10369,21 +12674,19 @@ func (a *VnicApiService) UpdateVnicEthQosPolicy(ctx _context.Context, moid strin
  * Execute executes the request
  * @return VnicEthQosPolicy
  */
-func (a *VnicApiService) UpdateVnicEthQosPolicyExecute(r ApiUpdateVnicEthQosPolicyRequest) (VnicEthQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) UpdateVnicEthQosPolicyExecute(r ApiUpdateVnicEthQosPolicyRequest) (VnicEthQosPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicEthQosPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.UpdateVnicEthQosPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/EthQosPolicies/{Moid}"
@@ -10393,8 +12696,7 @@ func (a *VnicApiService) UpdateVnicEthQosPolicyExecute(r ApiUpdateVnicEthQosPoli
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicEthQosPolicy == nil {
-		executionError.error = "vnicEthQosPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicEthQosPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -10421,22 +12723,19 @@ func (a *VnicApiService) UpdateVnicEthQosPolicyExecute(r ApiUpdateVnicEthQosPoli
 	localVarPostBody = r.vnicEthQosPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10503,7 +12802,7 @@ func (a *VnicApiService) UpdateVnicEthQosPolicyExecute(r ApiUpdateVnicEthQosPoli
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateVnicFcAdapterPolicyRequest struct {
@@ -10523,7 +12822,7 @@ func (r ApiUpdateVnicFcAdapterPolicyRequest) IfMatch(ifMatch string) ApiUpdateVn
 	return r
 }
 
-func (r ApiUpdateVnicFcAdapterPolicyRequest) Execute() (VnicFcAdapterPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateVnicFcAdapterPolicyRequest) Execute() (VnicFcAdapterPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateVnicFcAdapterPolicyExecute(r)
 }
 
@@ -10545,21 +12844,19 @@ func (a *VnicApiService) UpdateVnicFcAdapterPolicy(ctx _context.Context, moid st
  * Execute executes the request
  * @return VnicFcAdapterPolicy
  */
-func (a *VnicApiService) UpdateVnicFcAdapterPolicyExecute(r ApiUpdateVnicFcAdapterPolicyRequest) (VnicFcAdapterPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) UpdateVnicFcAdapterPolicyExecute(r ApiUpdateVnicFcAdapterPolicyRequest) (VnicFcAdapterPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicFcAdapterPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.UpdateVnicFcAdapterPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcAdapterPolicies/{Moid}"
@@ -10569,8 +12866,7 @@ func (a *VnicApiService) UpdateVnicFcAdapterPolicyExecute(r ApiUpdateVnicFcAdapt
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicFcAdapterPolicy == nil {
-		executionError.error = "vnicFcAdapterPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicFcAdapterPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -10597,22 +12893,19 @@ func (a *VnicApiService) UpdateVnicFcAdapterPolicyExecute(r ApiUpdateVnicFcAdapt
 	localVarPostBody = r.vnicFcAdapterPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10679,7 +12972,7 @@ func (a *VnicApiService) UpdateVnicFcAdapterPolicyExecute(r ApiUpdateVnicFcAdapt
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateVnicFcIfRequest struct {
@@ -10699,7 +12992,7 @@ func (r ApiUpdateVnicFcIfRequest) IfMatch(ifMatch string) ApiUpdateVnicFcIfReque
 	return r
 }
 
-func (r ApiUpdateVnicFcIfRequest) Execute() (VnicFcIf, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateVnicFcIfRequest) Execute() (VnicFcIf, *_nethttp.Response, error) {
 	return r.ApiService.UpdateVnicFcIfExecute(r)
 }
 
@@ -10721,21 +13014,19 @@ func (a *VnicApiService) UpdateVnicFcIf(ctx _context.Context, moid string) ApiUp
  * Execute executes the request
  * @return VnicFcIf
  */
-func (a *VnicApiService) UpdateVnicFcIfExecute(r ApiUpdateVnicFcIfRequest) (VnicFcIf, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) UpdateVnicFcIfExecute(r ApiUpdateVnicFcIfRequest) (VnicFcIf, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicFcIf
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.UpdateVnicFcIf")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcIfs/{Moid}"
@@ -10745,8 +13036,7 @@ func (a *VnicApiService) UpdateVnicFcIfExecute(r ApiUpdateVnicFcIfRequest) (Vnic
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicFcIf == nil {
-		executionError.error = "vnicFcIf is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicFcIf is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -10773,22 +13063,19 @@ func (a *VnicApiService) UpdateVnicFcIfExecute(r ApiUpdateVnicFcIfRequest) (Vnic
 	localVarPostBody = r.vnicFcIf
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -10855,7 +13142,7 @@ func (a *VnicApiService) UpdateVnicFcIfExecute(r ApiUpdateVnicFcIfRequest) (Vnic
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateVnicFcNetworkPolicyRequest struct {
@@ -10875,7 +13162,7 @@ func (r ApiUpdateVnicFcNetworkPolicyRequest) IfMatch(ifMatch string) ApiUpdateVn
 	return r
 }
 
-func (r ApiUpdateVnicFcNetworkPolicyRequest) Execute() (VnicFcNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateVnicFcNetworkPolicyRequest) Execute() (VnicFcNetworkPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateVnicFcNetworkPolicyExecute(r)
 }
 
@@ -10897,21 +13184,19 @@ func (a *VnicApiService) UpdateVnicFcNetworkPolicy(ctx _context.Context, moid st
  * Execute executes the request
  * @return VnicFcNetworkPolicy
  */
-func (a *VnicApiService) UpdateVnicFcNetworkPolicyExecute(r ApiUpdateVnicFcNetworkPolicyRequest) (VnicFcNetworkPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) UpdateVnicFcNetworkPolicyExecute(r ApiUpdateVnicFcNetworkPolicyRequest) (VnicFcNetworkPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicFcNetworkPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.UpdateVnicFcNetworkPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcNetworkPolicies/{Moid}"
@@ -10921,8 +13206,7 @@ func (a *VnicApiService) UpdateVnicFcNetworkPolicyExecute(r ApiUpdateVnicFcNetwo
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicFcNetworkPolicy == nil {
-		executionError.error = "vnicFcNetworkPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicFcNetworkPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -10949,22 +13233,19 @@ func (a *VnicApiService) UpdateVnicFcNetworkPolicyExecute(r ApiUpdateVnicFcNetwo
 	localVarPostBody = r.vnicFcNetworkPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11031,7 +13312,7 @@ func (a *VnicApiService) UpdateVnicFcNetworkPolicyExecute(r ApiUpdateVnicFcNetwo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateVnicFcQosPolicyRequest struct {
@@ -11051,7 +13332,7 @@ func (r ApiUpdateVnicFcQosPolicyRequest) IfMatch(ifMatch string) ApiUpdateVnicFc
 	return r
 }
 
-func (r ApiUpdateVnicFcQosPolicyRequest) Execute() (VnicFcQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateVnicFcQosPolicyRequest) Execute() (VnicFcQosPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateVnicFcQosPolicyExecute(r)
 }
 
@@ -11073,21 +13354,19 @@ func (a *VnicApiService) UpdateVnicFcQosPolicy(ctx _context.Context, moid string
  * Execute executes the request
  * @return VnicFcQosPolicy
  */
-func (a *VnicApiService) UpdateVnicFcQosPolicyExecute(r ApiUpdateVnicFcQosPolicyRequest) (VnicFcQosPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) UpdateVnicFcQosPolicyExecute(r ApiUpdateVnicFcQosPolicyRequest) (VnicFcQosPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicFcQosPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.UpdateVnicFcQosPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/FcQosPolicies/{Moid}"
@@ -11097,8 +13376,7 @@ func (a *VnicApiService) UpdateVnicFcQosPolicyExecute(r ApiUpdateVnicFcQosPolicy
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicFcQosPolicy == nil {
-		executionError.error = "vnicFcQosPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicFcQosPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -11125,22 +13403,19 @@ func (a *VnicApiService) UpdateVnicFcQosPolicyExecute(r ApiUpdateVnicFcQosPolicy
 	localVarPostBody = r.vnicFcQosPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11207,7 +13482,517 @@ func (a *VnicApiService) UpdateVnicFcQosPolicyExecute(r ApiUpdateVnicFcQosPolicy
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateVnicIscsiAdapterPolicyRequest struct {
+	ctx                    _context.Context
+	ApiService             *VnicApiService
+	moid                   string
+	vnicIscsiAdapterPolicy *VnicIscsiAdapterPolicy
+	ifMatch                *string
+}
+
+func (r ApiUpdateVnicIscsiAdapterPolicyRequest) VnicIscsiAdapterPolicy(vnicIscsiAdapterPolicy VnicIscsiAdapterPolicy) ApiUpdateVnicIscsiAdapterPolicyRequest {
+	r.vnicIscsiAdapterPolicy = &vnicIscsiAdapterPolicy
+	return r
+}
+func (r ApiUpdateVnicIscsiAdapterPolicyRequest) IfMatch(ifMatch string) ApiUpdateVnicIscsiAdapterPolicyRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateVnicIscsiAdapterPolicyRequest) Execute() (VnicIscsiAdapterPolicy, *_nethttp.Response, error) {
+	return r.ApiService.UpdateVnicIscsiAdapterPolicyExecute(r)
+}
+
+/*
+ * UpdateVnicIscsiAdapterPolicy Update a 'vnic.IscsiAdapterPolicy' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiUpdateVnicIscsiAdapterPolicyRequest
+ */
+func (a *VnicApiService) UpdateVnicIscsiAdapterPolicy(ctx _context.Context, moid string) ApiUpdateVnicIscsiAdapterPolicyRequest {
+	return ApiUpdateVnicIscsiAdapterPolicyRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VnicIscsiAdapterPolicy
+ */
+func (a *VnicApiService) UpdateVnicIscsiAdapterPolicyExecute(r ApiUpdateVnicIscsiAdapterPolicyRequest) (VnicIscsiAdapterPolicy, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicIscsiAdapterPolicy
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.UpdateVnicIscsiAdapterPolicy")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiAdapterPolicies/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.vnicIscsiAdapterPolicy == nil {
+		return localVarReturnValue, nil, reportError("vnicIscsiAdapterPolicy is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.vnicIscsiAdapterPolicy
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateVnicIscsiBootPolicyRequest struct {
+	ctx                 _context.Context
+	ApiService          *VnicApiService
+	moid                string
+	vnicIscsiBootPolicy *VnicIscsiBootPolicy
+	ifMatch             *string
+}
+
+func (r ApiUpdateVnicIscsiBootPolicyRequest) VnicIscsiBootPolicy(vnicIscsiBootPolicy VnicIscsiBootPolicy) ApiUpdateVnicIscsiBootPolicyRequest {
+	r.vnicIscsiBootPolicy = &vnicIscsiBootPolicy
+	return r
+}
+func (r ApiUpdateVnicIscsiBootPolicyRequest) IfMatch(ifMatch string) ApiUpdateVnicIscsiBootPolicyRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateVnicIscsiBootPolicyRequest) Execute() (VnicIscsiBootPolicy, *_nethttp.Response, error) {
+	return r.ApiService.UpdateVnicIscsiBootPolicyExecute(r)
+}
+
+/*
+ * UpdateVnicIscsiBootPolicy Update a 'vnic.IscsiBootPolicy' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiUpdateVnicIscsiBootPolicyRequest
+ */
+func (a *VnicApiService) UpdateVnicIscsiBootPolicy(ctx _context.Context, moid string) ApiUpdateVnicIscsiBootPolicyRequest {
+	return ApiUpdateVnicIscsiBootPolicyRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VnicIscsiBootPolicy
+ */
+func (a *VnicApiService) UpdateVnicIscsiBootPolicyExecute(r ApiUpdateVnicIscsiBootPolicyRequest) (VnicIscsiBootPolicy, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicIscsiBootPolicy
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.UpdateVnicIscsiBootPolicy")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiBootPolicies/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.vnicIscsiBootPolicy == nil {
+		return localVarReturnValue, nil, reportError("vnicIscsiBootPolicy is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.vnicIscsiBootPolicy
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateVnicIscsiStaticTargetPolicyRequest struct {
+	ctx                         _context.Context
+	ApiService                  *VnicApiService
+	moid                        string
+	vnicIscsiStaticTargetPolicy *VnicIscsiStaticTargetPolicy
+	ifMatch                     *string
+}
+
+func (r ApiUpdateVnicIscsiStaticTargetPolicyRequest) VnicIscsiStaticTargetPolicy(vnicIscsiStaticTargetPolicy VnicIscsiStaticTargetPolicy) ApiUpdateVnicIscsiStaticTargetPolicyRequest {
+	r.vnicIscsiStaticTargetPolicy = &vnicIscsiStaticTargetPolicy
+	return r
+}
+func (r ApiUpdateVnicIscsiStaticTargetPolicyRequest) IfMatch(ifMatch string) ApiUpdateVnicIscsiStaticTargetPolicyRequest {
+	r.ifMatch = &ifMatch
+	return r
+}
+
+func (r ApiUpdateVnicIscsiStaticTargetPolicyRequest) Execute() (VnicIscsiStaticTargetPolicy, *_nethttp.Response, error) {
+	return r.ApiService.UpdateVnicIscsiStaticTargetPolicyExecute(r)
+}
+
+/*
+ * UpdateVnicIscsiStaticTargetPolicy Update a 'vnic.IscsiStaticTargetPolicy' resource.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param moid The unique Moid identifier of a resource instance.
+ * @return ApiUpdateVnicIscsiStaticTargetPolicyRequest
+ */
+func (a *VnicApiService) UpdateVnicIscsiStaticTargetPolicy(ctx _context.Context, moid string) ApiUpdateVnicIscsiStaticTargetPolicyRequest {
+	return ApiUpdateVnicIscsiStaticTargetPolicyRequest{
+		ApiService: a,
+		ctx:        ctx,
+		moid:       moid,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return VnicIscsiStaticTargetPolicy
+ */
+func (a *VnicApiService) UpdateVnicIscsiStaticTargetPolicyExecute(r ApiUpdateVnicIscsiStaticTargetPolicyRequest) (VnicIscsiStaticTargetPolicy, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  VnicIscsiStaticTargetPolicy
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.UpdateVnicIscsiStaticTargetPolicy")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/api/v1/vnic/IscsiStaticTargetPolicies/{Moid}"
+	localVarPath = strings.Replace(localVarPath, "{"+"Moid"+"}", _neturl.PathEscape(parameterToString(r.moid, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+	if r.vnicIscsiStaticTargetPolicy == nil {
+		return localVarReturnValue, nil, reportError("vnicIscsiStaticTargetPolicy is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json", "application/json-patch+json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifMatch != nil {
+		localVarHeaderParams["If-Match"] = parameterToString(*r.ifMatch, "")
+	}
+	// body params
+	localVarPostBody = r.vnicIscsiStaticTargetPolicy
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		var v Error
+		err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+		if err != nil {
+			newErr.error = err.Error()
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateVnicLanConnectivityPolicyRequest struct {
@@ -11227,7 +14012,7 @@ func (r ApiUpdateVnicLanConnectivityPolicyRequest) IfMatch(ifMatch string) ApiUp
 	return r
 }
 
-func (r ApiUpdateVnicLanConnectivityPolicyRequest) Execute() (VnicLanConnectivityPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateVnicLanConnectivityPolicyRequest) Execute() (VnicLanConnectivityPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateVnicLanConnectivityPolicyExecute(r)
 }
 
@@ -11249,21 +14034,19 @@ func (a *VnicApiService) UpdateVnicLanConnectivityPolicy(ctx _context.Context, m
  * Execute executes the request
  * @return VnicLanConnectivityPolicy
  */
-func (a *VnicApiService) UpdateVnicLanConnectivityPolicyExecute(r ApiUpdateVnicLanConnectivityPolicyRequest) (VnicLanConnectivityPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) UpdateVnicLanConnectivityPolicyExecute(r ApiUpdateVnicLanConnectivityPolicyRequest) (VnicLanConnectivityPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicLanConnectivityPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.UpdateVnicLanConnectivityPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/LanConnectivityPolicies/{Moid}"
@@ -11273,8 +14056,7 @@ func (a *VnicApiService) UpdateVnicLanConnectivityPolicyExecute(r ApiUpdateVnicL
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicLanConnectivityPolicy == nil {
-		executionError.error = "vnicLanConnectivityPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicLanConnectivityPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -11301,22 +14083,19 @@ func (a *VnicApiService) UpdateVnicLanConnectivityPolicyExecute(r ApiUpdateVnicL
 	localVarPostBody = r.vnicLanConnectivityPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11383,7 +14162,7 @@ func (a *VnicApiService) UpdateVnicLanConnectivityPolicyExecute(r ApiUpdateVnicL
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUpdateVnicSanConnectivityPolicyRequest struct {
@@ -11403,7 +14182,7 @@ func (r ApiUpdateVnicSanConnectivityPolicyRequest) IfMatch(ifMatch string) ApiUp
 	return r
 }
 
-func (r ApiUpdateVnicSanConnectivityPolicyRequest) Execute() (VnicSanConnectivityPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (r ApiUpdateVnicSanConnectivityPolicyRequest) Execute() (VnicSanConnectivityPolicy, *_nethttp.Response, error) {
 	return r.ApiService.UpdateVnicSanConnectivityPolicyExecute(r)
 }
 
@@ -11425,21 +14204,19 @@ func (a *VnicApiService) UpdateVnicSanConnectivityPolicy(ctx _context.Context, m
  * Execute executes the request
  * @return VnicSanConnectivityPolicy
  */
-func (a *VnicApiService) UpdateVnicSanConnectivityPolicyExecute(r ApiUpdateVnicSanConnectivityPolicyRequest) (VnicSanConnectivityPolicy, *_nethttp.Response, GenericOpenAPIError) {
+func (a *VnicApiService) UpdateVnicSanConnectivityPolicyExecute(r ApiUpdateVnicSanConnectivityPolicyRequest) (VnicSanConnectivityPolicy, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		executionError       GenericOpenAPIError
 		localVarReturnValue  VnicSanConnectivityPolicy
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VnicApiService.UpdateVnicSanConnectivityPolicy")
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
 	localVarPath := localBasePath + "/api/v1/vnic/SanConnectivityPolicies/{Moid}"
@@ -11449,8 +14226,7 @@ func (a *VnicApiService) UpdateVnicSanConnectivityPolicyExecute(r ApiUpdateVnicS
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 	if r.vnicSanConnectivityPolicy == nil {
-		executionError.error = "vnicSanConnectivityPolicy is required and must be specified"
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, reportError("vnicSanConnectivityPolicy is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -11477,22 +14253,19 @@ func (a *VnicApiService) UpdateVnicSanConnectivityPolicyExecute(r ApiUpdateVnicS
 	localVarPostBody = r.vnicSanConnectivityPolicy
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, nil, executionError
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		executionError.error = err.Error()
-		return localVarReturnValue, localVarHTTPResponse, executionError
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -11559,5 +14332,5 @@ func (a *VnicApiService) UpdateVnicSanConnectivityPolicyExecute(r ApiUpdateVnicS
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarReturnValue, localVarHTTPResponse, executionError
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

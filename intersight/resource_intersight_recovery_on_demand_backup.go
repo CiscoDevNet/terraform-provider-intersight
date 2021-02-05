@@ -147,7 +147,7 @@ func resourceRecoveryOnDemandBackup() *schema.Resource {
 				Optional:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -487,7 +487,8 @@ func resourceRecoveryOnDemandBackupCreate(c context.Context, d *schema.ResourceD
 
 	r := conn.ApiClient.RecoveryApi.CreateRecoveryOnDemandBackup(conn.ctx).RecoveryOnDemandBackup(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating RecoveryOnDemandBackup: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -502,7 +503,8 @@ func resourceRecoveryOnDemandBackupRead(c context.Context, d *schema.ResourceDat
 	var de diag.Diagnostics
 	r := conn.ApiClient.RecoveryApi.GetRecoveryOnDemandBackupByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "RecoveryOnDemandBackup object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -839,7 +841,8 @@ func resourceRecoveryOnDemandBackupUpdate(c context.Context, d *schema.ResourceD
 
 	r := conn.ApiClient.RecoveryApi.UpdateRecoveryOnDemandBackup(conn.ctx, d.Id()).RecoveryOnDemandBackup(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating RecoveryOnDemandBackup: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -854,7 +857,8 @@ func resourceRecoveryOnDemandBackupDelete(c context.Context, d *schema.ResourceD
 	conn := meta.(*Config)
 	p := conn.ApiClient.RecoveryApi.DeleteRecoveryOnDemandBackup(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting RecoveryOnDemandBackup object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

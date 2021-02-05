@@ -44,7 +44,7 @@ func resourceKubernetesAciCniTenantClusterAllocation() *schema.Resource {
 				Computed:    true,
 			},
 			"object_type": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -259,7 +259,8 @@ func resourceKubernetesAciCniTenantClusterAllocationCreate(c context.Context, d 
 
 	r := conn.ApiClient.KubernetesApi.CreateKubernetesAciCniTenantClusterAllocation(conn.ctx).KubernetesAciCniTenantClusterAllocation(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating KubernetesAciCniTenantClusterAllocation: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -274,7 +275,8 @@ func resourceKubernetesAciCniTenantClusterAllocationRead(c context.Context, d *s
 	var de diag.Diagnostics
 	r := conn.ApiClient.KubernetesApi.GetKubernetesAciCniTenantClusterAllocationByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "KubernetesAciCniTenantClusterAllocation object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -459,7 +461,8 @@ func resourceKubernetesAciCniTenantClusterAllocationUpdate(c context.Context, d 
 
 	r := conn.ApiClient.KubernetesApi.UpdateKubernetesAciCniTenantClusterAllocation(conn.ctx, d.Id()).KubernetesAciCniTenantClusterAllocation(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating KubernetesAciCniTenantClusterAllocation: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -474,7 +477,8 @@ func resourceKubernetesAciCniTenantClusterAllocationDelete(c context.Context, d 
 	conn := meta.(*Config)
 	p := conn.ApiClient.KubernetesApi.DeleteKubernetesAciCniTenantClusterAllocation(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting KubernetesAciCniTenantClusterAllocation object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

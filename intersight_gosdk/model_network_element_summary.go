@@ -1,9 +1,9 @@
 /*
  * Cisco Intersight
  *
- * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-01-11T18:30:19Z.
+ * Cisco Intersight is a management platform delivered as a service with embedded analytics for your Cisco and 3rd party IT infrastructure. This platform offers an intelligent level of management that enables IT organizations to analyze, simplify, and automate their environments in more advanced ways than the prior generations of tools. Cisco Intersight provides an integrated and intuitive management experience for resources in the traditional data center as well as at the edge. With flexible deployment options to address complex security needs, getting started with Intersight is quick and easy. Cisco Intersight has deep integration with Cisco UCS and HyperFlex systems allowing for remote deployment, configuration, and ongoing maintenance. The model-based deployment works for a single system in a remote location or hundreds of systems in a data center and enables rapid, standardized configuration and deployment. It also streamlines maintaining those systems whether you are working with small or very large configurations. The Intersight OpenAPI document defines the complete set of properties that are returned in the HTTP response. From that perspective, a client can expect that no additional properties are returned, unless these properties are explicitly defined in the OpenAPI document. However, when a client uses an older version of the Intersight OpenAPI document, the server may send additional properties because the software is more recent than the client. In that case, the client may receive properties that it does not know about. Some generated SDKs perform a strict validation of the HTTP response body against the OpenAPI document. This document was created on 2021-02-05T15:05:56Z.
  *
- * API version: 1.0.9-3252
+ * API version: 1.0.9-3562
  * Contact: intersight@cisco.com
  */
 
@@ -111,6 +111,8 @@ type NetworkElementSummary struct {
 	SourceObjectType *string `json:"SourceObjectType,omitempty"`
 	// The Switch Id of the network Element.
 	SwitchId *string `json:"SwitchId,omitempty"`
+	// The Thermal status of the fabric interconnect. * `unknown` - The default state of the sensor (in case no data is received). * `ok` - State of the sensor indicating the sensor's temperature range is okay. * `upper-non-recoverable` - State of the sensor indicating that the temperature is extremely high above normal range. * `upper-critical` - State of the sensor indicating that the temperature is above normal range. * `upper-non-critical` - State of the sensor indicating that the temperature is a little above the normal range. * `lower-non-critical` - State of the sensor indicating that the temperature is a little below the normal range. * `lower-critical` - State of the sensor indicating that the temperature is below normal range. * `lower-non-recoverable` - State of the sensor indicating that the temperature is extremely below normal range.
+	Thermal *string `json:"Thermal,omitempty"`
 	// Total available memory on this switch platform.
 	TotalMemory *int64 `json:"TotalMemory,omitempty"`
 	// This field identifies the vendor of the given component.
@@ -137,6 +139,8 @@ func NewNetworkElementSummary(classId string, objectType string) *NetworkElement
 	this.FcSwitchingMode = &fcSwitchingMode
 	var managementMode string = "IntersightStandalone"
 	this.ManagementMode = &managementMode
+	var thermal string = "unknown"
+	this.Thermal = &thermal
 	return &this
 }
 
@@ -155,6 +159,8 @@ func NewNetworkElementSummaryWithDefaults() *NetworkElementSummary {
 	this.FcSwitchingMode = &fcSwitchingMode
 	var managementMode string = "IntersightStandalone"
 	this.ManagementMode = &managementMode
+	var thermal string = "unknown"
+	this.Thermal = &thermal
 	return &this
 }
 
@@ -1625,6 +1631,38 @@ func (o *NetworkElementSummary) SetSwitchId(v string) {
 	o.SwitchId = &v
 }
 
+// GetThermal returns the Thermal field value if set, zero value otherwise.
+func (o *NetworkElementSummary) GetThermal() string {
+	if o == nil || o.Thermal == nil {
+		var ret string
+		return ret
+	}
+	return *o.Thermal
+}
+
+// GetThermalOk returns a tuple with the Thermal field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *NetworkElementSummary) GetThermalOk() (*string, bool) {
+	if o == nil || o.Thermal == nil {
+		return nil, false
+	}
+	return o.Thermal, true
+}
+
+// HasThermal returns a boolean if a field has been set.
+func (o *NetworkElementSummary) HasThermal() bool {
+	if o != nil && o.Thermal != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetThermal gets a reference to the given string and assigns it to the Thermal field.
+func (o *NetworkElementSummary) SetThermal(v string) {
+	o.Thermal = &v
+}
+
 // GetTotalMemory returns the TotalMemory field value if set, zero value otherwise.
 func (o *NetworkElementSummary) GetTotalMemory() int64 {
 	if o == nil || o.TotalMemory == nil {
@@ -1901,6 +1939,9 @@ func (o NetworkElementSummary) MarshalJSON() ([]byte, error) {
 	if o.SwitchId != nil {
 		toSerialize["SwitchId"] = o.SwitchId
 	}
+	if o.Thermal != nil {
+		toSerialize["Thermal"] = o.Thermal
+	}
 	if o.TotalMemory != nil {
 		toSerialize["TotalMemory"] = o.TotalMemory
 	}
@@ -2014,6 +2055,8 @@ func (o *NetworkElementSummary) UnmarshalJSON(bytes []byte) (err error) {
 		SourceObjectType *string `json:"SourceObjectType,omitempty"`
 		// The Switch Id of the network Element.
 		SwitchId *string `json:"SwitchId,omitempty"`
+		// The Thermal status of the fabric interconnect. * `unknown` - The default state of the sensor (in case no data is received). * `ok` - State of the sensor indicating the sensor's temperature range is okay. * `upper-non-recoverable` - State of the sensor indicating that the temperature is extremely high above normal range. * `upper-critical` - State of the sensor indicating that the temperature is above normal range. * `upper-non-critical` - State of the sensor indicating that the temperature is a little above the normal range. * `lower-non-critical` - State of the sensor indicating that the temperature is a little below the normal range. * `lower-critical` - State of the sensor indicating that the temperature is below normal range. * `lower-non-recoverable` - State of the sensor indicating that the temperature is extremely below normal range.
+		Thermal *string `json:"Thermal,omitempty"`
 		// Total available memory on this switch platform.
 		TotalMemory *int64 `json:"TotalMemory,omitempty"`
 		// This field identifies the vendor of the given component.
@@ -2074,6 +2117,7 @@ func (o *NetworkElementSummary) UnmarshalJSON(bytes []byte) (err error) {
 		varNetworkElementSummary.Serial = varNetworkElementSummaryWithoutEmbeddedStruct.Serial
 		varNetworkElementSummary.SourceObjectType = varNetworkElementSummaryWithoutEmbeddedStruct.SourceObjectType
 		varNetworkElementSummary.SwitchId = varNetworkElementSummaryWithoutEmbeddedStruct.SwitchId
+		varNetworkElementSummary.Thermal = varNetworkElementSummaryWithoutEmbeddedStruct.Thermal
 		varNetworkElementSummary.TotalMemory = varNetworkElementSummaryWithoutEmbeddedStruct.TotalMemory
 		varNetworkElementSummary.Vendor = varNetworkElementSummaryWithoutEmbeddedStruct.Vendor
 		varNetworkElementSummary.Version = varNetworkElementSummaryWithoutEmbeddedStruct.Version
@@ -2141,6 +2185,7 @@ func (o *NetworkElementSummary) UnmarshalJSON(bytes []byte) (err error) {
 		delete(additionalProperties, "Serial")
 		delete(additionalProperties, "SourceObjectType")
 		delete(additionalProperties, "SwitchId")
+		delete(additionalProperties, "Thermal")
 		delete(additionalProperties, "TotalMemory")
 		delete(additionalProperties, "Vendor")
 		delete(additionalProperties, "Version")

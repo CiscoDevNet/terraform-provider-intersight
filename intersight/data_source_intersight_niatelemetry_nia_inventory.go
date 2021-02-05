@@ -20,11 +20,6 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 				Optional:         true,
 				DiffSuppressFunc: SuppressDiffAdditionProps,
 			},
-			"bgp_peer_count": {
-				Description: "Number of BGP peers on a node.",
-				Type:        schema.TypeInt,
-				Optional:    true,
-			},
 			"class_id": {
 				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
@@ -40,6 +35,26 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
+			"customer_device_connector": {
+				Description: "Returns the value of the customerDeviceConnector field.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"device_discovery": {
+				Description: "Returns the value of the deviceDiscovery field.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"device_health": {
+				Description: "Returns the device health.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"device_id": {
+				Description: "Returns the value of the deviceId field.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"device_name": {
 				Description: "Name of device being inventoried. The name the user assigns to the device is inventoried here.",
 				Type:        schema.TypeString,
@@ -48,6 +63,11 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 			"device_type": {
 				Description: "Type of device being inventoried. This determines whether the device is a controller, leaf or spine.",
 				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"device_up_time": {
+				Description: "Returns the device up time.",
+				Type:        schema.TypeInt,
 				Optional:    true,
 			},
 			"disk": {
@@ -63,7 +83,7 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 							DiffSuppressFunc: SuppressDiffAdditionProps,
 						},
 						"class_id": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 							Type:        schema.TypeString,
 							Optional:    true,
 						},
@@ -78,7 +98,7 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -114,6 +134,11 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 			},
 			"ip_address": {
 				Description: "The IP address of the device being inventoried.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"is_virtual_node": {
+				Description: "Flag to specify if the node is virtual.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -194,6 +219,53 @@ func dataSourceNiatelemetryNiaInventory() *schema.Resource {
 			},
 			"node_id": {
 				Description: "The ID of the device being inventoried.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
+			"nxos_evpn_mac_routes": {
+				Description: "Returns the total number of evpn mac routes.",
+				Type:        schema.TypeInt,
+				Optional:    true,
+			},
+			"nxos_interface_brief": {
+				Description: "Returns the value of the nxosInterfaceBrief field.",
+				Type:        schema.TypeList,
+				MaxItems:    1,
+				Optional:    true,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"additional_properties": {
+							Type:             schema.TypeString,
+							Optional:         true,
+							DiffSuppressFunc: SuppressDiffAdditionProps,
+						},
+						"class_id": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
+							Type:        schema.TypeString,
+							Optional:    true,
+						},
+						"interface_down_count": {
+							Description: "Return value of number of interafces down.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"interface_up_count": {
+							Description: "Return value of number of interafces up.",
+							Type:        schema.TypeInt,
+							Optional:    true,
+						},
+						"object_type": {
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
+							Type:        schema.TypeString,
+							Optional:    true,
+							Computed:    true,
+						},
+					},
+				},
+				Computed: true,
+			},
+			"nxos_telnet": {
+				Description: "Returns the value of the nxosTelnet field.",
 				Type:        schema.TypeString,
 				Optional:    true,
 			},
@@ -320,10 +392,6 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 	conn := meta.(*Config)
 	var de diag.Diagnostics
 	var o = &models.NiatelemetryNiaInventory{}
-	if v, ok := d.GetOk("bgp_peer_count"); ok {
-		x := int64(v.(int))
-		o.SetBgpPeerCount(x)
-	}
 	if v, ok := d.GetOk("class_id"); ok {
 		x := (v.(string))
 		o.SetClassId(x)
@@ -336,6 +404,22 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		x := (v.(string))
 		o.SetCrashResetLogs(x)
 	}
+	if v, ok := d.GetOk("customer_device_connector"); ok {
+		x := (v.(string))
+		o.SetCustomerDeviceConnector(x)
+	}
+	if v, ok := d.GetOk("device_discovery"); ok {
+		x := (v.(string))
+		o.SetDeviceDiscovery(x)
+	}
+	if v, ok := d.GetOk("device_health"); ok {
+		x := int64(v.(int))
+		o.SetDeviceHealth(x)
+	}
+	if v, ok := d.GetOk("device_id"); ok {
+		x := (v.(string))
+		o.SetDeviceId(x)
+	}
 	if v, ok := d.GetOk("device_name"); ok {
 		x := (v.(string))
 		o.SetDeviceName(x)
@@ -343,6 +427,10 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 	if v, ok := d.GetOk("device_type"); ok {
 		x := (v.(string))
 		o.SetDeviceType(x)
+	}
+	if v, ok := d.GetOk("device_up_time"); ok {
+		x := int64(v.(int))
+		o.SetDeviceUpTime(x)
 	}
 	if v, ok := d.GetOk("dn"); ok {
 		x := (v.(string))
@@ -359,6 +447,10 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 	if v, ok := d.GetOk("ip_address"); ok {
 		x := (v.(string))
 		o.SetIpAddress(x)
+	}
+	if v, ok := d.GetOk("is_virtual_node"); ok {
+		x := (v.(string))
+		o.SetIsVirtualNode(x)
 	}
 	if v, ok := d.GetOk("log_in_time"); ok {
 		x := (v.(string))
@@ -391,6 +483,14 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 	if v, ok := d.GetOk("node_id"); ok {
 		x := (v.(string))
 		o.SetNodeId(x)
+	}
+	if v, ok := d.GetOk("nxos_evpn_mac_routes"); ok {
+		x := int64(v.(int))
+		o.SetNxosEvpnMacRoutes(x)
+	}
+	if v, ok := d.GetOk("nxos_telnet"); ok {
+		x := (v.(string))
+		o.SetNxosTelnet(x)
 	}
 	if v, ok := d.GetOk("object_type"); ok {
 		x := (v.(string))
@@ -438,7 +538,8 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 		return diag.Errorf("json marshal of NiatelemetryNiaInventory object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.NiatelemetryApi.GetNiatelemetryNiaInventoryList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching NiatelemetryNiaInventory: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
@@ -471,9 +572,6 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 			if err := d.Set("additional_properties", flattenAdditionalProperties(s.AdditionalProperties)); err != nil {
 				return diag.Errorf("error occurred while setting property AdditionalProperties: %s", err.Error())
 			}
-			if err := d.Set("bgp_peer_count", (s.GetBgpPeerCount())); err != nil {
-				return diag.Errorf("error occurred while setting property BgpPeerCount: %s", err.Error())
-			}
 			if err := d.Set("class_id", (s.GetClassId())); err != nil {
 				return diag.Errorf("error occurred while setting property ClassId: %s", err.Error())
 			}
@@ -483,11 +581,26 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 			if err := d.Set("crash_reset_logs", (s.GetCrashResetLogs())); err != nil {
 				return diag.Errorf("error occurred while setting property CrashResetLogs: %s", err.Error())
 			}
+			if err := d.Set("customer_device_connector", (s.GetCustomerDeviceConnector())); err != nil {
+				return diag.Errorf("error occurred while setting property CustomerDeviceConnector: %s", err.Error())
+			}
+			if err := d.Set("device_discovery", (s.GetDeviceDiscovery())); err != nil {
+				return diag.Errorf("error occurred while setting property DeviceDiscovery: %s", err.Error())
+			}
+			if err := d.Set("device_health", (s.GetDeviceHealth())); err != nil {
+				return diag.Errorf("error occurred while setting property DeviceHealth: %s", err.Error())
+			}
+			if err := d.Set("device_id", (s.GetDeviceId())); err != nil {
+				return diag.Errorf("error occurred while setting property DeviceId: %s", err.Error())
+			}
 			if err := d.Set("device_name", (s.GetDeviceName())); err != nil {
 				return diag.Errorf("error occurred while setting property DeviceName: %s", err.Error())
 			}
 			if err := d.Set("device_type", (s.GetDeviceType())); err != nil {
 				return diag.Errorf("error occurred while setting property DeviceType: %s", err.Error())
+			}
+			if err := d.Set("device_up_time", (s.GetDeviceUpTime())); err != nil {
+				return diag.Errorf("error occurred while setting property DeviceUpTime: %s", err.Error())
 			}
 
 			if err := d.Set("disk", flattenMapNiatelemetryDiskinfo(s.GetDisk(), d)); err != nil {
@@ -504,6 +617,9 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 			}
 			if err := d.Set("ip_address", (s.GetIpAddress())); err != nil {
 				return diag.Errorf("error occurred while setting property IpAddress: %s", err.Error())
+			}
+			if err := d.Set("is_virtual_node", (s.GetIsVirtualNode())); err != nil {
+				return diag.Errorf("error occurred while setting property IsVirtualNode: %s", err.Error())
 			}
 
 			if err := d.Set("license_state", flattenMapNiatelemetryNiaLicenseStateRelationship(s.GetLicenseState(), d)); err != nil {
@@ -532,6 +648,16 @@ func dataSourceNiatelemetryNiaInventoryRead(c context.Context, d *schema.Resourc
 			}
 			if err := d.Set("node_id", (s.GetNodeId())); err != nil {
 				return diag.Errorf("error occurred while setting property NodeId: %s", err.Error())
+			}
+			if err := d.Set("nxos_evpn_mac_routes", (s.GetNxosEvpnMacRoutes())); err != nil {
+				return diag.Errorf("error occurred while setting property NxosEvpnMacRoutes: %s", err.Error())
+			}
+
+			if err := d.Set("nxos_interface_brief", flattenMapNiatelemetryInterface(s.GetNxosInterfaceBrief(), d)); err != nil {
+				return diag.Errorf("error occurred while setting property NxosInterfaceBrief: %s", err.Error())
+			}
+			if err := d.Set("nxos_telnet", (s.GetNxosTelnet())); err != nil {
+				return diag.Errorf("error occurred while setting property NxosTelnet: %s", err.Error())
 			}
 			if err := d.Set("object_type", (s.GetObjectType())); err != nil {
 				return diag.Errorf("error occurred while setting property ObjectType: %s", err.Error())

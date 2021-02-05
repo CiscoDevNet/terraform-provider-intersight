@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ClassId** | **string** | The fully-qualified name of the instantiated, concrete type. This property is used as a discriminator to identify the type of the payload when marshaling and unmarshaling data. | [default to "fabric.SwitchControlPolicy"]
 **ObjectType** | **string** | The fully-qualified name of the instantiated, concrete type. The value should be the same as the &#39;ClassId&#39; property. | [default to "fabric.SwitchControlPolicy"]
+**MacAgingSettings** | Pointer to [**NullableFabricMacAgingSettings**](fabric.MacAgingSettings.md) |  | [optional] 
 **VlanPortOptimizationEnabled** | Pointer to **bool** | To enable or disable the VLAN port count optimization. | [optional] [default to false]
 **Organization** | Pointer to [**OrganizationOrganizationRelationship**](organization.Organization.Relationship.md) |  | [optional] 
 **Profiles** | Pointer to [**[]FabricSwitchProfileRelationship**](FabricSwitchProfileRelationship.md) | An array of relationships to fabricSwitchProfile resources. | [optional] 
@@ -69,6 +70,41 @@ and a boolean to check if the value has been set.
 SetObjectType sets ObjectType field to given value.
 
 
+### GetMacAgingSettings
+
+`func (o *FabricSwitchControlPolicy) GetMacAgingSettings() FabricMacAgingSettings`
+
+GetMacAgingSettings returns the MacAgingSettings field if non-nil, zero value otherwise.
+
+### GetMacAgingSettingsOk
+
+`func (o *FabricSwitchControlPolicy) GetMacAgingSettingsOk() (*FabricMacAgingSettings, bool)`
+
+GetMacAgingSettingsOk returns a tuple with the MacAgingSettings field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMacAgingSettings
+
+`func (o *FabricSwitchControlPolicy) SetMacAgingSettings(v FabricMacAgingSettings)`
+
+SetMacAgingSettings sets MacAgingSettings field to given value.
+
+### HasMacAgingSettings
+
+`func (o *FabricSwitchControlPolicy) HasMacAgingSettings() bool`
+
+HasMacAgingSettings returns a boolean if a field has been set.
+
+### SetMacAgingSettingsNil
+
+`func (o *FabricSwitchControlPolicy) SetMacAgingSettingsNil(b bool)`
+
+ SetMacAgingSettingsNil sets the value for MacAgingSettings to be an explicit nil
+
+### UnsetMacAgingSettings
+`func (o *FabricSwitchControlPolicy) UnsetMacAgingSettings()`
+
+UnsetMacAgingSettings ensures that no value is present for MacAgingSettings, not even an explicit nil
 ### GetVlanPortOptimizationEnabled
 
 `func (o *FabricSwitchControlPolicy) GetVlanPortOptimizationEnabled() bool`

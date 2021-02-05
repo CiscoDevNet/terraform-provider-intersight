@@ -20,4 +20,5 @@ The following arguments can be used to get data of already created objects in In
 * `record_type`:(string) Type of record DCNM / APIC / SE. This determines the type of platform where inventory was collected. 
 * `record_version`:(string) Version of record being pushed. This determines what was the API version for data available from the device. 
 * `redundancy_state`:(string) Redundancy state of the line cards present. 
+* `serial_number`:(string) Serial number of the line card present. 
 * `site_name`:(string) The Site name represents an APIC cluster. Service Engine can onboard multiple APIC clusters / sites. 

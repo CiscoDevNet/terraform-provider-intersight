@@ -387,6 +387,11 @@ func dataSourceEquipmentSwitchCard() *schema.Resource {
 					},
 				},
 			},
+			"thermal": {
+				Description: "The Thermal status of the fabric interconnect.\n* `unknown` - The default state of the sensor (in case no data is received).\n* `ok` - State of the sensor indicating the sensor's temperature range is okay.\n* `upper-non-recoverable` - State of the sensor indicating that the temperature is extremely high above normal range.\n* `upper-critical` - State of the sensor indicating that the temperature is above normal range.\n* `upper-non-critical` - State of the sensor indicating that the temperature is a little above the normal range.\n* `lower-non-critical` - State of the sensor indicating that the temperature is a little below the normal range.\n* `lower-critical` - State of the sensor indicating that the temperature is below normal range.\n* `lower-non-recoverable` - State of the sensor indicating that the temperature is extremely below normal range.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"vendor": {
 				Description: "This field identifies the vendor of the given component.",
 				Type:        schema.TypeString,
@@ -479,6 +484,10 @@ func dataSourceEquipmentSwitchCardRead(c context.Context, d *schema.ResourceData
 		x := (v.(string))
 		o.SetSwitchId(x)
 	}
+	if v, ok := d.GetOk("thermal"); ok {
+		x := (v.(string))
+		o.SetThermal(x)
+	}
 	if v, ok := d.GetOk("vendor"); ok {
 		x := (v.(string))
 		o.SetVendor(x)
@@ -489,7 +498,8 @@ func dataSourceEquipmentSwitchCardRead(c context.Context, d *schema.ResourceData
 		return diag.Errorf("json marshal of EquipmentSwitchCard object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.EquipmentApi.GetEquipmentSwitchCardList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching EquipmentSwitchCard: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
@@ -606,6 +616,9 @@ func dataSourceEquipmentSwitchCardRead(c context.Context, d *schema.ResourceData
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
+			}
+			if err := d.Set("thermal", (s.GetThermal())); err != nil {
+				return diag.Errorf("error occurred while setting property Thermal: %s", err.Error())
 			}
 			if err := d.Set("vendor", (s.GetVendor())); err != nil {
 				return diag.Errorf("error occurred while setting property Vendor: %s", err.Error())

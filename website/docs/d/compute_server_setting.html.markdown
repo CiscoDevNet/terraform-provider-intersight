@@ -16,5 +16,6 @@ The following arguments can be used to get data of already created objects in In
 * `device_mo_id`:(string) The database identifier of the registered device of an object. 
 * `dn`:(string) The Distinguished Name unambiguously identifies an object in the system. 
 * `moid`:(string) The unique identifier of this Managed Object instance. 
+* `name`:(string) The property used to identify the name of the server it is associated with. 
 * `one_time_boot_device`:(string) The name of the device chosen by user for configuring One-Time Boot device. 
 * `rn`:(string) The Relative Name uniquely identifies an object within a given context. 

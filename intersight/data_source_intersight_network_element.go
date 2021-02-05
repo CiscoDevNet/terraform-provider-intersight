@@ -55,7 +55,7 @@ func dataSourceNetworkElement() *schema.Resource {
 							Optional:    true,
 						},
 						"object_type": {
-							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+							Description: "The fully-qualified name of the instantiated, concrete type.\nThe value should be the same as the 'ClassId' property.",
 							Type:        schema.TypeString,
 							Optional:    true,
 							Computed:    true,
@@ -708,6 +708,11 @@ func dataSourceNetworkElement() *schema.Resource {
 					},
 				},
 			},
+			"thermal": {
+				Description: "The Thermal status of the fabric interconnect.\n* `unknown` - The default state of the sensor (in case no data is received).\n* `ok` - State of the sensor indicating the sensor's temperature range is okay.\n* `upper-non-recoverable` - State of the sensor indicating that the temperature is extremely high above normal range.\n* `upper-critical` - State of the sensor indicating that the temperature is above normal range.\n* `upper-non-critical` - State of the sensor indicating that the temperature is a little above the normal range.\n* `lower-non-critical` - State of the sensor indicating that the temperature is a little below the normal range.\n* `lower-critical` - State of the sensor indicating that the temperature is below normal range.\n* `lower-non-recoverable` - State of the sensor indicating that the temperature is extremely below normal range.",
+				Type:        schema.TypeString,
+				Optional:    true,
+			},
 			"top_system": {
 				Description: "A reference to a topSystem resource.\nWhen the $expand query parameter is specified, the referenced resource is returned inline.",
 				Type:        schema.TypeList,
@@ -948,6 +953,10 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 		x := (v.(string))
 		o.SetSwitchId(x)
 	}
+	if v, ok := d.GetOk("thermal"); ok {
+		x := (v.(string))
+		o.SetThermal(x)
+	}
 	if v, ok := d.GetOk("total_memory"); ok {
 		x := int64(v.(int))
 		o.SetTotalMemory(x)
@@ -962,7 +971,8 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 		return diag.Errorf("json marshal of NetworkElement object failed with error : %s", err.Error())
 	}
 	resMo, _, responseErr := conn.ApiClient.NetworkApi.GetNetworkElementList(conn.ctx).Filter(getRequestParams(data)).Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while fetching NetworkElement: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 
@@ -1151,6 +1161,9 @@ func dataSourceNetworkElementRead(c context.Context, d *schema.ResourceData, met
 
 			if err := d.Set("tags", flattenListMoTag(s.GetTags(), d)); err != nil {
 				return diag.Errorf("error occurred while setting property Tags: %s", err.Error())
+			}
+			if err := d.Set("thermal", (s.GetThermal())); err != nil {
+				return diag.Errorf("error occurred while setting property Thermal: %s", err.Error())
 			}
 
 			if err := d.Set("top_system", flattenMapTopSystemRelationship(s.GetTopSystem(), d)); err != nil {

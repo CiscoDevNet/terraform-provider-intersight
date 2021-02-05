@@ -10,23 +10,16 @@ description: |-
 Infrastructure backend for providing virtual machines from a target.
 ## Argument Reference
 The following arguments are supported:
-* `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-* `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
 * `description`:(string) Description for the infrastructure provider. 
-* `infra_config`:(Array with Maximum of one item) - Virtual machine infrastucture provider allocation properties. 
+* `infra_config`:(HashMap) - Virtual machine infrastucture provider allocation properties. 
 This complex property has following sub-properties:
-  + `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
+  + `additional_properties`:(JSON) - Additional Properties as per object type, can be added as JSON using `jsonencode()`. Allowed Types are: [kubernetes.EsxiVirtualMachineInfraConfig](#kubernetesEsxiVirtualMachineInfraConfig)
+[kubernetes.HyperFlexApVirtualMachineInfraConfig](#kubernetesHyperFlexApVirtualMachineInfraConfig)
   + `interfaces`:
                 (Array of schema.TypeString) -
   + `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property.The enum values provides the list of concrete types that can be instantiated from this abstract type. 
-* `instance_type`:(Array with Maximum of one item) - A reference to a kubernetesVirtualMachineInstanceType resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+* `instance_type`:(HashMap) - A reference to a kubernetesVirtualMachineInstanceType resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
-  + `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
@@ -34,32 +27,20 @@ This complex property has following sub-properties:
 * `name`:(string) Name of an infrastructure provider. 
 * `node_groups`:(Array) An array of relationships to kubernetesNodeGroupProfile resources. 
 This complex property has following sub-properties:
-  + `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
-* `object_type`:(string) The fully-qualified name of the instantiated, concrete type.The value should be the same as the 'ClassId' property. 
-* `organization`:(Array with Maximum of one item) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+* `organization`:(HashMap) - A reference to a organizationOrganization resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
-  + `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
 * `tags`:(Array)
 This complex property has following sub-properties:
-  + `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
   + `key`:(string) The string representation of a tag key. 
   + `value`:(string) The string representation of a tag value. 
-* `target`:(Array with Maximum of one item) - A reference to a assetDeviceRegistration resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
+* `target`:(HashMap) - A reference to a assetDeviceRegistration resource.When the $expand query parameter is specified, the referenced resource is returned inline. 
 This complex property has following sub-properties:
-  + `additional_properties`:
-(Array with Maximum of one item) - Add additional properties in json format inside `jsonencode()` for this object.
-  + `class_id`:(string) The fully-qualified name of the instantiated, concrete type.This property is used as a discriminator to identify the type of the payloadwhen marshaling and unmarshaling data. 
   + `moid`:(string)(Computed) The Moid of the referenced REST resource. 
   + `object_type`:(string) The fully-qualified name of the remote type referred by this relationship. 
   + `selector`:(string)(Computed) An OData $filter expression which describes the REST resource to be referenced. This field maybe set instead of 'moid' by clients.1. If 'moid' is set this field is ignored.1. If 'selector' is set and 'moid' is empty/absent from the request, Intersight determines the Moid of theresource matching the filter expression and populates it in the MoRef that is part of the objectinstance being inserted/updated to fulfill the REST request.An error is returned if the filter matches zero or more than one REST resource.An example filter string is: Serial eq '3AA8B7T11'. 
@@ -70,3 +51,16 @@ This complex property has following sub-properties:
 ```
 $ terraform import intersight_kubernetes_virtual_machine_infrastructure_provider.example 1234567890987654321abcde
 ```
+## Allowed Types in `AdditionalProperties`
+ 
+### [kubernetes.EsxiVirtualMachineInfraConfig](#argument-reference)
+Infrastructure provider allocation configuration for ESXi virtual machine Kubernetes nodes.
+* `cluster`:(string) Name of the vSphere cluster on which the virtual machines are created. 
+* `datastore`:(string) Name of the datasore on which the virtual machine disks are created. 
+* `is_passphrase_set`:(bool)(Computed) Indicates whether the value of the 'passphrase' property has been set. 
+* `passphrase`:(string) Passphrase for the vcenter user. 
+* `resource_pool`:(string) Name of the vSphere resource pool on which the virtual machines are created. 
+
+### [kubernetes.HyperFlexApVirtualMachineInfraConfig](#argument-reference)
+Infrastructure provider allocation configuration for HyperFlex Application platform virtual machine Kubernetes nodes.
+  

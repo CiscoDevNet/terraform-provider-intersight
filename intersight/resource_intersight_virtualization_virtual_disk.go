@@ -31,7 +31,7 @@ func resourceVirtualizationVirtualDisk() *schema.Resource {
 				ForceNew:    true,
 			},
 			"class_id": {
-				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.\nThe enum values provides the list of concrete types that can be instantiated from this abstract type.",
+				Description: "The fully-qualified name of the instantiated, concrete type.\nThis property is used as a discriminator to identify the type of the payload\nwhen marshaling and unmarshaling data.",
 				Type:        schema.TypeString,
 				Optional:    true,
 				Computed:    true,
@@ -544,7 +544,8 @@ func resourceVirtualizationVirtualDiskCreate(c context.Context, d *schema.Resour
 
 	r := conn.ApiClient.VirtualizationApi.CreateVirtualizationVirtualDisk(conn.ctx).VirtualizationVirtualDisk(*o)
 	resultMo, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("failed while creating VirtualizationVirtualDisk: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", resultMo.GetMoid())
@@ -559,7 +560,8 @@ func resourceVirtualizationVirtualDiskRead(c context.Context, d *schema.Resource
 	var de diag.Diagnostics
 	r := conn.ApiClient.VirtualizationApi.GetVirtualizationVirtualDiskByMoid(conn.ctx, d.Id())
 	s, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		if strings.Contains(responseErr.Error(), "404") {
 			de = append(de, diag.Diagnostic{Summary: "VirtualizationVirtualDisk object " + d.Id() + " not found. Removing from statefile", Severity: diag.Warning})
 			d.SetId("")
@@ -918,7 +920,8 @@ func resourceVirtualizationVirtualDiskUpdate(c context.Context, d *schema.Resour
 
 	r := conn.ApiClient.VirtualizationApi.UpdateVirtualizationVirtualDisk(conn.ctx, d.Id()).VirtualizationVirtualDisk(*o)
 	result, _, responseErr := r.Execute()
-	if responseErr.Error() != "" {
+	if responseErr != nil {
+		responseErr := responseErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while updating VirtualizationVirtualDisk: %s Response from endpoint: %s", responseErr.Error(), string(responseErr.Body()))
 	}
 	log.Printf("Moid: %s", result.GetMoid())
@@ -933,7 +936,8 @@ func resourceVirtualizationVirtualDiskDelete(c context.Context, d *schema.Resour
 	conn := meta.(*Config)
 	p := conn.ApiClient.VirtualizationApi.DeleteVirtualizationVirtualDisk(conn.ctx, d.Id())
 	_, deleteErr := p.Execute()
-	if deleteErr.Error() != "" {
+	if deleteErr != nil {
+		deleteErr := deleteErr.(models.GenericOpenAPIError)
 		return diag.Errorf("error occurred while deleting VirtualizationVirtualDisk object: %s Response from endpoint: %s", deleteErr.Error(), string(deleteErr.Body()))
 	}
 	return de

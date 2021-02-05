@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **NumCoresEnabled** | Pointer to **string** | The number of enabled cores in the installed processor. | [optional] [readonly] 
 **NumThreads** | Pointer to **string** | The maximum number of threads available in the installed processor. | [optional] [readonly] 
 **OperPowerState** | Pointer to **string** | The power state of the processor. | [optional] [readonly] 
+**OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | The health indicator of the processor, &#39;OK&#39; indicates the processor is operatinal. | [optional] [readonly] 
 **Operability** | Pointer to **string** | Operability state of the central processing unit. | [optional] [readonly] 
 **Presence** | Pointer to **string** | The valid values are &#39;equipped&#39; and &#39;absent&#39;. | [optional] [readonly] 
@@ -209,6 +210,41 @@ SetOperPowerState sets OperPowerState field to given value.
 
 HasOperPowerState returns a boolean if a field has been set.
 
+### GetOperReason
+
+`func (o *ProcessorUnitAllOf) GetOperReason() []string`
+
+GetOperReason returns the OperReason field if non-nil, zero value otherwise.
+
+### GetOperReasonOk
+
+`func (o *ProcessorUnitAllOf) GetOperReasonOk() (*[]string, bool)`
+
+GetOperReasonOk returns a tuple with the OperReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperReason
+
+`func (o *ProcessorUnitAllOf) SetOperReason(v []string)`
+
+SetOperReason sets OperReason field to given value.
+
+### HasOperReason
+
+`func (o *ProcessorUnitAllOf) HasOperReason() bool`
+
+HasOperReason returns a boolean if a field has been set.
+
+### SetOperReasonNil
+
+`func (o *ProcessorUnitAllOf) SetOperReasonNil(b bool)`
+
+ SetOperReasonNil sets the value for OperReason to be an explicit nil
+
+### UnsetOperReason
+`func (o *ProcessorUnitAllOf) UnsetOperReason()`
+
+UnsetOperReason ensures that no value is present for OperReason, not even an explicit nil
 ### GetOperState
 
 `func (o *ProcessorUnitAllOf) GetOperState() string`

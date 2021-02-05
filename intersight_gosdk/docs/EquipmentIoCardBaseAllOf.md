@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ConnectionStatus** | Pointer to **string** | Connectivity Status of FEX/IOM to Switch - A or B or AB. | [optional] 
 **Description** | Pointer to **string** | This field is to provide description for the iocard module model. | [optional] [readonly] 
 **ModuleId** | Pointer to **int64** | Module Identifier for the IO module. | [optional] [readonly] 
+**OperReason** | Pointer to **[]string** |  | [optional] 
 **OperState** | Pointer to **string** | Operational state of IO card or fabric extender. | [optional] [readonly] 
 **PartNumber** | Pointer to **string** | Part Number identifier for the IO module. | [optional] [readonly] 
 **Pid** | Pointer to **string** | This field identifies the Product ID for the IO module. | [optional] [readonly] 
@@ -155,6 +156,41 @@ SetModuleId sets ModuleId field to given value.
 
 HasModuleId returns a boolean if a field has been set.
 
+### GetOperReason
+
+`func (o *EquipmentIoCardBaseAllOf) GetOperReason() []string`
+
+GetOperReason returns the OperReason field if non-nil, zero value otherwise.
+
+### GetOperReasonOk
+
+`func (o *EquipmentIoCardBaseAllOf) GetOperReasonOk() (*[]string, bool)`
+
+GetOperReasonOk returns a tuple with the OperReason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperReason
+
+`func (o *EquipmentIoCardBaseAllOf) SetOperReason(v []string)`
+
+SetOperReason sets OperReason field to given value.
+
+### HasOperReason
+
+`func (o *EquipmentIoCardBaseAllOf) HasOperReason() bool`
+
+HasOperReason returns a boolean if a field has been set.
+
+### SetOperReasonNil
+
+`func (o *EquipmentIoCardBaseAllOf) SetOperReasonNil(b bool)`
+
+ SetOperReasonNil sets the value for OperReason to be an explicit nil
+
+### UnsetOperReason
+`func (o *EquipmentIoCardBaseAllOf) UnsetOperReason()`
+
+UnsetOperReason ensures that no value is present for OperReason, not even an explicit nil
 ### GetOperState
 
 `func (o *EquipmentIoCardBaseAllOf) GetOperState() string`
